@@ -50,7 +50,7 @@
             // labelUser
             // 
             this.labelUser.AutoSize = true;
-            this.labelUser.Location = new System.Drawing.Point(44, 48);
+            this.labelUser.Location = new System.Drawing.Point(34, 48);
             this.labelUser.Name = "labelUser";
             this.labelUser.Size = new System.Drawing.Size(58, 13);
             this.labelUser.TabIndex = 0;
@@ -59,7 +59,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(46, 74);
+            this.label1.Location = new System.Drawing.Point(36, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 1;
@@ -68,7 +68,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 100);
+            this.label2.Location = new System.Drawing.Point(5, 100);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 13);
             this.label2.TabIndex = 2;
@@ -77,7 +77,7 @@
             // labelHost
             // 
             this.labelHost.AutoSize = true;
-            this.labelHost.Location = new System.Drawing.Point(70, 22);
+            this.labelHost.Location = new System.Drawing.Point(60, 22);
             this.labelHost.Name = "labelHost";
             this.labelHost.Size = new System.Drawing.Size(32, 13);
             this.labelHost.TabIndex = 3;
@@ -86,7 +86,7 @@
             // labelPort
             // 
             this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(73, 126);
+            this.labelPort.Location = new System.Drawing.Point(63, 126);
             this.labelPort.Name = "labelPort";
             this.labelPort.Size = new System.Drawing.Size(29, 13);
             this.labelPort.TabIndex = 4;
@@ -97,7 +97,7 @@
             this.checkBoxSaveSettings.AutoSize = true;
             this.checkBoxSaveSettings.Checked = true;
             this.checkBoxSaveSettings.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSaveSettings.Location = new System.Drawing.Point(116, 149);
+            this.checkBoxSaveSettings.Location = new System.Drawing.Point(113, 149);
             this.checkBoxSaveSettings.Name = "checkBoxSaveSettings";
             this.checkBoxSaveSettings.Size = new System.Drawing.Size(90, 17);
             this.checkBoxSaveSettings.TabIndex = 5;
@@ -106,41 +106,41 @@
             // 
             // textBoxHost
             // 
-            this.textBoxHost.Location = new System.Drawing.Point(116, 19);
+            this.textBoxHost.Location = new System.Drawing.Point(98, 19);
             this.textBoxHost.Name = "textBoxHost";
-            this.textBoxHost.Size = new System.Drawing.Size(100, 20);
+            this.textBoxHost.Size = new System.Drawing.Size(130, 20);
             this.textBoxHost.TabIndex = 0;
-            this.textBoxHost.Text = "127.0.0.1";
+            this.textBoxHost.Text = "localhost";
             // 
             // textBoxPort
             // 
-            this.textBoxPort.Location = new System.Drawing.Point(116, 123);
+            this.textBoxPort.Location = new System.Drawing.Point(98, 123);
             this.textBoxPort.Name = "textBoxPort";
-            this.textBoxPort.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPort.Size = new System.Drawing.Size(130, 20);
             this.textBoxPort.TabIndex = 4;
             this.textBoxPort.Text = "3307";
             // 
             // textBoxWorldDatabase
             // 
-            this.textBoxWorldDatabase.Location = new System.Drawing.Point(116, 97);
+            this.textBoxWorldDatabase.Location = new System.Drawing.Point(98, 97);
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
-            this.textBoxWorldDatabase.Size = new System.Drawing.Size(100, 20);
+            this.textBoxWorldDatabase.Size = new System.Drawing.Size(130, 20);
             this.textBoxWorldDatabase.TabIndex = 3;
             this.textBoxWorldDatabase.Text = "trinitycore_world";
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(116, 71);
+            this.textBoxPassword.Location = new System.Drawing.Point(98, 71);
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(100, 20);
+            this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
             this.textBoxPassword.TabIndex = 2;
             this.textBoxPassword.Text = "123";
             // 
             // textBoxUsername
             // 
-            this.textBoxUsername.Location = new System.Drawing.Point(116, 45);
+            this.textBoxUsername.Location = new System.Drawing.Point(98, 45);
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(100, 20);
+            this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
             this.textBoxUsername.TabIndex = 1;
             this.textBoxUsername.Text = "root";
             // 
