@@ -14,6 +14,7 @@ namespace SAI_Editor
     public partial class LoginForm : Form
     {
         MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
+        private readonly Settings _settings = new Settings();
 
         public LoginForm()
         {
@@ -24,8 +25,13 @@ namespace SAI_Editor
         {
             MaximizeBox = false;
             MinimizeBox = true;
+            FormBorderStyle = FormBorderStyle.FixedDialog;
 
-            this.FormBorderStyle = FormBorderStyle.FixedDialog;
+            textBoxHost.Text = _settings.GetSetting("Host", "localhost");
+            textBoxUsername.Text = _settings.GetSetting("User", "root");
+            textBoxPassword.Text = _settings.GetSetting("Password", string.Empty);
+            textBoxWorldDatabase.Text = _settings.GetSetting("database", "trinitycore_world");
+            textBoxPort.Text = _settings.GetSetting("Port", "3306");
         }
 
         private void buttonConnect_Click(object sender, EventArgs e)
@@ -58,6 +64,15 @@ namespace SAI_Editor
             {
                 MessageBox.Show("The port field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+
+            if (checkBoxSaveSettings.Checked)
+            {
+                _settings.PutSetting("User", textBoxUsername.Text);
+                _settings.PutSetting("Password", textBoxPassword.Text);
+                _settings.PutSetting("DB", textBoxWorldDatabase.Text);
+                _settings.PutSetting("Host", textBoxHost.Text);
+                _settings.PutSetting("Port", textBoxPort.Text);
             }
 
             connectionString.Server = textBoxHost.Text;

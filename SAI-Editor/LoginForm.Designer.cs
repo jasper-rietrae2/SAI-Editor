@@ -97,7 +97,7 @@
             this.checkBoxSaveSettings.AutoSize = true;
             this.checkBoxSaveSettings.Checked = true;
             this.checkBoxSaveSettings.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSaveSettings.Location = new System.Drawing.Point(113, 149);
+            this.checkBoxSaveSettings.Location = new System.Drawing.Point(98, 149);
             this.checkBoxSaveSettings.Name = "checkBoxSaveSettings";
             this.checkBoxSaveSettings.Size = new System.Drawing.Size(90, 17);
             this.checkBoxSaveSettings.TabIndex = 5;
@@ -110,7 +110,6 @@
             this.textBoxHost.Name = "textBoxHost";
             this.textBoxHost.Size = new System.Drawing.Size(130, 20);
             this.textBoxHost.TabIndex = 0;
-            this.textBoxHost.Text = "localhost";
             // 
             // textBoxPort
             // 
@@ -118,7 +117,6 @@
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
             this.textBoxPort.TabIndex = 4;
-            this.textBoxPort.Text = "3307";
             // 
             // textBoxWorldDatabase
             // 
@@ -126,7 +124,6 @@
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
             this.textBoxWorldDatabase.Size = new System.Drawing.Size(130, 20);
             this.textBoxWorldDatabase.TabIndex = 3;
-            this.textBoxWorldDatabase.Text = "trinitycore_world";
             // 
             // textBoxPassword
             // 
@@ -134,7 +131,6 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
             this.textBoxPassword.TabIndex = 2;
-            this.textBoxPassword.Text = "123";
             // 
             // textBoxUsername
             // 
@@ -142,7 +138,6 @@
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
             this.textBoxUsername.TabIndex = 1;
-            this.textBoxUsername.Text = "root";
             // 
             // groupBoxLogin
             // 
