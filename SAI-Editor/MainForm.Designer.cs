@@ -66,7 +66,7 @@
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -80,7 +80,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.comboBoxEventType = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxComments = new System.Windows.Forms.TextBox();
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.textBox8 = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -101,7 +101,7 @@
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
             this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBoxScriptId = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -423,7 +423,7 @@
             // 
             this.groupBoxPreferences.Controls.Add(this.checkBox4);
             this.groupBoxPreferences.Controls.Add(this.checkBox3);
-            this.groupBoxPreferences.Controls.Add(this.checkBox2);
+            this.groupBoxPreferences.Controls.Add(this.checkBoxLockEventId);
             this.groupBoxPreferences.Controls.Add(this.checkBoxAutoGenerateComments);
             this.groupBoxPreferences.Location = new System.Drawing.Point(12, 115);
             this.groupBoxPreferences.Name = "groupBoxPreferences";
@@ -453,17 +453,18 @@
             this.checkBox3.Text = "Preference 3";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // checkBoxLockEventId
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Checked = true;
-            this.checkBox2.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox2.Location = new System.Drawing.Point(13, 47);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(125, 17);
-            this.checkBox2.TabIndex = 1;
-            this.checkBox2.Text = "Lock smart_scripts.id";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBoxLockEventId.AutoSize = true;
+            this.checkBoxLockEventId.Checked = true;
+            this.checkBoxLockEventId.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxLockEventId.Location = new System.Drawing.Point(13, 47);
+            this.checkBoxLockEventId.Name = "checkBoxLockEventId";
+            this.checkBoxLockEventId.Size = new System.Drawing.Size(125, 17);
+            this.checkBoxLockEventId.TabIndex = 1;
+            this.checkBoxLockEventId.Text = "Lock smart_scripts.id";
+            this.checkBoxLockEventId.UseVisualStyleBackColor = true;
+            this.checkBoxLockEventId.CheckedChanged += new System.EventHandler(this.checkBoxLockEventId_CheckedChanged);
             // 
             // checkBoxAutoGenerateComments
             // 
@@ -474,6 +475,7 @@
             this.checkBoxAutoGenerateComments.TabIndex = 0;
             this.checkBoxAutoGenerateComments.Text = "Auto generate comments";
             this.checkBoxAutoGenerateComments.UseVisualStyleBackColor = true;
+            this.checkBoxAutoGenerateComments.CheckedChanged += new System.EventHandler(this.checkBoxAutoGenerateComments_CheckedChanged_1);
             // 
             // groupBoxScriptInfo
             // 
@@ -488,7 +490,7 @@
             this.groupBoxScriptInfo.Controls.Add(this.label8);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxEventType);
             this.groupBoxScriptInfo.Controls.Add(this.label7);
-            this.groupBoxScriptInfo.Controls.Add(this.textBox2);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxComments);
             this.groupBoxScriptInfo.Controls.Add(this.textBox9);
             this.groupBoxScriptInfo.Controls.Add(this.textBox8);
             this.groupBoxScriptInfo.Controls.Add(this.label5);
@@ -749,6 +751,7 @@
             this.comboBoxActionType.Name = "comboBoxActionType";
             this.comboBoxActionType.Size = new System.Drawing.Size(288, 21);
             this.comboBoxActionType.TabIndex = 19;
+            this.comboBoxActionType.SelectedIndexChanged += new System.EventHandler(this.comboBoxActionType_SelectedIndexChanged);
             // 
             // label8
             // 
@@ -914,6 +917,7 @@
             this.comboBoxEventType.Name = "comboBoxEventType";
             this.comboBoxEventType.Size = new System.Drawing.Size(288, 21);
             this.comboBoxEventType.TabIndex = 19;
+            this.comboBoxEventType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEventType_SelectedIndexChanged);
             // 
             // label7
             // 
@@ -924,12 +928,12 @@
             this.label7.TabIndex = 23;
             this.label7.Text = "Param 1";
             // 
-            // textBox2
+            // textBoxComments
             // 
-            this.textBox2.Location = new System.Drawing.Point(59, 234);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(448, 20);
-            this.textBox2.TabIndex = 0;
+            this.textBoxComments.Location = new System.Drawing.Point(59, 234);
+            this.textBoxComments.Name = "textBoxComments";
+            this.textBoxComments.Size = new System.Drawing.Size(448, 20);
+            this.textBoxComments.TabIndex = 0;
             // 
             // textBox9
             // 
@@ -1047,7 +1051,7 @@
             this.groupBox1.Controls.Add(this.textBox14);
             this.groupBox1.Controls.Add(this.label18);
             this.groupBox1.Controls.Add(this.textBox11);
-            this.groupBox1.Controls.Add(this.textBox10);
+            this.groupBox1.Controls.Add(this.textBoxScriptId);
             this.groupBox1.Controls.Add(this.label17);
             this.groupBox1.Controls.Add(this.label15);
             this.groupBox1.Controls.Add(this.label16);
@@ -1096,6 +1100,7 @@
             this.textBox14.Name = "textBox14";
             this.textBox14.Size = new System.Drawing.Size(43, 20);
             this.textBox14.TabIndex = 19;
+            this.textBox14.Text = "0";
             // 
             // label18
             // 
@@ -1114,13 +1119,14 @@
             this.textBox11.TabIndex = 19;
             this.textBox11.Text = "0";
             // 
-            // textBox10
+            // textBoxScriptId
             // 
-            this.textBox10.Location = new System.Drawing.Point(92, 20);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(41, 20);
-            this.textBox10.TabIndex = 19;
-            this.textBox10.Text = "0";
+            this.textBoxScriptId.Enabled = false;
+            this.textBoxScriptId.Location = new System.Drawing.Point(92, 20);
+            this.textBoxScriptId.Name = "textBoxScriptId";
+            this.textBoxScriptId.Size = new System.Drawing.Size(41, 20);
+            this.textBoxScriptId.TabIndex = 19;
+            this.textBoxScriptId.Text = "0";
             // 
             // label17
             // 
@@ -1174,7 +1180,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
-            this.Text = "SAI Editor | Login";
+            this.Text = "SAI Editor: Login";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.groupBoxLogin.ResumeLayout(false);
             this.groupBoxLogin.PerformLayout();
@@ -1233,13 +1239,13 @@
         private System.Windows.Forms.GroupBox groupBoxPreferences;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBoxLockEventId;
         private System.Windows.Forms.CheckBox checkBoxAutoGenerateComments;
         private System.Windows.Forms.GroupBox groupBoxScriptInfo;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPageEvent;
         private System.Windows.Forms.TabPage tabPageAction;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxComments;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabPage tabPageTarget;
@@ -1268,7 +1274,7 @@
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBoxScriptId;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;

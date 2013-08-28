@@ -168,28 +168,42 @@ namespace SAI_Editor
                 connectionString.Password = textBoxPassword.Text;
 
             if (CanConnectToDatabase())
+                StartExpandingToMainForm();
+        }
+
+        private void StartExpandingToMainForm()
+        {
+            if (checkBoxSaveSettings.Checked)
             {
-                if (checkBoxSaveSettings.Checked)
-                {
-                    _settings.PutSetting("User", textBoxUsername.Text);
-                    _settings.PutSetting("Password", textBoxPassword.Text);
-                    _settings.PutSetting("DB", textBoxWorldDatabase.Text);
-                    _settings.PutSetting("Host", textBoxHost.Text);
-                    _settings.PutSetting("Port", textBoxPort.Text);
-                }
-
-                Text = "SAI-Editor: " + textBoxUsername.Text + "@" + textBoxHost.Text + ":" + textBoxPort.Text;
-                timerExpandOrContract.Enabled = true;
-                expandingToMainForm = true;
-
-                foreach (Control control in controlsLoginForm)
-                    control.Visible = false;
-
-                foreach (Control control in controlsMainForm)
-                    control.Visible = true;
-
-                //Close();
+                _settings.PutSetting("User", textBoxUsername.Text);
+                _settings.PutSetting("Password", textBoxPassword.Text);
+                _settings.PutSetting("DB", textBoxWorldDatabase.Text);
+                _settings.PutSetting("Host", textBoxHost.Text);
+                _settings.PutSetting("Port", textBoxPort.Text);
             }
+
+            Text = "SAI-Editor: " + textBoxUsername.Text + "@" + textBoxHost.Text + ":" + textBoxPort.Text;
+            timerExpandOrContract.Enabled = true;
+            expandingToMainForm = true;
+
+            foreach (Control control in controlsLoginForm)
+                control.Visible = false;
+
+            foreach (Control control in controlsMainForm)
+                control.Visible = true;
+        }
+
+        private void StartContractingToLoginForm()
+        {
+            Text = "SAI-Editor: Login";
+            timerExpandOrContract.Enabled = true;
+            contractingToLoginForm = true;
+
+            foreach (Control control in controlsLoginForm)
+                control.Visible = true;
+
+            foreach (Control control in controlsMainForm)
+                control.Visible = false;
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -276,14 +290,27 @@ namespace SAI_Editor
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
-            timerExpandOrContract.Enabled = true;
-            contractingToLoginForm = true;
+            StartContractingToLoginForm();
+        }
 
-            foreach (Control control in controlsLoginForm)
-                control.Visible = true;
+        private void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBoxEventTypeId.Text = comboBoxEventType.SelectedIndex.ToString();
+        }
 
-            foreach (Control control in controlsMainForm)
-                control.Visible = false;
+        private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBoxActionTypeId.Text = comboBoxActionType.SelectedIndex.ToString();
+        }
+
+        private void checkBoxAutoGenerateComments_CheckedChanged_1(object sender, EventArgs e)
+        {
+            textBoxComments.Enabled = !checkBoxAutoGenerateComments.Checked;
+        }
+
+        private void checkBoxLockEventId_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxScriptId.Enabled = !checkBoxLockEventId.Checked;
         }
     }
 }
