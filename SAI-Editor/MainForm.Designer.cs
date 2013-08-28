@@ -48,6 +48,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuHeaderFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHeaderTestTwo = new System.Windows.Forms.ToolStripMenuItem();
             this.dawdaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHeaderTestThree = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,8 +106,6 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -288,8 +288,20 @@
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSettings.Size = new System.Drawing.Size(135, 22);
             this.menuItemSettings.Text = "Settings";
+            // 
+            // menuItemReconnect
+            // 
+            this.menuItemReconnect.Name = "menuItemReconnect";
+            this.menuItemReconnect.Size = new System.Drawing.Size(135, 22);
+            this.menuItemReconnect.Text = "Re-connect";
+            // 
+            // menuItemExit
+            // 
+            this.menuItemExit.Name = "menuItemExit";
+            this.menuItemExit.Size = new System.Drawing.Size(135, 22);
+            this.menuItemExit.Text = "Exit";
             // 
             // menuHeaderTestTwo
             // 
@@ -302,7 +314,7 @@
             // dawdaToolStripMenuItem
             // 
             this.dawdaToolStripMenuItem.Name = "dawdaToolStripMenuItem";
-            this.dawdaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.dawdaToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.dawdaToolStripMenuItem.Text = "dawda";
             // 
             // menuHeaderTestThree
@@ -316,7 +328,7 @@
             // awdawToolStripMenuItem
             // 
             this.awdawToolStripMenuItem.Name = "awdawToolStripMenuItem";
-            this.awdawToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.awdawToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
             this.awdawToolStripMenuItem.Text = "awdaw";
             // 
             // contextMenuStrip1
@@ -1145,18 +1157,6 @@
             this.label14.Size = new System.Drawing.Size(19, 13);
             this.label14.TabIndex = 23;
             this.label14.Text = "Id:";
-            // 
-            // menuItemReconnect
-            // 
-            this.menuItemReconnect.Name = "menuItemReconnect";
-            this.menuItemReconnect.Size = new System.Drawing.Size(152, 22);
-            this.menuItemReconnect.Text = "Re-connect";
-            // 
-            // menuItemExit
-            // 
-            this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
-            this.menuItemExit.Text = "Exit";
             // 
             // MainForm
             // 
