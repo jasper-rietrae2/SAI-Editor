@@ -48,10 +48,6 @@ namespace SAI_Editor
             SelectFromCreatureTemplate("SELECT entry, name FROM creature_template LIMIT 1000");
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-        }
-
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBoxSearchForCreatureEntry.Checked)
@@ -111,16 +107,22 @@ namespace SAI_Editor
             SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM creature_template WHERE {0} LIKE '%{1}%'", (checkBoxSearchForCreatureEntry.Checked ? "entry" : "name"), textBoxCreatureCriteria.Text));
         }
 
-        private void SearchForCreatureForm_KeyDown(object sende, KeyEventArgs e)
+        private void SearchForCreatureForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.Enter:
+                {
                     if (listViewCreatureResults.SelectedItems.Count > 0)
                     {
                         ((MainForm)Owner).textBox1.Text = listViewCreatureResults.SelectedItems[0].Text;
                         Close();
                     }
+                    else
+                        buttonSearchCreature_Click(sender, e);
+                    break;
+                }
+                default:
                     break;
             }
         }

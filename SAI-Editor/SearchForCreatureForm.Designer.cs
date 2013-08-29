@@ -44,7 +44,6 @@
             this.textBoxCreatureCriteria.Name = "textBoxCreatureCriteria";
             this.textBoxCreatureCriteria.Size = new System.Drawing.Size(206, 20);
             this.textBoxCreatureCriteria.TabIndex = 0;
-            this.textBoxCreatureCriteria.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // labelCreatureSearchInfo
             // 

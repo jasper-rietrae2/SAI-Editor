@@ -279,6 +279,8 @@ namespace SAI_Editor
                 case Keys.F5:
                     buttonConnect_Click(sender, e);
                     break;
+                default:
+                    break;
             }
         }
 
@@ -295,16 +297,6 @@ namespace SAI_Editor
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxActionTypeId.Text = comboBoxActionType.SelectedIndex.ToString();
-        }
-
-        private void checkBox2_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void checkBoxAutoGenerateComments_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
@@ -330,21 +322,6 @@ namespace SAI_Editor
         private void checkBoxLockEventId_CheckedChanged(object sender, EventArgs e)
         {
             textBoxScriptId.Enabled = !checkBoxLockEventId.Checked;
-        }
-
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBoxScriptInfo_Enter(object sender, EventArgs e)
-        {
-
         }
 
         private void FinishedExpandingOrContracting(bool expanding)
