@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
+internal enum FormSizes
+{
+    WidthToExpandTo  = 790,
+    HeightToExpandTo = 400,
+};
+
 namespace SAI_Editor
 {
     public partial class MainForm : Form
@@ -57,36 +63,66 @@ namespace SAI_Editor
             comboBoxActionType.SelectedIndex = 0;
 
             menuItemReconnect.Click += menuItemReconnect_Click;
+
+            listViewSmartScripts.View = View.Details;
+            listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);
+            listViewSmartScripts.Columns.Add("source_type", 70, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("id",          20, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("link",        30, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("event_type",  66, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("event_phase", 74, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("event_chance",81, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("event_flags", 69, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p4",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("action_type", 67, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p4",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p5",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p6",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("target_type", 67, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("x",           20, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("y",           20, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("z",           20, HorizontalAlignment.Right);
+          //listViewSmartScripts.Columns.Add("comment",     56, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("comment",     100, HorizontalAlignment.Left);
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
         {
             if (expandingToMainForm)
             {
-                if (Height < originalHeight + 400)
+                if (Height < originalHeight + (int)FormSizes.HeightToExpandTo)
                     Height += 20;
                 else
                 {
-                    Height = originalHeight + 400;
+                    Height = originalHeight + (int)FormSizes.HeightToExpandTo;
 
-                    if (Width >= originalWidth + 458) //! If both finished
+                    if (Width >= originalWidth + (int)FormSizes.WidthToExpandTo) //! If both finished
                     {
-                        Width = originalWidth + 458;
+                        Width = originalWidth + (int)FormSizes.WidthToExpandTo;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                         FinishedExpandingOrContracting(true);
                     }
                 }
 
-                if (Width < originalWidth + 458)
+                if (Width < originalWidth + (int)FormSizes.WidthToExpandTo)
                     Width += 20;
                 else
                 {
-                    Width = originalWidth + 458;
+                    Width = originalWidth + (int)FormSizes.WidthToExpandTo;
 
-                    if (Height >= originalHeight + 400) //! If both finished
+                    if (Height >= originalHeight + (int)FormSizes.HeightToExpandTo) //! If both finished
                     {
-                        Height = originalHeight + 400;
+                        Height = originalHeight + (int)FormSizes.HeightToExpandTo;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                         FinishedExpandingOrContracting(true);
@@ -344,6 +380,11 @@ namespace SAI_Editor
                     buttonSearchForCreature.Enabled = false;
                     break;
             }
+        }
+
+        private void buttonLoadScriptForEntry_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

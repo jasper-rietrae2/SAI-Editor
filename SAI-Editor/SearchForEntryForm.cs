@@ -32,7 +32,7 @@ namespace SAI_Editor
 
             listViewEntryResults.View = View.Details;
             listViewEntryResults.Columns.Add("Entry", 60, HorizontalAlignment.Right);
-            listViewEntryResults.Columns.Add("Name", 275, HorizontalAlignment.Left);
+            listViewEntryResults.Columns.Add("Name", 270, HorizontalAlignment.Left);
 
             listViewEntryResults.FullRowSelect = true; //! This will make clicking on a row in the results select the full row.
 

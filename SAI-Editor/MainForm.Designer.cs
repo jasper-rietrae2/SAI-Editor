@@ -58,6 +58,7 @@
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBoxCreatureInfo = new System.Windows.Forms.GroupBox();
+            this.buttonLoadScriptForEntry = new System.Windows.Forms.PictureBox();
             this.buttonSearchForCreature = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -96,11 +97,13 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.listViewSmartScripts = new System.Windows.Forms.ListView();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBoxCreatureInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -340,13 +343,14 @@
             this.panel1.Controls.Add(this.buttonConnect);
             this.panel1.Controls.Add(this.buttonClear);
             this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Location = new System.Drawing.Point(901, 302);
+            this.panel1.Location = new System.Drawing.Point(913, 7);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 225);
             this.panel1.TabIndex = 13;
             // 
             // groupBoxCreatureInfo
             // 
+            this.groupBoxCreatureInfo.Controls.Add(this.buttonLoadScriptForEntry);
             this.groupBoxCreatureInfo.Controls.Add(this.buttonSearchForCreature);
             this.groupBoxCreatureInfo.Controls.Add(this.label4);
             this.groupBoxCreatureInfo.Controls.Add(this.comboBoxSourceType);
@@ -357,12 +361,21 @@
             this.groupBoxCreatureInfo.Size = new System.Drawing.Size(290, 75);
             this.groupBoxCreatureInfo.TabIndex = 6;
             this.groupBoxCreatureInfo.TabStop = false;
-            this.groupBoxCreatureInfo.Text = "Creature information";
+            this.groupBoxCreatureInfo.Text = "Static script information";
             this.groupBoxCreatureInfo.Visible = false;
+            // 
+            // buttonLoadScriptForEntry
+            // 
+            this.buttonLoadScriptForEntry.Location = new System.Drawing.Point(261, 19);
+            this.buttonLoadScriptForEntry.Name = "buttonLoadScriptForEntry";
+            this.buttonLoadScriptForEntry.Size = new System.Drawing.Size(24, 21);
+            this.buttonLoadScriptForEntry.TabIndex = 24;
+            this.buttonLoadScriptForEntry.TabStop = false;
+            this.buttonLoadScriptForEntry.Click += new System.EventHandler(this.buttonLoadScriptForEntry_Click);
             // 
             // buttonSearchForCreature
             // 
-            this.buttonSearchForCreature.Location = new System.Drawing.Point(260, 18);
+            this.buttonSearchForCreature.Location = new System.Drawing.Point(236, 18);
             this.buttonSearchForCreature.Name = "buttonSearchForCreature";
             this.buttonSearchForCreature.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchForCreature.TabIndex = 18;
@@ -406,7 +419,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(101, 19);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(159, 20);
+            this.textBox1.Size = new System.Drawing.Size(135, 20);
             this.textBox1.TabIndex = 0;
             // 
             // groupBoxPreferences
@@ -427,9 +440,9 @@
             this.checkBox3.AutoSize = true;
             this.checkBox3.Location = new System.Drawing.Point(13, 47);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(219, 17);
+            this.checkBox3.Size = new System.Drawing.Size(241, 17);
             this.checkBox3.TabIndex = 1;
-            this.checkBox3.Text = "Show events and actions for source type";
+            this.checkBox3.Text = "Show events and actions for source type only";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // checkBoxLockEventId
@@ -889,7 +902,7 @@
             this.tabControl1.Controls.Add(this.tabPageEvent);
             this.tabControl1.Controls.Add(this.tabPageAction);
             this.tabControl1.Controls.Add(this.tabPageTarget);
-            this.tabControl1.Location = new System.Drawing.Point(909, 186);
+            this.tabControl1.Location = new System.Drawing.Point(913, 41);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(500, 108);
@@ -1062,11 +1075,21 @@
             this.groupBox2.Text = "Parameters";
             this.groupBox2.Visible = false;
             // 
+            // listViewSmartScripts
+            // 
+            this.listViewSmartScripts.Location = new System.Drawing.Point(14, 409);
+            this.listViewSmartScripts.Name = "listViewSmartScripts";
+            this.listViewSmartScripts.Size = new System.Drawing.Size(1069, 195);
+            this.listViewSmartScripts.TabIndex = 24;
+            this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
+            this.listViewSmartScripts.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1156, 539);
+            this.ClientSize = new System.Drawing.Size(1156, 616);
+            this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.groupBox1);
@@ -1089,6 +1112,7 @@
             this.panel1.ResumeLayout(false);
             this.groupBoxCreatureInfo.ResumeLayout(false);
             this.groupBoxCreatureInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -1170,6 +1194,8 @@
         public System.Windows.Forms.GroupBox groupBoxCreatureInfo;
         public System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttonSearchEventFlags;
+        private System.Windows.Forms.PictureBox buttonLoadScriptForEntry;
+        private System.Windows.Forms.ListView listViewSmartScripts;
     }
 }
 
