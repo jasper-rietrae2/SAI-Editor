@@ -61,10 +61,9 @@
             this.buttonSearchForCreature = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.labelCreatureEntry = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
@@ -341,7 +340,7 @@
             this.panel1.Controls.Add(this.buttonConnect);
             this.panel1.Controls.Add(this.buttonClear);
             this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(901, 302);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 225);
             this.panel1.TabIndex = 13;
@@ -351,7 +350,7 @@
             this.groupBoxCreatureInfo.Controls.Add(this.buttonSearchForCreature);
             this.groupBoxCreatureInfo.Controls.Add(this.label4);
             this.groupBoxCreatureInfo.Controls.Add(this.comboBoxSourceType);
-            this.groupBoxCreatureInfo.Controls.Add(this.label3);
+            this.groupBoxCreatureInfo.Controls.Add(this.labelCreatureEntry);
             this.groupBoxCreatureInfo.Controls.Add(this.textBox1);
             this.groupBoxCreatureInfo.Location = new System.Drawing.Point(12, 31);
             this.groupBoxCreatureInfo.Name = "groupBoxCreatureInfo";
@@ -388,31 +387,30 @@
             "SCRIPT_TYPE_GAMEOBJECT",
             "SCRIPT_TYPE_AREATRIGGER",
             "SCRIPT_TYPE_TIMED_ACTIONLIST"});
-            this.comboBoxSourceType.Location = new System.Drawing.Point(92, 45);
+            this.comboBoxSourceType.Location = new System.Drawing.Point(101, 45);
             this.comboBoxSourceType.Name = "comboBoxSourceType";
-            this.comboBoxSourceType.Size = new System.Drawing.Size(192, 21);
+            this.comboBoxSourceType.Size = new System.Drawing.Size(183, 21);
             this.comboBoxSourceType.TabIndex = 14;
+            this.comboBoxSourceType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourceType_SelectedIndexChanged);
             // 
-            // label3
+            // labelCreatureEntry
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 22);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 13);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Creature entry:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelCreatureEntry.AutoSize = true;
+            this.labelCreatureEntry.Location = new System.Drawing.Point(10, 22);
+            this.labelCreatureEntry.Name = "labelCreatureEntry";
+            this.labelCreatureEntry.Size = new System.Drawing.Size(76, 13);
+            this.labelCreatureEntry.TabIndex = 14;
+            this.labelCreatureEntry.Text = "Creature entry:";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(92, 19);
+            this.textBox1.Location = new System.Drawing.Point(101, 19);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(169, 20);
+            this.textBox1.Size = new System.Drawing.Size(159, 20);
             this.textBox1.TabIndex = 0;
             // 
             // groupBoxPreferences
             // 
-            this.groupBoxPreferences.Controls.Add(this.checkBox4);
             this.groupBoxPreferences.Controls.Add(this.checkBox3);
             this.groupBoxPreferences.Controls.Add(this.checkBoxLockEventId);
             this.groupBoxPreferences.Controls.Add(this.checkBoxAutoGenerateComments);
@@ -424,24 +422,14 @@
             this.groupBoxPreferences.Text = "Preferences";
             this.groupBoxPreferences.Visible = false;
             // 
-            // checkBox4
-            // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(163, 47);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(87, 17);
-            this.checkBox4.TabIndex = 1;
-            this.checkBox4.Text = "Preference 4";
-            this.checkBox4.UseVisualStyleBackColor = true;
-            // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(163, 23);
+            this.checkBox3.Location = new System.Drawing.Point(13, 47);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(87, 17);
+            this.checkBox3.Size = new System.Drawing.Size(219, 17);
             this.checkBox3.TabIndex = 1;
-            this.checkBox3.Text = "Preference 3";
+            this.checkBox3.Text = "Show events and actions for source type";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
             // checkBoxLockEventId
@@ -449,7 +437,7 @@
             this.checkBoxLockEventId.AutoSize = true;
             this.checkBoxLockEventId.Checked = true;
             this.checkBoxLockEventId.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLockEventId.Location = new System.Drawing.Point(13, 47);
+            this.checkBoxLockEventId.Location = new System.Drawing.Point(13, 24);
             this.checkBoxLockEventId.Name = "checkBoxLockEventId";
             this.checkBoxLockEventId.Size = new System.Drawing.Size(125, 17);
             this.checkBoxLockEventId.TabIndex = 1;
@@ -460,7 +448,7 @@
             // checkBoxAutoGenerateComments
             // 
             this.checkBoxAutoGenerateComments.AutoSize = true;
-            this.checkBoxAutoGenerateComments.Location = new System.Drawing.Point(13, 23);
+            this.checkBoxAutoGenerateComments.Location = new System.Drawing.Point(140, 24);
             this.checkBoxAutoGenerateComments.Name = "checkBoxAutoGenerateComments";
             this.checkBoxAutoGenerateComments.Size = new System.Drawing.Size(144, 17);
             this.checkBoxAutoGenerateComments.TabIndex = 0;
@@ -989,7 +977,7 @@
             // 
             // textBox12
             // 
-            this.textBox12.Location = new System.Drawing.Point(92, 72);
+            this.textBox12.Location = new System.Drawing.Point(101, 72);
             this.textBox12.Name = "textBox12";
             this.textBox12.Size = new System.Drawing.Size(41, 20);
             this.textBox12.TabIndex = 19;
@@ -999,7 +987,7 @@
             // 
             this.textBox14.Location = new System.Drawing.Point(241, 46);
             this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(43, 20);
+            this.textBox14.Size = new System.Drawing.Size(42, 20);
             this.textBox14.TabIndex = 19;
             this.textBox14.Text = "0";
             // 
@@ -1014,7 +1002,7 @@
             // 
             // textBox11
             // 
-            this.textBox11.Location = new System.Drawing.Point(92, 46);
+            this.textBox11.Location = new System.Drawing.Point(101, 46);
             this.textBox11.Name = "textBox11";
             this.textBox11.Size = new System.Drawing.Size(41, 20);
             this.textBox11.TabIndex = 19;
@@ -1023,7 +1011,7 @@
             // textBoxScriptId
             // 
             this.textBoxScriptId.Enabled = false;
-            this.textBoxScriptId.Location = new System.Drawing.Point(92, 20);
+            this.textBoxScriptId.Location = new System.Drawing.Point(101, 19);
             this.textBoxScriptId.Name = "textBoxScriptId";
             this.textBoxScriptId.Size = new System.Drawing.Size(41, 20);
             this.textBoxScriptId.TabIndex = 19;
@@ -1041,7 +1029,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(56, 49);
+            this.label15.Location = new System.Drawing.Point(65, 49);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(30, 13);
             this.label15.TabIndex = 24;
@@ -1050,7 +1038,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(21, 75);
+            this.label16.Location = new System.Drawing.Point(30, 75);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(65, 13);
             this.label16.TabIndex = 25;
@@ -1059,7 +1047,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(67, 23);
+            this.label14.Location = new System.Drawing.Point(76, 23);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(19, 13);
             this.label14.TabIndex = 23;
@@ -1144,10 +1132,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxSourceType;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelCreatureEntry;
         private System.Windows.Forms.Button buttonSearchForCreature;
         private System.Windows.Forms.GroupBox groupBoxPreferences;
-        private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBoxLockEventId;
         private System.Windows.Forms.CheckBox checkBoxAutoGenerateComments;

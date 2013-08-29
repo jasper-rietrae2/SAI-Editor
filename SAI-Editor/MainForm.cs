@@ -332,5 +332,30 @@ namespace SAI_Editor
             foreach (Control control in controlsMainForm)
                 control.Visible = expanding;
         }
+
+        private void comboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBoxSourceType.SelectedIndex)
+            {
+                case 0: //! Creature
+                    labelCreatureEntry.Text = "Creature entry";
+                    buttonSearchForCreature.Enabled = true;
+                    break;
+                case 1: //! Gameobject
+                    labelCreatureEntry.Text = "Gameobject entry";
+                    buttonSearchForCreature.Enabled = true;
+                    break;
+                case 2: //! Areatrigger
+                    labelCreatureEntry.Text = "Areatrigger entry";
+                    buttonSearchForCreature.Enabled = false;
+                    break;
+                case 3: //! Scriptedactionlist
+                    labelCreatureEntry.Text = "XX entry";
+                    buttonSearchForCreature.Enabled = false;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
