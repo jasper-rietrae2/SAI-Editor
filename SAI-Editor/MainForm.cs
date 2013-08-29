@@ -77,20 +77,20 @@ namespace SAI_Editor
                 {
                     Height = originalHeight + 400;
 
-                    if (Width >= originalWidth + 590) //! If both finished
+                    if (Width >= originalWidth + 458) //! If both finished
                     {
-                        Width = originalWidth + 590;
+                        Width = originalWidth + 458;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                         FinishedExpandingOrContracting(true);
                     }
                 }
 
-                if (Width < originalWidth + 590)
+                if (Width < originalWidth + 458)
                     Width += 20;
                 else
                 {
-                    Width = originalWidth + 590;
+                    Width = originalWidth + 458;
 
                     if (Height >= originalHeight + 400) //! If both finished
                     {

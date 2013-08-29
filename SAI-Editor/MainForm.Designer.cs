@@ -85,7 +85,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -96,6 +95,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonSearchEventFlags = new System.Windows.Forms.Button();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -934,8 +934,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.buttonSearchEventFlags);
             this.groupBox1.Controls.Add(this.numericUpDown1);
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.textBox12);
             this.groupBox1.Controls.Add(this.textBox14);
             this.groupBox1.Controls.Add(this.label18);
@@ -964,16 +964,6 @@
             0,
             0,
             0});
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(283, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 22);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.buttonSearchForCreature_Click);
             // 
             // textBox12
             // 
@@ -1057,11 +1047,20 @@
             // 
             this.groupBox2.Location = new System.Drawing.Point(14, 301);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(821, 100);
+            this.groupBox2.Size = new System.Drawing.Size(693, 100);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Parameters";
             this.groupBox2.Visible = false;
+            // 
+            // buttonSearchEventFlags
+            // 
+            this.buttonSearchEventFlags.Location = new System.Drawing.Point(283, 45);
+            this.buttonSearchEventFlags.Name = "buttonSearchEventFlags";
+            this.buttonSearchEventFlags.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchEventFlags.TabIndex = 28;
+            this.buttonSearchEventFlags.Text = "...";
+            this.buttonSearchEventFlags.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -1154,7 +1153,6 @@
         private System.Windows.Forms.ComboBox comboBoxActionType;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.TextBox textBox14;
         private System.Windows.Forms.Label label18;
@@ -1171,6 +1169,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         public System.Windows.Forms.GroupBox groupBoxCreatureInfo;
         public System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button buttonSearchEventFlags;
     }
 }
 
