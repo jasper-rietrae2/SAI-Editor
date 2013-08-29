@@ -29,6 +29,9 @@ namespace SAI_Editor
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 800);
 
+            KeyPreview = true;
+            KeyDown += SearchForCreatureForm_KeyDown;
+
             listViewCreatureResults.View = View.Details;
             listViewCreatureResults.Columns.Add("Entry", 60, HorizontalAlignment.Right);
             listViewCreatureResults.Columns.Add("Name", 275, HorizontalAlignment.Left);
@@ -74,7 +77,8 @@ namespace SAI_Editor
 
         private void listViewCreatureResults_DoubleClick(object sender, EventArgs e)
         {
-            string selectedEntry = listViewCreatureResults.SelectedItems[0].Text;
+            ((MainForm)Owner).textBox1.Text = listViewCreatureResults.SelectedItems[0].Text;
+            Close();
         }
 
         private void SelectFromCreatureTemplate(string queryToExecute)
@@ -105,6 +109,20 @@ namespace SAI_Editor
 
             listViewCreatureResults.Items.Clear();
             SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM creature_template WHERE {0} LIKE '%{1}%'", (checkBoxSearchForCreatureEntry.Checked ? "entry" : "name"), textBoxCreatureCriteria.Text));
+        }
+
+        private void SearchForCreatureForm_KeyDown(object sende, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    if (listViewCreatureResults.SelectedItems.Count > 0)
+                    {
+                        ((MainForm)Owner).textBox1.Text = listViewCreatureResults.SelectedItems[0].Text;
+                        Close();
+                    }
+                    break;
+            }
         }
     }
 }

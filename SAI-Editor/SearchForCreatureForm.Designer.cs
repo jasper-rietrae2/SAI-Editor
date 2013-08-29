@@ -33,8 +33,8 @@
             this.labelCreatureSearchInfo = new System.Windows.Forms.Label();
             this.checkBoxSearchForCreatureEntry = new System.Windows.Forms.CheckBox();
             this.groupBoxCreatureSearchInfo = new System.Windows.Forms.GroupBox();
-            this.listViewCreatureResults = new System.Windows.Forms.ListView();
             this.buttonSearchCreature = new System.Windows.Forms.Button();
+            this.listViewCreatureResults = new System.Windows.Forms.ListView();
             this.groupBoxCreatureSearchInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,14 +79,6 @@
             this.groupBoxCreatureSearchInfo.TabStop = false;
             this.groupBoxCreatureSearchInfo.Text = "Search information";
             // 
-            // listViewCreatureResults
-            // 
-            this.listViewCreatureResults.Location = new System.Drawing.Point(12, 89);
-            this.listViewCreatureResults.Name = "listViewCreatureResults";
-            this.listViewCreatureResults.Size = new System.Drawing.Size(351, 258);
-            this.listViewCreatureResults.TabIndex = 5;
-            this.listViewCreatureResults.UseCompatibleStateImageBehavior = false;
-            // 
             // buttonSearchCreature
             // 
             this.buttonSearchCreature.Location = new System.Drawing.Point(254, 42);
@@ -96,6 +88,14 @@
             this.buttonSearchCreature.Text = "Search";
             this.buttonSearchCreature.UseVisualStyleBackColor = true;
             this.buttonSearchCreature.Click += new System.EventHandler(this.buttonSearchCreature_Click);
+            // 
+            // listViewCreatureResults
+            // 
+            this.listViewCreatureResults.Location = new System.Drawing.Point(12, 89);
+            this.listViewCreatureResults.Name = "listViewCreatureResults";
+            this.listViewCreatureResults.Size = new System.Drawing.Size(351, 258);
+            this.listViewCreatureResults.TabIndex = 5;
+            this.listViewCreatureResults.UseCompatibleStateImageBehavior = false;
             // 
             // SearchForCreatureForm
             // 
@@ -116,11 +116,11 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBoxCreatureCriteria;
         private System.Windows.Forms.Label labelCreatureSearchInfo;
         private System.Windows.Forms.CheckBox checkBoxSearchForCreatureEntry;
         private System.Windows.Forms.GroupBox groupBoxCreatureSearchInfo;
         private System.Windows.Forms.ListView listViewCreatureResults;
         private System.Windows.Forms.Button buttonSearchCreature;
+        internal System.Windows.Forms.TextBox textBoxCreatureCriteria;
     }
 }

@@ -1145,11 +1145,9 @@
         private System.Windows.Forms.ToolStripMenuItem menuHeaderTestThree;
         private System.Windows.Forms.ToolStripMenuItem awdawToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBoxCreatureInfo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboBoxSourceType;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button buttonSearchForCreature;
         private System.Windows.Forms.GroupBox groupBoxPreferences;
         private System.Windows.Forms.CheckBox checkBox4;
@@ -1187,6 +1185,8 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.GroupBox groupBox2;
+        public System.Windows.Forms.GroupBox groupBoxCreatureInfo;
+        public System.Windows.Forms.TextBox textBox1;
     }
 }
 
