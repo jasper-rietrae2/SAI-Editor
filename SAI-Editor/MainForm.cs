@@ -1,26 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
 using MySql.Data.MySqlClient;
 
 namespace SAI_Editor
 {
     public partial class MainForm : Form
     {
-        MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
-        private System.Windows.Forms.Timer timerExpandOrContract = null;
-        private readonly Settings _settings = new Settings();
-        private int originalHeight = 0, originalWidth = 0;
-        private List<Control> controlsLoginForm = new List<Control>();
-        private List<Control> controlsMainForm = new List<Control>();
-        private bool expandingToMainForm = false, contractingToLoginForm = false;
+        private readonly Settings settings = new Settings();
+        private readonly MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
+        private readonly List<Control> controlsLoginForm = new List<Control>();
+        private readonly List<Control> controlsMainForm = new List<Control>();
+        private bool contractingToLoginForm;
+        private bool expandingToMainForm;
+        private int originalHeight, originalWidth;
+        private Timer timerExpandOrContract;
 
         public MainForm()
         {
@@ -38,19 +32,19 @@ namespace SAI_Editor
             originalHeight = Height;
             originalWidth = Width;
 
-            textBoxHost.Text = _settings.GetSetting("Host", "localhost");
-            textBoxUsername.Text = _settings.GetSetting("User", "root");
-            textBoxPassword.Text = _settings.GetSetting("Password", string.Empty);
-            textBoxWorldDatabase.Text = _settings.GetSetting("Database", "trinitycore_world");
-            textBoxPort.Text = _settings.GetSetting("Port", "3306");
+            textBoxHost.Text = settings.GetSetting("Host", "localhost");
+            textBoxUsername.Text = settings.GetSetting("User", "root");
+            textBoxPassword.Text = settings.GetSetting("Password", string.Empty);
+            textBoxWorldDatabase.Text = settings.GetSetting("Database", "trinitycore_world");
+            textBoxPort.Text = settings.GetSetting("Port", "3306");
 
-            timerExpandOrContract = new System.Windows.Forms.Timer();
+            timerExpandOrContract = new Timer();
             timerExpandOrContract.Enabled = false;
             timerExpandOrContract.Interval = 32;
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
 
             KeyPreview = true;
-            KeyDown += new KeyEventHandler(Form1_KeyDown);
+            KeyDown += Form1_KeyDown;
 
             foreach (Control control in Controls)
             {
@@ -183,11 +177,11 @@ namespace SAI_Editor
         {
             if (checkBoxSaveSettings.Checked)
             {
-                _settings.PutSetting("User", textBoxUsername.Text);
-                _settings.PutSetting("Password", textBoxPassword.Text);
-                _settings.PutSetting("Database", textBoxWorldDatabase.Text);
-                _settings.PutSetting("Host", textBoxHost.Text);
-                _settings.PutSetting("Port", textBoxPort.Text);
+                settings.PutSetting("User", textBoxUsername.Text);
+                settings.PutSetting("Password", textBoxPassword.Text);
+                settings.PutSetting("Database", textBoxWorldDatabase.Text);
+                settings.PutSetting("Host", textBoxHost.Text);
+                settings.PutSetting("Port", textBoxPort.Text);
             }
 
             Text = "SAI-Editor: " + textBoxUsername.Text + "@" + textBoxHost.Text + ":" + textBoxPort.Text;
