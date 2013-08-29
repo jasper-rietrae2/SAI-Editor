@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 
 namespace SAI_Editor
 {
     public partial class SearchForEntryForm : Form
     {
-        private MySqlConnectionStringBuilder connectionString = null;
-        private bool searchingForCreature = false;
+        private readonly MySqlConnectionStringBuilder connectionString;
+        private readonly bool searchingForCreature;
 
         public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, bool searchingForCreature)
         {
@@ -91,15 +86,14 @@ namespace SAI_Editor
                     connection.Open();
 
                     using (var query = new MySqlCommand(queryToExecute, connection))
-                        using (var reader = query.ExecuteReader())
+                        using (MySqlDataReader reader = query.ExecuteReader())
                             while (reader != null && reader.Read())
-                                listViewEntryResults.Items.Add(reader.GetInt32(0).ToString()).SubItems.Add(reader.GetString(1));
+                                listViewEntryResults.Items.Add(reader.GetInt32(0).ToString(CultureInfo.InvariantCulture)).SubItems.Add(reader.GetString(1));
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return;
             }
         }
 
@@ -125,10 +119,9 @@ namespace SAI_Editor
                     }
                     else
                         buttonSearchCreature_Click(sender, e);
+
                     break;
                 }
-                default:
-                    break;
             }
         }
     }

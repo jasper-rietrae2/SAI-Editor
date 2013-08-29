@@ -38,9 +38,7 @@ namespace SAI_Editor
             textBoxWorldDatabase.Text = settings.GetSetting("Database", "trinitycore_world");
             textBoxPort.Text = settings.GetSetting("Port", "3306");
 
-            timerExpandOrContract = new Timer();
-            timerExpandOrContract.Enabled = false;
-            timerExpandOrContract.Interval = 32;
+            timerExpandOrContract = new Timer { Enabled = false, Interval = 32 };
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
 
             KeyPreview = true;
@@ -201,10 +199,10 @@ namespace SAI_Editor
             timerExpandOrContract.Enabled = true;
             contractingToLoginForm = true;
 
-            foreach (Control control in controlsLoginForm)
+            foreach (var control in controlsLoginForm)
                 control.Visible = false;
 
-            foreach (Control control in controlsMainForm)
+            foreach (var control in controlsMainForm)
                 control.Visible = false;
         }
 
@@ -235,7 +233,7 @@ namespace SAI_Editor
 
         private bool CanConnectToDatabase()
         {
-            bool successFulConnection = true; //! We have to use a variable because the connection would otherwise not be closed if an error happened.
+            var successFulConnection = true; //! We have to use a variable because the connection would otherwise not be closed if an error happened.
             MySqlConnection connection = null;
 
             try
@@ -272,8 +270,6 @@ namespace SAI_Editor
                     break;
                 case Keys.F5:
                     buttonConnect_Click(sender, e);
-                    break;
-                default:
                     break;
             }
         }
@@ -320,10 +316,10 @@ namespace SAI_Editor
 
         private void FinishedExpandingOrContracting(bool expanding)
         {
-            foreach (Control control in controlsLoginForm)
+            foreach (var control in controlsLoginForm)
                 control.Visible = !expanding;
 
-            foreach (Control control in controlsMainForm)
+            foreach (var control in controlsMainForm)
                 control.Visible = expanding;
         }
 
@@ -332,22 +328,20 @@ namespace SAI_Editor
             switch (comboBoxSourceType.SelectedIndex)
             {
                 case 0: //! Creature
-                    labelCreatureEntry.Text = "Creature entry";
+                    labelCreatureEntry.Text = "Creature entry:";
                     buttonSearchForCreature.Enabled = true;
                     break;
                 case 1: //! Gameobject
-                    labelCreatureEntry.Text = "Gameobject entry";
+                    labelCreatureEntry.Text = "Gameobject entry:";
                     buttonSearchForCreature.Enabled = true;
                     break;
                 case 2: //! Areatrigger
-                    labelCreatureEntry.Text = "Areatrigger entry";
+                    labelCreatureEntry.Text = "Areatrigger entry:";
                     buttonSearchForCreature.Enabled = false;
                     break;
                 case 3: //! Scriptedactionlist
-                    labelCreatureEntry.Text = "XX entry";
+                    labelCreatureEntry.Text = "XX entry:";
                     buttonSearchForCreature.Enabled = false;
-                    break;
-                default:
                     break;
             }
         }
