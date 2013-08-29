@@ -103,7 +103,7 @@ namespace SAI_Editor
             if (String.IsNullOrEmpty(textBoxCreatureCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCreatureCriteria.Text))
                 return;
 
-            listViewCreatureResults.Clear();
+            listViewCreatureResults.Items.Clear();
             SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM creature_template WHERE {0} LIKE '%{1}%'", (checkBoxSearchForCreatureEntry.Checked ? "entry" : "name"), textBoxCreatureCriteria.Text));
         }
     }
