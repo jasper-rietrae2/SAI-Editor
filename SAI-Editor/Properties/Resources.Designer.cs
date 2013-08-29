@@ -63,16 +63,6 @@ namespace SAI_Editor.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap _1377794201_Load {
-            get {
-                object obj = ResourceManager.GetObject("1377794201_Load", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap icon_load_script {
             get {
                 object obj = ResourceManager.GetObject("icon_load_script", resourceCulture);

@@ -58,7 +58,6 @@
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBoxCreatureInfo = new System.Windows.Forms.GroupBox();
-            this.buttonLoadScriptForEntry = new System.Windows.Forms.PictureBox();
             this.buttonSearchForCreature = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -98,17 +97,18 @@
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
+            this.buttonLoadScriptForEntry = new System.Windows.Forms.PictureBox();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBoxCreatureInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).BeginInit();
             this.SuspendLayout();
             // 
             // labelUser
@@ -363,15 +363,6 @@
             this.groupBoxCreatureInfo.TabStop = false;
             this.groupBoxCreatureInfo.Text = "Static script information";
             this.groupBoxCreatureInfo.Visible = false;
-            // 
-            // buttonLoadScriptForEntry
-            // 
-            this.buttonLoadScriptForEntry.Location = new System.Drawing.Point(261, 19);
-            this.buttonLoadScriptForEntry.Name = "buttonLoadScriptForEntry";
-            this.buttonLoadScriptForEntry.Size = new System.Drawing.Size(24, 21);
-            this.buttonLoadScriptForEntry.TabIndex = 24;
-            this.buttonLoadScriptForEntry.TabStop = false;
-            this.buttonLoadScriptForEntry.Click += new System.EventHandler(this.buttonLoadScriptForEntry_Click);
             // 
             // buttonSearchForCreature
             // 
@@ -1084,6 +1075,16 @@
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.Visible = false;
             // 
+            // buttonLoadScriptForEntry
+            // 
+            this.buttonLoadScriptForEntry.Image = global::SAI_Editor.Properties.Resources.icon_load_script;
+            this.buttonLoadScriptForEntry.Location = new System.Drawing.Point(261, 19);
+            this.buttonLoadScriptForEntry.Name = "buttonLoadScriptForEntry";
+            this.buttonLoadScriptForEntry.Size = new System.Drawing.Size(24, 21);
+            this.buttonLoadScriptForEntry.TabIndex = 24;
+            this.buttonLoadScriptForEntry.TabStop = false;
+            this.buttonLoadScriptForEntry.Click += new System.EventHandler(this.buttonLoadScriptForEntry_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1112,7 +1113,6 @@
             this.panel1.ResumeLayout(false);
             this.groupBoxCreatureInfo.ResumeLayout(false);
             this.groupBoxCreatureInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -1121,6 +1121,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

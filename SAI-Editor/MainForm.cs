@@ -131,7 +131,7 @@ namespace SAI_Editor
             }
             else if (contractingToLoginForm)
             {
-                if (Height >= originalHeight)
+                if (Height > originalHeight)
                     Height -= 20;
                 else
                 {
@@ -146,7 +146,7 @@ namespace SAI_Editor
                     }
                 }
 
-                if (Width >= originalWidth)
+                if (Width > originalWidth)
                     Width -= 20;
                 else
                 {
