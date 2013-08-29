@@ -82,6 +82,7 @@ namespace SAI_Editor
                         Width = originalWidth + 590;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
+                        FinishedExpandingOrContracting(true);
                     }
                 }
 
@@ -96,6 +97,7 @@ namespace SAI_Editor
                         Height = originalHeight + 610;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
+                        FinishedExpandingOrContracting(true);
                     }
                 }
             }
@@ -112,6 +114,7 @@ namespace SAI_Editor
                         Width = originalWidth;
                         timerExpandOrContract.Enabled = false;
                         contractingToLoginForm = false;
+                        FinishedExpandingOrContracting(false);
                     }
                 }
 
@@ -126,6 +129,7 @@ namespace SAI_Editor
                         Height = originalHeight;
                         timerExpandOrContract.Enabled = false;
                         contractingToLoginForm = false;
+                        FinishedExpandingOrContracting(false);
                     }
                 }
             }
@@ -194,7 +198,7 @@ namespace SAI_Editor
                 control.Visible = false;
 
             foreach (Control control in controlsMainForm)
-                control.Visible = true;
+                control.Visible = false;
         }
 
         private void StartContractingToLoginForm()
@@ -204,7 +208,7 @@ namespace SAI_Editor
             contractingToLoginForm = true;
 
             foreach (Control control in controlsLoginForm)
-                control.Visible = true;
+                control.Visible = false;
 
             foreach (Control control in controlsMainForm)
                 control.Visible = false;
@@ -341,6 +345,15 @@ namespace SAI_Editor
         private void groupBoxScriptInfo_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void FinishedExpandingOrContracting(bool expanding)
+        {
+            foreach (Control control in controlsLoginForm)
+                control.Visible = !expanding;
+
+            foreach (Control control in controlsMainForm)
+                control.Visible = expanding;
         }
     }
 }
