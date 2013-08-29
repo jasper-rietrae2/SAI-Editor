@@ -316,5 +316,20 @@ namespace SAI_Editor
         {
             textBoxScriptId.Enabled = !checkBoxLockEventId.Checked;
         }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBoxScriptInfo_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
