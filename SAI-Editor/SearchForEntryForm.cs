@@ -48,7 +48,7 @@ namespace SAI_Editor
             //listViewCreatureResults.ColumnClick += new ColumnClickEventHandler(listViewCreatureResults_ColumnClick);
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM {0} LIMIT 1000", (searchingForCreature ? "creature_template" : "gameobject_template")));
+            SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM {0} ORDER BY entry LIMIT 1000", (searchingForCreature ? "creature_template" : "gameobject_template")));
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -109,7 +109,7 @@ namespace SAI_Editor
                 return;
 
             listViewEntryResults.Items.Clear();
-            SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM {0} WHERE {1} LIKE '%{2}%'", (searchingForCreature ? "creature_template" : "gameobject_template"), (checkBoxSearchForEntry.Checked ? "entry" : "name"), textBoxEntryCriteria.Text));
+            SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM {0} WHERE {1} LIKE '%{2}%' ORDER BY entry", (searchingForCreature ? "creature_template" : "gameobject_template"), (checkBoxSearchForEntry.Checked ? "entry" : "name"), textBoxEntryCriteria.Text));
         }
 
         private void SearchForEntryForm_KeyDown(object sender, KeyEventArgs e)
