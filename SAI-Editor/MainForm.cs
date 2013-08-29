@@ -212,10 +212,17 @@ namespace SAI_Editor
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            // not working
-            foreach (Control control in controlsLoginForm)
-                if (control is TextBox)
-                    ((TextBox)control).Text = "";
+            //! For some reason it won't work with a loop..
+            //foreach (Control control in controlsLoginForm)
+            //    if (control is TextBox)
+            //        ((TextBox)control).Text = "";
+
+            textBoxHost.Text = "";
+            textBoxUsername.Text = "";
+            textBoxPassword.Text = "";
+            textBoxWorldDatabase.Text = "";
+            textBoxPort.Text = "";
+            checkBoxSaveSettings.Checked = false;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
