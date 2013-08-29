@@ -122,6 +122,11 @@ namespace SAI_Editor
 
                     break;
                 }
+                case Keys.Escape:
+                {
+                    Close();
+                    break;
+                }
             }
         }
     }
