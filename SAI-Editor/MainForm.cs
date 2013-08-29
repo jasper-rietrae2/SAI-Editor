@@ -286,7 +286,7 @@ namespace SAI_Editor
 
         private void buttonSearchForCreature_Click(object sender, EventArgs e)
         {
-            new SearchForCreatureForm(connectionString).ShowDialog(this);
+            new SearchForEntryForm(connectionString, comboBoxSourceType.SelectedIndex == 0).ShowDialog(this);
         }
 
         private void comboBoxEventType_SelectedIndexChanged_1(object sender, EventArgs e)
