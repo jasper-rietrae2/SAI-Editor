@@ -41,7 +41,7 @@ namespace SAI_Editor
             textBoxHost.Text = _settings.GetSetting("Host", "localhost");
             textBoxUsername.Text = _settings.GetSetting("User", "root");
             textBoxPassword.Text = _settings.GetSetting("Password", string.Empty);
-            textBoxWorldDatabase.Text = _settings.GetSetting("database", "trinitycore_world");
+            textBoxWorldDatabase.Text = _settings.GetSetting("Database", "trinitycore_world");
             textBoxPort.Text = _settings.GetSetting("Port", "3306");
 
             timerExpandOrContract = new System.Windows.Forms.Timer();
@@ -185,7 +185,7 @@ namespace SAI_Editor
             {
                 _settings.PutSetting("User", textBoxUsername.Text);
                 _settings.PutSetting("Password", textBoxPassword.Text);
-                _settings.PutSetting("DB", textBoxWorldDatabase.Text);
+                _settings.PutSetting("Database", textBoxWorldDatabase.Text);
                 _settings.PutSetting("Host", textBoxHost.Text);
                 _settings.PutSetting("Port", textBoxPort.Text);
             }
