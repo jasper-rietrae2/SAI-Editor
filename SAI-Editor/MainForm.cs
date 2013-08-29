@@ -71,11 +71,11 @@ namespace SAI_Editor
         {
             if (expandingToMainForm)
             {
-                if (Height < originalHeight + 610)
+                if (Height < originalHeight + 400)
                     Height += 20;
                 else
                 {
-                    Height = originalHeight + 610;
+                    Height = originalHeight + 400;
 
                     if (Width >= originalWidth + 590) //! If both finished
                     {
@@ -92,9 +92,9 @@ namespace SAI_Editor
                 {
                     Width = originalWidth + 590;
 
-                    if (Height >= originalHeight + 610) //! If both finished
+                    if (Height >= originalHeight + 400) //! If both finished
                     {
-                        Height = originalHeight + 610;
+                        Height = originalHeight + 400;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                         FinishedExpandingOrContracting(true);
