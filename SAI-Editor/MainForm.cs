@@ -46,7 +46,7 @@ namespace SAI_Editor
 
             timerExpandOrContract = new System.Windows.Forms.Timer();
             timerExpandOrContract.Enabled = false;
-            timerExpandOrContract.Interval = 16;
+            timerExpandOrContract.Interval = 32;
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
 
             KeyPreview = true;
@@ -71,27 +71,29 @@ namespace SAI_Editor
         {
             if (expandingToMainForm)
             {
-                if (Height < originalHeight + 600)
-                    Height += 10;
+                if (Height < originalHeight + 610)
+                    Height += 20;
                 else
                 {
-                    Height = originalHeight + 600;
+                    Height = originalHeight + 610;
 
                     if (Width >= originalWidth + 590) //! If both finished
                     {
+                        Width = originalWidth + 590;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                     }
                 }
 
                 if (Width < originalWidth + 590)
-                    Width += 10;
+                    Width += 20;
                 else
                 {
                     Width = originalWidth + 590;
 
-                    if (Height >= originalHeight + 600) //! If both finished
+                    if (Height >= originalHeight + 610) //! If both finished
                     {
+                        Height = originalHeight + 610;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                     }
@@ -100,26 +102,28 @@ namespace SAI_Editor
             else if (contractingToLoginForm)
             {
                 if (Height >= originalHeight)
-                    Height -= 10;
+                    Height -= 20;
                 else
                 {
                     Height = originalHeight;
 
                     if (Width <= originalWidth) //! If both finished
                     {
+                        Width = originalWidth;
                         timerExpandOrContract.Enabled = false;
                         contractingToLoginForm = false;
                     }
                 }
 
                 if (Width >= originalWidth)
-                    Width -= 10;
+                    Width -= 20;
                 else
                 {
                     Width = originalWidth;
 
                     if (Height <= originalHeight) //! If both finished
                     {
+                        Height = originalHeight;
                         timerExpandOrContract.Enabled = false;
                         contractingToLoginForm = false;
                     }
