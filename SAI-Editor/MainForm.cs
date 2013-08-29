@@ -261,6 +261,10 @@ namespace SAI_Editor
         {
             switch (e.KeyCode)
             {
+                case Keys.Escape:
+                    if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        Close();
+                    break;
                 case Keys.F5:
                     buttonConnect_Click(sender, e);
                     break;
