@@ -84,6 +84,7 @@
             this.tabPageTarget = new System.Windows.Forms.TabPage();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonSearchEventFlags = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.textBox14 = new System.Windows.Forms.TextBox();
@@ -95,7 +96,6 @@
             this.label16 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonSearchEventFlags = new System.Windows.Forms.Button();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -373,7 +373,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(19, 48);
+            this.label4.Location = new System.Drawing.Point(17, 48);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 13);
             this.label4.TabIndex = 15;
@@ -396,7 +396,7 @@
             // labelCreatureEntry
             // 
             this.labelCreatureEntry.AutoSize = true;
-            this.labelCreatureEntry.Location = new System.Drawing.Point(10, 22);
+            this.labelCreatureEntry.Location = new System.Drawing.Point(8, 22);
             this.labelCreatureEntry.Name = "labelCreatureEntry";
             this.labelCreatureEntry.Size = new System.Drawing.Size(76, 13);
             this.labelCreatureEntry.TabIndex = 14;
@@ -953,6 +953,15 @@
             this.groupBox1.Text = "Event information";
             this.groupBox1.Visible = false;
             // 
+            // buttonSearchEventFlags
+            // 
+            this.buttonSearchEventFlags.Location = new System.Drawing.Point(283, 45);
+            this.buttonSearchEventFlags.Name = "buttonSearchEventFlags";
+            this.buttonSearchEventFlags.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchEventFlags.TabIndex = 28;
+            this.buttonSearchEventFlags.Text = "...";
+            this.buttonSearchEventFlags.UseVisualStyleBackColor = true;
+            // 
             // numericUpDown1
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(241, 20);
@@ -1019,7 +1028,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(65, 49);
+            this.label15.Location = new System.Drawing.Point(54, 50);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(30, 13);
             this.label15.TabIndex = 24;
@@ -1028,7 +1037,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(30, 75);
+            this.label16.Location = new System.Drawing.Point(19, 75);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(65, 13);
             this.label16.TabIndex = 25;
@@ -1037,7 +1046,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(76, 23);
+            this.label14.Location = new System.Drawing.Point(65, 23);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(19, 13);
             this.label14.TabIndex = 23;
@@ -1052,15 +1061,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Parameters";
             this.groupBox2.Visible = false;
-            // 
-            // buttonSearchEventFlags
-            // 
-            this.buttonSearchEventFlags.Location = new System.Drawing.Point(283, 45);
-            this.buttonSearchEventFlags.Name = "buttonSearchEventFlags";
-            this.buttonSearchEventFlags.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchEventFlags.TabIndex = 28;
-            this.buttonSearchEventFlags.Text = "...";
-            this.buttonSearchEventFlags.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 

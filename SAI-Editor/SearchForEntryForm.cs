@@ -63,7 +63,7 @@ namespace SAI_Editor
             }
             //else //! No need to check for numbers because some creature names have numbers in there
 
-            labelEntrySearchInfo.Text = (String.Format("{0}", (searchingForCreature ? "Creature" : "Gameobject")));
+            labelEntrySearchInfo.Text = String.Format("{0}", (searchingForCreature ? "Creature" : "Gameobject"));
 
             if (checkBoxSearchForEntry.Checked)
                 labelEntrySearchInfo.Text += " entry (part)";
