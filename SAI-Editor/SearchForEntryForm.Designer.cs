@@ -36,11 +36,13 @@
             this.listViewEntryResults = new System.Windows.Forms.ListView();
             this.textBoxCriteria = new System.Windows.Forms.TextBox();
             this.checkBoxUseSqlLike = new System.Windows.Forms.CheckBox();
+            this.buttonClearSearchResults = new System.Windows.Forms.Button();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxSearchInfo
             // 
+            this.groupBoxSearchInfo.Controls.Add(this.buttonClearSearchResults);
             this.groupBoxSearchInfo.Controls.Add(this.checkBoxUseSqlLike);
             this.groupBoxSearchInfo.Controls.Add(this.textBoxCriteria);
             this.groupBoxSearchInfo.Controls.Add(this.comboBoxSearchType);
@@ -117,6 +119,16 @@
             this.checkBoxUseSqlLike.Text = "Use SQL \'LIKE\' keyword";
             this.checkBoxUseSqlLike.UseVisualStyleBackColor = true;
             // 
+            // buttonClearSearchResults
+            // 
+            this.buttonClearSearchResults.Location = new System.Drawing.Point(173, 67);
+            this.buttonClearSearchResults.Name = "buttonClearSearchResults";
+            this.buttonClearSearchResults.Size = new System.Drawing.Size(75, 23);
+            this.buttonClearSearchResults.TabIndex = 10;
+            this.buttonClearSearchResults.Text = "Clear";
+            this.buttonClearSearchResults.UseVisualStyleBackColor = true;
+            this.buttonClearSearchResults.Click += new System.EventHandler(this.buttonClearSearchResults_Click);
+            // 
             // SearchForEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -143,5 +155,6 @@
         private System.Windows.Forms.ComboBox comboBoxSearchType;
         private System.Windows.Forms.TextBox textBoxCriteria;
         private System.Windows.Forms.CheckBox checkBoxUseSqlLike;
+        private System.Windows.Forms.Button buttonClearSearchResults;
     }
 }

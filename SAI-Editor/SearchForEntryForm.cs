@@ -185,5 +185,10 @@ namespace SAI_Editor
                     break;
             }
         }
+
+        private void buttonClearSearchResults_Click(object sender, EventArgs e)
+        {
+            listViewEntryResults.Items.Clear();
+        }
     }
 }
