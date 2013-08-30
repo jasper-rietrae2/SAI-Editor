@@ -337,11 +337,6 @@ namespace SAI_Editor
             new SearchForEntryForm(connectionString, comboBoxSourceType.SelectedIndex == 0).ShowDialog(this);
         }
 
-        private void comboBoxEventType_SelectedIndexChanged_1(object sender, EventArgs e)
-        {
-            textBoxEventTypeId.Text = comboBoxEventType.SelectedIndex.ToString();
-        }
-
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxActionTypeId.Text = comboBoxActionType.SelectedIndex.ToString();

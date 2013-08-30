@@ -71,13 +71,13 @@
             this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
-            this.textBoxTargetTypeId = new System.Windows.Forms.TextBox();
             this.comboBoxTargetType = new System.Windows.Forms.ComboBox();
+            this.comboBoxActionType = new System.Windows.Forms.ComboBox();
+            this.textBoxTargetTypeId = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxActionTypeId = new System.Windows.Forms.TextBox();
             this.textBoxEventTypeId = new System.Windows.Forms.TextBox();
-            this.comboBoxActionType = new System.Windows.Forms.ComboBox();
             this.comboBoxEventType = new System.Windows.Forms.ComboBox();
             this.textBoxComments = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -549,13 +549,13 @@
             // 
             // groupBoxScriptInfo
             // 
-            this.groupBoxScriptInfo.Controls.Add(this.textBoxTargetTypeId);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxTargetType);
+            this.groupBoxScriptInfo.Controls.Add(this.comboBoxActionType);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxTargetTypeId);
             this.groupBoxScriptInfo.Controls.Add(this.label14);
             this.groupBoxScriptInfo.Controls.Add(this.label13);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxActionTypeId);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventTypeId);
-            this.groupBoxScriptInfo.Controls.Add(this.comboBoxActionType);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxEventType);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxComments);
             this.groupBoxScriptInfo.Controls.Add(this.label5);
@@ -568,90 +568,8 @@
             this.groupBoxScriptInfo.Text = "Dynamic script information";
             this.groupBoxScriptInfo.Visible = false;
             // 
-            // textBoxTargetTypeId
-            // 
-            this.textBoxTargetTypeId.Enabled = false;
-            this.textBoxTargetTypeId.Location = new System.Drawing.Point(353, 72);
-            this.textBoxTargetTypeId.Name = "textBoxTargetTypeId";
-            this.textBoxTargetTypeId.Size = new System.Drawing.Size(26, 20);
-            this.textBoxTargetTypeId.TabIndex = 24;
-            this.textBoxTargetTypeId.Text = "0";
-            // 
             // comboBoxTargetType
             // 
-            this.comboBoxTargetType.AutoCompleteCustomSource.AddRange(new string[] {
-            "SMART_EVENT_UPDATE_IC",
-            "SMART_EVENT_UPDATE_OOC",
-            "SMART_EVENT_HEALT_PCT",
-            "SMART_EVENT_MANA_PCT",
-            "SMART_EVENT_AGGRO",
-            "SMART_EVENT_KILL",
-            "SMART_EVENT_DEATH",
-            "SMART_EVENT_EVADE",
-            "SMART_EVENT_SPELLHIT",
-            "SMART_EVENT_RANGE",
-            "SMART_EVENT_OOC_LOS",
-            "SMART_EVENT_RESPAWN",
-            "SMART_EVENT_TARGET_HEALTH_PCT",
-            "SMART_EVENT_TARGET_CASTING",
-            "SMART_EVENT_FRIENDLY_HEALTH",
-            "SMART_EVENT_FRIENDLY_IS_CC",
-            "SMART_EVENT_FRIENDLY_MISSING_BUFF",
-            "SMART_EVENT_SUMMONED_UNIT",
-            "SMART_EVENT_TARGET_MANA_PCT",
-            "SMART_EVENT_ACCEPTED_QUEST",
-            "SMART_EVENT_REWARD_QUEST",
-            "SMART_EVENT_REACHED_HOME",
-            "SMART_EVENT_RECEIVE_EMOTE",
-            "SMART_EVENT_HAS_AURA",
-            "SMART_EVENT_TARGET_BUFFED",
-            "SMART_EVENT_RESET",
-            "SMART_EVENT_IC_LOS",
-            "SMART_EVENT_PASSENGER_BOARDED",
-            "SMART_EVENT_PASSENGER_REMOVED",
-            "SMART_EVENT_CHARMED",
-            "SMART_EVENT_CHARMED_TARGET",
-            "SMART_EVENT_SPELLHIT_TARGET",
-            "SMART_EVENT_DAMAGED",
-            "SMART_EVENT_DAMAGED_TARGET",
-            "SMART_EVENT_MOVEMENTINFORM",
-            "SMART_EVENT_SUMMON_DESPAWNED",
-            "SMART_EVENT_CORPSE_REMOVED",
-            "SMART_EVENT_AI_INIT",
-            "SMART_EVENT_DATA_SET",
-            "SMART_EVENT_WAYPOINT_START",
-            "SMART_EVENT_WAYPOINT_REACHED",
-            "SMART_EVENT_TRANSPORT_ADDPLAYER",
-            "SMART_EVENT_TRANSPORT_ADDCREATURE",
-            "SMART_EVENT_TRANSPORT_REMOVE_PLAYER",
-            "SMART_EVENT_TRANSPORT_RELOCATE",
-            "SMART_EVENT_INSTANCE_PLAYER_ENTER",
-            "SMART_EVENT_AREATRIGGER_ONTRIGGER",
-            "SMART_EVENT_QUEST_ACCEPTED",
-            "SMART_EVENT_QUEST_OBJ_COPLETETION",
-            "SMART_EVENT_QUEST_COMPLETION",
-            "SMART_EVENT_QUEST_REWARDED",
-            "SMART_EVENT_QUEST_FAIL",
-            "SMART_EVENT_TEXT_OVER",
-            "SMART_EVENT_RECEIVE_HEAL",
-            "SMART_EVENT_JUST_SUMMONED",
-            "SMART_EVENT_WAYPOINT_PAUSED",
-            "SMART_EVENT_WAYPOINT_RESUMED",
-            "SMART_EVENT_WAYPOINT_STOPPED",
-            "SMART_EVENT_WAYPOINT_ENDED",
-            "SMART_EVENT_TIMED_EVENT_TRIGGERED",
-            "SMART_EVENT_UPDATE",
-            "SMART_EVENT_LINK",
-            "SMART_EVENT_GOSSIP_SELECT",
-            "SMART_EVENT_JUST_CREATED",
-            "SMART_EVENT_GOSSIP_HELLO",
-            "SMART_EVENT_FOLLOW_COMPLETED",
-            "SMART_EVENT_DUMMY_EFFECT ",
-            "SMART_EVENT_IS_BEHIND_TARGET",
-            "SMART_EVENT_GAME_EVENT_START",
-            "SMART_EVENT_GAME_EVENT_END",
-            "SMART_EVENT_GO_STATE_CHANGED"});
-            this.comboBoxTargetType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.comboBoxTargetType.FormattingEnabled = true;
             this.comboBoxTargetType.Items.AddRange(new object[] {
             "SMART_TARGET_NONE",
@@ -682,123 +600,13 @@
             "SMART_TARGET_CLOSEST_ENEMY",
             "SMART_TARGET_CLOSEST_FRIENDLY"});
             this.comboBoxTargetType.Location = new System.Drawing.Point(59, 72);
-            this.comboBoxTargetType.MinimumSize = new System.Drawing.Size(288, 0);
             this.comboBoxTargetType.Name = "comboBoxTargetType";
             this.comboBoxTargetType.Size = new System.Drawing.Size(288, 21);
-            this.comboBoxTargetType.TabIndex = 23;
+            this.comboBoxTargetType.TabIndex = 25;
             this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 75);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 13);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "Target:";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1, 102);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(54, 13);
-            this.label13.TabIndex = 21;
-            this.label13.Text = "Comment:";
-            // 
-            // textBoxActionTypeId
-            // 
-            this.textBoxActionTypeId.Enabled = false;
-            this.textBoxActionTypeId.Location = new System.Drawing.Point(353, 45);
-            this.textBoxActionTypeId.Name = "textBoxActionTypeId";
-            this.textBoxActionTypeId.Size = new System.Drawing.Size(26, 20);
-            this.textBoxActionTypeId.TabIndex = 20;
-            this.textBoxActionTypeId.Text = "0";
-            // 
-            // textBoxEventTypeId
-            // 
-            this.textBoxEventTypeId.Enabled = false;
-            this.textBoxEventTypeId.Location = new System.Drawing.Point(353, 18);
-            this.textBoxEventTypeId.Name = "textBoxEventTypeId";
-            this.textBoxEventTypeId.Size = new System.Drawing.Size(26, 20);
-            this.textBoxEventTypeId.TabIndex = 20;
-            this.textBoxEventTypeId.Text = "0";
             // 
             // comboBoxActionType
             // 
-            this.comboBoxActionType.AutoCompleteCustomSource.AddRange(new string[] {
-            "SMART_EVENT_UPDATE_IC",
-            "SMART_EVENT_UPDATE_OOC",
-            "SMART_EVENT_HEALT_PCT",
-            "SMART_EVENT_MANA_PCT",
-            "SMART_EVENT_AGGRO",
-            "SMART_EVENT_KILL",
-            "SMART_EVENT_DEATH",
-            "SMART_EVENT_EVADE",
-            "SMART_EVENT_SPELLHIT",
-            "SMART_EVENT_RANGE",
-            "SMART_EVENT_OOC_LOS",
-            "SMART_EVENT_RESPAWN",
-            "SMART_EVENT_TARGET_HEALTH_PCT",
-            "SMART_EVENT_TARGET_CASTING",
-            "SMART_EVENT_FRIENDLY_HEALTH",
-            "SMART_EVENT_FRIENDLY_IS_CC",
-            "SMART_EVENT_FRIENDLY_MISSING_BUFF",
-            "SMART_EVENT_SUMMONED_UNIT",
-            "SMART_EVENT_TARGET_MANA_PCT",
-            "SMART_EVENT_ACCEPTED_QUEST",
-            "SMART_EVENT_REWARD_QUEST",
-            "SMART_EVENT_REACHED_HOME",
-            "SMART_EVENT_RECEIVE_EMOTE",
-            "SMART_EVENT_HAS_AURA",
-            "SMART_EVENT_TARGET_BUFFED",
-            "SMART_EVENT_RESET",
-            "SMART_EVENT_IC_LOS",
-            "SMART_EVENT_PASSENGER_BOARDED",
-            "SMART_EVENT_PASSENGER_REMOVED",
-            "SMART_EVENT_CHARMED",
-            "SMART_EVENT_CHARMED_TARGET",
-            "SMART_EVENT_SPELLHIT_TARGET",
-            "SMART_EVENT_DAMAGED",
-            "SMART_EVENT_DAMAGED_TARGET",
-            "SMART_EVENT_MOVEMENTINFORM",
-            "SMART_EVENT_SUMMON_DESPAWNED",
-            "SMART_EVENT_CORPSE_REMOVED",
-            "SMART_EVENT_AI_INIT",
-            "SMART_EVENT_DATA_SET",
-            "SMART_EVENT_WAYPOINT_START",
-            "SMART_EVENT_WAYPOINT_REACHED",
-            "SMART_EVENT_TRANSPORT_ADDPLAYER",
-            "SMART_EVENT_TRANSPORT_ADDCREATURE",
-            "SMART_EVENT_TRANSPORT_REMOVE_PLAYER",
-            "SMART_EVENT_TRANSPORT_RELOCATE",
-            "SMART_EVENT_INSTANCE_PLAYER_ENTER",
-            "SMART_EVENT_AREATRIGGER_ONTRIGGER",
-            "SMART_EVENT_QUEST_ACCEPTED",
-            "SMART_EVENT_QUEST_OBJ_COPLETETION",
-            "SMART_EVENT_QUEST_COMPLETION",
-            "SMART_EVENT_QUEST_REWARDED",
-            "SMART_EVENT_QUEST_FAIL",
-            "SMART_EVENT_TEXT_OVER",
-            "SMART_EVENT_RECEIVE_HEAL",
-            "SMART_EVENT_JUST_SUMMONED",
-            "SMART_EVENT_WAYPOINT_PAUSED",
-            "SMART_EVENT_WAYPOINT_RESUMED",
-            "SMART_EVENT_WAYPOINT_STOPPED",
-            "SMART_EVENT_WAYPOINT_ENDED",
-            "SMART_EVENT_TIMED_EVENT_TRIGGERED",
-            "SMART_EVENT_UPDATE",
-            "SMART_EVENT_LINK",
-            "SMART_EVENT_GOSSIP_SELECT",
-            "SMART_EVENT_JUST_CREATED",
-            "SMART_EVENT_GOSSIP_HELLO",
-            "SMART_EVENT_FOLLOW_COMPLETED",
-            "SMART_EVENT_DUMMY_EFFECT ",
-            "SMART_EVENT_IS_BEHIND_TARGET",
-            "SMART_EVENT_GAME_EVENT_START",
-            "SMART_EVENT_GAME_EVENT_END",
-            "SMART_EVENT_GO_STATE_CHANGED"});
-            this.comboBoxActionType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.comboBoxActionType.FormattingEnabled = true;
             this.comboBoxActionType.Items.AddRange(new object[] {
             "SMART_ACTION_NONE",
@@ -903,11 +711,55 @@
             "SMART_ACTION_GO_SET_LOOT_STATE",
             "SMART_ACTION_SEND_TARGET_TO_TARGET"});
             this.comboBoxActionType.Location = new System.Drawing.Point(59, 45);
-            this.comboBoxActionType.MinimumSize = new System.Drawing.Size(288, 0);
             this.comboBoxActionType.Name = "comboBoxActionType";
             this.comboBoxActionType.Size = new System.Drawing.Size(288, 21);
-            this.comboBoxActionType.TabIndex = 19;
+            this.comboBoxActionType.TabIndex = 25;
             this.comboBoxActionType.SelectedIndexChanged += new System.EventHandler(this.comboBoxActionType_SelectedIndexChanged);
+            // 
+            // textBoxTargetTypeId
+            // 
+            this.textBoxTargetTypeId.Enabled = false;
+            this.textBoxTargetTypeId.Location = new System.Drawing.Point(353, 72);
+            this.textBoxTargetTypeId.Name = "textBoxTargetTypeId";
+            this.textBoxTargetTypeId.Size = new System.Drawing.Size(26, 20);
+            this.textBoxTargetTypeId.TabIndex = 24;
+            this.textBoxTargetTypeId.Text = "0";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 75);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Target:";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(1, 102);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(54, 13);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "Comment:";
+            // 
+            // textBoxActionTypeId
+            // 
+            this.textBoxActionTypeId.Enabled = false;
+            this.textBoxActionTypeId.Location = new System.Drawing.Point(353, 45);
+            this.textBoxActionTypeId.Name = "textBoxActionTypeId";
+            this.textBoxActionTypeId.Size = new System.Drawing.Size(26, 20);
+            this.textBoxActionTypeId.TabIndex = 20;
+            this.textBoxActionTypeId.Text = "0";
+            // 
+            // textBoxEventTypeId
+            // 
+            this.textBoxEventTypeId.Enabled = false;
+            this.textBoxEventTypeId.Location = new System.Drawing.Point(353, 18);
+            this.textBoxEventTypeId.Name = "textBoxEventTypeId";
+            this.textBoxEventTypeId.Size = new System.Drawing.Size(26, 20);
+            this.textBoxEventTypeId.TabIndex = 20;
+            this.textBoxEventTypeId.Text = "0";
             // 
             // comboBoxEventType
             // 
@@ -1696,7 +1548,6 @@
         private System.Windows.Forms.ComboBox comboBoxEventType;
         private System.Windows.Forms.TextBox textBoxEventTypeId;
         private System.Windows.Forms.TextBox textBoxActionTypeId;
-        private System.Windows.Forms.ComboBox comboBoxActionType;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ToolStripMenuItem menuItemReconnect;
         private System.Windows.Forms.ToolStripMenuItem menuItemExit;
@@ -1755,7 +1606,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox textBoxTargetParam1;
         private System.Windows.Forms.TextBox textBoxTargetTypeId;
-        private System.Windows.Forms.ComboBox comboBoxTargetType;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
@@ -1764,6 +1614,8 @@
         public System.Windows.Forms.CheckBox checkBoxAutoLogin;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         public System.Windows.Forms.ComboBox comboBoxSourceType;
+        private System.Windows.Forms.ComboBox comboBoxActionType;
+        private System.Windows.Forms.ComboBox comboBoxTargetType;
     }
 }
 
