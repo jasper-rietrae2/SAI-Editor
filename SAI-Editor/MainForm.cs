@@ -416,13 +416,13 @@ namespace SAI_Editor
                 using (var connection = new MySqlConnection(connectionString.ToString()))
                 {
                     connection.Open();
-                    var returnVal = new MySqlDataAdapter(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0}", textBoxEntryOrGuid.Text), connection);
+                    var returnVal = new MySqlDataAdapter(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, comboBoxSourceType.SelectedIndex), connection);
                     var dataTable = new DataTable();
                     returnVal.Fill(dataTable);
 
                     if (dataTable.Rows.Count <= 0)
                     {
-                        MessageBox.Show(String.Format("The entry '{0}' could not be found in the SmartAI table!", textBoxEntryOrGuid.Text), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(String.Format("The entry '{0}' could not be found in the SmartAI table for the given source type!", textBoxEntryOrGuid.Text), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
