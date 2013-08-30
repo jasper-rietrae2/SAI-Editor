@@ -5,8 +5,8 @@ using MySql.Data.MySqlClient;
 
 internal enum FormSizes
 {
-    WidthToExpandTo  = 790,
-    HeightToExpandTo = 400,
+    WidthToExpandTo  = 810,
+    HeightToExpandTo = 395,
 };
 
 namespace SAI_Editor
@@ -17,10 +17,10 @@ namespace SAI_Editor
         private readonly MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
         private readonly List<Control> controlsLoginForm = new List<Control>();
         private readonly List<Control> controlsMainForm = new List<Control>();
-        private bool contractingToLoginForm;
-        private bool expandingToMainForm;
-        private int originalHeight, originalWidth;
-        private Timer timerExpandOrContract;
+        private bool contractingToLoginForm = false;
+        private bool expandingToMainForm = false;
+        private int originalHeight = 0, originalWidth = 0;
+        private Timer timerExpandOrContract = null;
 
         public MainForm()
         {
@@ -44,7 +44,7 @@ namespace SAI_Editor
             textBoxWorldDatabase.Text = settings.GetSetting("Database", "trinitycore_world");
             textBoxPort.Text = settings.GetSetting("Port", "3306");
 
-            timerExpandOrContract = new Timer { Enabled = false, Interval = 32 };
+            timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
 
             KeyPreview = true;
@@ -100,7 +100,7 @@ namespace SAI_Editor
             if (expandingToMainForm)
             {
                 if (Height < originalHeight + (int)FormSizes.HeightToExpandTo)
-                    Height += 20;
+                    Height += 5;
                 else
                 {
                     Height = originalHeight + (int)FormSizes.HeightToExpandTo;
@@ -115,7 +115,7 @@ namespace SAI_Editor
                 }
 
                 if (Width < originalWidth + (int)FormSizes.WidthToExpandTo)
-                    Width += 20;
+                    Width += 5;
                 else
                 {
                     Width = originalWidth + (int)FormSizes.WidthToExpandTo;
@@ -132,7 +132,7 @@ namespace SAI_Editor
             else if (contractingToLoginForm)
             {
                 if (Height > originalHeight)
-                    Height -= 20;
+                    Height -= 5;
                 else
                 {
                     Height = originalHeight;
@@ -147,7 +147,7 @@ namespace SAI_Editor
                 }
 
                 if (Width > originalWidth)
-                    Width -= 20;
+                    Width -= 5;
                 else
                 {
                     Width = originalWidth;
