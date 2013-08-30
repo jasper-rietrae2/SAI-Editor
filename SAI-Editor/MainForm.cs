@@ -65,6 +65,7 @@ namespace SAI_Editor
             comboBoxTargetType.SelectedIndex = 0;
 
             menuItemReconnect.Click += menuItemReconnect_Click;
+            menuItemExit.Click += TryCloseApplication;
 
             listViewSmartScripts.View = View.Details;
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);
@@ -304,8 +305,7 @@ namespace SAI_Editor
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        Close();
+                    TryCloseApplication();
                     break;
                 case Keys.F5:
                     buttonConnect_Click(sender, e);
@@ -384,7 +384,7 @@ namespace SAI_Editor
                     buttonSearchForCreature.Enabled = false;
                     break;
                 case 3: //! Scriptedactionlist
-                    labelCreatureEntry.Text = "XX entry:";
+                    labelCreatureEntry.Text = "Actionlist entry:";
                     buttonSearchForCreature.Enabled = false;
                     break;
             }
@@ -432,6 +432,13 @@ namespace SAI_Editor
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
+        private void TryCloseApplication(object sender = null, EventArgs e = null)
+        {
+            if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                Close();
         }
     }
 }
