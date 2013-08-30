@@ -1679,7 +1679,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemSettings;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBoxSourceType;
         private System.Windows.Forms.Label labelCreatureEntry;
         private System.Windows.Forms.Button buttonSearchForCreature;
         private System.Windows.Forms.GroupBox groupBoxPreferences;
@@ -1764,6 +1763,7 @@
         private System.Windows.Forms.TextBox textBoxTargetY;
         public System.Windows.Forms.CheckBox checkBoxAutoLogin;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
+        public System.Windows.Forms.ComboBox comboBoxSourceType;
     }
 }
 

@@ -215,6 +215,9 @@ namespace SAI_Editor
 
             entryToPlace += listViewEntryResults.SelectedItems[0].Text;
             ((MainForm)Owner).textBoxEntryOrGuid.Text = entryToPlace;
+
+            //! Above 2 means it's a gameobject
+            ((MainForm)Owner).comboBoxSourceType.SelectedIndex = comboBoxSearchType.SelectedIndex > 2 ? 1 : 0;
             Close();
         }
     }
