@@ -11,6 +11,7 @@ namespace SAI_Editor
     {
         private readonly MySqlConnectionStringBuilder connectionString;
         private readonly bool searchingForCreature = false;
+        private int previouslySelectedSearchIndex = 0;
 
         public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, bool searchingForCreature)
         {
@@ -156,8 +157,8 @@ namespace SAI_Editor
         {
             if (Regex.IsMatch(textBoxCriteria.Text, @"^[a-zA-Z]+$"))
             {
-                if (MessageBox.Show("The criteria contains characters. Do you wish to clear the field? If you choose 'No', the selection will be set back to search for names.", "Something went wrong!", MessageBoxButtons.YesNo, MessageBoxIcon.Error) != DialogResult.Yes)
-                    comboBoxSearchType.SelectedIndex = 0;
+                if (MessageBox.Show("The criteria contains characters. Do you wish to clear the field? If you choose 'No', the selection will be set back to search for names.", "Something went wrong!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                    comboBoxSearchType.SelectedIndex = previouslySelectedSearchIndex;
                 else
                     textBoxCriteria.Text = "";
             }
@@ -184,6 +185,8 @@ namespace SAI_Editor
                 default:
                     break;
             }
+
+            previouslySelectedSearchIndex = comboBoxSearchType.SelectedIndex;
         }
 
         private void buttonClearSearchResults_Click(object sender, EventArgs e)
