@@ -488,37 +488,38 @@ namespace SAI_Editor
 
         private void FillFieldsBasedOnSelectedScript()
         {
-            comboBoxEventType.SelectedIndex = Convert.ToInt32(listViewSmartScripts.SelectedItems[0].SubItems[4].Text);
-            comboBoxActionType.SelectedIndex = Convert.ToInt32(listViewSmartScripts.SelectedItems[0].SubItems[12].Text);
-            comboBoxTargetType.SelectedIndex = Convert.ToInt32(listViewSmartScripts.SelectedItems[0].SubItems[19].Text);
-            textBoxComments.Text = listViewSmartScripts.SelectedItems[0].SubItems[27].Text;
-            textBoxEventScriptId.Text = listViewSmartScripts.SelectedItems[0].SubItems[2].Text;
-            textBoxEventLink.Text = listViewSmartScripts.SelectedItems[0].SubItems[3].Text;
-            textBoxEventPhasemask.Text = listViewSmartScripts.SelectedItems[0].SubItems[5].Text;
-            textBoxEventChance.Text = listViewSmartScripts.SelectedItems[0].SubItems[6].Text;
-            textBoxEventFlags.Text = listViewSmartScripts.SelectedItems[0].SubItems[7].Text;
+            ListViewItem.ListViewSubItemCollection selectedItem = listViewSmartScripts.SelectedItems[0].SubItems;
+            comboBoxEventType.SelectedIndex = Convert.ToInt32(selectedItem[4].Text);
+            comboBoxActionType.SelectedIndex = Convert.ToInt32(selectedItem[12].Text);
+            comboBoxTargetType.SelectedIndex = Convert.ToInt32(selectedItem[19].Text);
+            textBoxComments.Text = selectedItem[27].Text;
+            textBoxEventScriptId.Text = selectedItem[2].Text;
+            textBoxEventLink.Text = selectedItem[3].Text;
+            textBoxEventPhasemask.Text = selectedItem[5].Text;
+            textBoxEventChance.Text = selectedItem[6].Text;
+            textBoxEventFlags.Text = selectedItem[7].Text;
 
             //! Event parameters
-            textBoxEventParam1.Text = listViewSmartScripts.SelectedItems[0].SubItems[8].Text;
-            textBoxEventParam2.Text = listViewSmartScripts.SelectedItems[0].SubItems[9].Text;
-            textBoxEventParam3.Text = listViewSmartScripts.SelectedItems[0].SubItems[10].Text;
-            textBoxEventParam4.Text = listViewSmartScripts.SelectedItems[0].SubItems[11].Text;
+            textBoxEventParam1.Text = selectedItem[8].Text;
+            textBoxEventParam2.Text = selectedItem[9].Text;
+            textBoxEventParam3.Text = selectedItem[10].Text;
+            textBoxEventParam4.Text = selectedItem[11].Text;
 
             //! Action parameters
-            textBoxActionParam1.Text = listViewSmartScripts.SelectedItems[0].SubItems[13].Text;
-            textBoxActionParam2.Text = listViewSmartScripts.SelectedItems[0].SubItems[14].Text;
-            textBoxActionParam3.Text = listViewSmartScripts.SelectedItems[0].SubItems[15].Text;
-            textBoxActionParam4.Text = listViewSmartScripts.SelectedItems[0].SubItems[16].Text;
-            textBoxActionParam5.Text = listViewSmartScripts.SelectedItems[0].SubItems[17].Text;
-            textBoxActionParam6.Text = listViewSmartScripts.SelectedItems[0].SubItems[18].Text;
+            textBoxActionParam1.Text = selectedItem[13].Text;
+            textBoxActionParam2.Text = selectedItem[14].Text;
+            textBoxActionParam3.Text = selectedItem[15].Text;
+            textBoxActionParam4.Text = selectedItem[16].Text;
+            textBoxActionParam5.Text = selectedItem[17].Text;
+            textBoxActionParam6.Text = selectedItem[18].Text;
 
             //! Target parameters
-            textBoxTargetParam1.Text = listViewSmartScripts.SelectedItems[0].SubItems[20].Text;
-            textBoxTargetParam2.Text = listViewSmartScripts.SelectedItems[0].SubItems[21].Text;
-            textBoxTargetParam3.Text = listViewSmartScripts.SelectedItems[0].SubItems[22].Text;
-            textBoxTargetX.Text = listViewSmartScripts.SelectedItems[0].SubItems[23].Text;
-            textBoxTargetY.Text = listViewSmartScripts.SelectedItems[0].SubItems[24].Text;
-            textBoxTargetZ.Text = listViewSmartScripts.SelectedItems[0].SubItems[25].Text;
+            textBoxTargetParam1.Text = selectedItem[20].Text;
+            textBoxTargetParam2.Text = selectedItem[21].Text;
+            textBoxTargetParam3.Text = selectedItem[22].Text;
+            textBoxTargetX.Text = selectedItem[23].Text;
+            textBoxTargetY.Text = selectedItem[24].Text;
+            textBoxTargetZ.Text = selectedItem[25].Text;
         }
     }
 }
