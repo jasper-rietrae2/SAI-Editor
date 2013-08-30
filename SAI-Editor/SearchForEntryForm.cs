@@ -33,6 +33,8 @@ namespace SAI_Editor
 
             comboBoxSearchType.SelectedIndex = 0;
 
+            textBoxCriteria.KeyPress += textBoxCriteria_KeyPress;
+
             listViewEntryResults.View = View.Details;
             listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
             listViewEntryResults.Columns.Add("Name", 270, HorizontalAlignment.Left);
@@ -153,34 +155,19 @@ namespace SAI_Editor
             }
         }
 
-        private void CheckStringForCharacters()
-        {
-            if (Regex.IsMatch(textBoxCriteria.Text, @"^[a-zA-Z]+$"))
-            {
-                if (MessageBox.Show("The criteria contains characters. Do you wish to clear the field? If you choose 'No', the selection will be set back to search for names.", "Something went wrong!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
-                    comboBoxSearchType.SelectedIndex = previouslySelectedSearchIndex;
-                else
-                    textBoxCriteria.Text = "";
-            }
-        }
-
         private void comboBoxSearchType_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (comboBoxSearchType.SelectedIndex)
             {
                 case 2: //! Creature guid
                 case 5: //! Gameobject guid
-                    //listViewEntryResults.Columns[0].Text = "Guid";
-                    CheckStringForCharacters();
-                    break;
                 case 1: //! Creature entry
                 case 4: //! Gameobject entry
-                    //listViewEntryResults.Columns[0].Text = "Entry";
-                    CheckStringForCharacters();
+                    textBoxCriteria.Text = "";
                     break;
                 case 0: //! Creature name
                 case 3: //! Gameobject name
-                    //listViewEntryResults.Columns[0].Text = "Entry";
+                    //! Do nothing
                     break;
                 default:
                     break;
@@ -192,6 +179,29 @@ namespace SAI_Editor
         private void buttonClearSearchResults_Click(object sender, EventArgs e)
         {
             listViewEntryResults.Items.Clear();
+        }
+
+        private void textBoxCriteria_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text))
+                return;
+
+            switch (comboBoxSearchType.SelectedIndex)
+            {
+                case 2: //! Creature guid
+                case 5: //! Gameobject guid
+                case 1: //! Creature entry
+                case 4: //! Gameobject entry
+                    if (!char.IsNumber(e.KeyChar))
+                        e.Handled = e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.OemMinus;
+                    break;
+                case 0: //! Creature name
+                case 3: //! Gameobject name
+                    //! Allow any characters when searching for names
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
