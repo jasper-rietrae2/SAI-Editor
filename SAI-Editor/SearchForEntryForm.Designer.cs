@@ -29,90 +29,99 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForEntryForm));
-            this.textBoxEntryCriteria = new System.Windows.Forms.TextBox();
-            this.labelEntrySearchInfo = new System.Windows.Forms.Label();
-            this.checkBoxSearchForEntry = new System.Windows.Forms.CheckBox();
             this.groupBoxSearchInfo = new System.Windows.Forms.GroupBox();
-            this.buttonSearchCreature = new System.Windows.Forms.Button();
-            this.listViewEntryResults = new System.Windows.Forms.ListView();
+            this.comboBoxSearchType = new System.Windows.Forms.ComboBox();
             this.checkBoxHasAiName = new System.Windows.Forms.CheckBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.listViewEntryResults = new System.Windows.Forms.ListView();
+            this.textBoxCriteria = new System.Windows.Forms.TextBox();
+            this.checkBoxUseSqlLike = new System.Windows.Forms.CheckBox();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textBoxEntryCriteria
-            // 
-            this.textBoxEntryCriteria.Location = new System.Drawing.Point(123, 19);
-            this.textBoxEntryCriteria.Name = "textBoxEntryCriteria";
-            this.textBoxEntryCriteria.Size = new System.Drawing.Size(206, 20);
-            this.textBoxEntryCriteria.TabIndex = 0;
-            // 
-            // labelEntrySearchInfo
-            // 
-            this.labelEntrySearchInfo.AutoSize = true;
-            this.labelEntrySearchInfo.Location = new System.Drawing.Point(17, 22);
-            this.labelEntrySearchInfo.Name = "labelEntrySearchInfo";
-            this.labelEntrySearchInfo.Size = new System.Drawing.Size(106, 13);
-            this.labelEntrySearchInfo.TabIndex = 1;
-            this.labelEntrySearchInfo.Text = "Creature name (part):";
-            // 
-            // checkBoxSearchForEntry
-            // 
-            this.checkBoxSearchForEntry.AutoSize = true;
-            this.checkBoxSearchForEntry.Location = new System.Drawing.Point(20, 45);
-            this.checkBoxSearchForEntry.Name = "checkBoxSearchForEntry";
-            this.checkBoxSearchForEntry.Size = new System.Drawing.Size(138, 17);
-            this.checkBoxSearchForEntry.TabIndex = 2;
-            this.checkBoxSearchForEntry.Text = "Search for entry instead";
-            this.checkBoxSearchForEntry.UseVisualStyleBackColor = true;
-            this.checkBoxSearchForEntry.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // groupBoxSearchInfo
             // 
+            this.groupBoxSearchInfo.Controls.Add(this.checkBoxUseSqlLike);
+            this.groupBoxSearchInfo.Controls.Add(this.textBoxCriteria);
+            this.groupBoxSearchInfo.Controls.Add(this.comboBoxSearchType);
             this.groupBoxSearchInfo.Controls.Add(this.checkBoxHasAiName);
-            this.groupBoxSearchInfo.Controls.Add(this.buttonSearchCreature);
-            this.groupBoxSearchInfo.Controls.Add(this.textBoxEntryCriteria);
-            this.groupBoxSearchInfo.Controls.Add(this.labelEntrySearchInfo);
-            this.groupBoxSearchInfo.Controls.Add(this.checkBoxSearchForEntry);
+            this.groupBoxSearchInfo.Controls.Add(this.buttonSearch);
             this.groupBoxSearchInfo.Location = new System.Drawing.Point(12, 12);
             this.groupBoxSearchInfo.Name = "groupBoxSearchInfo";
-            this.groupBoxSearchInfo.Size = new System.Drawing.Size(351, 71);
+            this.groupBoxSearchInfo.Size = new System.Drawing.Size(351, 103);
             this.groupBoxSearchInfo.TabIndex = 4;
             this.groupBoxSearchInfo.TabStop = false;
             this.groupBoxSearchInfo.Text = "Search information";
             // 
-            // buttonSearchCreature
+            // comboBoxSearchType
             // 
-            this.buttonSearchCreature.Location = new System.Drawing.Point(254, 42);
-            this.buttonSearchCreature.Name = "buttonSearchCreature";
-            this.buttonSearchCreature.Size = new System.Drawing.Size(75, 23);
-            this.buttonSearchCreature.TabIndex = 3;
-            this.buttonSearchCreature.Text = "Search";
-            this.buttonSearchCreature.UseVisualStyleBackColor = true;
-            this.buttonSearchCreature.Click += new System.EventHandler(this.buttonSearchCreature_Click);
-            // 
-            // listViewEntryResults
-            // 
-            this.listViewEntryResults.Location = new System.Drawing.Point(12, 89);
-            this.listViewEntryResults.Name = "listViewEntryResults";
-            this.listViewEntryResults.Size = new System.Drawing.Size(351, 258);
-            this.listViewEntryResults.TabIndex = 5;
-            this.listViewEntryResults.UseCompatibleStateImageBehavior = false;
+            this.comboBoxSearchType.FormattingEnabled = true;
+            this.comboBoxSearchType.Items.AddRange(new object[] {
+            "Creature name",
+            "Creature entry",
+            "Creature guid",
+            "Gameobject name",
+            "Gameobject entry",
+            "Gameobject guid"});
+            this.comboBoxSearchType.Location = new System.Drawing.Point(20, 19);
+            this.comboBoxSearchType.Name = "comboBoxSearchType";
+            this.comboBoxSearchType.Size = new System.Drawing.Size(113, 21);
+            this.comboBoxSearchType.TabIndex = 7;
+            this.comboBoxSearchType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearchType_SelectedIndexChanged);
             // 
             // checkBoxHasAiName
             // 
             this.checkBoxHasAiName.AutoSize = true;
-            this.checkBoxHasAiName.Location = new System.Drawing.Point(162, 45);
+            this.checkBoxHasAiName.Location = new System.Drawing.Point(19, 50);
             this.checkBoxHasAiName.Name = "checkBoxHasAiName";
-            this.checkBoxHasAiName.Size = new System.Drawing.Size(86, 17);
+            this.checkBoxHasAiName.Size = new System.Drawing.Size(114, 17);
             this.checkBoxHasAiName.TabIndex = 6;
-            this.checkBoxHasAiName.Text = "Has AIName";
+            this.checkBoxHasAiName.Text = "AIName is SmartAI";
             this.checkBoxHasAiName.UseVisualStyleBackColor = true;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.Location = new System.Drawing.Point(254, 67);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(75, 23);
+            this.buttonSearch.TabIndex = 3;
+            this.buttonSearch.Text = "Search";
+            this.buttonSearch.UseVisualStyleBackColor = true;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
+            // listViewEntryResults
+            // 
+            this.listViewEntryResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listViewEntryResults.Location = new System.Drawing.Point(12, 121);
+            this.listViewEntryResults.Name = "listViewEntryResults";
+            this.listViewEntryResults.Size = new System.Drawing.Size(351, 295);
+            this.listViewEntryResults.TabIndex = 5;
+            this.listViewEntryResults.UseCompatibleStateImageBehavior = false;
+            // 
+            // textBoxCriteria
+            // 
+            this.textBoxCriteria.Location = new System.Drawing.Point(139, 19);
+            this.textBoxCriteria.Multiline = true;
+            this.textBoxCriteria.Name = "textBoxCriteria";
+            this.textBoxCriteria.Size = new System.Drawing.Size(190, 21);
+            this.textBoxCriteria.TabIndex = 8;
+            // 
+            // checkBoxUseSqlLike
+            // 
+            this.checkBoxUseSqlLike.AutoSize = true;
+            this.checkBoxUseSqlLike.Enabled = false;
+            this.checkBoxUseSqlLike.Location = new System.Drawing.Point(19, 73);
+            this.checkBoxUseSqlLike.Name = "checkBoxUseSqlLike";
+            this.checkBoxUseSqlLike.Size = new System.Drawing.Size(142, 17);
+            this.checkBoxUseSqlLike.TabIndex = 9;
+            this.checkBoxUseSqlLike.Text = "Use SQL \'LIKE\' keyword";
+            this.checkBoxUseSqlLike.UseVisualStyleBackColor = true;
             // 
             // SearchForEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(375, 359);
+            this.ClientSize = new System.Drawing.Size(375, 428);
             this.Controls.Add(this.listViewEntryResults);
             this.Controls.Add(this.groupBoxSearchInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -127,12 +136,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Label labelEntrySearchInfo;
-        private System.Windows.Forms.CheckBox checkBoxSearchForEntry;
         private System.Windows.Forms.GroupBox groupBoxSearchInfo;
         private System.Windows.Forms.ListView listViewEntryResults;
-        private System.Windows.Forms.Button buttonSearchCreature;
-        internal System.Windows.Forms.TextBox textBoxEntryCriteria;
+        private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.CheckBox checkBoxHasAiName;
+        private System.Windows.Forms.ComboBox comboBoxSearchType;
+        private System.Windows.Forms.TextBox textBoxCriteria;
+        private System.Windows.Forms.CheckBox checkBoxUseSqlLike;
     }
 }
