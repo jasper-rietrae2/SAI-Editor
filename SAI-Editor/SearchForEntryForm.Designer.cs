@@ -35,6 +35,7 @@
             this.groupBoxSearchInfo = new System.Windows.Forms.GroupBox();
             this.buttonSearchCreature = new System.Windows.Forms.Button();
             this.listViewEntryResults = new System.Windows.Forms.ListView();
+            this.checkBoxHasAiName = new System.Windows.Forms.CheckBox();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +68,7 @@
             // 
             // groupBoxSearchInfo
             // 
+            this.groupBoxSearchInfo.Controls.Add(this.checkBoxHasAiName);
             this.groupBoxSearchInfo.Controls.Add(this.buttonSearchCreature);
             this.groupBoxSearchInfo.Controls.Add(this.textBoxEntryCriteria);
             this.groupBoxSearchInfo.Controls.Add(this.labelEntrySearchInfo);
@@ -96,6 +98,16 @@
             this.listViewEntryResults.TabIndex = 5;
             this.listViewEntryResults.UseCompatibleStateImageBehavior = false;
             // 
+            // checkBoxHasAiName
+            // 
+            this.checkBoxHasAiName.AutoSize = true;
+            this.checkBoxHasAiName.Location = new System.Drawing.Point(162, 45);
+            this.checkBoxHasAiName.Name = "checkBoxHasAiName";
+            this.checkBoxHasAiName.Size = new System.Drawing.Size(86, 17);
+            this.checkBoxHasAiName.TabIndex = 6;
+            this.checkBoxHasAiName.Text = "Has AIName";
+            this.checkBoxHasAiName.UseVisualStyleBackColor = true;
+            // 
             // SearchForEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -121,5 +133,6 @@
         private System.Windows.Forms.ListView listViewEntryResults;
         private System.Windows.Forms.Button buttonSearchCreature;
         internal System.Windows.Forms.TextBox textBoxEntryCriteria;
+        private System.Windows.Forms.CheckBox checkBoxHasAiName;
     }
 }

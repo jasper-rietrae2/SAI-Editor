@@ -102,8 +102,17 @@ namespace SAI_Editor
             if (String.IsNullOrEmpty(textBoxEntryCriteria.Text) || String.IsNullOrWhiteSpace(textBoxEntryCriteria.Text))
                 return;
 
+            string query = "SELECT entry, name FROM ";
+            query += (searchingForCreature ? "creature_template" : "gameobject_template");
+            query += " WHERE " + (checkBoxSearchForEntry.Checked ? "entry" : "name");
+            query += " LIKE '%" + textBoxEntryCriteria.Text + "%'";
+
+            if (checkBoxHasAiName.Checked)
+                query += " AND AIName='SmartAI'";
+
+            query += " ORDER BY entry";
             listViewEntryResults.Items.Clear();
-            SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM {0} WHERE {1} LIKE '%{2}%' ORDER BY entry", (searchingForCreature ? "creature_template" : "gameobject_template"), (checkBoxSearchForEntry.Checked ? "entry" : "name"), textBoxEntryCriteria.Text));
+            SelectFromCreatureTemplate(query);
         }
 
         private void SearchForEntryForm_KeyDown(object sender, KeyEventArgs e)
