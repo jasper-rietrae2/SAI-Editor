@@ -709,7 +709,17 @@
             "SMART_ACTION_JUMP_TO_POS",
             "SMART_ACTION_SEND_GOSSIP_MENU",
             "SMART_ACTION_GO_SET_LOOT_STATE",
-            "SMART_ACTION_SEND_TARGET_TO_TARGET"});
+            "SMART_ACTION_SEND_TARGET_TO_TARGET",
+            "SMART_ACTION_SET_HOME_POS",
+            "SMART_ACTION_SET_HEALTH_REGEN",
+            "SMART_ACTION_SET_ROOT",
+            "SMART_ACTION_SET_GO_FLAG",
+            "SMART_ACTION_ADD_GO_FLAG",
+            "SMART_ACTION_REMOVE_GO_FLAG",
+            "SMART_ACTION_SUMMON_CREATURE_GROUP",
+            "SMART_ACTION_SET_POWER",
+            "SMART_ACTION_ADD_POWER",
+            "SMART_ACTION_REMOVE_POWER"});
             this.comboBoxActionType.Location = new System.Drawing.Point(59, 45);
             this.comboBoxActionType.Name = "comboBoxActionType";
             this.comboBoxActionType.Size = new System.Drawing.Size(288, 21);
