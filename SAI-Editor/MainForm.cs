@@ -50,6 +50,10 @@ namespace SAI_Editor
             KeyPreview = true;
             KeyDown += Form1_KeyDown;
 
+            comboBoxActionType.KeyPress += comboBox_KeyPress;
+            comboBoxTargetType.KeyPress += comboBox_KeyPress;
+            comboBoxEventType.KeyPress += comboBox_KeyPress;
+
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
 
             foreach (Control control in Controls)
@@ -520,6 +524,11 @@ namespace SAI_Editor
             textBoxTargetX.Text = selectedItem[23].Text;
             textBoxTargetY.Text = selectedItem[24].Text;
             textBoxTargetZ.Text = selectedItem[25].Text;
+        }
+
+        private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
         }
     }
 }

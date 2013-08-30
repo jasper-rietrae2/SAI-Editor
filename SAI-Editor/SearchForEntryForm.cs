@@ -32,6 +32,7 @@ namespace SAI_Editor
             KeyDown += SearchForEntryForm_KeyDown;
 
             comboBoxSearchType.SelectedIndex = 0;
+            comboBoxSearchType.KeyPress += comboBoxSearchType_KeyPress;
 
             textBoxCriteria.KeyPress += textBoxCriteria_KeyPress;
 
@@ -202,6 +203,11 @@ namespace SAI_Editor
                 default:
                     break;
             }
+        }
+
+        private void comboBoxSearchType_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
         }
     }
 }
