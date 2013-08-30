@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Data;
 using MySql.Data.MySqlClient;
 
 internal enum FormSizes
 {
-    WidthToExpandTo  = 810,
+    WidthToExpandTo  = 830,
     HeightToExpandTo = 395,
 };
 
@@ -92,6 +93,7 @@ namespace SAI_Editor
             listViewSmartScripts.Columns.Add("x",           20, HorizontalAlignment.Right);
             listViewSmartScripts.Columns.Add("y",           20, HorizontalAlignment.Right);
             listViewSmartScripts.Columns.Add("z",           20, HorizontalAlignment.Right);
+            listViewSmartScripts.Columns.Add("o",           20, HorizontalAlignment.Right);
           //listViewSmartScripts.Columns.Add("comment",     56, HorizontalAlignment.Right);
             listViewSmartScripts.Columns.Add("comment",     100, HorizontalAlignment.Left);
         }
@@ -390,7 +392,46 @@ namespace SAI_Editor
 
         private void buttonLoadScriptForEntry_Click(object sender, EventArgs e)
         {
+            if (IsInvalidString(textBoxEntryOrGuid.Text))
+                return;
 
+            listViewSmartScripts.Items.Clear();
+
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString.ToString()))
+                {
+                    connection.Open();
+                    var returnVal = new MySqlDataAdapter(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0}", textBoxEntryOrGuid.Text), connection);
+                    var dataTable = new DataTable();
+                    returnVal.Fill(dataTable);
+
+                    if (dataTable.Rows.Count <= 0)
+                    {
+                        MessageBox.Show(String.Format("The entry '{0}' could not be found in the SmartAI table!", textBoxEntryOrGuid.Text), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        var listViewItem = new ListViewItem();
+
+                        for (int i = 0; i < row.ItemArray.Length; i++)
+                        {
+                            if (i == 0)
+                                listViewItem.Text = row.ItemArray[i].ToString();
+                            else
+                                listViewItem.SubItems.Add(row.ItemArray[i].ToString());
+                        }
+
+                        listViewSmartScripts.Items.Add(listViewItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

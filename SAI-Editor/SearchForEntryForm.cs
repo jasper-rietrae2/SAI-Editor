@@ -73,7 +73,7 @@ namespace SAI_Editor
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
-            ((MainForm)Owner).textBox1.Text = listViewEntryResults.SelectedItems[0].Text;
+            ((MainForm)Owner).textBoxEntryOrGuid.Text = listViewEntryResults.SelectedItems[0].Text;
             Close();
         }
 
@@ -93,7 +93,7 @@ namespace SAI_Editor
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -114,7 +114,7 @@ namespace SAI_Editor
                 {
                     if (listViewEntryResults.SelectedItems.Count > 0)
                     {
-                        ((MainForm)Owner).textBox1.Text = listViewEntryResults.SelectedItems[0].Text;
+                        ((MainForm)Owner).textBoxEntryOrGuid.Text = listViewEntryResults.SelectedItems[0].Text;
                         Close();
                     }
                     else

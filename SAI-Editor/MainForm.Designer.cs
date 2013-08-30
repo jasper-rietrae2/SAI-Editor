@@ -63,7 +63,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
             this.labelCreatureEntry = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxEntryOrGuid = new System.Windows.Forms.TextBox();
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
@@ -388,7 +388,7 @@
             this.panel1.Controls.Add(this.buttonConnect);
             this.panel1.Controls.Add(this.buttonClear);
             this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Location = new System.Drawing.Point(9, 8);
+            this.panel1.Location = new System.Drawing.Point(1123, 115);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 225);
             this.panel1.TabIndex = 13;
@@ -400,7 +400,7 @@
             this.groupBoxStaticScriptInfo.Controls.Add(this.label4);
             this.groupBoxStaticScriptInfo.Controls.Add(this.comboBoxSourceType);
             this.groupBoxStaticScriptInfo.Controls.Add(this.labelCreatureEntry);
-            this.groupBoxStaticScriptInfo.Controls.Add(this.textBox1);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.textBoxEntryOrGuid);
             this.groupBoxStaticScriptInfo.Location = new System.Drawing.Point(12, 31);
             this.groupBoxStaticScriptInfo.Name = "groupBoxStaticScriptInfo";
             this.groupBoxStaticScriptInfo.Size = new System.Drawing.Size(290, 75);
@@ -411,6 +411,7 @@
             // 
             // buttonLoadScriptForEntry
             // 
+            this.buttonLoadScriptForEntry.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonLoadScriptForEntry.Image = global::SAI_Editor.Properties.Resources.icon_load_script;
             this.buttonLoadScriptForEntry.Location = new System.Drawing.Point(261, 19);
             this.buttonLoadScriptForEntry.Name = "buttonLoadScriptForEntry";
@@ -461,12 +462,12 @@
             this.labelCreatureEntry.TabIndex = 14;
             this.labelCreatureEntry.Text = "Creature entry:";
             // 
-            // textBox1
+            // textBoxEntryOrGuid
             // 
-            this.textBox1.Location = new System.Drawing.Point(101, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(135, 20);
-            this.textBox1.TabIndex = 0;
+            this.textBoxEntryOrGuid.Location = new System.Drawing.Point(101, 19);
+            this.textBoxEntryOrGuid.Name = "textBoxEntryOrGuid";
+            this.textBoxEntryOrGuid.Size = new System.Drawing.Size(135, 20);
+            this.textBoxEntryOrGuid.TabIndex = 0;
             // 
             // groupBoxPreferences
             // 
@@ -999,7 +1000,7 @@
             this.tabControl1.Location = new System.Drawing.Point(8, 19);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(319, 182);
+            this.tabControl1.Size = new System.Drawing.Size(339, 182);
             this.tabControl1.TabIndex = 15;
             // 
             // tabPageEvent
@@ -1061,7 +1062,7 @@
             this.tabPageTarget.Controls.Add(this.textBox23);
             this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
             this.tabPageTarget.Name = "tabPageTarget";
-            this.tabPageTarget.Size = new System.Drawing.Size(311, 156);
+            this.tabPageTarget.Size = new System.Drawing.Size(331, 156);
             this.tabPageTarget.TabIndex = 2;
             this.tabPageTarget.Text = "Target";
             // 
@@ -1070,7 +1071,7 @@
             this.groupBox2.Controls.Add(this.tabControl1);
             this.groupBox2.Location = new System.Drawing.Point(725, 31);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(333, 207);
+            this.groupBox2.Size = new System.Drawing.Size(353, 207);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Parameters";
@@ -1080,7 +1081,7 @@
             // 
             this.listViewSmartScripts.Location = new System.Drawing.Point(14, 244);
             this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(1044, 360);
+            this.listViewSmartScripts.Size = new System.Drawing.Size(1064, 360);
             this.listViewSmartScripts.TabIndex = 24;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.Visible = false;
@@ -1720,7 +1721,7 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.GroupBox groupBox2;
         public System.Windows.Forms.GroupBox groupBoxStaticScriptInfo;
-        public System.Windows.Forms.TextBox textBox1;
+        public System.Windows.Forms.TextBox textBoxEntryOrGuid;
         private System.Windows.Forms.PictureBox buttonLoadScriptForEntry;
         private System.Windows.Forms.ListView listViewSmartScripts;
         private System.Windows.Forms.CheckBox checkBox4;
