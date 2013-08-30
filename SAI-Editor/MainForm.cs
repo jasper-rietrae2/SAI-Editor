@@ -21,7 +21,7 @@ namespace SAI_Editor
         private bool contractingToLoginForm = false;
         private bool expandingToMainForm = false;
         private int originalHeight = 0, originalWidth = 0;
-        private Timer timerExpandOrContract = null;
+        private Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
 
         public MainForm()
         {
@@ -45,11 +45,10 @@ namespace SAI_Editor
             textBoxWorldDatabase.Text = settings.GetSetting("Database", "trinitycore_world");
             textBoxPort.Text = settings.GetSetting("Port", "3306");
 
-            timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
-            timerExpandOrContract.Tick += timerExpandOrContract_Tick;
-
             KeyPreview = true;
             KeyDown += Form1_KeyDown;
+
+            timerExpandOrContract.Tick += timerExpandOrContract_Tick;
 
             foreach (Control control in Controls)
             {
@@ -96,7 +95,13 @@ namespace SAI_Editor
             listViewSmartScripts.Columns.Add("z",           20, HorizontalAlignment.Right);
             listViewSmartScripts.Columns.Add("o",           20, HorizontalAlignment.Right);
           //listViewSmartScripts.Columns.Add("comment",     56, HorizontalAlignment.Right);
-            listViewSmartScripts.Columns.Add("comment",     100, HorizontalAlignment.Left);
+            listViewSmartScripts.Columns.Add("comment",     400, HorizontalAlignment.Left);
+
+            if (settings.GetSetting("Autologin", "no") == "yes")
+            {
+                checkBoxAutoLogin.Checked = true;
+                buttonConnect_Click(sender, e);
+            }
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
@@ -220,6 +225,7 @@ namespace SAI_Editor
                 settings.PutSetting("Database", textBoxWorldDatabase.Text);
                 settings.PutSetting("Host", textBoxHost.Text);
                 settings.PutSetting("Port", textBoxPort.Text);
+                settings.PutSetting("Autologin", (checkBoxAutoLogin.Checked ? "yes" : "no"));
             }
 
             Text = "SAI-Editor: " + textBoxUsername.Text + "@" + textBoxHost.Text + ":" + textBoxPort.Text;
@@ -439,6 +445,11 @@ namespace SAI_Editor
         {
             if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 Close();
+        }
+
+        private void checkBoxAutoLogin_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

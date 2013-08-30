@@ -139,6 +139,7 @@
             this.textBoxTargetTypeId = new System.Windows.Forms.TextBox();
             this.comboBoxTargetType = new System.Windows.Forms.ComboBox();
             this.label14 = new System.Windows.Forms.Label();
+            this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -206,7 +207,7 @@
             this.checkBoxSaveSettings.AutoSize = true;
             this.checkBoxSaveSettings.Checked = true;
             this.checkBoxSaveSettings.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSaveSettings.Location = new System.Drawing.Point(98, 149);
+            this.checkBoxSaveSettings.Location = new System.Drawing.Point(8, 149);
             this.checkBoxSaveSettings.Name = "checkBoxSaveSettings";
             this.checkBoxSaveSettings.Size = new System.Drawing.Size(90, 17);
             this.checkBoxSaveSettings.TabIndex = 5;
@@ -252,6 +253,7 @@
             // 
             // groupBoxLogin
             // 
+            this.groupBoxLogin.Controls.Add(this.checkBoxAutoLogin);
             this.groupBoxLogin.Controls.Add(this.textBoxHost);
             this.groupBoxLogin.Controls.Add(this.textBoxUsername);
             this.groupBoxLogin.Controls.Add(this.labelUser);
@@ -265,14 +267,14 @@
             this.groupBoxLogin.Controls.Add(this.checkBoxSaveSettings);
             this.groupBoxLogin.Location = new System.Drawing.Point(3, 3);
             this.groupBoxLogin.Name = "groupBoxLogin";
-            this.groupBoxLogin.Size = new System.Drawing.Size(237, 172);
+            this.groupBoxLogin.Size = new System.Drawing.Size(237, 170);
             this.groupBoxLogin.TabIndex = 10;
             this.groupBoxLogin.TabStop = false;
             this.groupBoxLogin.Text = "Connect information";
             // 
             // buttonConnect
             // 
-            this.buttonConnect.Location = new System.Drawing.Point(2, 181);
+            this.buttonConnect.Location = new System.Drawing.Point(3, 179);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(75, 23);
             this.buttonConnect.TabIndex = 6;
@@ -282,7 +284,7 @@
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(83, 181);
+            this.buttonClear.Location = new System.Drawing.Point(84, 179);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 7;
@@ -292,7 +294,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(164, 181);
+            this.buttonCancel.Location = new System.Drawing.Point(165, 179);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 8;
@@ -388,7 +390,7 @@
             this.panel1.Controls.Add(this.buttonConnect);
             this.panel1.Controls.Add(this.buttonClear);
             this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Location = new System.Drawing.Point(1123, 115);
+            this.panel1.Location = new System.Drawing.Point(9, 8);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 225);
             this.panel1.TabIndex = 13;
@@ -511,9 +513,9 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(140, 47);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
+            this.checkBox1.Size = new System.Drawing.Size(147, 17);
             this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.Text = "Show detailed information";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // checkBoxScriptByGuid
@@ -1019,7 +1021,7 @@
             this.tabPageEvent.Location = new System.Drawing.Point(4, 22);
             this.tabPageEvent.Name = "tabPageEvent";
             this.tabPageEvent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEvent.Size = new System.Drawing.Size(311, 156);
+            this.tabPageEvent.Size = new System.Drawing.Size(331, 156);
             this.tabPageEvent.TabIndex = 0;
             this.tabPageEvent.Text = "Event";
             // 
@@ -1041,7 +1043,7 @@
             this.tabPageAction.Location = new System.Drawing.Point(4, 22);
             this.tabPageAction.Name = "tabPageAction";
             this.tabPageAction.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAction.Size = new System.Drawing.Size(311, 156);
+            this.tabPageAction.Size = new System.Drawing.Size(331, 156);
             this.tabPageAction.TabIndex = 1;
             this.tabPageAction.Text = "Action";
             // 
@@ -1619,6 +1621,17 @@
             this.label14.TabIndex = 22;
             this.label14.Text = "Target:";
             // 
+            // checkBoxAutoLogin
+            // 
+            this.checkBoxAutoLogin.AutoSize = true;
+            this.checkBoxAutoLogin.Location = new System.Drawing.Point(141, 149);
+            this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
+            this.checkBoxAutoLogin.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxAutoLogin.TabIndex = 6;
+            this.checkBoxAutoLogin.Text = "Auto connect";
+            this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
+            this.checkBoxAutoLogin.CheckedChanged += new System.EventHandler(this.checkBoxAutoLogin_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1778,6 +1791,7 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textBox26;
         private System.Windows.Forms.TextBox textBox25;
+        private System.Windows.Forms.CheckBox checkBoxAutoLogin;
     }
 }
 
