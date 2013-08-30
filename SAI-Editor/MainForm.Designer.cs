@@ -46,7 +46,7 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.menuHeaderFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
@@ -140,8 +140,9 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxLogin.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.menuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
@@ -313,24 +314,24 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // menuStrip1
+            // menuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuHeaderFiles,
             this.menuHeaderTestTwo,
             this.menuHeaderTestThree});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1156, 24);
-            this.menuStrip1.TabIndex = 11;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.Visible = false;
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(1495, 24);
+            this.menuStrip.TabIndex = 11;
+            this.menuStrip.Text = "menuStrip1";
             // 
             // menuHeaderFiles
             // 
             this.menuHeaderFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSettings,
             this.menuItemReconnect,
+            this.menuItemAbout,
             this.menuItemExit});
             this.menuHeaderFiles.Name = "menuHeaderFiles";
             this.menuHeaderFiles.Size = new System.Drawing.Size(37, 20);
@@ -339,19 +340,19 @@
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(135, 22);
+            this.menuItemSettings.Size = new System.Drawing.Size(152, 22);
             this.menuItemSettings.Text = "Settings";
             // 
             // menuItemReconnect
             // 
             this.menuItemReconnect.Name = "menuItemReconnect";
-            this.menuItemReconnect.Size = new System.Drawing.Size(135, 22);
+            this.menuItemReconnect.Size = new System.Drawing.Size(152, 22);
             this.menuItemReconnect.Text = "Re-connect";
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(135, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
             this.menuItemExit.Text = "Exit";
             // 
             // menuHeaderTestTwo
@@ -401,7 +402,7 @@
             this.panel1.Controls.Add(this.buttonConnect);
             this.panel1.Controls.Add(this.buttonClear);
             this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Location = new System.Drawing.Point(9, 8);
+            this.panel1.Location = new System.Drawing.Point(1136, 102);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 225);
             this.panel1.TabIndex = 13;
@@ -1632,6 +1633,12 @@
             this.panel3.TabIndex = 21;
             this.panel3.Visible = false;
             // 
+            // menuItemAbout
+            // 
+            this.menuItemAbout.Name = "menuItemAbout";
+            this.menuItemAbout.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAbout.Text = "About";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1645,16 +1652,16 @@
             this.Controls.Add(this.groupBoxScriptInfo);
             this.Controls.Add(this.groupBoxPreferences);
             this.Controls.Add(this.groupBoxStaticScriptInfo);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MainMenuStrip = this.menuStrip1;
+            this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.Text = "SAI Editor: Login";
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.groupBoxLogin.ResumeLayout(false);
             this.groupBoxLogin.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
@@ -1697,7 +1704,7 @@
         private System.Windows.Forms.Button buttonConnect;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem menuHeaderFiles;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem1;
@@ -1792,6 +1799,7 @@
         private System.Windows.Forms.TextBox textBox26;
         private System.Windows.Forms.TextBox textBox25;
         public System.Windows.Forms.CheckBox checkBoxAutoLogin;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
     }
 }
 

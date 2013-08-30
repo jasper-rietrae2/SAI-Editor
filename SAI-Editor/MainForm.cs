@@ -30,6 +30,8 @@ namespace SAI_Editor
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
+
             MaximizeBox = false;
             MinimizeBox = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -66,6 +68,7 @@ namespace SAI_Editor
             menuItemReconnect.Click += menuItemReconnect_Click;
             menuItemExit.Click += TryCloseApplication;
             menuItemSettings.Click += menuItemSettings_Click;
+            menuItemAbout.Click += menuItemAbout_Click;
 
             listViewSmartScripts.View = View.Details;
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);
@@ -457,6 +460,11 @@ namespace SAI_Editor
         private void menuItemSettings_Click(object sender, EventArgs e)
         {
             new SettingsForm().ShowDialog(this);
+        }
+
+        private void menuItemAbout_Click(object sender, EventArgs e)
+        {
+            new AboutForm().ShowDialog(this);
         }
     }
 }
