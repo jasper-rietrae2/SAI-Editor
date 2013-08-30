@@ -472,6 +472,22 @@ namespace SAI_Editor
 
         private void listViewSmartScripts_Click(object sender, EventArgs e)
         {
+            if (listViewSmartScripts.SelectedItems.Count <= 0)
+                return;
+
+            FillFieldsBasedOnSelectedScript();
+        }
+
+        private void listViewSmartScripts_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count <= 0)
+                return;
+
+            FillFieldsBasedOnSelectedScript();
+        }
+
+        private void FillFieldsBasedOnSelectedScript()
+        {
             comboBoxEventType.SelectedIndex = Convert.ToInt32(listViewSmartScripts.SelectedItems[0].SubItems[4].Text);
             comboBoxActionType.SelectedIndex = Convert.ToInt32(listViewSmartScripts.SelectedItems[0].SubItems[12].Text);
             comboBoxTargetType.SelectedIndex = Convert.ToInt32(listViewSmartScripts.SelectedItems[0].SubItems[19].Text);

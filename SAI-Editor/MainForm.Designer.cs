@@ -454,6 +454,7 @@
             this.textBoxEntryOrGuid.Name = "textBoxEntryOrGuid";
             this.textBoxEntryOrGuid.Size = new System.Drawing.Size(135, 20);
             this.textBoxEntryOrGuid.TabIndex = 0;
+            this.textBoxEntryOrGuid.Text = "32663";
             // 
             // groupBoxPreferences
             // 
@@ -1456,6 +1457,7 @@
             this.listViewSmartScripts.TabIndex = 24;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.Visible = false;
+            this.listViewSmartScripts.SelectedIndexChanged += new System.EventHandler(this.listViewSmartScripts_SelectedIndexChanged);
             // 
             // groupBox3
             // 
