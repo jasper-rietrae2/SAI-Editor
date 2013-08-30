@@ -54,8 +54,7 @@ namespace SAI_Editor
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
-            ((MainForm)Owner).textBoxEntryOrGuid.Text = listViewEntryResults.SelectedItems[0].Text;
-            Close();
+            FillMainFormEntryOrGuidField();
         }
 
         private void SelectFromCreatureTemplate(string queryToExecute)
@@ -139,10 +138,7 @@ namespace SAI_Editor
                 case Keys.Enter:
                 {
                     if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
-                    {
-                        ((MainForm)Owner).textBoxEntryOrGuid.Text = listViewEntryResults.SelectedItems[0].Text;
-                        Close();
-                    }
+                        FillMainFormEntryOrGuidField();
                     else
                         buttonSearch_Click(sender, e);
 
@@ -208,6 +204,18 @@ namespace SAI_Editor
         private void comboBoxSearchType_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
+        }
+
+        private void FillMainFormEntryOrGuidField()
+        {
+            string entryToPlace = "";
+
+            if (comboBoxSearchType.SelectedIndex == 2 || comboBoxSearchType.SelectedIndex == 5)
+                entryToPlace = "-";
+
+            entryToPlace += listViewEntryResults.SelectedItems[0].Text;
+            ((MainForm)Owner).textBoxEntryOrGuid.Text = entryToPlace;
+            Close();
         }
     }
 }

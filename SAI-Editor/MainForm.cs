@@ -53,6 +53,7 @@ namespace SAI_Editor
             comboBoxActionType.KeyPress += comboBox_KeyPress;
             comboBoxTargetType.KeyPress += comboBox_KeyPress;
             comboBoxEventType.KeyPress += comboBox_KeyPress;
+            comboBoxSourceType.KeyPress += comboBox_KeyPress;
 
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
 
