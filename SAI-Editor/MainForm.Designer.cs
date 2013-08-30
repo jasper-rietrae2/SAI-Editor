@@ -42,6 +42,7 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.groupBoxLogin = new System.Windows.Forms.GroupBox();
+            this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -73,6 +74,9 @@
             this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
+            this.textBoxTargetTypeId = new System.Windows.Forms.TextBox();
+            this.comboBoxTargetType = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxActionTypeId = new System.Windows.Forms.TextBox();
             this.textBoxEventTypeId = new System.Windows.Forms.TextBox();
@@ -85,33 +89,17 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageEvent = new System.Windows.Forms.TabPage();
-            this.tabPageAction = new System.Windows.Forms.TabPage();
-            this.tabPageTarget = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.listViewSmartScripts = new System.Windows.Forms.ListView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.buttonSearchPhasemask = new System.Windows.Forms.Button();
-            this.buttonSearchLink = new System.Windows.Forms.Button();
-            this.buttonSearchEventFlags = new System.Windows.Forms.Button();
-            this.textBoxEventChance = new System.Windows.Forms.NumericUpDown();
-            this.textBoxEventPhasemask = new System.Windows.Forms.TextBox();
-            this.textBoxEventFlags = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxEventLink = new System.Windows.Forms.TextBox();
-            this.textBoxEventScriptId = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.labelEventParam2 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.labelEventParam3 = new System.Windows.Forms.Label();
             this.labelEventParam4 = new System.Windows.Forms.Label();
+            this.labelEventParam3 = new System.Windows.Forms.Label();
+            this.labelEventParam2 = new System.Windows.Forms.Label();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.tabPageAction = new System.Windows.Forms.TabPage();
+            this.labelActionParam6 = new System.Windows.Forms.Label();
+            this.labelActionParam5 = new System.Windows.Forms.Label();
             this.labelActionParam4 = new System.Windows.Forms.Label();
             this.labelActionParam3 = new System.Windows.Forms.Label();
             this.labelActionParam2 = new System.Windows.Forms.Label();
@@ -122,24 +110,36 @@
             this.textBox19 = new System.Windows.Forms.TextBox();
             this.labelActionParam1 = new System.Windows.Forms.Label();
             this.textBox20 = new System.Windows.Forms.TextBox();
-            this.labelActionParam5 = new System.Windows.Forms.Label();
-            this.labelActionParam6 = new System.Windows.Forms.Label();
+            this.tabPageTarget = new System.Windows.Forms.TabPage();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBox26 = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.textBox25 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.textBox24 = new System.Windows.Forms.TextBox();
             this.textBox21 = new System.Windows.Forms.TextBox();
             this.textBox22 = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBox23 = new System.Windows.Forms.TextBox();
-            this.textBox24 = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.textBox25 = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.textBox26 = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.textBoxTargetTypeId = new System.Windows.Forms.TextBox();
-            this.comboBoxTargetType = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.listViewSmartScripts = new System.Windows.Forms.ListView();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.buttonSearchLink = new System.Windows.Forms.Button();
+            this.buttonSearchPhasemask = new System.Windows.Forms.Button();
+            this.buttonSearchEventFlags = new System.Windows.Forms.Button();
+            this.textBoxEventChance = new System.Windows.Forms.NumericUpDown();
+            this.textBoxEventFlags = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxEventPhasemask = new System.Windows.Forms.TextBox();
+            this.textBoxEventLink = new System.Windows.Forms.TextBox();
+            this.textBoxEventScriptId = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -271,6 +271,17 @@
             this.groupBoxLogin.TabIndex = 10;
             this.groupBoxLogin.TabStop = false;
             this.groupBoxLogin.Text = "Connect information";
+            // 
+            // checkBoxAutoLogin
+            // 
+            this.checkBoxAutoLogin.AutoSize = true;
+            this.checkBoxAutoLogin.Location = new System.Drawing.Point(141, 149);
+            this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
+            this.checkBoxAutoLogin.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxAutoLogin.TabIndex = 6;
+            this.checkBoxAutoLogin.Text = "Auto connect";
+            this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
+            this.checkBoxAutoLogin.CheckedChanged += new System.EventHandler(this.checkBoxAutoLogin_CheckedChanged);
             // 
             // buttonConnect
             // 
@@ -582,6 +593,135 @@
             this.groupBoxScriptInfo.TabStop = false;
             this.groupBoxScriptInfo.Text = "Dynamic script information";
             this.groupBoxScriptInfo.Visible = false;
+            // 
+            // textBoxTargetTypeId
+            // 
+            this.textBoxTargetTypeId.Enabled = false;
+            this.textBoxTargetTypeId.Location = new System.Drawing.Point(353, 72);
+            this.textBoxTargetTypeId.Name = "textBoxTargetTypeId";
+            this.textBoxTargetTypeId.Size = new System.Drawing.Size(26, 20);
+            this.textBoxTargetTypeId.TabIndex = 24;
+            this.textBoxTargetTypeId.Text = "0";
+            // 
+            // comboBoxTargetType
+            // 
+            this.comboBoxTargetType.AutoCompleteCustomSource.AddRange(new string[] {
+            "SMART_EVENT_UPDATE_IC",
+            "SMART_EVENT_UPDATE_OOC",
+            "SMART_EVENT_HEALT_PCT",
+            "SMART_EVENT_MANA_PCT",
+            "SMART_EVENT_AGGRO",
+            "SMART_EVENT_KILL",
+            "SMART_EVENT_DEATH",
+            "SMART_EVENT_EVADE",
+            "SMART_EVENT_SPELLHIT",
+            "SMART_EVENT_RANGE",
+            "SMART_EVENT_OOC_LOS",
+            "SMART_EVENT_RESPAWN",
+            "SMART_EVENT_TARGET_HEALTH_PCT",
+            "SMART_EVENT_TARGET_CASTING",
+            "SMART_EVENT_FRIENDLY_HEALTH",
+            "SMART_EVENT_FRIENDLY_IS_CC",
+            "SMART_EVENT_FRIENDLY_MISSING_BUFF",
+            "SMART_EVENT_SUMMONED_UNIT",
+            "SMART_EVENT_TARGET_MANA_PCT",
+            "SMART_EVENT_ACCEPTED_QUEST",
+            "SMART_EVENT_REWARD_QUEST",
+            "SMART_EVENT_REACHED_HOME",
+            "SMART_EVENT_RECEIVE_EMOTE",
+            "SMART_EVENT_HAS_AURA",
+            "SMART_EVENT_TARGET_BUFFED",
+            "SMART_EVENT_RESET",
+            "SMART_EVENT_IC_LOS",
+            "SMART_EVENT_PASSENGER_BOARDED",
+            "SMART_EVENT_PASSENGER_REMOVED",
+            "SMART_EVENT_CHARMED",
+            "SMART_EVENT_CHARMED_TARGET",
+            "SMART_EVENT_SPELLHIT_TARGET",
+            "SMART_EVENT_DAMAGED",
+            "SMART_EVENT_DAMAGED_TARGET",
+            "SMART_EVENT_MOVEMENTINFORM",
+            "SMART_EVENT_SUMMON_DESPAWNED",
+            "SMART_EVENT_CORPSE_REMOVED",
+            "SMART_EVENT_AI_INIT",
+            "SMART_EVENT_DATA_SET",
+            "SMART_EVENT_WAYPOINT_START",
+            "SMART_EVENT_WAYPOINT_REACHED",
+            "SMART_EVENT_TRANSPORT_ADDPLAYER",
+            "SMART_EVENT_TRANSPORT_ADDCREATURE",
+            "SMART_EVENT_TRANSPORT_REMOVE_PLAYER",
+            "SMART_EVENT_TRANSPORT_RELOCATE",
+            "SMART_EVENT_INSTANCE_PLAYER_ENTER",
+            "SMART_EVENT_AREATRIGGER_ONTRIGGER",
+            "SMART_EVENT_QUEST_ACCEPTED",
+            "SMART_EVENT_QUEST_OBJ_COPLETETION",
+            "SMART_EVENT_QUEST_COMPLETION",
+            "SMART_EVENT_QUEST_REWARDED",
+            "SMART_EVENT_QUEST_FAIL",
+            "SMART_EVENT_TEXT_OVER",
+            "SMART_EVENT_RECEIVE_HEAL",
+            "SMART_EVENT_JUST_SUMMONED",
+            "SMART_EVENT_WAYPOINT_PAUSED",
+            "SMART_EVENT_WAYPOINT_RESUMED",
+            "SMART_EVENT_WAYPOINT_STOPPED",
+            "SMART_EVENT_WAYPOINT_ENDED",
+            "SMART_EVENT_TIMED_EVENT_TRIGGERED",
+            "SMART_EVENT_UPDATE",
+            "SMART_EVENT_LINK",
+            "SMART_EVENT_GOSSIP_SELECT",
+            "SMART_EVENT_JUST_CREATED",
+            "SMART_EVENT_GOSSIP_HELLO",
+            "SMART_EVENT_FOLLOW_COMPLETED",
+            "SMART_EVENT_DUMMY_EFFECT ",
+            "SMART_EVENT_IS_BEHIND_TARGET",
+            "SMART_EVENT_GAME_EVENT_START",
+            "SMART_EVENT_GAME_EVENT_END",
+            "SMART_EVENT_GO_STATE_CHANGED"});
+            this.comboBoxTargetType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.comboBoxTargetType.FormattingEnabled = true;
+            this.comboBoxTargetType.Items.AddRange(new object[] {
+            "SMART_TARGET_NONE",
+            "SMART_TARGET_SELF",
+            "SMART_TARGET_VICTIM",
+            "SMART_TARGET_HOSTILE_SECOND_AGGRO",
+            "SMART_TARGET_HOSTILE_LAST_AGGRO",
+            "SMART_TARGET_HOSTILE_RANDOM",
+            "SMART_TARGET_HOSTILE_RANDOM_NOT_TOP",
+            "SMART_TARGET_ACTION_INVOKER",
+            "SMART_TARGET_POSITION",
+            "SMART_TARGET_CREATURE_RANGE",
+            "SMART_TARGET_CREATURE_GUID",
+            "SMART_TARGET_CREATURE_DISTANCE",
+            "SMART_TARGET_STORED",
+            "SMART_TARGET_GAMEOBJECT_RANGE",
+            "SMART_TARGET_GAMEOBJECT_GUID",
+            "SMART_TARGET_GAMEOBJECT_DISTANCE",
+            "SMART_TARGET_INVOKER_PARTY",
+            "SMART_TARGET_PLAYER_RANGE",
+            "SMART_TARGET_PLAYER_DISTANCE",
+            "SMART_TARGET_CLOSEST_CREATURE",
+            "SMART_TARGET_CLOSEST_GAMEOBJECT",
+            "SMART_TARGET_CLOSEST_PLAYER",
+            "SMART_TARGET_ACTION_INVOKER_VEHICLE",
+            "SMART_TARGET_OWNER_OR_SUMMONER",
+            "SMART_TARGET_THREAT_LIST",
+            "SMART_TARGET_CLOSEST_ENEMY",
+            "SMART_TARGET_CLOSEST_FRIENDLY"});
+            this.comboBoxTargetType.Location = new System.Drawing.Point(59, 72);
+            this.comboBoxTargetType.MinimumSize = new System.Drawing.Size(288, 0);
+            this.comboBoxTargetType.Name = "comboBoxTargetType";
+            this.comboBoxTargetType.Size = new System.Drawing.Size(288, 21);
+            this.comboBoxTargetType.TabIndex = 23;
+            this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(15, 75);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(41, 13);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "Target:";
             // 
             // label13
             // 
@@ -1025,6 +1165,70 @@
             this.tabPageEvent.TabIndex = 0;
             this.tabPageEvent.Text = "Event";
             // 
+            // labelEventParam4
+            // 
+            this.labelEventParam4.AutoSize = true;
+            this.labelEventParam4.Location = new System.Drawing.Point(15, 85);
+            this.labelEventParam4.Name = "labelEventParam4";
+            this.labelEventParam4.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam4.TabIndex = 23;
+            this.labelEventParam4.Text = "Param 4";
+            // 
+            // labelEventParam3
+            // 
+            this.labelEventParam3.AutoSize = true;
+            this.labelEventParam3.Location = new System.Drawing.Point(15, 59);
+            this.labelEventParam3.Name = "labelEventParam3";
+            this.labelEventParam3.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam3.TabIndex = 23;
+            this.labelEventParam3.Text = "Param 3";
+            // 
+            // labelEventParam2
+            // 
+            this.labelEventParam2.AutoSize = true;
+            this.labelEventParam2.Location = new System.Drawing.Point(15, 33);
+            this.labelEventParam2.Name = "labelEventParam2";
+            this.labelEventParam2.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam2.TabIndex = 23;
+            this.labelEventParam2.Text = "Param 2";
+            // 
+            // textBox13
+            // 
+            this.textBox13.Enabled = false;
+            this.textBox13.Location = new System.Drawing.Point(118, 134);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(187, 20);
+            this.textBox13.TabIndex = 23;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Enabled = false;
+            this.textBox10.Location = new System.Drawing.Point(118, 108);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(187, 20);
+            this.textBox10.TabIndex = 23;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(118, 82);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(187, 20);
+            this.textBox9.TabIndex = 23;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(118, 56);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(187, 20);
+            this.textBox8.TabIndex = 23;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(118, 30);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(187, 20);
+            this.textBox7.TabIndex = 23;
+            // 
             // tabPageAction
             // 
             this.tabPageAction.BackColor = System.Drawing.SystemColors.Window;
@@ -1047,258 +1251,23 @@
             this.tabPageAction.TabIndex = 1;
             this.tabPageAction.Text = "Action";
             // 
-            // tabPageTarget
+            // labelActionParam6
             // 
-            this.tabPageTarget.BackColor = System.Drawing.SystemColors.Window;
-            this.tabPageTarget.Controls.Add(this.label22);
-            this.tabPageTarget.Controls.Add(this.label21);
-            this.tabPageTarget.Controls.Add(this.label20);
-            this.tabPageTarget.Controls.Add(this.textBox26);
-            this.tabPageTarget.Controls.Add(this.label7);
-            this.tabPageTarget.Controls.Add(this.textBox25);
-            this.tabPageTarget.Controls.Add(this.label12);
-            this.tabPageTarget.Controls.Add(this.textBox24);
-            this.tabPageTarget.Controls.Add(this.textBox21);
-            this.tabPageTarget.Controls.Add(this.textBox22);
-            this.tabPageTarget.Controls.Add(this.label19);
-            this.tabPageTarget.Controls.Add(this.textBox23);
-            this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
-            this.tabPageTarget.Name = "tabPageTarget";
-            this.tabPageTarget.Size = new System.Drawing.Size(331, 156);
-            this.tabPageTarget.TabIndex = 2;
-            this.tabPageTarget.Text = "Target";
+            this.labelActionParam6.AutoSize = true;
+            this.labelActionParam6.Location = new System.Drawing.Point(15, 137);
+            this.labelActionParam6.Name = "labelActionParam6";
+            this.labelActionParam6.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam6.TabIndex = 24;
+            this.labelActionParam6.Text = "Param 6";
             // 
-            // groupBox2
+            // labelActionParam5
             // 
-            this.groupBox2.Controls.Add(this.tabControl1);
-            this.groupBox2.Location = new System.Drawing.Point(725, 31);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(353, 207);
-            this.groupBox2.TabIndex = 23;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Parameters";
-            this.groupBox2.Visible = false;
-            // 
-            // listViewSmartScripts
-            // 
-            this.listViewSmartScripts.Location = new System.Drawing.Point(14, 244);
-            this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(1064, 360);
-            this.listViewSmartScripts.TabIndex = 24;
-            this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
-            this.listViewSmartScripts.Visible = false;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.buttonSearchLink);
-            this.groupBox3.Controls.Add(this.buttonSearchPhasemask);
-            this.groupBox3.Controls.Add(this.buttonSearchEventFlags);
-            this.groupBox3.Controls.Add(this.textBoxEventChance);
-            this.groupBox3.Controls.Add(this.textBoxEventFlags);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.textBoxEventPhasemask);
-            this.groupBox3.Controls.Add(this.textBoxEventLink);
-            this.groupBox3.Controls.Add(this.textBoxEventScriptId);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Location = new System.Drawing.Point(322, 167);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(385, 71);
-            this.groupBox3.TabIndex = 22;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Event information";
-            this.groupBox3.Visible = false;
-            // 
-            // buttonSearchPhasemask
-            // 
-            this.buttonSearchPhasemask.Location = new System.Drawing.Point(253, 20);
-            this.buttonSearchPhasemask.Name = "buttonSearchPhasemask";
-            this.buttonSearchPhasemask.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchPhasemask.TabIndex = 30;
-            this.buttonSearchPhasemask.Text = "...";
-            this.buttonSearchPhasemask.UseVisualStyleBackColor = true;
-            // 
-            // buttonSearchLink
-            // 
-            this.buttonSearchLink.Location = new System.Drawing.Point(100, 43);
-            this.buttonSearchLink.Name = "buttonSearchLink";
-            this.buttonSearchLink.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchLink.TabIndex = 29;
-            this.buttonSearchLink.Text = "...";
-            this.buttonSearchLink.UseVisualStyleBackColor = true;
-            // 
-            // buttonSearchEventFlags
-            // 
-            this.buttonSearchEventFlags.Location = new System.Drawing.Point(348, 44);
-            this.buttonSearchEventFlags.Name = "buttonSearchEventFlags";
-            this.buttonSearchEventFlags.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchEventFlags.TabIndex = 28;
-            this.buttonSearchEventFlags.Text = "...";
-            this.buttonSearchEventFlags.UseVisualStyleBackColor = true;
-            // 
-            // textBoxEventChance
-            // 
-            this.textBoxEventChance.Location = new System.Drawing.Point(214, 45);
-            this.textBoxEventChance.Name = "textBoxEventChance";
-            this.textBoxEventChance.Size = new System.Drawing.Size(63, 20);
-            this.textBoxEventChance.TabIndex = 23;
-            this.textBoxEventChance.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // textBoxEventPhasemask
-            // 
-            this.textBoxEventPhasemask.Location = new System.Drawing.Point(214, 21);
-            this.textBoxEventPhasemask.Name = "textBoxEventPhasemask";
-            this.textBoxEventPhasemask.Size = new System.Drawing.Size(39, 20);
-            this.textBoxEventPhasemask.TabIndex = 19;
-            this.textBoxEventPhasemask.Text = "0";
-            // 
-            // textBoxEventFlags
-            // 
-            this.textBoxEventFlags.Location = new System.Drawing.Point(307, 45);
-            this.textBoxEventFlags.Name = "textBoxEventFlags";
-            this.textBoxEventFlags.Size = new System.Drawing.Size(41, 20);
-            this.textBoxEventFlags.TabIndex = 19;
-            this.textBoxEventFlags.Text = "0";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(304, 24);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 13);
-            this.label3.TabIndex = 27;
-            this.label3.Text = "Event flags:";
-            // 
-            // textBoxEventLink
-            // 
-            this.textBoxEventLink.Location = new System.Drawing.Point(59, 44);
-            this.textBoxEventLink.Name = "textBoxEventLink";
-            this.textBoxEventLink.Size = new System.Drawing.Size(41, 20);
-            this.textBoxEventLink.TabIndex = 19;
-            this.textBoxEventLink.Text = "0";
-            // 
-            // textBoxEventScriptId
-            // 
-            this.textBoxEventScriptId.Enabled = false;
-            this.textBoxEventScriptId.Location = new System.Drawing.Point(59, 21);
-            this.textBoxEventScriptId.Name = "textBoxEventScriptId";
-            this.textBoxEventScriptId.Size = new System.Drawing.Size(41, 20);
-            this.textBoxEventScriptId.TabIndex = 19;
-            this.textBoxEventScriptId.Text = "0";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(131, 47);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 13);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Event chance:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 47);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(30, 13);
-            this.label9.TabIndex = 24;
-            this.label9.Text = "Link:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(143, 25);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(65, 13);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "Phasemask:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(23, 25);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(19, 13);
-            this.label11.TabIndex = 23;
-            this.label11.Text = "Id:";
-            // 
-            // panel3
-            // 
-            this.panel3.Location = new System.Drawing.Point(1089, 516);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(5, 88);
-            this.panel3.TabIndex = 21;
-            this.panel3.Visible = false;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(118, 30);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(187, 20);
-            this.textBox7.TabIndex = 23;
-            // 
-            // labelEventParam2
-            // 
-            this.labelEventParam2.AutoSize = true;
-            this.labelEventParam2.Location = new System.Drawing.Point(15, 33);
-            this.labelEventParam2.Name = "labelEventParam2";
-            this.labelEventParam2.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam2.TabIndex = 23;
-            this.labelEventParam2.Text = "Param 2";
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(118, 56);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(187, 20);
-            this.textBox8.TabIndex = 23;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(118, 82);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(187, 20);
-            this.textBox9.TabIndex = 23;
-            // 
-            // textBox10
-            // 
-            this.textBox10.Enabled = false;
-            this.textBox10.Location = new System.Drawing.Point(118, 108);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(187, 20);
-            this.textBox10.TabIndex = 23;
-            // 
-            // textBox13
-            // 
-            this.textBox13.Enabled = false;
-            this.textBox13.Location = new System.Drawing.Point(118, 134);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(187, 20);
-            this.textBox13.TabIndex = 23;
-            // 
-            // labelEventParam3
-            // 
-            this.labelEventParam3.AutoSize = true;
-            this.labelEventParam3.Location = new System.Drawing.Point(15, 59);
-            this.labelEventParam3.Name = "labelEventParam3";
-            this.labelEventParam3.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam3.TabIndex = 23;
-            this.labelEventParam3.Text = "Param 3";
-            // 
-            // labelEventParam4
-            // 
-            this.labelEventParam4.AutoSize = true;
-            this.labelEventParam4.Location = new System.Drawing.Point(15, 85);
-            this.labelEventParam4.Name = "labelEventParam4";
-            this.labelEventParam4.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam4.TabIndex = 23;
-            this.labelEventParam4.Text = "Param 4";
+            this.labelActionParam5.AutoSize = true;
+            this.labelActionParam5.Location = new System.Drawing.Point(15, 111);
+            this.labelActionParam5.Name = "labelActionParam5";
+            this.labelActionParam5.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam5.TabIndex = 24;
+            this.labelActionParam5.Text = "Param 5";
             // 
             // labelActionParam4
             // 
@@ -1378,23 +1347,60 @@
             this.textBox20.Size = new System.Drawing.Size(187, 20);
             this.textBox20.TabIndex = 33;
             // 
-            // labelActionParam5
+            // tabPageTarget
             // 
-            this.labelActionParam5.AutoSize = true;
-            this.labelActionParam5.Location = new System.Drawing.Point(15, 111);
-            this.labelActionParam5.Name = "labelActionParam5";
-            this.labelActionParam5.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam5.TabIndex = 24;
-            this.labelActionParam5.Text = "Param 5";
+            this.tabPageTarget.BackColor = System.Drawing.SystemColors.Window;
+            this.tabPageTarget.Controls.Add(this.label22);
+            this.tabPageTarget.Controls.Add(this.label21);
+            this.tabPageTarget.Controls.Add(this.label20);
+            this.tabPageTarget.Controls.Add(this.textBox26);
+            this.tabPageTarget.Controls.Add(this.label7);
+            this.tabPageTarget.Controls.Add(this.textBox25);
+            this.tabPageTarget.Controls.Add(this.label12);
+            this.tabPageTarget.Controls.Add(this.textBox24);
+            this.tabPageTarget.Controls.Add(this.textBox21);
+            this.tabPageTarget.Controls.Add(this.textBox22);
+            this.tabPageTarget.Controls.Add(this.label19);
+            this.tabPageTarget.Controls.Add(this.textBox23);
+            this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTarget.Name = "tabPageTarget";
+            this.tabPageTarget.Size = new System.Drawing.Size(331, 156);
+            this.tabPageTarget.TabIndex = 2;
+            this.tabPageTarget.Text = "Target";
             // 
-            // labelActionParam6
+            // label22
             // 
-            this.labelActionParam6.AutoSize = true;
-            this.labelActionParam6.Location = new System.Drawing.Point(15, 137);
-            this.labelActionParam6.Name = "labelActionParam6";
-            this.labelActionParam6.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam6.TabIndex = 24;
-            this.labelActionParam6.Text = "Param 6";
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(15, 137);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(48, 13);
+            this.label22.TabIndex = 34;
+            this.label22.Text = "Target Z";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(15, 111);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(48, 13);
+            this.label21.TabIndex = 34;
+            this.label21.Text = "Target Y";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(15, 85);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(48, 13);
+            this.label20.TabIndex = 34;
+            this.label20.Text = "Target X";
+            // 
+            // textBox26
+            // 
+            this.textBox26.Location = new System.Drawing.Point(118, 134);
+            this.textBox26.Name = "textBox26";
+            this.textBox26.Size = new System.Drawing.Size(187, 20);
+            this.textBox26.TabIndex = 36;
             // 
             // label7
             // 
@@ -1405,6 +1411,13 @@
             this.label7.TabIndex = 34;
             this.label7.Text = "Param 3";
             // 
+            // textBox25
+            // 
+            this.textBox25.Location = new System.Drawing.Point(118, 108);
+            this.textBox25.Name = "textBox25";
+            this.textBox25.Size = new System.Drawing.Size(187, 20);
+            this.textBox25.TabIndex = 36;
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -1413,6 +1426,13 @@
             this.label12.Size = new System.Drawing.Size(46, 13);
             this.label12.TabIndex = 35;
             this.label12.Text = "Param 2";
+            // 
+            // textBox24
+            // 
+            this.textBox24.Location = new System.Drawing.Point(118, 82);
+            this.textBox24.Name = "textBox24";
+            this.textBox24.Size = new System.Drawing.Size(187, 20);
+            this.textBox24.TabIndex = 36;
             // 
             // textBox21
             // 
@@ -1444,193 +1464,173 @@
             this.textBox23.Size = new System.Drawing.Size(187, 20);
             this.textBox23.TabIndex = 39;
             // 
-            // textBox24
+            // groupBox2
             // 
-            this.textBox24.Location = new System.Drawing.Point(118, 82);
-            this.textBox24.Name = "textBox24";
-            this.textBox24.Size = new System.Drawing.Size(187, 20);
-            this.textBox24.TabIndex = 36;
+            this.groupBox2.Controls.Add(this.tabControl1);
+            this.groupBox2.Location = new System.Drawing.Point(725, 31);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(353, 207);
+            this.groupBox2.TabIndex = 23;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Parameters";
+            this.groupBox2.Visible = false;
             // 
-            // label20
+            // listViewSmartScripts
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(15, 85);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(48, 13);
-            this.label20.TabIndex = 34;
-            this.label20.Text = "Target X";
+            this.listViewSmartScripts.Location = new System.Drawing.Point(14, 244);
+            this.listViewSmartScripts.Name = "listViewSmartScripts";
+            this.listViewSmartScripts.Size = new System.Drawing.Size(1064, 360);
+            this.listViewSmartScripts.TabIndex = 24;
+            this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
+            this.listViewSmartScripts.Visible = false;
             // 
-            // textBox25
+            // groupBox3
             // 
-            this.textBox25.Location = new System.Drawing.Point(118, 108);
-            this.textBox25.Name = "textBox25";
-            this.textBox25.Size = new System.Drawing.Size(187, 20);
-            this.textBox25.TabIndex = 36;
+            this.groupBox3.Controls.Add(this.buttonSearchLink);
+            this.groupBox3.Controls.Add(this.buttonSearchPhasemask);
+            this.groupBox3.Controls.Add(this.buttonSearchEventFlags);
+            this.groupBox3.Controls.Add(this.textBoxEventChance);
+            this.groupBox3.Controls.Add(this.textBoxEventFlags);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.textBoxEventPhasemask);
+            this.groupBox3.Controls.Add(this.textBoxEventLink);
+            this.groupBox3.Controls.Add(this.textBoxEventScriptId);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.label10);
+            this.groupBox3.Location = new System.Drawing.Point(322, 167);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(385, 71);
+            this.groupBox3.TabIndex = 22;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Event information";
+            this.groupBox3.Visible = false;
             // 
-            // label21
+            // buttonSearchLink
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(15, 111);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(48, 13);
-            this.label21.TabIndex = 34;
-            this.label21.Text = "Target Y";
+            this.buttonSearchLink.Location = new System.Drawing.Point(100, 43);
+            this.buttonSearchLink.Name = "buttonSearchLink";
+            this.buttonSearchLink.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchLink.TabIndex = 29;
+            this.buttonSearchLink.Text = "...";
+            this.buttonSearchLink.UseVisualStyleBackColor = true;
             // 
-            // textBox26
+            // buttonSearchPhasemask
             // 
-            this.textBox26.Location = new System.Drawing.Point(118, 134);
-            this.textBox26.Name = "textBox26";
-            this.textBox26.Size = new System.Drawing.Size(187, 20);
-            this.textBox26.TabIndex = 36;
+            this.buttonSearchPhasemask.Location = new System.Drawing.Point(253, 20);
+            this.buttonSearchPhasemask.Name = "buttonSearchPhasemask";
+            this.buttonSearchPhasemask.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchPhasemask.TabIndex = 30;
+            this.buttonSearchPhasemask.Text = "...";
+            this.buttonSearchPhasemask.UseVisualStyleBackColor = true;
             // 
-            // label22
+            // buttonSearchEventFlags
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(15, 137);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(48, 13);
-            this.label22.TabIndex = 34;
-            this.label22.Text = "Target Z";
+            this.buttonSearchEventFlags.Location = new System.Drawing.Point(348, 44);
+            this.buttonSearchEventFlags.Name = "buttonSearchEventFlags";
+            this.buttonSearchEventFlags.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchEventFlags.TabIndex = 28;
+            this.buttonSearchEventFlags.Text = "...";
+            this.buttonSearchEventFlags.UseVisualStyleBackColor = true;
             // 
-            // textBoxTargetTypeId
+            // textBoxEventChance
             // 
-            this.textBoxTargetTypeId.Enabled = false;
-            this.textBoxTargetTypeId.Location = new System.Drawing.Point(353, 72);
-            this.textBoxTargetTypeId.Name = "textBoxTargetTypeId";
-            this.textBoxTargetTypeId.Size = new System.Drawing.Size(26, 20);
-            this.textBoxTargetTypeId.TabIndex = 24;
-            this.textBoxTargetTypeId.Text = "0";
+            this.textBoxEventChance.Location = new System.Drawing.Point(214, 45);
+            this.textBoxEventChance.Name = "textBoxEventChance";
+            this.textBoxEventChance.Size = new System.Drawing.Size(63, 20);
+            this.textBoxEventChance.TabIndex = 23;
+            this.textBoxEventChance.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
-            // comboBoxTargetType
+            // textBoxEventFlags
             // 
-            this.comboBoxTargetType.AutoCompleteCustomSource.AddRange(new string[] {
-            "SMART_EVENT_UPDATE_IC",
-            "SMART_EVENT_UPDATE_OOC",
-            "SMART_EVENT_HEALT_PCT",
-            "SMART_EVENT_MANA_PCT",
-            "SMART_EVENT_AGGRO",
-            "SMART_EVENT_KILL",
-            "SMART_EVENT_DEATH",
-            "SMART_EVENT_EVADE",
-            "SMART_EVENT_SPELLHIT",
-            "SMART_EVENT_RANGE",
-            "SMART_EVENT_OOC_LOS",
-            "SMART_EVENT_RESPAWN",
-            "SMART_EVENT_TARGET_HEALTH_PCT",
-            "SMART_EVENT_TARGET_CASTING",
-            "SMART_EVENT_FRIENDLY_HEALTH",
-            "SMART_EVENT_FRIENDLY_IS_CC",
-            "SMART_EVENT_FRIENDLY_MISSING_BUFF",
-            "SMART_EVENT_SUMMONED_UNIT",
-            "SMART_EVENT_TARGET_MANA_PCT",
-            "SMART_EVENT_ACCEPTED_QUEST",
-            "SMART_EVENT_REWARD_QUEST",
-            "SMART_EVENT_REACHED_HOME",
-            "SMART_EVENT_RECEIVE_EMOTE",
-            "SMART_EVENT_HAS_AURA",
-            "SMART_EVENT_TARGET_BUFFED",
-            "SMART_EVENT_RESET",
-            "SMART_EVENT_IC_LOS",
-            "SMART_EVENT_PASSENGER_BOARDED",
-            "SMART_EVENT_PASSENGER_REMOVED",
-            "SMART_EVENT_CHARMED",
-            "SMART_EVENT_CHARMED_TARGET",
-            "SMART_EVENT_SPELLHIT_TARGET",
-            "SMART_EVENT_DAMAGED",
-            "SMART_EVENT_DAMAGED_TARGET",
-            "SMART_EVENT_MOVEMENTINFORM",
-            "SMART_EVENT_SUMMON_DESPAWNED",
-            "SMART_EVENT_CORPSE_REMOVED",
-            "SMART_EVENT_AI_INIT",
-            "SMART_EVENT_DATA_SET",
-            "SMART_EVENT_WAYPOINT_START",
-            "SMART_EVENT_WAYPOINT_REACHED",
-            "SMART_EVENT_TRANSPORT_ADDPLAYER",
-            "SMART_EVENT_TRANSPORT_ADDCREATURE",
-            "SMART_EVENT_TRANSPORT_REMOVE_PLAYER",
-            "SMART_EVENT_TRANSPORT_RELOCATE",
-            "SMART_EVENT_INSTANCE_PLAYER_ENTER",
-            "SMART_EVENT_AREATRIGGER_ONTRIGGER",
-            "SMART_EVENT_QUEST_ACCEPTED",
-            "SMART_EVENT_QUEST_OBJ_COPLETETION",
-            "SMART_EVENT_QUEST_COMPLETION",
-            "SMART_EVENT_QUEST_REWARDED",
-            "SMART_EVENT_QUEST_FAIL",
-            "SMART_EVENT_TEXT_OVER",
-            "SMART_EVENT_RECEIVE_HEAL",
-            "SMART_EVENT_JUST_SUMMONED",
-            "SMART_EVENT_WAYPOINT_PAUSED",
-            "SMART_EVENT_WAYPOINT_RESUMED",
-            "SMART_EVENT_WAYPOINT_STOPPED",
-            "SMART_EVENT_WAYPOINT_ENDED",
-            "SMART_EVENT_TIMED_EVENT_TRIGGERED",
-            "SMART_EVENT_UPDATE",
-            "SMART_EVENT_LINK",
-            "SMART_EVENT_GOSSIP_SELECT",
-            "SMART_EVENT_JUST_CREATED",
-            "SMART_EVENT_GOSSIP_HELLO",
-            "SMART_EVENT_FOLLOW_COMPLETED",
-            "SMART_EVENT_DUMMY_EFFECT ",
-            "SMART_EVENT_IS_BEHIND_TARGET",
-            "SMART_EVENT_GAME_EVENT_START",
-            "SMART_EVENT_GAME_EVENT_END",
-            "SMART_EVENT_GO_STATE_CHANGED"});
-            this.comboBoxTargetType.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
-            this.comboBoxTargetType.FormattingEnabled = true;
-            this.comboBoxTargetType.Items.AddRange(new object[] {
-            "SMART_TARGET_NONE",
-            "SMART_TARGET_SELF",
-            "SMART_TARGET_VICTIM",
-            "SMART_TARGET_HOSTILE_SECOND_AGGRO",
-            "SMART_TARGET_HOSTILE_LAST_AGGRO",
-            "SMART_TARGET_HOSTILE_RANDOM",
-            "SMART_TARGET_HOSTILE_RANDOM_NOT_TOP",
-            "SMART_TARGET_ACTION_INVOKER",
-            "SMART_TARGET_POSITION",
-            "SMART_TARGET_CREATURE_RANGE",
-            "SMART_TARGET_CREATURE_GUID",
-            "SMART_TARGET_CREATURE_DISTANCE",
-            "SMART_TARGET_STORED",
-            "SMART_TARGET_GAMEOBJECT_RANGE",
-            "SMART_TARGET_GAMEOBJECT_GUID",
-            "SMART_TARGET_GAMEOBJECT_DISTANCE",
-            "SMART_TARGET_INVOKER_PARTY",
-            "SMART_TARGET_PLAYER_RANGE",
-            "SMART_TARGET_PLAYER_DISTANCE",
-            "SMART_TARGET_CLOSEST_CREATURE",
-            "SMART_TARGET_CLOSEST_GAMEOBJECT",
-            "SMART_TARGET_CLOSEST_PLAYER",
-            "SMART_TARGET_ACTION_INVOKER_VEHICLE",
-            "SMART_TARGET_OWNER_OR_SUMMONER",
-            "SMART_TARGET_THREAT_LIST",
-            "SMART_TARGET_CLOSEST_ENEMY",
-            "SMART_TARGET_CLOSEST_FRIENDLY"});
-            this.comboBoxTargetType.Location = new System.Drawing.Point(59, 72);
-            this.comboBoxTargetType.MinimumSize = new System.Drawing.Size(288, 0);
-            this.comboBoxTargetType.Name = "comboBoxTargetType";
-            this.comboBoxTargetType.Size = new System.Drawing.Size(288, 21);
-            this.comboBoxTargetType.TabIndex = 23;
-            this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
+            this.textBoxEventFlags.Location = new System.Drawing.Point(307, 45);
+            this.textBoxEventFlags.Name = "textBoxEventFlags";
+            this.textBoxEventFlags.Size = new System.Drawing.Size(41, 20);
+            this.textBoxEventFlags.TabIndex = 19;
+            this.textBoxEventFlags.Text = "0";
             // 
-            // label14
+            // label3
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 75);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(41, 13);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "Target:";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(304, 24);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.TabIndex = 27;
+            this.label3.Text = "Event flags:";
             // 
-            // checkBoxAutoLogin
+            // textBoxEventPhasemask
             // 
-            this.checkBoxAutoLogin.AutoSize = true;
-            this.checkBoxAutoLogin.Location = new System.Drawing.Point(141, 149);
-            this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
-            this.checkBoxAutoLogin.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxAutoLogin.TabIndex = 6;
-            this.checkBoxAutoLogin.Text = "Auto connect";
-            this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
-            this.checkBoxAutoLogin.CheckedChanged += new System.EventHandler(this.checkBoxAutoLogin_CheckedChanged);
+            this.textBoxEventPhasemask.Location = new System.Drawing.Point(214, 21);
+            this.textBoxEventPhasemask.Name = "textBoxEventPhasemask";
+            this.textBoxEventPhasemask.Size = new System.Drawing.Size(39, 20);
+            this.textBoxEventPhasemask.TabIndex = 19;
+            this.textBoxEventPhasemask.Text = "0";
+            // 
+            // textBoxEventLink
+            // 
+            this.textBoxEventLink.Location = new System.Drawing.Point(59, 44);
+            this.textBoxEventLink.Name = "textBoxEventLink";
+            this.textBoxEventLink.Size = new System.Drawing.Size(41, 20);
+            this.textBoxEventLink.TabIndex = 19;
+            this.textBoxEventLink.Text = "0";
+            // 
+            // textBoxEventScriptId
+            // 
+            this.textBoxEventScriptId.Enabled = false;
+            this.textBoxEventScriptId.Location = new System.Drawing.Point(59, 21);
+            this.textBoxEventScriptId.Name = "textBoxEventScriptId";
+            this.textBoxEventScriptId.Size = new System.Drawing.Size(41, 20);
+            this.textBoxEventScriptId.TabIndex = 19;
+            this.textBoxEventScriptId.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(131, 47);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 13);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Event chance:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 47);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(30, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Link:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(23, 25);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(19, 13);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Id:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(143, 25);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Phasemask:";
+            // 
+            // panel3
+            // 
+            this.panel3.Location = new System.Drawing.Point(1089, 516);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(5, 88);
+            this.panel3.TabIndex = 21;
+            this.panel3.Visible = false;
             // 
             // MainForm
             // 
@@ -1791,7 +1791,7 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textBox26;
         private System.Windows.Forms.TextBox textBox25;
-        private System.Windows.Forms.CheckBox checkBoxAutoLogin;
+        public System.Windows.Forms.CheckBox checkBoxAutoLogin;
     }
 }
 

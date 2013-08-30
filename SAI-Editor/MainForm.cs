@@ -65,6 +65,7 @@ namespace SAI_Editor
 
             menuItemReconnect.Click += menuItemReconnect_Click;
             menuItemExit.Click += TryCloseApplication;
+            menuItemSettings.Click += menuItemSettings_Click;
 
             listViewSmartScripts.View = View.Details;
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);
@@ -220,10 +221,10 @@ namespace SAI_Editor
         {
             if (checkBoxSaveSettings.Checked)
             {
+                settings.PutSetting("Host", textBoxHost.Text);
                 settings.PutSetting("User", textBoxUsername.Text);
                 settings.PutSetting("Password", textBoxPassword.Text);
                 settings.PutSetting("Database", textBoxWorldDatabase.Text);
-                settings.PutSetting("Host", textBoxHost.Text);
                 settings.PutSetting("Port", textBoxPort.Text);
                 settings.PutSetting("Autologin", (checkBoxAutoLogin.Checked ? "yes" : "no"));
             }
@@ -265,6 +266,7 @@ namespace SAI_Editor
             textBoxWorldDatabase.Text = "";
             textBoxPort.Text = "";
             checkBoxSaveSettings.Checked = false;
+            checkBoxAutoLogin.Checked = false;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -450,6 +452,11 @@ namespace SAI_Editor
         private void checkBoxAutoLogin_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void menuItemSettings_Click(object sender, EventArgs e)
+        {
+            new SettingsForm().ShowDialog(this);
         }
     }
 }
