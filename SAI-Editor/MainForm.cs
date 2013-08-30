@@ -61,6 +61,7 @@ namespace SAI_Editor
             comboBoxSourceType.SelectedIndex = 0;
             comboBoxEventType.SelectedIndex = 0;
             comboBoxActionType.SelectedIndex = 0;
+            comboBoxTargetType.SelectedIndex = 0;
 
             menuItemReconnect.Click += menuItemReconnect_Click;
 
@@ -340,6 +341,11 @@ namespace SAI_Editor
             textBoxActionTypeId.Text = comboBoxActionType.SelectedIndex.ToString();
         }
 
+        private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            textBoxTargetTypeId.Text = comboBoxTargetType.SelectedIndex.ToString();
+        }
+
         private void checkBoxAutoGenerateComments_CheckedChanged_1(object sender, EventArgs e)
         {
             textBoxComments.Enabled = !checkBoxAutoGenerateComments.Checked;
@@ -347,7 +353,7 @@ namespace SAI_Editor
 
         private void checkBoxLockEventId_CheckedChanged(object sender, EventArgs e)
         {
-            textBoxScriptId.Enabled = !checkBoxLockEventId.Checked;
+            textBoxEventScriptId.Enabled = !checkBoxLockEventId.Checked;
         }
 
         private void FinishedExpandingOrContracting(bool expanding)
