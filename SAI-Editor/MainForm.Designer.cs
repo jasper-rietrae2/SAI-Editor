@@ -558,13 +558,13 @@
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventFlags);
             this.groupBoxScriptInfo.Controls.Add(this.label13);
             this.groupBoxScriptInfo.Controls.Add(this.label3);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxComments);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxActionTypeId);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventPhasemask);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventTypeId);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventLink);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxEventType);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventScriptId);
-            this.groupBoxScriptInfo.Controls.Add(this.textBoxComments);
             this.groupBoxScriptInfo.Controls.Add(this.label8);
             this.groupBoxScriptInfo.Controls.Add(this.label5);
             this.groupBoxScriptInfo.Controls.Add(this.label9);
@@ -758,7 +758,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1, 102);
+            this.label13.Location = new System.Drawing.Point(1, 180);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(54, 13);
             this.label13.TabIndex = 21;
@@ -941,7 +941,7 @@
             // 
             // textBoxComments
             // 
-            this.textBoxComments.Location = new System.Drawing.Point(59, 99);
+            this.textBoxComments.Location = new System.Drawing.Point(59, 177);
             this.textBoxComments.Name = "textBoxComments";
             this.textBoxComments.Size = new System.Drawing.Size(275, 20);
             this.textBoxComments.TabIndex = 0;
@@ -1324,9 +1324,9 @@
             // 
             // listViewSmartScripts
             // 
-            this.listViewSmartScripts.Location = new System.Drawing.Point(14, 244);
+            this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
             this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(945, 252);
+            this.listViewSmartScripts.Size = new System.Drawing.Size(947, 210);
             this.listViewSmartScripts.TabIndex = 24;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.Visible = false;
@@ -1334,7 +1334,7 @@
             // 
             // buttonSearchLink
             // 
-            this.buttonSearchLink.Location = new System.Drawing.Point(100, 151);
+            this.buttonSearchLink.Location = new System.Drawing.Point(100, 125);
             this.buttonSearchLink.Name = "buttonSearchLink";
             this.buttonSearchLink.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchLink.TabIndex = 29;
@@ -1343,7 +1343,7 @@
             // 
             // buttonSearchPhasemask
             // 
-            this.buttonSearchPhasemask.Location = new System.Drawing.Point(294, 124);
+            this.buttonSearchPhasemask.Location = new System.Drawing.Point(294, 98);
             this.buttonSearchPhasemask.Name = "buttonSearchPhasemask";
             this.buttonSearchPhasemask.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchPhasemask.TabIndex = 30;
@@ -1361,7 +1361,7 @@
             // 
             // textBoxEventChance
             // 
-            this.textBoxEventChance.Location = new System.Drawing.Point(255, 152);
+            this.textBoxEventChance.Location = new System.Drawing.Point(255, 126);
             this.textBoxEventChance.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1378,7 +1378,7 @@
             // 
             // textBoxEventFlags
             // 
-            this.textBoxEventFlags.Location = new System.Drawing.Point(59, 177);
+            this.textBoxEventFlags.Location = new System.Drawing.Point(59, 151);
             this.textBoxEventFlags.Name = "textBoxEventFlags";
             this.textBoxEventFlags.Size = new System.Drawing.Size(41, 20);
             this.textBoxEventFlags.TabIndex = 19;
@@ -1387,7 +1387,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 180);
+            this.label3.Location = new System.Drawing.Point(20, 154);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 27;
@@ -1395,7 +1395,7 @@
             // 
             // textBoxEventPhasemask
             // 
-            this.textBoxEventPhasemask.Location = new System.Drawing.Point(255, 125);
+            this.textBoxEventPhasemask.Location = new System.Drawing.Point(255, 99);
             this.textBoxEventPhasemask.Name = "textBoxEventPhasemask";
             this.textBoxEventPhasemask.Size = new System.Drawing.Size(39, 20);
             this.textBoxEventPhasemask.TabIndex = 19;
@@ -1403,7 +1403,7 @@
             // 
             // textBoxEventLink
             // 
-            this.textBoxEventLink.Location = new System.Drawing.Point(59, 151);
+            this.textBoxEventLink.Location = new System.Drawing.Point(59, 125);
             this.textBoxEventLink.Name = "textBoxEventLink";
             this.textBoxEventLink.Size = new System.Drawing.Size(41, 20);
             this.textBoxEventLink.TabIndex = 19;
@@ -1412,7 +1412,7 @@
             // textBoxEventScriptId
             // 
             this.textBoxEventScriptId.Enabled = false;
-            this.textBoxEventScriptId.Location = new System.Drawing.Point(59, 125);
+            this.textBoxEventScriptId.Location = new System.Drawing.Point(59, 99);
             this.textBoxEventScriptId.Name = "textBoxEventScriptId";
             this.textBoxEventScriptId.Size = new System.Drawing.Size(41, 20);
             this.textBoxEventScriptId.TabIndex = 19;
@@ -1421,7 +1421,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(168, 156);
+            this.label8.Location = new System.Drawing.Point(168, 130);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 13);
             this.label8.TabIndex = 26;
@@ -1430,7 +1430,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 152);
+            this.label9.Location = new System.Drawing.Point(25, 126);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(30, 13);
             this.label9.TabIndex = 24;
@@ -1439,7 +1439,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(36, 130);
+            this.label11.Location = new System.Drawing.Point(36, 104);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(19, 13);
             this.label11.TabIndex = 23;
@@ -1448,7 +1448,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(184, 128);
+            this.label10.Location = new System.Drawing.Point(184, 102);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 13);
             this.label10.TabIndex = 25;
@@ -1456,7 +1456,7 @@
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(1060, 396);
+            this.panel3.Location = new System.Drawing.Point(1028, 324);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(5, 88);
             this.panel3.TabIndex = 21;
@@ -1466,7 +1466,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1292, 508);
+            this.ClientSize = new System.Drawing.Size(1292, 467);
             this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel3);

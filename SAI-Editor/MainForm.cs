@@ -22,7 +22,7 @@ namespace SAI_Editor
         private bool expandingToMainForm = false;
         private int originalHeight = 0, originalWidth = 0;
         private Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
-        private int WidthToExpandTo = 985, HeightToExpandTo = 545;
+        private int WidthToExpandTo = 985, HeightToExpandTo = 505;
 
         public MainForm()
         {
