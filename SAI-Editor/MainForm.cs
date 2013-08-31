@@ -267,7 +267,7 @@ namespace SAI_Editor
             }
 
             foreach (Control control in controlsLoginForm)
-                control.Visible = !instant;
+                control.Visible = false;
 
             foreach (Control control in controlsMainForm)
                 control.Visible = instant;
@@ -292,7 +292,7 @@ namespace SAI_Editor
                 control.Visible = instant;
 
             foreach (var control in controlsMainForm)
-                control.Visible = !instant;
+                control.Visible = false;
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
