@@ -79,9 +79,6 @@ namespace SAI_Editor
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text))
-                return;
-
             string query = "";
 
             switch (comboBoxSearchType.SelectedIndex)
