@@ -370,7 +370,7 @@
             this.panel1.Controls.Add(this.buttonConnect);
             this.panel1.Controls.Add(this.buttonClear);
             this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Location = new System.Drawing.Point(965, 229);
+            this.panel1.Location = new System.Drawing.Point(9, 8);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 225);
             this.panel1.TabIndex = 13;

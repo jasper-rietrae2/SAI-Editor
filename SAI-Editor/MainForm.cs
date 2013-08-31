@@ -582,11 +582,6 @@ namespace SAI_Editor
                 e.Handled = e.KeyChar != (char)Keys.Back;
         }
 
-        private bool IsEmptyString(string str)
-        {
-            return String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str);
-        }
-
         private void textBoxEventTypeId_TextChanged(object sender, EventArgs e)
         {
             if (IsEmptyString(textBoxEventTypeId.Text))
@@ -615,6 +610,11 @@ namespace SAI_Editor
                 comboBoxTargetType.SelectedIndex = (int)MaxValues.MaxTargetType;
             else
                 comboBoxTargetType.SelectedIndex = Convert.ToInt32(textBoxTargetTypeId.Text);
+        }
+
+        private bool IsEmptyString(string str)
+        {
+            return String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str);
         }
     }
 }
