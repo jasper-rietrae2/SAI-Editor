@@ -4,11 +4,11 @@ using System.Windows.Forms;
 using System.Data;
 using MySql.Data.MySqlClient;
 
-internal enum FormSizes
-{
-    WidthToExpandTo  = 830,
-    HeightToExpandTo = 395,
-};
+//internal enum FormSizes
+//{
+//    WidthToExpandTo = 1035,
+//    HeightToExpandTo = 252,
+//};
 
 namespace SAI_Editor
 {
@@ -22,6 +22,7 @@ namespace SAI_Editor
         private bool expandingToMainForm = false;
         private int originalHeight = 0, originalWidth = 0;
         private Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
+        private int WidthToExpandTo = 1035, HeightToExpandTo = 546;
 
         public MainForm()
         {
@@ -40,6 +41,12 @@ namespace SAI_Editor
 
             originalHeight = Height;
             originalWidth = Width;
+
+            if (WidthToExpandTo > SystemInformation.VirtualScreen.Width)
+                WidthToExpandTo = SystemInformation.VirtualScreen.Width;
+
+            if (HeightToExpandTo > SystemInformation.VirtualScreen.Height)
+                HeightToExpandTo = SystemInformation.VirtualScreen.Height;
 
             textBoxHost.Text = settings.GetSetting("Host", "localhost");
             textBoxUsername.Text = settings.GetSetting("User", "root");
@@ -120,30 +127,30 @@ namespace SAI_Editor
         {
             if (expandingToMainForm)
             {
-                if (Height < originalHeight + (int)FormSizes.HeightToExpandTo)
+                if (Height < HeightToExpandTo)
                     Height += 5;
                 else
                 {
-                    Height = originalHeight + (int)FormSizes.HeightToExpandTo;
+                    Height = HeightToExpandTo;
 
-                    if (Width >= originalWidth + (int)FormSizes.WidthToExpandTo) //! If both finished
+                    if (Width >= WidthToExpandTo) //! If both finished
                     {
-                        Width = originalWidth + (int)FormSizes.WidthToExpandTo;
+                        Width = WidthToExpandTo;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                         FinishedExpandingOrContracting(true);
                     }
                 }
 
-                if (Width < originalWidth + (int)FormSizes.WidthToExpandTo)
+                if (Width < WidthToExpandTo)
                     Width += 5;
                 else
                 {
-                    Width = originalWidth + (int)FormSizes.WidthToExpandTo;
+                    Width = WidthToExpandTo;
 
-                    if (Height >= originalHeight + (int)FormSizes.HeightToExpandTo) //! If both finished
+                    if (Height >= HeightToExpandTo) //! If both finished
                     {
-                        Height = originalHeight + (int)FormSizes.HeightToExpandTo;
+                        Height = HeightToExpandTo;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                         FinishedExpandingOrContracting(true);

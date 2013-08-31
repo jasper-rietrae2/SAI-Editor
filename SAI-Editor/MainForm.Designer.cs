@@ -316,7 +316,7 @@
             this.menuHeaderFiles});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1495, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1178, 24);
             this.menuStrip.TabIndex = 11;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -965,7 +965,7 @@
             // 
             // textBoxEventParam1
             // 
-            this.textBoxEventParam1.Location = new System.Drawing.Point(118, 4);
+            this.textBoxEventParam1.Location = new System.Drawing.Point(64, 3);
             this.textBoxEventParam1.Name = "textBoxEventParam1";
             this.textBoxEventParam1.Size = new System.Drawing.Size(187, 20);
             this.textBoxEventParam1.TabIndex = 23;
@@ -978,7 +978,7 @@
             this.tabControl1.Location = new System.Drawing.Point(8, 19);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(339, 182);
+            this.tabControl1.Size = new System.Drawing.Size(269, 182);
             this.tabControl1.TabIndex = 15;
             // 
             // tabPageEvent
@@ -997,7 +997,7 @@
             this.tabPageEvent.Location = new System.Drawing.Point(4, 22);
             this.tabPageEvent.Name = "tabPageEvent";
             this.tabPageEvent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEvent.Size = new System.Drawing.Size(331, 156);
+            this.tabPageEvent.Size = new System.Drawing.Size(261, 156);
             this.tabPageEvent.TabIndex = 0;
             this.tabPageEvent.Text = "Event";
             // 
@@ -1031,7 +1031,7 @@
             // textBox13
             // 
             this.textBox13.Enabled = false;
-            this.textBox13.Location = new System.Drawing.Point(118, 134);
+            this.textBox13.Location = new System.Drawing.Point(64, 133);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(187, 20);
             this.textBox13.TabIndex = 23;
@@ -1039,28 +1039,28 @@
             // textBox10
             // 
             this.textBox10.Enabled = false;
-            this.textBox10.Location = new System.Drawing.Point(118, 108);
+            this.textBox10.Location = new System.Drawing.Point(64, 107);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(187, 20);
             this.textBox10.TabIndex = 23;
             // 
             // textBoxEventParam4
             // 
-            this.textBoxEventParam4.Location = new System.Drawing.Point(118, 82);
+            this.textBoxEventParam4.Location = new System.Drawing.Point(64, 81);
             this.textBoxEventParam4.Name = "textBoxEventParam4";
             this.textBoxEventParam4.Size = new System.Drawing.Size(187, 20);
             this.textBoxEventParam4.TabIndex = 23;
             // 
             // textBoxEventParam3
             // 
-            this.textBoxEventParam3.Location = new System.Drawing.Point(118, 56);
+            this.textBoxEventParam3.Location = new System.Drawing.Point(64, 55);
             this.textBoxEventParam3.Name = "textBoxEventParam3";
             this.textBoxEventParam3.Size = new System.Drawing.Size(187, 20);
             this.textBoxEventParam3.TabIndex = 23;
             // 
             // textBoxEventParam2
             // 
-            this.textBoxEventParam2.Location = new System.Drawing.Point(118, 30);
+            this.textBoxEventParam2.Location = new System.Drawing.Point(64, 29);
             this.textBoxEventParam2.Name = "textBoxEventParam2";
             this.textBoxEventParam2.Size = new System.Drawing.Size(187, 20);
             this.textBoxEventParam2.TabIndex = 23;
@@ -1083,7 +1083,7 @@
             this.tabPageAction.Location = new System.Drawing.Point(4, 22);
             this.tabPageAction.Name = "tabPageAction";
             this.tabPageAction.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAction.Size = new System.Drawing.Size(331, 156);
+            this.tabPageAction.Size = new System.Drawing.Size(261, 156);
             this.tabPageAction.TabIndex = 1;
             this.tabPageAction.Text = "Action";
             // 
@@ -1134,35 +1134,35 @@
             // 
             // textBoxActionParam6
             // 
-            this.textBoxActionParam6.Location = new System.Drawing.Point(118, 134);
+            this.textBoxActionParam6.Location = new System.Drawing.Point(64, 134);
             this.textBoxActionParam6.Name = "textBoxActionParam6";
             this.textBoxActionParam6.Size = new System.Drawing.Size(187, 20);
             this.textBoxActionParam6.TabIndex = 27;
             // 
             // textBoxActionParam5
             // 
-            this.textBoxActionParam5.Location = new System.Drawing.Point(118, 108);
+            this.textBoxActionParam5.Location = new System.Drawing.Point(64, 108);
             this.textBoxActionParam5.Name = "textBoxActionParam5";
             this.textBoxActionParam5.Size = new System.Drawing.Size(187, 20);
             this.textBoxActionParam5.TabIndex = 28;
             // 
             // textBoxActionParam4
             // 
-            this.textBoxActionParam4.Location = new System.Drawing.Point(118, 82);
+            this.textBoxActionParam4.Location = new System.Drawing.Point(64, 82);
             this.textBoxActionParam4.Name = "textBoxActionParam4";
             this.textBoxActionParam4.Size = new System.Drawing.Size(187, 20);
             this.textBoxActionParam4.TabIndex = 29;
             // 
             // textBoxActionParam3
             // 
-            this.textBoxActionParam3.Location = new System.Drawing.Point(118, 56);
+            this.textBoxActionParam3.Location = new System.Drawing.Point(64, 56);
             this.textBoxActionParam3.Name = "textBoxActionParam3";
             this.textBoxActionParam3.Size = new System.Drawing.Size(187, 20);
             this.textBoxActionParam3.TabIndex = 30;
             // 
             // textBoxActionParam2
             // 
-            this.textBoxActionParam2.Location = new System.Drawing.Point(118, 30);
+            this.textBoxActionParam2.Location = new System.Drawing.Point(64, 30);
             this.textBoxActionParam2.Name = "textBoxActionParam2";
             this.textBoxActionParam2.Size = new System.Drawing.Size(187, 20);
             this.textBoxActionParam2.TabIndex = 31;
@@ -1178,7 +1178,7 @@
             // 
             // textBoxActionParam1
             // 
-            this.textBoxActionParam1.Location = new System.Drawing.Point(118, 4);
+            this.textBoxActionParam1.Location = new System.Drawing.Point(64, 4);
             this.textBoxActionParam1.Name = "textBoxActionParam1";
             this.textBoxActionParam1.Size = new System.Drawing.Size(187, 20);
             this.textBoxActionParam1.TabIndex = 33;
@@ -1200,7 +1200,7 @@
             this.tabPageTarget.Controls.Add(this.textBoxTargetParam1);
             this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
             this.tabPageTarget.Name = "tabPageTarget";
-            this.tabPageTarget.Size = new System.Drawing.Size(331, 156);
+            this.tabPageTarget.Size = new System.Drawing.Size(261, 156);
             this.tabPageTarget.TabIndex = 2;
             this.tabPageTarget.Text = "Target";
             // 
@@ -1233,7 +1233,7 @@
             // 
             // textBoxTargetZ
             // 
-            this.textBoxTargetZ.Location = new System.Drawing.Point(118, 134);
+            this.textBoxTargetZ.Location = new System.Drawing.Point(64, 134);
             this.textBoxTargetZ.Name = "textBoxTargetZ";
             this.textBoxTargetZ.Size = new System.Drawing.Size(187, 20);
             this.textBoxTargetZ.TabIndex = 36;
@@ -1249,7 +1249,7 @@
             // 
             // textBoxTargetY
             // 
-            this.textBoxTargetY.Location = new System.Drawing.Point(118, 108);
+            this.textBoxTargetY.Location = new System.Drawing.Point(64, 108);
             this.textBoxTargetY.Name = "textBoxTargetY";
             this.textBoxTargetY.Size = new System.Drawing.Size(187, 20);
             this.textBoxTargetY.TabIndex = 36;
@@ -1265,21 +1265,21 @@
             // 
             // textBoxTargetX
             // 
-            this.textBoxTargetX.Location = new System.Drawing.Point(118, 82);
+            this.textBoxTargetX.Location = new System.Drawing.Point(64, 82);
             this.textBoxTargetX.Name = "textBoxTargetX";
             this.textBoxTargetX.Size = new System.Drawing.Size(187, 20);
             this.textBoxTargetX.TabIndex = 36;
             // 
             // textBoxTargetParam3
             // 
-            this.textBoxTargetParam3.Location = new System.Drawing.Point(118, 56);
+            this.textBoxTargetParam3.Location = new System.Drawing.Point(64, 56);
             this.textBoxTargetParam3.Name = "textBoxTargetParam3";
             this.textBoxTargetParam3.Size = new System.Drawing.Size(187, 20);
             this.textBoxTargetParam3.TabIndex = 36;
             // 
             // textBoxTargetParam2
             // 
-            this.textBoxTargetParam2.Location = new System.Drawing.Point(118, 30);
+            this.textBoxTargetParam2.Location = new System.Drawing.Point(64, 30);
             this.textBoxTargetParam2.Name = "textBoxTargetParam2";
             this.textBoxTargetParam2.Size = new System.Drawing.Size(187, 20);
             this.textBoxTargetParam2.TabIndex = 37;
@@ -1295,7 +1295,7 @@
             // 
             // textBoxTargetParam1
             // 
-            this.textBoxTargetParam1.Location = new System.Drawing.Point(118, 4);
+            this.textBoxTargetParam1.Location = new System.Drawing.Point(64, 4);
             this.textBoxTargetParam1.Name = "textBoxTargetParam1";
             this.textBoxTargetParam1.Size = new System.Drawing.Size(187, 20);
             this.textBoxTargetParam1.TabIndex = 39;
@@ -1305,7 +1305,7 @@
             this.groupBox2.Controls.Add(this.tabControl1);
             this.groupBox2.Location = new System.Drawing.Point(725, 31);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(353, 207);
+            this.groupBox2.Size = new System.Drawing.Size(284, 207);
             this.groupBox2.TabIndex = 23;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Parameters";
@@ -1315,7 +1315,7 @@
             // 
             this.listViewSmartScripts.Location = new System.Drawing.Point(14, 244);
             this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(1064, 360);
+            this.listViewSmartScripts.Size = new System.Drawing.Size(995, 252);
             this.listViewSmartScripts.TabIndex = 24;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.Visible = false;
@@ -1468,7 +1468,7 @@
             // 
             // panel3
             // 
-            this.panel3.Location = new System.Drawing.Point(1089, 516);
+            this.panel3.Location = new System.Drawing.Point(1060, 396);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(5, 88);
             this.panel3.TabIndex = 21;
@@ -1478,7 +1478,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1495, 616);
+            this.ClientSize = new System.Drawing.Size(1178, 508);
             this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel3);
