@@ -33,8 +33,8 @@ namespace SAI_Editor
         {
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
 
-            MaximizeBox = false;
-            MinimizeBox = true;
+            //MaximizeBox = false;
+            //MinimizeBox = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Width = 278;
             Height = 260;
@@ -57,6 +57,7 @@ namespace SAI_Editor
             KeyPreview = true;
             KeyDown += Form1_KeyDown;
 
+            //! Disallow writing anything in comboboxes (the 3D version looks like shit)
             comboBoxActionType.KeyPress += comboBox_KeyPress;
             comboBoxTargetType.KeyPress += comboBox_KeyPress;
             comboBoxEventType.KeyPress += comboBox_KeyPress;
@@ -120,7 +121,12 @@ namespace SAI_Editor
                 buttonConnect_Click(sender, e);
             }
 
+            if (settings.GetSetting("Startfullsize", "no") == "yes")
+                StartExpandingToMainForm(true);
+
             listViewSmartScripts.Click += listViewSmartScripts_Click;
+
+            //listViewSmartScripts.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
@@ -232,10 +238,10 @@ namespace SAI_Editor
                 connectionString.Password = textBoxPassword.Text;
 
             if (CanConnectToDatabase())
-                StartExpandingToMainForm();
+                StartExpandingToMainForm(settings.GetSetting("Startfullsize", "no") == "yes");
         }
 
-        private void StartExpandingToMainForm()
+        private void StartExpandingToMainForm(bool instant = false)
         {
             if (checkBoxSaveSettings.Checked)
             {
@@ -248,27 +254,45 @@ namespace SAI_Editor
             }
 
             Text = "SAI-Editor: " + textBoxUsername.Text + "@" + textBoxHost.Text + ":" + textBoxPort.Text;
-            timerExpandOrContract.Enabled = true;
-            expandingToMainForm = true;
+
+            if (instant)
+            {
+                Width = WidthToExpandTo;
+                Height = HeightToExpandTo;
+            }
+            else
+            {
+                timerExpandOrContract.Enabled = true;
+                expandingToMainForm = true;
+            }
 
             foreach (Control control in controlsLoginForm)
-                control.Visible = false;
+                control.Visible = !instant;
 
             foreach (Control control in controlsMainForm)
-                control.Visible = false;
+                control.Visible = instant;
         }
 
-        private void StartContractingToLoginForm()
+        private void StartContractingToLoginForm(bool instant = false)
         {
             Text = "SAI-Editor: Login";
-            timerExpandOrContract.Enabled = true;
-            contractingToLoginForm = true;
+
+            if (instant)
+            {
+                Width = originalWidth;
+                Height = originalHeight;
+            }
+            else
+            {
+                timerExpandOrContract.Enabled = true;
+                contractingToLoginForm = true;
+            }
 
             foreach (var control in controlsLoginForm)
-                control.Visible = false;
+                control.Visible = instant;
 
             foreach (var control in controlsMainForm)
-                control.Visible = false;
+                control.Visible = !instant;
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -351,7 +375,7 @@ namespace SAI_Editor
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
-            StartContractingToLoginForm();
+            StartContractingToLoginForm(settings.GetSetting("Startfullsize", "no") == "yes");
         }
 
         private void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
