@@ -122,7 +122,6 @@
             this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.buttonSearchLink = new System.Windows.Forms.Button();
             this.buttonSearchPhasemask = new System.Windows.Forms.Button();
             this.buttonSearchEventFlags = new System.Windows.Forms.Button();
@@ -150,7 +149,6 @@
             this.tabPageAction.SuspendLayout();
             this.tabPageTarget.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
             this.SuspendLayout();
             // 
@@ -316,7 +314,7 @@
             this.menuHeaderFiles});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1178, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1292, 24);
             this.menuStrip.TabIndex = 11;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -549,20 +547,33 @@
             // 
             // groupBoxScriptInfo
             // 
+            this.groupBoxScriptInfo.Controls.Add(this.buttonSearchLink);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxTargetType);
+            this.groupBoxScriptInfo.Controls.Add(this.buttonSearchPhasemask);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxActionType);
+            this.groupBoxScriptInfo.Controls.Add(this.buttonSearchEventFlags);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxTargetTypeId);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxEventChance);
             this.groupBoxScriptInfo.Controls.Add(this.label14);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxEventFlags);
             this.groupBoxScriptInfo.Controls.Add(this.label13);
+            this.groupBoxScriptInfo.Controls.Add(this.label3);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxActionTypeId);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxEventPhasemask);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventTypeId);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxEventLink);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxEventType);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxEventScriptId);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxComments);
+            this.groupBoxScriptInfo.Controls.Add(this.label8);
             this.groupBoxScriptInfo.Controls.Add(this.label5);
+            this.groupBoxScriptInfo.Controls.Add(this.label9);
             this.groupBoxScriptInfo.Controls.Add(this.label6);
+            this.groupBoxScriptInfo.Controls.Add(this.label11);
+            this.groupBoxScriptInfo.Controls.Add(this.label10);
             this.groupBoxScriptInfo.Location = new System.Drawing.Point(322, 31);
             this.groupBoxScriptInfo.Name = "groupBoxScriptInfo";
-            this.groupBoxScriptInfo.Size = new System.Drawing.Size(385, 125);
+            this.groupBoxScriptInfo.Size = new System.Drawing.Size(335, 207);
             this.groupBoxScriptInfo.TabIndex = 6;
             this.groupBoxScriptInfo.TabStop = false;
             this.groupBoxScriptInfo.Text = "Dynamic script information";
@@ -572,36 +583,36 @@
             // 
             this.comboBoxTargetType.FormattingEnabled = true;
             this.comboBoxTargetType.Items.AddRange(new object[] {
-            "SMART_TARGET_NONE",
-            "SMART_TARGET_SELF",
-            "SMART_TARGET_VICTIM",
-            "SMART_TARGET_HOSTILE_SECOND_AGGRO",
-            "SMART_TARGET_HOSTILE_LAST_AGGRO",
-            "SMART_TARGET_HOSTILE_RANDOM",
-            "SMART_TARGET_HOSTILE_RANDOM_NOT_TOP",
-            "SMART_TARGET_ACTION_INVOKER",
-            "SMART_TARGET_POSITION",
-            "SMART_TARGET_CREATURE_RANGE",
-            "SMART_TARGET_CREATURE_GUID",
-            "SMART_TARGET_CREATURE_DISTANCE",
-            "SMART_TARGET_STORED",
-            "SMART_TARGET_GAMEOBJECT_RANGE",
-            "SMART_TARGET_GAMEOBJECT_GUID",
-            "SMART_TARGET_GAMEOBJECT_DISTANCE",
-            "SMART_TARGET_INVOKER_PARTY",
-            "SMART_TARGET_PLAYER_RANGE",
-            "SMART_TARGET_PLAYER_DISTANCE",
-            "SMART_TARGET_CLOSEST_CREATURE",
-            "SMART_TARGET_CLOSEST_GAMEOBJECT",
-            "SMART_TARGET_CLOSEST_PLAYER",
-            "SMART_TARGET_ACTION_INVOKER_VEHICLE",
-            "SMART_TARGET_OWNER_OR_SUMMONER",
-            "SMART_TARGET_THREAT_LIST",
-            "SMART_TARGET_CLOSEST_ENEMY",
-            "SMART_TARGET_CLOSEST_FRIENDLY"});
+            "TARGET_NONE",
+            "TARGET_SELF",
+            "TARGET_VICTIM",
+            "TARGET_HOSTILE_SECOND_AGGRO",
+            "TARGET_HOSTILE_LAST_AGGRO",
+            "TARGET_HOSTILE_RANDOM",
+            "TARGET_HOSTILE_RANDOM_NOT_TOP",
+            "TARGET_ACTION_INVOKER",
+            "TARGET_POSITION",
+            "TARGET_CREATURE_RANGE",
+            "TARGET_CREATURE_GUID",
+            "TARGET_CREATURE_DISTANCE",
+            "TARGET_STORED",
+            "TARGET_GAMEOBJECT_RANGE",
+            "TARGET_GAMEOBJECT_GUID",
+            "TARGET_GAMEOBJECT_DISTANCE",
+            "TARGET_INVOKER_PARTY",
+            "TARGET_PLAYER_RANGE",
+            "TARGET_PLAYER_DISTANCE",
+            "TARGET_CLOSEST_CREATURE",
+            "TARGET_CLOSEST_GAMEOBJECT",
+            "TARGET_CLOSEST_PLAYER",
+            "TARGET_ACTION_INVOKER_VEHICLE",
+            "TARGET_OWNER_OR_SUMMONER",
+            "TARGET_THREAT_LIST",
+            "TARGET_CLOSEST_ENEMY",
+            "TARGET_CLOSEST_FRIENDLY"});
             this.comboBoxTargetType.Location = new System.Drawing.Point(59, 72);
             this.comboBoxTargetType.Name = "comboBoxTargetType";
-            this.comboBoxTargetType.Size = new System.Drawing.Size(288, 21);
+            this.comboBoxTargetType.Size = new System.Drawing.Size(243, 21);
             this.comboBoxTargetType.TabIndex = 25;
             this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
             // 
@@ -609,127 +620,127 @@
             // 
             this.comboBoxActionType.FormattingEnabled = true;
             this.comboBoxActionType.Items.AddRange(new object[] {
-            "SMART_ACTION_NONE",
-            "SMART_ACTION_TALK",
-            "SMART_ACTION_SET_FACTION",
-            "SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL",
-            "SMART_ACTION_SOUND",
-            "SMART_ACTION_PLAY_EMOTE",
-            "SMART_ACTION_FAIL_QUEST",
-            "SMART_ACTION_ADD_QUEST",
-            "SMART_ACTION_SET_REACT_STATE",
-            "SMART_ACTION_ACTIVATE_GOBJECT",
-            "SMART_ACTION_RANDOM_EMOTE",
-            "SMART_ACTION_CAST",
-            "SMART_ACTION_SUMMON_CREATURE",
-            "SMART_ACTION_THREAT_SINGLE_PCT",
-            "SMART_ACTION_THREAT_ALL_PCT",
-            "SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS",
-            "SMART_ACTION_SEND_CASTCREATUREORGO",
-            "SMART_ACTION_SET_EMOTE_STATE",
-            "SMART_ACTION_SET_UNIT_FLAG",
-            "SMART_ACTION_REMOVE_UNIT_FLAG",
-            "SMART_ACTION_AUTO_ATTACK",
-            "SMART_ACTION_ALLOW_COMBAT_MOVEMENT",
-            "SMART_ACTION_SET_EVENT_PHASE",
-            "SMART_ACTION_INC_EVENT_PHASE",
-            "SMART_ACTION_EVADE",
-            "SMART_ACTION_FLEE_FOR_ASSIST",
-            "SMART_ACTION_CALL_GROUPEVENTHAPPENS",
-            "SMART_ACTION_CALL_CASTEDCREATUREORGO",
-            "SMART_ACTION_REMOVEAURASFROMSPELL",
-            "SMART_ACTION_FOLLOW",
-            "SMART_ACTION_RANDOM_PHASE",
-            "SMART_ACTION_RANDOM_PHASE_RANGE",
-            "SMART_ACTION_RESET_GOBJECT",
-            "SMART_ACTION_CALL_KILLEDMONSTER",
-            "SMART_ACTION_SET_INST_DATA",
-            "SMART_ACTION_SET_INST_DATA64",
-            "SMART_ACTION_UPDATE_TEMPLATE",
-            "SMART_ACTION_DIE",
-            "SMART_ACTION_SET_IN_COMBAT_WITH_ZONE",
-            "SMART_ACTION_CALL_FOR_HELP",
-            "SMART_ACTION_SET_SHEATH",
-            "SMART_ACTION_FORCE_DESPAWN",
-            "SMART_ACTION_SET_INVINCIBILITY_HP_LEVEL",
-            "SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL",
-            "SMART_ACTION_SET_INGAME_PHASE_MASK",
-            "SMART_ACTION_SET_DATA",
-            "SMART_ACTION_MOVE_FORWARD",
-            "SMART_ACTION_SET_VISIBILITY",
-            "SMART_ACTION_SET_ACTIVE",
-            "SMART_ACTION_ATTACK_START",
-            "SMART_ACTION_SUMMON_GO",
-            "SMART_ACTION_KILL_UNIT",
-            "SMART_ACTION_ACTIVATE_TAXI",
-            "SMART_ACTION_WP_START",
-            "SMART_ACTION_WP_PAUSE",
-            "SMART_ACTION_WP_STOP",
-            "SMART_ACTION_ADD_ITEM",
-            "SMART_ACTION_REMOVE_ITEM",
-            "SMART_ACTION_INSTALL_AI_TEMPLATE",
-            "SMART_ACTION_SET_RUN",
-            "SMART_ACTION_SET_FLY",
-            "SMART_ACTION_SET_SWIM",
-            "SMART_ACTION_TELEPORT",
-            "SMART_ACTION_STORE_VARIABLE_DECIMAL",
-            "SMART_ACTION_STORE_TARGET_LIST",
-            "SMART_ACTION_WP_RESUME",
-            "SMART_ACTION_SET_ORIENTATION",
-            "SMART_ACTION_CREATE_TIMED_EVENT",
-            "SMART_ACTION_PLAYMOVIE",
-            "SMART_ACTION_MOVE_TO_POS",
-            "SMART_ACTION_RESPAWN_TARGET",
-            "SMART_ACTION_EQUIP",
-            "SMART_ACTION_CLOSE_GOSSIP",
-            "SMART_ACTION_TRIGGER_TIMED_EVENT",
-            "SMART_ACTION_REMOVE_TIMED_EVENT",
-            "SMART_ACTION_ADD_AURA",
-            "SMART_ACTION_OVERRIDE_SCRIPT_BASE_OBJECT",
-            "SMART_ACTION_RESET_SCRIPT_BASE_OBJECT",
-            "SMART_ACTION_CALL_SCRIPT_RESET",
-            "SMART_ACTION_UNUSED_79",
-            "SMART_ACTION_CALL_TIMED_ACTIONLIST",
-            "SMART_ACTION_SET_NPC_FLAG",
-            "SMART_ACTION_ADD_NPC_FLAG",
-            "SMART_ACTION_REMOVE_NPC_FLAG",
-            "SMART_ACTION_SIMPLE_TALK",
-            "SMART_ACTION_INVOKER_CAST",
-            "SMART_ACTION_CROSS_CAST",
-            "SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST",
-            "SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST",
-            "SMART_ACTION_RANDOM_MOVE",
-            "SMART_ACTION_SET_UNIT_FIELD_BYTES_1",
-            "SMART_ACTION_REMOVE_UNIT_FIELD_BYTES_1",
-            "SMART_ACTION_INTERRUPT_SPELL",
-            "SMART_ACTION_SEND_GO_CUSTOM_ANIM",
-            "SMART_ACTION_SET_DYNAMIC_FLAG",
-            "SMART_ACTION_ADD_DYNAMIC_FLAG",
-            "SMART_ACTION_REMOVE_DYNAMIC_FLAG",
-            "SMART_ACTION_JUMP_TO_POS",
-            "SMART_ACTION_SEND_GOSSIP_MENU",
-            "SMART_ACTION_GO_SET_LOOT_STATE",
-            "SMART_ACTION_SEND_TARGET_TO_TARGET",
-            "SMART_ACTION_SET_HOME_POS",
-            "SMART_ACTION_SET_HEALTH_REGEN",
-            "SMART_ACTION_SET_ROOT",
-            "SMART_ACTION_SET_GO_FLAG",
-            "SMART_ACTION_ADD_GO_FLAG",
-            "SMART_ACTION_REMOVE_GO_FLAG",
-            "SMART_ACTION_SUMMON_CREATURE_GROUP",
-            "SMART_ACTION_SET_POWER",
-            "SMART_ACTION_ADD_POWER",
-            "SMART_ACTION_REMOVE_POWER"});
+            "ACTION_NONE",
+            "ACTION_TALK",
+            "ACTION_SET_FACTION",
+            "ACTION_MORPH_TO_ENTRY_OR_MODEL",
+            "ACTION_SOUND",
+            "ACTION_PLAY_EMOTE",
+            "ACTION_FAIL_QUEST",
+            "ACTION_ADD_QUEST",
+            "ACTION_SET_REACT_STATE",
+            "ACTION_ACTIVATE_GOBJECT",
+            "ACTION_RANDOM_EMOTE",
+            "ACTION_CAST",
+            "ACTION_SUMMON_CREATURE",
+            "ACTION_THREAT_SINGLE_PCT",
+            "ACTION_THREAT_ALL_PCT",
+            "ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS",
+            "ACTION_SEND_CASTCREATUREORGO",
+            "ACTION_SET_EMOTE_STATE",
+            "ACTION_SET_UNIT_FLAG",
+            "ACTION_REMOVE_UNIT_FLAG",
+            "ACTION_AUTO_ATTACK",
+            "ACTION_ALLOW_COMBAT_MOVEMENT",
+            "ACTION_SET_EVENT_PHASE",
+            "ACTION_INC_EVENT_PHASE",
+            "ACTION_EVADE",
+            "ACTION_FLEE_FOR_ASSIST",
+            "ACTION_CALL_GROUPEVENTHAPPENS",
+            "ACTION_CALL_CASTEDCREATUREORGO",
+            "ACTION_REMOVEAURASFROMSPELL",
+            "ACTION_FOLLOW",
+            "ACTION_RANDOM_PHASE",
+            "ACTION_RANDOM_PHASE_RANGE",
+            "ACTION_RESET_GOBJECT",
+            "ACTION_CALL_KILLEDMONSTER",
+            "ACTION_SET_INST_DATA",
+            "ACTION_SET_INST_DATA64",
+            "ACTION_UPDATE_TEMPLATE",
+            "ACTION_DIE",
+            "ACTION_SET_IN_COMBAT_WITH_ZONE",
+            "ACTION_CALL_FOR_HELP",
+            "ACTION_SET_SHEATH",
+            "ACTION_FORCE_DESPAWN",
+            "ACTION_SET_INVINCIBILITY_HP_LEVEL",
+            "ACTION_MOUNT_TO_ENTRY_OR_MODEL",
+            "ACTION_SET_INGAME_PHASE_MASK",
+            "ACTION_SET_DATA",
+            "ACTION_MOVE_FORWARD",
+            "ACTION_SET_VISIBILITY",
+            "ACTION_SET_ACTIVE",
+            "ACTION_ATTACK_START",
+            "ACTION_SUMMON_GO",
+            "ACTION_KILL_UNIT",
+            "ACTION_ACTIVATE_TAXI",
+            "ACTION_WP_START",
+            "ACTION_WP_PAUSE",
+            "ACTION_WP_STOP",
+            "ACTION_ADD_ITEM",
+            "ACTION_REMOVE_ITEM",
+            "ACTION_INSTALL_AI_TEMPLATE",
+            "ACTION_SET_RUN",
+            "ACTION_SET_FLY",
+            "ACTION_SET_SWIM",
+            "ACTION_TELEPORT",
+            "ACTION_STORE_VARIABLE_DECIMAL",
+            "ACTION_STORE_TARGET_LIST",
+            "ACTION_WP_RESUME",
+            "ACTION_SET_ORIENTATION",
+            "ACTION_CREATE_TIMED_EVENT",
+            "ACTION_PLAYMOVIE",
+            "ACTION_MOVE_TO_POS",
+            "ACTION_RESPAWN_TARGET",
+            "ACTION_EQUIP",
+            "ACTION_CLOSE_GOSSIP",
+            "ACTION_TRIGGER_TIMED_EVENT",
+            "ACTION_REMOVE_TIMED_EVENT",
+            "ACTION_ADD_AURA",
+            "ACTION_OVERRIDE_SCRIPT_BASE_OBJECT",
+            "ACTION_RESET_SCRIPT_BASE_OBJECT",
+            "ACTION_CALL_SCRIPT_RESET",
+            "ACTION_UNUSED_79",
+            "ACTION_CALL_TIMED_ACTIONLIST",
+            "ACTION_SET_NPC_FLAG",
+            "ACTION_ADD_NPC_FLAG",
+            "ACTION_REMOVE_NPC_FLAG",
+            "ACTION_SIMPLE_TALK",
+            "ACTION_INVOKER_CAST",
+            "ACTION_CROSS_CAST",
+            "ACTION_CALL_RANDOM_TIMED_ACTIONLIST",
+            "ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST",
+            "ACTION_RANDOM_MOVE",
+            "ACTION_SET_UNIT_FIELD_BYTES_1",
+            "ACTION_REMOVE_UNIT_FIELD_BYTES_1",
+            "ACTION_INTERRUPT_SPELL",
+            "ACTION_SEND_GO_CUSTOM_ANIM",
+            "ACTION_SET_DYNAMIC_FLAG",
+            "ACTION_ADD_DYNAMIC_FLAG",
+            "ACTION_REMOVE_DYNAMIC_FLAG",
+            "ACTION_JUMP_TO_POS",
+            "ACTION_SEND_GOSSIP_MENU",
+            "ACTION_GO_SET_LOOT_STATE",
+            "ACTION_SEND_TARGET_TO_TARGET",
+            "ACTION_SET_HOME_POS",
+            "ACTION_SET_HEALTH_REGEN",
+            "ACTION_SET_ROOT",
+            "ACTION_SET_GO_FLAG",
+            "ACTION_ADD_GO_FLAG",
+            "ACTION_REMOVE_GO_FLAG",
+            "ACTION_SUMMON_CREATURE_GROUP",
+            "ACTION_SET_POWER",
+            "ACTION_ADD_POWER",
+            "ACTION_REMOVE_POWER"});
             this.comboBoxActionType.Location = new System.Drawing.Point(59, 45);
             this.comboBoxActionType.Name = "comboBoxActionType";
-            this.comboBoxActionType.Size = new System.Drawing.Size(288, 21);
+            this.comboBoxActionType.Size = new System.Drawing.Size(243, 21);
             this.comboBoxActionType.TabIndex = 25;
             this.comboBoxActionType.SelectedIndexChanged += new System.EventHandler(this.comboBoxActionType_SelectedIndexChanged);
             // 
             // textBoxTargetTypeId
             // 
             this.textBoxTargetTypeId.Enabled = false;
-            this.textBoxTargetTypeId.Location = new System.Drawing.Point(353, 72);
+            this.textBoxTargetTypeId.Location = new System.Drawing.Point(308, 72);
             this.textBoxTargetTypeId.Name = "textBoxTargetTypeId";
             this.textBoxTargetTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxTargetTypeId.TabIndex = 24;
@@ -756,7 +767,7 @@
             // textBoxActionTypeId
             // 
             this.textBoxActionTypeId.Enabled = false;
-            this.textBoxActionTypeId.Location = new System.Drawing.Point(353, 45);
+            this.textBoxActionTypeId.Location = new System.Drawing.Point(308, 45);
             this.textBoxActionTypeId.Name = "textBoxActionTypeId";
             this.textBoxActionTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxActionTypeId.TabIndex = 20;
@@ -765,7 +776,7 @@
             // textBoxEventTypeId
             // 
             this.textBoxEventTypeId.Enabled = false;
-            this.textBoxEventTypeId.Location = new System.Drawing.Point(353, 18);
+            this.textBoxEventTypeId.Location = new System.Drawing.Point(308, 18);
             this.textBoxEventTypeId.Name = "textBoxEventTypeId";
             this.textBoxEventTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxEventTypeId.TabIndex = 20;
@@ -847,84 +858,84 @@
             "SMART_EVENT_GO_STATE_CHANGED"});
             this.comboBoxEventType.FormattingEnabled = true;
             this.comboBoxEventType.Items.AddRange(new object[] {
-            "SMART_EVENT_UPDATE_IC",
-            "SMART_EVENT_UPDATE_OOC",
-            "SMART_EVENT_HEALT_PCT",
-            "SMART_EVENT_MANA_PCT",
-            "SMART_EVENT_AGGRO",
-            "SMART_EVENT_KILL",
-            "SMART_EVENT_DEATH",
-            "SMART_EVENT_EVADE",
-            "SMART_EVENT_SPELLHIT",
-            "SMART_EVENT_RANGE",
-            "SMART_EVENT_OOC_LOS",
-            "SMART_EVENT_RESPAWN",
-            "SMART_EVENT_TARGET_HEALTH_PCT",
-            "SMART_EVENT_TARGET_CASTING",
-            "SMART_EVENT_FRIENDLY_HEALTH",
-            "SMART_EVENT_FRIENDLY_IS_CC",
-            "SMART_EVENT_FRIENDLY_MISSING_BUFF",
-            "SMART_EVENT_SUMMONED_UNIT",
-            "SMART_EVENT_TARGET_MANA_PCT",
-            "SMART_EVENT_ACCEPTED_QUEST",
-            "SMART_EVENT_REWARD_QUEST",
-            "SMART_EVENT_REACHED_HOME",
-            "SMART_EVENT_RECEIVE_EMOTE",
-            "SMART_EVENT_HAS_AURA",
-            "SMART_EVENT_TARGET_BUFFED",
-            "SMART_EVENT_RESET",
-            "SMART_EVENT_IC_LOS",
-            "SMART_EVENT_PASSENGER_BOARDED",
-            "SMART_EVENT_PASSENGER_REMOVED",
-            "SMART_EVENT_CHARMED",
-            "SMART_EVENT_CHARMED_TARGET",
-            "SMART_EVENT_SPELLHIT_TARGET",
-            "SMART_EVENT_DAMAGED",
-            "SMART_EVENT_DAMAGED_TARGET",
-            "SMART_EVENT_MOVEMENTINFORM",
-            "SMART_EVENT_SUMMON_DESPAWNED",
-            "SMART_EVENT_CORPSE_REMOVED",
-            "SMART_EVENT_AI_INIT",
-            "SMART_EVENT_DATA_SET",
-            "SMART_EVENT_WAYPOINT_START",
-            "SMART_EVENT_WAYPOINT_REACHED",
-            "SMART_EVENT_TRANSPORT_ADDPLAYER",
-            "SMART_EVENT_TRANSPORT_ADDCREATURE",
-            "SMART_EVENT_TRANSPORT_REMOVE_PLAYER",
-            "SMART_EVENT_TRANSPORT_RELOCATE",
-            "SMART_EVENT_INSTANCE_PLAYER_ENTER",
-            "SMART_EVENT_AREATRIGGER_ONTRIGGER",
-            "SMART_EVENT_QUEST_ACCEPTED",
-            "SMART_EVENT_QUEST_OBJ_COPLETETION",
-            "SMART_EVENT_QUEST_COMPLETION",
-            "SMART_EVENT_QUEST_REWARDED",
-            "SMART_EVENT_QUEST_FAIL",
-            "SMART_EVENT_TEXT_OVER",
-            "SMART_EVENT_RECEIVE_HEAL",
-            "SMART_EVENT_JUST_SUMMONED",
-            "SMART_EVENT_WAYPOINT_PAUSED",
-            "SMART_EVENT_WAYPOINT_RESUMED",
-            "SMART_EVENT_WAYPOINT_STOPPED",
-            "SMART_EVENT_WAYPOINT_ENDED",
-            "SMART_EVENT_TIMED_EVENT_TRIGGERED",
-            "SMART_EVENT_UPDATE",
-            "SMART_EVENT_LINK",
-            "SMART_EVENT_GOSSIP_SELECT",
-            "SMART_EVENT_JUST_CREATED",
-            "SMART_EVENT_GOSSIP_HELLO",
-            "SMART_EVENT_FOLLOW_COMPLETED",
-            "SMART_EVENT_DUMMY_EFFECT ",
-            "SMART_EVENT_IS_BEHIND_TARGET",
-            "SMART_EVENT_GAME_EVENT_START",
-            "SMART_EVENT_GAME_EVENT_END",
-            "SMART_EVENT_GO_STATE_CHANGED",
-            "SMART_EVENT_GO_EVENT_INFORM",
-            "SMART_EVENT_ACTION_DONE",
-            "SMART_EVENT_ON_SPELLCLICK",
-            "SMART_EVENT_FRIENDLY_HEALTH_PCT"});
+            "EVENT_UPDATE_IC",
+            "EVENT_UPDATE_OOC",
+            "EVENT_HEALT_PCT",
+            "EVENT_MANA_PCT",
+            "EVENT_AGGRO",
+            "EVENT_KILL",
+            "EVENT_DEATH",
+            "EVENT_EVADE",
+            "EVENT_SPELLHIT",
+            "EVENT_RANGE",
+            "EVENT_OOC_LOS",
+            "EVENT_RESPAWN",
+            "EVENT_TARGET_HEALTH_PCT",
+            "EVENT_TARGET_CASTING",
+            "EVENT_FRIENDLY_HEALTH",
+            "EVENT_FRIENDLY_IS_CC",
+            "EVENT_FRIENDLY_MISSING_BUFF",
+            "EVENT_SUMMONED_UNIT",
+            "EVENT_TARGET_MANA_PCT",
+            "EVENT_ACCEPTED_QUEST",
+            "EVENT_REWARD_QUEST",
+            "EVENT_REACHED_HOME",
+            "EVENT_RECEIVE_EMOTE",
+            "EVENT_HAS_AURA",
+            "EVENT_TARGET_BUFFED",
+            "EVENT_RESET",
+            "EVENT_IC_LOS",
+            "EVENT_PASSENGER_BOARDED",
+            "EVENT_PASSENGER_REMOVED",
+            "EVENT_CHARMED",
+            "EVENT_CHARMED_TARGET",
+            "EVENT_SPELLHIT_TARGET",
+            "EVENT_DAMAGED",
+            "EVENT_DAMAGED_TARGET",
+            "EVENT_MOVEMENTINFORM",
+            "EVENT_SUMMON_DESPAWNED",
+            "EVENT_CORPSE_REMOVED",
+            "EVENT_AI_INIT",
+            "EVENT_DATA_SET",
+            "EVENT_WAYPOINT_START",
+            "EVENT_WAYPOINT_REACHED",
+            "EVENT_TRANSPORT_ADDPLAYER",
+            "EVENT_TRANSPORT_ADDCREATURE",
+            "EVENT_TRANSPORT_REMOVE_PLAYER",
+            "EVENT_TRANSPORT_RELOCATE",
+            "EVENT_INSTANCE_PLAYER_ENTER",
+            "EVENT_AREATRIGGER_ONTRIGGER",
+            "EVENT_QUEST_ACCEPTED",
+            "EVENT_QUEST_OBJ_COPLETETION",
+            "EVENT_QUEST_COMPLETION",
+            "EVENT_QUEST_REWARDED",
+            "EVENT_QUEST_FAIL",
+            "EVENT_TEXT_OVER",
+            "EVENT_RECEIVE_HEAL",
+            "EVENT_JUST_SUMMONED",
+            "EVENT_WAYPOINT_PAUSED",
+            "EVENT_WAYPOINT_RESUMED",
+            "EVENT_WAYPOINT_STOPPED",
+            "EVENT_WAYPOINT_ENDED",
+            "EVENT_TIMED_EVENT_TRIGGERED",
+            "EVENT_UPDATE",
+            "EVENT_LINK",
+            "EVENT_GOSSIP_SELECT",
+            "EVENT_JUST_CREATED",
+            "EVENT_GOSSIP_HELLO",
+            "EVENT_FOLLOW_COMPLETED",
+            "EVENT_DUMMY_EFFECT ",
+            "EVENT_IS_BEHIND_TARGET",
+            "EVENT_GAME_EVENT_START",
+            "EVENT_GAME_EVENT_END",
+            "EVENT_GO_STATE_CHANGED",
+            "EVENT_GO_EVENT_INFORM",
+            "EVENT_ACTION_DONE",
+            "EVENT_ON_SPELLCLICK",
+            "EVENT_FRIENDLY_HEALTH_PCT"});
             this.comboBoxEventType.Location = new System.Drawing.Point(59, 18);
             this.comboBoxEventType.Name = "comboBoxEventType";
-            this.comboBoxEventType.Size = new System.Drawing.Size(288, 21);
+            this.comboBoxEventType.Size = new System.Drawing.Size(243, 21);
             this.comboBoxEventType.TabIndex = 19;
             this.comboBoxEventType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEventType_SelectedIndexChanged);
             // 
@@ -932,7 +943,7 @@
             // 
             this.textBoxComments.Location = new System.Drawing.Point(59, 99);
             this.textBoxComments.Name = "textBoxComments";
-            this.textBoxComments.Size = new System.Drawing.Size(320, 20);
+            this.textBoxComments.Size = new System.Drawing.Size(275, 20);
             this.textBoxComments.TabIndex = 0;
             this.textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
             // 
@@ -965,7 +976,7 @@
             // 
             // textBoxEventParam1
             // 
-            this.textBoxEventParam1.Location = new System.Drawing.Point(64, 3);
+            this.textBoxEventParam1.Location = new System.Drawing.Point(64, 4);
             this.textBoxEventParam1.Name = "textBoxEventParam1";
             this.textBoxEventParam1.Size = new System.Drawing.Size(187, 20);
             this.textBoxEventParam1.TabIndex = 23;
@@ -1031,7 +1042,7 @@
             // textBox13
             // 
             this.textBox13.Enabled = false;
-            this.textBox13.Location = new System.Drawing.Point(64, 133);
+            this.textBox13.Location = new System.Drawing.Point(64, 134);
             this.textBox13.Name = "textBox13";
             this.textBox13.Size = new System.Drawing.Size(187, 20);
             this.textBox13.TabIndex = 23;
@@ -1039,28 +1050,28 @@
             // textBox10
             // 
             this.textBox10.Enabled = false;
-            this.textBox10.Location = new System.Drawing.Point(64, 107);
+            this.textBox10.Location = new System.Drawing.Point(64, 108);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(187, 20);
             this.textBox10.TabIndex = 23;
             // 
             // textBoxEventParam4
             // 
-            this.textBoxEventParam4.Location = new System.Drawing.Point(64, 81);
+            this.textBoxEventParam4.Location = new System.Drawing.Point(64, 82);
             this.textBoxEventParam4.Name = "textBoxEventParam4";
             this.textBoxEventParam4.Size = new System.Drawing.Size(187, 20);
             this.textBoxEventParam4.TabIndex = 23;
             // 
             // textBoxEventParam3
             // 
-            this.textBoxEventParam3.Location = new System.Drawing.Point(64, 55);
+            this.textBoxEventParam3.Location = new System.Drawing.Point(64, 56);
             this.textBoxEventParam3.Name = "textBoxEventParam3";
             this.textBoxEventParam3.Size = new System.Drawing.Size(187, 20);
             this.textBoxEventParam3.TabIndex = 23;
             // 
             // textBoxEventParam2
             // 
-            this.textBoxEventParam2.Location = new System.Drawing.Point(64, 29);
+            this.textBoxEventParam2.Location = new System.Drawing.Point(64, 30);
             this.textBoxEventParam2.Name = "textBoxEventParam2";
             this.textBoxEventParam2.Size = new System.Drawing.Size(187, 20);
             this.textBoxEventParam2.TabIndex = 23;
@@ -1303,7 +1314,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.tabControl1);
-            this.groupBox2.Location = new System.Drawing.Point(725, 31);
+            this.groupBox2.Location = new System.Drawing.Point(675, 31);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(284, 207);
             this.groupBox2.TabIndex = 23;
@@ -1315,38 +1326,15 @@
             // 
             this.listViewSmartScripts.Location = new System.Drawing.Point(14, 244);
             this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(995, 252);
+            this.listViewSmartScripts.Size = new System.Drawing.Size(945, 252);
             this.listViewSmartScripts.TabIndex = 24;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.Visible = false;
             this.listViewSmartScripts.SelectedIndexChanged += new System.EventHandler(this.listViewSmartScripts_SelectedIndexChanged);
             // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.buttonSearchLink);
-            this.groupBox3.Controls.Add(this.buttonSearchPhasemask);
-            this.groupBox3.Controls.Add(this.buttonSearchEventFlags);
-            this.groupBox3.Controls.Add(this.textBoxEventChance);
-            this.groupBox3.Controls.Add(this.textBoxEventFlags);
-            this.groupBox3.Controls.Add(this.label3);
-            this.groupBox3.Controls.Add(this.textBoxEventPhasemask);
-            this.groupBox3.Controls.Add(this.textBoxEventLink);
-            this.groupBox3.Controls.Add(this.textBoxEventScriptId);
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.label9);
-            this.groupBox3.Controls.Add(this.label11);
-            this.groupBox3.Controls.Add(this.label10);
-            this.groupBox3.Location = new System.Drawing.Point(322, 167);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(385, 71);
-            this.groupBox3.TabIndex = 22;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Event information";
-            this.groupBox3.Visible = false;
-            // 
             // buttonSearchLink
             // 
-            this.buttonSearchLink.Location = new System.Drawing.Point(100, 43);
+            this.buttonSearchLink.Location = new System.Drawing.Point(100, 151);
             this.buttonSearchLink.Name = "buttonSearchLink";
             this.buttonSearchLink.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchLink.TabIndex = 29;
@@ -1355,7 +1343,7 @@
             // 
             // buttonSearchPhasemask
             // 
-            this.buttonSearchPhasemask.Location = new System.Drawing.Point(253, 20);
+            this.buttonSearchPhasemask.Location = new System.Drawing.Point(294, 124);
             this.buttonSearchPhasemask.Name = "buttonSearchPhasemask";
             this.buttonSearchPhasemask.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchPhasemask.TabIndex = 30;
@@ -1364,7 +1352,7 @@
             // 
             // buttonSearchEventFlags
             // 
-            this.buttonSearchEventFlags.Location = new System.Drawing.Point(348, 44);
+            this.buttonSearchEventFlags.Location = new System.Drawing.Point(361, 149);
             this.buttonSearchEventFlags.Name = "buttonSearchEventFlags";
             this.buttonSearchEventFlags.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchEventFlags.TabIndex = 28;
@@ -1373,7 +1361,7 @@
             // 
             // textBoxEventChance
             // 
-            this.textBoxEventChance.Location = new System.Drawing.Point(214, 45);
+            this.textBoxEventChance.Location = new System.Drawing.Point(255, 152);
             this.textBoxEventChance.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1390,7 +1378,7 @@
             // 
             // textBoxEventFlags
             // 
-            this.textBoxEventFlags.Location = new System.Drawing.Point(307, 45);
+            this.textBoxEventFlags.Location = new System.Drawing.Point(59, 177);
             this.textBoxEventFlags.Name = "textBoxEventFlags";
             this.textBoxEventFlags.Size = new System.Drawing.Size(41, 20);
             this.textBoxEventFlags.TabIndex = 19;
@@ -1399,15 +1387,15 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(304, 24);
+            this.label3.Location = new System.Drawing.Point(20, 180);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(63, 13);
+            this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 27;
-            this.label3.Text = "Event flags:";
+            this.label3.Text = "Flags:";
             // 
             // textBoxEventPhasemask
             // 
-            this.textBoxEventPhasemask.Location = new System.Drawing.Point(214, 21);
+            this.textBoxEventPhasemask.Location = new System.Drawing.Point(255, 125);
             this.textBoxEventPhasemask.Name = "textBoxEventPhasemask";
             this.textBoxEventPhasemask.Size = new System.Drawing.Size(39, 20);
             this.textBoxEventPhasemask.TabIndex = 19;
@@ -1415,7 +1403,7 @@
             // 
             // textBoxEventLink
             // 
-            this.textBoxEventLink.Location = new System.Drawing.Point(59, 44);
+            this.textBoxEventLink.Location = new System.Drawing.Point(59, 151);
             this.textBoxEventLink.Name = "textBoxEventLink";
             this.textBoxEventLink.Size = new System.Drawing.Size(41, 20);
             this.textBoxEventLink.TabIndex = 19;
@@ -1424,7 +1412,7 @@
             // textBoxEventScriptId
             // 
             this.textBoxEventScriptId.Enabled = false;
-            this.textBoxEventScriptId.Location = new System.Drawing.Point(59, 21);
+            this.textBoxEventScriptId.Location = new System.Drawing.Point(59, 125);
             this.textBoxEventScriptId.Name = "textBoxEventScriptId";
             this.textBoxEventScriptId.Size = new System.Drawing.Size(41, 20);
             this.textBoxEventScriptId.TabIndex = 19;
@@ -1433,7 +1421,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(131, 47);
+            this.label8.Location = new System.Drawing.Point(168, 156);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 13);
             this.label8.TabIndex = 26;
@@ -1442,7 +1430,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(12, 47);
+            this.label9.Location = new System.Drawing.Point(25, 152);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(30, 13);
             this.label9.TabIndex = 24;
@@ -1451,7 +1439,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(23, 25);
+            this.label11.Location = new System.Drawing.Point(36, 130);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(19, 13);
             this.label11.TabIndex = 23;
@@ -1460,7 +1448,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(143, 25);
+            this.label10.Location = new System.Drawing.Point(184, 128);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 13);
             this.label10.TabIndex = 25;
@@ -1478,11 +1466,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1178, 508);
+            this.ClientSize = new System.Drawing.Size(1292, 508);
             this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.groupBoxScriptInfo);
             this.Controls.Add(this.groupBoxPreferences);
@@ -1514,8 +1501,6 @@
             this.tabPageTarget.ResumeLayout(false);
             this.tabPageTarget.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1577,7 +1562,6 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBoxScriptByGuid;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button buttonSearchEventFlags;
         private System.Windows.Forms.NumericUpDown textBoxEventChance;
         private System.Windows.Forms.TextBox textBoxEventPhasemask;
