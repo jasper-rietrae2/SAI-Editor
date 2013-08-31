@@ -42,7 +42,7 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.groupBoxLogin = new System.Windows.Forms.GroupBox();
-            this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -71,17 +71,30 @@
             this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
+            this.buttonSearchLink = new System.Windows.Forms.Button();
             this.comboBoxTargetType = new System.Windows.Forms.ComboBox();
+            this.buttonSearchPhasemask = new System.Windows.Forms.Button();
             this.comboBoxActionType = new System.Windows.Forms.ComboBox();
+            this.buttonSearchEventFlags = new System.Windows.Forms.Button();
             this.textBoxTargetTypeId = new System.Windows.Forms.TextBox();
+            this.textBoxEventChance = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
+            this.textBoxEventFlags = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
-            this.textBoxActionTypeId = new System.Windows.Forms.TextBox();
-            this.textBoxEventTypeId = new System.Windows.Forms.TextBox();
-            this.comboBoxEventType = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.textBoxComments = new System.Windows.Forms.TextBox();
+            this.textBoxActionTypeId = new System.Windows.Forms.TextBox();
+            this.textBoxEventPhasemask = new System.Windows.Forms.TextBox();
+            this.textBoxEventTypeId = new System.Windows.Forms.TextBox();
+            this.textBoxEventLink = new System.Windows.Forms.TextBox();
+            this.comboBoxEventType = new System.Windows.Forms.ComboBox();
+            this.textBoxEventScriptId = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.labelEventParam1 = new System.Windows.Forms.Label();
             this.textBoxEventParam1 = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -122,19 +135,6 @@
             this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
-            this.buttonSearchLink = new System.Windows.Forms.Button();
-            this.buttonSearchPhasemask = new System.Windows.Forms.Button();
-            this.buttonSearchEventFlags = new System.Windows.Forms.Button();
-            this.textBoxEventChance = new System.Windows.Forms.NumericUpDown();
-            this.textBoxEventFlags = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxEventPhasemask = new System.Windows.Forms.TextBox();
-            this.textBoxEventLink = new System.Windows.Forms.TextBox();
-            this.textBoxEventScriptId = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -144,12 +144,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPageEvent.SuspendLayout();
             this.tabPageAction.SuspendLayout();
             this.tabPageTarget.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
             this.SuspendLayout();
             // 
             // labelUser
@@ -248,7 +248,7 @@
             // 
             // groupBoxLogin
             // 
-            this.groupBoxLogin.Controls.Add(this.checkBoxAutoLogin);
+            this.groupBoxLogin.Controls.Add(this.checkBoxAutoConnect);
             this.groupBoxLogin.Controls.Add(this.textBoxHost);
             this.groupBoxLogin.Controls.Add(this.textBoxUsername);
             this.groupBoxLogin.Controls.Add(this.labelUser);
@@ -267,16 +267,15 @@
             this.groupBoxLogin.TabStop = false;
             this.groupBoxLogin.Text = "Connect information";
             // 
-            // checkBoxAutoLogin
+            // checkBoxAutoConnect
             // 
-            this.checkBoxAutoLogin.AutoSize = true;
-            this.checkBoxAutoLogin.Location = new System.Drawing.Point(141, 149);
-            this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
-            this.checkBoxAutoLogin.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxAutoLogin.TabIndex = 6;
-            this.checkBoxAutoLogin.Text = "Auto connect";
-            this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
-            this.checkBoxAutoLogin.CheckedChanged += new System.EventHandler(this.checkBoxAutoLogin_CheckedChanged);
+            this.checkBoxAutoConnect.AutoSize = true;
+            this.checkBoxAutoConnect.Location = new System.Drawing.Point(141, 149);
+            this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
+            this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxAutoConnect.TabIndex = 6;
+            this.checkBoxAutoConnect.Text = "Auto connect";
+            this.checkBoxAutoConnect.UseVisualStyleBackColor = true;
             // 
             // buttonConnect
             // 
@@ -579,6 +578,15 @@
             this.groupBoxScriptInfo.Text = "Dynamic script information";
             this.groupBoxScriptInfo.Visible = false;
             // 
+            // buttonSearchLink
+            // 
+            this.buttonSearchLink.Location = new System.Drawing.Point(100, 125);
+            this.buttonSearchLink.Name = "buttonSearchLink";
+            this.buttonSearchLink.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchLink.TabIndex = 29;
+            this.buttonSearchLink.Text = "...";
+            this.buttonSearchLink.UseVisualStyleBackColor = true;
+            // 
             // comboBoxTargetType
             // 
             this.comboBoxTargetType.FormattingEnabled = true;
@@ -615,6 +623,15 @@
             this.comboBoxTargetType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxTargetType.TabIndex = 25;
             this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
+            // 
+            // buttonSearchPhasemask
+            // 
+            this.buttonSearchPhasemask.Location = new System.Drawing.Point(302, 98);
+            this.buttonSearchPhasemask.Name = "buttonSearchPhasemask";
+            this.buttonSearchPhasemask.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchPhasemask.TabIndex = 30;
+            this.buttonSearchPhasemask.Text = "...";
+            this.buttonSearchPhasemask.UseVisualStyleBackColor = true;
             // 
             // comboBoxActionType
             // 
@@ -737,6 +754,15 @@
             this.comboBoxActionType.TabIndex = 25;
             this.comboBoxActionType.SelectedIndexChanged += new System.EventHandler(this.comboBoxActionType_SelectedIndexChanged);
             // 
+            // buttonSearchEventFlags
+            // 
+            this.buttonSearchEventFlags.Location = new System.Drawing.Point(361, 149);
+            this.buttonSearchEventFlags.Name = "buttonSearchEventFlags";
+            this.buttonSearchEventFlags.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchEventFlags.TabIndex = 28;
+            this.buttonSearchEventFlags.Text = "...";
+            this.buttonSearchEventFlags.UseVisualStyleBackColor = true;
+            // 
             // textBoxTargetTypeId
             // 
             this.textBoxTargetTypeId.Enabled = false;
@@ -745,6 +771,23 @@
             this.textBoxTargetTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxTargetTypeId.TabIndex = 24;
             this.textBoxTargetTypeId.Text = "0";
+            // 
+            // textBoxEventChance
+            // 
+            this.textBoxEventChance.Location = new System.Drawing.Point(263, 126);
+            this.textBoxEventChance.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.textBoxEventChance.Name = "textBoxEventChance";
+            this.textBoxEventChance.Size = new System.Drawing.Size(63, 20);
+            this.textBoxEventChance.TabIndex = 23;
+            this.textBoxEventChance.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
             // 
             // label14
             // 
@@ -755,6 +798,14 @@
             this.label14.TabIndex = 22;
             this.label14.Text = "Target:";
             // 
+            // textBoxEventFlags
+            // 
+            this.textBoxEventFlags.Location = new System.Drawing.Point(59, 151);
+            this.textBoxEventFlags.Name = "textBoxEventFlags";
+            this.textBoxEventFlags.Size = new System.Drawing.Size(41, 20);
+            this.textBoxEventFlags.TabIndex = 19;
+            this.textBoxEventFlags.Text = "0";
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -763,6 +814,23 @@
             this.label13.Size = new System.Drawing.Size(54, 13);
             this.label13.TabIndex = 21;
             this.label13.Text = "Comment:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(20, 154);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 27;
+            this.label3.Text = "Flags:";
+            // 
+            // textBoxComments
+            // 
+            this.textBoxComments.Location = new System.Drawing.Point(59, 177);
+            this.textBoxComments.Name = "textBoxComments";
+            this.textBoxComments.Size = new System.Drawing.Size(267, 20);
+            this.textBoxComments.TabIndex = 0;
+            this.textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
             // 
             // textBoxActionTypeId
             // 
@@ -773,6 +841,14 @@
             this.textBoxActionTypeId.TabIndex = 20;
             this.textBoxActionTypeId.Text = "0";
             // 
+            // textBoxEventPhasemask
+            // 
+            this.textBoxEventPhasemask.Location = new System.Drawing.Point(263, 99);
+            this.textBoxEventPhasemask.Name = "textBoxEventPhasemask";
+            this.textBoxEventPhasemask.Size = new System.Drawing.Size(39, 20);
+            this.textBoxEventPhasemask.TabIndex = 19;
+            this.textBoxEventPhasemask.Text = "0";
+            // 
             // textBoxEventTypeId
             // 
             this.textBoxEventTypeId.Enabled = false;
@@ -781,6 +857,14 @@
             this.textBoxEventTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxEventTypeId.TabIndex = 20;
             this.textBoxEventTypeId.Text = "0";
+            // 
+            // textBoxEventLink
+            // 
+            this.textBoxEventLink.Location = new System.Drawing.Point(59, 125);
+            this.textBoxEventLink.Name = "textBoxEventLink";
+            this.textBoxEventLink.Size = new System.Drawing.Size(41, 20);
+            this.textBoxEventLink.TabIndex = 19;
+            this.textBoxEventLink.Text = "0";
             // 
             // comboBoxEventType
             // 
@@ -939,13 +1023,23 @@
             this.comboBoxEventType.TabIndex = 19;
             this.comboBoxEventType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEventType_SelectedIndexChanged);
             // 
-            // textBoxComments
+            // textBoxEventScriptId
             // 
-            this.textBoxComments.Location = new System.Drawing.Point(59, 177);
-            this.textBoxComments.Name = "textBoxComments";
-            this.textBoxComments.Size = new System.Drawing.Size(275, 20);
-            this.textBoxComments.TabIndex = 0;
-            this.textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
+            this.textBoxEventScriptId.Enabled = false;
+            this.textBoxEventScriptId.Location = new System.Drawing.Point(59, 99);
+            this.textBoxEventScriptId.Name = "textBoxEventScriptId";
+            this.textBoxEventScriptId.Size = new System.Drawing.Size(41, 20);
+            this.textBoxEventScriptId.TabIndex = 19;
+            this.textBoxEventScriptId.Text = "0";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(180, 130);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(77, 13);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "Event chance:";
             // 
             // label5
             // 
@@ -956,6 +1050,15 @@
             this.label5.TabIndex = 14;
             this.label5.Text = "Event:";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(25, 126);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(30, 13);
+            this.label9.TabIndex = 24;
+            this.label9.Text = "Link:";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -964,6 +1067,24 @@
             this.label6.Size = new System.Drawing.Size(40, 13);
             this.label6.TabIndex = 14;
             this.label6.Text = "Action:";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(36, 104);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(19, 13);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "Id:";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(192, 102);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 13);
+            this.label10.TabIndex = 25;
+            this.label10.Text = "Phasemask:";
             // 
             // labelEventParam1
             // 
@@ -1332,128 +1453,6 @@
             this.listViewSmartScripts.Visible = false;
             this.listViewSmartScripts.SelectedIndexChanged += new System.EventHandler(this.listViewSmartScripts_SelectedIndexChanged);
             // 
-            // buttonSearchLink
-            // 
-            this.buttonSearchLink.Location = new System.Drawing.Point(100, 125);
-            this.buttonSearchLink.Name = "buttonSearchLink";
-            this.buttonSearchLink.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchLink.TabIndex = 29;
-            this.buttonSearchLink.Text = "...";
-            this.buttonSearchLink.UseVisualStyleBackColor = true;
-            // 
-            // buttonSearchPhasemask
-            // 
-            this.buttonSearchPhasemask.Location = new System.Drawing.Point(302, 98);
-            this.buttonSearchPhasemask.Name = "buttonSearchPhasemask";
-            this.buttonSearchPhasemask.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchPhasemask.TabIndex = 30;
-            this.buttonSearchPhasemask.Text = "...";
-            this.buttonSearchPhasemask.UseVisualStyleBackColor = true;
-            // 
-            // buttonSearchEventFlags
-            // 
-            this.buttonSearchEventFlags.Location = new System.Drawing.Point(361, 149);
-            this.buttonSearchEventFlags.Name = "buttonSearchEventFlags";
-            this.buttonSearchEventFlags.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchEventFlags.TabIndex = 28;
-            this.buttonSearchEventFlags.Text = "...";
-            this.buttonSearchEventFlags.UseVisualStyleBackColor = true;
-            // 
-            // textBoxEventChance
-            // 
-            this.textBoxEventChance.Location = new System.Drawing.Point(263, 126);
-            this.textBoxEventChance.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.textBoxEventChance.Name = "textBoxEventChance";
-            this.textBoxEventChance.Size = new System.Drawing.Size(63, 20);
-            this.textBoxEventChance.TabIndex = 23;
-            this.textBoxEventChance.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // textBoxEventFlags
-            // 
-            this.textBoxEventFlags.Location = new System.Drawing.Point(59, 151);
-            this.textBoxEventFlags.Name = "textBoxEventFlags";
-            this.textBoxEventFlags.Size = new System.Drawing.Size(41, 20);
-            this.textBoxEventFlags.TabIndex = 19;
-            this.textBoxEventFlags.Text = "0";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 154);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 27;
-            this.label3.Text = "Flags:";
-            // 
-            // textBoxEventPhasemask
-            // 
-            this.textBoxEventPhasemask.Location = new System.Drawing.Point(263, 99);
-            this.textBoxEventPhasemask.Name = "textBoxEventPhasemask";
-            this.textBoxEventPhasemask.Size = new System.Drawing.Size(39, 20);
-            this.textBoxEventPhasemask.TabIndex = 19;
-            this.textBoxEventPhasemask.Text = "0";
-            // 
-            // textBoxEventLink
-            // 
-            this.textBoxEventLink.Location = new System.Drawing.Point(59, 125);
-            this.textBoxEventLink.Name = "textBoxEventLink";
-            this.textBoxEventLink.Size = new System.Drawing.Size(41, 20);
-            this.textBoxEventLink.TabIndex = 19;
-            this.textBoxEventLink.Text = "0";
-            // 
-            // textBoxEventScriptId
-            // 
-            this.textBoxEventScriptId.Enabled = false;
-            this.textBoxEventScriptId.Location = new System.Drawing.Point(59, 99);
-            this.textBoxEventScriptId.Name = "textBoxEventScriptId";
-            this.textBoxEventScriptId.Size = new System.Drawing.Size(41, 20);
-            this.textBoxEventScriptId.TabIndex = 19;
-            this.textBoxEventScriptId.Text = "0";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(180, 130);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 13);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Event chance:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 126);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(30, 13);
-            this.label9.TabIndex = 24;
-            this.label9.Text = "Link:";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(36, 104);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(19, 13);
-            this.label11.TabIndex = 23;
-            this.label11.Text = "Id:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(192, 102);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(65, 13);
-            this.label10.TabIndex = 25;
-            this.label10.Text = "Phasemask:";
-            // 
             // panel3
             // 
             this.panel3.Location = new System.Drawing.Point(1028, 324);
@@ -1493,6 +1492,7 @@
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
             this.groupBoxScriptInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPageEvent.ResumeLayout(false);
             this.tabPageEvent.PerformLayout();
@@ -1501,7 +1501,6 @@
             this.tabPageTarget.ResumeLayout(false);
             this.tabPageTarget.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1515,11 +1514,6 @@
         private System.Windows.Forms.Label labelHost;
         private System.Windows.Forms.Label labelPort;
         private System.Windows.Forms.CheckBox checkBoxSaveSettings;
-        private System.Windows.Forms.TextBox textBoxHost;
-        private System.Windows.Forms.TextBox textBoxPort;
-        private System.Windows.Forms.TextBox textBoxWorldDatabase;
-        private System.Windows.Forms.TextBox textBoxPassword;
-        private System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.GroupBox groupBoxLogin;
         private System.Windows.Forms.Button buttonConnect;
         private System.Windows.Forms.Button buttonClear;
@@ -1610,11 +1604,16 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox textBoxTargetZ;
         private System.Windows.Forms.TextBox textBoxTargetY;
-        public System.Windows.Forms.CheckBox checkBoxAutoLogin;
+        public System.Windows.Forms.CheckBox checkBoxAutoConnect;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         public System.Windows.Forms.ComboBox comboBoxSourceType;
         private System.Windows.Forms.ComboBox comboBoxActionType;
         private System.Windows.Forms.ComboBox comboBoxTargetType;
+        public System.Windows.Forms.TextBox textBoxHost;
+        public System.Windows.Forms.TextBox textBoxPort;
+        public System.Windows.Forms.TextBox textBoxWorldDatabase;
+        public System.Windows.Forms.TextBox textBoxPassword;
+        public System.Windows.Forms.TextBox textBoxUsername;
     }
 }
 

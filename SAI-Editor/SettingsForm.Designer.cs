@@ -35,7 +35,7 @@
             this.checkBoxExpandInstantly = new System.Windows.Forms.CheckBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
-            this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
             this.textBoxHost = new System.Windows.Forms.TextBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
@@ -105,7 +105,7 @@
             // 
             // tabPageConnection
             // 
-            this.tabPageConnection.Controls.Add(this.checkBoxAutoLogin);
+            this.tabPageConnection.Controls.Add(this.checkBoxAutoConnect);
             this.tabPageConnection.Controls.Add(this.textBoxHost);
             this.tabPageConnection.Controls.Add(this.textBoxUsername);
             this.tabPageConnection.Controls.Add(this.textBoxPassword);
@@ -123,15 +123,15 @@
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
             // 
-            // checkBoxAutoLogin
+            // checkBoxAutoConnect
             // 
-            this.checkBoxAutoLogin.AutoSize = true;
-            this.checkBoxAutoLogin.Location = new System.Drawing.Point(149, 135);
-            this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
-            this.checkBoxAutoLogin.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxAutoLogin.TabIndex = 29;
-            this.checkBoxAutoLogin.Text = "Auto connect";
-            this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
+            this.checkBoxAutoConnect.AutoSize = true;
+            this.checkBoxAutoConnect.Location = new System.Drawing.Point(149, 135);
+            this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
+            this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxAutoConnect.TabIndex = 29;
+            this.checkBoxAutoConnect.Text = "Auto connect";
+            this.checkBoxAutoConnect.UseVisualStyleBackColor = true;
             // 
             // textBoxHost
             // 
@@ -253,7 +253,7 @@
         private System.Windows.Forms.TabControl tabControlSettings;
         private System.Windows.Forms.Button buttonClearSettings;
         private System.Windows.Forms.TabPage tabPageConnection;
-        private System.Windows.Forms.CheckBox checkBoxAutoLogin;
+        private System.Windows.Forms.CheckBox checkBoxAutoConnect;
         private System.Windows.Forms.TextBox textBoxHost;
         private System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.TextBox textBoxPassword;

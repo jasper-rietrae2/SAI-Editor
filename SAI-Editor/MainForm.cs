@@ -115,9 +115,9 @@ namespace SAI_Editor
           //listViewSmartScripts.Columns.Add("comment",     56, HorizontalAlignment.Right); // 26
             listViewSmartScripts.Columns.Add("comment",     400, HorizontalAlignment.Left); // 26
 
-            if (settings.GetSetting("Autologin", "no") == "yes")
+            if (settings.GetSetting("AutoConnect", "no") == "yes")
             {
-                checkBoxAutoLogin.Checked = true;
+                checkBoxAutoConnect.Checked = true;
                 buttonConnect_Click(sender, e);
 
                 if (settings.GetSetting("InstantExpand", "no") == "yes")
@@ -250,7 +250,7 @@ namespace SAI_Editor
                 settings.PutSetting("Password", textBoxPassword.Text);
                 settings.PutSetting("Database", textBoxWorldDatabase.Text);
                 settings.PutSetting("Port", textBoxPort.Text);
-                settings.PutSetting("Autologin", (checkBoxAutoLogin.Checked ? "yes" : "no"));
+                settings.PutSetting("AutoConnect", (checkBoxAutoConnect.Checked ? "yes" : "no"));
             }
 
             Text = "SAI-Editor: " + textBoxUsername.Text + "@" + textBoxHost.Text + ":" + textBoxPort.Text;
@@ -308,7 +308,7 @@ namespace SAI_Editor
             textBoxWorldDatabase.Text = "";
             textBoxPort.Text = "";
             checkBoxSaveSettings.Checked = false;
-            checkBoxAutoLogin.Checked = false;
+            checkBoxAutoConnect.Checked = false;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -484,11 +484,6 @@ namespace SAI_Editor
         {
             if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 Close();
-        }
-
-        private void checkBoxAutoLogin_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void menuItemSettings_Click(object sender, EventArgs e)

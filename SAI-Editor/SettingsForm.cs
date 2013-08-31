@@ -18,15 +18,15 @@ namespace SAI_Editor
             MinimizeBox = true;
             FormBorderStyle = FormBorderStyle.Fixed3D;
 
-            FormClosed += SettingsForm_FormClosed;
-            settings = ((MainForm)Owner).settings;
+            FormClosed += SettingsForm_FormClosed; //! To save settings
 
+            settings = ((MainForm)Owner).settings;
             textBoxHost.Text = settings.GetSetting("Host", "localhost");
             textBoxUsername.Text = settings.GetSetting("User", "root");
             textBoxPassword.Text = settings.GetSetting("Password", String.Empty);
             textBoxWorldDatabase.Text = settings.GetSetting("Database", "trinitycore_world");
             textBoxPort.Text = settings.GetSetting("Port", "3306");
-            checkBoxAutoLogin.Checked = settings.GetSetting("Autologin", "no") == "yes";
+            checkBoxAutoConnect.Checked = settings.GetSetting("AutoConnect", "no") == "yes";
             checkBoxExpandInstantly.Checked = settings.GetSetting("InstantExpand", "no") == "yes";
         }
 
@@ -43,9 +43,16 @@ namespace SAI_Editor
             settings.PutSetting("Password", textBoxPassword.Text);
             settings.PutSetting("Database", textBoxWorldDatabase.Text);
             settings.PutSetting("Port", textBoxPort.Text);
-            settings.PutSetting("Autologin", (checkBoxAutoLogin.Checked ? "yes" : "no"));
+            settings.PutSetting("AutoConnect", (checkBoxAutoConnect.Checked ? "yes" : "no"));
             settings.PutSetting("InstantExpand", (checkBoxExpandInstantly.Checked ? "yes" : "no"));
-            checkBoxAutoLogin.Checked = checkBoxAutoLogin.Checked;
+            checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
+
+            //! Update main form's fields so re-connecting will work with new settings
+            ((MainForm)Owner).textBoxHost.Text = textBoxHost.Text;
+            ((MainForm)Owner).textBoxUsername.Text = textBoxUsername.Text;
+            ((MainForm)Owner).textBoxPassword.Text = textBoxPassword.Text;
+            ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
+            ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
         }
 
         private void buttonExitSettings_Click(object sender, EventArgs e)
@@ -64,7 +71,7 @@ namespace SAI_Editor
         {
             if (textBoxHost.Text == settings.GetSetting("Host", "localhost") && textBoxUsername.Text == settings.GetSetting("User", "root") &&
                 textBoxPassword.Text == settings.GetSetting("Password", String.Empty) && textBoxWorldDatabase.Text == settings.GetSetting("Database", "trinitycore_world") &&
-                textBoxPort.Text == settings.GetSetting("Port", "3306") && checkBoxAutoLogin.Checked == (settings.GetSetting("Autologin", "no") == "yes") &&
+                textBoxPort.Text == settings.GetSetting("Port", "3306") && checkBoxAutoConnect.Checked == (settings.GetSetting("AutoConnect", "no") == "yes") &&
                 checkBoxExpandInstantly.Checked == (settings.GetSetting("InstantExpand", "no") == "yes"))
                 return;
 
@@ -76,16 +83,16 @@ namespace SAI_Editor
         {
             switch (tabControlSettings.SelectedIndex)
             {
-                case 0:
+                case 0: //! 'Other' tab
                     checkBoxExpandInstantly.Checked = false;
                     break;
-                case 1:
+                case 1: // ! 'Connection' tab
                     textBoxHost.Text = "";
                     textBoxUsername.Text = "";
                     textBoxPassword.Text = "";
                     textBoxWorldDatabase.Text = "";
                     textBoxPort.Text = "";
-                    checkBoxAutoLogin.Checked = false;
+                    checkBoxAutoConnect.Checked = false;
                     break;
             }
         }
