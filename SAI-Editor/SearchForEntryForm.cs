@@ -80,14 +80,25 @@ namespace SAI_Editor
         private void buttonSearch_Click(object sender, EventArgs e)
         {
             string query = "";
+            bool emptyString = String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text);
 
             switch (comboBoxSearchType.SelectedIndex)
             {
                 case 0: //! Creature name
                     query = "SELECT entry, name FROM creature_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
+
+                    if (checkBoxHasAiName.Checked)
+                        query += " AND AIName='SmartAI'";
                     break;
                 case 1: //! Creature entry
-                    query = "SELECT entry, name FROM creature_template WHERE entry=" + textBoxCriteria.Text;
+                    query = "SELECT entry, name FROM creature_template";
+
+                    if (!emptyString)
+                        query += " WHERE entry=" + textBoxCriteria.Text;
+
+                    if (checkBoxHasAiName.Checked)
+                        query += (emptyString ? " WHERE" : " AND") + " AIName='SmartAI'";
+
                     break;
                 case 2: //! Creature guid
                     query = "SELECT c.guid, ct.name FROM creature_template ct LEFT JOIN creature c ON ct.entry = c.id WHERE c.guid=" + textBoxCriteria.Text;
@@ -99,9 +110,18 @@ namespace SAI_Editor
                     break;
                 case 3: //! Gameobject name
                     query = "SELECT entry, name FROM gameobject_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
+
+                    if (checkBoxHasAiName.Checked)
+                        query += " AND AIName='SmartAI'";
                     break;
                 case 4: //! Gameobject entry
-                    query = "SELECT entry, name FROM gameobject_template WHERE entry=" + textBoxCriteria.Text;
+                    query = "SELECT entry, name FROM gameobject_template";
+
+                    if (!emptyString)
+                        query += " WHERE entry=" + textBoxCriteria.Text;
+
+                    if (checkBoxHasAiName.Checked)
+                        query += (emptyString ? " WHERE" : " AND") + " AIName='SmartAI'";
                     break;
                 case 5: //! Gameobject guid
                     query = "SELECT g.guid, gt.name FROM gameobject_template gt LEFT JOIN gameobject g ON gt.entry = g.id WHERE g.guid=" + textBoxCriteria.Text;
@@ -117,12 +137,7 @@ namespace SAI_Editor
 
             //! If we're searching for GUIDs we already added this above
             if (!(comboBoxSearchType.SelectedIndex == 2 || comboBoxSearchType.SelectedIndex == 5))
-            {
-                if (checkBoxHasAiName.Checked)
-                    query += " AND AIName='SmartAI'";
-
                 query += " ORDER BY entry";
-            }
 
             listViewEntryResults.Items.Clear();
             SelectFromCreatureTemplate(query);
