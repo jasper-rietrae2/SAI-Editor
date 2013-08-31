@@ -112,7 +112,7 @@ namespace SAI_Editor
                     query = "SELECT entry, name FROM gameobject_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
 
                     if (checkBoxHasAiName.Checked)
-                        query += " AND AIName='SmartAI'";
+                        query += " AND AIName='SmartGameObjectAI'";
                     break;
                 case 4: //! Gameobject entry
                     query = "SELECT entry, name FROM gameobject_template";
@@ -121,13 +121,13 @@ namespace SAI_Editor
                         query += " WHERE entry=" + textBoxCriteria.Text;
 
                     if (checkBoxHasAiName.Checked)
-                        query += (emptyString ? " WHERE" : " AND") + " AIName='SmartAI'";
+                        query += (emptyString ? " WHERE" : " AND") + " AIName='SmartGameObjectAI'";
                     break;
                 case 5: //! Gameobject guid
                     query = "SELECT g.guid, gt.name FROM gameobject_template gt LEFT JOIN gameobject g ON gt.entry = g.id WHERE g.guid=" + textBoxCriteria.Text;
 
                     if (checkBoxHasAiName.Checked)
-                        query += " AND gt.AIName='SmartAI'";
+                        query += " AND gt.AIName='SmartGameObjectAI'";
 
                     query += " ORDER BY g.guid";
                     break;
