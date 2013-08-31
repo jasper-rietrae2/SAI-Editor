@@ -16,6 +16,8 @@ namespace SAI_Editor
         {
             MaximizeBox = false;
             MinimizeBox = true;
+            FormBorderStyle = FormBorderStyle.Fixed3D;
+
             FormClosed += SettingsForm_FormClosed;
             settings = ((MainForm)Owner).settings;
 
