@@ -612,7 +612,7 @@
             "TARGET_CLOSEST_FRIENDLY"});
             this.comboBoxTargetType.Location = new System.Drawing.Point(59, 72);
             this.comboBoxTargetType.Name = "comboBoxTargetType";
-            this.comboBoxTargetType.Size = new System.Drawing.Size(243, 21);
+            this.comboBoxTargetType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxTargetType.TabIndex = 25;
             this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
             // 
@@ -733,14 +733,14 @@
             "ACTION_REMOVE_POWER"});
             this.comboBoxActionType.Location = new System.Drawing.Point(59, 45);
             this.comboBoxActionType.Name = "comboBoxActionType";
-            this.comboBoxActionType.Size = new System.Drawing.Size(243, 21);
+            this.comboBoxActionType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxActionType.TabIndex = 25;
             this.comboBoxActionType.SelectedIndexChanged += new System.EventHandler(this.comboBoxActionType_SelectedIndexChanged);
             // 
             // textBoxTargetTypeId
             // 
             this.textBoxTargetTypeId.Enabled = false;
-            this.textBoxTargetTypeId.Location = new System.Drawing.Point(308, 72);
+            this.textBoxTargetTypeId.Location = new System.Drawing.Point(300, 72);
             this.textBoxTargetTypeId.Name = "textBoxTargetTypeId";
             this.textBoxTargetTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxTargetTypeId.TabIndex = 24;
@@ -767,7 +767,7 @@
             // textBoxActionTypeId
             // 
             this.textBoxActionTypeId.Enabled = false;
-            this.textBoxActionTypeId.Location = new System.Drawing.Point(308, 45);
+            this.textBoxActionTypeId.Location = new System.Drawing.Point(300, 45);
             this.textBoxActionTypeId.Name = "textBoxActionTypeId";
             this.textBoxActionTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxActionTypeId.TabIndex = 20;
@@ -776,7 +776,7 @@
             // textBoxEventTypeId
             // 
             this.textBoxEventTypeId.Enabled = false;
-            this.textBoxEventTypeId.Location = new System.Drawing.Point(308, 18);
+            this.textBoxEventTypeId.Location = new System.Drawing.Point(300, 19);
             this.textBoxEventTypeId.Name = "textBoxEventTypeId";
             this.textBoxEventTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxEventTypeId.TabIndex = 20;
@@ -935,7 +935,7 @@
             "EVENT_FRIENDLY_HEALTH_PCT"});
             this.comboBoxEventType.Location = new System.Drawing.Point(59, 18);
             this.comboBoxEventType.Name = "comboBoxEventType";
-            this.comboBoxEventType.Size = new System.Drawing.Size(243, 21);
+            this.comboBoxEventType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxEventType.TabIndex = 19;
             this.comboBoxEventType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEventType_SelectedIndexChanged);
             // 
@@ -1343,7 +1343,7 @@
             // 
             // buttonSearchPhasemask
             // 
-            this.buttonSearchPhasemask.Location = new System.Drawing.Point(294, 98);
+            this.buttonSearchPhasemask.Location = new System.Drawing.Point(302, 98);
             this.buttonSearchPhasemask.Name = "buttonSearchPhasemask";
             this.buttonSearchPhasemask.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchPhasemask.TabIndex = 30;
@@ -1361,7 +1361,7 @@
             // 
             // textBoxEventChance
             // 
-            this.textBoxEventChance.Location = new System.Drawing.Point(255, 126);
+            this.textBoxEventChance.Location = new System.Drawing.Point(263, 126);
             this.textBoxEventChance.Minimum = new decimal(new int[] {
             1,
             0,
@@ -1395,7 +1395,7 @@
             // 
             // textBoxEventPhasemask
             // 
-            this.textBoxEventPhasemask.Location = new System.Drawing.Point(255, 99);
+            this.textBoxEventPhasemask.Location = new System.Drawing.Point(263, 99);
             this.textBoxEventPhasemask.Name = "textBoxEventPhasemask";
             this.textBoxEventPhasemask.Size = new System.Drawing.Size(39, 20);
             this.textBoxEventPhasemask.TabIndex = 19;
@@ -1421,7 +1421,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(168, 130);
+            this.label8.Location = new System.Drawing.Point(180, 130);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(77, 13);
             this.label8.TabIndex = 26;
@@ -1448,7 +1448,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(184, 102);
+            this.label10.Location = new System.Drawing.Point(192, 102);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 13);
             this.label10.TabIndex = 25;
