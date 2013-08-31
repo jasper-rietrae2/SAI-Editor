@@ -119,10 +119,10 @@ namespace SAI_Editor
             {
                 checkBoxAutoLogin.Checked = true;
                 buttonConnect_Click(sender, e);
-            }
 
-            if (settings.GetSetting("Startfullsize", "no") == "yes")
-                StartExpandingToMainForm(true);
+                if (settings.GetSetting("InstantExpand", "no") == "yes")
+                    StartExpandingToMainForm(true);
+            }
 
             listViewSmartScripts.Click += listViewSmartScripts_Click;
 
@@ -238,7 +238,7 @@ namespace SAI_Editor
                 connectionString.Password = textBoxPassword.Text;
 
             if (CanConnectToDatabase())
-                StartExpandingToMainForm(settings.GetSetting("Startfullsize", "no") == "yes");
+                StartExpandingToMainForm(settings.GetSetting("InstantExpand", "no") == "yes");
         }
 
         private void StartExpandingToMainForm(bool instant = false)
@@ -375,7 +375,7 @@ namespace SAI_Editor
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
-            StartContractingToLoginForm(settings.GetSetting("Startfullsize", "no") == "yes");
+            StartContractingToLoginForm(settings.GetSetting("InstantExpand", "no") == "yes");
         }
 
         private void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)

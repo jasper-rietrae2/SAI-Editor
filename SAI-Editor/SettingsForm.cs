@@ -21,7 +21,7 @@ namespace SAI_Editor
             textBoxWorldDatabase.Text = ((MainForm)Owner).settings.GetSetting("Database", "trinitycore_world");
             textBoxPort.Text = ((MainForm)Owner).settings.GetSetting("Port", "3306");
             checkBoxAutoLogin.Checked = ((MainForm)Owner).settings.GetSetting("Autologin", "no") == "yes";
-            checkBoxStartApplicationFullSize.Checked = ((MainForm)Owner).settings.GetSetting("Startfullsize", "no") == "yes";
+            checkBoxExpandInstantly.Checked = ((MainForm)Owner).settings.GetSetting("InstantExpand", "no") == "yes";
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -32,7 +32,7 @@ namespace SAI_Editor
             ((MainForm)Owner).settings.PutSetting("Database", textBoxWorldDatabase.Text);
             ((MainForm)Owner).settings.PutSetting("Port", textBoxPort.Text);
             ((MainForm)Owner).settings.PutSetting("Autologin", (checkBoxAutoLogin.Checked ? "yes" : "no"));
-            ((MainForm)Owner).settings.PutSetting("Startfullsize", (checkBoxStartApplicationFullSize.Checked ? "yes" : "no"));
+            ((MainForm)Owner).settings.PutSetting("InstantExpand", (checkBoxExpandInstantly.Checked ? "yes" : "no"));
             ((MainForm)Owner).checkBoxAutoLogin.Checked = checkBoxAutoLogin.Checked;
             Close();
         }

@@ -32,8 +32,8 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPage = new System.Windows.Forms.TabPage();
+            this.checkBoxExpandInstantly = new System.Windows.Forms.CheckBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
-            this.buttonClearSettings = new System.Windows.Forms.Button();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
             this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
             this.textBoxHost = new System.Windows.Forms.TextBox();
@@ -46,7 +46,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.checkBoxStartApplicationFullSize = new System.Windows.Forms.CheckBox();
+            this.buttonClearSettings = new System.Windows.Forms.Button();
             this.tabPage.SuspendLayout();
             this.tabControlSettings.SuspendLayout();
             this.tabPageConnection.SuspendLayout();
@@ -74,7 +74,7 @@
             // 
             // tabPage
             // 
-            this.tabPage.Controls.Add(this.checkBoxStartApplicationFullSize);
+            this.tabPage.Controls.Add(this.checkBoxExpandInstantly);
             this.tabPage.Location = new System.Drawing.Point(4, 22);
             this.tabPage.Name = "tabPage";
             this.tabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -82,6 +82,16 @@
             this.tabPage.TabIndex = 0;
             this.tabPage.Text = "Other";
             this.tabPage.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxExpandInstantly
+            // 
+            this.checkBoxExpandInstantly.AutoSize = true;
+            this.checkBoxExpandInstantly.Location = new System.Drawing.Point(6, 6);
+            this.checkBoxExpandInstantly.Name = "checkBoxExpandInstantly";
+            this.checkBoxExpandInstantly.Size = new System.Drawing.Size(166, 17);
+            this.checkBoxExpandInstantly.TabIndex = 0;
+            this.checkBoxExpandInstantly.Text = "Expand and contract instantly";
+            this.checkBoxExpandInstantly.UseVisualStyleBackColor = true;
             // 
             // tabControlSettings
             // 
@@ -92,16 +102,6 @@
             this.tabControlSettings.SelectedIndex = 0;
             this.tabControlSettings.Size = new System.Drawing.Size(251, 185);
             this.tabControlSettings.TabIndex = 1;
-            // 
-            // buttonClearSettings
-            // 
-            this.buttonClearSettings.Location = new System.Drawing.Point(100, 199);
-            this.buttonClearSettings.Name = "buttonClearSettings";
-            this.buttonClearSettings.Size = new System.Drawing.Size(75, 23);
-            this.buttonClearSettings.TabIndex = 4;
-            this.buttonClearSettings.Text = "Clear";
-            this.buttonClearSettings.UseVisualStyleBackColor = true;
-            this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
             // tabPageConnection
             // 
@@ -213,15 +213,15 @@
             this.label7.TabIndex = 28;
             this.label7.Text = "Port:";
             // 
-            // checkBoxStartApplicationFullSize
+            // buttonClearSettings
             // 
-            this.checkBoxStartApplicationFullSize.AutoSize = true;
-            this.checkBoxStartApplicationFullSize.Location = new System.Drawing.Point(6, 6);
-            this.checkBoxStartApplicationFullSize.Name = "checkBoxStartApplicationFullSize";
-            this.checkBoxStartApplicationFullSize.Size = new System.Drawing.Size(150, 17);
-            this.checkBoxStartApplicationFullSize.TabIndex = 0;
-            this.checkBoxStartApplicationFullSize.Text = "Start application in full size";
-            this.checkBoxStartApplicationFullSize.UseVisualStyleBackColor = true;
+            this.buttonClearSettings.Location = new System.Drawing.Point(100, 199);
+            this.buttonClearSettings.Name = "buttonClearSettings";
+            this.buttonClearSettings.Size = new System.Drawing.Size(75, 23);
+            this.buttonClearSettings.TabIndex = 4;
+            this.buttonClearSettings.Text = "Clear";
+            this.buttonClearSettings.UseVisualStyleBackColor = true;
+            this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
             // SettingsForm
             // 
@@ -264,7 +264,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox checkBoxStartApplicationFullSize;
+        private System.Windows.Forms.CheckBox checkBoxExpandInstantly;
 
     }
 }
