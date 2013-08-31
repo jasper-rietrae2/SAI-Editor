@@ -20,6 +20,9 @@ namespace SAI_Editor
 
             FormClosed += SettingsForm_FormClosed; //! To save settings
 
+            KeyPreview = true;
+            KeyDown += SettingsForm_KeyDown;
+
             settings = ((MainForm)Owner).settings;
             textBoxHost.Text = settings.GetSetting("Host", "localhost");
             textBoxUsername.Text = settings.GetSetting("User", "root");
@@ -93,6 +96,17 @@ namespace SAI_Editor
                     textBoxWorldDatabase.Text = "";
                     textBoxPort.Text = "";
                     checkBoxAutoConnect.Checked = false;
+                    break;
+            }
+        }
+
+        private void SettingsForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    PromptSaveSettingsOnClose();
+                    Close();
                     break;
             }
         }

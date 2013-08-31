@@ -55,7 +55,7 @@ namespace SAI_Editor
             textBoxPort.Text = settings.GetSetting("Port", "3306");
 
             KeyPreview = true;
-            KeyDown += Form1_KeyDown;
+            KeyDown += MainForm_KeyDown;
 
             //! Disallow writing anything in comboboxes (the 3D version looks like shit)
             comboBoxActionType.KeyPress += comboBox_KeyPress;
@@ -350,7 +350,7 @@ namespace SAI_Editor
             return successFulConnection;
         }
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        private void MainForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -365,6 +365,7 @@ namespace SAI_Editor
 
         private void buttonSearchForCreature_Click(object sender, EventArgs e)
         {
+            //! Just keep it in main thread; no purpose starting a new thread for this
             new SearchForEntryForm(connectionString, comboBoxSourceType.SelectedIndex == 0).ShowDialog(this);
         }
 
