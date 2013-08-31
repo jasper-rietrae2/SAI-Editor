@@ -54,7 +54,7 @@ namespace SAI_Editor
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
-            FillMainFormEntryOrGuidField();
+            FillMainFormEntryOrGuidField(sender, e);
         }
 
         private void SelectFromCreatureTemplate(string queryToExecute)
@@ -138,7 +138,7 @@ namespace SAI_Editor
                 case Keys.Enter:
                 {
                     if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
-                        FillMainFormEntryOrGuidField();
+                        FillMainFormEntryOrGuidField(sender, e);
                     else
                         buttonSearch_Click(sender, e);
 
@@ -206,7 +206,7 @@ namespace SAI_Editor
             e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
         }
 
-        private void FillMainFormEntryOrGuidField()
+        private void FillMainFormEntryOrGuidField(object sender, EventArgs e)
         {
             string entryToPlace = "";
 
@@ -218,6 +218,10 @@ namespace SAI_Editor
 
             //! Above 2 means it's a gameobject
             ((MainForm)Owner).comboBoxSourceType.SelectedIndex = comboBoxSearchType.SelectedIndex > 2 ? 1 : 0;
+
+            if (((MainForm)Owner).settings.GetSetting("LoadScriptInstantly", "no") == "yes")
+                ((MainForm)Owner).buttonLoadScriptForEntry_Click(sender, e);
+
             Close();
         }
     }

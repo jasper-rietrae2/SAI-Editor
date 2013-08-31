@@ -436,7 +436,7 @@ namespace SAI_Editor
             }
         }
 
-        private void buttonLoadScriptForEntry_Click(object sender, EventArgs e)
+        public void buttonLoadScriptForEntry_Click(object sender, EventArgs e)
         {
             if (IsInvalidString(textBoxEntryOrGuid.Text))
                 return;

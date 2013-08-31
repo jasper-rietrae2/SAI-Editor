@@ -32,6 +32,7 @@ namespace SAI_Editor
             textBoxPort.Text = settings.GetSetting("Port", "3306");
             checkBoxAutoConnect.Checked = settings.GetSetting("AutoConnect", "no") == "yes";
             checkBoxExpandInstantly.Checked = settings.GetSetting("InstantExpand", "no") == "yes";
+            checkBoxLoadScriptOfEntry.Checked = settings.GetSetting("LoadScriptInstantly", "no") == "yes";
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -50,6 +51,7 @@ namespace SAI_Editor
             settings.PutSetting("Port", textBoxPort.Text);
             settings.PutSetting("AutoConnect", (checkBoxAutoConnect.Checked ? "yes" : "no"));
             settings.PutSetting("InstantExpand", (checkBoxExpandInstantly.Checked ? "yes" : "no"));
+            settings.PutSetting("LoadScriptInstantly", (checkBoxLoadScriptOfEntry.Checked ? "yes" : "no"));
             checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
 
             //! Update main form's fields so re-connecting will work with new settings
@@ -78,7 +80,7 @@ namespace SAI_Editor
             if (textBoxHost.Text == settings.GetSetting("Host", "localhost") && textBoxUsername.Text == settings.GetSetting("User", "root") &&
                 textBoxPassword.Text == settings.GetSetting("Password", String.Empty) && textBoxWorldDatabase.Text == settings.GetSetting("Database", "trinitycore_world") &&
                 textBoxPort.Text == settings.GetSetting("Port", "3306") && checkBoxAutoConnect.Checked == (settings.GetSetting("AutoConnect", "no") == "yes") &&
-                checkBoxExpandInstantly.Checked == (settings.GetSetting("InstantExpand", "no") == "yes"))
+                checkBoxExpandInstantly.Checked == (settings.GetSetting("InstantExpand", "no") == "yes") && checkBoxLoadScriptOfEntry.Checked == (settings.GetSetting("LoadScriptInstantly", "no") == "yes"))
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
