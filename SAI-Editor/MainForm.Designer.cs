@@ -1374,6 +1374,11 @@
             // textBoxEventChance
             // 
             this.textBoxEventChance.Location = new System.Drawing.Point(214, 45);
+            this.textBoxEventChance.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.textBoxEventChance.Name = "textBoxEventChance";
             this.textBoxEventChance.Size = new System.Drawing.Size(63, 20);
             this.textBoxEventChance.TabIndex = 23;
