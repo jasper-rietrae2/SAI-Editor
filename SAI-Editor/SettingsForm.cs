@@ -6,6 +6,7 @@ namespace SAI_Editor
     public partial class SettingsForm : Form
     {
         private Settings settings = null;
+        private bool closedFormByHand = false;
 
         public SettingsForm()
         {
@@ -36,6 +37,7 @@ namespace SAI_Editor
         private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
             SaveSettings();
+            closedFormByHand = true;
             Close();
         }
 
@@ -61,12 +63,13 @@ namespace SAI_Editor
         private void buttonExitSettings_Click(object sender, EventArgs e)
         {
             PromptSaveSettingsOnClose();
+            closedFormByHand = true;
             Close();
         }
 
         void SettingsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            if (e.CloseReason == CloseReason.UserClosing)
+            if (e.CloseReason == CloseReason.UserClosing && !closedFormByHand)
                 PromptSaveSettingsOnClose();
         }
 
@@ -106,6 +109,7 @@ namespace SAI_Editor
             {
                 case Keys.Escape:
                     PromptSaveSettingsOnClose();
+                    closedFormByHand = true;
                     Close();
                     break;
             }
