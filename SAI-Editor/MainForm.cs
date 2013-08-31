@@ -14,7 +14,7 @@ namespace SAI_Editor
 {
     public partial class MainForm : Form
     {
-        private readonly Settings settings = new Settings();
+        public Settings settings = new Settings();
         private readonly MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
         private readonly List<Control> controlsLoginForm = new List<Control>();
         private readonly List<Control> controlsMainForm = new List<Control>();

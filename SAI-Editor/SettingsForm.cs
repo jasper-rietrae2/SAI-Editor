@@ -5,8 +5,6 @@ namespace SAI_Editor
 {
     public partial class SettingsForm : Form
     {
-        private readonly Settings settings = new Settings();
-
         public SettingsForm()
         {
             InitializeComponent();
@@ -17,24 +15,24 @@ namespace SAI_Editor
             MaximizeBox = false;
             MinimizeBox = true;
 
-            textBoxHost.Text = settings.GetSetting("Host", "localhost");
-            textBoxUsername.Text = settings.GetSetting("User", "root");
-            textBoxPassword.Text = settings.GetSetting("Password", string.Empty);
-            textBoxWorldDatabase.Text = settings.GetSetting("Database", "trinitycore_world");
-            textBoxPort.Text = settings.GetSetting("Port", "3306");
-            checkBoxAutoLogin.Checked = settings.GetSetting("Autologin", "no") == "yes";
-            checkBoxStartApplicationFullSize.Checked = settings.GetSetting("Startfullsize", "no") == "yes";
+            textBoxHost.Text = ((MainForm)Owner).settings.GetSetting("Host", "localhost");
+            textBoxUsername.Text = ((MainForm)Owner).settings.GetSetting("User", "root");
+            textBoxPassword.Text = ((MainForm)Owner).settings.GetSetting("Password", string.Empty);
+            textBoxWorldDatabase.Text = ((MainForm)Owner).settings.GetSetting("Database", "trinitycore_world");
+            textBoxPort.Text = ((MainForm)Owner).settings.GetSetting("Port", "3306");
+            checkBoxAutoLogin.Checked = ((MainForm)Owner).settings.GetSetting("Autologin", "no") == "yes";
+            checkBoxStartApplicationFullSize.Checked = ((MainForm)Owner).settings.GetSetting("Startfullsize", "no") == "yes";
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
-            settings.PutSetting("Host", textBoxHost.Text);
-            settings.PutSetting("User", textBoxUsername.Text);
-            settings.PutSetting("Password", textBoxPassword.Text);
-            settings.PutSetting("Database", textBoxWorldDatabase.Text);
-            settings.PutSetting("Port", textBoxPort.Text);
-            settings.PutSetting("Autologin", (checkBoxAutoLogin.Checked ? "yes" : "no"));
-            settings.PutSetting("Startfullsize", (checkBoxStartApplicationFullSize.Checked ? "yes" : "no"));
+            ((MainForm)Owner).settings.PutSetting("Host", textBoxHost.Text);
+            ((MainForm)Owner).settings.PutSetting("User", textBoxUsername.Text);
+            ((MainForm)Owner).settings.PutSetting("Password", textBoxPassword.Text);
+            ((MainForm)Owner).settings.PutSetting("Database", textBoxWorldDatabase.Text);
+            ((MainForm)Owner).settings.PutSetting("Port", textBoxPort.Text);
+            ((MainForm)Owner).settings.PutSetting("Autologin", (checkBoxAutoLogin.Checked ? "yes" : "no"));
+            ((MainForm)Owner).settings.PutSetting("Startfullsize", (checkBoxStartApplicationFullSize.Checked ? "yes" : "no"));
             ((MainForm)Owner).checkBoxAutoLogin.Checked = checkBoxAutoLogin.Checked;
             Close();
         }
