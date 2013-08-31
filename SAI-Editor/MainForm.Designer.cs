@@ -768,12 +768,12 @@
             // 
             // textBoxTargetTypeId
             // 
-            this.textBoxTargetTypeId.Enabled = false;
             this.textBoxTargetTypeId.Location = new System.Drawing.Point(300, 72);
             this.textBoxTargetTypeId.Name = "textBoxTargetTypeId";
             this.textBoxTargetTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxTargetTypeId.TabIndex = 24;
             this.textBoxTargetTypeId.Text = "0";
+            this.textBoxTargetTypeId.TextChanged += new System.EventHandler(this.textBoxTargetTypeId_TextChanged);
             // 
             // textBoxEventChance
             // 
@@ -837,12 +837,12 @@
             // 
             // textBoxActionTypeId
             // 
-            this.textBoxActionTypeId.Enabled = false;
             this.textBoxActionTypeId.Location = new System.Drawing.Point(300, 45);
             this.textBoxActionTypeId.Name = "textBoxActionTypeId";
             this.textBoxActionTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxActionTypeId.TabIndex = 20;
             this.textBoxActionTypeId.Text = "0";
+            this.textBoxActionTypeId.TextChanged += new System.EventHandler(this.textBoxActionTypeId_TextChanged);
             // 
             // textBoxEventPhasemask
             // 
@@ -854,12 +854,12 @@
             // 
             // textBoxEventTypeId
             // 
-            this.textBoxEventTypeId.Enabled = false;
             this.textBoxEventTypeId.Location = new System.Drawing.Point(300, 19);
             this.textBoxEventTypeId.Name = "textBoxEventTypeId";
             this.textBoxEventTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxEventTypeId.TabIndex = 20;
             this.textBoxEventTypeId.Text = "0";
+            this.textBoxEventTypeId.TextChanged += new System.EventHandler(this.textBoxEventTypeId_TextChanged);
             // 
             // textBoxEventLink
             // 

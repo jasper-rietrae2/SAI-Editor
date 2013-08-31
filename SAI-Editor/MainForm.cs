@@ -10,6 +10,13 @@ using MySql.Data.MySqlClient;
 //    HeightToExpandTo = 252,
 //};
 
+internal enum MaxValues
+{
+    MaxEventType = 74,
+    MaxActionType = 110,
+    MaxTargetType = 26,
+};
+
 namespace SAI_Editor
 {
     public partial class MainForm : Form
@@ -127,6 +134,9 @@ namespace SAI_Editor
             listViewSmartScripts.Click += listViewSmartScripts_Click;
 
             //listViewSmartScripts.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
+            textBoxEventTypeId.KeyPress += textBoxEventTypeId_KeyPress;
+            textBoxActionTypeId.KeyPress += textBoxActionTypeId_KeyPress;
+            textBoxTargetTypeId.KeyPress += textBoxTargetTypeId_KeyPress;
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
@@ -552,6 +562,59 @@ namespace SAI_Editor
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
+        }
+
+        private void textBoxEventTypeId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxEventTypeId.Text) || Convert.ToInt32(textBoxEventTypeId.Text) <= 74)))
+                e.Handled = e.KeyChar != (char)Keys.Back;
+        }
+
+        private void textBoxActionTypeId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxActionTypeId.Text) || Convert.ToInt32(textBoxActionTypeId.Text) <= 74)))
+                e.Handled = e.KeyChar != (char)Keys.Back;
+        }
+
+        private void textBoxTargetTypeId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxTargetTypeId.Text) || Convert.ToInt32(textBoxTargetTypeId.Text) <= 74)))
+                e.Handled = e.KeyChar != (char)Keys.Back;
+        }
+
+        private bool IsEmptyString(string str)
+        {
+            return String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str);
+        }
+
+        private void textBoxEventTypeId_TextChanged(object sender, EventArgs e)
+        {
+            if (IsEmptyString(textBoxEventTypeId.Text))
+                comboBoxEventType.SelectedIndex = 0;
+            else if (Convert.ToInt32(textBoxEventTypeId.Text) > (int)MaxValues.MaxEventType)
+                comboBoxEventType.SelectedIndex = (int)MaxValues.MaxEventType;
+            else
+                comboBoxEventType.SelectedIndex = Convert.ToInt32(textBoxEventTypeId.Text);
+        }
+
+        private void textBoxActionTypeId_TextChanged(object sender, EventArgs e)
+        {
+            if (IsEmptyString(textBoxActionTypeId.Text))
+                comboBoxActionType.SelectedIndex = 0;
+            else if (Convert.ToInt32(textBoxActionTypeId.Text) > (int)MaxValues.MaxActionType)
+                comboBoxActionType.SelectedIndex = (int)MaxValues.MaxActionType;
+            else
+                comboBoxActionType.SelectedIndex = Convert.ToInt32(textBoxActionTypeId.Text);
+        }
+
+        private void textBoxTargetTypeId_TextChanged(object sender, EventArgs e)
+        {
+            if (IsEmptyString(textBoxTargetTypeId.Text))
+                comboBoxTargetType.SelectedIndex = 0;
+            else if (Convert.ToInt32(textBoxTargetTypeId.Text) > (int)MaxValues.MaxTargetType)
+                comboBoxTargetType.SelectedIndex = (int)MaxValues.MaxTargetType;
+            else
+                comboBoxTargetType.SelectedIndex = Convert.ToInt32(textBoxTargetTypeId.Text);
         }
     }
 }
