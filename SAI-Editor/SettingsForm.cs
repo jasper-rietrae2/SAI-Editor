@@ -44,12 +44,20 @@ namespace SAI_Editor
 
         private void buttonClearSettings_Click(object sender, EventArgs e)
         {
-            textBoxHost.Text = "";
-            textBoxUsername.Text = "";
-            textBoxPassword.Text = "";
-            textBoxWorldDatabase.Text = "";
-            textBoxPort.Text = "";
-            checkBoxAutoLogin.Checked = false;
+            switch (tabControlSettings.SelectedIndex)
+            {
+                case 0:
+                    checkBoxExpandInstantly.Checked = false;
+                    break;
+                case 1:
+                    textBoxHost.Text = "";
+                    textBoxUsername.Text = "";
+                    textBoxPassword.Text = "";
+                    textBoxWorldDatabase.Text = "";
+                    textBoxPort.Text = "";
+                    checkBoxAutoLogin.Checked = false;
+                    break;
+            }
         }
     }
 }
