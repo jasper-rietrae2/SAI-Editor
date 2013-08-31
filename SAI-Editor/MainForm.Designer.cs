@@ -137,6 +137,10 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -541,8 +545,10 @@
             // 
             // groupBoxScriptInfo
             // 
+            this.groupBoxScriptInfo.Controls.Add(this.button1);
             this.groupBoxScriptInfo.Controls.Add(this.buttonSearchLink);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxTargetType);
+            this.groupBoxScriptInfo.Controls.Add(this.button2);
             this.groupBoxScriptInfo.Controls.Add(this.buttonSearchPhasemask);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxActionType);
             this.groupBoxScriptInfo.Controls.Add(this.buttonSearchEventFlags);
@@ -556,10 +562,12 @@
             this.groupBoxScriptInfo.Controls.Add(this.textBoxActionTypeId);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventPhasemask);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventTypeId);
+            this.groupBoxScriptInfo.Controls.Add(this.textBox1);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventLink);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxEventType);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventScriptId);
             this.groupBoxScriptInfo.Controls.Add(this.label8);
+            this.groupBoxScriptInfo.Controls.Add(this.label15);
             this.groupBoxScriptInfo.Controls.Add(this.label5);
             this.groupBoxScriptInfo.Controls.Add(this.label9);
             this.groupBoxScriptInfo.Controls.Add(this.label6);
@@ -575,7 +583,7 @@
             // 
             // buttonSearchLink
             // 
-            this.buttonSearchLink.Location = new System.Drawing.Point(100, 125);
+            this.buttonSearchLink.Location = new System.Drawing.Point(302, 151);
             this.buttonSearchLink.Name = "buttonSearchLink";
             this.buttonSearchLink.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchLink.TabIndex = 29;
@@ -769,7 +777,7 @@
             // 
             // textBoxEventChance
             // 
-            this.textBoxEventChance.Location = new System.Drawing.Point(263, 126);
+            this.textBoxEventChance.Location = new System.Drawing.Point(59, 125);
             this.textBoxEventChance.Minimum = new decimal(new int[] {
             1,
             0,
@@ -795,16 +803,16 @@
             // 
             // textBoxEventFlags
             // 
-            this.textBoxEventFlags.Location = new System.Drawing.Point(59, 151);
+            this.textBoxEventFlags.Location = new System.Drawing.Point(263, 126);
             this.textBoxEventFlags.Name = "textBoxEventFlags";
-            this.textBoxEventFlags.Size = new System.Drawing.Size(41, 20);
+            this.textBoxEventFlags.Size = new System.Drawing.Size(39, 20);
             this.textBoxEventFlags.TabIndex = 19;
             this.textBoxEventFlags.Text = "0";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1, 180);
+            this.label13.Location = new System.Drawing.Point(2, 180);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(54, 13);
             this.label13.TabIndex = 21;
@@ -813,7 +821,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 154);
+            this.label3.Location = new System.Drawing.Point(225, 129);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 27;
@@ -855,9 +863,9 @@
             // 
             // textBoxEventLink
             // 
-            this.textBoxEventLink.Location = new System.Drawing.Point(59, 125);
+            this.textBoxEventLink.Location = new System.Drawing.Point(263, 151);
             this.textBoxEventLink.Name = "textBoxEventLink";
-            this.textBoxEventLink.Size = new System.Drawing.Size(41, 20);
+            this.textBoxEventLink.Size = new System.Drawing.Size(39, 20);
             this.textBoxEventLink.TabIndex = 19;
             this.textBoxEventLink.Text = "0";
             // 
@@ -1030,16 +1038,16 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(180, 130);
+            this.label8.Location = new System.Drawing.Point(9, 128);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(77, 13);
+            this.label8.Size = new System.Drawing.Size(47, 13);
             this.label8.TabIndex = 26;
-            this.label8.Text = "Event chance:";
+            this.label8.Text = "Chance:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 21);
+            this.label5.Location = new System.Drawing.Point(18, 21);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 13);
             this.label5.TabIndex = 14;
@@ -1048,16 +1056,16 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 126);
+            this.label9.Location = new System.Drawing.Point(207, 154);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(30, 13);
+            this.label9.Size = new System.Drawing.Size(53, 13);
             this.label9.TabIndex = 24;
-            this.label9.Text = "Link:";
+            this.label9.Text = "Link from:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(15, 48);
+            this.label6.Location = new System.Drawing.Point(16, 48);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 13);
             this.label6.TabIndex = 14;
@@ -1066,7 +1074,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(36, 104);
+            this.label11.Location = new System.Drawing.Point(37, 102);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(19, 13);
             this.label11.TabIndex = 23;
@@ -1075,7 +1083,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(192, 102);
+            this.label10.Location = new System.Drawing.Point(195, 102);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(65, 13);
             this.label10.TabIndex = 25;
@@ -1470,6 +1478,41 @@
             this.menuItemAbout.Size = new System.Drawing.Size(152, 22);
             this.menuItemAbout.Text = "About";
             // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(14, 154);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 13);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "Link to:";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(59, 151);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(41, 20);
+            this.textBox1.TabIndex = 19;
+            this.textBox1.Text = "0";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(100, 150);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(24, 22);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "...";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(302, 126);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(24, 22);
+            this.button2.TabIndex = 30;
+            this.button2.Text = "...";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1624,6 +1667,10 @@
         public System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label15;
     }
 }
 
