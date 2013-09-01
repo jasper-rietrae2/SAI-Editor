@@ -10,6 +10,9 @@ namespace SAI_Editor
         public AboutForm()
         {
             InitializeComponent();
+
+            KeyPreview = true;
+            KeyDown += AboutForm_KeyDown;
         }
 
         #region Assembly Attribute Accessors
@@ -105,6 +108,16 @@ namespace SAI_Editor
         private void button3_Click(object sender, EventArgs e)
         {
             Process.Start("http://www.trinitycore.org/");
+        }
+
+        private void AboutForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    Close();
+                    break;
+            }
         }
     }
 }
