@@ -453,19 +453,26 @@ namespace SAI_Editor
                 return;
 
             listViewSmartScripts.Items.Clear();
+            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, comboBoxSourceType.SelectedIndex));
 
+            if (checkBoxListActionlists.Checked)
+                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100).ToString());
+        }
+
+        private void SelectAndFillListViewWithQuery(string queryToExecute)
+        {
             try
             {
                 using (var connection = new MySqlConnection(connectionString.ToString()))
                 {
                     connection.Open();
-                    var returnVal = new MySqlDataAdapter(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, comboBoxSourceType.SelectedIndex), connection);
+                    var returnVal = new MySqlDataAdapter(queryToExecute, connection);
                     var dataTable = new DataTable();
                     returnVal.Fill(dataTable);
 
                     if (dataTable.Rows.Count <= 0)
                     {
-                        MessageBox.Show(String.Format("The entry '{0}' could not be found in the SmartAI table for the given source type!", textBoxEntryOrGuid.Text), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI table for the given source type!", textBoxEntryOrGuid.Text), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -633,6 +640,28 @@ namespace SAI_Editor
 
             foreach (ListViewItem listViewItem in listViewSmartScripts.SelectedItems)
                 listViewSmartScripts.Items.Remove(listViewItem);
+        }
+
+        private void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxListActionlists.Checked)
+            {
+                if (listViewSmartScripts.Items.Count > 0)
+                {
+                    listViewSmartScripts.Items.Clear();
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, comboBoxSourceType.SelectedIndex));
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100).ToString());
+                }
+            }
+            else
+            {
+                if (listViewSmartScripts.Items.Count > 0)
+                {
+                    string selectedEntry = listViewSmartScripts.Items[0].Text;
+                    listViewSmartScripts.Items.Clear();
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", selectedEntry, comboBoxSourceType.SelectedIndex));
+                }
+            }
         }
     }
 }

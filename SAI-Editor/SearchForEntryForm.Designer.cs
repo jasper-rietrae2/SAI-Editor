@@ -36,7 +36,6 @@
             this.comboBoxSearchType = new System.Windows.Forms.ComboBox();
             this.checkBoxHasAiName = new System.Windows.Forms.CheckBox();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.listViewEntryResults = new System.Windows.Forms.ListView();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -154,7 +153,6 @@
         private System.Windows.Forms.TextBox textBoxCriteria;
         private System.Windows.Forms.CheckBox checkBoxFieldContainsCriteria;
         private System.Windows.Forms.Button buttonClearSearchResults;
-        private System.DirectoryServices.DirectoryEntry directoryEntry1;
         private System.Windows.Forms.ListView listViewEntryResults;
     }
 }

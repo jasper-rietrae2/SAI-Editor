@@ -31,11 +31,8 @@ namespace SAI_Editor
             KeyPreview = true;
             KeyDown += SearchForEntryForm_KeyDown;
 
-            comboBoxSearchType.SelectedIndex = 0;
+            comboBoxSearchType.SelectedIndex = searchingForCreature ? 0 : 3;
             comboBoxSearchType.KeyPress += comboBoxSearchType_KeyPress;
-
-            if (!searchingForCreature)
-                comboBoxSearchType.SelectedIndex = 3;
 
             textBoxCriteria.KeyPress += textBoxCriteria_KeyPress;
 
