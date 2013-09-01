@@ -559,6 +559,9 @@ namespace SAI_Editor
                 case 9:
                     comboBoxSourceType.SelectedIndex = 3;
                     break;
+                default:
+                    MessageBox.Show("Unknown source type found", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
             }
 
             comboBoxEventType.SelectedIndex = Convert.ToInt32(selectedItem[4].Text);
