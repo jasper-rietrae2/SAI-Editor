@@ -143,7 +143,7 @@
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuOptionDeleteSelectedRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDeleteSelectedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -1526,16 +1526,16 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuOptionDeleteSelectedRow});
+            this.menuItemDeleteSelectedRow});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
             // 
-            // menuOptionDeleteSelectedRow
+            // menuItemDeleteSelectedRow
             // 
-            this.menuOptionDeleteSelectedRow.Name = "menuOptionDeleteSelectedRow";
-            this.menuOptionDeleteSelectedRow.Size = new System.Drawing.Size(176, 22);
-            this.menuOptionDeleteSelectedRow.Text = "Delete selected row";
+            this.menuItemDeleteSelectedRow.Name = "menuItemDeleteSelectedRow";
+            this.menuItemDeleteSelectedRow.Size = new System.Drawing.Size(176, 22);
+            this.menuItemDeleteSelectedRow.Text = "Delete selected row";
             // 
             // MainForm
             // 
@@ -1697,7 +1697,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem menuItemExit;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem menuOptionDeleteSelectedRow;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDeleteSelectedRow;
     }
 }
 
