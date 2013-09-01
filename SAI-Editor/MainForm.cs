@@ -17,6 +17,13 @@ internal enum MaxValues
     MaxTargetType = 26,
 };
 
+internal enum SourceTypes
+{
+    SourceTypeCreature = 0,
+    SourceTypeGameobject = 1,
+    SourceTypeScriptedActionlist = 9,
+};
+
 namespace SAI_Editor
 {
     public partial class MainForm : Form
@@ -661,7 +668,7 @@ namespace SAI_Editor
         {
             if (checkBoxListActionlists.Checked)
             {
-                if (listViewSmartScripts.Items.Count > 0)
+                if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex) != (int)SourceTypes.SourceTypeScriptedActionlist)
                 {
                     listViewSmartScripts.Items.Clear();
                     SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex)));
@@ -670,7 +677,7 @@ namespace SAI_Editor
             }
             else
             {
-                if (listViewSmartScripts.Items.Count > 0)
+                if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex) != (int)SourceTypes.SourceTypeScriptedActionlist)
                 {
                     string selectedEntry = listViewSmartScripts.Items[0].Text;
                     listViewSmartScripts.Items.Clear();
