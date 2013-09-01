@@ -50,7 +50,8 @@
             this.menuHeaderFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -70,8 +71,10 @@
             this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.buttonSearchLink = new System.Windows.Forms.Button();
             this.comboBoxTargetType = new System.Windows.Forms.ComboBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.buttonSearchPhasemask = new System.Windows.Forms.Button();
             this.comboBoxActionType = new System.Windows.Forms.ComboBox();
             this.buttonSearchEventFlags = new System.Windows.Forms.Button();
@@ -85,10 +88,12 @@
             this.textBoxActionTypeId = new System.Windows.Forms.TextBox();
             this.textBoxEventPhasemask = new System.Windows.Forms.TextBox();
             this.textBoxEventTypeId = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBoxEventLink = new System.Windows.Forms.TextBox();
             this.comboBoxEventType = new System.Windows.Forms.ComboBox();
             this.textBoxEventScriptId = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -135,12 +140,10 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.label15 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuOptionDeleteSelectedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -316,6 +319,7 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuHeaderFiles,
+            this.optionsToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -328,6 +332,7 @@
             this.menuHeaderFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSettings,
             this.menuItemReconnect,
+            this.toolStripSeparator2,
             this.menuItemExit});
             this.menuHeaderFiles.Name = "menuHeaderFiles";
             this.menuHeaderFiles.Size = new System.Drawing.Size(37, 20);
@@ -345,11 +350,19 @@
             this.menuItemReconnect.Size = new System.Drawing.Size(152, 22);
             this.menuItemReconnect.Text = "Re-connect";
             // 
-            // menuItemExit
+            // aboutToolStripMenuItem
             // 
-            this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
-            this.menuItemExit.Text = "Exit";
+            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemAbout});
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // menuItemAbout
+            // 
+            this.menuItemAbout.Name = "menuItemAbout";
+            this.menuItemAbout.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAbout.Text = "About";
             // 
             // contextMenuStrip1
             // 
@@ -370,7 +383,7 @@
             this.panel1.Controls.Add(this.buttonConnect);
             this.panel1.Controls.Add(this.buttonClear);
             this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Location = new System.Drawing.Point(9, 8);
+            this.panel1.Location = new System.Drawing.Point(1018, 49);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(243, 225);
             this.panel1.TabIndex = 13;
@@ -581,6 +594,15 @@
             this.groupBoxScriptInfo.Text = "Dynamic script information";
             this.groupBoxScriptInfo.Visible = false;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(100, 150);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(24, 22);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "...";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // buttonSearchLink
             // 
             this.buttonSearchLink.Location = new System.Drawing.Point(302, 151);
@@ -626,6 +648,15 @@
             this.comboBoxTargetType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxTargetType.TabIndex = 25;
             this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(302, 126);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(24, 22);
+            this.button2.TabIndex = 30;
+            this.button2.Text = "...";
+            this.button2.UseVisualStyleBackColor = true;
             // 
             // buttonSearchPhasemask
             // 
@@ -861,6 +892,14 @@
             this.textBoxEventTypeId.Text = "0";
             this.textBoxEventTypeId.TextChanged += new System.EventHandler(this.textBoxEventTypeId_TextChanged);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(59, 151);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(41, 20);
+            this.textBox1.TabIndex = 19;
+            this.textBox1.Text = "0";
+            // 
             // textBoxEventLink
             // 
             this.textBoxEventLink.Location = new System.Drawing.Point(263, 151);
@@ -1043,6 +1082,15 @@
             this.label8.Size = new System.Drawing.Size(47, 13);
             this.label8.TabIndex = 26;
             this.label8.Text = "Chance:";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(14, 154);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 13);
+            this.label15.TabIndex = 24;
+            this.label15.Text = "Link to:";
             // 
             // label5
             // 
@@ -1464,54 +1512,30 @@
             this.panel3.TabIndex = 21;
             this.panel3.Visible = false;
             // 
-            // aboutToolStripMenuItem
+            // menuItemExit
             // 
-            this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemAbout});
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.menuItemExit.Name = "menuItemExit";
+            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
+            this.menuItemExit.Text = "Exit";
             // 
-            // menuItemAbout
+            // toolStripSeparator2
             // 
-            this.menuItemAbout.Name = "menuItemAbout";
-            this.menuItemAbout.Size = new System.Drawing.Size(152, 22);
-            this.menuItemAbout.Text = "About";
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
-            // label15
+            // optionsToolStripMenuItem
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(14, 154);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(42, 13);
-            this.label15.TabIndex = 24;
-            this.label15.Text = "Link to:";
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuOptionDeleteSelectedRow});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
             // 
-            // textBox1
+            // menuOptionDeleteSelectedRow
             // 
-            this.textBox1.Location = new System.Drawing.Point(59, 151);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(41, 20);
-            this.textBox1.TabIndex = 19;
-            this.textBox1.Text = "0";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(100, 150);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 22);
-            this.button1.TabIndex = 29;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(302, 126);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(24, 22);
-            this.button2.TabIndex = 30;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
+            this.menuOptionDeleteSelectedRow.Name = "menuOptionDeleteSelectedRow";
+            this.menuOptionDeleteSelectedRow.Size = new System.Drawing.Size(176, 22);
+            this.menuOptionDeleteSelectedRow.Text = "Delete selected row";
             // 
             // MainForm
             // 
@@ -1596,7 +1620,6 @@
         private System.Windows.Forms.TextBox textBoxActionTypeId;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ToolStripMenuItem menuItemReconnect;
-        private System.Windows.Forms.ToolStripMenuItem menuItemExit;
         private System.Windows.Forms.Label labelEventParam1;
         private System.Windows.Forms.TextBox textBoxEventParam1;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -1671,6 +1694,10 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExit;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuOptionDeleteSelectedRow;
     }
 }
 

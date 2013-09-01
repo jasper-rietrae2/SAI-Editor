@@ -89,6 +89,7 @@ namespace SAI_Editor
             menuItemExit.Click += TryCloseApplication;
             menuItemSettings.Click += menuItemSettings_Click;
             menuItemAbout.Click += menuItemAbout_Click;
+            menuOptionDeleteSelectedRow.Click += menuOptionDeleteSelectedRow_Click;
 
             listViewSmartScripts.View = View.Details;
             listViewSmartScripts.FullRowSelect = true;
@@ -615,6 +616,19 @@ namespace SAI_Editor
         private bool IsEmptyString(string str)
         {
             return String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str);
+        }
+
+        private void menuOptionDeleteSelectedRow_Click(object sender, EventArgs e)
+        {
+            //listViewSmartScripts_SelectedIndexChanged(object sender, EventArgs e)
+            if (listViewSmartScripts.SelectedItems.Count <= 0)
+            {
+                MessageBox.Show("No rows were selected to delete!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            foreach (ListViewItem listViewItem in listViewSmartScripts.SelectedItems)
+                listViewSmartScripts.Items.Remove(listViewItem);
         }
     }
 }

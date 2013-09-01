@@ -101,7 +101,15 @@ namespace SAI_Editor
 
                     break;
                 case 2: //! Creature guid
-                    query = "SELECT c.guid, ct.name FROM creature_template ct LEFT JOIN creature c ON ct.entry = c.id WHERE c.guid=" + textBoxCriteria.Text;
+                    if (emptyString)
+                    {
+                        if (MessageBox.Show("Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                            return;
+
+                        query = "SELECT c.guid, ct.name FROM creature_template ct LEFT JOIN creature c ON ct.entry = c.id";
+                    }
+                    else
+                        query = "SELECT c.guid, ct.name FROM creature_template ct LEFT JOIN creature c ON ct.entry = c.id WHERE c.guid=" + textBoxCriteria.Text;
 
                     if (checkBoxHasAiName.Checked)
                         query += " AND ct.AIName='SmartAI'";
