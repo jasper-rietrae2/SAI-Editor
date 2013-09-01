@@ -36,6 +36,7 @@
             this.comboBoxSearchType = new System.Windows.Forms.ComboBox();
             this.checkBoxHasAiName = new System.Windows.Forms.CheckBox();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.directoryEntry1 = new System.DirectoryServices.DirectoryEntry();
             this.listViewEntryResults = new System.Windows.Forms.ListView();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -121,11 +122,10 @@
             // 
             // listViewEntryResults
             // 
-            this.listViewEntryResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.listViewEntryResults.Location = new System.Drawing.Point(12, 121);
             this.listViewEntryResults.Name = "listViewEntryResults";
             this.listViewEntryResults.Size = new System.Drawing.Size(351, 295);
-            this.listViewEntryResults.TabIndex = 5;
+            this.listViewEntryResults.TabIndex = 11;
             this.listViewEntryResults.UseCompatibleStateImageBehavior = false;
             // 
             // SearchForEntryForm
@@ -148,12 +148,13 @@
         #endregion
 
         private System.Windows.Forms.GroupBox groupBoxSearchInfo;
-        private System.Windows.Forms.ListView listViewEntryResults;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.CheckBox checkBoxHasAiName;
         private System.Windows.Forms.ComboBox comboBoxSearchType;
         private System.Windows.Forms.TextBox textBoxCriteria;
         private System.Windows.Forms.CheckBox checkBoxFieldContainsCriteria;
         private System.Windows.Forms.Button buttonClearSearchResults;
+        private System.DirectoryServices.DirectoryEntry directoryEntry1;
+        private System.Windows.Forms.ListView listViewEntryResults;
     }
 }
