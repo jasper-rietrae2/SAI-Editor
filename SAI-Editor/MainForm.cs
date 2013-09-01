@@ -453,7 +453,7 @@ namespace SAI_Editor
                 return;
 
             listViewSmartScripts.Items.Clear();
-            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, comboBoxSourceType.SelectedIndex));
+            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex)));
 
             if (checkBoxListActionlists.Checked)
                 SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100).ToString());
@@ -664,7 +664,7 @@ namespace SAI_Editor
                 if (listViewSmartScripts.Items.Count > 0)
                 {
                     listViewSmartScripts.Items.Clear();
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, comboBoxSourceType.SelectedIndex));
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex)));
                     SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100).ToString());
                 }
             }
@@ -674,8 +674,24 @@ namespace SAI_Editor
                 {
                     string selectedEntry = listViewSmartScripts.Items[0].Text;
                     listViewSmartScripts.Items.Clear();
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", selectedEntry, comboBoxSourceType.SelectedIndex));
+
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", selectedEntry, GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex)));
                 }
+            }
+        }
+
+        private int GetSourceTypeByIndex(int index)
+        {
+            switch (comboBoxSourceType.SelectedIndex)
+            {
+                case 0: //! Creature
+                case 1: //! Gameobject
+                case 2: //! Areatrigger
+                    return comboBoxSourceType.SelectedIndex;
+                case 3:
+                    return 9;
+                default:
+                    return -1;
             }
         }
     }
