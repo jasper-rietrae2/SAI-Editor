@@ -30,20 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForEntryForm));
             this.groupBoxSearchInfo = new System.Windows.Forms.GroupBox();
+            this.buttonClearSearchResults = new System.Windows.Forms.Button();
+            this.checkBoxFieldContainsCriteria = new System.Windows.Forms.CheckBox();
+            this.textBoxCriteria = new System.Windows.Forms.TextBox();
             this.comboBoxSearchType = new System.Windows.Forms.ComboBox();
             this.checkBoxHasAiName = new System.Windows.Forms.CheckBox();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.listViewEntryResults = new System.Windows.Forms.ListView();
-            this.textBoxCriteria = new System.Windows.Forms.TextBox();
-            this.checkBoxUseSqlLike = new System.Windows.Forms.CheckBox();
-            this.buttonClearSearchResults = new System.Windows.Forms.Button();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBoxSearchInfo
             // 
             this.groupBoxSearchInfo.Controls.Add(this.buttonClearSearchResults);
-            this.groupBoxSearchInfo.Controls.Add(this.checkBoxUseSqlLike);
+            this.groupBoxSearchInfo.Controls.Add(this.checkBoxFieldContainsCriteria);
             this.groupBoxSearchInfo.Controls.Add(this.textBoxCriteria);
             this.groupBoxSearchInfo.Controls.Add(this.comboBoxSearchType);
             this.groupBoxSearchInfo.Controls.Add(this.checkBoxHasAiName);
@@ -54,6 +54,34 @@
             this.groupBoxSearchInfo.TabIndex = 4;
             this.groupBoxSearchInfo.TabStop = false;
             this.groupBoxSearchInfo.Text = "Search information";
+            // 
+            // buttonClearSearchResults
+            // 
+            this.buttonClearSearchResults.Location = new System.Drawing.Point(173, 67);
+            this.buttonClearSearchResults.Name = "buttonClearSearchResults";
+            this.buttonClearSearchResults.Size = new System.Drawing.Size(75, 23);
+            this.buttonClearSearchResults.TabIndex = 10;
+            this.buttonClearSearchResults.Text = "Clear";
+            this.buttonClearSearchResults.UseVisualStyleBackColor = true;
+            this.buttonClearSearchResults.Click += new System.EventHandler(this.buttonClearSearchResults_Click);
+            // 
+            // checkBoxFieldContainsCriteria
+            // 
+            this.checkBoxFieldContainsCriteria.AutoSize = true;
+            this.checkBoxFieldContainsCriteria.Location = new System.Drawing.Point(19, 73);
+            this.checkBoxFieldContainsCriteria.Name = "checkBoxFieldContainsCriteria";
+            this.checkBoxFieldContainsCriteria.Size = new System.Drawing.Size(125, 17);
+            this.checkBoxFieldContainsCriteria.TabIndex = 9;
+            this.checkBoxFieldContainsCriteria.Text = "Field contains criteria";
+            this.checkBoxFieldContainsCriteria.UseVisualStyleBackColor = true;
+            // 
+            // textBoxCriteria
+            // 
+            this.textBoxCriteria.Location = new System.Drawing.Point(139, 19);
+            this.textBoxCriteria.Multiline = true;
+            this.textBoxCriteria.Name = "textBoxCriteria";
+            this.textBoxCriteria.Size = new System.Drawing.Size(190, 21);
+            this.textBoxCriteria.TabIndex = 8;
             // 
             // comboBoxSearchType
             // 
@@ -100,35 +128,6 @@
             this.listViewEntryResults.TabIndex = 5;
             this.listViewEntryResults.UseCompatibleStateImageBehavior = false;
             // 
-            // textBoxCriteria
-            // 
-            this.textBoxCriteria.Location = new System.Drawing.Point(139, 19);
-            this.textBoxCriteria.Multiline = true;
-            this.textBoxCriteria.Name = "textBoxCriteria";
-            this.textBoxCriteria.Size = new System.Drawing.Size(190, 21);
-            this.textBoxCriteria.TabIndex = 8;
-            // 
-            // checkBoxUseSqlLike
-            // 
-            this.checkBoxUseSqlLike.AutoSize = true;
-            this.checkBoxUseSqlLike.Enabled = false;
-            this.checkBoxUseSqlLike.Location = new System.Drawing.Point(19, 73);
-            this.checkBoxUseSqlLike.Name = "checkBoxUseSqlLike";
-            this.checkBoxUseSqlLike.Size = new System.Drawing.Size(142, 17);
-            this.checkBoxUseSqlLike.TabIndex = 9;
-            this.checkBoxUseSqlLike.Text = "Use SQL \'LIKE\' keyword";
-            this.checkBoxUseSqlLike.UseVisualStyleBackColor = true;
-            // 
-            // buttonClearSearchResults
-            // 
-            this.buttonClearSearchResults.Location = new System.Drawing.Point(173, 67);
-            this.buttonClearSearchResults.Name = "buttonClearSearchResults";
-            this.buttonClearSearchResults.Size = new System.Drawing.Size(75, 23);
-            this.buttonClearSearchResults.TabIndex = 10;
-            this.buttonClearSearchResults.Text = "Clear";
-            this.buttonClearSearchResults.UseVisualStyleBackColor = true;
-            this.buttonClearSearchResults.Click += new System.EventHandler(this.buttonClearSearchResults_Click);
-            // 
             // SearchForEntryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,7 +153,7 @@
         private System.Windows.Forms.CheckBox checkBoxHasAiName;
         private System.Windows.Forms.ComboBox comboBoxSearchType;
         private System.Windows.Forms.TextBox textBoxCriteria;
-        private System.Windows.Forms.CheckBox checkBoxUseSqlLike;
+        private System.Windows.Forms.CheckBox checkBoxFieldContainsCriteria;
         private System.Windows.Forms.Button buttonClearSearchResults;
     }
 }

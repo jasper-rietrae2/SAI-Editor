@@ -567,7 +567,7 @@ namespace SAI_Editor
 
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
+            e.Handled = true; //! Disallow changing content of the combobox (because setting it to 3D looks like shit)
         }
 
         private void textBoxEventTypeId_KeyPress(object sender, KeyPressEventArgs e)
