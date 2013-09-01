@@ -539,6 +539,21 @@ namespace SAI_Editor
         private void FillFieldsBasedOnSelectedScript()
         {
             ListViewItem.ListViewSubItemCollection selectedItem = listViewSmartScripts.SelectedItems[0].SubItems;
+
+            textBoxEntryOrGuid.Text = selectedItem[0].Text;
+
+            switch (Convert.ToInt32(selectedItem[1].Text))
+            {
+                case 0: //! Creature
+                case 1: //! Gameobject
+                case 2: //! Areatrigger
+                    comboBoxSourceType.SelectedIndex = Convert.ToInt32(selectedItem[1].Text);
+                    break;
+                case 9:
+                    comboBoxSourceType.SelectedIndex = 3;
+                    break;
+            }
+
             comboBoxEventType.SelectedIndex = Convert.ToInt32(selectedItem[4].Text);
             comboBoxActionType.SelectedIndex = Convert.ToInt32(selectedItem[12].Text);
             comboBoxTargetType.SelectedIndex = Convert.ToInt32(selectedItem[19].Text);
