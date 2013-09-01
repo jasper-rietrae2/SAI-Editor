@@ -34,6 +34,9 @@ namespace SAI_Editor
             comboBoxSearchType.SelectedIndex = 0;
             comboBoxSearchType.KeyPress += comboBoxSearchType_KeyPress;
 
+            if (!searchingForCreature)
+                comboBoxSearchType.SelectedIndex = 3;
+
             textBoxCriteria.KeyPress += textBoxCriteria_KeyPress;
 
             listViewEntryResults.View = View.Details;
