@@ -604,19 +604,19 @@ namespace SAI_Editor
 
         private void textBoxEventTypeId_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxEventTypeId.Text) || Convert.ToInt32(textBoxEventTypeId.Text) <= 74)))
+            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxEventTypeId.Text) || Convert.ToInt32(textBoxEventTypeId.Text) <= (int)MaxValues.MaxEventType)))
                 e.Handled = e.KeyChar != (char)Keys.Back;
         }
 
         private void textBoxActionTypeId_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxActionTypeId.Text) || Convert.ToInt32(textBoxActionTypeId.Text) <= 74)))
+            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxActionTypeId.Text) || Convert.ToInt32(textBoxActionTypeId.Text) <= (int)MaxValues.MaxActionType)))
                 e.Handled = e.KeyChar != (char)Keys.Back;
         }
 
         private void textBoxTargetTypeId_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxTargetTypeId.Text) || Convert.ToInt32(textBoxTargetTypeId.Text) <= 74)))
+            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxTargetTypeId.Text) || Convert.ToInt32(textBoxTargetTypeId.Text) <= (int)MaxValues.MaxTargetType)))
                 e.Handled = e.KeyChar != (char)Keys.Back;
         }
 
