@@ -506,7 +506,7 @@ namespace SAI_Editor
         //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
         private void TryCloseApplication(object sender = null, EventArgs e = null)
         {
-            if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (settings.GetSetting("PromptToQuit", "yes") == "no" || MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 Close();
         }
 
