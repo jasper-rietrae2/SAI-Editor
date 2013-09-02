@@ -13,12 +13,13 @@ namespace SAI_Editor
         private readonly bool searchingForCreature = false;
         private int previouslySelectedSearchIndex = 0;
 
-        public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, bool searchingForCreature)
+        public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, string startEntryString, bool searchingForCreature)
         {
             InitializeComponent();
 
             this.connectionString = connectionString;
             this.searchingForCreature = searchingForCreature;
+            textBoxCriteria.Text = startEntryString;
         }
 
         private void SearchForCreatureForm_Load(object sender, EventArgs e)

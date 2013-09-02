@@ -33,11 +33,10 @@ namespace SAI_Editor
         private readonly MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
         private readonly List<Control> controlsLoginForm = new List<Control>();
         private readonly List<Control> controlsMainForm = new List<Control>();
-        private bool contractingToLoginForm = false;
-        private bool expandingToMainForm = false;
+        private bool contractingToLoginForm = false, expandingToMainForm = false;
         private int originalHeight = 0, originalWidth = 0;
-        private Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
-        private int WidthToExpandTo = 985, HeightToExpandTo = 505;
+        private readonly Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
+        private int WidthToExpandTo = 985, HeightToExpandTo = 505; //! Need to be variables instead of inside an enumerator because we have to change the values
 
         public MainForm()
         {
@@ -48,8 +47,8 @@ namespace SAI_Editor
         {
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
 
-            //MaximizeBox = false;
-            //MinimizeBox = true;
+            MaximizeBox = false;
+            MinimizeBox = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
             Width = 278;
             Height = 260;
@@ -389,12 +388,7 @@ namespace SAI_Editor
         private void buttonSearchForCreature_Click(object sender, EventArgs e)
         {
             //! Just keep it in main thread; no purpose starting a new thread for this
-            new SearchForEntryForm(connectionString, comboBoxSourceType.SelectedIndex == 0).ShowDialog(this);
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            textBoxActionTypeId.Text = comboBoxActionType.SelectedIndex.ToString();
+            new SearchForEntryForm(connectionString, textBoxEntryOrGuid.Text, comboBoxSourceType.SelectedIndex == 0).ShowDialog(this);
         }
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
@@ -465,10 +459,10 @@ namespace SAI_Editor
                 return;
 
             listViewSmartScripts.Items.Clear();
-            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex)));
+            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()));
 
             if (checkBoxListActionlists.Checked)
-                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100).ToString());
+                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100));
         }
 
         private void SelectAndFillListViewWithQuery(string queryToExecute)
@@ -672,26 +666,26 @@ namespace SAI_Editor
         {
             if (checkBoxListActionlists.Checked)
             {
-                if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex) != (int)SourceTypes.SourceTypeScriptedActionlist)
+                if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex() != (int)SourceTypes.SourceTypeScriptedActionlist)
                 {
                     listViewSmartScripts.Items.Clear();
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex)));
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100).ToString());
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()));
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100));
                 }
             }
             else
             {
-                if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex) != (int)SourceTypes.SourceTypeScriptedActionlist)
+                if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex() != (int)SourceTypes.SourceTypeScriptedActionlist)
                 {
                     string selectedEntry = listViewSmartScripts.Items[0].Text;
                     listViewSmartScripts.Items.Clear();
 
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", selectedEntry, GetSourceTypeByIndex(comboBoxSourceType.SelectedIndex)));
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", selectedEntry, GetSourceTypeByIndex()));
                 }
             }
         }
 
-        private int GetSourceTypeByIndex(int index)
+        private int GetSourceTypeByIndex()
         {
             switch (comboBoxSourceType.SelectedIndex)
             {
