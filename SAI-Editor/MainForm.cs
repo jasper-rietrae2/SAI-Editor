@@ -217,31 +217,31 @@ namespace SAI_Editor
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            if (IsInvalidString(textBoxHost.Text))
+            if (IsEmptyString(textBoxHost.Text))
             {
                 MessageBox.Show("The host field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (IsInvalidString(textBoxUsername.Text))
+            if (IsEmptyString(textBoxUsername.Text))
             {
                 MessageBox.Show("The username field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (textBoxPassword.Text.Length > 0 && IsInvalidString(textBoxPassword.Text))
+            if (textBoxPassword.Text.Length > 0 && IsEmptyString(textBoxPassword.Text))
             {
                 MessageBox.Show("The password field can not consist of only whitespaces!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (IsInvalidString(textBoxWorldDatabase.Text))
+            if (IsEmptyString(textBoxWorldDatabase.Text))
             {
                 MessageBox.Show("The world database field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (IsInvalidString(textBoxPort.Text))
+            if (IsEmptyString(textBoxPort.Text))
             {
                 MessageBox.Show("The port field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -334,7 +334,7 @@ namespace SAI_Editor
             Close();
         }
 
-        private bool IsInvalidString(string str)
+        private bool IsEmptyString(string str)
         {
             return (String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str));
         }
@@ -456,7 +456,7 @@ namespace SAI_Editor
 
         public void buttonLoadScriptForEntry_Click(object sender, EventArgs e)
         {
-            if (IsInvalidString(textBoxEntryOrGuid.Text))
+            if (IsEmptyString(textBoxEntryOrGuid.Text))
                 return;
 
             listViewSmartScripts.Items.Clear();
@@ -604,6 +604,7 @@ namespace SAI_Editor
 
         private void textBoxEventTypeId_KeyPress(object sender, KeyPressEventArgs e)
         {
+            //! Only allow typing keys that are numbers
             if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxEventTypeId.Text) || Convert.ToInt32(textBoxEventTypeId.Text) <= (int)MaxValues.MaxEventType)))
                 e.Handled = e.KeyChar != (char)Keys.Back;
         }
@@ -648,11 +649,6 @@ namespace SAI_Editor
                 comboBoxTargetType.SelectedIndex = (int)MaxValues.MaxTargetType;
             else
                 comboBoxTargetType.SelectedIndex = Convert.ToInt32(textBoxTargetTypeId.Text);
-        }
-
-        private bool IsEmptyString(string str)
-        {
-            return String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str);
         }
 
         private void menuOptionDeleteSelectedRow_Click(object sender, EventArgs e)
