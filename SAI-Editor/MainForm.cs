@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
+using System.Drawing;
 using MySql.Data.MySqlClient;
 
 //internal enum FormSizes
@@ -376,7 +377,11 @@ namespace SAI_Editor
                     TryCloseApplication();
                     break;
                 case Keys.F5:
-                    buttonConnect_Click(sender, e);
+                    if (panelLoginBox.Location.X == 1000 && panelLoginBox.Location.Y == 50)
+                        panelLoginBox.Location = new Point(9, 8);
+                    else
+                        panelLoginBox.Location = new Point(1000, 50);
+
                     break;
             }
         }

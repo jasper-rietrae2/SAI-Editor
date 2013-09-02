@@ -58,7 +58,7 @@
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelLoginBox = new System.Windows.Forms.Panel();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
             this.buttonLoadScriptForEntry = new System.Windows.Forms.PictureBox();
             this.buttonSearchForCreature = new System.Windows.Forms.Button();
@@ -147,7 +147,7 @@
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.panelLoginBox.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
@@ -402,16 +402,16 @@
             this.testToolStripMenuItem1.Size = new System.Drawing.Size(93, 22);
             this.testToolStripMenuItem1.Text = "test";
             // 
-            // panel1
+            // panelLoginBox
             // 
-            this.panel1.Controls.Add(this.groupBoxLogin);
-            this.panel1.Controls.Add(this.buttonConnect);
-            this.panel1.Controls.Add(this.buttonClear);
-            this.panel1.Controls.Add(this.buttonCancel);
-            this.panel1.Location = new System.Drawing.Point(1018, 49);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(243, 225);
-            this.panel1.TabIndex = 13;
+            this.panelLoginBox.Controls.Add(this.groupBoxLogin);
+            this.panelLoginBox.Controls.Add(this.buttonConnect);
+            this.panelLoginBox.Controls.Add(this.buttonClear);
+            this.panelLoginBox.Controls.Add(this.buttonCancel);
+            this.panelLoginBox.Location = new System.Drawing.Point(1000, 50);
+            this.panelLoginBox.Name = "panelLoginBox";
+            this.panelLoginBox.Size = new System.Drawing.Size(243, 225);
+            this.panelLoginBox.TabIndex = 13;
             // 
             // groupBoxStaticScriptInfo
             // 
@@ -1543,7 +1543,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1315, 580);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelLoginBox);
             this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.panel3);
@@ -1561,7 +1561,7 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.panelLoginBox.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).EndInit();
@@ -1600,7 +1600,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem menuItemSettings;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelLoginBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelCreatureEntry;
         private System.Windows.Forms.Button buttonSearchForCreature;
