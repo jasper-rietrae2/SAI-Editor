@@ -32,6 +32,7 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPage = new System.Windows.Forms.TabPage();
+            this.checkBoxLoadScriptOfEntry = new System.Windows.Forms.CheckBox();
             this.checkBoxExpandInstantly = new System.Windows.Forms.CheckBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
@@ -47,7 +48,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonClearSettings = new System.Windows.Forms.Button();
-            this.checkBoxLoadScriptOfEntry = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoSaveSettings = new System.Windows.Forms.CheckBox();
             this.tabPage.SuspendLayout();
             this.tabControlSettings.SuspendLayout();
             this.tabPageConnection.SuspendLayout();
@@ -75,6 +76,7 @@
             // 
             // tabPage
             // 
+            this.tabPage.Controls.Add(this.checkBoxAutoSaveSettings);
             this.tabPage.Controls.Add(this.checkBoxLoadScriptOfEntry);
             this.tabPage.Controls.Add(this.checkBoxExpandInstantly);
             this.tabPage.Location = new System.Drawing.Point(4, 22);
@@ -84,6 +86,16 @@
             this.tabPage.TabIndex = 0;
             this.tabPage.Text = "Other";
             this.tabPage.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxLoadScriptOfEntry
+            // 
+            this.checkBoxLoadScriptOfEntry.AutoSize = true;
+            this.checkBoxLoadScriptOfEntry.Location = new System.Drawing.Point(6, 29);
+            this.checkBoxLoadScriptOfEntry.Name = "checkBoxLoadScriptOfEntry";
+            this.checkBoxLoadScriptOfEntry.Size = new System.Drawing.Size(159, 17);
+            this.checkBoxLoadScriptOfEntry.TabIndex = 5;
+            this.checkBoxLoadScriptOfEntry.Text = "Load script of selected entry";
+            this.checkBoxLoadScriptOfEntry.UseVisualStyleBackColor = true;
             // 
             // checkBoxExpandInstantly
             // 
@@ -225,15 +237,15 @@
             this.buttonClearSettings.UseVisualStyleBackColor = true;
             this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
-            // checkBoxLoadScriptOfEntry
+            // checkBoxAutoSaveSettings
             // 
-            this.checkBoxLoadScriptOfEntry.AutoSize = true;
-            this.checkBoxLoadScriptOfEntry.Location = new System.Drawing.Point(6, 29);
-            this.checkBoxLoadScriptOfEntry.Name = "checkBoxLoadScriptOfEntry";
-            this.checkBoxLoadScriptOfEntry.Size = new System.Drawing.Size(159, 17);
-            this.checkBoxLoadScriptOfEntry.TabIndex = 5;
-            this.checkBoxLoadScriptOfEntry.Text = "Load script of selected entry";
-            this.checkBoxLoadScriptOfEntry.UseVisualStyleBackColor = true;
+            this.checkBoxAutoSaveSettings.AutoSize = true;
+            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(6, 136);
+            this.checkBoxAutoSaveSettings.Name = "checkBoxAutoSaveSettings";
+            this.checkBoxAutoSaveSettings.Size = new System.Drawing.Size(113, 17);
+            this.checkBoxAutoSaveSettings.TabIndex = 5;
+            this.checkBoxAutoSaveSettings.Text = "Auto save settings";
+            this.checkBoxAutoSaveSettings.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -278,6 +290,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBoxExpandInstantly;
         private System.Windows.Forms.CheckBox checkBoxLoadScriptOfEntry;
+        private System.Windows.Forms.CheckBox checkBoxAutoSaveSettings;
 
     }
 }

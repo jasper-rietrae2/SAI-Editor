@@ -380,14 +380,13 @@ namespace SAI_Editor
                         panelLoginBox.Location = new Point(9, 8);
                     else
                         panelLoginBox.Location = new Point(1000, 50);
-
                     break;
             }
         }
 
         private void buttonSearchForCreature_Click(object sender, EventArgs e)
         {
-            //! Just keep it in main thread; no purpose starting a new thread for this
+            //! Just keep it in main thread; no purpose starting a new thread for this (unless workspaces get implemented, maybe)
             new SearchForEntryForm(connectionString, textBoxEntryOrGuid.Text, comboBoxSourceType.SelectedIndex == 0).ShowDialog(this);
         }
 
