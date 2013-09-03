@@ -60,7 +60,7 @@
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
-            this.buttonLoadScriptForEntry = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonSearchForCreature = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -129,9 +129,11 @@
             this.labelActionParam1 = new System.Windows.Forms.Label();
             this.textBoxActionParam1 = new System.Windows.Forms.TextBox();
             this.tabPageTarget = new System.Windows.Forms.TabPage();
+            this.label16 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
+            this.textBoxTargetO = new System.Windows.Forms.TextBox();
             this.textBoxTargetZ = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxTargetY = new System.Windows.Forms.TextBox();
@@ -144,14 +146,12 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.textBoxTargetO = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -417,7 +417,7 @@
             // 
             // groupBoxStaticScriptInfo
             // 
-            this.groupBoxStaticScriptInfo.Controls.Add(this.buttonLoadScriptForEntry);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBox1);
             this.groupBoxStaticScriptInfo.Controls.Add(this.buttonSearchForCreature);
             this.groupBoxStaticScriptInfo.Controls.Add(this.label4);
             this.groupBoxStaticScriptInfo.Controls.Add(this.comboBoxSourceType);
@@ -431,16 +431,17 @@
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
             // 
-            // buttonLoadScriptForEntry
+            // pictureBox1
             // 
-            this.buttonLoadScriptForEntry.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonLoadScriptForEntry.Image = global::SAI_Editor.Properties.Resources.icon_load_script;
-            this.buttonLoadScriptForEntry.Location = new System.Drawing.Point(261, 19);
-            this.buttonLoadScriptForEntry.Name = "buttonLoadScriptForEntry";
-            this.buttonLoadScriptForEntry.Size = new System.Drawing.Size(24, 21);
-            this.buttonLoadScriptForEntry.TabIndex = 24;
-            this.buttonLoadScriptForEntry.TabStop = false;
-            this.buttonLoadScriptForEntry.Click += new System.EventHandler(this.buttonLoadScriptForEntry_Click);
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::SAI_Editor.Properties.Resources.icon_load_script;
+            this.pictureBox1.Location = new System.Drawing.Point(260, 19);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(24, 20);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // buttonSearchForCreature
             // 
@@ -1208,7 +1209,7 @@
             this.tabPageEvent.Location = new System.Drawing.Point(4, 22);
             this.tabPageEvent.Name = "tabPageEvent";
             this.tabPageEvent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEvent.Size = new System.Drawing.Size(261, 183);
+            this.tabPageEvent.Size = new System.Drawing.Size(261, 150);
             this.tabPageEvent.TabIndex = 0;
             this.tabPageEvent.Text = "Event";
             // 
@@ -1294,7 +1295,7 @@
             this.tabPageAction.Location = new System.Drawing.Point(4, 22);
             this.tabPageAction.Name = "tabPageAction";
             this.tabPageAction.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAction.Size = new System.Drawing.Size(261, 156);
+            this.tabPageAction.Size = new System.Drawing.Size(261, 150);
             this.tabPageAction.TabIndex = 1;
             this.tabPageAction.Text = "Action";
             // 
@@ -1417,6 +1418,15 @@
             this.tabPageTarget.TabIndex = 2;
             this.tabPageTarget.Text = "Target";
             // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(1, 163);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(49, 13);
+            this.label16.TabIndex = 34;
+            this.label16.Text = "Target O";
+            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -1443,6 +1453,13 @@
             this.label20.Size = new System.Drawing.Size(48, 13);
             this.label20.TabIndex = 34;
             this.label20.Text = "Target X";
+            // 
+            // textBoxTargetO
+            // 
+            this.textBoxTargetO.Location = new System.Drawing.Point(50, 160);
+            this.textBoxTargetO.Name = "textBoxTargetO";
+            this.textBoxTargetO.Size = new System.Drawing.Size(187, 20);
+            this.textBoxTargetO.TabIndex = 36;
             // 
             // textBoxTargetZ
             // 
@@ -1542,22 +1559,6 @@
             this.panel3.TabIndex = 21;
             this.panel3.Visible = false;
             // 
-            // textBoxTargetO
-            // 
-            this.textBoxTargetO.Location = new System.Drawing.Point(50, 160);
-            this.textBoxTargetO.Name = "textBoxTargetO";
-            this.textBoxTargetO.Size = new System.Drawing.Size(187, 20);
-            this.textBoxTargetO.TabIndex = 36;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1, 163);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(49, 13);
-            this.label16.TabIndex = 34;
-            this.label16.Text = "Target O";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1584,7 +1585,7 @@
             this.panelLoginBox.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.buttonLoadScriptForEntry)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -1646,7 +1647,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         public System.Windows.Forms.GroupBox groupBoxStaticScriptInfo;
         public System.Windows.Forms.TextBox textBoxEntryOrGuid;
-        private System.Windows.Forms.PictureBox buttonLoadScriptForEntry;
         private System.Windows.Forms.ListView listViewSmartScripts;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBoxListActionlists;
@@ -1721,6 +1721,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemDeleteSelectedRow;
         private System.Windows.Forms.TextBox textBoxTargetO;
         private System.Windows.Forms.Label label16;
+        public System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

@@ -479,18 +479,6 @@ namespace SAI_Editor
             }
         }
 
-        public void buttonLoadScriptForEntry_Click(object sender, EventArgs e)
-        {
-            if (IsEmptyString(textBoxEntryOrGuid.Text))
-                return;
-
-            listViewSmartScripts.Items.Clear();
-            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()));
-
-            if (checkBoxListActionlists.Checked)
-                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100));
-        }
-
         private void SelectAndFillListViewWithQuery(string queryToExecute)
         {
             try
@@ -724,6 +712,18 @@ namespace SAI_Editor
                 default:
                     return -1;
             }
+        }
+
+        public void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (IsEmptyString(textBoxEntryOrGuid.Text))
+                return;
+
+            listViewSmartScripts.Items.Clear();
+            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()));
+
+            if (checkBoxListActionlists.Checked)
+                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100));
         }
     }
 }
