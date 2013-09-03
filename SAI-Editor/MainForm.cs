@@ -160,6 +160,18 @@ namespace SAI_Editor
             textBoxEventTypeId.KeyPress += textBoxEventTypeId_KeyPress;
             textBoxActionTypeId.KeyPress += textBoxActionTypeId_KeyPress;
             textBoxTargetTypeId.KeyPress += textBoxTargetTypeId_KeyPress;
+
+            tabControlParameters.AutoScrollOffset = new Point(5, 5);
+
+            foreach (TabPage page in tabControlParameters.TabPages)
+            {
+                page.HorizontalScroll.Enabled = false;
+                page.HorizontalScroll.Visible = false;
+
+                page.AutoScroll = true;
+                //page.AutoScrollMargin = new Size(20, 20);
+                page.AutoScrollMinSize = new Size(page.Width, page.Height);
+            }
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
