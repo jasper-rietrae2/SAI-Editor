@@ -425,16 +425,25 @@ namespace SAI_Editor
         private void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxEventTypeId.Text = comboBoxEventType.SelectedIndex.ToString();
+
+            if (textBoxEventTypeId.Text == "0" || textBoxEventTypeId.Text == ((int)MaxValues.MaxEventType).ToString())
+                textBoxEventTypeId.SelectionStart = 3;
         }
 
         private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxActionTypeId.Text = comboBoxActionType.SelectedIndex.ToString();
+
+            if (textBoxActionTypeId.Text == "0" || textBoxActionTypeId.Text == ((int)MaxValues.MaxActionType).ToString())
+                textBoxActionTypeId.SelectionStart = 3;
         }
 
         private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxTargetTypeId.Text = comboBoxTargetType.SelectedIndex.ToString();
+
+            if (textBoxTargetTypeId.Text == "0" || textBoxTargetTypeId.Text == ((int)MaxValues.MaxTargetType).ToString())
+                textBoxTargetTypeId.SelectionStart = 3;
         }
 
         private void checkBoxAutoGenerateComments_CheckedChanged_1(object sender, EventArgs e)
@@ -637,7 +646,11 @@ namespace SAI_Editor
         private void textBoxEventTypeId_TextChanged(object sender, EventArgs e)
         {
             if (IsEmptyString(textBoxEventTypeId.Text))
+            {
                 comboBoxEventType.SelectedIndex = 0;
+                textBoxEventTypeId.Text = "0";
+                textBoxEventTypeId.SelectionStart = 3;
+            }
             else if (Convert.ToInt32(textBoxEventTypeId.Text) > (int)MaxValues.MaxEventType)
                 comboBoxEventType.SelectedIndex = (int)MaxValues.MaxEventType;
             else
@@ -647,7 +660,11 @@ namespace SAI_Editor
         private void textBoxActionTypeId_TextChanged(object sender, EventArgs e)
         {
             if (IsEmptyString(textBoxActionTypeId.Text))
+            {
                 comboBoxActionType.SelectedIndex = 0;
+                textBoxActionTypeId.Text = "0";
+                textBoxActionTypeId.SelectionStart = 3;
+            }
             else if (Convert.ToInt32(textBoxActionTypeId.Text) > (int)MaxValues.MaxActionType)
                 comboBoxActionType.SelectedIndex = (int)MaxValues.MaxActionType;
             else
@@ -657,7 +674,11 @@ namespace SAI_Editor
         private void textBoxTargetTypeId_TextChanged(object sender, EventArgs e)
         {
             if (IsEmptyString(textBoxTargetTypeId.Text))
+            {
                 comboBoxTargetType.SelectedIndex = 0;
+                textBoxTargetTypeId.Text = "0";
+                textBoxTargetTypeId.SelectionStart = 3;
+            }
             else if (Convert.ToInt32(textBoxTargetTypeId.Text) > (int)MaxValues.MaxTargetType)
                 comboBoxTargetType.SelectedIndex = (int)MaxValues.MaxTargetType;
             else

@@ -115,42 +115,6 @@
   <ItemGroup>
     <None Include="Resources\icon_load_script.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\rsz_icon_load_script.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1377794201_Load.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1377794267_View.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\load_script_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1378231894_download.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1378231904_download-alt.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1378231918_arrow_down.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1378231923_old-go-bottom.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1378231924_FTP_Download.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1378231931_ark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1378231931_manilla-folder-downloads.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1378231939_application-x-kgetlist.png" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
