@@ -11,7 +11,6 @@ namespace SAI_Editor
     {
         private readonly MySqlConnectionStringBuilder connectionString;
         private readonly bool searchingForCreature = false;
-        private int previouslySelectedSearchIndex = 0;
 
         public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, string startEntryString, bool searchingForCreature)
         {
@@ -237,8 +236,6 @@ namespace SAI_Editor
                 default:
                     break;
             }
-
-            previouslySelectedSearchIndex = comboBoxSearchType.SelectedIndex;
         }
 
         private void buttonClearSearchResults_Click(object sender, EventArgs e)
