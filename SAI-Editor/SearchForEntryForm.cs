@@ -187,7 +187,16 @@ namespace SAI_Editor
             }
 
             listViewEntryResults.Items.Clear();
-            SelectFromCreatureTemplate(query);
+            buttonSearch.Enabled = false;
+
+            try
+            {
+                SelectFromCreatureTemplate(query);
+            }
+            finally
+            {
+                buttonSearch.Enabled = true;
+            }
         }
 
         private void SearchForEntryForm_KeyDown(object sender, KeyEventArgs e)
