@@ -219,25 +219,6 @@ namespace SAI_Editor
             }
         }
 
-        private void comboBoxSearchType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (comboBoxSearchType.SelectedIndex)
-            {
-                case 2: //! Creature guid
-                case 5: //! Gameobject guid
-                case 1: //! Creature entry
-                case 4: //! Gameobject entry
-                    textBoxCriteria.Text = "";
-                    break;
-                case 0: //! Creature name
-                case 3: //! Gameobject name
-                    //! Do nothing
-                    break;
-                default:
-                    break;
-            }
-        }
-
         private void buttonClearSearchResults_Click(object sender, EventArgs e)
         {
             listViewEntryResults.Items.Clear();
@@ -254,8 +235,8 @@ namespace SAI_Editor
                 case 5: //! Gameobject guid
                 case 1: //! Creature entry
                 case 4: //! Gameobject entry
-                    if (!char.IsNumber(e.KeyChar))
-                        e.Handled = e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.OemMinus;
+                    if (!Char.IsNumber(e.KeyChar))
+                        e.Handled = e.KeyChar != (Char)Keys.Back && e.KeyChar != (Char)Keys.OemMinus;
                     break;
                 case 0: //! Creature name
                 case 3: //! Gameobject name

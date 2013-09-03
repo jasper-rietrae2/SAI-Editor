@@ -97,7 +97,6 @@
             this.comboBoxSearchType.Name = "comboBoxSearchType";
             this.comboBoxSearchType.Size = new System.Drawing.Size(113, 21);
             this.comboBoxSearchType.TabIndex = 7;
-            this.comboBoxSearchType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearchType_SelectedIndexChanged);
             // 
             // checkBoxHasAiName
             // 
