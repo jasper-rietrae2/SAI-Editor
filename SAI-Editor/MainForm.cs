@@ -98,6 +98,21 @@ namespace SAI_Editor
             menuItemAbout.Click += menuItemAbout_Click;
             menuItemDeleteSelectedRow.Click += menuOptionDeleteSelectedRow_Click;
 
+            menuItemExit.ShortcutKeys = (Keys.Shift | Keys.F5);
+            menuItemExit.ShortcutKeyDisplayString = "(Shift + F5)";
+
+            menuItemReconnect.ShortcutKeys = (Keys.Shift | Keys.F4);
+            menuItemReconnect.ShortcutKeyDisplayString = "(Shift + F4)";
+
+            menuItemSettings.ShortcutKeys = Keys.F1;
+            menuItemSettings.ShortcutKeyDisplayString = "(F1)";
+
+            menuItemAbout.ShortcutKeys = (Keys.Alt | Keys.F1);
+            menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
+
+            menuItemDeleteSelectedRow.ShortcutKeys = (Keys.Control | Keys.D);
+            menuItemDeleteSelectedRow.ShortcutKeyDisplayString = "(Ctrl + D)";
+
             listViewSmartScripts.View = View.Details;
             listViewSmartScripts.FullRowSelect = true;
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);  // 0
