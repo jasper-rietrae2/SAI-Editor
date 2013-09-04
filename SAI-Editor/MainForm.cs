@@ -37,6 +37,7 @@ namespace SAI_Editor
         private int originalHeight = 0, originalWidth = 0;
         private readonly Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
         private int WidthToExpandTo = 985, HeightToExpandTo = 505; //! Need to be variables instead of inside an enumerator because we have to change the values
+        public int animationSpeed = 5;
 
         public MainForm()
         {
@@ -67,6 +68,7 @@ namespace SAI_Editor
             textBoxPassword.Text = settings.GetSetting("Password", string.Empty);
             textBoxWorldDatabase.Text = settings.GetSetting("Database", "trinitycore_world");
             textBoxPort.Text = settings.GetSetting("Port", "3306");
+            animationSpeed = Convert.ToInt32(settings.GetSetting("AnimationSpeed", "6"));
 
             KeyPreview = true;
             KeyDown += MainForm_KeyDown;
@@ -179,7 +181,7 @@ namespace SAI_Editor
             if (expandingToMainForm)
             {
                 if (Height < HeightToExpandTo)
-                    Height += 5;
+                    Height += animationSpeed;
                 else
                 {
                     Height = HeightToExpandTo;
@@ -194,7 +196,7 @@ namespace SAI_Editor
                 }
 
                 if (Width < WidthToExpandTo)
-                    Width += 5;
+                    Width += animationSpeed;
                 else
                 {
                     Width = WidthToExpandTo;
@@ -211,7 +213,7 @@ namespace SAI_Editor
             else if (contractingToLoginForm)
             {
                 if (Height > originalHeight)
-                    Height -= 5;
+                    Height -= animationSpeed;
                 else
                 {
                     Height = originalHeight;
@@ -226,7 +228,7 @@ namespace SAI_Editor
                 }
 
                 if (Width > originalWidth)
-                    Width -= 5;
+                    Width -= animationSpeed;
                 else
                 {
                     Width = originalWidth;

@@ -24,6 +24,9 @@ namespace SAI_Editor
             KeyPreview = true;
             KeyDown += SettingsForm_KeyDown;
 
+            textBoxAnimationSpeed.KeyPress += textBoxAnimationSpeed_KeyPress;
+            trackBarAnimationSpeed.ValueChanged += trackBarAnimationSpeed_ValueChanged;
+
             settings = ((MainForm)Owner).settings;
             textBoxHost.Text = settings.GetSetting("Host", "localhost");
             textBoxUsername.Text = settings.GetSetting("User", "root");
@@ -35,9 +38,7 @@ namespace SAI_Editor
             checkBoxLoadScriptOfEntry.Checked = settings.GetSetting("LoadScriptInstantly", "yes") == "yes";
             checkBoxAutoSaveSettings.Checked = settings.GetSetting("AutoSaveSettings", "no") == "yes";
             checkBoxPromptToQuit.Checked = settings.GetSetting("PromptToQuit", "yes") == "yes";
-
-            textBoxAnimationSpeed.KeyPress += textBoxAnimationSpeed_KeyPress;
-            trackBarAnimationSpeed.ValueChanged += trackBarAnimationSpeed_ValueChanged;
+            textBoxAnimationSpeed.Text = settings.GetSetting("AnimationSpeed", "6");
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -59,6 +60,7 @@ namespace SAI_Editor
             settings.PutSetting("LoadScriptInstantly", (checkBoxLoadScriptOfEntry.Checked ? "yes" : "no"));
             settings.PutSetting("AutoSaveSettings", (checkBoxAutoSaveSettings.Checked ? "yes" : "no"));
             settings.PutSetting("PromptToQuit", (checkBoxPromptToQuit.Checked ? "yes" : "no"));
+            settings.PutSetting("AnimationSpeed", textBoxAnimationSpeed.Text);
             checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
 
             //! Update main form's fields so re-connecting will work with new settings
@@ -67,6 +69,8 @@ namespace SAI_Editor
             ((MainForm)Owner).textBoxPassword.Text = textBoxPassword.Text;
             ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
+
+            ((MainForm)Owner).animationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
         }
 
         private void buttonExitSettings_Click(object sender, EventArgs e)
@@ -94,7 +98,8 @@ namespace SAI_Editor
                 textBoxPassword.Text == settings.GetSetting("Password", String.Empty) && textBoxWorldDatabase.Text == settings.GetSetting("Database", "trinitycore_world") &&
                 textBoxPort.Text == settings.GetSetting("Port", "3306") && checkBoxAutoConnect.Checked == (settings.GetSetting("AutoConnect", "no") == "yes") &&
                 checkBoxExpandInstantly.Checked == (settings.GetSetting("InstantExpand", "no") == "yes") && checkBoxLoadScriptOfEntry.Checked == (settings.GetSetting("LoadScriptInstantly", "yes") == "yes") &&
-                checkBoxAutoSaveSettings.Checked == (settings.GetSetting("AutoSaveSettings", "no") == "yes") && checkBoxPromptToQuit.Checked == (settings.GetSetting("PromptToQuit", "yes") == "yes"))
+                checkBoxAutoSaveSettings.Checked == (settings.GetSetting("AutoSaveSettings", "no") == "yes") && checkBoxPromptToQuit.Checked == (settings.GetSetting("PromptToQuit", "yes") == "yes") &&
+                textBoxAnimationSpeed.Text == settings.GetSetting("AnimationSpeed", "6"))
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -148,7 +153,7 @@ namespace SAI_Editor
             textBoxAnimationSpeed.Text = (trackBarAnimationSpeed.Value).ToString();
         }
 
-        private void textBoxAnimationSpeed_ValueChanged(object sender, EventArgs e)
+        private void textBoxAnimationSpeed_TextChanged(object sender, EventArgs e)
         {
             int newValue = Convert.ToInt32(textBoxAnimationSpeed.Text);
 
@@ -161,7 +166,7 @@ namespace SAI_Editor
             trackBarAnimationSpeed.Value = newValue;
 
             if (newValue != Convert.ToInt32(textBoxAnimationSpeed.Text))
-                textBoxAnimationSpeed.Value = newValue;
+                textBoxAnimationSpeed.Text = newValue.ToString();
         }
     }
 }

@@ -52,12 +52,11 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonClearSettings = new System.Windows.Forms.Button();
-            this.textBoxAnimationSpeed = new System.Windows.Forms.NumericUpDown();
+            this.textBoxAnimationSpeed = new System.Windows.Forms.TextBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
             this.tabPageConnection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxAnimationSpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonExitSettings
@@ -293,26 +292,13 @@
             // 
             // textBoxAnimationSpeed
             // 
-            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 73);
-            this.textBoxAnimationSpeed.Maximum = new decimal(new int[] {
-            12,
-            0,
-            0,
-            0});
-            this.textBoxAnimationSpeed.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.textBoxAnimationSpeed.Enabled = false;
+            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 72);
             this.textBoxAnimationSpeed.Name = "textBoxAnimationSpeed";
-            this.textBoxAnimationSpeed.Size = new System.Drawing.Size(40, 20);
-            this.textBoxAnimationSpeed.TabIndex = 9;
-            this.textBoxAnimationSpeed.Value = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            this.textBoxAnimationSpeed.ValueChanged += new System.EventHandler(this.textBoxAnimationSpeed_ValueChanged);
+            this.textBoxAnimationSpeed.Size = new System.Drawing.Size(37, 20);
+            this.textBoxAnimationSpeed.TabIndex = 8;
+            this.textBoxAnimationSpeed.Text = "6";
+            this.textBoxAnimationSpeed.TextChanged += new System.EventHandler(this.textBoxAnimationSpeed_TextChanged);
             // 
             // SettingsForm
             // 
@@ -333,7 +319,6 @@
             this.tabControlSettings.ResumeLayout(false);
             this.tabPageConnection.ResumeLayout(false);
             this.tabPageConnection.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxAnimationSpeed)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -363,7 +348,7 @@
         private System.Windows.Forms.CheckBox checkBoxPromptToQuit;
         private System.Windows.Forms.Label labelAnimationSpeed;
         private System.Windows.Forms.TrackBar trackBarAnimationSpeed;
-        private System.Windows.Forms.NumericUpDown textBoxAnimationSpeed;
+        private System.Windows.Forms.TextBox textBoxAnimationSpeed;
 
     }
 }
