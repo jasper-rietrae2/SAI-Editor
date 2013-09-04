@@ -35,6 +35,9 @@ namespace SAI_Editor
             checkBoxLoadScriptOfEntry.Checked = settings.GetSetting("LoadScriptInstantly", "yes") == "yes";
             checkBoxAutoSaveSettings.Checked = settings.GetSetting("AutoSaveSettings", "no") == "yes";
             checkBoxPromptToQuit.Checked = settings.GetSetting("PromptToQuit", "yes") == "yes";
+
+            textBoxAnimationSpeed.KeyPress += textBoxAnimationSpeed_KeyPress;
+            trackBarAnimationSpeed.ValueChanged += trackBarAnimationSpeed_ValueChanged;
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -126,6 +129,39 @@ namespace SAI_Editor
                     Close();
                     break;
             }
+        }
+
+        private bool IsEmptyString(string str)
+        {
+            return String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str);
+        }
+
+        private void textBoxAnimationSpeed_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //! Only numbers
+            if (!Char.IsNumber(e.KeyChar))
+                e.Handled = e.KeyChar != (char)Keys.Back;
+        }
+
+        private void trackBarAnimationSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            textBoxAnimationSpeed.Text = (trackBarAnimationSpeed.Value).ToString();
+        }
+
+        private void textBoxAnimationSpeed_ValueChanged(object sender, EventArgs e)
+        {
+            int newValue = Convert.ToInt32(textBoxAnimationSpeed.Text);
+
+            if (newValue > 12)
+                newValue = 12;
+
+            if (newValue < 1)
+                newValue = 1;
+
+            trackBarAnimationSpeed.Value = newValue;
+
+            if (newValue != Convert.ToInt32(textBoxAnimationSpeed.Text))
+                textBoxAnimationSpeed.Value = newValue;
         }
     }
 }

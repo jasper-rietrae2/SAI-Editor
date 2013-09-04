@@ -363,7 +363,7 @@ namespace SAI_Editor
 
         private bool IsEmptyString(string str)
         {
-            return (String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str));
+            return String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str);
         }
 
         private bool CanConnectToDatabase()
@@ -627,19 +627,19 @@ namespace SAI_Editor
         private void textBoxEventTypeId_KeyPress(object sender, KeyPressEventArgs e)
         {
             //! Only allow typing keys that are numbers
-            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxEventTypeId.Text) || Convert.ToInt32(textBoxEventTypeId.Text) <= (int)MaxValues.MaxEventType)))
+            if (!(Char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxEventTypeId.Text) || Convert.ToInt32(textBoxEventTypeId.Text) <= (int)MaxValues.MaxEventType)))
                 e.Handled = e.KeyChar != (char)Keys.Back;
         }
 
         private void textBoxActionTypeId_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxActionTypeId.Text) || Convert.ToInt32(textBoxActionTypeId.Text) <= (int)MaxValues.MaxActionType)))
+            if (!(Char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxActionTypeId.Text) || Convert.ToInt32(textBoxActionTypeId.Text) <= (int)MaxValues.MaxActionType)))
                 e.Handled = e.KeyChar != (char)Keys.Back;
         }
 
         private void textBoxTargetTypeId_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxTargetTypeId.Text) || Convert.ToInt32(textBoxTargetTypeId.Text) <= (int)MaxValues.MaxTargetType)))
+            if (!(Char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxTargetTypeId.Text) || Convert.ToInt32(textBoxTargetTypeId.Text) <= (int)MaxValues.MaxTargetType)))
                 e.Handled = e.KeyChar != (char)Keys.Back;
         }
 

@@ -32,6 +32,8 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.labelAnimationSpeed = new System.Windows.Forms.Label();
+            this.trackBarAnimationSpeed = new System.Windows.Forms.TrackBar();
             this.checkBoxPromptToQuit = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoSaveSettings = new System.Windows.Forms.CheckBox();
             this.checkBoxLoadScriptOfEntry = new System.Windows.Forms.CheckBox();
@@ -50,9 +52,12 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonClearSettings = new System.Windows.Forms.Button();
+            this.textBoxAnimationSpeed = new System.Windows.Forms.NumericUpDown();
             this.tabPageGeneral.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
             this.tabPageConnection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxAnimationSpeed)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonExitSettings
@@ -77,6 +82,9 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.textBoxAnimationSpeed);
+            this.tabPageGeneral.Controls.Add(this.labelAnimationSpeed);
+            this.tabPageGeneral.Controls.Add(this.trackBarAnimationSpeed);
             this.tabPageGeneral.Controls.Add(this.checkBoxPromptToQuit);
             this.tabPageGeneral.Controls.Add(this.checkBoxAutoSaveSettings);
             this.tabPageGeneral.Controls.Add(this.checkBoxLoadScriptOfEntry);
@@ -88,6 +96,26 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // labelAnimationSpeed
+            // 
+            this.labelAnimationSpeed.AutoSize = true;
+            this.labelAnimationSpeed.Location = new System.Drawing.Point(6, 75);
+            this.labelAnimationSpeed.Name = "labelAnimationSpeed";
+            this.labelAnimationSpeed.Size = new System.Drawing.Size(91, 13);
+            this.labelAnimationSpeed.TabIndex = 7;
+            this.labelAnimationSpeed.Text = "Animation speed: ";
+            // 
+            // trackBarAnimationSpeed
+            // 
+            this.trackBarAnimationSpeed.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.trackBarAnimationSpeed.Location = new System.Drawing.Point(-4, 94);
+            this.trackBarAnimationSpeed.Maximum = 12;
+            this.trackBarAnimationSpeed.Minimum = 1;
+            this.trackBarAnimationSpeed.Name = "trackBarAnimationSpeed";
+            this.trackBarAnimationSpeed.Size = new System.Drawing.Size(251, 45);
+            this.trackBarAnimationSpeed.TabIndex = 6;
+            this.trackBarAnimationSpeed.Value = 6;
             // 
             // checkBoxPromptToQuit
             // 
@@ -104,7 +132,7 @@
             // checkBoxAutoSaveSettings
             // 
             this.checkBoxAutoSaveSettings.AutoSize = true;
-            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(6, 136);
+            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(124, 136);
             this.checkBoxAutoSaveSettings.Name = "checkBoxAutoSaveSettings";
             this.checkBoxAutoSaveSettings.Size = new System.Drawing.Size(113, 17);
             this.checkBoxAutoSaveSettings.TabIndex = 5;
@@ -263,6 +291,29 @@
             this.buttonClearSettings.UseVisualStyleBackColor = true;
             this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
+            // textBoxAnimationSpeed
+            // 
+            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 73);
+            this.textBoxAnimationSpeed.Maximum = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
+            this.textBoxAnimationSpeed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.textBoxAnimationSpeed.Name = "textBoxAnimationSpeed";
+            this.textBoxAnimationSpeed.Size = new System.Drawing.Size(40, 20);
+            this.textBoxAnimationSpeed.TabIndex = 9;
+            this.textBoxAnimationSpeed.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
+            this.textBoxAnimationSpeed.ValueChanged += new System.EventHandler(this.textBoxAnimationSpeed_ValueChanged);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,9 +329,11 @@
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.tabPageGeneral.ResumeLayout(false);
             this.tabPageGeneral.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).EndInit();
             this.tabControlSettings.ResumeLayout(false);
             this.tabPageConnection.ResumeLayout(false);
             this.tabPageConnection.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxAnimationSpeed)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -308,6 +361,9 @@
         private System.Windows.Forms.CheckBox checkBoxLoadScriptOfEntry;
         private System.Windows.Forms.CheckBox checkBoxAutoSaveSettings;
         private System.Windows.Forms.CheckBox checkBoxPromptToQuit;
+        private System.Windows.Forms.Label labelAnimationSpeed;
+        private System.Windows.Forms.TrackBar trackBarAnimationSpeed;
+        private System.Windows.Forms.NumericUpDown textBoxAnimationSpeed;
 
     }
 }
