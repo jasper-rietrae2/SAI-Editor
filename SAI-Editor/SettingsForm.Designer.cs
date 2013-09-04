@@ -53,6 +53,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.buttonClearSettings = new System.Windows.Forms.Button();
             this.textBoxAnimationSpeed = new System.Windows.Forms.TextBox();
+            this.checkBoxDontHidePass = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -61,7 +62,7 @@
             // 
             // buttonExitSettings
             // 
-            this.buttonExitSettings.Location = new System.Drawing.Point(188, 199);
+            this.buttonExitSettings.Location = new System.Drawing.Point(184, 227);
             this.buttonExitSettings.Name = "buttonExitSettings";
             this.buttonExitSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonExitSettings.TabIndex = 2;
@@ -71,7 +72,7 @@
             // 
             // buttonSaveSettings
             // 
-            this.buttonSaveSettings.Location = new System.Drawing.Point(12, 199);
+            this.buttonSaveSettings.Location = new System.Drawing.Point(12, 227);
             this.buttonSaveSettings.Name = "buttonSaveSettings";
             this.buttonSaveSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveSettings.TabIndex = 3;
@@ -81,6 +82,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.checkBoxDontHidePass);
             this.tabPageGeneral.Controls.Add(this.textBoxAnimationSpeed);
             this.tabPageGeneral.Controls.Add(this.labelAnimationSpeed);
             this.tabPageGeneral.Controls.Add(this.trackBarAnimationSpeed);
@@ -91,7 +93,7 @@
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(243, 159);
+            this.tabPageGeneral.Size = new System.Drawing.Size(243, 187);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
@@ -99,7 +101,7 @@
             // labelAnimationSpeed
             // 
             this.labelAnimationSpeed.AutoSize = true;
-            this.labelAnimationSpeed.Location = new System.Drawing.Point(6, 75);
+            this.labelAnimationSpeed.Location = new System.Drawing.Point(6, 138);
             this.labelAnimationSpeed.Name = "labelAnimationSpeed";
             this.labelAnimationSpeed.Size = new System.Drawing.Size(91, 13);
             this.labelAnimationSpeed.TabIndex = 7;
@@ -108,7 +110,7 @@
             // trackBarAnimationSpeed
             // 
             this.trackBarAnimationSpeed.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBarAnimationSpeed.Location = new System.Drawing.Point(-4, 94);
+            this.trackBarAnimationSpeed.Location = new System.Drawing.Point(-4, 157);
             this.trackBarAnimationSpeed.Maximum = 12;
             this.trackBarAnimationSpeed.Minimum = 1;
             this.trackBarAnimationSpeed.Name = "trackBarAnimationSpeed";
@@ -121,7 +123,7 @@
             this.checkBoxPromptToQuit.AutoSize = true;
             this.checkBoxPromptToQuit.Checked = true;
             this.checkBoxPromptToQuit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(6, 52);
+            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(6, 75);
             this.checkBoxPromptToQuit.Name = "checkBoxPromptToQuit";
             this.checkBoxPromptToQuit.Size = new System.Drawing.Size(171, 17);
             this.checkBoxPromptToQuit.TabIndex = 5;
@@ -131,7 +133,7 @@
             // checkBoxAutoSaveSettings
             // 
             this.checkBoxAutoSaveSettings.AutoSize = true;
-            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(124, 136);
+            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(6, 6);
             this.checkBoxAutoSaveSettings.Name = "checkBoxAutoSaveSettings";
             this.checkBoxAutoSaveSettings.Size = new System.Drawing.Size(113, 17);
             this.checkBoxAutoSaveSettings.TabIndex = 5;
@@ -143,7 +145,7 @@
             this.checkBoxLoadScriptOfEntry.AutoSize = true;
             this.checkBoxLoadScriptOfEntry.Checked = true;
             this.checkBoxLoadScriptOfEntry.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLoadScriptOfEntry.Location = new System.Drawing.Point(6, 29);
+            this.checkBoxLoadScriptOfEntry.Location = new System.Drawing.Point(6, 52);
             this.checkBoxLoadScriptOfEntry.Name = "checkBoxLoadScriptOfEntry";
             this.checkBoxLoadScriptOfEntry.Size = new System.Drawing.Size(159, 17);
             this.checkBoxLoadScriptOfEntry.TabIndex = 5;
@@ -153,7 +155,7 @@
             // checkBoxExpandInstantly
             // 
             this.checkBoxExpandInstantly.AutoSize = true;
-            this.checkBoxExpandInstantly.Location = new System.Drawing.Point(6, 6);
+            this.checkBoxExpandInstantly.Location = new System.Drawing.Point(6, 29);
             this.checkBoxExpandInstantly.Name = "checkBoxExpandInstantly";
             this.checkBoxExpandInstantly.Size = new System.Drawing.Size(166, 17);
             this.checkBoxExpandInstantly.TabIndex = 0;
@@ -167,7 +169,7 @@
             this.tabControlSettings.Location = new System.Drawing.Point(12, 8);
             this.tabControlSettings.Name = "tabControlSettings";
             this.tabControlSettings.SelectedIndex = 0;
-            this.tabControlSettings.Size = new System.Drawing.Size(251, 185);
+            this.tabControlSettings.Size = new System.Drawing.Size(251, 213);
             this.tabControlSettings.TabIndex = 1;
             // 
             // tabPageConnection
@@ -282,7 +284,7 @@
             // 
             // buttonClearSettings
             // 
-            this.buttonClearSettings.Location = new System.Drawing.Point(100, 199);
+            this.buttonClearSettings.Location = new System.Drawing.Point(101, 227);
             this.buttonClearSettings.Name = "buttonClearSettings";
             this.buttonClearSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonClearSettings.TabIndex = 4;
@@ -293,18 +295,28 @@
             // textBoxAnimationSpeed
             // 
             this.textBoxAnimationSpeed.Enabled = false;
-            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 72);
+            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 135);
             this.textBoxAnimationSpeed.Name = "textBoxAnimationSpeed";
             this.textBoxAnimationSpeed.Size = new System.Drawing.Size(37, 20);
             this.textBoxAnimationSpeed.TabIndex = 8;
             this.textBoxAnimationSpeed.Text = "6";
             this.textBoxAnimationSpeed.TextChanged += new System.EventHandler(this.textBoxAnimationSpeed_TextChanged);
             // 
+            // checkBoxDontHidePass
+            // 
+            this.checkBoxDontHidePass.AutoSize = true;
+            this.checkBoxDontHidePass.Location = new System.Drawing.Point(6, 98);
+            this.checkBoxDontHidePass.Name = "checkBoxDontHidePass";
+            this.checkBoxDontHidePass.Size = new System.Drawing.Size(138, 17);
+            this.checkBoxDontHidePass.TabIndex = 9;
+            this.checkBoxDontHidePass.Text = "Don\'t hide my password";
+            this.checkBoxDontHidePass.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 230);
+            this.ClientSize = new System.Drawing.Size(279, 262);
             this.Controls.Add(this.buttonClearSettings);
             this.Controls.Add(this.buttonSaveSettings);
             this.Controls.Add(this.buttonExitSettings);
@@ -349,6 +361,7 @@
         private System.Windows.Forms.Label labelAnimationSpeed;
         private System.Windows.Forms.TrackBar trackBarAnimationSpeed;
         private System.Windows.Forms.TextBox textBoxAnimationSpeed;
+        private System.Windows.Forms.CheckBox checkBoxDontHidePass;
 
     }
 }

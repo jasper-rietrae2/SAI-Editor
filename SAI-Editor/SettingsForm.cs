@@ -39,6 +39,7 @@ namespace SAI_Editor
             checkBoxAutoSaveSettings.Checked = settings.GetSetting("AutoSaveSettings", "no") == "yes";
             checkBoxPromptToQuit.Checked = settings.GetSetting("PromptToQuit", "yes") == "yes";
             textBoxAnimationSpeed.Text = settings.GetSetting("AnimationSpeed", "6");
+            checkBoxDontHidePass.Checked = settings.GetSetting("DontHidePass", "yes") == "yes";
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -61,6 +62,7 @@ namespace SAI_Editor
             settings.PutSetting("AutoSaveSettings", (checkBoxAutoSaveSettings.Checked ? "yes" : "no"));
             settings.PutSetting("PromptToQuit", (checkBoxPromptToQuit.Checked ? "yes" : "no"));
             settings.PutSetting("AnimationSpeed", textBoxAnimationSpeed.Text);
+            settings.PutSetting("DontHidePass", (checkBoxDontHidePass.Checked ? "yes" : "no"));
             checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
 
             //! Update main form's fields so re-connecting will work with new settings
@@ -71,6 +73,8 @@ namespace SAI_Editor
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
 
             ((MainForm)Owner).animationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
+
+            ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(!checkBoxDontHidePass.Checked ? '*' : '\0');
         }
 
         private void buttonExitSettings_Click(object sender, EventArgs e)
@@ -99,7 +103,7 @@ namespace SAI_Editor
                 textBoxPort.Text == settings.GetSetting("Port", "3306") && checkBoxAutoConnect.Checked == (settings.GetSetting("AutoConnect", "no") == "yes") &&
                 checkBoxExpandInstantly.Checked == (settings.GetSetting("InstantExpand", "no") == "yes") && checkBoxLoadScriptOfEntry.Checked == (settings.GetSetting("LoadScriptInstantly", "yes") == "yes") &&
                 checkBoxAutoSaveSettings.Checked == (settings.GetSetting("AutoSaveSettings", "no") == "yes") && checkBoxPromptToQuit.Checked == (settings.GetSetting("PromptToQuit", "yes") == "yes") &&
-                textBoxAnimationSpeed.Text == settings.GetSetting("AnimationSpeed", "6"))
+                textBoxAnimationSpeed.Text == settings.GetSetting("AnimationSpeed", "6") && checkBoxDontHidePass.Checked == (settings.GetSetting("DontHidePass", "yes") == "yes"))
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
