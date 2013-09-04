@@ -5,6 +5,13 @@ using System.Data;
 using System.Drawing;
 using MySql.Data.MySqlClient;
 
+internal enum FormState
+{
+    FormStateLogin,
+    FormStateExpandingOrContracting,
+    FormStateMain,
+};
+
 //internal enum FormSizes
 //{
 //    WidthToExpandTo = 1035,
@@ -38,6 +45,7 @@ namespace SAI_Editor
         private readonly Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
         private int WidthToExpandTo = 985, HeightToExpandTo = 505; //! Need to be variables instead of inside an enumerator because we have to change the values
         public int animationSpeed = 5;
+        private FormState formState = FormState.FormStateLogin;
 
         public MainForm()
         {
@@ -100,19 +108,17 @@ namespace SAI_Editor
             menuItemAbout.Click += menuItemAbout_Click;
             menuItemDeleteSelectedRow.Click += menuOptionDeleteSelectedRow_Click;
 
-            menuItemExit.ShortcutKeys = (Keys.Shift | Keys.F5);
+            //! We hardcode the actual shortcuts because there are certain conditons under which the menu should not be
+            //! opened at all.
+            //menuItemExit.ShortcutKeys = (Keys.Shift | Keys.F5);
             menuItemExit.ShortcutKeyDisplayString = "(Shift + F5)";
-
-            menuItemReconnect.ShortcutKeys = (Keys.Shift | Keys.F4);
+            //menuItemReconnect.ShortcutKeys = (Keys.Shift | Keys.F4);
             menuItemReconnect.ShortcutKeyDisplayString = "(Shift + F4)";
-
-            menuItemSettings.ShortcutKeys = Keys.F1;
+            //menuItemSettings.ShortcutKeys = Keys.F1;
             menuItemSettings.ShortcutKeyDisplayString = "(F1)";
-
-            menuItemAbout.ShortcutKeys = (Keys.Alt | Keys.F1);
+            //menuItemAbout.ShortcutKeys = (Keys.Alt | Keys.F1);
             menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
-
-            menuItemDeleteSelectedRow.ShortcutKeys = (Keys.Control | Keys.D);
+            //menuItemDeleteSelectedRow.ShortcutKeys = (Keys.Control | Keys.D);
             menuItemDeleteSelectedRow.ShortcutKeyDisplayString = "(Ctrl + D)";
 
             listViewSmartScripts.View = View.Details;
@@ -192,6 +198,7 @@ namespace SAI_Editor
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                         FinishedExpandingOrContracting(true);
+                        formState = FormState.FormStateMain;
                     }
                 }
 
@@ -207,6 +214,7 @@ namespace SAI_Editor
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                         FinishedExpandingOrContracting(true);
+                        formState = FormState.FormStateMain;
                     }
                 }
             }
@@ -224,6 +232,7 @@ namespace SAI_Editor
                         timerExpandOrContract.Enabled = false;
                         contractingToLoginForm = false;
                         FinishedExpandingOrContracting(false);
+                        formState = FormState.FormStateLogin;
                     }
                 }
 
@@ -239,6 +248,7 @@ namespace SAI_Editor
                         timerExpandOrContract.Enabled = false;
                         contractingToLoginForm = false;
                         FinishedExpandingOrContracting(false);
+                        formState = FormState.FormStateLogin;
                     }
                 }
             }
@@ -309,6 +319,7 @@ namespace SAI_Editor
             }
             else
             {
+                formState = FormState.FormStateExpandingOrContracting;
                 timerExpandOrContract.Enabled = true;
                 expandingToMainForm = true;
             }
@@ -331,6 +342,7 @@ namespace SAI_Editor
             }
             else
             {
+                formState = FormState.FormStateExpandingOrContracting;
                 timerExpandOrContract.Enabled = true;
                 contractingToLoginForm = true;
             }
@@ -410,6 +422,21 @@ namespace SAI_Editor
                     else
                         panelLoginBox.Location = new Point(1000, 50);
                     break;
+            }
+
+            //! Hardcode shortcuts to menu because of certain conditions
+            if (formState == FormState.FormStateMain)
+            {
+                if (e.KeyData == (Keys.Shift | Keys.F5) || e.KeyData == (Keys.ShiftKey | Keys.F5))
+                    TryCloseApplication();
+                else if (e.KeyData == (Keys.Shift | Keys.F4) || e.KeyData == (Keys.ShiftKey | Keys.F4))
+                    menuItemReconnect_Click(sender, e);
+                else if (e.KeyData == Keys.F1)
+                    menuItemSettings_Click(sender, e);
+                else if (e.KeyData == (Keys.Alt | Keys.F1))
+                    menuItemAbout_Click(sender, e);
+                else if (e.KeyData == (Keys.Control | Keys.D) || e.KeyData == (Keys.ControlKey | Keys.D))
+                    menuOptionDeleteSelectedRow_Click(sender, e);
             }
         }
 
