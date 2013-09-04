@@ -114,8 +114,15 @@ namespace SAI_Editor
         {
             switch (tabControlSettings.SelectedIndex)
             {
-                case 0: //! 'Other' tab
+                case 0: //! 'General' tab
                     checkBoxExpandInstantly.Checked = false;
+                    checkBoxAutoSaveSettings.Checked = false;
+                    checkBoxExpandInstantly.Checked = false;
+                    checkBoxLoadScriptOfEntry.Checked = false;
+                    checkBoxPromptToQuit.Checked = false;
+                    checkBoxDontHidePass.Checked = false;
+                    textBoxAnimationSpeed.Text = "6";
+                    trackBarAnimationSpeed.Value = 6;
                     break;
                 case 1: // ! 'Connection' tab
                     textBoxHost.Text = "";
