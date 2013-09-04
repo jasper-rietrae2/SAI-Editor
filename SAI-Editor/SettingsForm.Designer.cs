@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
-            this.tabPage = new System.Windows.Forms.TabPage();
+            this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxPromptToQuit = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoSaveSettings = new System.Windows.Forms.CheckBox();
             this.checkBoxLoadScriptOfEntry = new System.Windows.Forms.CheckBox();
             this.checkBoxExpandInstantly = new System.Windows.Forms.CheckBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
@@ -48,9 +50,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonClearSettings = new System.Windows.Forms.Button();
-            this.checkBoxAutoSaveSettings = new System.Windows.Forms.CheckBox();
-            this.checkBoxPromptToQuit = new System.Windows.Forms.CheckBox();
-            this.tabPage.SuspendLayout();
+            this.tabPageGeneral.SuspendLayout();
             this.tabControlSettings.SuspendLayout();
             this.tabPageConnection.SuspendLayout();
             this.SuspendLayout();
@@ -75,19 +75,41 @@
             this.buttonSaveSettings.UseVisualStyleBackColor = true;
             this.buttonSaveSettings.Click += new System.EventHandler(this.buttonSaveSettings_Click);
             // 
-            // tabPage
+            // tabPageGeneral
             // 
-            this.tabPage.Controls.Add(this.checkBoxPromptToQuit);
-            this.tabPage.Controls.Add(this.checkBoxAutoSaveSettings);
-            this.tabPage.Controls.Add(this.checkBoxLoadScriptOfEntry);
-            this.tabPage.Controls.Add(this.checkBoxExpandInstantly);
-            this.tabPage.Location = new System.Drawing.Point(4, 22);
-            this.tabPage.Name = "tabPage";
-            this.tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage.Size = new System.Drawing.Size(243, 159);
-            this.tabPage.TabIndex = 0;
-            this.tabPage.Text = "Other";
-            this.tabPage.UseVisualStyleBackColor = true;
+            this.tabPageGeneral.Controls.Add(this.checkBoxPromptToQuit);
+            this.tabPageGeneral.Controls.Add(this.checkBoxAutoSaveSettings);
+            this.tabPageGeneral.Controls.Add(this.checkBoxLoadScriptOfEntry);
+            this.tabPageGeneral.Controls.Add(this.checkBoxExpandInstantly);
+            this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGeneral.Name = "tabPageGeneral";
+            this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGeneral.Size = new System.Drawing.Size(243, 159);
+            this.tabPageGeneral.TabIndex = 0;
+            this.tabPageGeneral.Text = "General";
+            this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPromptToQuit
+            // 
+            this.checkBoxPromptToQuit.AutoSize = true;
+            this.checkBoxPromptToQuit.Checked = true;
+            this.checkBoxPromptToQuit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(6, 52);
+            this.checkBoxPromptToQuit.Name = "checkBoxPromptToQuit";
+            this.checkBoxPromptToQuit.Size = new System.Drawing.Size(171, 17);
+            this.checkBoxPromptToQuit.TabIndex = 5;
+            this.checkBoxPromptToQuit.Text = "Ask me if I\'m sure I want to exit";
+            this.checkBoxPromptToQuit.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAutoSaveSettings
+            // 
+            this.checkBoxAutoSaveSettings.AutoSize = true;
+            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(6, 136);
+            this.checkBoxAutoSaveSettings.Name = "checkBoxAutoSaveSettings";
+            this.checkBoxAutoSaveSettings.Size = new System.Drawing.Size(113, 17);
+            this.checkBoxAutoSaveSettings.TabIndex = 5;
+            this.checkBoxAutoSaveSettings.Text = "Auto save settings";
+            this.checkBoxAutoSaveSettings.UseVisualStyleBackColor = true;
             // 
             // checkBoxLoadScriptOfEntry
             // 
@@ -113,7 +135,7 @@
             // 
             // tabControlSettings
             // 
-            this.tabControlSettings.Controls.Add(this.tabPage);
+            this.tabControlSettings.Controls.Add(this.tabPageGeneral);
             this.tabControlSettings.Controls.Add(this.tabPageConnection);
             this.tabControlSettings.Location = new System.Drawing.Point(12, 8);
             this.tabControlSettings.Name = "tabControlSettings";
@@ -241,28 +263,6 @@
             this.buttonClearSettings.UseVisualStyleBackColor = true;
             this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
-            // checkBoxAutoSaveSettings
-            // 
-            this.checkBoxAutoSaveSettings.AutoSize = true;
-            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(6, 136);
-            this.checkBoxAutoSaveSettings.Name = "checkBoxAutoSaveSettings";
-            this.checkBoxAutoSaveSettings.Size = new System.Drawing.Size(113, 17);
-            this.checkBoxAutoSaveSettings.TabIndex = 5;
-            this.checkBoxAutoSaveSettings.Text = "Auto save settings";
-            this.checkBoxAutoSaveSettings.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxPromptToQuit
-            // 
-            this.checkBoxPromptToQuit.AutoSize = true;
-            this.checkBoxPromptToQuit.Checked = true;
-            this.checkBoxPromptToQuit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(6, 52);
-            this.checkBoxPromptToQuit.Name = "checkBoxPromptToQuit";
-            this.checkBoxPromptToQuit.Size = new System.Drawing.Size(171, 17);
-            this.checkBoxPromptToQuit.TabIndex = 5;
-            this.checkBoxPromptToQuit.Text = "Ask me if I\'m sure I want to exit";
-            this.checkBoxPromptToQuit.UseVisualStyleBackColor = true;
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -276,8 +276,8 @@
             this.Name = "SettingsForm";
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
-            this.tabPage.ResumeLayout(false);
-            this.tabPage.PerformLayout();
+            this.tabPageGeneral.ResumeLayout(false);
+            this.tabPageGeneral.PerformLayout();
             this.tabControlSettings.ResumeLayout(false);
             this.tabPageConnection.ResumeLayout(false);
             this.tabPageConnection.PerformLayout();
@@ -289,7 +289,7 @@
 
         private System.Windows.Forms.Button buttonExitSettings;
         private System.Windows.Forms.Button buttonSaveSettings;
-        private System.Windows.Forms.TabPage tabPage;
+        private System.Windows.Forms.TabPage tabPageGeneral;
         private System.Windows.Forms.TabControl tabControlSettings;
         private System.Windows.Forms.Button buttonClearSettings;
         private System.Windows.Forms.TabPage tabPageConnection;
