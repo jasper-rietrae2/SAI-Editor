@@ -37,8 +37,8 @@ namespace SAI_Editor
             checkBoxLoadScriptOfEntry.Checked = settings.GetSetting("LoadScriptInstantly", "yes") == "yes";
             checkBoxAutoSaveSettings.Checked = settings.GetSetting("AutoSaveSettings", "no") == "yes";
             checkBoxPromptToQuit.Checked = settings.GetSetting("PromptToQuit", "yes") == "yes";
-            textBoxAnimationSpeed.Text = settings.GetSetting("AnimationSpeed", "6");
-            checkBoxDontHidePass.Checked = settings.GetSetting("DontHidePass", "yes") == "yes";
+            textBoxAnimationSpeed.Text = settings.GetSetting("AnimationSpeed", "10");
+            checkBoxDontHidePass.Checked = settings.GetSetting("DontHidePass", "no") == "yes";
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -104,7 +104,7 @@ namespace SAI_Editor
                 textBoxPort.Text == settings.GetSetting("Port", "3306") && checkBoxAutoConnect.Checked == (settings.GetSetting("AutoConnect", "no") == "yes") &&
                 checkBoxExpandInstantly.Checked == (settings.GetSetting("InstantExpand", "no") == "yes") && checkBoxLoadScriptOfEntry.Checked == (settings.GetSetting("LoadScriptInstantly", "yes") == "yes") &&
                 checkBoxAutoSaveSettings.Checked == (settings.GetSetting("AutoSaveSettings", "no") == "yes") && checkBoxPromptToQuit.Checked == (settings.GetSetting("PromptToQuit", "yes") == "yes") &&
-                textBoxAnimationSpeed.Text == settings.GetSetting("AnimationSpeed", "6") && checkBoxDontHidePass.Checked == (settings.GetSetting("DontHidePass", "yes") == "yes"))
+                textBoxAnimationSpeed.Text == settings.GetSetting("AnimationSpeed", "10") && checkBoxDontHidePass.Checked == (settings.GetSetting("DontHidePass", "no") == "yes"))
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -122,8 +122,8 @@ namespace SAI_Editor
                     checkBoxLoadScriptOfEntry.Checked = false;
                     checkBoxPromptToQuit.Checked = false;
                     checkBoxDontHidePass.Checked = false;
-                    textBoxAnimationSpeed.Text = "6";
-                    trackBarAnimationSpeed.Value = 6;
+                    textBoxAnimationSpeed.Text = "10";
+                    trackBarAnimationSpeed.Value = 10;
                     break;
                 case 1: // ! 'Connection' tab
                     textBoxHost.Text = "";

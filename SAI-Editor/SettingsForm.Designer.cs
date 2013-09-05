@@ -115,7 +115,7 @@
             this.textBoxAnimationSpeed.Name = "textBoxAnimationSpeed";
             this.textBoxAnimationSpeed.Size = new System.Drawing.Size(37, 20);
             this.textBoxAnimationSpeed.TabIndex = 8;
-            this.textBoxAnimationSpeed.Text = "5";
+            this.textBoxAnimationSpeed.Text = "10";
             this.textBoxAnimationSpeed.TextChanged += new System.EventHandler(this.textBoxAnimationSpeed_TextChanged);
             // 
             // labelAnimationSpeed
@@ -136,7 +136,7 @@
             this.trackBarAnimationSpeed.Name = "trackBarAnimationSpeed";
             this.trackBarAnimationSpeed.Size = new System.Drawing.Size(251, 45);
             this.trackBarAnimationSpeed.TabIndex = 6;
-            this.trackBarAnimationSpeed.Value = 6;
+            this.trackBarAnimationSpeed.Value = 10;
             // 
             // checkBoxPromptToQuit
             // 
