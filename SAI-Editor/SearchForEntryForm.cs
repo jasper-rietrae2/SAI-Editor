@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Drawing;
 using System.Globalization;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Threading;
 using MySql.Data.MySqlClient;
 
 namespace SAI_Editor
 {
     public partial class SearchForEntryForm : Form
     {
+        private Thread searchThread = null;
         private readonly MySqlConnectionStringBuilder connectionString;
         private readonly bool searchingForCreature = false;
 
@@ -49,7 +50,7 @@ namespace SAI_Editor
             //listViewCreatureResults.ColumnClick += new ColumnClickEventHandler(listViewCreatureResults_ColumnClick);
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM {0} ORDER BY entry LIMIT 1000", (searchingForCreature ? "creature_template" : "gameobject_template")));
+            SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM {0} ORDER BY entry LIMIT 1000", (searchingForCreature ? "creature_template" : "gameobject_template")), false);
         }
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
@@ -57,7 +58,7 @@ namespace SAI_Editor
             FillMainFormEntryOrGuidField(sender, e);
         }
 
-        private void SelectFromCreatureTemplate(string queryToExecute)
+        private void SelectFromCreatureTemplate(string queryToExecute, bool crossThread)
         {
             try
             {
@@ -66,12 +67,21 @@ namespace SAI_Editor
                     connection.Open();
 
                     using (var query = new MySqlCommand(queryToExecute, connection))
+                    {
                         using (MySqlDataReader reader = query.ExecuteReader())
+                        {
                             while (reader != null && reader.Read())
-                                listViewEntryResults.Items.Add(reader.GetInt32(0).ToString(CultureInfo.InvariantCulture)).SubItems.Add(reader.GetString(1));
+                            {
+                                if (crossThread)
+                                    AddItemToListView(listViewEntryResults, reader.GetInt32(0).ToString(CultureInfo.InvariantCulture), reader.GetString(1));
+                                else
+                                    listViewEntryResults.Items.Add(reader.GetInt32(0).ToString(CultureInfo.InvariantCulture)).SubItems.Add(reader.GetString(1));
+                            }
+                        }
+                    }
                 }
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -79,10 +89,16 @@ namespace SAI_Editor
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            searchThread = new Thread(StartSearching);
+            searchThread.Start();
+        }
+
+        private void StartSearching()
+        {
             string query = "";
             bool criteriaLeftEmpty = String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text);
 
-            switch (comboBoxSearchType.SelectedIndex)
+            switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
             {
                 case 0: //! Creature name
                     query = "SELECT entry, name FROM creature_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
@@ -185,16 +201,16 @@ namespace SAI_Editor
                     return;
             }
 
-            listViewEntryResults.Items.Clear();
-            buttonSearch.Enabled = false;
+            ClearItemsOfListView(listViewEntryResults);
+            SetEnabledOfControl(buttonSearch, false);
 
             try
             {
-                SelectFromCreatureTemplate(query);
+                SelectFromCreatureTemplate(query, true);
             }
             finally
             {
-                buttonSearch.Enabled = true;
+                SetEnabledOfControl(buttonSearch, true);
             }
         }
 
@@ -221,7 +237,15 @@ namespace SAI_Editor
 
         private void buttonClearSearchResults_Click(object sender, EventArgs e)
         {
-            listViewEntryResults.Items.Clear();
+            try
+            {
+                if (searchThread != null && searchThread.IsAlive)
+                {
+                    searchThread.Abort();
+                    searchThread = null;
+                }
+            }
+            catch (Exception) { };
         }
 
         private void textBoxCriteria_KeyPress(object sender, KeyPressEventArgs e)
@@ -269,6 +293,59 @@ namespace SAI_Editor
                 ((MainForm)Owner).pictureBox1_Click(sender, e);
 
             Close();
+        }
+
+        //! Cross-thread functions:
+        private delegate int GetSelectedIndexOfComboBoxDelegate(ComboBox comboBox);
+
+        private int GetSelectedIndexOfComboBox(ComboBox comboBox)
+        {
+            if (comboBox.InvokeRequired)
+            {
+                Invoke(new GetSelectedIndexOfComboBoxDelegate(GetSelectedIndexOfComboBox), new object[] { comboBox });
+                return 0;
+            }
+
+            return comboBox.SelectedIndex;
+        }
+
+        private delegate void AddItemToListViewDelegate(ListView listView, string item, string subItem);
+
+        private void AddItemToListView(ListView listView, string item, string subItem)
+        {
+            if (listView.InvokeRequired)
+            {
+                Invoke(new AddItemToListViewDelegate(AddItemToListView), new object[] { listView, item, subItem });
+                return;
+            }
+
+            listView.Items.Add(item).SubItems.Add(subItem);
+        }
+
+        private delegate void SetEnabledOfControlDelegate(Control control, bool enable);
+
+        private void SetEnabledOfControl(Control control, bool enable)
+        {
+            if (control.InvokeRequired)
+            {
+                Invoke(new SetEnabledOfControlDelegate(SetEnabledOfControl), new object[] { control, enable });
+                return;
+            }
+
+            control.Enabled = enable;
+        }
+
+        private delegate void ClearItemsOfListViewDelegate(ListView listView);
+
+        private void ClearItemsOfListView(ListView listView)
+        {
+            if (listView.InvokeRequired)
+            {
+                Invoke(new ClearItemsOfListViewDelegate(ClearItemsOfListView), new object[] { listView });
+                return;
+            }
+
+            listView.Items.Clear();
         }
     }
 }

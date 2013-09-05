@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForEntryForm));
             this.groupBoxSearchInfo = new System.Windows.Forms.GroupBox();
-            this.buttonClearSearchResults = new System.Windows.Forms.Button();
+            this.buttonStopSearching = new System.Windows.Forms.Button();
             this.checkBoxFieldContainsCriteria = new System.Windows.Forms.CheckBox();
             this.textBoxCriteria = new System.Windows.Forms.TextBox();
             this.comboBoxSearchType = new System.Windows.Forms.ComboBox();
@@ -42,7 +42,7 @@
             // 
             // groupBoxSearchInfo
             // 
-            this.groupBoxSearchInfo.Controls.Add(this.buttonClearSearchResults);
+            this.groupBoxSearchInfo.Controls.Add(this.buttonStopSearching);
             this.groupBoxSearchInfo.Controls.Add(this.checkBoxFieldContainsCriteria);
             this.groupBoxSearchInfo.Controls.Add(this.textBoxCriteria);
             this.groupBoxSearchInfo.Controls.Add(this.comboBoxSearchType);
@@ -55,15 +55,15 @@
             this.groupBoxSearchInfo.TabStop = false;
             this.groupBoxSearchInfo.Text = "Search information";
             // 
-            // buttonClearSearchResults
+            // buttonStopSearching
             // 
-            this.buttonClearSearchResults.Location = new System.Drawing.Point(173, 67);
-            this.buttonClearSearchResults.Name = "buttonClearSearchResults";
-            this.buttonClearSearchResults.Size = new System.Drawing.Size(75, 23);
-            this.buttonClearSearchResults.TabIndex = 10;
-            this.buttonClearSearchResults.Text = "Clear";
-            this.buttonClearSearchResults.UseVisualStyleBackColor = true;
-            this.buttonClearSearchResults.Click += new System.EventHandler(this.buttonClearSearchResults_Click);
+            this.buttonStopSearching.Location = new System.Drawing.Point(173, 67);
+            this.buttonStopSearching.Name = "buttonStopSearching";
+            this.buttonStopSearching.Size = new System.Drawing.Size(75, 23);
+            this.buttonStopSearching.TabIndex = 10;
+            this.buttonStopSearching.Text = "Stop";
+            this.buttonStopSearching.UseVisualStyleBackColor = true;
+            this.buttonStopSearching.Click += new System.EventHandler(this.buttonClearSearchResults_Click);
             // 
             // checkBoxFieldContainsCriteria
             // 
@@ -151,7 +151,7 @@
         private System.Windows.Forms.ComboBox comboBoxSearchType;
         private System.Windows.Forms.TextBox textBoxCriteria;
         private System.Windows.Forms.CheckBox checkBoxFieldContainsCriteria;
-        private System.Windows.Forms.Button buttonClearSearchResults;
+        private System.Windows.Forms.Button buttonStopSearching;
         private System.Windows.Forms.ListView listViewEntryResults;
     }
 }
