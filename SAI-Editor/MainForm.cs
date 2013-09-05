@@ -167,9 +167,6 @@ namespace SAI_Editor
             listViewSmartScripts.Click += listViewSmartScripts_Click;
 
             //listViewSmartScripts.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-            textBoxEventTypeId.KeyPress += textBoxEventTypeId_KeyPress;
-            textBoxActionTypeId.KeyPress += textBoxActionTypeId_KeyPress;
-            textBoxTargetTypeId.KeyPress += textBoxTargetTypeId_KeyPress;
 
             tabControlParameters.AutoScrollOffset = new Point(5, 5);
 
@@ -189,6 +186,9 @@ namespace SAI_Editor
                         if (controlTabPage is TextBox)
                             controlTabPage.KeyPress += numericField_KeyPress;
 
+            textBoxEventTypeId.KeyPress += numericField_KeyPress;
+            textBoxActionTypeId.KeyPress += numericField_KeyPress;
+            textBoxTargetTypeId.KeyPress += numericField_KeyPress;
             textBoxEntryOrGuid.KeyPress += numericField_KeyPress;
             textBoxEventScriptId.KeyPress += numericField_KeyPress;
             textBoxLinkId.KeyPress += numericField_KeyPress;
@@ -667,25 +667,6 @@ namespace SAI_Editor
             e.Handled = true; //! Disallow changing content of the combobox (because setting it to 3D looks like shit)
         }
 
-        private void textBoxEventTypeId_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //! Only allow typing keys that are numbers
-            if (!(Char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxEventTypeId.Text) || Convert.ToInt32(textBoxEventTypeId.Text) <= (int)MaxValues.MaxEventType)))
-                e.Handled = e.KeyChar != (char)Keys.Back;
-        }
-
-        private void textBoxActionTypeId_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!(Char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxActionTypeId.Text) || Convert.ToInt32(textBoxActionTypeId.Text) <= (int)MaxValues.MaxActionType)))
-                e.Handled = e.KeyChar != (char)Keys.Back;
-        }
-
-        private void textBoxTargetTypeId_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!(Char.IsNumber(e.KeyChar) && (IsEmptyString(textBoxTargetTypeId.Text) || Convert.ToInt32(textBoxTargetTypeId.Text) <= (int)MaxValues.MaxTargetType)))
-                e.Handled = e.KeyChar != (char)Keys.Back;
-        }
-
         private void textBoxEventTypeId_TextChanged(object sender, EventArgs e)
         {
             if (IsEmptyString(textBoxEventTypeId.Text))
@@ -695,7 +676,11 @@ namespace SAI_Editor
                 textBoxEventTypeId.SelectionStart = 3; //! Set cursor position to end of the line
             }
             else if (Convert.ToInt32(textBoxEventTypeId.Text) > (int)MaxValues.MaxEventType)
+            {
                 comboBoxEventType.SelectedIndex = (int)MaxValues.MaxEventType;
+                textBoxEventTypeId.Text = ((int)MaxValues.MaxEventType).ToString();
+                textBoxEventTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+            }
             else
                 comboBoxEventType.SelectedIndex = Convert.ToInt32(textBoxEventTypeId.Text);
         }
@@ -709,7 +694,11 @@ namespace SAI_Editor
                 textBoxActionTypeId.SelectionStart = 3; //! Set cursor position to end of the line
             }
             else if (Convert.ToInt32(textBoxActionTypeId.Text) > (int)MaxValues.MaxActionType)
+            {
                 comboBoxActionType.SelectedIndex = (int)MaxValues.MaxActionType;
+                textBoxActionTypeId.Text = ((int)MaxValues.MaxActionType).ToString();
+                textBoxActionTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+            }
             else
                 comboBoxActionType.SelectedIndex = Convert.ToInt32(textBoxActionTypeId.Text);
         }
@@ -723,7 +712,11 @@ namespace SAI_Editor
                 textBoxTargetTypeId.SelectionStart = 3; //! Set cursor position to end of the line
             }
             else if (Convert.ToInt32(textBoxTargetTypeId.Text) > (int)MaxValues.MaxTargetType)
+            {
                 comboBoxTargetType.SelectedIndex = (int)MaxValues.MaxTargetType;
+                textBoxTargetTypeId.Text = ((int)MaxValues.MaxTargetType).ToString();
+                textBoxTargetTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+            }
             else
                 comboBoxTargetType.SelectedIndex = Convert.ToInt32(textBoxTargetTypeId.Text);
         }
