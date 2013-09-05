@@ -428,6 +428,10 @@ namespace SAI_Editor
                 case Keys.Escape:
                     TryCloseApplication();
                     break;
+                case Keys.Enter:
+                    if (formState == FormState.FormStateLogin)
+                        buttonConnect_Click(sender, e);
+                    break;
                 case Keys.F5:
                     if (panelLoginBox.Location.X == 1000 && panelLoginBox.Location.Y == 50)
                         panelLoginBox.Location = new Point(9, 8);
