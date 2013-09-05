@@ -743,22 +743,13 @@ namespace SAI_Editor
 
         private void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxListActionlists.Checked)
+            if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex() != (int)SourceTypes.SourceTypeScriptedActionlist)
             {
-                if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex() != (int)SourceTypes.SourceTypeScriptedActionlist)
-                {
-                    listViewSmartScripts.Items.Clear();
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()));
+                listViewSmartScripts.Items.Clear();
+                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()));
+
+                if (checkBoxListActionlists.Checked)
                     SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100));
-                }
-            }
-            else
-            {
-                if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex() != (int)SourceTypes.SourceTypeScriptedActionlist)
-                {
-                    listViewSmartScripts.Items.Clear();
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", listViewSmartScripts.Items[0].Text, GetSourceTypeByIndex()));
-                }
             }
         }
 
