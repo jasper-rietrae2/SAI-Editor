@@ -65,7 +65,7 @@
             this.buttonExitSettings.Location = new System.Drawing.Point(184, 227);
             this.buttonExitSettings.Name = "buttonExitSettings";
             this.buttonExitSettings.Size = new System.Drawing.Size(75, 23);
-            this.buttonExitSettings.TabIndex = 2;
+            this.buttonExitSettings.TabIndex = 9;
             this.buttonExitSettings.Text = "Exit";
             this.buttonExitSettings.UseVisualStyleBackColor = true;
             this.buttonExitSettings.Click += new System.EventHandler(this.buttonExitSettings_Click);
@@ -75,7 +75,7 @@
             this.buttonSaveSettings.Location = new System.Drawing.Point(12, 227);
             this.buttonSaveSettings.Name = "buttonSaveSettings";
             this.buttonSaveSettings.Size = new System.Drawing.Size(75, 23);
-            this.buttonSaveSettings.TabIndex = 3;
+            this.buttonSaveSettings.TabIndex = 7;
             this.buttonSaveSettings.Text = "Save";
             this.buttonSaveSettings.UseVisualStyleBackColor = true;
             this.buttonSaveSettings.Click += new System.EventHandler(this.buttonSaveSettings_Click);
@@ -104,7 +104,7 @@
             this.checkBoxDontHidePass.Location = new System.Drawing.Point(6, 98);
             this.checkBoxDontHidePass.Name = "checkBoxDontHidePass";
             this.checkBoxDontHidePass.Size = new System.Drawing.Size(138, 17);
-            this.checkBoxDontHidePass.TabIndex = 9;
+            this.checkBoxDontHidePass.TabIndex = 4;
             this.checkBoxDontHidePass.Text = "Don\'t hide my password";
             this.checkBoxDontHidePass.UseVisualStyleBackColor = true;
             // 
@@ -115,7 +115,7 @@
             this.textBoxAnimationSpeed.Name = "textBoxAnimationSpeed";
             this.textBoxAnimationSpeed.Size = new System.Drawing.Size(37, 20);
             this.textBoxAnimationSpeed.TabIndex = 8;
-            this.textBoxAnimationSpeed.Text = "6";
+            this.textBoxAnimationSpeed.Text = "5";
             this.textBoxAnimationSpeed.TextChanged += new System.EventHandler(this.textBoxAnimationSpeed_TextChanged);
             // 
             // labelAnimationSpeed
@@ -146,7 +146,7 @@
             this.checkBoxPromptToQuit.Location = new System.Drawing.Point(6, 75);
             this.checkBoxPromptToQuit.Name = "checkBoxPromptToQuit";
             this.checkBoxPromptToQuit.Size = new System.Drawing.Size(171, 17);
-            this.checkBoxPromptToQuit.TabIndex = 5;
+            this.checkBoxPromptToQuit.TabIndex = 3;
             this.checkBoxPromptToQuit.Text = "Ask me if I\'m sure I want to exit";
             this.checkBoxPromptToQuit.UseVisualStyleBackColor = true;
             // 
@@ -156,7 +156,7 @@
             this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(6, 6);
             this.checkBoxAutoSaveSettings.Name = "checkBoxAutoSaveSettings";
             this.checkBoxAutoSaveSettings.Size = new System.Drawing.Size(113, 17);
-            this.checkBoxAutoSaveSettings.TabIndex = 5;
+            this.checkBoxAutoSaveSettings.TabIndex = 0;
             this.checkBoxAutoSaveSettings.Text = "Auto save settings";
             this.checkBoxAutoSaveSettings.UseVisualStyleBackColor = true;
             // 
@@ -168,7 +168,7 @@
             this.checkBoxLoadScriptOfEntry.Location = new System.Drawing.Point(6, 52);
             this.checkBoxLoadScriptOfEntry.Name = "checkBoxLoadScriptOfEntry";
             this.checkBoxLoadScriptOfEntry.Size = new System.Drawing.Size(159, 17);
-            this.checkBoxLoadScriptOfEntry.TabIndex = 5;
+            this.checkBoxLoadScriptOfEntry.TabIndex = 2;
             this.checkBoxLoadScriptOfEntry.Text = "Load script of selected entry";
             this.checkBoxLoadScriptOfEntry.UseVisualStyleBackColor = true;
             // 
@@ -178,7 +178,7 @@
             this.checkBoxExpandInstantly.Location = new System.Drawing.Point(6, 29);
             this.checkBoxExpandInstantly.Name = "checkBoxExpandInstantly";
             this.checkBoxExpandInstantly.Size = new System.Drawing.Size(166, 17);
-            this.checkBoxExpandInstantly.TabIndex = 0;
+            this.checkBoxExpandInstantly.TabIndex = 1;
             this.checkBoxExpandInstantly.Text = "Expand and contract instantly";
             this.checkBoxExpandInstantly.UseVisualStyleBackColor = true;
             this.checkBoxExpandInstantly.CheckedChanged += new System.EventHandler(this.checkBoxExpandInstantly_CheckedChanged);
@@ -219,7 +219,7 @@
             this.checkBoxAutoConnect.Location = new System.Drawing.Point(149, 135);
             this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
             this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxAutoConnect.TabIndex = 29;
+            this.checkBoxAutoConnect.TabIndex = 5;
             this.checkBoxAutoConnect.Text = "Auto connect";
             this.checkBoxAutoConnect.UseVisualStyleBackColor = true;
             // 
@@ -228,35 +228,35 @@
             this.textBoxHost.Location = new System.Drawing.Point(106, 5);
             this.textBoxHost.Name = "textBoxHost";
             this.textBoxHost.Size = new System.Drawing.Size(130, 20);
-            this.textBoxHost.TabIndex = 19;
+            this.textBoxHost.TabIndex = 0;
             // 
             // textBoxUsername
             // 
             this.textBoxUsername.Location = new System.Drawing.Point(106, 31);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
-            this.textBoxUsername.TabIndex = 21;
+            this.textBoxUsername.TabIndex = 1;
             // 
             // textBoxPassword
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(106, 57);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPassword.TabIndex = 23;
+            this.textBoxPassword.TabIndex = 2;
             // 
             // textBoxWorldDatabase
             // 
             this.textBoxWorldDatabase.Location = new System.Drawing.Point(106, 83);
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
             this.textBoxWorldDatabase.Size = new System.Drawing.Size(130, 20);
-            this.textBoxWorldDatabase.TabIndex = 25;
+            this.textBoxWorldDatabase.TabIndex = 3;
             // 
             // textBoxPort
             // 
             this.textBoxPort.Location = new System.Drawing.Point(106, 109);
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPort.TabIndex = 27;
+            this.textBoxPort.TabIndex = 4;
             // 
             // label3
             // 
@@ -308,7 +308,7 @@
             this.buttonClearSettings.Location = new System.Drawing.Point(101, 227);
             this.buttonClearSettings.Name = "buttonClearSettings";
             this.buttonClearSettings.Size = new System.Drawing.Size(75, 23);
-            this.buttonClearSettings.TabIndex = 4;
+            this.buttonClearSettings.TabIndex = 8;
             this.buttonClearSettings.Text = "Clear";
             this.buttonClearSettings.UseVisualStyleBackColor = true;
             this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
