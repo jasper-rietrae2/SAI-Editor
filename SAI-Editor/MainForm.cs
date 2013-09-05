@@ -323,6 +323,7 @@ namespace SAI_Editor
             {
                 Width = WidthToExpandTo;
                 Height = HeightToExpandTo;
+                formState = FormState.FormStateMain;
             }
             else
             {
@@ -346,6 +347,7 @@ namespace SAI_Editor
             {
                 Width = originalWidth;
                 Height = originalHeight;
+                formState = FormState.FormStateMain;
             }
             else
             {
