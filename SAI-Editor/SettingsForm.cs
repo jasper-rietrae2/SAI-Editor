@@ -93,7 +93,7 @@ namespace SAI_Editor
 
         void PromptSaveSettingsOnClose()
         {
-            if (settings.GetSetting("AutoSaveSettings", "no") == "yes")
+            if (checkBoxAutoSaveSettings.Checked)
             {
                 SaveSettings();
                 return;
