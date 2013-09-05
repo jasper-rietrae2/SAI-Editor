@@ -761,7 +761,7 @@ namespace SAI_Editor
                             {
                                 connection.Open();
 
-                                using (var query = new MySqlCommand(String.Format("SELECT id FROM creature WHERE guid={0}", entryOrGuid), connection))
+                                using (var query = new MySqlCommand(String.Format("SELECT id FROM creature WHERE guid={0}", entryOrGuid * -1), connection))
                                     using (MySqlDataReader reader = query.ExecuteReader())
                                         while (reader != null && reader.Read())
                                             scriptEntry = reader.GetInt32(0) * 100;
