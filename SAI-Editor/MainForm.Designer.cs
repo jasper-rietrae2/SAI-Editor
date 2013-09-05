@@ -143,7 +143,7 @@
             this.textBoxTargetParam2 = new System.Windows.Forms.TextBox();
             this.label19 = new System.Windows.Forms.Label();
             this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBoxLogin.SuspendLayout();
@@ -159,7 +159,7 @@
             this.tabPageEvent.SuspendLayout();
             this.tabPageAction.SuspendLayout();
             this.tabPageTarget.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupBoxParameters.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelUser
@@ -1531,16 +1531,16 @@
             this.textBoxTargetParam1.Size = new System.Drawing.Size(187, 20);
             this.textBoxTargetParam1.TabIndex = 39;
             // 
-            // groupBox2
+            // groupBoxParameters
             // 
-            this.groupBox2.Controls.Add(this.tabControlParameters);
-            this.groupBox2.Location = new System.Drawing.Point(675, 31);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(284, 207);
-            this.groupBox2.TabIndex = 23;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Parameters";
-            this.groupBox2.Visible = false;
+            this.groupBoxParameters.Controls.Add(this.tabControlParameters);
+            this.groupBoxParameters.Location = new System.Drawing.Point(675, 31);
+            this.groupBoxParameters.Name = "groupBoxParameters";
+            this.groupBoxParameters.Size = new System.Drawing.Size(284, 207);
+            this.groupBoxParameters.TabIndex = 23;
+            this.groupBoxParameters.TabStop = false;
+            this.groupBoxParameters.Text = "Parameters";
+            this.groupBoxParameters.Visible = false;
             // 
             // listViewSmartScripts
             // 
@@ -1567,7 +1567,7 @@
             this.ClientSize = new System.Drawing.Size(1315, 580);
             this.Controls.Add(this.panelLoginBox);
             this.Controls.Add(this.listViewSmartScripts);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBoxParameters);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.groupBoxScriptInfo);
             this.Controls.Add(this.groupBoxPreferences);
@@ -1599,7 +1599,7 @@
             this.tabPageAction.PerformLayout();
             this.tabPageTarget.ResumeLayout(false);
             this.tabPageTarget.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
+            this.groupBoxParameters.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1645,7 +1645,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemReconnect;
         private System.Windows.Forms.Label labelEventParam1;
         private System.Windows.Forms.TextBox textBoxEventParam1;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxParameters;
         public System.Windows.Forms.GroupBox groupBoxStaticScriptInfo;
         public System.Windows.Forms.TextBox textBoxEntryOrGuid;
         private System.Windows.Forms.ListView listViewSmartScripts;

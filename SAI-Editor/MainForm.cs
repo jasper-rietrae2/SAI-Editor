@@ -182,6 +182,12 @@ namespace SAI_Editor
                 page.AutoScroll = true;
                 page.AutoScrollMinSize = new Size(page.Width, page.Height);
             }
+
+            foreach (Control control in tabControlParameters.Controls)
+                if (control is TabPage)
+                    foreach (Control controlTabPage in control.Controls)
+                        if (controlTabPage is TextBox)
+                            controlTabPage.KeyPress += numericField_KeyPress;
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
@@ -773,6 +779,13 @@ namespace SAI_Editor
 
             if (checkBoxListActionlists.Checked)
                 SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100));
+        }
+
+        private void numericField_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //! Only allow typing keys that are numbers
+            if (!Char.IsNumber(e.KeyChar))
+                e.Handled = e.KeyChar != (char)Keys.Back;
         }
     }
 }

@@ -216,7 +216,7 @@
             // checkBoxAutoConnect
             // 
             this.checkBoxAutoConnect.AutoSize = true;
-            this.checkBoxAutoConnect.Location = new System.Drawing.Point(149, 135);
+            this.checkBoxAutoConnect.Location = new System.Drawing.Point(150, 167);
             this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
             this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
             this.checkBoxAutoConnect.TabIndex = 5;
@@ -232,28 +232,28 @@
             // 
             // textBoxUsername
             // 
-            this.textBoxUsername.Location = new System.Drawing.Point(106, 31);
+            this.textBoxUsername.Location = new System.Drawing.Point(106, 34);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
             this.textBoxUsername.TabIndex = 1;
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(106, 57);
+            this.textBoxPassword.Location = new System.Drawing.Point(106, 63);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
             this.textBoxPassword.TabIndex = 2;
             // 
             // textBoxWorldDatabase
             // 
-            this.textBoxWorldDatabase.Location = new System.Drawing.Point(106, 83);
+            this.textBoxWorldDatabase.Location = new System.Drawing.Point(106, 92);
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
             this.textBoxWorldDatabase.Size = new System.Drawing.Size(130, 20);
             this.textBoxWorldDatabase.TabIndex = 3;
             // 
             // textBoxPort
             // 
-            this.textBoxPort.Location = new System.Drawing.Point(106, 109);
+            this.textBoxPort.Location = new System.Drawing.Point(106, 121);
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
             this.textBoxPort.TabIndex = 4;
@@ -261,7 +261,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 34);
+            this.label3.Location = new System.Drawing.Point(42, 37);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 20;
@@ -270,7 +270,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(44, 60);
+            this.label4.Location = new System.Drawing.Point(44, 66);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 22;
@@ -279,7 +279,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 86);
+            this.label5.Location = new System.Drawing.Point(13, 95);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(87, 13);
             this.label5.TabIndex = 24;
@@ -297,7 +297,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(71, 112);
+            this.label7.Location = new System.Drawing.Point(71, 124);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 13);
             this.label7.TabIndex = 28;
