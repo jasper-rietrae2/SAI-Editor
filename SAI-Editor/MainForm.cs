@@ -537,7 +537,7 @@ namespace SAI_Editor
             }
         }
 
-        private void SelectAndFillListViewWithQuery(string queryToExecute)
+        private void SelectAndFillListViewWithQuery(string queryToExecute, string entryOrGuid)
         {
             try
             {
@@ -550,7 +550,7 @@ namespace SAI_Editor
 
                     if (dataTable.Rows.Count <= 0)
                     {
-                        MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI table for the given source type!", textBoxEntryOrGuid.Text), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI table for the given source type!", entryOrGuid), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -746,10 +746,35 @@ namespace SAI_Editor
             if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex() != (int)SourceTypes.SourceTypeScriptedActionlist)
             {
                 listViewSmartScripts.Items.Clear();
-                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()));
+                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()), textBoxEntryOrGuid.Text);
 
                 if (checkBoxListActionlists.Checked)
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100));
+                {
+                    int entryOrGuid = Convert.ToInt32(textBoxEntryOrGuid.Text);
+                    int scriptEntry = entryOrGuid * 100;
+
+                    if (entryOrGuid < 0)
+                    {
+                        try
+                        {
+                            using (var connection = new MySqlConnection(connectionString.ToString()))
+                            {
+                                connection.Open();
+
+                                using (var query = new MySqlCommand(String.Format("SELECT id FROM creature WHERE guid={0}", entryOrGuid), connection))
+                                    using (MySqlDataReader reader = query.ExecuteReader())
+                                        while (reader != null && reader.Read())
+                                            scriptEntry = reader.GetInt32(0) * 100;
+                            }
+                        }
+                        catch (MySqlException ex)
+                        {
+                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", scriptEntry), scriptEntry.ToString());
+                }
             }
         }
 
@@ -774,10 +799,10 @@ namespace SAI_Editor
                 return;
 
             listViewSmartScripts.Items.Clear();
-            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()));
+            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()), textBoxEntryOrGuid.Text);
 
             if (checkBoxListActionlists.Checked)
-                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100));
+                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100), (Convert.ToInt32(textBoxEntryOrGuid.Text) * 100).ToString());
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
