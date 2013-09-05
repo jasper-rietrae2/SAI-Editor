@@ -20,6 +20,9 @@ namespace SAI_Editor
             MinimizeBox = true;
             FormBorderStyle = FormBorderStyle.Fixed3D;
 
+            KeyPreview = true;
+            KeyDown += MultiSelectForm_KeyDown;
+
             listViewSelectableItems.View = View.Details;
             listViewSelectableItems.FullRowSelect = true;
             listViewSelectableItems.Columns.Add("", 20, HorizontalAlignment.Left);
@@ -40,12 +43,24 @@ namespace SAI_Editor
             {
                 Text = "Select eventflag";
                 listViewSelectableItems.Columns.Add("Flag", 195, HorizontalAlignment.Left);
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NOT_REPEATABLE"); // 0
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_0");   // 1
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_1");   // 2
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_2");   // 3
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_3");   // 4
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DEBUG_ONLY");     // 5
+                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NONE");           // 0
+                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NOT_REPEATABLE"); // 1
+                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_0");   // 2
+                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_1");   // 3
+                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_2");   // 4
+                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_3");   // 5
+                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DEBUG_ONLY");     // 6
+            }
+
+            int bitmask = Convert.ToInt32(searchingForPhasemask ? ((MainForm)Owner).textBoxEventPhasemask.Text : ((MainForm)Owner).textBoxEventFlags.Text);
+
+            if (bitmask == 0)
+                listViewSelectableItems.Items[0].Checked = true;
+            else
+            {
+                foreach (ListViewItem item in listViewSelectableItems.Items)
+                    if (item.Index > 0 && (bitmask & GetMaskByIndex(item.Index)) == GetMaskByIndex(item.Index))
+                        item.Checked = true;
             }
         }
 
@@ -56,19 +71,41 @@ namespace SAI_Editor
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
-            int phase = 0;
+            int mask = 0;
 
             foreach (ListViewItem item in listViewSelectableItems.CheckedItems)
-                phase = (phase << 1) | 1;
+                mask += GetMaskByIndex(item.Index);
 
-            MessageBox.Show(phase.ToString());
+            if (searchingForPhasemask)
+                ((MainForm)Owner).textBoxEventPhasemask.Text = mask.ToString();
+            else
+                ((MainForm)Owner).textBoxEventFlags.Text = mask.ToString();
 
             Close();
         }
 
-        //private int GetMaskByIndex(int index)
-        //{
-            
-        //}
+        private int GetMaskByIndex(int index)
+        {
+            switch (index)
+            {
+                case 1: return 1;
+                case 2: return 2;
+                case 3: return 4;
+                case 4: return 8;
+                case 5: return 16;
+                case 6: return 32;
+                default: return 0;
+            }
+        }
+
+        private void MultiSelectForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    Close();
+                    break;
+            }
+        }
     }
 }
