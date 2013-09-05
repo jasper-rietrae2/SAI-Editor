@@ -649,6 +649,7 @@ namespace SAI_Editor
             textBoxTargetX.Text = selectedItem[23].Text;
             textBoxTargetY.Text = selectedItem[24].Text;
             textBoxTargetZ.Text = selectedItem[25].Text;
+            textBoxTargetO.Text = selectedItem[26].Text;
         }
 
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
