@@ -809,7 +809,7 @@ namespace SAI_Editor
         {
             //! Only allow typing keys that are numbers
             if (!Char.IsNumber(e.KeyChar))
-                e.Handled = e.KeyChar != (char)Keys.Back;
+                e.Handled = e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Insert; //! Inset is '-'
         }
     }
 }
