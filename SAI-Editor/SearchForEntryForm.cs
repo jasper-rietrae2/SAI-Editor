@@ -245,7 +245,7 @@ namespace SAI_Editor
                     searchThread = null;
                 }
             }
-            catch (Exception) { };
+            catch { } //! No need to report anything
         }
 
         private void textBoxCriteria_KeyPress(object sender, KeyPressEventArgs e)
@@ -265,8 +265,6 @@ namespace SAI_Editor
                 case 0: //! Creature name
                 case 3: //! Gameobject name
                     //! Allow any characters when searching for names
-                    break;
-                default:
                     break;
             }
         }
@@ -296,17 +294,12 @@ namespace SAI_Editor
         }
 
         //! Cross-thread functions:
-        private delegate int GetSelectedIndexOfComboBoxDelegate(ComboBox comboBox);
-
         private int GetSelectedIndexOfComboBox(ComboBox comboBox)
         {
             if (comboBox.InvokeRequired)
-            {
-                Invoke(new GetSelectedIndexOfComboBoxDelegate(GetSelectedIndexOfComboBox), new object[] { comboBox });
-                return 0;
-            }
-
-            return comboBox.SelectedIndex;
+                return (int)comboBox.Invoke(new Func<int>(() => GetSelectedIndexOfComboBox(comboBox)));
+            else
+                return comboBox.SelectedIndex;
         }
 
         private delegate void AddItemToListViewDelegate(ListView listView, string item, string subItem);

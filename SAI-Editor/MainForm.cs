@@ -16,6 +16,7 @@ internal enum FormSizes
 {
     Width = 278,
     Height = 260,
+
     WidthToExpandTo = 985,
     HeightToExpandTo = 505,
 };
@@ -195,6 +196,9 @@ namespace SAI_Editor
             textBoxEventPhasemask.KeyPress += numericField_KeyPress;
             textBoxEventFlags.KeyPress += numericField_KeyPress;
             textBoxEventLink.KeyPress += numericField_KeyPress;
+
+            //! Temp..
+            panelLoginBox.Location = new Point(9, 8);
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
@@ -404,7 +408,7 @@ namespace SAI_Editor
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message, "Could not connect.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Could not connect", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 successFulConnection = false;
             }
             finally
@@ -440,7 +444,7 @@ namespace SAI_Editor
                     break;
             }
 
-            //! Hardcode shortcuts to menu because of certain conditions
+            //! Hardcode shortcuts to menu because we can't use conditions otherwise
             if (formState == FormState.FormStateMain)
             {
                 if (e.KeyData == (Keys.Shift | Keys.F5) || e.KeyData == (Keys.ShiftKey | Keys.F5))
