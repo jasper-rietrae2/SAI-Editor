@@ -362,7 +362,7 @@ namespace SAI_Editor
             {
                 Width = originalWidth;
                 Height = originalHeight;
-                formState = FormState.FormStateMain;
+                formState = FormState.FormStateLogin;
             }
             else
             {
