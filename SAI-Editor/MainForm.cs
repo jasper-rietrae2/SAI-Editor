@@ -808,8 +808,19 @@ namespace SAI_Editor
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
         {
             //! Only allow typing keys that are numbers
-            if (!Char.IsNumber(e.KeyChar))
-                e.Handled = e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Insert; //! Inset is '-'
+            //! Inset is '-'
+            if (!Char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Insert)
+                e.Handled = true;
+        }
+
+        private void buttonSearchPhasemask_Click(object sender, EventArgs e)
+        {
+            new MultiSelectForm(true).ShowDialog(this);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new MultiSelectForm(false).ShowDialog(this);
         }
     }
 }

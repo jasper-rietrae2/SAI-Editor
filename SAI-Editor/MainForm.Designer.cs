@@ -60,7 +60,6 @@
             this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonSearchForCreature = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -78,7 +77,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.buttonSearchLink = new System.Windows.Forms.Button();
             this.comboBoxTargetType = new System.Windows.Forms.ComboBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.buttonSelectEventFlag = new System.Windows.Forms.Button();
             this.buttonSearchPhasemask = new System.Windows.Forms.Button();
             this.comboBoxActionType = new System.Windows.Forms.ComboBox();
             this.buttonSearchEventFlags = new System.Windows.Forms.Button();
@@ -146,12 +145,12 @@
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -160,6 +159,7 @@
             this.tabPageAction.SuspendLayout();
             this.tabPageTarget.SuspendLayout();
             this.groupBoxParameters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelUser
@@ -411,9 +411,9 @@
             this.panelLoginBox.Controls.Add(this.buttonConnect);
             this.panelLoginBox.Controls.Add(this.buttonClear);
             this.panelLoginBox.Controls.Add(this.buttonCancel);
-            this.panelLoginBox.Location = new System.Drawing.Point(1000, 50);
+            this.panelLoginBox.Location = new System.Drawing.Point(965, 31);
             this.panelLoginBox.Name = "panelLoginBox";
-            this.panelLoginBox.Size = new System.Drawing.Size(243, 225);
+            this.panelLoginBox.Size = new System.Drawing.Size(243, 207);
             this.panelLoginBox.TabIndex = 13;
             // 
             // groupBoxStaticScriptInfo
@@ -431,18 +431,6 @@
             this.groupBoxStaticScriptInfo.TabStop = false;
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::SAI_Editor.Properties.Resources.icon_load_script;
-            this.pictureBox1.Location = new System.Drawing.Point(260, 19);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(24, 20);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // buttonSearchForCreature
             // 
@@ -591,7 +579,7 @@
             this.groupBoxScriptInfo.Controls.Add(this.button1);
             this.groupBoxScriptInfo.Controls.Add(this.buttonSearchLink);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxTargetType);
-            this.groupBoxScriptInfo.Controls.Add(this.button2);
+            this.groupBoxScriptInfo.Controls.Add(this.buttonSelectEventFlag);
             this.groupBoxScriptInfo.Controls.Add(this.buttonSearchPhasemask);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxActionType);
             this.groupBoxScriptInfo.Controls.Add(this.buttonSearchEventFlags);
@@ -635,7 +623,7 @@
             // 
             // buttonSearchLink
             // 
-            this.buttonSearchLink.Location = new System.Drawing.Point(302, 151);
+            this.buttonSearchLink.Location = new System.Drawing.Point(302, 150);
             this.buttonSearchLink.Name = "buttonSearchLink";
             this.buttonSearchLink.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchLink.TabIndex = 14;
@@ -679,14 +667,15 @@
             this.comboBoxTargetType.TabIndex = 4;
             this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
             // 
-            // button2
+            // buttonSelectEventFlag
             // 
-            this.button2.Location = new System.Drawing.Point(302, 126);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(24, 22);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
+            this.buttonSelectEventFlag.Location = new System.Drawing.Point(302, 125);
+            this.buttonSelectEventFlag.Name = "buttonSelectEventFlag";
+            this.buttonSelectEventFlag.Size = new System.Drawing.Size(24, 22);
+            this.buttonSelectEventFlag.TabIndex = 12;
+            this.buttonSelectEventFlag.Text = "...";
+            this.buttonSelectEventFlag.UseVisualStyleBackColor = true;
+            this.buttonSelectEventFlag.Click += new System.EventHandler(this.button2_Click);
             // 
             // buttonSearchPhasemask
             // 
@@ -696,6 +685,7 @@
             this.buttonSearchPhasemask.TabIndex = 10;
             this.buttonSearchPhasemask.Text = "...";
             this.buttonSearchPhasemask.UseVisualStyleBackColor = true;
+            this.buttonSearchPhasemask.Click += new System.EventHandler(this.buttonSearchPhasemask_Click);
             // 
             // comboBoxActionType
             // 
@@ -1560,6 +1550,18 @@
             this.panel3.TabIndex = 21;
             this.panel3.Visible = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox1.Image = global::SAI_Editor.Properties.Resources.icon_load_script;
+            this.pictureBox1.Location = new System.Drawing.Point(260, 19);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(24, 20);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1586,7 +1588,6 @@
             this.panelLoginBox.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -1600,6 +1601,7 @@
             this.tabPageTarget.ResumeLayout(false);
             this.tabPageTarget.PerformLayout();
             this.groupBoxParameters.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1655,8 +1657,6 @@
         private System.Windows.Forms.CheckBox checkBoxScriptByGuid;
         private System.Windows.Forms.Button buttonSearchEventFlags;
         private System.Windows.Forms.NumericUpDown textBoxEventChance;
-        private System.Windows.Forms.TextBox textBoxEventPhasemask;
-        private System.Windows.Forms.TextBox textBoxEventFlags;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxEventLink;
         private System.Windows.Forms.TextBox textBoxEventScriptId;
@@ -1713,7 +1713,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonSelectEventFlag;
         private System.Windows.Forms.TextBox textBoxLinkId;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -1723,6 +1723,8 @@
         private System.Windows.Forms.TextBox textBoxTargetO;
         private System.Windows.Forms.Label label16;
         public System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.TextBox textBoxEventPhasemask;
+        public System.Windows.Forms.TextBox textBoxEventFlags;
     }
 }
 
