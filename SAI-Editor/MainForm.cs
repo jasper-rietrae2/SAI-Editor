@@ -199,6 +199,9 @@ namespace SAI_Editor
 
             //! Temp..
             panelLoginBox.Location = new Point(9, 8);
+
+            if (settings.GetSetting("DontHidePass", "no") == "yes")
+                textBoxPassword.PasswordChar = '*';
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
