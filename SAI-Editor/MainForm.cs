@@ -188,6 +188,13 @@ namespace SAI_Editor
                     foreach (Control controlTabPage in control.Controls)
                         if (controlTabPage is TextBox)
                             controlTabPage.KeyPress += numericField_KeyPress;
+
+            textBoxEntryOrGuid.KeyPress += numericField_KeyPress;
+            textBoxEventScriptId.KeyPress += numericField_KeyPress;
+            textBoxLinkId.KeyPress += numericField_KeyPress;
+            textBoxEventPhasemask.KeyPress += numericField_KeyPress;
+            textBoxEventFlags.KeyPress += numericField_KeyPress;
+            textBoxEventLink.KeyPress += numericField_KeyPress;
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)

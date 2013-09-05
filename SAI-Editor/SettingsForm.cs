@@ -24,6 +24,7 @@ namespace SAI_Editor
             KeyPreview = true;
             KeyDown += SettingsForm_KeyDown;
             trackBarAnimationSpeed.ValueChanged += trackBarAnimationSpeed_ValueChanged;
+            textBoxPort.KeyPress += numericField_KeyPress;
 
             settings = ((MainForm)Owner).settings;
             textBoxHost.Text = settings.GetSetting("Host", "localhost");
@@ -176,6 +177,13 @@ namespace SAI_Editor
         private void checkBoxExpandInstantly_CheckedChanged(object sender, EventArgs e)
         {
             trackBarAnimationSpeed.Enabled = !checkBoxExpandInstantly.Checked;
+        }
+
+        private void numericField_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //! Only allow typing keys that are numbers
+            if (!Char.IsNumber(e.KeyChar))
+                e.Handled = e.KeyChar != (char)Keys.Back;
         }
     }
 }

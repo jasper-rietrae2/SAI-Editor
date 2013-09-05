@@ -92,7 +92,7 @@
             this.textBoxActionTypeId = new System.Windows.Forms.TextBox();
             this.textBoxEventPhasemask = new System.Windows.Forms.TextBox();
             this.textBoxEventTypeId = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBoxLinkId = new System.Windows.Forms.TextBox();
             this.textBoxEventLink = new System.Windows.Forms.TextBox();
             this.comboBoxEventType = new System.Windows.Forms.ComboBox();
             this.textBoxEventScriptId = new System.Windows.Forms.TextBox();
@@ -605,7 +605,7 @@
             this.groupBoxScriptInfo.Controls.Add(this.textBoxActionTypeId);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventPhasemask);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventTypeId);
-            this.groupBoxScriptInfo.Controls.Add(this.textBox1);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxLinkId);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventLink);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxEventType);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventScriptId);
@@ -922,13 +922,13 @@
             this.textBoxEventTypeId.Text = "0";
             this.textBoxEventTypeId.TextChanged += new System.EventHandler(this.textBoxEventTypeId_TextChanged);
             // 
-            // textBox1
+            // textBoxLinkId
             // 
-            this.textBox1.Location = new System.Drawing.Point(59, 151);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(41, 20);
-            this.textBox1.TabIndex = 19;
-            this.textBox1.Text = "0";
+            this.textBoxLinkId.Location = new System.Drawing.Point(59, 151);
+            this.textBoxLinkId.Name = "textBoxLinkId";
+            this.textBoxLinkId.Size = new System.Drawing.Size(41, 20);
+            this.textBoxLinkId.TabIndex = 19;
+            this.textBoxLinkId.Text = "0";
             // 
             // textBoxEventLink
             // 
@@ -1714,7 +1714,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxLinkId;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem menuItemExit;
