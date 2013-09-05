@@ -32,6 +32,8 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxDontHidePass = new System.Windows.Forms.CheckBox();
+            this.textBoxAnimationSpeed = new System.Windows.Forms.TextBox();
             this.labelAnimationSpeed = new System.Windows.Forms.Label();
             this.trackBarAnimationSpeed = new System.Windows.Forms.TrackBar();
             this.checkBoxPromptToQuit = new System.Windows.Forms.CheckBox();
@@ -52,8 +54,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonClearSettings = new System.Windows.Forms.Button();
-            this.textBoxAnimationSpeed = new System.Windows.Forms.TextBox();
-            this.checkBoxDontHidePass = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -97,6 +97,26 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxDontHidePass
+            // 
+            this.checkBoxDontHidePass.AutoSize = true;
+            this.checkBoxDontHidePass.Location = new System.Drawing.Point(6, 98);
+            this.checkBoxDontHidePass.Name = "checkBoxDontHidePass";
+            this.checkBoxDontHidePass.Size = new System.Drawing.Size(138, 17);
+            this.checkBoxDontHidePass.TabIndex = 9;
+            this.checkBoxDontHidePass.Text = "Don\'t hide my password";
+            this.checkBoxDontHidePass.UseVisualStyleBackColor = true;
+            // 
+            // textBoxAnimationSpeed
+            // 
+            this.textBoxAnimationSpeed.Enabled = false;
+            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 135);
+            this.textBoxAnimationSpeed.Name = "textBoxAnimationSpeed";
+            this.textBoxAnimationSpeed.Size = new System.Drawing.Size(37, 20);
+            this.textBoxAnimationSpeed.TabIndex = 8;
+            this.textBoxAnimationSpeed.Text = "6";
+            this.textBoxAnimationSpeed.TextChanged += new System.EventHandler(this.textBoxAnimationSpeed_TextChanged);
             // 
             // labelAnimationSpeed
             // 
@@ -161,6 +181,7 @@
             this.checkBoxExpandInstantly.TabIndex = 0;
             this.checkBoxExpandInstantly.Text = "Expand and contract instantly";
             this.checkBoxExpandInstantly.UseVisualStyleBackColor = true;
+            this.checkBoxExpandInstantly.CheckedChanged += new System.EventHandler(this.checkBoxExpandInstantly_CheckedChanged);
             // 
             // tabControlSettings
             // 
@@ -187,7 +208,7 @@
             this.tabPageConnection.Controls.Add(this.label7);
             this.tabPageConnection.Location = new System.Drawing.Point(4, 22);
             this.tabPageConnection.Name = "tabPageConnection";
-            this.tabPageConnection.Size = new System.Drawing.Size(243, 159);
+            this.tabPageConnection.Size = new System.Drawing.Size(243, 187);
             this.tabPageConnection.TabIndex = 1;
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
@@ -291,26 +312,6 @@
             this.buttonClearSettings.Text = "Clear";
             this.buttonClearSettings.UseVisualStyleBackColor = true;
             this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
-            // 
-            // textBoxAnimationSpeed
-            // 
-            this.textBoxAnimationSpeed.Enabled = false;
-            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 135);
-            this.textBoxAnimationSpeed.Name = "textBoxAnimationSpeed";
-            this.textBoxAnimationSpeed.Size = new System.Drawing.Size(37, 20);
-            this.textBoxAnimationSpeed.TabIndex = 8;
-            this.textBoxAnimationSpeed.Text = "6";
-            this.textBoxAnimationSpeed.TextChanged += new System.EventHandler(this.textBoxAnimationSpeed_TextChanged);
-            // 
-            // checkBoxDontHidePass
-            // 
-            this.checkBoxDontHidePass.AutoSize = true;
-            this.checkBoxDontHidePass.Location = new System.Drawing.Point(6, 98);
-            this.checkBoxDontHidePass.Name = "checkBoxDontHidePass";
-            this.checkBoxDontHidePass.Size = new System.Drawing.Size(138, 17);
-            this.checkBoxDontHidePass.TabIndex = 9;
-            this.checkBoxDontHidePass.Text = "Don\'t hide my password";
-            this.checkBoxDontHidePass.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 

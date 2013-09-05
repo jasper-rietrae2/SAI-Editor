@@ -86,6 +86,8 @@ namespace SAI_Editor
 
         void SettingsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
+            //! Only call this prompt method if the form was closed by the user itself and the form was not
+            //! already closed before because we called Form::Close() (by pressing 'Exit' or so).
             if (e.CloseReason == CloseReason.UserClosing && !closedFormByHand)
                 PromptSaveSettingsOnClose();
         }
@@ -161,7 +163,7 @@ namespace SAI_Editor
 
         private void trackBarAnimationSpeed_ValueChanged(object sender, EventArgs e)
         {
-            textBoxAnimationSpeed.Text = (trackBarAnimationSpeed.Value).ToString();
+            textBoxAnimationSpeed.Text = trackBarAnimationSpeed.Value.ToString();
         }
 
         private void textBoxAnimationSpeed_TextChanged(object sender, EventArgs e)
@@ -178,6 +180,11 @@ namespace SAI_Editor
 
             if (newValue != Convert.ToInt32(textBoxAnimationSpeed.Text))
                 textBoxAnimationSpeed.Text = newValue.ToString();
+        }
+
+        private void checkBoxExpandInstantly_CheckedChanged(object sender, EventArgs e)
+        {
+            trackBarAnimationSpeed.Enabled = !checkBoxExpandInstantly.Checked;
         }
     }
 }

@@ -12,11 +12,6 @@ internal enum FormState
     FormStateMain,
 };
 
-/// <summary>
-/// 
-/// </summary>
-internal enum 
-
 internal enum FormSizes
 {
     Width = 278,
