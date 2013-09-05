@@ -23,8 +23,6 @@ namespace SAI_Editor
 
             KeyPreview = true;
             KeyDown += SettingsForm_KeyDown;
-
-            textBoxAnimationSpeed.KeyPress += textBoxAnimationSpeed_KeyPress;
             trackBarAnimationSpeed.ValueChanged += trackBarAnimationSpeed_ValueChanged;
 
             settings = ((MainForm)Owner).settings;
@@ -152,13 +150,6 @@ namespace SAI_Editor
         private bool IsEmptyString(string str)
         {
             return String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str);
-        }
-
-        private void textBoxAnimationSpeed_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //! Only numbers
-            if (!Char.IsNumber(e.KeyChar))
-                e.Handled = e.KeyChar != (char)Keys.Back;
         }
 
         private void trackBarAnimationSpeed_ValueChanged(object sender, EventArgs e)
