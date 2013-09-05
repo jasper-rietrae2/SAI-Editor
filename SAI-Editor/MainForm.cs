@@ -12,11 +12,18 @@ internal enum FormState
     FormStateMain,
 };
 
-//internal enum FormSizes
-//{
-//    WidthToExpandTo = 1035,
-//    HeightToExpandTo = 252,
-//};
+/// <summary>
+/// 
+/// </summary>
+internal enum 
+
+internal enum FormSizes
+{
+    Width = 278,
+    Height = 260,
+    WidthToExpandTo = 985,
+    HeightToExpandTo = 505,
+};
 
 internal enum MaxValues
 {
@@ -43,7 +50,7 @@ namespace SAI_Editor
         private bool contractingToLoginForm = false, expandingToMainForm = false;
         private int originalHeight = 0, originalWidth = 0;
         private readonly Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
-        private int WidthToExpandTo = 985, HeightToExpandTo = 505; //! Need to be variables instead of inside an enumerator because we have to change the values
+        private int WidthToExpandTo = (int)FormSizes.WidthToExpandTo, HeightToExpandTo = (int)FormSizes.HeightToExpandTo;
         public int animationSpeed = 5;
         private FormState formState = FormState.FormStateLogin;
 
@@ -59,8 +66,8 @@ namespace SAI_Editor
             MaximizeBox = false;
             MinimizeBox = true;
             FormBorderStyle = FormBorderStyle.FixedDialog;
-            Width = 278;
-            Height = 260;
+            Width = (int)FormSizes.Width;
+            Height = (int)FormSizes.Height;
 
             originalHeight = Height;
             originalWidth = Width;
@@ -171,13 +178,13 @@ namespace SAI_Editor
 
             tabControlParameters.AutoScrollOffset = new Point(5, 5);
 
+            //! Permanent scrollbar to the parameters tabpage windows
             foreach (TabPage page in tabControlParameters.TabPages)
             {
                 page.HorizontalScroll.Enabled = false;
                 page.HorizontalScroll.Visible = false;
 
                 page.AutoScroll = true;
-                //page.AutoScrollMargin = new Size(20, 20);
                 page.AutoScrollMinSize = new Size(page.Width, page.Height);
             }
         }
@@ -356,11 +363,6 @@ namespace SAI_Editor
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            //! For some reason it won't work with a loop..
-            //foreach (Control control in controlsLoginForm)
-            //    if (control is TextBox)
-            //        ((TextBox)control).Text = "";
-
             textBoxHost.Text = "";
             textBoxUsername.Text = "";
             textBoxPassword.Text = "";
@@ -456,7 +458,7 @@ namespace SAI_Editor
             textBoxEventTypeId.Text = comboBoxEventType.SelectedIndex.ToString();
 
             if (textBoxEventTypeId.Text == "0" || textBoxEventTypeId.Text == ((int)MaxValues.MaxEventType).ToString())
-                textBoxEventTypeId.SelectionStart = 3;
+                textBoxEventTypeId.SelectionStart = 3; //! Set cursot to end of text
         }
 
         private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
@@ -464,7 +466,7 @@ namespace SAI_Editor
             textBoxActionTypeId.Text = comboBoxActionType.SelectedIndex.ToString();
 
             if (textBoxActionTypeId.Text == "0" || textBoxActionTypeId.Text == ((int)MaxValues.MaxActionType).ToString())
-                textBoxActionTypeId.SelectionStart = 3;
+                textBoxActionTypeId.SelectionStart = 3; //! Set cursot to end of text
         }
 
         private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
@@ -472,7 +474,7 @@ namespace SAI_Editor
             textBoxTargetTypeId.Text = comboBoxTargetType.SelectedIndex.ToString();
 
             if (textBoxTargetTypeId.Text == "0" || textBoxTargetTypeId.Text == ((int)MaxValues.MaxTargetType).ToString())
-                textBoxTargetTypeId.SelectionStart = 3;
+                textBoxTargetTypeId.SelectionStart = 3; //! Set cursot to end of text
         }
 
         private void checkBoxAutoGenerateComments_CheckedChanged_1(object sender, EventArgs e)
@@ -588,6 +590,7 @@ namespace SAI_Editor
 
             menuItemDeleteSelectedRow.Text = "Delete selected row";
 
+            //! Set 'row' to 'rows' if there are several rows selected
             if (listViewSmartScripts.SelectedItems.Count > 1)
                 menuItemDeleteSelectedRow.Text += "s";
 
@@ -611,7 +614,7 @@ namespace SAI_Editor
                     comboBoxSourceType.SelectedIndex = 3;
                     break;
                 default:
-                    MessageBox.Show("Unknown source type found", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(String.Format("Unknown/unsupported source type found ({0})", selectedItem[0].Text), "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
             }
 
@@ -678,7 +681,7 @@ namespace SAI_Editor
             {
                 comboBoxEventType.SelectedIndex = 0;
                 textBoxEventTypeId.Text = "0";
-                textBoxEventTypeId.SelectionStart = 3;
+                textBoxEventTypeId.SelectionStart = 3; //! Set cursor position to end of the line
             }
             else if (Convert.ToInt32(textBoxEventTypeId.Text) > (int)MaxValues.MaxEventType)
                 comboBoxEventType.SelectedIndex = (int)MaxValues.MaxEventType;
@@ -692,7 +695,7 @@ namespace SAI_Editor
             {
                 comboBoxActionType.SelectedIndex = 0;
                 textBoxActionTypeId.Text = "0";
-                textBoxActionTypeId.SelectionStart = 3;
+                textBoxActionTypeId.SelectionStart = 3; //! Set cursor position to end of the line
             }
             else if (Convert.ToInt32(textBoxActionTypeId.Text) > (int)MaxValues.MaxActionType)
                 comboBoxActionType.SelectedIndex = (int)MaxValues.MaxActionType;
@@ -706,7 +709,7 @@ namespace SAI_Editor
             {
                 comboBoxTargetType.SelectedIndex = 0;
                 textBoxTargetTypeId.Text = "0";
-                textBoxTargetTypeId.SelectionStart = 3;
+                textBoxTargetTypeId.SelectionStart = 3; //! Set cursor position to end of the line
             }
             else if (Convert.ToInt32(textBoxTargetTypeId.Text) > (int)MaxValues.MaxTargetType)
                 comboBoxTargetType.SelectedIndex = (int)MaxValues.MaxTargetType;
@@ -741,10 +744,8 @@ namespace SAI_Editor
             {
                 if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex() != (int)SourceTypes.SourceTypeScriptedActionlist)
                 {
-                    string selectedEntry = listViewSmartScripts.Items[0].Text;
                     listViewSmartScripts.Items.Clear();
-
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", selectedEntry, GetSourceTypeByIndex()));
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", listViewSmartScripts.Items[0].Text, GetSourceTypeByIndex()));
                 }
             }
         }
