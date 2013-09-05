@@ -324,7 +324,7 @@
             this.Controls.Add(this.tabControlSettings);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
-            this.Text = "Settings";
+            this.Text = "SAI-Editor Settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.tabPageGeneral.ResumeLayout(false);
             this.tabPageGeneral.PerformLayout();
