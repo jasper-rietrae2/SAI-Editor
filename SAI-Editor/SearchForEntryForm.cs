@@ -98,6 +98,14 @@ namespace SAI_Editor
             string query = "";
             bool criteriaLeftEmpty = String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text);
 
+            if (!criteriaLeftEmpty && IsNumericIndex(GetSelectedIndexOfComboBox(comboBoxSearchType)) && Convert.ToInt32(textBoxCriteria.Text) < 0)
+            {
+                if (MessageBox.Show("The criteria field can not be a negative value, would you like me to set it to a positive number?", "Something went wrong!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    SetTextOfControl(textBoxCriteria, (Convert.ToInt32(textBoxCriteria.Text) * -1).ToString());
+                else
+                    return;
+            }
+
             switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
             {
                 case 0: //! Creature name
@@ -125,34 +133,32 @@ namespace SAI_Editor
                     query += " ORDER BY entry";
                     break;
                 case 2: //! Creature guid
-     //SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE ct.AIName = 'SmartAI' ORDER BY c.guid
                     if (criteriaLeftEmpty)
                     {
                         if (MessageBox.Show("Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                             return;
 
-                        if (checkBoxFieldContainsCriteria.Checked)
-                            query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry LIKE '%c.id%' JOIN smart_scripts ss ON ss.entryorguid LIKE '%c.guid%'";
-                        else
-                            query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid";
-
                         if (checkBoxHasAiName.Checked)
-                            query += " WHERE ct.AIName='SmartAI'";
+                            query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid < 0 AND ss.entryorguid = -c.guid AND ss.source_type = 0";
+                        else
+                            query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id";
                     }
                     else
                     {
-                        if (checkBoxFieldContainsCriteria.Checked)
-                                   // "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry LIKE '%c.id%' JOIN smart_scripts ss ON ss.entryorguid LIKE '%c.guid%'"SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry LIKE '%25171%' JOIN smart_scripts ss ON ss.entryorguid LIKE '%-209026%' WHERE c.guid LIKE '%209026%' AND ct.AIName = 'SmartAI'
-
-                                   //SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry LIKE '%25171%' JOIN smart_scripts ss ON ss.entryorguid LIKE '%-209026%' WHERE c.guid LIKE '%209026%' AND ct.AIName = 'SmartAI'
-                            query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry LIKE c.id JOIN smart_scripts ss ON ss.entryorguid LIKE '%-" + textBoxCriteria.Text + "%' WHERE c.guid LIKE '%" + textBoxCriteria.Text + "%'";
-                            //query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry LIKE '%c.id%' JOIN smart_scripts ss ON ss.entryorguid WHERE c.guid LIKE '%" + textBoxCriteria.Text + "%'";
-                        else
-                            query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -" + textBoxCriteria.Text + " WHERE c.guid = " + textBoxCriteria.Text;
-                            //query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id WHERE c.guid=" + textBoxCriteria.Text;
-
                         if (checkBoxHasAiName.Checked)
-                            query += " AND ct.AIName='SmartAI'";
+                        {
+                            if (checkBoxFieldContainsCriteria.Checked)
+                                query = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE c.guid LIKE '%" + textBoxCriteria.Text + "%' AND ss.source_type = 0";
+                            else
+                                query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE c.guid = " + textBoxCriteria.Text;
+                        }
+                        else
+                        {
+                            if (checkBoxFieldContainsCriteria.Checked)
+                                query = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id WHERE c.guid LIKE '%" + textBoxCriteria.Text + "%'";
+                            else
+                                query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id WHERE c.guid = " + textBoxCriteria.Text;
+                        }
                     }
 
                     query += " ORDER BY c.guid";
@@ -187,21 +193,28 @@ namespace SAI_Editor
                         if (MessageBox.Show("Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                             return;
 
-                        if (checkBoxFieldContainsCriteria.Checked)
-                            query = "SELECT g.guid, gt.name FROM gameobject_template gt LEFT JOIN gameobject g ON gt.entry LIKE '%g.id%'";
+                        if (checkBoxHasAiName.Checked)
+                            query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid < 0 AND ss.entryorguid = -g.guid AND ss.source_type = 1";
                         else
-                            query = "SELECT g.guid, gt.name FROM gameobject_template gt LEFT JOIN gameobject g ON gt.entry = g.id";
+                            query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id";
                     }
                     else
                     {
-                        if (checkBoxFieldContainsCriteria.Checked)
-                            query = "SELECT g.guid, gt.name FROM gameobject_template gt LEFT JOIN gameobject g ON gt.entry = g.id WHERE g.guid LIKE '%" + textBoxCriteria.Text + "%'";
+                        if (checkBoxHasAiName.Checked)
+                        {
+                            if (checkBoxFieldContainsCriteria.Checked)
+                                query = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid = -g.guid WHERE g.guid LIKE '%" + textBoxCriteria.Text + "%' AND ss.source_type = 1";
+                            else
+                                query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid = -g.guid WHERE g.guid = " + textBoxCriteria.Text + " AND ss.source_type = 1";
+                        }
                         else
-                            query = "SELECT g.guid, gt.name FROM gameobject_template gt LEFT JOIN gameobject g ON gt.entry = g.id WHERE g.guid=" + textBoxCriteria.Text;
+                        {
+                            if (checkBoxFieldContainsCriteria.Checked)
+                                query = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id WHERE g.guid LIKE '%" + textBoxCriteria.Text + "%'";
+                            else
+                                query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id WHERE g.guid = " + textBoxCriteria.Text;
+                        }
                     }
-
-                    if (checkBoxHasAiName.Checked)
-                        query += " AND gt.AIName='SmartGameObjectAI'";
 
                     query += " ORDER BY g.guid";
                     break;
@@ -302,6 +315,18 @@ namespace SAI_Editor
             Close();
         }
 
+        private bool IsNumericIndex(int index)
+        {
+            switch (index)
+            {
+                case 0: //! Creature name
+                case 3: //! Gameobject name:
+                    return false;
+                default:
+                    return true;
+            }
+        }
+
         //! Cross-thread functions:
         private int GetSelectedIndexOfComboBox(ComboBox comboBox)
         {
@@ -348,6 +373,19 @@ namespace SAI_Editor
             }
 
             listView.Items.Clear();
+        }
+
+        private delegate void SetTextOfControlDelegate(Control control, string text);
+
+        private void SetTextOfControl(Control control, string text)
+        {
+            if (control.InvokeRequired)
+            {
+                Invoke(new SetTextOfControlDelegate(SetTextOfControl), new object[] { control, text });
+                return;
+            }
+
+            control.Text = text;
         }
     }
 }
