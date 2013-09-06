@@ -292,7 +292,7 @@ namespace SAI_Editor
             //! Above 2 means it's a gameobject
             ((MainForm)Owner).comboBoxSourceType.SelectedIndex = comboBoxSearchType.SelectedIndex > 2 ? 1 : 0;
 
-            if (((MainForm)Owner).settings.GetSetting("LoadScriptInstantly", "no") == "yes")
+            if (Properties.Settings.Default.LoadScriptInstantly)
                 ((MainForm)Owner).pictureBox1_Click(sender, e);
 
             Close();

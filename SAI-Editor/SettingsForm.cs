@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace SAI_Editor
 {
     public partial class SettingsForm : Form
     {
-        private Settings settings = null;
         private bool closedFormByHand = false;
 
         public SettingsForm()
@@ -15,19 +15,20 @@ namespace SAI_Editor
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            settings = ((MainForm)Owner).settings;
-            textBoxHost.Text = settings.GetSetting("Host", "localhost");
-            textBoxUsername.Text = settings.GetSetting("User", "root");
-            textBoxPassword.Text = settings.GetSetting("Password", String.Empty);
-            textBoxWorldDatabase.Text = settings.GetSetting("Database", "trinitycore_world");
-            textBoxPort.Text = settings.GetSetting("Port", "3306");
-            checkBoxAutoConnect.Checked = settings.GetSetting("AutoConnect", "no") == "yes";
-            checkBoxExpandInstantly.Checked = settings.GetSetting("InstantExpand", "no") == "yes";
-            checkBoxLoadScriptOfEntry.Checked = settings.GetSetting("LoadScriptInstantly", "yes") == "yes";
-            checkBoxAutoSaveSettings.Checked = settings.GetSetting("AutoSaveSettings", "no") == "yes";
-            checkBoxPromptToQuit.Checked = settings.GetSetting("PromptToQuit", "yes") == "yes";
-            textBoxAnimationSpeed.Text = settings.GetSetting("AnimationSpeed", "10");
-            checkBoxDontHidePass.Checked = settings.GetSetting("DontHidePass", "no") == "yes";
+            textBoxHost.Text = Properties.Settings.Default.Host;
+            textBoxUsername.Text = Properties.Settings.Default.User;
+            textBoxPassword.Text = Properties.Settings.Default.Password;
+            textBoxWorldDatabase.Text = Properties.Settings.Default.Database;
+            textBoxPort.Text = Properties.Settings.Default.Port.ToString();
+
+            checkBoxAutoConnect.Checked = Properties.Settings.Default.AutoConnect;
+            checkBoxInstantExpand.Checked = Properties.Settings.Default.InstantExpand;
+            checkBoxLoadScriptInstantly.Checked = Properties.Settings.Default.LoadScriptInstantly;
+            checkBoxAutoSaveSettings.Checked = Properties.Settings.Default.AutoSaveSettings;
+            checkBoxPromptToQuit.Checked = Properties.Settings.Default.PromptToQuit;
+            checkBoxDontHidePass.Checked = Properties.Settings.Default.DontHidePass;
+
+            textBoxAnimationSpeed.Text = Properties.Settings.Default.AnimationSpeed.ToString();
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -39,29 +40,27 @@ namespace SAI_Editor
 
         private void SaveSettings()
         {
-            settings.PutSetting("Host", textBoxHost.Text);
-            settings.PutSetting("User", textBoxUsername.Text);
-            settings.PutSetting("Password", textBoxPassword.Text);
-            settings.PutSetting("Database", textBoxWorldDatabase.Text);
-            settings.PutSetting("Port", textBoxPort.Text);
-            settings.PutSetting("AutoConnect", (checkBoxAutoConnect.Checked ? "yes" : "no"));
-            settings.PutSetting("InstantExpand", (checkBoxExpandInstantly.Checked ? "yes" : "no"));
-            settings.PutSetting("LoadScriptInstantly", (checkBoxLoadScriptOfEntry.Checked ? "yes" : "no"));
-            settings.PutSetting("AutoSaveSettings", (checkBoxAutoSaveSettings.Checked ? "yes" : "no"));
-            settings.PutSetting("PromptToQuit", (checkBoxPromptToQuit.Checked ? "yes" : "no"));
-            settings.PutSetting("AnimationSpeed", textBoxAnimationSpeed.Text);
-            settings.PutSetting("DontHidePass", (checkBoxDontHidePass.Checked ? "yes" : "no"));
-            checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
+            Properties.Settings.Default.Host = textBoxHost.Text;
+            Properties.Settings.Default.User = textBoxUsername.Text;
+            Properties.Settings.Default.Password = textBoxPassword.Text;
+            Properties.Settings.Default.Database = textBoxWorldDatabase.Text;
+            Properties.Settings.Default.Port = Convert.ToInt32(textBoxPort.Text);
+            Properties.Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+            Properties.Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
+            Properties.Settings.Default.LoadScriptInstantly = checkBoxLoadScriptInstantly.Checked;
+            Properties.Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
+            Properties.Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
+            Properties.Settings.Default.DontHidePass = checkBoxDontHidePass.Checked;
+            Properties.Settings.Default.AnimationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
+            Properties.Settings.Default.Save();
 
-            //! Update main form's fields so re-connecting will work with new settings
+            ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
             ((MainForm)Owner).textBoxHost.Text = textBoxHost.Text;
             ((MainForm)Owner).textBoxUsername.Text = textBoxUsername.Text;
             ((MainForm)Owner).textBoxPassword.Text = textBoxPassword.Text;
             ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
-
             ((MainForm)Owner).animationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
-
             ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(!checkBoxDontHidePass.Checked ? '*' : '\0');
         }
 
@@ -88,12 +87,12 @@ namespace SAI_Editor
                 return;
             }
 
-            if (textBoxHost.Text == settings.GetSetting("Host", "localhost") && textBoxUsername.Text == settings.GetSetting("User", "root") &&
-                textBoxPassword.Text == settings.GetSetting("Password", String.Empty) && textBoxWorldDatabase.Text == settings.GetSetting("Database", "trinitycore_world") &&
-                textBoxPort.Text == settings.GetSetting("Port", "3306") && checkBoxAutoConnect.Checked == (settings.GetSetting("AutoConnect", "no") == "yes") &&
-                checkBoxExpandInstantly.Checked == (settings.GetSetting("InstantExpand", "no") == "yes") && checkBoxLoadScriptOfEntry.Checked == (settings.GetSetting("LoadScriptInstantly", "yes") == "yes") &&
-                checkBoxAutoSaveSettings.Checked == (settings.GetSetting("AutoSaveSettings", "no") == "yes") && checkBoxPromptToQuit.Checked == (settings.GetSetting("PromptToQuit", "yes") == "yes") &&
-                textBoxAnimationSpeed.Text == settings.GetSetting("AnimationSpeed", "10") && checkBoxDontHidePass.Checked == (settings.GetSetting("DontHidePass", "no") == "yes"))
+            if (textBoxHost.Text == Properties.Settings.Default.Host && textBoxUsername.Text == Properties.Settings.Default.User &&
+                textBoxPassword.Text == Properties.Settings.Default.Password && textBoxWorldDatabase.Text == Properties.Settings.Default.Database &&
+                textBoxPort.Text == Properties.Settings.Default.Port.ToString() && checkBoxAutoConnect.Checked == Properties.Settings.Default.AutoConnect &&
+                checkBoxInstantExpand.Checked == Properties.Settings.Default.InstantExpand && checkBoxLoadScriptInstantly.Checked == Properties.Settings.Default.LoadScriptInstantly &&
+                checkBoxAutoSaveSettings.Checked == Properties.Settings.Default.AutoSaveSettings && checkBoxPromptToQuit.Checked == Properties.Settings.Default.PromptToQuit &&
+                textBoxAnimationSpeed.Text == Properties.Settings.Default.AnimationSpeed.ToString() && checkBoxDontHidePass.Checked == Properties.Settings.Default.DontHidePass)
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -105,10 +104,10 @@ namespace SAI_Editor
             switch (tabControlSettings.SelectedIndex)
             {
                 case 0: //! 'General' tab
-                    checkBoxExpandInstantly.Checked = false;
+                    checkBoxInstantExpand.Checked = false;
                     checkBoxAutoSaveSettings.Checked = false;
-                    checkBoxExpandInstantly.Checked = false;
-                    checkBoxLoadScriptOfEntry.Checked = false;
+                    checkBoxInstantExpand.Checked = false;
+                    checkBoxLoadScriptInstantly.Checked = false;
                     checkBoxPromptToQuit.Checked = false;
                     checkBoxDontHidePass.Checked = false;
                     textBoxAnimationSpeed.Text = "10";
@@ -165,7 +164,7 @@ namespace SAI_Editor
 
         private void checkBoxExpandInstantly_CheckedChanged(object sender, EventArgs e)
         {
-            trackBarAnimationSpeed.Enabled = !checkBoxExpandInstantly.Checked;
+            trackBarAnimationSpeed.Enabled = !checkBoxInstantExpand.Checked;
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)

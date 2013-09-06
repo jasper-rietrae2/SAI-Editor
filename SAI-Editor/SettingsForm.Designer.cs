@@ -38,8 +38,8 @@
             this.trackBarAnimationSpeed = new System.Windows.Forms.TrackBar();
             this.checkBoxPromptToQuit = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoSaveSettings = new System.Windows.Forms.CheckBox();
-            this.checkBoxLoadScriptOfEntry = new System.Windows.Forms.CheckBox();
-            this.checkBoxExpandInstantly = new System.Windows.Forms.CheckBox();
+            this.checkBoxLoadScriptInstantly = new System.Windows.Forms.CheckBox();
+            this.checkBoxInstantExpand = new System.Windows.Forms.CheckBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
             this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
@@ -88,8 +88,8 @@
             this.tabPageGeneral.Controls.Add(this.trackBarAnimationSpeed);
             this.tabPageGeneral.Controls.Add(this.checkBoxPromptToQuit);
             this.tabPageGeneral.Controls.Add(this.checkBoxAutoSaveSettings);
-            this.tabPageGeneral.Controls.Add(this.checkBoxLoadScriptOfEntry);
-            this.tabPageGeneral.Controls.Add(this.checkBoxExpandInstantly);
+            this.tabPageGeneral.Controls.Add(this.checkBoxLoadScriptInstantly);
+            this.tabPageGeneral.Controls.Add(this.checkBoxInstantExpand);
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
@@ -161,28 +161,28 @@
             this.checkBoxAutoSaveSettings.Text = "Auto save settings";
             this.checkBoxAutoSaveSettings.UseVisualStyleBackColor = true;
             // 
-            // checkBoxLoadScriptOfEntry
+            // checkBoxLoadScriptInstantly
             // 
-            this.checkBoxLoadScriptOfEntry.AutoSize = true;
-            this.checkBoxLoadScriptOfEntry.Checked = true;
-            this.checkBoxLoadScriptOfEntry.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLoadScriptOfEntry.Location = new System.Drawing.Point(6, 52);
-            this.checkBoxLoadScriptOfEntry.Name = "checkBoxLoadScriptOfEntry";
-            this.checkBoxLoadScriptOfEntry.Size = new System.Drawing.Size(159, 17);
-            this.checkBoxLoadScriptOfEntry.TabIndex = 2;
-            this.checkBoxLoadScriptOfEntry.Text = "Load script of selected entry";
-            this.checkBoxLoadScriptOfEntry.UseVisualStyleBackColor = true;
+            this.checkBoxLoadScriptInstantly.AutoSize = true;
+            this.checkBoxLoadScriptInstantly.Checked = true;
+            this.checkBoxLoadScriptInstantly.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxLoadScriptInstantly.Location = new System.Drawing.Point(6, 52);
+            this.checkBoxLoadScriptInstantly.Name = "checkBoxLoadScriptInstantly";
+            this.checkBoxLoadScriptInstantly.Size = new System.Drawing.Size(159, 17);
+            this.checkBoxLoadScriptInstantly.TabIndex = 2;
+            this.checkBoxLoadScriptInstantly.Text = "Load script of selected entry";
+            this.checkBoxLoadScriptInstantly.UseVisualStyleBackColor = true;
             // 
-            // checkBoxExpandInstantly
+            // checkBoxInstantExpand
             // 
-            this.checkBoxExpandInstantly.AutoSize = true;
-            this.checkBoxExpandInstantly.Location = new System.Drawing.Point(6, 29);
-            this.checkBoxExpandInstantly.Name = "checkBoxExpandInstantly";
-            this.checkBoxExpandInstantly.Size = new System.Drawing.Size(166, 17);
-            this.checkBoxExpandInstantly.TabIndex = 1;
-            this.checkBoxExpandInstantly.Text = "Expand and contract instantly";
-            this.checkBoxExpandInstantly.UseVisualStyleBackColor = true;
-            this.checkBoxExpandInstantly.CheckedChanged += new System.EventHandler(this.checkBoxExpandInstantly_CheckedChanged);
+            this.checkBoxInstantExpand.AutoSize = true;
+            this.checkBoxInstantExpand.Location = new System.Drawing.Point(6, 29);
+            this.checkBoxInstantExpand.Name = "checkBoxInstantExpand";
+            this.checkBoxInstantExpand.Size = new System.Drawing.Size(166, 17);
+            this.checkBoxInstantExpand.TabIndex = 1;
+            this.checkBoxInstantExpand.Text = "Expand and contract instantly";
+            this.checkBoxInstantExpand.UseVisualStyleBackColor = true;
+            this.checkBoxInstantExpand.CheckedChanged += new System.EventHandler(this.checkBoxExpandInstantly_CheckedChanged);
             // 
             // tabControlSettings
             // 
@@ -362,8 +362,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckBox checkBoxExpandInstantly;
-        private System.Windows.Forms.CheckBox checkBoxLoadScriptOfEntry;
+        private System.Windows.Forms.CheckBox checkBoxInstantExpand;
+        private System.Windows.Forms.CheckBox checkBoxLoadScriptInstantly;
         private System.Windows.Forms.CheckBox checkBoxAutoSaveSettings;
         private System.Windows.Forms.CheckBox checkBoxPromptToQuit;
         private System.Windows.Forms.Label labelAnimationSpeed;
