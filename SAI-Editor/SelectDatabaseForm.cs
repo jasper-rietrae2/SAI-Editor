@@ -76,5 +76,10 @@ namespace SAI_Editor
             //! Perform the sort with these new sort options
             myListView.Sort();
         }
+
+        private void listViewDatabases_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buttonContinue.Enabled = listViewDatabases.SelectedItems.Count > 0;
+        }
     }
 }

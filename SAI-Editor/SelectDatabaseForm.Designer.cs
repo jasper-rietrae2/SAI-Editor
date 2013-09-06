@@ -45,6 +45,7 @@
             this.listViewDatabases.TabIndex = 0;
             this.listViewDatabases.UseCompatibleStateImageBehavior = false;
             this.listViewDatabases.View = System.Windows.Forms.View.Details;
+            this.listViewDatabases.SelectedIndexChanged += new System.EventHandler(this.listViewDatabases_SelectedIndexChanged);
             this.listViewDatabases.DoubleClick += new System.EventHandler(this.listViewDatabases_DoubleClick);
             // 
             // buttonContinue
