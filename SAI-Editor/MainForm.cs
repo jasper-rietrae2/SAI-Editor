@@ -539,20 +539,22 @@ namespace SAI_Editor
             }
         }
 
-        private void SelectAndFillListViewWithQuery(string queryToExecute, string entryOrGuid)
+        private void SelectAndFillListViewWithQuery(string queryToExecute, string entryOrGuid, SourceTypes sourceType)
         {
+            var timedActionlistEntries = new List<int>();
+
             try
             {
                 using (var connection = new MySqlConnection(connectionString.ToString()))
                 {
                     connection.Open();
-                    var returnVal = new MySqlDataAdapter(queryToExecute, connection);
+                    var returnVal = new MySqlDataAdapter(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", entryOrGuid, (int)sourceType), connection);
                     var dataTable = new DataTable();
                     returnVal.Fill(dataTable);
 
                     if (dataTable.Rows.Count <= 0)
                     {
-                        MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI table for the given source type!", entryOrGuid), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI table for the given source type ({1})!", entryOrGuid, (int)sourceType), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
 
@@ -568,6 +570,30 @@ namespace SAI_Editor
                                 listViewItem.SubItems.Add(row.ItemArray[i].ToString());
                         }
 
+                        if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
+                        {
+                            int actionParam1 = Convert.ToInt32(row.ItemArray[13].ToString());
+                            int actionParam2 = Convert.ToInt32(row.ItemArray[14].ToString());
+
+                            if (Convert.ToInt32(row.ItemArray[12].ToString()) == 80)      // SMART_ACTION_CALL_TIMED_ACTIONLIST
+                                timedActionlistEntries.Add(actionParam1);
+                            else if (Convert.ToInt32(row.ItemArray[12].ToString()) == 87) // SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST
+                            {
+                                for (int i = 13; i < 19; ++i)
+                                {
+                                    if (Convert.ToInt32(row.ItemArray[i].ToString()) == 0)
+                                        break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
+
+                                    timedActionlistEntries.Add(Convert.ToInt32(row.ItemArray[i].ToString()));
+                                }
+                            }
+                            else if (Convert.ToInt32(row.ItemArray[12].ToString()) == 88) // SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST
+                            {
+                                for (int i = actionParam1; i <= actionParam2; ++i)
+                                    timedActionlistEntries.Add(i);
+                            }
+                        }
+
                         listViewSmartScripts.Items.Add(listViewItem);
                     }
                 }
@@ -576,6 +602,10 @@ namespace SAI_Editor
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
+                foreach (var scriptEntry in timedActionlistEntries)
+                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", scriptEntry), scriptEntry.ToString(), SourceTypes.SourceTypeScriptedActionlist);
         }
 
         //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
@@ -750,35 +780,10 @@ namespace SAI_Editor
             if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex() != (int)SourceTypes.SourceTypeScriptedActionlist)
             {
                 listViewSmartScripts.Items.Clear();
-                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()), textBoxEntryOrGuid.Text);
-
-                if (checkBoxListActionlists.Checked)
-                {
-                    int entryOrGuid = Convert.ToInt32(textBoxEntryOrGuid.Text);
-                    int scriptEntry = entryOrGuid * 100;
-
-                    if (entryOrGuid < 0)
-                    {
-                        try
-                        {
-                            using (var connection = new MySqlConnection(connectionString.ToString()))
-                            {
-                                connection.Open();
-
-                                using (var query = new MySqlCommand(String.Format("SELECT id FROM creature WHERE guid={0}", entryOrGuid * -1), connection))
-                                    using (MySqlDataReader reader = query.ExecuteReader())
-                                        while (reader != null && reader.Read())
-                                            scriptEntry = reader.GetInt32(0) * 100;
-                            }
-                        }
-                        catch (MySqlException ex)
-                        {
-                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", scriptEntry), scriptEntry.ToString());
-                }
+                
+                //! to-do: We need to store the entry and source type we're searching for so we can use it here, else we're getting wrong results. To test
+                //! you can search for an entry with scripted actionlist(s), like 
+                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()), textBoxEntryOrGuid.Text, (SourceTypes)GetSourceTypeByIndex());
             }
         }
 
@@ -790,7 +795,7 @@ namespace SAI_Editor
                 case 1: //! Gameobject
                 case 2: //! Areatrigger
                     return comboBoxSourceType.SelectedIndex;
-                case 3:
+                case 3: //! Actionlist
                     return 9;
                 default:
                     return -1;
@@ -803,10 +808,7 @@ namespace SAI_Editor
                 return;
 
             listViewSmartScripts.Items.Clear();
-            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()), textBoxEntryOrGuid.Text);
-
-            if (checkBoxListActionlists.Checked)
-                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", Convert.ToInt32(textBoxEntryOrGuid.Text) * 100), (Convert.ToInt32(textBoxEntryOrGuid.Text) * 100).ToString());
+            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()), textBoxEntryOrGuid.Text, (SourceTypes)GetSourceTypeByIndex());
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
