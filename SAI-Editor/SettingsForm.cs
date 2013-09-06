@@ -15,17 +15,6 @@ namespace SAI_Editor
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            MaximizeBox = false;
-            MinimizeBox = true;
-            FormBorderStyle = FormBorderStyle.Fixed3D;
-
-            FormClosed += SettingsForm_FormClosed; //! To save settings
-
-            KeyPreview = true;
-            KeyDown += SettingsForm_KeyDown;
-            trackBarAnimationSpeed.ValueChanged += trackBarAnimationSpeed_ValueChanged;
-            textBoxPort.KeyPress += numericField_KeyPress;
-
             settings = ((MainForm)Owner).settings;
             textBoxHost.Text = settings.GetSetting("Host", "localhost");
             textBoxUsername.Text = settings.GetSetting("User", "root");

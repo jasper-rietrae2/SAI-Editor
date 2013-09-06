@@ -37,11 +37,15 @@
             // 
             // listViewDatabases
             // 
+            this.listViewDatabases.FullRowSelect = true;
             this.listViewDatabases.Location = new System.Drawing.Point(12, 25);
+            this.listViewDatabases.MultiSelect = false;
             this.listViewDatabases.Name = "listViewDatabases";
             this.listViewDatabases.Size = new System.Drawing.Size(220, 163);
             this.listViewDatabases.TabIndex = 0;
             this.listViewDatabases.UseCompatibleStateImageBehavior = false;
+            this.listViewDatabases.View = System.Windows.Forms.View.Details;
+            this.listViewDatabases.DoubleClick += new System.EventHandler(this.listViewDatabases_DoubleClick);
             // 
             // buttonContinue
             // 
@@ -81,10 +85,14 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonContinue);
             this.Controls.Add(this.listViewDatabases);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "SelectDatabaseForm";
             this.Text = "Select a database";
             this.Load += new System.EventHandler(this.SelectDatabaseForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SelectDatabaseForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

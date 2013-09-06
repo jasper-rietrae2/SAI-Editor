@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using System.Data;
 using System.Drawing;
 using MySql.Data.MySqlClient;
-using System.Data.SQLite;
+//using System.Data.SQLite;
 
 internal enum FormState
 {
@@ -77,9 +77,6 @@ namespace SAI_Editor
         {
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
 
-            MaximizeBox = false;
-            MinimizeBox = true;
-            FormBorderStyle = FormBorderStyle.FixedDialog;
             Width = (int)FormSizes.Width;
             Height = (int)FormSizes.Height;
 
@@ -99,15 +96,6 @@ namespace SAI_Editor
             textBoxPort.Text = settings.GetSetting("Port", "3306");
             animationSpeed = Convert.ToInt32(settings.GetSetting("AnimationSpeed", "6"));
 
-            KeyPreview = true;
-            KeyDown += MainForm_KeyDown;
-
-            //! Disallow writing anything in comboboxes (the 3D version looks like shit)
-            comboBoxActionType.KeyPress += comboBox_KeyPress;
-            comboBoxTargetType.KeyPress += comboBox_KeyPress;
-            comboBoxEventType.KeyPress += comboBox_KeyPress;
-            comboBoxSourceType.KeyPress += comboBox_KeyPress;
-
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
 
             foreach (Control control in Controls)
@@ -123,12 +111,6 @@ namespace SAI_Editor
             comboBoxActionType.SelectedIndex = 0;
             comboBoxTargetType.SelectedIndex = 0;
 
-            menuItemReconnect.Click += menuItemReconnect_Click;
-            menuItemExit.Click += TryCloseApplication;
-            menuItemSettings.Click += menuItemSettings_Click;
-            menuItemAbout.Click += menuItemAbout_Click;
-            menuItemDeleteSelectedRow.Click += menuOptionDeleteSelectedRow_Click;
-
             //! We hardcode the actual shortcuts because there are certain conditons under which the menu should not be
             //! opened at all.
             //menuItemExit.ShortcutKeys = (Keys.Shift | Keys.F5);
@@ -141,9 +123,6 @@ namespace SAI_Editor
             menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
             //menuItemDeleteSelectedRow.ShortcutKeys = (Keys.Control | Keys.D);
             menuItemDeleteSelectedRow.ShortcutKeyDisplayString = "(Ctrl + D)";
-
-            listViewSmartScripts.View = View.Details;
-            listViewSmartScripts.FullRowSelect = true;
 
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);  // 0
             listViewSmartScripts.Columns.Add("source_type", 70, HorizontalAlignment.Right); // 1
@@ -183,10 +162,6 @@ namespace SAI_Editor
                     StartExpandingToMainForm(true);
             }
 
-            listViewSmartScripts.Click += listViewSmartScripts_Click;
-
-            //listViewSmartScripts.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
-
             tabControlParameters.AutoScrollOffset = new Point(5, 5);
 
             //! Permanent scrollbar to the parameters tabpage windows
@@ -198,22 +173,6 @@ namespace SAI_Editor
                 page.AutoScroll = true;
                 page.AutoScrollMinSize = new Size(page.Width, page.Height);
             }
-
-            foreach (Control control in tabControlParameters.Controls)
-                if (control is TabPage)
-                    foreach (Control controlTabPage in control.Controls)
-                        if (controlTabPage is TextBox)
-                            controlTabPage.KeyPress += numericField_KeyPress;
-
-            textBoxEventTypeId.KeyPress += numericField_KeyPress;
-            textBoxActionTypeId.KeyPress += numericField_KeyPress;
-            textBoxTargetTypeId.KeyPress += numericField_KeyPress;
-            textBoxEntryOrGuid.KeyPress += numericField_KeyPress;
-            textBoxEventScriptId.KeyPress += numericField_KeyPress;
-            textBoxLinkId.KeyPress += numericField_KeyPress;
-            textBoxEventPhasemask.KeyPress += numericField_KeyPress;
-            textBoxEventFlags.KeyPress += numericField_KeyPress;
-            textBoxEventLink.KeyPress += numericField_KeyPress;
 
             //! Temp..
             panelLoginBox.Location = new Point(9, 8);

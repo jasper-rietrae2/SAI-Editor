@@ -37,11 +37,14 @@
             // listViewSelectableItems
             // 
             this.listViewSelectableItems.CheckBoxes = true;
+            this.listViewSelectableItems.FullRowSelect = true;
             this.listViewSelectableItems.Location = new System.Drawing.Point(12, 12);
             this.listViewSelectableItems.Name = "listViewSelectableItems";
             this.listViewSelectableItems.Size = new System.Drawing.Size(220, 176);
             this.listViewSelectableItems.TabIndex = 1;
             this.listViewSelectableItems.UseCompatibleStateImageBehavior = false;
+            this.listViewSelectableItems.View = System.Windows.Forms.View.Details;
+            this.listViewSelectableItems.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listViewSelectableItems_ItemChecked);
             // 
             // buttonContinue
             // 
@@ -71,18 +74,22 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonContinue);
             this.Controls.Add(this.listViewSelectableItems);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "MultiSelectForm";
             this.Text = "Select phase";
             this.Load += new System.EventHandler(this.MultiSelectForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MultiSelectForm_KeyDown);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView listViewSelectableItems;
         private System.Windows.Forms.Button buttonContinue;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.ListView listViewSelectableItems;
     }
 }

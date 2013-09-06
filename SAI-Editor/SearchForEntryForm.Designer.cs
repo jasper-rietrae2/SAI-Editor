@@ -82,6 +82,7 @@
             this.textBoxCriteria.Name = "textBoxCriteria";
             this.textBoxCriteria.Size = new System.Drawing.Size(190, 21);
             this.textBoxCriteria.TabIndex = 8;
+            this.textBoxCriteria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCriteria_KeyPress);
             // 
             // comboBoxSearchType
             // 
@@ -97,6 +98,7 @@
             this.comboBoxSearchType.Name = "comboBoxSearchType";
             this.comboBoxSearchType.Size = new System.Drawing.Size(113, 21);
             this.comboBoxSearchType.TabIndex = 7;
+            this.comboBoxSearchType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSearchType_KeyPress);
             // 
             // checkBoxHasAiName
             // 
@@ -120,11 +122,15 @@
             // 
             // listViewEntryResults
             // 
+            this.listViewEntryResults.FullRowSelect = true;
             this.listViewEntryResults.Location = new System.Drawing.Point(12, 121);
+            this.listViewEntryResults.MultiSelect = false;
             this.listViewEntryResults.Name = "listViewEntryResults";
             this.listViewEntryResults.Size = new System.Drawing.Size(351, 295);
             this.listViewEntryResults.TabIndex = 11;
             this.listViewEntryResults.UseCompatibleStateImageBehavior = false;
+            this.listViewEntryResults.View = System.Windows.Forms.View.Details;
+            this.listViewEntryResults.DoubleClick += new System.EventHandler(this.listViewEntryResults_DoubleClick);
             // 
             // SearchForEntryForm
             // 
@@ -134,9 +140,12 @@
             this.Controls.Add(this.listViewEntryResults);
             this.Controls.Add(this.groupBoxSearchInfo);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "SearchForEntryForm";
             this.Text = "Search for an entry";
             this.Load += new System.EventHandler(this.SearchForCreatureForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchForEntryForm_KeyDown);
             this.groupBoxSearchInfo.ResumeLayout(false);
             this.groupBoxSearchInfo.PerformLayout();
             this.ResumeLayout(false);

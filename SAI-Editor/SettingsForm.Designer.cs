@@ -137,6 +137,7 @@
             this.trackBarAnimationSpeed.Size = new System.Drawing.Size(255, 45);
             this.trackBarAnimationSpeed.TabIndex = 6;
             this.trackBarAnimationSpeed.Value = 10;
+            this.trackBarAnimationSpeed.ValueChanged += new System.EventHandler(this.trackBarAnimationSpeed_ValueChanged);
             // 
             // checkBoxPromptToQuit
             // 
@@ -257,6 +258,7 @@
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
             this.textBoxPort.TabIndex = 4;
+            this.textBoxPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // label3
             // 
@@ -322,10 +324,15 @@
             this.Controls.Add(this.buttonSaveSettings);
             this.Controls.Add(this.buttonExitSettings);
             this.Controls.Add(this.tabControlSettings);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "SettingsForm";
             this.Text = "SAI-Editor Settings";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SettingsForm_FormClosed);
             this.Load += new System.EventHandler(this.SettingsForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SettingsForm_KeyDown);
             this.tabPageGeneral.ResumeLayout(false);
             this.tabPageGeneral.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).EndInit();

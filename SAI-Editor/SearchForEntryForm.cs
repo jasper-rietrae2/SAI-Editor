@@ -24,30 +24,13 @@ namespace SAI_Editor
 
         private void SearchForCreatureForm_Load(object sender, EventArgs e)
         {
-            MaximizeBox = false;
-            MinimizeBox = true;
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 800);
 
-            KeyPreview = true;
-            KeyDown += SearchForEntryForm_KeyDown;
-
             comboBoxSearchType.SelectedIndex = searchingForCreature ? 0 : 3;
-            comboBoxSearchType.KeyPress += comboBoxSearchType_KeyPress;
 
-            textBoxCriteria.KeyPress += textBoxCriteria_KeyPress;
-
-            listViewEntryResults.View = View.Details;
             listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
             listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
-
-            listViewEntryResults.FullRowSelect = true; //! This will make clicking on a row in the results select the full row.
-
-            listViewEntryResults.DoubleClick += listViewEntryResults_DoubleClick;
-            listViewEntryResults.MultiSelect = false;
-
-            //listViewCreatureResults.ListViewItemSorter = lvwColumnSorter;
-            //listViewCreatureResults.ColumnClick += new ColumnClickEventHandler(listViewCreatureResults_ColumnClick);
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM {0} ORDER BY entry LIMIT 1000", (searchingForCreature ? "creature_template" : "gameobject_template")), false);

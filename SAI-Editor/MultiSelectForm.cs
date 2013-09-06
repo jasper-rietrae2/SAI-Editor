@@ -16,17 +16,7 @@ namespace SAI_Editor
 
         private void MultiSelectForm_Load(object sender, EventArgs e)
         {
-            MaximizeBox = false;
-            MinimizeBox = true;
-            FormBorderStyle = FormBorderStyle.Fixed3D;
-
-            KeyPreview = true;
-            KeyDown += MultiSelectForm_KeyDown;
-
-            listViewSelectableItems.View = View.Details;
-            listViewSelectableItems.FullRowSelect = true;
             listViewSelectableItems.Columns.Add("", 20, HorizontalAlignment.Left);
-            listViewSelectableItems.ItemChecked += listViewSelectableItems_ItemChecked;
 
             if (searchingForPhasemask)
             {

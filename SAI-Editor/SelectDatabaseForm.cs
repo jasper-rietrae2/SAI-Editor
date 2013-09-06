@@ -17,17 +17,6 @@ namespace SAI_Editor
 
         private void SelectDatabaseForm_Load(object sender, EventArgs e)
         {
-            MaximizeBox = false;
-            MinimizeBox = true;
-            FormBorderStyle = FormBorderStyle.Fixed3D;
-
-            KeyPreview = true;
-            KeyDown += SelectDatabaseForm_KeyDown;
-
-            listViewDatabases.View = View.Details;
-            listViewDatabases.MultiSelect = false;
-            listViewDatabases.FullRowSelect = true;
-            listViewDatabases.DoubleClick += listViewDatabases_DoubleClick;
             listViewDatabases.Columns.Add("Database", 198, HorizontalAlignment.Left);
 
             for (int i = 0; i < databaseNames.Count; ++i)
