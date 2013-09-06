@@ -57,6 +57,7 @@
             // 
             // buttonStopSearching
             // 
+            this.buttonStopSearching.Enabled = false;
             this.buttonStopSearching.Location = new System.Drawing.Point(173, 67);
             this.buttonStopSearching.Name = "buttonStopSearching";
             this.buttonStopSearching.Size = new System.Drawing.Size(75, 23);

@@ -93,6 +93,9 @@ namespace SAI_Editor
                     return;
             }
 
+            SetEnabledOfControl(buttonSearch, false);
+            SetEnabledOfControl(buttonStopSearching, true);
+
             switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
             {
                 case 0: //! Creature name
@@ -211,7 +214,6 @@ namespace SAI_Editor
             }
 
             ClearItemsOfListView(listViewEntryResults);
-            SetEnabledOfControl(buttonSearch, false);
 
             try
             {
@@ -220,6 +222,7 @@ namespace SAI_Editor
             finally
             {
                 SetEnabledOfControl(buttonSearch, true);
+                SetEnabledOfControl(buttonStopSearching, false);
             }
         }
 
