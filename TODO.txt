@@ -1,0 +1,14 @@
+- Functionality to check for 'wrong' code; reads selected line for stuff like unused parameters having values, wrong comments, incorrect use of parameters, etc. etc;
+- Checkbox if the user wants to fill in smart_scripts.id gaps;
+- Read DBCs for areatriggers and implement areatrigger searching in the search form;
+- Implement scripted actionlist searching in the search form;
+- Possibly take the workspace-idea by Event Horizon;
+- Checkbox to only show event_types and action_types for the chosen source_type (so for gameobjects we would hide SMART_EVENT_SPELLHIT, etc.);
+- Change the labels of the parameter fields based on the chosen event_type, action_type and target_type (SMART_EVENT_SPELLHIT -> first param = spellid);
+- Possibly pick another logo, this is fugly and boring;
+- Option to reset settings to default;
+- Can't use copy or paste in the numeric-only fields (entry, type id, parameters, etc.);
+- Slightly fix up logic for listing actionlists: if you uncheck 'List actionlists too' while you have an actionlist selected, nothing will happen because we did not store the initial entry of the creature;
+- Disable the 'Continue' button unless something is selected in the forms using one;
+- Implement sorting of listviews in all forms;
+- The label saying 'Creature entry:' by default (changes to 'Gameobject/Areatrigger/Actionlist entry:' based on chosen source type) should say 'Creature guid:' if a guid is selected;
