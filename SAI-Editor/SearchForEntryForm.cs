@@ -319,52 +319,56 @@ namespace SAI_Editor
                 return comboBox.SelectedIndex;
         }
 
-        private delegate void AddItemToListViewDelegate(ListView listView, string item, string subItem);
-
         private void AddItemToListView(ListView listView, string item, string subItem)
         {
             if (listView.InvokeRequired)
             {
-                Invoke(new AddItemToListViewDelegate(AddItemToListView), new object[] { listView, item, subItem });
+                Invoke((MethodInvoker)delegate
+                {
+                    listView.Items.Add(item).SubItems.Add(subItem);
+                });
                 return;
             }
 
             listView.Items.Add(item).SubItems.Add(subItem);
         }
 
-        private delegate void SetEnabledOfControlDelegate(Control control, bool enable);
-
         private void SetEnabledOfControl(Control control, bool enable)
         {
             if (control.InvokeRequired)
             {
-                Invoke(new SetEnabledOfControlDelegate(SetEnabledOfControl), new object[] { control, enable });
+                Invoke((MethodInvoker)delegate
+                {
+                    control.Enabled = enable;
+                });
                 return;
             }
 
             control.Enabled = enable;
         }
 
-        private delegate void ClearItemsOfListViewDelegate(ListView listView);
-
         private void ClearItemsOfListView(ListView listView)
         {
             if (listView.InvokeRequired)
             {
-                Invoke(new ClearItemsOfListViewDelegate(ClearItemsOfListView), new object[] { listView });
+                Invoke((MethodInvoker)delegate
+                {
+                    listView.Items.Clear();
+                });
                 return;
             }
 
             listView.Items.Clear();
         }
 
-        private delegate void SetTextOfControlDelegate(Control control, string text);
-
         private void SetTextOfControl(Control control, string text)
         {
             if (control.InvokeRequired)
             {
-                Invoke(new SetTextOfControlDelegate(SetTextOfControl), new object[] { control, text });
+                Invoke((MethodInvoker)delegate
+                {
+                    control.Text = text;
+                });
                 return;
             }
 
