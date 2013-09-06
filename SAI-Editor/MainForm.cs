@@ -437,6 +437,8 @@ namespace SAI_Editor
                 case Keys.Enter:
                     if (formState == FormState.FormStateLogin)
                         buttonConnect_Click(sender, e);
+                    else if (formState == FormState.FormStateMain && textBoxEntryOrGuid.Focused)
+                        pictureBox1_Click(sender, e);
                     break;
                 case Keys.F5:
                     if (panelLoginBox.Location.X == 1000 && panelLoginBox.Location.Y == 50)

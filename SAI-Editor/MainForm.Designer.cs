@@ -1535,9 +1535,9 @@
             // groupBoxParameters
             // 
             this.groupBoxParameters.Controls.Add(this.tabControlParameters);
-            this.groupBoxParameters.Location = new System.Drawing.Point(675, 31);
+            this.groupBoxParameters.Location = new System.Drawing.Point(677, 31);
             this.groupBoxParameters.Name = "groupBoxParameters";
-            this.groupBoxParameters.Size = new System.Drawing.Size(284, 207);
+            this.groupBoxParameters.Size = new System.Drawing.Size(282, 207);
             this.groupBoxParameters.TabIndex = 23;
             this.groupBoxParameters.TabStop = false;
             this.groupBoxParameters.Text = "Parameters";
