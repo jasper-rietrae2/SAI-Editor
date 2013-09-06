@@ -424,23 +424,15 @@ namespace SAI_Editor
 
             try
             {
-                connection = new MySqlConnection(connectionString.ToString());
-                connection.Open();
+                //! Close the connection again since this is just a try-connection function. We actually connect
+                //! when the mainform is opened (this happens automatically because we use 'using').
+                using (connection = new MySqlConnection(connectionString.ToString()))
+                    connection.Open();
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message, "Could not connect", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 successFulConnection = false;
-            }
-            finally
-            {
-                //! Close the connection again since this is just a try-connection function. We actually connect
-                //! when the mainform is opened.
-                if (connection != null)
-                {
-                    connection.Close();
-                    connection.Dispose();
-                }
             }
 
             return successFulConnection;
