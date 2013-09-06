@@ -51,9 +51,8 @@ namespace SAI_Editor
             // Cast the objects to be compared to ListViewItem objects
             listviewX = x as ListViewItem;
             listviewY = y as ListViewItem;
-            if (listviewX == listviewY)
-                compareResult = 0;
-            else
+
+            if (listviewX != listviewY)
                 compareResult = String.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
             
             if (OrderOfSort == SortOrder.Ascending)

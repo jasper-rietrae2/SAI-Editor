@@ -18,7 +18,6 @@ namespace SAI_Editor
         private void MultiSelectForm_Load(object sender, EventArgs e)
         {
             listViewSelectableItems.Columns.Add("", 20, HorizontalAlignment.Left);
-            listViewSelectableItems.ListViewItemSorter = lvwColumnSorter;
             listViewSelectableItems.ColumnClick += listViewSelectableItems_ColumnClick;
 
             if (searchingForPhasemask)
@@ -113,6 +112,7 @@ namespace SAI_Editor
         private void listViewSelectableItems_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
+            myListView.ListViewItemSorter = lvwColumnSorter;
 
             //! Determine if clicked column is already the column that is being sorted
             if (e.Column != lvwColumnSorter.SortColumn)

@@ -19,7 +19,6 @@ namespace SAI_Editor
         private void SelectDatabaseForm_Load(object sender, EventArgs e)
         {
             listViewDatabases.Columns.Add("Database", 198, HorizontalAlignment.Left);
-            listViewDatabases.ListViewItemSorter = lvwColumnSorter;
             listViewDatabases.ColumnClick += listViewDatabases_ColumnClick;
 
             for (int i = 0; i < databaseNames.Count; ++i)
@@ -61,6 +60,7 @@ namespace SAI_Editor
         private void listViewDatabases_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
+            myListView.ListViewItemSorter = lvwColumnSorter;
 
             //! Determine if clicked column is already the column that is being sorted
             if (e.Column != lvwColumnSorter.SortColumn)

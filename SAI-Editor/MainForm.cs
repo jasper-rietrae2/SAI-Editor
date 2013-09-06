@@ -143,7 +143,6 @@ namespace SAI_Editor
             listViewSmartScripts.Columns.Add("o",           20, HorizontalAlignment.Right); // 26
             listViewSmartScripts.Columns.Add("comment",     400, HorizontalAlignment.Left); // 27 (width 56 to fit)
 
-            listViewSmartScripts.ListViewItemSorter = lvwColumnSorter;
             listViewSmartScripts.ColumnClick += listViewSmartScripts_ColumnClick;
 
             if (Properties.Settings.Default.AutoConnect)
@@ -847,6 +846,7 @@ namespace SAI_Editor
         private void listViewSmartScripts_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
+            myListView.ListViewItemSorter = lvwColumnSorter;
 
             //! Determine if clicked column is already the column that is being sorted
             if (e.Column != lvwColumnSorter.SortColumn)
