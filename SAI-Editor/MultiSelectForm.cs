@@ -6,6 +6,7 @@ namespace SAI_Editor
     public partial class MultiSelectForm : Form
     {
         private readonly bool searchingForPhasemask;
+        private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
         public MultiSelectForm(bool searchingForPhasemask)
         {
@@ -17,6 +18,8 @@ namespace SAI_Editor
         private void MultiSelectForm_Load(object sender, EventArgs e)
         {
             listViewSelectableItems.Columns.Add("", 20, HorizontalAlignment.Left);
+            listViewSelectableItems.ListViewItemSorter = lvwColumnSorter;
+            listViewSelectableItems.ColumnClick += listViewSelectableItems_ColumnClick;
 
             if (searchingForPhasemask)
             {
@@ -103,6 +106,25 @@ namespace SAI_Editor
         {
             if (e.Item.Checked && e.Item.Index > 0)
                 listViewSelectableItems.Items[0].Checked = false;
+        }
+
+        private void listViewSelectableItems_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            var myListView = (ListView)sender;
+
+            //! Determine if clicked column is already the column that is being sorted
+            if (e.Column != lvwColumnSorter.SortColumn)
+            {
+                //! Set the column number that is to be sorted; default to ascending
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+            else
+                //! Reverse the current sort direction for this column
+                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+
+            //! Perform the sort with these new sort options
+            myListView.Sort();
         }
     }
 }

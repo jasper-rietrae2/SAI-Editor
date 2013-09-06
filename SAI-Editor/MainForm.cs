@@ -56,6 +56,7 @@ namespace SAI_Editor
         private int WidthToExpandTo = (int)FormSizes.WidthToExpandTo, HeightToExpandTo = (int)FormSizes.HeightToExpandTo;
         public int animationSpeed = 5;
         private FormState formState = FormState.FormStateLogin;
+        private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
         public MainForm()
         {
@@ -141,6 +142,9 @@ namespace SAI_Editor
             listViewSmartScripts.Columns.Add("z",           20, HorizontalAlignment.Right); // 25
             listViewSmartScripts.Columns.Add("o",           20, HorizontalAlignment.Right); // 26
             listViewSmartScripts.Columns.Add("comment",     400, HorizontalAlignment.Left); // 27 (width 56 to fit)
+
+            listViewSmartScripts.ListViewItemSorter = lvwColumnSorter;
+            listViewSmartScripts.ColumnClick += listViewSmartScripts_ColumnClick;
 
             if (Properties.Settings.Default.AutoConnect)
             {
@@ -838,6 +842,25 @@ namespace SAI_Editor
                 if (databaseNames.Count > 0)
                     new SelectDatabaseForm(databaseNames).Show(this);
             }
+        }
+
+        private void listViewSmartScripts_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            var myListView = (ListView)sender;
+
+            //! Determine if clicked column is already the column that is being sorted
+            if (e.Column != lvwColumnSorter.SortColumn)
+            {
+                //! Set the column number that is to be sorted; default to ascending
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+            else
+                //! Reverse the current sort direction for this column
+                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+
+            //! Perform the sort with these new sort options
+            myListView.Sort();
         }
     }
 }

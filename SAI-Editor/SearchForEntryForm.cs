@@ -12,6 +12,7 @@ namespace SAI_Editor
         private Thread searchThread = null;
         private readonly MySqlConnectionStringBuilder connectionString;
         private readonly bool searchingForCreature = false;
+        private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
         public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, string startEntryString, bool searchingForCreature)
         {
@@ -31,6 +32,9 @@ namespace SAI_Editor
 
             listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
             listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
+
+            listViewEntryResults.ListViewItemSorter = lvwColumnSorter;
+            listViewEntryResults.ColumnClick += listViewEntryResults_ColumnClick;
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM {0} ORDER BY entry LIMIT 1000", (searchingForCreature ? "creature_template" : "gameobject_template")), false);
@@ -373,6 +377,25 @@ namespace SAI_Editor
             }
 
             control.Text = text;
+        }
+
+        private void listViewEntryResults_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            var myListView = (ListView)sender;
+
+            //! Determine if clicked column is already the column that is being sorted
+            if (e.Column != lvwColumnSorter.SortColumn)
+            {
+                //! Set the column number that is to be sorted; default to ascending
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+            else
+                //! Reverse the current sort direction for this column
+                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+
+            //! Perform the sort with these new sort options
+            myListView.Sort();
         }
     }
 }

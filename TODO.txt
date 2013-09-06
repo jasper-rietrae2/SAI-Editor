@@ -10,5 +10,4 @@
 - Can't use copy or paste in the numeric-only fields (entry, type id, parameters, etc.);
 - Slightly fix up logic for listing actionlists: if you uncheck 'List actionlists too' while you have an actionlist selected, nothing will happen because we did not store the initial entry of the creature;
 - Disable the 'Continue' button unless something is selected in the forms using one;
-- Implement sorting of listviews in all forms;
 - The label saying 'Creature entry:' by default (changes to 'Gameobject/Areatrigger/Actionlist entry:' based on chosen source type) should say 'Creature guid:' if a guid is selected;
