@@ -840,5 +840,47 @@ namespace SAI_Editor
         {
             new MultiSelectForm(false).ShowDialog(this);
         }
+
+        private void buttonSearchWorldDb_Click(object sender, EventArgs e)
+        {
+            var databaseNames = new List<string>();
+
+            connectionString.Server = textBoxHost.Text;
+            connectionString.UserID = textBoxUsername.Text;
+            connectionString.Port = Convert.ToUInt16(textBoxPort.Text);
+            connectionString.Database = textBoxWorldDatabase.Text;
+
+            if (textBoxPassword.Text.Length > 0)
+                connectionString.Password = textBoxPassword.Text;
+            try
+            {
+                using (var connection = new MySqlConnection(connectionString.ToString()))
+                {
+                    connection.Open();
+                    var returnVal = new MySqlDataAdapter("SHOW DATABASES", connection);
+                    var dataTable = new DataTable();
+                    returnVal.Fill(dataTable);
+
+                    if (dataTable.Rows.Count <= 0)
+                    {
+                        MessageBox.Show("Your connection contains no databases!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    foreach (DataRow row in dataTable.Rows)
+                        for (int i = 0; i < row.ItemArray.Length; i++)
+                            databaseNames.Add(row.ItemArray[i].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (databaseNames.Count > 0)
+                    new SelectDatabaseForm(databaseNames).Show(this);
+            }
+        }
     }
 }

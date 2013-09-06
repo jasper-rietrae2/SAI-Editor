@@ -5,7 +5,7 @@ namespace SAI_Editor
 {
     public partial class MultiSelectForm : Form
     {
-        private bool searchingForPhasemask;
+        private readonly bool searchingForPhasemask;
 
         public MultiSelectForm(bool searchingForPhasemask)
         {

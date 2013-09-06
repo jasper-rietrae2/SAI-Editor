@@ -42,6 +42,7 @@
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.groupBoxLogin = new System.Windows.Forms.GroupBox();
+            this.buttonSearchWorldDb = new System.Windows.Forms.Button();
             this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
@@ -238,7 +239,7 @@
             // 
             this.textBoxWorldDatabase.Location = new System.Drawing.Point(98, 97);
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
-            this.textBoxWorldDatabase.Size = new System.Drawing.Size(130, 20);
+            this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
             this.textBoxWorldDatabase.TabIndex = 3;
             // 
             // textBoxPassword
@@ -258,6 +259,7 @@
             // 
             // groupBoxLogin
             // 
+            this.groupBoxLogin.Controls.Add(this.buttonSearchWorldDb);
             this.groupBoxLogin.Controls.Add(this.checkBoxAutoConnect);
             this.groupBoxLogin.Controls.Add(this.textBoxHost);
             this.groupBoxLogin.Controls.Add(this.textBoxUsername);
@@ -276,6 +278,16 @@
             this.groupBoxLogin.TabIndex = 10;
             this.groupBoxLogin.TabStop = false;
             this.groupBoxLogin.Text = "Connect information";
+            // 
+            // buttonSearchWorldDb
+            // 
+            this.buttonSearchWorldDb.Location = new System.Drawing.Point(204, 96);
+            this.buttonSearchWorldDb.Name = "buttonSearchWorldDb";
+            this.buttonSearchWorldDb.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchWorldDb.TabIndex = 29;
+            this.buttonSearchWorldDb.Text = "...";
+            this.buttonSearchWorldDb.UseVisualStyleBackColor = true;
+            this.buttonSearchWorldDb.Click += new System.EventHandler(this.buttonSearchWorldDb_Click);
             // 
             // checkBoxAutoConnect
             // 
@@ -1724,6 +1736,7 @@
         public System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.TextBox textBoxEventPhasemask;
         public System.Windows.Forms.TextBox textBoxEventFlags;
+        private System.Windows.Forms.Button buttonSearchWorldDb;
     }
 }
 
