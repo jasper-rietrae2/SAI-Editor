@@ -126,6 +126,7 @@ namespace SAI_Editor
 
             listViewSmartScripts.View = View.Details;
             listViewSmartScripts.FullRowSelect = true;
+
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);  // 0
             listViewSmartScripts.Columns.Add("source_type", 70, HorizontalAlignment.Right); // 1
             listViewSmartScripts.Columns.Add("id",          20, HorizontalAlignment.Right); // 2
@@ -440,7 +441,7 @@ namespace SAI_Editor
                     else if (formState == FormState.FormStateMain && textBoxEntryOrGuid.Focused)
                         pictureBox1_Click(sender, e);
                     break;
-                case Keys.F5:
+                case Keys.F5: //! Temp to make it easier to design
                     if (panelLoginBox.Location.X == 1000 && panelLoginBox.Location.Y == 50)
                         panelLoginBox.Location = new Point(9, 8);
                     else
@@ -598,6 +599,15 @@ namespace SAI_Editor
 
                         listViewSmartScripts.Items.Add(listViewItem);
                     }
+
+                    for (int i = 8; i <= 11; ++i)
+                        listViewSmartScripts.Columns[i].Width = -1;
+
+                    for (int i = 13; i <= 18; ++i)
+                        listViewSmartScripts.Columns[i].Width = -1;
+
+                    for (int i = 20; i <= 26; ++i)
+                        listViewSmartScripts.Columns[i].Width = -1;
                 }
             }
             catch (Exception ex)
