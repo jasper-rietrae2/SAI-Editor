@@ -45,6 +45,12 @@ namespace SAI_Editor
         ParameterTarget,
     };
 
+    internal struct OriginalSearchInfo
+    {
+        public SourceTypes SourceType;
+        public String EntryOrGuid;
+    }
+
     public partial class MainForm : Form
     {
         private readonly MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
@@ -56,6 +62,7 @@ namespace SAI_Editor
         private int WidthToExpandTo = (int)FormSizes.WidthToExpandTo, HeightToExpandTo = (int)FormSizes.HeightToExpandTo;
         public int animationSpeed = 5;
         private FormState formState = FormState.FormStateLogin;
+        OriginalSearchInfo? OriginalViewInfo = null;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
         public MainForm()
@@ -749,14 +756,22 @@ namespace SAI_Editor
 
         private void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
         {
-            if (listViewSmartScripts.Items.Count > 0 && GetSourceTypeByIndex() != (int)SourceTypes.SourceTypeScriptedActionlist)
+            CheckBox check = sender as CheckBox;
+            if (check.Checked && OriginalViewInfo != null && listViewSmartScripts.Items.Count > 0 && OriginalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
             {
                 listViewSmartScripts.Items.Clear();
-                
-                //! to-do: We need to store the entry and source type we're searching for so we can use it here, else we're getting wrong results. To test
-                //! you can search for an entry with scripted actionlist(s), like 
-                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()), textBoxEntryOrGuid.Text, (SourceTypes)GetSourceTypeByIndex());
+
+                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", OriginalViewInfo.Value.EntryOrGuid, OriginalViewInfo.Value.SourceType), OriginalViewInfo.Value.EntryOrGuid, OriginalViewInfo.Value.SourceType);
             }
+            else if (!check.Checked && OriginalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
+                RemoveActionListsFromView();
+        }
+
+        private void RemoveActionListsFromView()
+        {
+            foreach (ListViewItem item in listViewSmartScripts.Items)
+                if (Int32.Parse(item.SubItems[1].Text) == 9) // If the source_type column is ActionList
+                    listViewSmartScripts.Items.Remove(item);
         }
 
         private int GetSourceTypeByIndex()
@@ -778,6 +793,12 @@ namespace SAI_Editor
         {
             if (IsEmptyString(textBoxEntryOrGuid.Text))
                 return;
+            
+            OriginalViewInfo = new OriginalSearchInfo
+            {
+                SourceType = (SourceTypes)GetSourceTypeByIndex(),
+                EntryOrGuid = textBoxEntryOrGuid.Text
+            };
 
             listViewSmartScripts.Items.Clear();
             SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()), textBoxEntryOrGuid.Text, (SourceTypes)GetSourceTypeByIndex());
