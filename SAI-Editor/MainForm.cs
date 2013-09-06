@@ -127,34 +127,33 @@ namespace SAI_Editor
             listViewSmartScripts.View = View.Details;
             listViewSmartScripts.FullRowSelect = true;
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);  // 0
-            listViewSmartScripts.Columns.Add("source_type", 70, HorizontalAlignment.Right); // 0 (first subitem)
-            listViewSmartScripts.Columns.Add("id",          20, HorizontalAlignment.Right); // 1
-            listViewSmartScripts.Columns.Add("link",        30, HorizontalAlignment.Right); // 2
-            listViewSmartScripts.Columns.Add("event_type",  66, HorizontalAlignment.Right); // 3
-            listViewSmartScripts.Columns.Add("event_phase", 74, HorizontalAlignment.Right); // 4
-            listViewSmartScripts.Columns.Add("event_chance",81, HorizontalAlignment.Right); // 5
-            listViewSmartScripts.Columns.Add("event_flags", 69, HorizontalAlignment.Right); // 6
-            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right); // 7
-            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right); // 8
-            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right); // 9
-            listViewSmartScripts.Columns.Add("p4",          24, HorizontalAlignment.Right); // 10
-            listViewSmartScripts.Columns.Add("action_type", 67, HorizontalAlignment.Right); // 11
-            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right); // 12
-            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right); // 13
-            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right); // 14
-            listViewSmartScripts.Columns.Add("p4",          24, HorizontalAlignment.Right); // 15
-            listViewSmartScripts.Columns.Add("p5",          24, HorizontalAlignment.Right); // 16
-            listViewSmartScripts.Columns.Add("p6",          24, HorizontalAlignment.Right); // 17
-            listViewSmartScripts.Columns.Add("target_type", 67, HorizontalAlignment.Right); // 18
-            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right); // 19
-            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right); // 20
-            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right); // 21
-            listViewSmartScripts.Columns.Add("x",           20, HorizontalAlignment.Right); // 22
-            listViewSmartScripts.Columns.Add("y",           20, HorizontalAlignment.Right); // 23
-            listViewSmartScripts.Columns.Add("z",           20, HorizontalAlignment.Right); // 24
-            listViewSmartScripts.Columns.Add("o",           20, HorizontalAlignment.Right); // 25
-          //listViewSmartScripts.Columns.Add("comment",     56, HorizontalAlignment.Right); // 26
-            listViewSmartScripts.Columns.Add("comment",     400, HorizontalAlignment.Left); // 26
+            listViewSmartScripts.Columns.Add("source_type", 70, HorizontalAlignment.Right); // 1
+            listViewSmartScripts.Columns.Add("id",          20, HorizontalAlignment.Right); // 2
+            listViewSmartScripts.Columns.Add("link",        30, HorizontalAlignment.Right); // 3
+            listViewSmartScripts.Columns.Add("event_type",  66, HorizontalAlignment.Right); // 4
+            listViewSmartScripts.Columns.Add("event_phase", 74, HorizontalAlignment.Right); // 5
+            listViewSmartScripts.Columns.Add("event_chance",81, HorizontalAlignment.Right); // 6
+            listViewSmartScripts.Columns.Add("event_flags", 69, HorizontalAlignment.Right); // 7
+            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right); // 8
+            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right); // 9
+            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right); // 10
+            listViewSmartScripts.Columns.Add("p4",          24, HorizontalAlignment.Right); // 11
+            listViewSmartScripts.Columns.Add("action_type", 67, HorizontalAlignment.Right); // 12
+            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right); // 13
+            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right); // 14
+            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right); // 15
+            listViewSmartScripts.Columns.Add("p4",          24, HorizontalAlignment.Right); // 16
+            listViewSmartScripts.Columns.Add("p5",          24, HorizontalAlignment.Right); // 17
+            listViewSmartScripts.Columns.Add("p6",          24, HorizontalAlignment.Right); // 18
+            listViewSmartScripts.Columns.Add("target_type", 67, HorizontalAlignment.Right); // 19
+            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right); // 20
+            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right); // 21
+            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right); // 22
+            listViewSmartScripts.Columns.Add("x",           20, HorizontalAlignment.Right); // 23
+            listViewSmartScripts.Columns.Add("y",           20, HorizontalAlignment.Right); // 24
+            listViewSmartScripts.Columns.Add("z",           20, HorizontalAlignment.Right); // 25
+            listViewSmartScripts.Columns.Add("o",           20, HorizontalAlignment.Right); // 26
+            listViewSmartScripts.Columns.Add("comment",     400, HorizontalAlignment.Left); // 27 (width 56 to fit)
 
             if (settings.GetSetting("AutoConnect", "no") == "yes")
             {
@@ -639,12 +638,10 @@ namespace SAI_Editor
                     return;
             }
 
-            comboBoxEventType.SelectedIndex = Convert.ToInt32(selectedItem[4].Text);
-            comboBoxActionType.SelectedIndex = Convert.ToInt32(selectedItem[12].Text);
-            comboBoxTargetType.SelectedIndex = Convert.ToInt32(selectedItem[19].Text);
-            textBoxComments.Text = selectedItem[27].Text;
             textBoxEventScriptId.Text = selectedItem[2].Text;
             textBoxEventLink.Text = selectedItem[3].Text;
+
+            comboBoxEventType.SelectedIndex = Convert.ToInt32(selectedItem[4].Text);
             textBoxEventPhasemask.Text = selectedItem[5].Text;
             textBoxEventChance.Text = selectedItem[6].Text;
             textBoxEventFlags.Text = selectedItem[7].Text;
@@ -656,6 +653,7 @@ namespace SAI_Editor
             textBoxEventParam4.Text = selectedItem[11].Text;
 
             //! Action parameters
+            comboBoxActionType.SelectedIndex = Convert.ToInt32(selectedItem[12].Text);
             textBoxActionParam1.Text = selectedItem[13].Text;
             textBoxActionParam2.Text = selectedItem[14].Text;
             textBoxActionParam3.Text = selectedItem[15].Text;
@@ -664,6 +662,7 @@ namespace SAI_Editor
             textBoxActionParam6.Text = selectedItem[18].Text;
 
             //! Target parameters
+            comboBoxTargetType.SelectedIndex = Convert.ToInt32(selectedItem[19].Text);
             textBoxTargetParam1.Text = selectedItem[20].Text;
             textBoxTargetParam2.Text = selectedItem[21].Text;
             textBoxTargetParam3.Text = selectedItem[22].Text;
@@ -671,6 +670,8 @@ namespace SAI_Editor
             textBoxTargetY.Text = selectedItem[24].Text;
             textBoxTargetZ.Text = selectedItem[25].Text;
             textBoxTargetO.Text = selectedItem[26].Text;
+
+            textBoxComments.Text = selectedItem[24].Text;
         }
 
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
