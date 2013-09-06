@@ -33,7 +33,6 @@ namespace SAI_Editor
             listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
             listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
 
-            listViewEntryResults.ListViewItemSorter = lvwColumnSorter;
             listViewEntryResults.ColumnClick += listViewEntryResults_ColumnClick;
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -385,7 +384,7 @@ namespace SAI_Editor
         private void listViewEntryResults_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
-
+            myListView.ListViewItemSorter = lvwColumnSorter;
             //! Determine if clicked column is already the column that is being sorted
             if (e.Column != lvwColumnSorter.SortColumn)
             {
