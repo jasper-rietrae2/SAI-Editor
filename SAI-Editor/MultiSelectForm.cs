@@ -26,6 +26,7 @@ namespace SAI_Editor
             listViewSelectableItems.View = View.Details;
             listViewSelectableItems.FullRowSelect = true;
             listViewSelectableItems.Columns.Add("", 20, HorizontalAlignment.Left);
+            listViewSelectableItems.ItemChecked += listViewSelectableItems_ItemChecked;
 
             if (searchingForPhasemask)
             {
@@ -106,6 +107,12 @@ namespace SAI_Editor
                     Close();
                     break;
             }
+        }
+
+        private void listViewSelectableItems_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            if (e.Item.Checked && e.Item.Index > 0)
+                listViewSelectableItems.Items[0].Checked = false;
         }
     }
 }
