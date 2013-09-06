@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.Data;
 using System.Drawing;
 using MySql.Data.MySqlClient;
+using System.Data.SQLite;
 
 internal enum FormState
 {
@@ -33,6 +34,23 @@ internal enum SourceTypes
     SourceTypeCreature = 0,
     SourceTypeGameobject = 1,
     SourceTypeScriptedActionlist = 9,
+};
+
+internal enum ParameterType
+{
+    ParameterEvent,
+    ParameterAction,
+    ParameterTarget,
+};
+
+public struct ParameterInformation
+{
+    ParameterType parameterType;
+    int parameterId;
+
+    //! Arrays because we need one per parameter
+    string[] parameterString;
+    string[] parameterTooltip;
 };
 
 namespace SAI_Editor

@@ -147,6 +147,7 @@
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -1204,7 +1205,7 @@
             this.tabControlParameters.Location = new System.Drawing.Point(8, 19);
             this.tabControlParameters.Name = "tabControlParameters";
             this.tabControlParameters.SelectedIndex = 0;
-            this.tabControlParameters.Size = new System.Drawing.Size(269, 176);
+            this.tabControlParameters.Size = new System.Drawing.Size(269, 153);
             this.tabControlParameters.TabIndex = 0;
             // 
             // tabPageEvent
@@ -1223,7 +1224,7 @@
             this.tabPageEvent.Location = new System.Drawing.Point(4, 22);
             this.tabPageEvent.Name = "tabPageEvent";
             this.tabPageEvent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEvent.Size = new System.Drawing.Size(261, 150);
+            this.tabPageEvent.Size = new System.Drawing.Size(261, 127);
             this.tabPageEvent.TabIndex = 0;
             this.tabPageEvent.Text = "Event";
             // 
@@ -1309,7 +1310,7 @@
             this.tabPageAction.Location = new System.Drawing.Point(4, 22);
             this.tabPageAction.Name = "tabPageAction";
             this.tabPageAction.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAction.Size = new System.Drawing.Size(261, 150);
+            this.tabPageAction.Size = new System.Drawing.Size(261, 127);
             this.tabPageAction.TabIndex = 1;
             this.tabPageAction.Text = "Action";
             // 
@@ -1428,7 +1429,7 @@
             this.tabPageTarget.Controls.Add(this.textBoxTargetParam1);
             this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
             this.tabPageTarget.Name = "tabPageTarget";
-            this.tabPageTarget.Size = new System.Drawing.Size(261, 150);
+            this.tabPageTarget.Size = new System.Drawing.Size(261, 127);
             this.tabPageTarget.TabIndex = 2;
             this.tabPageTarget.Text = "Target";
             // 
@@ -1549,7 +1550,7 @@
             this.groupBoxParameters.Controls.Add(this.tabControlParameters);
             this.groupBoxParameters.Location = new System.Drawing.Point(677, 31);
             this.groupBoxParameters.Name = "groupBoxParameters";
-            this.groupBoxParameters.Size = new System.Drawing.Size(282, 207);
+            this.groupBoxParameters.Size = new System.Drawing.Size(282, 178);
             this.groupBoxParameters.TabIndex = 23;
             this.groupBoxParameters.TabStop = false;
             this.groupBoxParameters.Text = "Parameters";
@@ -1573,11 +1574,21 @@
             this.panel3.TabIndex = 21;
             this.panel3.Visible = false;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(884, 215);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "Add line";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1315, 580);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.panelLoginBox);
             this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.groupBoxParameters);
@@ -1737,6 +1748,7 @@
         public System.Windows.Forms.TextBox textBoxEventPhasemask;
         public System.Windows.Forms.TextBox textBoxEventFlags;
         private System.Windows.Forms.Button buttonSearchWorldDb;
+        private System.Windows.Forms.Button button2;
     }
 }
 

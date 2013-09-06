@@ -62,7 +62,7 @@
             // 
             // buttonExitSettings
             // 
-            this.buttonExitSettings.Location = new System.Drawing.Point(184, 227);
+            this.buttonExitSettings.Location = new System.Drawing.Point(192, 227);
             this.buttonExitSettings.Name = "buttonExitSettings";
             this.buttonExitSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonExitSettings.TabIndex = 9;
@@ -93,7 +93,7 @@
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(243, 187);
+            this.tabPageGeneral.Size = new System.Drawing.Size(247, 187);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
@@ -134,7 +134,7 @@
             this.trackBarAnimationSpeed.Maximum = 12;
             this.trackBarAnimationSpeed.Minimum = 1;
             this.trackBarAnimationSpeed.Name = "trackBarAnimationSpeed";
-            this.trackBarAnimationSpeed.Size = new System.Drawing.Size(251, 45);
+            this.trackBarAnimationSpeed.Size = new System.Drawing.Size(255, 45);
             this.trackBarAnimationSpeed.TabIndex = 6;
             this.trackBarAnimationSpeed.Value = 10;
             // 
@@ -190,7 +190,7 @@
             this.tabControlSettings.Location = new System.Drawing.Point(12, 8);
             this.tabControlSettings.Name = "tabControlSettings";
             this.tabControlSettings.SelectedIndex = 0;
-            this.tabControlSettings.Size = new System.Drawing.Size(251, 213);
+            this.tabControlSettings.Size = new System.Drawing.Size(255, 213);
             this.tabControlSettings.TabIndex = 1;
             // 
             // tabPageConnection
@@ -208,7 +208,7 @@
             this.tabPageConnection.Controls.Add(this.label7);
             this.tabPageConnection.Location = new System.Drawing.Point(4, 22);
             this.tabPageConnection.Name = "tabPageConnection";
-            this.tabPageConnection.Size = new System.Drawing.Size(243, 187);
+            this.tabPageConnection.Size = new System.Drawing.Size(247, 187);
             this.tabPageConnection.TabIndex = 1;
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
@@ -305,7 +305,7 @@
             // 
             // buttonClearSettings
             // 
-            this.buttonClearSettings.Location = new System.Drawing.Point(101, 227);
+            this.buttonClearSettings.Location = new System.Drawing.Point(102, 227);
             this.buttonClearSettings.Name = "buttonClearSettings";
             this.buttonClearSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonClearSettings.TabIndex = 8;
