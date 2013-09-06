@@ -6,55 +6,45 @@ using System.Drawing;
 using MySql.Data.MySqlClient;
 //using System.Data.SQLite;
 
-internal enum FormState
-{
-    FormStateLogin,
-    FormStateExpandingOrContracting,
-    FormStateMain,
-};
-
-internal enum FormSizes
-{
-    Width = 278,
-    Height = 260,
-
-    WidthToExpandTo = 985,
-    HeightToExpandTo = 505,
-};
-
-internal enum MaxValues
-{
-    MaxEventType = 74,
-    MaxActionType = 110,
-    MaxTargetType = 26,
-};
-
-internal enum SourceTypes
-{
-    SourceTypeCreature = 0,
-    SourceTypeGameobject = 1,
-    SourceTypeScriptedActionlist = 9,
-};
-
-internal enum ParameterType
-{
-    ParameterEvent,
-    ParameterAction,
-    ParameterTarget,
-};
-
-public struct ParameterInformation
-{
-    ParameterType parameterType;
-    int parameterId;
-
-    //! Arrays because we need one per parameter
-    string[] parameterString;
-    string[] parameterTooltip;
-};
-
 namespace SAI_Editor
 {
+    internal enum FormState
+    {
+        FormStateLogin,
+        FormStateExpandingOrContracting,
+        FormStateMain,
+    };
+
+    internal enum FormSizes
+    {
+        Width = 278,
+        Height = 260,
+
+        WidthToExpandTo = 985,
+        HeightToExpandTo = 505,
+    };
+
+    internal enum MaxValues
+    {
+        MaxEventType = 74,
+        MaxActionType = 110,
+        MaxTargetType = 26,
+    };
+
+    internal enum SourceTypes
+    {
+        SourceTypeCreature = 0,
+        SourceTypeGameobject = 1,
+        SourceTypeScriptedActionlist = 9,
+    };
+
+    internal enum ParameterType
+    {
+        ParameterEvent,
+        ParameterAction,
+        ParameterTarget,
+    };
+
     public partial class MainForm : Form
     {
         public Settings settings = new Settings();
