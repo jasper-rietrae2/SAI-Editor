@@ -314,6 +314,7 @@
             this.checkBoxDontHidePass.TabIndex = 29;
             this.checkBoxDontHidePass.Text = "Don\'t hide my password";
             this.checkBoxDontHidePass.UseVisualStyleBackColor = true;
+            this.checkBoxDontHidePass.CheckedChanged += new System.EventHandler(this.checkBoxDontHidePass_CheckedChanged);
             // 
             // SettingsForm
             // 

@@ -29,6 +29,8 @@ namespace SAI_Editor
             checkBoxDontHidePass.Checked = Properties.Settings.Default.DontHidePass;
 
             textBoxAnimationSpeed.Text = Properties.Settings.Default.AnimationSpeed.ToString();
+
+            textBoxPassword.PasswordChar = Convert.ToChar(!checkBoxDontHidePass.Checked ? '*' : '\0');
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -172,6 +174,11 @@ namespace SAI_Editor
             //! Only allow typing keys that are numbers
             if (!Char.IsNumber(e.KeyChar))
                 e.Handled = e.KeyChar != (char)Keys.Back;
+        }
+
+        private void checkBoxDontHidePass_CheckedChanged(object sender, EventArgs e)
+        {
+            textBoxPassword.PasswordChar = Convert.ToChar(!checkBoxDontHidePass.Checked ? '*' : '\0');
         }
     }
 }
