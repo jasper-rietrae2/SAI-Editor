@@ -76,8 +76,8 @@
             this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.buttonSearchLink = new System.Windows.Forms.Button();
+            this.buttonLinkTo = new System.Windows.Forms.Button();
+            this.buttonLinkFrom = new System.Windows.Forms.Button();
             this.comboBoxTargetType = new System.Windows.Forms.ComboBox();
             this.buttonSelectEventFlag = new System.Windows.Forms.Button();
             this.buttonSearchPhasemask = new System.Windows.Forms.Button();
@@ -93,8 +93,8 @@
             this.textBoxActionTypeId = new System.Windows.Forms.TextBox();
             this.textBoxEventPhasemask = new System.Windows.Forms.TextBox();
             this.textBoxEventTypeId = new System.Windows.Forms.TextBox();
-            this.textBoxLinkId = new System.Windows.Forms.TextBox();
-            this.textBoxEventLink = new System.Windows.Forms.TextBox();
+            this.textBoxLinkTo = new System.Windows.Forms.TextBox();
+            this.textBoxLinkFrom = new System.Windows.Forms.TextBox();
             this.comboBoxEventType = new System.Windows.Forms.ComboBox();
             this.textBoxEventScriptId = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -605,8 +605,8 @@
             // 
             // groupBoxScriptInfo
             // 
-            this.groupBoxScriptInfo.Controls.Add(this.button1);
-            this.groupBoxScriptInfo.Controls.Add(this.buttonSearchLink);
+            this.groupBoxScriptInfo.Controls.Add(this.buttonLinkTo);
+            this.groupBoxScriptInfo.Controls.Add(this.buttonLinkFrom);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxTargetType);
             this.groupBoxScriptInfo.Controls.Add(this.buttonSelectEventFlag);
             this.groupBoxScriptInfo.Controls.Add(this.buttonSearchPhasemask);
@@ -622,8 +622,8 @@
             this.groupBoxScriptInfo.Controls.Add(this.textBoxActionTypeId);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventPhasemask);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventTypeId);
-            this.groupBoxScriptInfo.Controls.Add(this.textBoxLinkId);
-            this.groupBoxScriptInfo.Controls.Add(this.textBoxEventLink);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxLinkTo);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxLinkFrom);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxEventType);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventScriptId);
             this.groupBoxScriptInfo.Controls.Add(this.label8);
@@ -641,23 +641,25 @@
             this.groupBoxScriptInfo.Text = "Dynamic script information";
             this.groupBoxScriptInfo.Visible = false;
             // 
-            // button1
+            // buttonLinkTo
             // 
-            this.button1.Location = new System.Drawing.Point(100, 150);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(24, 22);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.buttonLinkTo.Location = new System.Drawing.Point(100, 150);
+            this.buttonLinkTo.Name = "buttonLinkTo";
+            this.buttonLinkTo.Size = new System.Drawing.Size(24, 22);
+            this.buttonLinkTo.TabIndex = 8;
+            this.buttonLinkTo.Text = "...";
+            this.buttonLinkTo.UseVisualStyleBackColor = true;
+            this.buttonLinkTo.Click += new System.EventHandler(this.buttonLinkTo_Click);
             // 
-            // buttonSearchLink
+            // buttonLinkFrom
             // 
-            this.buttonSearchLink.Location = new System.Drawing.Point(302, 150);
-            this.buttonSearchLink.Name = "buttonSearchLink";
-            this.buttonSearchLink.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchLink.TabIndex = 14;
-            this.buttonSearchLink.Text = "...";
-            this.buttonSearchLink.UseVisualStyleBackColor = true;
+            this.buttonLinkFrom.Location = new System.Drawing.Point(302, 150);
+            this.buttonLinkFrom.Name = "buttonLinkFrom";
+            this.buttonLinkFrom.Size = new System.Drawing.Size(24, 22);
+            this.buttonLinkFrom.TabIndex = 14;
+            this.buttonLinkFrom.Text = "...";
+            this.buttonLinkFrom.UseVisualStyleBackColor = true;
+            this.buttonLinkFrom.Click += new System.EventHandler(this.buttonLinkFrom_Click);
             // 
             // comboBoxTargetType
             // 
@@ -949,23 +951,23 @@
             this.textBoxEventTypeId.TextChanged += new System.EventHandler(this.textBoxEventTypeId_TextChanged);
             this.textBoxEventTypeId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
-            // textBoxLinkId
+            // textBoxLinkTo
             // 
-            this.textBoxLinkId.Location = new System.Drawing.Point(59, 151);
-            this.textBoxLinkId.Name = "textBoxLinkId";
-            this.textBoxLinkId.Size = new System.Drawing.Size(41, 20);
-            this.textBoxLinkId.TabIndex = 19;
-            this.textBoxLinkId.Text = "0";
-            this.textBoxLinkId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
+            this.textBoxLinkTo.Location = new System.Drawing.Point(59, 151);
+            this.textBoxLinkTo.Name = "textBoxLinkTo";
+            this.textBoxLinkTo.Size = new System.Drawing.Size(41, 20);
+            this.textBoxLinkTo.TabIndex = 19;
+            this.textBoxLinkTo.Text = "0";
+            this.textBoxLinkTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
-            // textBoxEventLink
+            // textBoxLinkFrom
             // 
-            this.textBoxEventLink.Location = new System.Drawing.Point(263, 151);
-            this.textBoxEventLink.Name = "textBoxEventLink";
-            this.textBoxEventLink.Size = new System.Drawing.Size(39, 20);
-            this.textBoxEventLink.TabIndex = 13;
-            this.textBoxEventLink.Text = "0";
-            this.textBoxEventLink.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
+            this.textBoxLinkFrom.Location = new System.Drawing.Point(263, 151);
+            this.textBoxLinkFrom.Name = "textBoxLinkFrom";
+            this.textBoxLinkFrom.Size = new System.Drawing.Size(39, 20);
+            this.textBoxLinkFrom.TabIndex = 13;
+            this.textBoxLinkFrom.Text = "0";
+            this.textBoxLinkFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // comboBoxEventType
             // 
@@ -1240,7 +1242,7 @@
             this.tabPageEvent.Location = new System.Drawing.Point(4, 22);
             this.tabPageEvent.Name = "tabPageEvent";
             this.tabPageEvent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEvent.Size = new System.Drawing.Size(261, 222);
+            this.tabPageEvent.Size = new System.Drawing.Size(261, 157);
             this.tabPageEvent.TabIndex = 0;
             this.tabPageEvent.Text = "Event";
             // 
@@ -1693,7 +1695,7 @@
         private System.Windows.Forms.Button buttonSearchEventFlags;
         private System.Windows.Forms.NumericUpDown textBoxEventChance;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxEventLink;
+        private System.Windows.Forms.TextBox textBoxLinkFrom;
         private System.Windows.Forms.TextBox textBoxEventScriptId;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
@@ -1701,7 +1703,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button buttonSearchPhasemask;
-        private System.Windows.Forms.Button buttonSearchLink;
+        private System.Windows.Forms.Button buttonLinkFrom;
         private System.Windows.Forms.Label labelEventParam2;
         private System.Windows.Forms.TextBox textBoxEventParam4;
         private System.Windows.Forms.TextBox textBoxEventParam3;
@@ -1745,9 +1747,9 @@
         public System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonLinkTo;
         private System.Windows.Forms.Button buttonSelectEventFlag;
-        private System.Windows.Forms.TextBox textBoxLinkId;
+        private System.Windows.Forms.TextBox textBoxLinkTo;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem menuItemExit;

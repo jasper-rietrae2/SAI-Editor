@@ -649,7 +649,7 @@ namespace SAI_Editor
             }
 
             textBoxEventScriptId.Text = selectedItem[2].Text;
-            textBoxEventLink.Text = selectedItem[3].Text;
+            textBoxLinkTo.Text = selectedItem[3].Text;
 
             comboBoxEventType.SelectedIndex = Convert.ToInt32(selectedItem[4].Text);
             textBoxEventPhasemask.Text = selectedItem[5].Text;
