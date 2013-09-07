@@ -157,13 +157,13 @@ namespace SAI_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool DontHidePass {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HidePass {
             get {
-                return ((bool)(this["DontHidePass"]));
+                return ((bool)(this["HidePass"]));
             }
             set {
-                this["DontHidePass"] = value;
+                this["HidePass"] = value;
             }
         }
     }

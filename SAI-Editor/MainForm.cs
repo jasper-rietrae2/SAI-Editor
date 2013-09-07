@@ -176,7 +176,7 @@ namespace SAI_Editor
             //! Temp..
             panelLoginBox.Location = new Point(9, 8);
 
-            if (!Properties.Settings.Default.DontHidePass)
+            if (Properties.Settings.Default.HidePass)
                 textBoxPassword.PasswordChar = '*';
         }
 

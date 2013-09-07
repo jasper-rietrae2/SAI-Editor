@@ -26,11 +26,11 @@ namespace SAI_Editor
             checkBoxLoadScriptInstantly.Checked = Properties.Settings.Default.LoadScriptInstantly;
             checkBoxAutoSaveSettings.Checked = Properties.Settings.Default.AutoSaveSettings;
             checkBoxPromptToQuit.Checked = Properties.Settings.Default.PromptToQuit;
-            checkBoxDontHidePass.Checked = Properties.Settings.Default.DontHidePass;
+            checkBoxHidePass.Checked = Properties.Settings.Default.HidePass;
 
             textBoxAnimationSpeed.Text = Properties.Settings.Default.AnimationSpeed.ToString();
 
-            textBoxPassword.PasswordChar = Convert.ToChar(!checkBoxDontHidePass.Checked ? '*' : '\0');
+            textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '*' : '\0');
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -52,7 +52,7 @@ namespace SAI_Editor
             Properties.Settings.Default.LoadScriptInstantly = checkBoxLoadScriptInstantly.Checked;
             Properties.Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
             Properties.Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
-            Properties.Settings.Default.DontHidePass = checkBoxDontHidePass.Checked;
+            Properties.Settings.Default.HidePass = checkBoxHidePass.Checked;
             Properties.Settings.Default.AnimationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
             Properties.Settings.Default.Save();
 
@@ -63,7 +63,7 @@ namespace SAI_Editor
             ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
             ((MainForm)Owner).animationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
-            ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(!checkBoxDontHidePass.Checked ? '*' : '\0');
+            ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '*' : '\0');
         }
 
         private void buttonExitSettings_Click(object sender, EventArgs e)
@@ -94,7 +94,7 @@ namespace SAI_Editor
                 textBoxPort.Text == Properties.Settings.Default.Port.ToString() && checkBoxAutoConnect.Checked == Properties.Settings.Default.AutoConnect &&
                 checkBoxInstantExpand.Checked == Properties.Settings.Default.InstantExpand && checkBoxLoadScriptInstantly.Checked == Properties.Settings.Default.LoadScriptInstantly &&
                 checkBoxAutoSaveSettings.Checked == Properties.Settings.Default.AutoSaveSettings && checkBoxPromptToQuit.Checked == Properties.Settings.Default.PromptToQuit &&
-                textBoxAnimationSpeed.Text == Properties.Settings.Default.AnimationSpeed.ToString() && checkBoxDontHidePass.Checked == Properties.Settings.Default.DontHidePass)
+                textBoxAnimationSpeed.Text == Properties.Settings.Default.AnimationSpeed.ToString() && checkBoxHidePass.Checked == Properties.Settings.Default.HidePass)
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -111,7 +111,7 @@ namespace SAI_Editor
                     checkBoxInstantExpand.Checked = false;
                     checkBoxLoadScriptInstantly.Checked = false;
                     checkBoxPromptToQuit.Checked = false;
-                    checkBoxDontHidePass.Checked = false;
+                    checkBoxHidePass.Checked = true;
                     textBoxAnimationSpeed.Text = "10";
                     trackBarAnimationSpeed.Value = 10;
                     break;
@@ -178,7 +178,7 @@ namespace SAI_Editor
 
         private void checkBoxDontHidePass_CheckedChanged(object sender, EventArgs e)
         {
-            textBoxPassword.PasswordChar = Convert.ToChar(!checkBoxDontHidePass.Checked ? '*' : '\0');
+            textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '*' : '\0');
         }
     }
 }
