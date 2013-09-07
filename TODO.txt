@@ -10,3 +10,4 @@
 - Can't use copy or paste in the numeric-only fields (entry, type id, parameters, etc.);
 - The label saying 'Creature entry:' by default (changes to 'Gameobject/Areatrigger/Actionlist entry:' based on chosen source type) should say 'Creature guid:' if a guid is selected;
 - Use SQLite to store contents of Spell.dbc and Areatrigger.dbc as well as information on all event, action and target parameters (one for each id);
+- Clear all data to their default values when the user re-connects (contracts) to login form (source_type becomes creature, events/actions/targets become 0, etc. etc.);

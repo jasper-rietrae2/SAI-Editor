@@ -440,6 +440,7 @@ namespace SAI_Editor
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
+            listViewSmartScripts.Items.Clear();
             StartContractingToLoginForm(Properties.Settings.Default.InstantExpand);
         }
 
