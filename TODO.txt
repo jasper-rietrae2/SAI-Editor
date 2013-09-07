@@ -14,3 +14,5 @@
 - Make the column sorter work with numbers as well;
 - Implement a new form for the 'Links from' and 'Links to' buttons, which lists all current events that are in the listview of the main form in a new form and allows the user to choose an event to link to or from;
 - Figure out the app.config issue _properly_ (still doesn't work on a clean pull for me (Discover-));
+- Find a good-looking way to display _ALL_ info in the listview without having to scroll;
+- Make the application multi-platform supported;
