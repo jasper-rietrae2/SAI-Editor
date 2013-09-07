@@ -41,6 +41,7 @@ namespace SAI_Editor
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
+            TryToStopRunningThread();
             FillMainFormEntryOrGuidField(sender, e);
         }
 
@@ -247,6 +248,11 @@ namespace SAI_Editor
         }
 
         private void buttonClearSearchResults_Click(object sender, EventArgs e)
+        {
+            TryToStopRunningThread();
+        }
+
+        private void TryToStopRunningThread()
         {
             try
             {
