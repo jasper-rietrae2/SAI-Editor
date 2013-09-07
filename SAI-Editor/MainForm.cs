@@ -884,5 +884,28 @@ namespace SAI_Editor
             //! Perform the sort with these new sort options
             myListView.Sort();
         }
+
+        private ListView.ListViewItemCollection GetItemsWithoutActionlist(ListView listView)
+        {
+            ListView.ListViewItemCollection itemsWithoutActionlist = new ListView.ListViewItemCollection(listView);
+
+            foreach (ListViewItem item in listViewSmartScripts.Items)
+                if (Int32.Parse(item.SubItems[1].Text) == 9)
+                    itemsWithoutActionlist.Remove(item);
+
+            return itemsWithoutActionlist;
+        }
+
+        private void buttonLinkTo_Click(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                new SearchForLinkForm(true, GetItemsWithoutActionlist(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
+        }
+
+        private void buttonLinkFrom_Click(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                new SearchForLinkForm(false, GetItemsWithoutActionlist(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
+        }
     }
 }

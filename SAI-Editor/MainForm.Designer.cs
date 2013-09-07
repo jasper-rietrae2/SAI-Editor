@@ -1695,7 +1695,6 @@
         private System.Windows.Forms.Button buttonSearchEventFlags;
         private System.Windows.Forms.NumericUpDown textBoxEventChance;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxLinkFrom;
         private System.Windows.Forms.TextBox textBoxEventScriptId;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
@@ -1749,7 +1748,6 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.Button buttonLinkTo;
         private System.Windows.Forms.Button buttonSelectEventFlag;
-        private System.Windows.Forms.TextBox textBoxLinkTo;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem menuItemExit;
@@ -1761,6 +1759,8 @@
         public System.Windows.Forms.TextBox textBoxEventPhasemask;
         public System.Windows.Forms.TextBox textBoxEventFlags;
         private System.Windows.Forms.Button buttonSearchWorldDb;
+        public System.Windows.Forms.TextBox textBoxLinkFrom;
+        public System.Windows.Forms.TextBox textBoxLinkTo;
     }
 }
 
