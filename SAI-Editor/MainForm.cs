@@ -757,15 +757,20 @@ namespace SAI_Editor
 
         private void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox check = sender as CheckBox;
-            if (check.Checked && OriginalViewInfo != null && listViewSmartScripts.Items.Count > 0 && OriginalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
+            ListView.SelectedIndexCollection selectedIndices = listViewSmartScripts.SelectedIndices;
+
+            CheckBox checkListActionlists = sender as CheckBox;
+            if (checkListActionlists.Checked && OriginalViewInfo != null && listViewSmartScripts.Items.Count > 0 && OriginalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
             {
                 listViewSmartScripts.Items.Clear();
-
                 SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", OriginalViewInfo.Value.EntryOrGuid, OriginalViewInfo.Value.SourceType), OriginalViewInfo.Value.EntryOrGuid, OriginalViewInfo.Value.SourceType);
             }
-            else if (!check.Checked && OriginalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
+            else if (!checkListActionlists.Checked && OriginalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
                 RemoveActionListsFromView();
+
+            for (int i = 0; i < selectedIndices.Count; ++i)
+                if (listViewSmartScripts.Items[selectedIndices[i]] != null)
+                    listViewSmartScripts.Items[selectedIndices[i]].Selected  = true;
         }
 
         private void RemoveActionListsFromView()

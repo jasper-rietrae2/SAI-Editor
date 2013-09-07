@@ -1577,6 +1577,7 @@
             // listViewSmartScripts
             // 
             this.listViewSmartScripts.FullRowSelect = true;
+            this.listViewSmartScripts.HideSelection = false;
             this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
             this.listViewSmartScripts.Name = "listViewSmartScripts";
             this.listViewSmartScripts.Size = new System.Drawing.Size(947, 210);
