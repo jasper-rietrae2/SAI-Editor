@@ -892,13 +892,13 @@ namespace SAI_Editor
 
         private ListView.ListViewItemCollection GetItemsWithoutActionlist(ListView listView)
         {
-            ListView.ListViewItemCollection itemsWithoutActionlist = new ListView.ListViewItemCollection(listView);
+            ListView listViewScriptsCopy = new ListView();
 
-            foreach (ListViewItem item in listViewSmartScripts.Items)
-                if (Int32.Parse(item.SubItems[1].Text) == 9)
-                    itemsWithoutActionlist.Remove(item);
+            foreach (ListViewItem item in listView.Items)
+                if (Int32.Parse(item.SubItems[1].Text) != 9)
+                    listViewScriptsCopy.Items.Add((ListViewItem)item.Clone());
 
-            return itemsWithoutActionlist;
+            return listViewScriptsCopy.Items;
         }
 
         private void buttonLinkTo_Click(object sender, EventArgs e)
