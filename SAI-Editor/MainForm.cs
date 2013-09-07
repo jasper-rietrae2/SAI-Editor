@@ -900,12 +900,16 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
                 new SearchForLinkForm(true, GetItemsWithoutActionlist(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
+            else
+                MessageBox.Show("You must first select a line in the script", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void buttonLinkFrom_Click(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
                 new SearchForLinkForm(false, GetItemsWithoutActionlist(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
+            else
+                MessageBox.Show("You must first select a line in the script", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
