@@ -32,7 +32,6 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
-            this.checkBoxDontHidePass = new System.Windows.Forms.CheckBox();
             this.textBoxAnimationSpeed = new System.Windows.Forms.TextBox();
             this.labelAnimationSpeed = new System.Windows.Forms.Label();
             this.trackBarAnimationSpeed = new System.Windows.Forms.TrackBar();
@@ -54,6 +53,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonClearSettings = new System.Windows.Forms.Button();
+            this.checkBoxDontHidePass = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -82,7 +82,6 @@
             // 
             // tabPageGeneral
             // 
-            this.tabPageGeneral.Controls.Add(this.checkBoxDontHidePass);
             this.tabPageGeneral.Controls.Add(this.textBoxAnimationSpeed);
             this.tabPageGeneral.Controls.Add(this.labelAnimationSpeed);
             this.tabPageGeneral.Controls.Add(this.trackBarAnimationSpeed);
@@ -97,16 +96,6 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxDontHidePass
-            // 
-            this.checkBoxDontHidePass.AutoSize = true;
-            this.checkBoxDontHidePass.Location = new System.Drawing.Point(6, 98);
-            this.checkBoxDontHidePass.Name = "checkBoxDontHidePass";
-            this.checkBoxDontHidePass.Size = new System.Drawing.Size(138, 17);
-            this.checkBoxDontHidePass.TabIndex = 4;
-            this.checkBoxDontHidePass.Text = "Don\'t hide my password";
-            this.checkBoxDontHidePass.UseVisualStyleBackColor = true;
             // 
             // textBoxAnimationSpeed
             // 
@@ -196,6 +185,7 @@
             // 
             // tabPageConnection
             // 
+            this.tabPageConnection.Controls.Add(this.checkBoxDontHidePass);
             this.tabPageConnection.Controls.Add(this.checkBoxAutoConnect);
             this.tabPageConnection.Controls.Add(this.textBoxHost);
             this.tabPageConnection.Controls.Add(this.textBoxUsername);
@@ -217,7 +207,7 @@
             // checkBoxAutoConnect
             // 
             this.checkBoxAutoConnect.AutoSize = true;
-            this.checkBoxAutoConnect.Location = new System.Drawing.Point(150, 167);
+            this.checkBoxAutoConnect.Location = new System.Drawing.Point(10, 157);
             this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
             this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
             this.checkBoxAutoConnect.TabIndex = 5;
@@ -314,6 +304,16 @@
             this.buttonClearSettings.Text = "Clear";
             this.buttonClearSettings.UseVisualStyleBackColor = true;
             this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
+            // 
+            // checkBoxDontHidePass
+            // 
+            this.checkBoxDontHidePass.AutoSize = true;
+            this.checkBoxDontHidePass.Location = new System.Drawing.Point(106, 157);
+            this.checkBoxDontHidePass.Name = "checkBoxDontHidePass";
+            this.checkBoxDontHidePass.Size = new System.Drawing.Size(138, 17);
+            this.checkBoxDontHidePass.TabIndex = 29;
+            this.checkBoxDontHidePass.Text = "Don\'t hide my password";
+            this.checkBoxDontHidePass.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
