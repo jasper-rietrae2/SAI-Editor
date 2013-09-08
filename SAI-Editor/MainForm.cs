@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
 using System.Drawing;
+using SAI_Editor.Properties;
 using MySql.Data.MySqlClient;
 //using System.Data.SQLite;
 
@@ -70,7 +71,7 @@ namespace SAI_Editor
             InitializeComponent();
         }
 
-        private void LoginForm_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
 
@@ -86,12 +87,12 @@ namespace SAI_Editor
             if (HeightToExpandTo > SystemInformation.VirtualScreen.Height)
                 HeightToExpandTo = SystemInformation.VirtualScreen.Height;
 
-            textBoxHost.Text = Properties.Settings.Default.Host;
-            textBoxUsername.Text = Properties.Settings.Default.User;
-            textBoxPassword.Text = Properties.Settings.Default.Password;
-            textBoxWorldDatabase.Text = Properties.Settings.Default.Database;
-            textBoxPort.Text = Properties.Settings.Default.Port.ToString();
-            animationSpeed = Convert.ToInt32(Properties.Settings.Default.AnimationSpeed);
+            textBoxHost.Text = Settings.Default.Host;
+            textBoxUsername.Text = Settings.Default.User;
+            textBoxPassword.Text = Settings.Default.Password;
+            textBoxWorldDatabase.Text = Settings.Default.Database;
+            textBoxPort.Text = Settings.Default.Port.ToString();
+            animationSpeed = Convert.ToInt32(Settings.Default.AnimationSpeed);
 
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
 
@@ -152,12 +153,12 @@ namespace SAI_Editor
 
             listViewSmartScripts.ColumnClick += listViewSmartScripts_ColumnClick;
 
-            if (Properties.Settings.Default.AutoConnect)
+            if (Settings.Default.AutoConnect)
             {
                 checkBoxAutoConnect.Checked = true;
                 buttonConnect_Click(sender, e);
 
-                if (Properties.Settings.Default.InstantExpand)
+                if (Settings.Default.InstantExpand)
                     StartExpandingToMainForm(true);
             }
 
@@ -176,7 +177,7 @@ namespace SAI_Editor
             //! Temp..
             panelLoginBox.Location = new Point(9, 8);
 
-            if (Properties.Settings.Default.HidePass)
+            if (Settings.Default.HidePass)
                 textBoxPassword.PasswordChar = '*';
         }
 
@@ -293,18 +294,18 @@ namespace SAI_Editor
                 connectionString.Password = textBoxPassword.Text;
 
             if (CanConnectToDatabase())
-                StartExpandingToMainForm(Properties.Settings.Default.InstantExpand);
+                StartExpandingToMainForm(Settings.Default.InstantExpand);
         }
 
         private void StartExpandingToMainForm(bool instant = false)
         {
             if (checkBoxSaveSettings.Checked)
             {
-                Properties.Settings.Default.Host = textBoxHost.Text;
-                Properties.Settings.Default.User = textBoxUsername.Text;
-                Properties.Settings.Default.Password = textBoxPassword.Text;
-                Properties.Settings.Default.Database = textBoxWorldDatabase.Text;
-                Properties.Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+                Settings.Default.Host = textBoxHost.Text;
+                Settings.Default.User = textBoxUsername.Text;
+                Settings.Default.Password = textBoxPassword.Text;
+                Settings.Default.Database = textBoxWorldDatabase.Text;
+                Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
             }
 
             Text = "SAI-Editor: " + textBoxUsername.Text + "@" + textBoxHost.Text + ":" + textBoxPort.Text;
@@ -441,7 +442,7 @@ namespace SAI_Editor
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
             listViewSmartScripts.Items.Clear();
-            StartContractingToLoginForm(Properties.Settings.Default.InstantExpand);
+            StartContractingToLoginForm(Settings.Default.InstantExpand);
         }
 
         private void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
@@ -591,7 +592,7 @@ namespace SAI_Editor
         //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
         private void TryCloseApplication(object sender = null, EventArgs e = null)
         {
-            if (!Properties.Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (!Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 Close();
         }
 

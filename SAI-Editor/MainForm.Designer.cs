@@ -1616,7 +1616,7 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "SAI Editor: Login";
-            this.Load += new System.EventHandler(this.LoginForm_Load);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.groupBoxLogin.ResumeLayout(false);
             this.groupBoxLogin.PerformLayout();

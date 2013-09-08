@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Configuration;
+using SAI_Editor.Properties;
 
 namespace SAI_Editor
 {
@@ -15,20 +16,20 @@ namespace SAI_Editor
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            textBoxHost.Text = Properties.Settings.Default.Host;
-            textBoxUsername.Text = Properties.Settings.Default.User;
-            textBoxPassword.Text = Properties.Settings.Default.Password;
-            textBoxWorldDatabase.Text = Properties.Settings.Default.Database;
-            textBoxPort.Text = Properties.Settings.Default.Port.ToString();
+            textBoxHost.Text = Settings.Default.Host;
+            textBoxUsername.Text = Settings.Default.User;
+            textBoxPassword.Text = Settings.Default.Password;
+            textBoxWorldDatabase.Text = Settings.Default.Database;
+            textBoxPort.Text = Settings.Default.Port.ToString();
 
-            checkBoxAutoConnect.Checked = Properties.Settings.Default.AutoConnect;
-            checkBoxInstantExpand.Checked = Properties.Settings.Default.InstantExpand;
-            checkBoxLoadScriptInstantly.Checked = Properties.Settings.Default.LoadScriptInstantly;
-            checkBoxAutoSaveSettings.Checked = Properties.Settings.Default.AutoSaveSettings;
-            checkBoxPromptToQuit.Checked = Properties.Settings.Default.PromptToQuit;
-            checkBoxHidePass.Checked = Properties.Settings.Default.HidePass;
+            checkBoxAutoConnect.Checked = Settings.Default.AutoConnect;
+            checkBoxInstantExpand.Checked = Settings.Default.InstantExpand;
+            checkBoxLoadScriptInstantly.Checked = Settings.Default.LoadScriptInstantly;
+            checkBoxAutoSaveSettings.Checked = Settings.Default.AutoSaveSettings;
+            checkBoxPromptToQuit.Checked = Settings.Default.PromptToQuit;
+            checkBoxHidePass.Checked = Settings.Default.HidePass;
 
-            textBoxAnimationSpeed.Text = Properties.Settings.Default.AnimationSpeed.ToString();
+            textBoxAnimationSpeed.Text = Settings.Default.AnimationSpeed.ToString();
 
             textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '*' : '\0');
         }
@@ -42,19 +43,19 @@ namespace SAI_Editor
 
         private void SaveSettings()
         {
-            Properties.Settings.Default.Host = textBoxHost.Text;
-            Properties.Settings.Default.User = textBoxUsername.Text;
-            Properties.Settings.Default.Password = textBoxPassword.Text;
-            Properties.Settings.Default.Database = textBoxWorldDatabase.Text;
-            Properties.Settings.Default.Port = Convert.ToInt32(textBoxPort.Text);
-            Properties.Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
-            Properties.Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
-            Properties.Settings.Default.LoadScriptInstantly = checkBoxLoadScriptInstantly.Checked;
-            Properties.Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
-            Properties.Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
-            Properties.Settings.Default.HidePass = checkBoxHidePass.Checked;
-            Properties.Settings.Default.AnimationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
-            Properties.Settings.Default.Save();
+            Settings.Default.Host = textBoxHost.Text;
+            Settings.Default.User = textBoxUsername.Text;
+            Settings.Default.Password = textBoxPassword.Text;
+            Settings.Default.Database = textBoxWorldDatabase.Text;
+            Settings.Default.Port = Convert.ToInt32(textBoxPort.Text);
+            Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+            Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
+            Settings.Default.LoadScriptInstantly = checkBoxLoadScriptInstantly.Checked;
+            Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
+            Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
+            Settings.Default.HidePass = checkBoxHidePass.Checked;
+            Settings.Default.AnimationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
+            Settings.Default.Save();
 
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
             ((MainForm)Owner).textBoxHost.Text = textBoxHost.Text;
@@ -89,12 +90,12 @@ namespace SAI_Editor
                 return;
             }
 
-            if (textBoxHost.Text == Properties.Settings.Default.Host && textBoxUsername.Text == Properties.Settings.Default.User &&
-                textBoxPassword.Text == Properties.Settings.Default.Password && textBoxWorldDatabase.Text == Properties.Settings.Default.Database &&
-                textBoxPort.Text == Properties.Settings.Default.Port.ToString() && checkBoxAutoConnect.Checked == Properties.Settings.Default.AutoConnect &&
-                checkBoxInstantExpand.Checked == Properties.Settings.Default.InstantExpand && checkBoxLoadScriptInstantly.Checked == Properties.Settings.Default.LoadScriptInstantly &&
-                checkBoxAutoSaveSettings.Checked == Properties.Settings.Default.AutoSaveSettings && checkBoxPromptToQuit.Checked == Properties.Settings.Default.PromptToQuit &&
-                textBoxAnimationSpeed.Text == Properties.Settings.Default.AnimationSpeed.ToString() && checkBoxHidePass.Checked == Properties.Settings.Default.HidePass)
+            if (textBoxHost.Text == Settings.Default.Host && textBoxUsername.Text == Settings.Default.User &&
+                textBoxPassword.Text == Settings.Default.Password && textBoxWorldDatabase.Text == Settings.Default.Database &&
+                textBoxPort.Text == Settings.Default.Port.ToString() && checkBoxAutoConnect.Checked == Settings.Default.AutoConnect &&
+                checkBoxInstantExpand.Checked == Settings.Default.InstantExpand && checkBoxLoadScriptInstantly.Checked == Settings.Default.LoadScriptInstantly &&
+                checkBoxAutoSaveSettings.Checked == Settings.Default.AutoSaveSettings && checkBoxPromptToQuit.Checked == Settings.Default.PromptToQuit &&
+                textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() && checkBoxHidePass.Checked == Settings.Default.HidePass)
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
