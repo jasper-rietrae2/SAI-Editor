@@ -903,18 +903,30 @@ namespace SAI_Editor
 
         private void buttonLinkTo_Click(object sender, EventArgs e)
         {
-            if (listViewSmartScripts.SelectedItems.Count > 0)
-                new SearchForLinkForm(true, GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
-            else
-                MessageBox.Show("You must first select a line in the script", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            TryToOpenLinkForm(true);
         }
 
         private void buttonLinkFrom_Click(object sender, EventArgs e)
         {
-            if (listViewSmartScripts.SelectedItems.Count > 0)
-                new SearchForLinkForm(false, GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
-            else
+
+            TryToOpenLinkForm(false);
+        }
+
+        private void TryToOpenLinkForm(bool linkTo)
+        {
+            if (listViewSmartScripts.SelectedItems.Count <= 0)
+            {
                 MessageBox.Show("You must first select a line in the script", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (listViewSmartScripts.SelectedItems.Count > 1)
+            {
+                MessageBox.Show("You may only have one selected event when opening the Link form!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            new SearchForLinkForm(linkTo, GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
         }
     }
 }
