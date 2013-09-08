@@ -25,3 +25,4 @@
     - This could possibly also be implemented as a feature to refactor the SAI of the creature with the id's to be re-ordered (posibly based on a YesNo messagebox question);
   - We also need to adjust the id chosen to link from/to so the script will still work;
 - Allow resizing the application but just make everything scroll-able if it becomes smaller;
+- Allow remote access connections;
