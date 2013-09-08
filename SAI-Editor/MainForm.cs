@@ -890,12 +890,12 @@ namespace SAI_Editor
             myListView.Sort();
         }
 
-        private ListView.ListViewItemCollection GetItemsWithoutActionlist(ListView listView)
+        private ListView.ListViewItemCollection GetItemsBasedOnSelection(ListView listView)
         {
             ListView listViewScriptsCopy = new ListView();
 
             foreach (ListViewItem item in listView.Items)
-                if (Int32.Parse(item.SubItems[1].Text) != 9)
+                if (item.SubItems[1].Text == listView.SelectedItems[0].SubItems[1].Text)
                     listViewScriptsCopy.Items.Add((ListViewItem)item.Clone());
 
             return listViewScriptsCopy.Items;
@@ -904,7 +904,7 @@ namespace SAI_Editor
         private void buttonLinkTo_Click(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
-                new SearchForLinkForm(true, GetItemsWithoutActionlist(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
+                new SearchForLinkForm(true, GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
             else
                 MessageBox.Show("You must first select a line in the script", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
@@ -912,7 +912,7 @@ namespace SAI_Editor
         private void buttonLinkFrom_Click(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
-                new SearchForLinkForm(false, GetItemsWithoutActionlist(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
+                new SearchForLinkForm(false, GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
             else
                 MessageBox.Show("You must first select a line in the script", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
