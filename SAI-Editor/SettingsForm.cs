@@ -86,6 +86,7 @@ namespace SAI_Editor
         {
             if (checkBoxAutoSaveSettings.Checked)
             {
+                Settings.Default.AutoSaveSettings = true;
                 SaveSettings();
                 return;
             }
@@ -94,8 +95,8 @@ namespace SAI_Editor
                 textBoxPassword.Text == Settings.Default.Password && textBoxWorldDatabase.Text == Settings.Default.Database &&
                 textBoxPort.Text == Settings.Default.Port.ToString() && checkBoxAutoConnect.Checked == Settings.Default.AutoConnect &&
                 checkBoxInstantExpand.Checked == Settings.Default.InstantExpand && checkBoxLoadScriptInstantly.Checked == Settings.Default.LoadScriptInstantly &&
-                checkBoxAutoSaveSettings.Checked == Settings.Default.AutoSaveSettings && checkBoxPromptToQuit.Checked == Settings.Default.PromptToQuit &&
-                textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() && checkBoxHidePass.Checked == Settings.Default.HidePass)
+                checkBoxHidePass.Checked == Settings.Default.HidePass && checkBoxPromptToQuit.Checked == Settings.Default.PromptToQuit &&
+                textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString())
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
