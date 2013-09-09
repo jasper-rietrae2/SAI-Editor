@@ -372,23 +372,20 @@ namespace SAI_Editor
 
         private bool CanConnectToDatabase()
         {
-            var successFulConnection = true; //! We have to use a variable because the connection would otherwise not be closed if an error happened.
-            MySqlConnection connection = null;
-
             try
             {
                 //! Close the connection again since this is just a try-connection function. We actually connect
                 //! when the mainform is opened (this happens automatically because we use 'using').
-                using (connection = new MySqlConnection(connectionString.ToString()))
+                using (MySqlConnection connection = new MySqlConnection(connectionString.ToString()))
                     connection.Open();
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message, "Could not connect", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                successFulConnection = false;
+                return false;
             }
 
-            return successFulConnection;
+            return true;
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
