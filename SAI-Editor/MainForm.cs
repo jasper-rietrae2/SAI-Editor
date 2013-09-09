@@ -503,7 +503,7 @@ namespace SAI_Editor
             }
         }
 
-        private void SelectAndFillListViewWithQuery(string queryToExecute, string entryOrGuid, SourceTypes sourceType)
+        private void SelectAndFillListViewWithQuery(string entryOrGuid, SourceTypes sourceType)
         {
             var timedActionlistEntries = new List<int>();
 
@@ -578,7 +578,7 @@ namespace SAI_Editor
 
             if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
                 foreach (var scriptEntry in timedActionlistEntries)
-                    SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type=9", scriptEntry), scriptEntry.ToString(), SourceTypes.SourceTypeScriptedActionlist);
+                    SelectAndFillListViewWithQuery(scriptEntry.ToString(), SourceTypes.SourceTypeScriptedActionlist);
         }
 
         //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
@@ -756,7 +756,7 @@ namespace SAI_Editor
             if (checkListActionlists.Checked && OriginalViewInfo != null && listViewSmartScripts.Items.Count > 0 && OriginalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
             {
                 listViewSmartScripts.Items.Clear();
-                SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", OriginalViewInfo.Value.EntryOrGuid, OriginalViewInfo.Value.SourceType), OriginalViewInfo.Value.EntryOrGuid, OriginalViewInfo.Value.SourceType);
+                SelectAndFillListViewWithQuery(OriginalViewInfo.Value.EntryOrGuid, OriginalViewInfo.Value.SourceType);
             }
             else if (!checkListActionlists.Checked && OriginalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
                 RemoveActionListsFromView();
@@ -800,7 +800,7 @@ namespace SAI_Editor
             };
 
             listViewSmartScripts.Items.Clear();
-            SelectAndFillListViewWithQuery(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", textBoxEntryOrGuid.Text, GetSourceTypeByIndex()), textBoxEntryOrGuid.Text, (SourceTypes)GetSourceTypeByIndex());
+            SelectAndFillListViewWithQuery(textBoxEntryOrGuid.Text, (SourceTypes)GetSourceTypeByIndex());
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
