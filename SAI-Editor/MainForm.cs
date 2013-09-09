@@ -306,6 +306,7 @@ namespace SAI_Editor
                 Settings.Default.Password = textBoxPassword.Text;
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+                Settings.Default.Save();
             }
 
             Text = "SAI-Editor: " + textBoxUsername.Text + "@" + textBoxHost.Text + ":" + textBoxPort.Text;
