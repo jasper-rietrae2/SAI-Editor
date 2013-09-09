@@ -139,11 +139,6 @@ namespace SAI_Editor
             }
         }
 
-        private bool IsEmptyString(string str)
-        {
-            return String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str);
-        }
-
         private void trackBarAnimationSpeed_ValueChanged(object sender, EventArgs e)
         {
             textBoxAnimationSpeed.Text = trackBarAnimationSpeed.Value.ToString();

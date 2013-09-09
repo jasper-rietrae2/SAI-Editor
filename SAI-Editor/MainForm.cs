@@ -255,31 +255,31 @@ namespace SAI_Editor
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            if (IsEmptyString(textBoxHost.Text))
+            if (String.IsNullOrEmpty(textBoxHost.Text))
             {
                 MessageBox.Show("The host field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (IsEmptyString(textBoxUsername.Text))
+            if (String.IsNullOrEmpty(textBoxUsername.Text))
             {
                 MessageBox.Show("The username field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (textBoxPassword.Text.Length > 0 && IsEmptyString(textBoxPassword.Text))
+            if (textBoxPassword.Text.Length > 0 && String.IsNullOrEmpty(textBoxPassword.Text))
             {
                 MessageBox.Show("The password field can not consist of only whitespaces!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (IsEmptyString(textBoxWorldDatabase.Text))
+            if (String.IsNullOrEmpty(textBoxWorldDatabase.Text))
             {
                 MessageBox.Show("The world database field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (IsEmptyString(textBoxPort.Text))
+            if (String.IsNullOrEmpty(textBoxPort.Text))
             {
                 MessageBox.Show("The port field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -368,11 +368,6 @@ namespace SAI_Editor
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private bool IsEmptyString(string str)
-        {
-            return String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str);
         }
 
         private bool CanConnectToDatabase()
@@ -692,7 +687,7 @@ namespace SAI_Editor
 
         private void textBoxEventTypeId_TextChanged(object sender, EventArgs e)
         {
-            if (IsEmptyString(textBoxEventTypeId.Text))
+            if (String.IsNullOrEmpty(textBoxEventTypeId.Text))
             {
                 comboBoxEventType.SelectedIndex = 0;
                 textBoxEventTypeId.Text = "0";
@@ -710,7 +705,7 @@ namespace SAI_Editor
 
         private void textBoxActionTypeId_TextChanged(object sender, EventArgs e)
         {
-            if (IsEmptyString(textBoxActionTypeId.Text))
+            if (String.IsNullOrEmpty(textBoxActionTypeId.Text))
             {
                 comboBoxActionType.SelectedIndex = 0;
                 textBoxActionTypeId.Text = "0";
@@ -728,7 +723,7 @@ namespace SAI_Editor
 
         private void textBoxTargetTypeId_TextChanged(object sender, EventArgs e)
         {
-            if (IsEmptyString(textBoxTargetTypeId.Text))
+            if (String.IsNullOrEmpty(textBoxTargetTypeId.Text))
             {
                 comboBoxTargetType.SelectedIndex = 0;
                 textBoxTargetTypeId.Text = "0";
@@ -798,7 +793,7 @@ namespace SAI_Editor
 
         public void pictureBox1_Click(object sender, EventArgs e)
         {
-            if (IsEmptyString(textBoxEntryOrGuid.Text))
+            if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
                 return;
             
             OriginalViewInfo = new OriginalSearchInfo

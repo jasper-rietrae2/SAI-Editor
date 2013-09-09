@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
 using System.Threading;
+using SAI_Editor.Properties;
 using MySql.Data.MySqlClient;
 
 namespace SAI_Editor
