@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\..\Bureaublad\Development\Emulation\Repositories\SAI-Editor\SAI-Editor\Resources\MySql.Data.dll</HintPath>
+      <HintPath>..\..\SAI-Editor\SAI-Editor\Resources\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="SQLite.Designer">
       <HintPath>Resources\SQLite.Designer.dll</HintPath>
