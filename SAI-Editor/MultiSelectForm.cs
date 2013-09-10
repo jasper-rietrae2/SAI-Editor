@@ -103,7 +103,8 @@ namespace SAI_Editor
 
         private void listViewSelectableItems_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            buttonContinue.Enabled = listViewSelectableItems.CheckedItems.Count > 0;
+            if (listViewSelectableItems.CheckedItems.Count <= 0)
+                listViewSelectableItems.Items[0].Checked = true;
 
             if (e.Item.Checked && e.Item.Index > 0)
                 listViewSelectableItems.Items[0].Checked = false;
