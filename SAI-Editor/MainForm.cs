@@ -825,6 +825,12 @@ namespace SAI_Editor
 
         private void buttonSearchWorldDb_Click(object sender, EventArgs e)
         {
+            if (textBoxHost.Text.Length <= 0 || textBoxUsername.Text.Length <= 0 || textBoxPort.Text.Length <= 0)
+            {
+                MessageBox.Show("You must fill all fields except for the world database field in order to search for your world database (we need to establish a connection to list your databases)!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var databaseNames = new List<string>();
 
             connectionString.Server = textBoxHost.Text;
