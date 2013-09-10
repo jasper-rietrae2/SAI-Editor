@@ -31,7 +31,7 @@ namespace SAI_Editor
 
             textBoxAnimationSpeed.Text = Settings.Default.AnimationSpeed.ToString();
 
-            textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '*' : '\0');
+            textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace SAI_Editor
             ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
             ((MainForm)Owner).animationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
-            ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '*' : '\0');
+            ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
         }
 
         private void buttonExitSettings_Click(object sender, EventArgs e)
@@ -175,7 +175,7 @@ namespace SAI_Editor
 
         private void checkBoxDontHidePass_CheckedChanged(object sender, EventArgs e)
         {
-            textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '*' : '\0');
+            textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
         }
     }
 }

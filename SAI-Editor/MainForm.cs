@@ -178,7 +178,7 @@ namespace SAI_Editor
             panelLoginBox.Location = new Point(9, 8);
 
             if (Settings.Default.HidePass)
-                textBoxPassword.PasswordChar = '*';
+                textBoxPassword.PasswordChar = '●';
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
