@@ -929,5 +929,13 @@ namespace SAI_Editor
 
             new SearchForLinkForm(linkTo, GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
         }
+
+        protected override void WndProc(ref Message m)
+        {
+            if (((m.Msg == 274 && m.WParam.ToInt32() == 61456) || (m.Msg == 161 && m.WParam.ToInt32() == 2)) && (expandingToMainForm || contractingToLoginForm))
+                return;
+
+            base.WndProc(ref m);
+        }
     }
 }
