@@ -18,7 +18,6 @@
 - Create a checkbox to only show 'basic' data in the listview (entryorguid, id, event_type, action_type, target_type, comment);
   - Also implement this in the SearchForLink form;
 - Implement the 'Link from' field;
-- Moving the window while it is expanding will (sometimes?) bug it and be smaller than it should be;
 - The selected item looks as if it is no longer selected once the user uses a button to open a new form, like event_flags;
 - (Requires to be further into finishing the application) Improve implementation of the SearchForLinkForm to do the following:
   - Only allow to link to lines with a higher smart_scripts.id;
