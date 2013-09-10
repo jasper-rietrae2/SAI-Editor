@@ -306,6 +306,7 @@ namespace SAI_Editor
                 Settings.Default.Password = textBoxPassword.Text;
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+                Settings.Default.Port = Convert.ToInt32(textBoxPort.Text);
                 Settings.Default.Save();
             }
 
