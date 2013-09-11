@@ -94,11 +94,13 @@
             "Creature name",
             "Gameobject entry",
             "Gameobject name",
-            "Gameobject guid"});
+            "Gameobject guid",
+            "Actionlist entry"});
             this.comboBoxSearchType.Location = new System.Drawing.Point(20, 19);
             this.comboBoxSearchType.Name = "comboBoxSearchType";
             this.comboBoxSearchType.Size = new System.Drawing.Size(113, 21);
             this.comboBoxSearchType.TabIndex = 7;
+            this.comboBoxSearchType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearchType_SelectedIndexChanged);
             this.comboBoxSearchType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxSearchType_KeyPress);
             // 
             // checkBoxHasAiName
@@ -145,7 +147,7 @@
             this.MaximizeBox = false;
             this.Name = "SearchForEntryForm";
             this.Text = "Search for an entry";
-            this.Load += new System.EventHandler(this.SearchForCreatureForm_Load);
+            this.Load += new System.EventHandler(this.SearchForEntryForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchForEntryForm_KeyDown);
             this.groupBoxSearchInfo.ResumeLayout(false);
             this.groupBoxSearchInfo.PerformLayout();

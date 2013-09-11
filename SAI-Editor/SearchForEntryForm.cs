@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -12,32 +14,48 @@ namespace SAI_Editor
     {
         private Thread searchThread = null;
         private readonly MySqlConnectionStringBuilder connectionString;
-        private readonly bool searchingForCreature = false;
+        private readonly SourceTypes sourceTypeToSearchFor;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
-        public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, string startEntryString, bool searchingForCreature)
+        public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, string startEntryString, SourceTypes sourceTypeToSearchFor)
         {
             InitializeComponent();
 
             this.connectionString = connectionString;
-            this.searchingForCreature = searchingForCreature;
+            this.sourceTypeToSearchFor = sourceTypeToSearchFor;
             textBoxCriteria.Text = startEntryString;
         }
 
-        private void SearchForCreatureForm_Load(object sender, EventArgs e)
+        private void SearchForEntryForm_Load(object sender, EventArgs e)
         {
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 800);
 
-            comboBoxSearchType.SelectedIndex = searchingForCreature ? 0 : 3;
+            switch (sourceTypeToSearchFor)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    comboBoxSearchType.SelectedIndex = 0; //! Creature entry
+                    FillListViewWithQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000", false);
+                    break;
+                case SourceTypes.SourceTypeGameobject:
+                    comboBoxSearchType.SelectedIndex = 3; //! Gameobject entry
+                    FillListViewWithQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000", false);
+                    break;
+                case SourceTypes.SourceTypeAreaTrigger:
+                    //comboBoxSearchType.SelectedIndex = 7; //! NYI
+                    //FillListViewWithQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000", false);
+                    break;
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    checkBoxHasAiName.Enabled = false;
+                    comboBoxSearchType.SelectedIndex = 6; //! Actionlist entry
+                    //FillListViewWithQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000", false);
+                    break;
+            }
 
             listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
             listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
-
             listViewEntryResults.ColumnClick += listViewEntryResults_ColumnClick;
-
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            SelectFromCreatureTemplate(String.Format("SELECT entry, name FROM {0} ORDER BY entry LIMIT 1000", (searchingForCreature ? "creature_template" : "gameobject_template")), false);
         }
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
@@ -46,7 +64,7 @@ namespace SAI_Editor
             FillMainFormEntryOrGuidField(sender, e);
         }
 
-        private void SelectFromCreatureTemplate(string queryToExecute, bool crossThread)
+        private void FillListViewWithQuery(string queryToExecute, bool crossThread)
         {
             try
             {
@@ -209,6 +227,93 @@ namespace SAI_Editor
 
                     query += " ORDER BY g.guid";
                     break;
+                case 6: //! Actionlist entry
+                    ClearItemsOfListView(listViewEntryResults);
+
+                    try
+                    {
+                        using (var connection = new MySqlConnection(connectionString.ToString()))
+                        {
+                            connection.Open();
+
+                            string queryToExecute = "SELECT entryorguid, action_type, action_param1, action_param2, action_param3, action_param4, action_param5, action_param6 FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9";
+
+                            if (!criteriaLeftEmpty)
+                            {
+                                if (checkBoxFieldContainsCriteria.Checked)
+                                    queryToExecute += " AND entryorguid LIKE '%" + textBoxCriteria.Text + "%'";
+                                else
+                                    queryToExecute += " AND entryorguid = " + textBoxCriteria.Text;
+                            }
+                            else
+                                queryToExecute += " ORDER BY entryorguid";
+
+                            var returnVal = new MySqlDataAdapter(queryToExecute, connection);
+                            var dataTable = new DataTable();
+                            returnVal.Fill(dataTable);
+
+                            if (dataTable.Rows.Count > 0)
+                            {
+                                foreach (DataRow row in dataTable.Rows)
+                                {
+                                    int entryorguid = Convert.ToInt32(row.ItemArray[0].ToString());
+                                    int entry = entryorguid;
+
+                                    if (entryorguid < 0)
+                                    {
+                                        var returnValCreatureIdByGuid = new MySqlDataAdapter(String.Format("SELECT id FROM creature WHERE guid={0}", entryorguid * -1), connection);
+                                        var dataTableCreatureIdByGuid = new DataTable();
+                                        returnValCreatureIdByGuid.Fill(dataTableCreatureIdByGuid);
+
+                                        if (dataTableCreatureIdByGuid.Rows.Count == 0)
+                                            return;
+
+                                        entry = Convert.ToInt32(dataTableCreatureIdByGuid.Rows[0].ItemArray[0]);
+                                    }
+
+                                    var returnValCreatureName = new MySqlDataAdapter(String.Format("SELECT name FROM creature_template WHERE entry={0}", entry), connection);
+                                    var dataTableCreatureName = new DataTable();
+                                    returnValCreatureName.Fill(dataTableCreatureName);
+
+                                    if (dataTableCreatureName.Rows.Count > 0)
+                                    {
+                                        string name = dataTableCreatureName.Rows[0].ItemArray[0].ToString();
+                                        int actionParam1 = Convert.ToInt32(row.ItemArray[2].ToString());
+                                        int actionParam2 = Convert.ToInt32(row.ItemArray[3].ToString());
+
+                                        switch (Convert.ToInt32(row.ItemArray[1].ToString())) //! action type
+                                        {
+                                            case 80: // SMART_ACTION_CALL_TIMED_ACTIONLIST
+                                                AddItemToListView(listViewEntryResults, actionParam1.ToString(), name);
+                                                break;
+                                            case 87: // SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST
+                                                for (int i = 2; i < 8; ++i)
+                                                {
+                                                    if (row.ItemArray[i].ToString() == "0")
+                                                        break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
+
+                                                    AddItemToListView(listViewEntryResults, row.ItemArray[i].ToString(), name);
+                                                }
+                                                break;
+                                            case 88: // SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST
+                                                for (int i = actionParam1; i <= actionParam2; ++i)
+                                                    AddItemToListView(listViewEntryResults, i.ToString(), name);
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        SetEnabledOfControl(buttonSearch, true);
+                        SetEnabledOfControl(buttonStopSearching, false);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    return; //! We did everything in the switch block (we only do this for actionlists)
                 default:
                     MessageBox.Show("An unknown index was found in the search type box!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
@@ -218,7 +323,7 @@ namespace SAI_Editor
 
             try
             {
-                SelectFromCreatureTemplate(query, true);
+                FillListViewWithQuery(query, true);
             }
             finally
             {
@@ -303,7 +408,26 @@ namespace SAI_Editor
             ((MainForm)Owner).textBoxEntryOrGuid.Text = entryToPlace;
 
             //! Above 2 means it's a gameobject
-            ((MainForm)Owner).comboBoxSourceType.SelectedIndex = comboBoxSearchType.SelectedIndex > 2 ? 1 : 0;
+            switch (comboBoxSearchType.SelectedIndex)
+            {
+                case 0: //! Creature
+                case 1:
+                case 2:
+                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 0;
+                    break;
+                case 3: //! Gameobject
+                case 4:
+                case 5:
+                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 1;
+                    break;
+                //case : //! Areatrigger
+                //    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 2;
+                //    break;
+                case 6: //! Actionlist
+                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 3;
+                    break;
+
+            }
 
             if (Settings.Default.LoadScriptInstantly)
                 ((MainForm)Owner).pictureBox1_Click(sender, e);
@@ -405,6 +529,12 @@ namespace SAI_Editor
 
             //! Perform the sort with these new sort options
             myListView.Sort();
+        }
+
+        private void comboBoxSearchType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //! Disable the 'has ainame' checkbox when the user selected actionlist for search type
+            checkBoxHasAiName.Enabled = comboBoxSearchType.SelectedIndex != 6;
         }
     }
 }
