@@ -27,4 +27,3 @@
 - Create a class to easily execute queries without having use try-catch blocks all over the place;
 - If the results contain only actionlist entries (so for example when searched for a scripted actionlist), change the 'List actionlists too' to 'List entries too' (to list source of the script);
 - When selection has reset (so we unselected everything), set back all fields to their default values;
-- There is an exception thrown in the search form about accessing a deleted object when searching for GO guids and closing the window while it's searching

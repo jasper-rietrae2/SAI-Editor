@@ -536,5 +536,10 @@ namespace SAI_Editor
             //! Disable the 'has ainame' checkbox when the user selected actionlist for search type
             checkBoxHasAiName.Enabled = comboBoxSearchType.SelectedIndex != 6;
         }
+
+        private void SearchForEntryForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StopRunningThread();
+        }
     }
 }

@@ -147,6 +147,7 @@
             this.MaximizeBox = false;
             this.Name = "SearchForEntryForm";
             this.Text = "Search for an entry";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchForEntryForm_FormClosing);
             this.Load += new System.EventHandler(this.SearchForEntryForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchForEntryForm_KeyDown);
             this.groupBoxSearchInfo.ResumeLayout(false);
