@@ -99,15 +99,7 @@ namespace SAI_Editor
 
             switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
             {
-                case 0: //! Creature name
-                    query = "SELECT entry, name FROM creature_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
-
-                    if (checkBoxHasAiName.Checked)
-                        query += " AND AIName='SmartAI'";
-
-                    query += " ORDER BY entry";
-                    break;
-                case 1: //! Creature entry
+                case 0: //! Creature entry
                     query = "SELECT entry, name FROM creature_template";
 
                     if (!criteriaLeftEmpty)
@@ -120,6 +112,14 @@ namespace SAI_Editor
 
                     if (checkBoxHasAiName.Checked)
                         query += (criteriaLeftEmpty ? " WHERE" : " AND") + " AIName='SmartAI'";
+
+                    query += " ORDER BY entry";
+                    break;
+                case 1: //! Creature name
+                    query = "SELECT entry, name FROM creature_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
+
+                    if (checkBoxHasAiName.Checked)
+                        query += " AND AIName='SmartAI'";
 
                     query += " ORDER BY entry";
                     break;
@@ -154,15 +154,7 @@ namespace SAI_Editor
 
                     query += " ORDER BY c.guid";
                     break;
-                case 3: //! Gameobject name
-                    query = "SELECT entry, name FROM gameobject_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
-
-                    if (checkBoxHasAiName.Checked)
-                        query += " AND AIName='SmartGameObjectAI'";
-
-                    query += " ORDER BY entry";
-                    break;
-                case 4: //! Gameobject entry
+                case 3: //! Gameobject entry
                     query = "SELECT entry, name FROM gameobject_template";
 
                     if (!criteriaLeftEmpty)
@@ -175,6 +167,14 @@ namespace SAI_Editor
 
                     if (checkBoxHasAiName.Checked)
                         query += (criteriaLeftEmpty ? " WHERE" : " AND") + " AIName='SmartGameObjectAI'";
+
+                    query += " ORDER BY entry";
+                    break;
+                case 4: //! Gameobject name
+                    query = "SELECT entry, name FROM gameobject_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
+
+                    if (checkBoxHasAiName.Checked)
+                        query += " AND AIName='SmartGameObjectAI'";
 
                     query += " ORDER BY entry";
                     break;
@@ -275,13 +275,13 @@ namespace SAI_Editor
             {
                 case 2: //! Creature guid
                 case 5: //! Gameobject guid
-                case 1: //! Creature entry
-                case 4: //! Gameobject entry
+                case 0: //! Creature entry
+                case 3: //! Gameobject entry
                     if (!Char.IsNumber(e.KeyChar))
                         e.Handled = e.KeyChar != (Char)Keys.Back && e.KeyChar != (Char)Keys.OemMinus;
                     break;
-                case 0: //! Creature name
-                case 3: //! Gameobject name
+                case 1: //! Creature name
+                case 4: //! Gameobject name
                     //! Allow any characters when searching for names
                     break;
             }
@@ -315,8 +315,8 @@ namespace SAI_Editor
         {
             switch (index)
             {
-                case 0: //! Creature name
-                case 3: //! Gameobject name:
+                case 1: //! Creature name
+                case 4: //! Gameobject name:
                     return false;
                 default:
                     return true;

@@ -89,11 +89,11 @@
             // 
             this.comboBoxSearchType.FormattingEnabled = true;
             this.comboBoxSearchType.Items.AddRange(new object[] {
-            "Creature name",
             "Creature entry",
-            "Creature guid",
-            "Gameobject name",
+            "Creature entry",
+            "Creature name",
             "Gameobject entry",
+            "Gameobject name",
             "Gameobject guid"});
             this.comboBoxSearchType.Location = new System.Drawing.Point(20, 19);
             this.comboBoxSearchType.Name = "comboBoxSearchType";

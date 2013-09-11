@@ -909,7 +909,6 @@ namespace SAI_Editor
 
         private void buttonLinkFrom_Click(object sender, EventArgs e)
         {
-
             TryToOpenLinkForm(false);
         }
 
@@ -932,6 +931,9 @@ namespace SAI_Editor
 
         protected override void WndProc(ref Message m)
         {
+            //! Don't allow moving the window while we are expanding or contracting. This is required because
+            //! the window often breaks and has an incorrect size in the end if the application had been moved
+            //! while expanding or contracting.
             if (((m.Msg == 274 && m.WParam.ToInt32() == 61456) || (m.Msg == 161 && m.WParam.ToInt32() == 2)) && (expandingToMainForm || contractingToLoginForm))
                 return;
 
