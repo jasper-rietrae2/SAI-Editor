@@ -25,3 +25,6 @@
   - We also need to adjust the id chosen to link from/to so the script will still work;
 - Allow resizing the application but just make everything scroll-able if it becomes smaller;
 - Allow remote access connections;
+- Create a class to easily execute queries without having use try-catch blocks all over the place;
+- If the results contain only actionlist entries (so for example when searched for a scripted actionlist), change the 'List actionlists too' to 'List entries too' (to list source of the script);
+- When selection has reset (so we unselected everything), set back all fields to their default values;
