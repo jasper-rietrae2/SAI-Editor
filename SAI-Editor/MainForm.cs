@@ -40,13 +40,6 @@ namespace SAI_Editor
         SourceTypeScriptedActionlist = 9,
     };
 
-    internal enum ParameterType
-    {
-        ParameterEvent,
-        ParameterAction,
-        ParameterTarget,
-    };
-
     internal struct OriginalSearchInfo
     {
         public SourceTypes SourceType;
@@ -64,7 +57,8 @@ namespace SAI_Editor
         private int WidthToExpandTo = (int)FormSizes.WidthToExpandTo, HeightToExpandTo = (int)FormSizes.HeightToExpandTo;
         public int animationSpeed = 5;
         private FormState formState = FormState.FormStateLogin;
-        OriginalSearchInfo? originalViewInfo = null;
+        private SourceTypes originalSourceType;
+        private String originalEntryOrGuid;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
         public MainForm()
@@ -757,12 +751,12 @@ namespace SAI_Editor
             ListView.SelectedIndexCollection selectedIndices = listViewSmartScripts.SelectedIndices;
 
             CheckBox checkListActionlists = sender as CheckBox;
-            if (checkListActionlists.Checked && originalViewInfo != null && listViewSmartScripts.Items.Count > 0 && originalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
+            if (checkListActionlists.Checked && listViewSmartScripts.Items.Count > 0 && originalSourceType != SourceTypes.SourceTypeScriptedActionlist)
             {
                 listViewSmartScripts.Items.Clear();
-                SelectAndFillListViewWithQuery(originalViewInfo.Value.EntryOrGuid, originalViewInfo.Value.SourceType);
+                SelectAndFillListViewWithQuery(originalEntryOrGuid, originalSourceType);
             }
-            else if (!checkListActionlists.Checked && originalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
+            else if (!checkListActionlists.Checked && originalSourceType != SourceTypes.SourceTypeScriptedActionlist)
                 RemoveActionListsFromView();
 
             for (int i = 0; i < selectedIndices.Count; ++i)
@@ -796,13 +790,9 @@ namespace SAI_Editor
         {
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
                 return;
-            
-            originalViewInfo = new OriginalSearchInfo
-            {
-                SourceType = GetSourceTypeByIndex(),
-                EntryOrGuid = textBoxEntryOrGuid.Text
-            };
 
+            originalSourceType = GetSourceTypeByIndex();
+            originalEntryOrGuid = textBoxEntryOrGuid.Text;
             listViewSmartScripts.Items.Clear();
             SelectAndFillListViewWithQuery(textBoxEntryOrGuid.Text, GetSourceTypeByIndex());
         }
