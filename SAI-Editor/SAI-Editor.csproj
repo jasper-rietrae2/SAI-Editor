@@ -83,6 +83,7 @@
     <Compile Include="MySqlDatabase.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicEnums.cs" />
     <Compile Include="SearchForEntryForm.cs">
       <SubType>Form</SubType>
     </Compile>

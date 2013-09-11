@@ -28,6 +28,7 @@ namespace SAI_Editor
             checkBoxAutoSaveSettings.Checked = Settings.Default.AutoSaveSettings;
             checkBoxPromptToQuit.Checked = Settings.Default.PromptToQuit;
             checkBoxHidePass.Checked = Settings.Default.HidePass;
+            checkBoxPromptExecuteQuery.Checked = Settings.Default.PromptExecuteQuery;
 
             textBoxAnimationSpeed.Text = Settings.Default.AnimationSpeed.ToString();
 
@@ -55,6 +56,7 @@ namespace SAI_Editor
             Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
             Settings.Default.HidePass = checkBoxHidePass.Checked;
             Settings.Default.AnimationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
+            Settings.Default.PromptExecuteQuery = checkBoxPromptExecuteQuery.Checked;
             Settings.Default.Save();
 
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
@@ -96,7 +98,7 @@ namespace SAI_Editor
                 textBoxPort.Text == Settings.Default.Port.ToString() && checkBoxAutoConnect.Checked == Settings.Default.AutoConnect &&
                 checkBoxInstantExpand.Checked == Settings.Default.InstantExpand && checkBoxLoadScriptInstantly.Checked == Settings.Default.LoadScriptInstantly &&
                 checkBoxHidePass.Checked == Settings.Default.HidePass && checkBoxPromptToQuit.Checked == Settings.Default.PromptToQuit &&
-                textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString())
+                textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() && checkBoxPromptExecuteQuery.Checked == Settings.Default.PromptExecuteQuery)
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -116,6 +118,7 @@ namespace SAI_Editor
                     checkBoxHidePass.Checked = true;
                     textBoxAnimationSpeed.Text = "10";
                     trackBarAnimationSpeed.Value = 10;
+                    checkBoxPromptExecuteQuery.Checked = true;
                     break;
                 case 1: // ! 'Connection' tab
                     textBoxHost.Text = "";

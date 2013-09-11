@@ -54,6 +54,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonClearSettings = new System.Windows.Forms.Button();
+            this.checkBoxPromptExecuteQuery = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -82,6 +83,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.checkBoxPromptExecuteQuery);
             this.tabPageGeneral.Controls.Add(this.textBoxAnimationSpeed);
             this.tabPageGeneral.Controls.Add(this.labelAnimationSpeed);
             this.tabPageGeneral.Controls.Add(this.trackBarAnimationSpeed);
@@ -316,6 +318,18 @@
             this.buttonClearSettings.UseVisualStyleBackColor = true;
             this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
+            // checkBoxPromptExecuteQuery
+            // 
+            this.checkBoxPromptExecuteQuery.AutoSize = true;
+            this.checkBoxPromptExecuteQuery.Checked = true;
+            this.checkBoxPromptExecuteQuery.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPromptExecuteQuery.Location = new System.Drawing.Point(9, 98);
+            this.checkBoxPromptExecuteQuery.Name = "checkBoxPromptExecuteQuery";
+            this.checkBoxPromptExecuteQuery.Size = new System.Drawing.Size(231, 17);
+            this.checkBoxPromptExecuteQuery.TabIndex = 10;
+            this.checkBoxPromptExecuteQuery.Text = "Ask me if I\'m sure I want to execute a query";
+            this.checkBoxPromptExecuteQuery.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -371,6 +385,7 @@
         private System.Windows.Forms.TrackBar trackBarAnimationSpeed;
         private System.Windows.Forms.TextBox textBoxAnimationSpeed;
         private System.Windows.Forms.CheckBox checkBoxHidePass;
+        private System.Windows.Forms.CheckBox checkBoxPromptExecuteQuery;
 
     }
 }

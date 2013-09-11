@@ -57,8 +57,8 @@
             this.menuItemDeleteSelectedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.testToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripListView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.testToolStripMenuItemDeleteRow = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -147,7 +147,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
-            this.contextMenuStrip1.SuspendLayout();
+            this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -407,18 +407,19 @@
             this.menuItemAbout.Text = "About";
             this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
             // 
-            // contextMenuStrip1
+            // contextMenuStripListView
             // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItem1});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(94, 26);
+            this.contextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.testToolStripMenuItemDeleteRow});
+            this.contextMenuStripListView.Name = "contextMenuStripListView";
+            this.contextMenuStripListView.Size = new System.Drawing.Size(94, 26);
             // 
-            // testToolStripMenuItem1
+            // testToolStripMenuItemDeleteRow
             // 
-            this.testToolStripMenuItem1.Name = "testToolStripMenuItem1";
-            this.testToolStripMenuItem1.Size = new System.Drawing.Size(93, 22);
-            this.testToolStripMenuItem1.Text = "test";
+            this.testToolStripMenuItemDeleteRow.Name = "testToolStripMenuItemDeleteRow";
+            this.testToolStripMenuItemDeleteRow.Size = new System.Drawing.Size(93, 22);
+            this.testToolStripMenuItemDeleteRow.Text = "Delete row";
+            this.testToolStripMenuItemDeleteRow.Click += testToolStripMenuItemDeleteRow_Click;
             // 
             // panelLoginBox
             // 
@@ -1587,6 +1588,7 @@
             this.listViewSmartScripts.Visible = false;
             this.listViewSmartScripts.SelectedIndexChanged += new System.EventHandler(this.listViewSmartScripts_SelectedIndexChanged);
             this.listViewSmartScripts.Click += new System.EventHandler(this.listViewSmartScripts_Click);
+            this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
             // panel3
             // 
@@ -1622,7 +1624,7 @@
             this.groupBoxLogin.PerformLayout();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
+            this.contextMenuStripListView.ResumeLayout(false);
             this.panelLoginBox.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
@@ -1659,8 +1661,8 @@
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem menuHeaderFiles;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripListView;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItemDeleteRow;
         private System.Windows.Forms.ToolStripMenuItem menuItemSettings;
         private System.Windows.Forms.Panel panelLoginBox;
         private System.Windows.Forms.Label label4;

@@ -32,18 +32,12 @@ namespace SAI_Editor
         MaxTargetType = 26,
     };
 
-    internal enum SourceTypes
+    public enum SourceTypes
     {
         SourceTypeCreature = 0,
         SourceTypeGameobject = 1,
+        SourceTypeAreaTrigger = 2,
         SourceTypeScriptedActionlist = 9,
-    };
-
-    internal enum ParameterType
-    {
-        ParameterEvent,
-        ParameterAction,
-        ParameterTarget,
     };
 
     internal struct OriginalSearchInfo
@@ -63,7 +57,8 @@ namespace SAI_Editor
         private int WidthToExpandTo = (int)FormSizes.WidthToExpandTo, HeightToExpandTo = (int)FormSizes.HeightToExpandTo;
         public int animationSpeed = 5;
         private FormState formState = FormState.FormStateLogin;
-        OriginalSearchInfo? OriginalViewInfo = null;
+        private SourceTypes originalSourceType;
+        private String originalEntryOrGuid;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
         public MainForm()
@@ -430,7 +425,7 @@ namespace SAI_Editor
         private void buttonSearchForCreature_Click(object sender, EventArgs e)
         {
             //! Just keep it in main thread; no purpose starting a new thread for this (unless workspaces get implemented, maybe)
-            new SearchForEntryForm(connectionString, textBoxEntryOrGuid.Text, comboBoxSourceType.SelectedIndex == 0).ShowDialog(this);
+            new SearchForEntryForm(connectionString, textBoxEntryOrGuid.Text, GetSourceTypeByIndex()).ShowDialog(this);
         }
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
@@ -500,14 +495,14 @@ namespace SAI_Editor
                     break;
                 case 3: //! Scriptedactionlist
                     labelCreatureEntry.Text = "Actionlist entry:";
-                    buttonSearchForCreature.Enabled = false;
+                    buttonSearchForCreature.Enabled = true;
                     break;
             }
         }
 
         private void SelectAndFillListViewWithQuery(string entryOrGuid, SourceTypes sourceType)
         {
-            var timedActionlistEntries = new List<int>();
+            var timedActionlistEntries = new List<string>();
 
             try
             {
@@ -538,25 +533,28 @@ namespace SAI_Editor
 
                         if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
                         {
+                            SmartAction actionType = (SmartAction)Convert.ToInt32(row.ItemArray[12].ToString());
                             int actionParam1 = Convert.ToInt32(row.ItemArray[13].ToString());
                             int actionParam2 = Convert.ToInt32(row.ItemArray[14].ToString());
 
-                            if (Convert.ToInt32(row.ItemArray[12].ToString()) == 80)      // SMART_ACTION_CALL_TIMED_ACTIONLIST
-                                timedActionlistEntries.Add(actionParam1);
-                            else if (Convert.ToInt32(row.ItemArray[12].ToString()) == 87) // SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST
+                            switch (actionType)
                             {
-                                for (int i = 13; i < 19; ++i)
-                                {
-                                    if (Convert.ToInt32(row.ItemArray[i].ToString()) == 0)
-                                        break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
+                                case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
+                                    timedActionlistEntries.Add(actionParam1.ToString());
+                                    break;
+                                case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
+                                    for (int i = 13; i < 19; ++i)
+                                    {
+                                        if (row.ItemArray[i].ToString() == "0")
+                                            break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
 
-                                    timedActionlistEntries.Add(Convert.ToInt32(row.ItemArray[i].ToString()));
-                                }
-                            }
-                            else if (Convert.ToInt32(row.ItemArray[12].ToString()) == 88) // SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST
-                            {
-                                for (int i = actionParam1; i <= actionParam2; ++i)
-                                    timedActionlistEntries.Add(i);
+                                        timedActionlistEntries.Add(row.ItemArray[i].ToString());
+                                    }
+                                    break;
+                                case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
+                                    for (int i = actionParam1; i <= actionParam2; ++i)
+                                        timedActionlistEntries.Add(i.ToString());
+                                    break;
                             }
                         }
 
@@ -579,8 +577,8 @@ namespace SAI_Editor
             }
 
             if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
-                foreach (var scriptEntry in timedActionlistEntries)
-                    SelectAndFillListViewWithQuery(scriptEntry.ToString(), SourceTypes.SourceTypeScriptedActionlist);
+                foreach (string scriptEntry in timedActionlistEntries)
+                    SelectAndFillListViewWithQuery(scriptEntry, SourceTypes.SourceTypeScriptedActionlist);
         }
 
         //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
@@ -635,7 +633,7 @@ namespace SAI_Editor
                 case 2: //! Areatrigger
                     comboBoxSourceType.SelectedIndex = Convert.ToInt32(selectedItem[1].Text);
                     break;
-                case 9:
+                case 9: //! Actionlist
                     comboBoxSourceType.SelectedIndex = 3;
                     break;
                 default:
@@ -755,12 +753,12 @@ namespace SAI_Editor
             ListView.SelectedIndexCollection selectedIndices = listViewSmartScripts.SelectedIndices;
 
             CheckBox checkListActionlists = sender as CheckBox;
-            if (checkListActionlists.Checked && OriginalViewInfo != null && listViewSmartScripts.Items.Count > 0 && OriginalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
+            if (checkListActionlists.Checked && listViewSmartScripts.Items.Count > 0 && originalSourceType != SourceTypes.SourceTypeScriptedActionlist)
             {
                 listViewSmartScripts.Items.Clear();
-                SelectAndFillListViewWithQuery(OriginalViewInfo.Value.EntryOrGuid, OriginalViewInfo.Value.SourceType);
+                SelectAndFillListViewWithQuery(originalEntryOrGuid, originalSourceType);
             }
-            else if (!checkListActionlists.Checked && OriginalViewInfo.Value.SourceType != SourceTypes.SourceTypeScriptedActionlist)
+            else if (!checkListActionlists.Checked && originalSourceType != SourceTypes.SourceTypeScriptedActionlist)
                 RemoveActionListsFromView();
 
             for (int i = 0; i < selectedIndices.Count; ++i)
@@ -775,18 +773,18 @@ namespace SAI_Editor
                     listViewSmartScripts.Items.Remove(item);
         }
 
-        private int GetSourceTypeByIndex()
+        private SourceTypes GetSourceTypeByIndex()
         {
             switch (comboBoxSourceType.SelectedIndex)
             {
                 case 0: //! Creature
                 case 1: //! Gameobject
                 case 2: //! Areatrigger
-                    return comboBoxSourceType.SelectedIndex;
+                    return (SourceTypes)comboBoxSourceType.SelectedIndex;
                 case 3: //! Actionlist
-                    return 9;
+                    return SourceTypes.SourceTypeScriptedActionlist;
                 default:
-                    return -1;
+                    return SourceTypes.SourceTypeCreature; //! Default...
             }
         }
 
@@ -794,15 +792,11 @@ namespace SAI_Editor
         {
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
                 return;
-            
-            OriginalViewInfo = new OriginalSearchInfo
-            {
-                SourceType = (SourceTypes)GetSourceTypeByIndex(),
-                EntryOrGuid = textBoxEntryOrGuid.Text
-            };
 
+            originalSourceType = GetSourceTypeByIndex();
+            originalEntryOrGuid = textBoxEntryOrGuid.Text;
             listViewSmartScripts.Items.Clear();
-            SelectAndFillListViewWithQuery(textBoxEntryOrGuid.Text, (SourceTypes)GetSourceTypeByIndex());
+            SelectAndFillListViewWithQuery(textBoxEntryOrGuid.Text, GetSourceTypeByIndex());
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
@@ -909,7 +903,6 @@ namespace SAI_Editor
 
         private void buttonLinkFrom_Click(object sender, EventArgs e)
         {
-
             TryToOpenLinkForm(false);
         }
 
@@ -932,10 +925,27 @@ namespace SAI_Editor
 
         protected override void WndProc(ref Message m)
         {
+            //! Don't allow moving the window while we are expanding or contracting. This is required because
+            //! the window often breaks and has an incorrect size in the end if the application had been moved
+            //! while expanding or contracting.
             if (((m.Msg == 274 && m.WParam.ToInt32() == 61456) || (m.Msg == 161 && m.WParam.ToInt32() == 2)) && (expandingToMainForm || contractingToLoginForm))
                 return;
 
             base.WndProc(ref m);
+        }
+
+        private void listViewSmartScripts_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                if (listViewSmartScripts.FocusedItem.Bounds.Contains(e.Location))
+                    contextMenuStripListView.Show(Cursor.Position);
+        }
+
+        private void testToolStripMenuItemDeleteRow_Click(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                foreach (ListViewItem item in listViewSmartScripts.SelectedItems)
+                    listViewSmartScripts.Items.Remove(item);
         }
     }
 }
