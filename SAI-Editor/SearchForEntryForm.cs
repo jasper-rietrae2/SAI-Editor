@@ -60,7 +60,7 @@ namespace SAI_Editor
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
-            TryToStopRunningThread();
+            StopRunningThread();
             FillMainFormEntryOrGuidField(sender, e);
         }
 
@@ -281,12 +281,12 @@ namespace SAI_Editor
                                         int actionParam1 = Convert.ToInt32(row.ItemArray[2].ToString());
                                         int actionParam2 = Convert.ToInt32(row.ItemArray[3].ToString());
 
-                                        switch (Convert.ToInt32(row.ItemArray[1].ToString())) //! action type
+                                        switch ((SmartAction)Convert.ToInt32(row.ItemArray[1].ToString())) //! action type
                                         {
-                                            case 80: // SMART_ACTION_CALL_TIMED_ACTIONLIST
+                                            case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
                                                 AddItemToListView(listViewEntryResults, actionParam1.ToString(), name);
                                                 break;
-                                            case 87: // SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST
+                                            case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
                                                 for (int i = 2; i < 8; ++i)
                                                 {
                                                     if (row.ItemArray[i].ToString() == "0")
@@ -295,7 +295,7 @@ namespace SAI_Editor
                                                     AddItemToListView(listViewEntryResults, row.ItemArray[i].ToString(), name);
                                                 }
                                                 break;
-                                            case 88: // SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST
+                                            case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
                                                 for (int i = actionParam1; i <= actionParam2; ++i)
                                                     AddItemToListView(listViewEntryResults, i.ToString(), name);
                                                 break;
@@ -358,12 +358,12 @@ namespace SAI_Editor
             }
         }
 
-        private void buttonClearSearchResults_Click(object sender, EventArgs e)
+        private void buttonStopSearchResults_Click(object sender, EventArgs e)
         {
-            TryToStopRunningThread();
+            StopRunningThread();
         }
 
-        private void TryToStopRunningThread()
+        private void StopRunningThread()
         {
             if (searchThread != null && searchThread.IsAlive)
             {
@@ -427,7 +427,6 @@ namespace SAI_Editor
                 case 6: //! Actionlist
                     ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 3;
                     break;
-
             }
 
             if (Settings.Default.LoadScriptInstantly)

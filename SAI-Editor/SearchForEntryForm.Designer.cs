@@ -64,7 +64,7 @@
             this.buttonStopSearching.TabIndex = 10;
             this.buttonStopSearching.Text = "Stop";
             this.buttonStopSearching.UseVisualStyleBackColor = true;
-            this.buttonStopSearching.Click += new System.EventHandler(this.buttonClearSearchResults_Click);
+            this.buttonStopSearching.Click += new System.EventHandler(this.buttonStopSearchResults_Click);
             // 
             // checkBoxFieldContainsCriteria
             // 

@@ -533,26 +533,28 @@ namespace SAI_Editor
 
                         if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
                         {
-                            int actionType = Convert.ToInt32(row.ItemArray[12].ToString());
+                            SmartAction actionType = (SmartAction)Convert.ToInt32(row.ItemArray[12].ToString());
                             int actionParam1 = Convert.ToInt32(row.ItemArray[13].ToString());
                             int actionParam2 = Convert.ToInt32(row.ItemArray[14].ToString());
 
-                            if (actionType == 80)      // SMART_ACTION_CALL_TIMED_ACTIONLIST
-                                timedActionlistEntries.Add(actionParam1.ToString());
-                            else if (actionType == 87) // SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST
+                            switch (actionType)
                             {
-                                for (int i = 13; i < 19; ++i)
-                                {
-                                    if (row.ItemArray[i].ToString() == "0")
-                                        break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
+                                case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
+                                    timedActionlistEntries.Add(actionParam1.ToString());
+                                    break;
+                                case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
+                                    for (int i = 13; i < 19; ++i)
+                                    {
+                                        if (row.ItemArray[i].ToString() == "0")
+                                            break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
 
-                                    timedActionlistEntries.Add(row.ItemArray[i].ToString());
-                                }
-                            }
-                            else if (actionType == 88) // SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST
-                            {
-                                for (int i = actionParam1; i <= actionParam2; ++i)
-                                    timedActionlistEntries.Add(i.ToString());
+                                        timedActionlistEntries.Add(row.ItemArray[i].ToString());
+                                    }
+                                    break;
+                                case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
+                                    for (int i = actionParam1; i <= actionParam2; ++i)
+                                        timedActionlistEntries.Add(i.ToString());
+                                    break;
                             }
                         }
 
