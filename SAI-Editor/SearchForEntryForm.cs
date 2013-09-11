@@ -308,6 +308,11 @@ namespace SAI_Editor
                         SetEnabledOfControl(buttonSearch, true);
                         SetEnabledOfControl(buttonStopSearching, false);
                     }
+                    catch (ThreadAbortException ex)
+                    {
+                        SetEnabledOfControl(buttonSearch, true);
+                        SetEnabledOfControl(buttonStopSearching, false);
+                    }
                     catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
