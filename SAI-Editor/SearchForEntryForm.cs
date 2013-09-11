@@ -144,7 +144,7 @@ namespace SAI_Editor
                 case 2: //! Creature guid
                     if (criteriaLeftEmpty)
                     {
-                        if (MessageBox.Show("Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                        if (Settings.Default.PromptExecuteQuery && MessageBox.Show("Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                             return;
 
                         if (checkBoxHasAiName.Checked)
@@ -199,7 +199,7 @@ namespace SAI_Editor
                 case 5: //! Gameobject guid
                     if (criteriaLeftEmpty)
                     {
-                        if (MessageBox.Show("Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                        if (Settings.Default.PromptExecuteQuery && MessageBox.Show("Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                             return;
 
                         if (checkBoxHasAiName.Checked)
@@ -457,8 +457,8 @@ namespace SAI_Editor
         {
             if (comboBox.InvokeRequired)
                 return (int)comboBox.Invoke(new Func<int>(() => GetSelectedIndexOfComboBox(comboBox)));
-            else
-                return comboBox.SelectedIndex;
+
+            return comboBox.SelectedIndex;
         }
 
         private void AddItemToListView(ListView listView, string item, string subItem)
