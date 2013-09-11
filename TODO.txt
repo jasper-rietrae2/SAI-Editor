@@ -12,7 +12,6 @@
 - Use SQLite to store contents of Spell.dbc and Areatrigger.dbc as well as information on all event, action and target parameters (one for each id) (information like tooltips, meaning of the parameter, amount of parameters, etc.);
 - Clear all data to their default values when the user re-connects (contracts) to login form (source_type becomes creature, events/actions/targets become 0, etc. etc.);
 - Make the column sorter work with numbers as well;
-- Figure out the app.config issue _properly_ (still doesn't work on a clean pull for me (Discover-));
 - Find a good-looking way to display _ALL_ info in the listview without having to scroll;
 - Make the application multi-platform supported;
 - Create a checkbox to only show 'basic' data in the listview (entryorguid, id, event_type, action_type, target_type, comment);
