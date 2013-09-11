@@ -937,5 +937,18 @@ namespace SAI_Editor
 
             base.WndProc(ref m);
         }
+
+        private void listViewSmartScripts_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                if (listViewSmartScripts.FocusedItem.Bounds.Contains(e.Location))
+                    contextMenuStripListView.Show(Cursor.Position);
+        }
+
+        private void testToolStripMenuItemDeleteRow_Click(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.Items.Remove(listViewSmartScripts.SelectedItems[0]);
+        }
     }
 }
