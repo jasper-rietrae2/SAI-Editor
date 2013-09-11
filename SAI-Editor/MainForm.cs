@@ -948,7 +948,8 @@ namespace SAI_Editor
         private void testToolStripMenuItemDeleteRow_Click(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
-                listViewSmartScripts.Items.Remove(listViewSmartScripts.SelectedItems[0]);
+                foreach (ListViewItem item in listViewSmartScripts.SelectedItems)
+                    listViewSmartScripts.Items.Remove(item);
         }
     }
 }
