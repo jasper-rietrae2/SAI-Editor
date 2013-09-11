@@ -365,15 +365,11 @@ namespace SAI_Editor
 
         private void TryToStopRunningThread()
         {
-            try
+            if (searchThread != null && searchThread.IsAlive)
             {
-                if (searchThread != null && searchThread.IsAlive)
-                {
-                    searchThread.Abort();
-                    searchThread = null;
-                }
+                searchThread.Abort();
+                searchThread = null;
             }
-            catch { } //! No need to report anything
         }
 
         private void textBoxCriteria_KeyPress(object sender, KeyPressEventArgs e)
