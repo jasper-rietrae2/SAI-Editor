@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Data;
 using System.Drawing;
-using SAI_Editor.Properties;
 using MySql.Data.MySqlClient;
-//using System.Data.SQLite;
+using SAI_Editor.Properties;
+using SAI_Editor.Database.Classes;
 
 namespace SAI_Editor
 {
@@ -501,76 +501,94 @@ namespace SAI_Editor
             }
         }
 
-        private void SelectAndFillListViewWithQuery(string entryOrGuid, SourceTypes sourceType)
+        private async void SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
         {
             var timedActionlistEntries = new List<string>();
 
             try
             {
-                using (var connection = new MySqlConnection(connectionString.ToString()))
+                List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(Convert.ToInt32(entryOrGuid), (int)sourceType);
+
+                if (smartScripts == null)
                 {
-                    connection.Open();
-                    var returnVal = new MySqlDataAdapter(String.Format("SELECT * FROM smart_scripts WHERE entryorguid={0} AND source_type={1}", entryOrGuid, (int)sourceType), connection);
-                    var dataTable = new DataTable();
-                    returnVal.Fill(dataTable);
-
-                    if (dataTable.Rows.Count <= 0)
-                    {
-                        MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI table for the given source type ({1})!", entryOrGuid, (int)sourceType), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        var listViewItem = new ListViewItem();
-
-                        for (int i = 0; i < row.ItemArray.Length; i++)
-                        {
-                            if (i == 0)
-                                listViewItem.Text = row.ItemArray[i].ToString();
-                            else
-                                listViewItem.SubItems.Add(row.ItemArray[i].ToString());
-                        }
-
-                        if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
-                        {
-                            SmartAction actionType = (SmartAction)Convert.ToInt32(row.ItemArray[12].ToString());
-                            int actionParam1 = Convert.ToInt32(row.ItemArray[13].ToString());
-                            int actionParam2 = Convert.ToInt32(row.ItemArray[14].ToString());
-
-                            switch (actionType)
-                            {
-                                case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
-                                    timedActionlistEntries.Add(actionParam1.ToString());
-                                    break;
-                                case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
-                                    for (int i = 13; i < 19; ++i)
-                                    {
-                                        if (row.ItemArray[i].ToString() == "0")
-                                            break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
-
-                                        timedActionlistEntries.Add(row.ItemArray[i].ToString());
-                                    }
-                                    break;
-                                case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
-                                    for (int i = actionParam1; i <= actionParam2; ++i)
-                                        timedActionlistEntries.Add(i.ToString());
-                                    break;
-                            }
-                        }
-
-                        listViewSmartScripts.Items.Add(listViewItem);
-                    }
-
-                    for (int i = 8; i <= 11; ++i)
-                        listViewSmartScripts.Columns[i].Width = -1;
-
-                    for (int i = 13; i <= 18; ++i)
-                        listViewSmartScripts.Columns[i].Width = -1;
-
-                    for (int i = 20; i <= 26; ++i)
-                        listViewSmartScripts.Columns[i].Width = -1;
+                    MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI table for the given source type ({1})!", entryOrGuid, (int)sourceType), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
+
+                foreach (SmartScript smartScript in smartScripts)
+                {
+                    var listViewItem = new ListViewItem();
+                    listViewItem.Text = smartScript.entryorguid.ToString();
+                    listViewItem.SubItems.Add(smartScript.source_type.ToString());
+                    listViewItem.SubItems.Add(smartScript.id.ToString());
+                    listViewItem.SubItems.Add(smartScript.link.ToString());
+                    listViewItem.SubItems.Add(smartScript.event_type.ToString());
+                    listViewItem.SubItems.Add(smartScript.event_phase_mask.ToString());
+                    listViewItem.SubItems.Add(smartScript.event_chance.ToString());
+                    listViewItem.SubItems.Add(smartScript.event_flags.ToString());
+                    listViewItem.SubItems.Add(smartScript.event_param1.ToString());
+                    listViewItem.SubItems.Add(smartScript.event_param2.ToString());
+                    listViewItem.SubItems.Add(smartScript.event_param3.ToString());
+                    listViewItem.SubItems.Add(smartScript.event_param4.ToString());
+                    listViewItem.SubItems.Add(smartScript.action_type.ToString());
+                    listViewItem.SubItems.Add(smartScript.action_param1.ToString());
+                    listViewItem.SubItems.Add(smartScript.action_param2.ToString());
+                    listViewItem.SubItems.Add(smartScript.action_param3.ToString());
+                    listViewItem.SubItems.Add(smartScript.action_param4.ToString());
+                    listViewItem.SubItems.Add(smartScript.action_param5.ToString());
+                    listViewItem.SubItems.Add(smartScript.action_param6.ToString());
+                    listViewItem.SubItems.Add(smartScript.target_type.ToString());
+                    listViewItem.SubItems.Add(smartScript.target_param1.ToString());
+                    listViewItem.SubItems.Add(smartScript.target_param2.ToString());
+                    listViewItem.SubItems.Add(smartScript.target_param3.ToString());
+                    listViewItem.SubItems.Add(smartScript.target_x.ToString());
+                    listViewItem.SubItems.Add(smartScript.target_y.ToString());
+                    listViewItem.SubItems.Add(smartScript.target_z.ToString());
+                    listViewItem.SubItems.Add(smartScript.target_o.ToString());
+                    listViewItem.SubItems.Add(smartScript.comment);
+
+                    if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
+                    {
+                        switch ((SmartAction)smartScript.action_type)
+                        {
+                            case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
+                                timedActionlistEntries.Add(smartScript.action_param1.ToString());
+                                break;
+                            case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
+                                timedActionlistEntries.Add(smartScript.action_param1.ToString());
+                                timedActionlistEntries.Add(smartScript.action_param2.ToString());
+
+                                if (smartScript.action_param3 > 0)
+                                    timedActionlistEntries.Add(smartScript.action_param3.ToString());
+
+                                if (smartScript.action_param4 > 0)
+                                    timedActionlistEntries.Add(smartScript.action_param4.ToString());
+
+                                if (smartScript.action_param5 > 0)
+                                    timedActionlistEntries.Add(smartScript.action_param5.ToString());
+
+                                if (smartScript.action_param6 > 0)
+                                    timedActionlistEntries.Add(smartScript.action_param6.ToString());
+
+                                break;
+                            case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
+                                for (int i = smartScript.action_param1; i <= smartScript.action_param2; ++i)
+                                    timedActionlistEntries.Add(i.ToString());
+                                break;
+                        }
+                    }
+
+                    listViewSmartScripts.Items.Add(listViewItem);
+                }
+
+                for (int i = 8; i <= 11; ++i)
+                    listViewSmartScripts.Columns[i].Width = -1;
+
+                for (int i = 13; i <= 18; ++i)
+                    listViewSmartScripts.Columns[i].Width = -1;
+
+                for (int i = 20; i <= 26; ++i)
+                    listViewSmartScripts.Columns[i].Width = -1;
             }
             catch (Exception ex)
             {
@@ -579,7 +597,7 @@ namespace SAI_Editor
 
             if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
                 foreach (string scriptEntry in timedActionlistEntries)
-                    SelectAndFillListViewWithQuery(scriptEntry, SourceTypes.SourceTypeScriptedActionlist);
+                    SelectAndFillListViewByEntryAndSource(scriptEntry, SourceTypes.SourceTypeScriptedActionlist);
         }
 
         //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
@@ -757,7 +775,7 @@ namespace SAI_Editor
             if (checkListActionlists.Checked && listViewSmartScripts.Items.Count > 0 && originalSourceType != SourceTypes.SourceTypeScriptedActionlist)
             {
                 listViewSmartScripts.Items.Clear();
-                SelectAndFillListViewWithQuery(originalEntryOrGuid, originalSourceType);
+                SelectAndFillListViewByEntryAndSource(originalEntryOrGuid, originalSourceType);
             }
             else if (!checkListActionlists.Checked && originalSourceType != SourceTypes.SourceTypeScriptedActionlist)
                 RemoveActionListsFromView();
@@ -797,7 +815,7 @@ namespace SAI_Editor
             originalSourceType = GetSourceTypeByIndex();
             originalEntryOrGuid = textBoxEntryOrGuid.Text;
             listViewSmartScripts.Items.Clear();
-            SelectAndFillListViewWithQuery(textBoxEntryOrGuid.Text, GetSourceTypeByIndex());
+            SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, GetSourceTypeByIndex());
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)

@@ -65,6 +65,7 @@
     <Compile Include="AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Database\Classes\SmartScript.cs" />
     <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -106,7 +107,7 @@
     <Compile Include="SettingsForm.designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="WorldDatabase.cs" />
+    <Compile Include="Database\WorldDatabase.cs" />
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
