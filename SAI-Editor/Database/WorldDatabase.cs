@@ -106,30 +106,30 @@ namespace SAI_Editor
         {
             DataTable dt = await ExecuteQuery("SELECT id FROM creature WHERE guid = @guid", new MySqlParameter("@guid", guid));
 
-            if (dt.Rows.Count > 0)
+            if (dt.Rows.Count == 0)
                 return 0;
 
-            return (int)dt.Rows[0]["id"];
+            return Convert.ToInt32(dt.Rows[0]["id"]);
         }
 
         public async Task<string> GetCreatureNameById(int id)
         {
             DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = @id", new MySqlParameter("@id", id));
 
-            if (dt.Rows.Count > 0)
+            if (dt.Rows.Count == 0)
                 return String.Empty;
 
-            return (string)dt.Rows[0]["name"];
+            return dt.Rows[0]["name"].ToString();
         }
 
         public async Task<string> GetCreatureNameByGuid(int guid)
         {
             DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = @id", new MySqlParameter("@id", GetCreatureIdByGuid(guid)));
 
-            if (dt.Rows.Count > 0)
+            if (dt.Rows.Count == 0)
                 return String.Empty;
 
-            return (string)dt.Rows[0]["name"];
+            return dt.Rows[0]["name"].ToString();
         }
 
         public async Task<List<SmartScript>> GetSmartScripts(int entryorguid)
