@@ -40,12 +40,6 @@ namespace SAI_Editor
         SourceTypeScriptedActionlist = 9,
     };
 
-    internal struct OriginalSearchInfo
-    {
-        public SourceTypes SourceType;
-        public String EntryOrGuid;
-    }
-
     public partial class MainForm : Form
     {
         private readonly MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
