@@ -112,6 +112,29 @@ namespace SAI_Editor
             return Convert.ToInt32(dt.Rows[0]["id"]);
         }
 
+        public async Task<int> GetGameobjectIdByGuid(int guid)
+        {
+            DataTable dt = await ExecuteQuery("SELECT id FROM gameobject WHERE guid = @guid", new MySqlParameter("@guid", guid));
+
+            if (dt.Rows.Count == 0)
+                return 0;
+
+            return Convert.ToInt32(dt.Rows[0]["id"]);
+        }
+
+        public async Task<int> GetObjectIdByGuidAndSourceType(int guid, int source_type)
+        {
+            switch ((SourceTypes)source_type)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return await GetCreatureIdByGuid(guid);
+                case SourceTypes.SourceTypeGameobject:
+                    return await GetGameobjectIdByGuid(guid);
+            }
+
+            return 0;
+        }
+
         public async Task<string> GetCreatureNameById(int id)
         {
             DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = @id", new MySqlParameter("@id", id));
@@ -130,6 +153,52 @@ namespace SAI_Editor
                 return String.Empty;
 
             return dt.Rows[0]["name"].ToString();
+        }
+
+        public async Task<string> GetGameobjectNameById(int id)
+        {
+            DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = @id", new MySqlParameter("@id", id));
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["name"].ToString();
+        }
+
+        public async Task<string> GetGameobjectNameByGuid(int guid)
+        {
+            DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = @id", new MySqlParameter("@id", GetGameobjectIdByGuid(guid)));
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["name"].ToString();
+        }
+
+        public async Task<string> GetObjectNameByIdAndSourceType(int id, int source_type)
+        {
+            switch ((SourceTypes)source_type)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return await GetCreatureNameById(id);
+                case SourceTypes.SourceTypeGameobject:
+                    return await GetGameobjectNameById(id);
+            }
+
+            return String.Empty;
+        }
+
+        public async Task<string> GetObjectNameByGuidAndSourceType(int guid, int source_type)
+        {
+            switch ((SourceTypes)source_type)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return await GetCreatureNameByGuid(guid);
+                case SourceTypes.SourceTypeGameobject:
+                    return await GetGameobjectNameByGuid(guid);
+            }
+
+            return String.Empty;
         }
 
         public async Task<List<SmartScript>> GetSmartScripts(int entryorguid)

@@ -236,7 +236,7 @@ namespace SAI_Editor
                         {
                             connection.Open();
 
-                            string queryToExecute = "SELECT entryorguid, action_type, action_param1, action_param2, action_param3, action_param4, action_param5, action_param6 FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9";
+                            string queryToExecute = "SELECT entryorguid, source_type, action_type, action_param1, action_param2, action_param3, action_param4, action_param5, action_param6 FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9";
 
                             if (!criteriaLeftEmpty)
                             {
@@ -257,22 +257,26 @@ namespace SAI_Editor
                                 foreach (DataRow row in dataTable.Rows)
                                 {
                                     int entryorguid = Convert.ToInt32(row.ItemArray[0].ToString());
+                                    int source_type = Convert.ToInt32(row.ItemArray[1].ToString());
                                     int entry = entryorguid;
 
+                                    //! If the entryorguid is below 0 it means the script is for a creature. We need to get
+                                    //! the creature_template.entry by the guid in order to obtain the creature_template.name
+                                    //! field now.
                                     if (entryorguid < 0)
-                                        entry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(entryorguid * -1);
+                                        entry = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectIdByGuidAndSourceType(entryorguid * -1, source_type);
 
-                                    string name = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameById(entry);
-                                    int actionParam1 = Convert.ToInt32(row.ItemArray[2].ToString());
-                                    int actionParam2 = Convert.ToInt32(row.ItemArray[3].ToString());
+                                    string name = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdAndSourceType(entry, source_type);
+                                    int actionParam1 = Convert.ToInt32(row.ItemArray[3].ToString());
+                                    int actionParam2 = Convert.ToInt32(row.ItemArray[4].ToString());
 
-                                    switch ((SmartAction)Convert.ToInt32(row.ItemArray[1].ToString())) //! action type
+                                    switch ((SmartAction)Convert.ToInt32(row.ItemArray[2].ToString())) //! action type
                                     {
                                         case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
                                             AddItemToListView(listViewEntryResults, actionParam1.ToString(), name);
                                             break;
                                         case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
-                                            for (int i = 2; i < 8; ++i)
+                                            for (int i = 3; i < 9; ++i)
                                             {
                                                 if (row.ItemArray[i].ToString() == "0")
                                                     break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
