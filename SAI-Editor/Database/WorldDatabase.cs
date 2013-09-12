@@ -233,11 +233,7 @@ namespace SAI_Editor
 
         public async Task<List<SmartScript>> GetSmartScriptActionLists(string criteria, bool useLikeStatement)
         {
-            string query = "SELECT * FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9";
-
-            query += " ORDER BY entryorguid";
-
-            DataTable dt = await ExecuteQuery(query);
+            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9 ORDER BY entryorguid");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -284,16 +280,13 @@ namespace SAI_Editor
 
                     foreach (string scriptEntry in timedActionlistEntries)
                     {
-                        //if (scriptEntry == "2402112")
+                        if (useLikeStatement)
                         {
-                            if (useLikeStatement)
-                            {
-                                if (scriptEntry.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) >= 0)
-                                    smartScriptsClean.Add(smartScript);
-                            }
-                            else if (scriptEntry.IndexOf(criteria) >= 0)
+                            if (scriptEntry.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) >= 0)
                                 smartScriptsClean.Add(smartScript);
                         }
+                        else if (scriptEntry.IndexOf(criteria) >= 0)
+                            smartScriptsClean.Add(smartScript);
                     }
                 }
             }
