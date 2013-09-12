@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Threading;
 using SAI_Editor.Properties;
 using MySql.Data.MySqlClient;
+using SAI_Editor.Database.Classes;
 
 namespace SAI_Editor
 {
@@ -232,63 +233,51 @@ namespace SAI_Editor
 
                     try
                     {
-                        using (var connection = new MySqlConnection(connectionString.ToString()))
+                        List<SmartScript> smartScriptActionlists = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScriptActionLists(textBoxCriteria.Text, checkBoxFieldContainsCriteria.Checked);
+
+                        if (smartScriptActionlists != null)
                         {
-                            connection.Open();
-
-                            string queryToExecute = "SELECT entryorguid, source_type, action_type, action_param1, action_param2, action_param3, action_param4, action_param5, action_param6 FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9";
-
-                            if (!criteriaLeftEmpty)
+                            foreach (SmartScript smartScript in smartScriptActionlists)
                             {
-                                if (checkBoxFieldContainsCriteria.Checked)
-                                    queryToExecute += " AND entryorguid LIKE '%" + textBoxCriteria.Text + "%'";
-                                else
-                                    queryToExecute += " AND entryorguid = " + textBoxCriteria.Text;
-                            }
+                                int entryorguid = smartScript.entryorguid;
+                                int source_type = smartScript.source_type;
 
-                            queryToExecute += " ORDER BY entryorguid";
+                                //! If the entryorguid is below 0 it means the script is for a creature. We need to get
+                                //! the creature_template.entry by the guid in order to obtain the creature_template.name
+                                //! field now.
+                                if (entryorguid < 0)
+                                    entryorguid = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectIdByGuidAndSourceType(entryorguid * -1, source_type);
 
-                            var returnVal = new MySqlDataAdapter(queryToExecute, connection);
-                            var dataTable = new DataTable();
-                            returnVal.Fill(dataTable);
+                                string name = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdAndSourceType(entryorguid, source_type);
+                                int actionParam1 = smartScript.action_param1;
+                                int actionParam2 = smartScript.action_param2;
 
-                            if (dataTable.Rows.Count > 0)
-                            {
-                                foreach (DataRow row in dataTable.Rows)
+                                switch ((SmartAction)smartScript.action_type) //! action type
                                 {
-                                    int entryorguid = Convert.ToInt32(row.ItemArray[0].ToString());
-                                    int source_type = Convert.ToInt32(row.ItemArray[1].ToString());
-                                    int entry = entryorguid;
+                                    case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
+                                        AddItemToListView(listViewEntryResults, actionParam1.ToString(), name);
+                                        break;
+                                    case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
+                                        AddItemToListView(listViewEntryResults, smartScript.action_param1.ToString(), name);
+                                        AddItemToListView(listViewEntryResults, smartScript.action_param2.ToString(), name);
 
-                                    //! If the entryorguid is below 0 it means the script is for a creature. We need to get
-                                    //! the creature_template.entry by the guid in order to obtain the creature_template.name
-                                    //! field now.
-                                    if (entryorguid < 0)
-                                        entry = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectIdByGuidAndSourceType(entryorguid * -1, source_type);
+                                        if (smartScript.action_param3 > 0)
+                                            AddItemToListView(listViewEntryResults, smartScript.action_param3.ToString(), name);
 
-                                    string name = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdAndSourceType(entry, source_type);
-                                    int actionParam1 = Convert.ToInt32(row.ItemArray[3].ToString());
-                                    int actionParam2 = Convert.ToInt32(row.ItemArray[4].ToString());
+                                        if (smartScript.action_param4 > 0)
+                                            AddItemToListView(listViewEntryResults, smartScript.action_param4.ToString(), name);
 
-                                    switch ((SmartAction)Convert.ToInt32(row.ItemArray[2].ToString())) //! action type
-                                    {
-                                        case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
-                                            AddItemToListView(listViewEntryResults, actionParam1.ToString(), name);
-                                            break;
-                                        case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
-                                            for (int i = 3; i < 9; ++i)
-                                            {
-                                                if (row.ItemArray[i].ToString() == "0")
-                                                    break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
+                                        if (smartScript.action_param5 > 0)
+                                            AddItemToListView(listViewEntryResults, smartScript.action_param5.ToString(), name);
 
-                                                AddItemToListView(listViewEntryResults, row.ItemArray[i].ToString(), name);
-                                            }
-                                            break;
-                                        case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
-                                            for (int i = actionParam1; i <= actionParam2; ++i)
-                                                AddItemToListView(listViewEntryResults, i.ToString(), name);
-                                            break;
-                                    }
+                                        if (smartScript.action_param6 > 0)
+                                            AddItemToListView(listViewEntryResults, smartScript.action_param6.ToString(), name);
+
+                                        break;
+                                    case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
+                                        for (int i = actionParam1; i <= actionParam2; ++i)
+                                            AddItemToListView(listViewEntryResults, i.ToString(), name);
+                                        break;
                                 }
                             }
                         }
@@ -296,7 +285,7 @@ namespace SAI_Editor
                         SetEnabledOfControl(buttonSearch, true);
                         SetEnabledOfControl(buttonStopSearching, false);
                     }
-                    catch (ThreadAbortException ex)
+                    catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
                     {
                         SetEnabledOfControl(buttonSearch, true);
                         SetEnabledOfControl(buttonStopSearching, false);
