@@ -245,8 +245,8 @@ namespace SAI_Editor
                                 else
                                     queryToExecute += " AND entryorguid = " + textBoxCriteria.Text;
                             }
-                            else
-                                queryToExecute += " ORDER BY entryorguid";
+
+                            queryToExecute += " ORDER BY entryorguid";
 
                             var returnVal = new MySqlDataAdapter(queryToExecute, connection);
                             var dataTable = new DataTable();

@@ -32,6 +32,7 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxPromptExecuteQuery = new System.Windows.Forms.CheckBox();
             this.textBoxAnimationSpeed = new System.Windows.Forms.TextBox();
             this.labelAnimationSpeed = new System.Windows.Forms.Label();
             this.trackBarAnimationSpeed = new System.Windows.Forms.TrackBar();
@@ -54,7 +55,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonClearSettings = new System.Windows.Forms.Button();
-            this.checkBoxPromptExecuteQuery = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -98,6 +98,18 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPromptExecuteQuery
+            // 
+            this.checkBoxPromptExecuteQuery.AutoSize = true;
+            this.checkBoxPromptExecuteQuery.Checked = true;
+            this.checkBoxPromptExecuteQuery.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPromptExecuteQuery.Location = new System.Drawing.Point(6, 98);
+            this.checkBoxPromptExecuteQuery.Name = "checkBoxPromptExecuteQuery";
+            this.checkBoxPromptExecuteQuery.Size = new System.Drawing.Size(231, 17);
+            this.checkBoxPromptExecuteQuery.TabIndex = 10;
+            this.checkBoxPromptExecuteQuery.Text = "Ask me if I\'m sure I want to execute a query";
+            this.checkBoxPromptExecuteQuery.UseVisualStyleBackColor = true;
             // 
             // textBoxAnimationSpeed
             // 
@@ -317,18 +329,6 @@
             this.buttonClearSettings.Text = "Clear";
             this.buttonClearSettings.UseVisualStyleBackColor = true;
             this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
-            // 
-            // checkBoxPromptExecuteQuery
-            // 
-            this.checkBoxPromptExecuteQuery.AutoSize = true;
-            this.checkBoxPromptExecuteQuery.Checked = true;
-            this.checkBoxPromptExecuteQuery.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPromptExecuteQuery.Location = new System.Drawing.Point(9, 98);
-            this.checkBoxPromptExecuteQuery.Name = "checkBoxPromptExecuteQuery";
-            this.checkBoxPromptExecuteQuery.Size = new System.Drawing.Size(231, 17);
-            this.checkBoxPromptExecuteQuery.TabIndex = 10;
-            this.checkBoxPromptExecuteQuery.Text = "Ask me if I\'m sure I want to execute a query";
-            this.checkBoxPromptExecuteQuery.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
