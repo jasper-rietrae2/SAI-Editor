@@ -235,27 +235,72 @@ namespace SAI_Editor
         {
             string query = "SELECT * FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9";
 
-            if (criteria.Length > 0)
-            {
-                if (useLikeStatement)
-                    query += " AND entryorguid LIKE '%@criteria%'";
-                else
-                    query += " AND entryorguid = @criteria";
-            }
-
             query += " ORDER BY entryorguid";
 
-            DataTable dt = await ExecuteQuery(query, new MySqlParameter("@criteria", criteria));
+            DataTable dt = await ExecuteQuery(query);
 
             if (dt.Rows.Count == 0)
                 return null;
 
             List<SmartScript> smartScripts = new List<SmartScript>();
+            List<SmartScript> smartScriptsClean = new List<SmartScript>();
 
             foreach (DataRow row in dt.Rows)
                 smartScripts.Add(BuildSmartScript(row));
 
-            return smartScripts;
+            if (criteria.Length > 0)
+            {
+                foreach (SmartScript smartScript in smartScripts)
+                {
+                    var timedActionlistEntries = new List<string>();
+
+                    switch ((SmartAction)smartScript.action_type)
+                    {
+                        case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
+                            timedActionlistEntries.Add(smartScript.action_param1.ToString());
+                            break;
+                        case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
+                            timedActionlistEntries.Add(smartScript.action_param1.ToString());
+                            timedActionlistEntries.Add(smartScript.action_param2.ToString());
+
+                            if (smartScript.action_param3 > 0)
+                                timedActionlistEntries.Add(smartScript.action_param3.ToString());
+
+                            if (smartScript.action_param4 > 0)
+                                timedActionlistEntries.Add(smartScript.action_param4.ToString());
+
+                            if (smartScript.action_param5 > 0)
+                                timedActionlistEntries.Add(smartScript.action_param5.ToString());
+
+                            if (smartScript.action_param6 > 0)
+                                timedActionlistEntries.Add(smartScript.action_param6.ToString());
+
+                            break;
+                        case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
+                            for (int i = smartScript.action_param1; i <= smartScript.action_param2; ++i)
+                                timedActionlistEntries.Add(i.ToString());
+                            break;
+                    }
+
+                    foreach (string scriptEntry in timedActionlistEntries)
+                    {
+                        //if (scriptEntry == "2402112")
+                        {
+                            if (useLikeStatement)
+                            {
+                                if (scriptEntry.IndexOf(criteria, StringComparison.OrdinalIgnoreCase) >= 0)
+                                    smartScriptsClean.Add(smartScript);
+                            }
+                            else if (scriptEntry.IndexOf(criteria) >= 0)
+                                smartScriptsClean.Add(smartScript);
+                        }
+                    }
+                }
+            }
+            else
+                smartScriptsClean = smartScripts;
+
+            return smartScriptsClean;
         }
 
         private SmartScript BuildSmartScript(DataRow row)
