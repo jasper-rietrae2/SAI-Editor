@@ -82,12 +82,19 @@ namespace SAI_Editor
             if (HeightToExpandTo > SystemInformation.VirtualScreen.Height)
                 HeightToExpandTo = SystemInformation.VirtualScreen.Height;
 
-            textBoxHost.Text = Settings.Default.Host;
-            textBoxUsername.Text = Settings.Default.User;
-            textBoxPassword.Text = Settings.Default.Password;
-            textBoxWorldDatabase.Text = Settings.Default.Database;
-            textBoxPort.Text = Settings.Default.Port.ToString();
-            animationSpeed = Convert.ToInt32(Settings.Default.AnimationSpeed);
+            try
+            {
+                textBoxHost.Text = Settings.Default.Host;
+                textBoxUsername.Text = Settings.Default.User;
+                textBoxPassword.Text = Settings.Default.Password;
+                textBoxWorldDatabase.Text = Settings.Default.Database;
+                textBoxPort.Text = Settings.Default.Port.ToString();
+                animationSpeed = Convert.ToInt32(Settings.Default.AnimationSpeed);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
 
