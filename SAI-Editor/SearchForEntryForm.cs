@@ -99,7 +99,7 @@ namespace SAI_Editor
             searchThread.Start();
         }
 
-        private void StartSearching()
+        private async void StartSearching()
         {
             string query = "";
             bool criteriaLeftEmpty = String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text);
@@ -260,46 +260,30 @@ namespace SAI_Editor
                                     int entry = entryorguid;
 
                                     if (entryorguid < 0)
+                                        entry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(entryorguid * -1);
+
+                                    string name = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameById(entry);
+                                    int actionParam1 = Convert.ToInt32(row.ItemArray[2].ToString());
+                                    int actionParam2 = Convert.ToInt32(row.ItemArray[3].ToString());
+
+                                    switch ((SmartAction)Convert.ToInt32(row.ItemArray[1].ToString())) //! action type
                                     {
-                                        var returnValCreatureIdByGuid = new MySqlDataAdapter(String.Format("SELECT id FROM creature WHERE guid={0}", entryorguid * -1), connection);
-                                        var dataTableCreatureIdByGuid = new DataTable();
-                                        returnValCreatureIdByGuid.Fill(dataTableCreatureIdByGuid);
+                                        case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
+                                            AddItemToListView(listViewEntryResults, actionParam1.ToString(), name);
+                                            break;
+                                        case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
+                                            for (int i = 2; i < 8; ++i)
+                                            {
+                                                if (row.ItemArray[i].ToString() == "0")
+                                                    break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
 
-                                        if (dataTableCreatureIdByGuid.Rows.Count == 0)
-                                            return;
-
-                                        entry = Convert.ToInt32(dataTableCreatureIdByGuid.Rows[0].ItemArray[0]);
-                                    }
-
-                                    var returnValCreatureName = new MySqlDataAdapter(String.Format("SELECT name FROM creature_template WHERE entry={0}", entry), connection);
-                                    var dataTableCreatureName = new DataTable();
-                                    returnValCreatureName.Fill(dataTableCreatureName);
-
-                                    if (dataTableCreatureName.Rows.Count > 0)
-                                    {
-                                        string name = dataTableCreatureName.Rows[0].ItemArray[0].ToString();
-                                        int actionParam1 = Convert.ToInt32(row.ItemArray[2].ToString());
-                                        int actionParam2 = Convert.ToInt32(row.ItemArray[3].ToString());
-
-                                        switch ((SmartAction)Convert.ToInt32(row.ItemArray[1].ToString())) //! action type
-                                        {
-                                            case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
-                                                AddItemToListView(listViewEntryResults, actionParam1.ToString(), name);
-                                                break;
-                                            case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
-                                                for (int i = 2; i < 8; ++i)
-                                                {
-                                                    if (row.ItemArray[i].ToString() == "0")
-                                                        break; //! Once the first 0 is reached we can stop looking for other scripts, no gaps allowed
-
-                                                    AddItemToListView(listViewEntryResults, row.ItemArray[i].ToString(), name);
-                                                }
-                                                break;
-                                            case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
-                                                for (int i = actionParam1; i <= actionParam2; ++i)
-                                                    AddItemToListView(listViewEntryResults, i.ToString(), name);
-                                                break;
-                                        }
+                                                AddItemToListView(listViewEntryResults, row.ItemArray[i].ToString(), name);
+                                            }
+                                            break;
+                                        case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
+                                            for (int i = actionParam1; i <= actionParam2; ++i)
+                                                AddItemToListView(listViewEntryResults, i.ToString(), name);
+                                            break;
                                     }
                                 }
                             }
