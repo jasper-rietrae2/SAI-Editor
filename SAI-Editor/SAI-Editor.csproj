@@ -38,17 +38,8 @@
     <Reference Include="MySql.Data">
       <HintPath>..\..\SAI-Editor\SAI-Editor\Resources\MySql.Data.dll</HintPath>
     </Reference>
-    <Reference Include="SQLite.Designer">
-      <HintPath>Resources\SQLite.Designer.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>Resources\System.Data.SQLite.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.SQLite.Linq">
-      <HintPath>Resources\System.Data.SQLite.Linq.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />

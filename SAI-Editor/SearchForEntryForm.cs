@@ -413,7 +413,7 @@ namespace SAI_Editor
             }
 
             if (Settings.Default.LoadScriptInstantly)
-                ((MainForm)Owner).pictureBox1_Click(sender, e);
+                ((MainForm)Owner).pictureBoxLoadScript_Click(sender, e);
 
             Close();
         }
@@ -521,11 +521,11 @@ namespace SAI_Editor
 
             switch (comboBoxSearchType.SelectedIndex)
             {
+                case 6: //! Actionlist
                 case 0: //! Creature entry
                 case 2: //! Creature guid
                 case 3: //! Gameobject entry
                 case 5: //! Gameobject guid
-                case 6: //! Actionlist
                     textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");;
                     break;
                 case 1: //! Creature name

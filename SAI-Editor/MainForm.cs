@@ -397,7 +397,7 @@ namespace SAI_Editor
                     if (formState == FormState.FormStateLogin)
                         buttonConnect_Click(sender, e);
                     else if (formState == FormState.FormStateMain && textBoxEntryOrGuid.Focused)
-                        pictureBox1_Click(sender, e);
+                        pictureBoxLoadScript_Click(sender, e);
                     break;
                 case Keys.F5: //! Temp to make it easier to design
                     if (panelLoginBox.Location.X == 1000 && panelLoginBox.Location.Y == 50)
@@ -807,7 +807,7 @@ namespace SAI_Editor
             }
         }
 
-        public void pictureBox1_Click(object sender, EventArgs e)
+        public void pictureBoxLoadScript_Click(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
                 return;

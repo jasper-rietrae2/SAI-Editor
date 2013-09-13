@@ -39,7 +39,7 @@ namespace SAI_Editor
             {
                 Int32 strInt = Int32.Parse(str);
             }
-            catch (FormatException e)
+            catch (FormatException)
             {
                 return false;
             }
