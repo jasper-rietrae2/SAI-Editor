@@ -69,7 +69,7 @@
             this.textBoxEntryOrGuid = new System.Windows.Forms.TextBox();
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBoxListActionlists = new System.Windows.Forms.CheckBox();
+            this.checkBoxListActionlistsOrEntries = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBoxScriptByGuid = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
@@ -336,7 +336,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1315, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1220, 24);
             this.menuStrip.TabIndex = 11;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -412,14 +412,13 @@
             this.contextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.testToolStripMenuItemDeleteRow});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(94, 26);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(131, 26);
             // 
             // testToolStripMenuItemDeleteRow
             // 
             this.testToolStripMenuItemDeleteRow.Name = "testToolStripMenuItemDeleteRow";
-            this.testToolStripMenuItemDeleteRow.Size = new System.Drawing.Size(93, 22);
+            this.testToolStripMenuItemDeleteRow.Size = new System.Drawing.Size(130, 22);
             this.testToolStripMenuItemDeleteRow.Text = "Delete row";
-            this.testToolStripMenuItemDeleteRow.Click += testToolStripMenuItemDeleteRow_Click;
             // 
             // panelLoginBox
             // 
@@ -515,7 +514,7 @@
             // groupBoxPreferences
             // 
             this.groupBoxPreferences.Controls.Add(this.checkBox4);
-            this.groupBoxPreferences.Controls.Add(this.checkBoxListActionlists);
+            this.groupBoxPreferences.Controls.Add(this.checkBoxListActionlistsOrEntries);
             this.groupBoxPreferences.Controls.Add(this.checkBox1);
             this.groupBoxPreferences.Controls.Add(this.checkBoxScriptByGuid);
             this.groupBoxPreferences.Controls.Add(this.checkBox3);
@@ -539,16 +538,16 @@
             this.checkBox4.Text = "checkBox4";
             this.checkBox4.UseVisualStyleBackColor = true;
             // 
-            // checkBoxListActionlists
+            // checkBoxListActionlistsOrEntries
             // 
-            this.checkBoxListActionlists.AutoSize = true;
-            this.checkBoxListActionlists.Location = new System.Drawing.Point(13, 71);
-            this.checkBoxListActionlists.Name = "checkBoxListActionlists";
-            this.checkBoxListActionlists.Size = new System.Drawing.Size(109, 17);
-            this.checkBoxListActionlists.TabIndex = 4;
-            this.checkBoxListActionlists.Text = "List actionlists too";
-            this.checkBoxListActionlists.UseVisualStyleBackColor = true;
-            this.checkBoxListActionlists.CheckedChanged += new System.EventHandler(this.checkBoxListActionlists_CheckedChanged);
+            this.checkBoxListActionlistsOrEntries.AutoSize = true;
+            this.checkBoxListActionlistsOrEntries.Location = new System.Drawing.Point(13, 71);
+            this.checkBoxListActionlistsOrEntries.Name = "checkBoxListActionlistsOrEntries";
+            this.checkBoxListActionlistsOrEntries.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxListActionlistsOrEntries.TabIndex = 4;
+            this.checkBoxListActionlistsOrEntries.Text = "List actionlists too";
+            this.checkBoxListActionlistsOrEntries.UseVisualStyleBackColor = true;
+            this.checkBoxListActionlistsOrEntries.CheckedChanged += new System.EventHandler(this.checkBoxListActionlists_CheckedChanged);
             // 
             // checkBox1
             // 
@@ -1581,7 +1580,7 @@
             this.listViewSmartScripts.HideSelection = false;
             this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
             this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(947, 210);
+            this.listViewSmartScripts.Size = new System.Drawing.Size(947, 207);
             this.listViewSmartScripts.TabIndex = 24;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
@@ -1602,7 +1601,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1315, 580);
+            this.ClientSize = new System.Drawing.Size(1220, 463);
             this.Controls.Add(this.panelLoginBox);
             this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.groupBoxParameters);
@@ -1692,7 +1691,7 @@
         public System.Windows.Forms.TextBox textBoxEntryOrGuid;
         private System.Windows.Forms.ListView listViewSmartScripts;
         private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBoxListActionlists;
+        private System.Windows.Forms.CheckBox checkBoxListActionlistsOrEntries;
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.CheckBox checkBoxScriptByGuid;
         private System.Windows.Forms.Button buttonSearchEventFlags;

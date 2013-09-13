@@ -32,7 +32,6 @@ namespace SAI_Editor
             checkBoxChangeStaticInfo.Checked = Settings.Default.ChangeStaticInfo;
 
             textBoxAnimationSpeed.Text = Settings.Default.AnimationSpeed.ToString();
-
             textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
         }
 

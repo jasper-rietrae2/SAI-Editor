@@ -503,7 +503,8 @@ namespace SAI_Editor
 
         private async void SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
         {
-            var timedActionlistEntries = new List<string>();
+            var timedActionlistsOrEntries = new List<string>();
+            SourceTypes sourceTypeOfEntry = SourceTypes.SourceTypeScriptedActionlist;
 
             try
             {
@@ -547,36 +548,58 @@ namespace SAI_Editor
                     listViewItem.SubItems.Add(smartScript.target_o.ToString());
                     listViewItem.SubItems.Add(smartScript.comment);
 
-                    if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
+                    if (checkBoxListActionlistsOrEntries.Checked && sourceType == originalSourceType)
                     {
-                        switch ((SmartAction)smartScript.action_type)
-                        {
-                            case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
-                                timedActionlistEntries.Add(smartScript.action_param1.ToString());
-                                break;
-                            case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
-                                timedActionlistEntries.Add(smartScript.action_param1.ToString());
-                                timedActionlistEntries.Add(smartScript.action_param2.ToString());
+                        TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScript, sourceType);
 
-                                if (smartScript.action_param3 > 0)
-                                    timedActionlistEntries.Add(smartScript.action_param3.ToString());
-
-                                if (smartScript.action_param4 > 0)
-                                    timedActionlistEntries.Add(smartScript.action_param4.ToString());
-
-                                if (smartScript.action_param5 > 0)
-                                    timedActionlistEntries.Add(smartScript.action_param5.ToString());
-
-                                if (smartScript.action_param6 > 0)
-                                    timedActionlistEntries.Add(smartScript.action_param6.ToString());
-
-                                break;
-                            case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
-                                for (int i = smartScript.action_param1; i <= smartScript.action_param2; ++i)
-                                    timedActionlistEntries.Add(i.ToString());
-                                break;
-                        }
+                        timedActionlistsOrEntries = timedActionListOrEntries.entries;
+                        sourceTypeOfEntry = timedActionListOrEntries.sourceTypeOfEntry;
                     }
+
+                    //{
+                    //    if (sourceType == SourceTypes.SourceTypeScriptedActionlist)
+                    //    {
+                    //        switch ((SmartAction)smartScript.action_type)
+                    //        {
+                    //            case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
+                    //            case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
+                    //            case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
+                    //                timedActionlistsOrEntries.Add(smartScript.entryorguid.ToString());
+                    //                sourceTypeOfEntry = (SourceTypes)smartScript.source_type;
+                    //                break;
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        switch ((SmartAction)smartScript.action_type)
+                    //        {
+                    //            case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
+                    //                timedActionlistsOrEntries.Add(smartScript.action_param1.ToString());
+                    //                break;
+                    //            case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
+                    //                timedActionlistsOrEntries.Add(smartScript.action_param1.ToString());
+                    //                timedActionlistsOrEntries.Add(smartScript.action_param2.ToString());
+
+                    //                if (smartScript.action_param3 > 0)
+                    //                    timedActionlistsOrEntries.Add(smartScript.action_param3.ToString());
+
+                    //                if (smartScript.action_param4 > 0)
+                    //                    timedActionlistsOrEntries.Add(smartScript.action_param4.ToString());
+
+                    //                if (smartScript.action_param5 > 0)
+                    //                    timedActionlistsOrEntries.Add(smartScript.action_param5.ToString());
+
+                    //                if (smartScript.action_param6 > 0)
+                    //                    timedActionlistsOrEntries.Add(smartScript.action_param6.ToString());
+
+                    //                break;
+                    //            case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
+                    //                for (int i = smartScript.action_param1; i <= smartScript.action_param2; ++i)
+                    //                    timedActionlistsOrEntries.Add(i.ToString());
+                    //                break;
+                    //        }
+                    //    }
+                    //}
 
                     listViewSmartScripts.Items.Add(listViewItem);
                 }
@@ -595,9 +618,9 @@ namespace SAI_Editor
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            if (checkBoxListActionlists.Checked && sourceType != SourceTypes.SourceTypeScriptedActionlist)
-                foreach (string scriptEntry in timedActionlistEntries)
-                    SelectAndFillListViewByEntryAndSource(scriptEntry, SourceTypes.SourceTypeScriptedActionlist);
+            if (checkBoxListActionlistsOrEntries.Checked)
+                foreach (string scriptEntry in timedActionlistsOrEntries)
+                    SelectAndFillListViewByEntryAndSource(scriptEntry, sourceTypeOfEntry);
         }
 
         //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
@@ -772,26 +795,28 @@ namespace SAI_Editor
 
         private void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
         {
-            ListView.SelectedIndexCollection selectedIndices = listViewSmartScripts.SelectedIndices;
+            if (listViewSmartScripts.Items.Count == 0)
+                return;
 
-            CheckBox checkListActionlists = sender as CheckBox;
-            if (checkListActionlists.Checked && listViewSmartScripts.Items.Count > 0 && originalSourceType != SourceTypes.SourceTypeScriptedActionlist)
+            if (checkBoxListActionlistsOrEntries.Checked)
             {
                 listViewSmartScripts.Items.Clear();
                 SelectAndFillListViewByEntryAndSource(originalEntryOrGuid, originalSourceType);
             }
-            else if (!checkListActionlists.Checked && originalSourceType != SourceTypes.SourceTypeScriptedActionlist)
-                RemoveActionListsFromView();
+            else
+                RemoveNonOriginalScriptsFromView();
+
+            ListView.SelectedIndexCollection selectedIndices = listViewSmartScripts.SelectedIndices;
 
             for (int i = 0; i < selectedIndices.Count; ++i)
                 if (listViewSmartScripts.Items[selectedIndices[i]] != null)
                     listViewSmartScripts.Items[selectedIndices[i]].Selected  = true;
         }
 
-        private void RemoveActionListsFromView()
+        private void RemoveNonOriginalScriptsFromView()
         {
             foreach (ListViewItem item in listViewSmartScripts.Items)
-                if (Int32.Parse(item.SubItems[1].Text) == 9) // If the source_type column is ActionList
+                if ((SourceTypes)Int32.Parse(item.SubItems[1].Text) != originalSourceType)
                     listViewSmartScripts.Items.Remove(item);
         }
 
@@ -830,10 +855,14 @@ namespace SAI_Editor
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
                 return;
 
-            originalSourceType = GetSourceTypeByIndex();
+            SourceTypes newSourceType = GetSourceTypeByIndex();
+
+            originalSourceType = newSourceType;
             originalEntryOrGuid = textBoxEntryOrGuid.Text;
             listViewSmartScripts.Items.Clear();
-            SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, GetSourceTypeByIndex());
+            SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType);
+
+            checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)

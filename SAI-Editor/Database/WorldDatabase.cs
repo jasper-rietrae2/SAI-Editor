@@ -293,6 +293,21 @@ namespace SAI_Editor
             return smartScriptsClean;
         }
 
+        public async Task<List<SmartScript>> GetSmartScriptsCallingActionLists()
+        {
+            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9 ORDER BY entryorguid");
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            List<SmartScript> smartScripts = new List<SmartScript>();
+
+            foreach (DataRow row in dt.Rows)
+                smartScripts.Add(BuildSmartScript(row));
+
+            return smartScripts;
+        }
+
         private SmartScript BuildSmartScript(DataRow row)
         {
             var smartScript = new SmartScript();
