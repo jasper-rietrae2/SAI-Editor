@@ -306,6 +306,7 @@ namespace SAI_Editor
                 Settings.Default.Save();
             }
 
+            ResetNonStaticFieldsToDefault();
             Text = "SAI-Editor: " + textBoxUsername.Text + "@" + textBoxHost.Text + ":" + textBoxPort.Text;
 
             if (instant)
@@ -589,7 +590,10 @@ namespace SAI_Editor
         private void listViewSmartScripts_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count <= 0)
+            {
+                ResetNonStaticFieldsToDefault();
                 return;
+            }
 
             menuItemDeleteSelectedRow.Text = "Delete selected row";
 
@@ -950,6 +954,28 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
                 foreach (ListViewItem item in listViewSmartScripts.SelectedItems)
                     listViewSmartScripts.Items.Remove(item);
+        }
+
+        private void ResetNonStaticFieldsToDefault()
+        {
+            comboBoxEventType.SelectedIndex = 0;
+            comboBoxActionType.SelectedIndex = 0;
+            comboBoxTargetType.SelectedIndex = 0;
+            textBoxEventTypeId.Text = "0";
+            textBoxActionTypeId.Text = "0";
+            textBoxTargetTypeId.Text = "0";
+            textBoxEventChance.Text = "100";
+            textBoxEventScriptId.Text = "0";
+            textBoxLinkFrom.Text = "0";
+            textBoxLinkTo.Text = "0";
+            textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
+            textBoxEventPhasemask.Text = "0";
+            textBoxEventFlags.Text = "0";
+
+            foreach (TabPage page in tabControlParameters.TabPages)
+                foreach (Control control in page.Controls)
+                    if (control is TextBox)
+                        control.Text = "0";
         }
     }
 }

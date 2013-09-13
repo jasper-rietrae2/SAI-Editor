@@ -22,5 +22,3 @@
   - We also need to adjust the id chosen to link from/to so the script will still work
 - Allow resizing the application but just make everything scroll-able if it becomes smaller
 - Allow remote access connections
-- When selection has reset (so we unselected everything), set back all fields to their default values
-- Clear all data to their default values when the user re-connects (contracts) to login form (source_type becomes creature, events/actions/targets become 0, etc. etc.)
