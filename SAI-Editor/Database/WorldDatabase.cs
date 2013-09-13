@@ -7,14 +7,13 @@ using SAI_Editor.Database.Classes;
 
 namespace SAI_Editor
 {
-    class WorldDatabase
+    class WorldDatabase : Database<MySqlConnection, MySqlConnectionStringBuilder, MySqlParameter, MySqlCommand>
     {
         public string host { get; set; }
         public int port { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public string databaseName { get; set; }
-        public MySqlConnectionStringBuilder connectionString { get; private set; }
 
         public WorldDatabase(string host, int port, string username, string password, string databaseName)
         {
@@ -24,79 +23,14 @@ namespace SAI_Editor
             this.password = password;
             this.databaseName = databaseName;
 
-            connectionString = new MySqlConnectionStringBuilder();
-            connectionString.Server = host;
-            connectionString.Port = (uint)port;
-            connectionString.UserID = username;
-            connectionString.Password = password;
-            connectionString.Database = databaseName;
-            connectionString.AllowUserVariables = true;
-            connectionString.AllowZeroDateTime = true;
-        }
-
-        async Task ExecuteNonQuery(string nonQuery, params MySqlParameter[] parameters)
-        {
-            await Task.Run(() =>
-            {
-                using (MySqlConnection conn = new MySqlConnection(connectionString.ToString()))
-                {
-                    conn.Open();
-
-                    using (MySqlCommand cmd = new MySqlCommand(nonQuery, conn))
-                    {
-                        foreach (var param in parameters)
-                            cmd.Parameters.Add(param);
-
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    conn.Close();
-                }
-            });
-        }
-
-        async Task<DataTable> ExecuteQuery(string query, params MySqlParameter[] parameters)
-        {
-            return await Task.Run(() =>
-            {
-                using (MySqlConnection conn = new MySqlConnection(connectionString.ToString()))
-                {
-                    conn.Open();
-
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        foreach (var param in parameters)
-                            cmd.Parameters.Add(param);
-
-                        var reader = cmd.ExecuteReader();
-                        var dt = new DataTable();
-                        dt.Load(reader);
-                        conn.Close();
-                        return dt;
-                    }
-                }
-            });
-        }
-
-        async Task<object> ExecuteScalar(string query, params MySqlParameter[] parameters)
-        {
-            return await Task.Run(() =>
-            {
-                using (MySqlConnection conn = new MySqlConnection(connectionString.ToString()))
-                {
-                    conn.Open();
-
-                    using (MySqlCommand cmd = new MySqlCommand(query, conn))
-                    {
-                        foreach (var param in parameters)
-                            cmd.Parameters.Add(param);
-
-                        object returnVal = cmd.ExecuteScalar();
-                        conn.Close();
-                        return returnVal;
-                    }
-                }
-            });
+            ConnectionString = new MySqlConnectionStringBuilder();
+            ConnectionString.Server = host;
+            ConnectionString.Port = (uint)port;
+            ConnectionString.UserID = username;
+            ConnectionString.Password = password;
+            ConnectionString.Database = databaseName;
+            ConnectionString.AllowUserVariables = true;
+            ConnectionString.AllowZeroDateTime = true;
         }
 
         public async Task<int> GetCreatureIdByGuid(int guid)
