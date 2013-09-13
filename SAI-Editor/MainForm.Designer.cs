@@ -65,7 +65,7 @@
             this.buttonSearchForCreature = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
-            this.labelCreatureEntry = new System.Windows.Forms.Label();
+            this.labelEntryOrGuid = new System.Windows.Forms.Label();
             this.textBoxEntryOrGuid = new System.Windows.Forms.TextBox();
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
@@ -437,7 +437,7 @@
             this.groupBoxStaticScriptInfo.Controls.Add(this.buttonSearchForCreature);
             this.groupBoxStaticScriptInfo.Controls.Add(this.label4);
             this.groupBoxStaticScriptInfo.Controls.Add(this.comboBoxSourceType);
-            this.groupBoxStaticScriptInfo.Controls.Add(this.labelCreatureEntry);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.labelEntryOrGuid);
             this.groupBoxStaticScriptInfo.Controls.Add(this.textBoxEntryOrGuid);
             this.groupBoxStaticScriptInfo.Location = new System.Drawing.Point(12, 31);
             this.groupBoxStaticScriptInfo.Name = "groupBoxStaticScriptInfo";
@@ -493,14 +493,14 @@
             this.comboBoxSourceType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourceType_SelectedIndexChanged);
             this.comboBoxSourceType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
             // 
-            // labelCreatureEntry
+            // labelEntryOrGuid
             // 
-            this.labelCreatureEntry.AutoSize = true;
-            this.labelCreatureEntry.Location = new System.Drawing.Point(8, 22);
-            this.labelCreatureEntry.Name = "labelCreatureEntry";
-            this.labelCreatureEntry.Size = new System.Drawing.Size(76, 13);
-            this.labelCreatureEntry.TabIndex = 14;
-            this.labelCreatureEntry.Text = "Creature entry:";
+            this.labelEntryOrGuid.AutoSize = true;
+            this.labelEntryOrGuid.Location = new System.Drawing.Point(15, 22);
+            this.labelEntryOrGuid.Name = "labelEntryOrGuid";
+            this.labelEntryOrGuid.Size = new System.Drawing.Size(69, 13);
+            this.labelEntryOrGuid.TabIndex = 14;
+            this.labelEntryOrGuid.Text = "Entry or guid:";
             // 
             // textBoxEntryOrGuid
             // 
@@ -1665,7 +1665,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemSettings;
         private System.Windows.Forms.Panel panelLoginBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label labelCreatureEntry;
+        private System.Windows.Forms.Label labelEntryOrGuid;
         private System.Windows.Forms.Button buttonSearchForCreature;
         private System.Windows.Forms.GroupBox groupBoxPreferences;
         private System.Windows.Forms.CheckBox checkBox3;

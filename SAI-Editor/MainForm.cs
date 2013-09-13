@@ -480,25 +480,8 @@ namespace SAI_Editor
 
         private void comboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBoxSourceType.SelectedIndex)
-            {
-                case 0: //! Creature
-                    labelCreatureEntry.Text = "Creature entry:";
-                    buttonSearchForCreature.Enabled = true;
-                    break;
-                case 1: //! Gameobject
-                    labelCreatureEntry.Text = "Gameobject entry:";
-                    buttonSearchForCreature.Enabled = true;
-                    break;
-                case 2: //! Areatrigger
-                    labelCreatureEntry.Text = "Areatrigger entry:";
-                    buttonSearchForCreature.Enabled = false;
-                    break;
-                case 3: //! Scriptedactionlist
-                    labelCreatureEntry.Text = "Actionlist entry:";
-                    buttonSearchForCreature.Enabled = true;
-                    break;
-            }
+            //! Disable the button when source type areatrigger is selected (nyi to search for this).
+            buttonSearchForCreature.Enabled = comboBoxSourceType.SelectedIndex != 2;
         }
 
         private async void SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
@@ -555,51 +538,6 @@ namespace SAI_Editor
                         timedActionlistsOrEntries = timedActionListOrEntries.entries;
                         sourceTypeOfEntry = timedActionListOrEntries.sourceTypeOfEntry;
                     }
-
-                    //{
-                    //    if (sourceType == SourceTypes.SourceTypeScriptedActionlist)
-                    //    {
-                    //        switch ((SmartAction)smartScript.action_type)
-                    //        {
-                    //            case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
-                    //            case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
-                    //            case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
-                    //                timedActionlistsOrEntries.Add(smartScript.entryorguid.ToString());
-                    //                sourceTypeOfEntry = (SourceTypes)smartScript.source_type;
-                    //                break;
-                    //        }
-                    //    }
-                    //    else
-                    //    {
-                    //        switch ((SmartAction)smartScript.action_type)
-                    //        {
-                    //            case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
-                    //                timedActionlistsOrEntries.Add(smartScript.action_param1.ToString());
-                    //                break;
-                    //            case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
-                    //                timedActionlistsOrEntries.Add(smartScript.action_param1.ToString());
-                    //                timedActionlistsOrEntries.Add(smartScript.action_param2.ToString());
-
-                    //                if (smartScript.action_param3 > 0)
-                    //                    timedActionlistsOrEntries.Add(smartScript.action_param3.ToString());
-
-                    //                if (smartScript.action_param4 > 0)
-                    //                    timedActionlistsOrEntries.Add(smartScript.action_param4.ToString());
-
-                    //                if (smartScript.action_param5 > 0)
-                    //                    timedActionlistsOrEntries.Add(smartScript.action_param5.ToString());
-
-                    //                if (smartScript.action_param6 > 0)
-                    //                    timedActionlistsOrEntries.Add(smartScript.action_param6.ToString());
-
-                    //                break;
-                    //            case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
-                    //                for (int i = smartScript.action_param1; i <= smartScript.action_param2; ++i)
-                    //                    timedActionlistsOrEntries.Add(i.ToString());
-                    //                break;
-                    //        }
-                    //    }
-                    //}
 
                     listViewSmartScripts.Items.Add(listViewItem);
                 }
