@@ -64,7 +64,7 @@
             // 
             // buttonExitSettings
             // 
-            this.buttonExitSettings.Location = new System.Drawing.Point(188, 282);
+            this.buttonExitSettings.Location = new System.Drawing.Point(191, 282);
             this.buttonExitSettings.Name = "buttonExitSettings";
             this.buttonExitSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonExitSettings.TabIndex = 9;
@@ -74,7 +74,7 @@
             // 
             // buttonSaveSettings
             // 
-            this.buttonSaveSettings.Location = new System.Drawing.Point(8, 282);
+            this.buttonSaveSettings.Location = new System.Drawing.Point(11, 282);
             this.buttonSaveSettings.Name = "buttonSaveSettings";
             this.buttonSaveSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveSettings.TabIndex = 7;
@@ -324,7 +324,7 @@
             // 
             // buttonClearSettings
             // 
-            this.buttonClearSettings.Location = new System.Drawing.Point(98, 282);
+            this.buttonClearSettings.Location = new System.Drawing.Point(101, 282);
             this.buttonClearSettings.Name = "buttonClearSettings";
             this.buttonClearSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonClearSettings.TabIndex = 8;

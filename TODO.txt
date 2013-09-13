@@ -1,29 +1,27 @@
-- Functionality to check for 'wrong' code; reads selected line for stuff like unused parameters having values, wrong comments, incorrect use of parameters, etc. etc;
-- Checkbox if the user wants to fill in smart_scripts.id gaps;
-- Read DBCs for areatriggers and implement areatrigger searching in the search form;
-- Implement scripted actionlist searching in the search form;
-- Possibly take the workspace-idea by Event Horizon;
-- Checkbox to only show event_types and action_types for the chosen source_type (so for gameobjects we would hide SMART_EVENT_SPELLHIT, etc.);
-- Change the labels of the parameter fields based on the chosen event_type, action_type and target_type (SMART_EVENT_SPELLHIT -> first param = spellid);
-- Possibly pick another logo, this is fugly and boring;
-- Option to reset settings to default;
-- Can't use copy or paste in the numeric-only fields (entry, type id, parameters, etc.) (numericField_KeyPress);
-- The label saying 'Creature entry:' by default (changes to 'Gameobject/Areatrigger/Actionlist entry:' based on chosen source type) should say 'Creature guid:' if a guid is selected;
-- Use SQLite to store contents of Spell.dbc and Areatrigger.dbc as well as information on all event, action and target parameters (one for each id) (information like tooltips, meaning of the parameter, amount of parameters, etc.);
-- Clear all data to their default values when the user re-connects (contracts) to login form (source_type becomes creature, events/actions/targets become 0, etc. etc.);
-- Make the column sorter work with numbers as well;
-- Find a good-looking way to display _ALL_ info in the listview without having to scroll;
-- Make the application multi-platform supported;
-- Create a checkbox to only show 'basic' data in the listview (entryorguid, id, event_type, action_type, target_type, comment);
-  - Also implement this in the SearchForLink form;
-- Implement the 'Link from' field;
-- The selected item looks as if it is no longer selected once the user uses a button to open a new form, like event_flags;
+- Functionality to check for 'wrong' code reads selected line for stuff like unused parameters having values, wrong comments, incorrect use of parameters, etc. etc
+- Checkbox if the user wants to fill in smart_scripts.id gaps
+- Read DBCs for areatriggers and implement areatrigger searching in the search form
+- Possibly take the workspace-idea by Event Horizon
+- Checkbox to only show event_types and action_types for the chosen source_type (so for gameobjects we would hide SMART_EVENT_SPELLHIT, etc.)
+- Change the labels of the parameter fields based on the chosen event_type, action_type and target_type (SMART_EVENT_SPELLHIT -> first param = spellid)
+- Possibly pick another logo, this is fugly and boring
+- Option to reset settings to default
+- Can't use copy or paste in the numeric-only fields (entry, type id, parameters, etc.) (numericField_KeyPress)
+- The label saying 'Creature entry:' by default (changes to 'Gameobject/Areatrigger/Actionlist entry:' based on chosen source type) should say 'Creature guid:' if a guid is selected
+- Use SQLite to store contents of Spell.dbc and Areatrigger.dbc as well as information on all event, action and target parameters (one for each id) (information like tooltips, meaning of the parameter, amount of parameters, etc.)
+- Make the column sorter work with numbers as well
+- Find a good-looking way to display _ALL_ info in the listview without having to scroll (is there any?)
+- Make the application support more platforms than just Windows
+- Create a checkbox to only show 'basic' data in the listview (entryorguid, id, event_type, action_type, target_type, comment)
+  - Also implement this in the SearchForLink form
+- Implement the 'Link from' field
+- The selected item looks as if it is no longer selected once the user uses a button to open a new form, like event_flags
 - (Requires to be further into finishing the application) Improve implementation of the SearchForLinkForm to do the following:
-  - Only allow to link to lines with a higher smart_scripts.id;
-    - This could possibly also be implemented as a feature to refactor the SAI of the creature with the id's to be re-ordered (posibly based on a YesNo messagebox question);
-  - We also need to adjust the id chosen to link from/to so the script will still work;
-- Allow resizing the application but just make everything scroll-able if it becomes smaller;
-- Allow remote access connections;
-- Create a class to easily execute queries without having use try-catch blocks all over the place;
-- If the results contain only actionlist entries (so for example when searched for a scripted actionlist), change the 'List actionlists too' to 'List entries too' (to list source of the script);
-- When selection has reset (so we unselected everything), set back all fields to their default values;
+  - Only allow to link to lines with a higher smart_scripts.id
+    - This could possibly also be implemented as a feature to refactor the SAI of the creature with the id's to be re-ordered (posibly based on a YesNo messagebox question)
+  - We also need to adjust the id chosen to link from/to so the script will still work
+- Allow resizing the application but just make everything scroll-able if it becomes smaller
+- Allow remote access connections
+- If the results contain only actionlist entries (so for example when searched for a scripted actionlist), change the 'List actionlists too' to 'List entries too' (to list source of the script)
+- When selection has reset (so we unselected everything), set back all fields to their default values
+- Clear all data to their default values when the user re-connects (contracts) to login form (source_type becomes creature, events/actions/targets become 0, etc. etc.)
