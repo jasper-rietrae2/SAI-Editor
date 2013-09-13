@@ -1,22 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3902406E-07F0-4517-A76C-891588410C6C}</ProjectGuid>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{31DEB54A-6895-49E8-BFA4-DE209642F2A7}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SAI_Editor</RootNamespace>
     <AssemblyName>SAI-Editor</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -25,8 +22,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,16 +32,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data">
-      <HintPath>..\..\SAI-Editor\SAI-Editor\Resources\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MySql.Data.6.7.4\lib\net40\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SQLite">
-      <HintPath>..\packages\System.Data.SQLite.1.0.88.0\lib\net45\System.Data.SQLite.dll</HintPath>
+    <Reference Include="System.Data.SQLite, Version=1.0.88.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.MSIL.1.0.88.0\lib\net45\System.Data.SQLite.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data.SQLite.Linq">
-      <HintPath>..\packages\System.Data.SQLite.1.0.88.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.88.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.MSIL.1.0.88.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,6 +62,8 @@
     </Compile>
     <Compile Include="Database\Classes\SmartScript.cs" />
     <Compile Include="Database\Database.cs" />
+    <Compile Include="Database\SQLiteDatabase.cs" />
+    <Compile Include="Database\WorldDatabase.cs" />
     <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -90,13 +90,13 @@
     <Compile Include="SearchForLinkForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForLinkForm.Designer.cs">
+    <Compile Include="SearchForLinkForm.designer.cs">
       <DependentUpon>SearchForLinkForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SelectDatabaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SelectDatabaseForm.Designer.cs">
+    <Compile Include="SelectDatabaseForm.designer.cs">
       <DependentUpon>SelectDatabaseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SettingsForm.cs">
@@ -105,7 +105,6 @@
     <Compile Include="SettingsForm.designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database\WorldDatabase.cs" />
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,7 +122,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SearchForEntryForm.resx">
       <DependentUpon>SearchForEntryForm.cs</DependentUpon>
@@ -149,39 +147,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon_add.ico" />
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icon_add_2.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon_error.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon_info.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon_load_script.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon_remove.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon_warning.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon_write.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\settings_icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="x64\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="x86\SQLite.Interop.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\1378477411_33795.ico" />
+    <Content Include="Resources\icon_add.ico" />
+    <Content Include="Resources\icon_add_2.ico" />
+    <Content Include="Resources\icon_error.ico" />
+    <Content Include="Resources\icon_info.ico" />
+    <Content Include="Resources\icon_load_script.png" />
+    <Content Include="Resources\icon_remove.ico" />
+    <Content Include="Resources\icon_warning.ico" />
+    <Content Include="Resources\icon_write.ico" />
+    <Content Include="Resources\MySql.Data.dll" />
+    <Content Include="Resources\settings_icon.ico" />
+    <Content Include="Resources\SQLite.Designer.dll" />
+    <Content Include="Resources\System.Data.SQLite.dll" />
+    <Content Include="Resources\System.Data.SQLite.Linq.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
