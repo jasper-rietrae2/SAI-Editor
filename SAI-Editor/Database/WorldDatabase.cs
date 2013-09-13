@@ -1,38 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Data;
-using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using MySql.Data.Types;
 using SAI_Editor.Database.Classes;
 
 namespace SAI_Editor
 {
     class WorldDatabase
     {
-        public string Host { get; set; }
-        public int Port { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string DatabaseName { get; set; }
+        public string host { get; set; }
+        public int port { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public string databaseName { get; set; }
         public MySqlConnectionStringBuilder connectionString { get; private set; }
 
-        public WorldDatabase(string serverHost, int port, string username, string password, string dbName)
+        public WorldDatabase(string host, int port, string username, string password, string databaseName)
         {
-            Host = serverHost;
-            Port = port;
-            Username = username;
-            Password = password;
-            DatabaseName = dbName;
+            this.host = host;
+            this.port = port;
+            this.username = username;
+            this.password = password;
+            this.databaseName = databaseName;
 
             connectionString = new MySqlConnectionStringBuilder();
-            connectionString.Server = serverHost;
+            connectionString.Server = host;
             connectionString.Port = (uint)port;
             connectionString.UserID = username;
             connectionString.Password = password;
-            connectionString.Database = dbName;
+            connectionString.Database = databaseName;
             connectionString.AllowUserVariables = true;
             connectionString.AllowZeroDateTime = true;
         }

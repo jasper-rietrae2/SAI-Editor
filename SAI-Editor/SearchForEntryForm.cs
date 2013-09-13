@@ -281,9 +281,6 @@ namespace SAI_Editor
                                 }
                             }
                         }
-
-                        SetEnabledOfControl(buttonSearch, true);
-                        SetEnabledOfControl(buttonStopSearching, false);
                     }
                     catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
                     {
@@ -295,6 +292,11 @@ namespace SAI_Editor
                         SetEnabledOfControl(buttonSearch, true);
                         SetEnabledOfControl(buttonStopSearching, false);
                         MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        SetEnabledOfControl(buttonSearch, true);
+                        SetEnabledOfControl(buttonStopSearching, false);
                     }
 
                     return; //! We did everything in the switch block (we only do this for actionlists)
