@@ -90,8 +90,8 @@
             this.comboBoxSearchType.FormattingEnabled = true;
             this.comboBoxSearchType.Items.AddRange(new object[] {
             "Creature entry",
-            "Creature entry",
             "Creature name",
+            "Creature guid",
             "Gameobject entry",
             "Gameobject name",
             "Gameobject guid",
