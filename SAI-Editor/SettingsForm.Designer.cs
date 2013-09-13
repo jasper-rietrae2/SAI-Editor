@@ -32,6 +32,7 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxChangeStaticInfo = new System.Windows.Forms.CheckBox();
             this.checkBoxPromptExecuteQuery = new System.Windows.Forms.CheckBox();
             this.textBoxAnimationSpeed = new System.Windows.Forms.TextBox();
             this.labelAnimationSpeed = new System.Windows.Forms.Label();
@@ -55,7 +56,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonClearSettings = new System.Windows.Forms.Button();
-            this.checkBoxChangeStaticInfo = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -100,6 +100,18 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxChangeStaticInfo
+            // 
+            this.checkBoxChangeStaticInfo.AutoSize = true;
+            this.checkBoxChangeStaticInfo.Checked = true;
+            this.checkBoxChangeStaticInfo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxChangeStaticInfo.Location = new System.Drawing.Point(6, 121);
+            this.checkBoxChangeStaticInfo.Name = "checkBoxChangeStaticInfo";
+            this.checkBoxChangeStaticInfo.Size = new System.Drawing.Size(219, 17);
+            this.checkBoxChangeStaticInfo.TabIndex = 11;
+            this.checkBoxChangeStaticInfo.Text = "Change static script information on select";
+            this.checkBoxChangeStaticInfo.UseVisualStyleBackColor = true;
             // 
             // checkBoxPromptExecuteQuery
             // 
@@ -215,7 +227,7 @@
             this.tabPageConnection.Controls.Add(this.label7);
             this.tabPageConnection.Location = new System.Drawing.Point(4, 22);
             this.tabPageConnection.Name = "tabPageConnection";
-            this.tabPageConnection.Size = new System.Drawing.Size(247, 187);
+            this.tabPageConnection.Size = new System.Drawing.Size(247, 242);
             this.tabPageConnection.TabIndex = 1;
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
@@ -332,18 +344,6 @@
             this.buttonClearSettings.UseVisualStyleBackColor = true;
             this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
-            // checkBoxChangeStaticInfo
-            // 
-            this.checkBoxChangeStaticInfo.AutoSize = true;
-            this.checkBoxChangeStaticInfo.Checked = true;
-            this.checkBoxChangeStaticInfo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxChangeStaticInfo.Location = new System.Drawing.Point(6, 121);
-            this.checkBoxChangeStaticInfo.Name = "checkBoxChangeStaticInfo";
-            this.checkBoxChangeStaticInfo.Size = new System.Drawing.Size(219, 17);
-            this.checkBoxChangeStaticInfo.TabIndex = 11;
-            this.checkBoxChangeStaticInfo.Text = "Change static script information on select";
-            this.checkBoxChangeStaticInfo.UseVisualStyleBackColor = true;
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -358,6 +358,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "SettingsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SAI-Editor Settings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SettingsForm_FormClosed);
             this.Load += new System.EventHandler(this.SettingsForm_Load);

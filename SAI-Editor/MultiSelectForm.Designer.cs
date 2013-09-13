@@ -79,6 +79,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "MultiSelectForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select phase";
             this.Load += new System.EventHandler(this.MultiSelectForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MultiSelectForm_KeyDown);

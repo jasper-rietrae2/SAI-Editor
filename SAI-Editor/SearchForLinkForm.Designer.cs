@@ -82,6 +82,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "SearchForLinkForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Search for a link";
             this.Load += new System.EventHandler(this.SearchForLinkForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchForLinkForm_KeyDown);
