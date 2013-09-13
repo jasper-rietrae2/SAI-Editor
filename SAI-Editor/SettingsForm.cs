@@ -29,6 +29,7 @@ namespace SAI_Editor
             checkBoxPromptToQuit.Checked = Settings.Default.PromptToQuit;
             checkBoxHidePass.Checked = Settings.Default.HidePass;
             checkBoxPromptExecuteQuery.Checked = Settings.Default.PromptExecuteQuery;
+            checkBoxChangeStaticInfo.Checked = Settings.Default.ChangeStaticInfo;
 
             textBoxAnimationSpeed.Text = Settings.Default.AnimationSpeed.ToString();
 
@@ -44,6 +45,12 @@ namespace SAI_Editor
 
         private void SaveSettings()
         {
+            if (checkBoxChangeStaticInfo.Checked != Settings.Default.ChangeStaticInfo)
+            {
+                ((MainForm)Owner).textBoxEntryOrGuid.Text = ((MainForm)Owner).originalEntryOrGuid;
+                ((MainForm)Owner).comboBoxSourceType.SelectedIndex = ((MainForm)Owner).GetIndexBySourceType(((MainForm)Owner).originalSourceType);
+            }
+
             Settings.Default.Host = textBoxHost.Text;
             Settings.Default.User = textBoxUsername.Text;
             Settings.Default.Password = textBoxPassword.Text;
@@ -57,6 +64,7 @@ namespace SAI_Editor
             Settings.Default.HidePass = checkBoxHidePass.Checked;
             Settings.Default.AnimationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
             Settings.Default.PromptExecuteQuery = checkBoxPromptExecuteQuery.Checked;
+            Settings.Default.ChangeStaticInfo = checkBoxChangeStaticInfo.Checked;
             Settings.Default.Save();
 
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
@@ -98,7 +106,8 @@ namespace SAI_Editor
                 textBoxPort.Text == Settings.Default.Port.ToString() && checkBoxAutoConnect.Checked == Settings.Default.AutoConnect &&
                 checkBoxInstantExpand.Checked == Settings.Default.InstantExpand && checkBoxLoadScriptInstantly.Checked == Settings.Default.LoadScriptInstantly &&
                 checkBoxHidePass.Checked == Settings.Default.HidePass && checkBoxPromptToQuit.Checked == Settings.Default.PromptToQuit &&
-                textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() && checkBoxPromptExecuteQuery.Checked == Settings.Default.PromptExecuteQuery)
+                textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() && checkBoxPromptExecuteQuery.Checked == Settings.Default.PromptExecuteQuery &&
+                checkBoxChangeStaticInfo.Checked == Settings.Default.ChangeStaticInfo)
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -119,6 +128,7 @@ namespace SAI_Editor
                     textBoxAnimationSpeed.Text = "10";
                     trackBarAnimationSpeed.Value = 10;
                     checkBoxPromptExecuteQuery.Checked = true;
+                    checkBoxChangeStaticInfo.Checked = true;
                     break;
                 case 1: // ! 'Connection' tab
                     textBoxHost.Text = "";

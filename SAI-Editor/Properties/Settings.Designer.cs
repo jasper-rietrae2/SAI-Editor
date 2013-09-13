@@ -178,5 +178,17 @@ namespace SAI_Editor.Properties {
                 this["PromptExecuteQuery"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ChangeStaticInfo {
+            get {
+                return ((bool)(this["ChangeStaticInfo"]));
+            }
+            set {
+                this["ChangeStaticInfo"] = value;
+            }
+        }
     }
 }

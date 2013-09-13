@@ -51,8 +51,8 @@ namespace SAI_Editor
         private int WidthToExpandTo = (int)FormSizes.WidthToExpandTo, HeightToExpandTo = (int)FormSizes.HeightToExpandTo;
         public int animationSpeed = 5;
         private FormState formState = FormState.FormStateLogin;
-        private SourceTypes originalSourceType;
-        private String originalEntryOrGuid;
+        public SourceTypes originalSourceType = SourceTypes.SourceTypeCreature;
+        public String originalEntryOrGuid = String.Empty;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
         public MainForm()
@@ -643,21 +643,24 @@ namespace SAI_Editor
         {
             ListViewItem.ListViewSubItemCollection selectedItem = listViewSmartScripts.SelectedItems[0].SubItems;
 
-            textBoxEntryOrGuid.Text = selectedItem[0].Text;
-
-            switch (Convert.ToInt32(selectedItem[1].Text))
+            if (Settings.Default.ChangeStaticInfo)
             {
-                case 0: //! Creature
-                case 1: //! Gameobject
-                case 2: //! Areatrigger
-                    comboBoxSourceType.SelectedIndex = Convert.ToInt32(selectedItem[1].Text);
-                    break;
-                case 9: //! Actionlist
-                    comboBoxSourceType.SelectedIndex = 3;
-                    break;
-                default:
-                    MessageBox.Show(String.Format("Unknown/unsupported source type found ({0})", selectedItem[0].Text), "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                textBoxEntryOrGuid.Text = selectedItem[0].Text;
+
+                switch (Convert.ToInt32(selectedItem[1].Text))
+                {
+                    case 0: //! Creature
+                    case 1: //! Gameobject
+                    case 2: //! Areatrigger
+                        comboBoxSourceType.SelectedIndex = Convert.ToInt32(selectedItem[1].Text);
+                        break;
+                    case 9: //! Actionlist
+                        comboBoxSourceType.SelectedIndex = 3;
+                        break;
+                    default:
+                        MessageBox.Show(String.Format("Unknown/unsupported source type found ({0})", selectedItem[0].Text), "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                }
             }
 
             textBoxEventScriptId.Text = selectedItem[2].Text;
@@ -792,7 +795,7 @@ namespace SAI_Editor
                     listViewSmartScripts.Items.Remove(item);
         }
 
-        private SourceTypes GetSourceTypeByIndex()
+        public SourceTypes GetSourceTypeByIndex()
         {
             switch (comboBoxSourceType.SelectedIndex)
             {
@@ -804,6 +807,21 @@ namespace SAI_Editor
                     return SourceTypes.SourceTypeScriptedActionlist;
                 default:
                     return SourceTypes.SourceTypeCreature; //! Default...
+            }
+        }
+
+        public int GetIndexBySourceType(SourceTypes sourceType)
+        {
+            switch (sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                case SourceTypes.SourceTypeGameobject:
+                case SourceTypes.SourceTypeAreaTrigger:
+                    return (int)sourceType;
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    return 3;
+                default:
+                    return -1;
             }
         }
 
