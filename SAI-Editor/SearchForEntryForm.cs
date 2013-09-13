@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Globalization;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Threading;
 using SAI_Editor.Properties;
@@ -516,6 +518,20 @@ namespace SAI_Editor
         {
             //! Disable the 'has ainame' checkbox when the user selected actionlist for search type
             checkBoxHasAiName.Enabled = comboBoxSearchType.SelectedIndex != 6;
+
+            switch (comboBoxSearchType.SelectedIndex)
+            {
+                case 0: //! Creature entry
+                case 2: //! Creature guid
+                case 3: //! Gameobject entry
+                case 5: //! Gameobject guid
+                case 6: //! Actionlist
+                    textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");;
+                    break;
+                case 1: //! Creature name
+                case 4: //! Gameobject name
+                    break;
+            }
         }
 
         private void SearchForEntryForm_FormClosing(object sender, FormClosingEventArgs e)

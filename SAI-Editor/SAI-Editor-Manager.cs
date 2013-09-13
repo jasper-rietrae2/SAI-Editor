@@ -32,5 +32,19 @@ namespace SAI_Editor
         {
             worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, Settings.Default.Password, Settings.Default.Database);
         }
+
+        public bool IsNumericString(string str)
+        {
+            try
+            {
+                Int32 strInt = Int32.Parse(str);
+            }
+            catch (FormatException e)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
