@@ -14,6 +14,13 @@ namespace SAI_Editor
         public SourceTypes sourceTypeOfEntry;
     };
 
+    public enum ScriptTypeId
+    {
+        ScriptTypeEvent,
+        ScriptTypeAction,
+        ScriptTypeTarget,
+    };
+
     class SAI_Editor_Manager
     {
         public WorldDatabase worldDatabase { get; set; }
