@@ -11,9 +11,7 @@ using System.Windows.Forms;
 
 namespace SAI_Editor
 {
-    public class Database<Connection, StrBuilder, Parameter, Command> 
-        where Connection : DbConnection
-        where Command : DbCommand
+    public class Database<Connection, StrBuilder, Parameter, Command> where Connection : DbConnection where Command : DbCommand
     {
         public StrBuilder ConnectionString { get; set; }
 
@@ -82,6 +80,5 @@ namespace SAI_Editor
                 }
             });
         }
-
     }
 }

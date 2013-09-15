@@ -17,6 +17,7 @@ namespace SAI_Editor
     class SAI_Editor_Manager
     {
         public WorldDatabase worldDatabase { get; set; }
+        public SQLiteDatabase sqliteDatabase { get; set; }
 
         private static object _lock = new object();
         private static SAI_Editor_Manager _instance;
@@ -38,6 +39,7 @@ namespace SAI_Editor
         public SAI_Editor_Manager()
         {
             worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, Settings.Default.Password, Settings.Default.Database);
+            sqliteDatabase = new SQLiteDatabase("parameter_info.db");
         }
 
         public bool IsNumericString(string str)
