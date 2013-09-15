@@ -42,7 +42,6 @@ namespace SAI_Editor
             {
                 using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
                 {
-                    MessageBox.Show((conn != null).ToString());
                     conn.Open();
 
                     using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
