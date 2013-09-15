@@ -9,20 +9,8 @@ namespace SAI_Editor
 {
     class WorldDatabase : Database<MySqlConnection, MySqlConnectionStringBuilder, MySqlParameter, MySqlCommand>
     {
-        public string host { get; set; }
-        public int port { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string databaseName { get; set; }
-
         public WorldDatabase(string host, int port, string username, string password, string databaseName)
         {
-            this.host = host;
-            this.port = port;
-            this.username = username;
-            this.password = password;
-            this.databaseName = databaseName;
-
             ConnectionString = new MySqlConnectionStringBuilder();
             ConnectionString.Server = host;
             ConnectionString.Port = (uint)port;
