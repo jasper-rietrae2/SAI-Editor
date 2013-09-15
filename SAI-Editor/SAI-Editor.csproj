@@ -62,9 +62,10 @@
     <Compile Include="AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database\Classes\ParameterInfo.cs" />
-    <Compile Include="Database\Classes\ScriptTypeInformation.cs" />
+    <Compile Include="Database\Classes\ActionTypeInformation.cs" />
+    <Compile Include="Database\Classes\EventTypeInformation.cs" />
     <Compile Include="Database\Classes\SmartScript.cs" />
+    <Compile Include="Database\Classes\TargetTypeInformation.cs" />
     <Compile Include="Database\Database.cs" />
     <Compile Include="Database\SQLiteDatabase.cs" />
     <Compile Include="Database\WorldDatabase.cs" />

@@ -15,115 +15,81 @@ namespace SAI_Editor
             ConnectionString.DataSource = file;
         }
 
-        public async Task<ParameterInfo> GetParameterInfoById(int id)
+        public async Task<EventTypeInformation> GetEventTypeInformationById(int event_type)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM parameter_info WHERE id = @id", new SQLiteParameter("@id", id));
+            DataTable dt = await ExecuteQuery("SELECT * FROM event_type_information WHERE event_type = @event_type", new SQLiteParameter("@event_type", event_type));
 
             if (dt.Rows.Count == 0)
                 return null;
 
-            return BuildParameterInfo(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
+            return BuildEventTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
         }
 
-        public async Task<ScriptTypeInformation> GetScriptTypeInformationByParameterInfoId(int parameterInfoId)
+        public async Task<ActionTypeInformation> GetActionTypeInformationById(int action_type)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM script_type_information WHERE parameterInfoId = @parameterInfoId", new SQLiteParameter("@parameterInfoId", parameterInfoId));
+            DataTable dt = await ExecuteQuery("SELECT * FROM action_type_information WHERE action_type = @action_type", new SQLiteParameter("@action_type", action_type));
 
             if (dt.Rows.Count == 0)
                 return null;
 
-            return BuildScriptTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
+            return BuildActionTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
         }
 
-        public async Task<List<ScriptTypeInformation>> GetScriptTypeInformationsByTypeId(ScriptTypeId scriptTypeId)
+        public async Task<TargetTypeInformation> GetTargetTypeInformationById(int target_type)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM script_type_information WHERE scriptTypeId = @scriptTypeId", new SQLiteParameter("@scriptTypeId", scriptTypeId));
+            DataTable dt = await ExecuteQuery("SELECT * FROM target_type_information WHERE target_type = @target_type", new SQLiteParameter("@target_type", target_type));
 
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<ScriptTypeInformation> scriptTypeInformation = new List<ScriptTypeInformation>();
-
-            foreach (DataRow row in dt.Rows)
-                scriptTypeInformation.Add(BuildScriptTypeInformation(row));
-
-            return scriptTypeInformation;
+            return BuildTargetTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
         }
 
-        public async Task<string> GetTooltipByParameterId(int parameterInfoId)
+        private EventTypeInformation BuildEventTypeInformation(DataRow row)
         {
-            DataTable dt = await ExecuteQuery("SELECT toolTip FROM script_type_information WHERE parameterInfoId = @parameterInfoId", new SQLiteParameter("@parameterInfoId", parameterInfoId));
-
-            if (dt.Rows.Count == 0)
-                return String.Empty;
-
-            return dt.Rows[0]["toolTip"].ToString();
+            var eventTypeInformation = new EventTypeInformation();
+            eventTypeInformation.event_type = row["event_type"] != DBNull.Value ? Convert.ToInt32(row["event_type"]) : -1;
+            eventTypeInformation.parameterString1 = row["parameterString1"] != DBNull.Value ? (string)row["parameterString1"] : String.Empty;
+            eventTypeInformation.parameterString2 = row["parameterString2"] != DBNull.Value ? (string)row["parameterString2"] : String.Empty;
+            eventTypeInformation.parameterString3 = row["parameterString3"] != DBNull.Value ? (string)row["parameterString3"] : String.Empty;
+            eventTypeInformation.parameterString4 = row["parameterString4"] != DBNull.Value ? (string)row["parameterString4"] : String.Empty;
+            eventTypeInformation.parameterTooltip1 = row["parameterTooltip1"] != DBNull.Value ? (string)row["parameterTooltip1"] : String.Empty;
+            eventTypeInformation.parameterTooltip2 = row["parameterTooltip2"] != DBNull.Value ? (string)row["parameterTooltip2"] : String.Empty;
+            eventTypeInformation.parameterTooltip3 = row["parameterTooltip3"] != DBNull.Value ? (string)row["parameterTooltip3"] : String.Empty;
+            eventTypeInformation.parameterTooltip4 = row["parameterTooltip4"] != DBNull.Value ? (string)row["parameterTooltip4"] : String.Empty;
+            return eventTypeInformation;
         }
 
-        public async Task<int[]> GetParametersByParameterId(int id)
+        private ActionTypeInformation BuildActionTypeInformation(DataRow row)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM parameter_info WHERE id = @id", new SQLiteParameter("@id", id));
-
-            if (dt.Rows.Count == 0)
-                return null;
-
-            int[] parameters = new int[6];
-            parameters[0] = dt.Rows[0]["param1"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param1"]) : 0;
-            parameters[0] = dt.Rows[0]["param2"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param2"]) : 0;
-            parameters[0] = dt.Rows[0]["param3"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param3"]) : 0;
-            parameters[0] = dt.Rows[0]["param4"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param4"]) : 0;
-            parameters[0] = dt.Rows[0]["param5"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param5"]) : 0;
-            parameters[0] = dt.Rows[0]["param6"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param6"]) : 0;
-            return parameters;
+            var actionTypeInformation = new ActionTypeInformation();
+            actionTypeInformation.action_type = row["action_type"] != DBNull.Value ? Convert.ToInt32(row["action_type"]) : -1;
+            actionTypeInformation.parameterString1 = row["parameterString1"] != DBNull.Value ? (string)row["parameterString1"] : String.Empty;
+            actionTypeInformation.parameterString2 = row["parameterString2"] != DBNull.Value ? (string)row["parameterString2"] : String.Empty;
+            actionTypeInformation.parameterString3 = row["parameterString3"] != DBNull.Value ? (string)row["parameterString3"] : String.Empty;
+            actionTypeInformation.parameterString4 = row["parameterString4"] != DBNull.Value ? (string)row["parameterString4"] : String.Empty;
+            actionTypeInformation.parameterString5 = row["parameterString5"] != DBNull.Value ? (string)row["parameterString5"] : String.Empty;
+            actionTypeInformation.parameterString6 = row["parameterString6"] != DBNull.Value ? (string)row["parameterString6"] : String.Empty;
+            actionTypeInformation.parameterTooltip1 = row["parameterTooltip1"] != DBNull.Value ? (string)row["parameterTooltip1"] : String.Empty;
+            actionTypeInformation.parameterTooltip2 = row["parameterTooltip2"] != DBNull.Value ? (string)row["parameterTooltip2"] : String.Empty;
+            actionTypeInformation.parameterTooltip3 = row["parameterTooltip3"] != DBNull.Value ? (string)row["parameterTooltip3"] : String.Empty;
+            actionTypeInformation.parameterTooltip4 = row["parameterTooltip4"] != DBNull.Value ? (string)row["parameterTooltip4"] : String.Empty;
+            actionTypeInformation.parameterTooltip5 = row["parameterTooltip5"] != DBNull.Value ? (string)row["parameterTooltip5"] : String.Empty;
+            actionTypeInformation.parameterTooltip6 = row["parameterTooltip6"] != DBNull.Value ? (string)row["parameterTooltip6"] : String.Empty;
+            return actionTypeInformation;
         }
 
-        public async Task<int> GetParameterByParameterId(int id, int param)
+        private TargetTypeInformation BuildTargetTypeInformation(DataRow row)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM parameter_info WHERE id = @id", new SQLiteParameter("@id", id));
-
-            if (dt.Rows.Count == 0)
-                return 0;
-
-            switch (param)
-            {
-                case 1:
-                    return dt.Rows[0]["param1"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param1"]) : 0;
-                case 2:
-                    return dt.Rows[0]["param2"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param2"]) : 0;
-                case 3:
-                    return dt.Rows[0]["param3"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param3"]) : 0;
-                case 4:
-                    return dt.Rows[0]["param4"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param4"]) : 0;
-                case 5:
-                    return dt.Rows[0]["param5"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param5"]) : 0;
-                case 6:
-                    return dt.Rows[0]["param6"] != DBNull.Value ? Convert.ToInt32(dt.Rows[0]["param6"]) : 0;
-            }
-
-            return 0;
-        }
-
-        private ParameterInfo BuildParameterInfo(DataRow row)
-        {
-            var parameterInfo = new ParameterInfo();
-            parameterInfo.id = row["id"] != DBNull.Value ? Convert.ToInt32(row["id"]) : -1;
-            parameterInfo.param1 = row["param1"] != DBNull.Value ? Convert.ToInt32(row["param1"]) : 0;
-            parameterInfo.param2 = row["param2"] != DBNull.Value ? Convert.ToInt32(row["param2"]) : 0;
-            parameterInfo.param3 = row["param3"] != DBNull.Value ? Convert.ToInt32(row["param3"]) : 0;
-            parameterInfo.param4 = row["param4"] != DBNull.Value ? Convert.ToInt32(row["param4"]) : 0;
-            parameterInfo.param5 = row["param5"] != DBNull.Value ? Convert.ToInt32(row["param5"]) : 0;
-            parameterInfo.param6 = row["param6"] != DBNull.Value ? Convert.ToInt32(row["param6"]) : 0;
-            return parameterInfo;
-        }
-
-        private ScriptTypeInformation BuildScriptTypeInformation(DataRow row)
-        {
-            var scriptTypeInformation = new ScriptTypeInformation();
-            scriptTypeInformation.parameterInfoId = row["parameterInfoId"] != DBNull.Value ? Convert.ToInt32(row["parameterInfoId"]) : -1;
-            scriptTypeInformation.scriptType = row["scriptType"] != DBNull.Value ? Convert.ToInt32(row["scriptType"]) : 0;
-            scriptTypeInformation.id = row["id"] != DBNull.Value ? Convert.ToInt32(row["id"]) : 0;
-            scriptTypeInformation.toolTip = row["toolTip"] != DBNull.Value ? (string)row["toolTip"] : String.Empty;
-            return scriptTypeInformation;
+            var targetTypeInformation = new TargetTypeInformation();
+            targetTypeInformation.target_type = row["target_type"] != DBNull.Value ? Convert.ToInt32(row["target_type"]) : -1;
+            targetTypeInformation.parameterString1 = row["parameterString1"] != DBNull.Value ? (string)row["parameterString1"] : String.Empty;
+            targetTypeInformation.parameterString2 = row["parameterString2"] != DBNull.Value ? (string)row["parameterString2"] : String.Empty;
+            targetTypeInformation.parameterString3 = row["parameterString3"] != DBNull.Value ? (string)row["parameterString3"] : String.Empty;
+            targetTypeInformation.parameterTooltip1 = row["parameterTooltip1"] != DBNull.Value ? (string)row["parameterTooltip1"] : String.Empty;
+            targetTypeInformation.parameterTooltip2 = row["parameterTooltip2"] != DBNull.Value ? (string)row["parameterTooltip2"] : String.Empty;
+            targetTypeInformation.parameterTooltip3 = row["parameterTooltip3"] != DBNull.Value ? (string)row["parameterTooltip3"] : String.Empty;
+            return targetTypeInformation;
         }
     }
 }

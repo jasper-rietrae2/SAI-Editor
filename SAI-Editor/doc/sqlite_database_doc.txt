@@ -1,9 +1,17 @@
-script_type_information:
-	parameterInfoId: id of the parameter_info.id table which contains data on the parameters (param1 = repeatMin, param2 = repeatMax, etc. etc.)
-	scriptType: 	 0 = event, 1 = action, 2 = target
-	scriptTypeId:    id of the type (61 for event_type = SMART_EVENT_LINK, 7 for target_type = SMART_TARGET_ACTION_INVOKER, etc.)
-	toolTip:    	 tooltip shown when hovering over the event/action/target
+event_type_information:
+	event_type:					id of the smart_scripts.event_type. 61 would mean SMART_EVENT_LINK. (int)
+	tooltip:					string shown when hovering over this event_type in the combobox containing all of them (optional). (string)
+	parameterStringX (1-4):		parameter of the event_type (optional). (string)
+	parameterTooltipX (1-4):	string shown when hovering over the label of the given parameter (optional). (string)
 
-parameter_info:
-	id				 unique id of the parameter info (can be assigned to multiple script_type_information lines so we don't have to duplicate fields like RepeatMin/RepeatMax fields)
-	paramX (1-6)	 string per parameter to be shown when selecting the script
+action_type_information:
+	action_type:				id of the smart_scripts.action_type. 11 would mean SMART_ACTION_CAST. (int)
+	tooltip:					string shown when hovering over this action_type in the combobox containing all of them (optional). (string)
+	parameterStringX (1-6):		parameter of the action_type (optional). (string)
+	parameterTooltipX (1-6):	string shown when hovering over the label of the given parameter (optional). (string)
+
+target_type_information:
+	target_type:				id of the smart_scripts.target_type. 7 would mean SMART_TARGET_ACTION_INVOKER. (int)
+	tooltip:					string shown when hovering over this target_type in the combobox containing all of them (optional). (string)
+	parameterStringX (1-3):		parameter of the target_type (optional). (string)
+	parameterTooltipX (1-3):	string shown when hovering over the label of the given parameter (optional). (string)
