@@ -1,0 +1,9 @@
+script_type_information:
+	parameterInfoId: id of the parameter_info.id table which contains data on the parameters (param1 = repeatMin, param2 = repeatMax, etc. etc.)
+	scriptType: 	 0 = event, 1 = action, 2 = target
+	scriptTypeId:    id of the type (61 for event_type = SMART_EVENT_LINK, 7 for target_type = SMART_TARGET_ACTION_INVOKER, etc.)
+	toolTip:    	 tooltip shown when hovering over the event/action/target
+
+parameter_info:
+	id				 unique id of the parameter info (can be assigned to multiple script_type_information lines so we don't have to duplicate fields like RepeatMin/RepeatMax fields)
+	paramX (1-6)	 string per parameter to be shown when selecting the script
