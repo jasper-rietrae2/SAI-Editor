@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.20623.1 VSUPREVIEW
+VisualStudioVersion = 12.0.20827.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAI-Editor", "SAI-Editor\SAI-Editor.csproj", "{31DEB54A-6895-49E8-BFA4-DE209642F2A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAI-Editor", "SAI-Editor\SAI-Editor.csproj", "{1DF3EF8B-5DAA-4CD0-9CC0-573D421ED63E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{31DEB54A-6895-49E8-BFA4-DE209642F2A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{31DEB54A-6895-49E8-BFA4-DE209642F2A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{31DEB54A-6895-49E8-BFA4-DE209642F2A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{31DEB54A-6895-49E8-BFA4-DE209642F2A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DF3EF8B-5DAA-4CD0-9CC0-573D421ED63E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DF3EF8B-5DAA-4CD0-9CC0-573D421ED63E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DF3EF8B-5DAA-4CD0-9CC0-573D421ED63E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DF3EF8B-5DAA-4CD0-9CC0-573D421ED63E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
