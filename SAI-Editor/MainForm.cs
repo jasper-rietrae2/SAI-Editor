@@ -529,7 +529,6 @@ namespace SAI_Editor
                     if (checkBoxListActionlistsOrEntries.Checked && sourceType == originalSourceType)
                     {
                         TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScript, sourceType);
-
                         timedActionlistsOrEntries = timedActionListOrEntries.entries;
                         sourceTypeOfEntry = timedActionListOrEntries.sourceTypeOfEntry;
                     }
@@ -537,7 +536,7 @@ namespace SAI_Editor
                     listViewSmartScripts.Items.Add(listViewItem);
                 }
 
-                for (int i = 8; i <= 11; ++i)
+                for (int i = 0; i <= 11; ++i)
                     listViewSmartScripts.Columns[i].Width = -1;
 
                 for (int i = 13; i <= 18; ++i)
@@ -545,6 +544,8 @@ namespace SAI_Editor
 
                 for (int i = 20; i <= 26; ++i)
                     listViewSmartScripts.Columns[i].Width = -1;
+
+                listViewSmartScripts.Columns[27].Width = -1;
             }
             catch (Exception ex)
             {
