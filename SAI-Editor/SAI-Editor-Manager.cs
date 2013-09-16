@@ -46,7 +46,7 @@ namespace SAI_Editor
         public SAI_Editor_Manager()
         {
             worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, Settings.Default.Password, Settings.Default.Database);
-            sqliteDatabase = new SQLiteDatabase("parameter_info.db");
+            sqliteDatabase = new SQLiteDatabase("SQLiteDatabase/parameter_info.db");
         }
 
         public bool IsNumericString(string str)
