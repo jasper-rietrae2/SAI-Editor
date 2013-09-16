@@ -663,7 +663,10 @@ namespace SAI_Editor
                 case 5: //! Gameobject guid
                 case 8: //! Actionlist
                     if (previousSearchType == 6 || previousSearchType == 7)
+                    {
+                        StopRunningThread();
                         listViewEntryResults.Items.Clear();
+                    }
 
                     textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");
                     listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
@@ -672,7 +675,10 @@ namespace SAI_Editor
                 case 6: //! Areatrigger id
                 case 7: //! Areatrigger map id
                     if (!(previousSearchType == 6 || previousSearchType == 7))
+                    {
+                        StopRunningThread();
                         listViewEntryResults.Items.Clear();
+                    }
 
                     textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");
                     listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
@@ -684,7 +690,10 @@ namespace SAI_Editor
                 case 1: //! Creature name
                 case 4: //! Gameobject name
                     if (previousSearchType == 6 || previousSearchType == 7)
+                    {
+                        StopRunningThread();
                         listViewEntryResults.Items.Clear();
+                    }
 
                     listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
                     listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
