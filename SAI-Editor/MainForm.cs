@@ -835,17 +835,17 @@ namespace SAI_Editor
 
             var databaseNames = new List<string>();
 
-            connectionString.Server = textBoxHost.Text;
-            connectionString.UserID = textBoxUsername.Text;
-            connectionString.Port = Convert.ToUInt16(textBoxPort.Text);
-            connectionString.Database = "mysql";
+            MySqlConnectionStringBuilder _connectionString = new MySqlConnectionStringBuilder();
+            _connectionString.Server = textBoxHost.Text;
+            _connectionString.UserID = textBoxUsername.Text;
+            _connectionString.Port = Convert.ToUInt16(textBoxPort.Text);
 
             if (textBoxPassword.Text.Length > 0)
-                connectionString.Password = textBoxPassword.Text;
+                _connectionString.Password = textBoxPassword.Text;
 
             try
             {
-                using (var connection = new MySqlConnection(connectionString.ToString()))
+                using (var connection = new MySqlConnection(_connectionString.ToString()))
                 {
                     connection.Open();
                     var returnVal = new MySqlDataAdapter("SHOW DATABASES", connection);
