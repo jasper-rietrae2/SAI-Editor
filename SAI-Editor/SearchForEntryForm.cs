@@ -48,11 +48,11 @@ namespace SAI_Editor
             {
                 case SourceTypes.SourceTypeCreature:
                     comboBoxSearchType.SelectedIndex = 0; //! Creature entry
-                    FillListViewWithMySqlQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000", false);
+                    FillListViewWithMySqlQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000");
                     break;
                 case SourceTypes.SourceTypeGameobject:
                     comboBoxSearchType.SelectedIndex = 3; //! Gameobject entry
-                    FillListViewWithMySqlQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000", false);
+                    FillListViewWithMySqlQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000");
                     break;
                 case SourceTypes.SourceTypeAreaTrigger:
                     comboBoxSearchType.SelectedIndex = 6; //! NYI
@@ -61,12 +61,12 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("X", 75, HorizontalAlignment.Left);
                     listViewEntryResults.Columns.Add("Y", 75, HorizontalAlignment.Left);
                     listViewEntryResults.Columns.Add("Z", 75, HorizontalAlignment.Left);
-                    FillListViewWithAreaTriggers(String.Empty, String.Empty, true, false);
+                    FillListViewWithAreaTriggers(String.Empty, String.Empty, true);
                     break;
                 case SourceTypes.SourceTypeScriptedActionlist:
                     checkBoxHasAiName.Enabled = false;
                     comboBoxSearchType.SelectedIndex = 8; //! Actionlist entry
-                    //FillListViewWithMySqlQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000", false);
+                    //FillListViewWithMySqlQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000");
                     break;
             }
         }
@@ -77,7 +77,7 @@ namespace SAI_Editor
             FillMainFormEntryOrGuidField(sender, e);
         }
 
-        private void FillListViewWithMySqlQuery(string queryToExecute, bool crossThread)
+        private void FillListViewWithMySqlQuery(string queryToExecute)
         {
             try
             {
@@ -86,18 +86,9 @@ namespace SAI_Editor
                     connection.Open();
 
                     using (var query = new MySqlCommand(queryToExecute, connection))
-                    {
                         using (MySqlDataReader reader = query.ExecuteReader())
-                        {
                             while (reader != null && reader.Read())
-                            {
-                                if (crossThread)
-                                    AddItemToListView(listViewEntryResults, reader.GetInt32(0).ToString(CultureInfo.InvariantCulture), reader.GetString(1));
-                                else
-                                    listViewEntryResults.Items.Add(reader.GetInt32(0).ToString(CultureInfo.InvariantCulture)).SubItems.Add(reader.GetString(1));
-                            }
-                        }
-                    }
+                                AddItemToListView(listViewEntryResults, reader.GetInt32(0).ToString(CultureInfo.InvariantCulture), reader.GetString(1));
                 }
             }
             catch (MySqlException ex)
@@ -106,7 +97,7 @@ namespace SAI_Editor
             }
         }
 
-        private async void FillListViewWithAreaTriggers(string idFilter, string mapIdFilter, bool limit, bool crossThread)
+        private async void FillListViewWithAreaTriggers(string idFilter, string mapIdFilter, bool limit)
         {
             try
             {
@@ -323,7 +314,7 @@ namespace SAI_Editor
                         else
                             areaTriggerMapIdFilter = textBoxCriteria.Text;
 
-                        FillListViewWithAreaTriggers(areaTriggerIdFilter, areaTriggerMapIdFilter, false, true);
+                        FillListViewWithAreaTriggers(areaTriggerIdFilter, areaTriggerMapIdFilter, false);
                     }
                     catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
                     {
@@ -423,7 +414,7 @@ namespace SAI_Editor
 
             try
             {
-                FillListViewWithMySqlQuery(query, true);
+                FillListViewWithMySqlQuery(query);
             }
             finally
             {
