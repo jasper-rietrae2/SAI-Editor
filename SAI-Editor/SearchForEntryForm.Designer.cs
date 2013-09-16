@@ -95,6 +95,8 @@
             "Gameobject entry",
             "Gameobject name",
             "Gameobject guid",
+            "Areatrigger id",
+            "Areatrigger map id",
             "Actionlist entry"});
             this.comboBoxSearchType.Location = new System.Drawing.Point(20, 19);
             this.comboBoxSearchType.Name = "comboBoxSearchType";

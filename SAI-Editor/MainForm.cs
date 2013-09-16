@@ -479,12 +479,6 @@ namespace SAI_Editor
                 control.Visible = expanding;
         }
 
-        private void comboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //! Disable the button when source type areatrigger is selected (nyi to search for this).
-            buttonSearchForCreature.Enabled = comboBoxSourceType.SelectedIndex != 2;
-        }
-
         private async void SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
         {
             var timedActionlistsOrEntries = new List<string>();

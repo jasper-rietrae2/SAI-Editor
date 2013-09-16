@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Threading.Tasks;
@@ -27,22 +28,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetParameterStringsById(int type, int paramId, ScriptTypeId scriptTypeId)
         {
-            BaseTypeInformation baseTypeInformation = null;
-
-            switch (scriptTypeId)
-            {
-                case ScriptTypeId.ScriptTypeEvent:
-                    baseTypeInformation = await GetEventTypeInformationById(type);
-                    break;
-                case ScriptTypeId.ScriptTypeAction:
-                    baseTypeInformation = await GetActionTypeInformationById(type);
-                    break;
-                case ScriptTypeId.ScriptTypeTarget:
-                    baseTypeInformation = await GetTargetTypeInformationById(type);
-                    break;
-                default:
-                    return String.Empty;
-            }
+            BaseTypeInformation baseTypeInformation = await GetTypeByScriptTypeId(type, scriptTypeId);
 
             switch (paramId)
             {
@@ -81,6 +67,46 @@ namespace SAI_Editor.Database
                 return null;
 
             return BuildTargetTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
+        }
+
+        private async Task<BaseTypeInformation> GetTypeByScriptTypeId(int type, ScriptTypeId scriptTypeId)
+        {
+            switch (scriptTypeId)
+            {
+                case ScriptTypeId.ScriptTypeEvent:
+                    return await GetEventTypeInformationById(type);
+                case ScriptTypeId.ScriptTypeAction:
+                    return await GetActionTypeInformationById(type);
+                case ScriptTypeId.ScriptTypeTarget:
+                    return await GetTargetTypeInformationById(type);
+                default:
+                    return null;
+            }
+        }
+
+        public async Task<List<AreaTrigger>> GetAreaTriggers()
+        {
+            DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers");
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            List<AreaTrigger> areaTriggers = new List<AreaTrigger>();
+
+            foreach (DataRow row in dt.Rows)
+                areaTriggers.Add(BuildAreaTrigger(row));
+
+            return areaTriggers;
+        }
+
+        public async Task<AreaTrigger> GetAreaTriggerById(int id)
+        {
+            DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers WHERE id = @id", new SQLiteParameter("@id", id));
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            return BuildAreaTrigger(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
         }
 
         private EventTypeInformation BuildEventTypeInformation(DataRow row)
@@ -128,6 +154,22 @@ namespace SAI_Editor.Database
             targetTypeInformation.parameterTooltip2 = row["parameterTooltip2"] != DBNull.Value ? (string)row["parameterTooltip2"] : String.Empty;
             targetTypeInformation.parameterTooltip3 = row["parameterTooltip3"] != DBNull.Value ? (string)row["parameterTooltip3"] : String.Empty;
             return targetTypeInformation;
+        }
+
+        public AreaTrigger BuildAreaTrigger(DataRow row)
+        {
+            var areaTrigger = new AreaTrigger();
+            areaTrigger.id = row["id"] != DBNull.Value ? Convert.ToInt32(row["id"]) : -1;
+            areaTrigger.map_id = row["mapId"] != DBNull.Value ? Convert.ToInt32(row["mapId"]) : -1;
+            areaTrigger.posX = row["posX"] != DBNull.Value ? (double)row["posX"] : 0.0f;
+            areaTrigger.posY = row["posY"] != DBNull.Value ? (double)row["posY"] : 0.0f;
+            areaTrigger.posZ = row["posZ"] != DBNull.Value ? (double)row["posZ"] : 0.0f;
+            areaTrigger.field5 = row["field5"] != DBNull.Value ? (double)row["field5"] : 0.0f;
+            areaTrigger.field6 = row["field6"] != DBNull.Value ? (double)row["field6"] : 0.0f;
+            areaTrigger.field7 = row["field7"] != DBNull.Value ? (double)row["field7"] : 0.0f;
+            areaTrigger.field8 = row["field8"] != DBNull.Value ? (double)row["field8"] : 0.0f;
+            areaTrigger.field9 = row["field9"] != DBNull.Value ? (double)row["field9"] : 0.0f;
+            return areaTrigger;
         }
     }
 }

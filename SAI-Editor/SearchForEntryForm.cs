@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Globalization;
-using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Threading;
@@ -34,31 +34,40 @@ namespace SAI_Editor
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 800);
 
+            if (sourceTypeToSearchFor != SourceTypes.SourceTypeAreaTrigger)
+            {
+                listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
+                listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
+            }
+
+            listViewEntryResults.ColumnClick += listViewEntryResults_ColumnClick;
+            listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+
             switch (sourceTypeToSearchFor)
             {
                 case SourceTypes.SourceTypeCreature:
                     comboBoxSearchType.SelectedIndex = 0; //! Creature entry
-                    FillListViewWithQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000", false);
+                    FillListViewWithMySqlQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000", false);
                     break;
                 case SourceTypes.SourceTypeGameobject:
                     comboBoxSearchType.SelectedIndex = 3; //! Gameobject entry
-                    FillListViewWithQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000", false);
+                    FillListViewWithMySqlQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000", false);
                     break;
                 case SourceTypes.SourceTypeAreaTrigger:
-                    //comboBoxSearchType.SelectedIndex = 7; //! NYI
-                    //FillListViewWithQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000", false);
+                    comboBoxSearchType.SelectedIndex = 6; //! NYI
+                    listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
+                    listViewEntryResults.Columns.Add("Mapid", 52, HorizontalAlignment.Left);
+                    listViewEntryResults.Columns.Add("X", 75, HorizontalAlignment.Left);
+                    listViewEntryResults.Columns.Add("Y", 75, HorizontalAlignment.Left);
+                    listViewEntryResults.Columns.Add("Z", 75, HorizontalAlignment.Left);
+                    FillListViewWithAreaTriggers(String.Empty, String.Empty, true, false);
                     break;
                 case SourceTypes.SourceTypeScriptedActionlist:
                     checkBoxHasAiName.Enabled = false;
-                    comboBoxSearchType.SelectedIndex = 6; //! Actionlist entry
-                    //FillListViewWithQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000", false);
+                    comboBoxSearchType.SelectedIndex = 8; //! Actionlist entry
+                    //FillListViewWithMySqlQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000", false);
                     break;
             }
-
-            listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
-            listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
-            listViewEntryResults.ColumnClick += listViewEntryResults_ColumnClick;
-            listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
         }
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
@@ -67,7 +76,7 @@ namespace SAI_Editor
             FillMainFormEntryOrGuidField(sender, e);
         }
 
-        private void FillListViewWithQuery(string queryToExecute, bool crossThread)
+        private void FillListViewWithMySqlQuery(string queryToExecute, bool crossThread)
         {
             try
             {
@@ -87,6 +96,76 @@ namespace SAI_Editor
                                     listViewEntryResults.Items.Add(reader.GetInt32(0).ToString(CultureInfo.InvariantCulture)).SubItems.Add(reader.GetString(1));
                             }
                         }
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void FillListViewWithAreaTriggers(string idFilter, string mapIdFilter, bool limit, bool crossThread)
+        {
+            try
+            {
+                string queryToExecute = "SELECT * FROM areatriggers";
+
+                if (idFilter.Length > 0 || mapIdFilter.Length > 0)
+                {
+                    if (checkBoxFieldContainsCriteria.Checked)
+                    {
+                        if (idFilter.Length > 0)
+                        {
+                            queryToExecute += " WHERE id LIKE '%" + idFilter + "%'";
+
+                            if (mapIdFilter.Length > 0)
+                                queryToExecute += " AND mapId LIKE '%" + mapIdFilter + "%'";
+                        }
+                        else if (mapIdFilter.Length > 0)
+                        {
+                            queryToExecute += " WHERE mapId LIKE '%" + mapIdFilter + "%'";
+
+                            if (idFilter.Length > 0)
+                                queryToExecute += " AND id LIKE '%" + idFilter + "%'";
+                        }
+                    }
+                    else
+                    {
+                        if (idFilter.Length > 0)
+                        {
+                            queryToExecute += " WHERE id = " + idFilter;
+
+                            if (mapIdFilter.Length > 0)
+                                queryToExecute += " AND mapId = " + mapIdFilter;
+                        }
+                        else if (mapIdFilter.Length > 0)
+                        {
+                            queryToExecute += " WHERE mapId = " + mapIdFilter;
+
+                            if (idFilter.Length > 0)
+                                queryToExecute += " AND id = " + idFilter;
+                        }
+                    }
+                }
+
+                if (limit)
+                    queryToExecute += " LIMIT 1000";
+
+                DataTable dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
+
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        AreaTrigger areaTrigger = SAI_Editor_Manager.Instance.sqliteDatabase.BuildAreaTrigger(row);
+                        DataTable dtHasAiname = null;
+
+                        if (checkBoxHasAiName.Checked)
+                            dtHasAiname = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = @id", new MySqlParameter("@id", areaTrigger.id));
+
+                        if (!checkBoxHasAiName.Checked || dtHasAiname.Rows.Count > 0)
+                            AddItemToListView(listViewEntryResults, areaTrigger.id.ToString(), areaTrigger.map_id.ToString(), areaTrigger.posX.ToString(), areaTrigger.posY.ToString(), areaTrigger.posZ.ToString());
                     }
                 }
             }
@@ -230,7 +309,39 @@ namespace SAI_Editor
 
                     query += " ORDER BY g.guid";
                     break;
-                case 6: //! Actionlist entry
+                case 6:
+                case 7:
+                    ClearItemsOfListView(listViewEntryResults);
+
+                    try
+                    {
+                        string areaTriggerIdFilter = "", areaTriggerMapIdFilter = "";
+
+                        if (GetSelectedIndexOfComboBox(comboBoxSearchType) == 6)
+                            areaTriggerIdFilter = textBoxCriteria.Text;
+                        else
+                            areaTriggerMapIdFilter = textBoxCriteria.Text;
+
+                        FillListViewWithAreaTriggers(areaTriggerIdFilter, areaTriggerMapIdFilter, false, true);
+                    }
+                    catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
+                    {
+                        SetEnabledOfControl(buttonSearch, true);
+                        SetEnabledOfControl(buttonStopSearching, false);
+                    }
+                    catch (Exception ex)
+                    {
+                        SetEnabledOfControl(buttonSearch, true);
+                        SetEnabledOfControl(buttonStopSearching, false);
+                        MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        SetEnabledOfControl(buttonSearch, true);
+                        SetEnabledOfControl(buttonStopSearching, false);
+                    }
+                    return;
+                case 8: //! Actionlist entry
                     ClearItemsOfListView(listViewEntryResults);
 
                     try
@@ -311,7 +422,7 @@ namespace SAI_Editor
 
             try
             {
-                FillListViewWithQuery(query, true);
+                FillListViewWithMySqlQuery(query, true);
             }
             finally
             {
@@ -394,20 +505,21 @@ namespace SAI_Editor
             //! Above 2 means it's a gameobject
             switch (comboBoxSearchType.SelectedIndex)
             {
-                case 0: //! Creature
-                case 1:
-                case 2:
+                case 0: //! Creature entry
+                case 1: //! Creature name
+                case 2: //! Creature guid
                     ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 0;
                     break;
-                case 3: //! Gameobject
-                case 4:
-                case 5:
+                case 3: //! Gameobject entry
+                case 4: //! Gameobject name
+                case 5: //! Gameobject guid
                     ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 1;
                     break;
-                //case : //! Areatrigger
-                //    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 2;
-                //    break;
-                case 6: //! Actionlist
+                case 6: //! Areatrigger id
+                case 7: //! Areatrigger map id
+                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 2;
+                    break;
+                case 8: //! Actionlist entry
                     ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 3;
                     break;
             }
@@ -451,6 +563,28 @@ namespace SAI_Editor
             }
 
             listView.Items.Add(item).SubItems.Add(subItem);
+        }
+
+        private void AddItemToListView(ListView listView, string item, string subItem1, string subItem2, string subItem3, string subItem4)
+        {
+            if (listView.InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    ListViewItem listViewItem = listView.Items.Add(item);
+                    listViewItem.SubItems.Add(subItem1);
+                    listViewItem.SubItems.Add(subItem2);
+                    listViewItem.SubItems.Add(subItem3);
+                    listViewItem.SubItems.Add(subItem4);
+                });
+                return;
+            }
+
+            ListViewItem listViewItem2 = listView.Items.Add(item);
+            listViewItem2.SubItems.Add(subItem1);
+            listViewItem2.SubItems.Add(subItem2);
+            listViewItem2.SubItems.Add(subItem3);
+            listViewItem2.SubItems.Add(subItem4);
         }
 
         private void SetEnabledOfControl(Control control, bool enable)
@@ -517,19 +651,33 @@ namespace SAI_Editor
         private void comboBoxSearchType_SelectedIndexChanged(object sender, EventArgs e)
         {
             //! Disable the 'has ainame' checkbox when the user selected actionlist for search type
-            checkBoxHasAiName.Enabled = comboBoxSearchType.SelectedIndex != 6;
+            checkBoxHasAiName.Enabled = comboBoxSearchType.SelectedIndex != 8;
+            listViewEntryResults.Columns.Clear();
 
             switch (comboBoxSearchType.SelectedIndex)
             {
-                case 6: //! Actionlist
                 case 0: //! Creature entry
                 case 2: //! Creature guid
                 case 3: //! Gameobject entry
                 case 5: //! Gameobject guid
-                    textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");;
+                case 8: //! Actionlist
+                    textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");
+                    listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
+                    listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
+                    break;
+                case 6: //! Areatrigger id
+                case 7: //! Areatrigger map id
+                    textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");
+                    listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
+                    listViewEntryResults.Columns.Add("Mapid", 52, HorizontalAlignment.Left);
+                    listViewEntryResults.Columns.Add("X", 75, HorizontalAlignment.Left);
+                    listViewEntryResults.Columns.Add("Y", 75, HorizontalAlignment.Left);
+                    listViewEntryResults.Columns.Add("Z", 75, HorizontalAlignment.Left);
                     break;
                 case 1: //! Creature name
                 case 4: //! Gameobject name
+                    listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
+                    listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
                     break;
             }
         }

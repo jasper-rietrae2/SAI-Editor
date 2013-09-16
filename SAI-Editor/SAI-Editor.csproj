@@ -60,6 +60,7 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Database\Classes\ActionTypeInformation.cs" />
+    <Compile Include="Database\Classes\AreaTrigger.cs" />
     <Compile Include="Database\Classes\BaseTypeInformation.cs" />
     <Compile Include="Database\Classes\EventTypeInformation.cs" />
     <Compile Include="Database\Classes\SmartScript.cs" />
