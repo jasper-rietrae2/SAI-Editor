@@ -823,8 +823,8 @@ namespace SAI_Editor
         {
             //! Only allow typing keys that are numbers
             //! Inset is '-'
-            if (!Char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.Insert)
-                e.Handled = true;
+            //if (!Char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.ControlKey && e.KeyChar != (char)Keys.Insert)
+            //    e.Handled = true;
         }
 
         private void buttonSearchPhasemask_Click(object sender, EventArgs e)

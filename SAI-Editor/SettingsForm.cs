@@ -181,8 +181,8 @@ namespace SAI_Editor
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
         {
             //! Only allow typing keys that are numbers
-            if (!Char.IsNumber(e.KeyChar))
-                e.Handled = e.KeyChar != (char)Keys.Back;
+            //if (!Char.IsNumber(e.KeyChar))
+            //    e.Handled = e.KeyChar != (char)Keys.Back;
         }
 
         private void checkBoxDontHidePass_CheckedChanged(object sender, EventArgs e)

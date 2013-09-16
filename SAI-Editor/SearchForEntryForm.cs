@@ -474,8 +474,8 @@ namespace SAI_Editor
                 case 6: //! Areatrigger id
                 case 7: //! Areatrigger map id
                 case 8: //! Actionlist entry
-                    if (!Char.IsNumber(e.KeyChar))
-                        e.Handled = e.KeyChar != (Char)Keys.Back && e.KeyChar != (Char)Keys.OemMinus;
+                    //if (!Char.IsNumber(e.KeyChar))
+                    //    e.Handled = e.KeyChar != (Char)Keys.Back && e.KeyChar != (Char)Keys.OemMinus;
                     break;
                 case 1: //! Creature name
                 case 4: //! Gameobject name
