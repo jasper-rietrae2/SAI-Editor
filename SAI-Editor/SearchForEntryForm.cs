@@ -19,6 +19,7 @@ namespace SAI_Editor
         private readonly MySqlConnectionStringBuilder connectionString;
         private readonly SourceTypes sourceTypeToSearchFor;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+        private int previousSearchType = 0;
 
         public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, string startEntryString, SourceTypes sourceTypeToSearchFor)
         {
@@ -661,12 +662,18 @@ namespace SAI_Editor
                 case 3: //! Gameobject entry
                 case 5: //! Gameobject guid
                 case 8: //! Actionlist
+                    if (previousSearchType == 6 || previousSearchType == 7)
+                        listViewEntryResults.Items.Clear();
+
                     textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");
                     listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
                     listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
                     break;
                 case 6: //! Areatrigger id
                 case 7: //! Areatrigger map id
+                    if (!(previousSearchType == 6 || previousSearchType == 7))
+                        listViewEntryResults.Items.Clear();
+
                     textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");
                     listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
                     listViewEntryResults.Columns.Add("Mapid", 52, HorizontalAlignment.Left);
@@ -676,10 +683,15 @@ namespace SAI_Editor
                     break;
                 case 1: //! Creature name
                 case 4: //! Gameobject name
+                    if (previousSearchType == 6 || previousSearchType == 7)
+                        listViewEntryResults.Items.Clear();
+
                     listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
                     listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
                     break;
             }
+
+            previousSearchType = comboBoxSearchType.SelectedIndex;
         }
 
         private void SearchForEntryForm_FormClosing(object sender, FormClosingEventArgs e)
