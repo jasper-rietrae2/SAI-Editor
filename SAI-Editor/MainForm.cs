@@ -490,7 +490,7 @@ namespace SAI_Editor
 
                 if (smartScripts == null)
                 {
-                    MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI table for the given source type ({1})!", entryOrGuid, (int)sourceType), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI table for the given source type ({1})!", entryOrGuid, GetSourceTypeString(sourceType)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -989,6 +989,23 @@ namespace SAI_Editor
                 foreach (Control control in page.Controls)
                     if (control is TextBox)
                         control.Text = "0";
+        }
+
+        private string GetSourceTypeString(SourceTypes sourceType)
+        {
+            switch (sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return "creature";
+                case SourceTypes.SourceTypeGameobject:
+                    return "gameobject";
+                case SourceTypes.SourceTypeAreaTrigger:
+                    return "areatrigger";
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    return "actionlist";
+                default:
+                    return "unknown";
+            }
         }
     }
 }
