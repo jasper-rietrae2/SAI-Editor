@@ -128,19 +128,19 @@
             this.labelActionParam1 = new System.Windows.Forms.Label();
             this.textBoxActionParam1 = new System.Windows.Forms.TextBox();
             this.tabPageTarget = new System.Windows.Forms.TabPage();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
+            this.labelTargetO = new System.Windows.Forms.Label();
+            this.labelTargetZ = new System.Windows.Forms.Label();
+            this.labelTargetY = new System.Windows.Forms.Label();
+            this.labelTargetX = new System.Windows.Forms.Label();
             this.textBoxTargetO = new System.Windows.Forms.TextBox();
             this.textBoxTargetZ = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labelTargetParam3 = new System.Windows.Forms.Label();
             this.textBoxTargetY = new System.Windows.Forms.TextBox();
-            this.label12 = new System.Windows.Forms.Label();
+            this.labelTargetParam2 = new System.Windows.Forms.Label();
             this.textBoxTargetX = new System.Windows.Forms.TextBox();
             this.textBoxTargetParam3 = new System.Windows.Forms.TextBox();
             this.textBoxTargetParam2 = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
+            this.labelTargetParam1 = new System.Windows.Forms.Label();
             this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
@@ -1434,19 +1434,19 @@
             // tabPageTarget
             // 
             this.tabPageTarget.BackColor = System.Drawing.SystemColors.Window;
-            this.tabPageTarget.Controls.Add(this.label16);
-            this.tabPageTarget.Controls.Add(this.label22);
-            this.tabPageTarget.Controls.Add(this.label21);
-            this.tabPageTarget.Controls.Add(this.label20);
+            this.tabPageTarget.Controls.Add(this.labelTargetO);
+            this.tabPageTarget.Controls.Add(this.labelTargetZ);
+            this.tabPageTarget.Controls.Add(this.labelTargetY);
+            this.tabPageTarget.Controls.Add(this.labelTargetX);
             this.tabPageTarget.Controls.Add(this.textBoxTargetO);
             this.tabPageTarget.Controls.Add(this.textBoxTargetZ);
-            this.tabPageTarget.Controls.Add(this.label7);
+            this.tabPageTarget.Controls.Add(this.labelTargetParam3);
             this.tabPageTarget.Controls.Add(this.textBoxTargetY);
-            this.tabPageTarget.Controls.Add(this.label12);
+            this.tabPageTarget.Controls.Add(this.labelTargetParam2);
             this.tabPageTarget.Controls.Add(this.textBoxTargetX);
             this.tabPageTarget.Controls.Add(this.textBoxTargetParam3);
             this.tabPageTarget.Controls.Add(this.textBoxTargetParam2);
-            this.tabPageTarget.Controls.Add(this.label19);
+            this.tabPageTarget.Controls.Add(this.labelTargetParam1);
             this.tabPageTarget.Controls.Add(this.textBoxTargetParam1);
             this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
             this.tabPageTarget.Name = "tabPageTarget";
@@ -1454,41 +1454,41 @@
             this.tabPageTarget.TabIndex = 2;
             this.tabPageTarget.Text = "Target";
             // 
-            // label16
+            // labelTargetO
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1, 163);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(49, 13);
-            this.label16.TabIndex = 34;
-            this.label16.Text = "Target O";
+            this.labelTargetO.AutoSize = true;
+            this.labelTargetO.Location = new System.Drawing.Point(1, 163);
+            this.labelTargetO.Name = "labelTargetO";
+            this.labelTargetO.Size = new System.Drawing.Size(49, 13);
+            this.labelTargetO.TabIndex = 34;
+            this.labelTargetO.Text = "Target O";
             // 
-            // label22
+            // labelTargetZ
             // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(1, 137);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(48, 13);
-            this.label22.TabIndex = 34;
-            this.label22.Text = "Target Z";
+            this.labelTargetZ.AutoSize = true;
+            this.labelTargetZ.Location = new System.Drawing.Point(1, 137);
+            this.labelTargetZ.Name = "labelTargetZ";
+            this.labelTargetZ.Size = new System.Drawing.Size(48, 13);
+            this.labelTargetZ.TabIndex = 34;
+            this.labelTargetZ.Text = "Target Z";
             // 
-            // label21
+            // labelTargetY
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(1, 111);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(48, 13);
-            this.label21.TabIndex = 34;
-            this.label21.Text = "Target Y";
+            this.labelTargetY.AutoSize = true;
+            this.labelTargetY.Location = new System.Drawing.Point(1, 111);
+            this.labelTargetY.Name = "labelTargetY";
+            this.labelTargetY.Size = new System.Drawing.Size(48, 13);
+            this.labelTargetY.TabIndex = 34;
+            this.labelTargetY.Text = "Target Y";
             // 
-            // label20
+            // labelTargetX
             // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(1, 85);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(48, 13);
-            this.label20.TabIndex = 34;
-            this.label20.Text = "Target X";
+            this.labelTargetX.AutoSize = true;
+            this.labelTargetX.Location = new System.Drawing.Point(1, 85);
+            this.labelTargetX.Name = "labelTargetX";
+            this.labelTargetX.Size = new System.Drawing.Size(48, 13);
+            this.labelTargetX.TabIndex = 34;
+            this.labelTargetX.Text = "Target X";
             // 
             // textBoxTargetO
             // 
@@ -1508,14 +1508,14 @@
             this.textBoxTargetZ.Text = "0";
             this.textBoxTargetZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
-            // label7
+            // labelTargetParam3
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(1, 59);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 13);
-            this.label7.TabIndex = 34;
-            this.label7.Text = "Param 3";
+            this.labelTargetParam3.AutoSize = true;
+            this.labelTargetParam3.Location = new System.Drawing.Point(1, 59);
+            this.labelTargetParam3.Name = "labelTargetParam3";
+            this.labelTargetParam3.Size = new System.Drawing.Size(46, 13);
+            this.labelTargetParam3.TabIndex = 34;
+            this.labelTargetParam3.Text = "Param 3";
             // 
             // textBoxTargetY
             // 
@@ -1526,14 +1526,14 @@
             this.textBoxTargetY.Text = "0";
             this.textBoxTargetY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
-            // label12
+            // labelTargetParam2
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(1, 33);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(46, 13);
-            this.label12.TabIndex = 35;
-            this.label12.Text = "Param 2";
+            this.labelTargetParam2.AutoSize = true;
+            this.labelTargetParam2.Location = new System.Drawing.Point(1, 33);
+            this.labelTargetParam2.Name = "labelTargetParam2";
+            this.labelTargetParam2.Size = new System.Drawing.Size(46, 13);
+            this.labelTargetParam2.TabIndex = 35;
+            this.labelTargetParam2.Text = "Param 2";
             // 
             // textBoxTargetX
             // 
@@ -1562,14 +1562,14 @@
             this.textBoxTargetParam2.Text = "0";
             this.textBoxTargetParam2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
-            // label19
+            // labelTargetParam1
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(1, 7);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(46, 13);
-            this.label19.TabIndex = 38;
-            this.label19.Text = "Param 1";
+            this.labelTargetParam1.AutoSize = true;
+            this.labelTargetParam1.Location = new System.Drawing.Point(1, 7);
+            this.labelTargetParam1.Name = "labelTargetParam1";
+            this.labelTargetParam1.Size = new System.Drawing.Size(46, 13);
+            this.labelTargetParam1.TabIndex = 38;
+            this.labelTargetParam1.Text = "Param 1";
             // 
             // textBoxTargetParam1
             // 
@@ -1740,18 +1740,18 @@
         private System.Windows.Forms.TextBox textBoxActionParam2;
         private System.Windows.Forms.Label labelActionParam1;
         private System.Windows.Forms.TextBox textBoxActionParam1;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label labelTargetX;
+        private System.Windows.Forms.Label labelTargetParam3;
+        private System.Windows.Forms.Label labelTargetParam2;
         private System.Windows.Forms.TextBox textBoxTargetX;
         private System.Windows.Forms.TextBox textBoxTargetParam3;
         private System.Windows.Forms.TextBox textBoxTargetParam2;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label labelTargetParam1;
         private System.Windows.Forms.TextBox textBoxTargetParam1;
         private System.Windows.Forms.TextBox textBoxTargetTypeId;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label labelTargetZ;
+        private System.Windows.Forms.Label labelTargetY;
         private System.Windows.Forms.TextBox textBoxTargetZ;
         private System.Windows.Forms.TextBox textBoxTargetY;
         public System.Windows.Forms.CheckBox checkBoxAutoConnect;
@@ -1773,7 +1773,7 @@
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemDeleteSelectedRow;
         private System.Windows.Forms.TextBox textBoxTargetO;
-        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label labelTargetO;
         public System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.TextBox textBoxEventPhasemask;
         public System.Windows.Forms.TextBox textBoxEventFlags;

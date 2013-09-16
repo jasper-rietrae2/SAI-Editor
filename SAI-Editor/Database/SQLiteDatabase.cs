@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Threading.Tasks;
 using System.Data.SQLite;
+using System.Threading.Tasks;
 using SAI_Editor.Database.Classes;
 
-namespace SAI_Editor
+namespace SAI_Editor.Database
 {
     class SQLiteDatabase : Database<SQLiteConnection, SQLiteConnectionStringBuilder, SQLiteParameter, SQLiteCommand>
     {
@@ -13,6 +12,7 @@ namespace SAI_Editor
         {
             ConnectionString = new SQLiteConnectionStringBuilder();
             ConnectionString.DataSource = file;
+            ConnectionString.Version = 3;
         }
 
         public async Task<EventTypeInformation> GetEventTypeInformationById(int event_type)
@@ -23,6 +23,44 @@ namespace SAI_Editor
                 return null;
 
             return BuildEventTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
+        }
+
+        public async Task<string> GetParameterStringsById(int type, int paramId, ScriptTypeId scriptTypeId)
+        {
+            BaseTypeInformation baseTypeInformation = null;
+
+            switch (scriptTypeId)
+            {
+                case ScriptTypeId.ScriptTypeEvent:
+                    baseTypeInformation = await GetEventTypeInformationById(type);
+                    break;
+                case ScriptTypeId.ScriptTypeAction:
+                    baseTypeInformation = await GetActionTypeInformationById(type);
+                    break;
+                case ScriptTypeId.ScriptTypeTarget:
+                    baseTypeInformation = await GetTargetTypeInformationById(type);
+                    break;
+                default:
+                    return String.Empty;
+            }
+
+            switch (paramId)
+            {
+                case 1:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString1 : "Param 1";
+                case 2:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString2 : "Param 2";
+                case 3:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString3 : "Param 3";
+                case 4:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString4 : "Param 4";
+                case 5:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString5 : "Param 5";
+                case 6:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString6 : "Param 6";
+                default:
+                    return String.Empty;
+            }
         }
 
         public async Task<ActionTypeInformation> GetActionTypeInformationById(int action_type)

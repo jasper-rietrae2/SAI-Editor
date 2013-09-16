@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SAI_Editor.Database;
 using SAI_Editor.Database.Classes;
 using SAI_Editor.Properties;
 
@@ -46,7 +47,7 @@ namespace SAI_Editor
         public SAI_Editor_Manager()
         {
             worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, Settings.Default.Password, Settings.Default.Database);
-            sqliteDatabase = new SQLiteDatabase("SQLiteDatabase/parameter_info.db");
+            sqliteDatabase = new SQLiteDatabase("sqlite_database.db");
         }
 
         public bool IsNumericString(string str)
