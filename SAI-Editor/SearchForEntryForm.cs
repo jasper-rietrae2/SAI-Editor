@@ -66,7 +66,9 @@ namespace SAI_Editor
                 case SourceTypes.SourceTypeScriptedActionlist:
                     checkBoxHasAiName.Enabled = false;
                     comboBoxSearchType.SelectedIndex = 8; //! Actionlist entry
-                    //FillListViewWithMySqlQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000");
+                    //! We don't list 1000 actionlists like all other source types because we can't get the entry/name combination
+                    //! of several sources (considering the actionlist can be called from _ANY_ source_type (including actionlists
+                    //! itself). It's simply not worth the time.
                     break;
             }
         }
@@ -465,10 +467,13 @@ namespace SAI_Editor
 
             switch (comboBoxSearchType.SelectedIndex)
             {
-                case 2: //! Creature guid
-                case 5: //! Gameobject guid
                 case 0: //! Creature entry
+                case 2: //! Creature guid
                 case 3: //! Gameobject entry
+                case 5: //! Gameobject guid
+                case 6: //! Areatrigger id
+                case 7: //! Areatrigger map id
+                case 8: //! Actionlist entry
                     if (!Char.IsNumber(e.KeyChar))
                         e.Handled = e.KeyChar != (Char)Keys.Back && e.KeyChar != (Char)Keys.OemMinus;
                     break;
