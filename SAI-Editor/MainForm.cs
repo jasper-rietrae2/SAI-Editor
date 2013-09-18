@@ -601,80 +601,87 @@ namespace SAI_Editor
 
         private async void FillFieldsBasedOnSelectedScript()
         {
-            ListViewItem.ListViewSubItemCollection selectedItem = listViewSmartScripts.SelectedItems[0].SubItems;
-
-            if (Settings.Default.ChangeStaticInfo)
+            try
             {
-                textBoxEntryOrGuid.Text = selectedItem[0].Text;
+                ListViewItem.ListViewSubItemCollection selectedItem = listViewSmartScripts.SelectedItems[0].SubItems;
 
-                switch (Convert.ToInt32(selectedItem[1].Text))
+                if (Settings.Default.ChangeStaticInfo)
                 {
-                    case 0: //! Creature
-                    case 1: //! Gameobject
-                    case 2: //! Areatrigger
-                        comboBoxSourceType.SelectedIndex = Convert.ToInt32(selectedItem[1].Text);
-                        break;
-                    case 9: //! Actionlist
-                        comboBoxSourceType.SelectedIndex = 3;
-                        break;
-                    default:
-                        MessageBox.Show(String.Format("Unknown/unsupported source type found ({0})", selectedItem[0].Text), "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                    textBoxEntryOrGuid.Text = selectedItem[0].Text;
+
+                    switch (Convert.ToInt32(selectedItem[1].Text))
+                    {
+                        case 0: //! Creature
+                        case 1: //! Gameobject
+                        case 2: //! Areatrigger
+                            comboBoxSourceType.SelectedIndex = Convert.ToInt32(selectedItem[1].Text);
+                            break;
+                        case 9: //! Actionlist
+                            comboBoxSourceType.SelectedIndex = 3;
+                            break;
+                        default:
+                            MessageBox.Show(String.Format("Unknown/unsupported source type found ({0})", selectedItem[0].Text), "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                    }
                 }
+
+                textBoxEventScriptId.Text = selectedItem[2].Text;
+                textBoxLinkTo.Text = selectedItem[3].Text;
+
+                int event_type = Convert.ToInt32(selectedItem[4].Text);
+
+                comboBoxEventType.SelectedIndex = event_type;
+                textBoxEventPhasemask.Text = selectedItem[5].Text;
+                textBoxEventChance.Text = selectedItem[6].Text;
+                textBoxEventFlags.Text = selectedItem[7].Text;
+
+                //! Event parameters
+                //comboBoxEventType.SelectedIndex = event_type;
+                textBoxEventParam1.Text = selectedItem[8].Text;
+                textBoxEventParam2.Text = selectedItem[9].Text;
+                textBoxEventParam3.Text = selectedItem[10].Text;
+                textBoxEventParam4.Text = selectedItem[11].Text;
+                labelEventParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 1, ScriptTypeId.ScriptTypeEvent);
+                labelEventParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
+                labelEventParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
+                labelEventParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
+
+                //! Action parameters
+                int action_type = Convert.ToInt32(selectedItem[12].Text);
+                comboBoxActionType.SelectedIndex = action_type;
+                textBoxActionParam1.Text = selectedItem[13].Text;
+                textBoxActionParam2.Text = selectedItem[14].Text;
+                textBoxActionParam3.Text = selectedItem[15].Text;
+                textBoxActionParam4.Text = selectedItem[16].Text;
+                textBoxActionParam5.Text = selectedItem[17].Text;
+                textBoxActionParam6.Text = selectedItem[18].Text;
+                labelActionParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 1, ScriptTypeId.ScriptTypeAction);
+                labelActionParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 2, ScriptTypeId.ScriptTypeAction);
+                labelActionParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 3, ScriptTypeId.ScriptTypeAction);
+                labelActionParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 4, ScriptTypeId.ScriptTypeAction);
+                labelActionParam5.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 5, ScriptTypeId.ScriptTypeAction);
+                labelActionParam6.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 6, ScriptTypeId.ScriptTypeAction);
+
+                //! Target parameters
+                int target_type = Convert.ToInt32(selectedItem[19].Text);
+                comboBoxTargetType.SelectedIndex = target_type;
+                textBoxTargetParam1.Text = selectedItem[20].Text;
+                textBoxTargetParam2.Text = selectedItem[21].Text;
+                textBoxTargetParam3.Text = selectedItem[22].Text;
+                labelTargetParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
+                labelTargetParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
+                labelTargetParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
+                textBoxTargetX.Text = selectedItem[23].Text;
+                textBoxTargetY.Text = selectedItem[24].Text;
+                textBoxTargetZ.Text = selectedItem[25].Text;
+                textBoxTargetO.Text = selectedItem[26].Text;
+
+                textBoxComments.Text = selectedItem[27].Text;
             }
-
-            textBoxEventScriptId.Text = selectedItem[2].Text;
-            textBoxLinkTo.Text = selectedItem[3].Text;
-
-            int event_type = Convert.ToInt32(selectedItem[4].Text);
-
-            comboBoxEventType.SelectedIndex = event_type;
-            textBoxEventPhasemask.Text = selectedItem[5].Text;
-            textBoxEventChance.Text = selectedItem[6].Text;
-            textBoxEventFlags.Text = selectedItem[7].Text;
-
-            //! Event parameters
-          //comboBoxEventType.SelectedIndex = event_type;
-            textBoxEventParam1.Text = selectedItem[8].Text;
-            textBoxEventParam2.Text = selectedItem[9].Text;
-            textBoxEventParam3.Text = selectedItem[10].Text;
-            textBoxEventParam4.Text = selectedItem[11].Text;
-            labelEventParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 1, ScriptTypeId.ScriptTypeEvent);
-            labelEventParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
-            labelEventParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
-            labelEventParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
-
-            //! Action parameters
-            int action_type = Convert.ToInt32(selectedItem[12].Text);
-            comboBoxActionType.SelectedIndex = action_type;
-            textBoxActionParam1.Text = selectedItem[13].Text;
-            textBoxActionParam2.Text = selectedItem[14].Text;
-            textBoxActionParam3.Text = selectedItem[15].Text;
-            textBoxActionParam4.Text = selectedItem[16].Text;
-            textBoxActionParam5.Text = selectedItem[17].Text;
-            textBoxActionParam6.Text = selectedItem[18].Text;
-            labelActionParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 1, ScriptTypeId.ScriptTypeAction);
-            labelActionParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 2, ScriptTypeId.ScriptTypeAction);
-            labelActionParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 3, ScriptTypeId.ScriptTypeAction);
-            labelActionParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 4, ScriptTypeId.ScriptTypeAction);
-            labelActionParam5.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 5, ScriptTypeId.ScriptTypeAction);
-            labelActionParam6.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 6, ScriptTypeId.ScriptTypeAction);
-
-            //! Target parameters
-            int target_type = Convert.ToInt32(selectedItem[19].Text);
-            comboBoxTargetType.SelectedIndex = target_type;
-            textBoxTargetParam1.Text = selectedItem[20].Text;
-            textBoxTargetParam2.Text = selectedItem[21].Text;
-            textBoxTargetParam3.Text = selectedItem[22].Text;
-            labelTargetParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
-            labelTargetParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
-            labelTargetParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
-            textBoxTargetX.Text = selectedItem[23].Text;
-            textBoxTargetY.Text = selectedItem[24].Text;
-            textBoxTargetZ.Text = selectedItem[25].Text;
-            textBoxTargetO.Text = selectedItem[26].Text;
-
-            textBoxComments.Text = selectedItem[27].Text;
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
