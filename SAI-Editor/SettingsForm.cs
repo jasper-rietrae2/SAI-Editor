@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Configuration;
 using SAI_Editor.Properties;
 
 namespace SAI_Editor
 {
     public partial class SettingsForm : Form
     {
-        private bool closedFormByHand = false;
+        private bool closedFormByHand;
 
         public SettingsForm()
         {
@@ -83,7 +82,7 @@ namespace SAI_Editor
             Close();
         }
 
-        void SettingsForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void SettingsForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             //! Only call this prompt method if the form was closed by the user itself and the form was not
             //! already closed before because we called Form::Close() (by pressing 'Exit' or so).
@@ -91,7 +90,7 @@ namespace SAI_Editor
                 PromptSaveSettingsOnClose();
         }
 
-        void PromptSaveSettingsOnClose()
+        private void PromptSaveSettingsOnClose()
         {
             if (checkBoxAutoSaveSettings.Checked)
             {
@@ -101,11 +100,16 @@ namespace SAI_Editor
             }
 
             if (textBoxHost.Text == Settings.Default.Host && textBoxUsername.Text == Settings.Default.User &&
-                textBoxPassword.Text == Settings.Default.Password && textBoxWorldDatabase.Text == Settings.Default.Database &&
-                textBoxPort.Text == Settings.Default.Port.ToString() && checkBoxAutoConnect.Checked == Settings.Default.AutoConnect &&
-                checkBoxInstantExpand.Checked == Settings.Default.InstantExpand && checkBoxLoadScriptInstantly.Checked == Settings.Default.LoadScriptInstantly &&
-                checkBoxHidePass.Checked == Settings.Default.HidePass && checkBoxPromptToQuit.Checked == Settings.Default.PromptToQuit &&
-                textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() && checkBoxPromptExecuteQuery.Checked == Settings.Default.PromptExecuteQuery &&
+                textBoxPassword.Text == Settings.Default.Password &&
+                textBoxWorldDatabase.Text == Settings.Default.Database &&
+                textBoxPort.Text == Settings.Default.Port.ToString() &&
+                checkBoxAutoConnect.Checked == Settings.Default.AutoConnect &&
+                checkBoxInstantExpand.Checked == Settings.Default.InstantExpand &&
+                checkBoxLoadScriptInstantly.Checked == Settings.Default.LoadScriptInstantly &&
+                checkBoxHidePass.Checked == Settings.Default.HidePass &&
+                checkBoxPromptToQuit.Checked == Settings.Default.PromptToQuit &&
+                textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() &&
+                checkBoxPromptExecuteQuery.Checked == Settings.Default.PromptExecuteQuery &&
                 checkBoxChangeStaticInfo.Checked == Settings.Default.ChangeStaticInfo)
                 return;
 

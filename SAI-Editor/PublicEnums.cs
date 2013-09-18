@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SAI_Editor
+﻿namespace SAI_Editor
 {
     public enum SmartAction
     {
@@ -23,7 +18,7 @@ namespace SAI_Editor
         SMART_ACTION_THREAT_SINGLE_PCT = 13,
         SMART_ACTION_THREAT_ALL_PCT = 14,
         SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS = 15,
-        SMART_ACTION_SEND_CASTCREATUREORGO = 16,
+        SMART_ACTION_UNUSED_16 = 16,
         SMART_ACTION_SET_EMOTE_STATE = 17,
         SMART_ACTION_SET_UNIT_FLAG = 18,
         SMART_ACTION_REMOVE_UNIT_FLAG = 19,
