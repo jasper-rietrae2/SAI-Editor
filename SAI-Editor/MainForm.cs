@@ -555,6 +555,8 @@ namespace SAI_Editor
             if (checkBoxListActionlistsOrEntries.Checked)
                 foreach (string scriptEntry in timedActionlistsOrEntries)
                     SelectAndFillListViewByEntryAndSource(scriptEntry, sourceTypeOfEntry);
+
+            pictureBoxLoadScript.Enabled = true;
         }
 
         //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
@@ -817,13 +819,13 @@ namespace SAI_Editor
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
                 return;
 
-            SourceTypes newSourceType = GetSourceTypeByIndex();
+            pictureBoxLoadScript.Enabled = false;
 
+            SourceTypes newSourceType = GetSourceTypeByIndex();
             originalSourceType = newSourceType;
             originalEntryOrGuid = textBoxEntryOrGuid.Text;
             listViewSmartScripts.Items.Clear();
             SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType);
-
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
         }
 

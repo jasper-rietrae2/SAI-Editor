@@ -61,7 +61,7 @@
             this.testToolStripMenuItemDeleteRow = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxLoadScript = new System.Windows.Forms.PictureBox();
             this.buttonSearchForCreature = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -150,7 +150,7 @@
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -433,7 +433,7 @@
             // 
             // groupBoxStaticScriptInfo
             // 
-            this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBox1);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBoxLoadScript);
             this.groupBoxStaticScriptInfo.Controls.Add(this.buttonSearchForCreature);
             this.groupBoxStaticScriptInfo.Controls.Add(this.label4);
             this.groupBoxStaticScriptInfo.Controls.Add(this.comboBoxSourceType);
@@ -447,17 +447,17 @@
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
             // 
-            // pictureBox1
+            // pictureBoxLoadScript
             // 
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::SAI_Editor.Properties.Resources.icon_load_script;
-            this.pictureBox1.Location = new System.Drawing.Point(260, 19);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(24, 20);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
+            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Image = global::SAI_Editor.Properties.Resources.icon_load_script;
+            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
+            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLoadScript.TabIndex = 16;
+            this.pictureBoxLoadScript.TabStop = false;
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // buttonSearchForCreature
             // 
@@ -1643,7 +1643,7 @@
             this.panelLoginBox.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -1773,7 +1773,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemDeleteSelectedRow;
         private System.Windows.Forms.TextBox textBoxTargetO;
         private System.Windows.Forms.Label labelTargetO;
-        public System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.PictureBox pictureBoxLoadScript;
         public System.Windows.Forms.TextBox textBoxEventPhasemask;
         public System.Windows.Forms.TextBox textBoxEventFlags;
         private System.Windows.Forms.Button buttonSearchWorldDb;
