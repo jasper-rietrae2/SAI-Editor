@@ -305,7 +305,7 @@ namespace SAI_Editor
                 Settings.Default.Password = textBoxPassword.Text;
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
-                Settings.Default.Port = Convert.ToInt32(textBoxPort.Text);
+                Settings.Default.Port = textBoxPort.Text.Length > 0 ? Convert.ToInt32(textBoxPort.Text) : 0;
                 Settings.Default.Save();
             }
 
@@ -826,6 +826,7 @@ namespace SAI_Editor
                 return;
 
             pictureBoxLoadScript.Enabled = false;
+            pictureBoxLoadScript.BackColor = Color.FromArgb(0, 0, 0, 0);
 
             SourceTypes newSourceType = GetSourceTypeByIndex();
             originalSourceType = newSourceType;

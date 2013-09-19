@@ -144,7 +144,6 @@
             this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
-            this.panel3 = new System.Windows.Forms.Panel();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -337,7 +336,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1220, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1214, 24);
             this.menuStrip.TabIndex = 11;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -864,14 +863,14 @@
             // 
             // textBoxEventChance
             // 
-            this.textBoxEventChance.Location = new System.Drawing.Point(59, 125);
+            this.textBoxEventChance.Location = new System.Drawing.Point(59, 126);
             this.textBoxEventChance.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.textBoxEventChance.Name = "textBoxEventChance";
-            this.textBoxEventChance.Size = new System.Drawing.Size(63, 20);
+            this.textBoxEventChance.Size = new System.Drawing.Size(64, 20);
             this.textBoxEventChance.TabIndex = 7;
             this.textBoxEventChance.Value = new decimal(new int[] {
             100,
@@ -1608,23 +1607,14 @@
             this.listViewSmartScripts.Click += new System.EventHandler(this.listViewSmartScripts_Click);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
-            // panel3
-            // 
-            this.panel3.Location = new System.Drawing.Point(1028, 324);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(5, 88);
-            this.panel3.TabIndex = 21;
-            this.panel3.Visible = false;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1220, 463);
+            this.ClientSize = new System.Drawing.Size(1214, 463);
             this.Controls.Add(this.panelLoginBox);
             this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.groupBoxParameters);
-            this.Controls.Add(this.panel3);
             this.Controls.Add(this.groupBoxScriptInfo);
             this.Controls.Add(this.groupBoxPreferences);
             this.Controls.Add(this.groupBoxStaticScriptInfo);
@@ -1721,7 +1711,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button buttonSearchPhasemask;
         private System.Windows.Forms.Button buttonLinkFrom;
         private System.Windows.Forms.Label labelEventParam2;
