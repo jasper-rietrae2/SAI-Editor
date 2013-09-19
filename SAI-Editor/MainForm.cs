@@ -81,14 +81,12 @@ namespace SAI_Editor
 
             try
             {
-
                 textBoxHost.Text = Settings.Default.Host;
                 textBoxUsername.Text = Settings.Default.User;
                 textBoxPassword.Text = Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
                 textBoxWorldDatabase.Text = Settings.Default.Database;
                 textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
                 animationSpeed = Convert.ToInt32(Settings.Default.AnimationSpeed);
-
             }
             catch (Exception ex)
             {
@@ -316,13 +314,10 @@ namespace SAI_Editor
         {
             if (checkBoxSaveSettings.Checked)
             {
-
                 RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
                 byte[] buffer = new byte[1024];
-
                 rng.GetBytes(buffer);
                 string salt = BitConverter.ToString(buffer);
-
                 rng.Dispose();
 
                 Settings.Default.Entropy = salt;

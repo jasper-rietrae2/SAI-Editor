@@ -9,6 +9,8 @@ using MySql.Data.MySqlClient;
 using SAI_Editor.Database;
 using SAI_Editor.Database.Classes;
 using SAI_Editor.Properties;
+using System.Security.Cryptography;
+using SAI_Editor.Security;
 
 namespace SAI_Editor
 {
@@ -49,7 +51,12 @@ namespace SAI_Editor
 
         public void ResetDatabases()
         {
-            worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, Settings.Default.Password, Settings.Default.Database);
+            string password = Settings.Default.Password;
+
+            if (password.Length > 0)
+                password = SecurityExtensions.DecryptString(password, Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
+
+            worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, password, Settings.Default.Database);
             sqliteDatabase = new SQLiteDatabase("Resources/sqlite_database.db");
         }
 
