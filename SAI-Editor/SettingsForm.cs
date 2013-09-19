@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using SAI_Editor.Properties;
 
@@ -192,6 +193,20 @@ namespace SAI_Editor
         private void checkBoxDontHidePass_CheckedChanged(object sender, EventArgs e)
         {
             textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
+        }
+
+        private void buttonSearchForWorldDb_Click(object sender, EventArgs e)
+        {
+            List<string> databaseNames = SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
+
+            if (databaseNames.Count > 0)
+                new SelectDatabaseForm(databaseNames).Show(this);
+        }
+
+        private void settingTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                buttonSaveSettings_Click(sender, e);
         }
     }
 }

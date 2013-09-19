@@ -43,6 +43,7 @@
             this.checkBoxInstantExpand = new System.Windows.Forms.CheckBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
+            this.buttonSearchForWorldDb = new System.Windows.Forms.Button();
             this.checkBoxHidePass = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
             this.textBoxHost = new System.Windows.Forms.TextBox();
@@ -213,6 +214,7 @@
             // 
             // tabPageConnection
             // 
+            this.tabPageConnection.Controls.Add(this.buttonSearchForWorldDb);
             this.tabPageConnection.Controls.Add(this.checkBoxHidePass);
             this.tabPageConnection.Controls.Add(this.checkBoxAutoConnect);
             this.tabPageConnection.Controls.Add(this.textBoxHost);
@@ -231,6 +233,16 @@
             this.tabPageConnection.TabIndex = 1;
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
+            // 
+            // buttonSearchForWorldDb
+            // 
+            this.buttonSearchForWorldDb.Location = new System.Drawing.Point(212, 91);
+            this.buttonSearchForWorldDb.Name = "buttonSearchForWorldDb";
+            this.buttonSearchForWorldDb.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchForWorldDb.TabIndex = 30;
+            this.buttonSearchForWorldDb.Text = "...";
+            this.buttonSearchForWorldDb.UseVisualStyleBackColor = true;
+            this.buttonSearchForWorldDb.Click += new System.EventHandler(this.buttonSearchForWorldDb_Click);
             // 
             // checkBoxHidePass
             // 
@@ -259,6 +271,7 @@
             this.textBoxHost.Name = "textBoxHost";
             this.textBoxHost.Size = new System.Drawing.Size(130, 20);
             this.textBoxHost.TabIndex = 0;
+            this.textBoxHost.KeyDown += new System.Windows.Forms.KeyEventHandler(this.settingTextBox_KeyDown);
             // 
             // textBoxUsername
             // 
@@ -266,6 +279,7 @@
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
             this.textBoxUsername.TabIndex = 1;
+            this.textBoxUsername.KeyDown += new System.Windows.Forms.KeyEventHandler(this.settingTextBox_KeyDown);
             // 
             // textBoxPassword
             // 
@@ -273,13 +287,15 @@
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
             this.textBoxPassword.TabIndex = 2;
+            this.textBoxPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.settingTextBox_KeyDown);
             // 
             // textBoxWorldDatabase
             // 
             this.textBoxWorldDatabase.Location = new System.Drawing.Point(106, 92);
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
-            this.textBoxWorldDatabase.Size = new System.Drawing.Size(130, 20);
+            this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
             this.textBoxWorldDatabase.TabIndex = 3;
+            this.textBoxWorldDatabase.KeyDown += new System.Windows.Forms.KeyEventHandler(this.settingTextBox_KeyDown);
             // 
             // textBoxPort
             // 
@@ -287,6 +303,7 @@
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
             this.textBoxPort.TabIndex = 4;
+            this.textBoxPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.settingTextBox_KeyDown);
             this.textBoxPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // label3
@@ -402,6 +419,7 @@
         private System.Windows.Forms.CheckBox checkBoxHidePass;
         private System.Windows.Forms.CheckBox checkBoxPromptExecuteQuery;
         private System.Windows.Forms.CheckBox checkBoxChangeStaticInfo;
+        private System.Windows.Forms.Button buttonSearchForWorldDb;
 
     }
 }
