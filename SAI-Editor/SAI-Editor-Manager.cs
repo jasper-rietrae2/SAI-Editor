@@ -44,10 +44,15 @@ namespace SAI_Editor
             }
         }
 
-        public SAI_Editor_Manager()
+        public void ResetDatabases()
         {
             worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, Settings.Default.Password, Settings.Default.Database);
             sqliteDatabase = new SQLiteDatabase("Resources/sqlite_database.db");
+        }
+
+        public SAI_Editor_Manager()
+        {
+            ResetDatabases();
         }
 
         public bool IsNumericString(string str)

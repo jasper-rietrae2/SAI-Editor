@@ -290,7 +290,10 @@ namespace SAI_Editor
                 connectionString.Password = textBoxPassword.Text;
 
             if (CanConnectToDatabase())
+            {
                 StartExpandingToMainForm(Settings.Default.InstantExpand);
+                SAI_Editor_Manager.Instance.ResetDatabases();
+            }
         }
 
         private void StartExpandingToMainForm(bool instant = false)
