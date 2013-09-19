@@ -200,7 +200,7 @@ namespace SAI_Editor
             List<string> databaseNames = SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames.Count > 0)
-                new SelectDatabaseForm(databaseNames).Show(this);
+                new SelectDatabaseForm(databaseNames, false).Show(this);
         }
 
         private void settingTextBox_KeyDown(object sender, KeyEventArgs e)

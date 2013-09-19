@@ -853,51 +853,10 @@ namespace SAI_Editor
 
         private void buttonSearchWorldDb_Click(object sender, EventArgs e)
         {
-            if (textBoxHost.Text.Length <= 0 || textBoxUsername.Text.Length <= 0 || textBoxPort.Text.Length <= 0)
-            {
-                MessageBox.Show("You must fill all fields except for the world database field in order to search for your world database (we need to establish a connection to list your databases)!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            List<string> databaseNames = SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
-            var databaseNames = new List<string>();
-
-            MySqlConnectionStringBuilder _connectionString = new MySqlConnectionStringBuilder();
-            _connectionString.Server = textBoxHost.Text;
-            _connectionString.UserID = textBoxUsername.Text;
-            _connectionString.Port = Convert.ToUInt16(textBoxPort.Text);
-
-            if (textBoxPassword.Text.Length > 0)
-                _connectionString.Password = textBoxPassword.Text;
-
-            try
-            {
-                using (var connection = new MySqlConnection(_connectionString.ToString()))
-                {
-                    connection.Open();
-                    var returnVal = new MySqlDataAdapter("SHOW DATABASES", connection);
-                    var dataTable = new DataTable();
-                    returnVal.Fill(dataTable);
-
-                    if (dataTable.Rows.Count <= 0)
-                    {
-                        MessageBox.Show("Your connection contains no databases!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    foreach (DataRow row in dataTable.Rows)
-                        for (int i = 0; i < row.ItemArray.Length; i++)
-                            databaseNames.Add(row.ItemArray[i].ToString());
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                if (databaseNames.Count > 0)
-                    new SelectDatabaseForm(databaseNames).Show(this);
-            }
+            if (databaseNames.Count > 0)
+                new SelectDatabaseForm(databaseNames, true).Show(this);
         }
 
         private void listViewSmartScripts_ColumnClick(object sender, ColumnClickEventArgs e)

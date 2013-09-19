@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using SAI_Editor.Database;
 using SAI_Editor.Database.Classes;
 using SAI_Editor.Properties;
@@ -137,6 +140,52 @@ namespace SAI_Editor
             }
 
             return timedActionListOrEntries;
+        }
+
+        public List<string> GetDatabasesInConnection(string host, string username, uint port, string password = "")
+        {
+            if (host.Length <= 0 || username.Length <= 0 || port <= 0)
+            {
+                MessageBox.Show("You must fill all fields except for the world database field in order to search for your world database (we need to establish a connection to list your databases)!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+
+            var databaseNames = new List<string>();
+
+            MySqlConnectionStringBuilder _connectionString = new MySqlConnectionStringBuilder();
+            _connectionString.Server = host;
+            _connectionString.UserID = username;
+            _connectionString.Port = port;
+
+            if (password.Length > 0)
+                _connectionString.Password = password;
+
+            try
+            {
+                using (var connection = new MySqlConnection(_connectionString.ToString()))
+                {
+                    connection.Open();
+                    var returnVal = new MySqlDataAdapter("SHOW DATABASES", connection);
+                    var dataTable = new DataTable();
+                    returnVal.Fill(dataTable);
+
+                    if (dataTable.Rows.Count <= 0)
+                    {
+                        MessageBox.Show("Your connection contains no databases!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return null;
+                    }
+
+                    foreach (DataRow row in dataTable.Rows)
+                        for (int i = 0; i < row.ItemArray.Length; i++)
+                            databaseNames.Add(row.ItemArray[i].ToString());
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return databaseNames;
         }
     }
 }

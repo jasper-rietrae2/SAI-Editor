@@ -399,11 +399,6 @@
         private System.Windows.Forms.Button buttonClearSettings;
         private System.Windows.Forms.TabPage tabPageConnection;
         private System.Windows.Forms.CheckBox checkBoxAutoConnect;
-        private System.Windows.Forms.TextBox textBoxHost;
-        private System.Windows.Forms.TextBox textBoxUsername;
-        private System.Windows.Forms.TextBox textBoxPassword;
-        private System.Windows.Forms.TextBox textBoxWorldDatabase;
-        private System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
@@ -420,6 +415,11 @@
         private System.Windows.Forms.CheckBox checkBoxPromptExecuteQuery;
         private System.Windows.Forms.CheckBox checkBoxChangeStaticInfo;
         private System.Windows.Forms.Button buttonSearchForWorldDb;
+        public System.Windows.Forms.TextBox textBoxHost;
+        public System.Windows.Forms.TextBox textBoxUsername;
+        public System.Windows.Forms.TextBox textBoxPassword;
+        public System.Windows.Forms.TextBox textBoxWorldDatabase;
+        public System.Windows.Forms.TextBox textBoxPort;
 
     }
 }
