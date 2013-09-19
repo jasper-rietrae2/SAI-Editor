@@ -82,7 +82,7 @@ namespace SAI_Editor
                 textBoxUsername.Text = Settings.Default.User;
                 textBoxPassword.Text = Settings.Default.Password;
                 textBoxWorldDatabase.Text = Settings.Default.Database;
-                textBoxPort.Text = Settings.Default.Port.ToString();
+                textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
                 animationSpeed = Convert.ToInt32(Settings.Default.AnimationSpeed);
             }
             catch (Exception ex)
