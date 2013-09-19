@@ -54,7 +54,7 @@ namespace SAI_Editor
             Settings.Default.User = textBoxUsername.Text;
             Settings.Default.Password = textBoxPassword.Text;
             Settings.Default.Database = textBoxWorldDatabase.Text;
-            Settings.Default.Port = textBoxPort.Text.Length > 0 ? Convert.ToInt32(textBoxPort.Text) : String.Empty;
+            Settings.Default.Port = textBoxPort.Text.Length > 0 ? Convert.ToInt32(textBoxPort.Text) : 0;
             Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
             Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
             Settings.Default.LoadScriptInstantly = checkBoxLoadScriptInstantly.Checked;
@@ -128,7 +128,6 @@ namespace SAI_Editor
                     checkBoxInstantExpand.Checked = false;
                     checkBoxLoadScriptInstantly.Checked = false;
                     checkBoxPromptToQuit.Checked = false;
-                    checkBoxHidePass.Checked = true;
                     textBoxAnimationSpeed.Text = "10";
                     trackBarAnimationSpeed.Value = 10;
                     checkBoxPromptExecuteQuery.Checked = true;
@@ -141,6 +140,7 @@ namespace SAI_Editor
                     textBoxWorldDatabase.Text = "";
                     textBoxPort.Text = "";
                     checkBoxAutoConnect.Checked = false;
+                    checkBoxHidePass.Checked = true;
                     break;
             }
         }
