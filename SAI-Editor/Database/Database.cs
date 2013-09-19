@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Data.SQLite;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.Common;
 using System.Data;
@@ -13,67 +14,113 @@ namespace SAI_Editor
 
         public async Task ExecuteNonQuery(string nonQuery, params Parameter[] parameters)
         {
-            await Task.Run(() =>
+            try
             {
-                using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
+                await Task.Run(() =>
                 {
-                    conn.Open();
-
-                    using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), nonQuery, conn))
+                    using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
                     {
-                        foreach (var param in parameters)
-                            cmd.Parameters.Add(param);
+                        conn.Open();
 
-                        cmd.ExecuteNonQuery();
+                        using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), nonQuery, conn))
+                        {
+                            foreach (var param in parameters)
+                                cmd.Parameters.Add(param);
+
+                            try
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+
+                        conn.Close();
                     }
-
-                    conn.Close();
-                }
-            });
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         public async Task<DataTable> ExecuteQuery(string query, params Parameter[] parameters)
         {
-            return await Task.Run(() =>
+            try
             {
-                using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
+                return await Task.Run(() =>
                 {
-                    conn.Open();
-
-                    using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
+                    using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
                     {
-                        foreach (var param in parameters)
-                            cmd.Parameters.Add(param);
+                        conn.Open();
 
-                        var reader = cmd.ExecuteReader();
-                        var dt = new DataTable();
-                        dt.Load(reader);
-                        conn.Close();
-                        return dt;
+                        using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
+                        {
+                            foreach (var param in parameters)
+                                cmd.Parameters.Add(param);
+
+                            try
+                            {
+                                var reader = cmd.ExecuteReader();
+                                var dt = new DataTable();
+                                dt.Load(reader);
+                                conn.Close();
+                                return dt;
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return null;
+                            }
+                        }
                     }
-                }
-            });
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
 
         public async Task<object> ExecuteScalar(string query, params Parameter[] parameters)
         {
-            return await Task.Run(() =>
+            try
             {
-                using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
+                return await Task.Run(() =>
                 {
-                    conn.Open();
-
-                    using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
+                    using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
                     {
-                        foreach (var param in parameters)
-                            cmd.Parameters.Add(param);
+                        conn.Open();
 
-                        object returnVal = cmd.ExecuteScalar();
-                        conn.Close();
-                        return returnVal;
+                        using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
+                        {
+                            foreach (var param in parameters)
+                                cmd.Parameters.Add(param);
+
+                            try
+                            {
+                                object returnVal = cmd.ExecuteScalar();
+                                conn.Close();
+                                return returnVal;
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return null;
+                            }
+                        }
                     }
-                }
-            });
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
         }
     }
 }
