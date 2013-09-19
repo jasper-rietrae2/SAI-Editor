@@ -458,7 +458,7 @@
             this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxLoadScript.TabIndex = 16;
             this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load Existing Scripts");
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load existing scripts");
             this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // buttonSearchForCreature
