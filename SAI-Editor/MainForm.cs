@@ -152,6 +152,13 @@ namespace SAI_Editor
             if (Settings.Default.AutoConnect)
             {
                 checkBoxAutoConnect.Checked = true;
+                connectionString.Server = textBoxHost.Text;
+                connectionString.UserID = textBoxUsername.Text;
+                connectionString.Port = Convert.ToUInt16(textBoxPort.Text);
+                connectionString.Database = textBoxWorldDatabase.Text;
+
+                if (textBoxPassword.Text.Length > 0)
+                    connectionString.Password = textBoxPassword.Text;
 
                 if (CanConnectToDatabase(false))
                 {
