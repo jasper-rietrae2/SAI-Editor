@@ -195,9 +195,9 @@ namespace SAI_Editor
             textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
         }
 
-        private void buttonSearchForWorldDb_Click(object sender, EventArgs e)
+        private async void buttonSearchForWorldDb_Click(object sender, EventArgs e)
         {
-            List<string> databaseNames = SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
+            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames.Count > 0)
                 new SelectDatabaseForm(databaseNames, false).Show(this);

@@ -120,32 +120,32 @@ namespace SAI_Editor
 
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);  // 0
             listViewSmartScripts.Columns.Add("source_type", 70, HorizontalAlignment.Right); // 1
-            listViewSmartScripts.Columns.Add("id",          20, HorizontalAlignment.Right); // 2
-            listViewSmartScripts.Columns.Add("link",        30, HorizontalAlignment.Right); // 3
-            listViewSmartScripts.Columns.Add("event_type",  66, HorizontalAlignment.Right); // 4
+            listViewSmartScripts.Columns.Add("id", 20, HorizontalAlignment.Right); // 2
+            listViewSmartScripts.Columns.Add("link", 30, HorizontalAlignment.Right); // 3
+            listViewSmartScripts.Columns.Add("event_type", 66, HorizontalAlignment.Right); // 4
             listViewSmartScripts.Columns.Add("event_phase", 74, HorizontalAlignment.Right); // 5
-            listViewSmartScripts.Columns.Add("event_chance",81, HorizontalAlignment.Right); // 6
+            listViewSmartScripts.Columns.Add("event_chance", 81, HorizontalAlignment.Right); // 6
             listViewSmartScripts.Columns.Add("event_flags", 69, HorizontalAlignment.Right); // 7
-            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right); // 8
-            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right); // 9
-            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right); // 10
-            listViewSmartScripts.Columns.Add("p4",          24, HorizontalAlignment.Right); // 11
+            listViewSmartScripts.Columns.Add("p1", 24, HorizontalAlignment.Right); // 8
+            listViewSmartScripts.Columns.Add("p2", 24, HorizontalAlignment.Right); // 9
+            listViewSmartScripts.Columns.Add("p3", 24, HorizontalAlignment.Right); // 10
+            listViewSmartScripts.Columns.Add("p4", 24, HorizontalAlignment.Right); // 11
             listViewSmartScripts.Columns.Add("action_type", 67, HorizontalAlignment.Right); // 12
-            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right); // 13
-            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right); // 14
-            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right); // 15
-            listViewSmartScripts.Columns.Add("p4",          24, HorizontalAlignment.Right); // 16
-            listViewSmartScripts.Columns.Add("p5",          24, HorizontalAlignment.Right); // 17
-            listViewSmartScripts.Columns.Add("p6",          24, HorizontalAlignment.Right); // 18
+            listViewSmartScripts.Columns.Add("p1", 24, HorizontalAlignment.Right); // 13
+            listViewSmartScripts.Columns.Add("p2", 24, HorizontalAlignment.Right); // 14
+            listViewSmartScripts.Columns.Add("p3", 24, HorizontalAlignment.Right); // 15
+            listViewSmartScripts.Columns.Add("p4", 24, HorizontalAlignment.Right); // 16
+            listViewSmartScripts.Columns.Add("p5", 24, HorizontalAlignment.Right); // 17
+            listViewSmartScripts.Columns.Add("p6", 24, HorizontalAlignment.Right); // 18
             listViewSmartScripts.Columns.Add("target_type", 67, HorizontalAlignment.Right); // 19
-            listViewSmartScripts.Columns.Add("p1",          24, HorizontalAlignment.Right); // 20
-            listViewSmartScripts.Columns.Add("p2",          24, HorizontalAlignment.Right); // 21
-            listViewSmartScripts.Columns.Add("p3",          24, HorizontalAlignment.Right); // 22
-            listViewSmartScripts.Columns.Add("x",           20, HorizontalAlignment.Right); // 23
-            listViewSmartScripts.Columns.Add("y",           20, HorizontalAlignment.Right); // 24
-            listViewSmartScripts.Columns.Add("z",           20, HorizontalAlignment.Right); // 25
-            listViewSmartScripts.Columns.Add("o",           20, HorizontalAlignment.Right); // 26
-            listViewSmartScripts.Columns.Add("comment",     400, HorizontalAlignment.Left); // 27 (width 56 to fit)
+            listViewSmartScripts.Columns.Add("p1", 24, HorizontalAlignment.Right); // 20
+            listViewSmartScripts.Columns.Add("p2", 24, HorizontalAlignment.Right); // 21
+            listViewSmartScripts.Columns.Add("p3", 24, HorizontalAlignment.Right); // 22
+            listViewSmartScripts.Columns.Add("x", 20, HorizontalAlignment.Right); // 23
+            listViewSmartScripts.Columns.Add("y", 20, HorizontalAlignment.Right); // 24
+            listViewSmartScripts.Columns.Add("z", 20, HorizontalAlignment.Right); // 25
+            listViewSmartScripts.Columns.Add("o", 20, HorizontalAlignment.Right); // 26
+            listViewSmartScripts.Columns.Add("comment", 400, HorizontalAlignment.Left); // 27 (width 56 to fit)
 
             listViewSmartScripts.ColumnClick += listViewSmartScripts_ColumnClick;
 
@@ -162,7 +162,7 @@ namespace SAI_Editor
 
                 if (CanConnectToDatabase(false))
                 {
-                    buttonConnect_Click(sender, e);
+                    buttonConnect.PerformClick();
 
                     if (Settings.Default.InstantExpand)
                         StartExpandingToMainForm(true);
@@ -412,9 +412,9 @@ namespace SAI_Editor
                     break;
                 case Keys.Enter:
                     if (formState == FormState.FormStateLogin)
-                        buttonConnect_Click(sender, e);
+                        buttonConnect.PerformClick();
                     else if (formState == FormState.FormStateMain && textBoxEntryOrGuid.Focused)
-                        pictureBoxLoadScript_Click(sender, e);
+                        pictureBoxLoadScript_Click(pictureBoxLoadScript, null);
                     break;
                 case Keys.F5: //! Temp to make it easier to design
                     if (panelLoginBox.Location.X == 1000 && panelLoginBox.Location.Y == 50)
@@ -430,20 +430,21 @@ namespace SAI_Editor
                 if (e.KeyData == (Keys.Shift | Keys.F5) || e.KeyData == (Keys.ShiftKey | Keys.F5))
                     TryCloseApplication();
                 else if (e.KeyData == (Keys.Shift | Keys.F4) || e.KeyData == (Keys.ShiftKey | Keys.F4))
-                    menuItemReconnect_Click(sender, e);
+                    menuItemReconnect.PerformClick();
                 else if (e.KeyData == Keys.F1)
-                    menuItemSettings_Click(sender, e);
+                    menuItemSettings.PerformClick();
                 else if (e.KeyData == (Keys.Alt | Keys.F1))
-                    menuItemAbout_Click(sender, e);
+                    menuItemAbout.PerformClick();
                 else if (e.KeyData == (Keys.Control | Keys.D) || e.KeyData == (Keys.ControlKey | Keys.D))
-                    menuOptionDeleteSelectedRow_Click(sender, e);
+                    menuItemDeleteSelectedRow.PerformClick();
             }
         }
 
         private void buttonSearchForCreature_Click(object sender, EventArgs e)
         {
             //! Just keep it in main thread; no purpose starting a new thread for this (unless workspaces get implemented, maybe)
-            new SearchForEntryForm(connectionString, textBoxEntryOrGuid.Text, GetSourceTypeByIndex()).ShowDialog(this);
+            using (var entryForm = new SearchForEntryForm(connectionString, textBoxEntryOrGuid.Text, GetSourceTypeByIndex()))
+                entryForm.ShowDialog(this);
         }
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
@@ -794,7 +795,7 @@ namespace SAI_Editor
 
             for (int i = 0; i < selectedIndices.Count; ++i)
                 if (listViewSmartScripts.Items[selectedIndices[i]] != null)
-                    listViewSmartScripts.Items[selectedIndices[i]].Selected  = true;
+                    listViewSmartScripts.Items[selectedIndices[i]].Selected = true;
         }
 
         private void RemoveNonOriginalScriptsFromView()
@@ -868,9 +869,9 @@ namespace SAI_Editor
             new MultiSelectForm(false).ShowDialog(this);
         }
 
-        private void buttonSearchWorldDb_Click(object sender, EventArgs e)
+        private async void buttonSearchWorldDb_Click(object sender, EventArgs e)
         {
-            List<string> databaseNames = SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
+            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames.Count > 0)
                 new SelectDatabaseForm(databaseNames, true).Show(this);

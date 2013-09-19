@@ -434,7 +434,7 @@ namespace SAI_Editor
                     if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
                         FillMainFormEntryOrGuidField(sender, e);
                     else
-                        buttonSearch_Click(sender, e);
+                        buttonSearch.PerformClick();
 
                     break;
                 }
@@ -522,7 +522,7 @@ namespace SAI_Editor
             }
 
             if (Settings.Default.LoadScriptInstantly)
-                ((MainForm)Owner).pictureBoxLoadScript_Click(sender, e);
+                ((MainForm)Owner).pictureBoxLoadScript_Click(sender, null);
 
             Close();
         }
