@@ -152,10 +152,14 @@ namespace SAI_Editor
             if (Settings.Default.AutoConnect)
             {
                 checkBoxAutoConnect.Checked = true;
-                buttonConnect_Click(sender, e);
 
-                if (Settings.Default.InstantExpand)
-                    StartExpandingToMainForm(true);
+                if (CanConnectToDatabase(false))
+                {
+                    buttonConnect_Click(sender, e);
+
+                    if (Settings.Default.InstantExpand)
+                        StartExpandingToMainForm(true);
+                }
             }
 
             tabControlParameters.AutoScrollOffset = new Point(5, 5);
@@ -372,7 +376,7 @@ namespace SAI_Editor
             Close();
         }
 
-        private bool CanConnectToDatabase()
+        private bool CanConnectToDatabase(bool showErrorMessage = true)
         {
             try
             {
@@ -383,7 +387,9 @@ namespace SAI_Editor
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show(ex.Message, "Could not connect", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (showErrorMessage)
+                    MessageBox.Show(ex.Message, "Could not connect", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 return false;
             }
 
@@ -826,7 +832,6 @@ namespace SAI_Editor
                 return;
 
             pictureBoxLoadScript.Enabled = false;
-            pictureBoxLoadScript.BackColor = Color.FromArgb(0, 0, 0, 0);
 
             SourceTypes newSourceType = GetSourceTypeByIndex();
             originalSourceType = newSourceType;
