@@ -388,6 +388,7 @@
             // 
             // menuItemDeleteSelectedRow
             // 
+            this.menuItemDeleteSelectedRow.Enabled = false;
             this.menuItemDeleteSelectedRow.Name = "menuItemDeleteSelectedRow";
             this.menuItemDeleteSelectedRow.Size = new System.Drawing.Size(176, 22);
             this.menuItemDeleteSelectedRow.Text = "Delete selected row";
@@ -404,7 +405,7 @@
             // menuItemAbout
             // 
             this.menuItemAbout.Name = "menuItemAbout";
-            this.menuItemAbout.Size = new System.Drawing.Size(107, 22); 
+            this.menuItemAbout.Size = new System.Drawing.Size(107, 22);
             this.menuItemAbout.Text = "About";
             this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
             // 

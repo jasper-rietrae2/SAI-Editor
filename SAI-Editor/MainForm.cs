@@ -590,6 +590,8 @@ namespace SAI_Editor
 
         private void listViewSmartScripts_SelectedIndexChanged(object sender, EventArgs e)
         {
+            menuItemDeleteSelectedRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
+
             if (listViewSmartScripts.SelectedItems.Count <= 0)
             {
                 ResetNonStaticFieldsToDefault();
