@@ -54,7 +54,7 @@ namespace SAI_Editor
             Settings.Default.User = textBoxUsername.Text;
             Settings.Default.Password = textBoxPassword.Text;
             Settings.Default.Database = textBoxWorldDatabase.Text;
-            Settings.Default.Port = Convert.ToInt32(textBoxPort.Text);
+            Settings.Default.Port = textBoxPort.Text.Length > 0 ? Convert.ToInt32(textBoxPort.Text) : String.Empty;
             Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
             Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
             Settings.Default.LoadScriptInstantly = checkBoxLoadScriptInstantly.Checked;
