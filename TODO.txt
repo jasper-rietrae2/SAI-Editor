@@ -3,7 +3,6 @@
 - Possibly take the workspace-idea by Event Horizon
 - Checkbox to only show event_types and action_types for the chosen source_type (so for gameobjects we would hide SMART_EVENT_SPELLHIT, etc.)
 - Possibly pick another logo, this is fugly and boring
-- Option to reset settings to default
 - Can't use copy or paste in the numeric-only fields (entry, type id, parameters, etc.) (numericField_KeyPress)
 - Make the column sorter work with numbers as well
 - Find a good-looking way to display _ALL_ info in the listview without having to scroll (is there any?)

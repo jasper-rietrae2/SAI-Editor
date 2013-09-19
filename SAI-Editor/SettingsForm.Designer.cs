@@ -56,7 +56,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.buttonClearSettings = new System.Windows.Forms.Button();
+            this.buttonDefaultSettings = new System.Windows.Forms.Button();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -351,22 +351,22 @@
             this.label7.TabIndex = 28;
             this.label7.Text = "Port:";
             // 
-            // buttonClearSettings
+            // buttonDefaultSettings
             // 
-            this.buttonClearSettings.Location = new System.Drawing.Point(101, 282);
-            this.buttonClearSettings.Name = "buttonClearSettings";
-            this.buttonClearSettings.Size = new System.Drawing.Size(75, 23);
-            this.buttonClearSettings.TabIndex = 8;
-            this.buttonClearSettings.Text = "Clear";
-            this.buttonClearSettings.UseVisualStyleBackColor = true;
-            this.buttonClearSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
+            this.buttonDefaultSettings.Location = new System.Drawing.Point(101, 282);
+            this.buttonDefaultSettings.Name = "buttonDefaultSettings";
+            this.buttonDefaultSettings.Size = new System.Drawing.Size(75, 23);
+            this.buttonDefaultSettings.TabIndex = 8;
+            this.buttonDefaultSettings.Text = "Default";
+            this.buttonDefaultSettings.UseVisualStyleBackColor = true;
+            this.buttonDefaultSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(279, 317);
-            this.Controls.Add(this.buttonClearSettings);
+            this.Controls.Add(this.buttonDefaultSettings);
             this.Controls.Add(this.buttonSaveSettings);
             this.Controls.Add(this.buttonExitSettings);
             this.Controls.Add(this.tabControlSettings);
@@ -396,7 +396,7 @@
         private System.Windows.Forms.Button buttonSaveSettings;
         private System.Windows.Forms.TabPage tabPageGeneral;
         private System.Windows.Forms.TabControl tabControlSettings;
-        private System.Windows.Forms.Button buttonClearSettings;
+        private System.Windows.Forms.Button buttonDefaultSettings;
         private System.Windows.Forms.TabPage tabPageConnection;
         private System.Windows.Forms.CheckBox checkBoxAutoConnect;
         private System.Windows.Forms.Label label3;
