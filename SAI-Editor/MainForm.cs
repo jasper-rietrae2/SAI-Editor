@@ -828,6 +828,8 @@ namespace SAI_Editor
 
         public void pictureBoxLoadScript_Click(object sender, EventArgs e)
         {
+            listViewSmartScripts.Items.Clear();
+
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
                 return;
 
@@ -836,7 +838,6 @@ namespace SAI_Editor
             SourceTypes newSourceType = GetSourceTypeByIndex();
             originalSourceType = newSourceType;
             originalEntryOrGuid = textBoxEntryOrGuid.Text;
-            listViewSmartScripts.Items.Clear();
             SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType);
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
         }
