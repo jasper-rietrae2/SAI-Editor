@@ -145,6 +145,7 @@
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -403,7 +404,7 @@
             // menuItemAbout
             // 
             this.menuItemAbout.Name = "menuItemAbout";
-            this.menuItemAbout.Size = new System.Drawing.Size(107, 22);
+            this.menuItemAbout.Size = new System.Drawing.Size(107, 22); 
             this.menuItemAbout.Text = "About";
             this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
             // 
@@ -457,6 +458,7 @@
             this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxLoadScript.TabIndex = 16;
             this.pictureBoxLoadScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load Existing Scripts");
             this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // buttonSearchForCreature
@@ -1779,6 +1781,7 @@
         private System.Windows.Forms.Button buttonSearchWorldDb;
         public System.Windows.Forms.TextBox textBoxLinkFrom;
         public System.Windows.Forms.TextBox textBoxLinkTo;
+        private System.Windows.Forms.ToolTip LoadTooltip;
     }
 }
 
