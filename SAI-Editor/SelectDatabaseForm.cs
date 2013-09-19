@@ -28,7 +28,7 @@ namespace SAI_Editor
                 listViewDatabases.Items.Add(databaseNames[i]);
 
                 //! Select the currently used database (if any)
-                if ((openedFromMainForm && ((MainForm)Owner).textBoxWorldDatabase.Text == databaseNames[i]) || ((SettingsForm)Owner).textBoxWorldDatabase.Text == databaseNames[i])
+                if ((openedFromMainForm && ((MainForm)Owner).textBoxWorldDatabase.Text == databaseNames[i]) || (!openedFromMainForm && ((SettingsForm)Owner).textBoxWorldDatabase.Text == databaseNames[i]))
                     listViewDatabases.Items[i].Selected = true;
             }
         }
@@ -60,7 +60,7 @@ namespace SAI_Editor
 
         private void listViewDatabases_DoubleClick(object sender, EventArgs e)
         {
-            buttonContinue_Click(sender, e);
+            buttonContinue.PerformClick();
         }
 
         private void listViewDatabases_ColumnClick(object sender, ColumnClickEventArgs e)
