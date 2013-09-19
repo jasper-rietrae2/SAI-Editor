@@ -11,11 +11,14 @@
   - Also implement this in the SearchForLink form
 - Implement the 'Link from' field
 - The selected item looks as if it is no longer selected once the user uses a button to open a new form, like event_flags
-- (Requires to be further into finishing the application) Improve implementation of the SearchForLinkForm to do the following:
-  - Only allow to link to lines with a higher smart_scripts.id
-    - This could possibly also be implemented as a feature to refactor the SAI of the creature with the id's to be re-ordered (posibly based on a YesNo messagebox question)
-  - We also need to adjust the id chosen to link from/to so the script will still work
 - Allow resizing the application but just make everything scroll-able if it becomes smaller
 - For some reason it's not possible to cancel the threads ran while searching for either actionlists or areatriggers, very most likely related to the fact we use 'return' instead of 'break'
   - This also causes a second issue in which an exception is thrown when closing the search form WHILE it's searching. The exception, logically, says the object trying to be accessed (crossthread) is already removed/disposed. This makes sense, unlike the issue described one line up.
 - (?) Implement a sqlite database containing required tables for the tool (creature_template, creature, gameobject, smart_scripts, etc.) and use this if user wants to not use his local database
+
+Needs to be further into development:
+- Make all tabindexes work completely (need to finish pretty much first)
+- Improve implementation of the SearchForLinkForm to do the following:
+  - Only allow to link to lines with a higher smart_scripts.id
+    - This could possibly also be implemented as a feature to refactor the SAI of the creature with the id's to be re-ordered (posibly based on a YesNo messagebox question)
+  - We also need to adjust the id chosen to link from/to so the script will still work
