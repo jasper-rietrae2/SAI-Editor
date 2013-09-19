@@ -313,7 +313,7 @@ namespace SAI_Editor
                 Settings.Default.Save();
             }
 
-            ResetNonStaticFieldsToDefault();
+            ResetFieldsToDefault();
             Text = "SAI-Editor: " + textBoxUsername.Text + "@" + textBoxHost.Text + ":" + textBoxPort.Text;
 
             if (instant)
@@ -441,6 +441,7 @@ namespace SAI_Editor
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
+            ResetFieldsToDefault(true);
             listViewSmartScripts.Items.Clear();
             StartContractingToLoginForm(Settings.Default.InstantExpand);
         }
@@ -600,7 +601,7 @@ namespace SAI_Editor
 
             if (listViewSmartScripts.SelectedItems.Count <= 0)
             {
-                ResetNonStaticFieldsToDefault();
+                ResetFieldsToDefault();
                 return;
             }
 
@@ -951,8 +952,14 @@ namespace SAI_Editor
                     listViewSmartScripts.Items.Remove(item);
         }
 
-        private void ResetNonStaticFieldsToDefault()
+        private void ResetFieldsToDefault(bool withStatic = false)
         {
+            if (withStatic)
+            {
+                textBoxEntryOrGuid.Text = String.Empty;
+                comboBoxSourceType.SelectedIndex = 0;
+            }
+
             comboBoxEventType.SelectedIndex = 0;
             comboBoxActionType.SelectedIndex = 0;
             comboBoxTargetType.SelectedIndex = 0;
