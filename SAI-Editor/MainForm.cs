@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows.Forms;
 using System.Data;
 using System.Drawing;
 using MySql.Data.MySqlClient;
 using SAI_Editor.Properties;
 using SAI_Editor.Database.Classes;
+using SAI_Editor.Security;
 
 namespace SAI_Editor
 {
@@ -78,12 +81,14 @@ namespace SAI_Editor
 
             try
             {
+
                 textBoxHost.Text = Settings.Default.Host;
                 textBoxUsername.Text = Settings.Default.User;
-                textBoxPassword.Text = Settings.Default.Password;
+                textBoxPassword.Text = Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
                 textBoxWorldDatabase.Text = Settings.Default.Database;
                 textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
                 animationSpeed = Convert.ToInt32(Settings.Default.AnimationSpeed);
+
             }
             catch (Exception ex)
             {
@@ -311,9 +316,19 @@ namespace SAI_Editor
         {
             if (checkBoxSaveSettings.Checked)
             {
+
+                RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+                byte[] buffer = new byte[1024];
+
+                rng.GetBytes(buffer);
+                string salt = BitConverter.ToString(buffer);
+
+                rng.Dispose();
+
+                Settings.Default.Entropy = salt;
                 Settings.Default.Host = textBoxHost.Text;
                 Settings.Default.User = textBoxUsername.Text;
-                Settings.Default.Password = textBoxPassword.Text;
+                Settings.Default.Password = textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
                 Settings.Default.Port = textBoxPort.Text.Length > 0 ? Convert.ToInt32(textBoxPort.Text) : 0;
