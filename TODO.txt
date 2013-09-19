@@ -19,3 +19,4 @@
 - Allow resizing the application but just make everything scroll-able if it becomes smaller
 - For some reason it's not possible to cancel the threads ran while searching for either actionlists or areatriggers, very most likely related to the fact we use 'return' instead of 'break'
   - This also causes a second issue in which an exception is thrown when closing the search form WHILE it's searching. The exception, logically, says the object trying to be accessed (crossthread) is already removed/disposed. This makes sense, unlike the issue described one line up.
+- (?) Implement a sqlite database containing required tables for the tool (creature_template, creature, gameobject, smart_scripts, etc.) and use this if user wants to not use his local database
