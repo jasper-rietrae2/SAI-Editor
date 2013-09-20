@@ -60,11 +60,12 @@ namespace SAI_Editor
             string salt = BitConverter.ToString(buffer);
 
             rng.Dispose();
+            string decryptedPassword = textBoxPassword.Text;
 
             Settings.Default.Entropy = salt;
             Settings.Default.Host = textBoxHost.Text;
             Settings.Default.User = textBoxUsername.Text;
-            Settings.Default.Password = textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
+            Settings.Default.Password = decryptedPassword.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
             Settings.Default.Database = textBoxWorldDatabase.Text;
             Settings.Default.Port = textBoxPort.Text.Length > 0 ? Convert.ToInt32(textBoxPort.Text) : 0;
             Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
@@ -81,7 +82,7 @@ namespace SAI_Editor
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
             ((MainForm)Owner).textBoxHost.Text = textBoxHost.Text;
             ((MainForm)Owner).textBoxUsername.Text = textBoxUsername.Text;
-            ((MainForm)Owner).textBoxPassword.Text = textBoxPassword.Text.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
+            ((MainForm)Owner).textBoxPassword.Text = decryptedPassword;
             ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
             ((MainForm)Owner).animationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);

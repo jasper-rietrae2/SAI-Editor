@@ -83,7 +83,7 @@ namespace SAI_Editor
             {
                 textBoxHost.Text = Settings.Default.Host;
                 textBoxUsername.Text = Settings.Default.User;
-                textBoxPassword.Text = Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
+                textBoxPassword.Text = Settings.Default.Password.Length > 150 ? Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString() : Settings.Default.Password;
                 textBoxWorldDatabase.Text = Settings.Default.Database;
                 textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
                 animationSpeed = Convert.ToInt32(Settings.Default.AnimationSpeed);

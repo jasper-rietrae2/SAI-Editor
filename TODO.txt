@@ -16,6 +16,8 @@
   - This also causes a second issue in which an exception is thrown when closing the search form WHILE it's searching. The exception, logically, says the object trying to be accessed (crossthread) is already removed/disposed. This makes sense, unlike the issue described one line up.
 - (?) Implement a sqlite database containing required tables for the tool (creature_template, creature, gameobject, smart_scripts, etc.) and use this if user wants to not use his local database
 
+
+
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much first)
 - Improve implementation of the SearchForLinkForm to do the following:
