@@ -153,12 +153,8 @@ namespace SAI_Editor
                     foreach (DataRow row in dt.Rows)
                     {
                         AreaTrigger areaTrigger = SAI_Editor_Manager.Instance.sqliteDatabase.BuildAreaTrigger(row);
-                        DataTable dtHasAiname = null;
 
-                        if (checkBoxHasAiName.Checked)
-                            dtHasAiname = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = @id", new MySqlParameter("@id", areaTrigger.id));
-
-                        if (!checkBoxHasAiName.Checked || dtHasAiname.Rows.Count > 0)
+                        if (!checkBoxHasAiName.Checked || await SAI_Editor_Manager.Instance.worldDatabase.AreaTriggerHasSmartAI(areaTrigger.id))
                             AddItemToListView(listViewEntryResults, areaTrigger.id.ToString(), areaTrigger.map_id.ToString(), areaTrigger.posX.ToString(), areaTrigger.posY.ToString(), areaTrigger.posZ.ToString());
                     }
                 }
