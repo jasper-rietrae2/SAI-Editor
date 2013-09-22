@@ -20,11 +20,14 @@ namespace SAI_Editor
         private Thread searchThread = null;
         private readonly MySqlConnectionStringBuilder connectionString;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+        private readonly TextBox textBoxToChange = null;
 
-        public SearchForSpellForm(MySqlConnectionStringBuilder connectionString)
+        public SearchForSpellForm(MySqlConnectionStringBuilder connectionString, TextBox textBoxToChange)
         {
             InitializeComponent();
+
             this.connectionString = connectionString;
+            this.textBoxToChange = textBoxToChange;
         }
 
         private void SearchForSpellForm_Load(object sender, EventArgs e)
@@ -39,7 +42,8 @@ namespace SAI_Editor
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
             StopRunningThread();
-            FillMainFormEntryOrGuidField(sender, e);
+            textBoxToChange.Text = listViewEntryResults.SelectedItems[0].Text;
+            Close();
         }
 
         private async void FillListViewWithSpells(bool limit = false)
@@ -128,7 +132,10 @@ namespace SAI_Editor
                 case Keys.Enter:
                 {
                     if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
-                        FillMainFormEntryOrGuidField(sender, e);
+                    {
+                        textBoxToChange.Text = listViewEntryResults.SelectedItems[0].Text;
+                        Close();
+                    }
                     else
                         buttonSearch.PerformClick();
 
@@ -159,43 +166,6 @@ namespace SAI_Editor
         private void comboBoxSearchType_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
-        }
-
-        private void FillMainFormEntryOrGuidField(object sender, EventArgs e)
-        {
-            string entryToPlace = "";
-
-            if (comboBoxSearchType.SelectedIndex == 2 || comboBoxSearchType.SelectedIndex == 5)
-                entryToPlace = "-";
-
-            entryToPlace += listViewEntryResults.SelectedItems[0].Text;
-            ((MainForm)Owner).textBoxEntryOrGuid.Text = entryToPlace;
-
-            switch (comboBoxSearchType.SelectedIndex)
-            {
-                case 0: //! Creature entry
-                case 1: //! Creature name
-                case 2: //! Creature guid
-                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 0;
-                    break;
-                case 3: //! Gameobject entry
-                case 4: //! Gameobject name
-                case 5: //! Gameobject guid
-                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 1;
-                    break;
-                case 6: //! Areatrigger id
-                case 7: //! Areatrigger map id
-                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 2;
-                    break;
-                case 8: //! Actionlist entry
-                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 3;
-                    break;
-            }
-
-            if (Settings.Default.LoadScriptInstantly)
-                ((MainForm)Owner).pictureBoxLoadScript_Click(sender, null);
-
-            Close();
         }
 
         private int GetSelectedIndexOfComboBox(ComboBox comboBox)

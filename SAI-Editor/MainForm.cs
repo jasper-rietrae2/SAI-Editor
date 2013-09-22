@@ -1144,7 +1144,7 @@ namespace SAI_Editor
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
                 case SmartAction.SMART_ACTION_CAST:
-                    new SearchForSpellForm(connectionString).ShowDialog(this);
+                    new SearchForSpellForm(connectionString, textBoxActionParam1).ShowDialog(this);
                     break;
             }
         }
