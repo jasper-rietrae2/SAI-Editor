@@ -433,15 +433,6 @@ namespace SAI_Editor
                             break;
                     }
                     break;
-                case Keys.F5: //! Temp to make it easier to design
-                    if (formState == FormState.FormStateLogin)
-                    {
-                        if (panelLoginBox.Location.X == 1000 && panelLoginBox.Location.Y == 50)
-                            panelLoginBox.Location = new Point(9, 8);
-                        else
-                            panelLoginBox.Location = new Point(1000, 50);
-                    }
-                    break;
             }
 
             //! Hardcode shortcuts to menu because we can't use conditions otherwise
