@@ -865,7 +865,7 @@ namespace SAI_Editor
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
         {
             //! Only allow typing keys that are numbers
-            //! Inset is '-'
+            //! Insert is '-'
             //if (!Char.IsNumber(e.KeyChar) && e.KeyChar != (char)Keys.Back && e.KeyChar != (char)Keys.ControlKey && e.KeyChar != (char)Keys.Insert)
             //    e.Handled = true;
         }
@@ -884,7 +884,7 @@ namespace SAI_Editor
         {
             List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
-            if (databaseNames.Count > 0)
+            if (databaseNames != null && databaseNames.Count > 0)
                 new SelectDatabaseForm(databaseNames, true).Show(this);
         }
 
