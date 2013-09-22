@@ -421,17 +421,26 @@ namespace SAI_Editor
                     TryCloseApplication();
                     break;
                 case Keys.Enter:
-                    if (formState == FormState.FormStateLogin)
-                        buttonConnect.PerformClick();
-                    else if (formState == FormState.FormStateMain && textBoxEntryOrGuid.Focused)
-                        pictureBoxLoadScript_Click(pictureBoxLoadScript, null);
+                    switch (formState)
+                    {
+                        case FormState.FormStateLogin:
+                            buttonConnect.PerformClick();
+                            break;
+                        case FormState.FormStateMain:
+                            if (textBoxEntryOrGuid.Focused)
+                                pictureBoxLoadScript_Click(pictureBoxLoadScript, null);
 
+                            break;
+                    }
                     break;
                 case Keys.F5: //! Temp to make it easier to design
-                    if (panelLoginBox.Location.X == 1000 && panelLoginBox.Location.Y == 50)
-                        panelLoginBox.Location = new Point(9, 8);
-                    else
-                        panelLoginBox.Location = new Point(1000, 50);
+                    if (formState == FormState.FormStateLogin)
+                    {
+                        if (panelLoginBox.Location.X == 1000 && panelLoginBox.Location.Y == 50)
+                            panelLoginBox.Location = new Point(9, 8);
+                        else
+                            panelLoginBox.Location = new Point(1000, 50);
+                    }
                     break;
             }
 

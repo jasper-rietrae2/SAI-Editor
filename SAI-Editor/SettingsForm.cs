@@ -10,7 +10,7 @@ namespace SAI_Editor
 {
     public partial class SettingsForm : Form
     {
-        private bool closedFormByHand;
+        private bool closedFormByHand = false;
 
         public SettingsForm()
         {
