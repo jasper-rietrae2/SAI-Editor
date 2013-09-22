@@ -708,14 +708,20 @@ namespace SAI_Editor
                 textBoxTargetY.Text = selectedItem[24].Text;
                 textBoxTargetZ.Text = selectedItem[25].Text;
                 textBoxTargetO.Text = selectedItem[26].Text;
-
                 textBoxComments.Text = selectedItem[27].Text;
 
                 SetVisibilityOfAllParamButtons(false);
 
                 switch ((SmartEvent)event_type)
                 {
-                    case SmartEvent.SMART_EVENT_UPDATE_IC:
+                    case SmartEvent.SMART_EVENT_SPELLHIT:
+                        buttonEventParamOneSearch.Visible = true; //! Spell id
+                        buttonEventParamTwoSearch.Visible = true; //! Spell school
+                        break;
+                    case SmartEvent.SMART_EVENT_RESPAWN:
+                        buttonEventParamOneSearch.Visible = true; //! Respawn condition (SMART_SCRIPT_RESPAWN_CONDITION_MAP / SMART_SCRIPT_RESPAWN_CONDITION_AREA)
+                        buttonEventParamTwoSearch.Visible = true; //! Map id
+                        buttonEventParamThreeSearch.Visible = true; //! Zone id
                         break;
                 }
 
