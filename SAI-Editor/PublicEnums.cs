@@ -194,7 +194,7 @@
         SMART_EVENT_FRIENDLY_HEALTH_PCT = 74,
     }
 
-    public enum SmartTargetType
+    public enum SmartTarget
     {
         SMART_TARGET_NONE = 0,
         SMART_TARGET_SELF = 1,
