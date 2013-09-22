@@ -96,6 +96,8 @@ namespace SAI_Editor
         {
             try
             {
+                SetEnabledOfControl(buttonSearch, false);
+                SetEnabledOfControl(buttonStopSearching, true);
                 ClearItemsOfListView(listViewEntryResults);
 
                 try
