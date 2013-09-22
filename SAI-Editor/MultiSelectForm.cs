@@ -5,18 +5,14 @@ namespace SAI_Editor
 {
     public partial class MultiSelectForm : Form
     {
-        private readonly bool searchingForPhasemask;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+        private readonly TextBox textBoxToChange = null;
 
-        public MultiSelectForm(bool searchingForPhasemask)
+        public MultiSelectForm(bool searchingForPhasemask, TextBox textBoxToChange)
         {
             InitializeComponent();
 
-            this.searchingForPhasemask = searchingForPhasemask;
-        }
-
-        private void MultiSelectForm_Load(object sender, EventArgs e)
-        {
+            this.textBoxToChange = textBoxToChange;
             listViewSelectableItems.Columns.Add("", 20, HorizontalAlignment.Left);
             listViewSelectableItems.ColumnClick += listViewSelectableItems_ColumnClick;
 
@@ -44,8 +40,11 @@ namespace SAI_Editor
                 listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_3");   // 5
                 listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DEBUG_ONLY");     // 6
             }
+        }
 
-            int bitmask = Convert.ToInt32(searchingForPhasemask ? ((MainForm)Owner).textBoxEventPhasemask.Text : ((MainForm)Owner).textBoxEventFlags.Text);
+        private void MultiSelectForm_Load(object sender, EventArgs e)
+        {
+            int bitmask = Convert.ToInt32(textBoxToChange.Text);
 
             if (bitmask == 0)
                 listViewSelectableItems.Items[0].Checked = true;
@@ -69,11 +68,7 @@ namespace SAI_Editor
             foreach (ListViewItem item in listViewSelectableItems.CheckedItems)
                 mask += GetMaskByIndex(item.Index);
 
-            if (searchingForPhasemask)
-                ((MainForm)Owner).textBoxEventPhasemask.Text = mask.ToString();
-            else
-                ((MainForm)Owner).textBoxEventFlags.Text = mask.ToString();
-
+            textBoxToChange.Text = mask.ToString();
             Close();
         }
 

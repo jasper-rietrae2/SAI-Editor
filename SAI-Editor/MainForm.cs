@@ -934,12 +934,12 @@ namespace SAI_Editor
 
         private void buttonSearchPhasemask_Click(object sender, EventArgs e)
         {
-            new MultiSelectForm(true).ShowDialog(this);
+            new MultiSelectForm(true, textBoxEventPhasemask).ShowDialog(this);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void buttonSelectEventFlag_Click(object sender, EventArgs e)
         {
-            new MultiSelectForm(false).ShowDialog(this);
+            new MultiSelectForm(false, textBoxEventFlags).ShowDialog(this);
         }
 
         private async void buttonSearchWorldDb_Click(object sender, EventArgs e)
@@ -984,15 +984,15 @@ namespace SAI_Editor
 
         private void buttonLinkTo_Click(object sender, EventArgs e)
         {
-            TryToOpenLinkForm(true);
+            TryToOpenLinkForm(textBoxLinkTo);
         }
 
         private void buttonLinkFrom_Click(object sender, EventArgs e)
         {
-            TryToOpenLinkForm(false);
+            TryToOpenLinkForm(textBoxLinkFrom);
         }
 
-        private void TryToOpenLinkForm(bool linkTo)
+        private void TryToOpenLinkForm(TextBox textBoxToChange)
         {
             if (listViewSmartScripts.SelectedItems.Count <= 0)
             {
@@ -1006,7 +1006,7 @@ namespace SAI_Editor
                 return;
             }
 
-            new SearchForLinkForm(linkTo, GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index).Show(this);
+            new SearchForLinkForm(GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index, textBoxToChange).Show(this);
         }
 
         protected override void WndProc(ref Message m)

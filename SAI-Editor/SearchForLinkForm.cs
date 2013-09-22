@@ -12,17 +12,17 @@ namespace SAI_Editor
     public partial class SearchForLinkForm : Form
     {
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
-        private bool linkTo = false; //! Determines whether the form was opened by using 'Link to' or 'Link from' button
         private int indexOfLineToDisable = 0;
         private ListView.ListViewItemCollection items;
+        private readonly TextBox textBoxToChange = null;
 
-        public SearchForLinkForm(bool linkTo, ListView.ListViewItemCollection items, int indexOfLineToDisable)
+        public SearchForLinkForm(ListView.ListViewItemCollection items, int indexOfLineToDisable, TextBox textBoxToChange)
         {
             InitializeComponent();
 
-            this.linkTo = linkTo;
             this.items = items;
             this.indexOfLineToDisable = indexOfLineToDisable;
+            this.textBoxToChange = textBoxToChange;
         }
 
         private void SearchForLinkForm_Load(object sender, EventArgs e)
@@ -84,11 +84,7 @@ namespace SAI_Editor
                 return;
             }
 
-            if (linkTo)
-                ((MainForm)Owner).textBoxLinkTo.Text = listViewScripts.SelectedItems[0].SubItems[2].Text;
-            else
-                ((MainForm)Owner).textBoxLinkFrom.Text = listViewScripts.SelectedItems[0].SubItems[2].Text;
-
+            textBoxToChange.Text = listViewScripts.SelectedItems[0].SubItems[2].Text;
             Close();
         }
 

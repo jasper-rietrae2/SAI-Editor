@@ -725,7 +725,7 @@
             this.buttonSelectEventFlag.TabIndex = 12;
             this.buttonSelectEventFlag.Text = "...";
             this.buttonSelectEventFlag.UseVisualStyleBackColor = true;
-            this.buttonSelectEventFlag.Click += new System.EventHandler(this.button2_Click);
+            this.buttonSelectEventFlag.Click += new System.EventHandler(this.buttonSelectEventFlag_Click);
             // 
             // buttonSearchPhasemask
             // 
