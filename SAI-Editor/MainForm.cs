@@ -425,6 +425,7 @@ namespace SAI_Editor
                         buttonConnect.PerformClick();
                     else if (formState == FormState.FormStateMain && textBoxEntryOrGuid.Focused)
                         pictureBoxLoadScript_Click(pictureBoxLoadScript, null);
+
                     break;
                 case Keys.F5: //! Temp to make it easier to design
                     if (panelLoginBox.Location.X == 1000 && panelLoginBox.Location.Y == 50)
@@ -901,6 +902,9 @@ namespace SAI_Editor
 
         public void pictureBoxLoadScript_Click(object sender, EventArgs e)
         {
+            if (!pictureBoxLoadScript.Enabled)
+                return;
+
             // @Debug new AreatriggersForm().Show();
             listViewSmartScripts.Items.Clear();
 
