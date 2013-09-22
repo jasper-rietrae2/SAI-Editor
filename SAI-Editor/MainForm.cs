@@ -447,7 +447,10 @@ namespace SAI_Editor
                 else if (e.KeyData == (Keys.Alt | Keys.F1))
                     menuItemAbout.PerformClick();
                 else if (e.KeyData == (Keys.Control | Keys.D) || e.KeyData == (Keys.ControlKey | Keys.D))
-                    menuItemDeleteSelectedRow.PerformClick();
+                {
+                    if (menuItemDeleteSelectedRow.Enabled)
+                        menuItemDeleteSelectedRow.PerformClick();
+                }
             }
         }
 

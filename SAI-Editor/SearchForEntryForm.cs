@@ -442,7 +442,10 @@ namespace SAI_Editor
                     if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
                         FillMainFormEntryOrGuidField(sender, e);
                     else
-                        buttonSearch.PerformClick();
+                    {
+                        if (buttonSearch.Enabled)
+                            buttonSearch.PerformClick();
+                    }
 
                     break;
                 }

@@ -137,7 +137,10 @@ namespace SAI_Editor
                         Close();
                     }
                     else
-                        buttonSearch.PerformClick();
+                    {
+                        if (buttonSearch.Enabled)
+                            buttonSearch.PerformClick();
+                    }
 
                     break;
                 }
