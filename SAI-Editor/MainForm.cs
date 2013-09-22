@@ -947,7 +947,9 @@ namespace SAI_Editor
             List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
-                new SelectDatabaseForm(databaseNames, true).Show(this);
+                using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, true))
+                    if (selectDatabaseForm.ShowDialog() == DialogResult.OK)
+                        textBoxWorldDatabase.Text = selectDatabaseForm.selectedDatabaseItem;
         }
 
         private void listViewSmartScripts_ColumnClick(object sender, ColumnClickEventArgs e)
