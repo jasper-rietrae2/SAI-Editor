@@ -674,10 +674,14 @@ namespace SAI_Editor
                 textBoxEventParam2.Text = selectedItem[9].Text;
                 textBoxEventParam3.Text = selectedItem[10].Text;
                 textBoxEventParam4.Text = selectedItem[11].Text;
-                labelEventParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 1, ScriptTypeId.ScriptTypeEvent);
-                labelEventParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
-                labelEventParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
-                labelEventParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
+                labelEventParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 1, ScriptTypeId.ScriptTypeEvent);
+                labelEventParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
+                labelEventParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
+                labelEventParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
+                AddTooltip(labelEventParam1, labelEventParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 1, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam2, labelEventParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 2, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam3, labelEventParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 3, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam4, labelEventParam4.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
 
                 //! Action parameters
                 int action_type = Convert.ToInt32(selectedItem[12].Text);
@@ -688,12 +692,18 @@ namespace SAI_Editor
                 textBoxActionParam4.Text = selectedItem[16].Text;
                 textBoxActionParam5.Text = selectedItem[17].Text;
                 textBoxActionParam6.Text = selectedItem[18].Text;
-                labelActionParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 1, ScriptTypeId.ScriptTypeAction);
-                labelActionParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 2, ScriptTypeId.ScriptTypeAction);
-                labelActionParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 3, ScriptTypeId.ScriptTypeAction);
-                labelActionParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 4, ScriptTypeId.ScriptTypeAction);
-                labelActionParam5.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 5, ScriptTypeId.ScriptTypeAction);
-                labelActionParam6.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(action_type, 6, ScriptTypeId.ScriptTypeAction);
+                labelActionParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 1, ScriptTypeId.ScriptTypeAction);
+                labelActionParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 2, ScriptTypeId.ScriptTypeAction);
+                labelActionParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 3, ScriptTypeId.ScriptTypeAction);
+                labelActionParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 4, ScriptTypeId.ScriptTypeAction);
+                labelActionParam5.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 5, ScriptTypeId.ScriptTypeAction);
+                labelActionParam6.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 6, ScriptTypeId.ScriptTypeAction);
+                AddTooltip(labelActionParam1, labelActionParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 1, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam2, labelActionParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 2, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam3, labelActionParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 3, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam4, labelActionParam4.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 4, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam5, labelActionParam5.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 5, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam6, labelActionParam6.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
 
                 //! Target parameters
                 int target_type = Convert.ToInt32(selectedItem[19].Text);
@@ -701,9 +711,13 @@ namespace SAI_Editor
                 textBoxTargetParam1.Text = selectedItem[20].Text;
                 textBoxTargetParam2.Text = selectedItem[21].Text;
                 textBoxTargetParam3.Text = selectedItem[22].Text;
-                labelTargetParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
-                labelTargetParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
-                labelTargetParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringsById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
+                labelTargetParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
+                labelTargetParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
+                labelTargetParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
+                AddTooltip(labelTargetParam1, labelTargetParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 1, ScriptTypeId.ScriptTypeTarget));
+                AddTooltip(labelTargetParam2, labelTargetParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 2, ScriptTypeId.ScriptTypeTarget));
+                AddTooltip(labelTargetParam3, labelTargetParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
+
                 textBoxTargetX.Text = selectedItem[23].Text;
                 textBoxTargetY.Text = selectedItem[24].Text;
                 textBoxTargetZ.Text = selectedItem[25].Text;
@@ -743,6 +757,17 @@ namespace SAI_Editor
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info)
+        {
+            if (String.IsNullOrWhiteSpace(title) || String.IsNullOrWhiteSpace(text))
+                return;
+
+            ToolTip toolTip = new ToolTip();
+            toolTip.ToolTipIcon = icon;
+            toolTip.ToolTipTitle = title;
+            toolTip.SetToolTip(control, text);
         }
 
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)

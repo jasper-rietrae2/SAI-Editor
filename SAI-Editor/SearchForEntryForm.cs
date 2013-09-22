@@ -507,7 +507,6 @@ namespace SAI_Editor
             entryToPlace += listViewEntryResults.SelectedItems[0].Text;
             ((MainForm)Owner).textBoxEntryOrGuid.Text = entryToPlace;
 
-            //! Above 2 means it's a gameobject
             switch (comboBoxSearchType.SelectedIndex)
             {
                 case 0: //! Creature entry
@@ -540,7 +539,7 @@ namespace SAI_Editor
             switch (index)
             {
                 case 1: //! Creature name
-                case 4: //! Gameobject name:
+                case 4: //! Gameobject name
                     return false;
                 default:
                     return true;

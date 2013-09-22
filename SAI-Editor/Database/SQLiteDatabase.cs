@@ -26,7 +26,7 @@ namespace SAI_Editor.Database
             return BuildEventTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
         }
 
-        public async Task<string> GetParameterStringsById(int type, int paramId, ScriptTypeId scriptTypeId)
+        public async Task<string> GetParameterStringById(int type, int paramId, ScriptTypeId scriptTypeId)
         {
             BaseTypeInformation baseTypeInformation = await GetTypeByScriptTypeId(type, scriptTypeId);
 
@@ -44,6 +44,29 @@ namespace SAI_Editor.Database
                     return baseTypeInformation != null ? baseTypeInformation.parameterString5 : "Param 5";
                 case 6:
                     return baseTypeInformation != null ? baseTypeInformation.parameterString6 : "Param 6";
+                default:
+                    return String.Empty;
+            }
+        }
+
+        public async Task<string> GetParameterTooltipById(int type, int paramId, ScriptTypeId scriptTypeId)
+        {
+            BaseTypeInformation baseTypeInformation = await GetTypeByScriptTypeId(type, scriptTypeId);
+
+            switch (paramId)
+            {
+                case 1:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip1 : String.Empty;
+                case 2:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip2 : String.Empty;
+                case 3:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip3 : String.Empty;
+                case 4:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip4 : String.Empty;
+                case 5:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip5 : String.Empty;
+                case 6:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip6 : String.Empty;
                 default:
                     return String.Empty;
             }
