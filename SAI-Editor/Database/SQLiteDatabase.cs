@@ -16,16 +16,6 @@ namespace SAI_Editor.Database
             ConnectionString.Version = 3;
         }
 
-        public async Task<EventTypeInformation> GetEventTypeInformationById(int event_type)
-        {
-            DataTable dt = await ExecuteQuery("SELECT * FROM event_type_information WHERE event_type = @event_type", new SQLiteParameter("@event_type", event_type));
-
-            if (dt.Rows.Count == 0)
-                return null;
-
-            return BuildEventTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
-        }
-
         public async Task<string> GetParameterStringById(int type, int paramId, ScriptTypeId scriptTypeId)
         {
             BaseTypeInformation baseTypeInformation = await GetTypeByScriptTypeId(type, scriptTypeId);
@@ -70,6 +60,22 @@ namespace SAI_Editor.Database
                 default:
                     return String.Empty;
             }
+        }
+
+        public async Task<string> GetScriptTypeTooltipById(int type, ScriptTypeId scriptTypeId)
+        {
+            BaseTypeInformation baseTypeInformation = await GetTypeByScriptTypeId(type, scriptTypeId);
+            return baseTypeInformation != null ? baseTypeInformation.tooltip : String.Empty;
+        }
+
+        public async Task<EventTypeInformation> GetEventTypeInformationById(int event_type)
+        {
+            DataTable dt = await ExecuteQuery("SELECT * FROM event_type_information WHERE event_type = @event_type", new SQLiteParameter("@event_type", event_type));
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            return BuildEventTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
         }
 
         public async Task<ActionTypeInformation> GetActionTypeInformationById(int action_type)
@@ -153,6 +159,7 @@ namespace SAI_Editor.Database
         {
             var eventTypeInformation = new EventTypeInformation();
             eventTypeInformation.event_type = row["event_type"] != DBNull.Value ? Convert.ToInt32(row["event_type"]) : -1;
+            eventTypeInformation.tooltip = row["tooltip"] != DBNull.Value ? (string)row["tooltip"] : String.Empty;
             eventTypeInformation.parameterString1 = row["parameterString1"] != DBNull.Value ? (string)row["parameterString1"] : String.Empty;
             eventTypeInformation.parameterString2 = row["parameterString2"] != DBNull.Value ? (string)row["parameterString2"] : String.Empty;
             eventTypeInformation.parameterString3 = row["parameterString3"] != DBNull.Value ? (string)row["parameterString3"] : String.Empty;
@@ -168,6 +175,7 @@ namespace SAI_Editor.Database
         {
             var actionTypeInformation = new ActionTypeInformation();
             actionTypeInformation.action_type = row["action_type"] != DBNull.Value ? Convert.ToInt32(row["action_type"]) : -1;
+            actionTypeInformation.tooltip = row["tooltip"] != DBNull.Value ? (string)row["tooltip"] : String.Empty;
             actionTypeInformation.parameterString1 = row["parameterString1"] != DBNull.Value ? (string)row["parameterString1"] : String.Empty;
             actionTypeInformation.parameterString2 = row["parameterString2"] != DBNull.Value ? (string)row["parameterString2"] : String.Empty;
             actionTypeInformation.parameterString3 = row["parameterString3"] != DBNull.Value ? (string)row["parameterString3"] : String.Empty;
@@ -187,6 +195,7 @@ namespace SAI_Editor.Database
         {
             var targetTypeInformation = new TargetTypeInformation();
             targetTypeInformation.target_type = row["target_type"] != DBNull.Value ? Convert.ToInt32(row["target_type"]) : -1;
+            targetTypeInformation.tooltip = row["tooltip"] != DBNull.Value ? (string)row["tooltip"] : String.Empty;
             targetTypeInformation.parameterString1 = row["parameterString1"] != DBNull.Value ? (string)row["parameterString1"] : String.Empty;
             targetTypeInformation.parameterString2 = row["parameterString2"] != DBNull.Value ? (string)row["parameterString2"] : String.Empty;
             targetTypeInformation.parameterString3 = row["parameterString3"] != DBNull.Value ? (string)row["parameterString3"] : String.Empty;
