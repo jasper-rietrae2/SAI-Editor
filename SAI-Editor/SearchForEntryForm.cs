@@ -422,6 +422,11 @@ namespace SAI_Editor
                     SetEnabledOfControl(buttonStopSearching, false);
                 }
             }
+            catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
+            {
+                SetEnabledOfControl(buttonSearch, true);
+                SetEnabledOfControl(buttonStopSearching, false);
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
