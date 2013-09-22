@@ -710,6 +710,48 @@ namespace SAI_Editor
                 textBoxTargetO.Text = selectedItem[26].Text;
 
                 textBoxComments.Text = selectedItem[27].Text;
+
+                switch ((SmartEvent)event_type)
+                {
+                    case SmartEvent.SMART_EVENT_UPDATE_IC:
+                        break;
+                    default:
+                        buttonEventParamOneSearch.Visible = false;
+                        buttonEventParamTwoSearch.Visible = false;
+                        buttonEventParamThreeSearch.Visible = false;
+                        buttonEventParamFourSearch.Visible = false;
+                        break;
+                }
+
+                switch ((SmartAction)action_type)
+                {
+                    case SmartAction.SMART_ACTION_NONE:
+                        break;
+                    case SmartAction.SMART_ACTION_CAST:
+                        buttonActionParamOneSearch.Visible = true; //! Spell id
+                        buttonActionParamTwoSearch.Visible = true; //! Cast flags
+                        break;
+                    default:
+                        buttonActionParamOneSearch.Visible = false;
+                        buttonActionParamTwoSearch.Visible = false;
+                        buttonActionParamThreeSearch.Visible = false;
+                        buttonActionParamFourSearch.Visible = false;
+                        buttonActionParamFiveSearch.Visible = false;
+                        buttonActionParamSixSearch.Visible = false;
+                        break;
+                }
+
+                switch ((SmartTarget)target_type)
+                {
+                    case SmartTarget.SMART_TARGET_NONE:
+                        break;
+                    default:
+                        buttonTargetParamOneSearch.Visible = false;
+                        buttonTargetParamTwoSearch.Visible = false;
+                        buttonTargetParamThreeSearch.Visible = false;
+                        buttonTargetParamFourSearch.Visible = false;
+                        break;
+                }
             }
             catch (Exception ex)
             {
@@ -997,6 +1039,21 @@ namespace SAI_Editor
                 foreach (Control control in page.Controls)
                     if (control is TextBox)
                         control.Text = "0";
+
+            buttonEventParamOneSearch.Visible = false;
+            buttonEventParamTwoSearch.Visible = false;
+            buttonEventParamThreeSearch.Visible = false;
+            buttonEventParamFourSearch.Visible = false;
+            buttonActionParamOneSearch.Visible = false;
+            buttonActionParamTwoSearch.Visible = false;
+            buttonActionParamThreeSearch.Visible = false;
+            buttonActionParamFourSearch.Visible = false;
+            buttonActionParamFiveSearch.Visible = false;
+            buttonActionParamSixSearch.Visible = false;
+            buttonTargetParamOneSearch.Visible = false;
+            buttonTargetParamTwoSearch.Visible = false;
+            buttonTargetParamThreeSearch.Visible = false;
+            buttonTargetParamFourSearch.Visible = false;
         }
 
         private string GetSourceTypeString(SourceTypes sourceType)
@@ -1014,6 +1071,61 @@ namespace SAI_Editor
                 default:
                     return "unknown";
             }
+        }
+
+        private void buttonEventParamOneSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonEventParamTwoSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonEventParamThreeSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonEventParamFourSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTargetParamOneSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTargetParamTwoSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTargetParamThreeSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTargetParamFourSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTargetParamFiveSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTargetParamSixSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonTargetParamSevenSearch_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
