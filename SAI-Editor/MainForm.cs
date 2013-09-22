@@ -847,6 +847,7 @@ namespace SAI_Editor
 
         public void pictureBoxLoadScript_Click(object sender, EventArgs e)
         {
+            // @Debug new AreatriggersForm().Show();
             listViewSmartScripts.Items.Clear();
 
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))

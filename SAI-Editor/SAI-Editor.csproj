@@ -60,6 +60,12 @@
     <Compile Include="AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="AreatriggersForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AreatriggersForm.Designer.cs">
+      <DependentUpon>AreatriggersForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database\Classes\ActionTypeInformation.cs" />
     <Compile Include="Database\Classes\AreaTrigger.cs" />
     <Compile Include="Database\Classes\BaseTypeInformation.cs" />
@@ -69,6 +75,15 @@
     <Compile Include="Database\Database.cs" />
     <Compile Include="Database\SQLiteDatabase.cs" />
     <Compile Include="Database\WorldDatabase.cs" />
+    <Compile Include="dep\ScrollablePicturebox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dep\ScrollablePicturebox.Designer.cs">
+      <DependentUpon>ScrollablePicturebox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="dep\ZoomPanImageBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ListViewColumnSorter.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
@@ -113,6 +128,12 @@
     </Compile>
     <EmbeddedResource Include="AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AreatriggersForm.resx">
+      <DependentUpon>AreatriggersForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dep\ZoomPanImageBox.resx">
+      <DependentUpon>ZoomPanImageBox.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
