@@ -711,45 +711,25 @@ namespace SAI_Editor
 
                 textBoxComments.Text = selectedItem[27].Text;
 
+                SetVisibilityOfAllParamButtons(false);
+
                 switch ((SmartEvent)event_type)
                 {
                     case SmartEvent.SMART_EVENT_UPDATE_IC:
-                        break;
-                    default:
-                        buttonEventParamOneSearch.Visible = false;
-                        buttonEventParamTwoSearch.Visible = false;
-                        buttonEventParamThreeSearch.Visible = false;
-                        buttonEventParamFourSearch.Visible = false;
                         break;
                 }
 
                 switch ((SmartAction)action_type)
                 {
-                    case SmartAction.SMART_ACTION_NONE:
-                        break;
                     case SmartAction.SMART_ACTION_CAST:
                         buttonActionParamOneSearch.Visible = true; //! Spell id
                         buttonActionParamTwoSearch.Visible = true; //! Cast flags
-                        break;
-                    default:
-                        buttonActionParamOneSearch.Visible = false;
-                        buttonActionParamTwoSearch.Visible = false;
-                        buttonActionParamThreeSearch.Visible = false;
-                        buttonActionParamFourSearch.Visible = false;
-                        buttonActionParamFiveSearch.Visible = false;
-                        buttonActionParamSixSearch.Visible = false;
                         break;
                 }
 
                 switch ((SmartTarget)target_type)
                 {
                     case SmartTarget.SMART_TARGET_NONE:
-                        break;
-                    default:
-                        buttonTargetParamOneSearch.Visible = false;
-                        buttonTargetParamTwoSearch.Visible = false;
-                        buttonTargetParamThreeSearch.Visible = false;
-                        buttonTargetParamFourSearch.Visible = false;
                         break;
                 }
             }
@@ -1040,20 +1020,25 @@ namespace SAI_Editor
                     if (control is TextBox)
                         control.Text = "0";
 
-            buttonEventParamOneSearch.Visible = false;
-            buttonEventParamTwoSearch.Visible = false;
-            buttonEventParamThreeSearch.Visible = false;
-            buttonEventParamFourSearch.Visible = false;
-            buttonActionParamOneSearch.Visible = false;
-            buttonActionParamTwoSearch.Visible = false;
-            buttonActionParamThreeSearch.Visible = false;
-            buttonActionParamFourSearch.Visible = false;
-            buttonActionParamFiveSearch.Visible = false;
-            buttonActionParamSixSearch.Visible = false;
-            buttonTargetParamOneSearch.Visible = false;
-            buttonTargetParamTwoSearch.Visible = false;
-            buttonTargetParamThreeSearch.Visible = false;
-            buttonTargetParamFourSearch.Visible = false;
+            SetVisibilityOfAllParamButtons(false);
+        }
+
+        private void SetVisibilityOfAllParamButtons(bool visible)
+        {
+            buttonEventParamOneSearch.Visible = visible;
+            buttonEventParamTwoSearch.Visible = visible;
+            buttonEventParamThreeSearch.Visible = visible;
+            buttonEventParamFourSearch.Visible = visible;
+            buttonActionParamOneSearch.Visible = visible;
+            buttonActionParamTwoSearch.Visible = visible;
+            buttonActionParamThreeSearch.Visible = visible;
+            buttonActionParamFourSearch.Visible = visible;
+            buttonActionParamFiveSearch.Visible = visible;
+            buttonActionParamSixSearch.Visible = visible;
+            buttonTargetParamOneSearch.Visible = visible;
+            buttonTargetParamTwoSearch.Visible = visible;
+            buttonTargetParamThreeSearch.Visible = visible;
+            buttonTargetParamFourSearch.Visible = visible;
         }
 
         private string GetSourceTypeString(SourceTypes sourceType)
