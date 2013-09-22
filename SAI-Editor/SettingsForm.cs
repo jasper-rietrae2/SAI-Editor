@@ -213,9 +213,8 @@ namespace SAI_Editor
             List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
-                using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, false))
-                    if (selectDatabaseForm.ShowDialog() == DialogResult.OK)
-                        textBoxWorldDatabase.Text = selectDatabaseForm.selectedDatabaseItem;
+                using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
+                    selectDatabaseForm.Show(this);
         }
 
         private void settingTextBox_KeyDown(object sender, KeyEventArgs e)

@@ -8,14 +8,18 @@ namespace SAI_Editor
     {
         private readonly List<string> databaseNames = new List<string>();
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
-        public string selectedDatabaseItem { get; set; }
+        private readonly TextBox textBoxToChange = null;
 
-        public SelectDatabaseForm(List<string> databaseNames, bool openedFromMainForm)
+        public SelectDatabaseForm(List<string> databaseNames, TextBox textBoxToChange)
         {
             InitializeComponent();
 
             this.databaseNames = databaseNames;
+            this.textBoxToChange = textBoxToChange;
+        }
 
+        private void SelectDatabaseForm_Load(object sender, EventArgs e)
+        {
             listViewDatabases.Columns.Add("Database", 198, HorizontalAlignment.Left);
             listViewDatabases.ColumnClick += listViewDatabases_ColumnClick;
 
@@ -24,14 +28,9 @@ namespace SAI_Editor
                 listViewDatabases.Items.Add(databaseNames[i]);
 
                 //! Select the currently used database (if any)
-                if ((openedFromMainForm && ((MainForm)Owner).textBoxWorldDatabase.Text == databaseNames[i]) || (!openedFromMainForm && ((SettingsForm)Owner).textBoxWorldDatabase.Text == databaseNames[i]))
+                if (textBoxToChange.Text == databaseNames[i])
                     listViewDatabases.Items[i].Selected = true;
             }
-        }
-
-        private void SelectDatabaseForm_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void SelectDatabaseForm_KeyDown(object sender, KeyEventArgs e)
@@ -46,8 +45,7 @@ namespace SAI_Editor
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
-            selectedDatabaseItem = listViewDatabases.SelectedItems[0].Text;
+            textBoxToChange.Text = listViewDatabases.SelectedItems[0].Text;
             Close();
         }
 
