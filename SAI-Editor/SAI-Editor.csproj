@@ -113,6 +113,12 @@
     <Compile Include="SearchForLinkForm.designer.cs">
       <DependentUpon>SearchForLinkForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchForSpellForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchForSpellForm.Designer.cs">
+      <DependentUpon>SearchForSpellForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Security\SecurityExtensions.cs" />
     <Compile Include="SelectDatabaseForm.cs">
       <SubType>Form</SubType>
@@ -155,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SearchForLinkForm.resx">
       <DependentUpon>SearchForLinkForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchForSpellForm.resx">
+      <DependentUpon>SearchForSpellForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SelectDatabaseForm.resx">
       <DependentUpon>SelectDatabaseForm.cs</DependentUpon>

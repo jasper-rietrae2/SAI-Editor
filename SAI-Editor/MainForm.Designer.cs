@@ -119,6 +119,12 @@
             this.textBoxEventParam3 = new System.Windows.Forms.TextBox();
             this.textBoxEventParam2 = new System.Windows.Forms.TextBox();
             this.tabPageAction = new System.Windows.Forms.TabPage();
+            this.buttonActionParamSixSearch = new System.Windows.Forms.Button();
+            this.buttonActionParamFiveSearch = new System.Windows.Forms.Button();
+            this.buttonActionParamFourSearch = new System.Windows.Forms.Button();
+            this.buttonActionParamThreeSearch = new System.Windows.Forms.Button();
+            this.buttonActionParamTwoSearch = new System.Windows.Forms.Button();
+            this.buttonActionParamOneSearch = new System.Windows.Forms.Button();
             this.labelActionParam6 = new System.Windows.Forms.Label();
             this.labelActionParam5 = new System.Windows.Forms.Label();
             this.labelActionParam4 = new System.Windows.Forms.Label();
@@ -132,6 +138,13 @@
             this.labelActionParam1 = new System.Windows.Forms.Label();
             this.textBoxActionParam1 = new System.Windows.Forms.TextBox();
             this.tabPageTarget = new System.Windows.Forms.TabPage();
+            this.buttonTargetParamSevenSearch = new System.Windows.Forms.Button();
+            this.buttonTargetParamSixSearch = new System.Windows.Forms.Button();
+            this.buttonTargetParamFiveSearch = new System.Windows.Forms.Button();
+            this.buttonTargetParamFourSearch = new System.Windows.Forms.Button();
+            this.buttonTargetParamThreeSearch = new System.Windows.Forms.Button();
+            this.buttonTargetParamTwoSearch = new System.Windows.Forms.Button();
+            this.buttonTargetParamOneSearch = new System.Windows.Forms.Button();
             this.labelTargetO = new System.Windows.Forms.Label();
             this.labelTargetZ = new System.Windows.Forms.Label();
             this.labelTargetY = new System.Windows.Forms.Label();
@@ -149,19 +162,6 @@
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.buttonActionParamOneSearch = new System.Windows.Forms.Button();
-            this.buttonActionParamTwoSearch = new System.Windows.Forms.Button();
-            this.buttonActionParamThreeSearch = new System.Windows.Forms.Button();
-            this.buttonActionParamFourSearch = new System.Windows.Forms.Button();
-            this.buttonActionParamFiveSearch = new System.Windows.Forms.Button();
-            this.buttonActionParamSixSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamOneSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamTwoSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamThreeSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamFourSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamFiveSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamSixSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamSevenSearch = new System.Windows.Forms.Button();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -1395,6 +1395,72 @@
             this.tabPageAction.TabIndex = 1;
             this.tabPageAction.Text = "Action";
             // 
+            // buttonActionParamSixSearch
+            // 
+            this.buttonActionParamSixSearch.Location = new System.Drawing.Point(214, 134);
+            this.buttonActionParamSixSearch.Name = "buttonActionParamSixSearch";
+            this.buttonActionParamSixSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamSixSearch.TabIndex = 39;
+            this.buttonActionParamSixSearch.Text = "...";
+            this.buttonActionParamSixSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamSixSearch.Visible = false;
+            this.buttonActionParamSixSearch.Click += new System.EventHandler(this.buttonActionParamSixSearch_Click);
+            // 
+            // buttonActionParamFiveSearch
+            // 
+            this.buttonActionParamFiveSearch.Location = new System.Drawing.Point(214, 108);
+            this.buttonActionParamFiveSearch.Name = "buttonActionParamFiveSearch";
+            this.buttonActionParamFiveSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamFiveSearch.TabIndex = 38;
+            this.buttonActionParamFiveSearch.Text = "...";
+            this.buttonActionParamFiveSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamFiveSearch.Visible = false;
+            this.buttonActionParamFiveSearch.Click += new System.EventHandler(this.buttonActionParamFiveSearch_Click);
+            // 
+            // buttonActionParamFourSearch
+            // 
+            this.buttonActionParamFourSearch.Location = new System.Drawing.Point(214, 82);
+            this.buttonActionParamFourSearch.Name = "buttonActionParamFourSearch";
+            this.buttonActionParamFourSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamFourSearch.TabIndex = 37;
+            this.buttonActionParamFourSearch.Text = "...";
+            this.buttonActionParamFourSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamFourSearch.Visible = false;
+            this.buttonActionParamFourSearch.Click += new System.EventHandler(this.buttonActionParamFourSearch_Click);
+            // 
+            // buttonActionParamThreeSearch
+            // 
+            this.buttonActionParamThreeSearch.Location = new System.Drawing.Point(214, 56);
+            this.buttonActionParamThreeSearch.Name = "buttonActionParamThreeSearch";
+            this.buttonActionParamThreeSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamThreeSearch.TabIndex = 36;
+            this.buttonActionParamThreeSearch.Text = "...";
+            this.buttonActionParamThreeSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamThreeSearch.Visible = false;
+            this.buttonActionParamThreeSearch.Click += new System.EventHandler(this.buttonActionParamThreeSearch_Click);
+            // 
+            // buttonActionParamTwoSearch
+            // 
+            this.buttonActionParamTwoSearch.Location = new System.Drawing.Point(214, 30);
+            this.buttonActionParamTwoSearch.Name = "buttonActionParamTwoSearch";
+            this.buttonActionParamTwoSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamTwoSearch.TabIndex = 35;
+            this.buttonActionParamTwoSearch.Text = "...";
+            this.buttonActionParamTwoSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamTwoSearch.Visible = false;
+            this.buttonActionParamTwoSearch.Click += new System.EventHandler(this.buttonActionParamTwoSearch_Click);
+            // 
+            // buttonActionParamOneSearch
+            // 
+            this.buttonActionParamOneSearch.Location = new System.Drawing.Point(214, 3);
+            this.buttonActionParamOneSearch.Name = "buttonActionParamOneSearch";
+            this.buttonActionParamOneSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamOneSearch.TabIndex = 34;
+            this.buttonActionParamOneSearch.Text = "...";
+            this.buttonActionParamOneSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamOneSearch.Visible = false;
+            this.buttonActionParamOneSearch.Click += new System.EventHandler(this.buttonActionParamOneSearch_Click);
+            // 
             // labelActionParam6
             // 
             this.labelActionParam6.AutoSize = true;
@@ -1529,9 +1595,86 @@
             this.tabPageTarget.Controls.Add(this.textBoxTargetParam1);
             this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
             this.tabPageTarget.Name = "tabPageTarget";
-            this.tabPageTarget.Size = new System.Drawing.Size(261, 186);
+            this.tabPageTarget.Size = new System.Drawing.Size(261, 157);
             this.tabPageTarget.TabIndex = 2;
             this.tabPageTarget.Text = "Target";
+            // 
+            // buttonTargetParamSevenSearch
+            // 
+            this.buttonTargetParamSevenSearch.Location = new System.Drawing.Point(214, 159);
+            this.buttonTargetParamSevenSearch.Name = "buttonTargetParamSevenSearch";
+            this.buttonTargetParamSevenSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonTargetParamSevenSearch.TabIndex = 46;
+            this.buttonTargetParamSevenSearch.Text = "...";
+            this.buttonTargetParamSevenSearch.UseVisualStyleBackColor = true;
+            this.buttonTargetParamSevenSearch.Visible = false;
+            this.buttonTargetParamSevenSearch.Click += new System.EventHandler(this.buttonTargetParamSevenSearch_Click);
+            // 
+            // buttonTargetParamSixSearch
+            // 
+            this.buttonTargetParamSixSearch.Location = new System.Drawing.Point(214, 133);
+            this.buttonTargetParamSixSearch.Name = "buttonTargetParamSixSearch";
+            this.buttonTargetParamSixSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonTargetParamSixSearch.TabIndex = 45;
+            this.buttonTargetParamSixSearch.Text = "...";
+            this.buttonTargetParamSixSearch.UseVisualStyleBackColor = true;
+            this.buttonTargetParamSixSearch.Visible = false;
+            this.buttonTargetParamSixSearch.Click += new System.EventHandler(this.buttonTargetParamSixSearch_Click);
+            // 
+            // buttonTargetParamFiveSearch
+            // 
+            this.buttonTargetParamFiveSearch.Location = new System.Drawing.Point(214, 107);
+            this.buttonTargetParamFiveSearch.Name = "buttonTargetParamFiveSearch";
+            this.buttonTargetParamFiveSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonTargetParamFiveSearch.TabIndex = 44;
+            this.buttonTargetParamFiveSearch.Text = "...";
+            this.buttonTargetParamFiveSearch.UseVisualStyleBackColor = true;
+            this.buttonTargetParamFiveSearch.Visible = false;
+            this.buttonTargetParamFiveSearch.Click += new System.EventHandler(this.buttonTargetParamFiveSearch_Click);
+            // 
+            // buttonTargetParamFourSearch
+            // 
+            this.buttonTargetParamFourSearch.Location = new System.Drawing.Point(214, 82);
+            this.buttonTargetParamFourSearch.Name = "buttonTargetParamFourSearch";
+            this.buttonTargetParamFourSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonTargetParamFourSearch.TabIndex = 43;
+            this.buttonTargetParamFourSearch.Text = "...";
+            this.buttonTargetParamFourSearch.UseVisualStyleBackColor = true;
+            this.buttonTargetParamFourSearch.Visible = false;
+            this.buttonTargetParamFourSearch.Click += new System.EventHandler(this.buttonTargetParamFourSearch_Click);
+            // 
+            // buttonTargetParamThreeSearch
+            // 
+            this.buttonTargetParamThreeSearch.Location = new System.Drawing.Point(214, 55);
+            this.buttonTargetParamThreeSearch.Name = "buttonTargetParamThreeSearch";
+            this.buttonTargetParamThreeSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonTargetParamThreeSearch.TabIndex = 42;
+            this.buttonTargetParamThreeSearch.Text = "...";
+            this.buttonTargetParamThreeSearch.UseVisualStyleBackColor = true;
+            this.buttonTargetParamThreeSearch.Visible = false;
+            this.buttonTargetParamThreeSearch.Click += new System.EventHandler(this.buttonTargetParamThreeSearch_Click);
+            // 
+            // buttonTargetParamTwoSearch
+            // 
+            this.buttonTargetParamTwoSearch.Location = new System.Drawing.Point(214, 29);
+            this.buttonTargetParamTwoSearch.Name = "buttonTargetParamTwoSearch";
+            this.buttonTargetParamTwoSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonTargetParamTwoSearch.TabIndex = 41;
+            this.buttonTargetParamTwoSearch.Text = "...";
+            this.buttonTargetParamTwoSearch.UseVisualStyleBackColor = true;
+            this.buttonTargetParamTwoSearch.Visible = false;
+            this.buttonTargetParamTwoSearch.Click += new System.EventHandler(this.buttonTargetParamTwoSearch_Click);
+            // 
+            // buttonTargetParamOneSearch
+            // 
+            this.buttonTargetParamOneSearch.Location = new System.Drawing.Point(214, 3);
+            this.buttonTargetParamOneSearch.Name = "buttonTargetParamOneSearch";
+            this.buttonTargetParamOneSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonTargetParamOneSearch.TabIndex = 40;
+            this.buttonTargetParamOneSearch.Text = "...";
+            this.buttonTargetParamOneSearch.UseVisualStyleBackColor = true;
+            this.buttonTargetParamOneSearch.Visible = false;
+            this.buttonTargetParamOneSearch.Click += new System.EventHandler(this.buttonTargetParamOneSearch_Click);
             // 
             // labelTargetO
             // 
@@ -1684,143 +1827,6 @@
             this.listViewSmartScripts.SelectedIndexChanged += new System.EventHandler(this.listViewSmartScripts_SelectedIndexChanged);
             this.listViewSmartScripts.Click += new System.EventHandler(this.listViewSmartScripts_Click);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
-            // 
-            // buttonActionParamOneSearch
-            // 
-            this.buttonActionParamOneSearch.Location = new System.Drawing.Point(214, 3);
-            this.buttonActionParamOneSearch.Name = "buttonActionParamOneSearch";
-            this.buttonActionParamOneSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamOneSearch.TabIndex = 34;
-            this.buttonActionParamOneSearch.Text = "...";
-            this.buttonActionParamOneSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamOneSearch.Visible = false;
-            // 
-            // buttonActionParamTwoSearch
-            // 
-            this.buttonActionParamTwoSearch.Location = new System.Drawing.Point(214, 30);
-            this.buttonActionParamTwoSearch.Name = "buttonActionParamTwoSearch";
-            this.buttonActionParamTwoSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamTwoSearch.TabIndex = 35;
-            this.buttonActionParamTwoSearch.Text = "...";
-            this.buttonActionParamTwoSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamTwoSearch.Visible = false;
-            // 
-            // buttonActionParamThreeSearch
-            // 
-            this.buttonActionParamThreeSearch.Location = new System.Drawing.Point(214, 56);
-            this.buttonActionParamThreeSearch.Name = "buttonActionParamThreeSearch";
-            this.buttonActionParamThreeSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamThreeSearch.TabIndex = 36;
-            this.buttonActionParamThreeSearch.Text = "...";
-            this.buttonActionParamThreeSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamThreeSearch.Visible = false;
-            // 
-            // buttonActionParamFourSearch
-            // 
-            this.buttonActionParamFourSearch.Location = new System.Drawing.Point(214, 82);
-            this.buttonActionParamFourSearch.Name = "buttonActionParamFourSearch";
-            this.buttonActionParamFourSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamFourSearch.TabIndex = 37;
-            this.buttonActionParamFourSearch.Text = "...";
-            this.buttonActionParamFourSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamFourSearch.Visible = false;
-            // 
-            // buttonActionParamFiveSearch
-            // 
-            this.buttonActionParamFiveSearch.Location = new System.Drawing.Point(214, 108);
-            this.buttonActionParamFiveSearch.Name = "buttonActionParamFiveSearch";
-            this.buttonActionParamFiveSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamFiveSearch.TabIndex = 38;
-            this.buttonActionParamFiveSearch.Text = "...";
-            this.buttonActionParamFiveSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamFiveSearch.Visible = false;
-            // 
-            // buttonActionParamSixSearch
-            // 
-            this.buttonActionParamSixSearch.Location = new System.Drawing.Point(214, 134);
-            this.buttonActionParamSixSearch.Name = "buttonActionParamSixSearch";
-            this.buttonActionParamSixSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamSixSearch.TabIndex = 39;
-            this.buttonActionParamSixSearch.Text = "...";
-            this.buttonActionParamSixSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamSixSearch.Visible = false;
-            // 
-            // buttonTargetParamOneSearch
-            // 
-            this.buttonTargetParamOneSearch.Location = new System.Drawing.Point(214, 3);
-            this.buttonTargetParamOneSearch.Name = "buttonTargetParamOneSearch";
-            this.buttonTargetParamOneSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamOneSearch.TabIndex = 40;
-            this.buttonTargetParamOneSearch.Text = "...";
-            this.buttonTargetParamOneSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamOneSearch.Visible = false;
-            this.buttonTargetParamOneSearch.Click += new System.EventHandler(this.buttonTargetParamOneSearch_Click);
-            // 
-            // buttonTargetParamTwoSearch
-            // 
-            this.buttonTargetParamTwoSearch.Location = new System.Drawing.Point(214, 29);
-            this.buttonTargetParamTwoSearch.Name = "buttonTargetParamTwoSearch";
-            this.buttonTargetParamTwoSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamTwoSearch.TabIndex = 41;
-            this.buttonTargetParamTwoSearch.Text = "...";
-            this.buttonTargetParamTwoSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamTwoSearch.Visible = false;
-            this.buttonTargetParamTwoSearch.Click += new System.EventHandler(this.buttonTargetParamTwoSearch_Click);
-            // 
-            // buttonTargetParamThreeSearch
-            // 
-            this.buttonTargetParamThreeSearch.Location = new System.Drawing.Point(214, 55);
-            this.buttonTargetParamThreeSearch.Name = "buttonTargetParamThreeSearch";
-            this.buttonTargetParamThreeSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamThreeSearch.TabIndex = 42;
-            this.buttonTargetParamThreeSearch.Text = "...";
-            this.buttonTargetParamThreeSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamThreeSearch.Visible = false;
-            this.buttonTargetParamThreeSearch.Click += new System.EventHandler(this.buttonTargetParamThreeSearch_Click);
-            // 
-            // buttonTargetParamFourSearch
-            // 
-            this.buttonTargetParamFourSearch.Location = new System.Drawing.Point(214, 82);
-            this.buttonTargetParamFourSearch.Name = "buttonTargetParamFourSearch";
-            this.buttonTargetParamFourSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamFourSearch.TabIndex = 43;
-            this.buttonTargetParamFourSearch.Text = "...";
-            this.buttonTargetParamFourSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamFourSearch.Visible = false;
-            this.buttonTargetParamFourSearch.Click += new System.EventHandler(this.buttonTargetParamFourSearch_Click);
-            // 
-            // buttonTargetParamFiveSearch
-            // 
-            this.buttonTargetParamFiveSearch.Location = new System.Drawing.Point(214, 107);
-            this.buttonTargetParamFiveSearch.Name = "buttonTargetParamFiveSearch";
-            this.buttonTargetParamFiveSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamFiveSearch.TabIndex = 44;
-            this.buttonTargetParamFiveSearch.Text = "...";
-            this.buttonTargetParamFiveSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamFiveSearch.Visible = false;
-            this.buttonTargetParamFiveSearch.Click += new System.EventHandler(this.buttonTargetParamFiveSearch_Click);
-            // 
-            // buttonTargetParamSixSearch
-            // 
-            this.buttonTargetParamSixSearch.Location = new System.Drawing.Point(214, 133);
-            this.buttonTargetParamSixSearch.Name = "buttonTargetParamSixSearch";
-            this.buttonTargetParamSixSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamSixSearch.TabIndex = 45;
-            this.buttonTargetParamSixSearch.Text = "...";
-            this.buttonTargetParamSixSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamSixSearch.Visible = false;
-            this.buttonTargetParamSixSearch.Click += new System.EventHandler(this.buttonTargetParamSixSearch_Click);
-            // 
-            // buttonTargetParamSevenSearch
-            // 
-            this.buttonTargetParamSevenSearch.Location = new System.Drawing.Point(214, 159);
-            this.buttonTargetParamSevenSearch.Name = "buttonTargetParamSevenSearch";
-            this.buttonTargetParamSevenSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamSevenSearch.TabIndex = 46;
-            this.buttonTargetParamSevenSearch.Text = "...";
-            this.buttonTargetParamSevenSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamSevenSearch.Visible = false;
-            this.buttonTargetParamSevenSearch.Click += new System.EventHandler(this.buttonTargetParamSevenSearch_Click);
             // 
             // MainForm
             // 

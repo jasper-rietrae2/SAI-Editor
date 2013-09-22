@@ -132,6 +132,23 @@ namespace SAI_Editor.Database
             return BuildAreaTrigger(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
         }
 
+        //! We just do this locally because the database has a SHITLOAD of columns and we only need very few. Not going
+        //! to create a class just for that...
+        //public async Task<List<Spell>> GetSpells()
+        //{
+        //    DataTable dt = await ExecuteQuery("SELECT * FROM spells");
+
+        //    if (dt.Rows.Count == 0)
+        //        return null;
+
+        //    List<Spell> spells = new List<Spell>();
+
+        //    foreach (DataRow row in dt.Rows)
+        //        spells.Add(BuidSpell(row));
+
+        //    return spells;
+        //}
+
         private EventTypeInformation BuildEventTypeInformation(DataRow row)
         {
             var eventTypeInformation = new EventTypeInformation();

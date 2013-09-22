@@ -615,6 +615,8 @@ namespace SAI_Editor
             FillFieldsBasedOnSelectedScript();
         }
 
+        //! Todo: try to figure out why this is called when switching to a new selection (but with selecteditems.count
+        //! as '0', thus resulting in fugly text changing).
         private void listViewSmartScripts_SelectedIndexChanged(object sender, EventArgs e)
         {
             menuItemDeleteSelectedRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
@@ -664,7 +666,6 @@ namespace SAI_Editor
                 textBoxLinkTo.Text = selectedItem[3].Text;
 
                 int event_type = Convert.ToInt32(selectedItem[4].Text);
-
                 comboBoxEventType.SelectedIndex = event_type;
                 textBoxEventPhasemask.Text = selectedItem[5].Text;
                 textBoxEventChance.Text = selectedItem[6].Text;
@@ -1096,55 +1097,79 @@ namespace SAI_Editor
 
         private void buttonEventParamOneSearch_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonEventParamTwoSearch_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonEventParamThreeSearch_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonEventParamFourSearch_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonTargetParamOneSearch_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonTargetParamTwoSearch_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonTargetParamThreeSearch_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonTargetParamFourSearch_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonTargetParamFiveSearch_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonTargetParamSixSearch_Click(object sender, EventArgs e)
         {
-
         }
 
         private void buttonTargetParamSevenSearch_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void buttonActionParamOneSearch_Click(object sender, EventArgs e)
+        {
+            switch ((SmartAction)comboBoxActionType.SelectedIndex)
+            {
+                case SmartAction.SMART_ACTION_CAST:
+                    new SearchForSpellForm(connectionString).ShowDialog(this);
+                    break;
+            }
+        }
+
+        private void buttonActionParamTwoSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonActionParamThreeSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonActionParamFourSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonActionParamFiveSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonActionParamSixSearch_Click(object sender, EventArgs e)
         {
 
         }
