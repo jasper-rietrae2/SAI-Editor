@@ -768,7 +768,7 @@ namespace SAI_Editor
             }
         }
 
-        private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info)
+        private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true)
         {
             if (String.IsNullOrWhiteSpace(title) || String.IsNullOrWhiteSpace(text))
                 return;
@@ -776,6 +776,7 @@ namespace SAI_Editor
             ToolTip toolTip = new ToolTip();
             toolTip.ToolTipIcon = icon;
             toolTip.ToolTipTitle = title;
+            toolTip.IsBalloon = isBallon;
             toolTip.SetToolTip(control, text);
         }
 
