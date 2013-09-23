@@ -20,7 +20,7 @@
 - Add quotes around all SQL query input fields to prevent wrong errors. For example when searching for a creature and having the search criteria being a string such as "example" while it tries to search for creature_template.entry, it will throw an error saying something unrelated (because it'll be executed as "FROM creature_template WHERE entry = example").
 
 Needs to be further into development:
-- Make all tabindexes work completely (need to finish pretty much first)
+- Make all tabindexes work completely (need to finish pretty much everything before doing this)
 - Improve implementation of the SearchForLinkForm to do the following:
   - Only allow to link to lines with a higher smart_scripts.id
     - This could possibly also be implemented as a feature to refactor the SAI of the creature with the id's to be re-ordered (posibly based on a YesNo messagebox question)

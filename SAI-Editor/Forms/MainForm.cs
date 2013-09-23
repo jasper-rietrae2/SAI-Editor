@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
@@ -1274,6 +1275,23 @@ namespace SAI_Editor
         private void buttonActionParamSixSearch_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void TryToOpenPage(string url)
+        {
+            try
+            {
+                Process.Start(url);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The webpage could not be opened!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void smartAIWikiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TryToOpenPage("http://collab.kpsn.org/display/tc/smart_scripts");
         }
     }
 }
