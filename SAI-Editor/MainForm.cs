@@ -764,6 +764,12 @@ namespace SAI_Editor
                     case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
                         buttonActionParamOneSearch.Visible = true; //! Emote id
                         break;
+                    case SmartAction.SMART_ACTION_FAIL_QUEST:
+                    case SmartAction.SMART_ACTION_ADD_QUEST:
+                    case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS:
+                    case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
+                        buttonActionParamOneSearch.Visible = true; //! Quest id
+                        break;
                 }
 
                 switch ((SmartTarget)target_type)
@@ -1190,6 +1196,12 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                 case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_FAIL_QUEST:
+                case SmartAction.SMART_ACTION_ADD_QUEST:
+                case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS:
+                case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
             }
         }

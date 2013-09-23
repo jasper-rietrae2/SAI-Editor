@@ -20,6 +20,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeSpell = 0,
         DatabaseSearchFormTypeFaction = 1,
         DatabaseSearchFormTypeEmote = 2,
+        DatabaseSearchFormTypeQuest = 3,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -66,6 +67,13 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Emote id");
                     comboBoxSearchType.Items.Add("Emote name");
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeQuest:
+                    Text = "Search for a quest";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Quest id");
+                    comboBoxSearchType.Items.Add("Quest name");
                     break;
             }
 
@@ -167,14 +175,14 @@ namespace SAI_Editor
                         {
                             switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
                             {
-                                case 0: //! Faction entry
+                                case 0: //! Emote entry
                                     if (checkBoxFieldContainsCriteria.Checked)
                                         queryToExecute += " WHERE field0 LIKE '%" + textBoxCriteria.Text + "%'";
                                     else
                                         queryToExecute += " WHERE field0 = " + textBoxCriteria.Text;
 
                                     break;
-                                case 1: //! Faction name
+                                case 1: //! Emote name
                                     if (checkBoxFieldContainsCriteria.Checked)
                                         queryToExecute += " WHERE field1 LIKE '%" + textBoxCriteria.Text + "%'";
                                     else
@@ -191,6 +199,40 @@ namespace SAI_Editor
                         if (dt.Rows.Count > 0)
                             foreach (DataRow row in dt.Rows)
                                 AddItemToListView(listViewEntryResults, Convert.ToInt32(row["field0"]).ToString(), (string)row["field1"]);
+                        break;
+                    case DatabaseSearchFormType.DatabaseSearchFormTypeQuest:
+                        queryToExecute = "SELECT id, title FROM quest_template";
+
+                        if (limit)
+                            queryToExecute += " LIMIT 1000";
+                        else
+                        {
+                            switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
+                            {
+                                case 0: //! Quest entry
+                                    if (checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE id LIKE '%" + textBoxCriteria.Text + "%'";
+                                    else
+                                        queryToExecute += " WHERE id = " + textBoxCriteria.Text;
+
+                                    break;
+                                case 1: //! Quest name
+                                    if (checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE title LIKE '%" + textBoxCriteria.Text + "%'";
+                                    else
+                                        queryToExecute += " WHERE title = " + textBoxCriteria.Text;
+
+                                    break;
+                                default:
+                                    return;
+                            }
+                        }
+
+                        dt = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute);
+
+                        if (dt.Rows.Count > 0)
+                            foreach (DataRow row in dt.Rows)
+                                AddItemToListView(listViewEntryResults, Convert.ToInt32(row["id"]).ToString(), (string)row["title"]);
                         break;
                 }
             }
