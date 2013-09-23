@@ -30,6 +30,8 @@ namespace SAI_Editor
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly TextBox textBoxToChange = null;
         private readonly DatabaseSearchFormType databaseSearchFormType;
+        private string baseQuery, columnOne, columnTwo;
+        private bool useMySQL = false;
 
         public SearchFromDatabaseForm(MySqlConnectionStringBuilder connectionString, TextBox textBoxToChange, DatabaseSearchFormType databaseSearchFormType)
         {
@@ -53,6 +55,9 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Spell id");
                     comboBoxSearchType.Items.Add("Spell name");
+                    baseQuery = "SELECT id, spellName FROM spells";
+                    columnOne = "id";
+                    columnTwo = "spellName";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeFaction:
                     Text = "Search for a faction";
@@ -60,6 +65,9 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Faction id");
                     comboBoxSearchType.Items.Add("Faction name");
+                    baseQuery = "SELECT m_ID, m_name_lang_1 FROM factions";
+                    columnOne = "m_ID";
+                    columnTwo = "m_name_lang_1";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeEmote:
                     Text = "Search for an emote";
@@ -67,6 +75,9 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Emote id");
                     comboBoxSearchType.Items.Add("Emote name");
+                    baseQuery = "SELECT field0, field1 FROM emotes";
+                    columnOne = "field0";
+                    columnTwo = "field1";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeQuest:
                     Text = "Search for a quest";
@@ -74,6 +85,10 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Quest id");
                     comboBoxSearchType.Items.Add("Quest name");
+                    baseQuery = "SELECT id, title FROM quest_template";
+                    columnOne = "id";
+                    columnTwo = "title";
+                    useMySQL = true;
                     break;
             }
 
@@ -93,148 +108,40 @@ namespace SAI_Editor
         {
             try
             {
-                string queryToExecute = String.Empty;
                 DataTable dt = null;
+                string queryToExecute = baseQuery;
 
-                switch (databaseSearchFormType)
+                if (limit)
+                    queryToExecute += " LIMIT 1000";
+
+                if (!limit)
                 {
-                    case DatabaseSearchFormType.DatabaseSearchFormTypeSpell:
-                        queryToExecute = "SELECT id, spellName FROM spells";
+                    switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
+                    {
+                        case 0: //! First column
+                            if (checkBoxFieldContainsCriteria.Checked)
+                                queryToExecute += " WHERE " + columnOne + " LIKE '%" + textBoxCriteria.Text + "%'";
+                            else
+                                queryToExecute += " WHERE " + columnOne + " = " + textBoxCriteria.Text;
 
-                        if (limit)
-                            queryToExecute += " LIMIT 1000";
-                        else
-                        {
-                            switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
-                            {
-                                case 0: //! Spell entry
-                                    if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE id LIKE '%" + textBoxCriteria.Text + "%'";
-                                    else
-                                        queryToExecute += " WHERE id = " + textBoxCriteria.Text;
+                            break;
+                        case 1: //! Second column
+                            if (checkBoxFieldContainsCriteria.Checked)
+                                queryToExecute += " WHERE " + columnTwo + " LIKE '%" + textBoxCriteria.Text + "%'";
+                            else
+                                queryToExecute += " WHERE " + columnTwo + " = " + textBoxCriteria.Text;
 
-                                    break;
-                                case 1: //! Spell name
-                                    if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE spellName LIKE '%" + textBoxCriteria.Text + "%'";
-                                    else
-                                        queryToExecute += " WHERE spellName = " + textBoxCriteria.Text;
-
-                                    break;
-                                default:
-                                    return;
-                            }
-                        }
-
-                        dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
-
-                        if (dt.Rows.Count > 0)
-                            foreach (DataRow row in dt.Rows)
-                                AddItemToListView(listViewEntryResults, Convert.ToInt32(row["id"]).ToString(), (string)row["spellName"]);
-                        break;
-                    case DatabaseSearchFormType.DatabaseSearchFormTypeFaction:
-                        queryToExecute = "SELECT m_ID, m_name_lang_1 FROM factions";
-
-                        if (limit)
-                            queryToExecute += " LIMIT 1000";
-                        else
-                        {
-                            switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
-                            {
-                                case 0: //! Faction entry
-                                    if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE m_ID LIKE '%" + textBoxCriteria.Text + "%'";
-                                    else
-                                        queryToExecute += " WHERE m_ID = " + textBoxCriteria.Text;
-
-                                    break;
-                                case 1: //! Faction name
-                                    if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE m_name_lang_1 LIKE '%" + textBoxCriteria.Text + "%'";
-                                    else
-                                        queryToExecute += " WHERE m_name_lang_1 = " + textBoxCriteria.Text;
-
-                                    break;
-                                default:
-                                    return;
-                            }
-                        }
-
-                        dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
-
-                        if (dt.Rows.Count > 0)
-                            foreach (DataRow row in dt.Rows)
-                                AddItemToListView(listViewEntryResults, Convert.ToInt32(row["m_ID"]).ToString(), (string)row["m_name_lang_1"]);
-                        break;
-                    case DatabaseSearchFormType.DatabaseSearchFormTypeEmote:
-                        queryToExecute = "SELECT field0, field1 FROM emotes";
-
-                        if (limit)
-                            queryToExecute += " LIMIT 1000";
-                        else
-                        {
-                            switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
-                            {
-                                case 0: //! Emote entry
-                                    if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE field0 LIKE '%" + textBoxCriteria.Text + "%'";
-                                    else
-                                        queryToExecute += " WHERE field0 = " + textBoxCriteria.Text;
-
-                                    break;
-                                case 1: //! Emote name
-                                    if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE field1 LIKE '%" + textBoxCriteria.Text + "%'";
-                                    else
-                                        queryToExecute += " WHERE field1 = " + textBoxCriteria.Text;
-
-                                    break;
-                                default:
-                                    return;
-                            }
-                        }
-
-                        dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
-
-                        if (dt.Rows.Count > 0)
-                            foreach (DataRow row in dt.Rows)
-                                AddItemToListView(listViewEntryResults, Convert.ToInt32(row["field0"]).ToString(), (string)row["field1"]);
-                        break;
-                    case DatabaseSearchFormType.DatabaseSearchFormTypeQuest:
-                        queryToExecute = "SELECT id, title FROM quest_template";
-
-                        if (limit)
-                            queryToExecute += " LIMIT 1000";
-                        else
-                        {
-                            switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
-                            {
-                                case 0: //! Quest entry
-                                    if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE id LIKE '%" + textBoxCriteria.Text + "%'";
-                                    else
-                                        queryToExecute += " WHERE id = " + textBoxCriteria.Text;
-
-                                    break;
-                                case 1: //! Quest name
-                                    if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE title LIKE '%" + textBoxCriteria.Text + "%'";
-                                    else
-                                        queryToExecute += " WHERE title = " + textBoxCriteria.Text;
-
-                                    break;
-                                default:
-                                    return;
-                            }
-                        }
-
-                        dt = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute);
-
-                        if (dt.Rows.Count > 0)
-                            foreach (DataRow row in dt.Rows)
-                                AddItemToListView(listViewEntryResults, Convert.ToInt32(row["id"]).ToString(), (string)row["title"]);
-                        break;
+                            break;
+                        default:
+                            return;
+                    }
                 }
+
+                dt = useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
+
+                if (dt.Rows.Count > 0)
+                    foreach (DataRow row in dt.Rows)
+                        AddItemToListView(listViewEntryResults, Convert.ToInt32(row[columnOne]).ToString(), (string)row[columnTwo]);
             }
             catch (ObjectDisposedException)
             {
