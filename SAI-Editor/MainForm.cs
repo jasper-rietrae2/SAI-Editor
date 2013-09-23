@@ -1207,7 +1207,7 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_REACT_STATE:
-                    new SiingleSelectForm(SingleSelectFormType.SingleSelectFormTypeReactState, textBoxActionParam1).ShowDialog(this);
+                    new SingleSelectForm(SingleSelectFormType.SingleSelectFormTypeReactState, textBoxActionParam1).ShowDialog(this);
                     break;
             }
         }

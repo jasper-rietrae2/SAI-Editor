@@ -1,6 +1,6 @@
 ﻿namespace SAI_Editor.SearchForms
 {
-    partial class SiingleSelectForm
+    partial class SingleSelectForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SiingleSelectForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SingleSelectForm));
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonContinue = new System.Windows.Forms.Button();
             this.listViewSelectableItems = new System.Windows.Forms.ListView();
@@ -67,7 +67,7 @@
             this.listViewSelectableItems.SelectedIndexChanged += new System.EventHandler(this.listViewSelectableItems_SelectedIndexChanged);
             this.listViewSelectableItems.DoubleClick += new System.EventHandler(this.listViewSelectableItems_DoubleClick);
             // 
-            // SiingleSelectForm
+            // SingleSelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -79,11 +79,11 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.Name = "SiingleSelectForm";
+            this.Name = "SingleSelectForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select something...";
-            this.Load += new System.EventHandler(this.SiingleSelectForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SiingleSelectForm_KeyDown);
+            this.Load += new System.EventHandler(this.SingleSelectForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SingleSelectForm_KeyDown);
             this.ResumeLayout(false);
 
         }

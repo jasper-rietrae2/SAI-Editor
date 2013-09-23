@@ -15,13 +15,13 @@ namespace SAI_Editor.SearchForms
         SingleSelectFormTypeReactState = 0,
     };
 
-    public partial class SiingleSelectForm : Form
+    public partial class SingleSelectForm : Form
     {
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly TextBox textBoxToChange = null;
         private readonly SingleSelectFormType searchType;
 
-        public SiingleSelectForm(SingleSelectFormType searchType, TextBox textBoxToChange)
+        public SingleSelectForm(SingleSelectFormType searchType, TextBox textBoxToChange)
         {
             InitializeComponent();
 
@@ -43,7 +43,7 @@ namespace SAI_Editor.SearchForms
             }
         }
 
-        private void SiingleSelectForm_Load(object sender, EventArgs e)
+        private void SingleSelectForm_Load(object sender, EventArgs e)
         {
             if (String.IsNullOrWhiteSpace(textBoxToChange.Text))
                 listViewSelectableItems.Items[0].Selected = true;
@@ -86,7 +86,7 @@ namespace SAI_Editor.SearchForms
             myListView.Sort();
         }
 
-        private void SiingleSelectForm_KeyDown(object sender, KeyEventArgs e)
+        private void SingleSelectForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
