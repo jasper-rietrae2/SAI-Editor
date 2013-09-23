@@ -1,6 +1,6 @@
 ﻿namespace SAI_Editor
 {
-    partial class SearchForSpellForm
+    partial class SearchFromDatabaseForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForSpellForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchFromDatabaseForm));
             this.listViewEntryResults = new System.Windows.Forms.ListView();
-            this.columnHeaderSpellId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeaderSpellName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBoxSearchInfo = new System.Windows.Forms.GroupBox();
             this.buttonStopSearching = new System.Windows.Forms.Button();
             this.checkBoxFieldContainsCriteria = new System.Windows.Forms.CheckBox();
@@ -43,9 +41,6 @@
             // 
             // listViewEntryResults
             // 
-            this.listViewEntryResults.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeaderSpellId,
-            this.columnHeaderSpellName});
             this.listViewEntryResults.FullRowSelect = true;
             this.listViewEntryResults.Location = new System.Drawing.Point(12, 99);
             this.listViewEntryResults.MultiSelect = false;
@@ -56,16 +51,6 @@
             this.listViewEntryResults.View = System.Windows.Forms.View.Details;
             this.listViewEntryResults.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewEntryResults_ColumnClick);
             this.listViewEntryResults.DoubleClick += new System.EventHandler(this.listViewEntryResults_DoubleClick);
-            // 
-            // columnHeaderSpellId
-            // 
-            this.columnHeaderSpellId.Text = "Id";
-            this.columnHeaderSpellId.Width = 45;
-            // 
-            // columnHeaderSpellName
-            // 
-            this.columnHeaderSpellName.Text = "Name";
-            this.columnHeaderSpellName.Width = 284;
             // 
             // groupBoxSearchInfo
             // 
@@ -133,7 +118,7 @@
             this.buttonSearch.UseVisualStyleBackColor = true;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
-            // SearchForSpellForm
+            // SearchFromDatabaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -143,12 +128,12 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.Name = "SearchForSpellForm";
+            this.Name = "SearchFromDatabaseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Search for a spell";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchForSpellForm_FormClosing);
-            this.Load += new System.EventHandler(this.SearchForSpellForm_Load);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchForSpellForm_KeyDown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchFromDatabaseForm_FormClosing);
+            this.Load += new System.EventHandler(this.SearchFromDatabaseForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchFromDatabaseForm_KeyDown);
             this.groupBoxSearchInfo.ResumeLayout(false);
             this.groupBoxSearchInfo.PerformLayout();
             this.ResumeLayout(false);
@@ -164,8 +149,6 @@
         private System.Windows.Forms.TextBox textBoxCriteria;
         private System.Windows.Forms.ComboBox comboBoxSearchType;
         private System.Windows.Forms.Button buttonSearch;
-        private System.Windows.Forms.ColumnHeader columnHeaderSpellId;
-        private System.Windows.Forms.ColumnHeader columnHeaderSpellName;
 
     }
 }

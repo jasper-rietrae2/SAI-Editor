@@ -15,28 +15,45 @@ using SAI_Editor.Properties;
 
 namespace SAI_Editor
 {
-    public partial class SearchForSpellForm : Form
+    public enum DatabaseSearchFormType
+    {
+        DatabaseSearchFormTypeSpell = 0,
+    };
+
+    public partial class SearchFromDatabaseForm : Form
     {
         private Thread searchThread = null;
         private readonly MySqlConnectionStringBuilder connectionString;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly TextBox textBoxToChange = null;
+        private readonly DatabaseSearchFormType databaseSearchFormType;
 
-        public SearchForSpellForm(MySqlConnectionStringBuilder connectionString, TextBox textBoxToChange)
+        public SearchFromDatabaseForm(MySqlConnectionStringBuilder connectionString, TextBox textBoxToChange, DatabaseSearchFormType databaseSearchFormType)
         {
             InitializeComponent();
 
             this.connectionString = connectionString;
             this.textBoxToChange = textBoxToChange;
+            this.databaseSearchFormType = databaseSearchFormType;
         }
 
-        private void SearchForSpellForm_Load(object sender, EventArgs e)
+        private void SearchFromDatabaseForm_Load(object sender, EventArgs e)
         {
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 800);
+
+            switch (databaseSearchFormType)
+            {
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSpell:
+                    Text = "Search for a spell";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    break;
+            }
+
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             comboBoxSearchType.SelectedIndex = 0;
-            FillListViewWithSpells(true);
+            FillListView(true);
         }
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
@@ -46,42 +63,49 @@ namespace SAI_Editor
             Close();
         }
 
-        private async void FillListViewWithSpells(bool limit = false)
+        private async void FillListView(bool limit = false)
         {
             try
             {
-                string queryToExecute = "SELECT id, spellName FROM spells";
+                string queryToExecute = String.Empty;
 
-                if (limit)
-                    queryToExecute += " LIMIT 1000"; //? Looks like LIMIT doesn't work for SQLite?
-                else
+                switch (databaseSearchFormType)
                 {
-                    switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
-                    {
-                        case 0: //! Spell entry
-                            if (checkBoxFieldContainsCriteria.Checked)
-                                queryToExecute += " WHERE id LIKE '%" + textBoxCriteria.Text + "%'";
-                            else
-                                queryToExecute += " WHERE id = " + textBoxCriteria.Text;
+                    case DatabaseSearchFormType.DatabaseSearchFormTypeSpell:
+                        queryToExecute = "SELECT id, spellName FROM spells";
 
-                            break;
-                        case 1: //! Spell name
-                            if (checkBoxFieldContainsCriteria.Checked)
-                                queryToExecute += " WHERE spellName LIKE '%" + textBoxCriteria.Text + "%'";
-                            else
-                                queryToExecute += " WHERE spellName = " + textBoxCriteria.Text;
+                        if (limit)
+                            queryToExecute += " LIMIT 1000"; //? Looks like LIMIT doesn't work for SQLite?
+                        else
+                        {
+                            switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
+                            {
+                                case 0: //! Spell entry
+                                    if (checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE id LIKE '%" + textBoxCriteria.Text + "%'";
+                                    else
+                                        queryToExecute += " WHERE id = " + textBoxCriteria.Text;
 
-                            break;
-                        default:
-                            return;
-                    }
+                                    break;
+                                case 1: //! Spell name
+                                    if (checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE spellName LIKE '%" + textBoxCriteria.Text + "%'";
+                                    else
+                                        queryToExecute += " WHERE spellName = " + textBoxCriteria.Text;
+
+                                    break;
+                                default:
+                                    return;
+                            }
+                        }
+
+                        DataTable dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
+
+                        if (dt.Rows.Count > 0)
+                            foreach (DataRow row in dt.Rows)
+                                AddItemToListView(listViewEntryResults, Convert.ToInt32(row["id"]).ToString(), (string)row["spellName"]);
+                        break;
                 }
-
-                DataTable dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
-
-                if (dt.Rows.Count > 0)
-                    foreach (DataRow row in dt.Rows)
-                        AddItemToListView(listViewEntryResults, Convert.ToInt32(row["id"]).ToString(), (string)row["spellName"]);
             }
             catch (ObjectDisposedException)
             {
@@ -109,7 +133,7 @@ namespace SAI_Editor
 
                 try
                 {
-                    FillListViewWithSpells();
+                    FillListView();
                 }
                 finally
                 {
@@ -130,7 +154,7 @@ namespace SAI_Editor
             }
         }
 
-        private void SearchForSpellForm_KeyDown(object sender, KeyEventArgs e)
+        private void SearchFromDatabaseForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -245,7 +269,7 @@ namespace SAI_Editor
             myListView.Sort();
         }
 
-        private void SearchForSpellForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void SearchFromDatabaseForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             StopRunningThread();
         }

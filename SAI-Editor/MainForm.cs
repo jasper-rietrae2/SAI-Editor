@@ -1176,7 +1176,7 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_CAST:
                 case SmartAction.SMART_ACTION_INVOKER_CAST:
                 case SmartAction.SMART_ACTION_CROSS_CAST:
-                    new SearchForSpellForm(connectionString, textBoxActionParam1).ShowDialog(this);
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
             }
         }
