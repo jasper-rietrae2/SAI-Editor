@@ -1147,14 +1147,14 @@ namespace SAI_Editor
         {
             switch ((SmartEvent)comboBoxEventType.SelectedIndex)
             {
-                case SmartEvent.SMART_EVENT_SPELLHIT:
+                case SmartEvent.SMART_EVENT_SPELLHIT: //! Spell id
                 case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF:
                 case SmartEvent.SMART_EVENT_HAS_AURA:
                 case SmartEvent.SMART_EVENT_TARGET_BUFFED:
                 case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
                     new SearchFromDatabaseForm(connectionString, textBoxEventParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
-                case SmartEvent.SMART_EVENT_RESPAWN:
+                case SmartEvent.SMART_EVENT_RESPAWN: //! Respawn condition
                     new SingleSelectForm(SingleSelectFormType.SingleSelectFormTypeRespawnType, textBoxEventParam1).ShowDialog(this);
                     break;
             }
@@ -1167,11 +1167,20 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_SPELLHIT: //! Spell school
                     //new SearchFromDatabaseForm(connectionString, textBoxEventParam2, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
+                case SmartEvent.SMART_EVENT_RESPAWN: //! Map
+                    new SearchFromDatabaseForm(connectionString, textBoxEventParam2, DatabaseSearchFormType.DatabaseSearchFormTypeMap).ShowDialog(this);
+                    break;
             }
         }
 
         private void buttonEventParamThreeSearch_Click(object sender, EventArgs e)
         {
+            switch ((SmartEvent)comboBoxEventType.SelectedIndex)
+            {
+                case SmartEvent.SMART_EVENT_RESPAWN: //! Zone
+                    new SearchFromDatabaseForm(connectionString, textBoxEventParam3, DatabaseSearchFormType.DatabaseSearchFormTypeZone).ShowDialog(this);
+                    break;
+            }
         }
 
         private void buttonEventParamFourSearch_Click(object sender, EventArgs e)
@@ -1210,26 +1219,26 @@ namespace SAI_Editor
         {
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
-                case SmartAction.SMART_ACTION_CAST:
+                case SmartAction.SMART_ACTION_CAST: //! Spell id
                 case SmartAction.SMART_ACTION_INVOKER_CAST:
                 case SmartAction.SMART_ACTION_CROSS_CAST:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_SET_FACTION:
+                case SmartAction.SMART_ACTION_SET_FACTION: //! Faction id
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeFaction).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_EMOTE:
+                case SmartAction.SMART_ACTION_EMOTE: //! Emote id
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                 case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_FAIL_QUEST:
+                case SmartAction.SMART_ACTION_FAIL_QUEST: //! Quest id
                 case SmartAction.SMART_ACTION_ADD_QUEST:
                 case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS:
                 case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_SET_REACT_STATE:
+                case SmartAction.SMART_ACTION_SET_REACT_STATE: //! React state
                     new SingleSelectForm(SingleSelectFormType.SingleSelectFormTypeReactState, textBoxActionParam1).ShowDialog(this);
                     break;
             }

@@ -21,6 +21,8 @@ namespace SAI_Editor
         DatabaseSearchFormTypeFaction = 1,
         DatabaseSearchFormTypeEmote = 2,
         DatabaseSearchFormTypeQuest = 3,
+        DatabaseSearchFormTypeMap = 4,
+        DatabaseSearchFormTypeZone = 5,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -90,6 +92,26 @@ namespace SAI_Editor
                     columnTwo = "title";
                     useMySQL = true;
                     break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeMap:
+                    Text = "Search for a map id";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Map id");
+                    comboBoxSearchType.Items.Add("Map name");
+                    baseQuery = "SELECT m_ID, m_MapName_lang1 FROM maps";
+                    columnOne = "m_ID";
+                    columnTwo = "m_MapName_lang1";
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeZone:
+                    Text = "Search for a zone id";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Zone id");
+                    comboBoxSearchType.Items.Add("Zone name");
+                    baseQuery = "SELECT m_ID, m_AreaName_lang FROM areas_and_zones";
+                    columnOne = "m_ID";
+                    columnTwo = "m_AreaName_lang";
+                    break;
             }
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -110,9 +132,6 @@ namespace SAI_Editor
             {
                 DataTable dt = null;
                 string queryToExecute = baseQuery;
-
-                if (limit)
-                    queryToExecute += " LIMIT 1000";
 
                 if (!limit)
                 {
@@ -136,6 +155,17 @@ namespace SAI_Editor
                             return;
                     }
                 }
+
+                if (limit)
+                {
+                    if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
+                        queryToExecute += " WHERE m_ParentAreaID = 0";
+
+                    queryToExecute += " LIMIT 1000";
+                }
+                else if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
+                    queryToExecute += " AND m_ParentAreaID = 0";
+
 
                 dt = useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
 
