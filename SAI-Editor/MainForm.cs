@@ -751,6 +751,8 @@ namespace SAI_Editor
                 switch ((SmartAction)action_type)
                 {
                     case SmartAction.SMART_ACTION_CAST:
+                    case SmartAction.SMART_ACTION_INVOKER_CAST:
+                    case SmartAction.SMART_ACTION_CROSS_CAST:
                         buttonActionParamOneSearch.Visible = true; //! Spell id
                         buttonActionParamTwoSearch.Visible = true; //! Cast flags
                         break;
@@ -1168,6 +1170,8 @@ namespace SAI_Editor
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
                 case SmartAction.SMART_ACTION_CAST:
+                case SmartAction.SMART_ACTION_INVOKER_CAST:
+                case SmartAction.SMART_ACTION_CROSS_CAST:
                     new SearchForSpellForm(connectionString, textBoxActionParam1).ShowDialog(this);
                     break;
             }
@@ -1178,6 +1182,8 @@ namespace SAI_Editor
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
                 case SmartAction.SMART_ACTION_CAST:
+                case SmartAction.SMART_ACTION_INVOKER_CAST:
+                case SmartAction.SMART_ACTION_CROSS_CAST:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeCastFlag, textBoxActionParam2).ShowDialog(this);
                     break;
             }
