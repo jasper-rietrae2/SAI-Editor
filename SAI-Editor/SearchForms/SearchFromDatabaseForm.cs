@@ -166,7 +166,6 @@ namespace SAI_Editor
                 else if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
                     queryToExecute += " AND m_ParentAreaID = 0";
 
-
                 dt = useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
 
                 if (dt.Rows.Count > 0)

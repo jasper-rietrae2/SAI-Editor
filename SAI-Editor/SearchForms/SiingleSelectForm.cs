@@ -53,7 +53,7 @@ namespace SAI_Editor.SearchForms
 
         private void SingleSelectForm_Load(object sender, EventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(textBoxToChange.Text))
+            if (String.IsNullOrWhiteSpace(textBoxToChange.Text) || textBoxToChange.Text == "0")
                 listViewSelectableItems.Items[0].Selected = true;
             else
             {
