@@ -54,27 +54,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AboutForm.cs">
+    <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AboutForm.designer.cs">
+    <Compile Include="Forms\AboutForm.designer.cs">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchForms\AreatriggersForm.cs">
+    <Compile Include="Forms\SearchForms\AreatriggersForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForms\AreatriggersForm.Designer.cs">
+    <Compile Include="Forms\SearchForms\AreatriggersForm.Designer.cs">
       <DependentUpon>AreatriggersForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Database\Classes\ActionTypeInformation.cs" />
-    <Compile Include="Database\Classes\AreaTrigger.cs" />
-    <Compile Include="Database\Classes\BaseTypeInformation.cs" />
-    <Compile Include="Database\Classes\EventTypeInformation.cs" />
-    <Compile Include="Database\Classes\SmartScript.cs" />
-    <Compile Include="Database\Classes\TargetTypeInformation.cs" />
-    <Compile Include="Database\Database.cs" />
-    <Compile Include="Database\SQLiteDatabase.cs" />
-    <Compile Include="Database\WorldDatabase.cs" />
+    <Compile Include="Classes\Database\Classes\ActionTypeInformation.cs" />
+    <Compile Include="Classes\Database\Classes\AreaTrigger.cs" />
+    <Compile Include="Classes\Database\Classes\BaseTypeInformation.cs" />
+    <Compile Include="Classes\Database\Classes\EventTypeInformation.cs" />
+    <Compile Include="Classes\Database\Classes\SmartScript.cs" />
+    <Compile Include="Classes\Database\Classes\TargetTypeInformation.cs" />
+    <Compile Include="Classes\Database\Database.cs" />
+    <Compile Include="Classes\Database\SQLiteDatabase.cs" />
+    <Compile Include="Classes\Database\WorldDatabase.cs" />
     <Compile Include="dep\ScrollablePicturebox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -84,74 +84,74 @@
     <Compile Include="dep\ZoomPanImageBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ListViewColumnSorter.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Classes\ListViewColumnSorter.cs" />
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.designer.cs">
+    <Compile Include="Forms\MainForm.designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchForms\MultiSelectForm.cs">
+    <Compile Include="Forms\SearchForms\MultiSelectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForms\MultiSelectForm.designer.cs">
+    <Compile Include="Forms\SearchForms\MultiSelectForm.designer.cs">
       <DependentUpon>MultiSelectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PublicEnums.cs" />
-    <Compile Include="SAI-Editor-Manager.cs" />
-    <Compile Include="SearchForms\SearchForEntryForm.cs">
+    <Compile Include="Enumerators\PublicEnums.cs" />
+    <Compile Include="Classes\SAI-Editor-Manager.cs" />
+    <Compile Include="Forms\SearchForms\SearchForEntryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForms\SearchForEntryForm.designer.cs">
+    <Compile Include="Forms\SearchForms\SearchForEntryForm.designer.cs">
       <DependentUpon>SearchForEntryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchForms\SearchForLinkForm.cs">
+    <Compile Include="Forms\SearchForms\SearchForLinkForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForms\SearchForLinkForm.designer.cs">
+    <Compile Include="Forms\SearchForms\SearchForLinkForm.designer.cs">
       <DependentUpon>SearchForLinkForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchForms\SearchFromDatabaseForm.cs">
+    <Compile Include="Forms\SearchForms\SearchFromDatabaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForms\SearchFromDatabaseForm.Designer.cs">
+    <Compile Include="Forms\SearchForms\SearchFromDatabaseForm.Designer.cs">
       <DependentUpon>SearchFromDatabaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchForms\SiingleSelectForm.cs">
+    <Compile Include="Forms\SearchForms\SiingleSelectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForms\SiingleSelectForm.Designer.cs">
+    <Compile Include="Forms\SearchForms\SiingleSelectForm.Designer.cs">
       <DependentUpon>SiingleSelectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Security\SecurityExtensions.cs" />
-    <Compile Include="SearchForms\SelectDatabaseForm.cs">
+    <Compile Include="Classes\SecurityExtensions.cs" />
+    <Compile Include="Forms\SearchForms\SelectDatabaseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForms\SelectDatabaseForm.designer.cs">
+    <Compile Include="Forms\SearchForms\SelectDatabaseForm.designer.cs">
       <DependentUpon>SelectDatabaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SettingsForm.cs">
+    <Compile Include="Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsForm.designer.cs">
+    <Compile Include="Forms\SettingsForm.designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TooltipHelper.cs" />
-    <EmbeddedResource Include="AboutForm.resx">
+    <Compile Include="Classes\TooltipHelper.cs" />
+    <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchForms\AreatriggersForm.resx">
+    <EmbeddedResource Include="Forms\SearchForms\AreatriggersForm.resx">
       <DependentUpon>AreatriggersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dep\ZoomPanImageBox.resx">
       <DependentUpon>ZoomPanImageBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchForms\MultiSelectForm.resx">
+    <EmbeddedResource Include="Forms\SearchForms\MultiSelectForm.resx">
       <DependentUpon>MultiSelectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -163,22 +163,22 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SearchForms\SearchForEntryForm.resx">
+    <EmbeddedResource Include="Forms\SearchForms\SearchForEntryForm.resx">
       <DependentUpon>SearchForEntryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchForms\SearchForLinkForm.resx">
+    <EmbeddedResource Include="Forms\SearchForms\SearchForLinkForm.resx">
       <DependentUpon>SearchForLinkForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchForms\SearchFromDatabaseForm.resx">
+    <EmbeddedResource Include="Forms\SearchForms\SearchFromDatabaseForm.resx">
       <DependentUpon>SearchFromDatabaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchForms\SelectDatabaseForm.resx">
+    <EmbeddedResource Include="Forms\SearchForms\SelectDatabaseForm.resx">
       <DependentUpon>SelectDatabaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchForms\SiingleSelectForm.resx">
+    <EmbeddedResource Include="Forms\SearchForms\SiingleSelectForm.resx">
       <DependentUpon>SiingleSelectForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SettingsForm.resx">
+    <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
