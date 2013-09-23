@@ -8,6 +8,7 @@ using System.Drawing;
 using MySql.Data.MySqlClient;
 using SAI_Editor.Properties;
 using SAI_Editor.Database.Classes;
+using SAI_Editor.SearchForms;
 using SAI_Editor.Security;
 
 namespace SAI_Editor
@@ -770,6 +771,9 @@ namespace SAI_Editor
                     case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
                         buttonActionParamOneSearch.Visible = true; //! Quest id
                         break;
+                    case SmartAction.SMART_ACTION_SET_REACT_STATE:
+                        buttonActionParamOneSearch.Visible = true; //! Reactstate
+                        break;
                 }
 
                 switch ((SmartTarget)target_type)
@@ -1201,6 +1205,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS:
                 case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SET_REACT_STATE:
+                    new SiingleSelectForm(SingleSelectFormType.SingleSelectFormTypeReactState, textBoxActionParam1).ShowDialog(this);
                     break;
             }
         }

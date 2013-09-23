@@ -264,4 +264,11 @@
         SMARTCAST_TRIGGERED = 0x02,
         SMARTCAST_AURA_NOT_PRESENT = 0x20,
     }
+
+    public enum ReactStates
+    {
+        REACT_PASSIVE = 0,
+        REACT_DEFENSIVE = 1,
+        REACT_AGGRESSIVE = 2,
+    }
 }
