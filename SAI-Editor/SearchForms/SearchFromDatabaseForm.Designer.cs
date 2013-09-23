@@ -99,9 +99,6 @@
             // comboBoxSearchType
             // 
             this.comboBoxSearchType.FormattingEnabled = true;
-            this.comboBoxSearchType.Items.AddRange(new object[] {
-            "Spell entry",
-            "Spell name"});
             this.comboBoxSearchType.Location = new System.Drawing.Point(20, 19);
             this.comboBoxSearchType.Name = "comboBoxSearchType";
             this.comboBoxSearchType.Size = new System.Drawing.Size(113, 21);

@@ -1178,6 +1178,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_CROSS_CAST:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_SET_FACTION:
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeFaction).ShowDialog(this);
+                    break;
             }
         }
 

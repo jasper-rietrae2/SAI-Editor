@@ -107,12 +107,6 @@
     <Compile Include="SearchForms\SearchForEntryForm.designer.cs">
       <DependentUpon>SearchForEntryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchForms\SearchForFactionForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SearchForms\SearchForFactionForm.Designer.cs">
-      <DependentUpon>SearchForFactionForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="SearchForms\SearchForLinkForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,9 +158,6 @@
     </Compile>
     <EmbeddedResource Include="SearchForms\SearchForEntryForm.resx">
       <DependentUpon>SearchForEntryForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SearchForms\SearchForFactionFOrm.resx">
-      <DependentUpon>SearchForFactionForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchForms\SearchForLinkForm.resx">
       <DependentUpon>SearchForLinkForm.cs</DependentUpon>

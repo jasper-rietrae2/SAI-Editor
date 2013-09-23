@@ -18,6 +18,7 @@ namespace SAI_Editor
     public enum DatabaseSearchFormType
     {
         DatabaseSearchFormTypeSpell = 0,
+        DatabaseSearchFormTypeFaction = 1,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -48,6 +49,15 @@ namespace SAI_Editor
                     Text = "Search for a spell";
                     listViewEntryResults.Columns.Add("Id", 45);
                     listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Spell entry");
+                    comboBoxSearchType.Items.Add("Spell name");
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeFaction:
+                    Text = "Search for a faction";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Faction entry");
+                    comboBoxSearchType.Items.Add("Faction name");
                     break;
             }
 
@@ -68,6 +78,7 @@ namespace SAI_Editor
             try
             {
                 string queryToExecute = String.Empty;
+                DataTable dt = null;
 
                 switch (databaseSearchFormType)
                 {
@@ -99,11 +110,45 @@ namespace SAI_Editor
                             }
                         }
 
-                        DataTable dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
+                        dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
 
                         if (dt.Rows.Count > 0)
                             foreach (DataRow row in dt.Rows)
                                 AddItemToListView(listViewEntryResults, Convert.ToInt32(row["id"]).ToString(), (string)row["spellName"]);
+                        break;
+                    case DatabaseSearchFormType.DatabaseSearchFormTypeFaction:
+                        queryToExecute = "SELECT m_ID, m_name_lang_1 FROM factions";
+
+                        if (limit)
+                            queryToExecute += " LIMIT 1000"; //? Looks like LIMIT doesn't work for SQLite?
+                        else
+                        {
+                            switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
+                            {
+                                case 0: //! Faction entry
+                                    if (checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE m_ID LIKE '%" + textBoxCriteria.Text + "%'";
+                                    else
+                                        queryToExecute += " WHERE m_ID = " + textBoxCriteria.Text;
+
+                                    break;
+                                case 1: //! Faction name
+                                    if (checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE m_name_lang_1 LIKE '%" + textBoxCriteria.Text + "%'";
+                                    else
+                                        queryToExecute += " WHERE m_name_lang_1 = " + textBoxCriteria.Text;
+
+                                    break;
+                                default:
+                                    return;
+                            }
+                        }
+
+                        dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
+
+                        if (dt.Rows.Count > 0)
+                            foreach (DataRow row in dt.Rows)
+                                AddItemToListView(listViewEntryResults, Convert.ToInt32(row["m_ID"]).ToString(), (string)row["m_name_lang_1"]);
                         break;
                 }
             }
