@@ -83,7 +83,7 @@ namespace SAI_Editor
                     foreach (DataRow row in dt.Rows)
                         AddItemToListView(listViewEntryResults, Convert.ToInt32(row["id"]).ToString(), (string)row["spellName"]);
             }
-            catch (ObjectDisposedException ex)
+            catch (ObjectDisposedException)
             {
 
             }
@@ -124,6 +124,8 @@ namespace SAI_Editor
             }
             catch (Exception ex)
             {
+                SetEnabledOfControl(buttonSearch, true);
+                SetEnabledOfControl(buttonStopSearching, false);
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
