@@ -7,6 +7,7 @@ namespace SAI_Editor
     {
         MultiSelectFormTypePhaseMask = 0,
         MultiSelectFormTypeEventFlag = 1,
+        MultiSelectFormTypeCastFlag = 2,
     };
 
     public partial class MultiSelectForm : Form
@@ -25,7 +26,7 @@ namespace SAI_Editor
             switch (searchType)
             {
                 case MultiSelectFormType.MultiSelectFormTypePhaseMask:
-                    Text = "Select phasemask";
+                    Text = "Select a phasemask";
                     listViewSelectableItems.Columns.Add("Phase", 195, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_ALWAYS"); // 0
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_1");      // 1
@@ -36,7 +37,7 @@ namespace SAI_Editor
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_6");      // 6
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeEventFlag:
-                    Text = "Select eventflag";
+                    Text = "Select eventflags";
                     listViewSelectableItems.Columns.Add("Flag", 195, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NONE");           // 0
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NOT_REPEATABLE"); // 1
@@ -45,6 +46,13 @@ namespace SAI_Editor
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_2");   // 4
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_3");   // 5
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DEBUG_ONLY");     // 6
+                    break;
+                case MultiSelectFormType.MultiSelectFormTypeCastFlag:
+                    Text = "Select castflags";
+                    listViewSelectableItems.Columns.Add("Flag", 195, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_INTERRUPT_PREVIOUS"); // 0
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_TRIGGERED"); // 1
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_AURA_NOT_PRESENT"); // 2
                     break;
             }
         }

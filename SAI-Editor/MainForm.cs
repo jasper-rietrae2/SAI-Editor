@@ -1175,7 +1175,12 @@ namespace SAI_Editor
 
         private void buttonActionParamTwoSearch_Click(object sender, EventArgs e)
         {
-
+            switch ((SmartAction)comboBoxActionType.SelectedIndex)
+            {
+                case SmartAction.SMART_ACTION_CAST:
+                    new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeCastFlag, textBoxActionParam2).ShowDialog(this);
+                    break;
+            }
         }
 
         private void buttonActionParamThreeSearch_Click(object sender, EventArgs e)
