@@ -58,7 +58,7 @@ namespace SAI_Editor.SearchForms
             else
             {
                 foreach (ListViewItem item in listViewSelectableItems.Items)
-                    if (item.Index > 0 && textBoxToChange.Text == item.Text)
+                    if (item.Index > 0 && textBoxToChange.Text == item.Index.ToString())
                         item.Selected = true;
             }
         }
