@@ -3,12 +3,18 @@ using System.Windows.Forms;
 
 namespace SAI_Editor
 {
+    public enum MultiSelectFormType
+    {
+        MultiSelectFormTypePhaseMask = 0,
+        MultiSelectFormTypeEventFlag = 1,
+    };
+
     public partial class MultiSelectForm : Form
     {
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly TextBox textBoxToChange = null;
 
-        public MultiSelectForm(bool searchingForPhasemask, TextBox textBoxToChange)
+        public MultiSelectForm(MultiSelectFormType searchType, TextBox textBoxToChange)
         {
             InitializeComponent();
 
@@ -16,29 +22,30 @@ namespace SAI_Editor
             listViewSelectableItems.Columns.Add("", 20, HorizontalAlignment.Left);
             listViewSelectableItems.ColumnClick += listViewSelectableItems_ColumnClick;
 
-            if (searchingForPhasemask)
+            switch (searchType)
             {
-                Text = "Select phasemask";
-                listViewSelectableItems.Columns.Add("Phase", 195, HorizontalAlignment.Left);
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_ALWAYS"); // 0
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_1");      // 1
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_2");      // 2
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_3");      // 3
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_4");      // 4
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_5");      // 5
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_6");      // 6
-            }
-            else
-            {
-                Text = "Select eventflag";
-                listViewSelectableItems.Columns.Add("Flag", 195, HorizontalAlignment.Left);
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NONE");           // 0
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NOT_REPEATABLE"); // 1
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_0");   // 2
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_1");   // 3
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_2");   // 4
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_3");   // 5
-                listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DEBUG_ONLY");     // 6
+                case MultiSelectFormType.MultiSelectFormTypePhaseMask:
+                    Text = "Select phasemask";
+                    listViewSelectableItems.Columns.Add("Phase", 195, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_ALWAYS"); // 0
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_1");      // 1
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_2");      // 2
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_3");      // 3
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_4");      // 4
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_5");      // 5
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_6");      // 6
+                    break;
+                case MultiSelectFormType.MultiSelectFormTypeEventFlag:
+                    Text = "Select eventflag";
+                    listViewSelectableItems.Columns.Add("Flag", 195, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NONE");           // 0
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NOT_REPEATABLE"); // 1
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_0");   // 2
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_1");   // 3
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_2");   // 4
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_3");   // 5
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DEBUG_ONLY");     // 6
+                    break;
             }
         }
 

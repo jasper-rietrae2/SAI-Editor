@@ -954,12 +954,12 @@ namespace SAI_Editor
 
         private void buttonSearchPhasemask_Click(object sender, EventArgs e)
         {
-            new MultiSelectForm(true, textBoxEventPhasemask).ShowDialog(this);
+            new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxEventPhasemask).ShowDialog(this);
         }
 
         private void buttonSelectEventFlag_Click(object sender, EventArgs e)
         {
-            new MultiSelectForm(false, textBoxEventFlags).ShowDialog(this);
+            new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeEventFlag, textBoxEventFlags).ShowDialog(this);
         }
 
         private async void buttonSearchWorldDb_Click(object sender, EventArgs e)

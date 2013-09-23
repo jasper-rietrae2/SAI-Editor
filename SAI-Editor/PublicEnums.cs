@@ -257,4 +257,11 @@
         TEMPSUMMON_DEAD_DESPAWN = 7,
         TEMPSUMMON_MANUAL_DESPAWN = 8
     }
+
+    public enum SmartCastFlags
+    {
+        SMARTCAST_INTERRUPT_PREVIOUS = 0x01,
+        SMARTCAST_TRIGGERED = 0x02,
+        SMARTCAST_AURA_NOT_PRESENT = 0x20,
+    }
 }
