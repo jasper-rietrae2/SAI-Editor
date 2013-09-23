@@ -1154,6 +1154,9 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
                     new SearchFromDatabaseForm(connectionString, textBoxEventParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
+                case SmartEvent.SMART_EVENT_RESPAWN:
+                    new SingleSelectForm(SingleSelectFormType.SingleSelectFormTypeRespawnType, textBoxEventParam1).ShowDialog(this);
+                    break;
             }
         }
 

@@ -13,6 +13,7 @@ namespace SAI_Editor.SearchForms
     public enum SingleSelectFormType
     {
         SingleSelectFormTypeReactState = 0,
+        SingleSelectFormTypeRespawnType = 1,
     };
 
     public partial class SingleSelectForm : Form
@@ -39,6 +40,13 @@ namespace SAI_Editor.SearchForms
                     listViewSelectableItems.Items.Add("REACT_PASSIVE"); // 1
                     listViewSelectableItems.Items.Add("REACT_DEFENSIVE"); // 2
                     listViewSelectableItems.Items.Add("REACT_AGGRESSIVE"); // 3
+                    break;
+                case SingleSelectFormType.SingleSelectFormTypeRespawnType:
+                    Text = "Select a respawn condition";
+                    listViewSelectableItems.Columns.Add("Respawn condition", 256, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("RESPAWN_CONDITION_NONE"); // 0
+                    listViewSelectableItems.Items.Add("RESPAWN_CONDITION_MAP"); // 1
+                    listViewSelectableItems.Items.Add("RESPAWN_CONDITION_AREA"); // 2
                     break;
             }
         }

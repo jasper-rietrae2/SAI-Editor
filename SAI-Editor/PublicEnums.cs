@@ -271,4 +271,11 @@
         REACT_DEFENSIVE = 1,
         REACT_AGGRESSIVE = 2,
     }
+
+    public enum SmartScriptRespawnCondition
+    {
+        RESPAWN_CONDITION_NONE = 0,
+        RESPAWN_CONDITION_MAP = 1,
+        RESPAWN_CONDITION_AREA = 2,
+    }
 }
