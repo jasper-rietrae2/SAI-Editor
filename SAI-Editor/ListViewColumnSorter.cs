@@ -57,8 +57,8 @@ namespace SAI_Editor
             
             if (OrderOfSort == SortOrder.Ascending)
                 return compareResult;
-            else
-                return -compareResult;
+
+            return -compareResult;
         }
 
         /// <summary>

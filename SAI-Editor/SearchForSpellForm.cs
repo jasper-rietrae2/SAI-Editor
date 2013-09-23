@@ -83,7 +83,10 @@ namespace SAI_Editor
                     foreach (DataRow row in dt.Rows)
                         AddItemToListView(listViewEntryResults, Convert.ToInt32(row["id"]).ToString(), (string)row["spellName"]);
             }
-            //catch (SQLiteException ex)
+            catch (ObjectDisposedException ex)
+            {
+
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -219,20 +222,6 @@ namespace SAI_Editor
             }
 
             listView.Items.Clear();
-        }
-
-        private void SetTextOfControl(Control control, string text)
-        {
-            if (control.InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate
-                {
-                    control.Text = text;
-                });
-                return;
-            }
-
-            control.Text = text;
         }
 
         private void listViewEntryResults_ColumnClick(object sender, ColumnClickEventArgs e)
