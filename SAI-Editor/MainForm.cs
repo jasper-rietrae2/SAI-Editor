@@ -1183,7 +1183,6 @@ namespace SAI_Editor
         {
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
-                //! Spell id
                 case SmartAction.SMART_ACTION_CAST:
                 case SmartAction.SMART_ACTION_INVOKER_CAST:
                 case SmartAction.SMART_ACTION_CROSS_CAST:
@@ -1210,7 +1209,6 @@ namespace SAI_Editor
         {
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
-                //! Cast flags
                 case SmartAction.SMART_ACTION_CAST:
                 case SmartAction.SMART_ACTION_INVOKER_CAST:
                 case SmartAction.SMART_ACTION_CROSS_CAST:

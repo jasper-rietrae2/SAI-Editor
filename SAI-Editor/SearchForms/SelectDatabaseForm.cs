@@ -45,6 +45,9 @@ namespace SAI_Editor
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
+            if (listViewDatabases.SelectedItems.Count == 0)
+                return;
+
             textBoxToChange.Text = listViewDatabases.SelectedItems[0].Text;
             Close();
         }

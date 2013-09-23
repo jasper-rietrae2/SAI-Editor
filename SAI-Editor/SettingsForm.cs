@@ -214,7 +214,7 @@ namespace SAI_Editor
 
             if (databaseNames != null && databaseNames.Count > 0)
                 using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
-                    selectDatabaseForm.Show(this);
+                    selectDatabaseForm.ShowDialog(this);
         }
 
         private void settingTextBox_KeyDown(object sender, KeyEventArgs e)
