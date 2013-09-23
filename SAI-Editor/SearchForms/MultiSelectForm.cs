@@ -60,12 +60,12 @@ namespace SAI_Editor
 
         private void MultiSelectForm_Load(object sender, EventArgs e)
         {
-            int bitmask = Convert.ToInt32(textBoxToChange.Text);
-
-            if (bitmask == 0)
+            if (textBoxToChange.Text == "0" || String.IsNullOrWhiteSpace(textBoxToChange.Text))
                 listViewSelectableItems.Items[0].Checked = true;
             else
             {
+                int bitmask = Convert.ToInt32(textBoxToChange.Text);
+
                 foreach (ListViewItem item in listViewSelectableItems.Items)
                     if (item.Index > 0 && (bitmask & GetMaskByIndex(item.Index)) == GetMaskByIndex(item.Index))
                         item.Checked = true;
