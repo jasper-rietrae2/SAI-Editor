@@ -756,6 +756,9 @@ namespace SAI_Editor
                         buttonActionParamOneSearch.Visible = true; //! Spell id
                         buttonActionParamTwoSearch.Visible = true; //! Cast flags
                         break;
+                    case SmartAction.SMART_ACTION_SET_FACTION:
+                        buttonActionParamOneSearch.Visible = true; //! Faction id
+                        break;
                 }
 
                 switch ((SmartTarget)target_type)
@@ -1169,6 +1172,7 @@ namespace SAI_Editor
         {
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
+                //! Spell id
                 case SmartAction.SMART_ACTION_CAST:
                 case SmartAction.SMART_ACTION_INVOKER_CAST:
                 case SmartAction.SMART_ACTION_CROSS_CAST:
@@ -1181,6 +1185,7 @@ namespace SAI_Editor
         {
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
+                //! Cast flags
                 case SmartAction.SMART_ACTION_CAST:
                 case SmartAction.SMART_ACTION_INVOKER_CAST:
                 case SmartAction.SMART_ACTION_CROSS_CAST:
