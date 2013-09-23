@@ -813,7 +813,7 @@ namespace SAI_Editor
             if (String.IsNullOrWhiteSpace(title) || String.IsNullOrWhiteSpace(text))
                 return;
 
-            ToolTip toolTip = new ToolTip();
+            ToolTip toolTip = TooltipHelper.GetControlToolTip(control.Name.ToString());
             toolTip.ToolTipIcon = icon;
             toolTip.ToolTipTitle = title;
             toolTip.IsBalloon = isBallon;
