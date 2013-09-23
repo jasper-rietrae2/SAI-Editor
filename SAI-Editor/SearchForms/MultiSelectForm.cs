@@ -50,9 +50,10 @@ namespace SAI_Editor
                 case MultiSelectFormType.MultiSelectFormTypeCastFlag:
                     Text = "Select castflags";
                     listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
-                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_INTERRUPT_PREVIOUS"); // 0
-                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_TRIGGERED"); // 1
-                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_AURA_NOT_PRESENT"); // 2
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_NONE"); // 0
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_INTERRUPT_PREVIOUS"); // 1
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_TRIGGERED"); // 2
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_AURA_NOT_PRESENT"); // 3
                     break;
             }
         }
