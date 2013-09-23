@@ -19,6 +19,7 @@ namespace SAI_Editor
     {
         DatabaseSearchFormTypeSpell = 0,
         DatabaseSearchFormTypeFaction = 1,
+        DatabaseSearchFormTypeEmote = 2,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -49,15 +50,22 @@ namespace SAI_Editor
                     Text = "Search for a spell";
                     listViewEntryResults.Columns.Add("Id", 45);
                     listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Spell entry");
+                    comboBoxSearchType.Items.Add("Spell id");
                     comboBoxSearchType.Items.Add("Spell name");
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeFaction:
                     Text = "Search for a faction";
                     listViewEntryResults.Columns.Add("Id", 45);
                     listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Faction entry");
+                    comboBoxSearchType.Items.Add("Faction id");
                     comboBoxSearchType.Items.Add("Faction name");
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeEmote:
+                    Text = "Search for an emote";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Emote id");
+                    comboBoxSearchType.Items.Add("Emote name");
                     break;
             }
 
@@ -86,7 +94,7 @@ namespace SAI_Editor
                         queryToExecute = "SELECT id, spellName FROM spells";
 
                         if (limit)
-                            queryToExecute += " LIMIT 1000"; //? Looks like LIMIT doesn't work for SQLite?
+                            queryToExecute += " LIMIT 1000";
                         else
                         {
                             switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
@@ -120,7 +128,7 @@ namespace SAI_Editor
                         queryToExecute = "SELECT m_ID, m_name_lang_1 FROM factions";
 
                         if (limit)
-                            queryToExecute += " LIMIT 1000"; //? Looks like LIMIT doesn't work for SQLite?
+                            queryToExecute += " LIMIT 1000";
                         else
                         {
                             switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
@@ -149,6 +157,40 @@ namespace SAI_Editor
                         if (dt.Rows.Count > 0)
                             foreach (DataRow row in dt.Rows)
                                 AddItemToListView(listViewEntryResults, Convert.ToInt32(row["m_ID"]).ToString(), (string)row["m_name_lang_1"]);
+                        break;
+                    case DatabaseSearchFormType.DatabaseSearchFormTypeEmote:
+                        queryToExecute = "SELECT field0, field1 FROM emotes";
+
+                        if (limit)
+                            queryToExecute += " LIMIT 1000";
+                        else
+                        {
+                            switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
+                            {
+                                case 0: //! Faction entry
+                                    if (checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE field0 LIKE '%" + textBoxCriteria.Text + "%'";
+                                    else
+                                        queryToExecute += " WHERE field0 = " + textBoxCriteria.Text;
+
+                                    break;
+                                case 1: //! Faction name
+                                    if (checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE field1 LIKE '%" + textBoxCriteria.Text + "%'";
+                                    else
+                                        queryToExecute += " WHERE field1 = " + textBoxCriteria.Text;
+
+                                    break;
+                                default:
+                                    return;
+                            }
+                        }
+
+                        dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
+
+                        if (dt.Rows.Count > 0)
+                            foreach (DataRow row in dt.Rows)
+                                AddItemToListView(listViewEntryResults, Convert.ToInt32(row["field0"]).ToString(), (string)row["field1"]);
                         break;
                 }
             }

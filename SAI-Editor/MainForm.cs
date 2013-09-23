@@ -759,6 +759,11 @@ namespace SAI_Editor
                     case SmartAction.SMART_ACTION_SET_FACTION:
                         buttonActionParamOneSearch.Visible = true; //! Faction id
                         break;
+                    case SmartAction.SMART_ACTION_EMOTE:
+                    case SmartAction.SMART_ACTION_RANDOM_EMOTE:
+                    case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
+                        buttonActionParamOneSearch.Visible = true; //! Emote id
+                        break;
                 }
 
                 switch ((SmartTarget)target_type)
@@ -1180,6 +1185,11 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_SET_FACTION:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeFaction).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_EMOTE:
+                case SmartAction.SMART_ACTION_RANDOM_EMOTE:
+                case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
                     break;
             }
         }
