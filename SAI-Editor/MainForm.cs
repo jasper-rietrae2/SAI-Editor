@@ -761,6 +761,22 @@ namespace SAI_Editor
                     case SmartTarget.SMART_TARGET_NONE:
                         break;
                 }
+
+                textBoxEventParam1.Enabled = labelEventParam1.Text.Length > 0;
+                textBoxEventParam2.Enabled = labelEventParam2.Text.Length > 0;
+                textBoxEventParam3.Enabled = labelEventParam3.Text.Length > 0;
+                textBoxEventParam4.Enabled = labelEventParam4.Text.Length > 0;
+
+                textBoxActionParam1.Enabled = labelActionParam1.Text.Length > 0;
+                textBoxActionParam2.Enabled = labelActionParam2.Text.Length > 0;
+                textBoxActionParam3.Enabled = labelActionParam3.Text.Length > 0;
+                textBoxActionParam4.Enabled = labelActionParam4.Text.Length > 0;
+                textBoxActionParam5.Enabled = labelActionParam5.Text.Length > 0;
+                textBoxActionParam6.Enabled = labelActionParam6.Text.Length > 0;
+
+                textBoxTargetParam1.Enabled = labelTargetParam1.Text.Length > 0;
+                textBoxTargetParam2.Enabled = labelTargetParam2.Text.Length > 0;
+                textBoxTargetParam3.Enabled = labelTargetParam3.Text.Length > 0;
             }
             catch (Exception ex)
             {
