@@ -739,6 +739,10 @@ namespace SAI_Editor
                 switch ((SmartEvent)event_type)
                 {
                     case SmartEvent.SMART_EVENT_SPELLHIT:
+                    case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF:
+                    case SmartEvent.SMART_EVENT_HAS_AURA:
+                    case SmartEvent.SMART_EVENT_TARGET_BUFFED:
+                    case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
                         buttonEventParamOneSearch.Visible = true; //! Spell id
                         buttonEventParamTwoSearch.Visible = true; //! Spell school
                         break;
@@ -1141,10 +1145,26 @@ namespace SAI_Editor
 
         private void buttonEventParamOneSearch_Click(object sender, EventArgs e)
         {
+            switch ((SmartEvent)comboBoxEventType.SelectedIndex)
+            {
+                case SmartEvent.SMART_EVENT_SPELLHIT:
+                case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF:
+                case SmartEvent.SMART_EVENT_HAS_AURA:
+                case SmartEvent.SMART_EVENT_TARGET_BUFFED:
+                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
+                    new SearchFromDatabaseForm(connectionString, textBoxEventParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
+                    break;
+            }
         }
 
         private void buttonEventParamTwoSearch_Click(object sender, EventArgs e)
         {
+            switch ((SmartEvent)comboBoxEventType.SelectedIndex)
+            {
+                case SmartEvent.SMART_EVENT_SPELLHIT: //! Spell school
+                    //new SearchFromDatabaseForm(connectionString, textBoxEventParam2, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
+                    break;
+            }
         }
 
         private void buttonEventParamThreeSearch_Click(object sender, EventArgs e)
