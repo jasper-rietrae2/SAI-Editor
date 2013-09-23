@@ -23,17 +23,17 @@ namespace SAI_Editor.Database
             switch (paramId)
             {
                 case 1:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString1 : "Param 1";
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString1 : String.Empty;
                 case 2:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString2 : "Param 2";
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString2 : String.Empty;
                 case 3:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString3 : "Param 3";
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString3 : String.Empty;
                 case 4:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString4 : "Param 4";
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString4 : String.Empty;
                 case 5:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString5 : "Param 5";
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString5 : String.Empty;
                 case 6:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString6 : "Param 6";
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString6 : String.Empty;
                 default:
                     return String.Empty;
             }
