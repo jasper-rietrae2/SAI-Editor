@@ -27,7 +27,7 @@ namespace SAI_Editor
             {
                 case MultiSelectFormType.MultiSelectFormTypePhaseMask:
                     Text = "Select a phasemask";
-                    listViewSelectableItems.Columns.Add("Phase", 195, HorizontalAlignment.Left);
+                    listViewSelectableItems.Columns.Add("Phase", 235, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_ALWAYS"); // 0
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_1");      // 1
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_2");      // 2
@@ -38,7 +38,7 @@ namespace SAI_Editor
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeEventFlag:
                     Text = "Select eventflags";
-                    listViewSelectableItems.Columns.Add("Flag", 195, HorizontalAlignment.Left);
+                    listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NONE");           // 0
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NOT_REPEATABLE"); // 1
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_0");   // 2
@@ -49,7 +49,7 @@ namespace SAI_Editor
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeCastFlag:
                     Text = "Select castflags";
-                    listViewSelectableItems.Columns.Add("Flag", 195, HorizontalAlignment.Left);
+                    listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_INTERRUPT_PREVIOUS"); // 0
                     listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_TRIGGERED"); // 1
                     listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_AURA_NOT_PRESENT"); // 2

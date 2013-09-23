@@ -40,7 +40,7 @@
             this.listViewSelectableItems.FullRowSelect = true;
             this.listViewSelectableItems.Location = new System.Drawing.Point(12, 12);
             this.listViewSelectableItems.Name = "listViewSelectableItems";
-            this.listViewSelectableItems.Size = new System.Drawing.Size(220, 176);
+            this.listViewSelectableItems.Size = new System.Drawing.Size(260, 176);
             this.listViewSelectableItems.TabIndex = 1;
             this.listViewSelectableItems.UseCompatibleStateImageBehavior = false;
             this.listViewSelectableItems.View = System.Windows.Forms.View.Details;
@@ -58,7 +58,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(157, 194);
+            this.buttonCancel.Location = new System.Drawing.Point(197, 194);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 3;
@@ -70,7 +70,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 229);
+            this.ClientSize = new System.Drawing.Size(284, 229);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonContinue);
             this.Controls.Add(this.listViewSelectableItems);
