@@ -1,9 +1,8 @@
-- Functionality to check for 'wrong' code reads selected line for stuff like unused parameters having values, wrong comments, incorrect use of parameters, etc. etc
+- Functionality to check for 'wrong' code; reads selected line for stuff like unused parameters having values, wrong comments, incorrect use of parameters, etc. etc
 - Checkbox if the user wants to fill in smart_scripts.id gaps
 - Possibly take the workspace-idea by Event Horizon
 - Checkbox to only show event_types and action_types for the chosen source_type (so for gameobjects we would hide SMART_EVENT_SPELLHIT, etc.)
-- Possibly pick another logo, this is fugly and boring
-- Can't use copy or paste in the numeric-only fields (entry, type id, parameters, etc.) (numericField_KeyPress)
+- Possibly pick another logo, this is ugly and boring
 - Find a good-looking way to display _ALL_ info in the listview without having to scroll (is there any?)
 - Make the application support more platforms than just Windows
 - Create a checkbox to only show 'basic' data in the listview (entryorguid, id, event_type, action_type, target_type, comment)
