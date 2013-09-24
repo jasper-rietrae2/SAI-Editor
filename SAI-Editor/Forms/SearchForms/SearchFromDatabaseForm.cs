@@ -24,6 +24,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeMap = 4,
         DatabaseSearchFormTypeZone = 5,
         DatabaseSearchFormTypeCreature = 6,
+        DatabaseSearchFormTypeSound = 7,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -124,6 +125,16 @@ namespace SAI_Editor
                     columnTwo = "name";
                     useMySQL = true;
                     break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSound:
+                    Text = "Search for a sound id";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Sound id");
+                    comboBoxSearchType.Items.Add("Sound name");
+                    baseQuery = "SELECT id, name FROM sound_entries";
+                    columnOne = "id";
+                    columnTwo = "name";
+                    break;
             }
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -166,17 +177,17 @@ namespace SAI_Editor
                         default:
                             return;
                     }
-                }
 
-                if (limit)
+                    if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
+                        queryToExecute += " AND m_ParentAreaID = 0";
+                }
+                else
                 {
                     if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
                         queryToExecute += " WHERE m_ParentAreaID = 0";
 
                     queryToExecute += " LIMIT 1000";
                 }
-                else if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
-                    queryToExecute += " AND m_ParentAreaID = 0";
 
                 dt = useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
 

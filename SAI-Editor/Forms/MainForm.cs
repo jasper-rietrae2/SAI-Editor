@@ -784,6 +784,9 @@ namespace SAI_Editor
                     case SmartAction.SMART_ACTION_SET_REACT_STATE:
                         buttonActionParamOneSearch.Visible = true; //! Reactstate
                         break;
+                    case SmartAction.SMART_ACTION_SOUND:
+                        buttonActionParamOneSearch.Visible = true; //! Sound id
+                        break;
                 }
 
                 switch ((SmartTarget)target_type)
@@ -1249,6 +1252,9 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_SET_REACT_STATE: //! React state
                     new SingleSelectForm(textBoxActionParam1, SingleSelectFormType.SingleSelectFormTypeReactState).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SOUND: //! React state
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSound).ShowDialog(this);
                     break;
             }
         }
