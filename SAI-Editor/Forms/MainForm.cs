@@ -742,17 +742,19 @@ namespace SAI_Editor
                 switch ((SmartEvent)event_type)
                 {
                     case SmartEvent.SMART_EVENT_SPELLHIT:
+                        buttonEventParamOneSearch.Visible = true; //! Spell entry
+                        buttonEventParamTwoSearch.Visible = true; //! Spell school
+                        break;
                     case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF:
                     case SmartEvent.SMART_EVENT_HAS_AURA:
                     case SmartEvent.SMART_EVENT_TARGET_BUFFED:
                     case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
-                        buttonEventParamOneSearch.Visible = true; //! Spell id
-                        buttonEventParamTwoSearch.Visible = true; //! Spell school
+                        buttonEventParamOneSearch.Visible = true; //! Spell entry
                         break;
                     case SmartEvent.SMART_EVENT_RESPAWN:
                         buttonEventParamOneSearch.Visible = true; //! Respawn condition (SMART_SCRIPT_RESPAWN_CONDITION_MAP / SMART_SCRIPT_RESPAWN_CONDITION_AREA)
-                        buttonEventParamTwoSearch.Visible = true; //! Map id
-                        buttonEventParamThreeSearch.Visible = true; //! Zone id
+                        buttonEventParamTwoSearch.Visible = true; //! Map entry
+                        buttonEventParamThreeSearch.Visible = true; //! Zone entry
                         break;
                     case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED:
                         buttonEventParamOneSearch.Visible = true; //! Creature entry
@@ -767,34 +769,59 @@ namespace SAI_Editor
                     case SmartAction.SMART_ACTION_CAST:
                     case SmartAction.SMART_ACTION_INVOKER_CAST:
                     case SmartAction.SMART_ACTION_CROSS_CAST:
-                        buttonActionParamOneSearch.Visible = true; //! Spell id
+                        buttonActionParamOneSearch.Visible = true; //! Spell entry
                         buttonActionParamTwoSearch.Visible = true; //! Cast flags
                         break;
                     case SmartAction.SMART_ACTION_SET_FACTION:
-                        buttonActionParamOneSearch.Visible = true; //! Faction id
+                        buttonActionParamOneSearch.Visible = true; //! Faction entry
                         break;
                     case SmartAction.SMART_ACTION_EMOTE:
                     case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                     case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
-                        buttonActionParamOneSearch.Visible = true; //! Emote id
+                        buttonActionParamOneSearch.Visible = true; //! Emote entry
                         break;
                     case SmartAction.SMART_ACTION_FAIL_QUEST:
                     case SmartAction.SMART_ACTION_ADD_QUEST:
                     case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS:
                     case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
-                        buttonActionParamOneSearch.Visible = true; //! Quest id
+                        buttonActionParamOneSearch.Visible = true; //! Quest entry
                         break;
                     case SmartAction.SMART_ACTION_SET_REACT_STATE:
                         buttonActionParamOneSearch.Visible = true; //! Reactstate
                         break;
                     case SmartAction.SMART_ACTION_SOUND:
-                        buttonActionParamOneSearch.Visible = true; //! Sound id
+                        buttonActionParamOneSearch.Visible = true; //! Sound entry
+                        break;
+                    case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL: //! Creature entry
+                    case SmartAction.SMART_ACTION_SUMMON_CREATURE:
+                    case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO:
+                    case SmartAction.SMART_ACTION_KILLED_MONSTER:
+                    case SmartAction.SMART_ACTION_UPDATE_TEMPLATE:
+                    case SmartAction.SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL:
+                        buttonActionParamOneSearch.Visible = true; //! Creature entry
+                        break;
+                    case SmartAction.SMART_ACTION_WP_STOP:
+                        buttonActionParamTwoSearch.Visible = true; //! Quest entry
+                        break;
+                    case SmartAction.SMART_ACTION_FOLLOW:
+                        buttonActionParamThreeSearch.Visible = true; //! Creature entry
+                        break;
+                    case SmartAction.SMART_ACTION_WP_START:
+                        buttonActionParamFourSearch.Visible = true; //! Quest entry
+                        buttonActionParamSixSearch.Visible = true; //! React state
                         break;
                 }
 
                 switch ((SmartTarget)target_type)
                 {
-                    case SmartTarget.SMART_TARGET_NONE:
+                    case SmartTarget.SMART_TARGET_CREATURE_RANGE:
+                    case SmartTarget.SMART_TARGET_CREATURE_DISTANCE:
+                    case SmartTarget.SMART_TARGET_CLOSEST_CREATURE:
+                        buttonTargetParamOneSearch.Visible = true; //! Creature entry
+                        break;
+                    case SmartTarget.SMART_TARGET_CREATURE_GUID:
+                        buttonTargetParamOneSearch.Visible = true; //! Creature entry
+                        buttonTargetParamTwoSearch.Visible = true; //! Creature guid
                         break;
                 }
 
@@ -1214,6 +1241,9 @@ namespace SAI_Editor
                 case SmartTarget.SMART_TARGET_CLOSEST_CREATURE:
                     new SearchFromDatabaseForm(connectionString, textBoxTargetParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
                     break;
+                case SmartTarget.SMART_TARGET_CREATURE_GUID: //! Creature guid
+                    //new SearchFromDatabaseForm(connectionString, textBoxTargetParam2, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
             }
         }
 
@@ -1329,7 +1359,12 @@ namespace SAI_Editor
 
         private void buttonActionParamSixSearch_Click(object sender, EventArgs e)
         {
-
+            switch ((SmartAction)comboBoxActionType.SelectedIndex)
+            {
+                case SmartAction.SMART_ACTION_WP_START:
+                    new SingleSelectForm(textBoxActionParam6, SingleSelectFormType.SingleSelectFormTypeReactState).ShowDialog(this);
+                    break;
+            }
         }
 
         private void TryToOpenPage(string url)
