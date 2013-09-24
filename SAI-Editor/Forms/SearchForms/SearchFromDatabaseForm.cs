@@ -25,6 +25,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeZone = 5,
         DatabaseSearchFormTypeCreatureEntry = 6,
         DatabaseSearchFormTypeSound = 7,
+        DatabaseSearchFormTypeAreaTrigger = 8,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -135,6 +136,20 @@ namespace SAI_Editor
                     columnOne = "id";
                     columnTwo = "name";
                     break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger:
+                    Text = "Search for a sound id";
+                    listViewEntryResults.Columns.Add("Id", 52);
+                    listViewEntryResults.Columns.Add("Mapid", 52);
+                    listViewEntryResults.Columns.Add("X", 75);
+                    listViewEntryResults.Columns.Add("Y", 75);
+                    listViewEntryResults.Columns.Add("Z", 75);
+
+                    comboBoxSearchType.Items.Add("Areatrigger id");
+                    comboBoxSearchType.Items.Add("Areatrigger map id");
+                    baseQuery = "SELECT m_id, m_mapId, m_posX, m_posY, m_posZ FROM areatriggers";
+                    columnOne = "m_id";
+                    columnTwo = "m_mapId";
+                    break;
             }
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -192,8 +207,15 @@ namespace SAI_Editor
                 dt = useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
 
                 if (dt.Rows.Count > 0)
+                {
                     foreach (DataRow row in dt.Rows)
-                        AddItemToListView(listViewEntryResults, Convert.ToInt32(row[columnOne]).ToString(), (string)row[columnTwo]);
+                    {
+                        if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger)
+                            AddItemToListView(listViewEntryResults, Convert.ToInt32(row["m_Id"]).ToString(), Convert.ToInt32(row["m_mapId"]).ToString(), Convert.ToInt32(row["m_posX"]).ToString(), Convert.ToInt32(row["m_posY"]).ToString(), Convert.ToInt32(row["m_posZ"]).ToString());
+                        else
+                            AddItemToListView(listViewEntryResults, Convert.ToInt32(row[columnOne]).ToString(), (string)row[columnTwo]);
+                    }
+                }
             }
             catch (ObjectDisposedException)
             {
@@ -308,6 +330,30 @@ namespace SAI_Editor
             }
 
             listView.Items.Add(item).SubItems.Add(subItem);
+        }
+
+
+
+        private void AddItemToListView(ListView listView, string item, string subItem1, string subItem2, string subItem3, string subItem4)
+        {
+            if (listView.InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    ListViewItem listViewItem = listView.Items.Add(item);
+                    listViewItem.SubItems.Add(subItem1);
+                    listViewItem.SubItems.Add(subItem2);
+                    listViewItem.SubItems.Add(subItem3);
+                    listViewItem.SubItems.Add(subItem4);
+                });
+                return;
+            }
+
+            ListViewItem listViewItem2 = listView.Items.Add(item);
+            listViewItem2.SubItems.Add(subItem1);
+            listViewItem2.SubItems.Add(subItem2);
+            listViewItem2.SubItems.Add(subItem3);
+            listViewItem2.SubItems.Add(subItem4);
         }
 
         private void SetEnabledOfControl(Control control, bool enable)

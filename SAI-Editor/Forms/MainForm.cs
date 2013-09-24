@@ -757,6 +757,9 @@ namespace SAI_Editor
                     case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED:
                         buttonEventParamOneSearch.Visible = true; //! Creature entry
                         break;
+                    case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER:
+                        buttonEventParamOneSearch.Visible = true; //! Areatrigger entry
+                        break;
                 }
 
                 switch ((SmartAction)action_type)
@@ -1168,6 +1171,9 @@ namespace SAI_Editor
                     break;
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
                     new SearchFromDatabaseForm(connectionString, textBoxEventParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER: //! Areatrigger entry
+                    new SearchFromDatabaseForm(connectionString, textBoxEventParam1, DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger).ShowDialog(this);
                     break;
             }
         }

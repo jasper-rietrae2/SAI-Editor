@@ -55,7 +55,7 @@ namespace SAI_Editor
                     FillListViewWithMySqlQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000");
                     break;
                 case SourceTypes.SourceTypeAreaTrigger:
-                    comboBoxSearchType.SelectedIndex = 6; //! NYI
+                    comboBoxSearchType.SelectedIndex = 6; //! Areatrigger entry
                     listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
                     listViewEntryResults.Columns.Add("Mapid", 52, HorizontalAlignment.Left);
                     listViewEntryResults.Columns.Add("X", 75, HorizontalAlignment.Left);
