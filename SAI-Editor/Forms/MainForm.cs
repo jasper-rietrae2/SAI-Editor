@@ -456,7 +456,7 @@ namespace SAI_Editor
             }
         }
 
-        private void buttonSearchForCreature_Click(object sender, EventArgs e)
+        private void buttonSearchForEntry_Click(object sender, EventArgs e)
         {
             //! Just keep it in main thread; no purpose starting a new thread for this (unless workspaces get implemented, maybe)
             using (var entryForm = new SearchForEntryForm(connectionString, textBoxEntryOrGuid.Text, GetSourceTypeByIndex()))
@@ -753,6 +753,9 @@ namespace SAI_Editor
                         buttonEventParamOneSearch.Visible = true; //! Respawn condition (SMART_SCRIPT_RESPAWN_CONDITION_MAP / SMART_SCRIPT_RESPAWN_CONDITION_AREA)
                         buttonEventParamTwoSearch.Visible = true; //! Map id
                         buttonEventParamThreeSearch.Visible = true; //! Zone id
+                        break;
+                    case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED:
+                        buttonEventParamOneSearch.Visible = true; //! Creature entry
                         break;
                 }
 
@@ -1158,7 +1161,10 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxEventParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Respawn condition
-                    new SingleSelectForm(SingleSelectFormType.SingleSelectFormTypeRespawnType, textBoxEventParam1).ShowDialog(this);
+                    new SingleSelectForm(textBoxEventParam1, SingleSelectFormType.SingleSelectFormTypeRespawnType).ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
+                    new SearchFromDatabaseForm(connectionString, textBoxEventParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreature).ShowDialog(this);
                     break;
             }
         }
@@ -1242,7 +1248,7 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_REACT_STATE: //! React state
-                    new SingleSelectForm(SingleSelectFormType.SingleSelectFormTypeReactState, textBoxActionParam1).ShowDialog(this);
+                    new SingleSelectForm(textBoxActionParam1, SingleSelectFormType.SingleSelectFormTypeReactState).ShowDialog(this);
                     break;
             }
         }

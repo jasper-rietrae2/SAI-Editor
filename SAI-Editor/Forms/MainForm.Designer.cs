@@ -489,7 +489,7 @@
             this.buttonSearchForCreature.TabIndex = 1;
             this.buttonSearchForCreature.Text = "...";
             this.buttonSearchForCreature.UseVisualStyleBackColor = true;
-            this.buttonSearchForCreature.Click += new System.EventHandler(this.buttonSearchForCreature_Click);
+            this.buttonSearchForCreature.Click += new System.EventHandler(this.buttonSearchForEntry_Click);
             // 
             // label4
             // 

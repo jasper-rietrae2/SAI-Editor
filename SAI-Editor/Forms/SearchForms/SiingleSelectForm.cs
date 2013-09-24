@@ -22,7 +22,7 @@ namespace SAI_Editor.SearchForms
         private readonly TextBox textBoxToChange = null;
         private readonly SingleSelectFormType searchType;
 
-        public SingleSelectForm(SingleSelectFormType searchType, TextBox textBoxToChange)
+        public SingleSelectForm(TextBox textBoxToChange, SingleSelectFormType searchType)
         {
             InitializeComponent();
 

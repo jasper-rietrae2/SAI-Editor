@@ -23,6 +23,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeQuest = 3,
         DatabaseSearchFormTypeMap = 4,
         DatabaseSearchFormTypeZone = 5,
+        DatabaseSearchFormTypeCreature = 6,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -111,6 +112,17 @@ namespace SAI_Editor
                     baseQuery = "SELECT m_ID, m_AreaName_lang FROM areas_and_zones";
                     columnOne = "m_ID";
                     columnTwo = "m_AreaName_lang";
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeCreature:
+                    Text = "Search for a creature";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Creature id");
+                    comboBoxSearchType.Items.Add("Creature name");
+                    baseQuery = "SELECT entry, name FROM creature_template";
+                    columnOne = "entry";
+                    columnTwo = "name";
+                    useMySQL = true;
                     break;
             }
 
