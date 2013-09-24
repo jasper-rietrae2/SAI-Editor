@@ -163,8 +163,6 @@ namespace SAI_Editor
                     break;
             }
 
-            baseQuery += " ORDER BY " + columnOne;
-
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             comboBoxSearchType.SelectedIndex = 0;
             FillListView(true);
@@ -209,13 +207,13 @@ namespace SAI_Editor
                     if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
                         queryToExecute += " AND m_ParentAreaID = 0";
                 }
-                else
-                {
-                    if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
-                        queryToExecute += " WHERE m_ParentAreaID = 0";
+                else if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
+                    queryToExecute += " WHERE m_ParentAreaID = 0";
 
+                queryToExecute += " ORDER BY " + columnOne;
+
+                if (limit)
                     queryToExecute += " LIMIT 1000";
-                }
 
                 dt = useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
 
