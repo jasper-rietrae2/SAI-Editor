@@ -128,17 +128,17 @@ namespace SAI_Editor
                     {
                         if (idFilter.Length > 0)
                         {
-                            queryToExecute += " WHERE id = " + idFilter;
+                            queryToExecute += " WHERE id = '" + idFilter + "'";
 
                             if (mapIdFilter.Length > 0)
-                                queryToExecute += " AND mapId = " + mapIdFilter;
+                                queryToExecute += " AND mapId = '" + mapIdFilter + "'";
                         }
                         else if (mapIdFilter.Length > 0)
                         {
-                            queryToExecute += " WHERE mapId = " + mapIdFilter;
+                            queryToExecute += " WHERE mapId = '" + mapIdFilter + "'";
 
                             if (idFilter.Length > 0)
-                                queryToExecute += " AND id = " + idFilter;
+                                queryToExecute += " AND id = '" + idFilter + "'";
                         }
                     }
                 }
