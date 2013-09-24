@@ -111,34 +111,34 @@ namespace SAI_Editor
                     {
                         if (idFilter.Length > 0)
                         {
-                            queryToExecute += " WHERE id LIKE '%" + idFilter + "%'";
+                            queryToExecute += " WHERE m_id LIKE '%" + idFilter + "%'";
 
                             if (mapIdFilter.Length > 0)
-                                queryToExecute += " AND mapId LIKE '%" + mapIdFilter + "%'";
+                                queryToExecute += " AND m_mapId LIKE '%" + mapIdFilter + "%'";
                         }
                         else if (mapIdFilter.Length > 0)
                         {
-                            queryToExecute += " WHERE mapId LIKE '%" + mapIdFilter + "%'";
+                            queryToExecute += " WHERE m_mapId LIKE '%" + mapIdFilter + "%'";
 
                             if (idFilter.Length > 0)
-                                queryToExecute += " AND id LIKE '%" + idFilter + "%'";
+                                queryToExecute += " AND m_id LIKE '%" + idFilter + "%'";
                         }
                     }
                     else
                     {
                         if (idFilter.Length > 0)
                         {
-                            queryToExecute += " WHERE id = '" + idFilter + "'";
+                            queryToExecute += " WHERE m_id = '" + idFilter + "'";
 
                             if (mapIdFilter.Length > 0)
-                                queryToExecute += " AND mapId = '" + mapIdFilter + "'";
+                                queryToExecute += " AND m_mapId = '" + mapIdFilter + "'";
                         }
                         else if (mapIdFilter.Length > 0)
                         {
-                            queryToExecute += " WHERE mapId = '" + mapIdFilter + "'";
+                            queryToExecute += " WHERE m_mapId = '" + mapIdFilter + "'";
 
                             if (idFilter.Length > 0)
-                                queryToExecute += " AND id = '" + idFilter + "'";
+                                queryToExecute += " AND m_id = '" + idFilter + "'";
                         }
                     }
                 }
@@ -301,8 +301,8 @@ namespace SAI_Editor
 
                         query += " ORDER BY g.guid";
                         break;
-                    case 6:
-                    case 7:
+                    case 6: //! Areatrigger entry
+                    case 7: //! Areatrigger map id
                         ClearItemsOfListView(listViewEntryResults);
 
                         try

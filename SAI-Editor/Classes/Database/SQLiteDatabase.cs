@@ -212,16 +212,16 @@ namespace SAI_Editor.Database
         public AreaTrigger BuildAreaTrigger(DataRow row)
         {
             var areaTrigger = new AreaTrigger();
-            areaTrigger.id = row["id"] != DBNull.Value ? Convert.ToInt32(row["id"]) : -1;
-            areaTrigger.map_id = row["mapId"] != DBNull.Value ? Convert.ToInt32(row["mapId"]) : -1;
-            areaTrigger.posX = row["posX"] != DBNull.Value ? (double)row["posX"] : 0.0f;
-            areaTrigger.posY = row["posY"] != DBNull.Value ? (double)row["posY"] : 0.0f;
-            areaTrigger.posZ = row["posZ"] != DBNull.Value ? (double)row["posZ"] : 0.0f;
-            areaTrigger.field5 = row["field5"] != DBNull.Value ? (double)row["field5"] : 0.0f;
-            areaTrigger.field6 = row["field6"] != DBNull.Value ? (double)row["field6"] : 0.0f;
-            areaTrigger.field7 = row["field7"] != DBNull.Value ? (double)row["field7"] : 0.0f;
-            areaTrigger.field8 = row["field8"] != DBNull.Value ? (double)row["field8"] : 0.0f;
-            areaTrigger.field9 = row["field9"] != DBNull.Value ? (double)row["field9"] : 0.0f;
+            areaTrigger.id = row["m_id"] != DBNull.Value ? Convert.ToInt32(row["m_id"]) : -1;
+            areaTrigger.map_id = row["m_mapId"] != DBNull.Value ? Convert.ToInt32(row["m_mapId"]) : 0;
+            areaTrigger.posX = row["m_posX"] != DBNull.Value ? (double)row["m_posX"] : 0;
+            areaTrigger.posY = row["m_posY"] != DBNull.Value ? (double)row["m_posY"] : 0;
+            areaTrigger.posZ = row["m_posZ"] != DBNull.Value ? (double)row["m_posZ"] : 0;
+            areaTrigger.field5 = row["field5"] != DBNull.Value ? (int)row["field5"] : 0;
+            areaTrigger.field6 = row["field6"] != DBNull.Value ? (int)row["field6"] : 0;
+            areaTrigger.field7 = row["field7"] != DBNull.Value ? (int)row["field7"] : 0;
+            areaTrigger.field8 = row["field8"] != DBNull.Value ? (double)row["field8"] : 0;
+            areaTrigger.field9 = row["field9"] != DBNull.Value ? (double)row["field9"] : 0;
             return areaTrigger;
         }
     }

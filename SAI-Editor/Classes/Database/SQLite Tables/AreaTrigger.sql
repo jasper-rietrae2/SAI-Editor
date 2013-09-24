@@ -13,7 +13,7 @@ CREATE TABLE `areatriggers` (
 	PRIMARY KEY (`m_id`)
 );
 
-INSERT INTO `areatriggers` VALUES
+REPLACE INTO `areatriggers` VALUES
 (45, 0, 2924.38, -798.429, 161.611, 1090519040, 0, 0, 0, 0),
 (71, 0, -10645.9, 1179.06, 48.1781, 1104674816, 0, 0, 0, 0),
 (78, 0, -11208.5, 1685.34, 25.7612, 1088421888, 0, 0, 0, 0),
