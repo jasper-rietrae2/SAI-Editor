@@ -35,7 +35,7 @@ namespace SAI_Editor.SearchForms
             {
                 case SingleSelectFormType.SingleSelectFormTypeReactState:
                     Text = "Select a reactstate";
-                    listViewSelectableItems.Columns.Add("Reactstate", 256, HorizontalAlignment.Left);
+                    listViewSelectableItems.Columns.Add("Reactstate", 278, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("REACT_NONE"); // 0
                     listViewSelectableItems.Items.Add("REACT_PASSIVE"); // 1
                     listViewSelectableItems.Items.Add("REACT_DEFENSIVE"); // 2
@@ -43,7 +43,7 @@ namespace SAI_Editor.SearchForms
                     break;
                 case SingleSelectFormType.SingleSelectFormTypeRespawnType:
                     Text = "Select a respawn condition";
-                    listViewSelectableItems.Columns.Add("Respawn condition", 256, HorizontalAlignment.Left);
+                    listViewSelectableItems.Columns.Add("Respawn condition", 278, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("RESPAWN_CONDITION_NONE"); // 0
                     listViewSelectableItems.Items.Add("RESPAWN_CONDITION_MAP"); // 1
                     listViewSelectableItems.Items.Add("RESPAWN_CONDITION_AREA"); // 2
