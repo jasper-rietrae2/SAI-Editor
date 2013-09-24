@@ -840,6 +840,15 @@ namespace SAI_Editor
                         buttonTargetParamOneSearch.Visible = true; //! Creature entry
                         buttonTargetParamTwoSearch.Visible = true; //! Creature guid
                         break;
+                    case SmartTarget.SMART_TARGET_GAMEOBJECT_RANGE:
+                    case SmartTarget.SMART_TARGET_GAMEOBJECT_DISTANCE:
+                    case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT:
+                        buttonTargetParamOneSearch.Visible = true; //! Gameobject entry
+                        break;
+                    case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID:
+                        buttonTargetParamOneSearch.Visible = true; //! Gameobject entry
+                        buttonTargetParamTwoSearch.Visible = true; //! Gameobject guid
+                        break;
                 }
 
                 textBoxEventParam1.Enabled = labelEventParam1.Text.Length > 0;
@@ -1262,7 +1271,15 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxTargetParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
                     break;
                 case SmartTarget.SMART_TARGET_CREATURE_GUID: //! Creature guid
-                    //new SearchFromDatabaseForm(connectionString, textBoxTargetParam2, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    //new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid).ShowDialog(this);
+                    break;
+                case SmartTarget.SMART_TARGET_GAMEOBJECT_RANGE:
+                case SmartTarget.SMART_TARGET_GAMEOBJECT_DISTANCE:
+                case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT: //! Gameobject entry
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry).ShowDialog(this);
+                    break;
+                case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID: //! Gameobject guid
+                    //new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid).ShowDialog(this);
                     break;
             }
         }
@@ -1273,6 +1290,9 @@ namespace SAI_Editor
             {
                 case SmartTarget.SMART_TARGET_CREATURE_GUID: //! Creature entry
                     new SearchFromDatabaseForm(connectionString, textBoxTargetParam2, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
+                case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID: //! Gameobject entry
+                    new SearchFromDatabaseForm(connectionString, textBoxTargetParam2, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry).ShowDialog(this);
                     break;
             }
         }
