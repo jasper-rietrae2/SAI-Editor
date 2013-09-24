@@ -14,7 +14,7 @@ namespace SAI_Editor.dep
     {
         private Image image;
         private bool centerImage;
-        private float curScale;
+        //private float curScale;
         private Image origImage = null;
 
         public Image Image
@@ -40,7 +40,7 @@ namespace SAI_Editor.dep
             InitializeComponent();
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
             Image = null;
-            curScale = 1;
+            //curScale = 1;
             AutoScroll = true;
             AutoScrollMinSize = new Size(0, 0);
         }
