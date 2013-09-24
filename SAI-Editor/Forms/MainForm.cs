@@ -1053,7 +1053,7 @@ namespace SAI_Editor
                 return;
             }
 
-            new SearchForLinkForm(GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index, textBoxToChange).Show(this);
+            new SearchForLinkForm(GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index, textBoxToChange).ShowDialog(this);
         }
 
         protected override void WndProc(ref Message m)
