@@ -114,11 +114,21 @@ namespace SAI_Editor
 
         private void listViewSelectableItems_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
-            if (listViewSelectableItems.CheckedItems.Count <= 0)
-                listViewSelectableItems.Items[0].Checked = true;
+            //! TODO: Fix this. It's also called when the form loads and for some reason this if-check passes...
+            //if (listViewSelectableItems.Items[0].Checked)
+            //{
+            //    foreach (ListViewItem item in listViewSelectableItems.Items)
+            //        if (item.Index > 0)
+            //            item.Checked = false;
+            //}
+            //else
+            {
+                if (listViewSelectableItems.CheckedItems.Count <= 0)
+                    listViewSelectableItems.Items[0].Checked = true;
 
-            if (e.Item.Checked && e.Item.Index > 0)
-                listViewSelectableItems.Items[0].Checked = false;
+                if (e.Item.Checked && e.Item.Index > 0)
+                    listViewSelectableItems.Items[0].Checked = false;
+            }
         }
 
         private void listViewSelectableItems_ColumnClick(object sender, ColumnClickEventArgs e)

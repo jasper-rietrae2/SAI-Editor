@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SAI_Editor.SearchForms
@@ -15,6 +8,7 @@ namespace SAI_Editor.SearchForms
         SingleSelectFormTypeReactState = 0,
         SingleSelectFormTypeRespawnType = 1,
         SingleSelectFormTypeGoState = 2,
+        SingleSelectFormTypePowerType = 3,
     };
 
     public partial class SingleSelectForm : Form
@@ -57,6 +51,18 @@ namespace SAI_Editor.SearchForms
                     listViewSelectableItems.Items.Add("GAMEOBJECT_ACTIVATED"); // 2
                     listViewSelectableItems.Items.Add("GAMEOBJECT_JUST_DEACTIVATED"); // 3
                     break;
+                case SingleSelectFormType.SingleSelectFormTypePowerType:
+                    Text = "Select a power type";
+                    listViewSelectableItems.Columns.Add("Power type", 278, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("POWER_MANA"); // 0
+                    listViewSelectableItems.Items.Add("POWER_RAGE"); // 1
+                    listViewSelectableItems.Items.Add("POWER_FOCUS"); // 2
+                    listViewSelectableItems.Items.Add("POWER_ENERGY"); // 3
+                    listViewSelectableItems.Items.Add("POWER_HAPPINESS"); // 4
+                    listViewSelectableItems.Items.Add("POWER_RUNE"); // 5
+                    listViewSelectableItems.Items.Add("POWER_RUNIC_POWER"); // 6
+                    listViewSelectableItems.Items.Add("POWER_HEALTH"); // -2...
+                    break;
             }
         }
 
@@ -74,7 +80,12 @@ namespace SAI_Editor.SearchForms
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
-            textBoxToChange.Text = listViewSelectableItems.SelectedItems[0].Index.ToString();
+            string index = listViewSelectableItems.SelectedItems[0].Index.ToString();
+
+            if (index == "7" && searchType == SingleSelectFormType.SingleSelectFormTypePowerType) //! POWER_HEALTH
+                index = "-2";
+
+            textBoxToChange.Text = index;
             Close();
         }
 

@@ -813,6 +813,17 @@ namespace SAI_Editor
                         buttonActionParamFourSearch.Visible = true; //! Quest entry
                         buttonActionParamSixSearch.Visible = true; //! React state
                         break;
+                    case SmartAction.SMART_ACTION_INTERRUPT_SPELL:
+                        buttonActionParamTwoSearch.Visible = true; //! Spell entry
+                        break;
+                    case SmartAction.SMART_ACTION_GO_SET_LOOT_STATE:
+                        buttonActionParamOneSearch.Visible = true; //! Go state
+                        break;
+                    case SmartAction.SMART_ACTION_SET_POWER:
+                    case SmartAction.SMART_ACTION_ADD_POWER:
+                    case SmartAction.SMART_ACTION_REMOVE_POWER:
+                        buttonActionParamOneSearch.Visible = true; //! Power type
+                        break;
                 }
 
                 switch ((SmartTarget)target_type)
@@ -1287,38 +1298,46 @@ namespace SAI_Editor
         {
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
-                case SmartAction.SMART_ACTION_CAST: //! Spell id
+                case SmartAction.SMART_ACTION_CAST:
                 case SmartAction.SMART_ACTION_INVOKER_CAST:
                 case SmartAction.SMART_ACTION_CROSS_CAST:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_SET_FACTION: //! Faction id
+                case SmartAction.SMART_ACTION_SET_FACTION:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeFaction).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_EMOTE: //! Emote id
+                case SmartAction.SMART_ACTION_EMOTE:
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                 case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_FAIL_QUEST: //! Quest id
+                case SmartAction.SMART_ACTION_FAIL_QUEST:
                 case SmartAction.SMART_ACTION_ADD_QUEST:
                 case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS:
                 case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_SET_REACT_STATE: //! React state
+                case SmartAction.SMART_ACTION_SET_REACT_STATE:
                     new SingleSelectForm(textBoxActionParam1, SingleSelectFormType.SingleSelectFormTypeReactState).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_SOUND: //! React state
+                case SmartAction.SMART_ACTION_SOUND:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSound).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL: //! Creature entry
+                case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL:
                 case SmartAction.SMART_ACTION_SUMMON_CREATURE:
                 case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO:
                 case SmartAction.SMART_ACTION_KILLED_MONSTER:
                 case SmartAction.SMART_ACTION_UPDATE_TEMPLATE:
                 case SmartAction.SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_GO_SET_LOOT_STATE:
+                    new SingleSelectForm(textBoxActionParam1, SingleSelectFormType.SingleSelectFormTypeGoState).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SET_POWER: //! Power type
+                case SmartAction.SMART_ACTION_ADD_POWER:
+                case SmartAction.SMART_ACTION_REMOVE_POWER:
+                    new SingleSelectForm(textBoxActionParam1, SingleSelectFormType.SingleSelectFormTypePowerType).ShowDialog(this);
                     break;
             }
         }
@@ -1333,7 +1352,10 @@ namespace SAI_Editor
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeCastFlag, textBoxActionParam2).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_WP_STOP:
-                    new SearchFromDatabaseForm(connectionString, textBoxActionParam4, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam2, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_INTERRUPT_SPELL:
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam2, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
             }
         }
