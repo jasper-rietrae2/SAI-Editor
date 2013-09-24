@@ -1167,7 +1167,7 @@ namespace SAI_Editor
                     new SingleSelectForm(textBoxEventParam1, SingleSelectFormType.SingleSelectFormTypeRespawnType).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
-                    new SearchFromDatabaseForm(connectionString, textBoxEventParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreature).ShowDialog(this);
+                    new SearchFromDatabaseForm(connectionString, textBoxEventParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
                     break;
             }
         }
@@ -1201,10 +1201,24 @@ namespace SAI_Editor
 
         private void buttonTargetParamOneSearch_Click(object sender, EventArgs e)
         {
+            switch ((SmartTarget)comboBoxEventType.SelectedIndex)
+            {
+                case SmartTarget.SMART_TARGET_CREATURE_RANGE: //! Creature entry
+                case SmartTarget.SMART_TARGET_CREATURE_DISTANCE:
+                case SmartTarget.SMART_TARGET_CLOSEST_CREATURE:
+                    new SearchFromDatabaseForm(connectionString, textBoxTargetParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
+            }
         }
 
         private void buttonTargetParamTwoSearch_Click(object sender, EventArgs e)
         {
+            switch ((SmartTarget)comboBoxEventType.SelectedIndex)
+            {
+                case SmartTarget.SMART_TARGET_CREATURE_GUID: //! Creature entry
+                    new SearchFromDatabaseForm(connectionString, textBoxTargetParam2, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
+            }
         }
 
         private void buttonTargetParamThreeSearch_Click(object sender, EventArgs e)
@@ -1256,6 +1270,14 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SOUND: //! React state
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeSound).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL: //! Creature entry
+                case SmartAction.SMART_ACTION_SUMMON_CREATURE:
+                case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO:
+                case SmartAction.SMART_ACTION_KILLED_MONSTER:
+                case SmartAction.SMART_ACTION_UPDATE_TEMPLATE:
+                case SmartAction.SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL:
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
             }
         }
 
@@ -1273,7 +1295,12 @@ namespace SAI_Editor
 
         private void buttonActionParamThreeSearch_Click(object sender, EventArgs e)
         {
-
+            switch ((SmartAction)comboBoxActionType.SelectedIndex)
+            {
+                case SmartAction.SMART_ACTION_FOLLOW:
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam3, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
+            }
         }
 
         private void buttonActionParamFourSearch_Click(object sender, EventArgs e)

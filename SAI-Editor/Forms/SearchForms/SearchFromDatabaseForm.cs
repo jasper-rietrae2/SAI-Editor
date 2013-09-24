@@ -23,7 +23,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeQuest = 3,
         DatabaseSearchFormTypeMap = 4,
         DatabaseSearchFormTypeZone = 5,
-        DatabaseSearchFormTypeCreature = 6,
+        DatabaseSearchFormTypeCreatureEntry = 6,
         DatabaseSearchFormTypeSound = 7,
     };
 
@@ -114,7 +114,7 @@ namespace SAI_Editor
                     columnOne = "m_ID";
                     columnTwo = "m_AreaName_lang";
                     break;
-                case DatabaseSearchFormType.DatabaseSearchFormTypeCreature:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry:
                     Text = "Search for a creature";
                     listViewEntryResults.Columns.Add("Id", 45);
                     listViewEntryResults.Columns.Add("Name", 284);
