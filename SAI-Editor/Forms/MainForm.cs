@@ -817,12 +817,15 @@ namespace SAI_Editor
                         buttonActionParamTwoSearch.Visible = true; //! Spell entry
                         break;
                     case SmartAction.SMART_ACTION_GO_SET_LOOT_STATE:
-                        buttonActionParamOneSearch.Visible = true; //! Go state
+                        buttonActionParamOneSearch.Visible = true; //! Gameobject state
                         break;
                     case SmartAction.SMART_ACTION_SET_POWER:
                     case SmartAction.SMART_ACTION_ADD_POWER:
                     case SmartAction.SMART_ACTION_REMOVE_POWER:
                         buttonActionParamOneSearch.Visible = true; //! Power type
+                        break;
+                    case SmartAction.SMART_ACTION_SUMMON_GO:
+                        buttonActionParamOneSearch.Visible = true; //! Gameobject entry
                         break;
                 }
 
@@ -1338,6 +1341,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_ADD_POWER:
                 case SmartAction.SMART_ACTION_REMOVE_POWER:
                     new SingleSelectForm(textBoxActionParam1, SingleSelectFormType.SingleSelectFormTypePowerType).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SUMMON_GO:
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry).ShowDialog(this);
                     break;
             }
         }

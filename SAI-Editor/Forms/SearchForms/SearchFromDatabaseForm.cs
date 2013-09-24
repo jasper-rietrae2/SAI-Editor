@@ -24,8 +24,9 @@ namespace SAI_Editor
         DatabaseSearchFormTypeMap = 4,
         DatabaseSearchFormTypeZone = 5,
         DatabaseSearchFormTypeCreatureEntry = 6,
-        DatabaseSearchFormTypeSound = 7,
-        DatabaseSearchFormTypeAreaTrigger = 8,
+        DatabaseSearchFormTypeGameobjectEntry = 7,
+        DatabaseSearchFormTypeSound = 8,
+        DatabaseSearchFormTypeAreaTrigger = 9,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -126,6 +127,17 @@ namespace SAI_Editor
                     columnTwo = "name";
                     useMySQL = true;
                     break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry:
+                    Text = "Search for a gameobject";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Gameobject id");
+                    comboBoxSearchType.Items.Add("Gameobject name");
+                    baseQuery = "SELECT entry, name FROM gameobject_template";
+                    columnOne = "entry";
+                    columnTwo = "name";
+                    useMySQL = true;
+                    break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSound:
                     Text = "Search for a sound id";
                     listViewEntryResults.Columns.Add("Id", 45);
@@ -143,7 +155,6 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("X", 75);
                     listViewEntryResults.Columns.Add("Y", 75);
                     listViewEntryResults.Columns.Add("Z", 75);
-
                     comboBoxSearchType.Items.Add("Areatrigger id");
                     comboBoxSearchType.Items.Add("Areatrigger map id");
                     baseQuery = "SELECT m_id, m_mapId, m_posX, m_posY, m_posZ FROM areatriggers";
