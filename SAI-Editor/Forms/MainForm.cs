@@ -762,6 +762,9 @@ namespace SAI_Editor
                     case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER:
                         buttonEventParamOneSearch.Visible = true; //! Areatrigger entry
                         break;
+                    case SmartEvent.SMART_EVENT_GO_STATE_CHANGED: //! Go state
+                        new SingleSelectForm(textBoxEventParam1, SingleSelectFormType.SingleSelectFormTypeGoState).ShowDialog(this);
+                        break;
                 }
 
                 switch ((SmartAction)action_type)

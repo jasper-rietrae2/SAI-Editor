@@ -278,4 +278,12 @@
         RESPAWN_CONDITION_MAP = 1,
         RESPAWN_CONDITION_AREA = 2,
     }
+
+    public enum GoLootState
+    {
+        GAMEOBJECT_NOT_READY = 0,
+        GAMEOBJECT_READY = 1,
+        GAMEOBJECT_ACTIVATED = 2,
+        GAMEOBJECT_JUST_DEACTIVATED = 3,
+    }
 }

@@ -14,6 +14,7 @@ namespace SAI_Editor.SearchForms
     {
         SingleSelectFormTypeReactState = 0,
         SingleSelectFormTypeRespawnType = 1,
+        SingleSelectFormTypeGoState = 2,
     };
 
     public partial class SingleSelectForm : Form
@@ -47,6 +48,14 @@ namespace SAI_Editor.SearchForms
                     listViewSelectableItems.Items.Add("RESPAWN_CONDITION_NONE"); // 0
                     listViewSelectableItems.Items.Add("RESPAWN_CONDITION_MAP"); // 1
                     listViewSelectableItems.Items.Add("RESPAWN_CONDITION_AREA"); // 2
+                    break;
+                case SingleSelectFormType.SingleSelectFormTypeGoState:
+                    Text = "Select a gameobject state";
+                    listViewSelectableItems.Columns.Add("Gameobject state", 278, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("GAMEOBJECT_NOT_READY"); // 0
+                    listViewSelectableItems.Items.Add("GAMEOBJECT_READY"); // 1
+                    listViewSelectableItems.Items.Add("GAMEOBJECT_ACTIVATED"); // 2
+                    listViewSelectableItems.Items.Add("GAMEOBJECT_JUST_DEACTIVATED"); // 3
                     break;
             }
         }
