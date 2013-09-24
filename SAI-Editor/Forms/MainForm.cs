@@ -1296,6 +1296,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_CROSS_CAST:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeCastFlag, textBoxActionParam2).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_WP_STOP:
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam4, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
+                    break;
             }
         }
 
@@ -1311,7 +1314,12 @@ namespace SAI_Editor
 
         private void buttonActionParamFourSearch_Click(object sender, EventArgs e)
         {
-
+            switch ((SmartAction)comboBoxActionType.SelectedIndex)
+            {
+                case SmartAction.SMART_ACTION_WP_START:
+                    new SearchFromDatabaseForm(connectionString, textBoxActionParam4, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
+                    break;
+            }
         }
 
         private void buttonActionParamFiveSearch_Click(object sender, EventArgs e)
