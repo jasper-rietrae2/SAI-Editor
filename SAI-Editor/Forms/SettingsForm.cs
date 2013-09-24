@@ -113,8 +113,8 @@ namespace SAI_Editor
                 return;
             }
 
-            if (textBoxHost.Text == Settings.Default.Host && textBoxUsername.Text == Settings.Default.User &&
-                textBoxPassword.Text == Settings.Default.Password &&
+            if (textBoxHost.Text == Settings.Default.Host &&
+                textBoxUsername.Text == Settings.Default.User &&
                 textBoxWorldDatabase.Text == Settings.Default.Database &&
                 textBoxPort.Text == Settings.Default.Port.ToString() &&
                 checkBoxAutoConnect.Checked == Settings.Default.AutoConnect &&
@@ -124,7 +124,10 @@ namespace SAI_Editor
                 checkBoxPromptToQuit.Checked == Settings.Default.PromptToQuit &&
                 textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() &&
                 checkBoxPromptExecuteQuery.Checked == Settings.Default.PromptExecuteQuery &&
-                checkBoxChangeStaticInfo.Checked == Settings.Default.ChangeStaticInfo)
+                checkBoxChangeStaticInfo.Checked == Settings.Default.ChangeStaticInfo &&
+
+                //! Check password last because it's the most 'expensive' check
+                textBoxPassword.Text == Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString())
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
