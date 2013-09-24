@@ -15,6 +15,7 @@
 - (?) Implement a sqlite database containing required tables for the tool (creature_template, creature, gameobject, smart_scripts, etc.) and use this if user wants to not use his local database
   - Figure out why the 'finally' block is called right when we call FillListViewWithSpells instead of actually waiting till the process finished, possibly related to above line...
 - (?) Possible move the parameter button handling (like SMART_ACTION_CAST -> param1 has a button to search for spells) to the SQLite database so we have less code in the application?
+- Find a way around the annoying 500-line limit when inserting SQLite data. When found, implement all sounds into the SQLite database.
 
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
