@@ -762,8 +762,8 @@ namespace SAI_Editor
                     case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER:
                         buttonEventParamOneSearch.Visible = true; //! Areatrigger entry
                         break;
-                    case SmartEvent.SMART_EVENT_GO_STATE_CHANGED: //! Go state
-                        new SingleSelectForm(textBoxEventParam1, SingleSelectFormType.SingleSelectFormTypeGoState).ShowDialog(this);
+                    case SmartEvent.SMART_EVENT_GO_STATE_CHANGED:
+                        buttonEventParamOneSearch.Visible = true; //! Go state
                         break;
                 }
 
@@ -1204,6 +1204,9 @@ namespace SAI_Editor
                     break;
                 case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER: //! Areatrigger entry
                     new SearchFromDatabaseForm(connectionString, textBoxEventParam1, DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger).ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_GO_STATE_CHANGED: //! Go state
+                    new SingleSelectForm(textBoxEventParam1, SingleSelectFormType.SingleSelectFormTypeGoState).ShowDialog(this);
                     break;
             }
         }
