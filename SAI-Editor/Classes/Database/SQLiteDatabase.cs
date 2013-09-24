@@ -70,7 +70,8 @@ namespace SAI_Editor.Database
 
         public async Task<EventTypeInformation> GetEventTypeInformationById(int event_type)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM event_type_information WHERE event_type = '@event_type'", new SQLiteParameter("@event_type", event_type));
+            //DataTable dt = await ExecuteQuery("SELECT * FROM event_type_information WHERE event_type = '@event_type'", new SQLiteParameter("@event_type", event_type));
+            DataTable dt = await ExecuteQuery("SELECT * FROM event_type_information WHERE event_type = '" + event_type + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -80,7 +81,8 @@ namespace SAI_Editor.Database
 
         public async Task<ActionTypeInformation> GetActionTypeInformationById(int action_type)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM action_type_information WHERE action_type = '@action_type'", new SQLiteParameter("@action_type", action_type));
+            //DataTable dt = await ExecuteQuery("SELECT * FROM action_type_information WHERE action_type = '@action_type'", new SQLiteParameter("@action_type", action_type));
+            DataTable dt = await ExecuteQuery("SELECT * FROM action_type_information WHERE action_type = '" + action_type + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -90,7 +92,8 @@ namespace SAI_Editor.Database
 
         public async Task<TargetTypeInformation> GetTargetTypeInformationById(int target_type)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM target_type_information WHERE target_type = '@target_type'", new SQLiteParameter("@target_type", target_type));
+            //DataTable dt = await ExecuteQuery("SELECT * FROM target_type_information WHERE target_type = '@target_type'", new SQLiteParameter("@target_type", target_type));
+            DataTable dt = await ExecuteQuery("SELECT * FROM target_type_information WHERE target_type = '" + target_type + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -130,7 +133,8 @@ namespace SAI_Editor.Database
 
         public async Task<AreaTrigger> GetAreaTriggerById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers WHERE 'id' = @id", new SQLiteParameter("@id", id));
+            //DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers WHERE 'id' = @id", new SQLiteParameter("@id", id));
+            DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers WHERE id = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return null;

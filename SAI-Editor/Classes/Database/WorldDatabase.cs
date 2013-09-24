@@ -23,7 +23,8 @@ namespace SAI_Editor
 
         public async Task<int> GetCreatureIdByGuid(int guid)
         {
-            DataTable dt = await ExecuteQuery("SELECT id FROM creature WHERE guid = '@guid'", new MySqlParameter("@guid", guid));
+            //DataTable dt = await ExecuteQuery("SELECT id FROM creature WHERE guid = '@guid'", new MySqlParameter("@guid", guid));
+            DataTable dt = await ExecuteQuery("SELECT id FROM creature WHERE guid = '" + guid + "'");
 
             if (dt.Rows.Count == 0)
                 return 0;
@@ -33,7 +34,8 @@ namespace SAI_Editor
 
         public async Task<int> GetGameobjectIdByGuid(int guid)
         {
-            DataTable dt = await ExecuteQuery("SELECT id FROM gameobject WHERE guid = '@guid'", new MySqlParameter("@guid", guid));
+            //DataTable dt = await ExecuteQuery("SELECT id FROM gameobject WHERE guid = '@guid'", new MySqlParameter("@guid", guid));
+            DataTable dt = await ExecuteQuery("SELECT id FROM gameobject WHERE guid = '" + guid + "'");
 
             if (dt.Rows.Count == 0)
                 return 0;
@@ -56,7 +58,8 @@ namespace SAI_Editor
 
         public async Task<string> GetCreatureNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = '@id'", new MySqlParameter("@id", id));
+            //DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = '@id'", new MySqlParameter("@id", id));
+            DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -66,7 +69,8 @@ namespace SAI_Editor
 
         public async Task<string> GetCreatureNameByGuid(int guid)
         {
-            DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = '@id'", new MySqlParameter("@id", GetCreatureIdByGuid(guid)));
+            //DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = '@id'", new MySqlParameter("@id", GetCreatureIdByGuid(guid)));
+            DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = '" + GetCreatureIdByGuid(guid) + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -76,7 +80,8 @@ namespace SAI_Editor
 
         public async Task<string> GetGameobjectNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '@id'", new MySqlParameter("@id", id));
+            //DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '@id'", new MySqlParameter("@id", id));
+            DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -86,7 +91,8 @@ namespace SAI_Editor
 
         public async Task<string> GetGameobjectNameByGuid(int guid)
         {
-            DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '@id'", new MySqlParameter("@id", GetGameobjectIdByGuid(guid)));
+            //DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '@id'", new MySqlParameter("@id", GetGameobjectIdByGuid(guid)));
+            DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '" + GetGameobjectIdByGuid(guid) + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -122,7 +128,8 @@ namespace SAI_Editor
 
         public async Task<List<SmartScript>> GetSmartScripts(int entryorguid)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '@entryorguid'", new MySqlParameter("@entryorguid", entryorguid));
+            //DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '@entryorguid'", new MySqlParameter("@entryorguid", entryorguid));
+            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '" + entryorguid + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -137,7 +144,8 @@ namespace SAI_Editor
 
         public async Task<List<SmartScript>> GetSmartScripts(int entryorguid, int source_type)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '@entryorguid' AND source_type = '@source_type'", new MySqlParameter("@entryorguid", entryorguid), new MySqlParameter("@source_type", source_type));
+            //DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '@entryorguid' AND source_type = '@source_type'", new MySqlParameter("@entryorguid", entryorguid), new MySqlParameter("@source_type", source_type));
+            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '" + entryorguid + "' AND source_type = '" + source_type + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -232,7 +240,8 @@ namespace SAI_Editor
 
         public async Task<bool> AreaTriggerHasSmartAI(int entry)
         {
-            DataTable dt = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = '@entry'", new MySqlParameter("@entry", entry));
+            //DataTable dt = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = '@entry'", new MySqlParameter("@entry", entry));
+            DataTable dt = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = '" + entry + "'");
             return dt.Rows.Count > 0;
         }
 
