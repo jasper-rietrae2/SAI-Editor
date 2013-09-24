@@ -163,6 +163,8 @@ namespace SAI_Editor
                     break;
             }
 
+            baseQuery += " ORDER BY " + columnOne;
+
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             comboBoxSearchType.SelectedIndex = 0;
             FillListView(true);
