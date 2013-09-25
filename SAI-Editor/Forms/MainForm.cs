@@ -1279,6 +1279,13 @@ namespace SAI_Editor
         private void buttonEventParamFourSearch_Click(object sender, EventArgs e)
         {
             TextBox textBoxToChange = textBoxEventParam4;
+
+            switch ((SmartEvent)comboBoxEventType.SelectedIndex)
+            {
+                case SmartEvent.SMART_EVENT_KILL: //! Creature entry
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
+            }
         }
 
         private void buttonTargetParamOneSearch_Click(object sender, EventArgs e)
