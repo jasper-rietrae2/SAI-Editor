@@ -1129,6 +1129,7 @@ namespace SAI_Editor
 
             if (listViewSmartScripts.Items.Count > 0)
             {
+                SortListView(SortOrder.Ascending, 1);
                 listViewSmartScripts.Items[0].Selected = true;
                 listViewSmartScripts.Select(); //! Sets the focus on the listview
             }
@@ -1163,22 +1164,22 @@ namespace SAI_Editor
 
         private void listViewSmartScripts_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            var myListView = (ListView)sender;
-            myListView.ListViewItemSorter = lvwColumnSorter;
+            SortListView(SortOrder.None, e.Column);
+        }
 
-            //! Determine if clicked column is already the column that is being sorted
-            if (e.Column != lvwColumnSorter.SortColumn)
+        private void SortListView(SortOrder order, int column)
+        {
+            listViewSmartScripts.ListViewItemSorter = lvwColumnSorter;
+
+            if (column != lvwColumnSorter.SortColumn)
             {
-                //! Set the column number that is to be sorted; default to ascending
-                lvwColumnSorter.SortColumn = e.Column;
-                lvwColumnSorter.Order = SortOrder.Ascending;
+                lvwColumnSorter.SortColumn = column;
+                lvwColumnSorter.Order = order != SortOrder.None ? order : SortOrder.Ascending;
             }
             else
-                //! Reverse the current sort direction for this column
                 lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
 
-            //! Perform the sort with these new sort options
-            myListView.Sort();
+            listViewSmartScripts.Sort();
         }
 
         private ListView.ListViewItemCollection GetItemsBasedOnSelection(ListView listView)
