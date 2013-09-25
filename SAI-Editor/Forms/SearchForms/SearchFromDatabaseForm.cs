@@ -30,6 +30,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeCreatureGuid = 10,
         DatabaseSearchFormTypeGameobjectGuid = 11,
         DatabaseSearchFormTypeGameEvent = 12,
+        DatabaseSearchFormTypeItemEntry = 13,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -195,6 +196,17 @@ namespace SAI_Editor
                     baseQuery = "SELECT eventEntry, description FROM game_event";
                     columnOne = "eventEntry";
                     columnTwo = "description";
+                    useMySQL = true;
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry:
+                    Text = "Search for an item";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Item id");
+                    comboBoxSearchType.Items.Add("Item name");
+                    baseQuery = "SELECT entry, name FROM item_template";
+                    columnOne = "entry";
+                    columnTwo = "name";
                     useMySQL = true;
                     break;
             }

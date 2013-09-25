@@ -856,6 +856,15 @@ namespace SAI_Editor
                         buttonActionParamFiveSearch.Visible = true; //! Event phase 5
                         buttonActionParamSixSearch.Visible = true; //! Event phase 6
                         break;
+                    case SmartAction.SMART_ACTION_ADD_ITEM:
+                    case SmartAction.SMART_ACTION_REMOVE_ITEM:
+                        buttonActionParamOneSearch.Visible = true; //! Item entry
+                        break;
+                    case SmartAction.SMART_ACTION_EQUIP:
+                        buttonActionParamThreeSearch.Visible = true; //! Item entry 1
+                        buttonActionParamFourSearch.Visible = true; //! Item entry 2
+                        buttonActionParamFiveSearch.Visible = true; //! Item entry 3
+                        break;
                 }
 
                 switch ((SmartTarget)target_type)
@@ -1433,6 +1442,10 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_ADD_ITEM:
+                case SmartAction.SMART_ACTION_REMOVE_ITEM:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
+                    break;
             }
         }
 
@@ -1478,6 +1491,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_EQUIP:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
+                    break;
             }
         }
 
@@ -1493,6 +1509,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_EQUIP:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
+                    break;
             }
         }
 
@@ -1504,6 +1523,9 @@ namespace SAI_Editor
             {
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_EQUIP:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
                     break;
             }
         }
