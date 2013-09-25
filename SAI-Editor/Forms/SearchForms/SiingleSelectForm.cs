@@ -12,6 +12,7 @@ namespace SAI_Editor.SearchForms
         SingleSelectFormTypeTargetType = 4,
         SingleSelectFormTypeSpellSchool = 5,
         SingleSelectFormTypeMotionType = 6,
+        SingleSelectFormTypeSummonType = 7,
     };
 
     public partial class SingleSelectForm : Form
@@ -128,6 +129,19 @@ namespace SAI_Editor.SearchForms
                     listViewSelectableItems.Items.Add("FOLLOW_MOTION_TYPE"); // 14
                     listViewSelectableItems.Items.Add("ROTATE_MOTION_TYPE"); // 15
                     listViewSelectableItems.Items.Add("EFFECT_MOTION_TYPE"); // 16
+                    break;
+                case SingleSelectFormType.SingleSelectFormTypeSummonType:
+                    Text = "Select a summon type";
+                    listViewSelectableItems.Columns.Add("Summon type", 278, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("TEMPSUMMON_NONE"); // 0
+                    listViewSelectableItems.Items.Add("TIMED_OR_DEAD_DESPAWN"); // 1
+                    listViewSelectableItems.Items.Add("TIMED_OR_CORPSE_DESPAWN"); // 2
+                    listViewSelectableItems.Items.Add("TIMED_DESPAWN"); // 3
+                    listViewSelectableItems.Items.Add("TIMED_DESPAWN_OUT_OF_COMBAT"); // 4
+                    listViewSelectableItems.Items.Add("CORPSE_DESPAWN"); // 5
+                    listViewSelectableItems.Items.Add("CORPSE_TIMED_DESPAWN"); // 6
+                    listViewSelectableItems.Items.Add("DEAD_DESPAWN"); // 7
+                    listViewSelectableItems.Items.Add("MANUAL_DESPAWN"); // 8
                     break;
             }
         }

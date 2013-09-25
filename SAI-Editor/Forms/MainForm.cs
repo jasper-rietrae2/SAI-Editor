@@ -807,12 +807,15 @@ namespace SAI_Editor
                         buttonActionParamOneSearch.Visible = true; //! Sound entry
                         break;
                     case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL: //! Creature entry
-                    case SmartAction.SMART_ACTION_SUMMON_CREATURE:
                     case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO:
                     case SmartAction.SMART_ACTION_KILLED_MONSTER:
                     case SmartAction.SMART_ACTION_UPDATE_TEMPLATE:
                     case SmartAction.SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL:
                         buttonActionParamOneSearch.Visible = true; //! Creature entry
+                        break;
+                    case SmartAction.SMART_ACTION_SUMMON_CREATURE:
+                        buttonActionParamOneSearch.Visible = true; //! Creature entry
+                        buttonActionParamTwoSearch.Visible = true; //! Summon type
                         break;
                     case SmartAction.SMART_ACTION_WP_STOP:
                         buttonActionParamTwoSearch.Visible = true; //! Quest entry
@@ -1429,6 +1432,9 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_INTERRUPT_SPELL:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SUMMON_CREATURE:
+                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSummonType).ShowDialog(this);
                     break;
             }
         }
