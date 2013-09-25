@@ -110,7 +110,16 @@ namespace SAI_Editor
 
                                 break;
                             case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
-                                break; // param1 tot param2
+                                for (int i = _smartScript.action_param1; i <= _smartScript.action_param2; ++i)
+                                {
+                                    if (i == smartScript.entryorguid && !timedActionListOrEntries.entries.Contains(i.ToString()))
+                                    {
+                                        timedActionListOrEntries.entries.Add(_smartScript.entryorguid.ToString());
+                                        timedActionListOrEntries.sourceTypeOfEntry = (SourceTypes)_smartScript.source_type;
+                                        break;
+                                    }
+                                }
+                                break;
                         }
                     }
                 }

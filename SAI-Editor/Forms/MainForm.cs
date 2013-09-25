@@ -589,15 +589,15 @@ namespace SAI_Editor
                     listViewItem.SubItems.Add(smartScript.target_o.ToString());
                     listViewItem.SubItems.Add(smartScript.comment);
 
+                    listViewSmartScripts.Items.Add(listViewItem);
+
                     if (checkBoxListActionlistsOrEntries.Checked && sourceType == originalSourceType)
                     {
                         TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScript, sourceType);
 
                         foreach (string scriptEntry in timedActionListOrEntries.entries)
-                            SelectAndFillListViewByEntryAndSource(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
+                            await SelectAndFillListViewByEntryAndSource(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
                     }
-
-                    listViewSmartScripts.Items.Add(listViewItem);
                 }
 
                 //! This causes them to be resized to the item in the column with the highest width value.
