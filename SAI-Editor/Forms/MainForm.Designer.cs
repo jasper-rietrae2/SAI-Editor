@@ -57,6 +57,8 @@
             this.menuItemDeleteSelectedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.smartAIWikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripListView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.testToolStripMenuItemDeleteRow = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
@@ -162,8 +164,6 @@
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.smartAIWikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -427,6 +427,21 @@
             this.menuItemAbout.Size = new System.Drawing.Size(107, 22);
             this.menuItemAbout.Text = "About";
             this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
+            // 
+            // otherToolStripMenuItem
+            // 
+            this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smartAIWikiToolStripMenuItem});
+            this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
+            this.otherToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.otherToolStripMenuItem.Text = "Other";
+            // 
+            // smartAIWikiToolStripMenuItem
+            // 
+            this.smartAIWikiToolStripMenuItem.Name = "smartAIWikiToolStripMenuItem";
+            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.smartAIWikiToolStripMenuItem.Text = "SmartAI Wiki...";
+            this.smartAIWikiToolStripMenuItem.Click += new System.EventHandler(this.smartAIWikiToolStripMenuItem_Click);
             // 
             // contextMenuStripListView
             // 
@@ -1821,6 +1836,7 @@
             this.listViewSmartScripts.FullRowSelect = true;
             this.listViewSmartScripts.HideSelection = false;
             this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
+            this.listViewSmartScripts.MultiSelect = false;
             this.listViewSmartScripts.Name = "listViewSmartScripts";
             this.listViewSmartScripts.Size = new System.Drawing.Size(947, 207);
             this.listViewSmartScripts.TabIndex = 24;
@@ -1830,21 +1846,6 @@
             this.listViewSmartScripts.SelectedIndexChanged += new System.EventHandler(this.listViewSmartScripts_SelectedIndexChanged);
             this.listViewSmartScripts.Click += new System.EventHandler(this.listViewSmartScripts_Click);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
-            // 
-            // otherToolStripMenuItem
-            // 
-            this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.smartAIWikiToolStripMenuItem});
-            this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
-            this.otherToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
-            this.otherToolStripMenuItem.Text = "Other";
-            // 
-            // smartAIWikiToolStripMenuItem
-            // 
-            this.smartAIWikiToolStripMenuItem.Name = "smartAIWikiToolStripMenuItem";
-            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.smartAIWikiToolStripMenuItem.Text = "SmartAI Wiki...";
-            this.smartAIWikiToolStripMenuItem.Click += new System.EventHandler(this.smartAIWikiToolStripMenuItem_Click);
             // 
             // MainForm
             // 
