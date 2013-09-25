@@ -841,6 +841,21 @@ namespace SAI_Editor
                     case SmartAction.SMART_ACTION_SUMMON_GO:
                         buttonActionParamOneSearch.Visible = true; //! Gameobject entry
                         break;
+                    case SmartAction.SMART_ACTION_SET_EVENT_PHASE:
+                        buttonActionParamOneSearch.Visible = true; //! Event phase
+                        break;
+                    case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
+                        buttonActionParamOneSearch.Visible = true; //! Event phase 1
+                        buttonActionParamTwoSearch.Visible = true; //! Event phase 2
+                        break;
+                    case SmartAction.SMART_ACTION_RANDOM_PHASE:
+                        buttonActionParamOneSearch.Visible = true; //! Event phase 1
+                        buttonActionParamTwoSearch.Visible = true; //! Event phase 2
+                        buttonActionParamThreeSearch.Visible = true; //! Event phase 3
+                        buttonActionParamFourSearch.Visible = true; //! Event phase 4
+                        buttonActionParamFiveSearch.Visible = true; //! Event phase 5
+                        buttonActionParamSixSearch.Visible = true; //! Event phase 6
+                        break;
                 }
 
                 switch ((SmartTarget)target_type)
@@ -1413,6 +1428,11 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SUMMON_GO:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_SET_EVENT_PHASE:
+                case SmartAction.SMART_ACTION_RANDOM_PHASE:
+                case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
+                    new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
+                    break;
             }
         }
 
@@ -1436,6 +1456,10 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SUMMON_CREATURE:
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSummonType).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_RANDOM_PHASE:
+                case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
+                    new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
+                    break;
             }
         }
 
@@ -1451,6 +1475,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_CROSS_CAST:
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeTargetType).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_RANDOM_PHASE:
+                    new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
+                    break;
             }
         }
 
@@ -1463,12 +1490,22 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_WP_START:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_RANDOM_PHASE:
+                    new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
+                    break;
             }
         }
 
         private void buttonActionParamFiveSearch_Click(object sender, EventArgs e)
         {
             TextBox textBoxToChange = textBoxActionParam5;
+
+            switch ((SmartAction)comboBoxActionType.SelectedIndex)
+            {
+                case SmartAction.SMART_ACTION_RANDOM_PHASE:
+                    new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
+                    break;
+            }
         }
 
         private void buttonActionParamSixSearch_Click(object sender, EventArgs e)
@@ -1479,6 +1516,9 @@ namespace SAI_Editor
             {
                 case SmartAction.SMART_ACTION_WP_START:
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeReactState).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_RANDOM_PHASE:
+                    new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
                     break;
             }
         }
