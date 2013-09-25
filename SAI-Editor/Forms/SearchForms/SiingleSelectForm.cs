@@ -11,6 +11,7 @@ namespace SAI_Editor.SearchForms
         SingleSelectFormTypePowerType = 3,
         SingleSelectFormTypeTargetType = 4,
         SingleSelectFormTypeSpellSchool = 5,
+        SingleSelectFormTypeMotionType = 6,
     };
 
     public partial class SingleSelectForm : Form
@@ -106,6 +107,27 @@ namespace SAI_Editor.SearchForms
                     listViewSelectableItems.Items.Add("SPELL_SCHOOL_FROST"); // 4
                     listViewSelectableItems.Items.Add("SPELL_SCHOOL_SHADOW"); // 5
                     listViewSelectableItems.Items.Add("SPELL_SCHOOL_ARCANE"); // 6
+                    break;
+                case SingleSelectFormType.SingleSelectFormTypeMotionType:
+                    Text = "Select a movement type";
+                    listViewSelectableItems.Columns.Add("Movement type", 278, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("IDLE_MOTION_TYPE"); // 0
+                    listViewSelectableItems.Items.Add("RANDOM_MOTION_TYPE"); // 1
+                    listViewSelectableItems.Items.Add("WAYPOINT_MOTION_TYPE"); // 2
+                    listViewSelectableItems.Items.Add("ANIMAL_RANDOM_MOTION_TYPE"); // 3
+                    listViewSelectableItems.Items.Add("CONFUSED_MOTION_TYPE"); // 4
+                    listViewSelectableItems.Items.Add("CHASE_MOTION_TYPE"); // 5
+                    listViewSelectableItems.Items.Add("HOME_MOTION_TYPE"); // 6
+                    listViewSelectableItems.Items.Add("FLIGHT_MOTION_TYPE"); // 7
+                    listViewSelectableItems.Items.Add("POINT_MOTION_TYPE"); // 8
+                    listViewSelectableItems.Items.Add("FLEEING_MOTION_TYPE"); // 9
+                    listViewSelectableItems.Items.Add("DISTRACT_MOTION_TYPE"); // 10
+                    listViewSelectableItems.Items.Add("ASSISTANCE_MOTION_TYPE"); // 11
+                    listViewSelectableItems.Items.Add("ASSISTANCE_DISTRACT_MOTION_TYPE"); // 12
+                    listViewSelectableItems.Items.Add("TIMED_FLEEING_MOTION_TYPE"); // 13
+                    listViewSelectableItems.Items.Add("FOLLOW_MOTION_TYPE"); // 14
+                    listViewSelectableItems.Items.Add("ROTATE_MOTION_TYPE"); // 15
+                    listViewSelectableItems.Items.Add("EFFECT_MOTION_TYPE"); // 16
                     break;
             }
         }

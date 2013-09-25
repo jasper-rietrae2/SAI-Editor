@@ -769,6 +769,9 @@ namespace SAI_Editor
                     case SmartEvent.SMART_EVENT_GAME_EVENT_END:
                         buttonEventParamOneSearch.Visible = true; //! Game event entry
                         break;
+                    case SmartEvent.SMART_EVENT_MOVEMENTINFORM:
+                        buttonEventParamOneSearch.Visible = true; //! Movement type
+                        break;
                 }
 
                 switch ((SmartAction)action_type)
@@ -1245,6 +1248,9 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_GAME_EVENT_START: //! Game event entry
                 case SmartEvent.SMART_EVENT_GAME_EVENT_END:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent).ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_MOVEMENTINFORM:
+                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeMotionType).ShowDialog(this);
                     break;
             }
         }
