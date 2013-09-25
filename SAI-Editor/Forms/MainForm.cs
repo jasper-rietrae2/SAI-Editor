@@ -1247,7 +1247,8 @@ namespace SAI_Editor
             switch ((SmartEvent)comboBoxEventType.SelectedIndex)
             {
                 case SmartEvent.SMART_EVENT_SPELLHIT: //! Spell school
-                    //new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
+                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
+                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSpellSchool).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Map
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap).ShowDialog(this);

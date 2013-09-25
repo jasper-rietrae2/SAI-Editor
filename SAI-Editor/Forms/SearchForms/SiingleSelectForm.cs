@@ -10,6 +10,7 @@ namespace SAI_Editor.SearchForms
         SingleSelectFormTypeGoState = 2,
         SingleSelectFormTypePowerType = 3,
         SingleSelectFormTypeTargetType = 4,
+        SingleSelectFormTypeSpellSchool = 5,
     };
 
     public partial class SingleSelectForm : Form
@@ -94,6 +95,17 @@ namespace SAI_Editor.SearchForms
                     listViewSelectableItems.Items.Add("SMART_TARGET_THREAT_LIST"); // 25
                     listViewSelectableItems.Items.Add("SMART_TARGET_CLOSEST_ENEMY"); // 26
                     listViewSelectableItems.Items.Add("SMART_TARGET_CLOSEST_FRIENDLY"); // 27
+                    break;
+                case SingleSelectFormType.SingleSelectFormTypeSpellSchool:
+                    Text = "Select a spell school";
+                    listViewSelectableItems.Columns.Add("Spell school", 278, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("SPELL_SCHOOL_NORMAL"); // 0
+                    listViewSelectableItems.Items.Add("SPELL_SCHOOL_HOLY"); // 1
+                    listViewSelectableItems.Items.Add("SPELL_SCHOOL_FIRE"); // 2
+                    listViewSelectableItems.Items.Add("SPELL_SCHOOL_NATURE"); // 3
+                    listViewSelectableItems.Items.Add("SPELL_SCHOOL_FROST"); // 4
+                    listViewSelectableItems.Items.Add("SPELL_SCHOOL_SHADOW"); // 5
+                    listViewSelectableItems.Items.Add("SPELL_SCHOOL_ARCANE"); // 6
                     break;
             }
         }
