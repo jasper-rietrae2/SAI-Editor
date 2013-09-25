@@ -564,8 +564,6 @@ namespace SAI_Editor
 
         private async void SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
         {
-            SourceTypes sourceTypeOfEntry = SourceTypes.SourceTypeScriptedActionlist;
-
             try
             {
                 List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(Convert.ToInt32(entryOrGuid), (int)sourceType);
@@ -919,6 +917,9 @@ namespace SAI_Editor
                     buttonActionParamThreeSearch.Visible = true; //! Item entry 1
                     buttonActionParamFourSearch.Visible = true; //! Item entry 2
                     buttonActionParamFiveSearch.Visible = true; //! Item entry 3
+                    break;
+                case SmartAction.SMART_ACTION_TELEPORT:
+                    buttonActionParamOneSearch.Visible = true; //! Map id
                     break;
             }
 
@@ -1503,6 +1504,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_ADD_ITEM:
                 case SmartAction.SMART_ACTION_REMOVE_ITEM:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_TELEPORT: //! Map
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap).ShowDialog(this);
                     break;
             }
         }
