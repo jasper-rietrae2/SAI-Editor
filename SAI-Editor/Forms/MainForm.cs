@@ -476,6 +476,8 @@ namespace SAI_Editor
 
             if (textBoxEventTypeId.Text == "0" || textBoxEventTypeId.Text == ((int)MaxValues.MaxEventType).ToString())
                 textBoxEventTypeId.SelectionStart = 3; //! Set cursot to end of text
+
+            ChangeParameterFieldsBasedOnType();
         }
 
         private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
@@ -484,6 +486,8 @@ namespace SAI_Editor
 
             if (textBoxActionTypeId.Text == "0" || textBoxActionTypeId.Text == ((int)MaxValues.MaxActionType).ToString())
                 textBoxActionTypeId.SelectionStart = 3; //! Set cursot to end of text
+
+            ChangeParameterFieldsBasedOnType();
         }
 
         private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
@@ -492,6 +496,51 @@ namespace SAI_Editor
 
             if (textBoxTargetTypeId.Text == "0" || textBoxTargetTypeId.Text == ((int)MaxValues.MaxTargetType).ToString())
                 textBoxTargetTypeId.SelectionStart = 3; //! Set cursot to end of text
+
+            ChangeParameterFieldsBasedOnType();
+        }
+
+        private async void ChangeParameterFieldsBasedOnType()
+        {
+            //! Event parameters
+            int event_type = comboBoxEventType.SelectedIndex;
+            labelEventParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 1, ScriptTypeId.ScriptTypeEvent);
+            labelEventParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
+            labelEventParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
+            labelEventParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
+            AddTooltip(comboBoxEventType, comboBoxEventType.SelectedItem.ToString(), await SAI_Editor_Manager.Instance.sqliteDatabase.GetScriptTypeTooltipById(event_type, ScriptTypeId.ScriptTypeEvent));
+            AddTooltip(labelEventParam1, labelEventParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 1, ScriptTypeId.ScriptTypeEvent));
+            AddTooltip(labelEventParam2, labelEventParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 2, ScriptTypeId.ScriptTypeEvent));
+            AddTooltip(labelEventParam3, labelEventParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 3, ScriptTypeId.ScriptTypeEvent));
+            AddTooltip(labelEventParam4, labelEventParam4.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
+
+            //! Action parameters
+            int action_type = comboBoxActionType.SelectedIndex;
+            labelActionParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 1, ScriptTypeId.ScriptTypeAction);
+            labelActionParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 2, ScriptTypeId.ScriptTypeAction);
+            labelActionParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 3, ScriptTypeId.ScriptTypeAction);
+            labelActionParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 4, ScriptTypeId.ScriptTypeAction);
+            labelActionParam5.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 5, ScriptTypeId.ScriptTypeAction);
+            labelActionParam6.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 6, ScriptTypeId.ScriptTypeAction);
+            AddTooltip(comboBoxActionType, comboBoxActionType.SelectedItem.ToString(), await SAI_Editor_Manager.Instance.sqliteDatabase.GetScriptTypeTooltipById(action_type, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam1, labelActionParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 1, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam2, labelActionParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 2, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam3, labelActionParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 3, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam4, labelActionParam4.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 4, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam5, labelActionParam5.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 5, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam6, labelActionParam6.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
+
+            //! Target parameters
+            int target_type = comboBoxTargetType.SelectedIndex;
+            labelTargetParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
+            labelTargetParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
+            labelTargetParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
+            AddTooltip(comboBoxTargetType, comboBoxTargetType.SelectedItem.ToString(), await SAI_Editor_Manager.Instance.sqliteDatabase.GetScriptTypeTooltipById(target_type, ScriptTypeId.ScriptTypeTarget));
+            AddTooltip(labelTargetParam1, labelTargetParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 1, ScriptTypeId.ScriptTypeTarget));
+            AddTooltip(labelTargetParam2, labelTargetParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 2, ScriptTypeId.ScriptTypeTarget));
+            AddTooltip(labelTargetParam3, labelTargetParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
+
+            AdjustAllParameterFields(event_type, action_type, target_type);
         }
 
         private void checkBoxAutoGenerateComments_CheckedChanged_1(object sender, EventArgs e)
@@ -733,178 +782,183 @@ namespace SAI_Editor
                 textBoxTargetO.Text = selectedItem[26].Text;
                 textBoxComments.Text = selectedItem[27].Text;
 
-                SetVisibilityOfAllParamButtons(false);
-
-                switch ((SmartEvent)event_type)
-                {
-                    case SmartEvent.SMART_EVENT_SPELLHIT:
-                        buttonEventParamOneSearch.Visible = true; //! Spell entry
-                        buttonEventParamTwoSearch.Visible = true; //! Spell school
-                        break;
-                    case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF:
-                    case SmartEvent.SMART_EVENT_HAS_AURA:
-                    case SmartEvent.SMART_EVENT_TARGET_BUFFED:
-                    case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
-                        buttonEventParamOneSearch.Visible = true; //! Spell entry
-                        break;
-                    case SmartEvent.SMART_EVENT_RESPAWN:
-                        buttonEventParamOneSearch.Visible = true; //! Respawn condition (SMART_SCRIPT_RESPAWN_CONDITION_MAP / SMART_SCRIPT_RESPAWN_CONDITION_AREA)
-                        buttonEventParamTwoSearch.Visible = true; //! Map entry
-                        buttonEventParamThreeSearch.Visible = true; //! Zone entry
-                        break;
-                    case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED:
-                        buttonEventParamOneSearch.Visible = true; //! Creature entry
-                        break;
-                    case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER:
-                        buttonEventParamOneSearch.Visible = true; //! Areatrigger entry
-                        break;
-                    case SmartEvent.SMART_EVENT_GO_STATE_CHANGED:
-                        buttonEventParamOneSearch.Visible = true; //! Go state
-                        break;
-                    case SmartEvent.SMART_EVENT_GAME_EVENT_START:
-                    case SmartEvent.SMART_EVENT_GAME_EVENT_END:
-                        buttonEventParamOneSearch.Visible = true; //! Game event entry
-                        break;
-                    case SmartEvent.SMART_EVENT_MOVEMENTINFORM:
-                        buttonEventParamOneSearch.Visible = true; //! Movement type
-                        break;
-                }
-
-                switch ((SmartAction)action_type)
-                {
-                    case SmartAction.SMART_ACTION_CAST:
-                    case SmartAction.SMART_ACTION_INVOKER_CAST:
-                        buttonActionParamOneSearch.Visible = true; //! Spell entry
-                        buttonActionParamTwoSearch.Visible = true; //! Cast flags
-                        break;
-                    case SmartAction.SMART_ACTION_CROSS_CAST:
-                        buttonActionParamOneSearch.Visible = true; //! Spell entry
-                        buttonActionParamTwoSearch.Visible = true; //! Cast flags
-                        buttonActionParamThreeSearch.Visible = true; //! Target type
-                        break;
-                    case SmartAction.SMART_ACTION_SET_FACTION:
-                        buttonActionParamOneSearch.Visible = true; //! Faction entry
-                        break;
-                    case SmartAction.SMART_ACTION_EMOTE:
-                    case SmartAction.SMART_ACTION_RANDOM_EMOTE:
-                    case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
-                        buttonActionParamOneSearch.Visible = true; //! Emote entry
-                        break;
-                    case SmartAction.SMART_ACTION_FAIL_QUEST:
-                    case SmartAction.SMART_ACTION_ADD_QUEST:
-                    case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS:
-                    case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
-                        buttonActionParamOneSearch.Visible = true; //! Quest entry
-                        break;
-                    case SmartAction.SMART_ACTION_SET_REACT_STATE:
-                        buttonActionParamOneSearch.Visible = true; //! Reactstate
-                        break;
-                    case SmartAction.SMART_ACTION_SOUND:
-                        buttonActionParamOneSearch.Visible = true; //! Sound entry
-                        break;
-                    case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL: //! Creature entry
-                    case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO:
-                    case SmartAction.SMART_ACTION_KILLED_MONSTER:
-                    case SmartAction.SMART_ACTION_UPDATE_TEMPLATE:
-                    case SmartAction.SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL:
-                        buttonActionParamOneSearch.Visible = true; //! Creature entry
-                        break;
-                    case SmartAction.SMART_ACTION_SUMMON_CREATURE:
-                        buttonActionParamOneSearch.Visible = true; //! Creature entry
-                        buttonActionParamTwoSearch.Visible = true; //! Summon type
-                        break;
-                    case SmartAction.SMART_ACTION_WP_STOP:
-                        buttonActionParamTwoSearch.Visible = true; //! Quest entry
-                        break;
-                    case SmartAction.SMART_ACTION_FOLLOW:
-                        buttonActionParamThreeSearch.Visible = true; //! Creature entry
-                        break;
-                    case SmartAction.SMART_ACTION_WP_START:
-                        buttonActionParamFourSearch.Visible = true; //! Quest entry
-                        buttonActionParamSixSearch.Visible = true; //! React state
-                        break;
-                    case SmartAction.SMART_ACTION_INTERRUPT_SPELL:
-                        buttonActionParamTwoSearch.Visible = true; //! Spell entry
-                        break;
-                    case SmartAction.SMART_ACTION_GO_SET_LOOT_STATE:
-                        buttonActionParamOneSearch.Visible = true; //! Gameobject state
-                        break;
-                    case SmartAction.SMART_ACTION_SET_POWER:
-                    case SmartAction.SMART_ACTION_ADD_POWER:
-                    case SmartAction.SMART_ACTION_REMOVE_POWER:
-                        buttonActionParamOneSearch.Visible = true; //! Power type
-                        break;
-                    case SmartAction.SMART_ACTION_SUMMON_GO:
-                        buttonActionParamOneSearch.Visible = true; //! Gameobject entry
-                        break;
-                    case SmartAction.SMART_ACTION_SET_EVENT_PHASE:
-                        buttonActionParamOneSearch.Visible = true; //! Event phase
-                        break;
-                    case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
-                        buttonActionParamOneSearch.Visible = true; //! Event phase 1
-                        buttonActionParamTwoSearch.Visible = true; //! Event phase 2
-                        break;
-                    case SmartAction.SMART_ACTION_RANDOM_PHASE:
-                        buttonActionParamOneSearch.Visible = true; //! Event phase 1
-                        buttonActionParamTwoSearch.Visible = true; //! Event phase 2
-                        buttonActionParamThreeSearch.Visible = true; //! Event phase 3
-                        buttonActionParamFourSearch.Visible = true; //! Event phase 4
-                        buttonActionParamFiveSearch.Visible = true; //! Event phase 5
-                        buttonActionParamSixSearch.Visible = true; //! Event phase 6
-                        break;
-                    case SmartAction.SMART_ACTION_ADD_ITEM:
-                    case SmartAction.SMART_ACTION_REMOVE_ITEM:
-                        buttonActionParamOneSearch.Visible = true; //! Item entry
-                        break;
-                    case SmartAction.SMART_ACTION_EQUIP:
-                        buttonActionParamThreeSearch.Visible = true; //! Item entry 1
-                        buttonActionParamFourSearch.Visible = true; //! Item entry 2
-                        buttonActionParamFiveSearch.Visible = true; //! Item entry 3
-                        break;
-                }
-
-                switch ((SmartTarget)target_type)
-                {
-                    case SmartTarget.SMART_TARGET_CREATURE_RANGE:
-                    case SmartTarget.SMART_TARGET_CREATURE_DISTANCE:
-                    case SmartTarget.SMART_TARGET_CLOSEST_CREATURE:
-                        buttonTargetParamOneSearch.Visible = true; //! Creature entry
-                        break;
-                    case SmartTarget.SMART_TARGET_CREATURE_GUID:
-                        buttonTargetParamOneSearch.Visible = true; //! Creature guid
-                        buttonTargetParamTwoSearch.Visible = true; //! Creature entry
-                        break;
-                    case SmartTarget.SMART_TARGET_GAMEOBJECT_RANGE:
-                    case SmartTarget.SMART_TARGET_GAMEOBJECT_DISTANCE:
-                    case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT:
-                        buttonTargetParamOneSearch.Visible = true; //! Gameobject entry
-                        break;
-                    case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID:
-                        buttonTargetParamOneSearch.Visible = true; //! Gameobject guid
-                        buttonTargetParamTwoSearch.Visible = true; //! Gameobject entry
-                        break;
-                }
-
-                textBoxEventParam1.Enabled = labelEventParam1.Text.Length > 0;
-                textBoxEventParam2.Enabled = labelEventParam2.Text.Length > 0;
-                textBoxEventParam3.Enabled = labelEventParam3.Text.Length > 0;
-                textBoxEventParam4.Enabled = labelEventParam4.Text.Length > 0;
-
-                textBoxActionParam1.Enabled = labelActionParam1.Text.Length > 0;
-                textBoxActionParam2.Enabled = labelActionParam2.Text.Length > 0;
-                textBoxActionParam3.Enabled = labelActionParam3.Text.Length > 0;
-                textBoxActionParam4.Enabled = labelActionParam4.Text.Length > 0;
-                textBoxActionParam5.Enabled = labelActionParam5.Text.Length > 0;
-                textBoxActionParam6.Enabled = labelActionParam6.Text.Length > 0;
-
-                textBoxTargetParam1.Enabled = labelTargetParam1.Text.Length > 0;
-                textBoxTargetParam2.Enabled = labelTargetParam2.Text.Length > 0;
-                textBoxTargetParam3.Enabled = labelTargetParam3.Text.Length > 0;
+                AdjustAllParameterFields(event_type, action_type, target_type);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void AdjustAllParameterFields(int event_type, int action_type, int target_type)
+        {
+            SetVisibilityOfAllParamButtons(false);
+
+            switch ((SmartEvent)event_type)
+            {
+                case SmartEvent.SMART_EVENT_SPELLHIT:
+                    buttonEventParamOneSearch.Visible = true; //! Spell entry
+                    buttonEventParamTwoSearch.Visible = true; //! Spell school
+                    break;
+                case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF:
+                case SmartEvent.SMART_EVENT_HAS_AURA:
+                case SmartEvent.SMART_EVENT_TARGET_BUFFED:
+                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
+                    buttonEventParamOneSearch.Visible = true; //! Spell entry
+                    break;
+                case SmartEvent.SMART_EVENT_RESPAWN:
+                    buttonEventParamOneSearch.Visible = true; //! Respawn condition (SMART_SCRIPT_RESPAWN_CONDITION_MAP / SMART_SCRIPT_RESPAWN_CONDITION_AREA)
+                    buttonEventParamTwoSearch.Visible = true; //! Map entry
+                    buttonEventParamThreeSearch.Visible = true; //! Zone entry
+                    break;
+                case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED:
+                    buttonEventParamOneSearch.Visible = true; //! Creature entry
+                    break;
+                case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER:
+                    buttonEventParamOneSearch.Visible = true; //! Areatrigger entry
+                    break;
+                case SmartEvent.SMART_EVENT_GO_STATE_CHANGED:
+                    buttonEventParamOneSearch.Visible = true; //! Go state
+                    break;
+                case SmartEvent.SMART_EVENT_GAME_EVENT_START:
+                case SmartEvent.SMART_EVENT_GAME_EVENT_END:
+                    buttonEventParamOneSearch.Visible = true; //! Game event entry
+                    break;
+                case SmartEvent.SMART_EVENT_MOVEMENTINFORM:
+                    buttonEventParamOneSearch.Visible = true; //! Movement type
+                    break;
+            }
+
+            switch ((SmartAction)action_type)
+            {
+                case SmartAction.SMART_ACTION_CAST:
+                case SmartAction.SMART_ACTION_INVOKER_CAST:
+                    buttonActionParamOneSearch.Visible = true; //! Spell entry
+                    buttonActionParamTwoSearch.Visible = true; //! Cast flags
+                    break;
+                case SmartAction.SMART_ACTION_CROSS_CAST:
+                    buttonActionParamOneSearch.Visible = true; //! Spell entry
+                    buttonActionParamTwoSearch.Visible = true; //! Cast flags
+                    buttonActionParamThreeSearch.Visible = true; //! Target type
+                    break;
+                case SmartAction.SMART_ACTION_SET_FACTION:
+                    buttonActionParamOneSearch.Visible = true; //! Faction entry
+                    break;
+                case SmartAction.SMART_ACTION_EMOTE:
+                case SmartAction.SMART_ACTION_RANDOM_EMOTE:
+                case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
+                    buttonActionParamOneSearch.Visible = true; //! Emote entry
+                    break;
+                case SmartAction.SMART_ACTION_FAIL_QUEST:
+                case SmartAction.SMART_ACTION_ADD_QUEST:
+                case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS:
+                case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
+                    buttonActionParamOneSearch.Visible = true; //! Quest entry
+                    break;
+                case SmartAction.SMART_ACTION_SET_REACT_STATE:
+                    buttonActionParamOneSearch.Visible = true; //! Reactstate
+                    break;
+                case SmartAction.SMART_ACTION_SOUND:
+                    buttonActionParamOneSearch.Visible = true; //! Sound entry
+                    break;
+                case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL: //! Creature entry
+                case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO:
+                case SmartAction.SMART_ACTION_KILLED_MONSTER:
+                case SmartAction.SMART_ACTION_UPDATE_TEMPLATE:
+                case SmartAction.SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL:
+                    buttonActionParamOneSearch.Visible = true; //! Creature entry
+                    break;
+                case SmartAction.SMART_ACTION_SUMMON_CREATURE:
+                    buttonActionParamOneSearch.Visible = true; //! Creature entry
+                    buttonActionParamTwoSearch.Visible = true; //! Summon type
+                    break;
+                case SmartAction.SMART_ACTION_WP_STOP:
+                    buttonActionParamTwoSearch.Visible = true; //! Quest entry
+                    break;
+                case SmartAction.SMART_ACTION_FOLLOW:
+                    buttonActionParamThreeSearch.Visible = true; //! Creature entry
+                    break;
+                case SmartAction.SMART_ACTION_WP_START:
+                    buttonActionParamFourSearch.Visible = true; //! Quest entry
+                    buttonActionParamSixSearch.Visible = true; //! React state
+                    break;
+                case SmartAction.SMART_ACTION_INTERRUPT_SPELL:
+                    buttonActionParamTwoSearch.Visible = true; //! Spell entry
+                    break;
+                case SmartAction.SMART_ACTION_GO_SET_LOOT_STATE:
+                    buttonActionParamOneSearch.Visible = true; //! Gameobject state
+                    break;
+                case SmartAction.SMART_ACTION_SET_POWER:
+                case SmartAction.SMART_ACTION_ADD_POWER:
+                case SmartAction.SMART_ACTION_REMOVE_POWER:
+                    buttonActionParamOneSearch.Visible = true; //! Power type
+                    break;
+                case SmartAction.SMART_ACTION_SUMMON_GO:
+                    buttonActionParamOneSearch.Visible = true; //! Gameobject entry
+                    break;
+                case SmartAction.SMART_ACTION_SET_EVENT_PHASE:
+                    buttonActionParamOneSearch.Visible = true; //! Event phase
+                    break;
+                case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
+                    buttonActionParamOneSearch.Visible = true; //! Event phase 1
+                    buttonActionParamTwoSearch.Visible = true; //! Event phase 2
+                    break;
+                case SmartAction.SMART_ACTION_RANDOM_PHASE:
+                    buttonActionParamOneSearch.Visible = true; //! Event phase 1
+                    buttonActionParamTwoSearch.Visible = true; //! Event phase 2
+                    buttonActionParamThreeSearch.Visible = true; //! Event phase 3
+                    buttonActionParamFourSearch.Visible = true; //! Event phase 4
+                    buttonActionParamFiveSearch.Visible = true; //! Event phase 5
+                    buttonActionParamSixSearch.Visible = true; //! Event phase 6
+                    break;
+                case SmartAction.SMART_ACTION_ADD_ITEM:
+                case SmartAction.SMART_ACTION_REMOVE_ITEM:
+                    buttonActionParamOneSearch.Visible = true; //! Item entry
+                    break;
+                case SmartAction.SMART_ACTION_EQUIP:
+                    buttonActionParamThreeSearch.Visible = true; //! Item entry 1
+                    buttonActionParamFourSearch.Visible = true; //! Item entry 2
+                    buttonActionParamFiveSearch.Visible = true; //! Item entry 3
+                    break;
+            }
+
+            switch ((SmartTarget)target_type)
+            {
+                case SmartTarget.SMART_TARGET_CREATURE_RANGE:
+                case SmartTarget.SMART_TARGET_CREATURE_DISTANCE:
+                case SmartTarget.SMART_TARGET_CLOSEST_CREATURE:
+                    buttonTargetParamOneSearch.Visible = true; //! Creature entry
+                    break;
+                case SmartTarget.SMART_TARGET_CREATURE_GUID:
+                    buttonTargetParamOneSearch.Visible = true; //! Creature guid
+                    buttonTargetParamTwoSearch.Visible = true; //! Creature entry
+                    break;
+                case SmartTarget.SMART_TARGET_GAMEOBJECT_RANGE:
+                case SmartTarget.SMART_TARGET_GAMEOBJECT_DISTANCE:
+                case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT:
+                    buttonTargetParamOneSearch.Visible = true; //! Gameobject entry
+                    break;
+                case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID:
+                    buttonTargetParamOneSearch.Visible = true; //! Gameobject guid
+                    buttonTargetParamTwoSearch.Visible = true; //! Gameobject entry
+                    break;
+            }
+
+            textBoxEventParam1.Enabled = labelEventParam1.Text.Length > 0;
+            textBoxEventParam2.Enabled = labelEventParam2.Text.Length > 0;
+            textBoxEventParam3.Enabled = labelEventParam3.Text.Length > 0;
+            textBoxEventParam4.Enabled = labelEventParam4.Text.Length > 0;
+
+            textBoxActionParam1.Enabled = labelActionParam1.Text.Length > 0;
+            textBoxActionParam2.Enabled = labelActionParam2.Text.Length > 0;
+            textBoxActionParam3.Enabled = labelActionParam3.Text.Length > 0;
+            textBoxActionParam4.Enabled = labelActionParam4.Text.Length > 0;
+            textBoxActionParam5.Enabled = labelActionParam5.Text.Length > 0;
+            textBoxActionParam6.Enabled = labelActionParam6.Text.Length > 0;
+
+            textBoxTargetParam1.Enabled = labelTargetParam1.Text.Length > 0;
+            textBoxTargetParam2.Enabled = labelTargetParam2.Text.Length > 0;
+            textBoxTargetParam3.Enabled = labelTargetParam3.Text.Length > 0;
         }
 
         private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true)
