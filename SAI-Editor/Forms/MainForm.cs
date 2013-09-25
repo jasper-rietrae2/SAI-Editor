@@ -515,7 +515,6 @@ namespace SAI_Editor
 
         private async void SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
         {
-            var timedActionlistsOrEntries = new List<string>();
             SourceTypes sourceTypeOfEntry = SourceTypes.SourceTypeScriptedActionlist;
 
             try
@@ -564,8 +563,9 @@ namespace SAI_Editor
                     if (checkBoxListActionlistsOrEntries.Checked && sourceType == originalSourceType)
                     {
                         TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScript, sourceType);
-                        timedActionlistsOrEntries = timedActionListOrEntries.entries;
-                        sourceTypeOfEntry = timedActionListOrEntries.sourceTypeOfEntry;
+
+                        foreach (string scriptEntry in timedActionListOrEntries.entries)
+                            SelectAndFillListViewByEntryAndSource(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
                     }
 
                     listViewSmartScripts.Items.Add(listViewItem);
@@ -589,10 +589,6 @@ namespace SAI_Editor
                 pictureBoxLoadScript.Enabled = true;
                 return;
             }
-
-            if (checkBoxListActionlistsOrEntries.Checked)
-                foreach (string scriptEntry in timedActionlistsOrEntries)
-                    SelectAndFillListViewByEntryAndSource(scriptEntry, sourceTypeOfEntry);
 
             pictureBoxLoadScript.Enabled = true;
         }
