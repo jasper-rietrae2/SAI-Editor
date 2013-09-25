@@ -902,6 +902,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_TELEPORT:
                     buttonActionParamOneSearch.Visible = true; //! Map id
                     break;
+                case SmartAction.SMART_ACTION_SUMMON_CREATURE_GROUP:
+                    buttonActionParamOneSearch.Visible = true; //! Summons group id
+                    break;
             }
 
             switch ((SmartTarget)target_type)
@@ -1506,6 +1509,9 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_TELEPORT: //! Map
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SUMMON_CREATURE_GROUP:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId).ShowDialog(this);
                     break;
             }
         }

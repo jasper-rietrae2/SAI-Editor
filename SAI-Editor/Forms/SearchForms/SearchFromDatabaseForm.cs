@@ -32,6 +32,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeGameobjectGuid = 11,
         DatabaseSearchFormTypeGameEvent = 12,
         DatabaseSearchFormTypeItemEntry = 13,
+        DatabaseSearchFormTypeSummonsId = 14,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -43,7 +44,7 @@ namespace SAI_Editor
         private readonly DatabaseSearchFormType databaseSearchFormType;
         private string baseQuery, columnOne, columnTwo;
         private bool useMySQL = false;
-        private int amountOfListviewRows = 2;
+        private int amountOfListviewColumns = 2, listViewItemIndexToCopy = 0;
 
         public SearchFromDatabaseForm(MySqlConnectionStringBuilder connectionString, TextBox textBoxToChange, DatabaseSearchFormType databaseSearchFormType)
         {
@@ -166,7 +167,7 @@ namespace SAI_Editor
                     baseQuery = "SELECT m_id, m_mapId, m_posX, m_posY, m_posZ FROM areatriggers";
                     columnOne = "m_id";
                     columnTwo = "m_mapId";
-                    amountOfListviewRows = 5;
+                    amountOfListviewColumns = 5;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid:
                     Text = "Search for a creature";
@@ -212,6 +213,22 @@ namespace SAI_Editor
                     columnTwo = "name";
                     useMySQL = true;
                     break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId:
+                    Text = "Search for a summons id";
+                    listViewEntryResults.Columns.Add("Owner", 63);
+                    listViewEntryResults.Columns.Add("Entry", 63);
+                    listViewEntryResults.Columns.Add("Group", 66);
+                    listViewEntryResults.Columns.Add("Type", 66);
+                    listViewEntryResults.Columns.Add("Time", 66);
+                    comboBoxSearchType.Items.Add("Summoner id");
+                    comboBoxSearchType.Items.Add("Summon entry");
+                    baseQuery = "SELECT summonerId, entry, groupId, summonType, summonTime FROM creature_summon_groups";
+                    columnOne = "summonerId";
+                    columnTwo = "entry";
+                    useMySQL = true;
+                    amountOfListviewColumns = 5;
+                    listViewItemIndexToCopy = 2;
+                    break;
             }
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -222,7 +239,12 @@ namespace SAI_Editor
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
             StopRunningThread();
-            textBoxToChange.Text = listViewEntryResults.SelectedItems[0].Text;
+
+            if (listViewItemIndexToCopy > 0)
+                textBoxToChange.Text = listViewEntryResults.SelectedItems[0].SubItems[listViewItemIndexToCopy].Text;
+            else
+                textBoxToChange.Text = listViewEntryResults.SelectedItems[listViewItemIndexToCopy].Text;
+
             Close();
         }
 
@@ -274,7 +296,7 @@ namespace SAI_Editor
                     {
                         ListViewItem listViewItem = new ListViewItem(row.ItemArray[0].ToString());
 
-                        for (int i = 1; i < amountOfListviewRows; ++i)
+                        for (int i = 1; i < amountOfListviewColumns; ++i)
                             listViewItem.SubItems.Add(row.ItemArray[i].ToString());
 
                         AddItemToListView(listViewEntryResults, listViewItem);
@@ -336,7 +358,11 @@ namespace SAI_Editor
                 {
                     if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
                     {
-                        textBoxToChange.Text = listViewEntryResults.SelectedItems[0].Text;
+                        if (listViewItemIndexToCopy > 0)
+                            textBoxToChange.Text = listViewEntryResults.SelectedItems[0].SubItems[listViewItemIndexToCopy].Text;
+                        else
+                            textBoxToChange.Text = listViewEntryResults.SelectedItems[listViewItemIndexToCopy].Text;
+
                         Close();
                     }
                     else
