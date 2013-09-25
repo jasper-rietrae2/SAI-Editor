@@ -9,6 +9,7 @@ namespace SAI_Editor.SearchForms
         SingleSelectFormTypeRespawnType = 1,
         SingleSelectFormTypeGoState = 2,
         SingleSelectFormTypePowerType = 3,
+        SingleSelectFormTypeTargetType = 4,
     };
 
     public partial class SingleSelectForm : Form
@@ -62,6 +63,37 @@ namespace SAI_Editor.SearchForms
                     listViewSelectableItems.Items.Add("POWER_RUNE"); // 5
                     listViewSelectableItems.Items.Add("POWER_RUNIC_POWER"); // 6
                     listViewSelectableItems.Items.Add("POWER_HEALTH"); // -2...
+                    break;
+                case SingleSelectFormType.SingleSelectFormTypeTargetType:
+                    Text = "Select a target type";
+                    listViewSelectableItems.Columns.Add("Target type", 278, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("SMART_TARGET_NONE"); // 0
+                    listViewSelectableItems.Items.Add("SMART_TARGET_SELF"); // 1
+                    listViewSelectableItems.Items.Add("SMART_TARGET_VICTIM"); // 2
+                    listViewSelectableItems.Items.Add("SMART_TARGET_HOSTILE_SECOND_AGGRO"); // 3
+                    listViewSelectableItems.Items.Add("SMART_TARGET_HOSTILE_LAST_AGGRO"); // 4
+                    listViewSelectableItems.Items.Add("SMART_TARGET_HOSTILE_RANDOM"); // 5
+                    listViewSelectableItems.Items.Add("SMART_TARGET_HOSTILE_RANDOM_NOT_TOP"); // 6
+                    listViewSelectableItems.Items.Add("SMART_TARGET_ACTION_INVOKER"); // 7
+                    listViewSelectableItems.Items.Add("SMART_TARGET_POSITION"); // 8
+                    listViewSelectableItems.Items.Add("SMART_TARGET_CREATURE_RANGE"); // 9
+                    listViewSelectableItems.Items.Add("SMART_TARGET_CREATURE_GUID"); // 10
+                    listViewSelectableItems.Items.Add("SMART_TARGET_CREATURE_DISTANCE"); // 11
+                    listViewSelectableItems.Items.Add("SMART_TARGET_STORED"); // 12
+                    listViewSelectableItems.Items.Add("SMART_TARGET_GAMEOBJECT_RANGE"); // 13
+                    listViewSelectableItems.Items.Add("SMART_TARGET_GAMEOBJECT_GUID"); // 14
+                    listViewSelectableItems.Items.Add("SMART_TARGET_GAMEOBJECT_DISTANCE"); // 15
+                    listViewSelectableItems.Items.Add("SMART_TARGET_INVOKER_PARTY"); // 16
+                    listViewSelectableItems.Items.Add("SMART_TARGET_PLAYER_RANGE"); // 17
+                    listViewSelectableItems.Items.Add("SMART_TARGET_PLAYER_DISTANCE"); // 18
+                    listViewSelectableItems.Items.Add("SMART_TARGET_CLOSEST_CREATURE"); // 19
+                    listViewSelectableItems.Items.Add("SMART_TARGET_CLOSEST_GAMEOBJECT"); // 20
+                    listViewSelectableItems.Items.Add("SMART_TARGET_CLOSEST_PLAYER"); // 22
+                    listViewSelectableItems.Items.Add("SMART_TARGET_ACTION_INVOKER_VEHICLE"); // 23
+                    listViewSelectableItems.Items.Add("SMART_TARGET_OWNER_OR_SUMMONER"); // 24
+                    listViewSelectableItems.Items.Add("SMART_TARGET_THREAT_LIST"); // 25
+                    listViewSelectableItems.Items.Add("SMART_TARGET_CLOSEST_ENEMY"); // 26
+                    listViewSelectableItems.Items.Add("SMART_TARGET_CLOSEST_FRIENDLY"); // 27
                     break;
             }
         }

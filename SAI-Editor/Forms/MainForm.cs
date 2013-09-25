@@ -771,9 +771,13 @@ namespace SAI_Editor
                 {
                     case SmartAction.SMART_ACTION_CAST:
                     case SmartAction.SMART_ACTION_INVOKER_CAST:
+                        buttonActionParamOneSearch.Visible = true; //! Spell entry
+                        buttonActionParamTwoSearch.Visible = true; //! Cast flags
+                        break;
                     case SmartAction.SMART_ACTION_CROSS_CAST:
                         buttonActionParamOneSearch.Visible = true; //! Spell entry
                         buttonActionParamTwoSearch.Visible = true; //! Cast flags
+                        buttonActionParamThreeSearch.Visible = true; //! Target type
                         break;
                     case SmartAction.SMART_ACTION_SET_FACTION:
                         buttonActionParamOneSearch.Visible = true; //! Faction entry
@@ -1392,6 +1396,9 @@ namespace SAI_Editor
             {
                 case SmartAction.SMART_ACTION_FOLLOW:
                     new SearchFromDatabaseForm(connectionString, textBoxActionParam3, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_CROSS_CAST:
+                    new SingleSelectForm(textBoxActionParam3, SingleSelectFormType.SingleSelectFormTypeTargetType).ShowDialog(this);
                     break;
             }
         }
