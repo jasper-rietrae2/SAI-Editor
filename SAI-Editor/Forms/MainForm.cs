@@ -12,6 +12,7 @@ using SAI_Editor.Database.Classes;
 using SAI_Editor.SearchForms;
 using SAI_Editor.Security;
 using SAI_Editor.Classes;
+using System.Threading.Tasks;
 
 namespace SAI_Editor
 {
@@ -543,7 +544,7 @@ namespace SAI_Editor
                 control.Visible = expanding;
         }
 
-        private async void SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
+        private async Task<bool> SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
         {
             try
             {
@@ -553,7 +554,7 @@ namespace SAI_Editor
                 {
                     MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI (smart_scripts) table for the given source type ({1})!", entryOrGuid, GetSourceTypeString(sourceType)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     pictureBoxLoadScript.Enabled = true;
-                    return;
+                    return false;
                 }
 
                 foreach (SmartScript smartScript in smartScripts)
@@ -615,10 +616,11 @@ namespace SAI_Editor
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 pictureBoxLoadScript.Enabled = true;
-                return;
+                return false;
             }
 
             pictureBoxLoadScript.Enabled = true;
+            return true;
         }
 
         //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
@@ -1112,7 +1114,7 @@ namespace SAI_Editor
             }
         }
 
-        public void pictureBoxLoadScript_Click(object sender, EventArgs e)
+        public async void pictureBoxLoadScript_Click(object sender, EventArgs e)
         {
             if (!pictureBoxLoadScript.Enabled)
                 return;
@@ -1128,8 +1130,14 @@ namespace SAI_Editor
             SourceTypes newSourceType = GetSourceTypeByIndex();
             originalSourceType = newSourceType;
             originalEntryOrGuid = textBoxEntryOrGuid.Text;
-            SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType);
+            await SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType);
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
+
+            if (listViewSmartScripts.Items.Count > 0)
+            {
+                listViewSmartScripts.Items[0].Selected = true;
+                listViewSmartScripts.Select(); //! Sets the focus on the listview
+            }
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
