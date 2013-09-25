@@ -1057,7 +1057,7 @@ namespace SAI_Editor
                 listViewSmartScripts.Items.Remove(listViewItem);
         }
 
-        private void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
+        private async void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.Items.Count == 0)
                 return;
@@ -1065,16 +1065,10 @@ namespace SAI_Editor
             if (checkBoxListActionlistsOrEntries.Checked)
             {
                 listViewSmartScripts.Items.Clear();
-                SelectAndFillListViewByEntryAndSource(originalEntryOrGuid, originalSourceType);
+                await SelectAndFillListViewByEntryAndSource(originalEntryOrGuid, originalSourceType);
             }
             else
                 RemoveNonOriginalScriptsFromView();
-
-            ListView.SelectedIndexCollection selectedIndices = listViewSmartScripts.SelectedIndices;
-
-            for (int i = 0; i < selectedIndices.Count; ++i)
-                if (listViewSmartScripts.Items[selectedIndices[i]] != null)
-                    listViewSmartScripts.Items[selectedIndices[i]].Selected = true;
         }
 
         private void RemoveNonOriginalScriptsFromView()
