@@ -448,13 +448,14 @@
             this.contextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.testToolStripMenuItemDeleteRow});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(131, 26);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(153, 48);
             // 
             // testToolStripMenuItemDeleteRow
             // 
             this.testToolStripMenuItemDeleteRow.Name = "testToolStripMenuItemDeleteRow";
-            this.testToolStripMenuItemDeleteRow.Size = new System.Drawing.Size(130, 22);
+            this.testToolStripMenuItemDeleteRow.Size = new System.Drawing.Size(152, 22);
             this.testToolStripMenuItemDeleteRow.Text = "Delete row";
+            this.testToolStripMenuItemDeleteRow.Click += new System.EventHandler(this.testToolStripMenuItemDeleteRow_Click);
             // 
             // panelLoginBox
             // 
