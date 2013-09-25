@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 using SAI_Editor.Classes;
 using SAI_Editor.Properties;
 using SAI_Editor.Security;
@@ -12,6 +13,7 @@ namespace SAI_Editor
     public partial class SettingsForm : Form
     {
         private bool closedFormByHand = false;
+        MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
 
         public SettingsForm()
         {
@@ -63,13 +65,27 @@ namespace SAI_Editor
             rng.Dispose();
             string decryptedPassword = textBoxPassword.Text;
 
-            Settings.Default.Entropy = salt;
-            Settings.Default.Host = textBoxHost.Text;
-            Settings.Default.User = textBoxUsername.Text;
-            Settings.Default.Password = decryptedPassword.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
-            Settings.Default.Database = textBoxWorldDatabase.Text;
-            Settings.Default.Port = textBoxPort.Text.Length > 0 ? XConverter.TryParseStringToUInt32(textBoxPort.Text) : 0;
-            Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+            connectionString.Server = textBoxHost.Text;
+            connectionString.UserID = textBoxUsername.Text;
+            connectionString.Port = XConverter.TryParseStringToUInt32(textBoxPort.Text);
+            connectionString.Database = textBoxWorldDatabase.Text;
+
+            if (textBoxPassword.Text.Length > 0)
+                connectionString.Password = textBoxPassword.Text;
+
+            bool newConnectionSuccesfull = SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString, false);
+
+            if (newConnectionSuccesfull)
+            {
+                Settings.Default.Entropy = salt;
+                Settings.Default.Host = textBoxHost.Text;
+                Settings.Default.User = textBoxUsername.Text;
+                Settings.Default.Password = decryptedPassword.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
+                Settings.Default.Database = textBoxWorldDatabase.Text;
+                Settings.Default.Port = textBoxPort.Text.Length > 0 ? XConverter.TryParseStringToUInt32(textBoxPort.Text) : 0;
+                Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+            }
+
             Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
             Settings.Default.LoadScriptInstantly = checkBoxLoadScriptInstantly.Checked;
             Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
@@ -80,14 +96,19 @@ namespace SAI_Editor
             Settings.Default.ChangeStaticInfo = checkBoxChangeStaticInfo.Checked;
             Settings.Default.Save();
 
-            ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
-            ((MainForm)Owner).textBoxHost.Text = textBoxHost.Text;
-            ((MainForm)Owner).textBoxUsername.Text = textBoxUsername.Text;
-            ((MainForm)Owner).textBoxPassword.Text = decryptedPassword;
-            ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
-            ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
-            ((MainForm)Owner).animationSpeed = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
-            ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
+            if (newConnectionSuccesfull)
+            {
+                ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
+                ((MainForm)Owner).textBoxHost.Text = textBoxHost.Text;
+                ((MainForm)Owner).textBoxUsername.Text = textBoxUsername.Text;
+                ((MainForm)Owner).textBoxPassword.Text = decryptedPassword;
+                ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
+                ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
+                ((MainForm)Owner).animationSpeed = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
+                ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
+            }
+            else
+                MessageBox.Show("The database settings were not saved because no connection could be established.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void buttonExitSettings_Click(object sender, EventArgs e)
@@ -225,6 +246,20 @@ namespace SAI_Editor
         {
             if (e.KeyCode == Keys.Enter)
                 buttonSaveSettings_Click(sender, e);
+        }
+
+        private void buttonTestConnection_Click(object sender, EventArgs e)
+        {
+            connectionString.Server = textBoxHost.Text;
+            connectionString.UserID = textBoxUsername.Text;
+            connectionString.Port = XConverter.TryParseStringToUInt32(textBoxPort.Text);
+            connectionString.Database = textBoxWorldDatabase.Text;
+
+            if (textBoxPassword.Text.Length > 0)
+                connectionString.Password = textBoxPassword.Text;
+
+            if (SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
+                MessageBox.Show("Connection successful!", "Connection status", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }

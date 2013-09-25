@@ -12,6 +12,26 @@ namespace SAI_Editor
     {
         public StrBuilder ConnectionString { get; set; }
 
+        public bool CanConnectToDatabase(MySqlConnectionStringBuilder _connectionString, bool showErrorMessage = true)
+        {
+            try
+            {
+                //! Close the connection again since this is just a try-connection function. We actually connect
+                //! when the mainform is opened (this happens automatically because we use 'using').
+                using (MySqlConnection connection = new MySqlConnection(_connectionString.ToString()))
+                    connection.Open();
+            }
+            catch (MySqlException ex)
+            {
+                if (showErrorMessage)
+                    MessageBox.Show(ex.Message, "Could not connect", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+
+            return true;
+        }
+
         public async Task ExecuteNonQuery(string nonQuery, params Parameter[] parameters)
         {
             try

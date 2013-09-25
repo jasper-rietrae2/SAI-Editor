@@ -166,7 +166,7 @@ namespace SAI_Editor
                 if (textBoxPassword.Text.Length > 0)
                     connectionString.Password = textBoxPassword.Text;
 
-                if (CanConnectToDatabase(false))
+                if (SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString, false))
                 {
                     buttonConnect.PerformClick();
 
@@ -306,7 +306,7 @@ namespace SAI_Editor
             if (textBoxPassword.Text.Length > 0)
                 connectionString.Password = textBoxPassword.Text;
 
-            if (CanConnectToDatabase())
+            if (SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
             {
                 StartExpandingToMainForm(Settings.Default.InstantExpand);
                 SAI_Editor_Manager.Instance.ResetDatabases();
@@ -394,26 +394,6 @@ namespace SAI_Editor
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
-        }
-
-        private bool CanConnectToDatabase(bool showErrorMessage = true)
-        {
-            try
-            {
-                //! Close the connection again since this is just a try-connection function. We actually connect
-                //! when the mainform is opened (this happens automatically because we use 'using').
-                using (MySqlConnection connection = new MySqlConnection(connectionString.ToString()))
-                    connection.Open();
-            }
-            catch (MySqlException ex)
-            {
-                if (showErrorMessage)
-                    MessageBox.Show(ex.Message, "Could not connect", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                return false;
-            }
-
-            return true;
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)

@@ -43,6 +43,7 @@
             this.checkBoxInstantExpand = new System.Windows.Forms.CheckBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
+            this.buttonTestConnection = new System.Windows.Forms.Button();
             this.buttonSearchForWorldDb = new System.Windows.Forms.Button();
             this.checkBoxHidePass = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
@@ -65,7 +66,7 @@
             // 
             // buttonExitSettings
             // 
-            this.buttonExitSettings.Location = new System.Drawing.Point(191, 282);
+            this.buttonExitSettings.Location = new System.Drawing.Point(191, 262);
             this.buttonExitSettings.Name = "buttonExitSettings";
             this.buttonExitSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonExitSettings.TabIndex = 9;
@@ -75,7 +76,7 @@
             // 
             // buttonSaveSettings
             // 
-            this.buttonSaveSettings.Location = new System.Drawing.Point(11, 282);
+            this.buttonSaveSettings.Location = new System.Drawing.Point(11, 262);
             this.buttonSaveSettings.Name = "buttonSaveSettings";
             this.buttonSaveSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveSettings.TabIndex = 7;
@@ -97,7 +98,7 @@
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(247, 242);
+            this.tabPageGeneral.Size = new System.Drawing.Size(247, 222);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
@@ -129,7 +130,7 @@
             // textBoxAnimationSpeed
             // 
             this.textBoxAnimationSpeed.Enabled = false;
-            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 194);
+            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 174);
             this.textBoxAnimationSpeed.Name = "textBoxAnimationSpeed";
             this.textBoxAnimationSpeed.Size = new System.Drawing.Size(37, 20);
             this.textBoxAnimationSpeed.TabIndex = 8;
@@ -139,7 +140,7 @@
             // labelAnimationSpeed
             // 
             this.labelAnimationSpeed.AutoSize = true;
-            this.labelAnimationSpeed.Location = new System.Drawing.Point(6, 197);
+            this.labelAnimationSpeed.Location = new System.Drawing.Point(6, 177);
             this.labelAnimationSpeed.Name = "labelAnimationSpeed";
             this.labelAnimationSpeed.Size = new System.Drawing.Size(91, 13);
             this.labelAnimationSpeed.TabIndex = 7;
@@ -148,7 +149,7 @@
             // trackBarAnimationSpeed
             // 
             this.trackBarAnimationSpeed.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBarAnimationSpeed.Location = new System.Drawing.Point(-4, 216);
+            this.trackBarAnimationSpeed.Location = new System.Drawing.Point(-4, 196);
             this.trackBarAnimationSpeed.Maximum = 12;
             this.trackBarAnimationSpeed.Minimum = 1;
             this.trackBarAnimationSpeed.Name = "trackBarAnimationSpeed";
@@ -209,11 +210,12 @@
             this.tabControlSettings.Location = new System.Drawing.Point(12, 8);
             this.tabControlSettings.Name = "tabControlSettings";
             this.tabControlSettings.SelectedIndex = 0;
-            this.tabControlSettings.Size = new System.Drawing.Size(255, 268);
+            this.tabControlSettings.Size = new System.Drawing.Size(255, 248);
             this.tabControlSettings.TabIndex = 1;
             // 
             // tabPageConnection
             // 
+            this.tabPageConnection.Controls.Add(this.buttonTestConnection);
             this.tabPageConnection.Controls.Add(this.buttonSearchForWorldDb);
             this.tabPageConnection.Controls.Add(this.checkBoxHidePass);
             this.tabPageConnection.Controls.Add(this.checkBoxAutoConnect);
@@ -229,10 +231,20 @@
             this.tabPageConnection.Controls.Add(this.label7);
             this.tabPageConnection.Location = new System.Drawing.Point(4, 22);
             this.tabPageConnection.Name = "tabPageConnection";
-            this.tabPageConnection.Size = new System.Drawing.Size(247, 242);
+            this.tabPageConnection.Size = new System.Drawing.Size(247, 222);
             this.tabPageConnection.TabIndex = 1;
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
+            // 
+            // buttonTestConnection
+            // 
+            this.buttonTestConnection.Location = new System.Drawing.Point(138, 193);
+            this.buttonTestConnection.Name = "buttonTestConnection";
+            this.buttonTestConnection.Size = new System.Drawing.Size(98, 23);
+            this.buttonTestConnection.TabIndex = 31;
+            this.buttonTestConnection.Text = "Test connection";
+            this.buttonTestConnection.UseVisualStyleBackColor = true;
+            this.buttonTestConnection.Click += new System.EventHandler(this.buttonTestConnection_Click);
             // 
             // buttonSearchForWorldDb
             // 
@@ -247,8 +259,9 @@
             // checkBoxHidePass
             // 
             this.checkBoxHidePass.AutoSize = true;
-            this.checkBoxHidePass.Location = new System.Drawing.Point(106, 157);
+            this.checkBoxHidePass.Location = new System.Drawing.Point(124, 147);
             this.checkBoxHidePass.Name = "checkBoxHidePass";
+            this.checkBoxHidePass.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxHidePass.Size = new System.Drawing.Size(112, 17);
             this.checkBoxHidePass.TabIndex = 29;
             this.checkBoxHidePass.Text = "Hide my password";
@@ -258,8 +271,9 @@
             // checkBoxAutoConnect
             // 
             this.checkBoxAutoConnect.AutoSize = true;
-            this.checkBoxAutoConnect.Location = new System.Drawing.Point(10, 157);
+            this.checkBoxAutoConnect.Location = new System.Drawing.Point(146, 170);
             this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
+            this.checkBoxAutoConnect.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
             this.checkBoxAutoConnect.TabIndex = 5;
             this.checkBoxAutoConnect.Text = "Auto connect";
@@ -353,7 +367,7 @@
             // 
             // buttonDefaultSettings
             // 
-            this.buttonDefaultSettings.Location = new System.Drawing.Point(101, 282);
+            this.buttonDefaultSettings.Location = new System.Drawing.Point(101, 262);
             this.buttonDefaultSettings.Name = "buttonDefaultSettings";
             this.buttonDefaultSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonDefaultSettings.TabIndex = 8;
@@ -365,7 +379,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 317);
+            this.ClientSize = new System.Drawing.Size(279, 297);
             this.Controls.Add(this.buttonDefaultSettings);
             this.Controls.Add(this.buttonSaveSettings);
             this.Controls.Add(this.buttonExitSettings);
@@ -420,6 +434,7 @@
         public System.Windows.Forms.TextBox textBoxPassword;
         public System.Windows.Forms.TextBox textBoxWorldDatabase;
         public System.Windows.Forms.TextBox textBoxPort;
+        private System.Windows.Forms.Button buttonTestConnection;
 
     }
 }
