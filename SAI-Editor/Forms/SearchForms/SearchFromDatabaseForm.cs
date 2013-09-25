@@ -43,6 +43,7 @@ namespace SAI_Editor
         private readonly DatabaseSearchFormType databaseSearchFormType;
         private string baseQuery, columnOne, columnTwo;
         private bool useMySQL = false;
+        private int amountOfListviewRows = 2;
 
         public SearchFromDatabaseForm(MySqlConnectionStringBuilder connectionString, TextBox textBoxToChange, DatabaseSearchFormType databaseSearchFormType)
         {
@@ -165,6 +166,7 @@ namespace SAI_Editor
                     baseQuery = "SELECT m_id, m_mapId, m_posX, m_posY, m_posZ FROM areatriggers";
                     columnOne = "m_id";
                     columnTwo = "m_mapId";
+                    amountOfListviewRows = 5;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid:
                     Text = "Search for a creature";
@@ -270,10 +272,12 @@ namespace SAI_Editor
                 {
                     foreach (DataRow row in dt.Rows)
                     {
-                        if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger)
-                            AddItemToListView(listViewEntryResults, XConverter.TryParseStringToInt32(row["m_Id"]).ToString(), XConverter.TryParseStringToInt32(row["m_mapId"]).ToString(), XConverter.TryParseStringToInt32(row["m_posX"]).ToString(), XConverter.TryParseStringToInt32(row["m_posY"]).ToString(), XConverter.TryParseStringToInt32(row["m_posZ"]).ToString());
-                        else
-                            AddItemToListView(listViewEntryResults, row.ItemArray[0].ToString(), row.ItemArray[1].ToString());
+                        ListViewItem listViewItem = new ListViewItem(row.ItemArray[0].ToString());
+
+                        for (int i = 1; i < amountOfListviewRows; ++i)
+                            listViewItem.SubItems.Add(row.ItemArray[i].ToString());
+
+                        AddItemToListView(listViewEntryResults, listViewItem);
                     }
                 }
             }
@@ -378,42 +382,18 @@ namespace SAI_Editor
             return comboBox.SelectedIndex;
         }
 
-        private void AddItemToListView(ListView listView, string item, string subItem)
+        private void AddItemToListView(ListView listView, ListViewItem item)
         {
             if (listView.InvokeRequired)
             {
                 Invoke((MethodInvoker)delegate
                 {
-                    listView.Items.Add(item).SubItems.Add(subItem);
+                    listView.Items.Add(item);
                 });
                 return;
             }
 
-            listView.Items.Add(item).SubItems.Add(subItem);
-        }
-
-
-
-        private void AddItemToListView(ListView listView, string item, string subItem1, string subItem2, string subItem3, string subItem4)
-        {
-            if (listView.InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate
-                {
-                    ListViewItem listViewItem = listView.Items.Add(item);
-                    listViewItem.SubItems.Add(subItem1);
-                    listViewItem.SubItems.Add(subItem2);
-                    listViewItem.SubItems.Add(subItem3);
-                    listViewItem.SubItems.Add(subItem4);
-                });
-                return;
-            }
-
-            ListViewItem listViewItem2 = listView.Items.Add(item);
-            listViewItem2.SubItems.Add(subItem1);
-            listViewItem2.SubItems.Add(subItem2);
-            listViewItem2.SubItems.Add(subItem3);
-            listViewItem2.SubItems.Add(subItem4);
+            listView.Items.Add(item);
         }
 
         private void SetEnabledOfControl(Control control, bool enable)
