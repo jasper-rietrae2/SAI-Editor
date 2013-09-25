@@ -841,8 +841,8 @@ namespace SAI_Editor
                         buttonTargetParamOneSearch.Visible = true; //! Creature entry
                         break;
                     case SmartTarget.SMART_TARGET_CREATURE_GUID:
-                        buttonTargetParamOneSearch.Visible = true; //! Creature entry
-                        buttonTargetParamTwoSearch.Visible = true; //! Creature guid
+                        buttonTargetParamOneSearch.Visible = true; //! Creature guid
+                        buttonTargetParamTwoSearch.Visible = true; //! Creature entry
                         break;
                     case SmartTarget.SMART_TARGET_GAMEOBJECT_RANGE:
                     case SmartTarget.SMART_TARGET_GAMEOBJECT_DISTANCE:
@@ -850,8 +850,8 @@ namespace SAI_Editor
                         buttonTargetParamOneSearch.Visible = true; //! Gameobject entry
                         break;
                     case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID:
-                        buttonTargetParamOneSearch.Visible = true; //! Gameobject entry
-                        buttonTargetParamTwoSearch.Visible = true; //! Gameobject guid
+                        buttonTargetParamOneSearch.Visible = true; //! Gameobject guid
+                        buttonTargetParamTwoSearch.Visible = true; //! Gameobject entry
                         break;
                 }
 
@@ -1267,7 +1267,7 @@ namespace SAI_Editor
 
         private void buttonTargetParamOneSearch_Click(object sender, EventArgs e)
         {
-            switch ((SmartTarget)comboBoxEventType.SelectedIndex)
+            switch ((SmartTarget)comboBoxTargetType.SelectedIndex)
             {
                 case SmartTarget.SMART_TARGET_CREATURE_RANGE: //! Creature entry
                 case SmartTarget.SMART_TARGET_CREATURE_DISTANCE:
@@ -1275,22 +1275,22 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxTargetParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
                     break;
                 case SmartTarget.SMART_TARGET_CREATURE_GUID: //! Creature guid
-                    //new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid).ShowDialog(this);
+                    new SearchFromDatabaseForm(connectionString, textBoxTargetParam1, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid).ShowDialog(this);
                     break;
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_RANGE:
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_DISTANCE:
                 case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT: //! Gameobject entry
-                    new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry).ShowDialog(this);
+                    new SearchFromDatabaseForm(connectionString, textBoxTargetParam1, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry).ShowDialog(this);
                     break;
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID: //! Gameobject guid
-                    //new SearchFromDatabaseForm(connectionString, textBoxActionParam1, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid).ShowDialog(this);
+                    new SearchFromDatabaseForm(connectionString, textBoxTargetParam1, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid).ShowDialog(this);
                     break;
             }
         }
 
         private void buttonTargetParamTwoSearch_Click(object sender, EventArgs e)
         {
-            switch ((SmartTarget)comboBoxEventType.SelectedIndex)
+            switch ((SmartTarget)comboBoxTargetType.SelectedIndex)
             {
                 case SmartTarget.SMART_TARGET_CREATURE_GUID: //! Creature entry
                     new SearchFromDatabaseForm(connectionString, textBoxTargetParam2, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);

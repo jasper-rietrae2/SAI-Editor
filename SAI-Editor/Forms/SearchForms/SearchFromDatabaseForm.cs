@@ -27,6 +27,8 @@ namespace SAI_Editor
         DatabaseSearchFormTypeGameobjectEntry = 7,
         DatabaseSearchFormTypeSound = 8,
         DatabaseSearchFormTypeAreaTrigger = 9,
+        DatabaseSearchFormTypeCreatureGuid = 10,
+        DatabaseSearchFormTypeGameobjectGuid = 11,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -161,6 +163,28 @@ namespace SAI_Editor
                     columnOne = "m_id";
                     columnTwo = "m_mapId";
                     break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid:
+                    Text = "Search for a creature";
+                    listViewEntryResults.Columns.Add("Guid", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Creature guid");
+                    comboBoxSearchType.Items.Add("Creature name");
+                    baseQuery = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id";
+                    columnOne = "c.guid";
+                    columnTwo = "ct.name";
+                    useMySQL = true;
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid:
+                    Text = "Search for a gameobject";
+                    listViewEntryResults.Columns.Add("Guid", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Gameobject guid");
+                    comboBoxSearchType.Items.Add("Gameobject name");
+                    baseQuery = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id";
+                    columnOne = "g.guid";
+                    columnTwo = "gt.name";
+                    useMySQL = true;
+                    break;
             }
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -224,7 +248,7 @@ namespace SAI_Editor
                         if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger)
                             AddItemToListView(listViewEntryResults, Convert.ToInt32(row["m_Id"]).ToString(), Convert.ToInt32(row["m_mapId"]).ToString(), Convert.ToInt32(row["m_posX"]).ToString(), Convert.ToInt32(row["m_posY"]).ToString(), Convert.ToInt32(row["m_posZ"]).ToString());
                         else
-                            AddItemToListView(listViewEntryResults, Convert.ToInt32(row[columnOne]).ToString(), (string)row[columnTwo]);
+                            AddItemToListView(listViewEntryResults, row.ItemArray[0].ToString(), row.ItemArray[1].ToString());
                     }
                 }
             }
