@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Threading;
+using SAI_Editor.Classes;
 using SAI_Editor.Properties;
 using MySql.Data.MySqlClient;
 using SAI_Editor.Database.Classes;
@@ -178,10 +179,10 @@ namespace SAI_Editor
                 string query = "";
                 bool criteriaLeftEmpty = String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text);
 
-                if (!criteriaLeftEmpty && IsNumericIndex(GetSelectedIndexOfComboBox(comboBoxSearchType)) && Convert.ToInt32(textBoxCriteria.Text) < 0)
+                if (!criteriaLeftEmpty && IsNumericIndex(GetSelectedIndexOfComboBox(comboBoxSearchType)) && XConverter.TryParseStringToInt32(textBoxCriteria.Text) < 0)
                 {
                     if (MessageBox.Show("The criteria field can not be a negative value, would you like me to set it to a positive number?", "Something went wrong!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        SetTextOfControl(textBoxCriteria, (Convert.ToInt32(textBoxCriteria.Text) * -1).ToString());
+                        SetTextOfControl(textBoxCriteria, (XConverter.TryParseStringToInt32(textBoxCriteria.Text) * -1).ToString());
                     else
                         return;
                 }

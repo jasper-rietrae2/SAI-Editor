@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using SAI_Editor.Classes;
 using SAI_Editor.Properties;
 using SAI_Editor.Security;
 
@@ -67,14 +68,14 @@ namespace SAI_Editor
             Settings.Default.User = textBoxUsername.Text;
             Settings.Default.Password = decryptedPassword.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
             Settings.Default.Database = textBoxWorldDatabase.Text;
-            Settings.Default.Port = textBoxPort.Text.Length > 0 ? Convert.ToInt32(textBoxPort.Text) : 0;
+            Settings.Default.Port = textBoxPort.Text.Length > 0 ? XConverter.TryParseStringToUInt32(textBoxPort.Text) : 0;
             Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
             Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
             Settings.Default.LoadScriptInstantly = checkBoxLoadScriptInstantly.Checked;
             Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
             Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
             Settings.Default.HidePass = checkBoxHidePass.Checked;
-            Settings.Default.AnimationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
+            Settings.Default.AnimationSpeed = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
             Settings.Default.PromptExecuteQuery = checkBoxPromptExecuteQuery.Checked;
             Settings.Default.ChangeStaticInfo = checkBoxChangeStaticInfo.Checked;
             Settings.Default.Save();
@@ -85,7 +86,7 @@ namespace SAI_Editor
             ((MainForm)Owner).textBoxPassword.Text = decryptedPassword;
             ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
             ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
-            ((MainForm)Owner).animationSpeed = Convert.ToInt32(textBoxAnimationSpeed.Text);
+            ((MainForm)Owner).animationSpeed = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
             ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
         }
 
@@ -180,7 +181,7 @@ namespace SAI_Editor
 
         private void textBoxAnimationSpeed_TextChanged(object sender, EventArgs e)
         {
-            int newValue = Convert.ToInt32(textBoxAnimationSpeed.Text);
+            int newValue = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
 
             if (newValue > 12)
                 newValue = 12;
@@ -190,7 +191,7 @@ namespace SAI_Editor
 
             trackBarAnimationSpeed.Value = newValue;
 
-            if (newValue != Convert.ToInt32(textBoxAnimationSpeed.Text))
+            if (newValue != XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text))
                 textBoxAnimationSpeed.Text = newValue.ToString();
         }
 
@@ -213,7 +214,7 @@ namespace SAI_Editor
 
         private async void buttonSearchForWorldDb_Click(object sender, EventArgs e)
         {
-            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
+            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.TryParseStringToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
                 using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))

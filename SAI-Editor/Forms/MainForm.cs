@@ -11,6 +11,7 @@ using SAI_Editor.Properties;
 using SAI_Editor.Database.Classes;
 using SAI_Editor.SearchForms;
 using SAI_Editor.Security;
+using SAI_Editor.Classes;
 
 namespace SAI_Editor
 {
@@ -88,7 +89,7 @@ namespace SAI_Editor
                 textBoxPassword.Text = Settings.Default.Password.Length > 150 ? Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString() : Settings.Default.Password;
                 textBoxWorldDatabase.Text = Settings.Default.Database;
                 textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
-                animationSpeed = Convert.ToInt32(Settings.Default.AnimationSpeed);
+                animationSpeed = Settings.Default.AnimationSpeed;
             }
             catch (Exception ex)
             {
@@ -159,7 +160,7 @@ namespace SAI_Editor
                 checkBoxAutoConnect.Checked = true;
                 connectionString.Server = textBoxHost.Text;
                 connectionString.UserID = textBoxUsername.Text;
-                connectionString.Port = Convert.ToUInt16(textBoxPort.Text);
+                connectionString.Port = XConverter.TryParseStringToUInt32(textBoxPort.Text);
                 connectionString.Database = textBoxWorldDatabase.Text;
 
                 if (textBoxPassword.Text.Length > 0)
@@ -299,7 +300,7 @@ namespace SAI_Editor
 
             connectionString.Server = textBoxHost.Text;
             connectionString.UserID = textBoxUsername.Text;
-            connectionString.Port = Convert.ToUInt16(textBoxPort.Text);
+            connectionString.Port = XConverter.TryParseStringToUInt32(textBoxPort.Text);
             connectionString.Database = textBoxWorldDatabase.Text;
 
             if (textBoxPassword.Text.Length > 0)
@@ -328,7 +329,7 @@ namespace SAI_Editor
                 Settings.Default.Password = textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
-                Settings.Default.Port = textBoxPort.Text.Length > 0 ? Convert.ToInt32(textBoxPort.Text) : 0;
+                Settings.Default.Port = XConverter.TryParseStringToUInt32(textBoxPort.Text);
                 Settings.Default.Save();
             }
 
@@ -566,7 +567,7 @@ namespace SAI_Editor
         {
             try
             {
-                List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(Convert.ToInt32(entryOrGuid), (int)sourceType);
+                List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(XConverter.TryParseStringToInt32(entryOrGuid), (int)sourceType);
 
                 if (smartScripts == null)
                 {
@@ -696,12 +697,12 @@ namespace SAI_Editor
                 {
                     textBoxEntryOrGuid.Text = selectedItem[0].Text;
 
-                    switch (Convert.ToInt32(selectedItem[1].Text))
+                    switch (XConverter.TryParseStringToInt32(selectedItem[1].Text))
                     {
                         case 0: //! Creature
                         case 1: //! Gameobject
                         case 2: //! Areatrigger
-                            comboBoxSourceType.SelectedIndex = Convert.ToInt32(selectedItem[1].Text);
+                            comboBoxSourceType.SelectedIndex = XConverter.TryParseStringToInt32(selectedItem[1].Text);
                             break;
                         case 9: //! Actionlist
                             comboBoxSourceType.SelectedIndex = 3;
@@ -715,7 +716,7 @@ namespace SAI_Editor
                 textBoxEventScriptId.Text = selectedItem[2].Text;
                 textBoxLinkTo.Text = selectedItem[3].Text;
 
-                int event_type = Convert.ToInt32(selectedItem[4].Text);
+                int event_type = XConverter.TryParseStringToInt32(selectedItem[4].Text);
                 comboBoxEventType.SelectedIndex = event_type;
                 textBoxEventPhasemask.Text = selectedItem[5].Text;
                 textBoxEventChance.Text = selectedItem[6].Text;
@@ -738,7 +739,7 @@ namespace SAI_Editor
                 AddTooltip(labelEventParam4, labelEventParam4.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
 
                 //! Action parameters
-                int action_type = Convert.ToInt32(selectedItem[12].Text);
+                int action_type = XConverter.TryParseStringToInt32(selectedItem[12].Text);
                 comboBoxActionType.SelectedIndex = action_type;
                 textBoxActionParam1.Text = selectedItem[13].Text;
                 textBoxActionParam2.Text = selectedItem[14].Text;
@@ -761,7 +762,7 @@ namespace SAI_Editor
                 AddTooltip(labelActionParam6, labelActionParam6.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
 
                 //! Target parameters
-                int target_type = Convert.ToInt32(selectedItem[19].Text);
+                int target_type = XConverter.TryParseStringToInt32(selectedItem[19].Text);
                 comboBoxTargetType.SelectedIndex = target_type;
                 textBoxTargetParam1.Text = selectedItem[20].Text;
                 textBoxTargetParam2.Text = selectedItem[21].Text;
@@ -1168,7 +1169,7 @@ namespace SAI_Editor
 
         private async void buttonSearchWorldDb_Click(object sender, EventArgs e)
         {
-            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, Convert.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
+            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.TryParseStringToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
                 using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))

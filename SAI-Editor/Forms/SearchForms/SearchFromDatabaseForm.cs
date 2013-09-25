@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SAI_Editor.Classes;
 using SAI_Editor.Properties;
 
 namespace SAI_Editor
@@ -270,7 +271,7 @@ namespace SAI_Editor
                     foreach (DataRow row in dt.Rows)
                     {
                         if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger)
-                            AddItemToListView(listViewEntryResults, Convert.ToInt32(row["m_Id"]).ToString(), Convert.ToInt32(row["m_mapId"]).ToString(), Convert.ToInt32(row["m_posX"]).ToString(), Convert.ToInt32(row["m_posY"]).ToString(), Convert.ToInt32(row["m_posZ"]).ToString());
+                            AddItemToListView(listViewEntryResults, XConverter.TryParseStringToInt32(row["m_Id"]).ToString(), XConverter.TryParseStringToInt32(row["m_mapId"]).ToString(), XConverter.TryParseStringToInt32(row["m_posX"]).ToString(), XConverter.TryParseStringToInt32(row["m_posY"]).ToString(), XConverter.TryParseStringToInt32(row["m_posZ"]).ToString());
                         else
                             AddItemToListView(listViewEntryResults, row.ItemArray[0].ToString(), row.ItemArray[1].ToString());
                     }

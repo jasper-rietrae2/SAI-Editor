@@ -14,7 +14,7 @@
     <Setting Name="Database" Type="System.String" Scope="User">
       <Value Profile="(Default)">trinitycore_world</Value>
     </Setting>
-    <Setting Name="Port" Type="System.Int32" Scope="User">
+    <Setting Name="Port" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">3306</Value>
     </Setting>
     <Setting Name="AutoConnect" Type="System.Boolean" Scope="User">
