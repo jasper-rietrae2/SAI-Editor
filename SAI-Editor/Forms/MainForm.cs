@@ -995,14 +995,20 @@ namespace SAI_Editor
                 textBoxEventTypeId.Text = "0";
                 textBoxEventTypeId.SelectionStart = 3; //! Set cursor position to end of the line
             }
-            else if (Convert.ToInt32(textBoxEventTypeId.Text) > (int)MaxValues.MaxEventType)
-            {
-                comboBoxEventType.SelectedIndex = (int)MaxValues.MaxEventType;
-                textBoxEventTypeId.Text = ((int)MaxValues.MaxEventType).ToString();
-                textBoxEventTypeId.SelectionStart = 3; //! Set cursor position to end of the line
-            }
             else
-                comboBoxEventType.SelectedIndex = Convert.ToInt32(textBoxEventTypeId.Text);
+            {
+                int eventType;
+                Int32.TryParse(textBoxEventTypeId.Text, out eventType);
+
+                if (eventType > (int)MaxValues.MaxEventType)
+                {
+                    comboBoxEventType.SelectedIndex = (int)MaxValues.MaxEventType;
+                    textBoxEventTypeId.Text = ((int)MaxValues.MaxEventType).ToString();
+                    textBoxEventTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+                }
+                else
+                    comboBoxEventType.SelectedIndex = eventType;
+            }
         }
 
         private void textBoxActionTypeId_TextChanged(object sender, EventArgs e)
@@ -1013,14 +1019,20 @@ namespace SAI_Editor
                 textBoxActionTypeId.Text = "0";
                 textBoxActionTypeId.SelectionStart = 3; //! Set cursor position to end of the line
             }
-            else if (Convert.ToInt32(textBoxActionTypeId.Text) > (int)MaxValues.MaxActionType)
-            {
-                comboBoxActionType.SelectedIndex = (int)MaxValues.MaxActionType;
-                textBoxActionTypeId.Text = ((int)MaxValues.MaxActionType).ToString();
-                textBoxActionTypeId.SelectionStart = 3; //! Set cursor position to end of the line
-            }
             else
-                comboBoxActionType.SelectedIndex = Convert.ToInt32(textBoxActionTypeId.Text);
+            {
+                int actionType;
+                Int32.TryParse(textBoxActionTypeId.Text, out actionType);
+
+                if (actionType > (int)MaxValues.MaxActionType)
+                {
+                    comboBoxActionType.SelectedIndex = (int)MaxValues.MaxActionType;
+                    textBoxActionTypeId.Text = ((int)MaxValues.MaxActionType).ToString();
+                    textBoxActionTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+                }
+                else
+                    comboBoxActionType.SelectedIndex = actionType;
+            }
         }
 
         private void textBoxTargetTypeId_TextChanged(object sender, EventArgs e)
@@ -1031,14 +1043,20 @@ namespace SAI_Editor
                 textBoxTargetTypeId.Text = "0";
                 textBoxTargetTypeId.SelectionStart = 3; //! Set cursor position to end of the line
             }
-            else if (Convert.ToInt32(textBoxTargetTypeId.Text) > (int)MaxValues.MaxTargetType)
-            {
-                comboBoxTargetType.SelectedIndex = (int)MaxValues.MaxTargetType;
-                textBoxTargetTypeId.Text = ((int)MaxValues.MaxTargetType).ToString();
-                textBoxTargetTypeId.SelectionStart = 3; //! Set cursor position to end of the line
-            }
             else
-                comboBoxTargetType.SelectedIndex = Convert.ToInt32(textBoxTargetTypeId.Text);
+            {
+                int targetType;
+                Int32.TryParse(textBoxTargetTypeId.Text, out targetType);
+
+                if (targetType > (int)MaxValues.MaxTargetType)
+                {
+                    comboBoxTargetType.SelectedIndex = (int)MaxValues.MaxTargetType;
+                    textBoxTargetTypeId.Text = ((int)MaxValues.MaxTargetType).ToString();
+                    textBoxTargetTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+                }
+                else
+                    comboBoxTargetType.SelectedIndex = targetType;
+            }
         }
 
         private void menuOptionDeleteSelectedRow_Click(object sender, EventArgs e)
