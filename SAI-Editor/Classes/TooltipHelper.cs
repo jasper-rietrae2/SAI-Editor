@@ -25,5 +25,13 @@ namespace SAI_Editor
             tooltips.Add(controlName, tooltip);
             return tooltip;
         }
+
+        public static ToolTip GetExistingToolTip(string controlName)
+        {
+            if (tooltips.ContainsKey(controlName))
+                return tooltips[controlName];
+
+            return null;
+        }
     }
 }

@@ -914,12 +914,20 @@ namespace SAI_Editor
         private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true)
         {
             if (String.IsNullOrWhiteSpace(title) || String.IsNullOrWhiteSpace(text))
+            {
+                ToolTip toolTipExistent = TooltipHelper.GetExistingToolTip(control.Name.ToString());
+
+                if (toolTipExistent != null)
+                    toolTipExistent.Active = false;
+
                 return;
+            }
 
             ToolTip toolTip = TooltipHelper.GetControlToolTip(control.Name.ToString());
             toolTip.ToolTipIcon = icon;
             toolTip.ToolTipTitle = title;
             toolTip.IsBalloon = isBallon;
+            toolTip.Active = true;
             toolTip.SetToolTip(control, text);
         }
 
