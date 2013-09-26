@@ -12,6 +12,7 @@ namespace SAI_Editor
         MultiSelectFormTypeUnitFlag = 3,
         MultiSelectFormTypeUnitFlag2 = 4,
         MultiSelectFormTypeGoFlag = 5,
+        MultiSelectFormTypeDynamicFlag = 6,
     };
 
     public partial class MultiSelectForm : Form
@@ -129,6 +130,19 @@ namespace SAI_Editor
                     listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_TRIGGERED");
                     listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_DAMAGED");
                     listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_DESTROYED");
+                    break;
+                case MultiSelectFormType.MultiSelectFormTypeDynamicFlag:
+                    Text = "Select dynamic flags";
+                    listViewSelectableItems.Columns.Add("Dynamic flags", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_NONE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_LOOTABLE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_TRACK_UNIT");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_TAPPED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_TAPPED_BY_PLAYER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_SPECIALINFO");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_DEAD");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_REFER_A_FRIEND");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_TAPPED_BY_ALL_THREAT_LIST");
                     break;
             }
         }
