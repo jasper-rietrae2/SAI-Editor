@@ -925,6 +925,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SUMMON_CREATURE_GROUP:
                     buttonActionParamOneSearch.Visible = true; //! Summons group id
                     break;
+                case SmartAction.SMART_ACTION_REMOVEAURASFROMSPELL:
+                    buttonActionParamOneSearch.Visible = true; //! Spell entry
+                    break;
             }
 
             switch ((SmartTarget)target_type)
@@ -1478,6 +1481,7 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_CAST:
                 case SmartAction.SMART_ACTION_INVOKER_CAST:
                 case SmartAction.SMART_ACTION_CROSS_CAST:
+                case SmartAction.SMART_ACTION_REMOVEAURASFROMSPELL:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_FACTION:
