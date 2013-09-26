@@ -9,6 +9,8 @@ namespace SAI_Editor
         MultiSelectFormTypePhaseMask = 0,
         MultiSelectFormTypeEventFlag = 1,
         MultiSelectFormTypeCastFlag = 2,
+        MultiSelectFormTypeUnitFlag = 3,
+        MultiSelectFormTypeUnitFlag2 = 4,
     };
 
     public partial class MultiSelectForm : Form
@@ -28,7 +30,7 @@ namespace SAI_Editor
             {
                 case MultiSelectFormType.MultiSelectFormTypePhaseMask:
                     Text = "Select a phasemask";
-                    listViewSelectableItems.Columns.Add("Phase", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Columns.Add("Phases", 235, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_ALWAYS"); // 0
                     listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_1");      // 1
                     listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_2");      // 2
@@ -39,7 +41,7 @@ namespace SAI_Editor
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeEventFlag:
                     Text = "Select eventflags";
-                    listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Columns.Add("Event flags", 235, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NONE");           // 0
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NOT_REPEATABLE"); // 1
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NORMAL_DUNGEON");   // 2
@@ -50,11 +52,69 @@ namespace SAI_Editor
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeCastFlag:
                     Text = "Select castflags";
-                    listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Columns.Add("Cast flags", 235, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_NONE"); // 0
                     listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_INTERRUPT_PREVIOUS"); // 1
                     listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_TRIGGERED"); // 2
                     listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_AURA_NOT_PRESENT"); // 3
+                    break;
+                case MultiSelectFormType.MultiSelectFormTypeUnitFlag:
+                    Text = "Select unitflags";
+                    listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_SERVER_CONTROLLED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_NON_ATTACKABLE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_DISABLE_MOVE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_PVP_ATTACKABLE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_RENAME");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_PREPARATION");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_UNK_6");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_NOT_ATTACKABLE_1");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_IMMUNE_TO_PC");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_IMMUNE_TO_NPC");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_LOOTING");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_PET_IN_COMBAT");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_PVP");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_SILENCED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_UNK_14");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_UNK_15");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_UNK_16");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_PACIFIED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_STUNNED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_IN_COMBAT");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_TAXI_FLIGHT");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_DISARMED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_CONFUSED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_FLEEING");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_PLAYER_CONTROLLED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_NOT_SELECTABLE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_SKINNABLE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_MOUNT");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_UNK_28");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_UNK_29");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_SHEATHE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_UNK_31");
+                    break;
+                case MultiSelectFormType.MultiSelectFormTypeUnitFlag2:
+                    Text = "Select unitflags2";
+                    listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_FEIGN_DEATH");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_UNK1");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_IGNORE_REPUTATION");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_COMPREHEND_LANG");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_MIRROR_IMAGE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_INSTANTLY_APPEAR_MODEL");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_FORCE_MOVEMENT");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_DISARM_OFFHAND");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_DISABLE_PRED_STATS");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_DISARM_RANGED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_REGENERATE_POWER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_RESTRICT_PARTY_INTERACTION");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_PREVENT_SPELL_CLICK");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_ALLOW_ENEMY_INTERACT");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_DISABLE_TURN");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_UNK2");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_PLAY_DEATH_ANIM");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_ALLOW_CHEAT_SPELLS");
                     break;
             }
         }

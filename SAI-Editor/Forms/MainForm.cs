@@ -937,6 +937,10 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_ACTIVATE_TAXI:
                     buttonActionParamOneSearch.Visible = true; //! Taxi path id
                     break;
+                case SmartAction.SMART_ACTION_SET_UNIT_FLAG:
+                case SmartAction.SMART_ACTION_REMOVE_UNIT_FLAG:
+                    buttonActionParamOneSearch.Visible = true; //! Unit flags
+                    break;
             }
 
             switch ((SmartTarget)target_type)
@@ -1553,6 +1557,16 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_ACTIVATE_TAXI:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SET_UNIT_FLAG:
+                case SmartAction.SMART_ACTION_REMOVE_UNIT_FLAG:
+                    //! There should be a different form opened based on parameter 2. If parameter two is set to '0' it means
+                    //! we target UNIT_FIELD_FLAGS. If it's above 0 it means we target UNIT_FIELD_FLAGS2 (notice the 2).
+                    if (textBoxActionParam2.Text == "0" || String.IsNullOrWhiteSpace(textBoxActionParam2.Text))
+                        new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeUnitFlag, textBoxToChange).ShowDialog(this);
+                    else
+                        new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeUnitFlag2, textBoxToChange).ShowDialog(this);
+
                     break;
             }
         }
