@@ -121,6 +121,9 @@ namespace SAI_Editor
                 MessageBox.Show(ex.Message);
             }
 
+            //! We first load the information and then change the parameter fields
+            await SAI_Editor_Manager.Instance.LoadSQLiteDatabaseInfo();
+
             ChangeParameterFieldsBasedOnType();
 
             //! We hardcode the actual shortcuts because there are certain conditons under which the menu should not be
@@ -166,8 +169,6 @@ namespace SAI_Editor
             listViewSmartScripts.Columns.Add("comment", 400, HorizontalAlignment.Left); // 27 (width 56 to fit)
 
             listViewSmartScripts.ColumnClick += listViewSmartScripts_ColumnClick;
-
-            await SAI_Editor_Manager.Instance.LoadSQLiteDatabaseInfo();
 
             if (Settings.Default.AutoConnect)
             {
