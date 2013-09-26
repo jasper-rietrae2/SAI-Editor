@@ -207,6 +207,8 @@ namespace SAI_Editor
             if (Settings.Default.HidePass)
                 textBoxPassword.PasswordChar = '●';
 
+            textBoxComments.GotFocus += textBoxComments_GotFocus;
+            textBoxComments.LostFocus += textBoxComments_LostFocus;
             runningConstructor = false;
         }
 
@@ -1666,6 +1668,18 @@ namespace SAI_Editor
         private void smartAIWikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TryToOpenPage("http://collab.kpsn.org/display/tc/smart_scripts");
+        }
+
+        private void textBoxComments_GotFocus(object sender, EventArgs e)
+        {
+            if (textBoxComments.Text == "Npc - Event - Action (phase) (dungeon difficulty)")
+                textBoxComments.Text = "";
+        }
+
+        private void textBoxComments_LostFocus(object sender, EventArgs e)
+        {
+            if (String.IsNullOrEmpty(textBoxComments.Text))
+                textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
         }
     }
 }
