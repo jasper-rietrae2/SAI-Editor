@@ -941,6 +941,11 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_REMOVE_UNIT_FLAG:
                     buttonActionParamOneSearch.Visible = true; //! Unit flags
                     break;
+                case SmartAction.SMART_ACTION_SET_GO_FLAG:
+                case SmartAction.SMART_ACTION_ADD_GO_FLAG:
+                case SmartAction.SMART_ACTION_REMOVE_GO_FLAG:
+                    buttonActionParamOneSearch.Visible = true; //! Gameobject flags
+                    break;
             }
 
             switch ((SmartTarget)target_type)
@@ -1567,6 +1572,11 @@ namespace SAI_Editor
                     else
                         new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeUnitFlag2, textBoxToChange).ShowDialog(this);
 
+                    break;
+                case SmartAction.SMART_ACTION_SET_GO_FLAG:
+                case SmartAction.SMART_ACTION_ADD_GO_FLAG:
+                case SmartAction.SMART_ACTION_REMOVE_GO_FLAG:
+                    new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeGoFlag, textBoxToChange).ShowDialog(this);
                     break;
             }
         }

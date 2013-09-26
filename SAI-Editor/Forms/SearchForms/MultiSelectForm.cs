@@ -11,6 +11,7 @@ namespace SAI_Editor
         MultiSelectFormTypeCastFlag = 2,
         MultiSelectFormTypeUnitFlag = 3,
         MultiSelectFormTypeUnitFlag2 = 4,
+        MultiSelectFormTypeGoFlag = 5,
     };
 
     public partial class MultiSelectForm : Form
@@ -31,35 +32,35 @@ namespace SAI_Editor
                 case MultiSelectFormType.MultiSelectFormTypePhaseMask:
                     Text = "Select a phasemask";
                     listViewSelectableItems.Columns.Add("Phases", 235, HorizontalAlignment.Left);
-                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_ALWAYS"); // 0
-                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_1");      // 1
-                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_2");      // 2
-                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_3");      // 3
-                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_4");      // 4
-                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_5");      // 5
-                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_6");      // 6
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_ALWAYS");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_1");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_2");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_3");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_4");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_5");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_6");
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeEventFlag:
-                    Text = "Select eventflags";
+                    Text = "Select event flags";
                     listViewSelectableItems.Columns.Add("Event flags", 235, HorizontalAlignment.Left);
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NONE");           // 0
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NOT_REPEATABLE"); // 1
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NORMAL_DUNGEON");   // 2
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_HEROIC_DUNGEON");   // 3
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NORMAL_RAID");   // 4
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_HEROIC_RAID");   // 5
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DEBUG_ONLY");     // 6
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NONE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NOT_REPEATABLE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NORMAL_DUNGEON");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_HEROIC_DUNGEON");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NORMAL_RAID");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_HEROIC_RAID");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DEBUG_ONLY");
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeCastFlag:
-                    Text = "Select castflags";
+                    Text = "Select cast flags";
                     listViewSelectableItems.Columns.Add("Cast flags", 235, HorizontalAlignment.Left);
-                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_NONE"); // 0
-                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_INTERRUPT_PREVIOUS"); // 1
-                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_TRIGGERED"); // 2
-                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_AURA_NOT_PRESENT"); // 3
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_NONE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_INTERRUPT_PREVIOUS");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_TRIGGERED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("SMARTCAST_AURA_NOT_PRESENT");
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeUnitFlag:
-                    Text = "Select unitflags";
+                    Text = "Select unit flags";
                     listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_SERVER_CONTROLLED");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_NON_ATTACKABLE");
@@ -95,7 +96,7 @@ namespace SAI_Editor
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_UNK_31");
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeUnitFlag2:
-                    Text = "Select unitflags2";
+                    Text = "Select unit flags2";
                     listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_FEIGN_DEATH");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_UNK1");
@@ -115,6 +116,19 @@ namespace SAI_Editor
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_UNK2");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_PLAY_DEATH_ANIM");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_ALLOW_CHEAT_SPELLS");
+                    break;
+                case MultiSelectFormType.MultiSelectFormTypeGoFlag:
+                    Text = "Select gameobject flags";
+                    listViewSelectableItems.Columns.Add("Gameobject flags", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_IN_USE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_LOCKED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_INTERACT_COND");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_TRANSPORT");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_NOT_SELECTABLE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_NO_DESPAWN");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_TRIGGERED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_DAMAGED");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_DESTROYED");
                     break;
             }
         }
