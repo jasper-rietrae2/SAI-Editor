@@ -19,7 +19,6 @@
 - Add a setting to 'always show tooltips' and if checked, simply show permanent tooltips on events, actions, targets, etc. at the bottom of the application.
 - When opening the SingleSelectForm, MultiSelectForm or SearchFromDatabaseForm while the textbox that will be changed by this form has some text in there, try to select the item(s) that have the same identifier as the text in the textbox. So if we have "69" in a textbox that has a button to search for an emote id, start the form with selection STATE_USESTANDING and also scroll to that level.
 - Really long tooltips should go to a new line (we need to set a max width of tooltips)
-- Load the SQLite database information like events, actions and targets on connection made, instead of continuously pulling new stuff from the database.
 
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)

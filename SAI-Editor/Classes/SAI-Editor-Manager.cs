@@ -31,6 +31,9 @@ namespace SAI_Editor
     {
         public WorldDatabase worldDatabase { get; set; }
         public SQLiteDatabase sqliteDatabase { get; set; }
+        public List<EventTypeInformation> eventTypeInformations;
+        public List<ActionTypeInformation> actionTypeInformations;
+        public List<TargetTypeInformation> targetTypeInformations;
 
         private static object _lock = new object();
         private static SAI_Editor_Manager _instance;
@@ -63,6 +66,117 @@ namespace SAI_Editor
         public SAI_Editor_Manager()
         {
             ResetDatabases();
+        }
+
+        public async Task<bool> LoadSQLiteDatabaseInfo()
+        {
+            eventTypeInformations = await sqliteDatabase.GetEventTypeInformation();
+            actionTypeInformations = await sqliteDatabase.GetActionTypeInformation();
+            targetTypeInformations = await sqliteDatabase.GetTargetTypeInformation();
+            return true;
+        }
+
+        private BaseTypeInformation GetTypeByScriptTypeId(int type, ScriptTypeId scriptTypeId)
+        {
+            switch (scriptTypeId)
+            {
+                case ScriptTypeId.ScriptTypeEvent:
+                    return GetEventTypeInformationById(type);
+                case ScriptTypeId.ScriptTypeAction:
+                    return GetActionTypeInformationById(type);
+                case ScriptTypeId.ScriptTypeTarget:
+                    return GetTargetTypeInformationById(type);
+                default:
+                    return null;
+            }
+        }
+
+        public EventTypeInformation GetEventTypeInformationById(int event_type)
+        {
+            if (eventTypeInformations == null)
+                return null;
+
+            foreach (EventTypeInformation eventTypeInformation in eventTypeInformations)
+                if (eventTypeInformation.event_type == event_type)
+                    return eventTypeInformation;
+
+            return null;
+        }
+
+        public ActionTypeInformation GetActionTypeInformationById(int action_type)
+        {
+            if (actionTypeInformations == null)
+                return null;
+
+            foreach (ActionTypeInformation actionTypeInformation in actionTypeInformations)
+                if (actionTypeInformation.action_type == action_type)
+                    return actionTypeInformation;
+
+            return null;
+        }
+
+        public TargetTypeInformation GetTargetTypeInformationById(int target_type)
+        {
+            if (targetTypeInformations == null)
+                return null;
+
+            foreach (TargetTypeInformation targetTypeInformation in targetTypeInformations)
+                if (targetTypeInformation.target_type == target_type)
+                    return targetTypeInformation;
+
+            return null;
+        }
+
+        public string GetScriptTypeTooltipById(int type, ScriptTypeId scriptTypeId)
+        {
+            BaseTypeInformation baseTypeInformation = GetTypeByScriptTypeId(type, scriptTypeId);
+            return baseTypeInformation != null ? baseTypeInformation.tooltip : String.Empty;
+        }
+
+        public string GetParameterTooltipById(int type, int paramId, ScriptTypeId scriptTypeId)
+        {
+            BaseTypeInformation baseTypeInformation = GetTypeByScriptTypeId(type, scriptTypeId);
+
+            switch (paramId)
+            {
+                case 1:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip1 : String.Empty;
+                case 2:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip2 : String.Empty;
+                case 3:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip3 : String.Empty;
+                case 4:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip4 : String.Empty;
+                case 5:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip5 : String.Empty;
+                case 6:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip6 : String.Empty;
+                default:
+                    return String.Empty;
+            }
+        }
+
+        public string GetParameterStringById(int type, int paramId, ScriptTypeId scriptTypeId)
+        {
+            BaseTypeInformation baseTypeInformation = GetTypeByScriptTypeId(type, scriptTypeId);
+
+            switch (paramId)
+            {
+                case 1:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString1 : String.Empty;
+                case 2:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString2 : String.Empty;
+                case 3:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString3 : String.Empty;
+                case 4:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString4 : String.Empty;
+                case 5:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString5 : String.Empty;
+                case 6:
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString6 : String.Empty;
+                default:
+                    return String.Empty;
+            }
         }
 
         public bool IsNumericString(string str)

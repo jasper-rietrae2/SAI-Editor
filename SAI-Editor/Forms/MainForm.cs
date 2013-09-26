@@ -61,14 +61,16 @@ namespace SAI_Editor
         public SourceTypes originalSourceType = SourceTypes.SourceTypeCreature;
         public String originalEntryOrGuid = String.Empty;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+        private bool runningConstructor = false;
 
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object sender, EventArgs e)
         {
+            runningConstructor = true;
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
 
             Width = (int)FormSizes.Width;
@@ -107,10 +109,19 @@ namespace SAI_Editor
                     controlsMainForm.Add(control);
             }
 
-            comboBoxSourceType.SelectedIndex = 0;
-            comboBoxEventType.SelectedIndex = 0;
-            comboBoxActionType.SelectedIndex = 0;
-            comboBoxTargetType.SelectedIndex = 0;
+            try
+            {
+                comboBoxSourceType.SelectedIndex = 0;
+                comboBoxEventType.SelectedIndex = 0;
+                comboBoxActionType.SelectedIndex = 0;
+                comboBoxTargetType.SelectedIndex = 0;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            ChangeParameterFieldsBasedOnType();
 
             //! We hardcode the actual shortcuts because there are certain conditons under which the menu should not be
             //! opened at all.
@@ -156,6 +167,8 @@ namespace SAI_Editor
 
             listViewSmartScripts.ColumnClick += listViewSmartScripts_ColumnClick;
 
+            await SAI_Editor_Manager.Instance.LoadSQLiteDatabaseInfo();
+
             if (Settings.Default.AutoConnect)
             {
                 checkBoxAutoConnect.Checked = true;
@@ -193,6 +206,8 @@ namespace SAI_Editor
 
             if (Settings.Default.HidePass)
                 textBoxPassword.PasswordChar = '●';
+
+            runningConstructor = false;
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
@@ -459,7 +474,8 @@ namespace SAI_Editor
             if (textBoxEventTypeId.Text == "0" || textBoxEventTypeId.Text == ((int)MaxValues.MaxEventType).ToString())
                 textBoxEventTypeId.SelectionStart = 3; //! Set cursot to end of text
 
-            ChangeParameterFieldsBasedOnType();
+            if (!runningConstructor)
+                ChangeParameterFieldsBasedOnType();
         }
 
         private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
@@ -469,7 +485,8 @@ namespace SAI_Editor
             if (textBoxActionTypeId.Text == "0" || textBoxActionTypeId.Text == ((int)MaxValues.MaxActionType).ToString())
                 textBoxActionTypeId.SelectionStart = 3; //! Set cursot to end of text
 
-            ChangeParameterFieldsBasedOnType();
+            if (!runningConstructor)
+                ChangeParameterFieldsBasedOnType();
         }
 
         private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
@@ -479,48 +496,49 @@ namespace SAI_Editor
             if (textBoxTargetTypeId.Text == "0" || textBoxTargetTypeId.Text == ((int)MaxValues.MaxTargetType).ToString())
                 textBoxTargetTypeId.SelectionStart = 3; //! Set cursot to end of text
 
-            ChangeParameterFieldsBasedOnType();
+            if (!runningConstructor)
+                ChangeParameterFieldsBasedOnType();
         }
 
-        private async void ChangeParameterFieldsBasedOnType()
+        private void ChangeParameterFieldsBasedOnType()
         {
             //! Event parameters
             int event_type = comboBoxEventType.SelectedIndex;
-            labelEventParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 1, ScriptTypeId.ScriptTypeEvent);
-            labelEventParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
-            labelEventParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
-            labelEventParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
-            AddTooltip(comboBoxEventType, comboBoxEventType.SelectedItem.ToString(), await SAI_Editor_Manager.Instance.sqliteDatabase.GetScriptTypeTooltipById(event_type, ScriptTypeId.ScriptTypeEvent));
-            AddTooltip(labelEventParam1, labelEventParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 1, ScriptTypeId.ScriptTypeEvent));
-            AddTooltip(labelEventParam2, labelEventParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 2, ScriptTypeId.ScriptTypeEvent));
-            AddTooltip(labelEventParam3, labelEventParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 3, ScriptTypeId.ScriptTypeEvent));
-            AddTooltip(labelEventParam4, labelEventParam4.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
+            labelEventParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 1, ScriptTypeId.ScriptTypeEvent);
+            labelEventParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
+            labelEventParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
+            labelEventParam4.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
+            AddTooltip(comboBoxEventType, comboBoxEventType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(event_type, ScriptTypeId.ScriptTypeEvent));
+            AddTooltip(labelEventParam1, labelEventParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 1, ScriptTypeId.ScriptTypeEvent));
+            AddTooltip(labelEventParam2, labelEventParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 2, ScriptTypeId.ScriptTypeEvent));
+            AddTooltip(labelEventParam3, labelEventParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 3, ScriptTypeId.ScriptTypeEvent));
+            AddTooltip(labelEventParam4, labelEventParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
 
             //! Action parameters
             int action_type = comboBoxActionType.SelectedIndex;
-            labelActionParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 1, ScriptTypeId.ScriptTypeAction);
-            labelActionParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 2, ScriptTypeId.ScriptTypeAction);
-            labelActionParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 3, ScriptTypeId.ScriptTypeAction);
-            labelActionParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 4, ScriptTypeId.ScriptTypeAction);
-            labelActionParam5.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 5, ScriptTypeId.ScriptTypeAction);
-            labelActionParam6.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 6, ScriptTypeId.ScriptTypeAction);
-            AddTooltip(comboBoxActionType, comboBoxActionType.SelectedItem.ToString(), await SAI_Editor_Manager.Instance.sqliteDatabase.GetScriptTypeTooltipById(action_type, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam1, labelActionParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 1, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam2, labelActionParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 2, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam3, labelActionParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 3, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam4, labelActionParam4.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 4, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam5, labelActionParam5.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 5, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam6, labelActionParam6.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
+            labelActionParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 1, ScriptTypeId.ScriptTypeAction);
+            labelActionParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 2, ScriptTypeId.ScriptTypeAction);
+            labelActionParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 3, ScriptTypeId.ScriptTypeAction);
+            labelActionParam4.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 4, ScriptTypeId.ScriptTypeAction);
+            labelActionParam5.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 5, ScriptTypeId.ScriptTypeAction);
+            labelActionParam6.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 6, ScriptTypeId.ScriptTypeAction);
+            AddTooltip(comboBoxActionType, comboBoxActionType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(action_type, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam1, labelActionParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 1, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam2, labelActionParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 2, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam3, labelActionParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 3, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam4, labelActionParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 4, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam5, labelActionParam5.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 5, ScriptTypeId.ScriptTypeAction));
+            AddTooltip(labelActionParam6, labelActionParam6.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
 
             //! Target parameters
             int target_type = comboBoxTargetType.SelectedIndex;
-            labelTargetParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
-            labelTargetParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
-            labelTargetParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
-            AddTooltip(comboBoxTargetType, comboBoxTargetType.SelectedItem.ToString(), await SAI_Editor_Manager.Instance.sqliteDatabase.GetScriptTypeTooltipById(target_type, ScriptTypeId.ScriptTypeTarget));
-            AddTooltip(labelTargetParam1, labelTargetParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 1, ScriptTypeId.ScriptTypeTarget));
-            AddTooltip(labelTargetParam2, labelTargetParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 2, ScriptTypeId.ScriptTypeTarget));
-            AddTooltip(labelTargetParam3, labelTargetParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
+            labelTargetParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
+            labelTargetParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
+            labelTargetParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
+            AddTooltip(comboBoxTargetType, comboBoxTargetType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(target_type, ScriptTypeId.ScriptTypeTarget));
+            AddTooltip(labelTargetParam1, labelTargetParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 1, ScriptTypeId.ScriptTypeTarget));
+            AddTooltip(labelTargetParam2, labelTargetParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 2, ScriptTypeId.ScriptTypeTarget));
+            AddTooltip(labelTargetParam3, labelTargetParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
 
             AdjustAllParameterFields(event_type, action_type, target_type);
         }
@@ -669,7 +687,7 @@ namespace SAI_Editor
             FillFieldsBasedOnSelectedScript();
         }
 
-        private async void FillFieldsBasedOnSelectedScript()
+        private void FillFieldsBasedOnSelectedScript()
         {
             try
             {
@@ -710,15 +728,15 @@ namespace SAI_Editor
                 textBoxEventParam2.Text = selectedItem[9].Text;
                 textBoxEventParam3.Text = selectedItem[10].Text;
                 textBoxEventParam4.Text = selectedItem[11].Text;
-                labelEventParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 1, ScriptTypeId.ScriptTypeEvent);
-                labelEventParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
-                labelEventParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
-                labelEventParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
-                AddTooltip(comboBoxEventType, comboBoxEventType.SelectedItem.ToString(), await SAI_Editor_Manager.Instance.sqliteDatabase.GetScriptTypeTooltipById(event_type, ScriptTypeId.ScriptTypeEvent));
-                AddTooltip(labelEventParam1, labelEventParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 1, ScriptTypeId.ScriptTypeEvent));
-                AddTooltip(labelEventParam2, labelEventParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 2, ScriptTypeId.ScriptTypeEvent));
-                AddTooltip(labelEventParam3, labelEventParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 3, ScriptTypeId.ScriptTypeEvent));
-                AddTooltip(labelEventParam4, labelEventParam4.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
+                labelEventParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 1, ScriptTypeId.ScriptTypeEvent);
+                labelEventParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
+                labelEventParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
+                labelEventParam4.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
+                AddTooltip(comboBoxEventType, comboBoxEventType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(event_type, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam1, labelEventParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 1, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam2, labelEventParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 2, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam3, labelEventParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 3, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam4, labelEventParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
 
                 //! Action parameters
                 int action_type = XConverter.TryParseStringToInt32(selectedItem[12].Text);
@@ -729,19 +747,19 @@ namespace SAI_Editor
                 textBoxActionParam4.Text = selectedItem[16].Text;
                 textBoxActionParam5.Text = selectedItem[17].Text;
                 textBoxActionParam6.Text = selectedItem[18].Text;
-                labelActionParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 1, ScriptTypeId.ScriptTypeAction);
-                labelActionParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 2, ScriptTypeId.ScriptTypeAction);
-                labelActionParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 3, ScriptTypeId.ScriptTypeAction);
-                labelActionParam4.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 4, ScriptTypeId.ScriptTypeAction);
-                labelActionParam5.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 5, ScriptTypeId.ScriptTypeAction);
-                labelActionParam6.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(action_type, 6, ScriptTypeId.ScriptTypeAction);
-                AddTooltip(comboBoxActionType, comboBoxActionType.SelectedItem.ToString(), await SAI_Editor_Manager.Instance.sqliteDatabase.GetScriptTypeTooltipById(action_type, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam1, labelActionParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 1, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam2, labelActionParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 2, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam3, labelActionParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 3, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam4, labelActionParam4.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 4, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam5, labelActionParam5.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 5, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam6, labelActionParam6.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
+                labelActionParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 1, ScriptTypeId.ScriptTypeAction);
+                labelActionParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 2, ScriptTypeId.ScriptTypeAction);
+                labelActionParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 3, ScriptTypeId.ScriptTypeAction);
+                labelActionParam4.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 4, ScriptTypeId.ScriptTypeAction);
+                labelActionParam5.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 5, ScriptTypeId.ScriptTypeAction);
+                labelActionParam6.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 6, ScriptTypeId.ScriptTypeAction);
+                AddTooltip(comboBoxActionType, comboBoxActionType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(action_type, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam1, labelActionParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 1, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam2, labelActionParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 2, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam3, labelActionParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 3, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam4, labelActionParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 4, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam5, labelActionParam5.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 5, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam6, labelActionParam6.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
 
                 //! Target parameters
                 int target_type = XConverter.TryParseStringToInt32(selectedItem[19].Text);
@@ -749,13 +767,13 @@ namespace SAI_Editor
                 textBoxTargetParam1.Text = selectedItem[20].Text;
                 textBoxTargetParam2.Text = selectedItem[21].Text;
                 textBoxTargetParam3.Text = selectedItem[22].Text;
-                labelTargetParam1.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
-                labelTargetParam2.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
-                labelTargetParam3.Text = await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterStringById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
-                AddTooltip(comboBoxTargetType, comboBoxTargetType.SelectedItem.ToString(), await SAI_Editor_Manager.Instance.sqliteDatabase.GetScriptTypeTooltipById(target_type, ScriptTypeId.ScriptTypeTarget));
-                AddTooltip(labelTargetParam1, labelTargetParam1.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 1, ScriptTypeId.ScriptTypeTarget));
-                AddTooltip(labelTargetParam2, labelTargetParam2.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 2, ScriptTypeId.ScriptTypeTarget));
-                AddTooltip(labelTargetParam3, labelTargetParam3.Text, await SAI_Editor_Manager.Instance.sqliteDatabase.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
+                labelTargetParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
+                labelTargetParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
+                labelTargetParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
+                AddTooltip(comboBoxTargetType, comboBoxTargetType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(target_type, ScriptTypeId.ScriptTypeTarget));
+                AddTooltip(labelTargetParam1, labelTargetParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 1, ScriptTypeId.ScriptTypeTarget));
+                AddTooltip(labelTargetParam2, labelTargetParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 2, ScriptTypeId.ScriptTypeTarget));
+                AddTooltip(labelTargetParam3, labelTargetParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
 
                 textBoxTargetX.Text = selectedItem[23].Text;
                 textBoxTargetY.Text = selectedItem[24].Text;

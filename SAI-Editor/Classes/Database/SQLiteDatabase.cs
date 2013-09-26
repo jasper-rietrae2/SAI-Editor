@@ -17,104 +17,49 @@ namespace SAI_Editor.Database
             ConnectionString.Version = 3;
         }
 
-        public async Task<string> GetParameterStringById(int type, int paramId, ScriptTypeId scriptTypeId)
+        public async Task<List<EventTypeInformation>> GetEventTypeInformation()
         {
-            BaseTypeInformation baseTypeInformation = await GetTypeByScriptTypeId(type, scriptTypeId);
-
-            switch (paramId)
-            {
-                case 1:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString1 : String.Empty;
-                case 2:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString2 : String.Empty;
-                case 3:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString3 : String.Empty;
-                case 4:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString4 : String.Empty;
-                case 5:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString5 : String.Empty;
-                case 6:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString6 : String.Empty;
-                default:
-                    return String.Empty;
-            }
-        }
-
-        public async Task<string> GetParameterTooltipById(int type, int paramId, ScriptTypeId scriptTypeId)
-        {
-            BaseTypeInformation baseTypeInformation = await GetTypeByScriptTypeId(type, scriptTypeId);
-
-            switch (paramId)
-            {
-                case 1:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip1 : String.Empty;
-                case 2:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip2 : String.Empty;
-                case 3:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip3 : String.Empty;
-                case 4:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip4 : String.Empty;
-                case 5:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip5 : String.Empty;
-                case 6:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterTooltip6 : String.Empty;
-                default:
-                    return String.Empty;
-            }
-        }
-
-        public async Task<string> GetScriptTypeTooltipById(int type, ScriptTypeId scriptTypeId)
-        {
-            BaseTypeInformation baseTypeInformation = await GetTypeByScriptTypeId(type, scriptTypeId);
-            return baseTypeInformation != null ? baseTypeInformation.tooltip : String.Empty;
-        }
-
-        public async Task<EventTypeInformation> GetEventTypeInformationById(int event_type)
-        {
-            //DataTable dt = await ExecuteQuery("SELECT * FROM event_type_information WHERE event_type = '@event_type'", new SQLiteParameter("@event_type", event_type));
-            DataTable dt = await ExecuteQuery("SELECT * FROM event_type_information WHERE event_type = '" + event_type + "'");
+            DataTable dt = await ExecuteQuery("SELECT * FROM event_type_information");
 
             if (dt.Rows.Count == 0)
                 return null;
 
-            return BuildEventTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
+            List<EventTypeInformation> eventTypeInformations = new List<EventTypeInformation>();
+
+            foreach (DataRow row in dt.Rows)
+                eventTypeInformations.Add(BuildEventTypeInformation(row));
+
+            return eventTypeInformations;
         }
 
-        public async Task<ActionTypeInformation> GetActionTypeInformationById(int action_type)
+        public async Task<List<ActionTypeInformation>> GetActionTypeInformation()
         {
-            //DataTable dt = await ExecuteQuery("SELECT * FROM action_type_information WHERE action_type = '@action_type'", new SQLiteParameter("@action_type", action_type));
-            DataTable dt = await ExecuteQuery("SELECT * FROM action_type_information WHERE action_type = '" + action_type + "'");
+            DataTable dt = await ExecuteQuery("SELECT * FROM action_type_information");
 
             if (dt.Rows.Count == 0)
                 return null;
 
-            return BuildActionTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
+            List<ActionTypeInformation> actionTypeInformations = new List<ActionTypeInformation>();
+
+            foreach (DataRow row in dt.Rows)
+                actionTypeInformations.Add(BuildActionTypeInformation(row));
+
+            return actionTypeInformations;
         }
 
-        public async Task<TargetTypeInformation> GetTargetTypeInformationById(int target_type)
+        public async Task<List<TargetTypeInformation>> GetTargetTypeInformation()
         {
-            //DataTable dt = await ExecuteQuery("SELECT * FROM target_type_information WHERE target_type = '@target_type'", new SQLiteParameter("@target_type", target_type));
-            DataTable dt = await ExecuteQuery("SELECT * FROM target_type_information WHERE target_type = '" + target_type + "'");
+            DataTable dt = await ExecuteQuery("SELECT * FROM target_type_information");
 
             if (dt.Rows.Count == 0)
                 return null;
 
-            return BuildTargetTypeInformation(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
-        }
+            List<TargetTypeInformation> targetTypeInformations = new List<TargetTypeInformation>();
 
-        private async Task<BaseTypeInformation> GetTypeByScriptTypeId(int type, ScriptTypeId scriptTypeId)
-        {
-            switch (scriptTypeId)
-            {
-                case ScriptTypeId.ScriptTypeEvent:
-                    return await GetEventTypeInformationById(type);
-                case ScriptTypeId.ScriptTypeAction:
-                    return await GetActionTypeInformationById(type);
-                case ScriptTypeId.ScriptTypeTarget:
-                    return await GetTargetTypeInformationById(type);
-                default:
-                    return null;
-            }
+            foreach (DataRow row in dt.Rows)
+                targetTypeInformations.Add(BuildTargetTypeInformation(row));
+
+            return targetTypeInformations;
         }
 
         public async Task<List<AreaTrigger>> GetAreaTriggers()
