@@ -33,6 +33,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeGameEvent = 12,
         DatabaseSearchFormTypeItemEntry = 13,
         DatabaseSearchFormTypeSummonsId = 14,
+        DatabaseSearchFormTypeTaxiPath = 15,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -228,6 +229,16 @@ namespace SAI_Editor
                     useMySQL = true;
                     amountOfListviewColumns = 5;
                     listViewItemIndexToCopy = 2;
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath:
+                    Text = "Search for a taxi path";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Taxi id");
+                    comboBoxSearchType.Items.Add("Taxi name");
+                    baseQuery = "SELECT id, taxiName FROM taxi_nodes";
+                    columnOne = "id";
+                    columnTwo = "taxiName";
                     break;
             }
 

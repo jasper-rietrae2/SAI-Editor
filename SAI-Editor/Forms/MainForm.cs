@@ -932,6 +932,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SET_SHEATH:
                     buttonActionParamOneSearch.Visible = true; //! Sheath state
                     break;
+                case SmartAction.SMART_ACTION_ACTIVATE_TAXI:
+                    buttonActionParamOneSearch.Visible = true; //! Taxi path id
+                    break;
             }
 
             switch ((SmartTarget)target_type)
@@ -1545,6 +1548,9 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_SET_SHEATH:
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSheathState).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_ACTIVATE_TAXI:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath).ShowDialog(this);
                     break;
             }
         }
