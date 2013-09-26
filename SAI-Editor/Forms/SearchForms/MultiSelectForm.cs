@@ -42,10 +42,10 @@ namespace SAI_Editor
                     listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NONE");           // 0
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NOT_REPEATABLE"); // 1
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_0");   // 2
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_1");   // 3
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_2");   // 4
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DIFFICULTY_3");   // 5
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NORMAL_DUNGEON");   // 2
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_HEROIC_DUNGEON");   // 3
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_NORMAL_RAID");   // 4
+                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_HEROIC_RAID");   // 5
                     listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_FLAG_DEBUG_ONLY");     // 6
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeCastFlag:
