@@ -918,6 +918,7 @@ namespace SAI_Editor
                     buttonActionParamOneSearch.Visible = true; //! Item entry
                     break;
                 case SmartAction.SMART_ACTION_EQUIP:
+                    buttonActionParamOneSearch.Visible = true; //! Equipment entry
                     buttonActionParamThreeSearch.Visible = true; //! Item entry 1
                     buttonActionParamFourSearch.Visible = true; //! Item entry 2
                     buttonActionParamFiveSearch.Visible = true; //! Item entry 3
@@ -1587,6 +1588,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_ADD_DYNAMIC_FLAG:
                 case SmartAction.SMART_ACTION_REMOVE_DYNAMIC_FLAG:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeDynamicFlag, textBoxToChange).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_EQUIP:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate).ShowDialog(this);
                     break;
             }
         }

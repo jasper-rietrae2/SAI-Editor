@@ -34,6 +34,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeItemEntry = 13,
         DatabaseSearchFormTypeSummonsId = 14,
         DatabaseSearchFormTypeTaxiPath = 15,
+        DatabaseSearchFormTypeEquipTemplate = 16,
     };
 
     public partial class SearchFromDatabaseForm : Form
@@ -240,6 +241,21 @@ namespace SAI_Editor
                     columnOne = "id";
                     columnTwo = "taxiName";
                     break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate:
+                    Text = "Search for creature equipment";
+                    listViewEntryResults.Columns.Add("Entry", 63);
+                    listViewEntryResults.Columns.Add("Id", 63);
+                    listViewEntryResults.Columns.Add("Item 1", 66);
+                    listViewEntryResults.Columns.Add("Item 2", 66);
+                    listViewEntryResults.Columns.Add("Item 3", 66);
+                    comboBoxSearchType.Items.Add("Entry");
+                    comboBoxSearchType.Items.Add("Item entries");
+                    baseQuery = "SELECT entry, id, itemEntry1, itemEntry2, itemEntry3 FROM creature_equip_template";
+                    columnOne = "entry";
+                    columnTwo = "itemEntry1";
+                    useMySQL = true;
+                    amountOfListviewColumns = 5;
+                    break;
             }
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -278,10 +294,20 @@ namespace SAI_Editor
 
                             break;
                         case 1: //! Second column
-                            if (checkBoxFieldContainsCriteria.Checked)
-                                queryToExecute += " WHERE " + columnTwo + " LIKE '%" + textBoxCriteria.Text + "%'";
+                            if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate)
+                            {
+                                if (checkBoxFieldContainsCriteria.Checked)
+                                    queryToExecute += " WHERE itemEntry1 LIKE '%" + textBoxCriteria.Text + "%' OR itemEntry2 LIKE '%" + textBoxCriteria.Text + "%' OR itemEntry3 LIKE '%" + textBoxCriteria.Text + "%'";
+                                else
+                                    queryToExecute += " WHERE itemEntry1 = " + textBoxCriteria.Text + " OR itemEntry2 = " + textBoxCriteria.Text + " OR itemEntry3 = " + textBoxCriteria.Text;
+                            }
                             else
-                                queryToExecute += " WHERE " + columnTwo + " = " + textBoxCriteria.Text;
+                            {
+                                if (checkBoxFieldContainsCriteria.Checked)
+                                    queryToExecute += " WHERE " + columnTwo + " LIKE '%" + textBoxCriteria.Text + "%'";
+                                else
+                                    queryToExecute += " WHERE " + columnTwo + " = " + textBoxCriteria.Text;
+                            }
 
                             break;
                         default:
