@@ -473,9 +473,7 @@ namespace SAI_Editor
         private void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxEventTypeId.Text = comboBoxEventType.SelectedIndex.ToString();
-
-            if (textBoxEventTypeId.Text == "0" || textBoxEventTypeId.Text == ((int)MaxValues.MaxEventType).ToString())
-                textBoxEventTypeId.SelectionStart = 3; //! Set cursot to end of text
+            textBoxEventTypeId.SelectionStart = 3; //! Set cursot to end of text
 
             if (!runningConstructor)
                 ChangeParameterFieldsBasedOnType();
@@ -484,9 +482,7 @@ namespace SAI_Editor
         private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxActionTypeId.Text = comboBoxActionType.SelectedIndex.ToString();
-
-            if (textBoxActionTypeId.Text == "0" || textBoxActionTypeId.Text == ((int)MaxValues.MaxActionType).ToString())
-                textBoxActionTypeId.SelectionStart = 3; //! Set cursot to end of text
+            textBoxActionTypeId.SelectionStart = 3; //! Set cursot to end of text
 
             if (!runningConstructor)
                 ChangeParameterFieldsBasedOnType();
@@ -495,9 +491,7 @@ namespace SAI_Editor
         private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxTargetTypeId.Text = comboBoxTargetType.SelectedIndex.ToString();
-
-            if (textBoxTargetTypeId.Text == "0" || textBoxTargetTypeId.Text == ((int)MaxValues.MaxTargetType).ToString())
-                textBoxTargetTypeId.SelectionStart = 3; //! Set cursot to end of text
+            textBoxTargetTypeId.SelectionStart = 3; //! Set cursot to end of text
 
             if (!runningConstructor)
                 ChangeParameterFieldsBasedOnType();
