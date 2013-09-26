@@ -896,7 +896,8 @@ namespace SAI_Editor
                     buttonActionParamOneSearch.Visible = true; //! Gameobject entry
                     break;
                 case SmartAction.SMART_ACTION_SET_EVENT_PHASE:
-                    buttonActionParamOneSearch.Visible = true; //! Event phase
+                case SmartAction.SMART_ACTION_SET_PHASE_MASK:
+                    buttonActionParamOneSearch.Visible = true; //! Event/ingame phase
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
                     buttonActionParamOneSearch.Visible = true; //! Event phase 1
@@ -1529,6 +1530,7 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SET_EVENT_PHASE:
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                 case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
+                case SmartAction.SMART_ACTION_SET_PHASE_MASK:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_ADD_ITEM:

@@ -29,13 +29,13 @@ namespace SAI_Editor
                 case MultiSelectFormType.MultiSelectFormTypePhaseMask:
                     Text = "Select a phasemask";
                     listViewSelectableItems.Columns.Add("Phase", 235, HorizontalAlignment.Left);
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_ALWAYS"); // 0
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_1");      // 1
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_2");      // 2
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_3");      // 3
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_4");      // 4
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_5");      // 5
-                    listViewSelectableItems.Items.Add("").SubItems.Add("EVENT_PHASE_6");      // 6
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_ALWAYS"); // 0
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_1");      // 1
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_2");      // 2
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_3");      // 3
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_4");      // 4
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_5");      // 5
+                    listViewSelectableItems.Items.Add("").SubItems.Add("PHASE_6");      // 6
                     break;
                 case MultiSelectFormType.MultiSelectFormTypeEventFlag:
                     Text = "Select eventflags";
