@@ -928,6 +928,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_REMOVEAURASFROMSPELL:
                     buttonActionParamOneSearch.Visible = true; //! Spell entry
                     break;
+                case SmartAction.SMART_ACTION_SET_SHEATH:
+                    buttonActionParamOneSearch.Visible = true; //! Sheath state
+                    break;
             }
 
             switch ((SmartTarget)target_type)
@@ -1537,6 +1540,9 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_SUMMON_CREATURE_GROUP:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SET_SHEATH:
+                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSheathState).ShowDialog(this);
                     break;
             }
         }

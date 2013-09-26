@@ -13,6 +13,7 @@ namespace SAI_Editor.SearchForms
         SingleSelectFormTypeSpellSchool = 5,
         SingleSelectFormTypeMotionType = 6,
         SingleSelectFormTypeSummonType = 7,
+        SingleSelectFormTypeSheathState = 8,
     };
 
     public partial class SingleSelectForm : Form
@@ -142,6 +143,13 @@ namespace SAI_Editor.SearchForms
                     listViewSelectableItems.Items.Add("CORPSE_TIMED_DESPAWN"); // 6
                     listViewSelectableItems.Items.Add("DEAD_DESPAWN"); // 7
                     listViewSelectableItems.Items.Add("MANUAL_DESPAWN"); // 8
+                    break;
+                case SingleSelectFormType.SingleSelectFormTypeSheathState:
+                    Text = "Select a sheath state";
+                    listViewSelectableItems.Columns.Add("Sheath state", 278, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("SHEATH_STATE_UNARMED"); // 0
+                    listViewSelectableItems.Items.Add("SHEATH_STATE_MELEE"); // 1
+                    listViewSelectableItems.Items.Add("SHEATH_STATE_RANGED"); // 2
                     break;
             }
         }
