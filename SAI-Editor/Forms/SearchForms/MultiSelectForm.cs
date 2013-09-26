@@ -63,6 +63,7 @@ namespace SAI_Editor
                 case MultiSelectFormType.MultiSelectFormTypeUnitFlag:
                     Text = "Select unit flags";
                     listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_NONE");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_SERVER_CONTROLLED");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_NON_ATTACKABLE");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG_DISABLE_MOVE");
@@ -99,6 +100,7 @@ namespace SAI_Editor
                 case MultiSelectFormType.MultiSelectFormTypeUnitFlag2:
                     Text = "Select unit flags2";
                     listViewSelectableItems.Columns.Add("Flag", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_NONE");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_FEIGN_DEATH");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_UNK1");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_FLAG2_IGNORE_REPUTATION");
@@ -121,6 +123,7 @@ namespace SAI_Editor
                 case MultiSelectFormType.MultiSelectFormTypeGoFlag:
                     Text = "Select gameobject flags";
                     listViewSelectableItems.Columns.Add("Gameobject flags", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_NONE");
                     listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_IN_USE");
                     listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_LOCKED");
                     listViewSelectableItems.Items.Add("").SubItems.Add("GO_FLAG_INTERACT_COND");
