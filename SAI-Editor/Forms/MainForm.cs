@@ -1076,6 +1076,11 @@ namespace SAI_Editor
             textBoxTargetParam1.Enabled = labelTargetParam1.Text.Length > 0;
             textBoxTargetParam2.Enabled = labelTargetParam2.Text.Length > 0;
             textBoxTargetParam3.Enabled = labelTargetParam3.Text.Length > 0;
+
+            textBoxTargetX.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
+            textBoxTargetY.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
+            textBoxTargetZ.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
+            textBoxTargetO.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
         }
 
         private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true)
