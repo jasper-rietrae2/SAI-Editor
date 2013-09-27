@@ -4,29 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SAI_Editor.Classes;
 
 namespace SAI_Editor
 {
     class TooltipHelper
     {
-        private static readonly Dictionary<string, ToolTip> tooltips = new Dictionary<string, ToolTip>();
+        private static readonly Dictionary<string, XToolTip> tooltips = new Dictionary<string, XToolTip>();
 
         public TooltipHelper()
         {
 
         }
 
-        public static ToolTip GetControlToolTip(string controlName)
+        public static XToolTip GetControlToolTip(string controlName)
         {
             if (tooltips.ContainsKey(controlName))
                 return tooltips[controlName];
 
-            ToolTip tooltip = new ToolTip();
+            XToolTip tooltip = new XToolTip();
             tooltips.Add(controlName, tooltip);
             return tooltip;
         }
 
-        public static ToolTip GetExistingToolTip(string controlName)
+        public static XToolTip GetExistingToolTip(string controlName)
         {
             if (tooltips.ContainsKey(controlName))
                 return tooltips[controlName];

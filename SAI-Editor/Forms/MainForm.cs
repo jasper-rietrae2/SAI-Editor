@@ -992,7 +992,7 @@ namespace SAI_Editor
         {
             if (String.IsNullOrWhiteSpace(title) || String.IsNullOrWhiteSpace(text))
             {
-                ToolTip toolTipExistent = TooltipHelper.GetExistingToolTip(control.Name.ToString());
+                XToolTip toolTipExistent = TooltipHelper.GetExistingToolTip(control.Name.ToString());
 
                 if (toolTipExistent != null)
                     toolTipExistent.Active = false;
@@ -1000,12 +1000,12 @@ namespace SAI_Editor
                 return;
             }
 
-            ToolTip toolTip = TooltipHelper.GetControlToolTip(control.Name.ToString());
+            XToolTip toolTip = TooltipHelper.GetControlToolTip(control.Name.ToString());
             toolTip.ToolTipIcon = icon;
             toolTip.ToolTipTitle = title;
             toolTip.IsBalloon = isBallon;
             toolTip.Active = true;
-            toolTip.SetToolTip(control, text);
+            toolTip.SetToolTipText(control, text);
         }
 
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
