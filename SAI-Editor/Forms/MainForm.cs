@@ -393,7 +393,7 @@ namespace SAI_Editor
             }
 
             ResetFieldsToDefault();
-            Text = "SAI-Editor - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ":" + textBoxPort.Text;
+            Text = "SAI-Editor - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ", " + textBoxPort.Text;
 
             if (instant)
             {
