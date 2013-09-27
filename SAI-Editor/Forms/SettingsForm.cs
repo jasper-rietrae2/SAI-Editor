@@ -87,6 +87,8 @@ namespace SAI_Editor
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.Port = textBoxPort.Text.Length > 0 ? XConverter.TryParseStringToUInt32(textBoxPort.Text) : 0;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+                ((MainForm)Owner).connectionString = connectionString;
+                SAI_Editor_Manager.Instance.ResetDatabases();
             }
 
             Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;

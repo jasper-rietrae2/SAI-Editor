@@ -51,7 +51,7 @@ namespace SAI_Editor
 
     public partial class MainForm : Form
     {
-        private readonly MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
+        public MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
         private readonly List<Control> controlsLoginForm = new List<Control>();
         private readonly List<Control> controlsMainForm = new List<Control>();
         private bool contractingToLoginForm , expandingToMainForm, expandingListView, contractingListView;
