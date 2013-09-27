@@ -17,22 +17,28 @@ namespace SAI_Editor
 
         }
 
-        public static XToolTip GetControlToolTip(string controlName)
+        public static XToolTip GetControlToolTip(Control control)
         {
-            if (tooltips.ContainsKey(controlName))
-                return tooltips[controlName];
+            if (tooltips.ContainsKey(control.Name))
+                return tooltips[control.Name];
 
             XToolTip tooltip = new XToolTip();
-            tooltips.Add(controlName, tooltip);
+            tooltips.Add(control.Name, tooltip);
             return tooltip;
         }
 
-        public static XToolTip GetExistingToolTip(string controlName)
+        public static XToolTip GetExistingToolTip(Control control)
         {
-            if (tooltips.ContainsKey(controlName))
-                return tooltips[controlName];
+            if (tooltips.ContainsKey(control.Name))
+                return tooltips[control.Name];
 
             return null;
+        }
+
+        public static void DisableOrEnableAllToolTips(bool enable)
+        {
+            foreach (XToolTip toolTip in tooltips.Values)
+                toolTip.Active = enable;
         }
     }
 }

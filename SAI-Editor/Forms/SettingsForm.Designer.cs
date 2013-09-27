@@ -58,6 +58,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonDefaultSettings = new System.Windows.Forms.Button();
+            this.checkBoxShowTooltipsPermanently = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -86,6 +87,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.checkBoxShowTooltipsPermanently);
             this.tabPageGeneral.Controls.Add(this.checkBoxChangeStaticInfo);
             this.tabPageGeneral.Controls.Add(this.checkBoxPromptExecuteQuery);
             this.tabPageGeneral.Controls.Add(this.textBoxAnimationSpeed);
@@ -375,6 +377,16 @@
             this.buttonDefaultSettings.UseVisualStyleBackColor = true;
             this.buttonDefaultSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
+            // checkBoxShowTooltipsPermanently
+            // 
+            this.checkBoxShowTooltipsPermanently.AutoSize = true;
+            this.checkBoxShowTooltipsPermanently.Location = new System.Drawing.Point(6, 144);
+            this.checkBoxShowTooltipsPermanently.Name = "checkBoxShowTooltipsPermanently";
+            this.checkBoxShowTooltipsPermanently.Size = new System.Drawing.Size(149, 17);
+            this.checkBoxShowTooltipsPermanently.TabIndex = 12;
+            this.checkBoxShowTooltipsPermanently.Text = "Show tooltips permanently";
+            this.checkBoxShowTooltipsPermanently.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -435,6 +447,7 @@
         public System.Windows.Forms.TextBox textBoxWorldDatabase;
         public System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.Button buttonTestConnection;
+        private System.Windows.Forms.CheckBox checkBoxShowTooltipsPermanently;
 
     }
 }

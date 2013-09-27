@@ -36,6 +36,7 @@ namespace SAI_Editor
             checkBoxHidePass.Checked = Settings.Default.HidePass;
             checkBoxPromptExecuteQuery.Checked = Settings.Default.PromptExecuteQuery;
             checkBoxChangeStaticInfo.Checked = Settings.Default.ChangeStaticInfo;
+            checkBoxShowTooltipsPermanently.Checked = Settings.Default.ShowTooltipsPermanently;
 
             textBoxAnimationSpeed.Text = Settings.Default.AnimationSpeed.ToString();
             textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
@@ -55,6 +56,8 @@ namespace SAI_Editor
                 ((MainForm)Owner).textBoxEntryOrGuid.Text = ((MainForm)Owner).originalEntryOrGuid;
                 ((MainForm)Owner).comboBoxSourceType.SelectedIndex = ((MainForm)Owner).GetIndexBySourceType(((MainForm)Owner).originalSourceType);
             }
+
+            bool showTooltipsPermanently = Settings.Default.ShowTooltipsPermanently;
 
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             byte[] buffer = new byte[1024];
@@ -94,6 +97,7 @@ namespace SAI_Editor
             Settings.Default.AnimationSpeed = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
             Settings.Default.PromptExecuteQuery = checkBoxPromptExecuteQuery.Checked;
             Settings.Default.ChangeStaticInfo = checkBoxChangeStaticInfo.Checked;
+            Settings.Default.ShowTooltipsPermanently = checkBoxShowTooltipsPermanently.Checked;
             Settings.Default.Save();
 
             if (newConnectionSuccesfull)
@@ -104,11 +108,14 @@ namespace SAI_Editor
                 ((MainForm)Owner).textBoxPassword.Text = decryptedPassword;
                 ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
                 ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
-                ((MainForm)Owner).animationSpeed = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
+                ((MainForm)Owner).expandAndContractSpeed = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
                 ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
             }
             else
                 MessageBox.Show("The database settings were not saved because no connection could be established.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            if (checkBoxShowTooltipsPermanently.Checked != showTooltipsPermanently)
+                ((MainForm)Owner).ExpandToShowPermanentTooltips(!checkBoxShowTooltipsPermanently.Checked);
         }
 
         private void buttonExitSettings_Click(object sender, EventArgs e)
@@ -147,6 +154,7 @@ namespace SAI_Editor
                 textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() &&
                 checkBoxPromptExecuteQuery.Checked == Settings.Default.PromptExecuteQuery &&
                 checkBoxChangeStaticInfo.Checked == Settings.Default.ChangeStaticInfo &&
+                checkBoxShowTooltipsPermanently.Checked == Settings.Default.ShowTooltipsPermanently &&
 
                 //! Check password last because it's the most 'expensive' check
                 textBoxPassword.Text == Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString())
@@ -170,6 +178,7 @@ namespace SAI_Editor
                     trackBarAnimationSpeed.Value = 10;
                     checkBoxPromptExecuteQuery.Checked = true;
                     checkBoxChangeStaticInfo.Checked = true;
+                    checkBoxShowTooltipsPermanently.Checked = false;
                     break;
                 case 1: // ! 'Connection' tab
                     textBoxHost.Text = "";

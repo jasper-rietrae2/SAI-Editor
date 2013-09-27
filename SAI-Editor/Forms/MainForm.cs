@@ -30,6 +30,8 @@ namespace SAI_Editor
 
         WidthToExpandTo = 985,
         HeightToExpandTo = 505,
+
+        ListViewHeightContract = 57,
     };
 
     internal enum MaxValues
@@ -52,11 +54,13 @@ namespace SAI_Editor
         private readonly MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
         private readonly List<Control> controlsLoginForm = new List<Control>();
         private readonly List<Control> controlsMainForm = new List<Control>();
-        private bool contractingToLoginForm = false, expandingToMainForm = false;
+        private bool contractingToLoginForm , expandingToMainForm, expandingListView, contractingListView;
         private int originalHeight = 0, originalWidth = 0;
         private readonly Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
+        private readonly Timer timerShowPermanentTooltips = new Timer { Enabled = false, Interval = 4 };
         private int WidthToExpandTo = (int)FormSizes.WidthToExpandTo, HeightToExpandTo = (int)FormSizes.HeightToExpandTo;
-        public int animationSpeed = 5;
+        private int listViewSmartScriptsInitialHeight, listViewSmartScriptsHeightToChangeTo;
+        public int expandAndContractSpeed = 5, expandAndContractSpeedListView = 2;
         private FormState formState = FormState.FormStateLogin;
         public SourceTypes originalSourceType = SourceTypes.SourceTypeCreature;
         public String originalEntryOrGuid = String.Empty;
@@ -92,7 +96,11 @@ namespace SAI_Editor
                 textBoxPassword.Text = Settings.Default.Password.Length > 150 ? Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString() : Settings.Default.Password;
                 textBoxWorldDatabase.Text = Settings.Default.Database;
                 textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
-                animationSpeed = Settings.Default.AnimationSpeed;
+                expandAndContractSpeed = Settings.Default.AnimationSpeed;
+
+                //! Handled when the initial animation finished
+                //if (Settings.Default.ShowTooltipsPermanently)
+                //    ExpandToShowPermanentTooltips(false);
             }
             catch (Exception ex)
             {
@@ -100,6 +108,10 @@ namespace SAI_Editor
             }
 
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
+            timerShowPermanentTooltips.Tick += timerShowPermanentTooltips_Tick;
+
+            panelPermanentTooltipTypes.Visible = false;
+            panelPermanentTooltipParameters.Visible = false;
 
             foreach (Control control in Controls)
             {
@@ -200,6 +212,25 @@ namespace SAI_Editor
 
                 page.AutoScroll = true;
                 page.AutoScrollMinSize = new Size(page.Width, page.Height);
+
+                //foreach (Control control in page.Controls)
+                //{
+                //    if (control is Label)
+                //    {
+                //        switch (page.TabIndex)
+                //        {
+                //            case 0: //! Events
+                //                control.MouseEnter += labelsEventParameters_MouseEnter;
+                //                break;
+                //            case 1: //! Actions
+                //                control.MouseEnter += labelsActionsParameters_MouseEnter;
+                //                break;
+                //            case 2: //! Targets
+                //                control.MouseEnter += labelsTargetsParameters_MouseEnter;
+                //                break;
+                //        }
+                //    }
+                //}
             }
 
             //! Temp..
@@ -210,6 +241,15 @@ namespace SAI_Editor
 
             textBoxComments.GotFocus += textBoxComments_GotFocus;
             textBoxComments.LostFocus += textBoxComments_LostFocus;
+
+            panelPermanentTooltipTypes.BackColor = Color.FromArgb(255, 255, 225);
+            panelPermanentTooltipParameters.BackColor = Color.FromArgb(255, 255, 225);
+            labelPermanentTooltipTextTypes.BackColor = Color.FromArgb(255, 255, 225);
+
+            //! Set them to invisible by default; they become visible when the timer finished
+            panelPermanentTooltipTypes.Visible = false;
+            panelPermanentTooltipParameters.Visible = false;
+
             runningConstructor = false;
         }
 
@@ -218,7 +258,7 @@ namespace SAI_Editor
             if (expandingToMainForm)
             {
                 if (Height < HeightToExpandTo)
-                    Height += animationSpeed;
+                    Height += expandAndContractSpeed;
                 else
                 {
                     Height = HeightToExpandTo;
@@ -234,7 +274,7 @@ namespace SAI_Editor
                 }
 
                 if (Width < WidthToExpandTo)
-                    Width += animationSpeed;
+                    Width += expandAndContractSpeed;
                 else
                 {
                     Width = WidthToExpandTo;
@@ -252,7 +292,7 @@ namespace SAI_Editor
             else if (contractingToLoginForm)
             {
                 if (Height > originalHeight)
-                    Height -= animationSpeed;
+                    Height -= expandAndContractSpeed;
                 else
                 {
                     Height = originalHeight;
@@ -268,7 +308,7 @@ namespace SAI_Editor
                 }
 
                 if (Width > originalWidth)
-                    Width -= animationSpeed;
+                    Width -= expandAndContractSpeed;
                 else
                 {
                     Width = originalWidth;
@@ -360,6 +400,9 @@ namespace SAI_Editor
                 Width = WidthToExpandTo;
                 Height = HeightToExpandTo;
                 formState = FormState.FormStateMain;
+
+                if (Settings.Default.ShowTooltipsPermanently)
+                    ExpandToShowPermanentTooltips(false);
             }
             else
             {
@@ -373,11 +416,17 @@ namespace SAI_Editor
 
             foreach (Control control in controlsMainForm)
                 control.Visible = instant;
+
+            panelPermanentTooltipTypes.Visible = false;
+            panelPermanentTooltipParameters.Visible = false;
         }
 
         private void StartContractingToLoginForm(bool instant = false)
         {
             Text = "SAI-Editor: Login";
+
+            if (Settings.Default.ShowTooltipsPermanently)
+                listViewSmartScripts.Height += (int)FormSizes.ListViewHeightContract;
 
             if (instant)
             {
@@ -465,6 +514,8 @@ namespace SAI_Editor
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
+            panelPermanentTooltipTypes.Visible = false;
+            panelPermanentTooltipParameters.Visible = false;
             ResetFieldsToDefault(true);
             listViewSmartScripts.Items.Clear();
             StartContractingToLoginForm(Settings.Default.InstantExpand);
@@ -476,7 +527,10 @@ namespace SAI_Editor
             textBoxEventTypeId.SelectionStart = 3; //! Set cursot to end of text
 
             if (!runningConstructor)
+            {
                 ChangeParameterFieldsBasedOnType();
+                UpdatePermanentTooltipOfTypes(comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+            }
         }
 
         private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
@@ -485,7 +539,10 @@ namespace SAI_Editor
             textBoxActionTypeId.SelectionStart = 3; //! Set cursot to end of text
 
             if (!runningConstructor)
+            {
                 ChangeParameterFieldsBasedOnType();
+                UpdatePermanentTooltipOfTypes(comboBoxActionType, ScriptTypeId.ScriptTypeAction);
+            }
         }
 
         private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
@@ -494,7 +551,10 @@ namespace SAI_Editor
             textBoxTargetTypeId.SelectionStart = 3; //! Set cursot to end of text
 
             if (!runningConstructor)
+            {
                 ChangeParameterFieldsBasedOnType();
+                UpdatePermanentTooltipOfTypes(comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+            }
         }
 
         private void ChangeParameterFieldsBasedOnType()
@@ -505,11 +565,15 @@ namespace SAI_Editor
             labelEventParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
             labelEventParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
             labelEventParam4.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
-            AddTooltip(comboBoxEventType, comboBoxEventType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(event_type, ScriptTypeId.ScriptTypeEvent));
-            AddTooltip(labelEventParam1, labelEventParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 1, ScriptTypeId.ScriptTypeEvent));
-            AddTooltip(labelEventParam2, labelEventParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 2, ScriptTypeId.ScriptTypeEvent));
-            AddTooltip(labelEventParam3, labelEventParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 3, ScriptTypeId.ScriptTypeEvent));
-            AddTooltip(labelEventParam4, labelEventParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
+
+            if (!Settings.Default.ShowTooltipsPermanently)
+            {
+                AddTooltip(comboBoxEventType, comboBoxEventType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(event_type, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam1, labelEventParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 1, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam2, labelEventParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 2, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam3, labelEventParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 3, ScriptTypeId.ScriptTypeEvent));
+                AddTooltip(labelEventParam4, labelEventParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
+            }
 
             //! Action parameters
             int action_type = comboBoxActionType.SelectedIndex;
@@ -519,23 +583,31 @@ namespace SAI_Editor
             labelActionParam4.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 4, ScriptTypeId.ScriptTypeAction);
             labelActionParam5.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 5, ScriptTypeId.ScriptTypeAction);
             labelActionParam6.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 6, ScriptTypeId.ScriptTypeAction);
-            AddTooltip(comboBoxActionType, comboBoxActionType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(action_type, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam1, labelActionParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 1, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam2, labelActionParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 2, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam3, labelActionParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 3, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam4, labelActionParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 4, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam5, labelActionParam5.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 5, ScriptTypeId.ScriptTypeAction));
-            AddTooltip(labelActionParam6, labelActionParam6.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
+
+            if (!Settings.Default.ShowTooltipsPermanently)
+            {
+                AddTooltip(comboBoxActionType, comboBoxActionType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(action_type, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam1, labelActionParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 1, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam2, labelActionParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 2, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam3, labelActionParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 3, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam4, labelActionParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 4, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam5, labelActionParam5.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 5, ScriptTypeId.ScriptTypeAction));
+                AddTooltip(labelActionParam6, labelActionParam6.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
+            }
 
             //! Target parameters
             int target_type = comboBoxTargetType.SelectedIndex;
             labelTargetParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
             labelTargetParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
             labelTargetParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
-            AddTooltip(comboBoxTargetType, comboBoxTargetType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(target_type, ScriptTypeId.ScriptTypeTarget));
-            AddTooltip(labelTargetParam1, labelTargetParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 1, ScriptTypeId.ScriptTypeTarget));
-            AddTooltip(labelTargetParam2, labelTargetParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 2, ScriptTypeId.ScriptTypeTarget));
-            AddTooltip(labelTargetParam3, labelTargetParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
+
+            if (!Settings.Default.ShowTooltipsPermanently)
+            {
+                AddTooltip(comboBoxTargetType, comboBoxTargetType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(target_type, ScriptTypeId.ScriptTypeTarget));
+                AddTooltip(labelTargetParam1, labelTargetParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 1, ScriptTypeId.ScriptTypeTarget));
+                AddTooltip(labelTargetParam2, labelTargetParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 2, ScriptTypeId.ScriptTypeTarget));
+                AddTooltip(labelTargetParam3, labelTargetParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
+            }
 
             AdjustAllParameterFields(event_type, action_type, target_type);
         }
@@ -557,6 +629,12 @@ namespace SAI_Editor
 
             foreach (var control in controlsMainForm)
                 control.Visible = expanding;
+
+            panelPermanentTooltipTypes.Visible = false;
+            panelPermanentTooltipParameters.Visible = false;
+
+            if (expanding && Settings.Default.ShowTooltipsPermanently)
+                ExpandToShowPermanentTooltips(false);
         }
 
         private async Task<bool> SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
@@ -729,11 +807,15 @@ namespace SAI_Editor
                 labelEventParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
                 labelEventParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
                 labelEventParam4.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 4, ScriptTypeId.ScriptTypeEvent);
-                AddTooltip(comboBoxEventType, comboBoxEventType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(event_type, ScriptTypeId.ScriptTypeEvent));
-                AddTooltip(labelEventParam1, labelEventParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 1, ScriptTypeId.ScriptTypeEvent));
-                AddTooltip(labelEventParam2, labelEventParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 2, ScriptTypeId.ScriptTypeEvent));
-                AddTooltip(labelEventParam3, labelEventParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 3, ScriptTypeId.ScriptTypeEvent));
-                AddTooltip(labelEventParam4, labelEventParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
+
+                if (!Settings.Default.ShowTooltipsPermanently)
+                {
+                    AddTooltip(comboBoxEventType, comboBoxEventType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(event_type, ScriptTypeId.ScriptTypeEvent));
+                    AddTooltip(labelEventParam1, labelEventParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 1, ScriptTypeId.ScriptTypeEvent));
+                    AddTooltip(labelEventParam2, labelEventParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 2, ScriptTypeId.ScriptTypeEvent));
+                    AddTooltip(labelEventParam3, labelEventParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 3, ScriptTypeId.ScriptTypeEvent));
+                    AddTooltip(labelEventParam4, labelEventParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(event_type, 4, ScriptTypeId.ScriptTypeEvent));
+                }
 
                 //! Action parameters
                 int action_type = XConverter.TryParseStringToInt32(selectedItem[12].Text);
@@ -750,13 +832,17 @@ namespace SAI_Editor
                 labelActionParam4.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 4, ScriptTypeId.ScriptTypeAction);
                 labelActionParam5.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 5, ScriptTypeId.ScriptTypeAction);
                 labelActionParam6.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 6, ScriptTypeId.ScriptTypeAction);
-                AddTooltip(comboBoxActionType, comboBoxActionType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(action_type, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam1, labelActionParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 1, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam2, labelActionParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 2, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam3, labelActionParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 3, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam4, labelActionParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 4, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam5, labelActionParam5.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 5, ScriptTypeId.ScriptTypeAction));
-                AddTooltip(labelActionParam6, labelActionParam6.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
+
+                if (!Settings.Default.ShowTooltipsPermanently)
+                {
+                    AddTooltip(comboBoxActionType, comboBoxActionType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(action_type, ScriptTypeId.ScriptTypeAction));
+                    AddTooltip(labelActionParam1, labelActionParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 1, ScriptTypeId.ScriptTypeAction));
+                    AddTooltip(labelActionParam2, labelActionParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 2, ScriptTypeId.ScriptTypeAction));
+                    AddTooltip(labelActionParam3, labelActionParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 3, ScriptTypeId.ScriptTypeAction));
+                    AddTooltip(labelActionParam4, labelActionParam4.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 4, ScriptTypeId.ScriptTypeAction));
+                    AddTooltip(labelActionParam5, labelActionParam5.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 5, ScriptTypeId.ScriptTypeAction));
+                    AddTooltip(labelActionParam6, labelActionParam6.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(action_type, 6, ScriptTypeId.ScriptTypeAction));
+                }
 
                 //! Target parameters
                 int target_type = XConverter.TryParseStringToInt32(selectedItem[19].Text);
@@ -767,10 +853,14 @@ namespace SAI_Editor
                 labelTargetParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
                 labelTargetParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
                 labelTargetParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
-                AddTooltip(comboBoxTargetType, comboBoxTargetType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(target_type, ScriptTypeId.ScriptTypeTarget));
-                AddTooltip(labelTargetParam1, labelTargetParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 1, ScriptTypeId.ScriptTypeTarget));
-                AddTooltip(labelTargetParam2, labelTargetParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 2, ScriptTypeId.ScriptTypeTarget));
-                AddTooltip(labelTargetParam3, labelTargetParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
+
+                if (!Settings.Default.ShowTooltipsPermanently)
+                {
+                    AddTooltip(comboBoxTargetType, comboBoxTargetType.SelectedItem.ToString(), SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(target_type, ScriptTypeId.ScriptTypeTarget));
+                    AddTooltip(labelTargetParam1, labelTargetParam1.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 1, ScriptTypeId.ScriptTypeTarget));
+                    AddTooltip(labelTargetParam2, labelTargetParam2.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 2, ScriptTypeId.ScriptTypeTarget));
+                    AddTooltip(labelTargetParam3, labelTargetParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
+                }
 
                 textBoxTargetX.Text = selectedItem[23].Text;
                 textBoxTargetY.Text = selectedItem[24].Text;
@@ -992,7 +1082,7 @@ namespace SAI_Editor
         {
             if (String.IsNullOrWhiteSpace(title) || String.IsNullOrWhiteSpace(text))
             {
-                XToolTip toolTipExistent = TooltipHelper.GetExistingToolTip(control.Name.ToString());
+                XToolTip toolTipExistent = TooltipHelper.GetExistingToolTip(control);
 
                 if (toolTipExistent != null)
                     toolTipExistent.Active = false;
@@ -1000,7 +1090,7 @@ namespace SAI_Editor
                 return;
             }
 
-            XToolTip toolTip = TooltipHelper.GetControlToolTip(control.Name.ToString());
+            XToolTip toolTip = TooltipHelper.GetControlToolTip(control);
             toolTip.ToolTipIcon = icon;
             toolTip.ToolTipTitle = title;
             toolTip.IsBalloon = isBallon;
@@ -1715,6 +1805,198 @@ namespace SAI_Editor
         {
             if (String.IsNullOrEmpty(textBoxComments.Text))
                 textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
+        }
+
+        public void ExpandToShowPermanentTooltips(bool expand)
+        {
+            listViewSmartScriptsInitialHeight = listViewSmartScripts.Height;
+            expandingListView = expand;
+            contractingListView = !expand;
+            listViewSmartScriptsHeightToChangeTo = expand ? listViewSmartScripts.Height + (int)FormSizes.ListViewHeightContract : listViewSmartScripts.Height - (int)FormSizes.ListViewHeightContract;
+            timerShowPermanentTooltips.Enabled = true;
+            TooltipHelper.DisableOrEnableAllToolTips(false);
+
+            if (expand)
+            {
+                panelPermanentTooltipTypes.Visible = false;
+                panelPermanentTooltipParameters.Visible = false;
+                listViewSmartScriptsHeightToChangeTo = listViewSmartScripts.Height + (int)FormSizes.ListViewHeightContract;
+                ChangeParameterFieldsBasedOnType();
+            }
+            else
+            {
+                listViewSmartScriptsHeightToChangeTo = listViewSmartScripts.Height - (int)FormSizes.ListViewHeightContract;
+                //ChangeParameterFieldsBasedOnType();
+            }
+        }
+
+        private void timerShowPermanentTooltips_Tick(object sender, EventArgs e)
+        {
+            if (expandingListView)
+            {
+                if (listViewSmartScripts.Height < listViewSmartScriptsHeightToChangeTo)
+                    listViewSmartScripts.Height += expandAndContractSpeedListView;
+                else
+                {
+                    listViewSmartScripts.Height = listViewSmartScriptsHeightToChangeTo;
+                    timerShowPermanentTooltips.Enabled = false;
+                    expandingListView = false;
+                    TooltipHelper.DisableOrEnableAllToolTips(true);
+                }
+            }
+            else if (contractingListView)
+            {
+                if (listViewSmartScripts.Height > listViewSmartScriptsHeightToChangeTo)
+                    listViewSmartScripts.Height -= expandAndContractSpeedListView;
+                else
+                {
+                    listViewSmartScripts.Height = listViewSmartScriptsHeightToChangeTo;
+                    timerShowPermanentTooltips.Enabled = false;
+                    contractingListView = false;
+                    panelPermanentTooltipTypes.Visible = true;
+                    panelPermanentTooltipParameters.Visible = true;
+                }
+            }
+        }
+
+        private void comboBoxEventType_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfTypes(sender as ComboBox, ScriptTypeId.ScriptTypeEvent);
+        }
+
+        private void comboBoxActionType_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfTypes(sender as ComboBox, ScriptTypeId.ScriptTypeAction);
+        }
+
+        private void comboBoxTargetType_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfTypes(sender as ComboBox, ScriptTypeId.ScriptTypeTarget);
+        }
+
+        private void UpdatePermanentTooltipOfTypes(ComboBox comboBoxToTarget, ScriptTypeId scriptTypeId)
+        {
+            string toolTipOfType = SAI_Editor_Manager.Instance.GetScriptTypeTooltipById(comboBoxToTarget.SelectedIndex, scriptTypeId);
+            string toolTipTitleOfType = comboBoxToTarget.SelectedItem.ToString();
+
+            if (!String.IsNullOrWhiteSpace(toolTipOfType) && !String.IsNullOrWhiteSpace(toolTipTitleOfType))
+            {
+                labelPermanentTooltipTextTypes.Text = toolTipOfType;
+                labelPermanentTooltipTitleTypes.Text = toolTipTitleOfType;
+            }
+        }
+
+        private void UpdatePermanentTooltipOfParameter(Label labelToTarget, int paramId, ComboBox comboBoxToTarget, ScriptTypeId scriptTypeId)
+        {
+            string toolTipOfType = SAI_Editor_Manager.Instance.GetParameterTooltipById(comboBoxToTarget.SelectedIndex, paramId, scriptTypeId);
+
+            if (!String.IsNullOrWhiteSpace(toolTipOfType))
+                labelPermanentTooltipTextParameters.Text = toolTipOfType;
+        }
+
+        private void labelEventParam1_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 1, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+        }
+
+        private void labelEventParam2_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 2, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+        }
+
+        private void labelEventParam3_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 3, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+        }
+
+        private void labelEventParam4_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 4, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+        }
+
+        private void labelActionParam1_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 1, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
+        }
+
+        private void labelActionParam2_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 2, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
+        }
+
+        private void labelActionParam3_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 3, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
+        }
+
+        private void labelActionParam4_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 4, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
+        }
+
+        private void labelActionParam5_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 5, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
+        }
+
+        private void labelActionParam6_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 6, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
+        }
+
+        private void labelTargetParam1_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 1, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+        }
+
+        private void labelTargetParam2_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 2, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+        }
+
+        private void labelTargetParam3_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 3, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+        }
+
+        private void labelTargetX_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 4, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+        }
+
+        private void labelTargetY_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 5, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+        }
+
+        private void labelTargetZ_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 6, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+        }
+
+        private void labelTargetO_MouseEnter(object sender, EventArgs e)
+        {
+            if (Settings.Default.ShowTooltipsPermanently)
+                UpdatePermanentTooltipOfParameter(sender as Label, 7, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
         }
     }
 }

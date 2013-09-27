@@ -164,6 +164,13 @@
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.listViewSmartScripts = new System.Windows.Forms.ListView();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
+            this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
+            this.labelPermanentTooltipTextTypes = new System.Windows.Forms.Label();
+            this.pictureBoxPermanentTooltip = new System.Windows.Forms.PictureBox();
+            this.panelPermanentTooltipParameters = new System.Windows.Forms.Panel();
+            this.labelPermanentTooltipTextParameters = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -178,6 +185,10 @@
             this.tabPageAction.SuspendLayout();
             this.tabPageTarget.SuspendLayout();
             this.groupBoxParameters.SuspendLayout();
+            this.panelPermanentTooltipTypes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
+            this.panelPermanentTooltipParameters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelUser
@@ -735,6 +746,7 @@
             this.comboBoxTargetType.TabIndex = 4;
             this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
             this.comboBoxTargetType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
+            this.comboBoxTargetType.MouseEnter += new System.EventHandler(this.comboBoxTargetType_MouseEnter);
             // 
             // buttonSelectEventFlag
             // 
@@ -877,6 +889,7 @@
             this.comboBoxActionType.TabIndex = 2;
             this.comboBoxActionType.SelectedIndexChanged += new System.EventHandler(this.comboBoxActionType_SelectedIndexChanged);
             this.comboBoxActionType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
+            this.comboBoxActionType.MouseEnter += new System.EventHandler(this.comboBoxActionType_MouseEnter);
             // 
             // buttonSearchEventFlags
             // 
@@ -1163,6 +1176,7 @@
             this.comboBoxEventType.TabIndex = 0;
             this.comboBoxEventType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEventType_SelectedIndexChanged);
             this.comboBoxEventType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
+            this.comboBoxEventType.MouseEnter += new System.EventHandler(this.comboBoxEventType_MouseEnter);
             // 
             // textBoxEventScriptId
             // 
@@ -1245,6 +1259,7 @@
             this.labelEventParam1.Size = new System.Drawing.Size(46, 13);
             this.labelEventParam1.TabIndex = 23;
             this.labelEventParam1.Text = "Param 1";
+            this.labelEventParam1.MouseEnter += new System.EventHandler(this.labelEventParam1_MouseEnter);
             // 
             // textBoxEventParam1
             // 
@@ -1340,6 +1355,7 @@
             this.labelEventParam4.Size = new System.Drawing.Size(46, 13);
             this.labelEventParam4.TabIndex = 23;
             this.labelEventParam4.Text = "Param 4";
+            this.labelEventParam4.MouseEnter += new System.EventHandler(this.labelEventParam4_MouseEnter);
             // 
             // labelEventParam3
             // 
@@ -1349,6 +1365,7 @@
             this.labelEventParam3.Size = new System.Drawing.Size(46, 13);
             this.labelEventParam3.TabIndex = 23;
             this.labelEventParam3.Text = "Param 3";
+            this.labelEventParam3.MouseEnter += new System.EventHandler(this.labelEventParam3_MouseEnter);
             // 
             // labelEventParam2
             // 
@@ -1358,6 +1375,7 @@
             this.labelEventParam2.Size = new System.Drawing.Size(46, 13);
             this.labelEventParam2.TabIndex = 23;
             this.labelEventParam2.Text = "Param 2";
+            this.labelEventParam2.MouseEnter += new System.EventHandler(this.labelEventParam2_MouseEnter);
             // 
             // textBoxEventParam4
             // 
@@ -1488,6 +1506,7 @@
             this.labelActionParam6.Size = new System.Drawing.Size(46, 13);
             this.labelActionParam6.TabIndex = 24;
             this.labelActionParam6.Text = "Param 6";
+            this.labelActionParam6.MouseEnter += new System.EventHandler(this.labelActionParam6_MouseEnter);
             // 
             // labelActionParam5
             // 
@@ -1497,6 +1516,7 @@
             this.labelActionParam5.Size = new System.Drawing.Size(46, 13);
             this.labelActionParam5.TabIndex = 24;
             this.labelActionParam5.Text = "Param 5";
+            this.labelActionParam5.MouseEnter += new System.EventHandler(this.labelActionParam5_MouseEnter);
             // 
             // labelActionParam4
             // 
@@ -1506,6 +1526,7 @@
             this.labelActionParam4.Size = new System.Drawing.Size(46, 13);
             this.labelActionParam4.TabIndex = 24;
             this.labelActionParam4.Text = "Param 4";
+            this.labelActionParam4.MouseEnter += new System.EventHandler(this.labelActionParam4_MouseEnter);
             // 
             // labelActionParam3
             // 
@@ -1515,6 +1536,7 @@
             this.labelActionParam3.Size = new System.Drawing.Size(46, 13);
             this.labelActionParam3.TabIndex = 25;
             this.labelActionParam3.Text = "Param 3";
+            this.labelActionParam3.MouseEnter += new System.EventHandler(this.labelActionParam3_MouseEnter);
             // 
             // labelActionParam2
             // 
@@ -1524,6 +1546,7 @@
             this.labelActionParam2.Size = new System.Drawing.Size(46, 13);
             this.labelActionParam2.TabIndex = 26;
             this.labelActionParam2.Text = "Param 2";
+            this.labelActionParam2.MouseEnter += new System.EventHandler(this.labelActionParam2_MouseEnter);
             // 
             // textBoxActionParam6
             // 
@@ -1578,6 +1601,7 @@
             this.labelActionParam1.Size = new System.Drawing.Size(46, 13);
             this.labelActionParam1.TabIndex = 32;
             this.labelActionParam1.Text = "Param 1";
+            this.labelActionParam1.MouseEnter += new System.EventHandler(this.labelActionParam1_MouseEnter);
             // 
             // textBoxActionParam1
             // 
@@ -1703,6 +1727,7 @@
             this.labelTargetO.Size = new System.Drawing.Size(49, 13);
             this.labelTargetO.TabIndex = 34;
             this.labelTargetO.Text = "Target O";
+            this.labelTargetO.MouseEnter += new System.EventHandler(this.labelTargetO_MouseEnter);
             // 
             // labelTargetZ
             // 
@@ -1712,6 +1737,7 @@
             this.labelTargetZ.Size = new System.Drawing.Size(48, 13);
             this.labelTargetZ.TabIndex = 34;
             this.labelTargetZ.Text = "Target Z";
+            this.labelTargetZ.MouseEnter += new System.EventHandler(this.labelTargetZ_MouseEnter);
             // 
             // labelTargetY
             // 
@@ -1721,6 +1747,7 @@
             this.labelTargetY.Size = new System.Drawing.Size(48, 13);
             this.labelTargetY.TabIndex = 34;
             this.labelTargetY.Text = "Target Y";
+            this.labelTargetY.MouseEnter += new System.EventHandler(this.labelTargetY_MouseEnter);
             // 
             // labelTargetX
             // 
@@ -1730,6 +1757,7 @@
             this.labelTargetX.Size = new System.Drawing.Size(48, 13);
             this.labelTargetX.TabIndex = 34;
             this.labelTargetX.Text = "Target X";
+            this.labelTargetX.MouseEnter += new System.EventHandler(this.labelTargetX_MouseEnter);
             // 
             // textBoxTargetO
             // 
@@ -1757,6 +1785,7 @@
             this.labelTargetParam3.Size = new System.Drawing.Size(46, 13);
             this.labelTargetParam3.TabIndex = 34;
             this.labelTargetParam3.Text = "Param 3";
+            this.labelTargetParam3.MouseEnter += new System.EventHandler(this.labelTargetParam3_MouseEnter);
             // 
             // textBoxTargetY
             // 
@@ -1775,6 +1804,7 @@
             this.labelTargetParam2.Size = new System.Drawing.Size(46, 13);
             this.labelTargetParam2.TabIndex = 35;
             this.labelTargetParam2.Text = "Param 2";
+            this.labelTargetParam2.MouseEnter += new System.EventHandler(this.labelTargetParam2_MouseEnter);
             // 
             // textBoxTargetX
             // 
@@ -1811,6 +1841,7 @@
             this.labelTargetParam1.Size = new System.Drawing.Size(46, 13);
             this.labelTargetParam1.TabIndex = 38;
             this.labelTargetParam1.Text = "Param 1";
+            this.labelTargetParam1.MouseEnter += new System.EventHandler(this.labelTargetParam1_MouseEnter);
             // 
             // textBoxTargetParam1
             // 
@@ -1839,7 +1870,7 @@
             this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
             this.listViewSmartScripts.MultiSelect = false;
             this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(947, 207);
+            this.listViewSmartScripts.Size = new System.Drawing.Size(947, 214);
             this.listViewSmartScripts.TabIndex = 24;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
@@ -1848,11 +1879,81 @@
             this.listViewSmartScripts.Click += new System.EventHandler(this.listViewSmartScripts_Click);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
+            // panelPermanentTooltipTypes
+            // 
+            this.panelPermanentTooltipTypes.BackColor = System.Drawing.Color.White;
+            this.panelPermanentTooltipTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTitleTypes);
+            this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTextTypes);
+            this.panelPermanentTooltipTypes.Controls.Add(this.pictureBoxPermanentTooltip);
+            this.panelPermanentTooltipTypes.Location = new System.Drawing.Point(12, 405);
+            this.panelPermanentTooltipTypes.Name = "panelPermanentTooltipTypes";
+            this.panelPermanentTooltipTypes.Size = new System.Drawing.Size(947, 30);
+            this.panelPermanentTooltipTypes.TabIndex = 25;
+            // 
+            // labelPermanentTooltipTitleTypes
+            // 
+            this.labelPermanentTooltipTitleTypes.AutoSize = true;
+            this.labelPermanentTooltipTitleTypes.Location = new System.Drawing.Point(26, 1);
+            this.labelPermanentTooltipTitleTypes.Name = "labelPermanentTooltipTitleTypes";
+            this.labelPermanentTooltipTitleTypes.Size = new System.Drawing.Size(144, 13);
+            this.labelPermanentTooltipTitleTypes.TabIndex = 31;
+            this.labelPermanentTooltipTitleTypes.Text = "SMART_EVENT_SPELLHIT";
+            // 
+            // labelPermanentTooltipTextTypes
+            // 
+            this.labelPermanentTooltipTextTypes.AutoSize = true;
+            this.labelPermanentTooltipTextTypes.Location = new System.Drawing.Point(26, 15);
+            this.labelPermanentTooltipTextTypes.Name = "labelPermanentTooltipTextTypes";
+            this.labelPermanentTooltipTextTypes.Size = new System.Drawing.Size(153, 13);
+            this.labelPermanentTooltipTextTypes.TabIndex = 30;
+            this.labelPermanentTooltipTextTypes.Text = "On creature struck by a spell id";
+            // 
+            // pictureBoxPermanentTooltip
+            // 
+            this.pictureBoxPermanentTooltip.Image = global::SAI_Editor.Properties.Resources.permanent_tooltip_icon;
+            this.pictureBoxPermanentTooltip.Location = new System.Drawing.Point(6, 7);
+            this.pictureBoxPermanentTooltip.Name = "pictureBoxPermanentTooltip";
+            this.pictureBoxPermanentTooltip.Size = new System.Drawing.Size(14, 14);
+            this.pictureBoxPermanentTooltip.TabIndex = 29;
+            this.pictureBoxPermanentTooltip.TabStop = false;
+            // 
+            // panelPermanentTooltipParameters
+            // 
+            this.panelPermanentTooltipParameters.BackColor = System.Drawing.Color.White;
+            this.panelPermanentTooltipParameters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelPermanentTooltipParameters.Controls.Add(this.labelPermanentTooltipTextParameters);
+            this.panelPermanentTooltipParameters.Controls.Add(this.pictureBox1);
+            this.panelPermanentTooltipParameters.Location = new System.Drawing.Point(12, 439);
+            this.panelPermanentTooltipParameters.Name = "panelPermanentTooltipParameters";
+            this.panelPermanentTooltipParameters.Size = new System.Drawing.Size(947, 23);
+            this.panelPermanentTooltipParameters.TabIndex = 25;
+            // 
+            // labelPermanentTooltipTextParameters
+            // 
+            this.labelPermanentTooltipTextParameters.AutoSize = true;
+            this.labelPermanentTooltipTextParameters.Location = new System.Drawing.Point(26, 4);
+            this.labelPermanentTooltipTextParameters.Name = "labelPermanentTooltipTextParameters";
+            this.labelPermanentTooltipTextParameters.Size = new System.Drawing.Size(75, 13);
+            this.labelPermanentTooltipTextParameters.TabIndex = 30;
+            this.labelPermanentTooltipTextParameters.Text = "Parameter info";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::SAI_Editor.Properties.Resources.permanent_tooltip_icon;
+            this.pictureBox1.Location = new System.Drawing.Point(6, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(14, 14);
+            this.pictureBox1.TabIndex = 29;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1214, 463);
+            this.ClientSize = new System.Drawing.Size(1214, 474);
+            this.Controls.Add(this.panelPermanentTooltipParameters);
+            this.Controls.Add(this.panelPermanentTooltipTypes);
             this.Controls.Add(this.panelLoginBox);
             this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.groupBoxParameters);
@@ -1891,6 +1992,12 @@
             this.tabPageTarget.ResumeLayout(false);
             this.tabPageTarget.PerformLayout();
             this.groupBoxParameters.ResumeLayout(false);
+            this.panelPermanentTooltipTypes.ResumeLayout(false);
+            this.panelPermanentTooltipTypes.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
+            this.panelPermanentTooltipParameters.ResumeLayout(false);
+            this.panelPermanentTooltipParameters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2032,6 +2139,13 @@
         private System.Windows.Forms.Button buttonTargetParamOneSearch;
         private System.Windows.Forms.ToolStripMenuItem otherToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smartAIWikiToolStripMenuItem;
+        private System.Windows.Forms.Panel panelPermanentTooltipTypes;
+        private System.Windows.Forms.PictureBox pictureBoxPermanentTooltip;
+        private System.Windows.Forms.Label labelPermanentTooltipTextTypes;
+        private System.Windows.Forms.Label labelPermanentTooltipTitleTypes;
+        private System.Windows.Forms.Panel panelPermanentTooltipParameters;
+        private System.Windows.Forms.Label labelPermanentTooltipTextParameters;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

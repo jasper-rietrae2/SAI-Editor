@@ -202,5 +202,17 @@ namespace SAI_Editor.Properties {
                 this["Entropy"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowTooltipsPermanently {
+            get {
+                return ((bool)(this["ShowTooltipsPermanently"]));
+            }
+            set {
+                this["ShowTooltipsPermanently"] = value;
+            }
+        }
     }
 }
