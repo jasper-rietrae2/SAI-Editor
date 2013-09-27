@@ -16,8 +16,9 @@
   - Figure out why the 'finally' block is called right when we call FillListViewWithSpells instead of actually waiting till the process finished, possibly related to above line...
 - (?) Possible move the parameter button handling (like SMART_ACTION_CAST -> param1 has a button to search for spells) to the SQLite database so we have less code in the application?
 - Find a way around the annoying 500-line limit when inserting SQLite data. When found, implement all sounds into the SQLite database.
-- Add a setting to 'always show tooltips' and if checked, simply show permanent tooltips on events, actions, targets, etc. at the bottom of the application.
 - Fix the logic of the multiselectform (try with unit flags to see how it's broken)
+- Load tooltips on startup
+- Add a setting whether or not the user wants to use tooltips at all? To reduce start-up time (once we load them on startup)
 
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
