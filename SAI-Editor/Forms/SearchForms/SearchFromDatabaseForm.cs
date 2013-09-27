@@ -129,7 +129,7 @@ namespace SAI_Editor
                     Text = "Search for a creature";
                     listViewEntryResults.Columns.Add("Id", 45);
                     listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Creature id");
+                    comboBoxSearchType.Items.Add("Creature entry");
                     comboBoxSearchType.Items.Add("Creature name");
                     baseQuery = "SELECT entry, name FROM creature_template";
                     columnOne = "entry";
@@ -140,7 +140,7 @@ namespace SAI_Editor
                     Text = "Search for a gameobject";
                     listViewEntryResults.Columns.Add("Id", 45);
                     listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Gameobject id");
+                    comboBoxSearchType.Items.Add("Gameobject entry");
                     comboBoxSearchType.Items.Add("Gameobject name");
                     baseQuery = "SELECT entry, name FROM gameobject_template";
                     columnOne = "entry";
