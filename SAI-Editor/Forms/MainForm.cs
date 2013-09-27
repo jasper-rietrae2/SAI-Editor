@@ -1005,6 +1005,8 @@ namespace SAI_Editor
             toolTip.ToolTipTitle = title;
             toolTip.IsBalloon = isBallon;
             toolTip.Active = true;
+            toolTip.AutoPopDelay = 2100000000;
+            toolTip.ShowAlways = true;
             toolTip.SetToolTipText(control, text);
         }
 
