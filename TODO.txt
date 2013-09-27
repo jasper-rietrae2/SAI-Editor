@@ -8,7 +8,6 @@
 - Create a checkbox to only show 'basic' data in the listview (entryorguid, id, event_type, action_type, target_type, comment)
   - Also implement this in the SearchForLink form
 - Implement the 'Link from' field
-- The selected item looks as if it is no longer selected once the user uses a button to open a new form, like event_flags
 - Allow resizing the application but just make everything scroll-able if it becomes smaller
 - For some reason it's not possible to cancel the threads ran while searching for either actionlists or areatriggers, very most likely related to the fact we use 'return' instead of 'break'
   - This also causes a second issue in which an exception is thrown when closing the search form WHILE it's searching. The exception, logically, says the object trying to be accessed (crossthread) is already removed/disposed. This makes sense, unlike the issue described one line up.

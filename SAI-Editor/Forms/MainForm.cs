@@ -1251,7 +1251,8 @@ namespace SAI_Editor
                 return;
 
             // @Debug new AreatriggersForm().Show();
-            listViewSmartScripts.Items.Clear();
+
+            listViewSmartScripts.Items.Clear(); //! Clear this even if the search criteria was left empty
 
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
                 return;
