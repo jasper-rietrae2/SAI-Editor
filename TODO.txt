@@ -18,6 +18,7 @@
 - Fix the logic of the multiselectform (try with unit flags to see how it's broken)
 - Load tooltips on startup
 - Add a setting whether or not the user wants to use tooltips at all? To reduce start-up time (once we load them on startup)
+- Only enable target coordinate parameter fields for action types that actually use them
 
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
