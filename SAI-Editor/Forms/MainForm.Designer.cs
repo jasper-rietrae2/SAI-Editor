@@ -462,12 +462,12 @@
             this.contextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemDeleteSelectedRowListView});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(153, 48);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(131, 26);
             // 
             // menuItemDeleteSelectedRowListView
             // 
             this.menuItemDeleteSelectedRowListView.Name = "menuItemDeleteSelectedRowListView";
-            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(130, 22);
             this.menuItemDeleteSelectedRowListView.Text = "Delete row";
             this.menuItemDeleteSelectedRowListView.Click += new System.EventHandler(this.testToolStripMenuItemDeleteRow_Click);
             // 
@@ -684,7 +684,7 @@
             this.groupBoxScriptInfo.Controls.Add(this.label6);
             this.groupBoxScriptInfo.Controls.Add(this.label11);
             this.groupBoxScriptInfo.Controls.Add(this.label10);
-            this.groupBoxScriptInfo.Location = new System.Drawing.Point(322, 31);
+            this.groupBoxScriptInfo.Location = new System.Drawing.Point(308, 31);
             this.groupBoxScriptInfo.Name = "groupBoxScriptInfo";
             this.groupBoxScriptInfo.Size = new System.Drawing.Size(335, 207);
             this.groupBoxScriptInfo.TabIndex = 6;
@@ -1858,7 +1858,7 @@
             // groupBoxParameters
             // 
             this.groupBoxParameters.Controls.Add(this.tabControlParameters);
-            this.groupBoxParameters.Location = new System.Drawing.Point(677, 31);
+            this.groupBoxParameters.Location = new System.Drawing.Point(649, 31);
             this.groupBoxParameters.Name = "groupBoxParameters";
             this.groupBoxParameters.Size = new System.Drawing.Size(278, 178);
             this.groupBoxParameters.TabIndex = 23;
@@ -1873,7 +1873,7 @@
             this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
             this.listViewSmartScripts.MultiSelect = false;
             this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(943, 214);
+            this.listViewSmartScripts.Size = new System.Drawing.Size(915, 214);
             this.listViewSmartScripts.TabIndex = 24;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
@@ -1891,7 +1891,7 @@
             this.panelPermanentTooltipTypes.Controls.Add(this.pictureBoxPermanentTooltip);
             this.panelPermanentTooltipTypes.Location = new System.Drawing.Point(12, 405);
             this.panelPermanentTooltipTypes.Name = "panelPermanentTooltipTypes";
-            this.panelPermanentTooltipTypes.Size = new System.Drawing.Size(947, 30);
+            this.panelPermanentTooltipTypes.Size = new System.Drawing.Size(915, 30);
             this.panelPermanentTooltipTypes.TabIndex = 25;
             // 
             // labelPermanentTooltipTitleTypes
@@ -1929,7 +1929,7 @@
             this.panelPermanentTooltipParameters.Controls.Add(this.pictureBox1);
             this.panelPermanentTooltipParameters.Location = new System.Drawing.Point(12, 439);
             this.panelPermanentTooltipParameters.Name = "panelPermanentTooltipParameters";
-            this.panelPermanentTooltipParameters.Size = new System.Drawing.Size(947, 23);
+            this.panelPermanentTooltipParameters.Size = new System.Drawing.Size(915, 23);
             this.panelPermanentTooltipParameters.TabIndex = 25;
             // 
             // labelPermanentTooltipTextParameters
@@ -1953,7 +1953,7 @@
             // buttonNewLine
             // 
             this.buttonNewLine.Enabled = false;
-            this.buttonNewLine.Location = new System.Drawing.Point(677, 215);
+            this.buttonNewLine.Location = new System.Drawing.Point(649, 215);
             this.buttonNewLine.Name = "buttonNewLine";
             this.buttonNewLine.Size = new System.Drawing.Size(85, 23);
             this.buttonNewLine.TabIndex = 26;
@@ -1964,7 +1964,7 @@
             // 
             // buttonEditCurrent
             // 
-            this.buttonEditCurrent.Location = new System.Drawing.Point(774, 215);
+            this.buttonEditCurrent.Location = new System.Drawing.Point(746, 215);
             this.buttonEditCurrent.Name = "buttonEditCurrent";
             this.buttonEditCurrent.Size = new System.Drawing.Size(85, 23);
             this.buttonEditCurrent.TabIndex = 27;
@@ -1975,7 +1975,7 @@
             // 
             // buttonSaveChanges
             // 
-            this.buttonSaveChanges.Location = new System.Drawing.Point(870, 215);
+            this.buttonSaveChanges.Location = new System.Drawing.Point(842, 215);
             this.buttonSaveChanges.Name = "buttonSaveChanges";
             this.buttonSaveChanges.Size = new System.Drawing.Size(85, 23);
             this.buttonSaveChanges.TabIndex = 28;
