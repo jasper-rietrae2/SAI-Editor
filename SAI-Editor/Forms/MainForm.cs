@@ -28,7 +28,7 @@ namespace SAI_Editor
         Width = 278,
         Height = 260,
 
-        WidthToExpandTo = 985,
+        WidthToExpandTo = 989,
         HeightToExpandTo = 505,
 
         ListViewHeightContract = 57,

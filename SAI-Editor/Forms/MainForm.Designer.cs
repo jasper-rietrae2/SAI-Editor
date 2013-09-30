@@ -367,7 +367,7 @@
             this.otherToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1214, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1233, 24);
             this.menuStrip.TabIndex = 11;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -474,7 +474,7 @@
             this.panelLoginBox.Controls.Add(this.buttonConnect);
             this.panelLoginBox.Controls.Add(this.buttonClear);
             this.panelLoginBox.Controls.Add(this.buttonCancel);
-            this.panelLoginBox.Location = new System.Drawing.Point(965, 31);
+            this.panelLoginBox.Location = new System.Drawing.Point(978, 31);
             this.panelLoginBox.Name = "panelLoginBox";
             this.panelLoginBox.Size = new System.Drawing.Size(243, 207);
             this.panelLoginBox.TabIndex = 13;
@@ -1951,7 +1951,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1214, 474);
+            this.ClientSize = new System.Drawing.Size(1233, 474);
             this.Controls.Add(this.panelPermanentTooltipParameters);
             this.Controls.Add(this.panelPermanentTooltipTypes);
             this.Controls.Add(this.panelLoginBox);
