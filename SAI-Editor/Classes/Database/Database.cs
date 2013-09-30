@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 using System.Windows.Forms;
@@ -8,7 +9,9 @@ using System.Data;
 
 namespace SAI_Editor
 {
-    public class Database<Connection, StrBuilder, Parameter, Command> where Connection : DbConnection where Command : DbCommand
+    public class Database<Connection, StrBuilder, Parameter, Command>
+        where Connection : DbConnection
+        where Command : DbCommand
     {
         public StrBuilder ConnectionString { get; set; }
 
@@ -67,11 +70,16 @@ namespace SAI_Editor
             }
         }
 
-        public async Task<DataTable> ExecuteQuery(string query, params Parameter[] parameters)
+        public Task<DataTable> ExecuteQuery(string query, params Parameter[] parameters)
+        {
+            return ExecuteQueryWithCancellation(new CancellationToken(), query, parameters);
+        }
+
+        public async Task<DataTable> ExecuteQueryWithCancellation(CancellationToken token, string query, params Parameter[] parameters)
         {
             try
             {
-                return await Task.Run(() =>
+                return await Task.Run(async () =>
                 {
                     using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
                     {
@@ -84,7 +92,11 @@ namespace SAI_Editor
 
                             try
                             {
-                                var reader = cmd.ExecuteReader();
+                                var reader = await cmd.ExecuteReaderAsync(token);
+
+                                if (token.IsCancellationRequested)
+                                    token.ThrowIfCancellationRequested();
+
                                 var dt = new DataTable();
                                 dt.Load(reader);
                                 conn.Close();
