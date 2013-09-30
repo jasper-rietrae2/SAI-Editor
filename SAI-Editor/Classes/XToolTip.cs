@@ -13,6 +13,8 @@ namespace SAI_Editor.Classes
     {
         public void SetToolTipText(Control control, string caption)
         {
+            string newCaption = "";
+
             if (caption.Length > 80)
             {
                 string[] splitCaption = caption.Split(Convert.ToChar(" "));
@@ -29,33 +31,26 @@ namespace SAI_Editor.Classes
 
                     if (totalLength > 60 || i == splitCaption.Length - 1)
                     {
-                        totalLength = 0;
-
-                        List<string> wordsSoFarCopy = new List<string>();
-
-                        foreach (string str in wordsSoFar)
-                            wordsSoFarCopy.Add(str);
-
+                        List<string> wordsSoFarCopy = new List<string>(wordsSoFar);
                         captionChunks.Add(wordsSoFarCopy);
                         wordsSoFar.Clear();
+                        totalLength = 0;
                     }
                 }
-
-                caption = "";
 
                 foreach (List<string> listString in captionChunks)
                 {
                     foreach (string strPart in listString)
-                        caption += strPart + " ";
+                        newCaption += strPart + " ";
 
-                    caption += "\n";
+                    newCaption += "\n";
                 }
             }
 
             //! We can't use this because it will cut off words, which is exactly what we're trying to avoid.
             //List<string> strParts = new List<string>(Regex.Split(caption, @"(?<=\G.{60})", RegexOptions.Singleline));
 
-            SetToolTip(control, caption);
+            SetToolTip(control, newCaption);
         }
     }
 }
