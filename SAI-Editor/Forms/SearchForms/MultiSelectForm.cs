@@ -13,7 +13,7 @@ namespace SAI_Editor
         MultiSelectFormTypeUnitFlag2 = 4,
         MultiSelectFormTypeGoFlag = 5,
         MultiSelectFormTypeDynamicFlag = 6,
-    };
+    }
 
     public partial class MultiSelectForm : Form
     {

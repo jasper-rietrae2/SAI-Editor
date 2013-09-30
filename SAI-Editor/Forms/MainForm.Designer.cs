@@ -477,7 +477,7 @@
             this.panelLoginBox.Controls.Add(this.buttonConnect);
             this.panelLoginBox.Controls.Add(this.buttonClear);
             this.panelLoginBox.Controls.Add(this.buttonCancel);
-            this.panelLoginBox.Location = new System.Drawing.Point(978, 250);
+            this.panelLoginBox.Location = new System.Drawing.Point(978, 255);
             this.panelLoginBox.Name = "panelLoginBox";
             this.panelLoginBox.Size = new System.Drawing.Size(243, 207);
             this.panelLoginBox.TabIndex = 13;

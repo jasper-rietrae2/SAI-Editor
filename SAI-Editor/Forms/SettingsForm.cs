@@ -37,6 +37,7 @@ namespace SAI_Editor
             checkBoxPromptExecuteQuery.Checked = Settings.Default.PromptExecuteQuery;
             checkBoxChangeStaticInfo.Checked = Settings.Default.ChangeStaticInfo;
             checkBoxShowTooltipsPermanently.Checked = Settings.Default.ShowTooltipsPermanently;
+            checkBoxGenerateSql.Checked = Settings.Default.GenerateSql;
 
             textBoxAnimationSpeed.Text = Settings.Default.AnimationSpeed.ToString();
             textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
@@ -100,6 +101,7 @@ namespace SAI_Editor
             Settings.Default.PromptExecuteQuery = checkBoxPromptExecuteQuery.Checked;
             Settings.Default.ChangeStaticInfo = checkBoxChangeStaticInfo.Checked;
             Settings.Default.ShowTooltipsPermanently = checkBoxShowTooltipsPermanently.Checked;
+            Settings.Default.GenerateSql = checkBoxGenerateSql.Checked;
             Settings.Default.Save();
 
             if (newConnectionSuccesfull)
@@ -157,7 +159,7 @@ namespace SAI_Editor
                 checkBoxPromptExecuteQuery.Checked == Settings.Default.PromptExecuteQuery &&
                 checkBoxChangeStaticInfo.Checked == Settings.Default.ChangeStaticInfo &&
                 checkBoxShowTooltipsPermanently.Checked == Settings.Default.ShowTooltipsPermanently &&
-
+                checkBoxGenerateSql.Checked == Settings.Default.GenerateSql &&
                 //! Check password last because it's the most 'expensive' check
                 textBoxPassword.Text == Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString())
                 return;
@@ -181,6 +183,7 @@ namespace SAI_Editor
                     checkBoxPromptExecuteQuery.Checked = true;
                     checkBoxChangeStaticInfo.Checked = true;
                     checkBoxShowTooltipsPermanently.Checked = false;
+                    checkBoxGenerateSql.Checked = false;
                     break;
                 case 1: // ! 'Connection' tab
                     textBoxHost.Text = "";

@@ -214,5 +214,17 @@ namespace SAI_Editor.Properties {
                 this["ShowTooltipsPermanently"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool GenerateSql {
+            get {
+                return ((bool)(this["GenerateSql"]));
+            }
+            set {
+                this["GenerateSql"] = value;
+            }
+        }
     }
 }

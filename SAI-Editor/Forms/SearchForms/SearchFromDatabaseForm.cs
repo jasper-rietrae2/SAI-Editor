@@ -35,7 +35,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeSummonsId = 14,
         DatabaseSearchFormTypeTaxiPath = 15,
         DatabaseSearchFormTypeEquipTemplate = 16,
-    };
+    }
 
     public partial class SearchFromDatabaseForm : Form
     {

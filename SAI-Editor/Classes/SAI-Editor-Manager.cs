@@ -18,14 +18,14 @@ namespace SAI_Editor
     {
         public List<string> entries;
         public SourceTypes sourceTypeOfEntry;
-    };
+    }
 
     public enum ScriptTypeId
     {
         ScriptTypeEvent,
         ScriptTypeAction,
         ScriptTypeTarget,
-    };
+    }
 
     class SAI_Editor_Manager
     {

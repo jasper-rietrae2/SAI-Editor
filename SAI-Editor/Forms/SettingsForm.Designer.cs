@@ -32,6 +32,7 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxShowTooltipsPermanently = new System.Windows.Forms.CheckBox();
             this.checkBoxChangeStaticInfo = new System.Windows.Forms.CheckBox();
             this.checkBoxPromptExecuteQuery = new System.Windows.Forms.CheckBox();
             this.textBoxAnimationSpeed = new System.Windows.Forms.TextBox();
@@ -58,7 +59,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonDefaultSettings = new System.Windows.Forms.Button();
-            this.checkBoxShowTooltipsPermanently = new System.Windows.Forms.CheckBox();
+            this.checkBoxGenerateSql = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -67,7 +68,7 @@
             // 
             // buttonExitSettings
             // 
-            this.buttonExitSettings.Location = new System.Drawing.Point(191, 262);
+            this.buttonExitSettings.Location = new System.Drawing.Point(192, 294);
             this.buttonExitSettings.Name = "buttonExitSettings";
             this.buttonExitSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonExitSettings.TabIndex = 9;
@@ -77,7 +78,7 @@
             // 
             // buttonSaveSettings
             // 
-            this.buttonSaveSettings.Location = new System.Drawing.Point(11, 262);
+            this.buttonSaveSettings.Location = new System.Drawing.Point(12, 294);
             this.buttonSaveSettings.Name = "buttonSaveSettings";
             this.buttonSaveSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveSettings.TabIndex = 7;
@@ -87,6 +88,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.checkBoxGenerateSql);
             this.tabPageGeneral.Controls.Add(this.checkBoxShowTooltipsPermanently);
             this.tabPageGeneral.Controls.Add(this.checkBoxChangeStaticInfo);
             this.tabPageGeneral.Controls.Add(this.checkBoxPromptExecuteQuery);
@@ -100,10 +102,20 @@
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(247, 222);
+            this.tabPageGeneral.Size = new System.Drawing.Size(247, 254);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxShowTooltipsPermanently
+            // 
+            this.checkBoxShowTooltipsPermanently.AutoSize = true;
+            this.checkBoxShowTooltipsPermanently.Location = new System.Drawing.Point(6, 144);
+            this.checkBoxShowTooltipsPermanently.Name = "checkBoxShowTooltipsPermanently";
+            this.checkBoxShowTooltipsPermanently.Size = new System.Drawing.Size(149, 17);
+            this.checkBoxShowTooltipsPermanently.TabIndex = 12;
+            this.checkBoxShowTooltipsPermanently.Text = "Show tooltips permanently";
+            this.checkBoxShowTooltipsPermanently.UseVisualStyleBackColor = true;
             // 
             // checkBoxChangeStaticInfo
             // 
@@ -132,7 +144,7 @@
             // textBoxAnimationSpeed
             // 
             this.textBoxAnimationSpeed.Enabled = false;
-            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 174);
+            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 206);
             this.textBoxAnimationSpeed.Name = "textBoxAnimationSpeed";
             this.textBoxAnimationSpeed.Size = new System.Drawing.Size(37, 20);
             this.textBoxAnimationSpeed.TabIndex = 8;
@@ -142,7 +154,7 @@
             // labelAnimationSpeed
             // 
             this.labelAnimationSpeed.AutoSize = true;
-            this.labelAnimationSpeed.Location = new System.Drawing.Point(6, 177);
+            this.labelAnimationSpeed.Location = new System.Drawing.Point(6, 209);
             this.labelAnimationSpeed.Name = "labelAnimationSpeed";
             this.labelAnimationSpeed.Size = new System.Drawing.Size(91, 13);
             this.labelAnimationSpeed.TabIndex = 7;
@@ -151,7 +163,7 @@
             // trackBarAnimationSpeed
             // 
             this.trackBarAnimationSpeed.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBarAnimationSpeed.Location = new System.Drawing.Point(-4, 196);
+            this.trackBarAnimationSpeed.Location = new System.Drawing.Point(-4, 228);
             this.trackBarAnimationSpeed.Maximum = 12;
             this.trackBarAnimationSpeed.Minimum = 1;
             this.trackBarAnimationSpeed.Name = "trackBarAnimationSpeed";
@@ -212,7 +224,7 @@
             this.tabControlSettings.Location = new System.Drawing.Point(12, 8);
             this.tabControlSettings.Name = "tabControlSettings";
             this.tabControlSettings.SelectedIndex = 0;
-            this.tabControlSettings.Size = new System.Drawing.Size(255, 248);
+            this.tabControlSettings.Size = new System.Drawing.Size(255, 280);
             this.tabControlSettings.TabIndex = 1;
             // 
             // tabPageConnection
@@ -233,14 +245,14 @@
             this.tabPageConnection.Controls.Add(this.label7);
             this.tabPageConnection.Location = new System.Drawing.Point(4, 22);
             this.tabPageConnection.Name = "tabPageConnection";
-            this.tabPageConnection.Size = new System.Drawing.Size(247, 222);
+            this.tabPageConnection.Size = new System.Drawing.Size(247, 254);
             this.tabPageConnection.TabIndex = 1;
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
             // 
             // buttonTestConnection
             // 
-            this.buttonTestConnection.Location = new System.Drawing.Point(138, 193);
+            this.buttonTestConnection.Location = new System.Drawing.Point(138, 226);
             this.buttonTestConnection.Name = "buttonTestConnection";
             this.buttonTestConnection.Size = new System.Drawing.Size(98, 23);
             this.buttonTestConnection.TabIndex = 31;
@@ -369,7 +381,7 @@
             // 
             // buttonDefaultSettings
             // 
-            this.buttonDefaultSettings.Location = new System.Drawing.Point(101, 262);
+            this.buttonDefaultSettings.Location = new System.Drawing.Point(102, 294);
             this.buttonDefaultSettings.Name = "buttonDefaultSettings";
             this.buttonDefaultSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonDefaultSettings.TabIndex = 8;
@@ -377,21 +389,21 @@
             this.buttonDefaultSettings.UseVisualStyleBackColor = true;
             this.buttonDefaultSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
-            // checkBoxShowTooltipsPermanently
+            // checkBoxGenerateSql
             // 
-            this.checkBoxShowTooltipsPermanently.AutoSize = true;
-            this.checkBoxShowTooltipsPermanently.Location = new System.Drawing.Point(6, 144);
-            this.checkBoxShowTooltipsPermanently.Name = "checkBoxShowTooltipsPermanently";
-            this.checkBoxShowTooltipsPermanently.Size = new System.Drawing.Size(149, 17);
-            this.checkBoxShowTooltipsPermanently.TabIndex = 12;
-            this.checkBoxShowTooltipsPermanently.Text = "Show tooltips permanently";
-            this.checkBoxShowTooltipsPermanently.UseVisualStyleBackColor = true;
+            this.checkBoxGenerateSql.AutoSize = true;
+            this.checkBoxGenerateSql.Location = new System.Drawing.Point(6, 167);
+            this.checkBoxGenerateSql.Name = "checkBoxGenerateSql";
+            this.checkBoxGenerateSql.Size = new System.Drawing.Size(229, 17);
+            this.checkBoxGenerateSql.TabIndex = 13;
+            this.checkBoxGenerateSql.Text = "Generate SQL instead of executing queries";
+            this.checkBoxGenerateSql.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 297);
+            this.ClientSize = new System.Drawing.Size(279, 324);
             this.Controls.Add(this.buttonDefaultSettings);
             this.Controls.Add(this.buttonSaveSettings);
             this.Controls.Add(this.buttonExitSettings);
@@ -448,6 +460,7 @@
         public System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.Button buttonTestConnection;
         private System.Windows.Forms.CheckBox checkBoxShowTooltipsPermanently;
+        private System.Windows.Forms.CheckBox checkBoxGenerateSql;
 
     }
 }

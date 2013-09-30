@@ -14,7 +14,7 @@ namespace SAI_Editor.SearchForms
         SingleSelectFormTypeMotionType = 6,
         SingleSelectFormTypeSummonType = 7,
         SingleSelectFormTypeSheathState = 8,
-    };
+    }
 
     public partial class SingleSelectForm : Form
     {

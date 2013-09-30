@@ -21,7 +21,7 @@ namespace SAI_Editor
         FormStateLogin,
         FormStateExpandingOrContracting,
         FormStateMain,
-    };
+    }
 
     internal enum FormSizes
     {
@@ -32,14 +32,14 @@ namespace SAI_Editor
         HeightToExpandTo = 505,
 
         ListViewHeightContract = 57,
-    };
+    }
 
     internal enum MaxValues
     {
         MaxEventType = 74,
         MaxActionType = 110,
         MaxTargetType = 26,
-    };
+    }
 
     public enum SourceTypes
     {
@@ -47,7 +47,7 @@ namespace SAI_Editor
         SourceTypeGameobject = 1,
         SourceTypeAreaTrigger = 2,
         SourceTypeScriptedActionlist = 9,
-    };
+    }
 
     public partial class MainForm : Form
     {
@@ -122,21 +122,13 @@ namespace SAI_Editor
                     controlsMainForm.Add(control);
             }
 
-            try
-            {
-                comboBoxSourceType.SelectedIndex = 0;
-                comboBoxEventType.SelectedIndex = 0;
-                comboBoxActionType.SelectedIndex = 0;
-                comboBoxTargetType.SelectedIndex = 0;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            comboBoxSourceType.SelectedIndex = 0;
+            comboBoxEventType.SelectedIndex = 0;
+            comboBoxActionType.SelectedIndex = 0;
+            comboBoxTargetType.SelectedIndex = 0;
 
             //! We first load the information and then change the parameter fields
             await SAI_Editor_Manager.Instance.LoadSQLiteDatabaseInfo();
-
             ChangeParameterFieldsBasedOnType();
 
             //! We hardcode the actual shortcuts because there are certain conditons under which the menu should not be
@@ -2014,53 +2006,54 @@ namespace SAI_Editor
 
         private void buttonNewLine_Click(object sender, EventArgs e)
         {
-            if (listViewSmartScripts.Items.Count > 0)
+            if (listViewSmartScripts.Items.Count == 0)
             {
-                //! Writing it all out because it's easier to read and edit it this way
-                ListViewItem listViewItem = new ListViewItem();
-                listViewItem.Text = originalEntryOrGuid; //! Entryorguid
-                listViewItem.SubItems.Add(((int)originalSourceType).ToString()); //! Source type
-
-                if (checkBoxLockEventId.Checked)
-                    listViewItem.SubItems.Add((++lastSmartScriptIdOfScript).ToString()); // id
-                else
-                    listViewItem.SubItems.Add("0"); // id
-
-                listViewItem.SubItems.Add("0"); // link
-                listViewItem.SubItems.Add("0"); // event type
-                listViewItem.SubItems.Add("0"); // phasemask
-                listViewItem.SubItems.Add("100"); // event chance
-                listViewItem.SubItems.Add("0"); // event flags
-                listViewItem.SubItems.Add("0"); // event param 1
-                listViewItem.SubItems.Add("0"); // event param 2
-                listViewItem.SubItems.Add("0"); // event param 3
-                listViewItem.SubItems.Add("0"); // event param 4
-                listViewItem.SubItems.Add("0"); // action type
-                listViewItem.SubItems.Add("0"); // action param 1
-                listViewItem.SubItems.Add("0"); // action param 2
-                listViewItem.SubItems.Add("0"); // action param 3
-                listViewItem.SubItems.Add("0"); // action param 4
-                listViewItem.SubItems.Add("0"); // action param 5
-                listViewItem.SubItems.Add("0"); // action param 6
-                listViewItem.SubItems.Add("0"); // target type
-                listViewItem.SubItems.Add("0"); // target param 1
-                listViewItem.SubItems.Add("0"); // target param 2
-                listViewItem.SubItems.Add("0"); // target param 3
-                listViewItem.SubItems.Add("0"); // target X
-                listViewItem.SubItems.Add("0"); // target Y
-                listViewItem.SubItems.Add("0"); // target Z
-                listViewItem.SubItems.Add("0"); // target O
-
-                //! Todo: implement auto-generated comments
-                if (checkBoxAutoGenerateComments.Checked)
-                    listViewItem.SubItems.Add(GenerateCommentForScript(BuildSmartScript(listViewSmartScripts.Items[0]))); // comment
-                else
-                    listViewItem.SubItems.Add("Npc - Event - Action (phase) (dungeon difficulty)"); // comment
-
-                listViewSmartScripts.Items.Add(listViewItem);
-            }
-            else
                 MessageBox.Show("This button should not be available if there are no lines in the listview, please report this as a bug!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //! Writing it all out because it's easier to read and edit it this way
+            ListViewItem listViewItem = new ListViewItem();
+            listViewItem.Text = originalEntryOrGuid; //! Entryorguid
+            listViewItem.SubItems.Add(((int)originalSourceType).ToString()); //! Source type
+
+            if (checkBoxLockEventId.Checked)
+                listViewItem.SubItems.Add((++lastSmartScriptIdOfScript).ToString()); // id
+            else
+                listViewItem.SubItems.Add("0"); // id
+
+            listViewItem.SubItems.Add("0"); // link
+            listViewItem.SubItems.Add("0"); // event type
+            listViewItem.SubItems.Add("0"); // phasemask
+            listViewItem.SubItems.Add("100"); // event chance
+            listViewItem.SubItems.Add("0"); // event flags
+            listViewItem.SubItems.Add("0"); // event param 1
+            listViewItem.SubItems.Add("0"); // event param 2
+            listViewItem.SubItems.Add("0"); // event param 3
+            listViewItem.SubItems.Add("0"); // event param 4
+            listViewItem.SubItems.Add("0"); // action type
+            listViewItem.SubItems.Add("0"); // action param 1
+            listViewItem.SubItems.Add("0"); // action param 2
+            listViewItem.SubItems.Add("0"); // action param 3
+            listViewItem.SubItems.Add("0"); // action param 4
+            listViewItem.SubItems.Add("0"); // action param 5
+            listViewItem.SubItems.Add("0"); // action param 6
+            listViewItem.SubItems.Add("0"); // target type
+            listViewItem.SubItems.Add("0"); // target param 1
+            listViewItem.SubItems.Add("0"); // target param 2
+            listViewItem.SubItems.Add("0"); // target param 3
+            listViewItem.SubItems.Add("0"); // target X
+            listViewItem.SubItems.Add("0"); // target Y
+            listViewItem.SubItems.Add("0"); // target Z
+            listViewItem.SubItems.Add("0"); // target O
+
+            //! Todo: implement auto-generated comments
+            if (checkBoxAutoGenerateComments.Checked)
+                listViewItem.SubItems.Add(GenerateCommentForScript(BuildSmartScript(listViewSmartScripts.Items[0]))); // comment
+            else
+                listViewItem.SubItems.Add("Npc - Event - Action (phase) (dungeon difficulty)"); // comment
+
+            listViewSmartScripts.Items.Add(listViewItem);
         }
 
         private void buttonEditCurrent_Click(object sender, EventArgs e)
@@ -2070,7 +2063,14 @@ namespace SAI_Editor
 
         private void buttonSaveChanges_Click(object sender, EventArgs e)
         {
+            if (Settings.Default.GenerateSql)
+            {
 
+            }
+            else
+            {
+
+            }
         }
 
         private SmartScript BuildSmartScript(ListViewItem item)
