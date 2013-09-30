@@ -28,7 +28,7 @@ namespace SAI_Editor
         Width = 278,
         Height = 260,
 
-        WidthToExpandTo = 989,
+        WidthToExpandTo = 986,
         HeightToExpandTo = 505,
 
         ListViewHeightContract = 57,
@@ -752,12 +752,6 @@ namespace SAI_Editor
                 ResetFieldsToDefault();
                 return;
             }
-
-            menuItemDeleteSelectedRow.Text = "Delete selected row";
-
-            //! Set 'row' to 'rows' if there are several rows selected
-            if (listViewSmartScripts.SelectedItems.Count > 1)
-                menuItemDeleteSelectedRow.Text += "s";
 
             FillFieldsBasedOnSelectedScript();
         }
