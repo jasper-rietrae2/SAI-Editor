@@ -60,7 +60,7 @@
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smartAIWikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripListView = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.testToolStripMenuItemDeleteRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDeleteSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
             this.pictureBoxLoadScript = new System.Windows.Forms.PictureBox();
@@ -171,6 +171,9 @@
             this.panelPermanentTooltipParameters = new System.Windows.Forms.Panel();
             this.labelPermanentTooltipTextParameters = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.buttonNewLine = new System.Windows.Forms.Button();
+            this.buttonEditCurrent = new System.Windows.Forms.Button();
+            this.buttonSaveChanges = new System.Windows.Forms.Button();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -457,16 +460,16 @@
             // contextMenuStripListView
             // 
             this.contextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.testToolStripMenuItemDeleteRow});
+            this.menuItemDeleteSelectedRowListView});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(131, 26);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(153, 48);
             // 
-            // testToolStripMenuItemDeleteRow
+            // menuItemDeleteSelectedRowListView
             // 
-            this.testToolStripMenuItemDeleteRow.Name = "testToolStripMenuItemDeleteRow";
-            this.testToolStripMenuItemDeleteRow.Size = new System.Drawing.Size(130, 22);
-            this.testToolStripMenuItemDeleteRow.Text = "Delete row";
-            this.testToolStripMenuItemDeleteRow.Click += new System.EventHandler(this.testToolStripMenuItemDeleteRow_Click);
+            this.menuItemDeleteSelectedRowListView.Name = "menuItemDeleteSelectedRowListView";
+            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(152, 22);
+            this.menuItemDeleteSelectedRowListView.Text = "Delete row";
+            this.menuItemDeleteSelectedRowListView.Click += new System.EventHandler(this.testToolStripMenuItemDeleteRow_Click);
             // 
             // panelLoginBox
             // 
@@ -474,7 +477,7 @@
             this.panelLoginBox.Controls.Add(this.buttonConnect);
             this.panelLoginBox.Controls.Add(this.buttonClear);
             this.panelLoginBox.Controls.Add(this.buttonCancel);
-            this.panelLoginBox.Location = new System.Drawing.Point(978, 31);
+            this.panelLoginBox.Location = new System.Drawing.Point(978, 250);
             this.panelLoginBox.Name = "panelLoginBox";
             this.panelLoginBox.Size = new System.Drawing.Size(243, 207);
             this.panelLoginBox.TabIndex = 13;
@@ -1278,7 +1281,7 @@
             this.tabControlParameters.Location = new System.Drawing.Point(8, 19);
             this.tabControlParameters.Name = "tabControlParameters";
             this.tabControlParameters.SelectedIndex = 0;
-            this.tabControlParameters.Size = new System.Drawing.Size(269, 183);
+            this.tabControlParameters.Size = new System.Drawing.Size(264, 152);
             this.tabControlParameters.TabIndex = 0;
             // 
             // tabPageEvent
@@ -1299,7 +1302,7 @@
             this.tabPageEvent.Location = new System.Drawing.Point(4, 22);
             this.tabPageEvent.Name = "tabPageEvent";
             this.tabPageEvent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEvent.Size = new System.Drawing.Size(261, 157);
+            this.tabPageEvent.Size = new System.Drawing.Size(256, 126);
             this.tabPageEvent.TabIndex = 0;
             this.tabPageEvent.Text = "Event";
             // 
@@ -1428,7 +1431,7 @@
             this.tabPageAction.Location = new System.Drawing.Point(4, 22);
             this.tabPageAction.Name = "tabPageAction";
             this.tabPageAction.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAction.Size = new System.Drawing.Size(261, 157);
+            this.tabPageAction.Size = new System.Drawing.Size(256, 126);
             this.tabPageAction.TabIndex = 1;
             this.tabPageAction.Text = "Action";
             // 
@@ -1638,7 +1641,7 @@
             this.tabPageTarget.Controls.Add(this.textBoxTargetParam1);
             this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
             this.tabPageTarget.Name = "tabPageTarget";
-            this.tabPageTarget.Size = new System.Drawing.Size(261, 157);
+            this.tabPageTarget.Size = new System.Drawing.Size(256, 126);
             this.tabPageTarget.TabIndex = 2;
             this.tabPageTarget.Text = "Target";
             // 
@@ -1857,7 +1860,7 @@
             this.groupBoxParameters.Controls.Add(this.tabControlParameters);
             this.groupBoxParameters.Location = new System.Drawing.Point(677, 31);
             this.groupBoxParameters.Name = "groupBoxParameters";
-            this.groupBoxParameters.Size = new System.Drawing.Size(282, 207);
+            this.groupBoxParameters.Size = new System.Drawing.Size(278, 178);
             this.groupBoxParameters.TabIndex = 23;
             this.groupBoxParameters.TabStop = false;
             this.groupBoxParameters.Text = "Parameters";
@@ -1870,7 +1873,7 @@
             this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
             this.listViewSmartScripts.MultiSelect = false;
             this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(947, 214);
+            this.listViewSmartScripts.Size = new System.Drawing.Size(943, 214);
             this.listViewSmartScripts.TabIndex = 24;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
@@ -1947,11 +1950,48 @@
             this.pictureBox1.TabIndex = 29;
             this.pictureBox1.TabStop = false;
             // 
+            // buttonNewLine
+            // 
+            this.buttonNewLine.Enabled = false;
+            this.buttonNewLine.Location = new System.Drawing.Point(677, 215);
+            this.buttonNewLine.Name = "buttonNewLine";
+            this.buttonNewLine.Size = new System.Drawing.Size(85, 23);
+            this.buttonNewLine.TabIndex = 26;
+            this.buttonNewLine.Text = "New line";
+            this.buttonNewLine.UseVisualStyleBackColor = true;
+            this.buttonNewLine.Visible = false;
+            this.buttonNewLine.Click += new System.EventHandler(this.buttonNewLine_Click);
+            // 
+            // buttonEditCurrent
+            // 
+            this.buttonEditCurrent.Location = new System.Drawing.Point(774, 215);
+            this.buttonEditCurrent.Name = "buttonEditCurrent";
+            this.buttonEditCurrent.Size = new System.Drawing.Size(85, 23);
+            this.buttonEditCurrent.TabIndex = 27;
+            this.buttonEditCurrent.Text = "Edit current";
+            this.buttonEditCurrent.UseVisualStyleBackColor = true;
+            this.buttonEditCurrent.Visible = false;
+            this.buttonEditCurrent.Click += new System.EventHandler(this.buttonEditCurrent_Click);
+            // 
+            // buttonSaveChanges
+            // 
+            this.buttonSaveChanges.Location = new System.Drawing.Point(870, 215);
+            this.buttonSaveChanges.Name = "buttonSaveChanges";
+            this.buttonSaveChanges.Size = new System.Drawing.Size(85, 23);
+            this.buttonSaveChanges.TabIndex = 28;
+            this.buttonSaveChanges.Text = "Save changes";
+            this.buttonSaveChanges.UseVisualStyleBackColor = true;
+            this.buttonSaveChanges.Visible = false;
+            this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1233, 474);
+            this.Controls.Add(this.buttonSaveChanges);
+            this.Controls.Add(this.buttonEditCurrent);
+            this.Controls.Add(this.buttonNewLine);
             this.Controls.Add(this.panelPermanentTooltipParameters);
             this.Controls.Add(this.panelPermanentTooltipTypes);
             this.Controls.Add(this.panelLoginBox);
@@ -2018,7 +2058,7 @@
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem menuHeaderFiles;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripListView;
-        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItemDeleteRow;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDeleteSelectedRowListView;
         private System.Windows.Forms.ToolStripMenuItem menuItemSettings;
         private System.Windows.Forms.Panel panelLoginBox;
         private System.Windows.Forms.Label label4;
@@ -2146,6 +2186,9 @@
         private System.Windows.Forms.Panel panelPermanentTooltipParameters;
         private System.Windows.Forms.Label labelPermanentTooltipTextParameters;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button buttonNewLine;
+        private System.Windows.Forms.Button buttonEditCurrent;
+        private System.Windows.Forms.Button buttonSaveChanges;
     }
 }
 

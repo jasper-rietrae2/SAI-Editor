@@ -64,6 +64,7 @@ namespace SAI_Editor
         private FormState formState = FormState.FormStateLogin;
         public SourceTypes originalSourceType = SourceTypes.SourceTypeCreature;
         public String originalEntryOrGuid = String.Empty;
+        public int lastSmartScriptIdOfScript = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool runningConstructor = false;
 
@@ -150,6 +151,7 @@ namespace SAI_Editor
             menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
             //menuItemDeleteSelectedRow.ShortcutKeys = (Keys.Control | Keys.D);
             menuItemDeleteSelectedRow.ShortcutKeyDisplayString = "(Ctrl + D)";
+            menuItemDeleteSelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + D)";
 
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);  // 0
             listViewSmartScripts.Columns.Add("source_type", 70, HorizontalAlignment.Right); // 1
@@ -652,7 +654,7 @@ namespace SAI_Editor
 
                 foreach (SmartScript smartScript in smartScripts)
                 {
-                    var listViewItem = new ListViewItem();
+                    ListViewItem listViewItem = new ListViewItem();
                     listViewItem.Text = smartScript.entryorguid.ToString();
                     listViewItem.SubItems.Add(smartScript.source_type.ToString());
                     listViewItem.SubItems.Add(smartScript.id.ToString());
@@ -1184,8 +1186,19 @@ namespace SAI_Editor
                 return;
             }
 
-            foreach (ListViewItem listViewItem in listViewSmartScripts.SelectedItems)
-                listViewSmartScripts.Items.Remove(listViewItem);
+            DeleteSelectedRow();
+        }
+
+        private void DeleteSelectedRow()
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
+                foreach (ListViewItem item in listViewSmartScripts.SelectedItems)
+                    listViewSmartScripts.Items.Remove(item);
+
+                buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
+                lastSmartScriptIdOfScript--;
+            }
         }
 
         private async void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
@@ -1258,12 +1271,14 @@ namespace SAI_Editor
             originalEntryOrGuid = textBoxEntryOrGuid.Text;
             await SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType);
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
+            buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
 
             if (listViewSmartScripts.Items.Count > 0)
             {
                 SortListView(SortOrder.Ascending, 1);
                 listViewSmartScripts.Items[0].Selected = true;
                 listViewSmartScripts.Select(); //! Sets the focus on the listview
+                lastSmartScriptIdOfScript = XConverter.TryParseStringToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
             }
         }
 
@@ -1372,9 +1387,7 @@ namespace SAI_Editor
 
         private void testToolStripMenuItemDeleteRow_Click(object sender, EventArgs e)
         {
-            if (listViewSmartScripts.SelectedItems.Count > 0)
-                foreach (ListViewItem item in listViewSmartScripts.SelectedItems)
-                    listViewSmartScripts.Items.Remove(item);
+            DeleteSelectedRow();
         }
 
         private void ResetFieldsToDefault(bool withStatic = false)
@@ -1997,6 +2010,78 @@ namespace SAI_Editor
         {
             if (Settings.Default.ShowTooltipsPermanently)
                 UpdatePermanentTooltipOfParameter(sender as Label, 7, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+        }
+
+        private void buttonNewLine_Click(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.Items.Count > 0)
+            {
+                //! Writing it all out because it's easier to read and edit it this way
+                ListViewItem listViewItem = new ListViewItem();
+                listViewItem.Text = originalEntryOrGuid; //! Entryorguid
+                listViewItem.SubItems.Add(((int)originalSourceType).ToString()); //! Source type
+
+                if (checkBoxLockEventId.Checked)
+                    listViewItem.SubItems.Add((++lastSmartScriptIdOfScript).ToString()); // id
+                else
+                    listViewItem.SubItems.Add("0"); // id
+
+                listViewItem.SubItems.Add("0"); // link
+                listViewItem.SubItems.Add("0"); // event type
+                listViewItem.SubItems.Add("0"); // phasemask
+                listViewItem.SubItems.Add("100"); // event chance
+                listViewItem.SubItems.Add("0"); // event flags
+                listViewItem.SubItems.Add("0"); // event param 1
+                listViewItem.SubItems.Add("0"); // event param 2
+                listViewItem.SubItems.Add("0"); // event param 3
+                listViewItem.SubItems.Add("0"); // event param 4
+                listViewItem.SubItems.Add("0"); // action type
+                listViewItem.SubItems.Add("0"); // action param 1
+                listViewItem.SubItems.Add("0"); // action param 2
+                listViewItem.SubItems.Add("0"); // action param 3
+                listViewItem.SubItems.Add("0"); // action param 4
+                listViewItem.SubItems.Add("0"); // action param 5
+                listViewItem.SubItems.Add("0"); // action param 6
+                listViewItem.SubItems.Add("0"); // target type
+                listViewItem.SubItems.Add("0"); // target param 1
+                listViewItem.SubItems.Add("0"); // target param 2
+                listViewItem.SubItems.Add("0"); // target param 3
+                listViewItem.SubItems.Add("0"); // target X
+                listViewItem.SubItems.Add("0"); // target Y
+                listViewItem.SubItems.Add("0"); // target Z
+                listViewItem.SubItems.Add("0"); // target O
+
+                //! Todo: implement auto-generated comments
+                if (checkBoxAutoGenerateComments.Checked)
+                    listViewItem.SubItems.Add(GenerateCommentForScript(BuildSmartScript(listViewSmartScripts.Items[0]))); // comment
+                else
+                    listViewItem.SubItems.Add("Npc - Event - Action (phase) (dungeon difficulty)"); // comment
+
+                listViewSmartScripts.Items.Add(listViewItem);
+            }
+            else
+                MessageBox.Show("This button should not be available if there are no lines in the listview, please report this as a bug!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void buttonEditCurrent_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSaveChanges_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private SmartScript BuildSmartScript(ListViewItem item)
+        {
+            SmartScript smartScript = new SmartScript();
+            return smartScript;
+        }
+
+        private string GenerateCommentForScript(SmartScript smartScript)
+        {
+            return String.Empty;
         }
     }
 }
