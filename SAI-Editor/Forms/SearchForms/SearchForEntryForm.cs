@@ -7,7 +7,6 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Threading;
-using SAI_Editor.Classes;
 using SAI_Editor.Properties;
 using MySql.Data.MySqlClient;
 using SAI_Editor.Database.Classes;
@@ -21,6 +20,10 @@ namespace SAI_Editor
         private readonly SourceTypes sourceTypeToSearchFor;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private int previousSearchType = 0;
+
+        private bool _isBusy = false;
+
+        private CancellationTokenSource _cts;
 
         public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, string startEntryString, SourceTypes sourceTypeToSearchFor)
         {
@@ -45,6 +48,8 @@ namespace SAI_Editor
             listViewEntryResults.ColumnClick += listViewEntryResults_ColumnClick;
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
 
+            _cts = new CancellationTokenSource();
+
             switch (sourceTypeToSearchFor)
             {
                 case SourceTypes.SourceTypeCreature:
@@ -56,7 +61,7 @@ namespace SAI_Editor
                     FillListViewWithMySqlQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000");
                     break;
                 case SourceTypes.SourceTypeAreaTrigger:
-                    comboBoxSearchType.SelectedIndex = 6; //! Areatrigger entry
+                    comboBoxSearchType.SelectedIndex = 6; //! NYI
                     listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
                     listViewEntryResults.Columns.Add("Mapid", 52, HorizontalAlignment.Left);
                     listViewEntryResults.Columns.Add("X", 75, HorizontalAlignment.Left);
@@ -88,10 +93,21 @@ namespace SAI_Editor
                 {
                     connection.Open();
 
+                    List<Item> items = new List<Item>();
+
                     using (var query = new MySqlCommand(queryToExecute, connection))
-                        using (MySqlDataReader reader = query.ExecuteReader())
-                            while (reader != null && reader.Read())
-                                AddItemToListView(listViewEntryResults, reader.GetInt32(0).ToString(CultureInfo.InvariantCulture), reader.GetString(1));
+                    using (MySqlDataReader reader = query.ExecuteReader())
+                        while (reader != null && reader.Read())
+                        {
+
+                            if (_cts.IsCancellationRequested)
+                                break;
+
+                            items.Add(new Item { ItemName = reader.GetInt32(0).ToString(CultureInfo.InvariantCulture), SubItems = new List<string> { reader.GetString(1) } });
+                        }
+
+                    AddItemToListView(listViewEntryResults, items);
+
                 }
             }
             catch (MySqlException ex)
@@ -112,34 +128,34 @@ namespace SAI_Editor
                     {
                         if (idFilter.Length > 0)
                         {
-                            queryToExecute += " WHERE m_id LIKE '%" + idFilter + "%'";
+                            queryToExecute += " WHERE id LIKE '%" + idFilter + "%'";
 
                             if (mapIdFilter.Length > 0)
-                                queryToExecute += " AND m_mapId LIKE '%" + mapIdFilter + "%'";
+                                queryToExecute += " AND mapId LIKE '%" + mapIdFilter + "%'";
                         }
                         else if (mapIdFilter.Length > 0)
                         {
-                            queryToExecute += " WHERE m_mapId LIKE '%" + mapIdFilter + "%'";
+                            queryToExecute += " WHERE mapId LIKE '%" + mapIdFilter + "%'";
 
                             if (idFilter.Length > 0)
-                                queryToExecute += " AND m_id LIKE '%" + idFilter + "%'";
+                                queryToExecute += " AND id LIKE '%" + idFilter + "%'";
                         }
                     }
                     else
                     {
                         if (idFilter.Length > 0)
                         {
-                            queryToExecute += " WHERE m_id = '" + idFilter + "'";
+                            queryToExecute += " WHERE id = " + idFilter;
 
                             if (mapIdFilter.Length > 0)
-                                queryToExecute += " AND m_mapId = '" + mapIdFilter + "'";
+                                queryToExecute += " AND mapId = " + mapIdFilter;
                         }
                         else if (mapIdFilter.Length > 0)
                         {
-                            queryToExecute += " WHERE m_mapId = '" + mapIdFilter + "'";
+                            queryToExecute += " WHERE mapId = " + mapIdFilter;
 
                             if (idFilter.Length > 0)
-                                queryToExecute += " AND m_id = '" + idFilter + "'";
+                                queryToExecute += " AND id = " + idFilter;
                         }
                     }
                 }
@@ -147,17 +163,29 @@ namespace SAI_Editor
                 if (limit)
                     queryToExecute += " LIMIT 1000";
 
-                DataTable dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
+                DataTable dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQueryWithCancellation(_cts.Token, queryToExecute);
 
                 if (dt.Rows.Count > 0)
                 {
+
+                    List<Item> items = new List<Item>();
+
                     foreach (DataRow row in dt.Rows)
                     {
+
+                        if (_cts.IsCancellationRequested)
+                            break;
+
                         AreaTrigger areaTrigger = SAI_Editor_Manager.Instance.sqliteDatabase.BuildAreaTrigger(row);
 
                         if (!checkBoxHasAiName.Checked || await SAI_Editor_Manager.Instance.worldDatabase.AreaTriggerHasSmartAI(areaTrigger.id))
-                            AddItemToListView(listViewEntryResults, areaTrigger.id.ToString(), areaTrigger.map_id.ToString(), areaTrigger.posX.ToString(), areaTrigger.posY.ToString(), areaTrigger.posZ.ToString());
+                            items.Add(new Item { ItemName = areaTrigger.id.ToString(), SubItems = new List<string> { areaTrigger.map_id.ToString(), areaTrigger.posX.ToString(), areaTrigger.posY.ToString(), areaTrigger.posZ.ToString() } });
+                            //AddItemToListView(listViewEntryResults, areaTrigger.id.ToString(), areaTrigger.map_id.ToString(), areaTrigger.posX.ToString(), areaTrigger.posY.ToString(), areaTrigger.posZ.ToString());
+
                     }
+
+                    AddItemToListView(listViewEntryResults, items);
+
                 }
             }
             catch (MySqlException ex)
@@ -168,8 +196,15 @@ namespace SAI_Editor
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+
+            if (_isBusy)
+                return;
+
+            _isBusy = true;
+
             searchThread = new Thread(StartSearching);
             searchThread.Start();
+
         }
 
         private async void StartSearching()
@@ -179,10 +214,10 @@ namespace SAI_Editor
                 string query = "";
                 bool criteriaLeftEmpty = String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text);
 
-                if (!criteriaLeftEmpty && IsNumericIndex(GetSelectedIndexOfComboBox(comboBoxSearchType)) && XConverter.TryParseStringToInt32(textBoxCriteria.Text) < 0)
+                if (!criteriaLeftEmpty && IsNumericIndex(GetSelectedIndexOfComboBox(comboBoxSearchType)) && Convert.ToInt32(textBoxCriteria.Text) < 0)
                 {
                     if (MessageBox.Show("The criteria field can not be a negative value, would you like me to set it to a positive number?", "Something went wrong!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                        SetTextOfControl(textBoxCriteria, (XConverter.TryParseStringToInt32(textBoxCriteria.Text) * -1).ToString());
+                        SetTextOfControl(textBoxCriteria, (Convert.ToInt32(textBoxCriteria.Text) * -1).ToString());
                     else
                         return;
                 }
@@ -302,8 +337,8 @@ namespace SAI_Editor
 
                         query += " ORDER BY g.guid";
                         break;
-                    case 6: //! Areatrigger entry
-                    case 7: //! Areatrigger map id
+                    case 6:
+                    case 7:
                         ClearItemsOfListView(listViewEntryResults);
 
                         try
@@ -343,8 +378,15 @@ namespace SAI_Editor
 
                             if (smartScriptActionlists != null)
                             {
+
+                                List<Item> items = new List<Item>();
+
                                 foreach (SmartScript smartScript in smartScriptActionlists)
                                 {
+
+                                    if (_cts.IsCancellationRequested)
+                                        break;
+
                                     int entryorguid = smartScript.entryorguid;
                                     int source_type = smartScript.source_type;
 
@@ -361,31 +403,42 @@ namespace SAI_Editor
                                     switch ((SmartAction)smartScript.action_type) //! action type
                                     {
                                         case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
-                                            AddItemToListView(listViewEntryResults, actionParam1.ToString(), name);
+                                            items.Add(new Item { ItemName = actionParam1.ToString(), SubItems = new List<string>() { name } });
+                                            //AddItemToListView(listViewEntryResults, actionParam1.ToString(), name);
                                             break;
                                         case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
-                                            AddItemToListView(listViewEntryResults, smartScript.action_param1.ToString(), name);
-                                            AddItemToListView(listViewEntryResults, smartScript.action_param2.ToString(), name);
+
+                                            items.Add(new Item { ItemName = smartScript.action_param1.ToString(), SubItems = new List<string> { name } });
+                                            items.Add(new Item { ItemName = smartScript.action_param2.ToString(), SubItems = new List<string> { name } });
+
 
                                             if (smartScript.action_param3 > 0)
-                                                AddItemToListView(listViewEntryResults, smartScript.action_param3.ToString(), name);
+                                                items.Add(new Item { ItemName = smartScript.action_param3.ToString(), SubItems = new List<string> { name } });
+                                                //AddItemToListView(listViewEntryResults, smartScript.action_param3.ToString(), name);
 
                                             if (smartScript.action_param4 > 0)
-                                                AddItemToListView(listViewEntryResults, smartScript.action_param4.ToString(), name);
+                                                items.Add(new Item { ItemName = smartScript.action_param4.ToString(), SubItems = new List<string> { name } });
+                                                //AddItemToListView(listViewEntryResults, smartScript.action_param4.ToString(), name);
 
                                             if (smartScript.action_param5 > 0)
-                                                AddItemToListView(listViewEntryResults, smartScript.action_param5.ToString(), name);
+                                                items.Add(new Item { ItemName = smartScript.action_param5.ToString(), SubItems = new List<string> { name } });
+                                                //AddItemToListView(listViewEntryResults, smartScript.action_param5.ToString(), name);
 
                                             if (smartScript.action_param6 > 0)
-                                                AddItemToListView(listViewEntryResults, smartScript.action_param6.ToString(), name);
+                                                items.Add(new Item { ItemName = smartScript.action_param6.ToString(), SubItems = new List<string> { name } });
+                                                //AddItemToListView(listViewEntryResults, smartScript.action_param6.ToString(), name);
 
                                             break;
                                         case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
                                             for (int i = actionParam1; i <= actionParam2; ++i)
-                                                AddItemToListView(listViewEntryResults, i.ToString(), name);
+                                                items.Add(new Item { ItemName = i.ToString(), SubItems = new List<string> { name } });
+                                                //AddItemToListView(listViewEntryResults, i.ToString(), name);
                                             break;
                                     }
                                 }
+
+                                AddItemToListView(listViewEntryResults, items);
+
                             }
                         }
                         catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
@@ -401,6 +454,7 @@ namespace SAI_Editor
                         }
                         finally
                         {
+                            _isBusy = false;
                             SetEnabledOfControl(buttonSearch, true);
                             SetEnabledOfControl(buttonStopSearching, false);
                         }
@@ -419,19 +473,22 @@ namespace SAI_Editor
                 }
                 finally
                 {
+
                     SetEnabledOfControl(buttonSearch, true);
                     SetEnabledOfControl(buttonStopSearching, false);
+
+                    _isBusy = false;
+
                 }
             }
             catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
             {
                 SetEnabledOfControl(buttonSearch, true);
                 SetEnabledOfControl(buttonStopSearching, false);
+                _isBusy = false;
             }
             catch (Exception ex)
             {
-                SetEnabledOfControl(buttonSearch, true);
-                SetEnabledOfControl(buttonStopSearching, false);
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -441,37 +498,36 @@ namespace SAI_Editor
             switch (e.KeyCode)
             {
                 case Keys.Enter:
-                {
-                    if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
-                        FillMainFormEntryOrGuidField(sender, e);
-                    else
                     {
-                        if (buttonSearch.Enabled)
+                        if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
+                            FillMainFormEntryOrGuidField(sender, e);
+                        else
                             buttonSearch.PerformClick();
-                    }
 
-                    break;
-                }
+                        break;
+                    }
                 case Keys.Escape:
-                {
-                    Close();
-                    break;
-                }
+                    {
+                        Close();
+                        break;
+                    }
             }
         }
 
         private void buttonStopSearchResults_Click(object sender, EventArgs e)
         {
             StopRunningThread();
+            _isBusy = false;
         }
 
         private void StopRunningThread()
         {
             if (searchThread != null && searchThread.IsAlive)
             {
-                searchThread.Abort();
-                searchThread = null;
+                if (_cts != null)
+                    _cts.Cancel();
             }
+            _isBusy = false;
         }
 
         private void textBoxCriteria_KeyPress(object sender, KeyPressEventArgs e)
@@ -561,41 +617,54 @@ namespace SAI_Editor
             return comboBox.SelectedIndex;
         }
 
-        private void AddItemToListView(ListView listView, string item, string subItem)
+        private void AddItemToListView(ListView listView, IEnumerable<Item> items)
         {
-            if (listView.InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate
-                {
-                    listView.Items.Add(item).SubItems.Add(subItem);
-                });
-                return;
-            }
 
-            listView.Items.Add(item).SubItems.Add(subItem);
+            List<ListViewItem> lvItems = new List<ListViewItem>();
+
+            Invoke((MethodInvoker)delegate
+            {
+
+                foreach (var item in items)
+                {
+
+                    var lvi = new ListViewItem(item.ItemName);
+
+                    foreach (string subItem in item.SubItems)
+                    {
+                        lvi.SubItems.Add(subItem);
+                    }
+
+                    lvItems.Add(lvi);
+
+                }
+
+                listView.Items.AddRange(lvItems.ToArray());
+            });
+
         }
 
-        private void AddItemToListView(ListView listView, string item, string subItem1, string subItem2, string subItem3, string subItem4)
-        {
-            if (listView.InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate
-                {
-                    ListViewItem listViewItem = listView.Items.Add(item);
-                    listViewItem.SubItems.Add(subItem1);
-                    listViewItem.SubItems.Add(subItem2);
-                    listViewItem.SubItems.Add(subItem3);
-                    listViewItem.SubItems.Add(subItem4);
-                });
-                return;
-            }
+        //private void AddItemToListView(ListView listView, string item, string subItem1, string subItem2, string subItem3, string subItem4)
+        //{
+        //    if (listView.InvokeRequired)
+        //    {
+        //        Invoke((MethodInvoker)delegate
+        //        {
+        //            ListViewItem listViewItem = listView.Items.Add(item);
+        //            listViewItem.SubItems.Add(subItem1);
+        //            listViewItem.SubItems.Add(subItem2);
+        //            listViewItem.SubItems.Add(subItem3);
+        //            listViewItem.SubItems.Add(subItem4);
+        //        });
+        //        return;
+        //    }
 
-            ListViewItem listViewItem2 = listView.Items.Add(item);
-            listViewItem2.SubItems.Add(subItem1);
-            listViewItem2.SubItems.Add(subItem2);
-            listViewItem2.SubItems.Add(subItem3);
-            listViewItem2.SubItems.Add(subItem4);
-        }
+        //    ListViewItem listViewItem2 = listView.Items.Add(item);
+        //    listViewItem2.SubItems.Add(subItem1);
+        //    listViewItem2.SubItems.Add(subItem2);
+        //    listViewItem2.SubItems.Add(subItem3);
+        //    listViewItem2.SubItems.Add(subItem4);
+        //}
 
         private void SetEnabledOfControl(Control control, bool enable)
         {
@@ -716,5 +785,15 @@ namespace SAI_Editor
         {
             StopRunningThread();
         }
+
+        public class Item
+        {
+
+            public string ItemName { get; set; }
+
+            public List<string> SubItems { get; set; }
+
+        }
+
     }
 }
