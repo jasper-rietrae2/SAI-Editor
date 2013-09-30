@@ -1083,11 +1083,11 @@ namespace SAI_Editor
             textBoxTargetO.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
         }
 
-        private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true)
+        private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true, bool active = true, int autoPopDelay = 2100000000, bool showAlways = true)
         {
             if (String.IsNullOrWhiteSpace(title) || String.IsNullOrWhiteSpace(text))
             {
-                XToolTip toolTipExistent = TooltipHelper.GetExistingToolTip(control);
+                XToolTip toolTipExistent = ToolTipHelper.GetExistingToolTip(control);
 
                 if (toolTipExistent != null)
                     toolTipExistent.Active = false;
@@ -1095,13 +1095,13 @@ namespace SAI_Editor
                 return;
             }
 
-            XToolTip toolTip = TooltipHelper.GetControlToolTip(control);
+            XToolTip toolTip = ToolTipHelper.GetControlToolTip(control);
             toolTip.ToolTipIcon = icon;
             toolTip.ToolTipTitle = title;
             toolTip.IsBalloon = isBallon;
-            toolTip.Active = true;
-            toolTip.AutoPopDelay = 2100000000;
-            toolTip.ShowAlways = true;
+            toolTip.Active = active;
+            toolTip.AutoPopDelay = autoPopDelay;
+            toolTip.ShowAlways = showAlways;
             toolTip.SetToolTipText(control, text);
         }
 
@@ -1820,7 +1820,7 @@ namespace SAI_Editor
             contractingListView = !expand;
             listViewSmartScriptsHeightToChangeTo = expand ? listViewSmartScripts.Height + (int)FormSizes.ListViewHeightContract : listViewSmartScripts.Height - (int)FormSizes.ListViewHeightContract;
             timerShowPermanentTooltips.Enabled = true;
-            TooltipHelper.DisableOrEnableAllToolTips(false);
+            ToolTipHelper.DisableOrEnableAllToolTips(false);
 
             if (expand)
             {
@@ -1847,7 +1847,7 @@ namespace SAI_Editor
                     listViewSmartScripts.Height = listViewSmartScriptsHeightToChangeTo;
                     timerShowPermanentTooltips.Enabled = false;
                     expandingListView = false;
-                    TooltipHelper.DisableOrEnableAllToolTips(true);
+                    ToolTipHelper.DisableOrEnableAllToolTips(true);
                 }
             }
             else if (contractingListView)

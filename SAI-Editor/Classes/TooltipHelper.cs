@@ -8,11 +8,11 @@ using SAI_Editor.Classes;
 
 namespace SAI_Editor
 {
-    class TooltipHelper
+    class ToolTipHelper
     {
         private static readonly Dictionary<string, XToolTip> tooltips = new Dictionary<string, XToolTip>();
 
-        public TooltipHelper()
+        public ToolTipHelper()
         {
 
         }

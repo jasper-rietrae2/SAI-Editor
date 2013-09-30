@@ -55,9 +55,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\XConverter.cs" />
-    <Compile Include="Classes\XToolTip.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,6 +140,9 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\TooltipHelper.cs" />
+    <Compile Include="Classes\XToolTip.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="Forms\AboutForm.resx">
       <DependentUpon>AboutForm.cs</DependentUpon>
     </EmbeddedResource>

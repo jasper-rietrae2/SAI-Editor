@@ -46,6 +46,8 @@ namespace SAI_Editor.Classes
                     newCaption += "\n";
                 }
             }
+            else
+                newCaption = caption;
 
             //! We can't use this because it will cut off words, which is exactly what we're trying to avoid.
             //List<string> strParts = new List<string>(Regex.Split(caption, @"(?<=\G.{60})", RegexOptions.Singleline));
