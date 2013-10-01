@@ -9,15 +9,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SAI_Editor.Database.Classes;
 using SAI_Editor.Classes;
+using System.IO;
 
 namespace SAI_Editor.Forms
 {
     public partial class SqlOutputForm : Form
     {
+        private List<SmartScript> smartScripts = null;
+
         public SqlOutputForm(List<SmartScript> smartScripts)
         {
             InitializeComponent();
-            ExportSqlToTextbox(smartScripts);
+
+            this.smartScripts = smartScripts;
+            ExportSqlToTextbox();
         }
 
         public void SqlOutputForm_Load(object sender, EventArgs e)
@@ -25,17 +30,12 @@ namespace SAI_Editor.Forms
 
         }
 
-        private async void ExportSqlToTextbox(List<SmartScript> smartScripts)
+        private async void ExportSqlToTextbox()
         {
             if (smartScripts.Count == 0)
                 return;
 
-            string sourceName = String.Empty;
-
-            if (smartScripts[0].entryorguid < 0)
-                sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameByGuid(-XConverter.TryParseStringToInt32(smartScripts[0].entryorguid));
-            else
-                sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameById(XConverter.TryParseStringToInt32(smartScripts[0].entryorguid));
+            string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameByIdOrGuid(XConverter.TryParseStringToInt32(smartScripts[0].entryorguid));
 
             richTextBoxSqlOutput.Text += "-- " + sourceName + " SAI\n";
             richTextBoxSqlOutput.Text += "SET @ENTRY := " + smartScripts[0].entryorguid + ";\n";
@@ -67,6 +67,17 @@ namespace SAI_Editor.Forms
         private void buttonExecuteScript_Click(object sender, EventArgs e)
         {
             SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(richTextBoxSqlOutput.Text);
+        }
+
+        private void buttonSaveToFile_Click(object sender, EventArgs e)
+        {
+            saveFileDialog.Filter = "SQL files (*.sql)|*.sql|All files (*.*)|*.*";
+            saveFileDialog.ShowDialog(this);
+        }
+
+        private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            File.WriteAllText(saveFileDialog.FileName, richTextBoxSqlOutput.Text);
         }
     }
 }

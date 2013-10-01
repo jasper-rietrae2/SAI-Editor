@@ -79,6 +79,11 @@ namespace SAI_Editor
             return dt.Rows[0]["name"].ToString();
         }
 
+        public async Task<string> GetCreatureNameByIdOrGuid(int idOrGuid)
+        {
+            return idOrGuid < 0 ? await GetCreatureNameByGuid(-idOrGuid) : await GetCreatureNameById(idOrGuid);
+        }
+
         public async Task<string> GetGameobjectNameById(int id)
         {
             //DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '@id'", new MySqlParameter("@id", id));

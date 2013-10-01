@@ -31,6 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SqlOutputForm));
             this.richTextBoxSqlOutput = new System.Windows.Forms.RichTextBox();
             this.buttonExecuteScript = new System.Windows.Forms.Button();
+            this.buttonSaveToFile = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // richTextBoxSqlOutput
@@ -51,11 +53,26 @@
             this.buttonExecuteScript.UseVisualStyleBackColor = true;
             this.buttonExecuteScript.Click += new System.EventHandler(this.buttonExecuteScript_Click);
             // 
+            // buttonSaveToFile
+            // 
+            this.buttonSaveToFile.Location = new System.Drawing.Point(655, 340);
+            this.buttonSaveToFile.Name = "buttonSaveToFile";
+            this.buttonSaveToFile.Size = new System.Drawing.Size(85, 23);
+            this.buttonSaveToFile.TabIndex = 2;
+            this.buttonSaveToFile.Text = "Save to file";
+            this.buttonSaveToFile.UseVisualStyleBackColor = true;
+            this.buttonSaveToFile.Click += new System.EventHandler(this.buttonSaveToFile_Click);
+            // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
+            // 
             // SqlOutputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 368);
+            this.Controls.Add(this.buttonSaveToFile);
             this.Controls.Add(this.buttonExecuteScript);
             this.Controls.Add(this.richTextBoxSqlOutput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -74,5 +91,7 @@
 
         private System.Windows.Forms.RichTextBox richTextBoxSqlOutput;
         private System.Windows.Forms.Button buttonExecuteScript;
+        private System.Windows.Forms.Button buttonSaveToFile;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
