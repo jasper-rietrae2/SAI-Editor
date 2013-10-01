@@ -1372,6 +1372,9 @@ namespace SAI_Editor
             buttonTargetParamTwoSearch.Visible = visible;
             buttonTargetParamThreeSearch.Visible = visible;
             buttonTargetParamFourSearch.Visible = visible;
+            buttonTargetParamFiveSearch.Visible = visible;
+            buttonTargetParamSixSearch.Visible = visible;
+            buttonTargetParamSevenSearch.Visible = visible;
         }
 
         private string GetSourceTypeString(SourceTypes sourceType)
