@@ -67,7 +67,6 @@ namespace SAI_Editor
         public int lastSmartScriptIdOfScript = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool runningConstructor = false;
-        private List<SmartScript> allSmartScripts = new List<SmartScript>();
 
         public MainForm()
         {
@@ -741,13 +740,6 @@ namespace SAI_Editor
                 return;
 
             menuItemDeleteSelectedRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
-
-            //if (!e.IsSelected)
-            //{
-            //    ResetFieldsToDefault();
-            //    return;
-            //}
-
             FillFieldsBasedOnSelectedScript();
         }
 
@@ -1137,15 +1129,6 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
 
-            foreach (SmartScript smartScript in allSmartScripts)
-            {
-                if (smartScript.entryorguid.ToString() == listViewSmartScripts.SelectedItems[0].Text)
-                {
-                    allSmartScripts.Remove(smartScript);
-                    break;
-                }
-            }
-
             listViewSmartScripts.Items.Remove(listViewSmartScripts.SelectedItems[0]);
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
             lastSmartScriptIdOfScript--;
@@ -1230,9 +1213,6 @@ namespace SAI_Editor
                 listViewSmartScripts.Select(); //! Sets the focus on the listview
                 lastSmartScriptIdOfScript = XConverter.TryParseStringToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
             }
-
-            foreach (ListViewItem item in listViewSmartScripts.Items)
-                allSmartScripts.Add(BuildSmartScript(item));
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
@@ -2009,12 +1989,9 @@ namespace SAI_Editor
             listViewItem.SubItems.Add("0"); // target Z
             listViewItem.SubItems.Add("0"); // target O
 
-            SmartScript smartScript = BuildSmartScript(listViewSmartScripts.Items[0]);
-            allSmartScripts.Add(smartScript);
-
             //! Todo: implement auto-generated comments
             if (checkBoxAutoGenerateComments.Checked)
-                listViewItem.SubItems.Add(GenerateCommentForScript(smartScript)); // comment
+                listViewItem.SubItems.Add(GenerateCommentForScript(BuildSmartScript(listViewSmartScripts.Items[0]))); // comment
             else
                 listViewItem.SubItems.Add("Npc - Event - Action (phase) (dungeon difficulty)"); // comment
 
