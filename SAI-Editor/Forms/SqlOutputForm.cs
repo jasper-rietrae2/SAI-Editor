@@ -22,6 +22,7 @@ namespace SAI_Editor.Forms
             InitializeComponent();
 
             this.smartScripts = smartScripts;
+
             ExportSqlToTextbox();
         }
 
@@ -34,7 +35,7 @@ namespace SAI_Editor.Forms
 
         private async void ExportSqlToTextbox()
         {
-            if (smartScripts.Count == 0)
+            if (smartScripts == null || smartScripts.Count == 0)
                 return;
 
             string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameByIdOrGuid(XConverter.TryParseStringToInt32(smartScripts[0].entryorguid));
