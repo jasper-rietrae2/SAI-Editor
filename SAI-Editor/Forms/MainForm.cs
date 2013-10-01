@@ -145,6 +145,8 @@ namespace SAI_Editor
             //menuItemDeleteSelectedRow.ShortcutKeys = (Keys.Control | Keys.D);
             menuItemDeleteSelectedRow.ShortcutKeyDisplayString = "(Ctrl + D)";
             menuItemDeleteSelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + D)";
+            //menuItemGenerateSql.ShortcutKeys = (Keys.Control | Keys.M);
+            menuItemGenerateSql.ShortcutKeyDisplayString = "(Ctrl + M)";
 
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);  // 0
             listViewSmartScripts.Columns.Add("source_type", 70, HorizontalAlignment.Right); // 1
@@ -496,6 +498,11 @@ namespace SAI_Editor
                 {
                     if (menuItemDeleteSelectedRow.Enabled)
                         menuItemDeleteSelectedRow.PerformClick();
+                }
+                else if (e.KeyData == (Keys.Control | Keys.M) || e.KeyData == (Keys.ControlKey | Keys.M))
+                {
+                    if (menuItemGenerateSql.Enabled)
+                        menuItemGenerateSql.PerformClick();
                 }
             }
         }
