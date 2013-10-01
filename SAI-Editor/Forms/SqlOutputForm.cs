@@ -27,7 +27,9 @@ namespace SAI_Editor.Forms
 
         public void SqlOutputForm_Load(object sender, EventArgs e)
         {
-
+            richTextBoxSqlOutput.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            buttonExecuteScript.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
+            buttonSaveToFile.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
         }
 
         private async void ExportSqlToTextbox()
