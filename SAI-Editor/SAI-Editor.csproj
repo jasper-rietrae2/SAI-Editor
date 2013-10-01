@@ -98,6 +98,12 @@
     <Compile Include="Forms\SearchForms\MultiSelectForm.designer.cs">
       <DependentUpon>MultiSelectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SqlOutputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SqlOutputForm.Designer.cs">
+      <DependentUpon>SqlOutputForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\XListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SearchForms\MultiSelectForm.resx">
       <DependentUpon>MultiSelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SqlOutputForm.resx">
+      <DependentUpon>SqlOutputForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

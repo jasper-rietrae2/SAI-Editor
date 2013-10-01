@@ -13,6 +13,7 @@ using SAI_Editor.SearchForms;
 using SAI_Editor.Security;
 using SAI_Editor.Classes;
 using System.Threading.Tasks;
+using SAI_Editor.Forms;
 
 namespace SAI_Editor
 {
@@ -2013,18 +2014,6 @@ namespace SAI_Editor
 
         }
 
-        private void buttonSaveChanges_Click(object sender, EventArgs e)
-        {
-            if (Settings.Default.GenerateSql)
-            {
-
-            }
-            else
-            {
-
-            }
-        }
-
         private SmartScript BuildSmartScript(ListViewItem item)
         {
             SmartScript smartScript = new SmartScript();
@@ -2204,6 +2193,27 @@ namespace SAI_Editor
         private void textBoxEntryOrGuid_TextChanged(object sender, EventArgs e)
         {
             pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+        }
+
+        private void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenSqlOutputForm();
+        }
+
+        private void buttonGenerateSql_Click(object sender, EventArgs e)
+        {
+            OpenSqlOutputForm();
+        }
+
+        private void OpenSqlOutputForm()
+        {
+            List<SmartScript> smartScriptsToExport = new List<SmartScript>();
+
+            foreach (ListViewItem item in listViewSmartScripts.Items)
+                smartScriptsToExport.Add(BuildSmartScript(item));
+
+            if (smartScriptsToExport.Count > 0)
+                new SqlOutputForm(smartScriptsToExport).ShowDialog(this);
         }
     }
 }

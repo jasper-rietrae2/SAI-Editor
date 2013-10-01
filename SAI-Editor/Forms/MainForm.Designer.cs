@@ -53,6 +53,7 @@ namespace SAI_Editor
             this.menuHeaderFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
+            this.generateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -164,7 +165,6 @@ namespace SAI_Editor
             this.labelTargetParam1 = new System.Windows.Forms.Label();
             this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
-            this.listViewSmartScripts = new System.Windows.Forms.XListView();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
@@ -175,7 +175,8 @@ namespace SAI_Editor
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonNewLine = new System.Windows.Forms.Button();
             this.buttonEditCurrent = new System.Windows.Forms.Button();
-            this.buttonSaveChanges = new System.Windows.Forms.Button();
+            this.buttonGenerateSql = new System.Windows.Forms.Button();
+            this.listViewSmartScripts = new System.Windows.Forms.XListView();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -381,6 +382,7 @@ namespace SAI_Editor
             this.menuHeaderFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSettings,
             this.menuItemReconnect,
+            this.generateSQLToolStripMenuItem,
             this.toolStripSeparator2,
             this.menuItemExit});
             this.menuHeaderFiles.Name = "menuHeaderFiles";
@@ -390,26 +392,33 @@ namespace SAI_Editor
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(135, 22);
+            this.menuItemSettings.Size = new System.Drawing.Size(145, 22);
             this.menuItemSettings.Text = "Settings";
             this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
             // 
             // menuItemReconnect
             // 
             this.menuItemReconnect.Name = "menuItemReconnect";
-            this.menuItemReconnect.Size = new System.Drawing.Size(135, 22);
+            this.menuItemReconnect.Size = new System.Drawing.Size(145, 22);
             this.menuItemReconnect.Text = "Re-connect";
             this.menuItemReconnect.Click += new System.EventHandler(this.menuItemReconnect_Click);
+            // 
+            // generateSQLToolStripMenuItem
+            // 
+            this.generateSQLToolStripMenuItem.Name = "generateSQLToolStripMenuItem";
+            this.generateSQLToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.generateSQLToolStripMenuItem.Text = "Generate SQL";
+            this.generateSQLToolStripMenuItem.Click += new System.EventHandler(this.generateSQLToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(132, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(142, 6);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(135, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(145, 22);
             this.menuItemExit.Text = "Exit";
             this.menuItemExit.Click += new System.EventHandler(this.TryCloseApplication);
             // 
@@ -1893,22 +1902,6 @@ namespace SAI_Editor
             this.groupBoxParameters.Text = "Parameters";
             this.groupBoxParameters.Visible = false;
             // 
-            // listViewSmartScripts
-            // 
-            this.listViewSmartScripts.FullRowSelect = true;
-            this.listViewSmartScripts.HideSelection = false;
-            this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
-            this.listViewSmartScripts.MultiSelect = false;
-            this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(915, 214);
-            this.listViewSmartScripts.TabIndex = 24;
-            this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
-            this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
-            this.listViewSmartScripts.Visible = false;
-            this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
-            this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
-            this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
-            // 
             // panelPermanentTooltipTypes
             // 
             this.panelPermanentTooltipTypes.BackColor = System.Drawing.Color.White;
@@ -2000,23 +1993,39 @@ namespace SAI_Editor
             this.buttonEditCurrent.Visible = false;
             this.buttonEditCurrent.Click += new System.EventHandler(this.buttonEditCurrent_Click);
             // 
-            // buttonSaveChanges
+            // buttonGenerateSql
             // 
-            this.buttonSaveChanges.Location = new System.Drawing.Point(841, 215);
-            this.buttonSaveChanges.Name = "buttonSaveChanges";
-            this.buttonSaveChanges.Size = new System.Drawing.Size(85, 23);
-            this.buttonSaveChanges.TabIndex = 28;
-            this.buttonSaveChanges.Text = "Save changes";
-            this.buttonSaveChanges.UseVisualStyleBackColor = true;
-            this.buttonSaveChanges.Visible = false;
-            this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
+            this.buttonGenerateSql.Location = new System.Drawing.Point(841, 215);
+            this.buttonGenerateSql.Name = "buttonGenerateSql";
+            this.buttonGenerateSql.Size = new System.Drawing.Size(85, 23);
+            this.buttonGenerateSql.TabIndex = 28;
+            this.buttonGenerateSql.Text = "Generate SQL";
+            this.buttonGenerateSql.UseVisualStyleBackColor = true;
+            this.buttonGenerateSql.Visible = false;
+            this.buttonGenerateSql.Click += new System.EventHandler(this.buttonGenerateSql_Click);
+            // 
+            // listViewSmartScripts
+            // 
+            this.listViewSmartScripts.FullRowSelect = true;
+            this.listViewSmartScripts.HideSelection = false;
+            this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
+            this.listViewSmartScripts.MultiSelect = false;
+            this.listViewSmartScripts.Name = "listViewSmartScripts";
+            this.listViewSmartScripts.Size = new System.Drawing.Size(915, 214);
+            this.listViewSmartScripts.TabIndex = 24;
+            this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
+            this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
+            this.listViewSmartScripts.Visible = false;
+            this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
+            this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
+            this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1233, 474);
-            this.Controls.Add(this.buttonSaveChanges);
+            this.Controls.Add(this.buttonGenerateSql);
             this.Controls.Add(this.buttonEditCurrent);
             this.Controls.Add(this.buttonNewLine);
             this.Controls.Add(this.panelPermanentTooltipParameters);
@@ -2215,7 +2224,8 @@ namespace SAI_Editor
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonNewLine;
         private System.Windows.Forms.Button buttonEditCurrent;
-        private System.Windows.Forms.Button buttonSaveChanges;
+        private System.Windows.Forms.Button buttonGenerateSql;
+        private System.Windows.Forms.ToolStripMenuItem generateSQLToolStripMenuItem;
     }
 }
 
