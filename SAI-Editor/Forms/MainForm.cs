@@ -740,6 +740,8 @@ namespace SAI_Editor
         private void listViewSmartScripts_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             menuItemDeleteSelectedRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
+            menuItemGenerateSql.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
+            buttonGenerateSql.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
 
             if (!e.IsSelected)
                 return;

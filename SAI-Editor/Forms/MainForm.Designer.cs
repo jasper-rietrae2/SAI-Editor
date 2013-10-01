@@ -53,7 +53,7 @@ namespace SAI_Editor
             this.menuHeaderFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
-            this.generateSQLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemGenerateSql = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -382,7 +382,7 @@ namespace SAI_Editor
             this.menuHeaderFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSettings,
             this.menuItemReconnect,
-            this.generateSQLToolStripMenuItem,
+            this.menuItemGenerateSql,
             this.toolStripSeparator2,
             this.menuItemExit});
             this.menuHeaderFiles.Name = "menuHeaderFiles";
@@ -392,33 +392,34 @@ namespace SAI_Editor
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(145, 22);
+            this.menuItemSettings.Size = new System.Drawing.Size(152, 22);
             this.menuItemSettings.Text = "Settings";
             this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
             // 
             // menuItemReconnect
             // 
             this.menuItemReconnect.Name = "menuItemReconnect";
-            this.menuItemReconnect.Size = new System.Drawing.Size(145, 22);
+            this.menuItemReconnect.Size = new System.Drawing.Size(152, 22);
             this.menuItemReconnect.Text = "Re-connect";
             this.menuItemReconnect.Click += new System.EventHandler(this.menuItemReconnect_Click);
             // 
-            // generateSQLToolStripMenuItem
+            // menuItemGenerateSql
             // 
-            this.generateSQLToolStripMenuItem.Name = "generateSQLToolStripMenuItem";
-            this.generateSQLToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
-            this.generateSQLToolStripMenuItem.Text = "Generate SQL";
-            this.generateSQLToolStripMenuItem.Click += new System.EventHandler(this.generateSQLToolStripMenuItem_Click);
+            this.menuItemGenerateSql.Enabled = false;
+            this.menuItemGenerateSql.Name = "menuItemGenerateSql";
+            this.menuItemGenerateSql.Size = new System.Drawing.Size(152, 22);
+            this.menuItemGenerateSql.Text = "Generate SQL";
+            this.menuItemGenerateSql.Click += new System.EventHandler(this.generateSQLToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(142, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(145, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
             this.menuItemExit.Text = "Exit";
             this.menuItemExit.Click += new System.EventHandler(this.TryCloseApplication);
             // 
@@ -1995,6 +1996,7 @@ namespace SAI_Editor
             // 
             // buttonGenerateSql
             // 
+            this.buttonGenerateSql.Enabled = false;
             this.buttonGenerateSql.Location = new System.Drawing.Point(841, 215);
             this.buttonGenerateSql.Name = "buttonGenerateSql";
             this.buttonGenerateSql.Size = new System.Drawing.Size(85, 23);
@@ -2225,7 +2227,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Button buttonNewLine;
         private System.Windows.Forms.Button buttonEditCurrent;
         private System.Windows.Forms.Button buttonGenerateSql;
-        private System.Windows.Forms.ToolStripMenuItem generateSQLToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuItemGenerateSql;
     }
 }
 
