@@ -1341,7 +1341,7 @@ namespace SAI_Editor
             textBoxActionTypeId.Text = "0";
             textBoxTargetTypeId.Text = "0";
             textBoxEventChance.Text = "100";
-            textBoxEventScriptId.Text = "0";
+            textBoxEventScriptId.Text = "-1";
             textBoxLinkFrom.Text = "0";
             textBoxLinkTo.Text = "0";
             textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
