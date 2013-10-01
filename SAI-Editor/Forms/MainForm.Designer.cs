@@ -905,7 +905,7 @@
             // 
             // textBoxTargetTypeId
             // 
-            this.textBoxTargetTypeId.Location = new System.Drawing.Point(300, 72);
+            this.textBoxTargetTypeId.Location = new System.Drawing.Point(299, 73);
             this.textBoxTargetTypeId.Name = "textBoxTargetTypeId";
             this.textBoxTargetTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxTargetTypeId.TabIndex = 5;
@@ -929,6 +929,7 @@
             0,
             0,
             0});
+            this.textBoxEventChance.ValueChanged += new System.EventHandler(this.textBoxEventChance_ValueChanged);
             this.textBoxEventChance.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // label14
@@ -947,6 +948,7 @@
             this.textBoxEventFlags.Size = new System.Drawing.Size(39, 20);
             this.textBoxEventFlags.TabIndex = 11;
             this.textBoxEventFlags.Text = "0";
+            this.textBoxEventFlags.TextChanged += new System.EventHandler(this.textBoxEventFlags_TextChanged);
             this.textBoxEventFlags.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // label13
@@ -974,10 +976,11 @@
             this.textBoxComments.Size = new System.Drawing.Size(267, 20);
             this.textBoxComments.TabIndex = 15;
             this.textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
+            this.textBoxComments.TextChanged += new System.EventHandler(this.textBoxComments_TextChanged);
             // 
             // textBoxActionTypeId
             // 
-            this.textBoxActionTypeId.Location = new System.Drawing.Point(300, 45);
+            this.textBoxActionTypeId.Location = new System.Drawing.Point(299, 46);
             this.textBoxActionTypeId.Name = "textBoxActionTypeId";
             this.textBoxActionTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxActionTypeId.TabIndex = 3;
@@ -992,11 +995,12 @@
             this.textBoxEventPhasemask.Size = new System.Drawing.Size(39, 20);
             this.textBoxEventPhasemask.TabIndex = 9;
             this.textBoxEventPhasemask.Text = "0";
+            this.textBoxEventPhasemask.TextChanged += new System.EventHandler(this.textBoxEventPhasemask_TextChanged);
             this.textBoxEventPhasemask.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxEventTypeId
             // 
-            this.textBoxEventTypeId.Location = new System.Drawing.Point(300, 19);
+            this.textBoxEventTypeId.Location = new System.Drawing.Point(299, 18);
             this.textBoxEventTypeId.Name = "textBoxEventTypeId";
             this.textBoxEventTypeId.Size = new System.Drawing.Size(26, 20);
             this.textBoxEventTypeId.TabIndex = 1;
@@ -1011,6 +1015,7 @@
             this.textBoxLinkTo.Size = new System.Drawing.Size(41, 20);
             this.textBoxLinkTo.TabIndex = 19;
             this.textBoxLinkTo.Text = "0";
+            this.textBoxLinkTo.TextChanged += new System.EventHandler(this.textBoxLinkTo_TextChanged);
             this.textBoxLinkTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxLinkFrom
@@ -1020,6 +1025,7 @@
             this.textBoxLinkFrom.Size = new System.Drawing.Size(39, 20);
             this.textBoxLinkFrom.TabIndex = 13;
             this.textBoxLinkFrom.Text = "0";
+            this.textBoxLinkFrom.TextChanged += new System.EventHandler(this.textBoxLinkFrom_TextChanged);
             this.textBoxLinkFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // comboBoxEventType
@@ -1271,6 +1277,7 @@
             this.textBoxEventParam1.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam1.TabIndex = 0;
             this.textBoxEventParam1.Text = "0";
+            this.textBoxEventParam1.TextChanged += new System.EventHandler(this.textBoxEventParam1_TextChanged);
             this.textBoxEventParam1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // tabControlParameters
@@ -1281,7 +1288,7 @@
             this.tabControlParameters.Location = new System.Drawing.Point(8, 19);
             this.tabControlParameters.Name = "tabControlParameters";
             this.tabControlParameters.SelectedIndex = 0;
-            this.tabControlParameters.Size = new System.Drawing.Size(264, 152);
+            this.tabControlParameters.Size = new System.Drawing.Size(264, 153);
             this.tabControlParameters.TabIndex = 0;
             // 
             // tabPageEvent
@@ -1302,7 +1309,7 @@
             this.tabPageEvent.Location = new System.Drawing.Point(4, 22);
             this.tabPageEvent.Name = "tabPageEvent";
             this.tabPageEvent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEvent.Size = new System.Drawing.Size(256, 126);
+            this.tabPageEvent.Size = new System.Drawing.Size(256, 127);
             this.tabPageEvent.TabIndex = 0;
             this.tabPageEvent.Text = "Event";
             // 
@@ -1387,6 +1394,7 @@
             this.textBoxEventParam4.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam4.TabIndex = 3;
             this.textBoxEventParam4.Text = "0";
+            this.textBoxEventParam4.TextChanged += new System.EventHandler(this.textBoxEventParam4_TextChanged);
             this.textBoxEventParam4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxEventParam3
@@ -1396,6 +1404,7 @@
             this.textBoxEventParam3.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam3.TabIndex = 2;
             this.textBoxEventParam3.Text = "0";
+            this.textBoxEventParam3.TextChanged += new System.EventHandler(this.textBoxEventParam3_TextChanged);
             this.textBoxEventParam3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxEventParam2
@@ -1405,6 +1414,7 @@
             this.textBoxEventParam2.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam2.TabIndex = 1;
             this.textBoxEventParam2.Text = "0";
+            this.textBoxEventParam2.TextChanged += new System.EventHandler(this.textBoxEventParam2_TextChanged);
             this.textBoxEventParam2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // tabPageAction
@@ -1431,7 +1441,7 @@
             this.tabPageAction.Location = new System.Drawing.Point(4, 22);
             this.tabPageAction.Name = "tabPageAction";
             this.tabPageAction.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAction.Size = new System.Drawing.Size(256, 126);
+            this.tabPageAction.Size = new System.Drawing.Size(256, 127);
             this.tabPageAction.TabIndex = 1;
             this.tabPageAction.Text = "Action";
             // 
@@ -1558,6 +1568,7 @@
             this.textBoxActionParam6.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam6.TabIndex = 27;
             this.textBoxActionParam6.Text = "0";
+            this.textBoxActionParam6.TextChanged += new System.EventHandler(this.textBoxActionParam6_TextChanged);
             this.textBoxActionParam6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxActionParam5
@@ -1567,6 +1578,7 @@
             this.textBoxActionParam5.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam5.TabIndex = 28;
             this.textBoxActionParam5.Text = "0";
+            this.textBoxActionParam5.TextChanged += new System.EventHandler(this.textBoxActionParam5_TextChanged);
             this.textBoxActionParam5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxActionParam4
@@ -1576,6 +1588,7 @@
             this.textBoxActionParam4.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam4.TabIndex = 29;
             this.textBoxActionParam4.Text = "0";
+            this.textBoxActionParam4.TextChanged += new System.EventHandler(this.textBoxActionParam4_TextChanged);
             this.textBoxActionParam4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxActionParam3
@@ -1585,6 +1598,7 @@
             this.textBoxActionParam3.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam3.TabIndex = 30;
             this.textBoxActionParam3.Text = "0";
+            this.textBoxActionParam3.TextChanged += new System.EventHandler(this.textBoxActionParam3_TextChanged);
             this.textBoxActionParam3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxActionParam2
@@ -1594,6 +1608,7 @@
             this.textBoxActionParam2.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam2.TabIndex = 31;
             this.textBoxActionParam2.Text = "0";
+            this.textBoxActionParam2.TextChanged += new System.EventHandler(this.textBoxActionParam2_TextChanged);
             this.textBoxActionParam2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // labelActionParam1
@@ -1613,6 +1628,7 @@
             this.textBoxActionParam1.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam1.TabIndex = 33;
             this.textBoxActionParam1.Text = "0";
+            this.textBoxActionParam1.TextChanged += new System.EventHandler(this.textBoxActionParam1_TextChanged);
             this.textBoxActionParam1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // tabPageTarget
@@ -1641,7 +1657,7 @@
             this.tabPageTarget.Controls.Add(this.textBoxTargetParam1);
             this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
             this.tabPageTarget.Name = "tabPageTarget";
-            this.tabPageTarget.Size = new System.Drawing.Size(256, 126);
+            this.tabPageTarget.Size = new System.Drawing.Size(256, 127);
             this.tabPageTarget.TabIndex = 2;
             this.tabPageTarget.Text = "Target";
             // 
@@ -1769,6 +1785,7 @@
             this.textBoxTargetO.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetO.TabIndex = 36;
             this.textBoxTargetO.Text = "0";
+            this.textBoxTargetO.TextChanged += new System.EventHandler(this.textBoxTargetO_TextChanged);
             this.textBoxTargetO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxTargetZ
@@ -1778,6 +1795,7 @@
             this.textBoxTargetZ.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetZ.TabIndex = 36;
             this.textBoxTargetZ.Text = "0";
+            this.textBoxTargetZ.TextChanged += new System.EventHandler(this.textBoxTargetZ_TextChanged);
             this.textBoxTargetZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // labelTargetParam3
@@ -1797,6 +1815,7 @@
             this.textBoxTargetY.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetY.TabIndex = 36;
             this.textBoxTargetY.Text = "0";
+            this.textBoxTargetY.TextChanged += new System.EventHandler(this.textBoxTargetY_TextChanged);
             this.textBoxTargetY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // labelTargetParam2
@@ -1816,6 +1835,7 @@
             this.textBoxTargetX.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetX.TabIndex = 36;
             this.textBoxTargetX.Text = "0";
+            this.textBoxTargetX.TextChanged += new System.EventHandler(this.textBoxTargetX_TextChanged);
             this.textBoxTargetX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxTargetParam3
@@ -1825,6 +1845,7 @@
             this.textBoxTargetParam3.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetParam3.TabIndex = 36;
             this.textBoxTargetParam3.Text = "0";
+            this.textBoxTargetParam3.TextChanged += new System.EventHandler(this.textBoxTargetParam3_TextChanged);
             this.textBoxTargetParam3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxTargetParam2
@@ -1834,6 +1855,7 @@
             this.textBoxTargetParam2.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetParam2.TabIndex = 37;
             this.textBoxTargetParam2.Text = "0";
+            this.textBoxTargetParam2.TextChanged += new System.EventHandler(this.textBoxTargetParam2_TextChanged);
             this.textBoxTargetParam2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // labelTargetParam1
@@ -1853,6 +1875,7 @@
             this.textBoxTargetParam1.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetParam1.TabIndex = 39;
             this.textBoxTargetParam1.Text = "0";
+            this.textBoxTargetParam1.TextChanged += new System.EventHandler(this.textBoxTargetParam1_TextChanged);
             this.textBoxTargetParam1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // groupBoxParameters
@@ -1878,8 +1901,8 @@
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
             this.listViewSmartScripts.Visible = false;
-            this.listViewSmartScripts.SelectedIndexChanged += new System.EventHandler(this.listViewSmartScripts_SelectedIndexChanged);
-            this.listViewSmartScripts.Click += new System.EventHandler(this.listViewSmartScripts_Click);
+            this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
+            this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
             // panelPermanentTooltipTypes
@@ -1953,7 +1976,7 @@
             // buttonNewLine
             // 
             this.buttonNewLine.Enabled = false;
-            this.buttonNewLine.Location = new System.Drawing.Point(649, 215);
+            this.buttonNewLine.Location = new System.Drawing.Point(650, 215);
             this.buttonNewLine.Name = "buttonNewLine";
             this.buttonNewLine.Size = new System.Drawing.Size(85, 23);
             this.buttonNewLine.TabIndex = 26;
@@ -1975,7 +1998,7 @@
             // 
             // buttonSaveChanges
             // 
-            this.buttonSaveChanges.Location = new System.Drawing.Point(842, 215);
+            this.buttonSaveChanges.Location = new System.Drawing.Point(841, 215);
             this.buttonSaveChanges.Name = "buttonSaveChanges";
             this.buttonSaveChanges.Size = new System.Drawing.Size(85, 23);
             this.buttonSaveChanges.TabIndex = 28;

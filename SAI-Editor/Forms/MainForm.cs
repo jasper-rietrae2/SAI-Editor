@@ -67,6 +67,7 @@ namespace SAI_Editor
         public int lastSmartScriptIdOfScript = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool runningConstructor = false;
+        private List<SmartScript> allSmartScripts = new List<SmartScript>();
 
         public MainForm()
         {
@@ -173,8 +174,6 @@ namespace SAI_Editor
             listViewSmartScripts.Columns.Add("z", 20, HorizontalAlignment.Right); // 25
             listViewSmartScripts.Columns.Add("o", 20, HorizontalAlignment.Right); // 26
             listViewSmartScripts.Columns.Add("comment", 400, HorizontalAlignment.Left); // 27 (width 56 to fit)
-
-            listViewSmartScripts.ColumnClick += listViewSmartScripts_ColumnClick;
 
             if (Settings.Default.AutoConnect)
             {
@@ -525,6 +524,9 @@ namespace SAI_Editor
                 ChangeParameterFieldsBasedOnType();
                 UpdatePermanentTooltipOfTypes(comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
             }
+
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[4].Text = comboBoxEventType.SelectedIndex.ToString();
         }
 
         private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
@@ -537,6 +539,9 @@ namespace SAI_Editor
                 ChangeParameterFieldsBasedOnType();
                 UpdatePermanentTooltipOfTypes(comboBoxActionType, ScriptTypeId.ScriptTypeAction);
             }
+
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[12].Text = comboBoxActionType.SelectedIndex.ToString();
         }
 
         private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
@@ -549,6 +554,9 @@ namespace SAI_Editor
                 ChangeParameterFieldsBasedOnType();
                 UpdatePermanentTooltipOfTypes(comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
             }
+
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[19].Text = comboBoxTargetType.SelectedIndex.ToString();
         }
 
         private void ChangeParameterFieldsBasedOnType()
@@ -727,25 +735,18 @@ namespace SAI_Editor
             new AboutForm().ShowDialog(this);
         }
 
-        private void listViewSmartScripts_Click(object sender, EventArgs e)
+        private void listViewSmartScripts_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            if (listViewSmartScripts.SelectedItems.Count <= 0)
+            if (!e.IsSelected)
                 return;
 
-            FillFieldsBasedOnSelectedScript();
-        }
-
-        //! Todo: try to figure out why this is called when switching to a new selection (but with selecteditems.count
-        //! as '0', thus resulting in fugly text changing).
-        private void listViewSmartScripts_SelectedIndexChanged(object sender, EventArgs e)
-        {
             menuItemDeleteSelectedRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
 
-            if (listViewSmartScripts.SelectedItems.Count <= 0)
-            {
-                ResetFieldsToDefault();
-                return;
-            }
+            //if (!e.IsSelected)
+            //{
+            //    ResetFieldsToDefault();
+            //    return;
+            //}
 
             FillFieldsBasedOnSelectedScript();
         }
@@ -786,7 +787,6 @@ namespace SAI_Editor
                 textBoxEventFlags.Text = selectedItem[7].Text;
 
                 //! Event parameters
-                //comboBoxEventType.SelectedIndex = event_type;
                 textBoxEventParam1.Text = selectedItem[8].Text;
                 textBoxEventParam2.Text = selectedItem[9].Text;
                 textBoxEventParam3.Text = selectedItem[10].Text;
@@ -1134,14 +1134,21 @@ namespace SAI_Editor
 
         private void DeleteSelectedRow()
         {
-            if (listViewSmartScripts.SelectedItems.Count > 0)
-            {
-                foreach (ListViewItem item in listViewSmartScripts.SelectedItems)
-                    listViewSmartScripts.Items.Remove(item);
+            if (listViewSmartScripts.SelectedItems.Count == 0)
+                return;
 
-                buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
-                lastSmartScriptIdOfScript--;
+            foreach (SmartScript smartScript in allSmartScripts)
+            {
+                if (smartScript.entryorguid.ToString() == listViewSmartScripts.SelectedItems[0].Text)
+                {
+                    allSmartScripts.Remove(smartScript);
+                    break;
+                }
             }
+
+            listViewSmartScripts.Items.Remove(listViewSmartScripts.SelectedItems[0]);
+            buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
+            lastSmartScriptIdOfScript--;
         }
 
         private async void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
@@ -1223,6 +1230,9 @@ namespace SAI_Editor
                 listViewSmartScripts.Select(); //! Sets the focus on the listview
                 lastSmartScriptIdOfScript = XConverter.TryParseStringToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
             }
+
+            foreach (ListViewItem item in listViewSmartScripts.Items)
+                allSmartScripts.Add(BuildSmartScript(item));
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
@@ -1999,9 +2009,12 @@ namespace SAI_Editor
             listViewItem.SubItems.Add("0"); // target Z
             listViewItem.SubItems.Add("0"); // target O
 
+            SmartScript smartScript = BuildSmartScript(listViewSmartScripts.Items[0]);
+            allSmartScripts.Add(smartScript);
+
             //! Todo: implement auto-generated comments
             if (checkBoxAutoGenerateComments.Checked)
-                listViewItem.SubItems.Add(GenerateCommentForScript(BuildSmartScript(listViewSmartScripts.Items[0]))); // comment
+                listViewItem.SubItems.Add(GenerateCommentForScript(smartScript)); // comment
             else
                 listViewItem.SubItems.Add("Npc - Event - Action (phase) (dungeon difficulty)"); // comment
 
@@ -2028,12 +2041,177 @@ namespace SAI_Editor
         private SmartScript BuildSmartScript(ListViewItem item)
         {
             SmartScript smartScript = new SmartScript();
+            smartScript.entryorguid = XConverter.TryParseStringToInt32(item.Text);
+            smartScript.source_type = XConverter.TryParseStringToInt32(item.SubItems[1].Text);
+            smartScript.id = XConverter.TryParseStringToInt32(item.SubItems[2].Text);
+            smartScript.link = XConverter.TryParseStringToInt32(item.SubItems[3].Text);
+            smartScript.event_type = XConverter.TryParseStringToInt32(item.SubItems[4].Text);
+            smartScript.event_phase_mask = XConverter.TryParseStringToInt32(item.SubItems[5].Text);
+            smartScript.event_chance = XConverter.TryParseStringToInt32(item.SubItems[6].Text);
+            smartScript.event_flags = XConverter.TryParseStringToInt32(item.SubItems[7].Text);
+            smartScript.event_param1 = XConverter.TryParseStringToInt32(item.SubItems[8].Text);
+            smartScript.event_param2 = XConverter.TryParseStringToInt32(item.SubItems[9].Text);
+            smartScript.event_param3 = XConverter.TryParseStringToInt32(item.SubItems[10].Text);
+            smartScript.event_param4 = XConverter.TryParseStringToInt32(item.SubItems[11].Text);
+            smartScript.action_type = XConverter.TryParseStringToInt32(item.SubItems[12].Text);
+            smartScript.action_param1 = XConverter.TryParseStringToInt32(item.SubItems[13].Text);
+            smartScript.action_param2 = XConverter.TryParseStringToInt32(item.SubItems[14].Text);
+            smartScript.action_param3 = XConverter.TryParseStringToInt32(item.SubItems[15].Text);
+            smartScript.action_param4 = XConverter.TryParseStringToInt32(item.SubItems[16].Text);
+            smartScript.action_param5 = XConverter.TryParseStringToInt32(item.SubItems[17].Text);
+            smartScript.action_param6 = XConverter.TryParseStringToInt32(item.SubItems[18].Text);
+            smartScript.target_type = XConverter.TryParseStringToInt32(item.SubItems[19].Text);
+            smartScript.target_param1 = XConverter.TryParseStringToInt32(item.SubItems[20].Text);
+            smartScript.target_param2 = XConverter.TryParseStringToInt32(item.SubItems[21].Text);
+            smartScript.target_param3 = XConverter.TryParseStringToInt32(item.SubItems[22].Text);
+            smartScript.target_x = XConverter.TryParseStringToInt32(item.SubItems[23].Text);
+            smartScript.target_y = XConverter.TryParseStringToInt32(item.SubItems[24].Text);
+            smartScript.target_z = XConverter.TryParseStringToInt32(item.SubItems[25].Text);
+            smartScript.target_o = XConverter.TryParseStringToInt32(item.SubItems[26].Text);
+            smartScript.comment = item.SubItems[27].Text;
             return smartScript;
         }
 
         private string GenerateCommentForScript(SmartScript smartScript)
         {
             return String.Empty;
+        }
+
+        private void textBoxLinkTo_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[3].Text = textBoxLinkTo.Text;
+        }
+
+        private void textBoxComments_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = textBoxComments.Text;
+        }
+
+        private void textBoxEventPhasemask_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[5].Text = textBoxEventPhasemask.Text;
+        }
+
+        private void textBoxEventChance_ValueChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[6].Text = textBoxEventChance.Value.ToString(); //! Using .Text propert results in wrong value
+        }
+
+        private void textBoxEventFlags_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[7].Text = textBoxEventFlags.Text;
+        }
+
+        private void textBoxLinkFrom_TextChanged(object sender, EventArgs e)
+        {
+            // unused (?)
+        }
+
+        private void textBoxEventParam1_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[8].Text = textBoxEventParam1.Text;
+        }
+
+        private void textBoxEventParam2_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[9].Text = textBoxEventParam2.Text;
+        }
+
+        private void textBoxEventParam3_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[10].Text = textBoxEventParam3.Text;
+        }
+
+        private void textBoxEventParam4_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[11].Text = textBoxEventParam4.Text;
+        }
+
+        private void textBoxActionParam1_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[13].Text = textBoxActionParam1.Text;
+        }
+
+        private void textBoxActionParam2_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[14].Text = textBoxActionParam2.Text;
+        }
+
+        private void textBoxActionParam3_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[15].Text = textBoxActionParam3.Text;
+        }
+
+        private void textBoxActionParam4_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[16].Text = textBoxActionParam4.Text;
+        }
+
+        private void textBoxActionParam5_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[17].Text = textBoxActionParam5.Text;
+        }
+
+        private void textBoxActionParam6_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[18].Text = textBoxActionParam6.Text;
+        }
+
+        private void textBoxTargetParam1_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[20].Text = textBoxTargetParam1.Text;
+        }
+
+        private void textBoxTargetParam2_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[21].Text = textBoxTargetParam2.Text;
+        }
+
+        private void textBoxTargetParam3_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[22].Text = textBoxTargetParam3.Text;
+        }
+
+        private void textBoxTargetX_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[23].Text = textBoxTargetX.Text;
+        }
+
+        private void textBoxTargetY_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[24].Text = textBoxTargetY.Text;
+        }
+
+        private void textBoxTargetZ_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[25].Text = textBoxTargetZ.Text;
+        }
+
+        private void textBoxTargetO_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+                listViewSmartScripts.SelectedItems[0].SubItems[26].Text = textBoxTargetO.Text;
         }
     }
 }
