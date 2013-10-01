@@ -1999,6 +1999,8 @@ namespace SAI_Editor
                 listViewItem.SubItems.Add("Npc - Event - Action (phase) (dungeon difficulty)"); // comment
 
             listViewSmartScripts.Items.Add(listViewItem);
+            listViewItem.Selected = true;
+            listViewSmartScripts.Select();
         }
 
         private void buttonEditCurrent_Click(object sender, EventArgs e)
