@@ -133,8 +133,8 @@ namespace SAI_Editor
 
             //! We hardcode the actual shortcuts because there are certain conditons under which the menu should not be
             //! opened at all.
-            //menuItemExit.ShortcutKeys = (Keys.Shift | Keys.F5);
-            menuItemExit.ShortcutKeyDisplayString = "(Shift + F5)";
+            //menuItemExit.ShortcutKeys = (Keys.Alt | Keys.F4);
+            menuItemExit.ShortcutKeyDisplayString = "(Alt + F4)";
             //menuItemReconnect.ShortcutKeys = (Keys.Shift | Keys.F4);
             menuItemReconnect.ShortcutKeyDisplayString = "(Shift + F4)";
             //menuItemSettings.ShortcutKeys = Keys.F1;
@@ -481,7 +481,7 @@ namespace SAI_Editor
             //! Hardcode shortcuts to menu because we can't use conditions otherwise
             if (formState == FormState.FormStateMain)
             {
-                if (e.KeyData == (Keys.Shift | Keys.F5) || e.KeyData == (Keys.ShiftKey | Keys.F5))
+                if (e.KeyData == (Keys.Alt | Keys.F4))
                     TryCloseApplication();
                 else if (e.KeyData == (Keys.Shift | Keys.F4) || e.KeyData == (Keys.ShiftKey | Keys.F4))
                     menuItemReconnect.PerformClick();
