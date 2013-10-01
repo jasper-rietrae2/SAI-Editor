@@ -48,7 +48,7 @@ namespace SAI_Editor.Forms
                 SmartScript smartScript = smartScripts[i];
 
                 richTextBoxSqlOutput.Text += "(@ENTRY," + smartScript.source_type + "," + smartScript.id + "," + smartScript.link + "," + smartScript.event_type + "," +
-                                              smartScript.event_phase_mask + "," + smartScript.event_flags + "," + smartScript.event_chance + "," + smartScript.event_param1 + "," +
+                                              smartScript.event_phase_mask + "," + smartScript.event_chance + "," + smartScript.event_flags + "," + smartScript.event_param1 + "," +
                                               smartScript.event_param2 + "," + smartScript.event_param3 + "," + smartScript.event_param4 + "," + smartScript.action_type + "," +
                                               smartScript.action_param1 + "," + smartScript.action_param2 + "," + smartScript.action_param3 + "," + smartScript.action_param4 + "," +
                                               smartScript.action_param5 + "," + smartScript.action_param6 + "," + smartScript.target_type + "," + smartScript.target_param1 + "," +
