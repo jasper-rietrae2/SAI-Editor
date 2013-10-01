@@ -174,6 +174,9 @@ namespace SAI_Editor.SearchForms
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
+            if (listViewSelectableItems.SelectedItems.Count == 0)
+                return;
+
             string index = listViewSelectableItems.SelectedItems[0].Index.ToString();
 
             if (index == "7" && searchType == SingleSelectFormType.SingleSelectFormTypePowerType) //! POWER_HEALTH
@@ -214,6 +217,11 @@ namespace SAI_Editor.SearchForms
             {
                 case Keys.Escape:
                     Close();
+                    break;
+                case Keys.Enter:
+                    if (listViewSelectableItems.SelectedItems.Count > 0)
+                        buttonContinue.PerformClick();
+
                     break;
             }
         }
