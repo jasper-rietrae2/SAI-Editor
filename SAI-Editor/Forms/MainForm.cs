@@ -242,6 +242,8 @@ namespace SAI_Editor
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
 
+            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+
             runningConstructor = false;
         }
 
@@ -2197,6 +2199,11 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
                 listViewSmartScripts.SelectedItems[0].SubItems[26].Text = textBoxTargetO.Text;
+        }
+
+        private void textBoxEntryOrGuid_TextChanged(object sender, EventArgs e)
+        {
+            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
         }
     }
 }

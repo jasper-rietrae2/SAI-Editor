@@ -503,6 +503,7 @@ namespace SAI_Editor
             // pictureBoxLoadScript
             // 
             this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Enabled = false;
             this.pictureBoxLoadScript.Image = global::SAI_Editor.Properties.Resources.icon_load_script;
             this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
             this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
@@ -562,6 +563,7 @@ namespace SAI_Editor
             this.textBoxEntryOrGuid.Size = new System.Drawing.Size(135, 20);
             this.textBoxEntryOrGuid.TabIndex = 0;
             this.textBoxEntryOrGuid.Text = "33303";
+            this.textBoxEntryOrGuid.TextChanged += new System.EventHandler(this.textBoxEntryOrGuid_TextChanged);
             this.textBoxEntryOrGuid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // groupBoxPreferences
