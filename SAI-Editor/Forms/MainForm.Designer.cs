@@ -1,4 +1,6 @@
-﻿namespace SAI_Editor
+﻿using SAI_Editor.Classes;
+
+namespace SAI_Editor
 {
     partial class MainForm
     {
@@ -162,7 +164,7 @@
             this.labelTargetParam1 = new System.Windows.Forms.Label();
             this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
-            this.listViewSmartScripts = new System.Windows.Forms.ListView();
+            this.listViewSmartScripts = new System.Windows.Forms.XListView();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
@@ -2109,7 +2111,7 @@
         private System.Windows.Forms.GroupBox groupBoxParameters;
         public System.Windows.Forms.GroupBox groupBoxStaticScriptInfo;
         public System.Windows.Forms.TextBox textBoxEntryOrGuid;
-        private System.Windows.Forms.ListView listViewSmartScripts;
+        private System.Windows.Forms.XListView listViewSmartScripts;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBoxListActionlistsOrEntries;
         private System.Windows.Forms.CheckBox checkBox1;

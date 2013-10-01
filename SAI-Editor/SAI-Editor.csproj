@@ -98,6 +98,9 @@
     <Compile Include="Forms\SearchForms\MultiSelectForm.designer.cs">
       <DependentUpon>MultiSelectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\XListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Enumerators\PublicEnums.cs" />
