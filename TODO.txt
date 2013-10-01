@@ -23,6 +23,8 @@
 - Add a warning box in the following case: the user selected a script which uses action type SMART_ACTION_SUMMON_CREATURE and then manually changes the combobox' item to SMART_ACTION_CAST. This means that the first parameter which was originally a creature id, is now read as a spell id because of the new action type
 - Add a preference or setting to hide unused parameters?
 - Also visually disable the picturebox to load scripts
+- Implement SAI conditions support
+- Implement creature text support (?)
 
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
