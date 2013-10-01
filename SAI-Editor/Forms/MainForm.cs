@@ -874,32 +874,22 @@ namespace SAI_Editor
                     buttonEventParamOneSearch.Visible = true; //! Spell entry
                     buttonEventParamTwoSearch.Visible = true; //! Spell school
                     break;
-                case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF:
-                case SmartEvent.SMART_EVENT_HAS_AURA:
-                case SmartEvent.SMART_EVENT_TARGET_BUFFED:
-                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
-                    buttonEventParamOneSearch.Visible = true; //! Spell entry
-                    break;
                 case SmartEvent.SMART_EVENT_RESPAWN:
                     buttonEventParamOneSearch.Visible = true; //! Respawn condition (SMART_SCRIPT_RESPAWN_CONDITION_MAP / SMART_SCRIPT_RESPAWN_CONDITION_AREA)
                     buttonEventParamTwoSearch.Visible = true; //! Map entry
                     buttonEventParamThreeSearch.Visible = true; //! Zone entry
                     break;
-                case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED:
-                    buttonEventParamOneSearch.Visible = true; //! Creature entry
-                    break;
-                case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER:
-                    buttonEventParamOneSearch.Visible = true; //! Areatrigger entry
-                    break;
-                case SmartEvent.SMART_EVENT_GO_STATE_CHANGED:
-                    buttonEventParamOneSearch.Visible = true; //! Go state
-                    break;
-                case SmartEvent.SMART_EVENT_GAME_EVENT_START:
-                case SmartEvent.SMART_EVENT_GAME_EVENT_END:
-                    buttonEventParamOneSearch.Visible = true; //! Game event entry
-                    break;
-                case SmartEvent.SMART_EVENT_MOVEMENTINFORM:
-                    buttonEventParamOneSearch.Visible = true; //! Movement type
+                case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER: //! Areatrigger entry
+                case SmartEvent.SMART_EVENT_GO_STATE_CHANGED: //! Go state
+                case SmartEvent.SMART_EVENT_GAME_EVENT_START: //! Game event entry
+                case SmartEvent.SMART_EVENT_GAME_EVENT_END: //! Game event entry
+                case SmartEvent.SMART_EVENT_MOVEMENTINFORM: //! Movement type
+                case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF:
+                case SmartEvent.SMART_EVENT_HAS_AURA:
+                case SmartEvent.SMART_EVENT_TARGET_BUFFED:
+                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
+                case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
+                    buttonEventParamOneSearch.Visible = true; //! Spell entry
                     break;
             }
 
@@ -915,64 +905,20 @@ namespace SAI_Editor
                     buttonActionParamTwoSearch.Visible = true; //! Cast flags
                     buttonActionParamThreeSearch.Visible = true; //! Target type
                     break;
-                case SmartAction.SMART_ACTION_SET_FACTION:
-                    buttonActionParamOneSearch.Visible = true; //! Faction entry
-                    break;
-                case SmartAction.SMART_ACTION_EMOTE:
-                case SmartAction.SMART_ACTION_RANDOM_EMOTE:
-                case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
-                    buttonActionParamOneSearch.Visible = true; //! Emote entry
-                    break;
-                case SmartAction.SMART_ACTION_FAIL_QUEST:
-                case SmartAction.SMART_ACTION_ADD_QUEST:
-                case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS:
-                case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
-                    buttonActionParamOneSearch.Visible = true; //! Quest entry
-                    break;
-                case SmartAction.SMART_ACTION_SET_REACT_STATE:
-                    buttonActionParamOneSearch.Visible = true; //! Reactstate
-                    break;
-                case SmartAction.SMART_ACTION_SOUND:
-                    buttonActionParamOneSearch.Visible = true; //! Sound entry
-                    break;
-                case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL: //! Creature entry
-                case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO:
-                case SmartAction.SMART_ACTION_KILLED_MONSTER:
-                case SmartAction.SMART_ACTION_UPDATE_TEMPLATE:
-                case SmartAction.SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL:
-                    buttonActionParamOneSearch.Visible = true; //! Creature entry
-                    break;
                 case SmartAction.SMART_ACTION_SUMMON_CREATURE:
                     buttonActionParamOneSearch.Visible = true; //! Creature entry
                     buttonActionParamTwoSearch.Visible = true; //! Summon type
                     break;
-                case SmartAction.SMART_ACTION_WP_STOP:
-                    buttonActionParamTwoSearch.Visible = true; //! Quest entry
-                    break;
-                case SmartAction.SMART_ACTION_FOLLOW:
-                    buttonActionParamThreeSearch.Visible = true; //! Creature entry
+                case SmartAction.SMART_ACTION_WP_STOP: //! Quest entry
+                case SmartAction.SMART_ACTION_INTERRUPT_SPELL: //! Spell entry
+                    buttonActionParamTwoSearch.Visible = true;
                     break;
                 case SmartAction.SMART_ACTION_WP_START:
                     buttonActionParamFourSearch.Visible = true; //! Quest entry
                     buttonActionParamSixSearch.Visible = true; //! React state
                     break;
-                case SmartAction.SMART_ACTION_INTERRUPT_SPELL:
-                    buttonActionParamTwoSearch.Visible = true; //! Spell entry
-                    break;
-                case SmartAction.SMART_ACTION_GO_SET_LOOT_STATE:
-                    buttonActionParamOneSearch.Visible = true; //! Gameobject state
-                    break;
-                case SmartAction.SMART_ACTION_SET_POWER:
-                case SmartAction.SMART_ACTION_ADD_POWER:
-                case SmartAction.SMART_ACTION_REMOVE_POWER:
-                    buttonActionParamOneSearch.Visible = true; //! Power type
-                    break;
-                case SmartAction.SMART_ACTION_SUMMON_GO:
-                    buttonActionParamOneSearch.Visible = true; //! Gameobject entry
-                    break;
-                case SmartAction.SMART_ACTION_SET_EVENT_PHASE:
-                case SmartAction.SMART_ACTION_SET_PHASE_MASK:
-                    buttonActionParamOneSearch.Visible = true; //! Event/ingame phase
+                case SmartAction.SMART_ACTION_FOLLOW:
+                    buttonActionParamThreeSearch.Visible = true; //! Creature entry
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
                     buttonActionParamOneSearch.Visible = true; //! Event phase 1
@@ -986,66 +932,71 @@ namespace SAI_Editor
                     buttonActionParamFiveSearch.Visible = true; //! Event phase 5
                     buttonActionParamSixSearch.Visible = true; //! Event phase 6
                     break;
-                case SmartAction.SMART_ACTION_ADD_ITEM:
-                case SmartAction.SMART_ACTION_REMOVE_ITEM:
-                    buttonActionParamOneSearch.Visible = true; //! Item entry
-                    break;
                 case SmartAction.SMART_ACTION_EQUIP:
                     buttonActionParamOneSearch.Visible = true; //! Equipment entry
                     buttonActionParamThreeSearch.Visible = true; //! Item entry 1
                     buttonActionParamFourSearch.Visible = true; //! Item entry 2
                     buttonActionParamFiveSearch.Visible = true; //! Item entry 3
                     break;
-                case SmartAction.SMART_ACTION_TELEPORT:
-                    buttonActionParamOneSearch.Visible = true; //! Map id
-                    break;
-                case SmartAction.SMART_ACTION_SUMMON_CREATURE_GROUP:
-                    buttonActionParamOneSearch.Visible = true; //! Summons group id
-                    break;
-                case SmartAction.SMART_ACTION_REMOVEAURASFROMSPELL:
-                    buttonActionParamOneSearch.Visible = true; //! Spell entry
-                    break;
-                case SmartAction.SMART_ACTION_SET_SHEATH:
-                    buttonActionParamOneSearch.Visible = true; //! Sheath state
-                    break;
-                case SmartAction.SMART_ACTION_ACTIVATE_TAXI:
-                    buttonActionParamOneSearch.Visible = true; //! Taxi path id
-                    break;
-                case SmartAction.SMART_ACTION_SET_UNIT_FLAG:
-                case SmartAction.SMART_ACTION_REMOVE_UNIT_FLAG:
-                    buttonActionParamOneSearch.Visible = true; //! Unit flags
-                    break;
-                case SmartAction.SMART_ACTION_SET_GO_FLAG:
-                case SmartAction.SMART_ACTION_ADD_GO_FLAG:
-                case SmartAction.SMART_ACTION_REMOVE_GO_FLAG:
-                    buttonActionParamOneSearch.Visible = true; //! Gameobject flags
-                    break;
-                case SmartAction.SMART_ACTION_SET_DYNAMIC_FLAG:
-                case SmartAction.SMART_ACTION_ADD_DYNAMIC_FLAG:
-                case SmartAction.SMART_ACTION_REMOVE_DYNAMIC_FLAG:
-                    buttonActionParamOneSearch.Visible = true; //! Dynamic flags
+                case SmartAction.SMART_ACTION_SET_FACTION: //! Faction entry
+                case SmartAction.SMART_ACTION_EMOTE: //! Emote entry
+                case SmartAction.SMART_ACTION_RANDOM_EMOTE: //! Emote entry
+                case SmartAction.SMART_ACTION_SET_EMOTE_STATE: //! Emote entry
+                case SmartAction.SMART_ACTION_FAIL_QUEST: //! Quest entry
+                case SmartAction.SMART_ACTION_ADD_QUEST: //! Quest entry
+                case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS: //! Quest entry
+                case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS: //! Quest entry
+                case SmartAction.SMART_ACTION_SET_REACT_STATE: //! Reactstate
+                case SmartAction.SMART_ACTION_SOUND: //! Sound entry
+                case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL: //! Creature entry
+                case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO: //! Creature entry
+                case SmartAction.SMART_ACTION_KILLED_MONSTER: //! Creature entry
+                case SmartAction.SMART_ACTION_UPDATE_TEMPLATE: //! Creature entry
+                case SmartAction.SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL: //! Creature entry
+                case SmartAction.SMART_ACTION_GO_SET_LOOT_STATE: //! Gameobject state
+                case SmartAction.SMART_ACTION_SET_POWER: //! Power type
+                case SmartAction.SMART_ACTION_ADD_POWER: //! Power type
+                case SmartAction.SMART_ACTION_REMOVE_POWER: //! Power type
+                case SmartAction.SMART_ACTION_SUMMON_GO: //! Gameobject entry
+                case SmartAction.SMART_ACTION_SET_EVENT_PHASE: //! Event/ingame phase
+                case SmartAction.SMART_ACTION_SET_PHASE_MASK: //! Event/ingame phase
+                case SmartAction.SMART_ACTION_ADD_ITEM: //! Item entry
+                case SmartAction.SMART_ACTION_REMOVE_ITEM: //! Item entry
+                case SmartAction.SMART_ACTION_TELEPORT: //! Map id
+                case SmartAction.SMART_ACTION_SUMMON_CREATURE_GROUP: //! Summons group id
+                case SmartAction.SMART_ACTION_REMOVEAURASFROMSPELL: //! Spell id
+                case SmartAction.SMART_ACTION_SET_SHEATH: //! Sheath state
+                case SmartAction.SMART_ACTION_ACTIVATE_TAXI: //! Taxi path id
+                case SmartAction.SMART_ACTION_SET_UNIT_FLAG: //! Unit flags
+                case SmartAction.SMART_ACTION_REMOVE_UNIT_FLAG: //! Unit flags
+                case SmartAction.SMART_ACTION_SET_GO_FLAG: //! Gameobject flags
+                case SmartAction.SMART_ACTION_ADD_GO_FLAG: //! Gameobject flags
+                case SmartAction.SMART_ACTION_REMOVE_GO_FLAG: //! Gameobject flags
+                case SmartAction.SMART_ACTION_SET_DYNAMIC_FLAG: //! Dynamic flags
+                case SmartAction.SMART_ACTION_ADD_DYNAMIC_FLAG: //! Dynamic flags
+                case SmartAction.SMART_ACTION_REMOVE_DYNAMIC_FLAG: //! Dynamic flags
+                case SmartAction.SMART_ACTION_ADD_AURA: //! Spell id
+                    buttonActionParamOneSearch.Visible = true;
                     break;
             }
 
             switch ((SmartTarget)target_type)
             {
-                case SmartTarget.SMART_TARGET_CREATURE_RANGE:
-                case SmartTarget.SMART_TARGET_CREATURE_DISTANCE:
-                case SmartTarget.SMART_TARGET_CLOSEST_CREATURE:
-                    buttonTargetParamOneSearch.Visible = true; //! Creature entry
-                    break;
                 case SmartTarget.SMART_TARGET_CREATURE_GUID:
                     buttonTargetParamOneSearch.Visible = true; //! Creature guid
                     buttonTargetParamTwoSearch.Visible = true; //! Creature entry
                     break;
-                case SmartTarget.SMART_TARGET_GAMEOBJECT_RANGE:
-                case SmartTarget.SMART_TARGET_GAMEOBJECT_DISTANCE:
-                case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT:
-                    buttonTargetParamOneSearch.Visible = true; //! Gameobject entry
-                    break;
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID:
                     buttonTargetParamOneSearch.Visible = true; //! Gameobject guid
                     buttonTargetParamTwoSearch.Visible = true; //! Gameobject entry
+                    break;
+                case SmartTarget.SMART_TARGET_CREATURE_RANGE: //! Creature entry
+                case SmartTarget.SMART_TARGET_CREATURE_DISTANCE: //! Creature entry
+                case SmartTarget.SMART_TARGET_CLOSEST_CREATURE: //! Creature entry
+                case SmartTarget.SMART_TARGET_GAMEOBJECT_RANGE: //! Gameobject entry
+                case SmartTarget.SMART_TARGET_GAMEOBJECT_DISTANCE: //! Gameobject entry
+                case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT: //! Gameobject entry
+                    buttonTargetParamOneSearch.Visible = true;
                     break;
             }
 
@@ -1598,6 +1549,7 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_INVOKER_CAST:
                 case SmartAction.SMART_ACTION_CROSS_CAST:
                 case SmartAction.SMART_ACTION_REMOVEAURASFROMSPELL:
+                case SmartAction.SMART_ACTION_ADD_AURA:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_FACTION:
