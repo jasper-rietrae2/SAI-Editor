@@ -739,10 +739,11 @@ namespace SAI_Editor
 
         private void listViewSmartScripts_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
+            menuItemDeleteSelectedRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
+
             if (!e.IsSelected)
                 return;
 
-            menuItemDeleteSelectedRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
             FillFieldsBasedOnSelectedScript();
         }
 
