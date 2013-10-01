@@ -25,6 +25,7 @@
 - Also visually disable the picturebox to load scripts
 - Implement SAI conditions support
 - Implement creature text support (?)
+- Convert all 'new xxxForm().ShowDialog(this)' to use 'using'
 
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
