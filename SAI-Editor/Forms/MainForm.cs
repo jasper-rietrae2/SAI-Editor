@@ -1132,6 +1132,9 @@ namespace SAI_Editor
             listViewSmartScripts.Items.Remove(listViewSmartScripts.SelectedItems[0]);
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
             lastSmartScriptIdOfScript--;
+
+            if (listViewSmartScripts.Items.Count <= 0)
+                ResetFieldsToDefault(true);
         }
 
         private async void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
