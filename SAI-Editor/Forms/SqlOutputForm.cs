@@ -63,5 +63,10 @@ namespace SAI_Editor.Forms
                 richTextBoxSqlOutput.Text += "\n"; //! White line at end of script to make it easier to select
             }
         }
+
+        private void buttonExecuteScript_Click(object sender, EventArgs e)
+        {
+            SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(richTextBoxSqlOutput.Text);
+        }
     }
 }

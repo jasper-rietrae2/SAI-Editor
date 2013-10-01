@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SqlOutputForm));
             this.richTextBoxSqlOutput = new System.Windows.Forms.RichTextBox();
+            this.buttonExecuteScript = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // richTextBoxSqlOutput
@@ -40,11 +41,22 @@
             this.richTextBoxSqlOutput.TabIndex = 0;
             this.richTextBoxSqlOutput.Text = "";
             // 
+            // buttonExecuteScript
+            // 
+            this.buttonExecuteScript.Location = new System.Drawing.Point(746, 340);
+            this.buttonExecuteScript.Name = "buttonExecuteScript";
+            this.buttonExecuteScript.Size = new System.Drawing.Size(85, 23);
+            this.buttonExecuteScript.TabIndex = 1;
+            this.buttonExecuteScript.Text = "Execute script";
+            this.buttonExecuteScript.UseVisualStyleBackColor = true;
+            this.buttonExecuteScript.Click += new System.EventHandler(this.buttonExecuteScript_Click);
+            // 
             // SqlOutputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 346);
+            this.ClientSize = new System.Drawing.Size(843, 368);
+            this.Controls.Add(this.buttonExecuteScript);
             this.Controls.Add(this.richTextBoxSqlOutput);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -61,5 +73,6 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBoxSqlOutput;
+        private System.Windows.Forms.Button buttonExecuteScript;
     }
 }
