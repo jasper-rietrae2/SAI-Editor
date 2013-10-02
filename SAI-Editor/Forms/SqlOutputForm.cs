@@ -71,7 +71,7 @@ namespace SAI_Editor.Forms
                         break;
                     case SourceTypes.SourceTypeAreaTrigger:
                         richTextBoxSqlOutput.Text += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
-                        richTextBoxSqlOutput.Text += "INSERT INTO areatrigger_scripts VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
+                        richTextBoxSqlOutput.Text += "INSERT INTO `areatrigger_scripts` VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
                         break;
                     case SourceTypes.SourceTypeScriptedActionlist:
                         // todo
