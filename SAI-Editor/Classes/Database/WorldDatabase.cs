@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 using SAI_Editor.Classes;
 using SAI_Editor.Database.Classes;
 
-namespace SAI_Editor
+namespace SAI_Editor.Database
 {
     class WorldDatabase : Database<MySqlConnection, MySqlConnectionStringBuilder, MySqlParameter, MySqlCommand>
     {
