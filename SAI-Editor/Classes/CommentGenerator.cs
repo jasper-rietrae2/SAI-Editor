@@ -231,7 +231,7 @@ namespace SAI_Editor.Classes
         public async Task<string> GenerateCommentFor(SmartScript smartScript, EntryOrGuidAndSourceType entryOrGuidAndSourceType)
         {
             if (!Settings.Default.GenerateComments)
-                return String.Empty;
+                return String.IsNullOrWhiteSpace(smartScript.comment) ? "Npc - Event - Action (phase) (dungeon difficulty)" : smartScript.comment;
 
             string fullLine = String.Empty;
 
