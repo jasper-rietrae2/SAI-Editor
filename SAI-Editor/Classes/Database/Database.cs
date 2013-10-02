@@ -35,8 +35,10 @@ namespace SAI_Editor
             return true;
         }
 
-        public async Task ExecuteNonQuery(string nonQuery, params Parameter[] parameters)
+        public async Task<bool> ExecuteNonQuery(string nonQuery, params Parameter[] parameters)
         {
+            bool exceptionOccurred = false;
+
             try
             {
                 await Task.Run(() =>
@@ -57,6 +59,7 @@ namespace SAI_Editor
                             catch (Exception ex)
                             {
                                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                exceptionOccurred = true;
                             }
                         }
 
@@ -68,6 +71,8 @@ namespace SAI_Editor
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            return !exceptionOccurred;
         }
 
         public Task<DataTable> ExecuteQuery(string query, params Parameter[] parameters)

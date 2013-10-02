@@ -67,9 +67,10 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private void buttonExecuteScript_Click(object sender, EventArgs e)
+        private async void buttonExecuteScript_Click(object sender, EventArgs e)
         {
-            SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(richTextBoxSqlOutput.Text);
+            if (await SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(richTextBoxSqlOutput.Text))
+                MessageBox.Show("The query has been executed succesfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void buttonSaveToFile_Click(object sender, EventArgs e)
