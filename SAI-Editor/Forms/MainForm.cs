@@ -522,7 +522,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[4].Text = comboBoxEventType.SelectedIndex.ToString();
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -540,7 +540,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[12].Text = comboBoxActionType.SelectedIndex.ToString();
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -558,7 +558,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[19].Text = comboBoxTargetType.SelectedIndex.ToString();
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2017,7 +2017,7 @@ namespace SAI_Editor
 
             //! Todo: implement auto-generated comments
             if (checkBoxAutoGenerateComments.Checked)
-                listViewItem.SubItems.Add(await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewItem))); // comment
+                listViewItem.SubItems.Add(await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewItem), originalEntryOrGuidAndSourceType)); // comment
             else
                 listViewItem.SubItems.Add("Npc - Event - Action (phase) (dungeon difficulty)"); // comment
 
@@ -2079,7 +2079,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[3].Text = textBoxLinkTo.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2088,7 +2088,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[27].Text = textBoxComments.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2097,7 +2097,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[5].Text = textBoxEventPhasemask.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2106,7 +2106,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[6].Text = textBoxEventChance.Value.ToString(); //! Using .Text propert results in wrong value
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2115,7 +2115,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[7].Text = textBoxEventFlags.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2129,7 +2129,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[8].Text = textBoxEventParam1.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2138,7 +2138,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[9].Text = textBoxEventParam2.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2147,7 +2147,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[10].Text = textBoxEventParam3.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2156,7 +2156,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[11].Text = textBoxEventParam4.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2165,7 +2165,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[13].Text = textBoxActionParam1.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2174,7 +2174,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[14].Text = textBoxActionParam2.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2183,7 +2183,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[15].Text = textBoxActionParam3.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2192,7 +2192,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[16].Text = textBoxActionParam4.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2201,7 +2201,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[17].Text = textBoxActionParam5.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2210,7 +2210,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[18].Text = textBoxActionParam6.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2219,7 +2219,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[20].Text = textBoxTargetParam1.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2228,7 +2228,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[21].Text = textBoxTargetParam2.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2237,7 +2237,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[22].Text = textBoxTargetParam3.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2246,7 +2246,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[23].Text = textBoxTargetX.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2255,7 +2255,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[24].Text = textBoxTargetY.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2264,7 +2264,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[25].Text = textBoxTargetZ.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
@@ -2273,7 +2273,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedItems[0].SubItems[26].Text = textBoxTargetO.Text;
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
             }
         }
 
