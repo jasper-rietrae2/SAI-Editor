@@ -61,6 +61,7 @@ namespace SAI_Editor
         {
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 800);
+            textBoxCriteria.Text = textBoxToChange.Text;
 
             switch (databaseSearchFormType)
             {
@@ -270,7 +271,7 @@ namespace SAI_Editor
             if (listViewItemIndexToCopy > 0)
                 textBoxToChange.Text = listViewEntryResults.SelectedItems[0].SubItems[listViewItemIndexToCopy].Text;
             else
-                textBoxToChange.Text = listViewEntryResults.SelectedItems[listViewItemIndexToCopy].Text;
+                textBoxToChange.Text = listViewEntryResults.SelectedItems[0].Text;
 
             Close();
         }
