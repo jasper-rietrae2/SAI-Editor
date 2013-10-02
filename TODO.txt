@@ -20,8 +20,7 @@
 - Add a setting whether or not the user wants to use tooltips at all? To reduce start-up time (once we load them on startup)
 - Only enable target coordinate parameter fields for action types that actually use them
 - Make permanent tooltips support multilines OR decrease length of tooltips to a fixed size...
-- Add a warning box in the following case: the user selected a script which uses action type SMART_ACTION_SUMMON_CREATURE and then manually changes the combobox' item to SMART_ACTION_CAST. This means that the first parameter which was originally a creature id, is now read as a spell id because of the new action type
-- Add a preference or setting to hide unused parameters?
+- Add a preference or setting to hide unused parameters? Or hide them by default?
 - Also visually disable the picturebox to load scripts
 - Implement SAI conditions support
 - Implement creature text support (?)
