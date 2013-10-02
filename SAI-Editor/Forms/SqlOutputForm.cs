@@ -161,7 +161,17 @@ namespace SAI_Editor.Forms
 
             //! Replaces '@ENTRY*100[id]' ([id] being like 00, 01, 02, 03, etc.) by '@ENTRY*100+3' for example.
             for (int i = 0; i < 50; ++i) //! We expect a maximum of 50 scripts for one entry...
-                richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace(sourceSet + "0" + i.ToString(), sourceSet + "*100+" + i.ToString());
+            {
+                if (richTextBoxSqlOutput.Text.Contains(sourceSet + "0" + i.ToString()))
+                {
+                    string replacedText = richTextBoxSqlOutput.Text.Replace(sourceSet + "0" + i.ToString(), sourceSet + "*100");
+
+                    if (i > 0)
+                        replacedText += "+" + i.ToString();
+
+                    richTextBoxSqlOutput.Text = replacedText;
+                }
+            }
         }
 
         private async void buttonExecuteScript_Click(object sender, EventArgs e)
