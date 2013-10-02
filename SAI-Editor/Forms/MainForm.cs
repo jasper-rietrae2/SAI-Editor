@@ -212,25 +212,6 @@ namespace SAI_Editor
 
                 page.AutoScroll = true;
                 page.AutoScrollMinSize = new Size(page.Width, page.Height);
-
-                //foreach (Control control in page.Controls)
-                //{
-                //    if (control is Label)
-                //    {
-                //        switch (page.TabIndex)
-                //        {
-                //            case 0: //! Events
-                //                control.MouseEnter += labelsEventParameters_MouseEnter;
-                //                break;
-                //            case 1: //! Actions
-                //                control.MouseEnter += labelsActionsParameters_MouseEnter;
-                //                break;
-                //            case 2: //! Targets
-                //                control.MouseEnter += labelsTargetsParameters_MouseEnter;
-                //                break;
-                //        }
-                //    }
-                //}
             }
 
             //! Temp..
@@ -250,8 +231,7 @@ namespace SAI_Editor
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
 
-            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
-
+            SetPictureBoxLoadScriptEnabled(textBoxEntryOrGuid.Text.Length > 0);
             runningConstructor = false;
         }
 
@@ -662,7 +642,7 @@ namespace SAI_Editor
                 if (smartScripts == null)
                 {
                     MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI (smart_scripts) table for the given source type ({1})!", entryOrGuid, GetSourceTypeString(sourceType)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    pictureBoxLoadScript.Enabled = true;
+                    SetPictureBoxLoadScriptEnabled(true);
                     return false;
                 }
 
@@ -724,11 +704,11 @@ namespace SAI_Editor
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                pictureBoxLoadScript.Enabled = true;
+                SetPictureBoxLoadScriptEnabled(true);
                 return false;
             }
 
-            pictureBoxLoadScript.Enabled = true;
+            SetPictureBoxLoadScriptEnabled(true);
             return true;
         }
 
@@ -1228,7 +1208,7 @@ namespace SAI_Editor
 
             buttonGenerateSql.Enabled = false;
             menuItemGenerateSql.Enabled = false;
-            pictureBoxLoadScript.Enabled = false;
+            SetPictureBoxLoadScriptEnabled(false);
 
             SourceTypes newSourceType = GetSourceTypeByIndex();
             originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.TryParseStringToInt32(textBoxEntryOrGuid.Text);
@@ -2220,7 +2200,7 @@ namespace SAI_Editor
 
         private void textBoxEntryOrGuid_TextChanged(object sender, EventArgs e)
         {
-            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+            SetPictureBoxLoadScriptEnabled(textBoxEntryOrGuid.Text.Length > 0);
         }
 
         private void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2242,6 +2222,28 @@ namespace SAI_Editor
 
             if (smartScriptsToExport.Count > 0)
                 new SqlOutputForm(smartScriptsToExport).ShowDialog(this);
+        }
+
+        private void SetPictureBoxLoadScriptEnabled(bool enable)
+        {
+            Bitmap pic = new Bitmap(SAI_Editor.Properties.Resources.icon_load_script);
+            pictureBoxLoadScript.Enabled = enable;
+
+            if (!enable)
+            {
+                for (int w = 0; w < pic.Width; w++)
+                {
+                    for (int h = 0; h < pic.Height; h++)
+                    {
+                        Color c = pic.GetPixel(w, h);
+
+                        if (c.A != 0 && c.B != 0 && c.G != 0)
+                            pic.SetPixel(w, h, Color.FromArgb(70, c));
+                    }
+                }
+            }
+
+            pictureBoxLoadScript.Image = pic;
         }
     }
 }
