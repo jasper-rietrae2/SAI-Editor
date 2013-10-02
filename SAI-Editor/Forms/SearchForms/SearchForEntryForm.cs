@@ -538,19 +538,19 @@ namespace SAI_Editor
             switch (e.KeyCode)
             {
                 case Keys.Enter:
-                    {
-                        if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
-                            FillMainFormEntryOrGuidField(sender, e);
-                        else
-                            buttonSearch.PerformClick();
+                {
+                    if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
+                        FillMainFormEntryOrGuidField(sender, e);
+                    else
+                        buttonSearch.PerformClick();
 
-                        break;
-                    }
+                    break;
+                }
                 case Keys.Escape:
-                    {
-                        Close();
-                        break;
-                    }
+                {
+                    Close();
+                    break;
+                }
             }
         }
 

@@ -15,6 +15,12 @@ namespace SAI_Editor.Forms
 {
     public partial class SqlOutputForm : Form
     {
+        private struct EntryOrGuidAndSourceType
+        {
+            public int entryOrGuid;
+            public int sourceType;
+        };
+
         private List<SmartScript> smartScripts = null;
 
         public SqlOutputForm(List<SmartScript> smartScripts)
@@ -38,13 +44,54 @@ namespace SAI_Editor.Forms
             if (smartScripts == null || smartScripts.Count == 0)
                 return;
 
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = new List<EntryOrGuidAndSourceType>();
+
+            foreach (SmartScript smartScript in smartScripts)
+            {
+                EntryOrGuidAndSourceType entryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
+                entryOrGuidAndSourceType.entryOrGuid = smartScript.entryorguid;
+                entryOrGuidAndSourceType.sourceType = smartScript.source_type;
+
+                if (entriesOrGuidsAndSourceTypes.Contains(entryOrGuidAndSourceType))
+                    continue;
+
+                entriesOrGuidsAndSourceTypes.Add(entryOrGuidAndSourceType);
+            }
+
             string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameByIdOrGuid(XConverter.TryParseStringToInt32(smartScripts[0].entryorguid));
             string sourceSet = smartScripts[0].entryorguid < 0 ? "@GUID" : "@ENTRY";
 
             richTextBoxSqlOutput.Text += "-- " + sourceName + " SAI\n";
             richTextBoxSqlOutput.Text += "SET " + sourceSet + " := " + smartScripts[0].entryorguid + ";\n";
             richTextBoxSqlOutput.Text += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
-            richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + sourceSet + " AND `source_type`=" + smartScripts[0].source_type + ";\n";
+
+            if (entriesOrGuidsAndSourceTypes.Count == 1)
+                richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + sourceSet + " AND `source_type`=" + smartScripts[0].source_type + ";\n";
+            else
+            {
+                richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid` IN (";
+
+                for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
+                {
+                    if (i == entriesOrGuidsAndSourceTypes.Count - 1)
+                        richTextBoxSqlOutput.Text += entriesOrGuidsAndSourceTypes[i].entryOrGuid + ")";
+                    else
+                        richTextBoxSqlOutput.Text += entriesOrGuidsAndSourceTypes[i].entryOrGuid + ",";
+                }
+
+                richTextBoxSqlOutput.Text += " AND `source_type` IN (";
+
+                for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
+                {
+                    if (i == entriesOrGuidsAndSourceTypes.Count - 1)
+                        richTextBoxSqlOutput.Text += entriesOrGuidsAndSourceTypes[i].sourceType + ")";
+                    else
+                        richTextBoxSqlOutput.Text += entriesOrGuidsAndSourceTypes[i].sourceType + ",";
+                }
+
+                richTextBoxSqlOutput.Text += ";\n";
+            }
+
             richTextBoxSqlOutput.Text += "INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES\n";
 
             for (int i = 0; i < smartScripts.Count; ++i)
