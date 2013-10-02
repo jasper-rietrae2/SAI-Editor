@@ -88,7 +88,7 @@ namespace SAI_Editor
                 case SourceTypes.SourceTypeGameobject:
                     return idOrGuid < 0 ? await GetGameobjectNameByGuid(-idOrGuid) : await GetGameobjectNameById(idOrGuid);
                 case SourceTypes.SourceTypeAreaTrigger:
-                    return String.Empty;
+                    return "Areatrigger";
             }
 
             return String.Empty;
