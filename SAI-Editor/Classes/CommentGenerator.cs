@@ -115,7 +115,7 @@ namespace SAI_Editor.Classes
             smartEventStrings.Add(SmartEvent.SMART_EVENT_LINK, "_previousLineComment_");
 
             //! Filling up actions
-            smartActionStrings.Add(SmartAction.SMART_ACTION_NONE, "Incorrect Action");
+            smartActionStrings.Add(SmartAction.SMART_ACTION_NONE, "No Action Type");
             smartActionStrings.Add(SmartAction.SMART_ACTION_TALK, "Say Line _actionParamOne_");
             smartActionStrings.Add(SmartAction.SMART_ACTION_SET_FACTION, "Set Faction _actionParamOne_");
             smartActionStrings.Add(SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL, "_morphToEntryOrModelActionParams_");
@@ -902,6 +902,8 @@ namespace SAI_Editor.Classes
         {
             switch ((SmartTarget)smartScript.target_type)
             {
+                case SmartTarget.SMART_TARGET_SELF:
+                    return "Self";
                 case SmartTarget.SMART_TARGET_VICTIM:
                     return "Victim";
                 case SmartTarget.SMART_TARGET_HOSTILE_SECOND_AGGRO:

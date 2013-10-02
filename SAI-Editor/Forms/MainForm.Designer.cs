@@ -174,8 +174,8 @@ namespace SAI_Editor
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonNewLine = new System.Windows.Forms.Button();
             this.buttonGenerateSql = new System.Windows.Forms.Button();
-            this.listViewSmartScripts = new System.Windows.Forms.XListView();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
+            this.listViewSmartScripts = new System.Windows.Forms.XListView();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -1961,9 +1961,9 @@ namespace SAI_Editor
             // buttonNewLine
             // 
             this.buttonNewLine.Enabled = false;
-            this.buttonNewLine.Location = new System.Drawing.Point(650, 215);
+            this.buttonNewLine.Location = new System.Drawing.Point(649, 215);
             this.buttonNewLine.Name = "buttonNewLine";
-            this.buttonNewLine.Size = new System.Drawing.Size(85, 23);
+            this.buttonNewLine.Size = new System.Drawing.Size(83, 23);
             this.buttonNewLine.TabIndex = 26;
             this.buttonNewLine.Text = "New line";
             this.buttonNewLine.UseVisualStyleBackColor = true;
@@ -1973,14 +1973,25 @@ namespace SAI_Editor
             // buttonGenerateSql
             // 
             this.buttonGenerateSql.Enabled = false;
-            this.buttonGenerateSql.Location = new System.Drawing.Point(841, 215);
+            this.buttonGenerateSql.Location = new System.Drawing.Point(844, 215);
             this.buttonGenerateSql.Name = "buttonGenerateSql";
-            this.buttonGenerateSql.Size = new System.Drawing.Size(85, 23);
+            this.buttonGenerateSql.Size = new System.Drawing.Size(83, 23);
             this.buttonGenerateSql.TabIndex = 28;
             this.buttonGenerateSql.Text = "Generate SQL";
             this.buttonGenerateSql.UseVisualStyleBackColor = true;
             this.buttonGenerateSql.Visible = false;
             this.buttonGenerateSql.Click += new System.EventHandler(this.buttonGenerateSql_Click);
+            // 
+            // buttonGenerateComments
+            // 
+            this.buttonGenerateComments.Location = new System.Drawing.Point(733, 215);
+            this.buttonGenerateComments.Name = "buttonGenerateComments";
+            this.buttonGenerateComments.Size = new System.Drawing.Size(110, 23);
+            this.buttonGenerateComments.TabIndex = 29;
+            this.buttonGenerateComments.Text = "Generate comments";
+            this.buttonGenerateComments.UseVisualStyleBackColor = true;
+            this.buttonGenerateComments.Visible = false;
+            this.buttonGenerateComments.Click += new System.EventHandler(this.buttonGenerateComments_Click);
             // 
             // listViewSmartScripts
             // 
@@ -1997,17 +2008,6 @@ namespace SAI_Editor
             this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
-            // 
-            // buttonGenerateComments
-            // 
-            this.buttonGenerateComments.Location = new System.Drawing.Point(741, 215);
-            this.buttonGenerateComments.Name = "buttonGenerateComments";
-            this.buttonGenerateComments.Size = new System.Drawing.Size(90, 23);
-            this.buttonGenerateComments.TabIndex = 29;
-            this.buttonGenerateComments.Text = "Generate comment";
-            this.buttonGenerateComments.UseVisualStyleBackColor = true;
-            this.buttonGenerateComments.Visible = false;
-            this.buttonGenerateComments.Click += new System.EventHandler(this.buttonGenerateComments_Click);
             // 
             // MainForm
             // 
