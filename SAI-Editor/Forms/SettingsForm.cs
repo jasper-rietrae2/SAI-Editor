@@ -54,8 +54,9 @@ namespace SAI_Editor
         {
             if (checkBoxChangeStaticInfo.Checked != Settings.Default.ChangeStaticInfo)
             {
-                ((MainForm)Owner).textBoxEntryOrGuid.Text = ((MainForm)Owner).originalEntryOrGuidAndSourceType.entryOrGuid.ToString();
-                ((MainForm)Owner).comboBoxSourceType.SelectedIndex = ((MainForm)Owner).GetIndexBySourceType(((MainForm)Owner).originalEntryOrGuidAndSourceType.sourceType);
+                EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = ((MainForm)Owner).originalEntryOrGuidAndSourceType;
+                ((MainForm)Owner).textBoxEntryOrGuid.Text = originalEntryOrGuidAndSourceType.entryOrGuid.ToString();
+                ((MainForm)Owner).comboBoxSourceType.SelectedIndex = (int)originalEntryOrGuidAndSourceType.sourceType;
             }
 
             bool showTooltipsPermanently = Settings.Default.ShowTooltipsPermanently;
