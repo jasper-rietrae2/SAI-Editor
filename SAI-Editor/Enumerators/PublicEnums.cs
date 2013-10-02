@@ -286,4 +286,125 @@
         GAMEOBJECT_ACTIVATED = 2,
         GAMEOBJECT_JUST_DEACTIVATED = 3,
     }
+
+    public enum SmartAiTemplates
+    {
+        SMARTAI_TEMPLATE_BASIC,
+        SMARTAI_TEMPLATE_CASTER,
+        SMARTAI_TEMPLATE_TURRET,
+        SMARTAI_TEMPLATE_PASSIVE,
+        SMARTAI_TEMPLATE_CAGED_GO_PART,
+        SMARTAI_TEMPLATE_CAGED_NPC_PART,
+    }
+
+    public enum GoFlags : uint
+    {
+        GO_FLAG_IN_USE                  = 0x00000001,
+        GO_FLAG_LOCKED                  = 0x00000002,
+        GO_FLAG_INTERACT_COND           = 0x00000004,
+        GO_FLAG_TRANSPORT               = 0x00000008,
+        GO_FLAG_NOT_SELECTABLE          = 0x00000010,
+        GO_FLAG_NODESPAWN               = 0x00000020,
+        GO_FLAG_TRIGGERED               = 0x00000040,
+        GO_FLAG_DAMAGED                 = 0x00000200,
+        GO_FLAG_DESTROYED               = 0x00000400,
+    }
+
+    public enum DynamicFlags : uint
+    {
+        UNIT_DYNFLAG_NONE                       = 0x0000,
+        UNIT_DYNFLAG_LOOTABLE                   = 0x0001,
+        UNIT_DYNFLAG_TRACK_UNIT                 = 0x0002,
+        UNIT_DYNFLAG_TAPPED                     = 0x0004,       // Lua_UnitIsTapped
+        UNIT_DYNFLAG_TAPPED_BY_PLAYER           = 0x0008,       // Lua_UnitIsTappedByPlayer
+        UNIT_DYNFLAG_SPECIALINFO                = 0x0010,
+        UNIT_DYNFLAG_DEAD                       = 0x0020,
+        UNIT_DYNFLAG_REFER_A_FRIEND             = 0x0040,
+        UNIT_DYNFLAG_TAPPED_BY_ALL_THREAT_LIST  = 0x0080        // Lua_UnitIsTappedByAllThreatList
+    }
+
+    public enum UnitFieldBytes1Type
+    {
+        UnitStandStateType,
+        UnitStandFlags,
+        UnitBytes1_Flags,
+    }
+
+    public enum UnitStandStateType : uint
+    {
+        UNIT_STAND_STATE_STAND             = 0,
+        UNIT_STAND_STATE_SIT               = 1,
+        UNIT_STAND_STATE_SIT_CHAIR         = 2,
+        UNIT_STAND_STATE_SLEEP             = 3,
+        UNIT_STAND_STATE_SIT_LOW_CHAIR     = 4,
+        UNIT_STAND_STATE_SIT_MEDIUM_CHAIR  = 5,
+        UNIT_STAND_STATE_SIT_HIGH_CHAIR    = 6,
+        UNIT_STAND_STATE_DEAD              = 7,
+        UNIT_STAND_STATE_KNEEL             = 8,
+        UNIT_STAND_STATE_SUBMERGED         = 9
+    }
+
+    public enum UnitStandFlags : uint
+    {
+        UNIT_STAND_FLAGS_UNK1         = 0x01,
+        UNIT_STAND_FLAGS_CREEP        = 0x02,
+        UNIT_STAND_FLAGS_UNTRACKABLE  = 0x04,
+        UNIT_STAND_FLAGS_UNK4         = 0x08,
+        UNIT_STAND_FLAGS_UNK5         = 0x10,
+        UNIT_STAND_FLAGS_ALL          = 0xFF
+    }
+
+    public enum UnitBytes1_Flags : uint
+    {
+        UNIT_BYTE1_FLAG_ALWAYS_STAND    = 0x01,
+        UNIT_BYTE1_FLAG_HOVER           = 0x02,
+        UNIT_BYTE1_FLAG_UNK_3           = 0x04,
+        UNIT_BYTE1_FLAG_ALL             = 0xFF
+    }
+
+    public enum SmartEventFlags : uint
+    {
+        SMART_EVENT_FLAG_NOT_REPEATABLE     = 0x01,
+        SMART_EVENT_FLAG_DIFFICULTY_0       = 0x02,
+        SMART_EVENT_FLAG_DIFFICULTY_1       = 0x04,
+        SMART_EVENT_FLAG_DIFFICULTY_2       = 0x08,
+        SMART_EVENT_FLAG_DIFFICULTY_3       = 0x10,
+        SMART_EVENT_FLAG_DEBUG_ONLY         = 0x80,
+    }
+
+    public enum UnitFlags : uint
+    {
+        UNIT_FLAG_SERVER_CONTROLLED     = 0x00000001,           // set only when unit movement is controlled by server - by SPLINE/MONSTER_MOVE packets, together with UNIT_FLAG_STUNNED; only set to units controlled by client; client function CGUnit_C::IsClientControlled returns false when set for owner
+        UNIT_FLAG_NON_ATTACKABLE        = 0x00000002,           // not attackable
+        UNIT_FLAG_DISABLE_MOVE          = 0x00000004,
+        UNIT_FLAG_PVP_ATTACKABLE        = 0x00000008,           // allow apply pvp rules to attackable state in addition to faction dependent state
+        UNIT_FLAG_RENAME                = 0x00000010,
+        UNIT_FLAG_PREPARATION           = 0x00000020,           // don't take reagents for spells with SPELL_ATTR5_NO_REAGENT_WHILE_PREP
+        UNIT_FLAG_UNK_6                 = 0x00000040,
+        UNIT_FLAG_NOT_ATTACKABLE_1      = 0x00000080,           // ?? (UNIT_FLAG_PVP_ATTACKABLE | UNIT_FLAG_NOT_ATTACKABLE_1) is NON_PVP_ATTACKABLE
+        UNIT_FLAG_IMMUNE_TO_PC          = 0x00000100,           // disables combat/assistance with PlayerCharacters (PC) - see Unit::_IsValidAttackTarget, Unit::_IsValidAssistTarget
+        UNIT_FLAG_IMMUNE_TO_NPC         = 0x00000200,           // disables combat/assistance with NonPlayerCharacters (NPC) - see Unit::_IsValidAttackTarget, Unit::_IsValidAssistTarget
+        UNIT_FLAG_LOOTING               = 0x00000400,           // loot animation
+        UNIT_FLAG_PET_IN_COMBAT         = 0x00000800,           // in combat?, 2.0.8
+        UNIT_FLAG_PVP                   = 0x00001000,           // changed in 3.0.3
+        UNIT_FLAG_SILENCED              = 0x00002000,           // silenced, 2.1.1
+        UNIT_FLAG_UNK_14                = 0x00004000,           // 2.0.8
+        UNIT_FLAG_UNK_15                = 0x00008000,
+        UNIT_FLAG_UNK_16                = 0x00010000,
+        UNIT_FLAG_PACIFIED              = 0x00020000,           // 3.0.3 ok
+        UNIT_FLAG_STUNNED               = 0x00040000,           // 3.0.3 ok
+        UNIT_FLAG_IN_COMBAT             = 0x00080000,
+        UNIT_FLAG_TAXI_FLIGHT           = 0x00100000,           // disable casting at client side spell not allowed by taxi flight (mounted?), probably used with 0x4 flag
+        UNIT_FLAG_DISARMED              = 0x00200000,           // 3.0.3, disable melee spells casting..., "Required melee weapon" added to melee spells tooltip.
+        UNIT_FLAG_CONFUSED              = 0x00400000,
+        UNIT_FLAG_FLEEING               = 0x00800000,
+        UNIT_FLAG_PLAYER_CONTROLLED     = 0x01000000,           // used in spell Eyes of the Beast for pet... let attack by controlled creature
+        UNIT_FLAG_NOT_SELECTABLE        = 0x02000000,
+        UNIT_FLAG_SKINNABLE             = 0x04000000,
+        UNIT_FLAG_MOUNT                 = 0x08000000,
+        UNIT_FLAG_UNK_28                = 0x10000000,
+        UNIT_FLAG_UNK_29                = 0x20000000,           // used in Feing Death spell
+        UNIT_FLAG_SHEATHE               = 0x40000000,
+        UNIT_FLAG_UNK_31                = 0x80000000,
+    }
 }

@@ -52,6 +52,11 @@ namespace SAI_Editor
             }
         }
 
+        public SAI_Editor_Manager()
+        {
+            ResetDatabases();
+        }
+
         public void ResetDatabases()
         {
             string password = Settings.Default.Password;
@@ -61,11 +66,6 @@ namespace SAI_Editor
 
             worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, password, Settings.Default.Database);
             sqliteDatabase = new SQLiteDatabase("Resources/sqlite_database.db");
-        }
-
-        public SAI_Editor_Manager()
-        {
-            ResetDatabases();
         }
 
         public async Task<bool> LoadSQLiteDatabaseInfo()

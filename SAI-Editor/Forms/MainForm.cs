@@ -111,7 +111,7 @@ namespace SAI_Editor
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             timerExpandOrContract.Tick += timerExpandOrContract_Tick;
@@ -508,7 +508,7 @@ namespace SAI_Editor
             StartContractingToLoginForm(Settings.Default.InstantExpand);
         }
 
-        private void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxEventTypeId.Text = comboBoxEventType.SelectedIndex.ToString();
             textBoxEventTypeId.SelectionStart = 3; //! Set cursot to end of text
@@ -520,10 +520,13 @@ namespace SAI_Editor
             }
 
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[4].Text = comboBoxEventType.SelectedIndex.ToString();
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxActionTypeId.Text = comboBoxActionType.SelectedIndex.ToString();
             textBoxActionTypeId.SelectionStart = 3; //! Set cursot to end of text
@@ -535,10 +538,13 @@ namespace SAI_Editor
             }
 
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[12].Text = comboBoxActionType.SelectedIndex.ToString();
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
+        private async void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxTargetTypeId.Text = comboBoxTargetType.SelectedIndex.ToString();
             textBoxTargetTypeId.SelectionStart = 3; //! Set cursot to end of text
@@ -550,7 +556,10 @@ namespace SAI_Editor
             }
 
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[19].Text = comboBoxTargetType.SelectedIndex.ToString();
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
         private void ChangeParameterFieldsBasedOnType()
@@ -1963,7 +1972,7 @@ namespace SAI_Editor
                 UpdatePermanentTooltipOfParameter(sender as Label, 7, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
         }
 
-        private void buttonNewLine_Click(object sender, EventArgs e)
+        private async void buttonNewLine_Click(object sender, EventArgs e)
         {
             if (listViewSmartScripts.Items.Count == 0)
             {
@@ -2008,7 +2017,7 @@ namespace SAI_Editor
 
             //! Todo: implement auto-generated comments
             if (checkBoxAutoGenerateComments.Checked)
-                listViewItem.SubItems.Add(GenerateCommentForScript(BuildSmartScript(listViewSmartScripts.Items[0]))); // comment
+                listViewItem.SubItems.Add(await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewItem))); // comment
             else
                 listViewItem.SubItems.Add("Npc - Event - Action (phase) (dungeon difficulty)"); // comment
 
@@ -2052,7 +2061,11 @@ namespace SAI_Editor
             smartScript.target_y = XConverter.TryParseStringToInt32(item.SubItems[24].Text);
             smartScript.target_z = XConverter.TryParseStringToInt32(item.SubItems[25].Text);
             smartScript.target_o = XConverter.TryParseStringToInt32(item.SubItems[26].Text);
-            smartScript.comment = item.SubItems[27].Text;
+
+            //! This method is also called when we generate a comment, so the field is not yet filled
+            if (item.SubItems.Count > 27)
+                smartScript.comment = item.SubItems[27].Text;
+
             return smartScript;
         }
 
@@ -2061,34 +2074,49 @@ namespace SAI_Editor
             return String.Empty;
         }
 
-        private void textBoxLinkTo_TextChanged(object sender, EventArgs e)
+        private async void textBoxLinkTo_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[3].Text = textBoxLinkTo.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxComments_TextChanged(object sender, EventArgs e)
+        private async void textBoxComments_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[27].Text = textBoxComments.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxEventPhasemask_TextChanged(object sender, EventArgs e)
+        private async void textBoxEventPhasemask_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[5].Text = textBoxEventPhasemask.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxEventChance_ValueChanged(object sender, EventArgs e)
+        private async void textBoxEventChance_ValueChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[6].Text = textBoxEventChance.Value.ToString(); //! Using .Text propert results in wrong value
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxEventFlags_TextChanged(object sender, EventArgs e)
+        private async void textBoxEventFlags_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[7].Text = textBoxEventFlags.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
         private void textBoxLinkFrom_TextChanged(object sender, EventArgs e)
@@ -2096,106 +2124,157 @@ namespace SAI_Editor
             // unused (?)
         }
 
-        private void textBoxEventParam1_TextChanged(object sender, EventArgs e)
+        private async void textBoxEventParam1_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[8].Text = textBoxEventParam1.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxEventParam2_TextChanged(object sender, EventArgs e)
+        private async void textBoxEventParam2_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[9].Text = textBoxEventParam2.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxEventParam3_TextChanged(object sender, EventArgs e)
+        private async void textBoxEventParam3_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[10].Text = textBoxEventParam3.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxEventParam4_TextChanged(object sender, EventArgs e)
+        private async void textBoxEventParam4_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[11].Text = textBoxEventParam4.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxActionParam1_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam1_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[13].Text = textBoxActionParam1.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxActionParam2_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam2_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[14].Text = textBoxActionParam2.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxActionParam3_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam3_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[15].Text = textBoxActionParam3.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxActionParam4_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam4_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[16].Text = textBoxActionParam4.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxActionParam5_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam5_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[17].Text = textBoxActionParam5.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxActionParam6_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam6_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[18].Text = textBoxActionParam6.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxTargetParam1_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetParam1_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[20].Text = textBoxTargetParam1.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxTargetParam2_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetParam2_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[21].Text = textBoxTargetParam2.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxTargetParam3_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetParam3_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[22].Text = textBoxTargetParam3.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxTargetX_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetX_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[23].Text = textBoxTargetX.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxTargetY_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetY_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[24].Text = textBoxTargetY.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxTargetZ_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetZ_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[25].Text = textBoxTargetZ.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
-        private void textBoxTargetO_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetO_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
                 listViewSmartScripts.SelectedItems[0].SubItems[26].Text = textBoxTargetO.Text;
+                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            }
         }
 
         private void textBoxEntryOrGuid_TextChanged(object sender, EventArgs e)

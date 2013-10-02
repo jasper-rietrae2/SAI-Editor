@@ -79,21 +79,6 @@ namespace SAI_Editor
             return dt.Rows[0]["name"].ToString();
         }
 
-        public async Task<string> GetObjectNameByIdOrGuid(SourceTypes sourceType, int idOrGuid)
-        {
-            switch (sourceType)
-            {
-                case SourceTypes.SourceTypeCreature:
-                    return idOrGuid < 0 ? await GetCreatureNameByGuid(-idOrGuid) : await GetCreatureNameById(idOrGuid);
-                case SourceTypes.SourceTypeGameobject:
-                    return idOrGuid < 0 ? await GetGameobjectNameByGuid(-idOrGuid) : await GetGameobjectNameById(idOrGuid);
-                case SourceTypes.SourceTypeAreaTrigger:
-                    return "Areatrigger";
-            }
-
-            return String.Empty;
-        }
-
         public async Task<string> GetGameobjectNameById(int id)
         {
             //DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '@id'", new MySqlParameter("@id", id));
@@ -137,6 +122,21 @@ namespace SAI_Editor
                     return await GetCreatureNameByGuid(guid);
                 case SourceTypes.SourceTypeGameobject:
                     return await GetGameobjectNameByGuid(guid);
+            }
+
+            return String.Empty;
+        }
+
+        public async Task<string> GetObjectNameByIdOrGuidAndSourceType(SourceTypes sourceType, int idOrGuid)
+        {
+            switch (sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return idOrGuid < 0 ? await GetCreatureNameByGuid(-idOrGuid) : await GetCreatureNameById(idOrGuid);
+                case SourceTypes.SourceTypeGameobject:
+                    return idOrGuid < 0 ? await GetGameobjectNameByGuid(-idOrGuid) : await GetGameobjectNameById(idOrGuid);
+                case SourceTypes.SourceTypeAreaTrigger:
+                    return "Areatrigger";
             }
 
             return String.Empty;
@@ -259,6 +259,46 @@ namespace SAI_Editor
             //DataTable dt = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = '@entry'", new MySqlParameter("@entry", entry));
             DataTable dt = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = '" + entry + "'");
             return dt.Rows.Count > 0;
+        }
+
+        public async Task<string> GetQuestTitleById(int id)
+        {
+            DataTable dt = await ExecuteQuery("SELECT title FROM quest_template WHERE id = '" + id + "'");
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["title"].ToString();
+        }
+
+        public async Task<string> GetQuestTitleByCriteria(int requiredNpcOrGo1, int requiredNpcOrGo2, int requiredNpcOrGo3, int requiredNpcOrGo4)
+        {
+            DataTable dt = await ExecuteQuery("SELECT title FROM quest_template WHERE (RequiredNpcOrGo1 = '" + requiredNpcOrGo1 + "' OR " + "RequiredNpcOrGo1 = '" + requiredNpcOrGo2 + "' OR " + "RequiredNpcOrGo2 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo3 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo4 = '" + requiredNpcOrGo4 + "')");
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["title"].ToString();
+        }
+
+        public async Task<string> GetQuestTitleByCriteria(int requiredNpcOrGo1, int requiredNpcOrGo2, int requiredNpcOrGo3, int requiredNpcOrGo4, int requiredSpellCast1)
+        {
+            DataTable dt = await ExecuteQuery("SELECT title FROM quest_template WHERE (RequiredNpcOrGo1 = '" + requiredNpcOrGo1 + "' OR " + "RequiredNpcOrGo1 = '" + requiredNpcOrGo2 + "' OR " + "RequiredNpcOrGo2 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo3 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo4 = '" + requiredNpcOrGo4 + "') AND RequiredSpellCast1 = '" + requiredSpellCast1 + "'");
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["title"].ToString();
+        }
+
+        public async Task<string> GetItemNameById(int entry)
+        {
+            DataTable dt = await ExecuteQuery("SELECT name FROM item_template WHERE entry = '" + entry + "'");
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["name"].ToString();
         }
 
         private SmartScript BuildSmartScript(DataRow row)
