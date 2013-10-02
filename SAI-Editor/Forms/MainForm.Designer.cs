@@ -175,6 +175,7 @@ namespace SAI_Editor
             this.buttonNewLine = new System.Windows.Forms.Button();
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.listViewSmartScripts = new System.Windows.Forms.XListView();
+            this.buttonGenerateComments = new System.Windows.Forms.Button();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -1997,11 +1998,22 @@ namespace SAI_Editor
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
+            // buttonGenerateComments
+            // 
+            this.buttonGenerateComments.Location = new System.Drawing.Point(741, 215);
+            this.buttonGenerateComments.Name = "buttonGenerateComments";
+            this.buttonGenerateComments.Size = new System.Drawing.Size(90, 23);
+            this.buttonGenerateComments.TabIndex = 29;
+            this.buttonGenerateComments.Text = "Generate comment";
+            this.buttonGenerateComments.UseVisualStyleBackColor = true;
+            this.buttonGenerateComments.Click += new System.EventHandler(this.buttonGenerateComments_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1233, 474);
+            this.Controls.Add(this.buttonGenerateComments);
             this.Controls.Add(this.buttonGenerateSql);
             this.Controls.Add(this.buttonNewLine);
             this.Controls.Add(this.panelPermanentTooltipParameters);
@@ -2201,6 +2213,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Button buttonGenerateSql;
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateSql;
         public System.Windows.Forms.XListView listViewSmartScripts;
+        private System.Windows.Forms.Button buttonGenerateComments;
     }
 }
 
