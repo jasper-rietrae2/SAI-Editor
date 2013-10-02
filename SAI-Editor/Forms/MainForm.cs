@@ -1162,6 +1162,9 @@ namespace SAI_Editor
             if (listViewSmartScripts.Items.Count == 0)
                 return;
 
+            buttonGenerateSql.Enabled = false;
+            menuItemGenerateSql.Enabled = false;
+
             if (checkBoxListActionlistsOrEntries.Checked)
             {
                 listViewSmartScripts.Items.Clear();
@@ -1169,6 +1172,9 @@ namespace SAI_Editor
             }
             else
                 RemoveNonOriginalScriptsFromView();
+
+            buttonGenerateSql.Enabled = true;
+            menuItemGenerateSql.Enabled = true;
         }
 
         private void RemoveNonOriginalScriptsFromView()
