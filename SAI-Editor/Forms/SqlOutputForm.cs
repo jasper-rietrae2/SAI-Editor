@@ -63,12 +63,50 @@ namespace SAI_Editor.Forms
 
             richTextBoxSqlOutput.Text += "-- " + sourceName + " SAI\n";
             richTextBoxSqlOutput.Text += "SET " + sourceSet + " := " + smartScripts[0].entryorguid + ";\n";
-            richTextBoxSqlOutput.Text += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
 
             if (entriesOrGuidsAndSourceTypes.Count == 1)
+            {
+                switch ((SourceTypes)smartScripts[0].source_type)
+                {
+                    case SourceTypes.SourceTypeCreature:
+                        richTextBoxSqlOutput.Text += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                        break;
+                    case SourceTypes.SourceTypeGameobject:
+                        richTextBoxSqlOutput.Text += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                        break;
+                    case SourceTypes.SourceTypeAreaTrigger:
+                        richTextBoxSqlOutput.Text += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
+                        richTextBoxSqlOutput.Text += "INSERT INTO areatrigger_scripts VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
+                        break;
+                    case SourceTypes.SourceTypeScriptedActionlist:
+                        // todo
+                        break;
+                }
+
                 richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + sourceSet + " AND `source_type`=" + smartScripts[0].source_type + ";\n";
+            }
             else
             {
+                foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in entriesOrGuidsAndSourceTypes)
+                {
+                    switch ((SourceTypes)entryOrGuidAndSourceType.sourceType)
+                    {
+                        case SourceTypes.SourceTypeCreature:
+                            richTextBoxSqlOutput.Text += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                            break;
+                        case SourceTypes.SourceTypeGameobject:
+                            richTextBoxSqlOutput.Text += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                            break;
+                        case SourceTypes.SourceTypeAreaTrigger:
+                            richTextBoxSqlOutput.Text += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
+                            richTextBoxSqlOutput.Text += "INSERT INTO areatrigger_scripts VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
+                            break;
+                        case SourceTypes.SourceTypeScriptedActionlist:
+                            // todo
+                            break;
+                    }
+                }
+
                 richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid` IN (";
 
                 for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
