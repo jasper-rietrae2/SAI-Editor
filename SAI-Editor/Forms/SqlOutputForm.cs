@@ -150,6 +150,12 @@ namespace SAI_Editor.Forms
 
                 richTextBoxSqlOutput.Text += "\n"; //! White line at end of script to make it easier to select
             }
+
+            richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), sourceSet);
+            richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace("SET " + sourceSet + " := " + sourceSet, "SET " + sourceSet + " := " + originalEntryOrGuidAndSourceType.entryOrGuid.ToString());
+
+            for (int i = 0; i < 20; ++i)
+                richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace(sourceSet + "0" + i.ToString(), sourceSet + "*100+" + i.ToString());
         }
 
         private async void buttonExecuteScript_Click(object sender, EventArgs e)
