@@ -2318,7 +2318,7 @@ namespace SAI_Editor
         public async void GenerateCommentsForAllItems()
         {
             foreach (ListViewItem item in listViewSmartScripts.Items)
-                item.SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(item), originalEntryOrGuidAndSourceType);
+                item.SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(item), originalEntryOrGuidAndSourceType, true);
         }
 
         private void buttonGenerateComments_Click(object sender, EventArgs e)

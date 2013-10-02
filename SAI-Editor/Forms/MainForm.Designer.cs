@@ -2006,6 +2006,7 @@ namespace SAI_Editor
             this.buttonGenerateComments.TabIndex = 29;
             this.buttonGenerateComments.Text = "Generate comment";
             this.buttonGenerateComments.UseVisualStyleBackColor = true;
+            this.buttonGenerateComments.Visible = false;
             this.buttonGenerateComments.Click += new System.EventHandler(this.buttonGenerateComments_Click);
             // 
             // MainForm

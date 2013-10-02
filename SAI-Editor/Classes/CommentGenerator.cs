@@ -228,9 +228,9 @@ namespace SAI_Editor.Classes
             smartActionStrings.Add(SmartAction.SMART_ACTION_REMOVE_POWER, "Remove _actionParamTwo_ _powerTypeActionParamOne_");
         }
 
-        public async Task<string> GenerateCommentFor(SmartScript smartScript, EntryOrGuidAndSourceType entryOrGuidAndSourceType)
+        public async Task<string> GenerateCommentFor(SmartScript smartScript, EntryOrGuidAndSourceType entryOrGuidAndSourceType, bool forced = false)
         {
-            if (!Settings.Default.GenerateComments)
+            if (!forced && !Settings.Default.GenerateComments)
                 return String.IsNullOrWhiteSpace(smartScript.comment) ? "Npc - Event - Action (phase) (dungeon difficulty)" : smartScript.comment;
 
             string fullLine = String.Empty;
