@@ -113,16 +113,21 @@ namespace SAI_Editor.Forms
                 }
 
                 richTextBoxSqlOutput.Text += " AND `source_type` IN (";
+                List<int> sourceTypesAdded = new List<int>();
 
                 for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
                 {
-                    if (i == entriesOrGuidsAndSourceTypes.Count - 1)
-                        richTextBoxSqlOutput.Text += (int)entriesOrGuidsAndSourceTypes[i].sourceType + ")";
-                    else
-                        richTextBoxSqlOutput.Text += (int)entriesOrGuidsAndSourceTypes[i].sourceType + ",";
+                    if (sourceTypesAdded.Contains((int)entriesOrGuidsAndSourceTypes[i].sourceType))
+                        continue;
+
+                    if (i != 0)
+                        richTextBoxSqlOutput.Text += ",";
+
+                    richTextBoxSqlOutput.Text += (int)entriesOrGuidsAndSourceTypes[i].sourceType;
+                    sourceTypesAdded.Add((int)entriesOrGuidsAndSourceTypes[i].sourceType);
                 }
 
-                richTextBoxSqlOutput.Text += ";\n";
+                richTextBoxSqlOutput.Text += ");\n";
             }
 
             richTextBoxSqlOutput.Text += "INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES\n";
@@ -154,7 +159,8 @@ namespace SAI_Editor.Forms
             richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), sourceSet);
             richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace("SET " + sourceSet + " := " + sourceSet, "SET " + sourceSet + " := " + originalEntryOrGuidAndSourceType.entryOrGuid.ToString());
 
-            for (int i = 0; i < 20; ++i)
+            //! Replaces '@ENTRY*100[id]' ([id] being like 00, 01, 02, 03, etc.) by '@ENTRY*100+3' for example.
+            for (int i = 0; i < 50; ++i) //! We expect a maximum of 50 scripts for one entry...
                 richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace(sourceSet + "0" + i.ToString(), sourceSet + "*100+" + i.ToString());
         }
 
