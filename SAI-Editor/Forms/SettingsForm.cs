@@ -50,7 +50,7 @@ namespace SAI_Editor
             Close();
         }
 
-        private void SaveSettings()
+        private async void SaveSettings()
         {
             if (checkBoxChangeStaticInfo.Checked != Settings.Default.ChangeStaticInfo)
             {
@@ -60,6 +60,7 @@ namespace SAI_Editor
             }
 
             bool showTooltipsPermanently = Settings.Default.ShowTooltipsPermanently;
+            bool generateComments = Settings.Default.GenerateComments;
 
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             byte[] buffer = new byte[1024];
@@ -119,6 +120,9 @@ namespace SAI_Editor
             else
                 MessageBox.Show("The database settings were not saved because no connection could be established.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
+            if (checkBoxAutoGenerateComments.Checked != generateComments && checkBoxAutoGenerateComments.Checked)
+                ((MainForm)Owner).GenerateCommentsForAllItems();
+            
             if (checkBoxShowTooltipsPermanently.Checked != showTooltipsPermanently)
                 ((MainForm)Owner).ExpandToShowPermanentTooltips(!checkBoxShowTooltipsPermanently.Checked);
         }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace System.Windows.Forms
 {
-    class XListView : ListView
+    public class XListView : ListView
     {
         protected override void WndProc(ref Message m)
         {

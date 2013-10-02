@@ -2021,7 +2021,7 @@ namespace SAI_Editor
             listViewSmartScripts.Select();
         }
 
-        private SmartScript BuildSmartScript(ListViewItem item)
+        public SmartScript BuildSmartScript(ListViewItem item)
         {
             SmartScript smartScript = new SmartScript();
             smartScript.entryorguid = XConverter.TryParseStringToInt32(item.Text);
@@ -2313,6 +2313,12 @@ namespace SAI_Editor
             }
 
             pictureBoxLoadScript.Image = pic;
+        }
+
+        public async void GenerateCommentsForAllItems()
+        {
+            foreach (ListViewItem item in listViewSmartScripts.Items)
+                item.SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(item), originalEntryOrGuidAndSourceType);
         }
     }
 }

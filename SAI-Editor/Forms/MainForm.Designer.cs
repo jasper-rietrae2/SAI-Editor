@@ -2098,7 +2098,6 @@ namespace SAI_Editor
         private System.Windows.Forms.GroupBox groupBoxParameters;
         public System.Windows.Forms.GroupBox groupBoxStaticScriptInfo;
         public System.Windows.Forms.TextBox textBoxEntryOrGuid;
-        private System.Windows.Forms.XListView listViewSmartScripts;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBoxListActionlistsOrEntries;
         private System.Windows.Forms.CheckBox checkBox1;
@@ -2201,6 +2200,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Button buttonNewLine;
         private System.Windows.Forms.Button buttonGenerateSql;
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateSql;
+        public System.Windows.Forms.XListView listViewSmartScripts;
     }
 }
 
