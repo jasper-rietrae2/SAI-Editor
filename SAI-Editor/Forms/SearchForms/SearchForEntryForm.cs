@@ -118,6 +118,7 @@ namespace SAI_Editor
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                StopRunningThread();
             }
         }
 
@@ -197,6 +198,7 @@ namespace SAI_Editor
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                StopRunningThread();
             }
         }
 
@@ -403,6 +405,7 @@ namespace SAI_Editor
                             SetEnabledOfControl(buttonSearch, true);
                             SetEnabledOfControl(buttonStopSearching, false);
                             MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            StopRunningThread();
                         }
                         finally
                         {
@@ -491,6 +494,7 @@ namespace SAI_Editor
                             SetEnabledOfControl(buttonSearch, true);
                             SetEnabledOfControl(buttonStopSearching, false);
                             MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            StopRunningThread();
                         }
                         finally
                         {
@@ -502,6 +506,7 @@ namespace SAI_Editor
                         return; //! We did everything in the switch block (we only do this for actionlists)
                     default:
                         MessageBox.Show("An unknown index was found in the search type box!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        StopRunningThread();
                         return;
                 }
 
@@ -525,11 +530,12 @@ namespace SAI_Editor
             {
                 SetEnabledOfControl(buttonSearch, true);
                 SetEnabledOfControl(buttonStopSearching, false);
-                _isBusy = false;
+                StopRunningThread();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                StopRunningThread();
             }
         }
 
