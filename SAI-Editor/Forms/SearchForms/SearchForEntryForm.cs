@@ -229,7 +229,10 @@ namespace SAI_Editor
                     }));
 
                     if (!pressedYes)
+                    {
+                        StopRunningThread();
                         return;
+                    }
 
                     SetTextOfControl(textBoxCriteria, (Convert.ToInt32(textBoxCriteria.Text) * -1).ToString());
                 }
@@ -276,7 +279,10 @@ namespace SAI_Editor
                                 }));
 
                                 if (!pressedYes)
+                                {
+                                    StopRunningThread();
                                     return;
+                                }
                             }
 
                             if (checkBoxHasAiName.Checked)
@@ -341,7 +347,10 @@ namespace SAI_Editor
                                 }));
 
                                 if (!pressedYes)
+                                {
+                                    StopRunningThread();
                                     return;
+                                }
                             }
 
                             if (checkBoxHasAiName.Checked)
