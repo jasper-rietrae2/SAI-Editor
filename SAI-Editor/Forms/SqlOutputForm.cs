@@ -78,7 +78,7 @@ namespace SAI_Editor.Forms
                         break;
                 }
 
-                richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + sourceSet + " AND `source_type`=" + originalEntryOrGuidAndSourceType.sourceType + ";\n";
+                richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + sourceSet + " AND `source_type`=" + (int)originalEntryOrGuidAndSourceType.sourceType + ";\n";
             }
             else
             {
@@ -117,9 +117,9 @@ namespace SAI_Editor.Forms
                 for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
                 {
                     if (i == entriesOrGuidsAndSourceTypes.Count - 1)
-                        richTextBoxSqlOutput.Text += entriesOrGuidsAndSourceTypes[i].sourceType + ")";
+                        richTextBoxSqlOutput.Text += (int)entriesOrGuidsAndSourceTypes[i].sourceType + ")";
                     else
-                        richTextBoxSqlOutput.Text += entriesOrGuidsAndSourceTypes[i].sourceType + ",";
+                        richTextBoxSqlOutput.Text += (int)entriesOrGuidsAndSourceTypes[i].sourceType + ",";
                 }
 
                 richTextBoxSqlOutput.Text += ";\n";
