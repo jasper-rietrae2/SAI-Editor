@@ -1226,6 +1226,8 @@ namespace SAI_Editor
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
                 return;
 
+            buttonGenerateSql.Enabled = false;
+            menuItemGenerateSql.Enabled = false;
             pictureBoxLoadScript.Enabled = false;
 
             SourceTypes newSourceType = GetSourceTypeByIndex();
@@ -1242,6 +1244,9 @@ namespace SAI_Editor
                 listViewSmartScripts.Select(); //! Sets the focus on the listview
                 lastSmartScriptIdOfScript = XConverter.TryParseStringToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
             }
+
+            buttonGenerateSql.Enabled = true;
+            menuItemGenerateSql.Enabled = true;
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
