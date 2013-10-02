@@ -221,7 +221,14 @@ namespace SAI_Editor
 
                 if (!criteriaLeftEmpty && IsNumericIndex(GetSelectedIndexOfComboBox(comboBoxSearchType)) && Convert.ToInt32(textBoxCriteria.Text) < 0)
                 {
-                    if (MessageBox.Show("The criteria field can not be a negative value, would you like me to set it to a positive number?", "Something went wrong!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes)
+                    bool pressedYes = true;
+
+                    this.Invoke(new Action(() =>
+                    {
+                        pressedYes = MessageBox.Show("The criteria field can not be a negative value, would you like me to set it to a positive number and continue the search?", "Something went wrong!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes;
+                    }));
+
+                    if (!pressedYes)
                         return;
 
                     SetTextOfControl(textBoxCriteria, (Convert.ToInt32(textBoxCriteria.Text) * -1).ToString());
