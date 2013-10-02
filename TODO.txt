@@ -22,6 +22,8 @@
 - Implement SAI conditions support
 - Implement creature text support (?)
 - Convert all 'new xxxForm().ShowDialog(this)' to use 'using'
+- Drop all unused columns in the DBC tables in the SQLite database to reduce the size of the database
+- Fix the printing of @ENTRY*100+x actionlists (test with creature 28362)
 
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
