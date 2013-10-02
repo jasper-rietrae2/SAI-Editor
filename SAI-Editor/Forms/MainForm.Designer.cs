@@ -174,7 +174,6 @@ namespace SAI_Editor
             this.labelPermanentTooltipTextParameters = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonNewLine = new System.Windows.Forms.Button();
-            this.buttonEditCurrent = new System.Windows.Forms.Button();
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.listViewSmartScripts = new System.Windows.Forms.XListView();
             this.groupBoxLogin.SuspendLayout();
@@ -1983,17 +1982,6 @@ namespace SAI_Editor
             this.buttonNewLine.Visible = false;
             this.buttonNewLine.Click += new System.EventHandler(this.buttonNewLine_Click);
             // 
-            // buttonEditCurrent
-            // 
-            this.buttonEditCurrent.Location = new System.Drawing.Point(746, 215);
-            this.buttonEditCurrent.Name = "buttonEditCurrent";
-            this.buttonEditCurrent.Size = new System.Drawing.Size(85, 23);
-            this.buttonEditCurrent.TabIndex = 27;
-            this.buttonEditCurrent.Text = "Edit current";
-            this.buttonEditCurrent.UseVisualStyleBackColor = true;
-            this.buttonEditCurrent.Visible = false;
-            this.buttonEditCurrent.Click += new System.EventHandler(this.buttonEditCurrent_Click);
-            // 
             // buttonGenerateSql
             // 
             this.buttonGenerateSql.Enabled = false;
@@ -2028,7 +2016,6 @@ namespace SAI_Editor
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1233, 474);
             this.Controls.Add(this.buttonGenerateSql);
-            this.Controls.Add(this.buttonEditCurrent);
             this.Controls.Add(this.buttonNewLine);
             this.Controls.Add(this.panelPermanentTooltipParameters);
             this.Controls.Add(this.panelPermanentTooltipTypes);
@@ -2226,7 +2213,6 @@ namespace SAI_Editor
         private System.Windows.Forms.Label labelPermanentTooltipTextParameters;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonNewLine;
-        private System.Windows.Forms.Button buttonEditCurrent;
         private System.Windows.Forms.Button buttonGenerateSql;
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateSql;
     }
