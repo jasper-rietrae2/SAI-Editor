@@ -617,11 +617,6 @@ namespace SAI_Editor
             AdjustAllParameterFields(event_type, action_type, target_type);
         }
 
-        private void checkBoxAutoGenerateComments_CheckedChanged_1(object sender, EventArgs e)
-        {
-            textBoxComments.Enabled = !checkBoxAutoGenerateComments.Checked;
-        }
-
         private void checkBoxLockEventId_CheckedChanged(object sender, EventArgs e)
         {
             textBoxEventScriptId.Enabled = !checkBoxLockEventId.Checked;
@@ -2016,7 +2011,7 @@ namespace SAI_Editor
             listViewItem.SubItems.Add("0"); // target O
 
             //! Todo: implement auto-generated comments
-            if (checkBoxAutoGenerateComments.Checked)
+            if (Settings.Default.GenerateComments)
                 listViewItem.SubItems.Add(await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewItem), originalEntryOrGuidAndSourceType)); // comment
             else
                 listViewItem.SubItems.Add("Npc - Event - Action (phase) (dungeon difficulty)"); // comment
@@ -2024,11 +2019,6 @@ namespace SAI_Editor
             listViewSmartScripts.Items.Add(listViewItem);
             listViewItem.Selected = true;
             listViewSmartScripts.Select();
-        }
-
-        private void buttonEditCurrent_Click(object sender, EventArgs e)
-        {
-
         }
 
         private SmartScript BuildSmartScript(ListViewItem item)

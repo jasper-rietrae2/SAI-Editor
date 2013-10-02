@@ -79,7 +79,6 @@ namespace SAI_Editor
             this.checkBoxScriptByGuid = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
-            this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
             this.buttonLinkTo = new System.Windows.Forms.Button();
             this.buttonLinkFrom = new System.Windows.Forms.Button();
@@ -583,7 +582,6 @@ namespace SAI_Editor
             this.groupBoxPreferences.Controls.Add(this.checkBoxScriptByGuid);
             this.groupBoxPreferences.Controls.Add(this.checkBox3);
             this.groupBoxPreferences.Controls.Add(this.checkBoxLockEventId);
-            this.groupBoxPreferences.Controls.Add(this.checkBoxAutoGenerateComments);
             this.groupBoxPreferences.Location = new System.Drawing.Point(12, 115);
             this.groupBoxPreferences.Name = "groupBoxPreferences";
             this.groupBoxPreferences.Size = new System.Drawing.Size(290, 123);
@@ -595,7 +593,7 @@ namespace SAI_Editor
             // checkBox4
             // 
             this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(140, 71);
+            this.checkBox4.Location = new System.Drawing.Point(140, 47);
             this.checkBox4.Name = "checkBox4";
             this.checkBox4.Size = new System.Drawing.Size(80, 17);
             this.checkBox4.TabIndex = 5;
@@ -616,7 +614,7 @@ namespace SAI_Editor
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(140, 47);
+            this.checkBox1.Location = new System.Drawing.Point(140, 24);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(147, 17);
             this.checkBox1.TabIndex = 3;
@@ -655,17 +653,6 @@ namespace SAI_Editor
             this.checkBoxLockEventId.Text = "Lock smart_scripts.id";
             this.checkBoxLockEventId.UseVisualStyleBackColor = true;
             this.checkBoxLockEventId.CheckedChanged += new System.EventHandler(this.checkBoxLockEventId_CheckedChanged);
-            // 
-            // checkBoxAutoGenerateComments
-            // 
-            this.checkBoxAutoGenerateComments.AutoSize = true;
-            this.checkBoxAutoGenerateComments.Location = new System.Drawing.Point(140, 24);
-            this.checkBoxAutoGenerateComments.Name = "checkBoxAutoGenerateComments";
-            this.checkBoxAutoGenerateComments.Size = new System.Drawing.Size(144, 17);
-            this.checkBoxAutoGenerateComments.TabIndex = 1;
-            this.checkBoxAutoGenerateComments.Text = "Auto generate comments";
-            this.checkBoxAutoGenerateComments.UseVisualStyleBackColor = true;
-            this.checkBoxAutoGenerateComments.CheckedChanged += new System.EventHandler(this.checkBoxAutoGenerateComments_CheckedChanged_1);
             // 
             // groupBoxScriptInfo
             // 
@@ -2093,7 +2080,6 @@ namespace SAI_Editor
         private System.Windows.Forms.GroupBox groupBoxPreferences;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBoxLockEventId;
-        private System.Windows.Forms.CheckBox checkBoxAutoGenerateComments;
         private System.Windows.Forms.GroupBox groupBoxScriptInfo;
         private System.Windows.Forms.TabControl tabControlParameters;
         private System.Windows.Forms.TabPage tabPageEvent;
