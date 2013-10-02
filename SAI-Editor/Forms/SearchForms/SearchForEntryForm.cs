@@ -87,6 +87,8 @@ namespace SAI_Editor
 
         private void FillListViewWithMySqlQuery(string queryToExecute)
         {
+            _cts = new CancellationTokenSource();
+
             try
             {
                 using (var connection = new MySqlConnection(connectionString.ToString()))
@@ -96,15 +98,18 @@ namespace SAI_Editor
                     List<Item> items = new List<Item>();
 
                     using (var query = new MySqlCommand(queryToExecute, connection))
-                    using (MySqlDataReader reader = query.ExecuteReader())
-                        while (reader != null && reader.Read())
+                    {
+                        using (MySqlDataReader reader = query.ExecuteReader())
                         {
+                            while (reader != null && reader.Read())
+                            {
+                                if (_cts.IsCancellationRequested)
+                                    break;
 
-                            if (_cts.IsCancellationRequested)
-                                break;
-
-                            items.Add(new Item { ItemName = reader.GetInt32(0).ToString(CultureInfo.InvariantCulture), SubItems = new List<string> { reader.GetString(1) } });
+                                items.Add(new Item { ItemName = reader.GetInt32(0).ToString(CultureInfo.InvariantCulture), SubItems = new List<string> { reader.GetString(1) } });
+                            }
                         }
+                    }
 
                     AddItemToListView(listViewEntryResults, items);
 
@@ -118,6 +123,8 @@ namespace SAI_Editor
 
         private async void FillListViewWithAreaTriggers(string idFilter, string mapIdFilter, bool limit)
         {
+            _cts = new CancellationTokenSource();
+
             try
             {
                 string queryToExecute = "SELECT * FROM areatriggers";
@@ -172,7 +179,6 @@ namespace SAI_Editor
 
                     foreach (DataRow row in dt.Rows)
                     {
-
                         if (_cts.IsCancellationRequested)
                             break;
 
@@ -196,19 +202,18 @@ namespace SAI_Editor
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-
             if (_isBusy)
                 return;
 
             _isBusy = true;
-
             searchThread = new Thread(StartSearching);
             searchThread.Start();
-
         }
 
         private async void StartSearching()
         {
+            _cts = new CancellationTokenSource();
+
             try
             {
                 string query = "";
@@ -383,7 +388,6 @@ namespace SAI_Editor
 
                                 foreach (SmartScript smartScript in smartScriptActionlists)
                                 {
-
                                     if (_cts.IsCancellationRequested)
                                         break;
 
@@ -517,16 +521,13 @@ namespace SAI_Editor
         private void buttonStopSearchResults_Click(object sender, EventArgs e)
         {
             StopRunningThread();
-            _isBusy = false;
         }
 
         private void StopRunningThread()
         {
-            if (searchThread != null && searchThread.IsAlive)
-            {
-                if (_cts != null)
-                    _cts.Cancel();
-            }
+            if (searchThread != null && _cts != null && searchThread.IsAlive)
+                _cts.Cancel();
+
             _isBusy = false;
         }
 
