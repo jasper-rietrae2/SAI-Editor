@@ -1148,6 +1148,8 @@ namespace SAI_Editor
 
             if (listViewSmartScripts.Items.Count <= 0)
                 ResetFieldsToDefault(true);
+            else
+                listViewSmartScripts.Items[0].Selected = true;
         }
 
         private async void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
