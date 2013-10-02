@@ -15,28 +15,23 @@ namespace SAI_Editor.Forms
 {
     public partial class SqlOutputForm : Form
     {
-        private struct EntryOrGuidAndSourceType
-        {
-            public int entryOrGuid;
-            public int sourceType;
-        };
-
         private List<SmartScript> smartScripts = null;
+        private EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
 
         public SqlOutputForm(List<SmartScript> smartScripts)
         {
             InitializeComponent();
 
             this.smartScripts = smartScripts;
-
-            ExportSqlToTextbox();
         }
 
         public void SqlOutputForm_Load(object sender, EventArgs e)
         {
+            this.originalEntryOrGuidAndSourceType = ((MainForm)Owner).originalEntryOrGuidAndSourceType;
             richTextBoxSqlOutput.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             buttonExecuteScript.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             buttonSaveToFile.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
+            ExportSqlToTextbox();
         }
 
         private async void ExportSqlToTextbox()
@@ -50,7 +45,7 @@ namespace SAI_Editor.Forms
             {
                 EntryOrGuidAndSourceType entryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
                 entryOrGuidAndSourceType.entryOrGuid = smartScript.entryorguid;
-                entryOrGuidAndSourceType.sourceType = smartScript.source_type;
+                entryOrGuidAndSourceType.sourceType = (SourceTypes)smartScript.source_type;
 
                 if (entriesOrGuidsAndSourceTypes.Contains(entryOrGuidAndSourceType))
                     continue;
@@ -58,15 +53,15 @@ namespace SAI_Editor.Forms
                 entriesOrGuidsAndSourceTypes.Add(entryOrGuidAndSourceType);
             }
 
-            string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameByIdOrGuid(XConverter.TryParseStringToInt32(smartScripts[0].entryorguid));
-            string sourceSet = smartScripts[0].entryorguid < 0 ? "@GUID" : "@ENTRY";
+            string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameByIdOrGuid(XConverter.TryParseStringToInt32(originalEntryOrGuidAndSourceType.entryOrGuid));
+            string sourceSet = originalEntryOrGuidAndSourceType.entryOrGuid < 0 ? "@GUID" : "@ENTRY";
 
             richTextBoxSqlOutput.Text += "-- " + sourceName + " SAI\n";
-            richTextBoxSqlOutput.Text += "SET " + sourceSet + " := " + smartScripts[0].entryorguid + ";\n";
+            richTextBoxSqlOutput.Text += "SET " + sourceSet + " := " + originalEntryOrGuidAndSourceType.entryOrGuid + ";\n";
 
             if (entriesOrGuidsAndSourceTypes.Count == 1)
             {
-                switch ((SourceTypes)smartScripts[0].source_type)
+                switch ((SourceTypes)originalEntryOrGuidAndSourceType.sourceType)
                 {
                     case SourceTypes.SourceTypeCreature:
                         richTextBoxSqlOutput.Text += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
@@ -83,7 +78,7 @@ namespace SAI_Editor.Forms
                         break;
                 }
 
-                richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + sourceSet + " AND `source_type`=" + smartScripts[0].source_type + ";\n";
+                richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + sourceSet + " AND `source_type`=" + originalEntryOrGuidAndSourceType.sourceType + ";\n";
             }
             else
             {
@@ -137,7 +132,7 @@ namespace SAI_Editor.Forms
                 SmartScript smartScript = smartScripts[i];
                 string actualSourceSet = sourceSet;
 
-                if (smartScripts[0].entryorguid != smartScripts[i].entryorguid)
+                if (originalEntryOrGuidAndSourceType.entryOrGuid != smartScripts[i].entryorguid)
                     actualSourceSet = smartScripts[i].entryorguid.ToString();
 
                 richTextBoxSqlOutput.Text += "(" + actualSourceSet + "," + smartScript.source_type + "," + smartScript.id + "," + smartScript.link + "," + smartScript.event_type + "," +

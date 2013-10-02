@@ -50,6 +50,12 @@ namespace SAI_Editor
         SourceTypeScriptedActionlist = 9,
     }
 
+    public struct EntryOrGuidAndSourceType
+    {
+        public int entryOrGuid;
+        public SourceTypes sourceType;
+    };
+
     public partial class MainForm : Form
     {
         public MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
@@ -63,8 +69,7 @@ namespace SAI_Editor
         private int listViewSmartScriptsInitialHeight, listViewSmartScriptsHeightToChangeTo;
         public int expandAndContractSpeed = 5, expandAndContractSpeedListView = 2;
         private FormState formState = FormState.FormStateLogin;
-        public SourceTypes originalSourceType = SourceTypes.SourceTypeCreature;
-        public String originalEntryOrGuid = String.Empty;
+        public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
         public int lastSmartScriptIdOfScript = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool runningConstructor = false;
@@ -695,7 +700,7 @@ namespace SAI_Editor
 
                     listViewSmartScripts.Items.Add(listViewItem);
 
-                    if (checkBoxListActionlistsOrEntries.Checked && sourceType == originalSourceType)
+                    if (checkBoxListActionlistsOrEntries.Checked && sourceType == originalEntryOrGuidAndSourceType.sourceType)
                     {
                         TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScript, sourceType);
 
@@ -1160,7 +1165,7 @@ namespace SAI_Editor
             if (checkBoxListActionlistsOrEntries.Checked)
             {
                 listViewSmartScripts.Items.Clear();
-                await SelectAndFillListViewByEntryAndSource(originalEntryOrGuid, originalSourceType);
+                await SelectAndFillListViewByEntryAndSource(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType);
             }
             else
                 RemoveNonOriginalScriptsFromView();
@@ -1169,7 +1174,7 @@ namespace SAI_Editor
         private void RemoveNonOriginalScriptsFromView()
         {
             foreach (ListViewItem item in listViewSmartScripts.Items)
-                if ((SourceTypes)Int32.Parse(item.SubItems[1].Text) != originalSourceType)
+                if ((SourceTypes)Int32.Parse(item.SubItems[1].Text) != originalEntryOrGuidAndSourceType.sourceType)
                     listViewSmartScripts.Items.Remove(item);
         }
 
@@ -1218,8 +1223,8 @@ namespace SAI_Editor
             pictureBoxLoadScript.Enabled = false;
 
             SourceTypes newSourceType = GetSourceTypeByIndex();
-            originalSourceType = newSourceType;
-            originalEntryOrGuid = textBoxEntryOrGuid.Text;
+            originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.TryParseStringToInt32(textBoxEntryOrGuid.Text);
+            originalEntryOrGuidAndSourceType.sourceType = newSourceType;
             await SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType);
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
@@ -1977,8 +1982,8 @@ namespace SAI_Editor
 
             //! Writing it all out because it's easier to read and edit it this way
             ListViewItem listViewItem = new ListViewItem();
-            listViewItem.Text = originalEntryOrGuid; //! Entryorguid
-            listViewItem.SubItems.Add(((int)originalSourceType).ToString()); //! Source type
+            listViewItem.Text = originalEntryOrGuidAndSourceType.entryOrGuid.ToString(); //! Entryorguid
+            listViewItem.SubItems.Add(((int)originalEntryOrGuidAndSourceType.sourceType).ToString()); //! Source type
 
             if (checkBoxLockEventId.Checked)
                 listViewItem.SubItems.Add((++lastSmartScriptIdOfScript).ToString()); // id
