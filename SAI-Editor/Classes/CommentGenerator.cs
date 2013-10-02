@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SAI_Editor.Properties;
 
 namespace SAI_Editor.Classes
 {
@@ -229,6 +230,9 @@ namespace SAI_Editor.Classes
 
         public async Task<string> GenerateCommentFor(SmartScript smartScript, EntryOrGuidAndSourceType entryOrGuidAndSourceType)
         {
+            if (!Settings.Default.GenerateComments)
+                return String.Empty;
+
             string fullLine = String.Empty;
 
             try
