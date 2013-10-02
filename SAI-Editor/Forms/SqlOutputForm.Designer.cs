@@ -82,6 +82,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Output";
             this.Load += new System.EventHandler(this.SqlOutputForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SqlOutputForm_KeyDown);
             this.ResumeLayout(false);
 
         }

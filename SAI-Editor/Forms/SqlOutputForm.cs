@@ -180,5 +180,15 @@ namespace SAI_Editor.Forms
         {
             File.WriteAllText(saveFileDialog.FileName, richTextBoxSqlOutput.Text);
         }
+
+        private void SqlOutputForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    Close();
+                    break;
+            }
+        }
     }
 }
