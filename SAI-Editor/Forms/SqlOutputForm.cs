@@ -135,8 +135,12 @@ namespace SAI_Editor.Forms
             for (int i = 0; i < smartScripts.Count; ++i)
             {
                 SmartScript smartScript = smartScripts[i];
+                string actualSourceSet = sourceSet;
 
-                richTextBoxSqlOutput.Text += "(" + sourceSet + "," + smartScript.source_type + "," + smartScript.id + "," + smartScript.link + "," + smartScript.event_type + "," +
+                if (smartScripts[0].entryorguid != smartScripts[i].entryorguid)
+                    actualSourceSet = smartScripts[i].entryorguid.ToString();
+
+                richTextBoxSqlOutput.Text += "(" + actualSourceSet + "," + smartScript.source_type + "," + smartScript.id + "," + smartScript.link + "," + smartScript.event_type + "," +
                                               smartScript.event_phase_mask + "," + smartScript.event_chance + "," + smartScript.event_flags + "," + smartScript.event_param1 + "," +
                                               smartScript.event_param2 + "," + smartScript.event_param3 + "," + smartScript.event_param4 + "," + smartScript.action_type + "," +
                                               smartScript.action_param1 + "," + smartScript.action_param2 + "," + smartScript.action_param3 + "," + smartScript.action_param4 + "," +
