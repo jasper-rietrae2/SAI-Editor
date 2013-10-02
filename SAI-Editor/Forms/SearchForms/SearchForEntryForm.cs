@@ -259,8 +259,18 @@ namespace SAI_Editor
                     case 2: //! Creature guid
                         if (criteriaLeftEmpty)
                         {
-                            if (Settings.Default.PromptExecuteQuery && MessageBox.Show("Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                                return;
+                            if (Settings.Default.PromptExecuteQuery)
+                            {
+                                bool pressedYes = true;
+
+                                this.Invoke(new Action(() =>
+                                {
+                                    pressedYes = MessageBox.Show(this, "Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                                }));
+
+                                if (!pressedYes)
+                                    return;
+                            }
 
                             if (checkBoxHasAiName.Checked)
                                 query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid < 0 AND ss.entryorguid = -c.guid AND ss.source_type = 0";
@@ -314,8 +324,18 @@ namespace SAI_Editor
                     case 5: //! Gameobject guid
                         if (criteriaLeftEmpty)
                         {
-                            if (Settings.Default.PromptExecuteQuery && MessageBox.Show("Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                                return;
+                            if (Settings.Default.PromptExecuteQuery)
+                            {
+                                bool pressedYes = true;
+
+                                this.Invoke(new Action(() =>
+                                {
+                                    pressedYes = MessageBox.Show(this, "Are you sure you wish to continue? This query will take a long time to execute because the criteria field was left empty!", "Are you sure you want to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes;
+                                }));
+
+                                if (!pressedYes)
+                                    return;
+                            }
 
                             if (checkBoxHasAiName.Checked)
                                 query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid < 0 AND ss.entryorguid = -g.guid AND ss.source_type = 1";
