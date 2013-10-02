@@ -53,7 +53,7 @@ namespace SAI_Editor.Forms
                 entriesOrGuidsAndSourceTypes.Add(entryOrGuidAndSourceType);
             }
 
-            string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameByIdOrGuid(XConverter.TryParseStringToInt32(originalEntryOrGuidAndSourceType.entryOrGuid));
+            string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuid(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
             string sourceSet = originalEntryOrGuidAndSourceType.entryOrGuid < 0 ? "@GUID" : "@ENTRY";
 
             richTextBoxSqlOutput.Text += "-- " + sourceName + " SAI\n";

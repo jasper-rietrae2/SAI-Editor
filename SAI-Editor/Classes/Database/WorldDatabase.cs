@@ -79,9 +79,19 @@ namespace SAI_Editor
             return dt.Rows[0]["name"].ToString();
         }
 
-        public async Task<string> GetCreatureNameByIdOrGuid(int idOrGuid)
+        public async Task<string> GetObjectNameByIdOrGuid(SourceTypes sourceType, int idOrGuid)
         {
-            return idOrGuid < 0 ? await GetCreatureNameByGuid(-idOrGuid) : await GetCreatureNameById(idOrGuid);
+            switch (sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return idOrGuid < 0 ? await GetCreatureNameByGuid(-idOrGuid) : await GetCreatureNameById(idOrGuid);
+                case SourceTypes.SourceTypeGameobject:
+                    return idOrGuid < 0 ? await GetGameobjectNameByGuid(-idOrGuid) : await GetGameobjectNameById(idOrGuid);
+                case SourceTypes.SourceTypeAreaTrigger:
+                    return String.Empty;
+            }
+
+            return String.Empty;
         }
 
         public async Task<string> GetGameobjectNameById(int id)
