@@ -39,18 +39,19 @@ namespace SAI_Editor.Forms
                 return;
 
             string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureNameByIdOrGuid(XConverter.TryParseStringToInt32(smartScripts[0].entryorguid));
+            string sourceSet = smartScripts[0].entryorguid < 0 ? "@GUID" : "@ENTRY";
 
             richTextBoxSqlOutput.Text += "-- " + sourceName + " SAI\n";
-            richTextBoxSqlOutput.Text += "SET @ENTRY := " + smartScripts[0].entryorguid + ";\n";
-            richTextBoxSqlOutput.Text += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=@ENTRY;\n";
-            richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid`=@ENTRY AND `source_type`=" + smartScripts[0].source_type + ";\n";
+            richTextBoxSqlOutput.Text += "SET " + sourceSet + " := " + smartScripts[0].entryorguid + ";\n";
+            richTextBoxSqlOutput.Text += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+            richTextBoxSqlOutput.Text += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + sourceSet + " AND `source_type`=" + smartScripts[0].source_type + ";\n";
             richTextBoxSqlOutput.Text += "INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES\n";
 
             for (int i = 0; i < smartScripts.Count; ++i)
             {
                 SmartScript smartScript = smartScripts[i];
 
-                richTextBoxSqlOutput.Text += "(@ENTRY," + smartScript.source_type + "," + smartScript.id + "," + smartScript.link + "," + smartScript.event_type + "," +
+                richTextBoxSqlOutput.Text += "(" + sourceSet + "," + smartScript.source_type + "," + smartScript.id + "," + smartScript.link + "," + smartScript.event_type + "," +
                                               smartScript.event_phase_mask + "," + smartScript.event_chance + "," + smartScript.event_flags + "," + smartScript.event_param1 + "," +
                                               smartScript.event_param2 + "," + smartScript.event_param3 + "," + smartScript.event_param4 + "," + smartScript.action_type + "," +
                                               smartScript.action_param1 + "," + smartScript.action_param2 + "," + smartScript.action_param3 + "," + smartScript.action_param4 + "," +
