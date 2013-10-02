@@ -247,18 +247,19 @@ namespace SAI_Editor.Classes
                 {
                     case 0: //! Creature
                         fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(SourceTypes.SourceTypeCreature, smartScript.entryorguid) + " - ";
+                        fullLine += smartEventStrings[(SmartEvent)smartScript.event_type];
                         break;
                     case 1: //! Gameobject
                         fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(SourceTypes.SourceTypeGameobject, smartScript.entryorguid) + " - ";
+                        fullLine += smartEventStrings[(SmartEvent)smartScript.event_type];
                         break;
                     case 9: //! Actionlist
                         fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid) + " - ";
+                        fullLine += "On Script";
                         break;
                     case 2: //! Areatrigger
                         return String.Empty;
                 }
-
-                fullLine += smartEventStrings[(SmartEvent)smartScript.event_type];
 
                 if (fullLine.Contains("_previousLineComment_"))
                 {
