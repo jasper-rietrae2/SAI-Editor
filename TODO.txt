@@ -24,6 +24,10 @@
 - Convert all 'new xxxForm().ShowDialog(this)' to use 'using'
 - Drop all unused columns in the DBC tables in the SQLite database to reduce the size of the database
 - Fix the printing of @ENTRY*100+x actionlists (test with creature 28362)
+- New line sets `id` to latest id in the entire listview, instead of the latest id AFTER the original entry (new bug)
+- When searching for a script like 33303's (creature) and also listing actionlists, the sort order changes every search (new bug?)
+- Disable the 'Generate Comments' button when there are no items in the listview
+- When clicking Generate Comments, also update all textboxes for the selected script
 
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
