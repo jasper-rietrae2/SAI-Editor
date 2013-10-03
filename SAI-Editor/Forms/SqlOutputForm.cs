@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SAI_Editor.Database.Classes;
 using SAI_Editor.Classes;
 using System.IO;
+using System.Diagnostics;
 
 namespace SAI_Editor.Forms
 {
@@ -198,7 +199,21 @@ namespace SAI_Editor.Forms
                 return;
             }
 
-            MessageBox.Show("The file has been saved succesfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (MessageBox.Show("The file has been saved succesfully! Do you want to open it?", "Success!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                StartProcess(saveFileDialog.FileName);
+        }
+
+        private void StartProcess(string filename, string argument = "")
+        {
+            try
+            {
+                Process.Start(filename, argument);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show(String.Format("The process '{0}' could not be opened!", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void SqlOutputForm_KeyDown(object sender, KeyEventArgs e)
