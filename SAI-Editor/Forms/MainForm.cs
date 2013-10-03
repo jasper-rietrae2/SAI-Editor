@@ -506,6 +506,7 @@ namespace SAI_Editor
         {
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
+            SaveLastUsedFields();
             ResetFieldsToDefault(true);
             listViewSmartScripts.Items.Clear();
             StartContractingToLoginForm(Settings.Default.InstantExpand);
@@ -641,9 +642,10 @@ namespace SAI_Editor
 
             textBoxEntryOrGuid.Text = Settings.Default.LastEntryOrGuid;
             comboBoxSourceType.SelectedIndex = Settings.Default.LastSourceType;
+            TryToLoadScript(false);
         }
 
-        private async Task<bool> SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
+        private async Task<bool> SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType, bool showError = true)
         {
             try
             {
@@ -651,7 +653,9 @@ namespace SAI_Editor
 
                 if (smartScripts == null)
                 {
-                    MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI (smart_scripts) table for the given source type ({1})!", entryOrGuid, GetSourceTypeString(sourceType)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (showError)
+                        MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI (smart_scripts) table for the given source type ({1})!", entryOrGuid, GetSourceTypeString(sourceType)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    
                     SetPictureBoxLoadScriptEnabled(true);
                     return false;
                 }
@@ -724,7 +728,9 @@ namespace SAI_Editor
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (showError)
+                    MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
                 SetPictureBoxLoadScriptEnabled(true);
                 return false;
             }
@@ -1205,11 +1211,16 @@ namespace SAI_Editor
             }
         }
 
-        public async void pictureBoxLoadScript_Click(object sender, EventArgs e)
+        public void pictureBoxLoadScript_Click(object sender, EventArgs e)
         {
             if (!pictureBoxLoadScript.Enabled)
                 return;
 
+            TryToLoadScript(true);
+        }
+
+        private async void TryToLoadScript(bool showErrorIfNoneFound)
+        {
             // @Debug new AreatriggersForm().Show();
 
             listViewSmartScripts.Items.Clear(); //! Clear this even if the search criteria was left empty
@@ -1224,7 +1235,7 @@ namespace SAI_Editor
             SourceTypes newSourceType = GetSourceTypeByIndex();
             originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.TryParseStringToInt32(textBoxEntryOrGuid.Text);
             originalEntryOrGuidAndSourceType.sourceType = newSourceType;
-            await SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType);
+            await SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType, showErrorIfNoneFound);
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
@@ -2345,6 +2356,11 @@ namespace SAI_Editor
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveLastUsedFields();
+        }
+
+        private void SaveLastUsedFields()
         {
             Settings.Default.LastEntryOrGuid = textBoxEntryOrGuid.Text;
             Settings.Default.LastSourceType = comboBoxSourceType.SelectedIndex;
