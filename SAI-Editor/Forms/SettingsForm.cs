@@ -56,7 +56,7 @@ namespace SAI_Editor
             {
                 EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = ((MainForm)Owner).originalEntryOrGuidAndSourceType;
                 ((MainForm)Owner).textBoxEntryOrGuid.Text = originalEntryOrGuidAndSourceType.entryOrGuid.ToString();
-                ((MainForm)Owner).comboBoxSourceType.SelectedIndex = (int)originalEntryOrGuidAndSourceType.sourceType;
+                ((MainForm)Owner).comboBoxSourceType.SelectedIndex = ((MainForm)Owner).GetIndexBySourceType(originalEntryOrGuidAndSourceType.sourceType);
             }
 
             bool showTooltipsPermanently = Settings.Default.ShowTooltipsPermanently;
