@@ -1121,10 +1121,12 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
 
+            if (listViewSmartScripts.SelectedItems[0].SubItems[0].Text == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
+                lastSmartScriptIdOfScript--;
+
             listViewSmartScripts.Items.Remove(listViewSmartScripts.SelectedItems[0]);
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
-            lastSmartScriptIdOfScript--;
 
             if (listViewSmartScripts.Items.Count <= 0)
                 ResetFieldsToDefault(true);
@@ -1218,7 +1220,15 @@ namespace SAI_Editor
                 SortListView(SortOrder.Ascending, 1);
                 listViewSmartScripts.Items[0].Selected = true;
                 listViewSmartScripts.Select(); //! Sets the focus on the listview
-                lastSmartScriptIdOfScript = XConverter.TryParseStringToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
+
+                if (checkBoxListActionlistsOrEntries.Checked)
+                {
+                    foreach (ListViewItem item in listViewSmartScripts.Items)
+                        if (item.Text == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
+                            lastSmartScriptIdOfScript = XConverter.TryParseStringToInt32(item.SubItems[2].Text);
+                }
+                else
+                    lastSmartScriptIdOfScript = XConverter.TryParseStringToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
             }
 
             buttonGenerateSql.Enabled = true;
