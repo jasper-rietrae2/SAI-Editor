@@ -188,7 +188,17 @@ namespace SAI_Editor.Forms
 
         private void saveFileDialog_FileOk(object sender, CancelEventArgs e)
         {
-            File.WriteAllText(saveFileDialog.FileName, richTextBoxSqlOutput.Text);
+            try
+            {
+                File.WriteAllText(saveFileDialog.FileName, richTextBoxSqlOutput.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            MessageBox.Show("The file has been saved succesfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void SqlOutputForm_KeyDown(object sender, KeyEventArgs e)
