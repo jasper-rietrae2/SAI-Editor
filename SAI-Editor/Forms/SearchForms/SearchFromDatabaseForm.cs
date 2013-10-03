@@ -345,8 +345,8 @@ namespace SAI_Editor
 
                     }
 
-                    listViewEntryResults.Items.AddRange(items.ToArray());
-
+                    //listViewEntryResults.Items.AddRange(items.ToArray());
+                    AddItemRangeToListView(listViewEntryResults, items.ToArray());
                 }
             }
             catch (ObjectDisposedException)
@@ -454,19 +454,19 @@ namespace SAI_Editor
             return comboBox.SelectedIndex;
         }
 
-        //private void AddItemToListView(ListView listView, ListViewItem item)
-        //{
-        //    if (listView.InvokeRequired)
-        //    {
-        //        Invoke((MethodInvoker)delegate
-        //        {
-        //            listView.Items.Add(item);
-        //        });
-        //        return;
-        //    }
+        private void AddItemRangeToListView(ListView listView, ListViewItem[] items)
+        {
+            if (listView.InvokeRequired)
+            {
+                Invoke((MethodInvoker)delegate
+                {
+                    listView.Items.AddRange(items);
+                });
+                return;
+            }
 
-        //    listView.Items.Add(item);
-        //}
+            listView.Items.AddRange(items);
+        }
 
         private void SetEnabledOfControl(Control control, bool enable)
         {
