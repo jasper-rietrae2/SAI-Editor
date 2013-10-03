@@ -60,7 +60,7 @@
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="CreateRevertQuery" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

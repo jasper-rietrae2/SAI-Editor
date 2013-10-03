@@ -14,6 +14,7 @@ using SAI_Editor.Security;
 using SAI_Editor.Classes;
 using System.Threading.Tasks;
 using SAI_Editor.Forms;
+using System.IO;
 
 namespace SAI_Editor
 {
@@ -2415,7 +2416,8 @@ namespace SAI_Editor
 
         private void menuItemRevertQuery_Click(object sender, EventArgs e)
         {
-            new RevertQueryForm().ShowDialog(this);
+            if (Directory.Exists("Reverts"))
+                new RevertQueryForm().ShowDialog(this);
         }
     }
 }
