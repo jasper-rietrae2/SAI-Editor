@@ -571,7 +571,6 @@ namespace SAI_Editor
             this.textBoxEntryOrGuid.Name = "textBoxEntryOrGuid";
             this.textBoxEntryOrGuid.Size = new System.Drawing.Size(135, 20);
             this.textBoxEntryOrGuid.TabIndex = 0;
-            this.textBoxEntryOrGuid.Text = "33303";
             this.textBoxEntryOrGuid.TextChanged += new System.EventHandler(this.textBoxEntryOrGuid_TextChanged);
             this.textBoxEntryOrGuid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
@@ -2035,6 +2034,7 @@ namespace SAI_Editor
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SAI Editor: Login";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
             this.groupBoxLogin.ResumeLayout(false);

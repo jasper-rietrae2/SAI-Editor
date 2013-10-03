@@ -638,6 +638,9 @@ namespace SAI_Editor
 
             if (expanding && Settings.Default.ShowTooltipsPermanently)
                 ExpandToShowPermanentTooltips(false);
+
+            textBoxEntryOrGuid.Text = Settings.Default.LastEntryOrGuid;
+            comboBoxSourceType.SelectedIndex = Settings.Default.LastSourceType;
         }
 
         private async Task<bool> SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType)
@@ -2339,6 +2342,13 @@ namespace SAI_Editor
         private void buttonGenerateComments_Click(object sender, EventArgs e)
         {
             GenerateCommentsForAllItems();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Settings.Default.LastEntryOrGuid = textBoxEntryOrGuid.Text;
+            Settings.Default.LastSourceType = comboBoxSourceType.SelectedIndex;
+            Settings.Default.Save();
         }
     }
 }

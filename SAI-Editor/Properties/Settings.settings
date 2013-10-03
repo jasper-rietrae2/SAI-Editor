@@ -53,5 +53,11 @@
     <Setting Name="GenerateComments" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="LastEntryOrGuid" Type="System.String" Scope="User">
+      <Value Profile="(Default)">33303</Value>
+    </Setting>
+    <Setting Name="LastSourceType" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
