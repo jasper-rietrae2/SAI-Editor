@@ -27,7 +27,7 @@ namespace SAI_Editor.Forms
             smartScriptListView1 = new SmartScriptListView(await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(33303, (int)SourceTypes.SourceTypeCreature));
             smartScriptListView1.View = View.Details;
 
-            smartScriptListView1.Size = new Size(500, 500);
+            smartScriptListView1.Size = new Size(5000, 500);
 
             Controls.Add(smartScriptListView1);
 

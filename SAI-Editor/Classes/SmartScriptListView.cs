@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SAI_Editor.Database.Classes;
 
-namespace SAI_Editor.Classes
+namespace System.Windows.Forms
 {
-    public class SmartScriptListView : ListView
+    public class SmartScriptListView : XListView
     {
 
         private List<SmartScript> _smartScripts;

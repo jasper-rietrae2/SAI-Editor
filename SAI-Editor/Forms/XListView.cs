@@ -10,7 +10,7 @@ namespace System.Windows.Forms
     {
         protected override void WndProc(ref Message m)
         {
-            // Suppress mouse messages that are OUTSIDE of the items area
+            //! Disallows de-selecting an item in the listview
             if (m.Msg >= 0x201 && m.Msg <= 0x209)
             {
                 Point pos = new Point(m.LParam.ToInt32() & 0xffff, m.LParam.ToInt32() >> 16);
@@ -25,6 +25,7 @@ namespace System.Windows.Forms
                         return;
                 }
             }
+
             base.WndProc(ref m);
         }
     }
