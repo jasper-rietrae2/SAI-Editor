@@ -714,17 +714,8 @@ namespace SAI_Editor
                     }
                 }
 
-                //! This causes them to be resized to the item in the column with the highest width value.
-                for (int i = 0; i <= 11; ++i)
-                    listViewSmartScripts.Columns[i].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                for (int i = 13; i <= 18; ++i)
-                    listViewSmartScripts.Columns[i].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                for (int i = 20; i <= 26; ++i)
-                    listViewSmartScripts.Columns[i].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-
-                listViewSmartScripts.Columns[27].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize); //! Comment column
+                foreach (ColumnHeader header in listViewSmartScripts.Columns)
+                    header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
             }
             catch (Exception ex)
             {

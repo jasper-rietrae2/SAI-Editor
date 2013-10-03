@@ -61,9 +61,7 @@ namespace System.Windows.Forms
             }
 
             foreach (ColumnHeader header in Columns)
-            {
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-            }
 
         }
 
