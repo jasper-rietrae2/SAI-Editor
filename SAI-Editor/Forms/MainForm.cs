@@ -246,7 +246,7 @@ namespace SAI_Editor
                 {
                     Height = HeightToExpandTo;
 
-                    if (Width >= WidthToExpandTo) //! If both finished
+                    if (Width >= WidthToExpandTo && timerExpandOrContract.Enabled) //! If both finished
                     {
                         Width = WidthToExpandTo;
                         timerExpandOrContract.Enabled = false;
@@ -262,7 +262,7 @@ namespace SAI_Editor
                 {
                     Width = WidthToExpandTo;
 
-                    if (Height >= HeightToExpandTo) //! If both finished
+                    if (Height >= HeightToExpandTo && timerExpandOrContract.Enabled) //! If both finished
                     {
                         Height = HeightToExpandTo;
                         timerExpandOrContract.Enabled = false;
@@ -280,7 +280,7 @@ namespace SAI_Editor
                 {
                     Height = originalHeight;
 
-                    if (Width <= originalWidth) //! If both finished
+                    if (Width <= originalWidth && timerExpandOrContract.Enabled) //! If both finished
                     {
                         Width = originalWidth;
                         timerExpandOrContract.Enabled = false;
@@ -296,7 +296,7 @@ namespace SAI_Editor
                 {
                     Width = originalWidth;
 
-                    if (Height <= originalHeight) //! If both finished
+                    if (Height <= originalHeight && timerExpandOrContract.Enabled) //! If both finished
                     {
                         Height = originalHeight;
                         timerExpandOrContract.Enabled = false;
