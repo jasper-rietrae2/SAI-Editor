@@ -2367,8 +2367,16 @@ namespace SAI_Editor
 
         private async void GenerateCommentAndResizeColumns()
         {
+            if (listViewSmartScripts.SelectedItems.Count == 0)
+                return;
+
             string oldComment = listViewSmartScripts.SelectedItems[0].SubItems[27].Text;
             string newComment = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
+
+            //! For some reason we have to re-check it here...
+            if (listViewSmartScripts.SelectedItems.Count == 0)
+                return;
+
             listViewSmartScripts.SelectedItems[0].SubItems[27].Text = newComment;
 
             if (oldComment != newComment)
