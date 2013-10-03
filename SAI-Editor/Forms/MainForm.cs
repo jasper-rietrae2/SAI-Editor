@@ -747,6 +747,7 @@ namespace SAI_Editor
                 return;
 
             FillFieldsBasedOnSelectedScript();
+            checkBoxListActionlistsOrEntries.Text = listViewSmartScripts.SelectedItems[0].SubItems[1].Text == "9" ? "List entries too" : "List actionlists too";
         }
 
         private void FillFieldsBasedOnSelectedScript()
@@ -758,21 +759,7 @@ namespace SAI_Editor
                 if (Settings.Default.ChangeStaticInfo)
                 {
                     textBoxEntryOrGuid.Text = selectedItem[0].Text;
-
-                    switch (XConverter.TryParseStringToInt32(selectedItem[1].Text))
-                    {
-                        case 0: //! Creature
-                        case 1: //! Gameobject
-                        case 2: //! Areatrigger
-                            comboBoxSourceType.SelectedIndex = XConverter.TryParseStringToInt32(selectedItem[1].Text);
-                            break;
-                        case 9: //! Actionlist
-                            comboBoxSourceType.SelectedIndex = 3;
-                            break;
-                        default:
-                            MessageBox.Show(String.Format("Unknown/unsupported source type found ({0})", selectedItem[0].Text), "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                    }
+                    comboBoxSourceType.SelectedIndex = GetIndexBySourceType((SourceTypes)XConverter.TryParseStringToInt32(selectedItem[1].Text));
                 }
 
                 textBoxEventScriptId.Text = selectedItem[2].Text;
