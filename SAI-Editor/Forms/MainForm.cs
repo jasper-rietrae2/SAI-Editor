@@ -653,43 +653,54 @@ namespace SAI_Editor
                     return false;
                 }
 
-                foreach (SmartScript smartScript in smartScripts)
+                for (int i = 0; i < smartScripts.Count; ++i)
                 {
                     ListViewItem listViewItem = new ListViewItem();
-                    listViewItem.Text = smartScript.entryorguid.ToString();
-                    listViewItem.SubItems.Add(smartScript.source_type.ToString());
-                    listViewItem.SubItems.Add(smartScript.id.ToString());
-                    listViewItem.SubItems.Add(smartScript.link.ToString());
-                    listViewItem.SubItems.Add(smartScript.event_type.ToString());
-                    listViewItem.SubItems.Add(smartScript.event_phase_mask.ToString());
-                    listViewItem.SubItems.Add(smartScript.event_chance.ToString());
-                    listViewItem.SubItems.Add(smartScript.event_flags.ToString());
-                    listViewItem.SubItems.Add(smartScript.event_param1.ToString());
-                    listViewItem.SubItems.Add(smartScript.event_param2.ToString());
-                    listViewItem.SubItems.Add(smartScript.event_param3.ToString());
-                    listViewItem.SubItems.Add(smartScript.event_param4.ToString());
-                    listViewItem.SubItems.Add(smartScript.action_type.ToString());
-                    listViewItem.SubItems.Add(smartScript.action_param1.ToString());
-                    listViewItem.SubItems.Add(smartScript.action_param2.ToString());
-                    listViewItem.SubItems.Add(smartScript.action_param3.ToString());
-                    listViewItem.SubItems.Add(smartScript.action_param4.ToString());
-                    listViewItem.SubItems.Add(smartScript.action_param5.ToString());
-                    listViewItem.SubItems.Add(smartScript.action_param6.ToString());
-                    listViewItem.SubItems.Add(smartScript.target_type.ToString());
-                    listViewItem.SubItems.Add(smartScript.target_param1.ToString());
-                    listViewItem.SubItems.Add(smartScript.target_param2.ToString());
-                    listViewItem.SubItems.Add(smartScript.target_param3.ToString());
-                    listViewItem.SubItems.Add(smartScript.target_x.ToString());
-                    listViewItem.SubItems.Add(smartScript.target_y.ToString());
-                    listViewItem.SubItems.Add(smartScript.target_z.ToString());
-                    listViewItem.SubItems.Add(smartScript.target_o.ToString());
-                    listViewItem.SubItems.Add(smartScript.comment);
-
+                    listViewItem.Text = smartScripts[i].entryorguid.ToString();
+                    listViewItem.SubItems.Add(smartScripts[i].source_type.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].id.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].link.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].event_type.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].event_phase_mask.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].event_chance.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].event_flags.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].event_param1.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].event_param2.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].event_param3.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].event_param4.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].action_type.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].action_param1.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].action_param2.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].action_param3.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].action_param4.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].action_param5.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].action_param6.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].target_type.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].target_param1.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].target_param2.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].target_param3.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].target_x.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].target_y.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].target_z.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].target_o.ToString());
+                    listViewItem.SubItems.Add(smartScripts[i].comment);
                     listViewSmartScripts.Items.Add(listViewItem);
 
-                    if (checkBoxListActionlistsOrEntries.Checked && sourceType == originalEntryOrGuidAndSourceType.sourceType)
+                    if (i == smartScripts.Count - 1 && originalEntryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist)
                     {
-                        TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScript, sourceType);
+                        if (checkBoxListActionlistsOrEntries.Checked)
+                        {
+                            TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScripts[i], sourceType);
+
+                            if (timedActionListOrEntries.sourceTypeOfEntry != SourceTypes.SourceTypeScriptedActionlist)
+                                foreach (string scriptEntry in timedActionListOrEntries.entries)
+                                    await SelectAndFillListViewByEntryAndSource(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
+                        }
+                    }
+
+                    if (checkBoxListActionlistsOrEntries.Checked && sourceType == originalEntryOrGuidAndSourceType.sourceType && originalEntryOrGuidAndSourceType.sourceType != SourceTypes.SourceTypeScriptedActionlist)
+                    {
+                        TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScripts[i], sourceType);
 
                         foreach (string scriptEntry in timedActionListOrEntries.entries)
                             await SelectAndFillListViewByEntryAndSource(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
