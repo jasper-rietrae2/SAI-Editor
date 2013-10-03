@@ -2412,5 +2412,10 @@ namespace SAI_Editor
             if (oldComment != newComment)
                 ResizeColumns();
         }
+
+        private void menuItemRevertQuery_Click(object sender, EventArgs e)
+        {
+            new RevertQueryForm().ShowDialog(this);
+        }
     }
 }

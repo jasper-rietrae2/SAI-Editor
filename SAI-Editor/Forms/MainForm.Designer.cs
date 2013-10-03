@@ -176,6 +176,7 @@ namespace SAI_Editor
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
             this.listViewSmartScripts = new System.Windows.Forms.XListView();
+            this.menuItemRevertQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -382,6 +383,7 @@ namespace SAI_Editor
             this.menuItemSettings,
             this.menuItemReconnect,
             this.menuItemGenerateSql,
+            this.menuItemRevertQuery,
             this.toolStripSeparator2,
             this.menuItemExit});
             this.menuHeaderFiles.Name = "menuHeaderFiles";
@@ -391,14 +393,14 @@ namespace SAI_Editor
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(145, 22);
+            this.menuItemSettings.Size = new System.Drawing.Size(189, 22);
             this.menuItemSettings.Text = "Settings";
             this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
             // 
             // menuItemReconnect
             // 
             this.menuItemReconnect.Name = "menuItemReconnect";
-            this.menuItemReconnect.Size = new System.Drawing.Size(145, 22);
+            this.menuItemReconnect.Size = new System.Drawing.Size(189, 22);
             this.menuItemReconnect.Text = "Re-connect";
             this.menuItemReconnect.Click += new System.EventHandler(this.menuItemReconnect_Click);
             // 
@@ -406,19 +408,19 @@ namespace SAI_Editor
             // 
             this.menuItemGenerateSql.Enabled = false;
             this.menuItemGenerateSql.Name = "menuItemGenerateSql";
-            this.menuItemGenerateSql.Size = new System.Drawing.Size(145, 22);
+            this.menuItemGenerateSql.Size = new System.Drawing.Size(189, 22);
             this.menuItemGenerateSql.Text = "Generate SQL";
             this.menuItemGenerateSql.Click += new System.EventHandler(this.generateSQLToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(142, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(186, 6);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(145, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(189, 22);
             this.menuItemExit.Text = "Exit";
             this.menuItemExit.Click += new System.EventHandler(this.TryCloseApplication);
             // 
@@ -2009,6 +2011,13 @@ namespace SAI_Editor
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
+            // menuItemRevertQuery
+            // 
+            this.menuItemRevertQuery.Name = "menuItemRevertQuery";
+            this.menuItemRevertQuery.Size = new System.Drawing.Size(189, 22);
+            this.menuItemRevertQuery.Text = "Execute a revert query";
+            this.menuItemRevertQuery.Click += new System.EventHandler(this.menuItemRevertQuery_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2216,6 +2225,7 @@ namespace SAI_Editor
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateSql;
         public System.Windows.Forms.XListView listViewSmartScripts;
         private System.Windows.Forms.Button buttonGenerateComments;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
     }
 }
 

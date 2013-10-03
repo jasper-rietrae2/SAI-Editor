@@ -11,6 +11,7 @@ using SAI_Editor.Database.Classes;
 using SAI_Editor.Classes;
 using System.IO;
 using System.Diagnostics;
+using SAI_Editor.Properties;
 
 namespace SAI_Editor.Forms
 {
@@ -35,11 +36,8 @@ namespace SAI_Editor.Forms
             ExportSqlToTextbox();
         }
 
-        private async void ExportSqlToTextbox()
+        private List<EntryOrGuidAndSourceType> GetUniqueEntriesOrGuidsAndSourceTypes()
         {
-            if (smartScripts == null || smartScripts.Count == 0)
-                return;
-
             List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = new List<EntryOrGuidAndSourceType>();
 
             foreach (SmartScript smartScript in smartScripts)
@@ -53,6 +51,16 @@ namespace SAI_Editor.Forms
 
                 entriesOrGuidsAndSourceTypes.Add(entryOrGuidAndSourceType);
             }
+
+            return entriesOrGuidsAndSourceTypes;
+        }
+
+        private async void ExportSqlToTextbox()
+        {
+            if (smartScripts == null || smartScripts.Count == 0)
+                return;
+
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = GetUniqueEntriesOrGuidsAndSourceTypes();
 
             string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
             string sourceSet = originalEntryOrGuidAndSourceType.entryOrGuid < 0 ? "@GUID" : "@ENTRY";
@@ -170,8 +178,18 @@ namespace SAI_Editor.Forms
 
         private async void buttonExecuteScript_Click(object sender, EventArgs e)
         {
+            string revertQuery = String.Empty;
+
+            if (Settings.Default.CreateRevertQuery)
+                revertQuery = await InitializeRevertQuery();
+
             if (await SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(richTextBoxSqlOutput.Text))
+            {
                 MessageBox.Show("The query has been executed succesfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (Settings.Default.CreateRevertQuery)
+                    CreateRevertQuery(revertQuery);
+            }
         }
 
         private void buttonSaveToFile_Click(object sender, EventArgs e)
@@ -216,6 +234,69 @@ namespace SAI_Editor.Forms
                 case Keys.Escape:
                     Close();
                     break;
+            }
+        }
+
+        private async Task<string> InitializeRevertQuery()
+        {
+            string revertQuery = String.Empty;
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = GetUniqueEntriesOrGuidsAndSourceTypes();
+
+            foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in entriesOrGuidsAndSourceTypes)
+            {
+                List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entryOrGuidAndSourceType.entryOrGuid, (int)entryOrGuidAndSourceType.sourceType);
+
+                if (smartScripts == null || smartScripts.Count == 0)
+                    continue;
+
+                for (int i = 0; i < smartScripts.Count; ++i)
+                {
+                    SmartScript smartScript = smartScripts[i];
+
+                    if (i > 0)
+                        revertQuery += "\n";
+
+                    revertQuery += "UPDATE smart_scripts SET ";
+                    revertQuery += String.Format("event_type={0}, event_phase_mask={1}, event_chance={2}, event_flags={3}, ", smartScript.event_type, smartScript.event_phase_mask, smartScript.event_chance, smartScript.event_flags);
+                    revertQuery += String.Format("event_param1={0}, event_param2={1}, event_param3={2}, event_param4={3}, ", smartScript.event_param1, smartScript.event_param2, smartScript.event_param3, smartScript.event_param4);
+                    revertQuery += String.Format("action_type={0}, action_param1={1}, action_param2={2}, action_param3={3}, ", smartScript.action_type, smartScript.action_param1, smartScript.action_param2, smartScript.action_param3);
+                    revertQuery += String.Format("action_param4={0}, action_param5={1}, action_param6={2}, target_type={3}, ", smartScript.action_param4, smartScript.action_param5, smartScript.action_param6, smartScript.target_type);
+                    revertQuery += String.Format("target_param1={0}, target_param2={1}, target_param3={2}, target_x={3}, ", smartScript.target_param1, smartScript.target_param2, smartScript.target_param3, smartScript.target_x);
+                    revertQuery += String.Format("target_y={0}, target_z={1}, target_o={2}, comment=" + '"' + "{3}" + '"', smartScript.target_y, smartScript.target_z, smartScript.target_o, smartScript.comment);
+                    revertQuery += String.Format(" WHERE entryorguid={0} AND source_type={1} AND id={2};", smartScript.entryorguid, smartScript.source_type, smartScript.id);
+                }
+            }
+
+            return revertQuery;
+        }
+
+        private void CreateRevertQuery(string revertQuery)
+        {
+            //! Example output:
+            //! [Creature][33303] 3-10-2013 15.32.40.sql
+            string filename = @"Reverts\[" + GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType) + "] [" + originalEntryOrGuidAndSourceType.entryOrGuid + "] " + DateTime.Now.ToString() + ".sql";
+
+            if (!Directory.Exists("Reverts"))
+                Directory.CreateDirectory("Reverts");
+
+            filename = filename.Replace(":", ";");
+            File.WriteAllText(filename, revertQuery);
+        }
+
+        private string GetSourceTypeString(SourceTypes sourceType)
+        {
+            switch (sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return "Creature";
+                case SourceTypes.SourceTypeGameobject:
+                    return "Gameobject";
+                case SourceTypes.SourceTypeAreaTrigger:
+                    return "Areatrigger";
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    return "Actionlist";
+                default:
+                    return "Unknown";
             }
         }
     }

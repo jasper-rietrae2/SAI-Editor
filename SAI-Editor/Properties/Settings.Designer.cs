@@ -250,5 +250,17 @@ namespace SAI_Editor.Properties {
                 this["LastSourceType"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CreateRevertQuery {
+            get {
+                return ((bool)(this["CreateRevertQuery"]));
+            }
+            set {
+                this["CreateRevertQuery"] = value;
+            }
+        }
     }
 }
