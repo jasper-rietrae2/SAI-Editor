@@ -643,7 +643,9 @@ namespace SAI_Editor
 
             textBoxEntryOrGuid.Text = Settings.Default.LastEntryOrGuid;
             comboBoxSourceType.SelectedIndex = Settings.Default.LastSourceType;
-            TryToLoadScript(false);
+
+            if (expanding)
+                TryToLoadScript(false);
         }
 
         private async Task<bool> SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType, bool showError = true)
