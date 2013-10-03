@@ -401,6 +401,10 @@ namespace SAI_Editor
 
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
+
+            TestForm tf = new TestForm();
+            tf.Show();
+
         }
 
         private void StartContractingToLoginForm(bool instant = false)
