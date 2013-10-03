@@ -22,7 +22,6 @@
 - Implement SAI conditions support
 - Implement creature text support (?)
 - Convert all 'new xxxForm().ShowDialog(this)' to use 'using'
-- Drop all unused columns in the DBC tables in the SQLite database to reduce the size of the database
 - Fix the printing of @ENTRY*100+x actionlists (test with creature 28362)
 - When searching for a script like 33303's (creature) and also listing actionlists, the sort order changes every search (new bug?)
 
