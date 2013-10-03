@@ -254,7 +254,16 @@ namespace SAI_Editor.Classes
                         fullLine += smartEventStrings[(SmartEvent)smartScript.event_type];
                         break;
                     case 9: //! Actionlist
-                        fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid) + " - ";
+                        if (entryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist)
+                        {
+                            TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScript, SourceTypes.SourceTypeScriptedActionlist);
+
+                            if (timedActionListOrEntries.entries != null && timedActionListOrEntries.entries.Count > 0)
+                                fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(timedActionListOrEntries.sourceTypeOfEntry, XConverter.TryParseStringToInt32(timedActionListOrEntries.entries[0])) + " - ";
+                        }
+                        else
+                            fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid) + " - ";
+
                         fullLine += "On Script";
                         break;
                     case 2: //! Areatrigger
