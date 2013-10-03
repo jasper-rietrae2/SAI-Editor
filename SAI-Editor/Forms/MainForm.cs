@@ -657,8 +657,35 @@ namespace SAI_Editor
                 if (smartScripts == null)
                 {
                     if (showError)
-                        MessageBox.Show(String.Format("The entryorguid '{0}' could not be found in the SmartAI (smart_scripts) table for the given source type ({1})!", entryOrGuid, GetSourceTypeString(sourceType)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    
+                    {
+                        string message = String.Format("The entryorguid '{0}' could not be found in the SmartAI (smart_scripts) table for the given source type ({1})!", entryOrGuid, GetSourceTypeString(sourceType));
+
+                        for (int i = 0; i <= 9; ++i)
+                        {
+                            if (i == (int)sourceType)
+                                continue;
+
+                            smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(XConverter.TryParseStringToInt32(entryOrGuid), i);
+
+                            if (smartScripts != null)
+                                break;
+                        }
+
+                        if (smartScripts != null)
+                        {
+                            message += "\n\nA script was found with this entry using sourcetype " + smartScripts[0].source_type + ". Do you wish to load this instead?";
+
+                            if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            {
+                                textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
+                                comboBoxSourceType.SelectedIndex = GetIndexBySourceType((SourceTypes)smartScripts[0].source_type);
+                                TryToLoadScript(true);
+                            }
+                        }
+                        else
+                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
                     SetPictureBoxLoadScriptEnabled(true);
                     return false;
                 }
