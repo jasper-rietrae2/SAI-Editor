@@ -175,7 +175,7 @@ namespace SAI_Editor
             this.buttonNewLine = new System.Windows.Forms.Button();
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
-            this.listViewSmartScripts = new System.Windows.Forms.SmartScriptListView();
+            this.listViewSmartScripts = new System.Windows.Forms.XListView();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -2213,7 +2213,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Button buttonNewLine;
         private System.Windows.Forms.Button buttonGenerateSql;
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateSql;
-        public System.Windows.Forms.SmartScriptListView listViewSmartScripts;
+        public System.Windows.Forms.XListView listViewSmartScripts;
         private System.Windows.Forms.Button buttonGenerateComments;
     }
 }
