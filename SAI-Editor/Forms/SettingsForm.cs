@@ -50,7 +50,7 @@ namespace SAI_Editor
             Close();
         }
 
-        private async void SaveSettings()
+        private void SaveSettings()
         {
             if (checkBoxChangeStaticInfo.Checked != Settings.Default.ChangeStaticInfo)
             {
