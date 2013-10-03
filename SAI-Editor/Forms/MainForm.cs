@@ -673,7 +673,7 @@ namespace SAI_Editor
 
                         if (smartScripts != null)
                         {
-                            message += "\n\nA script was found with this entry using sourcetype " + smartScripts[0].source_type + ". Do you wish to load this instead?";
+                            message += "\n\nA script was found with this entry using sourcetype " + smartScripts[0].source_type + " (" + GetSourceTypeString((SourceTypes)smartScripts[0].source_type) + ". Do you wish to load this instead?";
 
                             if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             {
