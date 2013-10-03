@@ -1123,6 +1123,7 @@ namespace SAI_Editor
 
             listViewSmartScripts.Items.Remove(listViewSmartScripts.SelectedItems[0]);
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
+            buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
             lastSmartScriptIdOfScript--;
 
             if (listViewSmartScripts.Items.Count <= 0)
@@ -1210,6 +1211,7 @@ namespace SAI_Editor
             await SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType);
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
+            buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
 
             if (listViewSmartScripts.Items.Count > 0)
             {

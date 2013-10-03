@@ -1984,6 +1984,7 @@ namespace SAI_Editor
             // 
             // buttonGenerateComments
             // 
+            this.buttonGenerateComments.Enabled = false;
             this.buttonGenerateComments.Location = new System.Drawing.Point(733, 215);
             this.buttonGenerateComments.Name = "buttonGenerateComments";
             this.buttonGenerateComments.Size = new System.Drawing.Size(110, 23);
