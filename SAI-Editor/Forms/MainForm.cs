@@ -187,7 +187,7 @@ namespace SAI_Editor
                 checkBoxAutoConnect.Checked = true;
                 connectionString.Server = textBoxHost.Text;
                 connectionString.UserID = textBoxUsername.Text;
-                connectionString.Port = XConverter.TryParseStringToUInt32(textBoxPort.Text);
+                connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
                 connectionString.Database = textBoxWorldDatabase.Text;
 
                 if (textBoxPassword.Text.Length > 0)
@@ -342,7 +342,7 @@ namespace SAI_Editor
 
             connectionString.Server = textBoxHost.Text;
             connectionString.UserID = textBoxUsername.Text;
-            connectionString.Port = XConverter.TryParseStringToUInt32(textBoxPort.Text);
+            connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
             connectionString.Database = textBoxWorldDatabase.Text;
 
             if (textBoxPassword.Text.Length > 0)
@@ -371,7 +371,7 @@ namespace SAI_Editor
                 Settings.Default.Password = textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
-                Settings.Default.Port = XConverter.TryParseStringToUInt32(textBoxPort.Text);
+                Settings.Default.Port = XConverter.ToUInt32(textBoxPort.Text);
                 Settings.Default.Save();
             }
 
@@ -652,7 +652,7 @@ namespace SAI_Editor
         {
             try
             {
-                List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(XConverter.TryParseStringToInt32(entryOrGuid), (int)sourceType);
+                List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(XConverter.ToInt32(entryOrGuid), (int)sourceType);
 
                 if (smartScripts == null)
                 {
@@ -665,7 +665,7 @@ namespace SAI_Editor
                             if (i == (int)sourceType)
                                 continue;
 
-                            smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(XConverter.TryParseStringToInt32(entryOrGuid), i);
+                            smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(XConverter.ToInt32(entryOrGuid), i);
 
                             if (smartScripts != null)
                                 break;
@@ -799,13 +799,13 @@ namespace SAI_Editor
                 if (Settings.Default.ChangeStaticInfo)
                 {
                     textBoxEntryOrGuid.Text = selectedItem[0].Text;
-                    comboBoxSourceType.SelectedIndex = GetIndexBySourceType((SourceTypes)XConverter.TryParseStringToInt32(selectedItem[1].Text));
+                    comboBoxSourceType.SelectedIndex = GetIndexBySourceType((SourceTypes)XConverter.ToInt32(selectedItem[1].Text));
                 }
 
                 textBoxEventScriptId.Text = selectedItem[2].Text;
                 textBoxLinkTo.Text = selectedItem[3].Text;
 
-                int event_type = XConverter.TryParseStringToInt32(selectedItem[4].Text);
+                int event_type = XConverter.ToInt32(selectedItem[4].Text);
                 comboBoxEventType.SelectedIndex = event_type;
                 textBoxEventPhasemask.Text = selectedItem[5].Text;
                 textBoxEventChance.Text = selectedItem[6].Text;
@@ -831,7 +831,7 @@ namespace SAI_Editor
                 }
 
                 //! Action parameters
-                int action_type = XConverter.TryParseStringToInt32(selectedItem[12].Text);
+                int action_type = XConverter.ToInt32(selectedItem[12].Text);
                 comboBoxActionType.SelectedIndex = action_type;
                 textBoxActionParam1.Text = selectedItem[13].Text;
                 textBoxActionParam2.Text = selectedItem[14].Text;
@@ -858,7 +858,7 @@ namespace SAI_Editor
                 }
 
                 //! Target parameters
-                int target_type = XConverter.TryParseStringToInt32(selectedItem[19].Text);
+                int target_type = XConverter.ToInt32(selectedItem[19].Text);
                 comboBoxTargetType.SelectedIndex = target_type;
                 textBoxTargetParam1.Text = selectedItem[20].Text;
                 textBoxTargetParam2.Text = selectedItem[21].Text;
@@ -1254,7 +1254,7 @@ namespace SAI_Editor
             SetPictureBoxLoadScriptEnabled(false);
 
             SourceTypes newSourceType = GetSourceTypeByIndex();
-            originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.TryParseStringToInt32(textBoxEntryOrGuid.Text);
+            originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
             originalEntryOrGuidAndSourceType.sourceType = newSourceType;
             await SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType, showErrorIfNoneFound);
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
@@ -1271,10 +1271,10 @@ namespace SAI_Editor
                 {
                     foreach (ListViewItem item in listViewSmartScripts.Items)
                         if (item.Text == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
-                            lastSmartScriptIdOfScript = XConverter.TryParseStringToInt32(item.SubItems[2].Text);
+                            lastSmartScriptIdOfScript = XConverter.ToInt32(item.SubItems[2].Text);
                 }
                 else
-                    lastSmartScriptIdOfScript = XConverter.TryParseStringToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
+                    lastSmartScriptIdOfScript = XConverter.ToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
             }
 
             buttonGenerateSql.Enabled = true;
@@ -1301,7 +1301,7 @@ namespace SAI_Editor
 
         private async void buttonSearchWorldDb_Click(object sender, EventArgs e)
         {
-            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.TryParseStringToUInt32(textBoxPort.Text), textBoxPassword.Text);
+            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
                 using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
@@ -2072,33 +2072,33 @@ namespace SAI_Editor
         public SmartScript BuildSmartScript(ListViewItem item)
         {
             SmartScript smartScript = new SmartScript();
-            smartScript.entryorguid = XConverter.TryParseStringToInt32(item.Text);
-            smartScript.source_type = XConverter.TryParseStringToInt32(item.SubItems[1].Text);
-            smartScript.id = XConverter.TryParseStringToInt32(item.SubItems[2].Text);
-            smartScript.link = XConverter.TryParseStringToInt32(item.SubItems[3].Text);
-            smartScript.event_type = XConverter.TryParseStringToInt32(item.SubItems[4].Text);
-            smartScript.event_phase_mask = XConverter.TryParseStringToInt32(item.SubItems[5].Text);
-            smartScript.event_chance = XConverter.TryParseStringToInt32(item.SubItems[6].Text);
-            smartScript.event_flags = XConverter.TryParseStringToInt32(item.SubItems[7].Text);
-            smartScript.event_param1 = XConverter.TryParseStringToInt32(item.SubItems[8].Text);
-            smartScript.event_param2 = XConverter.TryParseStringToInt32(item.SubItems[9].Text);
-            smartScript.event_param3 = XConverter.TryParseStringToInt32(item.SubItems[10].Text);
-            smartScript.event_param4 = XConverter.TryParseStringToInt32(item.SubItems[11].Text);
-            smartScript.action_type = XConverter.TryParseStringToInt32(item.SubItems[12].Text);
-            smartScript.action_param1 = XConverter.TryParseStringToInt32(item.SubItems[13].Text);
-            smartScript.action_param2 = XConverter.TryParseStringToInt32(item.SubItems[14].Text);
-            smartScript.action_param3 = XConverter.TryParseStringToInt32(item.SubItems[15].Text);
-            smartScript.action_param4 = XConverter.TryParseStringToInt32(item.SubItems[16].Text);
-            smartScript.action_param5 = XConverter.TryParseStringToInt32(item.SubItems[17].Text);
-            smartScript.action_param6 = XConverter.TryParseStringToInt32(item.SubItems[18].Text);
-            smartScript.target_type = XConverter.TryParseStringToInt32(item.SubItems[19].Text);
-            smartScript.target_param1 = XConverter.TryParseStringToInt32(item.SubItems[20].Text);
-            smartScript.target_param2 = XConverter.TryParseStringToInt32(item.SubItems[21].Text);
-            smartScript.target_param3 = XConverter.TryParseStringToInt32(item.SubItems[22].Text);
-            smartScript.target_x = XConverter.TryParseStringToInt32(item.SubItems[23].Text);
-            smartScript.target_y = XConverter.TryParseStringToInt32(item.SubItems[24].Text);
-            smartScript.target_z = XConverter.TryParseStringToInt32(item.SubItems[25].Text);
-            smartScript.target_o = XConverter.TryParseStringToInt32(item.SubItems[26].Text);
+            smartScript.entryorguid = XConverter.ToInt32(item.Text);
+            smartScript.source_type = XConverter.ToInt32(item.SubItems[1].Text);
+            smartScript.id = XConverter.ToInt32(item.SubItems[2].Text);
+            smartScript.link = XConverter.ToInt32(item.SubItems[3].Text);
+            smartScript.event_type = XConverter.ToInt32(item.SubItems[4].Text);
+            smartScript.event_phase_mask = XConverter.ToInt32(item.SubItems[5].Text);
+            smartScript.event_chance = XConverter.ToInt32(item.SubItems[6].Text);
+            smartScript.event_flags = XConverter.ToInt32(item.SubItems[7].Text);
+            smartScript.event_param1 = XConverter.ToInt32(item.SubItems[8].Text);
+            smartScript.event_param2 = XConverter.ToInt32(item.SubItems[9].Text);
+            smartScript.event_param3 = XConverter.ToInt32(item.SubItems[10].Text);
+            smartScript.event_param4 = XConverter.ToInt32(item.SubItems[11].Text);
+            smartScript.action_type = XConverter.ToInt32(item.SubItems[12].Text);
+            smartScript.action_param1 = XConverter.ToInt32(item.SubItems[13].Text);
+            smartScript.action_param2 = XConverter.ToInt32(item.SubItems[14].Text);
+            smartScript.action_param3 = XConverter.ToInt32(item.SubItems[15].Text);
+            smartScript.action_param4 = XConverter.ToInt32(item.SubItems[16].Text);
+            smartScript.action_param5 = XConverter.ToInt32(item.SubItems[17].Text);
+            smartScript.action_param6 = XConverter.ToInt32(item.SubItems[18].Text);
+            smartScript.target_type = XConverter.ToInt32(item.SubItems[19].Text);
+            smartScript.target_param1 = XConverter.ToInt32(item.SubItems[20].Text);
+            smartScript.target_param2 = XConverter.ToInt32(item.SubItems[21].Text);
+            smartScript.target_param3 = XConverter.ToInt32(item.SubItems[22].Text);
+            smartScript.target_x = XConverter.ToInt32(item.SubItems[23].Text);
+            smartScript.target_y = XConverter.ToInt32(item.SubItems[24].Text);
+            smartScript.target_z = XConverter.ToInt32(item.SubItems[25].Text);
+            smartScript.target_o = XConverter.ToInt32(item.SubItems[26].Text);
 
             //! This method is also called when we generate a comment, so the field is not yet filled
             if (item.SubItems.Count > 27)

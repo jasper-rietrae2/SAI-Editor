@@ -73,7 +73,7 @@ namespace SAI_Editor
 
             connectionString.Server = textBoxHost.Text;
             connectionString.UserID = textBoxUsername.Text;
-            connectionString.Port = XConverter.TryParseStringToUInt32(textBoxPort.Text);
+            connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
             connectionString.Database = textBoxWorldDatabase.Text;
 
             if (textBoxPassword.Text.Length > 0)
@@ -88,7 +88,7 @@ namespace SAI_Editor
                 Settings.Default.User = textBoxUsername.Text;
                 Settings.Default.Password = decryptedPassword.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
-                Settings.Default.Port = textBoxPort.Text.Length > 0 ? XConverter.TryParseStringToUInt32(textBoxPort.Text) : 0;
+                Settings.Default.Port = textBoxPort.Text.Length > 0 ? XConverter.ToUInt32(textBoxPort.Text) : 0;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
                 ((MainForm)Owner).connectionString = connectionString;
                 SAI_Editor_Manager.Instance.ResetDatabases();
@@ -99,7 +99,7 @@ namespace SAI_Editor
             Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
             Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
             Settings.Default.HidePass = checkBoxHidePass.Checked;
-            Settings.Default.AnimationSpeed = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
+            Settings.Default.AnimationSpeed = XConverter.ToInt32(textBoxAnimationSpeed.Text);
             Settings.Default.PromptExecuteQuery = checkBoxPromptExecuteQuery.Checked;
             Settings.Default.ChangeStaticInfo = checkBoxChangeStaticInfo.Checked;
             Settings.Default.ShowTooltipsPermanently = checkBoxShowTooltipsPermanently.Checked;
@@ -114,7 +114,7 @@ namespace SAI_Editor
                 ((MainForm)Owner).textBoxPassword.Text = decryptedPassword;
                 ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
                 ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
-                ((MainForm)Owner).expandAndContractSpeed = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
+                ((MainForm)Owner).expandAndContractSpeed = XConverter.ToInt32(textBoxAnimationSpeed.Text);
                 ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
             }
             else
@@ -221,7 +221,7 @@ namespace SAI_Editor
 
         private void textBoxAnimationSpeed_TextChanged(object sender, EventArgs e)
         {
-            int newValue = XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text);
+            int newValue = XConverter.ToInt32(textBoxAnimationSpeed.Text);
 
             if (newValue > 12)
                 newValue = 12;
@@ -231,7 +231,7 @@ namespace SAI_Editor
 
             trackBarAnimationSpeed.Value = newValue;
 
-            if (newValue != XConverter.TryParseStringToInt32(textBoxAnimationSpeed.Text))
+            if (newValue != XConverter.ToInt32(textBoxAnimationSpeed.Text))
                 textBoxAnimationSpeed.Text = newValue.ToString();
         }
 
@@ -254,7 +254,7 @@ namespace SAI_Editor
 
         private async void buttonSearchForWorldDb_Click(object sender, EventArgs e)
         {
-            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.TryParseStringToUInt32(textBoxPort.Text), textBoxPassword.Text);
+            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
                 using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
@@ -271,7 +271,7 @@ namespace SAI_Editor
         {
             connectionString.Server = textBoxHost.Text;
             connectionString.UserID = textBoxUsername.Text;
-            connectionString.Port = XConverter.TryParseStringToUInt32(textBoxPort.Text);
+            connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
             connectionString.Database = textBoxWorldDatabase.Text;
 
             if (textBoxPassword.Text.Length > 0)

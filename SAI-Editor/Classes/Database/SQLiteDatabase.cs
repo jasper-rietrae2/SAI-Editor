@@ -118,7 +118,7 @@ namespace SAI_Editor.Database
         private EventTypeInformation BuildEventTypeInformation(DataRow row)
         {
             var eventTypeInformation = new EventTypeInformation();
-            eventTypeInformation.event_type = row["event_type"] != DBNull.Value ? XConverter.TryParseStringToInt32(row["event_type"]) : -1;
+            eventTypeInformation.event_type = row["event_type"] != DBNull.Value ? XConverter.ToInt32(row["event_type"]) : -1;
             eventTypeInformation.tooltip = row["tooltip"] != DBNull.Value ? (string)row["tooltip"] : String.Empty;
             eventTypeInformation.parameterString1 = row["parameterString1"] != DBNull.Value ? (string)row["parameterString1"] : String.Empty;
             eventTypeInformation.parameterString2 = row["parameterString2"] != DBNull.Value ? (string)row["parameterString2"] : String.Empty;
@@ -134,7 +134,7 @@ namespace SAI_Editor.Database
         private ActionTypeInformation BuildActionTypeInformation(DataRow row)
         {
             var actionTypeInformation = new ActionTypeInformation();
-            actionTypeInformation.action_type = row["action_type"] != DBNull.Value ? XConverter.TryParseStringToInt32(row["action_type"]) : -1;
+            actionTypeInformation.action_type = row["action_type"] != DBNull.Value ? XConverter.ToInt32(row["action_type"]) : -1;
             actionTypeInformation.tooltip = row["tooltip"] != DBNull.Value ? (string)row["tooltip"] : String.Empty;
             actionTypeInformation.parameterString1 = row["parameterString1"] != DBNull.Value ? (string)row["parameterString1"] : String.Empty;
             actionTypeInformation.parameterString2 = row["parameterString2"] != DBNull.Value ? (string)row["parameterString2"] : String.Empty;
@@ -154,7 +154,7 @@ namespace SAI_Editor.Database
         private TargetTypeInformation BuildTargetTypeInformation(DataRow row)
         {
             var targetTypeInformation = new TargetTypeInformation();
-            targetTypeInformation.target_type = row["target_type"] != DBNull.Value ? XConverter.TryParseStringToInt32(row["target_type"]) : -1;
+            targetTypeInformation.target_type = row["target_type"] != DBNull.Value ? XConverter.ToInt32(row["target_type"]) : -1;
             targetTypeInformation.tooltip = row["tooltip"] != DBNull.Value ? (string)row["tooltip"] : String.Empty;
             targetTypeInformation.parameterString1 = row["parameterString1"] != DBNull.Value ? (string)row["parameterString1"] : String.Empty;
             targetTypeInformation.parameterString2 = row["parameterString2"] != DBNull.Value ? (string)row["parameterString2"] : String.Empty;
@@ -168,8 +168,8 @@ namespace SAI_Editor.Database
         public AreaTrigger BuildAreaTrigger(DataRow row)
         {
             var areaTrigger = new AreaTrigger();
-            areaTrigger.id = row["m_id"] != DBNull.Value ? XConverter.TryParseStringToInt32(row["m_id"]) : -1;
-            areaTrigger.map_id = row["m_mapId"] != DBNull.Value ? XConverter.TryParseStringToInt32(row["m_mapId"]) : 0;
+            areaTrigger.id = row["m_id"] != DBNull.Value ? XConverter.ToInt32(row["m_id"]) : -1;
+            areaTrigger.map_id = row["m_mapId"] != DBNull.Value ? XConverter.ToInt32(row["m_mapId"]) : 0;
             areaTrigger.posX = row["m_posX"] != DBNull.Value ? (double)row["m_posX"] : 0;
             areaTrigger.posY = row["m_posY"] != DBNull.Value ? (double)row["m_posY"] : 0;
             areaTrigger.posZ = row["m_posZ"] != DBNull.Value ? (double)row["m_posZ"] : 0;
