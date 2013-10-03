@@ -330,6 +330,9 @@ namespace SAI_Editor
 
                 if (dt.Rows.Count > 0)
                 {
+
+                    List<ListViewItem> items = new List<ListViewItem>();
+
                     foreach (DataRow row in dt.Rows)
                     {
                         ListViewItem listViewItem = new ListViewItem(row.ItemArray[0].ToString());
@@ -337,8 +340,13 @@ namespace SAI_Editor
                         for (int i = 1; i < amountOfListviewColumns; ++i)
                             listViewItem.SubItems.Add(row.ItemArray[i].ToString());
 
-                        AddItemToListView(listViewEntryResults, listViewItem);
+
+                        items.Add(listViewItem);
+
                     }
+
+                    listViewEntryResults.Items.AddRange(items.ToArray());
+
                 }
             }
             catch (ObjectDisposedException)
@@ -446,19 +454,19 @@ namespace SAI_Editor
             return comboBox.SelectedIndex;
         }
 
-        private void AddItemToListView(ListView listView, ListViewItem item)
-        {
-            if (listView.InvokeRequired)
-            {
-                Invoke((MethodInvoker)delegate
-                {
-                    listView.Items.Add(item);
-                });
-                return;
-            }
+        //private void AddItemToListView(ListView listView, ListViewItem item)
+        //{
+        //    if (listView.InvokeRequired)
+        //    {
+        //        Invoke((MethodInvoker)delegate
+        //        {
+        //            listView.Items.Add(item);
+        //        });
+        //        return;
+        //    }
 
-            listView.Items.Add(item);
-        }
+        //    listView.Items.Add(item);
+        //}
 
         private void SetEnabledOfControl(Control control, bool enable)
         {
