@@ -113,7 +113,7 @@ namespace SAI_Editor.Forms
             StartProcess("explorer.exe", String.Format("/select,\"{0}\"", fileName));
         }
 
-        private void StartProcess(string filename, string argument = String.Empty)
+        private void StartProcess(string filename, string argument = "")
         {
             try
             {

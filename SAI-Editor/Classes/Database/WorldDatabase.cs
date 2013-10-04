@@ -174,6 +174,21 @@ namespace SAI_Editor.Database
             return smartScripts;
         }
 
+        public async Task<List<SmartScript>> GetSmartScriptsWithoutSourceType(int entryorguid, int source_type)
+        {
+            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '" + entryorguid + "' AND source_type != '" + source_type + "'");
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            List<SmartScript> smartScripts = new List<SmartScript>();
+
+            foreach (DataRow row in dt.Rows)
+                smartScripts.Add(BuildSmartScript(row));
+
+            return smartScripts;
+        }
+
         public async Task<List<SmartScript>> GetSmartScriptActionLists(string criteria, bool useLikeStatement)
         {
             DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9 ORDER BY entryorguid");
