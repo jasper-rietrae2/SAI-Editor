@@ -57,7 +57,8 @@ namespace SAI_Editor.Forms
             if (listViewScripts.SelectedItems.Count == 0)
                 return;
 
-            string fileName = "Reverts\\" + listViewScripts.SelectedItems[0].Text + ".sql".Replace(":", ";");
+            string fileName = "Reverts\\" + listViewScripts.SelectedItems[0].Text + ".sql";
+            fileName = fileName.Replace(":", ";");
 
             if (await SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(File.ReadAllText(fileName)))
                 MessageBox.Show("The query has been executed succesfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
