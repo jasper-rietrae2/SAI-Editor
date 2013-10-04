@@ -71,7 +71,7 @@ namespace SAI_Editor.Database
         public async Task<string> GetCreatureNameByGuid(int guid)
         {
             //DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = '@id'", new MySqlParameter("@id", GetCreatureIdByGuid(guid)));
-            DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = '" + GetCreatureIdByGuid(guid) + "'");
+            DataTable dt = await ExecuteQuery("SELECT `name` FROM creature_template WHERE entry = '" + await GetCreatureIdByGuid(guid) + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -93,7 +93,7 @@ namespace SAI_Editor.Database
         public async Task<string> GetGameobjectNameByGuid(int guid)
         {
             //DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '@id'", new MySqlParameter("@id", GetGameobjectIdByGuid(guid)));
-            DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '" + GetGameobjectIdByGuid(guid) + "'");
+            DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '" + await GetGameobjectIdByGuid(guid) + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
