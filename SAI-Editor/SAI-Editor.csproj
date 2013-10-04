@@ -55,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CommentGenerator.cs" />
+    <Compile Include="Classes\Database\Classes\Creature.cs" />
+    <Compile Include="Classes\Database\Classes\Gameobject.cs" />
     <Compile Include="Classes\SmartScriptListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -107,6 +109,12 @@
     </Compile>
     <Compile Include="Forms\SearchForms\MultiSelectForm.designer.cs">
       <DependentUpon>MultiSelectForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\SearchForms\SelectSmartScriptForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SearchForms\SelectSmartScriptForm.Designer.cs">
+      <DependentUpon>SelectSmartScriptForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\SqlOutputForm.cs">
       <SubType>Form</SubType>
@@ -183,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SearchForms\MultiSelectForm.resx">
       <DependentUpon>MultiSelectForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SearchForms\SelectSmartScriptForm.resx">
+      <DependentUpon>SelectSmartScriptForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SqlOutputForm.resx">
       <DependentUpon>SqlOutputForm.cs</DependentUpon>

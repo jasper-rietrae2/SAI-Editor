@@ -676,7 +676,124 @@ namespace SAI_Editor
                             }
                         }
                         else
-                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        {
+                            switch (sourceType)
+                            {
+                                case SourceTypes.SourceTypeCreature:
+                                {
+                                    //! Get `id` from `creature` and check it for SAI
+                                    if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
+                                    {
+                                        int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-XConverter.ToInt32(entryOrGuid));
+                                        smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeCreature);
+
+                                        if (smartScripts != null)
+                                        {
+                                            message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
+
+                                            if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                            {
+                                                textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
+                                                comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeCreature);
+                                                TryToLoadScript(true);
+                                            }
+                                        }
+                                        else
+                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    //! Get all `guid` instances from `creature` for the given `id` and allow user to select a script
+                                    else //! Non-guid (entry)
+                                    {
+                                        int actualEntry = XConverter.ToInt32(entryOrGuid);
+                                        List<Creature> creatures = await SAI_Editor_Manager.Instance.worldDatabase.GetCreaturesById(actualEntry);
+
+                                        if (creatures != null)
+                                        {
+                                            List<List<SmartScript>> creaturesWithSmartAi = new List<List<SmartScript>>();
+
+                                            foreach (Creature creature in creatures)
+                                            {
+                                                smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(-creature.guid, (int)SourceTypes.SourceTypeCreature);
+
+                                                if (smartScripts != null)
+                                                    creaturesWithSmartAi.Add(smartScripts);
+                                            }
+
+                                            if (creaturesWithSmartAi.Count > 0)
+                                            {
+                                                message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
+
+                                                if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                                    new SelectSmartScriptForm(creaturesWithSmartAi).ShowDialog(this);
+                                            }
+                                            else
+                                                MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                        else
+                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    break;
+                                }
+                                case SourceTypes.SourceTypeGameobject:
+                                {
+                                    //! Get `id` from `gameobject` and check it for SAI
+                                    if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
+                                    {
+                                        int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-XConverter.ToInt32(entryOrGuid));
+                                        smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeGameobject);
+
+                                        if (smartScripts != null)
+                                        {
+                                            message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
+
+                                            if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                            {
+                                                textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
+                                                comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeGameobject);
+                                                TryToLoadScript(true);
+                                            }
+                                        }
+                                        else
+                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    //! Get all `guid` instances from `gameobject` for the given `id` and allow user to select a script
+                                    else //! Non-guid (entry)
+                                    {
+                                        int actualEntry = XConverter.ToInt32(entryOrGuid);
+                                        List<Gameobject> gameobjects = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectsById(actualEntry);
+
+                                        if (gameobjects != null)
+                                        {
+                                            List<List<SmartScript>> gameobjectsWithSmartAi = new List<List<SmartScript>>();
+
+                                            foreach (Gameobject gameobject in gameobjects)
+                                            {
+                                                smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(-gameobject.guid, (int)SourceTypes.SourceTypeGameobject);
+
+                                                if (smartScripts != null)
+                                                    gameobjectsWithSmartAi.Add(smartScripts);
+                                            }
+
+                                            message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
+
+                                            if (gameobjectsWithSmartAi.Count > 0)
+                                            {
+                                                if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                                    new SelectSmartScriptForm(gameobjectsWithSmartAi).ShowDialog(this);
+                                            }
+                                            else
+                                                MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                        else
+                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    break;
+                                }
+                                default:
+                                    MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    break;
+                            }
+                        }
                     }
 
                     SetPictureBoxLoadScriptEnabled(true);
@@ -1233,7 +1350,7 @@ namespace SAI_Editor
             TryToLoadScript(true);
         }
 
-        private async void TryToLoadScript(bool showErrorIfNoneFound)
+        public async void TryToLoadScript(bool showErrorIfNoneFound)
         {
             // @Debug new AreatriggersForm().Show();
 

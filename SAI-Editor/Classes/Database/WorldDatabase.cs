@@ -316,6 +316,36 @@ namespace SAI_Editor.Database
             return dt.Rows[0]["name"].ToString();
         }
 
+        public async Task<List<Creature>> GetCreaturesById(int id)
+        {
+            DataTable dt = await ExecuteQuery("SELECT * FROM creature WHERE id = '" + id + "'");
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            List<Creature> creatures = new List<Creature>();
+
+            foreach (DataRow row in dt.Rows)
+                creatures.Add(BuildCreature(row));
+
+            return creatures;
+        }
+
+        public async Task<List<Gameobject>> GetGameobjectsById(int id)
+        {
+            DataTable dt = await ExecuteQuery("SELECT * FROM gameobject WHERE id = '" + id + "'");
+
+            if (dt.Rows.Count == 0)
+                return null;
+
+            List<Gameobject> gameobjects = new List<Gameobject>();
+
+            foreach (DataRow row in dt.Rows)
+                gameobjects.Add(BuildGameobject(row));
+
+            return gameobjects;
+        }
+
         private SmartScript BuildSmartScript(DataRow row)
         {
             var smartScript = new SmartScript();
@@ -348,6 +378,54 @@ namespace SAI_Editor.Database
             smartScript.target_o = row["target_o"] != DBNull.Value ? XConverter.ToInt32(row["target_o"]) : 0;
             smartScript.comment = row["comment"] != DBNull.Value ? (string)row["comment"] : String.Empty;
             return smartScript;
+        }
+
+        private Creature BuildCreature(DataRow row)
+        {
+            var creature = new Creature();
+            creature.guid = row["guid"] != DBNull.Value ? XConverter.ToInt32(row["guid"]) : 0;
+            creature.id = row["id"] != DBNull.Value ? XConverter.ToInt32(row["id"]) : 0;
+            creature.map = row["map"] != DBNull.Value ? XConverter.ToInt32(row["map"]) : 0;
+            creature.spawnMask = row["spawnMask"] != DBNull.Value ? XConverter.ToInt32(row["spawnMask"]) : 0;
+            creature.phaseMask = row["phaseMask"] != DBNull.Value ? XConverter.ToInt32(row["phaseMask"]) : 0;
+            creature.modelid = row["modelid"] != DBNull.Value ? XConverter.ToInt32(row["modelid"]) : 0;
+            creature.equipment_id = row["equipment_id"] != DBNull.Value ? XConverter.ToInt32(row["equipment_id"]) : 0;
+            creature.position_x = row["position_x"] != DBNull.Value ? XConverter.ToInt32(row["position_x"]) : 0;
+            creature.position_y = row["position_y"] != DBNull.Value ? XConverter.ToInt32(row["position_y"]) : 0;
+            creature.position_z = row["position_z"] != DBNull.Value ? XConverter.ToInt32(row["position_z"]) : 0;
+            creature.orientation = row["orientation"] != DBNull.Value ? XConverter.ToInt32(row["orientation"]) : 0;
+            creature.spawntimesecs = row["spawntimesecs"] != DBNull.Value ? XConverter.ToInt32(row["spawntimesecs"]) : 0;
+            creature.spawndist = row["spawndist"] != DBNull.Value ? XConverter.ToInt32(row["spawndist"]) : 0;
+            creature.currentwaypoint = row["currentwaypoint"] != DBNull.Value ? XConverter.ToInt32(row["currentwaypoint"]) : 0;
+            creature.curhealth = row["curhealth"] != DBNull.Value ? XConverter.ToInt32(row["curhealth"]) : 0;
+            creature.curmana = row["curmana"] != DBNull.Value ? XConverter.ToInt32(row["curmana"]) : 0;
+            creature.movementType = row["movementType"] != DBNull.Value ? XConverter.ToInt32(row["movementType"]) : 0;
+            creature.npcflag = row["npcflag"] != DBNull.Value ? XConverter.ToInt32(row["npcflag"]) : 0;
+            creature.unit_flags = row["unit_flags"] != DBNull.Value ? XConverter.ToInt32(row["unit_flags"]) : 0;
+            creature.dynamicflags = row["dynamicflags"] != DBNull.Value ? XConverter.ToInt32(row["dynamicflags"]) : 0;
+            return creature;
+        }
+
+        private Gameobject BuildGameobject(DataRow row)
+        {
+            var gameobject = new Gameobject();
+            gameobject.guid = row["guid"] != DBNull.Value ? XConverter.ToInt32(row["guid"]) : 0;
+            gameobject.id = row["id"] != DBNull.Value ? XConverter.ToInt32(row["id"]) : 0;
+            gameobject.map = row["map"] != DBNull.Value ? XConverter.ToInt32(row["map"]) : 0;
+            gameobject.spawnMask = row["spawnMask"] != DBNull.Value ? XConverter.ToInt32(row["spawnMask"]) : 0;
+            gameobject.phaseMask = row["phaseMask"] != DBNull.Value ? XConverter.ToInt32(row["phaseMask"]) : 0;
+            gameobject.position_x = row["position_x"] != DBNull.Value ? XConverter.ToInt32(row["position_x"]) : 0;
+            gameobject.position_y = row["position_y"] != DBNull.Value ? XConverter.ToInt32(row["position_y"]) : 0;
+            gameobject.position_z = row["position_z"] != DBNull.Value ? XConverter.ToInt32(row["position_z"]) : 0;
+            gameobject.orientation = row["orientation"] != DBNull.Value ? XConverter.ToInt32(row["orientation"]) : 0;
+            gameobject.rotation0 = row["rotation0"] != DBNull.Value ? XConverter.ToInt32(row["rotation0"]) : 0;
+            gameobject.rotation1 = row["rotation1"] != DBNull.Value ? XConverter.ToInt32(row["rotation1"]) : 0;
+            gameobject.rotation2 = row["rotation2"] != DBNull.Value ? XConverter.ToInt32(row["rotation2"]) : 0;
+            gameobject.rotation3 = row["rotation3"] != DBNull.Value ? XConverter.ToInt32(row["rotation3"]) : 0;
+            gameobject.spawntimesecs = row["spawntimesecs"] != DBNull.Value ? XConverter.ToInt32(row["spawntimesecs"]) : 0;
+            gameobject.animprogress = row["animprogress"] != DBNull.Value ? XConverter.ToInt32(row["animprogress"]) : 0;
+            gameobject.state = row["state"] != DBNull.Value ? XConverter.ToInt32(row["state"]) : 0;
+            return gameobject;
         }
     }
 }
