@@ -1301,8 +1301,8 @@ namespace SAI_Editor
             else
                 RemoveNonOriginalScriptsFromView();
 
-            buttonGenerateSql.Enabled = true;
-            menuItemGenerateSql.Enabled = true;
+            buttonGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
+            menuItemGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
         }
 
         private void RemoveNonOriginalScriptsFromView()
