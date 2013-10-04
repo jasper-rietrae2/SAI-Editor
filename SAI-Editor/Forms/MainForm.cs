@@ -745,10 +745,10 @@ namespace SAI_Editor
                                                     gameobjectsWithSmartAi.Add(smartScripts);
                                             }
 
-                                            message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
-
                                             if (gameobjectsWithSmartAi.Count > 0)
                                             {
+                                                message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
+
                                                 if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                                                     new SelectSmartScriptForm(gameobjectsWithSmartAi).ShowDialog(this);
                                             }
