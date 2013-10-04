@@ -28,11 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RevertQueryForm));
             this.listViewScripts = new System.Windows.Forms.ListView();
             this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonExecuteSelectedScript = new System.Windows.Forms.Button();
             this.calenderScriptsToRevert = new System.Windows.Forms.MonthCalendar();
+            this.listViewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFileWithToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openDirectoryOfFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteRevertQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.listViewContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // listViewScripts
@@ -48,6 +55,8 @@
             this.listViewScripts.UseCompatibleStateImageBehavior = false;
             this.listViewScripts.View = System.Windows.Forms.View.Details;
             this.listViewScripts.SelectedIndexChanged += new System.EventHandler(this.listViewScripts_SelectedIndexChanged);
+            this.listViewScripts.DoubleClick += new System.EventHandler(this.listViewScripts_DoubleClick);
+            this.listViewScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewScripts_MouseClick);
             // 
             // columnHeader
             // 
@@ -67,9 +76,49 @@
             // calenderScriptsToRevert
             // 
             this.calenderScriptsToRevert.Location = new System.Drawing.Point(18, 18);
+            this.calenderScriptsToRevert.MaxSelectionCount = 30;
             this.calenderScriptsToRevert.Name = "calenderScriptsToRevert";
             this.calenderScriptsToRevert.TabIndex = 4;
             this.calenderScriptsToRevert.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.calenderScriptsToRevert_DateChanged);
+            // 
+            // listViewContextMenu
+            // 
+            this.listViewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openFileToolStripMenuItem,
+            this.openFileWithToolStripMenuItem,
+            this.openDirectoryOfFileToolStripMenuItem,
+            this.deleteRevertQueryToolStripMenuItem});
+            this.listViewContextMenu.Name = "listViewContextMenu";
+            this.listViewContextMenu.Size = new System.Drawing.Size(187, 92);
+            this.listViewContextMenu.Text = "derp";
+            // 
+            // openFileToolStripMenuItem
+            // 
+            this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.openFileToolStripMenuItem.Text = "Open file";
+            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
+            // 
+            // openFileWithToolStripMenuItem
+            // 
+            this.openFileWithToolStripMenuItem.Name = "openFileWithToolStripMenuItem";
+            this.openFileWithToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.openFileWithToolStripMenuItem.Text = "Open file with...";
+            this.openFileWithToolStripMenuItem.Click += new System.EventHandler(this.openFileWithToolStripMenuItem_Click);
+            // 
+            // openDirectoryOfFileToolStripMenuItem
+            // 
+            this.openDirectoryOfFileToolStripMenuItem.Name = "openDirectoryOfFileToolStripMenuItem";
+            this.openDirectoryOfFileToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.openDirectoryOfFileToolStripMenuItem.Text = "Open directory of file";
+            this.openDirectoryOfFileToolStripMenuItem.Click += new System.EventHandler(this.openDirectoryOfFileToolStripMenuItem_Click);
+            // 
+            // deleteRevertQueryToolStripMenuItem
+            // 
+            this.deleteRevertQueryToolStripMenuItem.Name = "deleteRevertQueryToolStripMenuItem";
+            this.deleteRevertQueryToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.deleteRevertQueryToolStripMenuItem.Text = "Delete revert query";
+            this.deleteRevertQueryToolStripMenuItem.Click += new System.EventHandler(this.deleteRevertQueryToolStripMenuItem_Click);
             // 
             // RevertQueryForm
             // 
@@ -87,6 +136,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select a script to revert to";
             this.Load += new System.EventHandler(this.RevertQueryForm_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RevertQueryForm_KeyDown);
+            this.listViewContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -97,5 +148,10 @@
         private System.Windows.Forms.Button buttonExecuteSelectedScript;
         private System.Windows.Forms.MonthCalendar calenderScriptsToRevert;
         private System.Windows.Forms.ColumnHeader columnHeader;
+        private System.Windows.Forms.ContextMenuStrip listViewContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFileWithToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openDirectoryOfFileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteRevertQueryToolStripMenuItem;
     }
 }

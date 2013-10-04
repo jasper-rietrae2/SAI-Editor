@@ -54,6 +54,7 @@ namespace SAI_Editor
             this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemGenerateSql = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemRevertQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -176,7 +177,6 @@ namespace SAI_Editor
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
             this.listViewSmartScripts = new System.Windows.Forms.XListView();
-            this.menuItemRevertQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -411,6 +411,13 @@ namespace SAI_Editor
             this.menuItemGenerateSql.Size = new System.Drawing.Size(189, 22);
             this.menuItemGenerateSql.Text = "Generate SQL";
             this.menuItemGenerateSql.Click += new System.EventHandler(this.generateSQLToolStripMenuItem_Click);
+            // 
+            // menuItemRevertQuery
+            // 
+            this.menuItemRevertQuery.Name = "menuItemRevertQuery";
+            this.menuItemRevertQuery.Size = new System.Drawing.Size(189, 22);
+            this.menuItemRevertQuery.Text = "Execute a revert query";
+            this.menuItemRevertQuery.Click += new System.EventHandler(this.menuItemRevertQuery_Click);
             // 
             // toolStripSeparator2
             // 
@@ -2011,13 +2018,6 @@ namespace SAI_Editor
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
-            // menuItemRevertQuery
-            // 
-            this.menuItemRevertQuery.Name = "menuItemRevertQuery";
-            this.menuItemRevertQuery.Size = new System.Drawing.Size(189, 22);
-            this.menuItemRevertQuery.Text = "Execute a revert query";
-            this.menuItemRevertQuery.Click += new System.EventHandler(this.menuItemRevertQuery_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2225,7 +2225,7 @@ namespace SAI_Editor
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateSql;
         public System.Windows.Forms.XListView listViewSmartScripts;
         private System.Windows.Forms.Button buttonGenerateComments;
-        private System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
+        public System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
     }
 }
 

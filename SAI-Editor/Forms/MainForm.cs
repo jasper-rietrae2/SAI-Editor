@@ -140,19 +140,14 @@ namespace SAI_Editor
 
             //! We hardcode the actual shortcuts because there are certain conditons under which the menu should not be
             //! opened at all.
-            //menuItemExit.ShortcutKeys = (Keys.Alt | Keys.F4);
             menuItemExit.ShortcutKeyDisplayString = "(Alt + F4)";
-            //menuItemReconnect.ShortcutKeys = (Keys.Shift | Keys.F4);
             menuItemReconnect.ShortcutKeyDisplayString = "(Shift + F4)";
-            //menuItemSettings.ShortcutKeys = Keys.F1;
             menuItemSettings.ShortcutKeyDisplayString = "(F1)";
-            //menuItemAbout.ShortcutKeys = (Keys.Alt | Keys.F1);
             menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
-            //menuItemDeleteSelectedRow.ShortcutKeys = (Keys.Control | Keys.D);
             menuItemDeleteSelectedRow.ShortcutKeyDisplayString = "(Ctrl + D)";
             menuItemDeleteSelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + D)";
-            //menuItemGenerateSql.ShortcutKeys = (Keys.Control | Keys.M);
             menuItemGenerateSql.ShortcutKeyDisplayString = "(Ctrl + M)";
+            menuItemRevertQuery.ShortcutKeyDisplayString = "(Ctrl + R)";
 
             listViewSmartScripts.Columns.Add("entryorguid", 67, HorizontalAlignment.Left);  // 0
             listViewSmartScripts.Columns.Add("source_type", 70, HorizontalAlignment.Right); // 1
@@ -233,6 +228,8 @@ namespace SAI_Editor
             panelPermanentTooltipParameters.Visible = false;
 
             SetPictureBoxLoadScriptEnabled(textBoxEntryOrGuid.Text.Length > 0);
+
+            menuItemRevertQuery.Enabled = Settings.Default.CreateRevertQuery;
 
             runningConstructor = false;
         }
@@ -493,6 +490,11 @@ namespace SAI_Editor
                 {
                     if (menuItemGenerateSql.Enabled)
                         menuItemGenerateSql.PerformClick();
+                }
+                else if (e.KeyData == (Keys.Control | Keys.R) || e.KeyData == (Keys.ControlKey | Keys.R))
+                {
+                    if (menuItemRevertQuery.Enabled)
+                        menuItemRevertQuery.PerformClick();
                 }
             }
         }

@@ -257,12 +257,12 @@ namespace SAI_Editor.Forms
                         revertQuery += "\n";
 
                     revertQuery += "UPDATE smart_scripts SET ";
-                    revertQuery += String.Format("event_type={0}, event_phase_mask={1}, event_chance={2}, event_flags={3}, ", smartScript.event_type, smartScript.event_phase_mask, smartScript.event_chance, smartScript.event_flags);
-                    revertQuery += String.Format("event_param1={0}, event_param2={1}, event_param3={2}, event_param4={3}, ", smartScript.event_param1, smartScript.event_param2, smartScript.event_param3, smartScript.event_param4);
-                    revertQuery += String.Format("action_type={0}, action_param1={1}, action_param2={2}, action_param3={3}, ", smartScript.action_type, smartScript.action_param1, smartScript.action_param2, smartScript.action_param3);
-                    revertQuery += String.Format("action_param4={0}, action_param5={1}, action_param6={2}, target_type={3}, ", smartScript.action_param4, smartScript.action_param5, smartScript.action_param6, smartScript.target_type);
-                    revertQuery += String.Format("target_param1={0}, target_param2={1}, target_param3={2}, target_x={3}, ", smartScript.target_param1, smartScript.target_param2, smartScript.target_param3, smartScript.target_x);
-                    revertQuery += String.Format("target_y={0}, target_z={1}, target_o={2}, comment=" + '"' + "{3}" + '"', smartScript.target_y, smartScript.target_z, smartScript.target_o, smartScript.comment);
+                    revertQuery += String.Format("event_type={0},event_phase_mask={1},event_chance={2},event_flags={3},", smartScript.event_type, smartScript.event_phase_mask, smartScript.event_chance, smartScript.event_flags);
+                    revertQuery += String.Format("event_param1={0},event_param2={1},event_param3={2},event_param4={3},", smartScript.event_param1, smartScript.event_param2, smartScript.event_param3, smartScript.event_param4);
+                    revertQuery += String.Format("action_type={0},action_param1={1},action_param2={2},action_param3={3},", smartScript.action_type, smartScript.action_param1, smartScript.action_param2, smartScript.action_param3);
+                    revertQuery += String.Format("action_param4={0},action_param5={1},action_param6={2},target_type={3},", smartScript.action_param4, smartScript.action_param5, smartScript.action_param6, smartScript.target_type);
+                    revertQuery += String.Format("target_param1={0},target_param2={1},target_param3={2},target_x={3},", smartScript.target_param1, smartScript.target_param2, smartScript.target_param3, smartScript.target_x);
+                    revertQuery += String.Format("target_y={0},target_z={1},target_o={2},comment=" + '"' + "{3}" + '"', smartScript.target_y, smartScript.target_z, smartScript.target_o, smartScript.comment);
                     revertQuery += String.Format(" WHERE entryorguid={0} AND source_type={1} AND id={2};", smartScript.entryorguid, smartScript.source_type, smartScript.id);
                 }
             }

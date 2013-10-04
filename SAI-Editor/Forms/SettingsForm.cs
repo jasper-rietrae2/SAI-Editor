@@ -127,6 +127,8 @@ namespace SAI_Editor
             
             if (checkBoxShowTooltipsPermanently.Checked != showTooltipsPermanently)
                 ((MainForm)Owner).ExpandToShowPermanentTooltips(!checkBoxShowTooltipsPermanently.Checked);
+
+            ((MainForm)Owner).menuItemRevertQuery.Enabled = checkBoxCreateRevertQuery.Checked;
         }
 
         private void buttonExitSettings_Click(object sender, EventArgs e)
