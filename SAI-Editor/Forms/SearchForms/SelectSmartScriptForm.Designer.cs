@@ -43,6 +43,7 @@
             this.listBoxGuids.Size = new System.Drawing.Size(49, 238);
             this.listBoxGuids.TabIndex = 1;
             this.listBoxGuids.SelectedIndexChanged += new System.EventHandler(this.listBoxGuids_SelectedIndexChanged);
+            this.listBoxGuids.DoubleClick += new System.EventHandler(this.listBoxGuids_DoubleClick);
             // 
             // listViewSmartScripts
             // 

@@ -113,10 +113,23 @@ namespace SAI_Editor
 
         private void buttonLoadScript_Click(object sender, EventArgs e)
         {
+            LoadScript();
+        }
+
+        private void LoadScript()
+        {
+            if (listBoxGuids.SelectedItem == null)
+                return;
+
             ((MainForm)Owner).textBoxEntryOrGuid.Text = (-XConverter.ToInt32(listBoxGuids.SelectedItem.ToString())).ToString();
             ((MainForm)Owner).comboBoxSourceType.SelectedIndex = (int)SourceTypes.SourceTypeCreature;
             ((MainForm)Owner).TryToLoadScript(true);
             Close();
+        }
+
+        private void listBoxGuids_DoubleClick(object sender, EventArgs e)
+        {
+            LoadScript();
         }
     }
 }
