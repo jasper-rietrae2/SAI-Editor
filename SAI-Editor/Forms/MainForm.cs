@@ -1002,6 +1002,10 @@ namespace SAI_Editor
         private void AdjustAllParameterFields(int event_type, int action_type, int target_type)
         {
             SetVisibilityOfAllParamButtons(false);
+            labelTargetX.Text = String.Empty;
+            labelTargetY.Text = String.Empty;
+            labelTargetZ.Text = String.Empty;
+            labelTargetO.Text = String.Empty;
 
             switch ((SmartEvent)event_type)
             {
@@ -1133,6 +1137,12 @@ namespace SAI_Editor
                 case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT: //! Gameobject entry
                     buttonTargetParamOneSearch.Visible = true;
                     break;
+                case SmartTarget.SMART_TARGET_POSITION:
+                    labelTargetX.Text = "Target X";
+                    labelTargetY.Text = "Target Y";
+                    labelTargetZ.Text = "Target Z";
+                    labelTargetO.Text = "Target O";
+                    break;
             }
 
             textBoxEventParam1.Enabled = labelEventParam1.Text.Length > 0;
@@ -1150,6 +1160,10 @@ namespace SAI_Editor
             textBoxTargetParam1.Enabled = labelTargetParam1.Text.Length > 0;
             textBoxTargetParam2.Enabled = labelTargetParam2.Text.Length > 0;
             textBoxTargetParam3.Enabled = labelTargetParam3.Text.Length > 0;
+            textBoxTargetX.Enabled = labelTargetX.Text.Length > 0;
+            textBoxTargetY.Enabled = labelTargetY.Text.Length > 0;
+            textBoxTargetZ.Enabled = labelTargetZ.Text.Length > 0;
+            textBoxTargetO.Enabled = labelTargetO.Text.Length > 0;
 
             textBoxTargetX.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
             textBoxTargetY.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
