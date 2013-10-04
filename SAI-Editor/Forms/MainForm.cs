@@ -176,7 +176,7 @@ namespace SAI_Editor
             listViewSmartScripts.Columns.Add("y", 20, HorizontalAlignment.Right); // 24
             listViewSmartScripts.Columns.Add("z", 20, HorizontalAlignment.Right); // 25
             listViewSmartScripts.Columns.Add("o", 20, HorizontalAlignment.Right); // 26
-            listViewSmartScripts.Columns.Add("comment", 400, HorizontalAlignment.Left); // 27 (width 56 to fit)
+            listViewSmartScripts.Columns.Add("comment", 400, HorizontalAlignment.Left); // 27 (width 56 to fit column title)
 
             if (Settings.Default.AutoConnect)
             {
@@ -2485,6 +2485,7 @@ namespace SAI_Editor
         private void buttonGenerateComments_Click(object sender, EventArgs e)
         {
             GenerateCommentsForAllItems();
+            ResizeColumns();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
