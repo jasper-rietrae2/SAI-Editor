@@ -2090,49 +2090,29 @@ namespace SAI_Editor
                 return;
             }
 
-            //! Writing it all out because it's easier to read and edit it this way
-            ListViewItem listViewItem = new ListViewItem();
-            listViewItem.Text = originalEntryOrGuidAndSourceType.entryOrGuid.ToString(); //! Entryorguid
-            listViewItem.SubItems.Add(((int)originalEntryOrGuidAndSourceType.sourceType).ToString()); //! Source type
+            List<SmartScript> _smartScripts = new List<SmartScript>();
+
+            foreach (SmartScript smartScript in listViewSmartScripts._smartScripts)
+                _smartScripts.Add(smartScript);
+
+            SmartScript newSmartScript = new SmartScript();
+            newSmartScript.entryorguid = originalEntryOrGuidAndSourceType.entryOrGuid;
+            newSmartScript.source_type = (int)originalEntryOrGuidAndSourceType.sourceType;
 
             if (checkBoxLockEventId.Checked)
-                listViewItem.SubItems.Add((++lastSmartScriptIdOfScript).ToString()); // id
+                newSmartScript.id = ++lastSmartScriptIdOfScript;
             else
-                listViewItem.SubItems.Add("0"); // id
+                newSmartScript.id = 0;
 
-            listViewItem.SubItems.Add("0"); // link
-            listViewItem.SubItems.Add("0"); // event type
-            listViewItem.SubItems.Add("0"); // phasemask
-            listViewItem.SubItems.Add("100"); // event chance
-            listViewItem.SubItems.Add("0"); // event flags
-            listViewItem.SubItems.Add("0"); // event param 1
-            listViewItem.SubItems.Add("0"); // event param 2
-            listViewItem.SubItems.Add("0"); // event param 3
-            listViewItem.SubItems.Add("0"); // event param 4
-            listViewItem.SubItems.Add("0"); // action type
-            listViewItem.SubItems.Add("0"); // action param 1
-            listViewItem.SubItems.Add("0"); // action param 2
-            listViewItem.SubItems.Add("0"); // action param 3
-            listViewItem.SubItems.Add("0"); // action param 4
-            listViewItem.SubItems.Add("0"); // action param 5
-            listViewItem.SubItems.Add("0"); // action param 6
-            listViewItem.SubItems.Add("0"); // target type
-            listViewItem.SubItems.Add("0"); // target param 1
-            listViewItem.SubItems.Add("0"); // target param 2
-            listViewItem.SubItems.Add("0"); // target param 3
-            listViewItem.SubItems.Add("0"); // target X
-            listViewItem.SubItems.Add("0"); // target Y
-            listViewItem.SubItems.Add("0"); // target Z
-            listViewItem.SubItems.Add("0"); // target O
-
-            //! Todo: implement auto-generated comments
             if (Settings.Default.GenerateComments)
-                listViewItem.SubItems.Add(await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewItem), originalEntryOrGuidAndSourceType)); // comment
+                newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
             else
-                listViewItem.SubItems.Add("Npc - Event - Action (phase) (dungeon difficulty)"); // comment
+                newSmartScript.comment = "Npc - Event - Action (phase) (dungeon difficulty)";
 
-            listViewSmartScripts.Items.Add(listViewItem);
-            listViewItem.Selected = true;
+            newSmartScript.event_chance = 100;
+            _smartScripts.Add(newSmartScript);
+            listViewSmartScripts.ReplaceData(_smartScripts);
+            listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].Selected = true;
             listViewSmartScripts.Select();
         }
 

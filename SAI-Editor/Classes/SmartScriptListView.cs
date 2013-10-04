@@ -11,7 +11,7 @@ namespace System.Windows.Forms
 {
     public class SmartScriptListView : XListView
     {
-        private List<SmartScript> _smartScripts;
+        public List<SmartScript> _smartScripts;
         private List<string> _excludedProperties;
         private readonly PropertyInfo[] _pinfo;
 
@@ -46,8 +46,9 @@ namespace System.Windows.Forms
                 Columns.Add(propInfo.Name);
             }
 
-            foreach (SmartScript script in _smartScripts)
-                AddSmartScript(script);
+            if (_smartScripts != null)
+                foreach (SmartScript script in _smartScripts)
+                    AddSmartScript(script);
 
             foreach (ColumnHeader header in Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -94,17 +95,17 @@ namespace System.Windows.Forms
             _smartScripts[_smartScripts.IndexOf(_smartScripts.Single(p => p.entryorguid == script.entryorguid))] = script;
         }
 
-        public void RemoveSmartScript(int scriptId)
-        {
-            Items.RemoveByKey(scriptId.ToString());
-            _smartScripts.Remove(_smartScripts.Single(p => p.entryorguid == scriptId));
-        }
-
         public void ReplaceData(List<SmartScript> scripts, List<string> exProps = null)
         {
             _smartScripts = scripts;
             _excludedProperties = exProps ?? new List<string>();
             Init();
+        }
+
+        public void RemoveSmartScript(int scriptId)
+        {
+            Items.RemoveByKey(scriptId.ToString());
+            _smartScripts.Remove(_smartScripts.Single(p => p.entryorguid == scriptId));
         }
 
         public void IncludeProperty(string propName)
