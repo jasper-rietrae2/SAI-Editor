@@ -76,7 +76,7 @@ namespace SAI_Editor
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
             this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.checkBoxListActionlistsOrEntries = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxShowBasicInfo = new System.Windows.Forms.CheckBox();
             this.checkBoxScriptByGuid = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
@@ -176,7 +176,7 @@ namespace SAI_Editor
             this.buttonNewLine = new System.Windows.Forms.Button();
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
-            this.listViewSmartScripts = new System.Windows.Forms.XListView();
+            this.listViewSmartScripts = new System.Windows.Forms.SmartScriptListView();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -522,7 +522,7 @@ namespace SAI_Editor
             // 
             this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = global::SAI_Editor.Properties.Resources.icon_load_script;
+            this.pictureBoxLoadScript.Image = global::SAI_Editor.Properties.Resources.icon_load_script1;
             this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
             this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
             this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
@@ -587,7 +587,7 @@ namespace SAI_Editor
             // 
             this.groupBoxPreferences.Controls.Add(this.checkBox4);
             this.groupBoxPreferences.Controls.Add(this.checkBoxListActionlistsOrEntries);
-            this.groupBoxPreferences.Controls.Add(this.checkBox1);
+            this.groupBoxPreferences.Controls.Add(this.checkBoxShowBasicInfo);
             this.groupBoxPreferences.Controls.Add(this.checkBoxScriptByGuid);
             this.groupBoxPreferences.Controls.Add(this.checkBox3);
             this.groupBoxPreferences.Controls.Add(this.checkBoxLockEventId);
@@ -620,15 +620,16 @@ namespace SAI_Editor
             this.checkBoxListActionlistsOrEntries.UseVisualStyleBackColor = true;
             this.checkBoxListActionlistsOrEntries.CheckedChanged += new System.EventHandler(this.checkBoxListActionlists_CheckedChanged);
             // 
-            // checkBox1
+            // checkBoxShowBasicInfo
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(140, 24);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(147, 17);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "Show detailed information";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxShowBasicInfo.AutoSize = true;
+            this.checkBoxShowBasicInfo.Location = new System.Drawing.Point(140, 24);
+            this.checkBoxShowBasicInfo.Name = "checkBoxShowBasicInfo";
+            this.checkBoxShowBasicInfo.Size = new System.Drawing.Size(135, 17);
+            this.checkBoxShowBasicInfo.TabIndex = 3;
+            this.checkBoxShowBasicInfo.Text = "Show basic information";
+            this.checkBoxShowBasicInfo.UseVisualStyleBackColor = true;
+            this.checkBoxShowBasicInfo.CheckedChanged += new System.EventHandler(this.checkBoxShowBasicInfo_CheckedChanged);
             // 
             // checkBoxScriptByGuid
             // 
@@ -2123,7 +2124,7 @@ namespace SAI_Editor
         public System.Windows.Forms.TextBox textBoxEntryOrGuid;
         private System.Windows.Forms.CheckBox checkBox4;
         private System.Windows.Forms.CheckBox checkBoxListActionlistsOrEntries;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxShowBasicInfo;
         private System.Windows.Forms.CheckBox checkBoxScriptByGuid;
         private System.Windows.Forms.Button buttonSearchEventFlags;
         private System.Windows.Forms.NumericUpDown textBoxEventChance;
@@ -2223,7 +2224,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Button buttonNewLine;
         private System.Windows.Forms.Button buttonGenerateSql;
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateSql;
-        public System.Windows.Forms.XListView listViewSmartScripts;
+        public System.Windows.Forms.SmartScriptListView listViewSmartScripts;
         private System.Windows.Forms.Button buttonGenerateComments;
         public System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
     }
