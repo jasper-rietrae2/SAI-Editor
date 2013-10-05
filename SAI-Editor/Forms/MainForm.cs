@@ -1328,6 +1328,7 @@ namespace SAI_Editor
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
+            HandleShowBasicInfo();
 
             if (listViewSmartScripts.Items.Count > 0)
             {
@@ -1347,7 +1348,6 @@ namespace SAI_Editor
 
             buttonGenerateSql.Enabled = true;
             menuItemGenerateSql.Enabled = true;
-            HandleShowBasicInfo();
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
