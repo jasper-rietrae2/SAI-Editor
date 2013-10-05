@@ -5,6 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.Data;
+using System.Linq;
 using System.Drawing;
 using MySql.Data.MySqlClient;
 using SAI_Editor.Properties;
@@ -62,7 +63,7 @@ namespace SAI_Editor
         public MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
         private readonly List<Control> controlsLoginForm = new List<Control>();
         private readonly List<Control> controlsMainForm = new List<Control>();
-        private bool contractingToLoginForm , expandingToMainForm, expandingListView, contractingListView;
+        private bool contractingToLoginForm, expandingToMainForm, expandingListView, contractingListView;
         private int originalHeight = 0, originalWidth = 0;
         private readonly Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
         private readonly Timer timerShowPermanentTooltips = new Timer { Enabled = false, Interval = 4 };
@@ -518,7 +519,8 @@ namespace SAI_Editor
 
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[12].Text = comboBoxActionType.SelectedIndex.ToString();
+                listViewSmartScripts.SelectedSmartScript.action_type = comboBoxActionType.SelectedIndex;
+                //listViewSmartScripts.SelectedItems[0].SubItems[12].Text = comboBoxActionType.SelectedIndex.ToString();
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -651,115 +653,115 @@ namespace SAI_Editor
                             switch (sourceType)
                             {
                                 case SourceTypes.SourceTypeCreature:
-                                {
-                                    //! Get `id` from `creature` and check it for SAI
-                                    if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
                                     {
-                                        int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-XConverter.ToInt32(entryOrGuid));
-                                        smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeCreature);
-
-                                        if (smartScripts != null)
+                                        //! Get `id` from `creature` and check it for SAI
+                                        if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
                                         {
-                                            message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
+                                            int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-XConverter.ToInt32(entryOrGuid));
+                                            smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeCreature);
 
-                                            if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                            if (smartScripts != null)
                                             {
-                                                textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
-                                                comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeCreature);
-                                                TryToLoadScript(true);
-                                            }
-                                        }
-                                        else
-                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    }
-                                    //! Get all `guid` instances from `creature` for the given `id` and allow user to select a script
-                                    else //! Non-guid (entry)
-                                    {
-                                        int actualEntry = XConverter.ToInt32(entryOrGuid);
-                                        List<Creature> creatures = await SAI_Editor_Manager.Instance.worldDatabase.GetCreaturesById(actualEntry);
-
-                                        if (creatures != null)
-                                        {
-                                            List<List<SmartScript>> creaturesWithSmartAi = new List<List<SmartScript>>();
-
-                                            foreach (Creature creature in creatures)
-                                            {
-                                                smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(-creature.guid, (int)SourceTypes.SourceTypeCreature);
-
-                                                if (smartScripts != null)
-                                                    creaturesWithSmartAi.Add(smartScripts);
-                                            }
-
-                                            if (creaturesWithSmartAi.Count > 0)
-                                            {
-                                                message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
+                                                message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
 
                                                 if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-                                                    new SelectSmartScriptForm(creaturesWithSmartAi).ShowDialog(this);
+                                                {
+                                                    textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
+                                                    comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeCreature);
+                                                    TryToLoadScript(true);
+                                                }
                                             }
                                             else
                                                 MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         }
-                                        else
-                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        //! Get all `guid` instances from `creature` for the given `id` and allow user to select a script
+                                        else //! Non-guid (entry)
+                                        {
+                                            int actualEntry = XConverter.ToInt32(entryOrGuid);
+                                            List<Creature> creatures = await SAI_Editor_Manager.Instance.worldDatabase.GetCreaturesById(actualEntry);
+
+                                            if (creatures != null)
+                                            {
+                                                List<List<SmartScript>> creaturesWithSmartAi = new List<List<SmartScript>>();
+
+                                                foreach (Creature creature in creatures)
+                                                {
+                                                    smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(-creature.guid, (int)SourceTypes.SourceTypeCreature);
+
+                                                    if (smartScripts != null)
+                                                        creaturesWithSmartAi.Add(smartScripts);
+                                                }
+
+                                                if (creaturesWithSmartAi.Count > 0)
+                                                {
+                                                    message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
+
+                                                    if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                                        new SelectSmartScriptForm(creaturesWithSmartAi).ShowDialog(this);
+                                                }
+                                                else
+                                                    MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            }
+                                            else
+                                                MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                        break;
                                     }
-                                    break;
-                                }
                                 case SourceTypes.SourceTypeGameobject:
-                                {
-                                    //! Get `id` from `gameobject` and check it for SAI
-                                    if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
                                     {
-                                        int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-XConverter.ToInt32(entryOrGuid));
-                                        smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeGameobject);
-
-                                        if (smartScripts != null)
+                                        //! Get `id` from `gameobject` and check it for SAI
+                                        if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
                                         {
-                                            message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
+                                            int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-XConverter.ToInt32(entryOrGuid));
+                                            smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeGameobject);
 
-                                            if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                            if (smartScripts != null)
                                             {
-                                                textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
-                                                comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeGameobject);
-                                                TryToLoadScript(true);
-                                            }
-                                        }
-                                        else
-                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    }
-                                    //! Get all `guid` instances from `gameobject` for the given `id` and allow user to select a script
-                                    else //! Non-guid (entry)
-                                    {
-                                        int actualEntry = XConverter.ToInt32(entryOrGuid);
-                                        List<Gameobject> gameobjects = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectsById(actualEntry);
-
-                                        if (gameobjects != null)
-                                        {
-                                            List<List<SmartScript>> gameobjectsWithSmartAi = new List<List<SmartScript>>();
-
-                                            foreach (Gameobject gameobject in gameobjects)
-                                            {
-                                                smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(-gameobject.guid, (int)SourceTypes.SourceTypeGameobject);
-
-                                                if (smartScripts != null)
-                                                    gameobjectsWithSmartAi.Add(smartScripts);
-                                            }
-
-                                            if (gameobjectsWithSmartAi.Count > 0)
-                                            {
-                                                message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
+                                                message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
 
                                                 if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-                                                    new SelectSmartScriptForm(gameobjectsWithSmartAi).ShowDialog(this);
+                                                {
+                                                    textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
+                                                    comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeGameobject);
+                                                    TryToLoadScript(true);
+                                                }
                                             }
                                             else
                                                 MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         }
-                                        else
-                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        //! Get all `guid` instances from `gameobject` for the given `id` and allow user to select a script
+                                        else //! Non-guid (entry)
+                                        {
+                                            int actualEntry = XConverter.ToInt32(entryOrGuid);
+                                            List<Gameobject> gameobjects = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectsById(actualEntry);
+
+                                            if (gameobjects != null)
+                                            {
+                                                List<List<SmartScript>> gameobjectsWithSmartAi = new List<List<SmartScript>>();
+
+                                                foreach (Gameobject gameobject in gameobjects)
+                                                {
+                                                    smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(-gameobject.guid, (int)SourceTypes.SourceTypeGameobject);
+
+                                                    if (smartScripts != null)
+                                                        gameobjectsWithSmartAi.Add(smartScripts);
+                                                }
+
+                                                if (gameobjectsWithSmartAi.Count > 0)
+                                                {
+                                                    message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
+
+                                                    if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                                        new SelectSmartScriptForm(gameobjectsWithSmartAi).ShowDialog(this);
+                                                }
+                                                else
+                                                    MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            }
+                                            else
+                                                MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                        break;
                                     }
-                                    break;
-                                }
                                 default:
                                     MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
@@ -2095,7 +2097,7 @@ namespace SAI_Editor
 
             List<SmartScript> _smartScripts = new List<SmartScript>();
 
-            foreach (SmartScript smartScript in listViewSmartScripts._smartScripts)
+            foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
                 _smartScripts.Add(smartScript);
 
             SmartScript newSmartScript = new SmartScript();
@@ -2166,7 +2168,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[3].Text = textBoxLinkTo.Text;
+                listViewSmartScripts.SelectedSmartScript.link = XConverter.ToInt32(textBoxLinkTo.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[3].Text = textBoxLinkTo.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2175,7 +2179,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[27].Text = textBoxComments.Text;
+                listViewSmartScripts.SelectedSmartScript.comment = textBoxComments.Text;
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[27].Text = textBoxComments.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2184,7 +2190,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[5].Text = textBoxEventPhasemask.Text;
+                listViewSmartScripts.SelectedSmartScript.event_phase_mask = XConverter.ToInt32(textBoxEventPhasemask.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[5].Text = textBoxEventPhasemask.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2193,7 +2201,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[6].Text = textBoxEventChance.Value.ToString(); //! Using .Text propert results in wrong value
+                listViewSmartScripts.SelectedSmartScript.event_chance = (int)textBoxEventChance.Value;
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[6].Text = textBoxEventChance.Value.ToString(); //! Using .Text propert results in wrong value
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2202,7 +2212,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[7].Text = textBoxEventFlags.Text;
+                listViewSmartScripts.SelectedSmartScript.event_flags = XConverter.ToInt32(textBoxEventFlags.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[7].Text = textBoxEventFlags.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2216,7 +2228,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[8].Text = textBoxEventParam1.Text;
+                listViewSmartScripts.SelectedSmartScript.event_param1 = XConverter.ToInt32(textBoxEventParam1.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[8].Text = textBoxEventParam1.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2225,7 +2239,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[9].Text = textBoxEventParam2.Text;
+                listViewSmartScripts.SelectedSmartScript.event_param2 = XConverter.ToInt32(textBoxEventParam2.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[9].Text = textBoxEventParam2.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2234,7 +2250,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[10].Text = textBoxEventParam3.Text;
+                listViewSmartScripts.SelectedSmartScript.event_param3 = XConverter.ToInt32(textBoxEventParam3.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[10].Text = textBoxEventParam3.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2243,7 +2261,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[11].Text = textBoxEventParam4.Text;
+                listViewSmartScripts.SelectedSmartScript.event_param3 = XConverter.ToInt32(textBoxEventParam4.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[11].Text = textBoxEventParam4.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2252,7 +2272,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[13].Text = textBoxActionParam1.Text;
+                listViewSmartScripts.SelectedSmartScript.action_param1 = XConverter.ToInt32(textBoxActionParam1.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[13].Text = textBoxActionParam1.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2261,7 +2283,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[14].Text = textBoxActionParam2.Text;
+                listViewSmartScripts.SelectedSmartScript.action_param2 = XConverter.ToInt32(textBoxActionParam2.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[14].Text = textBoxActionParam2.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2270,7 +2294,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[15].Text = textBoxActionParam3.Text;
+                listViewSmartScripts.SelectedSmartScript.action_param3 = XConverter.ToInt32(textBoxActionParam3.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[15].Text = textBoxActionParam3.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2279,7 +2305,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[16].Text = textBoxActionParam4.Text;
+                listViewSmartScripts.SelectedSmartScript.action_param4 = XConverter.ToInt32(textBoxActionParam4.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[16].Text = textBoxActionParam4.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2288,7 +2316,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[17].Text = textBoxActionParam5.Text;
+                listViewSmartScripts.SelectedSmartScript.action_param5 = XConverter.ToInt32(textBoxActionParam5.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[17].Text = textBoxActionParam5.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2297,7 +2327,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[18].Text = textBoxActionParam6.Text;
+                listViewSmartScripts.SelectedSmartScript.action_param6 = XConverter.ToInt32(textBoxActionParam6.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[18].Text = textBoxActionParam6.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2306,7 +2338,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[20].Text = textBoxTargetParam1.Text;
+                listViewSmartScripts.SelectedSmartScript.target_param1 = XConverter.ToInt32(textBoxTargetParam1.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[20].Text = textBoxTargetParam1.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2315,7 +2349,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[21].Text = textBoxTargetParam2.Text;
+                listViewSmartScripts.SelectedSmartScript.target_param2 = XConverter.ToInt32(textBoxTargetParam2.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[21].Text = textBoxTargetParam2.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2324,7 +2360,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[22].Text = textBoxTargetParam3.Text;
+                listViewSmartScripts.SelectedSmartScript.target_param3 = XConverter.ToInt32(textBoxTargetParam3.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[22].Text = textBoxTargetParam3.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2333,7 +2371,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[23].Text = textBoxTargetX.Text;
+                listViewSmartScripts.SelectedSmartScript.target_x = XConverter.ToInt32(textBoxTargetX.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[23].Text = textBoxTargetX.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2342,7 +2382,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[24].Text = textBoxTargetY.Text;
+                listViewSmartScripts.SelectedSmartScript.target_y = XConverter.ToInt32(textBoxTargetY.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[24].Text = textBoxTargetY.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2351,7 +2393,8 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[25].Text = textBoxTargetZ.Text;
+                listViewSmartScripts.SelectedSmartScript.target_z = XConverter.ToInt32(textBoxTargetZ.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2360,7 +2403,9 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[26].Text = textBoxTargetO.Text;
+                listViewSmartScripts.SelectedSmartScript.target_o = XConverter.ToInt32(textBoxTargetO.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                //listViewSmartScripts.SelectedItems[0].SubItems[26].Text = textBoxTargetO.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2473,21 +2518,36 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
 
-            ListViewItem selectedItem = listViewSmartScripts.SelectedItems[0];
-            string oldComment = selectedItem.SubItems[27].Text;
+            SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
+            string oldComment = selectedScript.comment;
 
-            SmartScript smartScriptLink = null;
+            //SmartScript smartScriptLink = null;
 
-            if (selectedItem.Index > 0)
-                smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[selectedItem.Index - 1]);
+            //if (selectedItem.Index > 0)
+            //smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[selectedItem.Index - 1]);
 
-            string newComment = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(selectedItem), originalEntryOrGuidAndSourceType, false, smartScriptLink);
+            ListViewItem lvi = listViewSmartScripts.Items.Cast<ListViewItem>().First(p => p.Text == listViewSmartScripts.SelectedSmartScript.entryorguid.ToString());
+
+            if (lvi == null)
+                return;
+
+            if (lvi.Index <= 0)
+                return;
+
+            ListViewItem lvi2 = listViewSmartScripts.Items[lvi.Index - 1];
+
+            if (lvi2 == null)
+                return;
+
+            string newComment = await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, false, listViewSmartScripts
+                .SmartScripts.Single(p => p.entryorguid.ToString() == lvi2.Text));
 
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
 
-            selectedItem.SubItems[27].Text = newComment;
+
+            selectedScript.comment = newComment;
 
             if (oldComment != newComment)
                 ResizeColumns();
