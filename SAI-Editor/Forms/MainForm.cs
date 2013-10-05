@@ -2422,12 +2422,18 @@ namespace SAI_Editor
                 if (i > 0 && smartScript.event_type == (int)SmartEvent.SMART_EVENT_LINK)
                 {
                     smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[i - 1]);
-                    int x = i;
 
-                    while (smartScriptLink.event_type == (int)SmartEvent.SMART_EVENT_LINK)
+                    if (smartScriptLink.link == 0)
+                        smartScriptLink = null;
+                    else
                     {
-                        smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[x - 1]);
-                        x--;
+                        int x = i;
+
+                        while (smartScriptLink.event_type == (int)SmartEvent.SMART_EVENT_LINK)
+                        {
+                            smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[x - 1]);
+                            x--;
+                        }
                     }
                 }
 
