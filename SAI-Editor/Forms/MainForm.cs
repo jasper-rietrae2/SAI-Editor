@@ -1347,6 +1347,7 @@ namespace SAI_Editor
 
             buttonGenerateSql.Enabled = true;
             menuItemGenerateSql.Enabled = true;
+            HandleShowBasicInfo();
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
@@ -2492,6 +2493,11 @@ namespace SAI_Editor
         }
 
         private void checkBoxShowBasicInfo_CheckedChanged(object sender, EventArgs e)
+        {
+            HandleShowBasicInfo();
+        }
+
+        private void HandleShowBasicInfo()
         {
             List<string> properties = new List<string>();
 
