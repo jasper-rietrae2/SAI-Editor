@@ -1229,7 +1229,8 @@ namespace SAI_Editor
                 return;
 
             if (listViewSmartScripts.SelectedItems[0].SubItems[0].Text == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
-                lastSmartScriptIdOfScript--;
+                if (listViewSmartScripts.SelectedItems[0].SubItems[2].Text == lastSmartScriptIdOfScript.ToString())
+                    lastSmartScriptIdOfScript--;
 
             listViewSmartScripts.RemoveSmartScript(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
