@@ -228,7 +228,7 @@ namespace SAI_Editor.Classes
             smartActionStrings.Add(SmartAction.SMART_ACTION_REMOVE_POWER, "Remove _actionParamTwo_ _powerTypeActionParamOne_");
         }
 
-        public async Task<string> GenerateCommentFor(SmartScript smartScript, EntryOrGuidAndSourceType entryOrGuidAndSourceType, bool forced = false)
+        public async Task<string> GenerateCommentFor(SmartScript smartScript, EntryOrGuidAndSourceType entryOrGuidAndSourceType, bool forced = false, SmartScript smartScriptLink = null)
         {
             if (!forced && !Settings.Default.GenerateComments)
                 return String.IsNullOrWhiteSpace(smartScript.comment) ? "Npc - Event - Action (phase) (dungeon difficulty)" : smartScript.comment;
@@ -240,7 +240,6 @@ namespace SAI_Editor.Classes
                 WorldDatabase worldDatabase = SAI_Editor_Manager.Instance.worldDatabase;
                 SQLiteDatabase sqliteDatabase = SAI_Editor_Manager.Instance.sqliteDatabase;
 
-                SmartScript smartScriptLink = null;
                 int entry = smartScript.entryorguid;
 
                 switch (smartScript.source_type)
@@ -275,10 +274,10 @@ namespace SAI_Editor.Classes
                     if (smartScriptLink != null)
                     {
                         fullLine = fullLine.Replace("_previousLineComment_", smartEventStrings[(SmartEvent)smartScriptLink.event_type]);
-                        smartScript.event_param1 = Convert.ToInt32(smartScriptLink.event_param1);
-                        smartScript.event_param2 = Convert.ToInt32(smartScriptLink.event_param2);
-                        smartScript.event_param3 = Convert.ToInt32(smartScriptLink.event_param3);
-                        smartScript.event_param4 = Convert.ToInt32(smartScriptLink.event_param4);
+                        smartScript.event_param1 = smartScriptLink.event_param1;
+                        smartScript.event_param2 = smartScriptLink.event_param2;
+                        smartScript.event_param3 = smartScriptLink.event_param3;
+                        smartScript.event_param4 = smartScriptLink.event_param4;
 
                         if (smartScriptLink.link == 0)
                             smartScriptLink = null;

@@ -2413,8 +2413,25 @@ namespace SAI_Editor
 
         public async void GenerateCommentsForAllItems()
         {
-            foreach (ListViewItem item in listViewSmartScripts.Items)
-                item.SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(item), originalEntryOrGuidAndSourceType, true);
+            for (int i = 0; i < listViewSmartScripts.Items.Count; ++i)
+            {
+                SmartScript smartScript = BuildSmartScript(listViewSmartScripts.Items[i]);
+                SmartScript smartScriptLink = null;
+
+                if (i > 0 && smartScript.event_type == (int)SmartEvent.SMART_EVENT_LINK)
+                {
+                    smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[i - 1]);
+                    int x = i;
+
+                    while (smartScriptLink.event_type == (int)SmartEvent.SMART_EVENT_LINK)
+                    {
+                        smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[x - 1]);
+                        x--;
+                    }
+                }
+
+                listViewSmartScripts.Items[i].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+            }
 
             textBoxComments.Text = listViewSmartScripts.SelectedItems[0].SubItems[27].Text;
         }
@@ -2448,14 +2465,21 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
 
-            string oldComment = listViewSmartScripts.SelectedItems[0].SubItems[27].Text;
-            string newComment = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(listViewSmartScripts.SelectedItems[0]), originalEntryOrGuidAndSourceType);
+            ListViewItem selectedItem = listViewSmartScripts.SelectedItems[0];
+            string oldComment = selectedItem.SubItems[27].Text;
+
+            SmartScript smartScriptLink = null;
+
+            if (selectedItem.Index > 0)
+                smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[selectedItem.Index - 1]);
+
+            string newComment = await CommentGenerator.Instance.GenerateCommentFor(BuildSmartScript(selectedItem), originalEntryOrGuidAndSourceType, false, smartScriptLink);
 
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
 
-            listViewSmartScripts.SelectedItems[0].SubItems[27].Text = newComment;
+            selectedItem.SubItems[27].Text = newComment;
 
             if (oldComment != newComment)
                 ResizeColumns();
