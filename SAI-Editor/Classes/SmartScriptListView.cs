@@ -73,6 +73,27 @@ namespace System.Windows.Forms
             Items.Add(lvi);
         }
 
+        public void RemoveSmartScript(SmartScript script)
+        {
+            foreach (ListViewItem item in Items)
+            {
+                if (item.Text == script.entryorguid.ToString() && item.SubItems[2].Text == script.id.ToString())
+                {
+                    Items.Remove(item);
+                    break;
+                }
+            }
+
+            foreach (SmartScript smartScript in _smartScripts)
+            {
+                if (smartScript.entryorguid == script.entryorguid && smartScript.id == script.id)
+                {
+                    _smartScripts.Remove(smartScript);
+                    break;
+                }
+            }
+        }
+
         public void ReplaceSmartScript(SmartScript script)
         {
             ListViewItem lvi = Items[script.entryorguid.ToString()];
@@ -100,12 +121,6 @@ namespace System.Windows.Forms
             _smartScripts = scripts;
             _excludedProperties = exProps ?? new List<string>();
             Init();
-        }
-
-        public void RemoveSmartScript(int scriptId)
-        {
-            Items.RemoveByKey(scriptId.ToString());
-            _smartScripts.Remove(_smartScripts.Single(p => p.entryorguid == scriptId));
         }
 
         public void IncludeProperty(string propName)
