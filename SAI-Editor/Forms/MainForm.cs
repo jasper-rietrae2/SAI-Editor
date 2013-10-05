@@ -598,7 +598,7 @@ namespace SAI_Editor
 
         private void checkBoxLockEventId_CheckedChanged(object sender, EventArgs e)
         {
-            textBoxEventScriptId.Enabled = !checkBoxLockEventId.Checked;
+            textBoxId.Enabled = !checkBoxLockEventId.Checked;
         }
 
         private void FinishedExpandingOrContracting(bool expanding)
@@ -847,27 +847,28 @@ namespace SAI_Editor
             try
             {
                 ListViewItem.ListViewSubItemCollection selectedItem = listViewSmartScripts.SelectedItems[0].SubItems;
+                SmartScript selectedScript = listViewSmartScripts.GetSmartScript(XConverter.ToInt32(selectedItem[0].Text), XConverter.ToInt32(selectedItem[2].Text));
 
                 if (Settings.Default.ChangeStaticInfo)
                 {
-                    textBoxEntryOrGuid.Text = selectedItem[0].Text;
-                    comboBoxSourceType.SelectedIndex = GetIndexBySourceType((SourceTypes)XConverter.ToInt32(selectedItem[1].Text));
+                    textBoxEntryOrGuid.Text = selectedScript.entryorguid.ToString();
+                    comboBoxSourceType.SelectedIndex = GetIndexBySourceType((SourceTypes)selectedScript.source_type);
                 }
 
-                textBoxEventScriptId.Text = selectedItem[2].Text;
-                textBoxLinkTo.Text = selectedItem[3].Text;
+                textBoxId.Text = selectedScript.id.ToString();
+                textBoxLinkTo.Text = selectedScript.link.ToString();
 
-                int event_type = XConverter.ToInt32(selectedItem[4].Text);
+                int event_type = selectedScript.event_type;
                 comboBoxEventType.SelectedIndex = event_type;
-                textBoxEventPhasemask.Text = selectedItem[5].Text;
-                textBoxEventChance.Text = selectedItem[6].Text;
-                textBoxEventFlags.Text = selectedItem[7].Text;
+                textBoxEventPhasemask.Text = selectedScript.event_phase_mask.ToString();
+                textBoxEventChance.Text = selectedScript.event_chance.ToString();
+                textBoxEventFlags.Text = selectedScript.event_flags.ToString();
 
                 //! Event parameters
-                textBoxEventParam1.Text = selectedItem[8].Text;
-                textBoxEventParam2.Text = selectedItem[9].Text;
-                textBoxEventParam3.Text = selectedItem[10].Text;
-                textBoxEventParam4.Text = selectedItem[11].Text;
+                textBoxEventParam1.Text = selectedScript.event_param1.ToString();
+                textBoxEventParam2.Text = selectedScript.event_param2.ToString();
+                textBoxEventParam3.Text = selectedScript.event_param3.ToString();
+                textBoxEventParam4.Text = selectedScript.event_param4.ToString();
                 labelEventParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 1, ScriptTypeId.ScriptTypeEvent);
                 labelEventParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 2, ScriptTypeId.ScriptTypeEvent);
                 labelEventParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(event_type, 3, ScriptTypeId.ScriptTypeEvent);
@@ -883,14 +884,14 @@ namespace SAI_Editor
                 }
 
                 //! Action parameters
-                int action_type = XConverter.ToInt32(selectedItem[12].Text);
+                int action_type = selectedScript.action_type;
                 comboBoxActionType.SelectedIndex = action_type;
-                textBoxActionParam1.Text = selectedItem[13].Text;
-                textBoxActionParam2.Text = selectedItem[14].Text;
-                textBoxActionParam3.Text = selectedItem[15].Text;
-                textBoxActionParam4.Text = selectedItem[16].Text;
-                textBoxActionParam5.Text = selectedItem[17].Text;
-                textBoxActionParam6.Text = selectedItem[18].Text;
+                textBoxActionParam1.Text = selectedScript.action_param1.ToString();
+                textBoxActionParam2.Text = selectedScript.action_param2.ToString();
+                textBoxActionParam3.Text = selectedScript.action_param3.ToString();
+                textBoxActionParam4.Text = selectedScript.action_param4.ToString();
+                textBoxActionParam5.Text = selectedScript.action_param5.ToString();
+                textBoxActionParam6.Text = selectedScript.action_param6.ToString();
                 labelActionParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 1, ScriptTypeId.ScriptTypeAction);
                 labelActionParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 2, ScriptTypeId.ScriptTypeAction);
                 labelActionParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(action_type, 3, ScriptTypeId.ScriptTypeAction);
@@ -910,11 +911,11 @@ namespace SAI_Editor
                 }
 
                 //! Target parameters
-                int target_type = XConverter.ToInt32(selectedItem[19].Text);
+                int target_type = selectedScript.target_type;
                 comboBoxTargetType.SelectedIndex = target_type;
-                textBoxTargetParam1.Text = selectedItem[20].Text;
-                textBoxTargetParam2.Text = selectedItem[21].Text;
-                textBoxTargetParam3.Text = selectedItem[22].Text;
+                textBoxTargetParam1.Text = selectedScript.target_param1.ToString();
+                textBoxTargetParam2.Text = selectedScript.target_param2.ToString();
+                textBoxTargetParam3.Text = selectedScript.target_param3.ToString();
                 labelTargetParam1.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 1, ScriptTypeId.ScriptTypeTarget);
                 labelTargetParam2.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 2, ScriptTypeId.ScriptTypeTarget);
                 labelTargetParam3.Text = SAI_Editor_Manager.Instance.GetParameterStringById(target_type, 3, ScriptTypeId.ScriptTypeTarget);
@@ -927,11 +928,11 @@ namespace SAI_Editor
                     AddTooltip(labelTargetParam3, labelTargetParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
                 }
 
-                textBoxTargetX.Text = selectedItem[23].Text;
-                textBoxTargetY.Text = selectedItem[24].Text;
-                textBoxTargetZ.Text = selectedItem[25].Text;
-                textBoxTargetO.Text = selectedItem[26].Text;
-                textBoxComments.Text = selectedItem[27].Text;
+                textBoxTargetX.Text = selectedScript.target_x.ToString();
+                textBoxTargetY.Text = selectedScript.target_y.ToString();
+                textBoxTargetZ.Text = selectedScript.target_z.ToString();
+                textBoxTargetO.Text = selectedScript.target_o.ToString();
+                textBoxComments.Text = selectedScript.comment;
 
                 AdjustAllParameterFields(event_type, action_type, target_type);
             }
@@ -1473,7 +1474,7 @@ namespace SAI_Editor
             textBoxActionTypeId.Text = "0";
             textBoxTargetTypeId.Text = "0";
             textBoxEventChance.Text = "100";
-            textBoxEventScriptId.Text = "-1";
+            textBoxId.Text = "-1";
             textBoxLinkFrom.Text = "0";
             textBoxLinkTo.Text = "0";
             textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";

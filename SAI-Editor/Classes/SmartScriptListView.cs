@@ -150,5 +150,14 @@ namespace System.Windows.Forms
 
             Init();
         }
+
+        public SmartScript GetSmartScript(int entryorguid, int id)
+        {
+            foreach (SmartScript smartScript in _smartScripts)
+                if (smartScript.entryorguid == entryorguid && smartScript.id == id)
+                    return smartScript;
+
+            return null;
+        }
     }
 }

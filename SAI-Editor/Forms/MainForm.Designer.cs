@@ -101,7 +101,7 @@ namespace SAI_Editor
             this.textBoxLinkTo = new System.Windows.Forms.TextBox();
             this.textBoxLinkFrom = new System.Windows.Forms.TextBox();
             this.comboBoxEventType = new System.Windows.Forms.ComboBox();
-            this.textBoxEventScriptId = new System.Windows.Forms.TextBox();
+            this.textBoxId = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -686,7 +686,7 @@ namespace SAI_Editor
             this.groupBoxScriptInfo.Controls.Add(this.textBoxLinkTo);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxLinkFrom);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxEventType);
-            this.groupBoxScriptInfo.Controls.Add(this.textBoxEventScriptId);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxId);
             this.groupBoxScriptInfo.Controls.Add(this.label8);
             this.groupBoxScriptInfo.Controls.Add(this.label15);
             this.groupBoxScriptInfo.Controls.Add(this.label5);
@@ -1197,15 +1197,15 @@ namespace SAI_Editor
             this.comboBoxEventType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
             this.comboBoxEventType.MouseEnter += new System.EventHandler(this.comboBoxEventType_MouseEnter);
             // 
-            // textBoxEventScriptId
+            // textBoxId
             // 
-            this.textBoxEventScriptId.Enabled = false;
-            this.textBoxEventScriptId.Location = new System.Drawing.Point(59, 99);
-            this.textBoxEventScriptId.Name = "textBoxEventScriptId";
-            this.textBoxEventScriptId.Size = new System.Drawing.Size(41, 20);
-            this.textBoxEventScriptId.TabIndex = 6;
-            this.textBoxEventScriptId.Text = "0";
-            this.textBoxEventScriptId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
+            this.textBoxId.Enabled = false;
+            this.textBoxId.Location = new System.Drawing.Point(59, 99);
+            this.textBoxId.Name = "textBoxId";
+            this.textBoxId.Size = new System.Drawing.Size(41, 20);
+            this.textBoxId.TabIndex = 6;
+            this.textBoxId.Text = "0";
+            this.textBoxId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // label8
             // 
@@ -2129,7 +2129,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Button buttonSearchEventFlags;
         private System.Windows.Forms.NumericUpDown textBoxEventChance;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBoxEventScriptId;
+        private System.Windows.Forms.TextBox textBoxId;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
