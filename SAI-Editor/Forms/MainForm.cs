@@ -502,6 +502,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedSmartScript.event_type = comboBoxEventType.SelectedIndex;
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 //listViewSmartScripts.SelectedItems[0].SubItems[4].Text = comboBoxEventType.SelectedIndex.ToString();
                 GenerateCommentAndResizeColumns();
             }
@@ -521,6 +522,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedSmartScript.action_type = comboBoxActionType.SelectedIndex;
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 //listViewSmartScripts.SelectedItems[0].SubItems[12].Text = comboBoxActionType.SelectedIndex.ToString();
                 GenerateCommentAndResizeColumns();
             }
@@ -540,6 +542,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedSmartScript.target_type = comboBoxTargetType.SelectedIndex;
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 //listViewSmartScripts.SelectedItems[0].SubItems[19].Text = comboBoxTargetType.SelectedIndex.ToString();
                 GenerateCommentAndResizeColumns();
             }
@@ -2499,7 +2502,6 @@ namespace SAI_Editor
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
-
 
             selectedScript.comment = newComment;
 
