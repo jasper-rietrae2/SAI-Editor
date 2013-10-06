@@ -501,7 +501,8 @@ namespace SAI_Editor
 
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[4].Text = comboBoxEventType.SelectedIndex.ToString();
+                listViewSmartScripts.SelectedSmartScript.event_type = comboBoxEventType.SelectedIndex;
+                //listViewSmartScripts.SelectedItems[0].SubItems[4].Text = comboBoxEventType.SelectedIndex.ToString();
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -538,7 +539,8 @@ namespace SAI_Editor
 
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedItems[0].SubItems[19].Text = comboBoxTargetType.SelectedIndex.ToString();
+                listViewSmartScripts.SelectedSmartScript.target_type = comboBoxTargetType.SelectedIndex;
+                //listViewSmartScripts.SelectedItems[0].SubItems[19].Text = comboBoxTargetType.SelectedIndex.ToString();
                 GenerateCommentAndResizeColumns();
             }
         }
