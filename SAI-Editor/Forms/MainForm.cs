@@ -2429,13 +2429,8 @@ namespace SAI_Editor
 
         private void OpenSqlOutputForm()
         {
-            List<SmartScript> smartScriptsToExport = new List<SmartScript>();
-
-            foreach (ListViewItem item in listViewSmartScripts.Items)
-                smartScriptsToExport.Add(BuildSmartScript(item));
-
-            if (smartScriptsToExport.Count > 0)
-                new SqlOutputForm(smartScriptsToExport).ShowDialog(this);
+            if (listViewSmartScripts.SmartScripts.Count > 0)
+                new SqlOutputForm(listViewSmartScripts.SmartScripts).ShowDialog(this);
         }
 
         private void SetPictureBoxLoadScriptEnabled(bool enable)
