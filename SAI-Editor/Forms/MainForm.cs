@@ -2457,14 +2457,14 @@ namespace SAI_Editor
 
         public async void GenerateCommentsForAllItems()
         {
-            for (int i = 0; i < listViewSmartScripts.Items.Count; ++i)
+            for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
             {
-                SmartScript smartScript = BuildSmartScript(listViewSmartScripts.Items[i]);
+                SmartScript smartScript = listViewSmartScripts.SmartScripts[i];
                 SmartScript smartScriptLink = null;
 
                 if (i > 0 && smartScript.event_type == (int)SmartEvent.SMART_EVENT_LINK)
                 {
-                    smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[i - 1]);
+                    smartScriptLink = listViewSmartScripts.SmartScripts[i - 1];
 
                     if (smartScriptLink.link == 0)
                         smartScriptLink = null;
@@ -2474,16 +2474,16 @@ namespace SAI_Editor
 
                         while (smartScriptLink.event_type == (int)SmartEvent.SMART_EVENT_LINK)
                         {
-                            smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[x - 1]);
+                            smartScriptLink = listViewSmartScripts.SmartScripts[x - 1];
                             x--;
                         }
                     }
                 }
 
-                listViewSmartScripts.Items[i].SubItems[27].Text = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+                smartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
             }
 
-            textBoxComments.Text = listViewSmartScripts.SelectedItems[0].SubItems[27].Text;
+            textBoxComments.Text = listViewSmartScripts.SelectedSmartScript.comment;
         }
 
         private void buttonGenerateComments_Click(object sender, EventArgs e)
