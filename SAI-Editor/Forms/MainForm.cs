@@ -2123,44 +2123,6 @@ namespace SAI_Editor
             listViewSmartScripts.Select();
         }
 
-        public SmartScript BuildSmartScript(ListViewItem item)
-        {
-            SmartScript smartScript = new SmartScript();
-            smartScript.entryorguid = XConverter.ToInt32(item.Text);
-            smartScript.source_type = XConverter.ToInt32(item.SubItems[1].Text);
-            smartScript.id = XConverter.ToInt32(item.SubItems[2].Text);
-            smartScript.link = XConverter.ToInt32(item.SubItems[3].Text);
-            smartScript.event_type = XConverter.ToInt32(item.SubItems[4].Text);
-            smartScript.event_phase_mask = XConverter.ToInt32(item.SubItems[5].Text);
-            smartScript.event_chance = XConverter.ToInt32(item.SubItems[6].Text);
-            smartScript.event_flags = XConverter.ToInt32(item.SubItems[7].Text);
-            smartScript.event_param1 = XConverter.ToInt32(item.SubItems[8].Text);
-            smartScript.event_param2 = XConverter.ToInt32(item.SubItems[9].Text);
-            smartScript.event_param3 = XConverter.ToInt32(item.SubItems[10].Text);
-            smartScript.event_param4 = XConverter.ToInt32(item.SubItems[11].Text);
-            smartScript.action_type = XConverter.ToInt32(item.SubItems[12].Text);
-            smartScript.action_param1 = XConverter.ToInt32(item.SubItems[13].Text);
-            smartScript.action_param2 = XConverter.ToInt32(item.SubItems[14].Text);
-            smartScript.action_param3 = XConverter.ToInt32(item.SubItems[15].Text);
-            smartScript.action_param4 = XConverter.ToInt32(item.SubItems[16].Text);
-            smartScript.action_param5 = XConverter.ToInt32(item.SubItems[17].Text);
-            smartScript.action_param6 = XConverter.ToInt32(item.SubItems[18].Text);
-            smartScript.target_type = XConverter.ToInt32(item.SubItems[19].Text);
-            smartScript.target_param1 = XConverter.ToInt32(item.SubItems[20].Text);
-            smartScript.target_param2 = XConverter.ToInt32(item.SubItems[21].Text);
-            smartScript.target_param3 = XConverter.ToInt32(item.SubItems[22].Text);
-            smartScript.target_x = XConverter.ToInt32(item.SubItems[23].Text);
-            smartScript.target_y = XConverter.ToInt32(item.SubItems[24].Text);
-            smartScript.target_z = XConverter.ToInt32(item.SubItems[25].Text);
-            smartScript.target_o = XConverter.ToInt32(item.SubItems[26].Text);
-
-            //! This method is also called when we generate a comment, so the field is not yet filled
-            if (item.SubItems.Count > 27)
-                smartScript.comment = item.SubItems[27].Text;
-
-            return smartScript;
-        }
-
         private string GenerateCommentForScript(SmartScript smartScript)
         {
             return String.Empty;
