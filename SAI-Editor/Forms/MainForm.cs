@@ -2519,6 +2519,8 @@ namespace SAI_Editor
 
         private void HandleShowBasicInfo()
         {
+            int prevSelectedIndex = listViewSmartScripts.SelectedItems.Count > 0 ? listViewSmartScripts.SelectedItems[0].Index : 0;
+
             List<string> properties = new List<string>();
 
             properties.Add("event_phase_mask");
@@ -2546,6 +2548,9 @@ namespace SAI_Editor
                 listViewSmartScripts.ExcludeProperties(properties);
             else
                 listViewSmartScripts.IncludeProperties(properties);
+
+            listViewSmartScripts.Items[prevSelectedIndex].Selected = true;
+            listViewSmartScripts.Select(); //! Sets the focus on the listview
         }
     }
 }
