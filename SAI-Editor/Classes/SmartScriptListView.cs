@@ -27,8 +27,23 @@ namespace System.Windows.Forms
         {
             get
             {
-                return _smartScripts.FirstOrDefault(p => p.entryorguid.ToString() == SelectedItems[0].Text);
+                if (SelectedItems.Count > 0)
+                    foreach (SmartScript smartScript in _smartScripts)
+                        if (smartScript.entryorguid.ToString() == SelectedItems[0].SubItems[0].Text && smartScript.id.ToString() == SelectedItems[0].SubItems[2].Text)
+                            return smartScript;
+
+                return null;
+                //return _smartScripts.FirstOrDefault(p => p.entryorguid.ToString() == SelectedItems[0].Text);
             }
+        }
+
+        public SmartScript GetSmartScript(int entryorguid, int id)
+        {
+            foreach (SmartScript smartScript in _smartScripts)
+                if (smartScript.entryorguid == entryorguid && smartScript.id == id)
+                    return smartScript;
+
+            return null;
         }
 
         public SmartScriptListView()
@@ -121,19 +136,21 @@ namespace System.Windows.Forms
                 }
             }
 
-            foreach (SmartScript smartScript in _smartScripts)
-            {
-                if (smartScript.entryorguid == entryorguid && smartScript.id == id)
-                {
-                    _smartScripts.Remove(smartScript);
-                    break;
-                }
-            }
+            _smartScripts.Remove(GetSmartScript(entryorguid, id));
         }
 
         public void ReplaceSmartScript(SmartScript script)
         {
-            ListViewItem lvi = Items[script.entryorguid.ToString()];
+            ListViewItem lvi = null;
+
+            foreach (ListViewItem item in Items)
+            {
+                if (item.SubItems[0].Text == script.entryorguid.ToString() && item.SubItems[2].Text == script.id.ToString())
+                {
+                    lvi = item;
+                    break;
+                }
+            }
 
             if (lvi == null)
                 return;
@@ -150,7 +167,7 @@ namespace System.Windows.Forms
                 lvi.SubItems.Add(propInfo.GetValue(script).ToString());
             }
 
-            _smartScripts[_smartScripts.IndexOf(_smartScripts.Single(p => p.entryorguid == script.entryorguid && p.id == script.id))] = script;
+            _smartScripts[_smartScripts.IndexOf(GetSmartScript(script.entryorguid, script.id))] = script;
         }
 
         public void ReplaceData(List<SmartScript> scripts, List<string> exProps = null)
@@ -186,15 +203,6 @@ namespace System.Windows.Forms
                 _excludedProperties.Add(propName);
 
             Init();
-        }
-
-        public SmartScript GetSmartScript(int entryorguid, int id)
-        {
-            foreach (SmartScript smartScript in _smartScripts)
-                if (smartScript.entryorguid == entryorguid && smartScript.id == id)
-                    return smartScript;
-
-            return null;
         }
     }
 }

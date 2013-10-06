@@ -850,8 +850,7 @@ namespace SAI_Editor
         {
             try
             {
-                ListViewItem.ListViewSubItemCollection selectedItem = listViewSmartScripts.SelectedItems[0].SubItems;
-                SmartScript selectedScript = listViewSmartScripts.GetSmartScript(XConverter.ToInt32(selectedItem[0].Text), XConverter.ToInt32(selectedItem[2].Text));
+                SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
 
                 if (Settings.Default.ChangeStaticInfo)
                 {
