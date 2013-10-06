@@ -2445,7 +2445,9 @@ namespace SAI_Editor
                     }
                 }
 
-                smartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+                string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+                newComment = newComment.Replace("_previousLineComment_", "MISSING LINK");
+                smartScript.comment = newComment;
             }
 
             textBoxComments.Text = listViewSmartScripts.SelectedSmartScript.comment;
@@ -2503,6 +2505,7 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
 
+            newComment = newComment.Replace("_previousLineComment_", "MISSING LINK");
             selectedScript.comment = newComment;
 
             if (oldComment != newComment)
