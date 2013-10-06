@@ -2120,6 +2120,7 @@ namespace SAI_Editor
             listViewSmartScripts.ReplaceData(_smartScripts);
             listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].Selected = true;
             listViewSmartScripts.Select();
+            HandleShowBasicInfo();
         }
 
         private string GenerateCommentForScript(SmartScript smartScript)
