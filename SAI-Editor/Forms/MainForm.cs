@@ -2448,6 +2448,7 @@ namespace SAI_Editor
                 string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
                 newComment = newComment.Replace("_previousLineComment_", "MISSING LINK");
                 smartScript.comment = newComment;
+                listViewSmartScripts.ReplaceSmartScript(smartScript);
             }
 
             textBoxComments.Text = listViewSmartScripts.SelectedSmartScript.comment;
