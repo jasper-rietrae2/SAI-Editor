@@ -11,9 +11,25 @@ namespace System.Windows.Forms
 {
     public class SmartScriptListView : XListView
     {
-        public List<SmartScript> _smartScripts;
+        private List<SmartScript> _smartScripts;
         private List<string> _excludedProperties;
         private readonly PropertyInfo[] _pinfo;
+
+        public List<SmartScript> SmartScripts
+        {
+            get
+            {
+                return _smartScripts;
+            }
+        }
+
+        public SmartScript SelectedSmartScript
+        {
+            get
+            {
+                return _smartScripts.FirstOrDefault(p => p.entryorguid.ToString() == SelectedItems[0].Text);
+            }
+        }
 
         public SmartScriptListView()
         {
@@ -113,7 +129,7 @@ namespace System.Windows.Forms
                 lvi.SubItems.Add(propInfo.GetValue(script).ToString());
             }
 
-            _smartScripts[_smartScripts.IndexOf(_smartScripts.Single(p => p.entryorguid == script.entryorguid))] = script;
+            _smartScripts[_smartScripts.IndexOf(_smartScripts.Single(p => p.entryorguid == script.entryorguid && p.id == script.id))] = script;
         }
 
         public void ReplaceData(List<SmartScript> scripts, List<string> exProps = null)
