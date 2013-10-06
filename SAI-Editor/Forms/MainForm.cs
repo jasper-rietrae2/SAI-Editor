@@ -1237,7 +1237,7 @@ namespace SAI_Editor
                 if (listViewSmartScripts.SelectedItems[0].SubItems[2].Text == lastSmartScriptIdOfScript.ToString())
                     lastSmartScriptIdOfScript--;
 
-            listViewSmartScripts.RemoveSmartScript(BuildSmartScript(listViewSmartScripts.SelectedItems[0]));
+            listViewSmartScripts.RemoveSmartScript(XConverter.ToInt32(listViewSmartScripts.SelectedItems[0].SubItems[0].Text), XConverter.ToInt32(listViewSmartScripts.SelectedItems[0].SubItems[2].Text));
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
 
@@ -2517,11 +2517,6 @@ namespace SAI_Editor
 
             SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
             string oldComment = selectedScript.comment;
-
-            //SmartScript smartScriptLink = null;
-
-            //if (selectedItem.Index > 0)
-            //smartScriptLink = BuildSmartScript(listViewSmartScripts.Items[selectedItem.Index - 1]);
 
             ListViewItem lvi = listViewSmartScripts.Items.Cast<ListViewItem>().First(p => p.Text == listViewSmartScripts.SelectedSmartScript.entryorguid.ToString());
 

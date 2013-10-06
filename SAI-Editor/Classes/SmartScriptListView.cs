@@ -110,6 +110,27 @@ namespace System.Windows.Forms
             }
         }
 
+        public void RemoveSmartScript(int entryorguid, int id)
+        {
+            foreach (ListViewItem item in Items)
+            {
+                if (item.Text == entryorguid.ToString() && item.SubItems[2].Text == id.ToString())
+                {
+                    Items.Remove(item);
+                    break;
+                }
+            }
+
+            foreach (SmartScript smartScript in _smartScripts)
+            {
+                if (smartScript.entryorguid == entryorguid && smartScript.id == id)
+                {
+                    _smartScripts.Remove(smartScript);
+                    break;
+                }
+            }
+        }
+
         public void ReplaceSmartScript(SmartScript script)
         {
             ListViewItem lvi = Items[script.entryorguid.ToString()];
