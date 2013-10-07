@@ -1284,7 +1284,7 @@ namespace SAI_Editor
 
             buttonGenerateSql.Enabled = false;
             menuItemGenerateSql.Enabled = false;
-            int prevSelectedIndex = listViewSmartScripts.SelectedItems[0].Index;
+            int prevSelectedIndex = listViewSmartScripts.SelectedItems.Count > 0 ? listViewSmartScripts.SelectedItems[0].Index : 0;
 
             if (checkBoxListActionlistsOrEntries.Checked)
             {
