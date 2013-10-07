@@ -2243,9 +2243,11 @@ namespace SAI_Editor
             _smartScripts.Add(newSmartScript);
             listViewSmartScripts.ReplaceData(_smartScripts);
             HandleShowBasicInfo();
-            listViewSmartScripts.Items[newSmartScript.id].Selected = true;
+
+            listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].Selected = true;
             listViewSmartScripts.Select();
-            listViewSmartScripts.EnsureVisible(newSmartScript.id);
+            listViewSmartScripts.EnsureVisible(listViewSmartScripts.Items.Count - 1);
+
             buttonNewLine.Enabled = true;
         }
 
