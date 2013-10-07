@@ -1299,9 +1299,14 @@ namespace SAI_Editor
 
         private void RemoveNonOriginalScriptsFromView()
         {
-            foreach (ListViewItem item in listViewSmartScripts.Items)
-                if ((SourceTypes)Int32.Parse(item.SubItems[1].Text) != originalEntryOrGuidAndSourceType.sourceType)
-                    listViewSmartScripts.Items.Remove(item);
+            List<SmartScript> smartScriptsToRemove = new List<SmartScript>();
+
+            foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
+                if (smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType)
+                    smartScriptsToRemove.Add(smartScript);
+
+            foreach (SmartScript smartScript in smartScriptsToRemove)
+                listViewSmartScripts.SmartScripts.Remove(smartScript);
         }
 
         public SourceTypes GetSourceTypeByIndex()
