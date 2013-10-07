@@ -34,16 +34,17 @@ namespace SAI_Editor.Forms
         {
             listViewScripts.Items.Clear();
             string[] allFiles = Directory.GetFiles("Reverts");
+            List<string> allFilesList = allFiles.OrderByDescending(file => File.GetCreationTime(file)).ToList();
 
-            for (int i = 0; i < allFiles.Length; ++i)
+            foreach (string file in allFilesList)
             {
-                DateTime createTime = File.GetCreationTime(allFiles[i]);
+                DateTime createTime = File.GetCreationTime(file);
 
                 //! If the file was created after or before the selection of the user, don't list it
                 if (createTime.CompareTo(calenderScriptsToRevert.SelectionStart) < 0 && createTime.CompareTo(calenderScriptsToRevert.SelectionEnd) < 0)
                     continue;
 
-                listViewScripts.Items.Add(allFiles[i].Replace(@"Reverts\", "").Replace(".sql", "").Replace(";", ":"));
+                listViewScripts.Items.Add(file.Replace(@"Reverts\", "").Replace(".sql", "").Replace(";", ":"));
             }
         }
 
