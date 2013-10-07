@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SearchForLinkForm));
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonContinue = new System.Windows.Forms.Button();
-            this.listViewScripts = new System.Windows.Forms.ListView();
+            this.listViewScripts = new System.Windows.Forms.SmartScriptListView();
             this.SuspendLayout();
             // 
             // buttonCancel
@@ -94,6 +94,6 @@
 
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonContinue;
-        private System.Windows.Forms.ListView listViewScripts;
+        private System.Windows.Forms.SmartScriptListView listViewScripts;
     }
 }

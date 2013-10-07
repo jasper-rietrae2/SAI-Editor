@@ -1475,7 +1475,7 @@ namespace SAI_Editor
                 return;
             }
 
-            new SearchForLinkForm(GetItemsBasedOnSelection(listViewSmartScripts), listViewSmartScripts.SelectedItems[0].Index, textBoxToChange).ShowDialog(this);
+            new SearchForLinkForm(listViewSmartScripts.SmartScripts, listViewSmartScripts.SelectedItems[0].Index, textBoxToChange).ShowDialog(this);
         }
 
         protected override void WndProc(ref Message m)
