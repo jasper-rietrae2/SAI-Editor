@@ -32,9 +32,7 @@ namespace System.Windows.Forms
                         if (smartScript.entryorguid.ToString() == SelectedItems[0].SubItems[0].Text && smartScript.id.ToString() == SelectedItems[0].SubItems[2].Text)
                             return smartScript;
 
-                MessageBox.Show("SelectedSmartScript returned null, something is wrong!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
-                //return _smartScripts.FirstOrDefault(p => p.entryorguid.ToString() == SelectedItems[0].Text);
             }
         }
 

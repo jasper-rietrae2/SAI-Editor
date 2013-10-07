@@ -1274,8 +1274,6 @@ namespace SAI_Editor
                 listViewSmartScripts.Items.Clear();
                 List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType);
                 listViewSmartScripts.ReplaceData(smartScripts);
-                //foreach (SmartScript smartScript in smartScripts)
-                //    listViewSmartScripts.AddSmartScript(smartScript);
             }
             else
                 RemoveNonOriginalScriptsFromView();
