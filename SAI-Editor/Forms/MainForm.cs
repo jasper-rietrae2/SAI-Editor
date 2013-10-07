@@ -2135,6 +2135,7 @@ namespace SAI_Editor
                 return;
             }
 
+            buttonNewLine.Enabled = false;
             List<SmartScript> _smartScripts = new List<SmartScript>();
 
             foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
@@ -2161,6 +2162,7 @@ namespace SAI_Editor
             listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].Selected = true;
             listViewSmartScripts.Select();
             listViewSmartScripts.EnsureVisible(listViewSmartScripts.Items.Count - 1);
+            buttonNewLine.Enabled = true;
         }
 
         private string GenerateCommentForScript(SmartScript smartScript)
