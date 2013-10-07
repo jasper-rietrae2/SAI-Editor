@@ -2592,7 +2592,9 @@ namespace SAI_Editor
             else
                 listViewSmartScripts.IncludeProperties(properties);
 
-            listViewSmartScripts.Items[prevSelectedIndex].Selected = true;
+            if (listViewSmartScripts.Items.Count > prevSelectedIndex)
+                listViewSmartScripts.Items[prevSelectedIndex].Selected = true;
+
             listViewSmartScripts.Select(); //! Sets the focus on the listview
         }
     }
