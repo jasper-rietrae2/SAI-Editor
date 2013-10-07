@@ -59,6 +59,9 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetObjectAiName(int entryorguid, int source_type)
         {
+            if (entryorguid < 0)
+                entryorguid = await GetObjectIdByGuidAndSourceType(entryorguid, source_type);
+
             switch ((SourceTypes)source_type)
             {
                 case SourceTypes.SourceTypeCreature:
@@ -74,6 +77,9 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetObjectScriptName(int entryorguid, int source_type)
         {
+            if (entryorguid < 0)
+                entryorguid = await GetObjectIdByGuidAndSourceType(entryorguid, source_type);
+
             switch ((SourceTypes)source_type)
             {
                 case SourceTypes.SourceTypeCreature:
