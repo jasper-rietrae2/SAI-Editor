@@ -248,6 +248,25 @@ namespace SAI_Editor.Forms
             {
                 List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entryOrGuidAndSourceType.entryOrGuid, (int)entryOrGuidAndSourceType.sourceType);
 
+                switch (entryOrGuidAndSourceType.sourceType)
+                {
+                    case SourceTypes.SourceTypeCreature:
+                        revertQuery += "UPDATE creature_template SET Ainame='',Scriptname='" + await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureScriptNameById(entryOrGuidAndSourceType.entryOrGuid) + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
+                        break;
+                    case SourceTypes.SourceTypeGameobject:
+                        revertQuery += "UPDATE gameobject_template SET Ainame='',Scriptname='" + await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectScriptNameById(entryOrGuidAndSourceType.entryOrGuid) + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
+                        break;
+                    case SourceTypes.SourceTypeAreaTrigger:
+                        string scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetAreaTriggerScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
+
+                        if (scriptName != String.Empty)
+                            revertQuery += "UPDATE areatrigger_scripts SET Ainame='',Scriptname='" + scriptName + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
+                        else
+                            revertQuery += "DELETE FROM areatrigger_scripts WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
+
+                        break;
+                }
+
                 if (smartScripts == null || smartScripts.Count == 0)
                     continue;
 
