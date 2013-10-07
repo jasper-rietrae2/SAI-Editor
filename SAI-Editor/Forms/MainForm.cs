@@ -479,7 +479,7 @@ namespace SAI_Editor
             panelPermanentTooltipParameters.Visible = false;
             SaveLastUsedFields();
             ResetFieldsToDefault(true);
-            listViewSmartScripts.Items.Clear();
+            listViewSmartScripts.ReplaceData(new List<SmartScript>());
             StartContractingToLoginForm(Settings.Default.InstantExpand);
         }
 
@@ -1288,7 +1288,6 @@ namespace SAI_Editor
 
             if (checkBoxListActionlistsOrEntries.Checked)
             {
-                listViewSmartScripts.Items.Clear();
                 List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType);
                 listViewSmartScripts.ReplaceData(smartScripts);
                 SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0);
@@ -1432,7 +1431,7 @@ namespace SAI_Editor
         {
             // @Debug new AreatriggersForm().Show();
 
-            listViewSmartScripts.Items.Clear(); //! Clear this even if the search criteria was left empty
+            listViewSmartScripts.ReplaceData(new List<SmartScript>());
             ResetFieldsToDefault();
 
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
