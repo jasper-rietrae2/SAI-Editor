@@ -860,7 +860,9 @@ namespace SAI_Editor
                 return;
 
             FillFieldsBasedOnSelectedScript();
-            checkBoxListActionlistsOrEntries.Text = listViewSmartScripts.SelectedItems[0].SubItems[1].Text == "9" ? "List entries too" : "List actionlists too";
+
+            if (Settings.Default.ChangeStaticInfo)
+                checkBoxListActionlistsOrEntries.Text = listViewSmartScripts.SelectedItems[0].SubItems[1].Text == "9" ? "List entries too" : "List actionlists too";
         }
 
         private void FillFieldsBasedOnSelectedScript()
@@ -1448,7 +1450,9 @@ namespace SAI_Editor
             List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(textBoxEntryOrGuid.Text, newSourceType, showErrorIfNoneFound);
             listViewSmartScripts.ReplaceData(smartScripts);
 
-            checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
+            if (Settings.Default.ChangeStaticInfo)
+                checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
+
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
             HandleShowBasicInfo();
