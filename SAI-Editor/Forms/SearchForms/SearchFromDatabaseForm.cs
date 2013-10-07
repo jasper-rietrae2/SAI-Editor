@@ -339,7 +339,6 @@ namespace SAI_Editor
                         for (int i = 1; i < amountOfListviewColumns; ++i)
                             listViewItem.SubItems.Add(row.ItemArray[i].ToString());
 
-
                         items.Add(listViewItem);
                     }
 

@@ -2157,9 +2157,10 @@ namespace SAI_Editor
             newSmartScript.event_chance = 100;
             _smartScripts.Add(newSmartScript);
             listViewSmartScripts.ReplaceData(_smartScripts);
+            HandleShowBasicInfo();
             listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].Selected = true;
             listViewSmartScripts.Select();
-            HandleShowBasicInfo();
+            listViewSmartScripts.EnsureVisible(listViewSmartScripts.Items.Count - 1);
         }
 
         private string GenerateCommentForScript(SmartScript smartScript)
