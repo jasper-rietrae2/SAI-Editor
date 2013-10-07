@@ -1246,6 +1246,8 @@ namespace SAI_Editor
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
 
+            int prevSelectedIndex = listViewSmartScripts.SelectedItems[0].Index;
+
             if (listViewSmartScripts.SelectedItems[0].SubItems[0].Text == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
                 if (listViewSmartScripts.SelectedItems[0].SubItems[2].Text == lastSmartScriptIdOfScript.ToString())
                     lastSmartScriptIdOfScript--;
@@ -1257,7 +1259,15 @@ namespace SAI_Editor
             if (listViewSmartScripts.Items.Count <= 0)
                 ResetFieldsToDefault(true);
             else
-                listViewSmartScripts.Items[0].Selected = true;
+                ReselectListViewItemWithPrevIndex(prevSelectedIndex);
+        }
+
+        private void ReselectListViewItemWithPrevIndex(int prevIndex)
+        {
+            if (listViewSmartScripts.Items.Count > prevIndex)
+                listViewSmartScripts.Items[prevIndex].Selected = true;
+            else
+                listViewSmartScripts.Items[prevIndex - 1].Selected = true;
         }
 
         private async void checkBoxListActionlists_CheckedChanged(object sender, EventArgs e)
