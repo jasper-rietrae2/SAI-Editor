@@ -32,6 +32,7 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxCreateRevertQuery = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
             this.checkBoxShowTooltipsPermanently = new System.Windows.Forms.CheckBox();
             this.checkBoxChangeStaticInfo = new System.Windows.Forms.CheckBox();
@@ -60,7 +61,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonDefaultSettings = new System.Windows.Forms.Button();
-            this.checkBoxCreateRevertQuery = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -109,14 +109,24 @@
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
             // 
+            // checkBoxCreateRevertQuery
+            // 
+            this.checkBoxCreateRevertQuery.AutoSize = true;
+            this.checkBoxCreateRevertQuery.Location = new System.Drawing.Point(6, 190);
+            this.checkBoxCreateRevertQuery.Name = "checkBoxCreateRevertQuery";
+            this.checkBoxCreateRevertQuery.Size = new System.Drawing.Size(181, 17);
+            this.checkBoxCreateRevertQuery.TabIndex = 10;
+            this.checkBoxCreateRevertQuery.Text = "Create a revert query on execute";
+            this.checkBoxCreateRevertQuery.UseVisualStyleBackColor = true;
+            // 
             // checkBoxAutoGenerateComments
             // 
             this.checkBoxAutoGenerateComments.AutoSize = true;
             this.checkBoxAutoGenerateComments.Location = new System.Drawing.Point(6, 167);
             this.checkBoxAutoGenerateComments.Name = "checkBoxAutoGenerateComments";
-            this.checkBoxAutoGenerateComments.Size = new System.Drawing.Size(184, 17);
+            this.checkBoxAutoGenerateComments.Size = new System.Drawing.Size(183, 17);
             this.checkBoxAutoGenerateComments.TabIndex = 13;
-            this.checkBoxAutoGenerateComments.Text = "Automatically generate comments";
+            this.checkBoxAutoGenerateComments.Text = "Generate comments for new lines";
             this.checkBoxAutoGenerateComments.UseVisualStyleBackColor = true;
             // 
             // checkBoxShowTooltipsPermanently
@@ -400,16 +410,6 @@
             this.buttonDefaultSettings.Text = "Default";
             this.buttonDefaultSettings.UseVisualStyleBackColor = true;
             this.buttonDefaultSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
-            // 
-            // checkBoxCreateRevertQuery
-            // 
-            this.checkBoxCreateRevertQuery.AutoSize = true;
-            this.checkBoxCreateRevertQuery.Location = new System.Drawing.Point(6, 190);
-            this.checkBoxCreateRevertQuery.Name = "checkBoxCreateRevertQuery";
-            this.checkBoxCreateRevertQuery.Size = new System.Drawing.Size(181, 17);
-            this.checkBoxCreateRevertQuery.TabIndex = 10;
-            this.checkBoxCreateRevertQuery.Text = "Create a revert query on execute";
-            this.checkBoxCreateRevertQuery.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 

@@ -106,10 +106,6 @@ namespace SAI_Editor
                 textBoxWorldDatabase.Text = Settings.Default.Database;
                 textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
                 expandAndContractSpeed = Settings.Default.AnimationSpeed;
-
-                //! Handled when the initial animation finished
-                //if (Settings.Default.ShowTooltipsPermanently)
-                //    ExpandToShowPermanentTooltips(false);
             }
             catch (Exception ex)
             {
