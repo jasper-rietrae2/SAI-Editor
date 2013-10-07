@@ -197,8 +197,6 @@ namespace SAI_Editor
 
             SetPictureBoxLoadScriptEnabled(textBoxEntryOrGuid.Text.Length > 0);
 
-            menuItemRevertQuery.Enabled = Settings.Default.CreateRevertQuery;
-
             runningConstructor = false;
         }
 
