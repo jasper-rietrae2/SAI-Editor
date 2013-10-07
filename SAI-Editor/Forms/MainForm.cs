@@ -619,6 +619,9 @@ namespace SAI_Editor
 
             textBoxEntryOrGuid.Text = Settings.Default.LastEntryOrGuid;
             comboBoxSourceType.SelectedIndex = Settings.Default.LastSourceType;
+            checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
+            checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
+            checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
 
             if (expanding)
                 TryToLoadScript(false);
@@ -2595,6 +2598,9 @@ namespace SAI_Editor
         {
             Settings.Default.LastEntryOrGuid = textBoxEntryOrGuid.Text;
             Settings.Default.LastSourceType = comboBoxSourceType.SelectedIndex;
+            Settings.Default.ShowBasicInfo = checkBoxShowBasicInfo.Checked;
+            Settings.Default.LockSmartScriptId = checkBoxLockEventId.Checked;
+            Settings.Default.ListActionLists = checkBoxListActionlistsOrEntries.Checked;
             Settings.Default.Save();
         }
 
