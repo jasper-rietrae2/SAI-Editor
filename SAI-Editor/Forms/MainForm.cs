@@ -1267,6 +1267,7 @@ namespace SAI_Editor
 
             buttonGenerateSql.Enabled = false;
             menuItemGenerateSql.Enabled = false;
+            int prevSelectedIndex = listViewSmartScripts.SelectedItems[0].Index;
 
             if (checkBoxListActionlistsOrEntries.Checked)
             {
@@ -1280,6 +1281,10 @@ namespace SAI_Editor
                 RemoveNonOriginalScriptsFromView();
 
             HandleShowBasicInfo();
+
+            if (listViewSmartScripts.Items.Count > prevSelectedIndex)
+                listViewSmartScripts.Items[prevSelectedIndex].Selected = true;
+
             buttonGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
             menuItemGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
         }
