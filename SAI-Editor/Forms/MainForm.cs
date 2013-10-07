@@ -1406,7 +1406,7 @@ namespace SAI_Editor
             SmartScript newSmartScript = new SmartScript();
             newSmartScript.entryorguid = entryorguid;
             newSmartScript.source_type = source_type;
-            newSmartScript.id = 0;
+            newSmartScript.id = -1;
             newSmartScript.event_chance = 100;
 
             if (Settings.Default.GenerateComments)
@@ -2232,7 +2232,7 @@ namespace SAI_Editor
             if (checkBoxLockEventId.Checked)
                 newSmartScript.id = ++lastSmartScriptIdOfScript;
             else
-                newSmartScript.id = 0;
+                newSmartScript.id = -1;
 
             if (Settings.Default.GenerateComments)
                 newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
