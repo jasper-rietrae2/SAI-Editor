@@ -80,13 +80,13 @@ namespace System.Windows.Forms
 
             if (_smartScripts != null)
                 foreach (SmartScript script in _smartScripts)
-                    AddSmartScript(script);
+                    AddSmartScript(script, true);
 
             foreach (ColumnHeader header in Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-        public void AddSmartScript(SmartScript script)
+        public void AddSmartScript(SmartScript script, bool listViewOnly = false)
         {
             ListViewItem lvi = new ListViewItem(script.entryorguid.ToString());
             lvi.Name = script.entryorguid.ToString();
@@ -99,10 +99,32 @@ namespace System.Windows.Forms
                 lvi.SubItems.Add(propInfo.GetValue(script).ToString());
             }
 
-            if (_smartScripts.All(p => p.entryorguid != script.entryorguid))
+            if (!listViewOnly)
                 _smartScripts.Add(script);
 
             Items.Add(lvi);
+        }
+
+        public void AddSmartScripts(List<SmartScript> scripts, bool listViewOnly = false)
+        {
+            foreach (SmartScript script in scripts)
+            {
+                ListViewItem lvi = new ListViewItem(script.entryorguid.ToString());
+                lvi.Name = script.entryorguid.ToString();
+
+                foreach (PropertyInfo propInfo in _pinfo.Where(p => !p.Name.Equals("entryorguid")))
+                {
+                    if (_excludedProperties.Contains(propInfo.Name))
+                        continue;
+
+                    lvi.SubItems.Add(propInfo.GetValue(script).ToString());
+                }
+
+                if (!listViewOnly)
+                    _smartScripts.Add(script);
+
+                Items.Add(lvi);
+            }
         }
 
         public void RemoveSmartScript(SmartScript script)

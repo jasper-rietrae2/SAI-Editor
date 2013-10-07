@@ -629,8 +629,10 @@ namespace SAI_Editor
                 TryToLoadScript(false);
         }
 
-        private async Task<bool> SelectAndFillListViewByEntryAndSource(string entryOrGuid, SourceTypes sourceType, bool showError = true)
+        private async Task<List<SmartScript>> GetSmartScriptsForEntryAndSourceType(string entryOrGuid, SourceTypes sourceType, bool showError = true)
         {
+            List<SmartScript> smartScriptsToReturn = new List<SmartScript>();
+
             try
             {
                 List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(XConverter.ToInt32(entryOrGuid), (int)sourceType);
@@ -658,115 +660,115 @@ namespace SAI_Editor
                             switch (sourceType)
                             {
                                 case SourceTypes.SourceTypeCreature:
+                                {
+                                    //! Get `id` from `creature` and check it for SAI
+                                    if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
                                     {
-                                        //! Get `id` from `creature` and check it for SAI
-                                        if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
-                                        {
-                                            int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-XConverter.ToInt32(entryOrGuid));
-                                            smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeCreature);
+                                        int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-XConverter.ToInt32(entryOrGuid));
+                                        smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeCreature);
 
-                                            if (smartScripts != null)
+                                        if (smartScripts != null)
+                                        {
+                                            message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
+
+                                            if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                                             {
-                                                message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
+                                                textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
+                                                comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeCreature);
+                                                TryToLoadScript(true);
+                                            }
+                                        }
+                                        else
+                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    //! Get all `guid` instances from `creature` for the given `id` and allow user to select a script
+                                    else //! Non-guid (entry)
+                                    {
+                                        int actualEntry = XConverter.ToInt32(entryOrGuid);
+                                        List<Creature> creatures = await SAI_Editor_Manager.Instance.worldDatabase.GetCreaturesById(actualEntry);
+
+                                        if (creatures != null)
+                                        {
+                                            List<List<SmartScript>> creaturesWithSmartAi = new List<List<SmartScript>>();
+
+                                            foreach (Creature creature in creatures)
+                                            {
+                                                smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(-creature.guid, (int)SourceTypes.SourceTypeCreature);
+
+                                                if (smartScripts != null)
+                                                    creaturesWithSmartAi.Add(smartScripts);
+                                            }
+
+                                            if (creaturesWithSmartAi.Count > 0)
+                                            {
+                                                message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
 
                                                 if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-                                                {
-                                                    textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
-                                                    comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeCreature);
-                                                    TryToLoadScript(true);
-                                                }
+                                                    new SelectSmartScriptForm(creaturesWithSmartAi).ShowDialog(this);
                                             }
                                             else
                                                 MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         }
-                                        //! Get all `guid` instances from `creature` for the given `id` and allow user to select a script
-                                        else //! Non-guid (entry)
-                                        {
-                                            int actualEntry = XConverter.ToInt32(entryOrGuid);
-                                            List<Creature> creatures = await SAI_Editor_Manager.Instance.worldDatabase.GetCreaturesById(actualEntry);
-
-                                            if (creatures != null)
-                                            {
-                                                List<List<SmartScript>> creaturesWithSmartAi = new List<List<SmartScript>>();
-
-                                                foreach (Creature creature in creatures)
-                                                {
-                                                    smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(-creature.guid, (int)SourceTypes.SourceTypeCreature);
-
-                                                    if (smartScripts != null)
-                                                        creaturesWithSmartAi.Add(smartScripts);
-                                                }
-
-                                                if (creaturesWithSmartAi.Count > 0)
-                                                {
-                                                    message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
-
-                                                    if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-                                                        new SelectSmartScriptForm(creaturesWithSmartAi).ShowDialog(this);
-                                                }
-                                                else
-                                                    MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                            }
-                                            else
-                                                MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
-                                        break;
+                                        else
+                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
+                                    break;
+                                }
                                 case SourceTypes.SourceTypeGameobject:
+                                {
+                                    //! Get `id` from `gameobject` and check it for SAI
+                                    if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
                                     {
-                                        //! Get `id` from `gameobject` and check it for SAI
-                                        if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
-                                        {
-                                            int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-XConverter.ToInt32(entryOrGuid));
-                                            smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeGameobject);
+                                        int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-XConverter.ToInt32(entryOrGuid));
+                                        smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeGameobject);
 
-                                            if (smartScripts != null)
+                                        if (smartScripts != null)
+                                        {
+                                            message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
+
+                                            if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                                             {
-                                                message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
+                                                textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
+                                                comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeGameobject);
+                                                TryToLoadScript(true);
+                                            }
+                                        }
+                                        else
+                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                    //! Get all `guid` instances from `gameobject` for the given `id` and allow user to select a script
+                                    else //! Non-guid (entry)
+                                    {
+                                        int actualEntry = XConverter.ToInt32(entryOrGuid);
+                                        List<Gameobject> gameobjects = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectsById(actualEntry);
+
+                                        if (gameobjects != null)
+                                        {
+                                            List<List<SmartScript>> gameobjectsWithSmartAi = new List<List<SmartScript>>();
+
+                                            foreach (Gameobject gameobject in gameobjects)
+                                            {
+                                                smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(-gameobject.guid, (int)SourceTypes.SourceTypeGameobject);
+
+                                                if (smartScripts != null)
+                                                    gameobjectsWithSmartAi.Add(smartScripts);
+                                            }
+
+                                            if (gameobjectsWithSmartAi.Count > 0)
+                                            {
+                                                message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
 
                                                 if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-                                                {
-                                                    textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
-                                                    comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeGameobject);
-                                                    TryToLoadScript(true);
-                                                }
+                                                    new SelectSmartScriptForm(gameobjectsWithSmartAi).ShowDialog(this);
                                             }
                                             else
                                                 MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                         }
-                                        //! Get all `guid` instances from `gameobject` for the given `id` and allow user to select a script
-                                        else //! Non-guid (entry)
-                                        {
-                                            int actualEntry = XConverter.ToInt32(entryOrGuid);
-                                            List<Gameobject> gameobjects = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectsById(actualEntry);
-
-                                            if (gameobjects != null)
-                                            {
-                                                List<List<SmartScript>> gameobjectsWithSmartAi = new List<List<SmartScript>>();
-
-                                                foreach (Gameobject gameobject in gameobjects)
-                                                {
-                                                    smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(-gameobject.guid, (int)SourceTypes.SourceTypeGameobject);
-
-                                                    if (smartScripts != null)
-                                                        gameobjectsWithSmartAi.Add(smartScripts);
-                                                }
-
-                                                if (gameobjectsWithSmartAi.Count > 0)
-                                                {
-                                                    message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
-
-                                                    if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
-                                                        new SelectSmartScriptForm(gameobjectsWithSmartAi).ShowDialog(this);
-                                                }
-                                                else
-                                                    MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                            }
-                                            else
-                                                MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
-                                        break;
+                                        else
+                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
+                                    break;
+                                }
                                 default:
                                     MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
@@ -775,31 +777,43 @@ namespace SAI_Editor
                     }
 
                     SetPictureBoxLoadScriptEnabled(true);
-                    return false;
+                    return null;
                 }
-
-                listViewSmartScripts.ReplaceData(smartScripts);
 
                 for (int i = 0; i < smartScripts.Count; ++i)
                 {
+                    smartScriptsToReturn.Add(smartScripts[i]);
+
+                    if (!checkBoxListActionlistsOrEntries.Checked)
+                        continue;
+
                     if (i == smartScripts.Count - 1 && originalEntryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist)
                     {
-                        if (checkBoxListActionlistsOrEntries.Checked)
-                        {
-                            TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScripts[i], sourceType);
+                        TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScripts[i], sourceType);
 
-                            if (timedActionListOrEntries.sourceTypeOfEntry != SourceTypes.SourceTypeScriptedActionlist)
-                                foreach (string scriptEntry in timedActionListOrEntries.entries)
-                                    await SelectAndFillListViewByEntryAndSource(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
+                        if (timedActionListOrEntries.sourceTypeOfEntry != SourceTypes.SourceTypeScriptedActionlist)
+                        {
+                            foreach (string scriptEntry in timedActionListOrEntries.entries)
+                            {
+                                List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
+
+                                foreach (SmartScript item in newSmartScripts)
+                                    smartScriptsToReturn.Add(item);
+                            }
                         }
                     }
 
-                    if (checkBoxListActionlistsOrEntries.Checked && sourceType == originalEntryOrGuidAndSourceType.sourceType && originalEntryOrGuidAndSourceType.sourceType != SourceTypes.SourceTypeScriptedActionlist)
+                    if (sourceType == originalEntryOrGuidAndSourceType.sourceType && originalEntryOrGuidAndSourceType.sourceType != SourceTypes.SourceTypeScriptedActionlist)
                     {
                         TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScripts[i], sourceType);
 
                         foreach (string scriptEntry in timedActionListOrEntries.entries)
-                            await SelectAndFillListViewByEntryAndSource(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
+                        {
+                            List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
+
+                            foreach (SmartScript item in newSmartScripts)
+                                smartScriptsToReturn.Add(item);
+                        }
                     }
                 }
 
@@ -810,13 +824,10 @@ namespace SAI_Editor
             {
                 if (showError)
                     MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                SetPictureBoxLoadScriptEnabled(true);
-                return false;
             }
 
             SetPictureBoxLoadScriptEnabled(true);
-            return true;
+            return smartScriptsToReturn;
         }
 
         //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
@@ -1260,7 +1271,10 @@ namespace SAI_Editor
             if (checkBoxListActionlistsOrEntries.Checked)
             {
                 listViewSmartScripts.Items.Clear();
-                await SelectAndFillListViewByEntryAndSource(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType);
+                List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType);
+                listViewSmartScripts.ReplaceData(smartScripts);
+                //foreach (SmartScript smartScript in smartScripts)
+                //    listViewSmartScripts.AddSmartScript(smartScript);
             }
             else
                 RemoveNonOriginalScriptsFromView();
@@ -1331,7 +1345,10 @@ namespace SAI_Editor
             SourceTypes newSourceType = GetSourceTypeByIndex();
             originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
             originalEntryOrGuidAndSourceType.sourceType = newSourceType;
-            await SelectAndFillListViewByEntryAndSource(textBoxEntryOrGuid.Text, newSourceType, showErrorIfNoneFound);
+
+            List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(textBoxEntryOrGuid.Text, newSourceType, showErrorIfNoneFound);
+            listViewSmartScripts.ReplaceData(smartScripts);
+
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
