@@ -244,6 +244,7 @@
     <Content Include="Resources\1378477411_33795.ico" />
     <Content Include="Resources\icon_add.ico" />
     <Content Include="Resources\icon_add_2.ico" />
+    <None Include="Resources\icon_create_script.png" />
     <Content Include="Resources\icon_error.ico" />
     <Content Include="Resources\icon_info.ico" />
     <Content Include="Resources\icon_load_script.png" />

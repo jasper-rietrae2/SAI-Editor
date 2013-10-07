@@ -195,7 +195,8 @@ namespace SAI_Editor
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
 
-            SetPictureBoxLoadScriptEnabled(textBoxEntryOrGuid.Text.Length > 0);
+            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, textBoxEntryOrGuid.Text.Length > 0);
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0);
 
             runningConstructor = false;
         }
@@ -770,7 +771,8 @@ namespace SAI_Editor
                         }
                     }
 
-                    SetPictureBoxLoadScriptEnabled(true);
+                    SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
+                    SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0);
                     return null;
                 }
 
@@ -793,6 +795,8 @@ namespace SAI_Editor
 
                                 foreach (SmartScript item in newSmartScripts)
                                     smartScriptsToReturn.Add(item);
+
+                                SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0);
                             }
                         }
                     }
@@ -807,6 +811,8 @@ namespace SAI_Editor
 
                             foreach (SmartScript item in newSmartScripts)
                                 smartScriptsToReturn.Add(item);
+
+                            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0);
                         }
                     }
                 }
@@ -820,7 +826,8 @@ namespace SAI_Editor
                     MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            SetPictureBoxLoadScriptEnabled(true);
+            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0);
             return smartScriptsToReturn;
         }
 
@@ -1256,6 +1263,8 @@ namespace SAI_Editor
                 ResetFieldsToDefault(true);
             else
                 ReselectListViewItemWithPrevIndex(prevSelectedIndex);
+
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0);
         }
 
         private void ReselectListViewItemWithPrevIndex(int prevIndex)
@@ -1280,6 +1289,7 @@ namespace SAI_Editor
                 listViewSmartScripts.Items.Clear();
                 List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType);
                 listViewSmartScripts.ReplaceData(smartScripts);
+                SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0);
             }
             else
                 RemoveNonOriginalScriptsFromView();
@@ -1343,6 +1353,78 @@ namespace SAI_Editor
             TryToLoadScript(true);
         }
 
+        private void pictureBoxCreateScript_Click(object sender, EventArgs e)
+        {
+            if (!pictureBoxCreateScript.Enabled)
+                return;
+
+            if (String.IsNullOrWhiteSpace(textBoxEntryOrGuid.Text) || comboBoxSourceType.SelectedIndex == -1)
+                return;
+
+            TryToCreateScript();
+        }
+
+        public async void TryToCreateScript()
+        {
+            if (listViewSmartScripts.Items.Count > 0)
+            {
+                MessageBox.Show("This button should not be available if there are already lines in the listview, please report this as a bug!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
+            int source_type = (int)GetSourceTypeByIndex();
+            string sourceTypeString = GetSourceTypeString((SourceTypes)source_type);
+
+            if (await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(entryorguid, source_type) != String.Empty)
+            {
+                MessageBox.Show("This " + sourceTypeString + " already has its AIName set to SmartAI!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (await SAI_Editor_Manager.Instance.worldDatabase.GetObjectScriptName(entryorguid, source_type) != String.Empty)
+            {
+                MessageBox.Show("This " + sourceTypeString + " already has a ScriptName set!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entryorguid, source_type);
+
+            if (smartScripts != null && smartScripts.Count > 0)
+            {
+                MessageBox.Show("This " + sourceTypeString + " already has smart scripts!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            buttonNewLine.Enabled = false;
+            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, false);
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, false);
+
+            listViewSmartScripts.ReplaceData(new List<SmartScript>());
+
+            SmartScript newSmartScript = new SmartScript();
+            newSmartScript.entryorguid = entryorguid;
+            newSmartScript.source_type = source_type;
+            newSmartScript.id = 0;
+            newSmartScript.event_chance = 100;
+
+            if (Settings.Default.GenerateComments)
+                newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
+            else
+                newSmartScript.comment = "Npc - Event - Action (phase) (dungeon difficulty)";
+
+            listViewSmartScripts.AddSmartScript(newSmartScript);
+
+            HandleShowBasicInfo();
+            listViewSmartScripts.Items[newSmartScript.id].Selected = true;
+            listViewSmartScripts.Select();
+            listViewSmartScripts.EnsureVisible(newSmartScript.id);
+
+            buttonNewLine.Enabled = true;
+            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
+            //! Only re-enable the loadscript button as the createscript button must be disabled, still
+        }
+
         public async void TryToLoadScript(bool showErrorIfNoneFound)
         {
             // @Debug new AreatriggersForm().Show();
@@ -1355,7 +1437,8 @@ namespace SAI_Editor
 
             buttonGenerateSql.Enabled = false;
             menuItemGenerateSql.Enabled = false;
-            SetPictureBoxLoadScriptEnabled(false);
+            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, false);
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, false);
 
             SourceTypes newSourceType = GetSourceTypeByIndex();
             originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
@@ -1387,6 +1470,7 @@ namespace SAI_Editor
 
             buttonGenerateSql.Enabled = true;
             menuItemGenerateSql.Enabled = true;
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0);
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
@@ -2414,7 +2498,8 @@ namespace SAI_Editor
 
         private void textBoxEntryOrGuid_TextChanged(object sender, EventArgs e)
         {
-            SetPictureBoxLoadScriptEnabled(textBoxEntryOrGuid.Text.Length > 0);
+            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, textBoxEntryOrGuid.Text.Length > 0);
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0);
         }
 
         private void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2433,10 +2518,10 @@ namespace SAI_Editor
                 new SqlOutputForm(listViewSmartScripts.SmartScripts).ShowDialog(this);
         }
 
-        private void SetPictureBoxLoadScriptEnabled(bool enable)
+        private void SetPictureBoxEnabled(PictureBox pictureBox, Image image, bool enable)
         {
-            Bitmap pic = new Bitmap(SAI_Editor.Properties.Resources.icon_load_script);
-            pictureBoxLoadScript.Enabled = enable;
+            Bitmap pic = new Bitmap(image);
+            pictureBox.Enabled = enable;
 
             if (!enable)
             {
@@ -2452,7 +2537,7 @@ namespace SAI_Editor
                 }
             }
 
-            pictureBoxLoadScript.Image = pic;
+            pictureBox.Image = pic;
         }
 
         public async void GenerateCommentsForAllItems()

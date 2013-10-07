@@ -57,6 +57,86 @@ namespace SAI_Editor.Database
             return 0;
         }
 
+        public async Task<string> GetObjectAiName(int entryorguid, int source_type)
+        {
+            switch ((SourceTypes)source_type)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return await GetCreatureAiNameById(entryorguid);
+                case SourceTypes.SourceTypeGameobject:
+                    return await GetGameobjectAiNameById(entryorguid);
+                case SourceTypes.SourceTypeAreaTrigger:
+                    return await GetAreaTriggerScriptNameById(entryorguid);
+            }
+
+            return String.Empty;
+        }
+
+        public async Task<string> GetObjectScriptName(int entryorguid, int source_type)
+        {
+            switch ((SourceTypes)source_type)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return await GetCreatureScriptNameById(entryorguid);
+                case SourceTypes.SourceTypeGameobject:
+                    return await GetGameobjectScriptNameById(entryorguid);
+                case SourceTypes.SourceTypeAreaTrigger:
+                    return await GetAreaTriggerScriptNameById(entryorguid);
+            }
+
+            return String.Empty;
+        }
+
+        public async Task<string> GetCreatureAiNameById(int id)
+        {
+            DataTable dt = await ExecuteQuery("SELECT ainame FROM creature_template WHERE entry = '" + id + "'");
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["ainame"].ToString();
+        }
+
+        public async Task<string> GetCreatureScriptNameById(int id)
+        {
+            DataTable dt = await ExecuteQuery("SELECT scriptname FROM creature_template WHERE entry = '" + id + "'");
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["scriptname"].ToString();
+        }
+
+        public async Task<string> GetGameobjectAiNameById(int id)
+        {
+            DataTable dt = await ExecuteQuery("SELECT ainame FROM gameobject_template WHERE entry = '" + id + "'");
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["ainame"].ToString();
+        }
+
+        public async Task<string> GetGameobjectScriptNameById(int id)
+        {
+            DataTable dt = await ExecuteQuery("SELECT scriptname FROM gameobject_template WHERE entry = '" + id + "'");
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["scriptname"].ToString();
+        }
+
+        public async Task<string> GetAreaTriggerScriptNameById(int id)
+        {
+            DataTable dt = await ExecuteQuery("SELECT scriptname FROM areatrigger_scripts WHERE entry = '" + id + "'");
+
+            if (dt.Rows.Count == 0)
+                return String.Empty;
+
+            return dt.Rows[0]["scriptname"].ToString();
+        }
+
         public async Task<string> GetCreatureNameById(int id)
         {
             //DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = '@id'", new MySqlParameter("@id", id));

@@ -52,10 +52,10 @@ namespace SAI_Editor
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.menuHeaderFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemGenerateSql = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemRevertQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDeleteSelectedRow = new System.Windows.Forms.ToolStripMenuItem();
@@ -67,6 +67,7 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
+            this.pictureBoxCreateScript = new System.Windows.Forms.PictureBox();
             this.pictureBoxLoadScript = new System.Windows.Forms.PictureBox();
             this.buttonSearchForCreature = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -182,6 +183,7 @@ namespace SAI_Editor
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
@@ -397,13 +399,6 @@ namespace SAI_Editor
             this.menuItemSettings.Text = "Settings";
             this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
             // 
-            // menuItemReconnect
-            // 
-            this.menuItemReconnect.Name = "menuItemReconnect";
-            this.menuItemReconnect.Size = new System.Drawing.Size(189, 22);
-            this.menuItemReconnect.Text = "Re-connect";
-            this.menuItemReconnect.Click += new System.EventHandler(this.menuItemReconnect_Click);
-            // 
             // menuItemGenerateSql
             // 
             this.menuItemGenerateSql.Enabled = false;
@@ -423,6 +418,13 @@ namespace SAI_Editor
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(186, 6);
+            // 
+            // menuItemReconnect
+            // 
+            this.menuItemReconnect.Name = "menuItemReconnect";
+            this.menuItemReconnect.Size = new System.Drawing.Size(189, 22);
+            this.menuItemReconnect.Text = "Re-connect";
+            this.menuItemReconnect.Click += new System.EventHandler(this.menuItemReconnect_Click);
             // 
             // menuItemExit
             // 
@@ -504,6 +506,7 @@ namespace SAI_Editor
             // 
             // groupBoxStaticScriptInfo
             // 
+            this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBoxCreateScript);
             this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBoxLoadScript);
             this.groupBoxStaticScriptInfo.Controls.Add(this.buttonSearchForCreature);
             this.groupBoxStaticScriptInfo.Controls.Add(this.label4);
@@ -518,6 +521,20 @@ namespace SAI_Editor
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
             // 
+            // pictureBoxCreateScript
+            // 
+            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCreateScript.Enabled = false;
+            this.pictureBoxCreateScript.Image = global::SAI_Editor.Properties.Resources.icon_create_script;
+            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
+            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCreateScript.TabIndex = 16;
+            this.pictureBoxCreateScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            // 
             // pictureBoxLoadScript
             // 
             this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -529,12 +546,12 @@ namespace SAI_Editor
             this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxLoadScript.TabIndex = 16;
             this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load existing scripts");
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
             this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // buttonSearchForCreature
             // 
-            this.buttonSearchForCreature.Location = new System.Drawing.Point(236, 18);
+            this.buttonSearchForCreature.Location = new System.Drawing.Point(211, 18);
             this.buttonSearchForCreature.Name = "buttonSearchForCreature";
             this.buttonSearchForCreature.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchForCreature.TabIndex = 1;
@@ -578,7 +595,7 @@ namespace SAI_Editor
             // 
             this.textBoxEntryOrGuid.Location = new System.Drawing.Point(101, 19);
             this.textBoxEntryOrGuid.Name = "textBoxEntryOrGuid";
-            this.textBoxEntryOrGuid.Size = new System.Drawing.Size(135, 20);
+            this.textBoxEntryOrGuid.Size = new System.Drawing.Size(110, 20);
             this.textBoxEntryOrGuid.TabIndex = 0;
             this.textBoxEntryOrGuid.TextChanged += new System.EventHandler(this.textBoxEntryOrGuid_TextChanged);
             this.textBoxEntryOrGuid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -2055,6 +2072,7 @@ namespace SAI_Editor
             this.panelLoginBox.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
@@ -2227,6 +2245,7 @@ namespace SAI_Editor
         public System.Windows.Forms.SmartScriptListView listViewSmartScripts;
         private System.Windows.Forms.Button buttonGenerateComments;
         public System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
+        public System.Windows.Forms.PictureBox pictureBoxCreateScript;
     }
 }
 
