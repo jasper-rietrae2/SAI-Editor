@@ -835,12 +835,14 @@ namespace SAI_Editor
 
         private void menuItemSettings_Click(object sender, EventArgs e)
         {
-            new SettingsForm().ShowDialog(this);
+            using (SettingsForm settingsForm = new SettingsForm())
+                settingsForm.ShowDialog(this);
         }
 
         private void menuItemAbout_Click(object sender, EventArgs e)
         {
-            new AboutForm().ShowDialog(this);
+            using (AboutForm aboutForm = new AboutForm())
+                aboutForm.ShowDialog(this);
         }
 
         private void listViewSmartScripts_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)

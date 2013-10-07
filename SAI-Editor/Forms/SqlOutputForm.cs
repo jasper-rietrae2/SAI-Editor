@@ -255,9 +255,6 @@ namespace SAI_Editor.Forms
                 {
                     SmartScript smartScript = smartScripts[i];
 
-                    if (i > 0)
-                        revertQuery += "\n";
-
                     revertQuery += "UPDATE smart_scripts SET ";
                     revertQuery += String.Format("event_type={0},event_phase_mask={1},event_chance={2},event_flags={3},", smartScript.event_type, smartScript.event_phase_mask, smartScript.event_chance, smartScript.event_flags);
                     revertQuery += String.Format("event_param1={0},event_param2={1},event_param3={2},event_param4={3},", smartScript.event_param1, smartScript.event_param2, smartScript.event_param3, smartScript.event_param4);
