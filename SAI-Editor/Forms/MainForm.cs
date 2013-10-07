@@ -2517,7 +2517,7 @@ namespace SAI_Editor
                 return;
 
             string newComment = await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, false, listViewSmartScripts
-                .SmartScripts.Single(p => p.entryorguid.ToString() == lvi2.Text));
+                .SmartScripts.Single(p => p.entryorguid.ToString() == lvi2.Text && p.id.ToString() == lvi2.SubItems[2].Text));
 
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
