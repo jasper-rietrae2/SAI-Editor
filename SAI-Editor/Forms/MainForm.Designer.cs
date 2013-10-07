@@ -381,10 +381,10 @@ namespace SAI_Editor
             // 
             this.menuHeaderFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSettings,
-            this.menuItemReconnect,
             this.menuItemGenerateSql,
             this.menuItemRevertQuery,
             this.toolStripSeparator2,
+            this.menuItemReconnect,
             this.menuItemExit});
             this.menuHeaderFiles.Name = "menuHeaderFiles";
             this.menuHeaderFiles.Size = new System.Drawing.Size(37, 20);
