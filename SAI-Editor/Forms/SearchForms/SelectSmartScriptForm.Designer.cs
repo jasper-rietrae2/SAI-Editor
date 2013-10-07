@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectSmartScriptForm));
             this.listBoxGuids = new System.Windows.Forms.ListBox();
-            this.listViewSmartScripts = new System.Windows.Forms.ListView();
+            this.listViewSmartScripts = new System.Windows.Forms.SmartScriptListView();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonLoadScript = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -102,7 +102,7 @@
         #endregion
 
         private System.Windows.Forms.ListBox listBoxGuids;
-        private System.Windows.Forms.ListView listViewSmartScripts;
+        private System.Windows.Forms.SmartScriptListView listViewSmartScripts;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonLoadScript;
 
