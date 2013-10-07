@@ -330,7 +330,6 @@ namespace SAI_Editor
 
                 if (dt.Rows.Count > 0)
                 {
-
                     List<ListViewItem> items = new List<ListViewItem>();
 
                     foreach (DataRow row in dt.Rows)
@@ -342,7 +341,6 @@ namespace SAI_Editor
 
 
                         items.Add(listViewItem);
-
                     }
 
                     //listViewEntryResults.Items.AddRange(items.ToArray());

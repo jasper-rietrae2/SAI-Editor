@@ -43,9 +43,7 @@ namespace SAI_Editor
                 listBoxGuids.SelectedIndex = 0;
 
             listViewSmartScripts.Items.Clear();
-
-            foreach (SmartScript smartScript in items[listBoxGuids.SelectedIndex])
-                listViewSmartScripts.AddSmartScript(smartScript);
+            listViewSmartScripts.AddSmartScripts(items[listBoxGuids.SelectedIndex]);
 
             foreach (ColumnHeader header in listViewSmartScripts.Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);

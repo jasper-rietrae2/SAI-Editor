@@ -77,8 +77,7 @@ namespace System.Windows.Forms
             }
 
             if (_smartScripts != null)
-                foreach (SmartScript script in _smartScripts)
-                    AddSmartScript(script, true);
+                AddSmartScripts(_smartScripts, true);
 
             foreach (ColumnHeader header in Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
@@ -105,6 +104,8 @@ namespace System.Windows.Forms
 
         public void AddSmartScripts(List<SmartScript> scripts, bool listViewOnly = false)
         {
+            List<ListViewItem> items = new List<ListViewItem>();
+
             foreach (SmartScript script in scripts)
             {
                 ListViewItem lvi = new ListViewItem(script.entryorguid.ToString());
@@ -121,8 +122,10 @@ namespace System.Windows.Forms
                 if (!listViewOnly)
                     _smartScripts.Add(script);
 
-                Items.Add(lvi);
+                items.Add(lvi);
             }
+
+            Items.AddRange(items.ToArray());
         }
 
         public void RemoveSmartScript(SmartScript script)
