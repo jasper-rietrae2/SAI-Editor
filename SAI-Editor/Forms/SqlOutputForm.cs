@@ -274,7 +274,23 @@ namespace SAI_Editor.Forms
         {
             //! Example output:
             //! [Creature][33303] 3-10-2013 15.32.40.sql
-            string filename = @"Reverts\[" + GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType) + "] [" + originalEntryOrGuidAndSourceType.entryOrGuid + "] " + DateTime.Now.ToString() + ".sql";
+            string filename = @"Reverts\[" + GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType) + "] [";
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = GetUniqueEntriesOrGuidsAndSourceTypes();
+
+            if (entriesOrGuidsAndSourceTypes.Count > 1)
+            {
+                for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
+                {
+                    filename += entriesOrGuidsAndSourceTypes[i].entryOrGuid;
+
+                    if (i < entriesOrGuidsAndSourceTypes.Count - 1)
+                        filename += " - ";
+                }
+
+                filename += "] " + DateTime.Now.ToString() + ".sql";
+            }
+            else
+                filename += originalEntryOrGuidAndSourceType.entryOrGuid + "] " + DateTime.Now.ToString() + ".sql";
 
             if (!Directory.Exists("Reverts"))
                 Directory.CreateDirectory("Reverts");
