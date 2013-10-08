@@ -2278,7 +2278,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.link = XConverter.ToInt32(textBoxLinkTo.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[3].Text = textBoxLinkTo.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2289,7 +2288,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.comment = textBoxComments.Text;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[27].Text = textBoxComments.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2300,7 +2298,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.event_phase_mask = XConverter.ToInt32(textBoxEventPhasemask.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[5].Text = textBoxEventPhasemask.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2309,9 +2306,8 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.event_chance = (int)textBoxEventChance.Value;
+                listViewSmartScripts.SelectedSmartScript.event_chance = (int)textBoxEventChance.Value; //! Using .Text propert results in wrong value
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[6].Text = textBoxEventChance.Value.ToString(); //! Using .Text propert results in wrong value
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2322,7 +2318,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.event_flags = XConverter.ToInt32(textBoxEventFlags.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[7].Text = textBoxEventFlags.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2338,7 +2333,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.event_param1 = XConverter.ToInt32(textBoxEventParam1.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[8].Text = textBoxEventParam1.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2349,7 +2343,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.event_param2 = XConverter.ToInt32(textBoxEventParam2.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[9].Text = textBoxEventParam2.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2360,7 +2353,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.event_param3 = XConverter.ToInt32(textBoxEventParam3.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[10].Text = textBoxEventParam3.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2371,7 +2363,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.event_param3 = XConverter.ToInt32(textBoxEventParam4.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[11].Text = textBoxEventParam4.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2382,7 +2373,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.action_param1 = XConverter.ToInt32(textBoxActionParam1.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[13].Text = textBoxActionParam1.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2393,7 +2383,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.action_param2 = XConverter.ToInt32(textBoxActionParam2.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[14].Text = textBoxActionParam2.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2404,7 +2393,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.action_param3 = XConverter.ToInt32(textBoxActionParam3.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[15].Text = textBoxActionParam3.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2415,7 +2403,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.action_param4 = XConverter.ToInt32(textBoxActionParam4.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[16].Text = textBoxActionParam4.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2426,7 +2413,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.action_param5 = XConverter.ToInt32(textBoxActionParam5.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[17].Text = textBoxActionParam5.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2437,7 +2423,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.action_param6 = XConverter.ToInt32(textBoxActionParam6.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[18].Text = textBoxActionParam6.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2448,7 +2433,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.target_param1 = XConverter.ToInt32(textBoxTargetParam1.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[20].Text = textBoxTargetParam1.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2459,7 +2443,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.target_param2 = XConverter.ToInt32(textBoxTargetParam2.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[21].Text = textBoxTargetParam2.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2470,7 +2453,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.target_param3 = XConverter.ToInt32(textBoxTargetParam3.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[22].Text = textBoxTargetParam3.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2481,7 +2463,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.target_x = XConverter.ToInt32(textBoxTargetX.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[23].Text = textBoxTargetX.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2492,7 +2473,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.target_y = XConverter.ToInt32(textBoxTargetY.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[24].Text = textBoxTargetY.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2513,7 +2493,6 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.target_o = XConverter.ToInt32(textBoxTargetO.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[26].Text = textBoxTargetO.Text;
                 GenerateCommentAndResizeColumns();
             }
         }
@@ -2551,10 +2530,12 @@ namespace SAI_Editor
                 {
                     for (int h = 0; h < pic.Height; h++)
                     {
-                        Color c = pic.GetPixel(w, h);
+                        Color pixelColor = pic.GetPixel(w, h);
 
-                        if (c.A != 0 && c.B != 0 && c.G != 0)
-                            pic.SetPixel(w, h, Color.FromArgb(70, c));
+                        //! We only set the color to gray/white ish with an alpha effect on pixels containing an
+                        //! actual color. Else it looks really weird and not actually disabled at all.
+                        if (pixelColor.A != 0 && pixelColor.B != 0 && pixelColor.G != 0)
+                            pic.SetPixel(w, h, Color.FromArgb(70, pixelColor));
                     }
                 }
             }
