@@ -187,10 +187,15 @@ namespace SAI_Editor.Forms
 
             if (await SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(richTextBoxSqlOutput.Text))
             {
-                MessageBox.Show("The query has been executed succesfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                string message = "The query has been executed succesfully!";
 
                 if (Settings.Default.CreateRevertQuery)
+                {
                     CreateRevertQuery(revertQuery);
+                    message += "\n\nA revert query has also been generated to reset the script back to its previous (current) state. To view all revert queries, open the Revert Query Form from the File menu option.";
+                }
+
+                MessageBox.Show(message, "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
