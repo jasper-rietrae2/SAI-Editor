@@ -1298,7 +1298,25 @@ namespace SAI_Editor
             if (checkBoxListActionlistsOrEntries.Checked)
             {
                 List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType);
-                listViewSmartScripts.ReplaceData(smartScripts);
+                List<SmartScript> newSmartScripts = new List<SmartScript>();
+
+                foreach (SmartScript newSmartScript in smartScripts)
+                {
+                    bool isActuallyNew = true;
+
+                    foreach (SmartScript listSmartScript in listViewSmartScripts.SmartScripts)
+                    {
+                        if (listSmartScript.entryorguid == newSmartScript.entryorguid && listSmartScript.id == newSmartScript.id)
+                        {
+                            isActuallyNew = false;
+                            break;
+                        }
+                    }
+
+                    if (isActuallyNew)
+                        listViewSmartScripts.AddSmartScript(newSmartScript);
+                }
+
                 SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0 && textBoxEntryOrGuid.Text.Length > 0);
             }
             else
