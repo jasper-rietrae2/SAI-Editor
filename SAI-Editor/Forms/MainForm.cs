@@ -2612,34 +2612,34 @@ namespace SAI_Editor
 
         private async void GenerateCommentAndResizeColumns()
         {
-            if (listViewSmartScripts.SelectedItems.Count == 0)
+            if (listViewSmartScripts.SelectedItems.Count == 0 || !Settings.Default.GenerateComments)
                 return;
 
             SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
-            string oldComment = selectedScript.comment;
+            SmartScript smartScriptLink = null;
 
-            ListViewItem lvi = listViewSmartScripts.Items.Cast<ListViewItem>().First(p => p.Text == listViewSmartScripts.SelectedSmartScript.entryorguid.ToString());
+            for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
+            {
+                if (listViewSmartScripts.SmartScripts[i].entryorguid == selectedScript.entryorguid && listViewSmartScripts.SmartScripts[i].id == selectedScript.id)
+                {
+                    if (i > 0 && listViewSmartScripts.SmartScripts.Count > i)
+                        smartScriptLink = listViewSmartScripts.SmartScripts[i - 1];
 
-            if (lvi == null)
-                return;
+                    break;
+                }
+            }
 
-            if (lvi.Index <= 0)
-                return;
-
-            ListViewItem lvi2 = listViewSmartScripts.Items[lvi.Index - 1];
-
-            if (lvi2 == null)
-                return;
-
-            string newComment = await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, false, listViewSmartScripts
-                .SmartScripts.Single(p => p.entryorguid.ToString() == lvi2.Text && p.id.ToString() == lvi2.SubItems[2].Text));
+            string newComment = await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, false, smartScriptLink);
 
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
 
+            string oldComment = selectedScript.comment;
+
             newComment = newComment.Replace("_previousLineComment_", "MISSING LINK");
             selectedScript.comment = newComment;
+            listViewSmartScripts.ReplaceSmartScript(selectedScript);
 
             if (oldComment != newComment)
                 ResizeColumns();
