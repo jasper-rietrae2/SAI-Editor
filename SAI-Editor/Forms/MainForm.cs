@@ -2247,11 +2247,6 @@ namespace SAI_Editor
             }
 
             buttonNewLine.Enabled = false;
-            List<SmartScript> _smartScripts = new List<SmartScript>();
-
-            foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
-                _smartScripts.Add(smartScript);
-
             SmartScript newSmartScript = new SmartScript();
             newSmartScript.entryorguid = originalEntryOrGuidAndSourceType.entryOrGuid;
             newSmartScript.source_type = (int)originalEntryOrGuidAndSourceType.sourceType;
@@ -2267,13 +2262,12 @@ namespace SAI_Editor
                 newSmartScript.comment = "Npc - Event - Action (phase) (dungeon difficulty)";
 
             newSmartScript.event_chance = 100;
-            _smartScripts.Add(newSmartScript);
-            listViewSmartScripts.ReplaceSmartScripts(_smartScripts);
+            int index = listViewSmartScripts.AddSmartScript(newSmartScript);
             HandleShowBasicInfo();
 
-            listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].Selected = true;
+            listViewSmartScripts.Items[index].Selected = true;
             listViewSmartScripts.Select();
-            listViewSmartScripts.EnsureVisible(listViewSmartScripts.Items.Count - 1);
+            listViewSmartScripts.EnsureVisible(index);
 
             buttonNewLine.Enabled = true;
         }

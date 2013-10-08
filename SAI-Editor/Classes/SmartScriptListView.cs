@@ -83,7 +83,7 @@ namespace System.Windows.Forms
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
-        public void AddSmartScript(SmartScript script, bool listViewOnly = false)
+        public int AddSmartScript(SmartScript script, bool listViewOnly = false)
         {
             ListViewItem lvi = new ListViewItem(script.entryorguid.ToString());
             lvi.Name = script.entryorguid.ToString();
@@ -99,7 +99,7 @@ namespace System.Windows.Forms
             if (!listViewOnly)
                 _smartScripts.Add(script);
 
-            Items.Add(lvi);
+            return Items.Add(lvi).Index;
         }
 
         public void AddSmartScripts(List<SmartScript> scripts, bool listViewOnly = false)
