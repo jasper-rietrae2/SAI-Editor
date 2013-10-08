@@ -178,6 +178,7 @@ namespace SAI_Editor
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
             this.listViewSmartScripts = new System.Windows.Forms.SmartScriptListView();
+            this.menuItemGenerateCommentListView = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -482,14 +483,15 @@ namespace SAI_Editor
             // contextMenuStripListView
             // 
             this.contextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemGenerateCommentListView,
             this.menuItemDeleteSelectedRowListView});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(131, 26);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(177, 70);
             // 
             // menuItemDeleteSelectedRowListView
             // 
             this.menuItemDeleteSelectedRowListView.Name = "menuItemDeleteSelectedRowListView";
-            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(130, 22);
+            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(176, 22);
             this.menuItemDeleteSelectedRowListView.Text = "Delete row";
             this.menuItemDeleteSelectedRowListView.Click += new System.EventHandler(this.testToolStripMenuItemDeleteRow_Click);
             // 
@@ -2036,6 +2038,13 @@ namespace SAI_Editor
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
+            // menuItemGenerateCommentListView
+            // 
+            this.menuItemGenerateCommentListView.Name = "menuItemGenerateCommentListView";
+            this.menuItemGenerateCommentListView.Size = new System.Drawing.Size(176, 22);
+            this.menuItemGenerateCommentListView.Text = "Generate comment";
+            this.menuItemGenerateCommentListView.Click += new System.EventHandler(this.menuItemGenerateCommentListView_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2246,6 +2255,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Button buttonGenerateComments;
         public System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
         public System.Windows.Forms.PictureBox pictureBoxCreateScript;
+        private System.Windows.Forms.ToolStripMenuItem menuItemGenerateCommentListView;
     }
 }
 

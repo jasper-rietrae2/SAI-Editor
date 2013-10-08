@@ -145,6 +145,7 @@ namespace SAI_Editor
             menuItemDeleteSelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + D)";
             menuItemGenerateSql.ShortcutKeyDisplayString = "(Ctrl + M)";
             menuItemRevertQuery.ShortcutKeyDisplayString = "(Ctrl + R)";
+            menuItemGenerateCommentListView.ShortcutKeyDisplayString = "(Ctrl + G)";
 
             if (Settings.Default.AutoConnect)
             {
@@ -462,6 +463,11 @@ namespace SAI_Editor
                 {
                     if (menuItemRevertQuery.Enabled)
                         menuItemRevertQuery.PerformClick();
+                }
+                else if (e.KeyData == (Keys.Control | Keys.G) || e.KeyData == (Keys.ControlKey | Keys.G))
+                {
+                    if (menuItemGenerateCommentListView.Enabled)
+                        menuItemGenerateCommentListView.PerformClick();
                 }
             }
         }
@@ -2254,11 +2260,6 @@ namespace SAI_Editor
             buttonNewLine.Enabled = true;
         }
 
-        private string GenerateCommentForScript(SmartScript smartScript)
-        {
-            return String.Empty;
-        }
-
         private void textBoxLinkTo_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
@@ -2692,6 +2693,44 @@ namespace SAI_Editor
                 listViewSmartScripts.Items[prevSelectedIndex].Selected = true;
 
             listViewSmartScripts.Select(); //! Sets the focus on the listview
+        }
+
+        private async void menuItemGenerateCommentListView_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
+            {
+                SmartScript smartScript = listViewSmartScripts.SmartScripts[i];
+
+                if (smartScript != listViewSmartScripts.SelectedSmartScript)
+                    continue;
+
+                SmartScript smartScriptLink = null;
+
+                if (i > 0 && smartScript.event_type == (int)SmartEvent.SMART_EVENT_LINK)
+                {
+                    smartScriptLink = listViewSmartScripts.SmartScripts[i - 1];
+
+                    if (smartScriptLink.link == 0)
+                        smartScriptLink = null;
+                    else
+                    {
+                        int x = i;
+
+                        while (smartScriptLink.event_type == (int)SmartEvent.SMART_EVENT_LINK)
+                        {
+                            smartScriptLink = listViewSmartScripts.SmartScripts[x - 1];
+                            x--;
+                        }
+                    }
+                }
+
+                string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+                newComment = newComment.Replace("_previousLineComment_", "MISSING LINK");
+                smartScript.comment = newComment;
+                listViewSmartScripts.ReplaceSmartScript(smartScript);
+            }
+
+            textBoxComments.Text = listViewSmartScripts.SelectedSmartScript.comment;
         }
     }
 }
