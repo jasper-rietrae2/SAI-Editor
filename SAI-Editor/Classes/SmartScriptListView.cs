@@ -201,6 +201,12 @@ namespace System.Windows.Forms
             Init();
         }
 
+        public void ReplaceSmartScripts(List<SmartScript> scripts)
+        {
+            _smartScripts = scripts;
+            Init();
+        }
+
         public void IncludeProperty(string propName)
         {
             _excludedProperties.Remove(propName);

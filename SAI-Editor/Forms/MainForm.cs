@@ -485,7 +485,7 @@ namespace SAI_Editor
             panelPermanentTooltipParameters.Visible = false;
             SaveLastUsedFields();
             ResetFieldsToDefault(true);
-            listViewSmartScripts.ReplaceData(new List<SmartScript>());
+            listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
             StartContractingToLoginForm(Settings.Default.InstantExpand);
         }
 
@@ -1428,7 +1428,7 @@ namespace SAI_Editor
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, false);
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, false);
 
-            listViewSmartScripts.ReplaceData(new List<SmartScript>());
+            listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
 
             SmartScript newSmartScript = new SmartScript();
             newSmartScript.entryorguid = entryorguid;
@@ -1458,7 +1458,7 @@ namespace SAI_Editor
         {
             // @Debug new AreatriggersForm().Show();
 
-            listViewSmartScripts.ReplaceData(new List<SmartScript>());
+            listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
             ResetFieldsToDefault();
 
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
@@ -1474,7 +1474,7 @@ namespace SAI_Editor
             originalEntryOrGuidAndSourceType.sourceType = newSourceType;
 
             List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(textBoxEntryOrGuid.Text, newSourceType, showErrorIfNoneFound);
-            listViewSmartScripts.ReplaceData(smartScripts);
+            listViewSmartScripts.ReplaceSmartScripts(smartScripts);
 
             if (Settings.Default.ChangeStaticInfo)
                 checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
@@ -2268,7 +2268,7 @@ namespace SAI_Editor
 
             newSmartScript.event_chance = 100;
             _smartScripts.Add(newSmartScript);
-            listViewSmartScripts.ReplaceData(_smartScripts);
+            listViewSmartScripts.ReplaceSmartScripts(_smartScripts);
             HandleShowBasicInfo();
 
             listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].Selected = true;
