@@ -1409,7 +1409,11 @@ namespace SAI_Editor
 
             if (await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(entryorguid, source_type) != String.Empty)
             {
-                MessageBox.Show("This " + sourceTypeString + " already has its AIName set to SmartAI!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult dialogResult = MessageBox.Show("This " + sourceTypeString + " already has its AIName set to SmartAI! Do you want to load it instead?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dialogResult == DialogResult.Yes)
+                    TryToLoadScript(true);
+
                 return;
             }
 
