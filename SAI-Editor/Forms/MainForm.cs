@@ -197,7 +197,7 @@ namespace SAI_Editor
             panelPermanentTooltipParameters.Visible = false;
 
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, textBoxEntryOrGuid.Text.Length > 0);
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0 && textBoxEntryOrGuid.Text.Length > 0);
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
 
             runningConstructor = false;
         }
@@ -781,7 +781,7 @@ namespace SAI_Editor
                     }
 
                     SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
-                    SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0 && textBoxEntryOrGuid.Text.Length > 0);
+                    SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
                     return null;
                 }
 
@@ -805,7 +805,7 @@ namespace SAI_Editor
                                 foreach (SmartScript item in newSmartScripts)
                                     smartScriptsToReturn.Add(item);
 
-                                SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0 && textBoxEntryOrGuid.Text.Length > 0);
+                                SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
                             }
                         }
                     }
@@ -821,7 +821,7 @@ namespace SAI_Editor
                             foreach (SmartScript item in newSmartScripts)
                                 smartScriptsToReturn.Add(item);
 
-                            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0 && textBoxEntryOrGuid.Text.Length > 0);
+                            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
                         }
                     }
                 }
@@ -836,7 +836,7 @@ namespace SAI_Editor
             }
 
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0 && textBoxEntryOrGuid.Text.Length > 0);
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
             return smartScriptsToReturn;
         }
 
@@ -1275,7 +1275,8 @@ namespace SAI_Editor
             else
                 ReselectListViewItemWithPrevIndex(prevSelectedIndex);
 
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0 && textBoxEntryOrGuid.Text.Length > 0);
+            //! Need to do this if static info is changed
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
         }
 
         private void ReselectListViewItemWithPrevIndex(int prevIndex)
@@ -1317,7 +1318,7 @@ namespace SAI_Editor
                         listViewSmartScripts.AddSmartScript(newSmartScript);
                 }
 
-                SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0 && textBoxEntryOrGuid.Text.Length > 0);
+                SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
             }
             else
                 RemoveNonOriginalScriptsFromView();
@@ -1396,8 +1397,10 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.Items.Count > 0)
             {
-                MessageBox.Show("This button should not be available if there are already lines in the listview, please report this as a bug!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                DialogResult dialogResult = MessageBox.Show("There is already a script loaded at this moment. Do you want to overwrite this?\n\nWarning: overwriting means local unsaved changes will also be discarded!", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                
+                if (dialogResult != DialogResult.Yes)
+                    return;
             }
 
             int entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
@@ -1501,7 +1504,7 @@ namespace SAI_Editor
 
             buttonGenerateSql.Enabled = true;
             menuItemGenerateSql.Enabled = true;
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0 && textBoxEntryOrGuid.Text.Length > 0);
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
@@ -2500,7 +2503,7 @@ namespace SAI_Editor
         private void textBoxEntryOrGuid_TextChanged(object sender, EventArgs e)
         {
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, textBoxEntryOrGuid.Text.Length > 0);
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, listViewSmartScripts.Items.Count == 0 && textBoxEntryOrGuid.Text.Length > 0);
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
         }
 
         private void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
