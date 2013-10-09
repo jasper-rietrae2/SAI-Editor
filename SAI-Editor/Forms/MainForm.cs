@@ -1466,6 +1466,7 @@ namespace SAI_Editor
 
             buttonNewLine.Enabled = true;
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
+            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, true);
             buttonGenerateComments.Enabled = true;
             //! Only re-enable the loadscript button as the createscript button must be disabled, still
         }
