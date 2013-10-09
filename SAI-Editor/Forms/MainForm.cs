@@ -1460,9 +1460,9 @@ namespace SAI_Editor
             listViewSmartScripts.AddSmartScript(newSmartScript);
 
             HandleShowBasicInfo();
-            listViewSmartScripts.Items[newSmartScript.id].Selected = true;
+
+            listViewSmartScripts.Items[0].Selected = true;
             listViewSmartScripts.Select();
-            listViewSmartScripts.EnsureVisible(newSmartScript.id);
 
             buttonNewLine.Enabled = true;
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
