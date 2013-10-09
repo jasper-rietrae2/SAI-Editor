@@ -61,7 +61,7 @@ namespace SAI_Editor
 
             ((MainForm)Owner).textBoxEntryOrGuid.Text = (-XConverter.ToInt32(listBoxGuids.SelectedItem.ToString())).ToString();
             ((MainForm)Owner).comboBoxSourceType.SelectedIndex = (int)SourceTypes.SourceTypeCreature;
-            ((MainForm)Owner).TryToLoadScript(true);
+            ((MainForm)Owner).TryToLoadScript();
             Close();
         }
 

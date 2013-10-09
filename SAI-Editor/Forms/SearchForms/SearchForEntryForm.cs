@@ -82,7 +82,7 @@ namespace SAI_Editor
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
             StopRunningThread();
-            FillMainFormEntryOrGuidField(sender, e);
+            FillMainFormFields(sender, e);
         }
 
         private void FillListViewWithMySqlQuery(string queryToExecute)
@@ -546,7 +546,7 @@ namespace SAI_Editor
                 case Keys.Enter:
                 {
                     if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
-                        FillMainFormEntryOrGuidField(sender, e);
+                        FillMainFormFields(sender, e);
                     else
                         buttonSearch.PerformClick();
 
@@ -602,10 +602,11 @@ namespace SAI_Editor
             e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
         }
 
-        private void FillMainFormEntryOrGuidField(object sender, EventArgs e)
+        private void FillMainFormFields(object sender, EventArgs e)
         {
             string entryToPlace = "";
 
+            //! If we're searching for a creature guid or gameobject guid we have to make the value negative.
             if (comboBoxSearchType.SelectedIndex == 2 || comboBoxSearchType.SelectedIndex == 5)
                 entryToPlace = "-";
 
@@ -633,8 +634,8 @@ namespace SAI_Editor
                     break;
             }
 
-            if (Settings.Default.LoadScriptInstantly)
-                ((MainForm)Owner).pictureBoxLoadScript_Click(sender, null);
+            if (Settings.Default.LoadScriptInstantly && ((MainForm)Owner).pictureBoxLoadScript.Enabled)
+                ((MainForm)Owner).TryToLoadScript(true, true);
 
             Close();
         }

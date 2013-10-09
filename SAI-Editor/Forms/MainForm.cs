@@ -633,7 +633,7 @@ namespace SAI_Editor
                 TryToLoadScript(false);
         }
 
-        private async Task<List<SmartScript>> GetSmartScriptsForEntryAndSourceType(string entryOrGuid, SourceTypes sourceType, bool showError = true)
+        private async Task<List<SmartScript>> GetSmartScriptsForEntryAndSourceType(string entryOrGuid, SourceTypes sourceType, bool showError = true, bool promptCreateIfNoneFound = false)
         {
             List<SmartScript> smartScriptsToReturn = new List<SmartScript>();
 
@@ -645,7 +645,8 @@ namespace SAI_Editor
                 {
                     if (showError)
                     {
-                        string message = String.Format("The entryorguid '{0}' could not be found in the SmartAI (smart_scripts) table for the given source type ({1})!", entryOrGuid, GetSourceTypeString(sourceType));
+                        bool showNormalErrorMessage = false;
+                        string message = String.Format("The entryorguid '{0}' could not be found in the smart_scripts table for the given source type ({1})!", entryOrGuid, GetSourceTypeString(sourceType));
                         smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScriptsWithoutSourceType(XConverter.ToInt32(entryOrGuid), (int)sourceType);
 
                         if (smartScripts != null)
@@ -656,7 +657,7 @@ namespace SAI_Editor
                             {
                                 textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
                                 comboBoxSourceType.SelectedIndex = GetIndexBySourceType((SourceTypes)smartScripts[0].source_type);
-                                TryToLoadScript(true);
+                                TryToLoadScript();
                             }
                         }
                         else
@@ -679,11 +680,11 @@ namespace SAI_Editor
                                             {
                                                 textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
                                                 comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeCreature);
-                                                TryToLoadScript(true);
+                                                TryToLoadScript();
                                             }
                                         }
                                         else
-                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            showNormalErrorMessage = true;
                                     }
                                     //! Get all `guid` instances from `creature` for the given `id` and allow user to select a script
                                     else //! Non-guid (entry)
@@ -711,10 +712,10 @@ namespace SAI_Editor
                                                     new SelectSmartScriptForm(creaturesWithSmartAi).ShowDialog(this);
                                             }
                                             else
-                                                MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                showNormalErrorMessage = true;
                                         }
                                         else
-                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            showNormalErrorMessage = true;
                                     }
                                     break;
                                 }
@@ -734,11 +735,11 @@ namespace SAI_Editor
                                             {
                                                 textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
                                                 comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeGameobject);
-                                                TryToLoadScript(true);
+                                                TryToLoadScript();
                                             }
                                         }
                                         else
-                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            showNormalErrorMessage = true;
                                     }
                                     //! Get all `guid` instances from `gameobject` for the given `id` and allow user to select a script
                                     else //! Non-guid (entry)
@@ -766,17 +767,30 @@ namespace SAI_Editor
                                                     new SelectSmartScriptForm(gameobjectsWithSmartAi).ShowDialog(this);
                                             }
                                             else
-                                                MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                showNormalErrorMessage = true;
                                         }
                                         else
-                                            MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            showNormalErrorMessage = true;
                                     }
                                     break;
                                 }
                                 default:
-                                    MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    showNormalErrorMessage = true;
                                     break;
                             }
+                        }
+
+                        if (showNormalErrorMessage)
+                        {
+                            if (promptCreateIfNoneFound)
+                            {
+                                DialogResult dialogResult = MessageBox.Show(message + "\n\nDo you want to create a new script using this entryorguid?", "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                                if (dialogResult == DialogResult.Yes)
+                                    TryToCreateScript();
+                            }
+                            else
+                                MessageBox.Show(message, "No scripts found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
 
@@ -1379,7 +1393,7 @@ namespace SAI_Editor
             if (!pictureBoxLoadScript.Enabled)
                 return;
 
-            TryToLoadScript(true);
+            TryToLoadScript();
         }
 
         private void pictureBoxCreateScript_Click(object sender, EventArgs e)
@@ -1412,7 +1426,7 @@ namespace SAI_Editor
                 DialogResult dialogResult = MessageBox.Show("This " + sourceTypeString + " already has its AIName set to SmartAI! Do you want to load it instead?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Yes)
-                    TryToLoadScript(true);
+                    TryToLoadScript();
 
                 return;
             }
@@ -1430,7 +1444,7 @@ namespace SAI_Editor
                 DialogResult dialogResult = MessageBox.Show("This " + sourceTypeString + " already has smart scripts (without its AIName set to SmartAI)! Do you want to load it instead?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Yes)
-                    TryToLoadScript(true);
+                    TryToLoadScript();
 
                 return;
             }
@@ -1465,13 +1479,12 @@ namespace SAI_Editor
             listViewSmartScripts.Select();
 
             buttonNewLine.Enabled = true;
+            buttonGenerateComments.Enabled = true;
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, true);
-            buttonGenerateComments.Enabled = true;
-            //! Only re-enable the loadscript button as the createscript button must be disabled, still
         }
 
-        public async void TryToLoadScript(bool showErrorIfNoneFound)
+        public async void TryToLoadScript(bool showErrorIfNoneFound = true, bool promptCreateIfNoneFound = false)
         {
             // @Debug new AreatriggersForm().Show();
 
@@ -1490,7 +1503,7 @@ namespace SAI_Editor
             originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
             originalEntryOrGuidAndSourceType.sourceType = newSourceType;
 
-            List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(textBoxEntryOrGuid.Text, newSourceType, showErrorIfNoneFound);
+            List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(textBoxEntryOrGuid.Text, newSourceType, showErrorIfNoneFound, promptCreateIfNoneFound);
             listViewSmartScripts.ReplaceSmartScripts(smartScripts);
 
             if (Settings.Default.ChangeStaticInfo)
