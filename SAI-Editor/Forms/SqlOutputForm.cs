@@ -151,12 +151,45 @@ namespace SAI_Editor.Forms
                 if (originalEntryOrGuidAndSourceType.entryOrGuid != smartScripts[i].entryorguid)
                     actualSourceSet = smartScripts[i].entryorguid.ToString();
 
+                int[] eventParameters = new int[4];
+                eventParameters[0] = smartScript.event_param1;
+                eventParameters[1] = smartScript.event_param2;
+                eventParameters[2] = smartScript.event_param3;
+                eventParameters[3] = smartScript.event_param4;
+
+                int[] actionParameters = new int[6];
+                actionParameters[0] = smartScript.action_param1;
+                actionParameters[1] = smartScript.action_param2;
+                actionParameters[2] = smartScript.action_param3;
+                actionParameters[3] = smartScript.action_param4;
+                actionParameters[4] = smartScript.action_param5;
+                actionParameters[5] = smartScript.action_param6;
+
+                int[] targetParameters = new int[3];
+                targetParameters[0] = smartScript.target_param1;
+                targetParameters[1] = smartScript.target_param2;
+                targetParameters[2] = smartScript.target_param3;
+
+                for (int x = 0; x < 6; ++x)
+                {
+                    if (x < 4)
+                        if (eventParameters[x].ToString() == sourceSet)
+                            eventParameters[x] = XConverter.ToInt32(sourceSet);
+
+                    if (actionParameters[x].ToString() == sourceSet)
+                        actionParameters[x] = XConverter.ToInt32(sourceSet);
+
+                    if (x < 3)
+                        if (targetParameters[x].ToString() == sourceSet)
+                            targetParameters[x] = XConverter.ToInt32(sourceSet);
+                }
+
                 richTextBoxSqlOutput.Text += "(" + actualSourceSet + "," + smartScript.source_type + "," + smartScript.id + "," + smartScript.link + "," + smartScript.event_type + "," +
-                                              smartScript.event_phase_mask + "," + smartScript.event_chance + "," + smartScript.event_flags + "," + smartScript.event_param1 + "," +
-                                              smartScript.event_param2 + "," + smartScript.event_param3 + "," + smartScript.event_param4 + "," + smartScript.action_type + "," +
-                                              smartScript.action_param1 + "," + smartScript.action_param2 + "," + smartScript.action_param3 + "," + smartScript.action_param4 + "," +
-                                              smartScript.action_param5 + "," + smartScript.action_param6 + "," + smartScript.target_type + "," + smartScript.target_param1 + "," +
-                                              smartScript.target_param2 + "," + smartScript.target_param3 + "," + smartScript.target_x + "," + smartScript.target_y + "," +
+                                              smartScript.event_phase_mask + "," + smartScript.event_chance + "," + smartScript.event_flags + "," + eventParameters[0] + "," +
+                                              eventParameters[1] + "," + eventParameters[2] + "," + eventParameters[3] + "," + smartScript.action_type + "," +
+                                              actionParameters[0] + "," + actionParameters[1] + "," + actionParameters[2] + "," + actionParameters[3] + "," +
+                                              actionParameters[4] + "," + actionParameters[5] + "," + smartScript.target_type + "," + targetParameters[0] + "," +
+                                              targetParameters[1] + "," + targetParameters[2] + "," + smartScript.target_x + "," + smartScript.target_y + "," +
                                               smartScript.target_z + "," + smartScript.target_o + "," + '"' + smartScript.comment + '"' + ")";
 
                 if (i == smartScripts.Count - 1)
@@ -167,8 +200,8 @@ namespace SAI_Editor.Forms
                 richTextBoxSqlOutput.Text += "\n"; //! White line at end of script to make it easier to select
             }
 
-            richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), sourceSet);
-            richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace("SET " + sourceSet + " := " + sourceSet, "SET " + sourceSet + " := " + originalEntryOrGuidAndSourceType.entryOrGuid.ToString());
+            //richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), sourceSet);
+            //richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace("SET " + sourceSet + " := " + sourceSet, "SET " + sourceSet + " := " + originalEntryOrGuidAndSourceType.entryOrGuid.ToString());
 
             //! Replaces '@ENTRY*100[id]' ([id] being like 00, 01, 02, 03, etc.) by '@ENTRY*100+3' for example.
             for (int i = 0; i < 50; ++i) //! We expect a maximum of 50 scripts for one entry...
