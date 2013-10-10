@@ -796,7 +796,7 @@ namespace SAI_Editor
 
                     SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
                     SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
-                    return null;
+                    return new List<SmartScript>();
                 }
 
                 for (int i = 0; i < smartScripts.Count; ++i)

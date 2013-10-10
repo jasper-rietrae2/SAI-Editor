@@ -11,8 +11,8 @@ namespace System.Windows.Forms
 {
     public class SmartScriptListView : XListView
     {
-        private List<SmartScript> _smartScripts;
-        private List<string> _excludedProperties;
+        private List<SmartScript> _smartScripts = new List<SmartScript>();
+        private List<string> _excludedProperties = new List<string>();
         private readonly PropertyInfo[] _pinfo;
 
         public List<SmartScript> SmartScripts
