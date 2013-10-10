@@ -8,13 +8,13 @@ using SAI_Editor.Database.Classes;
 
 namespace SAI_Editor.Database
 {
-    class SQLiteDatabase : Database<SQLiteConnection, SQLiteConnectionStringBuilder, SQLiteParameter, SQLiteCommand>
+    class SQLiteDatabase : Database<SQLiteConnection, SQLiteConnectionStringBuilder, SQLiteParameter, SQLiteCommand, SQLiteTransaction>
     {
         public SQLiteDatabase(string file)
         {
-            ConnectionString = new SQLiteConnectionStringBuilder();
-            ConnectionString.DataSource = file;
-            ConnectionString.Version = 3;
+            connectionString = new SQLiteConnectionStringBuilder();
+            connectionString.DataSource = file;
+            connectionString.Version = 3;
         }
 
         public async Task<List<EventTypeInformation>> GetEventTypeInformation()

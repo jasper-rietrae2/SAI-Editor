@@ -9,11 +9,12 @@ using System.Data;
 
 namespace SAI_Editor
 {
-    public class Database<Connection, StrBuilder, Parameter, Command>
+    public class Database<Connection, StrBuilder, Parameter, Command, Transaction>
         where Connection : DbConnection
         where Command : DbCommand
+        where Transaction : DbTransaction
     {
-        public StrBuilder ConnectionString { get; set; }
+        public StrBuilder connectionString { get; set; }
 
         public bool CanConnectToDatabase(MySqlConnectionStringBuilder _connectionString, bool showErrorMessage = true)
         {
@@ -43,23 +44,36 @@ namespace SAI_Editor
             {
                 await Task.Run(() =>
                 {
-                    using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
+                    using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                     {
                         conn.Open();
+                        Transaction transaction = (Transaction)conn.BeginTransaction();
 
                         using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), nonQuery, conn))
                         {
+                            cmd.Transaction = transaction;
+
                             foreach (var param in parameters)
                                 cmd.Parameters.Add(param);
 
                             try
                             {
                                 cmd.ExecuteNonQuery();
+                                transaction.Commit();
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                exceptionOccurred = true;
+                                try
+                                {
+                                    exceptionOccurred = true;
+                                    MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    transaction.Rollback();
+                                }
+                                catch (Exception ex2)
+                                {
+                                    MessageBox.Show(ex2.Message, "Something went wrong while rolling back!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    exceptionOccurred = true;
+                                }
                             }
                         }
 
@@ -84,14 +98,17 @@ namespace SAI_Editor
         {
             try
             {
-                return await Task.Run(async () =>
+                return await Task.Run(async() =>
                 {
-                    using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
+                    using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                     {
                         conn.Open();
+                        Transaction transaction = (Transaction)conn.BeginTransaction();
 
                         using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
                         {
+                            cmd.Transaction = transaction;
+
                             foreach (var param in parameters)
                                 cmd.Parameters.Add(param);
 
@@ -104,13 +121,23 @@ namespace SAI_Editor
 
                                 var dt = new DataTable();
                                 dt.Load(reader);
+                                transaction.Commit();
                                 conn.Close();
                                 return dt;
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return null;
+                                try
+                                {
+                                    MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    transaction.Rollback();
+                                    return null;
+                                }
+                                catch (Exception ex2)
+                                {
+                                    MessageBox.Show(ex2.Message, "Something went wrong while rolling back!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    return null;
+                                }
                             }
                         }
                     }
@@ -129,25 +156,39 @@ namespace SAI_Editor
             {
                 return await Task.Run(() =>
                 {
-                    using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), ConnectionString.ToString()))
+                    using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                     {
                         conn.Open();
+                        Transaction transaction = (Transaction)conn.BeginTransaction();
 
                         using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
                         {
+                            cmd.Transaction = transaction;
+
                             foreach (var param in parameters)
                                 cmd.Parameters.Add(param);
 
                             try
                             {
                                 object returnVal = cmd.ExecuteScalar();
+                                transaction.Commit();
                                 conn.Close();
                                 return returnVal;
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return null;
+                                try
+                                {
+                                    MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    transaction.Rollback();
+                                    return null;
+                                }
+                                catch (Exception ex2)
+                                {
+                                    MessageBox.Show(ex2.Message, "Something went wrong while rolling back!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    transaction.Rollback();
+                                    return null;
+                                }
                             }
                         }
                     }

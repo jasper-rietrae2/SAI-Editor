@@ -8,18 +8,18 @@ using SAI_Editor.Database.Classes;
 
 namespace SAI_Editor.Database
 {
-    class WorldDatabase : Database<MySqlConnection, MySqlConnectionStringBuilder, MySqlParameter, MySqlCommand>
+    class WorldDatabase : Database<MySqlConnection, MySqlConnectionStringBuilder, MySqlParameter, MySqlCommand, MySqlTransaction>
     {
         public WorldDatabase(string host, uint port, string username, string password, string databaseName)
         {
-            ConnectionString = new MySqlConnectionStringBuilder();
-            ConnectionString.Server = host;
-            ConnectionString.Port = (uint)port;
-            ConnectionString.UserID = username;
-            ConnectionString.Password = password;
-            ConnectionString.Database = databaseName;
-            ConnectionString.AllowUserVariables = true;
-            ConnectionString.AllowZeroDateTime = true;
+            connectionString = new MySqlConnectionStringBuilder();
+            connectionString.Server = host;
+            connectionString.Port = (uint)port;
+            connectionString.UserID = username;
+            connectionString.Password = password;
+            connectionString.Database = databaseName;
+            connectionString.AllowUserVariables = true;
+            connectionString.AllowZeroDateTime = true;
         }
 
         public async Task<int> GetCreatureIdByGuid(int guid)
