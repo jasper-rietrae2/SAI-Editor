@@ -1529,8 +1529,8 @@ namespace SAI_Editor
                     lastSmartScriptIdOfScript = XConverter.ToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
             }
 
-            buttonGenerateSql.Enabled = true;
-            menuItemGenerateSql.Enabled = true;
+            buttonGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
+            menuItemGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
         }
 
