@@ -1453,6 +1453,9 @@ namespace SAI_Editor
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, false);
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, false);
 
+            originalEntryOrGuidAndSourceType.entryOrGuid = entryorguid;
+            originalEntryOrGuidAndSourceType.sourceType = (SourceTypes)source_type;
+
             listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
 
             SmartScript newSmartScript = new SmartScript();
