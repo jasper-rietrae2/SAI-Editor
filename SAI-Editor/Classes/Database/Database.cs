@@ -47,7 +47,7 @@ namespace SAI_Editor
                     using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                     {
                         conn.Open();
-                        Transaction transaction = (Transaction)conn.BeginTransaction();
+                        var transaction = conn.BeginTransaction();
 
                         using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), nonQuery, conn))
                         {
@@ -103,7 +103,7 @@ namespace SAI_Editor
                     using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                     {
                         conn.Open();
-                        Transaction transaction = (Transaction)conn.BeginTransaction();
+                        var transaction = conn.BeginTransaction();
 
                         using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
                         {
@@ -159,7 +159,7 @@ namespace SAI_Editor
                     using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                     {
                         conn.Open();
-                        Transaction transaction = (Transaction)conn.BeginTransaction();
+                        var transaction = conn.BeginTransaction();
 
                         using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
                         {
@@ -186,7 +186,6 @@ namespace SAI_Editor
                                 catch (Exception ex2)
                                 {
                                     MessageBox.Show(ex2.Message, "Something went wrong while rolling back!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    transaction.Rollback();
                                     return null;
                                 }
                             }
