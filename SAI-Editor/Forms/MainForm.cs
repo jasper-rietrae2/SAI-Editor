@@ -1285,7 +1285,7 @@ namespace SAI_Editor
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
 
             if (listViewSmartScripts.Items.Count <= 0)
-                ResetFieldsToDefault(true);
+                ResetFieldsToDefault(Settings.Default.ChangeStaticInfo);
             else
                 ReselectListViewItemWithPrevIndex(prevSelectedIndex);
 
