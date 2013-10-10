@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SqlOutputForm));
-            this.richTextBoxSqlOutput = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxSqlOutput = new FastColoredTextBoxNS.FastColoredTextBox();
             this.buttonExecuteScript = new System.Windows.Forms.Button();
             this.buttonSaveToFile = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -40,6 +40,7 @@
             this.richTextBoxSqlOutput.Location = new System.Drawing.Point(12, 12);
             this.richTextBoxSqlOutput.Name = "richTextBoxSqlOutput";
             this.richTextBoxSqlOutput.Size = new System.Drawing.Size(819, 322);
+            this.richTextBoxSqlOutput.Language = FastColoredTextBoxNS.Language.SQL;
             this.richTextBoxSqlOutput.TabIndex = 0;
             this.richTextBoxSqlOutput.Text = "";
             // 
@@ -89,7 +90,7 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBoxSqlOutput;
+        private FastColoredTextBoxNS.FastColoredTextBox richTextBoxSqlOutput;
         private System.Windows.Forms.Button buttonExecuteScript;
         private System.Windows.Forms.Button buttonSaveToFile;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;

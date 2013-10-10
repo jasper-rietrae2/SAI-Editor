@@ -518,12 +518,9 @@ namespace SAI_Editor
                 }
                 finally
                 {
-
                     SetEnabledOfControl(buttonSearch, true);
                     SetEnabledOfControl(buttonStopSearching, false);
-
                     _isBusy = false;
-
                 }
             }
             catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
