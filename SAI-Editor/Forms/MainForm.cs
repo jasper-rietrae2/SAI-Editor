@@ -199,6 +199,10 @@ namespace SAI_Editor
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, textBoxEntryOrGuid.Text.Length > 0);
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
 
+            textBoxEventType.MouseWheel += textBoxEventType_MouseWheel;
+            textBoxActionType.MouseWheel += textBoxActionType_MouseWheel;
+            textBoxTargetType.MouseWheel += textBoxTargetType_MouseWheel;
+
             runningConstructor = false;
         }
 
@@ -491,8 +495,8 @@ namespace SAI_Editor
 
         private void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxEventTypeId.Text = comboBoxEventType.SelectedIndex.ToString();
-            textBoxEventTypeId.SelectionStart = 3; //! Set cursot to end of text
+            textBoxEventType.Text = comboBoxEventType.SelectedIndex.ToString();
+            textBoxEventType.SelectionStart = 3; //! Set cursot to end of text
 
             if (!runningConstructor)
             {
@@ -511,8 +515,8 @@ namespace SAI_Editor
 
         private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxActionTypeId.Text = comboBoxActionType.SelectedIndex.ToString();
-            textBoxActionTypeId.SelectionStart = 3; //! Set cursot to end of text
+            textBoxActionType.Text = comboBoxActionType.SelectedIndex.ToString();
+            textBoxActionType.SelectionStart = 3; //! Set cursot to end of text
 
             if (!runningConstructor)
             {
@@ -531,8 +535,8 @@ namespace SAI_Editor
 
         private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxTargetTypeId.Text = comboBoxTargetType.SelectedIndex.ToString();
-            textBoxTargetTypeId.SelectionStart = 3; //! Set cursot to end of text
+            textBoxTargetType.Text = comboBoxTargetType.SelectedIndex.ToString();
+            textBoxTargetType.SelectionStart = 3; //! Set cursot to end of text
 
             if (!runningConstructor)
             {
@@ -1188,22 +1192,22 @@ namespace SAI_Editor
 
         private void textBoxEventTypeId_TextChanged(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBoxEventTypeId.Text))
+            if (String.IsNullOrEmpty(textBoxEventType.Text))
             {
                 comboBoxEventType.SelectedIndex = 0;
-                textBoxEventTypeId.Text = "0";
-                textBoxEventTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+                textBoxEventType.Text = "0";
+                textBoxEventType.SelectionStart = 3; //! Set cursor position to end of the line
             }
             else
             {
                 int eventType;
-                Int32.TryParse(textBoxEventTypeId.Text, out eventType);
+                Int32.TryParse(textBoxEventType.Text, out eventType);
 
                 if (eventType > (int)MaxValues.MaxEventType)
                 {
                     comboBoxEventType.SelectedIndex = (int)MaxValues.MaxEventType;
-                    textBoxEventTypeId.Text = ((int)MaxValues.MaxEventType).ToString();
-                    textBoxEventTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+                    textBoxEventType.Text = ((int)MaxValues.MaxEventType).ToString();
+                    textBoxEventType.SelectionStart = 3; //! Set cursor position to end of the line
                 }
                 else
                     comboBoxEventType.SelectedIndex = eventType;
@@ -1212,22 +1216,22 @@ namespace SAI_Editor
 
         private void textBoxActionTypeId_TextChanged(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBoxActionTypeId.Text))
+            if (String.IsNullOrEmpty(textBoxActionType.Text))
             {
                 comboBoxActionType.SelectedIndex = 0;
-                textBoxActionTypeId.Text = "0";
-                textBoxActionTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+                textBoxActionType.Text = "0";
+                textBoxActionType.SelectionStart = 3; //! Set cursor position to end of the line
             }
             else
             {
                 int actionType;
-                Int32.TryParse(textBoxActionTypeId.Text, out actionType);
+                Int32.TryParse(textBoxActionType.Text, out actionType);
 
                 if (actionType > (int)MaxValues.MaxActionType)
                 {
                     comboBoxActionType.SelectedIndex = (int)MaxValues.MaxActionType;
-                    textBoxActionTypeId.Text = ((int)MaxValues.MaxActionType).ToString();
-                    textBoxActionTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+                    textBoxActionType.Text = ((int)MaxValues.MaxActionType).ToString();
+                    textBoxActionType.SelectionStart = 3; //! Set cursor position to end of the line
                 }
                 else
                     comboBoxActionType.SelectedIndex = actionType;
@@ -1236,22 +1240,22 @@ namespace SAI_Editor
 
         private void textBoxTargetTypeId_TextChanged(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBoxTargetTypeId.Text))
+            if (String.IsNullOrEmpty(textBoxTargetType.Text))
             {
                 comboBoxTargetType.SelectedIndex = 0;
-                textBoxTargetTypeId.Text = "0";
-                textBoxTargetTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+                textBoxTargetType.Text = "0";
+                textBoxTargetType.SelectionStart = 3; //! Set cursor position to end of the line
             }
             else
             {
                 int targetType;
-                Int32.TryParse(textBoxTargetTypeId.Text, out targetType);
+                Int32.TryParse(textBoxTargetType.Text, out targetType);
 
                 if (targetType > (int)MaxValues.MaxTargetType)
                 {
                     comboBoxTargetType.SelectedIndex = (int)MaxValues.MaxTargetType;
-                    textBoxTargetTypeId.Text = ((int)MaxValues.MaxTargetType).ToString();
-                    textBoxTargetTypeId.SelectionStart = 3; //! Set cursor position to end of the line
+                    textBoxTargetType.Text = ((int)MaxValues.MaxTargetType).ToString();
+                    textBoxTargetType.SelectionStart = 3; //! Set cursor position to end of the line
                 }
                 else
                     comboBoxTargetType.SelectedIndex = targetType;
@@ -1656,9 +1660,9 @@ namespace SAI_Editor
             comboBoxEventType.SelectedIndex = 0;
             comboBoxActionType.SelectedIndex = 0;
             comboBoxTargetType.SelectedIndex = 0;
-            textBoxEventTypeId.Text = "0";
-            textBoxActionTypeId.Text = "0";
-            textBoxTargetTypeId.Text = "0";
+            textBoxEventType.Text = "0";
+            textBoxActionType.Text = "0";
+            textBoxTargetType.Text = "0";
             textBoxEventChance.Text = "100";
             textBoxId.Text = "-1";
             textBoxLinkFrom.Text = "0";
@@ -2757,6 +2761,60 @@ namespace SAI_Editor
             }
 
             textBoxComments.Text = listViewSmartScripts.SelectedSmartScript.comment;
+        }
+
+        private void textBoxEventType_MouseWheel(object sender, MouseEventArgs e)
+        {
+            int newNumber = XConverter.ToInt32(textBoxEventType.Text);
+
+            if (e.Delta > 0)
+                newNumber++;
+            else
+                newNumber--;
+
+            if (newNumber < 0)
+                newNumber = 0;
+
+            if (newNumber > (int)MaxValues.MaxEventType)
+                newNumber = (int)MaxValues.MaxEventType;
+
+            textBoxEventType.Text = newNumber.ToString();
+        }
+
+        private void textBoxActionType_MouseWheel(object sender, MouseEventArgs e)
+        {
+            int newNumber = XConverter.ToInt32(textBoxActionType.Text);
+
+            if (e.Delta > 0)
+                newNumber++;
+            else
+                newNumber--;
+
+            if (newNumber < 0)
+                newNumber = 0;
+
+            if (newNumber > (int)MaxValues.MaxActionType)
+                newNumber = (int)MaxValues.MaxActionType;
+
+            textBoxActionType.Text = newNumber.ToString();
+        }
+
+        private void textBoxTargetType_MouseWheel(object sender, MouseEventArgs e)
+        {
+            int newNumber = XConverter.ToInt32(textBoxTargetType.Text);
+
+            if (e.Delta > 0)
+                newNumber++;
+            else
+                newNumber--;
+
+            if (newNumber < 0)
+                newNumber = 0;
+
+            if (newNumber > (int)MaxValues.MaxTargetType)
+                newNumber = (int)MaxValues.MaxTargetType;
+
+            textBoxTargetType.Text = newNumber.ToString();
         }
     }
 }

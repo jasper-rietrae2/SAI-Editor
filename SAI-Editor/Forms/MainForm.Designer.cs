@@ -90,16 +90,16 @@ namespace SAI_Editor
             this.buttonSearchPhasemask = new System.Windows.Forms.Button();
             this.comboBoxActionType = new System.Windows.Forms.ComboBox();
             this.buttonSearchEventFlags = new System.Windows.Forms.Button();
-            this.textBoxTargetTypeId = new System.Windows.Forms.TextBox();
+            this.textBoxTargetType = new System.Windows.Forms.TextBox();
             this.textBoxEventChance = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxEventFlags = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxComments = new System.Windows.Forms.TextBox();
-            this.textBoxActionTypeId = new System.Windows.Forms.TextBox();
+            this.textBoxActionType = new System.Windows.Forms.TextBox();
             this.textBoxEventPhasemask = new System.Windows.Forms.TextBox();
-            this.textBoxEventTypeId = new System.Windows.Forms.TextBox();
+            this.textBoxEventType = new System.Windows.Forms.TextBox();
             this.textBoxLinkTo = new System.Windows.Forms.TextBox();
             this.textBoxLinkFrom = new System.Windows.Forms.TextBox();
             this.comboBoxEventType = new System.Windows.Forms.ComboBox();
@@ -698,16 +698,16 @@ namespace SAI_Editor
             this.groupBoxScriptInfo.Controls.Add(this.buttonSearchPhasemask);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxActionType);
             this.groupBoxScriptInfo.Controls.Add(this.buttonSearchEventFlags);
-            this.groupBoxScriptInfo.Controls.Add(this.textBoxTargetTypeId);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxTargetType);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventChance);
             this.groupBoxScriptInfo.Controls.Add(this.label14);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventFlags);
             this.groupBoxScriptInfo.Controls.Add(this.label13);
             this.groupBoxScriptInfo.Controls.Add(this.label3);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxComments);
-            this.groupBoxScriptInfo.Controls.Add(this.textBoxActionTypeId);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxActionType);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxEventPhasemask);
-            this.groupBoxScriptInfo.Controls.Add(this.textBoxEventTypeId);
+            this.groupBoxScriptInfo.Controls.Add(this.textBoxEventType);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxLinkTo);
             this.groupBoxScriptInfo.Controls.Add(this.textBoxLinkFrom);
             this.groupBoxScriptInfo.Controls.Add(this.comboBoxEventType);
@@ -938,15 +938,15 @@ namespace SAI_Editor
             this.buttonSearchEventFlags.Text = "...";
             this.buttonSearchEventFlags.UseVisualStyleBackColor = true;
             // 
-            // textBoxTargetTypeId
+            // textBoxTargetType
             // 
-            this.textBoxTargetTypeId.Location = new System.Drawing.Point(299, 73);
-            this.textBoxTargetTypeId.Name = "textBoxTargetTypeId";
-            this.textBoxTargetTypeId.Size = new System.Drawing.Size(26, 20);
-            this.textBoxTargetTypeId.TabIndex = 5;
-            this.textBoxTargetTypeId.Text = "0";
-            this.textBoxTargetTypeId.TextChanged += new System.EventHandler(this.textBoxTargetTypeId_TextChanged);
-            this.textBoxTargetTypeId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
+            this.textBoxTargetType.Location = new System.Drawing.Point(299, 73);
+            this.textBoxTargetType.Name = "textBoxTargetType";
+            this.textBoxTargetType.Size = new System.Drawing.Size(26, 20);
+            this.textBoxTargetType.TabIndex = 5;
+            this.textBoxTargetType.Text = "0";
+            this.textBoxTargetType.TextChanged += new System.EventHandler(this.textBoxTargetTypeId_TextChanged);
+            this.textBoxTargetType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxEventChance
             // 
@@ -1013,15 +1013,15 @@ namespace SAI_Editor
             this.textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
             this.textBoxComments.TextChanged += new System.EventHandler(this.textBoxComments_TextChanged);
             // 
-            // textBoxActionTypeId
+            // textBoxActionType
             // 
-            this.textBoxActionTypeId.Location = new System.Drawing.Point(299, 46);
-            this.textBoxActionTypeId.Name = "textBoxActionTypeId";
-            this.textBoxActionTypeId.Size = new System.Drawing.Size(26, 20);
-            this.textBoxActionTypeId.TabIndex = 3;
-            this.textBoxActionTypeId.Text = "0";
-            this.textBoxActionTypeId.TextChanged += new System.EventHandler(this.textBoxActionTypeId_TextChanged);
-            this.textBoxActionTypeId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
+            this.textBoxActionType.Location = new System.Drawing.Point(299, 46);
+            this.textBoxActionType.Name = "textBoxActionType";
+            this.textBoxActionType.Size = new System.Drawing.Size(26, 20);
+            this.textBoxActionType.TabIndex = 3;
+            this.textBoxActionType.Text = "0";
+            this.textBoxActionType.TextChanged += new System.EventHandler(this.textBoxActionTypeId_TextChanged);
+            this.textBoxActionType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxEventPhasemask
             // 
@@ -1033,15 +1033,15 @@ namespace SAI_Editor
             this.textBoxEventPhasemask.TextChanged += new System.EventHandler(this.textBoxEventPhasemask_TextChanged);
             this.textBoxEventPhasemask.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
-            // textBoxEventTypeId
+            // textBoxEventType
             // 
-            this.textBoxEventTypeId.Location = new System.Drawing.Point(299, 18);
-            this.textBoxEventTypeId.Name = "textBoxEventTypeId";
-            this.textBoxEventTypeId.Size = new System.Drawing.Size(26, 20);
-            this.textBoxEventTypeId.TabIndex = 1;
-            this.textBoxEventTypeId.Text = "0";
-            this.textBoxEventTypeId.TextChanged += new System.EventHandler(this.textBoxEventTypeId_TextChanged);
-            this.textBoxEventTypeId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
+            this.textBoxEventType.Location = new System.Drawing.Point(299, 18);
+            this.textBoxEventType.Name = "textBoxEventType";
+            this.textBoxEventType.Size = new System.Drawing.Size(26, 20);
+            this.textBoxEventType.TabIndex = 1;
+            this.textBoxEventType.Text = "0";
+            this.textBoxEventType.TextChanged += new System.EventHandler(this.textBoxEventTypeId_TextChanged);
+            this.textBoxEventType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // textBoxLinkTo
             // 
@@ -2139,8 +2139,8 @@ namespace SAI_Editor
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabPage tabPageTarget;
         private System.Windows.Forms.ComboBox comboBoxEventType;
-        private System.Windows.Forms.TextBox textBoxEventTypeId;
-        private System.Windows.Forms.TextBox textBoxActionTypeId;
+        private System.Windows.Forms.TextBox textBoxEventType;
+        private System.Windows.Forms.TextBox textBoxActionType;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.ToolStripMenuItem menuItemReconnect;
         private System.Windows.Forms.Label labelEventParam1;
@@ -2188,7 +2188,7 @@ namespace SAI_Editor
         private System.Windows.Forms.TextBox textBoxTargetParam2;
         private System.Windows.Forms.Label labelTargetParam1;
         private System.Windows.Forms.TextBox textBoxTargetParam1;
-        private System.Windows.Forms.TextBox textBoxTargetTypeId;
+        private System.Windows.Forms.TextBox textBoxTargetType;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label labelTargetZ;
         private System.Windows.Forms.Label labelTargetY;
