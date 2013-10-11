@@ -1431,6 +1431,7 @@ namespace SAI_Editor
             }
 
             buttonNewLine.Enabled = false;
+            checkBoxListActionlistsOrEntries.Text = GetSourceTypeByIndex() == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, false);
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, false);
 
@@ -1490,9 +1491,7 @@ namespace SAI_Editor
 
             List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(textBoxEntryOrGuid.Text, newSourceType, showErrorIfNoneFound, promptCreateIfNoneFound);
             listViewSmartScripts.ReplaceSmartScripts(smartScripts);
-
-            if (Settings.Default.ChangeStaticInfo)
-                checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
+            checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
 
             buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
