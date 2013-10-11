@@ -229,6 +229,8 @@ namespace System.Windows.Forms
 
         public void ExcludeProperties(List<string> propNames)
         {
+            _excludedProperties.Clear();
+
             foreach (string propName in propNames)
                 _excludedProperties.Add(propName);
 
