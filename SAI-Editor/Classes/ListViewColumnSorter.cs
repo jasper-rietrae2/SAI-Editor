@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
+using SAI_Editor.Classes;
 
 namespace SAI_Editor
 {
@@ -53,8 +54,13 @@ namespace SAI_Editor
             listviewY = y as ListViewItem;
 
             if (listviewX != listviewY)
-                compareResult = String.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
-            
+            {
+                if (XConverter.ToInt32(listviewX.SubItems[ColumnToSort].Text) > 0 && XConverter.ToInt32(listviewY.SubItems[ColumnToSort].Text) > 0)
+                    compareResult = Decimal.Compare(XConverter.ToInt32(listviewX.SubItems[ColumnToSort].Text), XConverter.ToInt32(listviewY.SubItems[ColumnToSort].Text));
+                else
+                    compareResult = String.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
+            }
+
             if (OrderOfSort == SortOrder.Ascending)
                 return compareResult;
 

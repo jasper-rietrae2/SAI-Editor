@@ -274,7 +274,6 @@ namespace SAI_Editor
 
         public Task<List<string>> GetDatabasesInConnection(string host, string username, uint port, string password = "")
         {
-
             return Task.Run(() =>
             {
                 if (host.Length <= 0 || username.Length <= 0 || port <= 0)
