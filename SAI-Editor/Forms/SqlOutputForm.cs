@@ -118,10 +118,15 @@ namespace SAI_Editor.Forms
 
                 for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
                 {
+                    string entryorguid = entriesOrGuidsAndSourceTypes[i].entryOrGuid.ToString();
+
+                    if (entryorguid == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
+                        entryorguid = sourceSet;
+
                     if (i == entriesOrGuidsAndSourceTypes.Count - 1)
-                        richTextBoxSqlOutput.Text += entriesOrGuidsAndSourceTypes[i].entryOrGuid + ")";
+                        richTextBoxSqlOutput.Text += entryorguid + ")";
                     else
-                        richTextBoxSqlOutput.Text += entriesOrGuidsAndSourceTypes[i].entryOrGuid + ",";
+                        richTextBoxSqlOutput.Text += entryorguid + ",";
                 }
 
                 richTextBoxSqlOutput.Text += " AND `source_type` IN (";
@@ -202,9 +207,6 @@ namespace SAI_Editor.Forms
 
                 richTextBoxSqlOutput.Text += "\n"; //! White line at end of script to make it easier to select
             }
-
-            //richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), sourceSet);
-            //richTextBoxSqlOutput.Text = richTextBoxSqlOutput.Text.Replace("SET " + sourceSet + " := " + sourceSet, "SET " + sourceSet + " := " + originalEntryOrGuidAndSourceType.entryOrGuid.ToString());
 
             //! Replaces '@ENTRY*100[id]' ([id] being like 00, 01, 02, 03, etc.) by '@ENTRY*100+3' for example.
             for (int i = 0; i < 50; ++i) //! We expect a maximum of 50 scripts for one entry...
