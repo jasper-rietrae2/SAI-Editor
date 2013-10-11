@@ -28,21 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SqlOutputForm));
             this.richTextBoxSqlOutput = new FastColoredTextBoxNS.FastColoredTextBox();
             this.buttonExecuteScript = new System.Windows.Forms.Button();
             this.buttonSaveToFile = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            ((System.ComponentModel.ISupportInitialize)(this.richTextBoxSqlOutput)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBoxSqlOutput
             // 
+            this.richTextBoxSqlOutput.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.richTextBoxSqlOutput.BackBrush = null;
+            this.richTextBoxSqlOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.richTextBoxSqlOutput.CharHeight = 14;
+            this.richTextBoxSqlOutput.CharWidth = 8;
+            this.richTextBoxSqlOutput.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.richTextBoxSqlOutput.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.richTextBoxSqlOutput.Font = new System.Drawing.Font("Courier New", 9.75F);
+            this.richTextBoxSqlOutput.IsReplaceMode = false;
+            this.richTextBoxSqlOutput.Language = FastColoredTextBoxNS.Language.SQL;
             this.richTextBoxSqlOutput.Location = new System.Drawing.Point(12, 12);
             this.richTextBoxSqlOutput.Name = "richTextBoxSqlOutput";
+            this.richTextBoxSqlOutput.Paddings = new System.Windows.Forms.Padding(0);
+            this.richTextBoxSqlOutput.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.richTextBoxSqlOutput.Size = new System.Drawing.Size(819, 322);
-            this.richTextBoxSqlOutput.Language = FastColoredTextBoxNS.Language.SQL;
             this.richTextBoxSqlOutput.TabIndex = 0;
-            this.richTextBoxSqlOutput.Text = "";
+            this.richTextBoxSqlOutput.Zoom = 100;
             // 
             // buttonExecuteScript
             // 
@@ -84,6 +97,7 @@
             this.Text = "Output";
             this.Load += new System.EventHandler(this.SqlOutputForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SqlOutputForm_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.richTextBoxSqlOutput)).EndInit();
             this.ResumeLayout(false);
 
         }
