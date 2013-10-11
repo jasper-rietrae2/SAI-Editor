@@ -396,8 +396,8 @@ namespace SAI_Editor
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.ShortcutKeyDisplayString = "(Alt + F1)";
-            this.menuItemSettings.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F1)));
+            this.menuItemSettings.ShortcutKeyDisplayString = "(F1)";
+            this.menuItemSettings.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.menuItemSettings.Size = new System.Drawing.Size(244, 22);
             this.menuItemSettings.Text = "Settings";
             this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
