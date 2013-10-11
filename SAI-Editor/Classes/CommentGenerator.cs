@@ -573,13 +573,13 @@ namespace SAI_Editor.Classes
                             fullLine = fullLine.Replace("_setOrientationTargetType_", smartScript.target_o.ToString());
                             break;
                         default:
-                            fullLine = fullLine.Replace("_setOrientationTargetType_", GetStringByTargetType(smartScript, worldDatabase));
+                            fullLine = fullLine.Replace("_setOrientationTargetType_", await GetStringByTargetType(smartScript, worldDatabase));
                             break;
                     }
                 }
 
                 if (fullLine.Contains("_getTargetType_"))
-                    fullLine = fullLine.Replace("_getTargetType_", GetStringByTargetType(smartScript, worldDatabase));
+                    fullLine = fullLine.Replace("_getTargetType_", await GetStringByTargetType(smartScript, worldDatabase));
 
                 if (fullLine.Contains("_goStateActionParamOne_"))
                 {
@@ -906,7 +906,7 @@ namespace SAI_Editor.Classes
             return fullLine;
         }
 
-        private string GetStringByTargetType(SmartScript smartScript, WorldDatabase worldDatabase)
+        private async Task<string> GetStringByTargetType(SmartScript smartScript, WorldDatabase worldDatabase)
         {
             switch ((SmartTarget)smartScript.target_type)
             {
@@ -929,15 +929,15 @@ namespace SAI_Editor.Classes
                 case SmartTarget.SMART_TARGET_CREATURE_RANGE:
                 case SmartTarget.SMART_TARGET_CREATURE_DISTANCE:
                 case SmartTarget.SMART_TARGET_CLOSEST_CREATURE:
-                    return "Closest Creature '" + worldDatabase.GetCreatureNameById(smartScript.target_param1) + "'";
+                    return "Closest Creature '" + await worldDatabase.GetCreatureNameById(smartScript.target_param1) + "'";
                 case SmartTarget.SMART_TARGET_CREATURE_GUID:
-                    return "Closest Creature '" + worldDatabase.GetCreatureNameByGuid(smartScript.target_param1) + "'";
+                    return "Closest Creature '" + await worldDatabase.GetCreatureNameByGuid(smartScript.target_param1) + "'";
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_RANGE:
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_DISTANCE:
                 case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT:
-                    return "Closest Gameobject '" + worldDatabase.GetGameobjectNameById(smartScript.target_param1) + "'";
+                    return "Closest Gameobject '" + await worldDatabase.GetGameobjectNameById(smartScript.target_param1) + "'";
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID:
-                    return "Closest Gameobject '" + worldDatabase.GetGameobjectNameByGuid(smartScript.target_param1) + "'";
+                    return "Closest Gameobject '" + await worldDatabase.GetGameobjectNameByGuid(smartScript.target_param1) + "'";
                 case SmartTarget.SMART_TARGET_INVOKER_PARTY:
                     return "Invoker's Party";
                 case SmartTarget.SMART_TARGET_PLAYER_RANGE:
