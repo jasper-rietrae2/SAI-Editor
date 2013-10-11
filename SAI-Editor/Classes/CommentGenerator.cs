@@ -196,9 +196,9 @@ namespace SAI_Editor.Classes
             smartActionStrings.Add(SmartAction.SMART_ACTION_CALL_SCRIPT_RESET, "Reset All Scriptsfa");
             smartActionStrings.Add(SmartAction.SMART_ACTION_SET_RANGED_MOVEMENT, "Set Ranged Movement");
             smartActionStrings.Add(SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST, "Run Script");
-            smartActionStrings.Add(SmartAction.SMART_ACTION_SET_NPC_FLAG, "Set Unit Flag_getUnitFlags_");
-            smartActionStrings.Add(SmartAction.SMART_ACTION_ADD_NPC_FLAG, "Add Unit Flag_getUnitFlags_");
-            smartActionStrings.Add(SmartAction.SMART_ACTION_REMOVE_NPC_FLAG, "Remove Unit Flag_getUnitFlags_");
+            smartActionStrings.Add(SmartAction.SMART_ACTION_SET_NPC_FLAG, "Set Npc Flag_getNpcFlags_");
+            smartActionStrings.Add(SmartAction.SMART_ACTION_ADD_NPC_FLAG, "Add Npc Flag_getNpcFlags_");
+            smartActionStrings.Add(SmartAction.SMART_ACTION_REMOVE_NPC_FLAG, "Remove Npc Flag_getNpcFlags_");
             smartActionStrings.Add(SmartAction.SMART_ACTION_SIMPLE_TALK, "Say Line _actionParamOne_");
             smartActionStrings.Add(SmartAction.SMART_ACTION_INVOKER_CAST, "Invoker Cast '_spellNameActionParamOne_'");
             smartActionStrings.Add(SmartAction.SMART_ACTION_CROSS_CAST, "Cross Cast '_spellNameActionParamOne_'");
@@ -449,6 +449,47 @@ namespace SAI_Editor.Classes
                         fullLine = fullLine.Replace("_getUnitFlags_", "s_getUnitFlags_");
 
                     fullLine = fullLine.Replace("_getUnitFlags_", " " + commentUnitFlag);
+                }
+
+                if (fullLine.Contains("_getNpcFlags_"))
+                {
+                    string commentNpcFlag = "";
+                    int npcFlags = smartScript.action_param1;
+
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_NONE) != 0) commentNpcFlag += "None & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_GOSSIP) != 0) commentNpcFlag += "Gossip & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_QUESTGIVER) != 0) commentNpcFlag += "Questgiver & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_UNK1) != 0) commentNpcFlag += "Unknown 1 & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_UNK2) != 0) commentNpcFlag += "Unknown 2 & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_TRAINER) != 0) commentNpcFlag += "Trainer & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_TRAINER_CLASS) != 0) commentNpcFlag += "Class Trainer & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_TRAINER_PROFESSION) != 0) commentNpcFlag += "Profession Trainer & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_VENDOR) != 0) commentNpcFlag += "Vendor & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_VENDOR_AMMO) != 0) commentNpcFlag += "Ammo Vendor & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_VENDOR_FOOD) != 0) commentNpcFlag += "Food Vendor & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_VENDOR_POISON) != 0) commentNpcFlag += "Poison Vendor & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_VENDOR_REAGENT) != 0) commentNpcFlag += "Reagent Vendor & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_REPAIR) != 0) commentNpcFlag += "Repair Vendor & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_FLIGHTMASTER) != 0) commentNpcFlag += "Flightmaster & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_SPIRITHEALER) != 0) commentNpcFlag += "Spirithealer & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_SPIRITGUIDE) != 0) commentNpcFlag += "Spiritguide & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_INNKEEPER) != 0) commentNpcFlag += "Innkeeper & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_BANKER) != 0) commentNpcFlag += "Banker & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_PETITIONER) != 0) commentNpcFlag += "Petitioner & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_TABARDDESIGNER) != 0) commentNpcFlag += "Tabard Designer & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_BATTLEMASTER) != 0) commentNpcFlag += "Battlemaster & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_AUCTIONEER) != 0) commentNpcFlag += "Auctioneer & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_STABLEMASTER) != 0) commentNpcFlag += "Stablemaster & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_GUILD_BANKER) != 0) commentNpcFlag += "Guild Banker & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_SPELLCLICK) != 0) commentNpcFlag += "Spellclick & ";
+                    if ((npcFlags & (int)NpcFlags.UNIT_NPC_FLAG_PLAYER_VEHICLE) != 0) commentNpcFlag += "Player Vehicle & ";
+
+                    commentNpcFlag = commentNpcFlag.Trim(new[] { ' ', '&', ' ' }); //! Trim last ' & ' from the comment..
+
+                    if (commentNpcFlag.Contains("&"))
+                        fullLine = fullLine.Replace("_getNpcFlags_", "s_getNpcFlags_");
+
+                    fullLine = fullLine.Replace("_getNpcFlags_", " " + commentNpcFlag);
                 }
 
                 if (fullLine.Contains("_startOrStopActionParamOne_"))
