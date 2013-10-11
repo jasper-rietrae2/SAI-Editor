@@ -1077,6 +1077,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_ADD_DYNAMIC_FLAG: //! Dynamic flags
                 case SmartAction.SMART_ACTION_REMOVE_DYNAMIC_FLAG: //! Dynamic flags
                 case SmartAction.SMART_ACTION_ADD_AURA: //! Spell id
+                case SmartAction.SMART_ACTION_SET_NPC_FLAG: //! Npc flags
+                case SmartAction.SMART_ACTION_ADD_NPC_FLAG: //! Npc flags
+                case SmartAction.SMART_ACTION_REMOVE_NPC_FLAG: //! Npc flags
                     buttonActionParamOneSearch.Visible = true;
                     break;
             }
@@ -1929,6 +1932,11 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_EQUIP:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SET_NPC_FLAG:
+                case SmartAction.SMART_ACTION_ADD_NPC_FLAG:
+                case SmartAction.SMART_ACTION_REMOVE_NPC_FLAG:
+                    new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeNpcFlag, textBoxToChange).ShowDialog(this);
                     break;
             }
         }

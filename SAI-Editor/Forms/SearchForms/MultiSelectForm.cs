@@ -13,6 +13,7 @@ namespace SAI_Editor
         MultiSelectFormTypeUnitFlag2 = 4,
         MultiSelectFormTypeGoFlag = 5,
         MultiSelectFormTypeDynamicFlag = 6,
+        MultiSelectFormTypeNpcFlag = 7,
     }
 
     public partial class MultiSelectForm : Form
@@ -146,6 +147,37 @@ namespace SAI_Editor
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_DEAD");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_REFER_A_FRIEND");
                     listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_DYNFLAG_TAPPED_BY_ALL_THREAT_LIST");
+                    break;
+                case MultiSelectFormType.MultiSelectFormTypeNpcFlag:
+                    Text = "Select npc flags";
+                    listViewSelectableItems.Columns.Add("Npc flags", 235, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_NONE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_GOSSIP");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_QUESTGIVER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_UNK1");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_UNK2");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_TRAINER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_TRAINER_CLASS");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_TRAINER_PROFESSION");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_VENDOR");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_VENDOR_AMMO");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_VENDOR_FOOD");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_VENDOR_POISON");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_VENDOR_REAGENT");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_REPAIR");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_FLIGHTMASTER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_SPIRITHEALER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_SPIRITGUIDE");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_INNKEEPER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_BANKER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_PETITIONER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_TABARDDESIGNER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_BATTLEMASTER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_AUCTIONEER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_STABLEMASTER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_GUILD_BANKER");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_SPELLCLICK");
+                    listViewSelectableItems.Items.Add("").SubItems.Add("UNIT_NPC_FLAG_PLAYER_VEHICLE");
                     break;
             }
         }
