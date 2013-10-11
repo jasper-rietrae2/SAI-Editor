@@ -1396,6 +1396,7 @@ namespace SAI_Editor
             int entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
             int source_type = (int)GetSourceTypeByIndex();
             string sourceTypeString = GetSourceTypeString((SourceTypes)source_type);
+            lastSmartScriptIdOfScript = 0;
 
             if (await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(entryorguid, source_type) != String.Empty)
             {
@@ -1477,6 +1478,7 @@ namespace SAI_Editor
             menuItemGenerateSql.Enabled = false;
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, false);
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, false);
+            lastSmartScriptIdOfScript = 0;
 
             SourceTypes newSourceType = GetSourceTypeByIndex();
             originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
