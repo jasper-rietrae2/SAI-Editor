@@ -809,7 +809,7 @@ namespace SAI_Editor.Classes
                 if (fullLine.Contains("_morphToEntryOrModelActionParams_"))
                 {
                     if (smartScript.action_param1 > 0)
-                        fullLine = fullLine.Replace("_morphToEntryOrModelActionParams_", "Morph To Creature " + worldDatabase.GetCreatureNameById(smartScript.action_param1));
+                        fullLine = fullLine.Replace("_morphToEntryOrModelActionParams_", "Morph To Creature " + await worldDatabase.GetCreatureNameById(smartScript.action_param1));
                     else if (smartScript.action_param2 > 0)
                         fullLine = fullLine.Replace("_morphToEntryOrModelActionParams_", "Morph To Model " + smartScript.action_param2);
                     else
@@ -819,7 +819,7 @@ namespace SAI_Editor.Classes
                 if (fullLine.Contains("_mountToEntryOrModelActionParams_"))
                 {
                     if (smartScript.action_param1 > 0)
-                        fullLine = fullLine.Replace("_mountToEntryOrModelActionParams_", "Mount To Creature " + worldDatabase.GetCreatureNameById(smartScript.action_param1));
+                        fullLine = fullLine.Replace("_mountToEntryOrModelActionParams_", "Mount To Creature " + await worldDatabase.GetCreatureNameById(smartScript.action_param1));
                     else if (smartScript.action_param2 > 0)
                         fullLine = fullLine.Replace("_mountToEntryOrModelActionParams_", "Mount To Model " + smartScript.action_param2);
                     else
