@@ -223,8 +223,8 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("Group", 66);
                     listViewEntryResults.Columns.Add("Type", 66);
                     listViewEntryResults.Columns.Add("Time", 66);
-                    comboBoxSearchType.Items.Add("Summoner id");
-                    comboBoxSearchType.Items.Add("Summon entry");
+                    comboBoxSearchType.Items.Add("Owner entry");
+                    comboBoxSearchType.Items.Add("Target entry");
                     baseQuery = "SELECT summonerId, entry, groupId, summonType, summonTime FROM creature_summon_groups";
                     columnOne = "summonerId";
                     columnTwo = "entry";
