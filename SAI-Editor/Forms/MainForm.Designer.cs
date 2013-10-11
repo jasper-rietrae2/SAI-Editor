@@ -396,7 +396,9 @@ namespace SAI_Editor
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(189, 22);
+            this.menuItemSettings.ShortcutKeyDisplayString = "(Alt + F1)";
+            this.menuItemSettings.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F1)));
+            this.menuItemSettings.Size = new System.Drawing.Size(244, 22);
             this.menuItemSettings.Text = "Settings";
             this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
             // 
@@ -404,35 +406,43 @@ namespace SAI_Editor
             // 
             this.menuItemGenerateSql.Enabled = false;
             this.menuItemGenerateSql.Name = "menuItemGenerateSql";
-            this.menuItemGenerateSql.Size = new System.Drawing.Size(189, 22);
+            this.menuItemGenerateSql.ShortcutKeyDisplayString = "(Ctrl + M)";
+            this.menuItemGenerateSql.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
+            this.menuItemGenerateSql.Size = new System.Drawing.Size(244, 22);
             this.menuItemGenerateSql.Text = "Generate SQL";
             this.menuItemGenerateSql.Click += new System.EventHandler(this.generateSQLToolStripMenuItem_Click);
             // 
             // menuItemRevertQuery
             // 
             this.menuItemRevertQuery.Name = "menuItemRevertQuery";
-            this.menuItemRevertQuery.Size = new System.Drawing.Size(189, 22);
+            this.menuItemRevertQuery.ShortcutKeyDisplayString = "(Ctrl + R)";
+            this.menuItemRevertQuery.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.menuItemRevertQuery.Size = new System.Drawing.Size(244, 22);
             this.menuItemRevertQuery.Text = "Execute a revert query";
             this.menuItemRevertQuery.Click += new System.EventHandler(this.menuItemRevertQuery_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(186, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(241, 6);
             // 
             // menuItemReconnect
             // 
             this.menuItemReconnect.Name = "menuItemReconnect";
-            this.menuItemReconnect.Size = new System.Drawing.Size(189, 22);
+            this.menuItemReconnect.ShortcutKeyDisplayString = "(Shift + F4)";
+            this.menuItemReconnect.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F4)));
+            this.menuItemReconnect.Size = new System.Drawing.Size(244, 22);
             this.menuItemReconnect.Text = "Re-connect";
             this.menuItemReconnect.Click += new System.EventHandler(this.menuItemReconnect_Click);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(189, 22);
+            this.menuItemExit.ShortcutKeyDisplayString = "(Alt + F4)";
+            this.menuItemExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
+            this.menuItemExit.Size = new System.Drawing.Size(244, 22);
             this.menuItemExit.Text = "Exit";
-            this.menuItemExit.Click += new System.EventHandler(this.TryCloseApplication);
+            this.menuItemExit.Click += menuItemExit_Click;
             // 
             // optionsToolStripMenuItem
             // 
@@ -446,7 +456,9 @@ namespace SAI_Editor
             // 
             this.menuItemDeleteSelectedRow.Enabled = false;
             this.menuItemDeleteSelectedRow.Name = "menuItemDeleteSelectedRow";
-            this.menuItemDeleteSelectedRow.Size = new System.Drawing.Size(176, 22);
+            this.menuItemDeleteSelectedRow.ShortcutKeyDisplayString = "(Ctrl + D)";
+            this.menuItemDeleteSelectedRow.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.menuItemDeleteSelectedRow.Size = new System.Drawing.Size(232, 22);
             this.menuItemDeleteSelectedRow.Text = "Delete selected row";
             this.menuItemDeleteSelectedRow.Click += new System.EventHandler(this.menuOptionDeleteSelectedRow_Click);
             // 
@@ -461,7 +473,9 @@ namespace SAI_Editor
             // menuItemAbout
             // 
             this.menuItemAbout.Name = "menuItemAbout";
-            this.menuItemAbout.Size = new System.Drawing.Size(107, 22);
+            this.menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
+            this.menuItemAbout.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F1)));
+            this.menuItemAbout.Size = new System.Drawing.Size(163, 22);
             this.menuItemAbout.Text = "About";
             this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
             // 
@@ -476,7 +490,7 @@ namespace SAI_Editor
             // smartAIWikiToolStripMenuItem
             // 
             this.smartAIWikiToolStripMenuItem.Name = "smartAIWikiToolStripMenuItem";
-            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.smartAIWikiToolStripMenuItem.Text = "SmartAI Wiki...";
             this.smartAIWikiToolStripMenuItem.Click += new System.EventHandler(this.smartAIWikiToolStripMenuItem_Click);
             // 
@@ -486,19 +500,23 @@ namespace SAI_Editor
             this.menuItemGenerateCommentListView,
             this.menuItemDeleteSelectedRowListView});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(177, 48);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(233, 48);
             // 
             // menuItemGenerateCommentListView
             // 
             this.menuItemGenerateCommentListView.Name = "menuItemGenerateCommentListView";
-            this.menuItemGenerateCommentListView.Size = new System.Drawing.Size(176, 22);
+            this.menuItemGenerateCommentListView.ShortcutKeyDisplayString = "(Ctrl + G)";
+            this.menuItemGenerateCommentListView.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.menuItemGenerateCommentListView.Size = new System.Drawing.Size(232, 22);
             this.menuItemGenerateCommentListView.Text = "Generate comment";
             this.menuItemGenerateCommentListView.Click += new System.EventHandler(this.menuItemGenerateCommentListView_Click);
             // 
             // menuItemDeleteSelectedRowListView
             // 
             this.menuItemDeleteSelectedRowListView.Name = "menuItemDeleteSelectedRowListView";
-            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(176, 22);
+            this.menuItemDeleteSelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + D)";
+            this.menuItemDeleteSelectedRowListView.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(232, 22);
             this.menuItemDeleteSelectedRowListView.Text = "Delete row";
             this.menuItemDeleteSelectedRowListView.Click += new System.EventHandler(this.testToolStripMenuItemDeleteRow_Click);
             // 

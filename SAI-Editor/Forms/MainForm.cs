@@ -135,18 +135,6 @@ namespace SAI_Editor
             await SAI_Editor_Manager.Instance.LoadSQLiteDatabaseInfo();
             ChangeParameterFieldsBasedOnType();
 
-            //! We hardcode the actual shortcuts because there are certain conditons under which the menu should not be
-            //! opened at all.
-            menuItemExit.ShortcutKeyDisplayString = "(Alt + F4)";
-            menuItemReconnect.ShortcutKeyDisplayString = "(Shift + F4)";
-            menuItemSettings.ShortcutKeyDisplayString = "(F1)";
-            menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
-            menuItemDeleteSelectedRow.ShortcutKeyDisplayString = "(Ctrl + D)";
-            menuItemDeleteSelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + D)";
-            menuItemGenerateSql.ShortcutKeyDisplayString = "(Ctrl + M)";
-            menuItemRevertQuery.ShortcutKeyDisplayString = "(Ctrl + R)";
-            menuItemGenerateCommentListView.ShortcutKeyDisplayString = "(Ctrl + G)";
-
             if (Settings.Default.AutoConnect)
             {
                 checkBoxAutoConnect.Checked = true;
@@ -441,39 +429,6 @@ namespace SAI_Editor
                     }
                     break;
             }
-
-            //! Hardcode shortcuts to menu because we can't use conditions otherwise
-            if (formState == FormState.FormStateMain)
-            {
-                if (e.KeyData == (Keys.Alt | Keys.F4))
-                    TryCloseApplication();
-                else if (e.KeyData == (Keys.Shift | Keys.F4) || e.KeyData == (Keys.ShiftKey | Keys.F4))
-                    menuItemReconnect.PerformClick();
-                else if (e.KeyData == Keys.F1)
-                    menuItemSettings.PerformClick();
-                else if (e.KeyData == (Keys.Alt | Keys.F1))
-                    menuItemAbout.PerformClick();
-                else if (e.KeyData == (Keys.Control | Keys.D) || e.KeyData == (Keys.ControlKey | Keys.D))
-                {
-                    if (menuItemDeleteSelectedRow.Enabled)
-                        menuItemDeleteSelectedRow.PerformClick();
-                }
-                else if (e.KeyData == (Keys.Control | Keys.M) || e.KeyData == (Keys.ControlKey | Keys.M))
-                {
-                    if (menuItemGenerateSql.Enabled)
-                        menuItemGenerateSql.PerformClick();
-                }
-                else if (e.KeyData == (Keys.Control | Keys.R) || e.KeyData == (Keys.ControlKey | Keys.R))
-                {
-                    if (menuItemRevertQuery.Enabled)
-                        menuItemRevertQuery.PerformClick();
-                }
-                else if (e.KeyData == (Keys.Control | Keys.G) || e.KeyData == (Keys.ControlKey | Keys.G))
-                {
-                    if (menuItemGenerateCommentListView.Enabled)
-                        menuItemGenerateCommentListView.PerformClick();
-                }
-            }
         }
 
         private void buttonSearchForEntry_Click(object sender, EventArgs e)
@@ -485,6 +440,9 @@ namespace SAI_Editor
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
+            if (formState != FormState.FormStateMain)
+                return;
+
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
             SaveLastUsedFields();
@@ -858,8 +816,13 @@ namespace SAI_Editor
             return smartScriptsToReturn;
         }
 
-        //! Needs object and EventAgrs parameters so we can trigger it as an event when 'Exit' is called from the menu.
-        private void TryCloseApplication(object sender = null, EventArgs e = null)
+        private void menuItemExit_Click(object sender, System.EventArgs e)
+        {
+            if (formState == FormState.FormStateMain)
+                TryCloseApplication();
+        }
+
+        private void TryCloseApplication()
         {
             if (!Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 Close();
@@ -867,12 +830,18 @@ namespace SAI_Editor
 
         private void menuItemSettings_Click(object sender, EventArgs e)
         {
+            if (formState != FormState.FormStateMain)
+                return;
+
             using (SettingsForm settingsForm = new SettingsForm())
                 settingsForm.ShowDialog(this);
         }
 
         private void menuItemAbout_Click(object sender, EventArgs e)
         {
+            if (formState != FormState.FormStateMain)
+                return;
+
             using (AboutForm aboutForm = new AboutForm())
                 aboutForm.ShowDialog(this);
         }
@@ -1264,6 +1233,9 @@ namespace SAI_Editor
 
         private void menuOptionDeleteSelectedRow_Click(object sender, EventArgs e)
         {
+            if (formState != FormState.FormStateMain)
+                return;
+
             if (listViewSmartScripts.SelectedItems.Count <= 0)
             {
                 MessageBox.Show("No rows were selected to delete!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -2547,6 +2519,9 @@ namespace SAI_Editor
 
         private void buttonGenerateSql_Click(object sender, EventArgs e)
         {
+            if (formState != FormState.FormStateMain)
+                return;
+
             OpenSqlOutputForm();
         }
 
@@ -2678,6 +2653,9 @@ namespace SAI_Editor
 
         private void menuItemRevertQuery_Click(object sender, EventArgs e)
         {
+            if (formState != FormState.FormStateMain)
+                return;
+
             if (Directory.Exists("Reverts"))
                 new RevertQueryForm().ShowDialog(this);
         }
@@ -2727,6 +2705,9 @@ namespace SAI_Editor
 
         private async void menuItemGenerateCommentListView_Click(object sender, EventArgs e)
         {
+            if (formState != FormState.FormStateMain)
+                return;
+
             for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
             {
                 SmartScript smartScript = listViewSmartScripts.SmartScripts[i];
