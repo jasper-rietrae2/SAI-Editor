@@ -298,5 +298,17 @@ namespace SAI_Editor.Properties {
                 this["ListActionLists"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AllowChangingEntryAndSourceType {
+            get {
+                return ((bool)(this["AllowChangingEntryAndSourceType"]));
+            }
+            set {
+                this["AllowChangingEntryAndSourceType"] = value;
+            }
+        }
     }
 }

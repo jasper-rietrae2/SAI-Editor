@@ -20,6 +20,7 @@
 - When searching for a script like 33303's (creature) and also listing actionlists, the sort order changes every search (new bug?)
 - Add support to add specific flags to the source. If you for example want a creature to have a gossip, the npcflag also needs to be set accordingly. No idea yet on how to implement this in a good looking way
 - Properly implement keeping track SmartScripts in the SmartScriptListView class. Currently we base everything on `entryorguid` together with `id` but this means we can't change the `id` value by hand, or have `id`'s with numbers that are already used (like -1)
+  - Also needed to implement the AllowChangingEntryAndSourceType setting (which is needed to create actionlists unless someone else has a better implementation idea for this)
 
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)

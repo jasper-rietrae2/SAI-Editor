@@ -76,7 +76,7 @@ namespace SAI_Editor
             this.labelEntryOrGuid = new System.Windows.Forms.Label();
             this.textBoxEntryOrGuid = new System.Windows.Forms.TextBox();
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBoxAllowChangingEntryAndSourceType = new System.Windows.Forms.CheckBox();
             this.checkBoxListActionlistsOrEntries = new System.Windows.Forms.CheckBox();
             this.checkBoxShowBasicInfo = new System.Windows.Forms.CheckBox();
             this.checkBoxScriptByGuid = new System.Windows.Forms.CheckBox();
@@ -442,7 +442,6 @@ namespace SAI_Editor
             this.menuItemExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.menuItemExit.Size = new System.Drawing.Size(244, 22);
             this.menuItemExit.Text = "Exit";
-            this.menuItemExit.Click += menuItemExit_Click;
             // 
             // optionsToolStripMenuItem
             // 
@@ -490,7 +489,7 @@ namespace SAI_Editor
             // smartAIWikiToolStripMenuItem
             // 
             this.smartAIWikiToolStripMenuItem.Name = "smartAIWikiToolStripMenuItem";
-            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.smartAIWikiToolStripMenuItem.Text = "SmartAI Wiki...";
             this.smartAIWikiToolStripMenuItem.Click += new System.EventHandler(this.smartAIWikiToolStripMenuItem_Click);
             // 
@@ -606,6 +605,7 @@ namespace SAI_Editor
             this.comboBoxSourceType.Name = "comboBoxSourceType";
             this.comboBoxSourceType.Size = new System.Drawing.Size(183, 21);
             this.comboBoxSourceType.TabIndex = 2;
+            this.comboBoxSourceType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourceType_SelectedIndexChanged);
             this.comboBoxSourceType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
             // 
             // labelEntryOrGuid
@@ -628,7 +628,7 @@ namespace SAI_Editor
             // 
             // groupBoxPreferences
             // 
-            this.groupBoxPreferences.Controls.Add(this.checkBox4);
+            this.groupBoxPreferences.Controls.Add(this.checkBoxAllowChangingEntryAndSourceType);
             this.groupBoxPreferences.Controls.Add(this.checkBoxListActionlistsOrEntries);
             this.groupBoxPreferences.Controls.Add(this.checkBoxShowBasicInfo);
             this.groupBoxPreferences.Controls.Add(this.checkBoxScriptByGuid);
@@ -642,20 +642,21 @@ namespace SAI_Editor
             this.groupBoxPreferences.Text = "Preferences";
             this.groupBoxPreferences.Visible = false;
             // 
-            // checkBox4
+            // checkBoxAllowChangingEntryAndSourceType
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(140, 47);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(80, 17);
-            this.checkBox4.TabIndex = 5;
-            this.checkBox4.Text = "checkBox4";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBoxAllowChangingEntryAndSourceType.AutoSize = true;
+            this.checkBoxAllowChangingEntryAndSourceType.Location = new System.Drawing.Point(13, 71);
+            this.checkBoxAllowChangingEntryAndSourceType.Name = "checkBoxAllowChangingEntryAndSourceType";
+            this.checkBoxAllowChangingEntryAndSourceType.Size = new System.Drawing.Size(229, 17);
+            this.checkBoxAllowChangingEntryAndSourceType.TabIndex = 5;
+            this.checkBoxAllowChangingEntryAndSourceType.Text = "Allow changing entryorguid and sourcetype";
+            this.checkBoxAllowChangingEntryAndSourceType.UseVisualStyleBackColor = true;
+            this.checkBoxAllowChangingEntryAndSourceType.CheckedChanged += new System.EventHandler(this.checkBoxAllowChangingEntryAndSourceType_CheckedChanged);
             // 
             // checkBoxListActionlistsOrEntries
             // 
             this.checkBoxListActionlistsOrEntries.AutoSize = true;
-            this.checkBoxListActionlistsOrEntries.Location = new System.Drawing.Point(13, 71);
+            this.checkBoxListActionlistsOrEntries.Location = new System.Drawing.Point(13, 47);
             this.checkBoxListActionlistsOrEntries.Name = "checkBoxListActionlistsOrEntries";
             this.checkBoxListActionlistsOrEntries.Size = new System.Drawing.Size(109, 17);
             this.checkBoxListActionlistsOrEntries.TabIndex = 4;
@@ -677,7 +678,7 @@ namespace SAI_Editor
             // checkBoxScriptByGuid
             // 
             this.checkBoxScriptByGuid.AutoSize = true;
-            this.checkBoxScriptByGuid.Location = new System.Drawing.Point(13, 47);
+            this.checkBoxScriptByGuid.Location = new System.Drawing.Point(140, 47);
             this.checkBoxScriptByGuid.Name = "checkBoxScriptByGuid";
             this.checkBoxScriptByGuid.Size = new System.Drawing.Size(97, 17);
             this.checkBoxScriptByGuid.TabIndex = 2;
@@ -2166,7 +2167,7 @@ namespace SAI_Editor
         private System.Windows.Forms.GroupBox groupBoxParameters;
         public System.Windows.Forms.GroupBox groupBoxStaticScriptInfo;
         public System.Windows.Forms.TextBox textBoxEntryOrGuid;
-        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBoxAllowChangingEntryAndSourceType;
         private System.Windows.Forms.CheckBox checkBoxListActionlistsOrEntries;
         private System.Windows.Forms.CheckBox checkBoxShowBasicInfo;
         private System.Windows.Forms.CheckBox checkBoxScriptByGuid;

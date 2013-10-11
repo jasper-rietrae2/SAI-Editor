@@ -590,6 +590,7 @@ namespace SAI_Editor
             checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
             checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
             checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
+            checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
 
             if (expanding)
                 TryToLoadScript(false);
@@ -2512,6 +2513,23 @@ namespace SAI_Editor
         {
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, textBoxEntryOrGuid.Text.Length > 0);
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
+
+            //if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
+            //{
+            //    listViewSmartScripts.SelectedSmartScript.entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
+            //    listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+            //    GenerateCommentAndResizeColumns();
+            //}
+        }
+
+        private void comboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
+            //{
+            //    listViewSmartScripts.SelectedSmartScript.entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
+            //    listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+            //    GenerateCommentAndResizeColumns();
+            //}
         }
 
         private void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2609,6 +2627,7 @@ namespace SAI_Editor
             Settings.Default.ShowBasicInfo = checkBoxShowBasicInfo.Checked;
             Settings.Default.LockSmartScriptId = checkBoxLockEventId.Checked;
             Settings.Default.ListActionLists = checkBoxListActionlistsOrEntries.Checked;
+            Settings.Default.AllowChangingEntryAndSourceType = checkBoxAllowChangingEntryAndSourceType.Checked;
             Settings.Default.Save();
         }
 
@@ -2801,6 +2820,11 @@ namespace SAI_Editor
                 newNumber = (int)MaxValues.MaxTargetType;
 
             textBoxTargetType.Text = newNumber.ToString();
+        }
+
+        private void checkBoxAllowChangingEntryAndSourceType_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
