@@ -140,7 +140,9 @@ namespace SAI_Editor.Forms
             if (listViewScripts.SelectedItems.Count == 0)
                 return;
 
-            if (MessageBox.Show("Are you sure you want to delete this revert query permanently? This action can not be undone!", "Are you sure!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this revert query permanently? This action can not be undone!", "Are you sure!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (dialogResult != DialogResult.Yes)
                 return;
 
             string fileName = @"Reverts\" + listViewScripts.SelectedItems[0].Text + ".sql";

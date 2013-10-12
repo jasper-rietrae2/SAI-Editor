@@ -615,8 +615,9 @@ namespace SAI_Editor
                         if (smartScripts != null)
                         {
                             message += "\n\nA script was found with this entry using sourcetype " + smartScripts[0].source_type + " (" + GetSourceTypeString((SourceTypes)smartScripts[0].source_type) + "). Do you wish to load this instead?";
+                            DialogResult dialogResult = MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
-                            if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                            if (dialogResult == DialogResult.Yes)
                             {
                                 textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
                                 comboBoxSourceType.SelectedIndex = GetIndexBySourceType((SourceTypes)smartScripts[0].source_type);
@@ -638,8 +639,9 @@ namespace SAI_Editor
                                         if (smartScripts != null)
                                         {
                                             message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
+                                            DialogResult dialogResult = MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
-                                            if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                            if (dialogResult == DialogResult.Yes)
                                             {
                                                 textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
                                                 comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeCreature);
@@ -670,8 +672,9 @@ namespace SAI_Editor
                                             if (creaturesWithSmartAi.Count > 0)
                                             {
                                                 message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
+                                                DialogResult dialogResult = MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
-                                                if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                                if (dialogResult == DialogResult.Yes)
                                                     new SelectSmartScriptForm(creaturesWithSmartAi).ShowDialog(this);
                                             }
                                             else
@@ -693,8 +696,9 @@ namespace SAI_Editor
                                         if (smartScripts != null)
                                         {
                                             message += "\n\nA script was not found for this guid but we did find one using the entry of the guid (" + smartScripts[0].entryorguid + "). Do you wish to load this instead?";
+                                            DialogResult dialogResult = MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
-                                            if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                            if (dialogResult == DialogResult.Yes)
                                             {
                                                 textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
                                                 comboBoxSourceType.SelectedIndex = GetIndexBySourceType(SourceTypes.SourceTypeGameobject);
@@ -725,8 +729,9 @@ namespace SAI_Editor
                                             if (gameobjectsWithSmartAi.Count > 0)
                                             {
                                                 message += "\n\nA script was not found for this entry but we did find script(s) for guid(s) spawned under this entry. Do you wish to select one of these instead? (you can pick one out of all guid-scripts for this entry)";
+                                                DialogResult dialogResult = MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
-                                                if (MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                                                if (dialogResult == DialogResult.Yes)
                                                     new SelectSmartScriptForm(gameobjectsWithSmartAi).ShowDialog(this);
                                             }
                                             else
@@ -825,7 +830,7 @@ namespace SAI_Editor
 
         private void TryCloseApplication()
         {
-            if (!Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (!Settings.Default.PromptToQuit || DialogResult.Yes == MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 Close();
         }
 
