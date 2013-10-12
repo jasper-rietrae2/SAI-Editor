@@ -1447,7 +1447,15 @@ namespace SAI_Editor
 
             if (smartScripts != null && smartScripts.Count > 0)
             {
-                DialogResult dialogResult = MessageBox.Show("This " + sourceTypeString + " already has smart scripts (without its AIName set to SmartAI)! Do you want to load it instead?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                string errorMessage = "This " + sourceTypeString + " already has smart scripts";// (without its AIName set to SmartAI)! Do you want to load it instead?";
+
+                if ((SourceTypes)source_type != SourceTypes.SourceTypeScriptedActionlist)
+                    errorMessage += " (without its AIName set to SmartAI)!";
+                else
+                    errorMessage += "!";
+
+                errorMessage += " Do you want to load it instead?";
+                DialogResult dialogResult = MessageBox.Show(errorMessage, "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Yes)
                     TryToLoadScript();
