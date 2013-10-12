@@ -1403,22 +1403,44 @@ namespace SAI_Editor
             string aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(entryorguid, source_type);
             lastSmartScriptIdOfScript = 0;
 
-            if (aiName != String.Empty)
+            if ((SourceTypes)source_type == SourceTypes.SourceTypeAreaTrigger)
             {
-                DialogResult dialogResult = MessageBox.Show("This " + sourceTypeString + " already has its AIName set to '" + aiName + "'! Do you want to load it instead?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (aiName != String.Empty)
+                {
+                    string errorMessage = "This areatrigger already has its ";
 
-                if (dialogResult == DialogResult.Yes)
-                    TryToLoadScript();
+                    if (aiName != "SmartTrigger")
+                        errorMessage += "ScriptName set to " + aiName;
+                    else
+                        errorMessage += "AIName set! Do you want to load it instead?";
 
-                return;
+                    DialogResult dialogResult = MessageBox.Show(errorMessage, "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (dialogResult == DialogResult.Yes)
+                        TryToLoadScript();
+
+                    return;
+                }
             }
-
-            string scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectScriptName(entryorguid, source_type);
-
-            if (scriptName != String.Empty)
+            else
             {
-                MessageBox.Show("This " + sourceTypeString + " already has a ScriptName set (to '" + scriptName + "')!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (aiName != String.Empty)
+                {
+                    DialogResult dialogResult = MessageBox.Show("This " + sourceTypeString + " already has its AIName set to '" + aiName + "'! Do you want to load it instead?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (dialogResult == DialogResult.Yes)
+                        TryToLoadScript();
+
+                    return;
+                }
+
+                string scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectScriptName(entryorguid, source_type);
+
+                if (scriptName != String.Empty)
+                {
+                    MessageBox.Show("This " + sourceTypeString + " already has a ScriptName set (to '" + scriptName + "')!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
             List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entryorguid, source_type);
