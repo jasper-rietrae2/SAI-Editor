@@ -1413,9 +1413,11 @@ namespace SAI_Editor
                 return;
             }
 
-            if (await SAI_Editor_Manager.Instance.worldDatabase.GetObjectScriptName(entryorguid, source_type) != String.Empty)
+            string scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectScriptName(entryorguid, source_type);
+
+            if (scriptName != String.Empty)
             {
-                MessageBox.Show("This " + sourceTypeString + " already has a ScriptName set!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This " + sourceTypeString + " already has a ScriptName set (to '" + scriptName + "')!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
