@@ -83,7 +83,7 @@ namespace SAI_Editor.Forms
                         break;
                     case SourceTypes.SourceTypeAreaTrigger:
                         richTextBoxSqlOutput.Text += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
-                        richTextBoxSqlOutput.Text += "INSERT INTO `areatrigger_scripts` VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
+                        richTextBoxSqlOutput.Text += "INSERT INTO `areatrigger_scripts` (`entry`,`ScriptName`) VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
                         break;
                     case SourceTypes.SourceTypeScriptedActionlist:
                         // todo
@@ -312,7 +312,7 @@ namespace SAI_Editor.Forms
                         scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetAreaTriggerScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
 
                         if (scriptName != String.Empty)
-                            revertQuery += "UPDATE areatrigger_scripts SET Ainame='',Scriptname='" + scriptName + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
+                            revertQuery += "UPDATE areatrigger_scripts SET Scriptname='" + scriptName + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
                         else
                             revertQuery += "DELETE FROM areatrigger_scripts WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
 
