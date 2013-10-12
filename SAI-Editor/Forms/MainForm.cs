@@ -1400,11 +1400,12 @@ namespace SAI_Editor
             int entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
             int source_type = (int)GetSourceTypeByIndex();
             string sourceTypeString = GetSourceTypeString((SourceTypes)source_type);
+            string aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(entryorguid, source_type);
             lastSmartScriptIdOfScript = 0;
 
-            if (await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(entryorguid, source_type) != String.Empty)
+            if (aiName != String.Empty)
             {
-                DialogResult dialogResult = MessageBox.Show("This " + sourceTypeString + " already has its AIName set to SmartAI! Do you want to load it instead?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult dialogResult = MessageBox.Show("This " + sourceTypeString + " already has its AIName set to '" + aiName + "'! Do you want to load it instead?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Yes)
                     TryToLoadScript();
