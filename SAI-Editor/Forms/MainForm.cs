@@ -1261,7 +1261,6 @@ namespace SAI_Editor
                     lastSmartScriptIdOfScript--;
 
             listViewSmartScripts.RemoveSmartScript(XConverter.ToInt32(listViewSmartScripts.SelectedItems[0].SubItems[0].Text), XConverter.ToInt32(listViewSmartScripts.SelectedItems[0].SubItems[2].Text));
-            buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
 
             if (listViewSmartScripts.Items.Count <= 0)
@@ -1526,7 +1525,7 @@ namespace SAI_Editor
             listViewSmartScripts.ReplaceSmartScripts(smartScripts);
             checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
 
-            buttonNewLine.Enabled = listViewSmartScripts.Items.Count > 0;
+            buttonNewLine.Enabled = false;
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
             HandleShowBasicInfo();
 
@@ -1546,6 +1545,7 @@ namespace SAI_Editor
                     lastSmartScriptIdOfScript = XConverter.ToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
             }
 
+            buttonNewLine.Enabled = true;
             buttonGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
             menuItemGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
@@ -2294,7 +2294,11 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.Items.Count == 0)
             {
-                MessageBox.Show("This button should not be available if there are no lines in the listview, please report this as a bug!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to create a new script for the given entry and sourcetype?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (dialogResult == DialogResult.Yes)
+                    TryToCreateScript();
+
                 return;
             }
 
