@@ -1011,10 +1011,11 @@ namespace SAI_Editor
 
             switch ((SmartAction)action_type)
             {
-                case SmartAction.SMART_ACTION_CAST:
-                case SmartAction.SMART_ACTION_INVOKER_CAST:
-                    buttonActionParamOneSearch.Visible = true; //! Spell entry
-                    buttonActionParamTwoSearch.Visible = true; //! Cast flags
+                case SmartAction.SMART_ACTION_CAST: //! Spell entry & Cast flags
+                case SmartAction.SMART_ACTION_INVOKER_CAST: //! Spell entry & Cast flags
+                case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO: //! Creature entry & Spell entry
+                    buttonActionParamOneSearch.Visible = true;
+                    buttonActionParamTwoSearch.Visible = true;
                     break;
                 case SmartAction.SMART_ACTION_CROSS_CAST:
                     buttonActionParamOneSearch.Visible = true; //! Spell entry
@@ -1065,7 +1066,6 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SET_REACT_STATE: //! Reactstate
                 case SmartAction.SMART_ACTION_SOUND: //! Sound entry
                 case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL: //! Creature entry
-                case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO: //! Creature entry
                 case SmartAction.SMART_ACTION_KILLED_MONSTER: //! Creature entry
                 case SmartAction.SMART_ACTION_UPDATE_TEMPLATE: //! Creature entry
                 case SmartAction.SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL: //! Creature entry
@@ -2042,6 +2042,7 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_INTERRUPT_SPELL:
+                case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SUMMON_CREATURE:
