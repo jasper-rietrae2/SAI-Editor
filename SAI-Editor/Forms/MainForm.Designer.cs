@@ -908,7 +908,7 @@ namespace SAI_Editor
             "ACTION_OVERRIDE_SCRIPT_BASE_OBJECT",
             "ACTION_RESET_SCRIPT_BASE_OBJECT",
             "ACTION_CALL_SCRIPT_RESET",
-            "ACTION_UNUSED_79",
+            "ACTION_SET_RANGED_MOVEMENT",
             "ACTION_CALL_TIMED_ACTIONLIST",
             "ACTION_SET_NPC_FLAG",
             "ACTION_ADD_NPC_FLAG",
