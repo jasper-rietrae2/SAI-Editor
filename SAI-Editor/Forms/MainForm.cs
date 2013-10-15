@@ -1431,20 +1431,22 @@ namespace SAI_Editor
                 if (aiName != String.Empty)
                 {
                     string strAlreadyHasAiName = "This " + sourceTypeString + " already has its AIName set to '" + aiName + "'";
-                    MessageBoxButtons buttons = MessageBoxButtons.OK;
 
-                    if (aiName == "EventAI" || aiName == "SmartAI")
-                    {
+                    if (aiName == "SmartAI")
                         strAlreadyHasAiName += "! Do you want to load it instead?";
-                        buttons = MessageBoxButtons.YesNo;
-                    }
                     else
-                        strAlreadyHasAiName += " and can therefore not have any SmartAI. You will have to get rid of this AIName first (by hand)!";
+                        strAlreadyHasAiName += " and can therefore not have any SmartAI. Do you want to get rid of this AIName right now?";
 
-                    DialogResult dialogResult = MessageBox.Show(strAlreadyHasAiName, "Something went wrong", buttons, MessageBoxIcon.Warning);
+                    DialogResult dialogResult = MessageBox.Show(strAlreadyHasAiName, "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (dialogResult == DialogResult.Yes)
-                        TryToLoadScript();
+                    {
+                        if (aiName == "SmartAI")
+                            TryToLoadScript();
+                        else
+                            //! We don't have to target areatrigger_scripts here, as we've already done this a few lines up
+                            new SqlOutputForm("UPDATE `" + GetTemplateTableBySourceType((SourceTypes)source_type) + "` SET `AIName`=" + '"' + '"' + " WHERE `entry`=" + entryorguid + ";\n").ShowDialog(this);
+                    }
 
                     return;
                 }
@@ -1515,6 +1517,19 @@ namespace SAI_Editor
             buttonGenerateComments.Enabled = true;
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, true);
+        }
+
+        private string GetTemplateTableBySourceType(SourceTypes sourceType)
+        {
+            switch (sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return "creature_template";
+                case SourceTypes.SourceTypeGameobject:
+                    return "gameobject_template";
+            }
+
+            return "<unknown template table>";
         }
 
         public async void TryToLoadScript(bool showErrorIfNoneFound = true, bool promptCreateIfNoneFound = false)
@@ -2592,23 +2607,251 @@ namespace SAI_Editor
             //}
         }
 
-        private void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenSqlOutputForm();
+            new SqlOutputForm(await GenerateSmartAiSqlFromListView(), await GenerateSmartAiRevertQuery()).ShowDialog(this);
         }
 
-        private void buttonGenerateSql_Click(object sender, EventArgs e)
+        private async void buttonGenerateSql_Click(object sender, EventArgs e)
         {
             if (formState != FormState.FormStateMain)
                 return;
 
-            OpenSqlOutputForm();
+            new SqlOutputForm(await GenerateSmartAiSqlFromListView(), await GenerateSmartAiRevertQuery()).ShowDialog(this);
         }
 
-        private void OpenSqlOutputForm()
+        private async Task<string> GenerateSmartAiSqlFromListView()
         {
-            if (listViewSmartScripts.SmartScripts.Count > 0)
-                new SqlOutputForm(listViewSmartScripts.SmartScripts).ShowDialog(this);
+            string generatedSql = String.Empty;
+
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
+
+            string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
+            string sourceSet = originalEntryOrGuidAndSourceType.entryOrGuid < 0 ? "@GUID" : "@ENTRY";
+
+            generatedSql += "-- " + sourceName + " SAI\n";
+            generatedSql += "SET " + sourceSet + " := " + originalEntryOrGuidAndSourceType.entryOrGuid + ";\n";
+
+            if (entriesOrGuidsAndSourceTypes.Count == 1)
+            {
+                switch ((SourceTypes)originalEntryOrGuidAndSourceType.sourceType)
+                {
+                    case SourceTypes.SourceTypeCreature:
+                        generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                        break;
+                    case SourceTypes.SourceTypeGameobject:
+                        generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                        break;
+                    case SourceTypes.SourceTypeAreaTrigger:
+                        generatedSql += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
+                        generatedSql += "INSERT INTO `areatrigger_scripts` (`entry`,`ScriptName`) VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
+                        break;
+                    case SourceTypes.SourceTypeScriptedActionlist:
+                        // todo
+                        break;
+                }
+
+                generatedSql += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + sourceSet + " AND `source_type`=" + (int)originalEntryOrGuidAndSourceType.sourceType + ";\n";
+            }
+            else
+            {
+                foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in entriesOrGuidsAndSourceTypes)
+                {
+                    switch ((SourceTypes)entryOrGuidAndSourceType.sourceType)
+                    {
+                        case SourceTypes.SourceTypeCreature:
+                            generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                            break;
+                        case SourceTypes.SourceTypeGameobject:
+                            generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                            break;
+                        case SourceTypes.SourceTypeAreaTrigger:
+                            generatedSql += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
+                            generatedSql += "INSERT INTO areatrigger_scripts VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
+                            break;
+                        case SourceTypes.SourceTypeScriptedActionlist:
+                            // todo
+                            break;
+                    }
+                }
+
+                generatedSql += "DELETE FROM `smart_scripts` WHERE `entryorguid` IN (";
+
+                for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
+                {
+                    string entryorguid = entriesOrGuidsAndSourceTypes[i].entryOrGuid.ToString();
+
+                    if (entryorguid == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
+                        entryorguid = sourceSet;
+
+                    if (i == entriesOrGuidsAndSourceTypes.Count - 1)
+                        generatedSql += entryorguid + ")";
+                    else
+                        generatedSql += entryorguid + ",";
+                }
+
+                generatedSql += " AND `source_type` IN (";
+                List<int> sourceTypesAdded = new List<int>();
+
+                for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
+                {
+                    if (sourceTypesAdded.Contains((int)entriesOrGuidsAndSourceTypes[i].sourceType))
+                        continue;
+
+                    if (i != 0)
+                        generatedSql += ",";
+
+                    generatedSql += (int)entriesOrGuidsAndSourceTypes[i].sourceType;
+                    sourceTypesAdded.Add((int)entriesOrGuidsAndSourceTypes[i].sourceType);
+                }
+
+                generatedSql += ");\n";
+            }
+
+            generatedSql += "INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES\n";
+
+            List<SmartScript> smartScripts = listViewSmartScripts.SmartScripts;
+            smartScripts = smartScripts.OrderBy(smartScript => smartScript.entryorguid).ToList();
+
+            for (int i = 0; i < smartScripts.Count; ++i)
+            {
+                SmartScript smartScript = smartScripts[i];
+                string actualSourceSet = sourceSet;
+
+                if (originalEntryOrGuidAndSourceType.entryOrGuid != smartScripts[i].entryorguid)
+                    actualSourceSet = smartScripts[i].entryorguid.ToString();
+
+                int[] eventParameters = new int[4];
+                eventParameters[0] = smartScript.event_param1;
+                eventParameters[1] = smartScript.event_param2;
+                eventParameters[2] = smartScript.event_param3;
+                eventParameters[3] = smartScript.event_param4;
+
+                int[] actionParameters = new int[6];
+                actionParameters[0] = smartScript.action_param1;
+                actionParameters[1] = smartScript.action_param2;
+                actionParameters[2] = smartScript.action_param3;
+                actionParameters[3] = smartScript.action_param4;
+                actionParameters[4] = smartScript.action_param5;
+                actionParameters[5] = smartScript.action_param6;
+
+                int[] targetParameters = new int[3];
+                targetParameters[0] = smartScript.target_param1;
+                targetParameters[1] = smartScript.target_param2;
+                targetParameters[2] = smartScript.target_param3;
+
+                for (int x = 0; x < 6; ++x)
+                {
+                    if (x < 4)
+                        if (eventParameters[x].ToString() == sourceSet)
+                            eventParameters[x] = XConverter.ToInt32(sourceSet);
+
+                    if (actionParameters[x].ToString() == sourceSet)
+                        actionParameters[x] = XConverter.ToInt32(sourceSet);
+
+                    if (x < 3)
+                        if (targetParameters[x].ToString() == sourceSet)
+                            targetParameters[x] = XConverter.ToInt32(sourceSet);
+                }
+
+                generatedSql += "(" + actualSourceSet + "," + smartScript.source_type + "," + smartScript.id + "," + smartScript.link + "," + smartScript.event_type + "," +
+                                              smartScript.event_phase_mask + "," + smartScript.event_chance + "," + smartScript.event_flags + "," + eventParameters[0] + "," +
+                                              eventParameters[1] + "," + eventParameters[2] + "," + eventParameters[3] + "," + smartScript.action_type + "," +
+                                              actionParameters[0] + "," + actionParameters[1] + "," + actionParameters[2] + "," + actionParameters[3] + "," +
+                                              actionParameters[4] + "," + actionParameters[5] + "," + smartScript.target_type + "," + targetParameters[0] + "," +
+                                              targetParameters[1] + "," + targetParameters[2] + "," + smartScript.target_x + "," + smartScript.target_y + "," +
+                                              smartScript.target_z + "," + smartScript.target_o + "," + '"' + smartScript.comment + '"' + ")";
+
+                if (i == smartScripts.Count - 1)
+                    generatedSql += ";";
+                else
+                    generatedSql += ",";
+
+                generatedSql += "\n"; //! White line at end of script to make it easier to select
+            }
+
+            //! Replaces '@ENTRY*100[id]' ([id] being like 00, 01, 02, 03, etc.) by '@ENTRY*100+3' for example.
+            for (int i = 0; i < 50; ++i) //! We expect a maximum of 50 scripts for one entry...
+                generatedSql = generatedSql.Replace(sourceSet + "0" + i.ToString(), sourceSet + "*100+" + i.ToString());
+
+            //! Replaces '@ENTRY*100+0' by just '@ENTRY*100' (which is proper codestyle)
+            generatedSql = generatedSql.Replace(sourceSet + "*100+0", sourceSet + "*100");
+            return generatedSql;
+        }
+
+        private async Task<string> GenerateSmartAiRevertQuery()
+        {
+            string revertQuery = String.Empty;
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
+
+            foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in entriesOrGuidsAndSourceTypes)
+            {
+                List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entryOrGuidAndSourceType.entryOrGuid, (int)entryOrGuidAndSourceType.sourceType);
+                string scriptName = String.Empty, aiName = String.Empty;
+
+                switch (entryOrGuidAndSourceType.sourceType)
+                {
+                    case SourceTypes.SourceTypeCreature:
+                        scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
+                        aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureAiNameById(entryOrGuidAndSourceType.entryOrGuid);
+
+                        revertQuery += "UPDATE creature_template SET Ainame='" + aiName + "',Scriptname='" + scriptName + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
+                        break;
+                    case SourceTypes.SourceTypeGameobject:
+                        scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
+                        aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectAiNameById(entryOrGuidAndSourceType.entryOrGuid);
+
+                        revertQuery += "UPDATE gameobject_template SET Ainame='" + aiName + "',Scriptname='" + await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectScriptNameById(entryOrGuidAndSourceType.entryOrGuid) + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
+                        break;
+                    case SourceTypes.SourceTypeAreaTrigger:
+                        scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetAreaTriggerScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
+
+                        if (scriptName != String.Empty)
+                            revertQuery += "UPDATE areatrigger_scripts SET Scriptname='" + scriptName + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
+                        else
+                            revertQuery += "DELETE FROM areatrigger_scripts WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "'";
+
+                        break;
+                }
+
+                if (smartScripts == null || smartScripts.Count == 0)
+                    continue;
+
+                for (int i = 0; i < smartScripts.Count; ++i)
+                {
+                    SmartScript smartScript = smartScripts[i];
+
+                    revertQuery += "UPDATE smart_scripts SET ";
+                    revertQuery += String.Format("event_type={0},event_phase_mask={1},event_chance={2},event_flags={3},", smartScript.event_type, smartScript.event_phase_mask, smartScript.event_chance, smartScript.event_flags);
+                    revertQuery += String.Format("event_param1={0},event_param2={1},event_param3={2},event_param4={3},", smartScript.event_param1, smartScript.event_param2, smartScript.event_param3, smartScript.event_param4);
+                    revertQuery += String.Format("action_type={0},action_param1={1},action_param2={2},action_param3={3},", smartScript.action_type, smartScript.action_param1, smartScript.action_param2, smartScript.action_param3);
+                    revertQuery += String.Format("action_param4={0},action_param5={1},action_param6={2},target_type={3},", smartScript.action_param4, smartScript.action_param5, smartScript.action_param6, smartScript.target_type);
+                    revertQuery += String.Format("target_param1={0},target_param2={1},target_param3={2},target_x={3},", smartScript.target_param1, smartScript.target_param2, smartScript.target_param3, smartScript.target_x);
+                    revertQuery += String.Format("target_y={0},target_z={1},target_o={2},comment=" + '"' + "{3}" + '"', smartScript.target_y, smartScript.target_z, smartScript.target_o, smartScript.comment);
+                    revertQuery += String.Format(" WHERE entryorguid={0} AND source_type={1} AND id={2};", smartScript.entryorguid, smartScript.source_type, smartScript.id);
+                }
+            }
+
+            return revertQuery;
+        }
+
+        private List<EntryOrGuidAndSourceType> GetUniqueEntriesOrGuidsAndSourceTypes(List<SmartScript> smartScripts)
+        {
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = new List<EntryOrGuidAndSourceType>();
+
+            foreach (SmartScript smartScript in smartScripts)
+            {
+                EntryOrGuidAndSourceType entryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
+                entryOrGuidAndSourceType.entryOrGuid = smartScript.entryorguid;
+                entryOrGuidAndSourceType.sourceType = (SourceTypes)smartScript.source_type;
+
+                if (entriesOrGuidsAndSourceTypes.Contains(entryOrGuidAndSourceType))
+                    continue;
+
+                entriesOrGuidsAndSourceTypes.Add(entryOrGuidAndSourceType);
+            }
+
+            return entriesOrGuidsAndSourceTypes;
         }
 
         private void SetPictureBoxEnabled(PictureBox pictureBox, Image image, bool enable)
