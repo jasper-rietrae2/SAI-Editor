@@ -990,12 +990,15 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_GAME_EVENT_START: //! Game event entry
                 case SmartEvent.SMART_EVENT_GAME_EVENT_END: //! Game event entry
                 case SmartEvent.SMART_EVENT_MOVEMENTINFORM: //! Movement type
-                case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF:
-                case SmartEvent.SMART_EVENT_HAS_AURA:
-                case SmartEvent.SMART_EVENT_TARGET_BUFFED:
-                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
+                case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF: //! Spell id
+                case SmartEvent.SMART_EVENT_HAS_AURA: //! Spell id
+                case SmartEvent.SMART_EVENT_TARGET_BUFFED: //! Spell id
+                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET: //! Spell id
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
                     buttonEventParamOneSearch.Visible = true; //! Spell entry
+                    break;
+                case SmartEvent.SMART_EVENT_TEXT_OVER:
+                    buttonEventParamTwoSearch.Visible = true; //! Creature entry
                     break;
             }
 
@@ -1801,11 +1804,14 @@ namespace SAI_Editor
             switch ((SmartEvent)comboBoxEventType.SelectedIndex)
             {
                 case SmartEvent.SMART_EVENT_SPELLHIT: //! Spell school
-                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
+                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET: //! Spell school
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSpellSchool).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Map
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap).ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_TEXT_OVER: //! Creature entry
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
                     break;
             }
         }
