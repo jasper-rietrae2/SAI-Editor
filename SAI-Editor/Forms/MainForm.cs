@@ -1040,13 +1040,14 @@ namespace SAI_Editor
                     buttonActionParamOneSearch.Visible = true; //! Event phase 1
                     buttonActionParamTwoSearch.Visible = true; //! Event phase 2
                     break;
-                case SmartAction.SMART_ACTION_RANDOM_PHASE:
-                    buttonActionParamOneSearch.Visible = true; //! Event phase 1
-                    buttonActionParamTwoSearch.Visible = true; //! Event phase 2
-                    buttonActionParamThreeSearch.Visible = true; //! Event phase 3
-                    buttonActionParamFourSearch.Visible = true; //! Event phase 4
-                    buttonActionParamFiveSearch.Visible = true; //! Event phase 5
-                    buttonActionParamSixSearch.Visible = true; //! Event phase 6
+                case SmartAction.SMART_ACTION_RANDOM_PHASE:  //! Event phase 1-6
+                case SmartAction.SMART_ACTION_RANDOM_EMOTE: //! Emote entry 1-6
+                    buttonActionParamOneSearch.Visible = true;
+                    buttonActionParamTwoSearch.Visible = true;
+                    buttonActionParamThreeSearch.Visible = true;
+                    buttonActionParamFourSearch.Visible = true;
+                    buttonActionParamFiveSearch.Visible = true;
+                    buttonActionParamSixSearch.Visible = true;
                     break;
                 case SmartAction.SMART_ACTION_EQUIP:
                     buttonActionParamOneSearch.Visible = true; //! Equipment entry
@@ -1056,7 +1057,6 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_SET_FACTION: //! Faction entry
                 case SmartAction.SMART_ACTION_EMOTE: //! Emote entry
-                case SmartAction.SMART_ACTION_RANDOM_EMOTE: //! Emote entry
                 case SmartAction.SMART_ACTION_SET_EMOTE_STATE: //! Emote entry
                 case SmartAction.SMART_ACTION_FAIL_QUEST: //! Quest entry
                 case SmartAction.SMART_ACTION_ADD_QUEST: //! Quest entry
@@ -2051,6 +2051,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_RANDOM_EMOTE:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
+                    break;
             }
         }
 
@@ -2072,6 +2075,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_EQUIP:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_RANDOM_EMOTE:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
+                    break;
             }
         }
 
@@ -2090,6 +2096,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_EQUIP:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_RANDOM_EMOTE:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
+                    break;
             }
         }
 
@@ -2105,6 +2114,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_EQUIP:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_RANDOM_EMOTE:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
+                    break;
             }
         }
 
@@ -2119,6 +2131,9 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_RANDOM_EMOTE:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
                     break;
             }
         }
