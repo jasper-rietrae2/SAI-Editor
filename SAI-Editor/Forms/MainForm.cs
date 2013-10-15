@@ -992,6 +992,7 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_HAS_AURA: //! Spell id
                 case SmartEvent.SMART_EVENT_TARGET_BUFFED: //! Spell id
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
+                case SmartEvent.SMART_EVENT_SUMMONED_UNIT: //! Creature entry
                 case SmartEvent.SMART_EVENT_ACCEPTED_QUEST: //! Quest id
                 case SmartEvent.SMART_EVENT_REWARD_QUEST: //! Quest id
                 case SmartEvent.SMART_EVENT_RECEIVE_EMOTE: //! Emote id
