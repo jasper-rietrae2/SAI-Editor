@@ -997,6 +997,7 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
                 case SmartEvent.SMART_EVENT_ACCEPTED_QUEST: //! Quest id
                 case SmartEvent.SMART_EVENT_REWARD_QUEST: //! Quest id
+                case SmartEvent.SMART_EVENT_RECEIVE_EMOTE: //! Emote id
                     buttonEventParamOneSearch.Visible = true;
                     break;
                 case SmartEvent.SMART_EVENT_TEXT_OVER: //! Creature entry
@@ -1802,6 +1803,9 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_ACCEPTED_QUEST: //! Quest id
                 case SmartEvent.SMART_EVENT_REWARD_QUEST: //! Quest id
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_RECEIVE_EMOTE:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
                     break;
             }
         }
