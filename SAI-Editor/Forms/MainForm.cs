@@ -995,6 +995,8 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_TARGET_BUFFED: //! Spell id
                 case SmartEvent.SMART_EVENT_SPELLHIT_TARGET: //! Spell id
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
+                case SmartEvent.SMART_EVENT_ACCEPTED_QUEST: //! Quest id
+                case SmartEvent.SMART_EVENT_REWARD_QUEST: //! Quest id
                     buttonEventParamOneSearch.Visible = true;
                     break;
                 case SmartEvent.SMART_EVENT_TEXT_OVER: //! Creature entry
@@ -1771,17 +1773,17 @@ namespace SAI_Editor
             switch ((SmartEvent)comboBoxEventType.SelectedIndex)
             {
                 case SmartEvent.SMART_EVENT_SPELLHIT: //! Spell id
-                case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF:
-                case SmartEvent.SMART_EVENT_HAS_AURA:
-                case SmartEvent.SMART_EVENT_TARGET_BUFFED:
-                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
+                case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF: //! Spell id
+                case SmartEvent.SMART_EVENT_HAS_AURA: //! Spell id
+                case SmartEvent.SMART_EVENT_TARGET_BUFFED: //! Spell id
+                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET: //! Spell id
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Respawn condition
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeRespawnType).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
-                case SmartEvent.SMART_EVENT_SUMMONED_UNIT:
+                case SmartEvent.SMART_EVENT_SUMMONED_UNIT: //! Creature entry
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER: //! Areatrigger entry
@@ -1791,11 +1793,15 @@ namespace SAI_Editor
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeGoState).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_GAME_EVENT_START: //! Game event entry
-                case SmartEvent.SMART_EVENT_GAME_EVENT_END:
+                case SmartEvent.SMART_EVENT_GAME_EVENT_END: //! Game event entry
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent).ShowDialog(this);
                     break;
-                case SmartEvent.SMART_EVENT_MOVEMENTINFORM:
+                case SmartEvent.SMART_EVENT_MOVEMENTINFORM: //! Motion type
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeMotionType).ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_ACCEPTED_QUEST: //! Quest id
+                case SmartEvent.SMART_EVENT_REWARD_QUEST: //! Quest id
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
             }
         }
