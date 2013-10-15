@@ -1430,7 +1430,18 @@ namespace SAI_Editor
             {
                 if (aiName != String.Empty)
                 {
-                    DialogResult dialogResult = MessageBox.Show("This " + sourceTypeString + " already has its AIName set to '" + aiName + "'! Do you want to load it instead?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    string strAlreadyHasAiName = "This " + sourceTypeString + " already has its AIName set to '" + aiName + "'";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+
+                    if (aiName == "EventAI" || aiName == "SmartAI")
+                    {
+                        strAlreadyHasAiName += "! Do you want to load it instead?";
+                        buttons = MessageBoxButtons.YesNo;
+                    }
+                    else
+                        strAlreadyHasAiName += " and can therefore not have any SmartAI. You will have to get rid of this AIName first (by hand)!";
+
+                    DialogResult dialogResult = MessageBox.Show(strAlreadyHasAiName, "Something went wrong", buttons, MessageBoxIcon.Warning);
 
                     if (dialogResult == DialogResult.Yes)
                         TryToLoadScript();
