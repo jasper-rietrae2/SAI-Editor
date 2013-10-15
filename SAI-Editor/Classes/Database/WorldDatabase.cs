@@ -213,19 +213,31 @@ namespace SAI_Editor.Database
             return String.Empty;
         }
 
-        public async Task<string> GetObjectNameByIdOrGuidAndSourceType(SourceTypes sourceType, int idOrGuid)
+        public async Task<string> GetObjectNameByIdOrGuidAndSourceType(SourceTypes sourceType, int idOrGuid, bool errorIfNoneFound = false)
         {
+            string newName = String.Empty;
+
             switch (sourceType)
             {
                 case SourceTypes.SourceTypeCreature:
-                    return idOrGuid < 0 ? await GetCreatureNameByGuid(-idOrGuid) : await GetCreatureNameById(idOrGuid);
+                    newName = idOrGuid < 0 ? await GetCreatureNameByGuid(-idOrGuid) : await GetCreatureNameById(idOrGuid);
+
+                    if (errorIfNoneFound && String.IsNullOrWhiteSpace(newName))
+                        newName = "<Could not generate name>";
+
+                    return newName;
                 case SourceTypes.SourceTypeGameobject:
-                    return idOrGuid < 0 ? await GetGameobjectNameByGuid(-idOrGuid) : await GetGameobjectNameById(idOrGuid);
+                    newName = idOrGuid < 0 ? await GetGameobjectNameByGuid(-idOrGuid) : await GetGameobjectNameById(idOrGuid);
+
+                    if (errorIfNoneFound && String.IsNullOrWhiteSpace(newName))
+                        newName = "<Could not generate name>";
+
+                    return newName;
                 case SourceTypes.SourceTypeAreaTrigger:
                     return "Areatrigger";
             }
 
-            return String.Empty;
+            return "<Could not generate name>";
         }
 
         public async Task<List<SmartScript>> GetSmartScripts(int entryorguid)

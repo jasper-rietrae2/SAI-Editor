@@ -245,11 +245,11 @@ namespace SAI_Editor.Classes
                 switch (smartScript.source_type)
                 {
                     case 0: //! Creature
-                        fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(SourceTypes.SourceTypeCreature, smartScript.entryorguid) + " - ";
+                        fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(SourceTypes.SourceTypeCreature, smartScript.entryorguid, true) + " - ";
                         fullLine += smartEventStrings[(SmartEvent)smartScript.event_type];
                         break;
                     case 1: //! Gameobject
-                        fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(SourceTypes.SourceTypeGameobject, smartScript.entryorguid) + " - ";
+                        fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(SourceTypes.SourceTypeGameobject, smartScript.entryorguid, true) + " - ";
                         fullLine += smartEventStrings[(SmartEvent)smartScript.event_type];
                         break;
                     case 9: //! Actionlist
@@ -258,10 +258,10 @@ namespace SAI_Editor.Classes
                             TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScript, SourceTypes.SourceTypeScriptedActionlist);
 
                             if (timedActionListOrEntries.entries != null && timedActionListOrEntries.entries.Count > 0)
-                                fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(timedActionListOrEntries.sourceTypeOfEntry, XConverter.ToInt32(timedActionListOrEntries.entries[0])) + " - ";
+                                fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(timedActionListOrEntries.sourceTypeOfEntry, XConverter.ToInt32(timedActionListOrEntries.entries[0]), true) + " - ";
                         }
                         else
-                            fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid) + " - ";
+                            fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid, true) + " - ";
 
                         fullLine += "On Script";
                         break;
