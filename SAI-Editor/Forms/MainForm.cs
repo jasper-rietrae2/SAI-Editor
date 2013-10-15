@@ -412,9 +412,6 @@ namespace SAI_Editor
         {
             switch (e.KeyCode)
             {
-                case Keys.Escape:
-                    TryCloseApplication();
-                    break;
                 case Keys.Enter:
                     switch (formState)
                     {
