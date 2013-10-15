@@ -1432,7 +1432,7 @@ namespace SAI_Editor
                 {
                     string strAlreadyHasAiName = "This " + sourceTypeString + " already has its AIName set to '" + aiName + "'";
 
-                    if (aiName == "SmartAI")
+                    if (SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName))
                         strAlreadyHasAiName += "! Do you want to load it instead?";
                     else
                         strAlreadyHasAiName += " and can therefore not have any SmartAI. Do you want to get rid of this AIName right now?";
@@ -1441,7 +1441,7 @@ namespace SAI_Editor
 
                     if (dialogResult == DialogResult.Yes)
                     {
-                        if (aiName == "SmartAI")
+                        if (SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName))
                             TryToLoadScript();
                         else
                             //! We don't have to target areatrigger_scripts here, as we've already done this a few lines up

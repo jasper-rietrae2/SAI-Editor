@@ -320,7 +320,11 @@ namespace SAI_Editor
                 return databaseNames;
 
             });
+        }
 
+        public bool IsAiNameSmartAi(string aiName)
+        {
+            return aiName == "SmartAI" || aiName == "SmartGameObjectAI";
         }
     }
 }
