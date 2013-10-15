@@ -14,6 +14,7 @@ namespace SAI_Editor.SearchForms
         SingleSelectFormTypeMotionType = 6,
         SingleSelectFormTypeSummonType = 7,
         SingleSelectFormTypeSheathState = 8,
+        SingleSelectFormTypeSmartAiTemplate = 9,
     }
 
     public partial class SingleSelectForm : Form
@@ -150,6 +151,16 @@ namespace SAI_Editor.SearchForms
                     listViewSelectableItems.Items.Add("SHEATH_STATE_UNARMED"); // 0
                     listViewSelectableItems.Items.Add("SHEATH_STATE_MELEE"); // 1
                     listViewSelectableItems.Items.Add("SHEATH_STATE_RANGED"); // 2
+                    break;
+                case SingleSelectFormType.SingleSelectFormTypeSmartAiTemplate:
+                    Text = "Select a SAI template";
+                    listViewSelectableItems.Columns.Add("SAI template", 278, HorizontalAlignment.Left);
+                    listViewSelectableItems.Items.Add("SMARTAI_TEMPLATE_BASIC"); // 0
+                    listViewSelectableItems.Items.Add("SMARTAI_TEMPLATE_CASTER"); // 1
+                    listViewSelectableItems.Items.Add("SMARTAI_TEMPLATE_TURRET"); // 2
+                    listViewSelectableItems.Items.Add("SMARTAI_TEMPLATE_PASSIVE"); // 3
+                    listViewSelectableItems.Items.Add("SMARTAI_TEMPLATE_CAGED_GO_PART"); // 4
+                    listViewSelectableItems.Items.Add("SMARTAI_TEMPLATE_CAGED_NPC_PART"); // 5
                     break;
             }
         }

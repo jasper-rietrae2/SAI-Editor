@@ -1036,6 +1036,7 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_FOLLOW:
                     buttonActionParamThreeSearch.Visible = true; //! Creature entry
+                    buttonActionParamFourSearch.Visible = true; //! Creature entry
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
                     buttonActionParamOneSearch.Visible = true; //! Event phase 1
@@ -1095,6 +1096,7 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SET_NPC_FLAG: //! Npc flags
                 case SmartAction.SMART_ACTION_ADD_NPC_FLAG: //! Npc flags
                 case SmartAction.SMART_ACTION_REMOVE_NPC_FLAG: //! Npc flags
+                case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE: //! AI template
                     buttonActionParamOneSearch.Visible = true;
                     break;
             }
@@ -1125,6 +1127,11 @@ namespace SAI_Editor
                     break;
             }
 
+            SetEnabledOfParameterFields();
+        }
+
+        private void SetEnabledOfParameterFields()
+        {
             textBoxEventParam1.Enabled = labelEventParam1.Text.Length > 0;
             textBoxEventParam2.Enabled = labelEventParam2.Text.Length > 0;
             textBoxEventParam3.Enabled = labelEventParam3.Text.Length > 0;
@@ -1144,6 +1151,11 @@ namespace SAI_Editor
             textBoxTargetY.Enabled = labelTargetY.Text.Length > 0;
             textBoxTargetZ.Enabled = labelTargetZ.Text.Length > 0;
             textBoxTargetO.Enabled = labelTargetO.Text.Length > 0;
+
+            int target_type = comboBoxTargetType.SelectedIndex;
+
+            if (listViewSmartScripts != null && listViewSmartScripts.SelectedSmartScript != null)
+                target_type = listViewSmartScripts.SelectedSmartScript.target_type;
 
             textBoxTargetX.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
             textBoxTargetY.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
@@ -1751,6 +1763,35 @@ namespace SAI_Editor
             buttonTargetParamSevenSearch.Visible = visible;
         }
 
+        private void SetVisibilityOfAllEventParamButtons(bool visible)
+        {
+            buttonEventParamOneSearch.Visible = visible;
+            buttonEventParamTwoSearch.Visible = visible;
+            buttonEventParamThreeSearch.Visible = visible;
+            buttonEventParamFourSearch.Visible = visible;
+        }
+
+        private void SetVisibilityOfAllActionParamButtons(bool visible)
+        {
+            buttonActionParamOneSearch.Visible = visible;
+            buttonActionParamTwoSearch.Visible = visible;
+            buttonActionParamThreeSearch.Visible = visible;
+            buttonActionParamFourSearch.Visible = visible;
+            buttonActionParamFiveSearch.Visible = visible;
+            buttonActionParamSixSearch.Visible = visible;
+        }
+
+        private void SetVisibilityOfAllTargetParamButtons(bool visible)
+        {
+            buttonTargetParamOneSearch.Visible = visible;
+            buttonTargetParamTwoSearch.Visible = visible;
+            buttonTargetParamThreeSearch.Visible = visible;
+            buttonTargetParamFourSearch.Visible = visible;
+            buttonTargetParamFiveSearch.Visible = visible;
+            buttonTargetParamSixSearch.Visible = visible;
+            buttonTargetParamSevenSearch.Visible = visible;
+        }
+
         private string GetSourceTypeString(SourceTypes sourceType)
         {
             switch (sourceType)
@@ -1878,6 +1919,20 @@ namespace SAI_Editor
                     break;
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID: //! Gameobject guid
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid).ShowDialog(this);
+                    break;
+            }
+
+            switch ((SmartAction)comboBoxActionType.SelectedIndex)
+            {
+                case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE:
+                    //! This button is different based on the number in the first parameter field
+                    switch ((SmartAiTemplates)XConverter.ToInt32(textBoxActionParam1.Text))
+                    {
+                        case SmartAiTemplates.SMARTAI_TEMPLATE_CASTER:
+                        case SmartAiTemplates.SMARTAI_TEMPLATE_TURRET:
+                            new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeCastFlag, textBoxToChange).ShowDialog(this);
+                            break;
+                    }
                     break;
             }
         }
@@ -2024,7 +2079,85 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_REMOVE_NPC_FLAG:
                     new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypeNpcFlag, textBoxToChange).ShowDialog(this);
                     break;
+                case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE:
+                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSmartAiTemplate).ShowDialog(this);
+                    ParameterInstallAiTemplateChanged();
+                    break;
             }
+        }
+
+        private void SetTextOfAllEventParameterLabels(string str)
+        {
+            labelEventParam1.Text = str;
+            labelEventParam2.Text = str;
+            labelEventParam3.Text = str;
+            labelEventParam4.Text = str;
+        }
+
+        private void SetTextOfAllActionParameterLabels(string str)
+        {
+            labelActionParam1.Text = str;
+            labelActionParam2.Text = str;
+            labelActionParam3.Text = str;
+            labelActionParam4.Text = str;
+            labelActionParam5.Text = str;
+            labelActionParam6.Text = str;
+        }
+
+        private void SetTextOfAllTargetParameterLabels(string str)
+        {
+            labelTargetParam1.Text = str;
+            labelTargetParam2.Text = str;
+            labelTargetParam3.Text = str;
+            labelTargetX.Text = str;
+            labelTargetY.Text = str;
+            labelTargetZ.Text = str;
+            labelTargetO.Text = str;
+        }
+
+        private void ParameterInstallAiTemplateChanged()
+        {
+            SetVisibilityOfAllActionParamButtons(false);
+            SetVisibilityOfAllTargetParamButtons(false);
+            SetTextOfAllActionParameterLabels("");
+
+            labelActionParam1.Text = "Template entry";
+            buttonActionParamOneSearch.Visible = true;
+            int newTemplateId = XConverter.ToInt32(textBoxActionParam1.Text);
+
+            switch ((SmartAiTemplates)newTemplateId)
+            {
+                case SmartAiTemplates.SMARTAI_TEMPLATE_BASIC:
+                case SmartAiTemplates.SMARTAI_TEMPLATE_PASSIVE:
+                    break;
+                case SmartAiTemplates.SMARTAI_TEMPLATE_CASTER:
+                case SmartAiTemplates.SMARTAI_TEMPLATE_TURRET:
+                    labelActionParam2.Text = "Spell id";
+                    buttonActionParamTwoSearch.Visible = true; //! Spell id
+                    labelActionParam3.Text = "RepeatMin";
+                    labelActionParam4.Text = "RepeatMax";
+                    labelActionParam5.Text = "Range";
+                    labelActionParam6.Text = "Mana pct";
+
+                    labelTargetParam1.Text = "Castflag";
+                    buttonTargetParamOneSearch.Visible = true;
+                    break;
+                case SmartAiTemplates.SMARTAI_TEMPLATE_CAGED_GO_PART:
+                    labelActionParam2.Text = "Creature entry";
+                    buttonActionParamTwoSearch.Visible = true; //! Creature entry
+                    labelActionParam3.Text = "Credit at end (0/1)";
+                    break;
+                case SmartAiTemplates.SMARTAI_TEMPLATE_CAGED_NPC_PART:
+                    labelActionParam2.Text = "Gameobject entry";
+                    buttonActionParamTwoSearch.Visible = true; //! Gameobject entry
+                    labelActionParam3.Text = "Despawn time";
+                    labelActionParam4.Text = "Walk/run (0/1)";
+                    labelActionParam5.Text = "Distance";
+                    labelActionParam6.Text = "Group id";
+                    break;
+            }
+
+            SetEnabledOfParameterFields();
         }
 
         private void buttonActionParamTwoSearch_Click(object sender, EventArgs e)
@@ -2054,6 +2187,22 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE:
+                    //! This button is different based on the number in the first parameter field
+                    switch ((SmartAiTemplates)XConverter.ToInt32(textBoxActionParam1.Text))
+                    {
+                        case SmartAiTemplates.SMARTAI_TEMPLATE_CASTER:
+                        case SmartAiTemplates.SMARTAI_TEMPLATE_TURRET:
+                            new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
+                            break;
+                        case SmartAiTemplates.SMARTAI_TEMPLATE_CAGED_GO_PART:
+                            new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                            break;
+                        case SmartAiTemplates.SMARTAI_TEMPLATE_CAGED_NPC_PART:
+                            new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry).ShowDialog(this);
+                            break;
+                    }
                     break;
             }
         }
@@ -2088,6 +2237,9 @@ namespace SAI_Editor
 
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
+                case SmartAction.SMART_ACTION_FOLLOW:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
                 case SmartAction.SMART_ACTION_WP_START:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
@@ -2495,6 +2647,9 @@ namespace SAI_Editor
 
         private void textBoxActionParam1_TextChanged(object sender, EventArgs e)
         {
+            if ((SmartAction)comboBoxActionType.SelectedIndex == SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE)
+                ParameterInstallAiTemplateChanged();
+
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 listViewSmartScripts.SelectedSmartScript.action_param1 = XConverter.ToInt32(textBoxActionParam1.Text);
