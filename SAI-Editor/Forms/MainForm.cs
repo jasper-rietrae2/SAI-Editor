@@ -995,10 +995,13 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_TARGET_BUFFED: //! Spell id
                 case SmartEvent.SMART_EVENT_SPELLHIT_TARGET: //! Spell id
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
-                    buttonEventParamOneSearch.Visible = true; //! Spell entry
+                    buttonEventParamOneSearch.Visible = true;
                     break;
-                case SmartEvent.SMART_EVENT_TEXT_OVER:
-                    buttonEventParamTwoSearch.Visible = true; //! Creature entry
+                case SmartEvent.SMART_EVENT_TEXT_OVER: //! Creature entry
+                    buttonEventParamTwoSearch.Visible = true;
+                    break;
+                case SmartEvent.SMART_EVENT_TARGET_CASTING: //! Spell id
+                    buttonEventParamThreeSearch.Visible = true;
                     break;
             }
 
@@ -1824,6 +1827,9 @@ namespace SAI_Editor
             {
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Zone
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeZone).ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_TARGET_CASTING: //! Spell id
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
             }
         }
