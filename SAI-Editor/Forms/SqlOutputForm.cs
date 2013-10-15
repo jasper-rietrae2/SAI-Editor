@@ -42,7 +42,25 @@ namespace SAI_Editor.Forms
 
         private async void buttonExecuteScript_Click(object sender, EventArgs e)
         {
-            if (await SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(richTextBoxSqlOutput.Text))
+            string query = richTextBoxSqlOutput.Text;
+
+            if (!String.IsNullOrWhiteSpace(richTextBoxSqlOutput.SelectedText))
+            {
+                DialogResult dialogResult = MessageBox.Show("Do you only want to execute the selected SQL?", "Selection", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                switch (dialogResult)
+                {
+                    case DialogResult.Yes:
+                        query = richTextBoxSqlOutput.SelectedText;
+                        break;
+                    //case DialogResult.No:
+                    default:
+                        query = richTextBoxSqlOutput.Text;
+                        break;
+                }
+            }
+
+            if (await SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(query))
             {
                 string message = "The query has been executed succesfully!";
 
