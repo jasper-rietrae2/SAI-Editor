@@ -1003,6 +1003,9 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_TARGET_CASTING: //! Spell id
                     buttonEventParamThreeSearch.Visible = true;
                     break;
+                case SmartEvent.SMART_EVENT_KILL: //! Creature entry
+                    buttonEventParamFourSearch.Visible = true;
+                    break;
             }
 
             switch ((SmartAction)action_type)
