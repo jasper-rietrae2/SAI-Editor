@@ -974,6 +974,7 @@ namespace SAI_Editor
             switch ((SmartEvent)event_type)
             {
                 case SmartEvent.SMART_EVENT_SPELLHIT:
+                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
                     buttonEventParamOneSearch.Visible = true; //! Spell entry
                     buttonEventParamTwoSearch.Visible = true; //! Spell school
                     break;
@@ -990,7 +991,6 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_FRIENDLY_MISSING_BUFF: //! Spell id
                 case SmartEvent.SMART_EVENT_HAS_AURA: //! Spell id
                 case SmartEvent.SMART_EVENT_TARGET_BUFFED: //! Spell id
-                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET: //! Spell id
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
                 case SmartEvent.SMART_EVENT_ACCEPTED_QUEST: //! Quest id
                 case SmartEvent.SMART_EVENT_REWARD_QUEST: //! Quest id
