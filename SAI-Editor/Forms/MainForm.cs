@@ -3128,6 +3128,7 @@ namespace SAI_Editor
                 string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
                 smartScript.comment = newComment;
                 listViewSmartScripts.ReplaceSmartScript(smartScript);
+                FillFieldsBasedOnSelectedScript();
             }
 
             textBoxComments.Text = listViewSmartScripts.SelectedSmartScript.comment;
@@ -3201,6 +3202,7 @@ namespace SAI_Editor
             string oldComment = selectedScript.comment;
             selectedScript.comment = newComment;
             listViewSmartScripts.ReplaceSmartScript(selectedScript);
+            FillFieldsBasedOnSelectedScript();
 
             if (oldComment != newComment)
                 ResizeColumns();
@@ -3296,6 +3298,7 @@ namespace SAI_Editor
                 string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
                 smartScript.comment = newComment;
                 listViewSmartScripts.ReplaceSmartScript(smartScript);
+                FillFieldsBasedOnSelectedScript();
             }
 
             textBoxComments.Text = listViewSmartScripts.SelectedSmartScript.comment;
