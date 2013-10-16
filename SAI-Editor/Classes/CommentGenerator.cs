@@ -278,13 +278,10 @@ namespace SAI_Editor.Classes
                         smartScript.event_param2 = smartScriptLink.event_param2;
                         smartScript.event_param3 = smartScriptLink.event_param3;
                         smartScript.event_param4 = smartScriptLink.event_param4;
-
-                        if (smartScriptLink.link == 0)
-                            smartScriptLink = null;
                     }
                 }
-                else if (smartScript.link > 0)
-                    smartScriptLink = smartScript;
+
+                fullLine = fullLine.Replace("_previousLineComment_", "MISSING LINK");
 
                 //! This must be called AFTER we check for _previousLineComment_ so that copied event types don't need special handling
                 if (fullLine.Contains("_eventParamOne_"))

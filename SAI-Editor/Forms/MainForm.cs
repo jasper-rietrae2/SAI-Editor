@@ -3098,7 +3098,6 @@ namespace SAI_Editor
                 }
 
                 string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
-                newComment = newComment.Replace("_previousLineComment_", "MISSING LINK");
                 smartScript.comment = newComment;
                 listViewSmartScripts.ReplaceSmartScript(smartScript);
             }
@@ -3172,7 +3171,6 @@ namespace SAI_Editor
                 return;
 
             string oldComment = selectedScript.comment;
-            newComment = newComment.Replace("_previousLineComment_", "MISSING LINK");
             selectedScript.comment = newComment;
             listViewSmartScripts.ReplaceSmartScript(selectedScript);
 
@@ -3268,7 +3266,6 @@ namespace SAI_Editor
                 }
 
                 string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
-                newComment = newComment.Replace("_previousLineComment_", "MISSING LINK");
                 smartScript.comment = newComment;
                 listViewSmartScripts.ReplaceSmartScript(smartScript);
             }
