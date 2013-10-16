@@ -3050,6 +3050,8 @@ namespace SAI_Editor
                         revertQuery += String.Format(" WHERE entryorguid={0} AND source_type={1} AND id={2};", smartScript.entryorguid, smartScript.source_type, smartScript.id);
                     }
                 }
+                else
+                    revertQuery += "DELETE FROM smart_scripts WHERE entryorguid='" + entryOrGuidAndSourceType.entryOrGuid + "';";
             }
 
             return revertQuery;
