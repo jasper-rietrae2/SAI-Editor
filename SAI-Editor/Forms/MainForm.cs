@@ -3142,14 +3142,26 @@ namespace SAI_Editor
             SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
             SmartScript smartScriptLink = null;
 
-            for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
+            if ((SmartEvent)selectedScript.event_type == SmartEvent.SMART_EVENT_LINK)
             {
-                if (listViewSmartScripts.SmartScripts[i].entryorguid == selectedScript.entryorguid && listViewSmartScripts.SmartScripts[i].id == selectedScript.id)
-                {
-                    if (i > 0 && listViewSmartScripts.SmartScripts.Count > i)
-                        smartScriptLink = listViewSmartScripts.SmartScripts[i - 1];
+                int i = listViewSmartScripts.SmartScripts.IndexOf(selectedScript);
 
-                    break;
+                if (i > 0)
+                {
+                    smartScriptLink = listViewSmartScripts.SmartScripts[i - 1];
+
+                    if (smartScriptLink.link == 0)
+                        smartScriptLink = null;
+                    else
+                    {
+                        int x = i;
+
+                        while (smartScriptLink.event_type == (int)SmartEvent.SMART_EVENT_LINK)
+                        {
+                            smartScriptLink = listViewSmartScripts.SmartScripts[x - 1];
+                            x--;
+                        }
+                    }
                 }
             }
 
@@ -3160,7 +3172,6 @@ namespace SAI_Editor
                 return;
 
             string oldComment = selectedScript.comment;
-
             newComment = newComment.Replace("_previousLineComment_", "MISSING LINK");
             selectedScript.comment = newComment;
             listViewSmartScripts.ReplaceSmartScript(selectedScript);
