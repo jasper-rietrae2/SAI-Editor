@@ -1521,12 +1521,35 @@ namespace SAI_Editor
             else
                 newSmartScript.id = -1;
 
-            newSmartScript.event_chance = 100;
+            newSmartScript.link = XConverter.ToInt32(textBoxLinkTo.Text);
+            newSmartScript.event_type = XConverter.ToInt32(textBoxEventType.Text);
+            newSmartScript.event_phase_mask = XConverter.ToInt32(textBoxEventPhasemask.Text);
+            newSmartScript.event_chance = XConverter.ToInt32(textBoxEventChance.Value);
+            newSmartScript.event_flags = XConverter.ToInt32(textBoxEventFlags.Text);
+            newSmartScript.event_param1 = XConverter.ToInt32(textBoxEventParam1.Text);
+            newSmartScript.event_param2 = XConverter.ToInt32(textBoxEventParam2.Text);
+            newSmartScript.event_param3 = XConverter.ToInt32(textBoxEventParam3.Text);
+            newSmartScript.event_param4 = XConverter.ToInt32(textBoxEventParam4.Text);
+            newSmartScript.action_type = XConverter.ToInt32(textBoxActionType.Text);
+            newSmartScript.action_param1 = XConverter.ToInt32(textBoxActionParam1.Text);
+            newSmartScript.action_param2 = XConverter.ToInt32(textBoxActionParam2.Text);
+            newSmartScript.action_param3 = XConverter.ToInt32(textBoxActionParam3.Text);
+            newSmartScript.action_param4 = XConverter.ToInt32(textBoxActionParam4.Text);
+            newSmartScript.action_param5 = XConverter.ToInt32(textBoxActionParam5.Text);
+            newSmartScript.action_param6 = XConverter.ToInt32(textBoxActionParam6.Text);
+            newSmartScript.target_type = XConverter.ToInt32(textBoxTargetType.Text);
+            newSmartScript.target_param1 = XConverter.ToInt32(textBoxTargetParam1.Text);
+            newSmartScript.target_param2 = XConverter.ToInt32(textBoxTargetParam2.Text);
+            newSmartScript.target_param3 = XConverter.ToInt32(textBoxTargetParam3.Text);
+            newSmartScript.target_x = XConverter.ToInt32(textBoxTargetX.Text);
+            newSmartScript.target_y = XConverter.ToInt32(textBoxTargetY.Text);
+            newSmartScript.target_z = XConverter.ToInt32(textBoxTargetZ.Text);
+            newSmartScript.target_o = XConverter.ToInt32(textBoxTargetO.Text);
 
             if (Settings.Default.GenerateComments)
                 newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
             else
-                newSmartScript.comment = "Npc - Event - Action (phase) (dungeon difficulty)";
+                newSmartScript.comment = textBoxComments.Text;
 
             listViewSmartScripts.AddSmartScript(newSmartScript);
 
