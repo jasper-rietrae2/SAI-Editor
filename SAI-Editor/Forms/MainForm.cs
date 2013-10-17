@@ -1669,7 +1669,7 @@ namespace SAI_Editor
                 lvwColumnSorter.Order = order != SortOrder.None ? order : SortOrder.Ascending;
             }
             else
-                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                lvwColumnSorter.Order = order != SortOrder.None ? order : SortOrder.Ascending;
 
             listViewSmartScripts.Sort();
         }
