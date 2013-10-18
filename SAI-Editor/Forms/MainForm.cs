@@ -1322,21 +1322,9 @@ namespace SAI_Editor
                 List<SmartScript> newSmartScripts = new List<SmartScript>();
 
                 foreach (SmartScript newSmartScript in smartScripts)
-                {
-                    bool isActuallyNew = true;
-
-                    foreach (SmartScript listSmartScript in listViewSmartScripts.SmartScripts)
-                    {
-                        if (listSmartScript.entryorguid == newSmartScript.entryorguid && listSmartScript.id == newSmartScript.id)
-                        {
-                            isActuallyNew = false;
-                            break;
-                        }
-                    }
-
-                    if (isActuallyNew)
+                    //! Only add the new smartscript if it doesn't yet exist
+                    if (listViewSmartScripts.GetSmartScript(newSmartScript.entryorguid, newSmartScript.id) == null)
                         listViewSmartScripts.AddSmartScript(newSmartScript);
-                }
 
                 SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
             }

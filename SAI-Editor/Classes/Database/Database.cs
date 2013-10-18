@@ -94,12 +94,9 @@ namespace SAI_Editor
                 using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                 {
                     conn.Open();
-                    var transaction = conn.BeginTransaction();
 
                     using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
                     {
-                        cmd.Transaction = transaction;
-
                         foreach (var param in parameters)
                             cmd.Parameters.Add(param);
 
@@ -112,23 +109,13 @@ namespace SAI_Editor
 
                             var dt = new DataTable();
                             dt.Load(reader);
-                            transaction.Commit();
                             conn.Close();
                             return dt;
                         }
                         catch (Exception ex)
                         {
-                            try
-                            {
-                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                transaction.Rollback();
-                                return null;
-                            }
-                            catch (Exception ex2)
-                            {
-                                MessageBox.Show(ex2.Message, "Something went wrong while rolling back!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return null;
-                            }
+                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return null;
                         }
                     }
                 }
@@ -142,35 +129,22 @@ namespace SAI_Editor
                 using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                 {
                     conn.Open();
-                    var transaction = conn.BeginTransaction();
 
                     using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
                     {
-                        cmd.Transaction = transaction;
-
                         foreach (var param in parameters)
                             cmd.Parameters.Add(param);
 
                         try
                         {
                             object returnVal = cmd.ExecuteScalar();
-                            transaction.Commit();
                             conn.Close();
                             return returnVal;
                         }
                         catch (Exception ex)
                         {
-                            try
-                            {
-                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                transaction.Rollback();
-                                return null;
-                            }
-                            catch (Exception ex2)
-                            {
-                                MessageBox.Show(ex2.Message, "Something went wrong while rolling back!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return null;
-                            }
+                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return null;
                         }
                     }
                 }
