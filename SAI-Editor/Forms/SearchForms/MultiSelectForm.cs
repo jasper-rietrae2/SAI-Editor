@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using SAI_Editor.Classes;
+using System.Linq;
 
 namespace SAI_Editor
 {
@@ -190,9 +191,46 @@ namespace SAI_Editor
             {
                 int bitmask = XConverter.ToInt32(textBoxToChange.Text);
 
+                NpcFlags1 flags = (NpcFlags1)bitmask;
+
+                var vals = Enum.GetValues(typeof(NpcFlags1)).OfType<Enum>().ToList();
+
+                bool anyFlag = false;
+
                 foreach (ListViewItem item in listViewSelectableItems.Items)
-                    if (item.Index > 0 && (bitmask & GetMaskByIndex(item.Index)) == GetMaskByIndex(item.Index))
-                        item.Checked = true;
+                {
+
+                    foreach (var en in Enum.GetNames(typeof(NpcFlags1)))
+                    {
+
+                        if (en.Equals(item.SubItems[1].Text))
+                        {
+
+                            var val = vals.SingleOrDefault(p => p.ToString().Equals(en));
+
+                            if (val != null && flags.HasFlag(val))
+                            {
+
+                                anyFlag = true;
+
+                                item.Checked = true;
+
+                            }
+
+                        }
+                    }
+
+                }
+
+                if (!anyFlag)
+                {
+
+                    foreach (ListViewItem item in listViewSelectableItems.Items)
+                        if (item.Index > 0)
+                            item.Checked = false;
+
+                }
+
             }
         }
 
@@ -205,25 +243,31 @@ namespace SAI_Editor
         {
             int mask = 0;
 
+            var vals = Enum.GetValues(typeof(NpcFlags1)).OfType<Enum>().ToList();
+
             foreach (ListViewItem item in listViewSelectableItems.CheckedItems)
-                mask += GetMaskByIndex(item.Index);
+            {
+
+                foreach (var en in Enum.GetNames(typeof(NpcFlags1)))
+                {
+
+                    if (en.Equals(item.SubItems[1].Text))
+                    {
+
+                        var val = vals.SingleOrDefault(p => p.ToString().Equals(en));
+
+                        if (item.Checked && val != null)
+                        {
+                            mask += (int)((NpcFlags1)val);
+                        }
+
+                    }
+                }
+
+            }
 
             textBoxToChange.Text = mask.ToString();
             Close();
-        }
-
-        private int GetMaskByIndex(int index)
-        {
-            switch (index)
-            {
-                case 1: return 1;
-                case 2: return 2;
-                case 3: return 4;
-                case 4: return 8;
-                case 5: return 16;
-                case 6: return 32;
-                default: return 0;
-            }
         }
 
         private void MultiSelectForm_KeyDown(object sender, KeyEventArgs e)
