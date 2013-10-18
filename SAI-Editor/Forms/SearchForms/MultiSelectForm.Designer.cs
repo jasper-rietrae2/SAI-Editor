@@ -30,7 +30,6 @@ namespace SAI_Editor
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultiSelectForm<T>));
             this.listViewSelectableItems = new System.Windows.Forms.ListView();
             this.buttonContinue = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -46,6 +45,7 @@ namespace SAI_Editor
             this.listViewSelectableItems.TabIndex = 1;
             this.listViewSelectableItems.UseCompatibleStateImageBehavior = false;
             this.listViewSelectableItems.View = System.Windows.Forms.View.Details;
+            this.listViewSelectableItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSelectableItems_ColumnClick);
             this.listViewSelectableItems.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listViewSelectableItems_ItemChecked);
             // 
             // buttonContinue
@@ -77,7 +77,6 @@ namespace SAI_Editor
             this.Controls.Add(this.buttonContinue);
             this.Controls.Add(this.listViewSelectableItems);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "MultiSelectForm";

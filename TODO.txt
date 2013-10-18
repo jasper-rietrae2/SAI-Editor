@@ -9,7 +9,6 @@
   - Make this a download option instead (?). The SQLite file would become over 100 MB if we'd do this and it'd make no sense if we'd never use the data.
 - Move the parameter button handling (like SMART_ACTION_CAST -> param1 has a button to search for spells) to the SQLite database so we have less code in the application?
 - Find a way around the annoying 500-line limit when inserting SQLite data. When found, implement all sounds into the SQLite database.
-- Fix the logic of the multiselectform (try with unit flags to see how it's broken)
 - Make permanent tooltips support multilines (or decrease length of tooltips to a fixed size)
 - Implement SAI conditions support
 - Implement creature text support (?)
