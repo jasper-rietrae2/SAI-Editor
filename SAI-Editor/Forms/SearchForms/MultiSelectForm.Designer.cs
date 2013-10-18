@@ -1,6 +1,8 @@
-﻿namespace SAI_Editor
+﻿using System;
+
+namespace SAI_Editor
 {
-    partial class MultiSelectForm
+    partial class MultiSelectForm<T> where T : struct, IConvertible
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultiSelectForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MultiSelectForm<T>));
             this.listViewSelectableItems = new System.Windows.Forms.ListView();
             this.buttonContinue = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
@@ -75,7 +77,7 @@
             this.Controls.Add(this.buttonContinue);
             this.Controls.Add(this.listViewSelectableItems);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "MultiSelectForm";
