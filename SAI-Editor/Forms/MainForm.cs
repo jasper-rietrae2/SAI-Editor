@@ -1413,6 +1413,8 @@ namespace SAI_Editor
                 
                 if (dialogResult != DialogResult.Yes)
                     return;
+
+                ResetFieldsToDefault();
             }
 
             int entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
