@@ -1637,7 +1637,7 @@ namespace SAI_Editor
 
         private void buttonSearchPhasemask_Click(object sender, EventArgs e)
         {
-            //new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxEventPhasemask).ShowDialog(this); //need a PhaseMask enum
+            new MultiSelectForm<SmartPhaseMasks>(textBoxEventPhasemask).ShowDialog(this);
         }
 
         private void buttonSelectEventFlag_Click(object sender, EventArgs e)
@@ -2056,7 +2056,7 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                 case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
                 case SmartAction.SMART_ACTION_SET_PHASE_MASK:
-                    //new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this); //need PhaseMask enum
+                    new MultiSelectForm<SmartPhaseMasks>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_ADD_ITEM:
                 case SmartAction.SMART_ACTION_REMOVE_ITEM:
@@ -2080,8 +2080,8 @@ namespace SAI_Editor
                     //! we target UNIT_FIELD_FLAGS. If it's above 0 it means we target UNIT_FIELD_FLAGS2 (notice the 2).
                     if (textBoxActionParam2.Text == "0" || String.IsNullOrWhiteSpace(textBoxActionParam2.Text))
                         new MultiSelectForm<UnitFlags>(textBoxToChange).ShowDialog(this);
-                    //else
-                    //    new MultiSelectForm<UnitFlags>(MultiSelectFormType.MultiSelectFormTypeUnitFlag2, textBoxToChange).ShowDialog(this); //need enum for unit flags "2"
+                    else
+                        new MultiSelectForm<UnitFlags2>(textBoxToChange).ShowDialog(this);
 
                     break;
                 case SmartAction.SMART_ACTION_SET_GO_FLAG:
@@ -2206,7 +2206,7 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                 case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
-                    //new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this); //need PhaseMask enum
+                    new MultiSelectForm<SmartPhaseMasks>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
@@ -2249,7 +2249,7 @@ namespace SAI_Editor
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeTargetType).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
-                    //new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this); //need PhaseMask enum
+                    new MultiSelectForm<SmartPhaseMasks>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_EQUIP:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
@@ -2273,7 +2273,7 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
-                    //new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this); //need PhaseMask enum
+                    new MultiSelectForm<SmartPhaseMasks>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_EQUIP:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
@@ -2291,7 +2291,7 @@ namespace SAI_Editor
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
-                    //new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this); //need PhaseMask enum
+                    new MultiSelectForm<SmartPhaseMasks>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_EQUIP:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
@@ -2312,7 +2312,7 @@ namespace SAI_Editor
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeReactState).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
-                    //new MultiSelectForm(MultiSelectFormType.MultiSelectFormTypePhaseMask, textBoxToChange).ShowDialog(this); //need PhaseMask enum
+                    new MultiSelectForm<SmartPhaseMasks>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
