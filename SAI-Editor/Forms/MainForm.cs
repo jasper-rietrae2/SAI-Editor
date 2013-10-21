@@ -1583,7 +1583,7 @@ namespace SAI_Editor
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, false);
             lastSmartScriptIdOfScript = 0;
 
-            if (entryorguid > 0 && sourceType != SourceTypes.SourceTypeNone)
+            if (entryorguid != -1 && sourceType != SourceTypes.SourceTypeNone)
             {
                 originalEntryOrGuidAndSourceType.entryOrGuid = entryorguid;
                 originalEntryOrGuidAndSourceType.sourceType = sourceType;
