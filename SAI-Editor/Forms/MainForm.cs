@@ -1032,6 +1032,7 @@ namespace SAI_Editor
                     buttonActionParamTwoSearch.Visible = true;
                     break;
                 case SmartAction.SMART_ACTION_WP_START:
+                    buttonActionParamTwoSearch.Visible = true; //! Waypoint entry
                     buttonActionParamFourSearch.Visible = true; //! Quest entry
                     buttonActionParamSixSearch.Visible = true; //! React state
                     break;
@@ -2224,6 +2225,9 @@ namespace SAI_Editor
                             new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry).ShowDialog(this);
                             break;
                     }
+                    break;
+                case SmartAction.SMART_ACTION_WP_START:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint).ShowDialog(this);
                     break;
             }
         }

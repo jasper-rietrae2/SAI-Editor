@@ -18,23 +18,24 @@ namespace SAI_Editor
 {
     public enum DatabaseSearchFormType
     {
-        DatabaseSearchFormTypeSpell = 0,
-        DatabaseSearchFormTypeFaction = 1,
-        DatabaseSearchFormTypeEmote = 2,
-        DatabaseSearchFormTypeQuest = 3,
-        DatabaseSearchFormTypeMap = 4,
-        DatabaseSearchFormTypeZone = 5,
-        DatabaseSearchFormTypeCreatureEntry = 6,
-        DatabaseSearchFormTypeGameobjectEntry = 7,
-        DatabaseSearchFormTypeSound = 8,
-        DatabaseSearchFormTypeAreaTrigger = 9,
-        DatabaseSearchFormTypeCreatureGuid = 10,
-        DatabaseSearchFormTypeGameobjectGuid = 11,
-        DatabaseSearchFormTypeGameEvent = 12,
-        DatabaseSearchFormTypeItemEntry = 13,
-        DatabaseSearchFormTypeSummonsId = 14,
-        DatabaseSearchFormTypeTaxiPath = 15,
-        DatabaseSearchFormTypeEquipTemplate = 16,
+        DatabaseSearchFormTypeSpell,
+        DatabaseSearchFormTypeFaction,
+        DatabaseSearchFormTypeEmote,
+        DatabaseSearchFormTypeQuest,
+        DatabaseSearchFormTypeMap,
+        DatabaseSearchFormTypeZone,
+        DatabaseSearchFormTypeCreatureEntry,
+        DatabaseSearchFormTypeGameobjectEntry,
+        DatabaseSearchFormTypeSound,
+        DatabaseSearchFormTypeAreaTrigger,
+        DatabaseSearchFormTypeCreatureGuid,
+        DatabaseSearchFormTypeGameobjectGuid,
+        DatabaseSearchFormTypeGameEvent,
+        DatabaseSearchFormTypeItemEntry,
+        DatabaseSearchFormTypeSummonsId,
+        DatabaseSearchFormTypeTaxiPath,
+        DatabaseSearchFormTypeEquipTemplate,
+        DatabaseSearchFormTypeWaypoint,
     }
 
     public partial class SearchFromDatabaseForm : Form
@@ -257,6 +258,20 @@ namespace SAI_Editor
                     useMySQL = true;
                     amountOfListviewColumns = 5;
                     break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint:
+                    Text = "Search for a waypoints path";
+                    listViewEntryResults.Columns.Add("Entry", 52);
+                    listViewEntryResults.Columns.Add("Point", 52);
+                    listViewEntryResults.Columns.Add("X", 75);
+                    listViewEntryResults.Columns.Add("Y", 75);
+                    listViewEntryResults.Columns.Add("Z", 75);
+                    comboBoxSearchType.Items.Add("Creature entry");
+                    baseQuery = "SELECT entry, pointid, position_x, position_y, position_z FROM waypoints";
+                    columnOne = "entry";
+                    columnTwo = "pointid";
+                    useMySQL = true;
+                    amountOfListviewColumns = 5;
+                    break;
             }
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -295,19 +310,29 @@ namespace SAI_Editor
 
                             break;
                         case 1: //! Second column
-                            if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate)
+                            switch (databaseSearchFormType)
                             {
-                                if (checkBoxFieldContainsCriteria.Checked)
-                                    queryToExecute += " WHERE itemEntry1 LIKE '%" + textBoxCriteria.Text + "%' OR itemEntry2 LIKE '%" + textBoxCriteria.Text + "%' OR itemEntry3 LIKE '%" + textBoxCriteria.Text + "%'";
-                                else
-                                    queryToExecute += " WHERE itemEntry1 = " + textBoxCriteria.Text + " OR itemEntry2 = " + textBoxCriteria.Text + " OR itemEntry3 = " + textBoxCriteria.Text;
-                            }
-                            else
-                            {
-                                if (checkBoxFieldContainsCriteria.Checked)
-                                    queryToExecute += " WHERE " + columnTwo + " LIKE '%" + textBoxCriteria.Text + "%'";
-                                else
-                                    queryToExecute += " WHERE " + columnTwo + " = " + textBoxCriteria.Text;
+                                //! No second column exists for search type
+                                case DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint:
+                                    return;
+                                case DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate:
+                                {
+                                    if (checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE itemEntry1 LIKE '%" + textBoxCriteria.Text + "%' OR itemEntry2 LIKE '%" + textBoxCriteria.Text + "%' OR itemEntry3 LIKE '%" + textBoxCriteria.Text + "%'";
+                                    else
+                                        queryToExecute += " WHERE itemEntry1 = " + textBoxCriteria.Text + " OR itemEntry2 = " + textBoxCriteria.Text + " OR itemEntry3 = " + textBoxCriteria.Text;
+
+                                    break;
+                                }
+                                default:
+                                {
+                                    if (checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE " + columnTwo + " LIKE '%" + textBoxCriteria.Text + "%'";
+                                    else
+                                        queryToExecute += " WHERE " + columnTwo + " = " + textBoxCriteria.Text;
+
+                                    break;
+                                }
                             }
 
                             break;
