@@ -46,6 +46,7 @@ namespace SAI_Editor
 
     public enum SourceTypes
     {
+        SourceTypeNone = -1,
         SourceTypeCreature = 0,
         SourceTypeGameobject = 1,
         SourceTypeAreaTrigger = 2,
@@ -590,7 +591,7 @@ namespace SAI_Editor
             checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
 
             if (expanding)
-                TryToLoadScript(false);
+                TryToLoadScript(-1, SourceTypes.SourceTypeNone, false);
         }
 
         private async Task<List<SmartScript>> GetSmartScriptsForEntryAndSourceType(string entryOrGuid, SourceTypes sourceType, bool showError = true, bool promptCreateIfNoneFound = false)
@@ -1565,7 +1566,7 @@ namespace SAI_Editor
             return "<unknown template table>";
         }
 
-        public async void TryToLoadScript(bool showErrorIfNoneFound = true, bool promptCreateIfNoneFound = false)
+        public async void TryToLoadScript(int entryorguid = -1, SourceTypes sourceType = SourceTypes.SourceTypeNone, bool showErrorIfNoneFound = true, bool promptCreateIfNoneFound = false)
         {
             // @Debug new AreatriggersForm().Show();
 
@@ -1581,13 +1582,22 @@ namespace SAI_Editor
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, false);
             lastSmartScriptIdOfScript = 0;
 
-            SourceTypes newSourceType = GetSourceTypeByIndex();
-            originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
-            originalEntryOrGuidAndSourceType.sourceType = newSourceType;
+            if (entryorguid > 0 && sourceType != SourceTypes.SourceTypeNone)
+            {
+                originalEntryOrGuidAndSourceType.entryOrGuid = entryorguid;
+                originalEntryOrGuidAndSourceType.sourceType = sourceType;
+                textBoxEntryOrGuid.Text = entryorguid.ToString();
+                comboBoxSourceType.SelectedIndex = GetIndexBySourceType(sourceType);
+            }
+            else
+            {
+                originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
+                originalEntryOrGuidAndSourceType.sourceType = GetSourceTypeByIndex();
+            }
 
-            List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(textBoxEntryOrGuid.Text, newSourceType, showErrorIfNoneFound, promptCreateIfNoneFound);
+            List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType, showErrorIfNoneFound, promptCreateIfNoneFound);
             listViewSmartScripts.ReplaceSmartScripts(smartScripts);
-            checkBoxListActionlistsOrEntries.Text = newSourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
+            checkBoxListActionlistsOrEntries.Text = originalEntryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
 
             buttonNewLine.Enabled = false;
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
@@ -3346,9 +3356,13 @@ namespace SAI_Editor
             textBoxTargetType.Text = newNumber.ToString();
         }
 
-        private void checkBoxAllowChangingEntryAndSourceType_CheckedChanged(object sender, EventArgs e)
+        private void menuItemLoadSelectedEntry_Click(object sender, EventArgs e)
         {
-
+            int entryorguid = listViewSmartScripts.SelectedSmartScript.entryorguid;
+            SourceTypes source_type = (SourceTypes)listViewSmartScripts.SelectedSmartScript.source_type;
+            listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
+            listViewSmartScripts.Items.Clear();
+            TryToLoadScript(entryorguid, source_type);
         }
     }
 }

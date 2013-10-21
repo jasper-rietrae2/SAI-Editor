@@ -632,7 +632,7 @@ namespace SAI_Editor
             }
 
             if (Settings.Default.LoadScriptInstantly && ((MainForm)Owner).pictureBoxLoadScript.Enabled)
-                ((MainForm)Owner).TryToLoadScript(true, true);
+                ((MainForm)Owner).TryToLoadScript(-1, SourceTypes.SourceTypeNone, true, true);
 
             Close();
         }

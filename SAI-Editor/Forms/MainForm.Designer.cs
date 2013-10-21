@@ -179,6 +179,8 @@ namespace SAI_Editor
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
             this.listViewSmartScripts = new System.Windows.Forms.SmartScriptListView();
+            this.menuItemLoadSelectedEntry = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -496,17 +498,19 @@ namespace SAI_Editor
             // contextMenuStripListView
             // 
             this.contextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemLoadSelectedEntry,
             this.menuItemGenerateCommentListView,
+            this.toolStripSeparator1,
             this.menuItemDeleteSelectedRowListView});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(233, 48);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(269, 98);
             // 
             // menuItemGenerateCommentListView
             // 
             this.menuItemGenerateCommentListView.Name = "menuItemGenerateCommentListView";
             this.menuItemGenerateCommentListView.ShortcutKeyDisplayString = "(Ctrl + G)";
             this.menuItemGenerateCommentListView.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.menuItemGenerateCommentListView.Size = new System.Drawing.Size(232, 22);
+            this.menuItemGenerateCommentListView.Size = new System.Drawing.Size(268, 22);
             this.menuItemGenerateCommentListView.Text = "Generate comment";
             this.menuItemGenerateCommentListView.Click += new System.EventHandler(this.menuItemGenerateCommentListView_Click);
             // 
@@ -515,7 +519,7 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRowListView.Name = "menuItemDeleteSelectedRowListView";
             this.menuItemDeleteSelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + D)";
             this.menuItemDeleteSelectedRowListView.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(232, 22);
+            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(268, 22);
             this.menuItemDeleteSelectedRowListView.Text = "Delete row";
             this.menuItemDeleteSelectedRowListView.Click += new System.EventHandler(this.testToolStripMenuItemDeleteRow_Click);
             // 
@@ -651,7 +655,6 @@ namespace SAI_Editor
             this.checkBoxAllowChangingEntryAndSourceType.TabIndex = 5;
             this.checkBoxAllowChangingEntryAndSourceType.Text = "Allow changing entryorguid and sourcetype";
             this.checkBoxAllowChangingEntryAndSourceType.UseVisualStyleBackColor = true;
-            this.checkBoxAllowChangingEntryAndSourceType.CheckedChanged += new System.EventHandler(this.checkBoxAllowChangingEntryAndSourceType_CheckedChanged);
             // 
             // checkBoxListActionlistsOrEntries
             // 
@@ -2063,6 +2066,21 @@ namespace SAI_Editor
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
+            // menuItemLoadSelectedEntry
+            // 
+            this.menuItemLoadSelectedEntry.Name = "menuItemLoadSelectedEntry";
+            this.menuItemLoadSelectedEntry.ShortcutKeyDisplayString = "(Ctrl + Shift + L)";
+            this.menuItemLoadSelectedEntry.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.L)));
+            this.menuItemLoadSelectedEntry.Size = new System.Drawing.Size(268, 22);
+            this.menuItemLoadSelectedEntry.Text = "Load selected entry";
+            this.menuItemLoadSelectedEntry.Click += new System.EventHandler(this.menuItemLoadSelectedEntry_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(265, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2274,6 +2292,8 @@ namespace SAI_Editor
         public System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
         public System.Windows.Forms.PictureBox pictureBoxCreateScript;
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateCommentListView;
+        private System.Windows.Forms.ToolStripMenuItem menuItemLoadSelectedEntry;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
