@@ -37,6 +37,8 @@ namespace SAI_Editor
         DatabaseSearchFormTypeEquipTemplate,
         DatabaseSearchFormTypeWaypoint,
         DatabaseSearchFormTypeNpcText,
+        DatabaseSearchFormTypeGossipMenuOption,
+        DatabaseSearchFormTypeGossipOptionId,
     }
 
     public partial class SearchFromDatabaseForm : Form
@@ -46,7 +48,8 @@ namespace SAI_Editor
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly TextBox textBoxToChange = null;
         private readonly DatabaseSearchFormType databaseSearchFormType;
-        private string baseQuery, columnOne, columnTwo;
+        private string baseQuery;
+        private string[] columns = new string[3];
         private bool useMySQL = false;
         private int amountOfListviewColumns = 2, listViewItemIndexToCopy = 0;
 
@@ -74,8 +77,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Spell id");
                     comboBoxSearchType.Items.Add("Spell name");
                     baseQuery = "SELECT id, spellName FROM spells";
-                    columnOne = "id";
-                    columnTwo = "spellName";
+                    columns[0] = "id";
+                    columns[1] = "spellName";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeFaction:
                     Text = "Search for a faction";
@@ -84,8 +87,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Faction id");
                     comboBoxSearchType.Items.Add("Faction name");
                     baseQuery = "SELECT m_ID, m_name_lang_1 FROM factions";
-                    columnOne = "m_ID";
-                    columnTwo = "m_name_lang_1";
+                    columns[0] = "m_ID";
+                    columns[1] = "m_name_lang_1";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeEmote:
                     Text = "Search for an emote";
@@ -94,8 +97,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Emote id");
                     comboBoxSearchType.Items.Add("Emote name");
                     baseQuery = "SELECT field0, field1 FROM emotes";
-                    columnOne = "field0";
-                    columnTwo = "field1";
+                    columns[0] = "field0";
+                    columns[1] = "field1";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeQuest:
                     Text = "Search for a quest";
@@ -104,8 +107,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Quest id");
                     comboBoxSearchType.Items.Add("Quest name");
                     baseQuery = "SELECT id, title FROM quest_template";
-                    columnOne = "id";
-                    columnTwo = "title";
+                    columns[0] = "id";
+                    columns[1] = "title";
                     useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeMap:
@@ -115,8 +118,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Map id");
                     comboBoxSearchType.Items.Add("Map name");
                     baseQuery = "SELECT m_ID, m_MapName_lang1 FROM maps";
-                    columnOne = "m_ID";
-                    columnTwo = "m_MapName_lang1";
+                    columns[0] = "m_ID";
+                    columns[1] = "m_MapName_lang1";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeZone:
                     Text = "Search for a zone id";
@@ -125,8 +128,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Zone id");
                     comboBoxSearchType.Items.Add("Zone name");
                     baseQuery = "SELECT m_ID, m_AreaName_lang FROM areas_and_zones";
-                    columnOne = "m_ID";
-                    columnTwo = "m_AreaName_lang";
+                    columns[0] = "m_ID";
+                    columns[1] = "m_AreaName_lang";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry:
                     Text = "Search for a creature";
@@ -135,8 +138,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Creature entry");
                     comboBoxSearchType.Items.Add("Creature name");
                     baseQuery = "SELECT entry, name FROM creature_template";
-                    columnOne = "entry";
-                    columnTwo = "name";
+                    columns[0] = "entry";
+                    columns[1] = "name";
                     useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry:
@@ -146,8 +149,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Gameobject entry");
                     comboBoxSearchType.Items.Add("Gameobject name");
                     baseQuery = "SELECT entry, name FROM gameobject_template";
-                    columnOne = "entry";
-                    columnTwo = "name";
+                    columns[0] = "entry";
+                    columns[1] = "name";
                     useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSound:
@@ -157,8 +160,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Sound id");
                     comboBoxSearchType.Items.Add("Sound name");
                     baseQuery = "SELECT id, name FROM sound_entries";
-                    columnOne = "id";
-                    columnTwo = "name";
+                    columns[0] = "id";
+                    columns[1] = "name";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger:
                     Text = "Search for a sound id";
@@ -170,8 +173,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Areatrigger id");
                     comboBoxSearchType.Items.Add("Areatrigger map id");
                     baseQuery = "SELECT m_id, m_mapId, m_posX, m_posY, m_posZ FROM areatriggers";
-                    columnOne = "m_id";
-                    columnTwo = "m_mapId";
+                    columns[0] = "m_id";
+                    columns[1] = "m_mapId";
                     amountOfListviewColumns = 5;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid:
@@ -181,8 +184,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Creature guid");
                     comboBoxSearchType.Items.Add("Creature name");
                     baseQuery = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id";
-                    columnOne = "c.guid";
-                    columnTwo = "ct.name";
+                    columns[0] = "c.guid";
+                    columns[1] = "ct.name";
                     useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid:
@@ -192,8 +195,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Gameobject guid");
                     comboBoxSearchType.Items.Add("Gameobject name");
                     baseQuery = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id";
-                    columnOne = "g.guid";
-                    columnTwo = "gt.name";
+                    columns[0] = "g.guid";
+                    columns[1] = "gt.name";
                     useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent:
@@ -203,8 +206,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Game event entry");
                     comboBoxSearchType.Items.Add("Game event description");
                     baseQuery = "SELECT eventEntry, description FROM game_event";
-                    columnOne = "eventEntry";
-                    columnTwo = "description";
+                    columns[0] = "eventEntry";
+                    columns[1] = "description";
                     useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry:
@@ -214,8 +217,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Item id");
                     comboBoxSearchType.Items.Add("Item name");
                     baseQuery = "SELECT entry, name FROM item_template";
-                    columnOne = "entry";
-                    columnTwo = "name";
+                    columns[0] = "entry";
+                    columns[1] = "name";
                     useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId:
@@ -228,8 +231,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Owner entry");
                     comboBoxSearchType.Items.Add("Target entry");
                     baseQuery = "SELECT summonerId, entry, groupId, summonType, summonTime FROM creature_summon_groups";
-                    columnOne = "summonerId";
-                    columnTwo = "entry";
+                    columns[0] = "summonerId";
+                    columns[1] = "entry";
                     useMySQL = true;
                     amountOfListviewColumns = 5;
                     listViewItemIndexToCopy = 2;
@@ -241,8 +244,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Taxi id");
                     comboBoxSearchType.Items.Add("Taxi name");
                     baseQuery = "SELECT id, taxiName FROM taxi_nodes";
-                    columnOne = "id";
-                    columnTwo = "taxiName";
+                    columns[0] = "id";
+                    columns[1] = "taxiName";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate:
                     Text = "Search for creature equipment";
@@ -254,8 +257,8 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Entry");
                     comboBoxSearchType.Items.Add("Item entries");
                     baseQuery = "SELECT entry, id, itemEntry1, itemEntry2, itemEntry3 FROM creature_equip_template";
-                    columnOne = "entry";
-                    columnTwo = "itemEntry1";
+                    columns[0] = "entry";
+                    columns[1] = "itemEntry1";
                     useMySQL = true;
                     amountOfListviewColumns = 5;
                     break;
@@ -268,8 +271,8 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("Z", 75);
                     comboBoxSearchType.Items.Add("Creature entry");
                     baseQuery = "SELECT entry, pointid, position_x, position_y, position_z FROM waypoints";
-                    columnOne = "entry";
-                    columnTwo = "pointid";
+                    columns[0] = "entry";
+                    columns[1] = "pointid";
                     useMySQL = true;
                     amountOfListviewColumns = 5;
                     break;
@@ -280,9 +283,29 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Id");
                     comboBoxSearchType.Items.Add("Text");
                     baseQuery = "SELECT id, text0_0 FROM npc_text";
-                    columnOne = "id";
-                    columnTwo = "text0_0";
+                    columns[0] = "id";
+                    columns[1] = "text0_0";
                     useMySQL = true;
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOption:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeGossipOptionId:
+                    Text = "Search for a gossip item";
+                    listViewEntryResults.Columns.Add("Menu id", 45);
+                    listViewEntryResults.Columns.Add("Id", 284);
+                    listViewEntryResults.Columns.Add("Text", 284);
+                    comboBoxSearchType.Items.Add("Menu");
+                    comboBoxSearchType.Items.Add("Id");
+                    comboBoxSearchType.Items.Add("Text");
+                    baseQuery = "SELECT menu_id, id, option_text FROM gossip_menu_option";
+                    columns[0] = "menu_id";
+                    columns[1] = "id";
+                    columns[2] = "option_text";
+                    useMySQL = true;
+                    amountOfListviewColumns = 3;
+
+                    if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeGossipOptionId)
+                        listViewItemIndexToCopy = 1;
+
                     break;
             }
 
@@ -315,17 +338,14 @@ namespace SAI_Editor
                     {
                         case 0: //! First column
                             if (checkBoxFieldContainsCriteria.Checked)
-                                queryToExecute += " WHERE " + columnOne + " LIKE '%" + textBoxCriteria.Text + "%'";
+                                queryToExecute += " WHERE " + columns[0] + " LIKE '%" + textBoxCriteria.Text + "%'";
                             else
-                                queryToExecute += " WHERE " + columnOne + " = " + textBoxCriteria.Text;
+                                queryToExecute += " WHERE " + columns[0] + " = " + textBoxCriteria.Text;
 
                             break;
                         case 1: //! Second column
                             switch (databaseSearchFormType)
                             {
-                                //! No second column exists for search type
-                                case DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint:
-                                    return;
                                 case DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate:
                                 {
                                     if (checkBoxFieldContainsCriteria.Checked)
@@ -338,13 +358,19 @@ namespace SAI_Editor
                                 default:
                                 {
                                     if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE " + columnTwo + " LIKE '%" + textBoxCriteria.Text + "%'";
+                                        queryToExecute += " WHERE " + columns[1] + " LIKE '%" + textBoxCriteria.Text + "%'";
                                     else
-                                        queryToExecute += " WHERE " + columnTwo + " = " + textBoxCriteria.Text;
+                                        queryToExecute += " WHERE " + columns[1] + " = " + textBoxCriteria.Text;
 
                                     break;
                                 }
                             }
+                            break;
+                        case 2: //! Third column
+                            if (checkBoxFieldContainsCriteria.Checked)
+                                queryToExecute += " WHERE " + columns[2] + " LIKE '%" + textBoxCriteria.Text + "%'";
+                            else
+                                queryToExecute += " WHERE " + columns[2] + " = " + textBoxCriteria.Text;
 
                             break;
                         default:
@@ -357,7 +383,7 @@ namespace SAI_Editor
                 else if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
                     queryToExecute += " WHERE m_ParentAreaID = 0";
 
-                queryToExecute += " ORDER BY " + columnOne;
+                queryToExecute += " ORDER BY " + columns[0];
 
                 if (limit)
                     queryToExecute += " LIMIT 1000";

@@ -974,10 +974,11 @@ namespace SAI_Editor
 
             switch ((SmartEvent)event_type)
             {
-                case SmartEvent.SMART_EVENT_SPELLHIT:
-                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET:
-                    buttonEventParamOneSearch.Visible = true; //! Spell entry
-                    buttonEventParamTwoSearch.Visible = true; //! Spell school
+                case SmartEvent.SMART_EVENT_SPELLHIT: //! Spell entry & Spell school
+                case SmartEvent.SMART_EVENT_SPELLHIT_TARGET: //! Spell entry & Spell school
+                case SmartEvent.SMART_EVENT_GOSSIP_SELECT: //! Gossip menu id & gossip id
+                    buttonEventParamOneSearch.Visible = true;
+                    buttonEventParamTwoSearch.Visible = true;
                     break;
                 case SmartEvent.SMART_EVENT_RESPAWN:
                     buttonEventParamOneSearch.Visible = true; //! Respawn condition (SMART_SCRIPT_RESPAWN_CONDITION_MAP / SMART_SCRIPT_RESPAWN_CONDITION_AREA)
@@ -1869,8 +1870,11 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_REWARD_QUEST: //! Quest id
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
-                case SmartEvent.SMART_EVENT_RECEIVE_EMOTE:
+                case SmartEvent.SMART_EVENT_RECEIVE_EMOTE: //! Emote id
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote).ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_GOSSIP_SELECT: //! Gossip menu id
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOption).ShowDialog(this);
                     break;
             }
         }
@@ -1890,6 +1894,9 @@ namespace SAI_Editor
                     break;
                 case SmartEvent.SMART_EVENT_TEXT_OVER: //! Creature entry
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_GOSSIP_SELECT: //! Gossip id
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGossipOptionId).ShowDialog(this);
                     break;
             }
         }
