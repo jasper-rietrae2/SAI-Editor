@@ -36,6 +36,7 @@ namespace SAI_Editor
         DatabaseSearchFormTypeTaxiPath,
         DatabaseSearchFormTypeEquipTemplate,
         DatabaseSearchFormTypeWaypoint,
+        DatabaseSearchFormTypeNpcText,
     }
 
     public partial class SearchFromDatabaseForm : Form
@@ -272,6 +273,17 @@ namespace SAI_Editor
                     useMySQL = true;
                     amountOfListviewColumns = 5;
                     break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeNpcText:
+                    Text = "Search for an npc_text entry";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Text", 284);
+                    comboBoxSearchType.Items.Add("Id");
+                    comboBoxSearchType.Items.Add("Text");
+                    baseQuery = "SELECT id, text0_0 FROM npc_text";
+                    columnOne = "id";
+                    columnTwo = "text0_0";
+                    useMySQL = true;
+                    break;
             }
 
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -295,7 +307,6 @@ namespace SAI_Editor
         {
             try
             {
-                DataTable dt = null;
                 string queryToExecute = baseQuery;
 
                 if (!limit)
@@ -351,7 +362,7 @@ namespace SAI_Editor
                 if (limit)
                     queryToExecute += " LIMIT 1000";
 
-                dt = useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
+                DataTable dt = useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
 
                 if (dt.Rows.Count > 0)
                 {

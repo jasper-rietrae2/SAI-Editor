@@ -1029,6 +1029,7 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_WP_STOP: //! Quest entry
                 case SmartAction.SMART_ACTION_INTERRUPT_SPELL: //! Spell entry
+                case SmartAction.SMART_ACTION_SEND_GOSSIP_MENU: //! Gossip menu id & npc_text.id
                     buttonActionParamTwoSearch.Visible = true;
                     break;
                 case SmartAction.SMART_ACTION_WP_START:
@@ -1040,9 +1041,9 @@ namespace SAI_Editor
                     buttonActionParamThreeSearch.Visible = true; //! Creature entry
                     buttonActionParamFourSearch.Visible = true; //! Creature entry
                     break;
-                case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
-                    buttonActionParamOneSearch.Visible = true; //! Event phase 1
-                    buttonActionParamTwoSearch.Visible = true; //! Event phase 2
+                case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE: //! Event phase 1 & 2
+                    buttonActionParamOneSearch.Visible = true;
+                    buttonActionParamTwoSearch.Visible = true;
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:  //! Event phase 1-6
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE: //! Emote entry 1-6
@@ -2228,6 +2229,9 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_WP_START:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SEND_GOSSIP_MENU:
+                    new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeNpcText).ShowDialog(this);
                     break;
             }
         }
