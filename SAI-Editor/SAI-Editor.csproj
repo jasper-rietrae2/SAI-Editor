@@ -61,7 +61,6 @@
     <Compile Include="Classes\CommentGenerator.cs" />
     <Compile Include="Classes\Database\Classes\Creature.cs" />
     <Compile Include="Classes\Database\Classes\Gameobject.cs" />
-    <Compile Include="Classes\NpcFlags1.cs" />
     <Compile Include="Classes\SmartScriptListView.cs">
       <SubType>Component</SubType>
     </Compile>

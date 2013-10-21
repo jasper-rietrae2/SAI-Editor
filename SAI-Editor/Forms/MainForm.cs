@@ -2109,7 +2109,7 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SET_NPC_FLAG:
                 case SmartAction.SMART_ACTION_ADD_NPC_FLAG:
                 case SmartAction.SMART_ACTION_REMOVE_NPC_FLAG:
-                    new MultiSelectForm<NpcFlags1>(textBoxToChange).ShowDialog(this);
+                    new MultiSelectForm<NpcFlags>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE:
                     new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSmartAiTemplate).ShowDialog(this);
