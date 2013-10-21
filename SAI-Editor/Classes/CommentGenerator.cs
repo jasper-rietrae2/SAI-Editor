@@ -692,85 +692,87 @@ namespace SAI_Editor.Classes
                     switch ((UnitFieldBytes1Type)smartScript.action_param2)
                     {
                         case UnitFieldBytes1Type.UnitStandStateType:
+                        {
+                            switch ((UnitStandStateType)smartScript.action_param1)
                             {
-                                switch ((UnitStandStateType)smartScript.action_param1)
-                                {
-                                    case UnitStandStateType.UNIT_STAND_STATE_STAND:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Stand Up");
-                                        break;
-                                    case UnitStandStateType.UNIT_STAND_STATE_SIT:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sit Down");
-                                        break;
-                                    case UnitStandStateType.UNIT_STAND_STATE_SIT_CHAIR:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sit Down Chair");
-                                        break;
-                                    case UnitStandStateType.UNIT_STAND_STATE_SLEEP:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sleep");
-                                        break;
-                                    case UnitStandStateType.UNIT_STAND_STATE_SIT_LOW_CHAIR:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sit Low Chair");
-                                        break;
-                                    case UnitStandStateType.UNIT_STAND_STATE_SIT_MEDIUM_CHAIR:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sit Medium Chair");
-                                        break;
-                                    case UnitStandStateType.UNIT_STAND_STATE_SIT_HIGH_CHAIR:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sit High Chair");
-                                        break;
-                                    case UnitStandStateType.UNIT_STAND_STATE_DEAD:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Dead");
-                                        break;
-                                    case UnitStandStateType.UNIT_STAND_STATE_KNEEL:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Kneel");
-                                        break;
-                                    case UnitStandStateType.UNIT_STAND_STATE_SUBMERGED:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Submerged");
-                                        break;
-                                    default:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown bytes1 (UnitStandStateType)>");
-                                        break;
-                                }
-                                break;
+                                case UnitStandStateType.UNIT_STAND_STATE_STAND:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Stand Up");
+                                    break;
+                                case UnitStandStateType.UNIT_STAND_STATE_SIT:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sit Down");
+                                    break;
+                                case UnitStandStateType.UNIT_STAND_STATE_SIT_CHAIR:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sit Down Chair");
+                                    break;
+                                case UnitStandStateType.UNIT_STAND_STATE_SLEEP:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sleep");
+                                    break;
+                                case UnitStandStateType.UNIT_STAND_STATE_SIT_LOW_CHAIR:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sit Low Chair");
+                                    break;
+                                case UnitStandStateType.UNIT_STAND_STATE_SIT_MEDIUM_CHAIR:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sit Medium Chair");
+                                    break;
+                                case UnitStandStateType.UNIT_STAND_STATE_SIT_HIGH_CHAIR:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Sit High Chair");
+                                    break;
+                                case UnitStandStateType.UNIT_STAND_STATE_DEAD:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Dead");
+                                    break;
+                                case UnitStandStateType.UNIT_STAND_STATE_KNEEL:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Kneel");
+                                    break;
+                                case UnitStandStateType.UNIT_STAND_STATE_SUBMERGED:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Standstate Submerged");
+                                    break;
+                                default:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown bytes1 (UnitStandStateType)>");
+                                    break;
                             }
+                            break;
+                        }
                         case UnitFieldBytes1Type.UnitStandFlags:
+                        {
+                            switch ((UnitStandFlags)smartScript.action_param1)
                             {
-                                switch ((UnitStandFlags)smartScript.action_param1)
-                                {
-                                    case UnitStandFlags.UNIT_STAND_FLAGS_UNK1:
-                                    case UnitStandFlags.UNIT_STAND_FLAGS_UNK4:
-                                    case UnitStandFlags.UNIT_STAND_FLAGS_UNK5:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown>");
-                                        break;
-                                    case UnitStandFlags.UNIT_STAND_FLAGS_CREEP:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Creep");
-                                        break;
-                                    case UnitStandFlags.UNIT_STAND_FLAGS_UNTRACKABLE:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Untrackable");
-                                        break;
-                                    default:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown bytes1 (UnitStandFlags)>");
-                                        break;
-                                }
-                                break;
+                                case UnitStandFlags.UNIT_STAND_FLAGS_UNK1:
+                                case UnitStandFlags.UNIT_STAND_FLAGS_UNK4:
+                                case UnitStandFlags.UNIT_STAND_FLAGS_UNK5:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown>");
+                                    break;
+                                case UnitStandFlags.UNIT_STAND_FLAGS_CREEP:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Creep");
+                                    break;
+                                case UnitStandFlags.UNIT_STAND_FLAGS_UNTRACKABLE:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Untrackable");
+                                    break;
+                                default:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown bytes1 (UnitStandFlags)>");
+                                    break;
                             }
+                            break;
+                        }
                         case UnitFieldBytes1Type.UnitBytes1_Flags:
+                        {
+                            switch ((UnitBytes1_Flags)smartScript.action_param1)
                             {
-                                switch ((UnitBytes1_Flags)smartScript.action_param1)
-                                {
-                                    case UnitBytes1_Flags.UNIT_BYTE1_FLAG_UNK_3:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown>");
-                                        break;
-                                    case UnitBytes1_Flags.UNIT_BYTE1_FLAG_HOVER:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Hover");
-                                        break;
-                                    case UnitBytes1_Flags.UNIT_BYTE1_FLAG_ALWAYS_STAND:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "Always Stand");
-                                        break;
-                                    default:
-                                        fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown bytes1 (UnitBytes1_Flags)>");
-                                        break;
-                                }
-                                break;
+                                case UnitBytes1_Flags.UNIT_BYTE1_FLAG_UNK_3:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown>");
+                                    break;
+                                case UnitBytes1_Flags.UNIT_BYTE1_FLAG_HOVER:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Hover");
+                                    break;
+                                case UnitBytes1_Flags.UNIT_BYTE1_FLAG_ALWAYS_STAND:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "Always Stand");
+                                    break;
+                                default:
+                                    fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown bytes1 (UnitBytes1_Flags)>");
+                                    break;
                             }
+                            break;
+                        }
+                        default:
+                            break;
                     }
                 }
 

@@ -260,6 +260,7 @@
 
     public enum SmartCastFlags
     {
+        SMARTCAST_NONE = 0x00,
         SMARTCAST_INTERRUPT_PREVIOUS = 0x01,
         SMARTCAST_TRIGGERED = 0x02,
         SMARTCAST_AURA_NOT_PRESENT = 0x20,
@@ -299,6 +300,7 @@
 
     public enum GoFlags : uint
     {
+        GO_FLAG_NONE                    = 0x00000000,
         GO_FLAG_IN_USE                  = 0x00000001,
         GO_FLAG_LOCKED                  = 0x00000002,
         GO_FLAG_INTERACT_COND           = 0x00000004,
@@ -364,6 +366,7 @@
 
     public enum SmartEventFlags : uint
     {
+        SMART_EVENT_FLAG_NONE               = 0x00,
         SMART_EVENT_FLAG_NOT_REPEATABLE     = 0x01,
         SMART_EVENT_FLAG_DIFFICULTY_0       = 0x02,
         SMART_EVENT_FLAG_DIFFICULTY_1       = 0x04,
@@ -374,6 +377,7 @@
 
     public enum UnitFlags : uint
     {
+        UNIT_FLAG_NONE                  = 0x00000000,
         UNIT_FLAG_SERVER_CONTROLLED     = 0x00000001,           // set only when unit movement is controlled by server - by SPLINE/MONSTER_MOVE packets, together with UNIT_FLAG_STUNNED; only set to units controlled by client; client function CGUnit_C::IsClientControlled returns false when set for owner
         UNIT_FLAG_NON_ATTACKABLE        = 0x00000002,           // not attackable
         UNIT_FLAG_DISABLE_MOVE          = 0x00000004,
@@ -410,6 +414,7 @@
 
     public enum UnitFlags2 : uint
     {
+        UNIT_FLAG2_NONE                         = 0x00000000,
         UNIT_FLAG2_FEIGN_DEATH                  = 0x00000001,
         UNIT_FLAG2_UNK1                         = 0x00000002,   // Hide unit model (show only player equip)
         UNIT_FLAG2_IGNORE_REPUTATION            = 0x00000004,
