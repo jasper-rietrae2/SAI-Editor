@@ -124,9 +124,9 @@
             this.checkBoxAutoGenerateComments.AutoSize = true;
             this.checkBoxAutoGenerateComments.Location = new System.Drawing.Point(6, 167);
             this.checkBoxAutoGenerateComments.Name = "checkBoxAutoGenerateComments";
-            this.checkBoxAutoGenerateComments.Size = new System.Drawing.Size(183, 17);
+            this.checkBoxAutoGenerateComments.Size = new System.Drawing.Size(184, 17);
             this.checkBoxAutoGenerateComments.TabIndex = 13;
-            this.checkBoxAutoGenerateComments.Text = "Generate comments for new lines";
+            this.checkBoxAutoGenerateComments.Text = "Automatically generate comments";
             this.checkBoxAutoGenerateComments.UseVisualStyleBackColor = true;
             // 
             // checkBoxShowTooltipsPermanently
