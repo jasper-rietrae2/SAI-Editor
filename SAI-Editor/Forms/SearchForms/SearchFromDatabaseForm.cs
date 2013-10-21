@@ -155,7 +155,6 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Areatrigger id");
                     comboBoxSearchType.Items.Add("Areatrigger map id");
                     baseQuery = "SELECT m_id, m_mapId, m_posX, m_posY, m_posZ FROM areatriggers";
-                    amountOfListviewColumns = 5;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid:
                     Text = "Search for a creature";
@@ -204,7 +203,6 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Target entry");
                     baseQuery = "SELECT summonerId, entry, groupId, summonType, summonTime FROM creature_summon_groups";
                     useMySQL = true;
-                    amountOfListviewColumns = 5;
                     listViewItemIndexToCopy = 2;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath:
@@ -226,7 +224,6 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Item entries");
                     baseQuery = "SELECT entry, id, itemEntry1, itemEntry2, itemEntry3 FROM creature_equip_template";
                     useMySQL = true;
-                    amountOfListviewColumns = 5;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint:
                     Text = "Search for a waypoints path";
@@ -238,7 +235,6 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Creature entry");
                     baseQuery = "SELECT entry, pointid, position_x, position_y, position_z FROM waypoints";
                     useMySQL = true;
-                    amountOfListviewColumns = 5;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeNpcText:
                     Text = "Search for an npc_text entry";
@@ -262,17 +258,18 @@ namespace SAI_Editor
                     comboBoxSearchType.Items.Add("Text");
                     baseQuery = "SELECT menu_id, id, option_text FROM gossip_menu_option";
                     useMySQL = true;
-                    amountOfListviewColumns = 3;
                     break;
                 default:
                     break;
             }
 
             string[] columnsSplit = baseQuery.Replace("SELECT ", "").Replace(" FROM " + baseQuery.Split(' ').LastOrDefault(), "").Split(',');
+            columns = new string[columnsSplit.Length + 1];
 
             for (int i = 0; i < columnsSplit.Length; ++i)
                 columns[i] = columnsSplit[i];
 
+            amountOfListviewColumns = columns.Length - 1;
             listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             comboBoxSearchType.SelectedIndex = 0;
             FillListView(true);
