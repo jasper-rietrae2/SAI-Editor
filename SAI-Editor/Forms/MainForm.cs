@@ -444,7 +444,7 @@ namespace SAI_Editor
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
             SaveLastUsedFields();
-            ResetFieldsToDefault(true);
+            ResetFieldsToDefault();
             listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
             StartContractingToLoginForm(Settings.Default.InstantExpand);
         }
