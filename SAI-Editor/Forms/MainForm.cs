@@ -1002,7 +1002,7 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_TEXT_OVER: //! Creature entry
                     buttonEventParamTwoSearch.Visible = true;
                     break;
-                case SmartEvent.SMART_EVENT_TARGET_CASTING: //! Spell id
+                case SmartEvent.SMART_EVENT_VICTIM_CASTING: //! Spell id
                     buttonEventParamThreeSearch.Visible = true;
                     break;
                 case SmartEvent.SMART_EVENT_KILL: //! Creature entry
@@ -1901,7 +1901,7 @@ namespace SAI_Editor
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Zone
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeZone).ShowDialog(this);
                     break;
-                case SmartEvent.SMART_EVENT_TARGET_CASTING: //! Spell id
+                case SmartEvent.SMART_EVENT_VICTIM_CASTING: //! Spell id
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
             }

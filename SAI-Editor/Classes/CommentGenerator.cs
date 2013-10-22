@@ -73,8 +73,8 @@ namespace SAI_Editor.Classes
             smartEventStrings.Add(SmartEvent.SMART_EVENT_DEATH, "On Just Died");
             smartEventStrings.Add(SmartEvent.SMART_EVENT_EVADE, "On Evade");
             smartEventStrings.Add(SmartEvent.SMART_EVENT_RESPAWN, "On Respawn");
-            smartEventStrings.Add(SmartEvent.SMART_EVENT_TARGET_CASTING, "Target Casting '_targetCastingSpellName_'");
-            smartEventStrings.Add(SmartEvent.SMART_EVENT_FRIENDLY_IS_CC, "Friendly Crowd Controlled");
+            smartEventStrings.Add(SmartEvent.SMART_EVENT_VICTIM_CASTING, "On Victim Casting '_targetCastingSpellName_'");
+            smartEventStrings.Add(SmartEvent.SMART_EVENT_FRIENDLY_IS_CC, "On Friendly Crowd Controlled");
             smartEventStrings.Add(SmartEvent.SMART_EVENT_SUMMONED_UNIT, "On Summoned Unit");
             smartEventStrings.Add(SmartEvent.SMART_EVENT_ACCEPTED_QUEST, "On Quest '_questNameEventParamOne_' Taken");
             smartEventStrings.Add(SmartEvent.SMART_EVENT_REWARD_QUEST, "On Quest '_questNameEventParamOne_' Finished");
