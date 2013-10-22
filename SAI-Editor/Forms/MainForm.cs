@@ -1756,7 +1756,7 @@ namespace SAI_Editor
             textBoxId.Text = "-1";
             textBoxLinkFrom.Text = "0";
             textBoxLinkTo.Text = "0";
-            textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
+            textBoxComments.Text = GetDefaultCommentForSourceType(GetSourceTypeByIndex());
             textBoxEventPhasemask.Text = "0";
             textBoxEventFlags.Text = "0";
 
@@ -2348,14 +2348,31 @@ namespace SAI_Editor
 
         private void textBoxComments_GotFocus(object sender, EventArgs e)
         {
-            if (textBoxComments.Text == "Npc - Event - Action (phase) (dungeon difficulty)")
+            if (textBoxComments.Text == GetDefaultCommentForSourceType(GetSourceTypeByIndex()))
                 textBoxComments.Text = "";
         }
 
         private void textBoxComments_LostFocus(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBoxComments.Text))
-                textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
+                textBoxComments.Text = GetDefaultCommentForSourceType(GetSourceTypeByIndex());
+        }
+
+        private string GetDefaultCommentForSourceType(SourceTypes sourceType)
+        {
+            switch (sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return "Npc - Event - Action (phase) (dungeon difficulty)";
+                case SourceTypes.SourceTypeGameobject:
+                    return "Gameobject - Event - Action (phase) (dungeon difficulty)";
+                case SourceTypes.SourceTypeAreaTrigger:
+                    return "Areatrigger - Event - Action (phase) (dungeon difficulty)";
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    return "Source - Event - Action (phase) (dungeon difficulty)";
+            }
+
+            return String.Empty;
         }
 
         public void ExpandToShowPermanentTooltips(bool expand)
@@ -2575,7 +2592,7 @@ namespace SAI_Editor
             if (Settings.Default.GenerateComments)
                 newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
             else
-                newSmartScript.comment = "Npc - Event - Action (phase) (dungeon difficulty)";
+                newSmartScript.comment = GetDefaultCommentForSourceType((SourceTypes)newSmartScript.source_type);
 
             newSmartScript.event_chance = 100;
             int index = listViewSmartScripts.AddSmartScript(newSmartScript);
