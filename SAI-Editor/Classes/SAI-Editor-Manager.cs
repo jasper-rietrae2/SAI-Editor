@@ -278,11 +278,9 @@ namespace SAI_Editor
             {
                 if (host.Length <= 0 || username.Length <= 0 || port <= 0)
                 {
-                    MessageBox.Show("You must fill a host, username, password (optional) and port in order to search for your world database (we need to establish a connection to list your databases)!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("You must fill a host, username and port in order to search for your world database (we need to establish a connection to list your databases)!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
-
-                var databaseNames = new List<string>();
 
                 MySqlConnectionStringBuilder _connectionString = new MySqlConnectionStringBuilder();
                 _connectionString.Server = host;
@@ -291,6 +289,11 @@ namespace SAI_Editor
 
                 if (password.Length > 0)
                     _connectionString.Password = password;
+
+                if (!Instance.worldDatabase.CanConnectToDatabase(_connectionString))
+                    return null;
+
+                var databaseNames = new List<string>();
 
                 try
                 {
