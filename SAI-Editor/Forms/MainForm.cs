@@ -1155,16 +1155,6 @@ namespace SAI_Editor
             textBoxTargetY.Enabled = labelTargetY.Text.Length > 0;
             textBoxTargetZ.Enabled = labelTargetZ.Text.Length > 0;
             textBoxTargetO.Enabled = labelTargetO.Text.Length > 0;
-
-            int target_type = comboBoxTargetType.SelectedIndex;
-
-            if (listViewSmartScripts != null && listViewSmartScripts.SelectedSmartScript != null)
-                target_type = listViewSmartScripts.SelectedSmartScript.target_type;
-
-            textBoxTargetX.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
-            textBoxTargetY.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
-            textBoxTargetZ.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
-            textBoxTargetO.Enabled = (SmartTarget)target_type == SmartTarget.SMART_TARGET_POSITION;
         }
 
         private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true, bool active = true, int autoPopDelay = 2100000000, bool showAlways = true)
