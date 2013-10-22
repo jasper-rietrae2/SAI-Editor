@@ -9,6 +9,7 @@ using SAI_Editor.Database.Classes;
 using SAI_Editor.Classes;
 using SAI_Editor;
 using SAI_Editor.Properties;
+using System.Drawing;
 
 namespace System.Windows.Forms
 {
@@ -112,29 +113,53 @@ namespace System.Windows.Forms
             if (!Settings.Default.PhaseHighlighting)
                 return;
 
-            foreach (ListViewItem item in Items)
-            {
-                foreach (SmartScript smartScript in _smartScripts)
-                {
-                    if (item.Text == smartScript.entryorguid.ToString() && item.SubItems[2].Text == smartScript.id.ToString())
-                    {
-                        //! Try-catch has to be right here. Otherwise all items coming after an item that caused an exception
-                        //! will no longer be colored.
-                        try
-                        {
-                            item.BackColor = Constants.phaseColors[(SmartPhaseMasks)Enum.GetValues(typeof(SmartPhaseMasks)).GetValue(smartScript.event_phase_mask)];
-                            break;
-                        }
-                        catch (IndexOutOfRangeException)
-                        {
+            List<Color> phaseColors = new List<Color>(Constants.phaseColors);
+            Dictionary<int /* phase */, List<SmartScript>> smartScriptsPhases = new Dictionary<int, List<SmartScript>>();
 
-                        }
-                        catch (Exception ex)
+            foreach (SmartScript smartScript in _smartScripts)
+            {
+                if (!smartScriptsPhases.ContainsKey(smartScript.event_phase_mask))
+                {
+                    List<SmartScript> newSmartScriptList = new List<SmartScript>();
+                    newSmartScriptList.Add(smartScript);
+                    smartScriptsPhases[smartScript.event_phase_mask] = newSmartScriptList;
+                }
+                else
+                    smartScriptsPhases[smartScript.event_phase_mask].Add(smartScript);
+            }
+
+            foreach (List<SmartScript> smartScripts in smartScriptsPhases.Values)
+            {
+                bool foundColor = false;
+
+                foreach (SmartScript smartScript in smartScripts)
+                {
+                    foreach (ListViewItem item in Items)
+                    {
+                        if (item.Text == smartScript.entryorguid.ToString() && item.SubItems[2].Text == smartScript.id.ToString())
                         {
-                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            //! Try-catch has to be right here and not outside the loops. Otherwise all items coming after an
+                            //! item that caused an exception will not be colored.
+                            try
+                            {
+                                item.BackColor = phaseColors.First();
+                                foundColor = true;
+                                break;
+                            }
+                            catch (IndexOutOfRangeException)
+                            {
+
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                     }
                 }
+
+                if (foundColor)
+                    phaseColors.RemoveAt(0);
             }
         }
 
