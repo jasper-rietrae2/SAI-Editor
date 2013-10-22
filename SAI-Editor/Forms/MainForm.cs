@@ -342,9 +342,7 @@ namespace SAI_Editor
                 Width = WidthToExpandTo;
                 Height = HeightToExpandTo;
                 formState = FormState.FormStateMain;
-
-                if (Settings.Default.ShowTooltipsPermanently)
-                    ExpandToShowPermanentTooltips(false);
+                FinishedExpandingOrContracting(true);
             }
             else
             {
@@ -378,6 +376,7 @@ namespace SAI_Editor
                 Width = originalWidth;
                 Height = originalHeight;
                 formState = FormState.FormStateLogin;
+                FinishedExpandingOrContracting(false);
             }
             else
             {
