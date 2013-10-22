@@ -69,7 +69,7 @@
             // 
             // buttonExitSettings
             // 
-            this.buttonExitSettings.Location = new System.Drawing.Point(192, 317);
+            this.buttonExitSettings.Location = new System.Drawing.Point(452, 213);
             this.buttonExitSettings.Name = "buttonExitSettings";
             this.buttonExitSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonExitSettings.TabIndex = 9;
@@ -79,7 +79,7 @@
             // 
             // buttonSaveSettings
             // 
-            this.buttonSaveSettings.Location = new System.Drawing.Point(12, 317);
+            this.buttonSaveSettings.Location = new System.Drawing.Point(272, 213);
             this.buttonSaveSettings.Name = "buttonSaveSettings";
             this.buttonSaveSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonSaveSettings.TabIndex = 7;
@@ -104,7 +104,7 @@
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
             this.tabPageGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGeneral.Size = new System.Drawing.Size(247, 277);
+            this.tabPageGeneral.Size = new System.Drawing.Size(511, 173);
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
@@ -112,7 +112,7 @@
             // checkBoxCreateRevertQuery
             // 
             this.checkBoxCreateRevertQuery.AutoSize = true;
-            this.checkBoxCreateRevertQuery.Location = new System.Drawing.Point(6, 190);
+            this.checkBoxCreateRevertQuery.Location = new System.Drawing.Point(253, 29);
             this.checkBoxCreateRevertQuery.Name = "checkBoxCreateRevertQuery";
             this.checkBoxCreateRevertQuery.Size = new System.Drawing.Size(181, 17);
             this.checkBoxCreateRevertQuery.TabIndex = 10;
@@ -122,7 +122,7 @@
             // checkBoxAutoGenerateComments
             // 
             this.checkBoxAutoGenerateComments.AutoSize = true;
-            this.checkBoxAutoGenerateComments.Location = new System.Drawing.Point(6, 167);
+            this.checkBoxAutoGenerateComments.Location = new System.Drawing.Point(253, 6);
             this.checkBoxAutoGenerateComments.Name = "checkBoxAutoGenerateComments";
             this.checkBoxAutoGenerateComments.Size = new System.Drawing.Size(184, 17);
             this.checkBoxAutoGenerateComments.TabIndex = 13;
@@ -166,7 +166,7 @@
             // textBoxAnimationSpeed
             // 
             this.textBoxAnimationSpeed.Enabled = false;
-            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(103, 228);
+            this.textBoxAnimationSpeed.Location = new System.Drawing.Point(347, 124);
             this.textBoxAnimationSpeed.Name = "textBoxAnimationSpeed";
             this.textBoxAnimationSpeed.Size = new System.Drawing.Size(37, 20);
             this.textBoxAnimationSpeed.TabIndex = 8;
@@ -176,20 +176,21 @@
             // labelAnimationSpeed
             // 
             this.labelAnimationSpeed.AutoSize = true;
-            this.labelAnimationSpeed.Location = new System.Drawing.Point(6, 231);
+            this.labelAnimationSpeed.Location = new System.Drawing.Point(250, 127);
             this.labelAnimationSpeed.Name = "labelAnimationSpeed";
             this.labelAnimationSpeed.Size = new System.Drawing.Size(91, 13);
             this.labelAnimationSpeed.TabIndex = 7;
             this.labelAnimationSpeed.Text = "Animation speed: ";
+            this.labelAnimationSpeed.Click += new System.EventHandler(this.labelAnimationSpeed_Click);
             // 
             // trackBarAnimationSpeed
             // 
             this.trackBarAnimationSpeed.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.trackBarAnimationSpeed.Location = new System.Drawing.Point(-4, 250);
+            this.trackBarAnimationSpeed.Location = new System.Drawing.Point(243, 144);
             this.trackBarAnimationSpeed.Maximum = 12;
             this.trackBarAnimationSpeed.Minimum = 1;
             this.trackBarAnimationSpeed.Name = "trackBarAnimationSpeed";
-            this.trackBarAnimationSpeed.Size = new System.Drawing.Size(255, 45);
+            this.trackBarAnimationSpeed.Size = new System.Drawing.Size(272, 45);
             this.trackBarAnimationSpeed.TabIndex = 6;
             this.trackBarAnimationSpeed.Value = 10;
             this.trackBarAnimationSpeed.ValueChanged += new System.EventHandler(this.trackBarAnimationSpeed_ValueChanged);
@@ -246,7 +247,7 @@
             this.tabControlSettings.Location = new System.Drawing.Point(12, 8);
             this.tabControlSettings.Name = "tabControlSettings";
             this.tabControlSettings.SelectedIndex = 0;
-            this.tabControlSettings.Size = new System.Drawing.Size(255, 303);
+            this.tabControlSettings.Size = new System.Drawing.Size(519, 199);
             this.tabControlSettings.TabIndex = 1;
             // 
             // tabPageConnection
@@ -267,16 +268,16 @@
             this.tabPageConnection.Controls.Add(this.label7);
             this.tabPageConnection.Location = new System.Drawing.Point(4, 22);
             this.tabPageConnection.Name = "tabPageConnection";
-            this.tabPageConnection.Size = new System.Drawing.Size(247, 277);
+            this.tabPageConnection.Size = new System.Drawing.Size(511, 173);
             this.tabPageConnection.TabIndex = 1;
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
             // 
             // buttonTestConnection
             // 
-            this.buttonTestConnection.Location = new System.Drawing.Point(138, 193);
+            this.buttonTestConnection.Location = new System.Drawing.Point(387, 136);
             this.buttonTestConnection.Name = "buttonTestConnection";
-            this.buttonTestConnection.Size = new System.Drawing.Size(98, 23);
+            this.buttonTestConnection.Size = new System.Drawing.Size(112, 23);
             this.buttonTestConnection.TabIndex = 31;
             this.buttonTestConnection.Text = "Test connection";
             this.buttonTestConnection.UseVisualStyleBackColor = true;
@@ -284,7 +285,7 @@
             // 
             // buttonSearchForWorldDb
             // 
-            this.buttonSearchForWorldDb.Location = new System.Drawing.Point(212, 91);
+            this.buttonSearchForWorldDb.Location = new System.Drawing.Point(212, 107);
             this.buttonSearchForWorldDb.Name = "buttonSearchForWorldDb";
             this.buttonSearchForWorldDb.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchForWorldDb.TabIndex = 30;
@@ -295,7 +296,7 @@
             // checkBoxHidePass
             // 
             this.checkBoxHidePass.AutoSize = true;
-            this.checkBoxHidePass.Location = new System.Drawing.Point(124, 147);
+            this.checkBoxHidePass.Location = new System.Drawing.Point(387, 111);
             this.checkBoxHidePass.Name = "checkBoxHidePass";
             this.checkBoxHidePass.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxHidePass.Size = new System.Drawing.Size(112, 17);
@@ -307,7 +308,7 @@
             // checkBoxAutoConnect
             // 
             this.checkBoxAutoConnect.AutoSize = true;
-            this.checkBoxAutoConnect.Location = new System.Drawing.Point(146, 170);
+            this.checkBoxAutoConnect.Location = new System.Drawing.Point(409, 88);
             this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
             this.checkBoxAutoConnect.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
@@ -317,7 +318,7 @@
             // 
             // textBoxHost
             // 
-            this.textBoxHost.Location = new System.Drawing.Point(106, 5);
+            this.textBoxHost.Location = new System.Drawing.Point(106, 15);
             this.textBoxHost.Name = "textBoxHost";
             this.textBoxHost.Size = new System.Drawing.Size(130, 20);
             this.textBoxHost.TabIndex = 0;
@@ -325,7 +326,7 @@
             // 
             // textBoxUsername
             // 
-            this.textBoxUsername.Location = new System.Drawing.Point(106, 34);
+            this.textBoxUsername.Location = new System.Drawing.Point(106, 46);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
             this.textBoxUsername.TabIndex = 1;
@@ -333,7 +334,7 @@
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(106, 63);
+            this.textBoxPassword.Location = new System.Drawing.Point(106, 77);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
             this.textBoxPassword.TabIndex = 2;
@@ -341,7 +342,7 @@
             // 
             // textBoxWorldDatabase
             // 
-            this.textBoxWorldDatabase.Location = new System.Drawing.Point(106, 92);
+            this.textBoxWorldDatabase.Location = new System.Drawing.Point(106, 108);
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
             this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
             this.textBoxWorldDatabase.TabIndex = 3;
@@ -349,7 +350,7 @@
             // 
             // textBoxPort
             // 
-            this.textBoxPort.Location = new System.Drawing.Point(106, 121);
+            this.textBoxPort.Location = new System.Drawing.Point(106, 139);
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
             this.textBoxPort.TabIndex = 4;
@@ -359,7 +360,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(42, 37);
+            this.label3.Location = new System.Drawing.Point(42, 49);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 20;
@@ -368,7 +369,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(44, 66);
+            this.label4.Location = new System.Drawing.Point(44, 80);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(56, 13);
             this.label4.TabIndex = 22;
@@ -377,7 +378,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 95);
+            this.label5.Location = new System.Drawing.Point(13, 111);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(87, 13);
             this.label5.TabIndex = 24;
@@ -386,7 +387,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(68, 8);
+            this.label6.Location = new System.Drawing.Point(68, 18);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(32, 13);
             this.label6.TabIndex = 26;
@@ -395,7 +396,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(71, 124);
+            this.label7.Location = new System.Drawing.Point(71, 142);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 13);
             this.label7.TabIndex = 28;
@@ -403,7 +404,7 @@
             // 
             // buttonDefaultSettings
             // 
-            this.buttonDefaultSettings.Location = new System.Drawing.Point(102, 317);
+            this.buttonDefaultSettings.Location = new System.Drawing.Point(362, 213);
             this.buttonDefaultSettings.Name = "buttonDefaultSettings";
             this.buttonDefaultSettings.Size = new System.Drawing.Size(75, 23);
             this.buttonDefaultSettings.TabIndex = 8;
@@ -415,7 +416,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 352);
+            this.ClientSize = new System.Drawing.Size(543, 247);
             this.Controls.Add(this.buttonDefaultSettings);
             this.Controls.Add(this.buttonSaveSettings);
             this.Controls.Add(this.buttonExitSettings);

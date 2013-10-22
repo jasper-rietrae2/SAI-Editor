@@ -310,5 +310,17 @@ namespace SAI_Editor.Properties {
                 this["AllowChangingEntryAndSourceType"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool PhaseHighlighting {
+            get {
+                return ((bool)(this["PhaseHighlighting"]));
+            }
+            set {
+                this["PhaseHighlighting"] = value;
+            }
+        }
     }
 }

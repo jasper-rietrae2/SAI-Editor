@@ -287,5 +287,10 @@ namespace SAI_Editor
             if (SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
                 MessageBox.Show("Connection successful!", "Connection status", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
+
+        private void labelAnimationSpeed_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
