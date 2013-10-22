@@ -61,16 +61,16 @@ namespace SAI_Editor
                         }
                         catch (Exception ex)
                         {
+                            exceptionOccurred = true;
+
                             try
                             {
-                                exceptionOccurred = true;
                                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 transaction.Rollback();
                             }
                             catch (Exception ex2)
                             {
                                 MessageBox.Show(ex2.Message, "Something went wrong while rolling back!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                exceptionOccurred = true;
                             }
                         }
                     }

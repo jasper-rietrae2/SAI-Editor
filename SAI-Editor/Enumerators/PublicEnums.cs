@@ -468,12 +468,12 @@
 
     public enum SmartPhaseMasks
     {
-        SMART_EVENT_PHASE_ALWAYS = 0,
-        SMART_EVENT_PHASE_1 = 1,
-        SMART_EVENT_PHASE_2 = 2,
-        SMART_EVENT_PHASE_3 = 3,
-        SMART_EVENT_PHASE_4 = 4,
-        SMART_EVENT_PHASE_5 = 5,
-        SMART_EVENT_PHASE_6 = 6,
+        SMART_EVENT_PHASE_ALWAYS            = 0x00,
+        SMART_EVENT_PHASE_1                 = 0x01,
+        SMART_EVENT_PHASE_2                 = 0x02,
+        SMART_EVENT_PHASE_3                 = 0x04,
+        SMART_EVENT_PHASE_4                 = 0x08,
+        SMART_EVENT_PHASE_5                 = 0x10,
+        SMART_EVENT_PHASE_6                 = 0x20,
     }
 }
