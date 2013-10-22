@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CommentGenerator.cs" />
+    <Compile Include="Classes\Constants.cs" />
     <Compile Include="Classes\Database\Classes\Creature.cs" />
     <Compile Include="Classes\Database\Classes\Gameobject.cs" />
     <Compile Include="Classes\SmartScriptListView.cs">

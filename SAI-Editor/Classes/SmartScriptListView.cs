@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SAI_Editor.Database.Classes;
+using SAI_Editor.Classes;
+using SAI_Editor;
 
 namespace System.Windows.Forms
 {
@@ -99,7 +101,37 @@ namespace System.Windows.Forms
             if (!listViewOnly)
                 _smartScripts.Add(script);
 
-            return Items.Add(lvi).Index;
+            ListViewItem newItem = Items.Add(lvi);
+            HandleHighlightItems();
+            return newItem.Index;
+        }
+
+        public void HandleHighlightItems()
+        {
+            foreach (ListViewItem item in Items)
+            {
+                foreach (SmartScript smartScript in _smartScripts)
+                {
+                    if (item.Text == smartScript.entryorguid.ToString() && item.SubItems[2].Text == smartScript.id.ToString())
+                    {
+                        //! Try-catch has to be right here. Otherwise all items coming after an item that caused an exception
+                        //! will no longer be colored.
+                        try
+                        {
+                            item.BackColor = Constants.phaseColors[(SmartPhaseMasks)Enum.GetValues(typeof(SmartPhaseMasks)).GetValue(smartScript.event_phase_mask)];
+                            break;
+                        }
+                        catch (IndexOutOfRangeException)
+                        {
+
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
         }
 
         public void AddSmartScripts(List<SmartScript> scripts, bool listViewOnly = false)
@@ -126,6 +158,7 @@ namespace System.Windows.Forms
             }
 
             Items.AddRange(items.ToArray());
+            HandleHighlightItems();
         }
 
         public void RemoveSmartScript(SmartScript script)
@@ -235,6 +268,12 @@ namespace System.Windows.Forms
                 _excludedProperties.Add(propName);
 
             Init();
+        }
+
+        protected override void OnItemSelectionChanged(ListViewItemSelectionChangedEventArgs e)
+        {
+            HandleHighlightItems();
+            base.OnItemSelectionChanged(e);
         }
     }
 }
