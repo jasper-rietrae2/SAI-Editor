@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using SAI_Editor.Database.Classes;
 using SAI_Editor.Classes;
 using SAI_Editor;
+using SAI_Editor.Properties;
 
 namespace System.Windows.Forms
 {
@@ -65,7 +66,7 @@ namespace System.Windows.Forms
             Init();
         }
 
-        private void Init()
+        public void Init()
         {
             Items.Clear();
             Columns.Clear();
@@ -108,6 +109,9 @@ namespace System.Windows.Forms
 
         public void HandleHighlightItems()
         {
+            if (!Settings.Default.PhaseHighlighting)
+                return;
+
             foreach (ListViewItem item in Items)
             {
                 foreach (SmartScript smartScript in _smartScripts)

@@ -39,6 +39,7 @@ namespace SAI_Editor
             checkBoxShowTooltipsPermanently.Checked = Settings.Default.ShowTooltipsPermanently;
             checkBoxAutoGenerateComments.Checked = Settings.Default.GenerateComments;
             checkBoxCreateRevertQuery.Checked = Settings.Default.CreateRevertQuery;
+            checkBoxPhaseHighlighting.Checked = Settings.Default.PhaseHighlighting;
 
             textBoxAnimationSpeed.Text = Settings.Default.AnimationSpeed.ToString();
             textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
@@ -62,6 +63,7 @@ namespace SAI_Editor
 
             bool showTooltipsPermanently = Settings.Default.ShowTooltipsPermanently;
             bool generateComments = Settings.Default.GenerateComments;
+            bool phaseHighlighting = Settings.Default.PhaseHighlighting;
 
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             byte[] buffer = new byte[1024];
@@ -106,6 +108,7 @@ namespace SAI_Editor
             Settings.Default.ShowTooltipsPermanently = checkBoxShowTooltipsPermanently.Checked;
             Settings.Default.GenerateComments = checkBoxAutoGenerateComments.Checked;
             Settings.Default.CreateRevertQuery = checkBoxCreateRevertQuery.Checked;
+            Settings.Default.PhaseHighlighting = checkBoxPhaseHighlighting.Checked;
             Settings.Default.Save();
 
             if (newConnectionSuccesfull)
@@ -127,6 +130,9 @@ namespace SAI_Editor
             
             if (checkBoxShowTooltipsPermanently.Checked != showTooltipsPermanently)
                 ((MainForm)Owner).ExpandToShowPermanentTooltips(!checkBoxShowTooltipsPermanently.Checked);
+
+            if (checkBoxPhaseHighlighting.Checked != phaseHighlighting)
+                ((MainForm)Owner).listViewSmartScripts.Init();
         }
 
         private void buttonExitSettings_Click(object sender, EventArgs e)
@@ -168,6 +174,7 @@ namespace SAI_Editor
                 checkBoxShowTooltipsPermanently.Checked == Settings.Default.ShowTooltipsPermanently &&
                 checkBoxAutoGenerateComments.Checked == Settings.Default.GenerateComments &&
                 checkBoxCreateRevertQuery.Checked == Settings.Default.CreateRevertQuery &&
+                checkBoxPhaseHighlighting.Checked == Settings.Default.PhaseHighlighting &&
 
                 //! Check password last because it's the most 'expensive' check
                 textBoxPassword.Text == Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString())
@@ -196,6 +203,7 @@ namespace SAI_Editor
                     checkBoxShowTooltipsPermanently.Checked = false;
                     checkBoxAutoGenerateComments.Checked = false;
                     checkBoxCreateRevertQuery.Checked = false;
+                    checkBoxPhaseHighlighting.Checked = true;
                     break;
                 case 1: // ! 'Connection' tab
                     textBoxHost.Text = "";
@@ -286,11 +294,6 @@ namespace SAI_Editor
 
             if (SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
                 MessageBox.Show("Connection successful!", "Connection status", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void labelAnimationSpeed_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

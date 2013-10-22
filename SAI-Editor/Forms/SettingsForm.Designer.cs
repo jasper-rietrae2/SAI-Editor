@@ -61,6 +61,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonDefaultSettings = new System.Windows.Forms.Button();
+            this.checkBoxPhaseHighlighting = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -89,6 +90,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.checkBoxPhaseHighlighting);
             this.tabPageGeneral.Controls.Add(this.checkBoxCreateRevertQuery);
             this.tabPageGeneral.Controls.Add(this.checkBoxAutoGenerateComments);
             this.tabPageGeneral.Controls.Add(this.checkBoxShowTooltipsPermanently);
@@ -181,7 +183,6 @@
             this.labelAnimationSpeed.Size = new System.Drawing.Size(91, 13);
             this.labelAnimationSpeed.TabIndex = 7;
             this.labelAnimationSpeed.Text = "Animation speed: ";
-            this.labelAnimationSpeed.Click += new System.EventHandler(this.labelAnimationSpeed_Click);
             // 
             // trackBarAnimationSpeed
             // 
@@ -412,6 +413,16 @@
             this.buttonDefaultSettings.UseVisualStyleBackColor = true;
             this.buttonDefaultSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
+            // checkBoxPhaseHighlighting
+            // 
+            this.checkBoxPhaseHighlighting.AutoSize = true;
+            this.checkBoxPhaseHighlighting.Location = new System.Drawing.Point(253, 52);
+            this.checkBoxPhaseHighlighting.Name = "checkBoxPhaseHighlighting";
+            this.checkBoxPhaseHighlighting.Size = new System.Drawing.Size(203, 17);
+            this.checkBoxPhaseHighlighting.TabIndex = 10;
+            this.checkBoxPhaseHighlighting.Text = "Show a different color for each phase";
+            this.checkBoxPhaseHighlighting.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -475,6 +486,7 @@
         private System.Windows.Forms.CheckBox checkBoxShowTooltipsPermanently;
         private System.Windows.Forms.CheckBox checkBoxAutoGenerateComments;
         private System.Windows.Forms.CheckBox checkBoxCreateRevertQuery;
+        private System.Windows.Forms.CheckBox checkBoxPhaseHighlighting;
 
     }
 }
