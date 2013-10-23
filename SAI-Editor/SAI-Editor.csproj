@@ -65,9 +65,6 @@
     <Compile Include="Classes\SmartScriptListView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\SortableListView.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Classes\XConverter.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
