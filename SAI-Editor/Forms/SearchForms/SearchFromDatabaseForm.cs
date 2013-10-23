@@ -60,10 +60,7 @@ namespace SAI_Editor
             this.connectionString = connectionString;
             this.textBoxToChange = textBoxToChange;
             this.databaseSearchFormType = databaseSearchFormType;
-        }
 
-        private void SearchFromDatabaseForm_Load(object sender, EventArgs e)
-        {
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 800);
             textBoxCriteria.Text = textBoxToChange.Text;

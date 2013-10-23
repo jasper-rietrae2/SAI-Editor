@@ -30,10 +30,7 @@ namespace SAI_Editor
 
             this.textBoxToChange = textBoxToChange;
             listViewSelectableItems.Columns.Add("", 20, HorizontalAlignment.Left);
-        }
 
-        private void MultiSelectForm_Load(object sender, EventArgs e)
-        {
             int bitmask = XConverter.ToInt32(textBoxToChange.Text);
 
             listViewSelectableItems.Columns.Add(typeof(T).Name, 235, HorizontalAlignment.Left);

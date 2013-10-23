@@ -163,10 +163,7 @@ namespace SAI_Editor.SearchForms
                     listViewSelectableItems.Items.Add("SMARTAI_TEMPLATE_CAGED_NPC_PART"); // 5
                     break;
             }
-        }
 
-        private void SingleSelectForm_Load(object sender, EventArgs e)
-        {
             if (String.IsNullOrWhiteSpace(textBoxToChange.Text) || textBoxToChange.Text == "0")
                 listViewSelectableItems.Items[0].Selected = true;
             else

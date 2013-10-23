@@ -17,10 +17,7 @@ namespace SAI_Editor.Forms
         public RevertQueryForm()
         {
             InitializeComponent();
-        }
 
-        private void RevertQueryForm_Load(object sender, EventArgs e)
-        {
             calenderScriptsToRevert.TodayDate = DateTime.Now;
             FillListViewWithDate();
         }

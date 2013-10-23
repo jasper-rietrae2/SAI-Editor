@@ -15,10 +15,6 @@ namespace SAI_Editor
         public AreatriggersForm()
         {
             InitializeComponent();
-        }
-
-        private void AreatriggersForm_Load(object sender, EventArgs e)
-        {
             zoomPanImageBox1.Image = Image.FromFile(@"C:\Users\Sebastian\Dropbox\Public\6324.jpg");
         }
     }

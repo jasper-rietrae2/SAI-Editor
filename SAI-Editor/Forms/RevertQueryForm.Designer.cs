@@ -135,7 +135,6 @@
             this.Name = "RevertQueryForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select a script to revert to";
-            this.Load += new System.EventHandler(this.RevertQueryForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RevertQueryForm_KeyDown);
             this.listViewContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);

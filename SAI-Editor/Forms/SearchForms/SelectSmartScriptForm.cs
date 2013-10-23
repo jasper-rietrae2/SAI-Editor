@@ -26,10 +26,7 @@ namespace SAI_Editor
                 listBoxGuids.Items.Add(-smartScripts[0].entryorguid);
 
             listBoxGuids.SelectedIndex = 0;
-        }
 
-        private void SelectSmartScriptForm_Load(object sender, EventArgs e)
-        {
             foreach (ColumnHeader header in listViewSmartScripts.Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
 

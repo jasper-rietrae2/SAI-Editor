@@ -503,7 +503,7 @@ namespace SAI_Editor
             this.toolStripSeparator1,
             this.menuItemDeleteSelectedRowListView});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(233, 98);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(233, 76);
             // 
             // menuItemLoadSelectedEntry
             // 

@@ -96,7 +96,6 @@
             this.Name = "SqlOutputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Sql output";
-            this.Load += new System.EventHandler(this.SqlOutputForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SqlOutputForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.richTextBoxSqlOutput)).EndInit();
             this.ResumeLayout(false);

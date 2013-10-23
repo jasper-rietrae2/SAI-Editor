@@ -93,7 +93,6 @@
             this.Name = "SelectSmartScriptForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select a script to load";
-            this.Load += new System.EventHandler(this.SelectSmartScriptForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -32,10 +32,7 @@ namespace SAI_Editor
             this.connectionString = connectionString;
             this.sourceTypeToSearchFor = sourceTypeToSearchFor;
             textBoxCriteria.Text = startEntryString;
-        }
 
-        private void SearchForEntryForm_Load(object sender, EventArgs e)
-        {
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 800);
 

@@ -129,7 +129,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Search for something..";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchFromDatabaseForm_FormClosing);
-            this.Load += new System.EventHandler(this.SearchFromDatabaseForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchFromDatabaseForm_KeyDown);
             this.groupBoxSearchInfo.ResumeLayout(false);
             this.groupBoxSearchInfo.PerformLayout();

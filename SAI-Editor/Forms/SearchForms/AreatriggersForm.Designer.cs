@@ -47,7 +47,6 @@
             this.Controls.Add(this.zoomPanImageBox1);
             this.Name = "AreatriggersForm";
             this.Text = "AreatriggersForm";
-            this.Load += new System.EventHandler(this.AreatriggersForm_Load);
             this.ResumeLayout(false);
 
         }

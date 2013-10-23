@@ -18,10 +18,7 @@ namespace SAI_Editor
         public SettingsForm()
         {
             InitializeComponent();
-        }
 
-        private void SettingsForm_Load(object sender, EventArgs e)
-        {
             textBoxHost.Text = Settings.Default.Host;
             textBoxUsername.Text = Settings.Default.User;
             textBoxPassword.Text = Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();

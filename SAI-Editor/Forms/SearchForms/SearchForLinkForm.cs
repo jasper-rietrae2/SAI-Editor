@@ -24,10 +24,7 @@ namespace SAI_Editor
             this.smartScripts = smartScripts;
             this.indexOfLineToDisable = indexOfLineToDisable;
             this.textBoxToChange = textBoxToChange;
-        }
 
-        private void SearchForLinkForm_Load(object sender, EventArgs e)
-        {
             foreach (SmartScript smartScript in smartScripts)
                 listViewScripts.AddSmartScript(smartScript);
 
