@@ -6,21 +6,8 @@ using System.Linq;
 
 namespace SAI_Editor
 {
-    public enum MultiSelectFormType
-    {
-        MultiSelectFormTypePhaseMask = 0,
-        MultiSelectFormTypeEventFlag = 1,
-        MultiSelectFormTypeCastFlag = 2,
-        MultiSelectFormTypeUnitFlag = 3,
-        MultiSelectFormTypeUnitFlag2 = 4,
-        MultiSelectFormTypeGoFlag = 5,
-        MultiSelectFormTypeDynamicFlag = 6,
-        MultiSelectFormTypeNpcFlag = 7,
-    }
-
     public partial class MultiSelectForm<T> : Form where T : struct, IConvertible
     {
-
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly TextBox textBoxToChange = null;
 

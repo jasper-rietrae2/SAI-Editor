@@ -1838,7 +1838,7 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Respawn condition
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeRespawnType).ShowDialog(this);
+                    new SingleSelectForm<SmartScriptRespawnCondition>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
                 case SmartEvent.SMART_EVENT_SUMMONED_UNIT: //! Creature entry
@@ -1848,14 +1848,14 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_GO_STATE_CHANGED: //! Go state
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeGoState).ShowDialog(this);
+                    new SingleSelectForm<GoStates>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_GAME_EVENT_START: //! Game event entry
                 case SmartEvent.SMART_EVENT_GAME_EVENT_END: //! Game event entry
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_MOVEMENTINFORM: //! Motion type
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeMotionType).ShowDialog(this);
+                    new SingleSelectForm<MovementGeneratorType>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_ACCEPTED_QUEST: //! Quest id
                 case SmartEvent.SMART_EVENT_REWARD_QUEST: //! Quest id
@@ -1878,7 +1878,7 @@ namespace SAI_Editor
             {
                 case SmartEvent.SMART_EVENT_SPELLHIT: //! Spell school
                 case SmartEvent.SMART_EVENT_SPELLHIT_TARGET: //! Spell school
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSpellSchool).ShowDialog(this);
+                    new SingleSelectForm<SpellSchools>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Map
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap).ShowDialog(this);
@@ -2026,7 +2026,7 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_REACT_STATE:
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeReactState).ShowDialog(this);
+                    new SingleSelectForm<ReactStates>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SOUND:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSound).ShowDialog(this);
@@ -2040,12 +2040,12 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_GO_SET_LOOT_STATE:
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeGoState).ShowDialog(this);
+                    new SingleSelectForm<GoStates>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_POWER: //! Power type
                 case SmartAction.SMART_ACTION_ADD_POWER:
                 case SmartAction.SMART_ACTION_REMOVE_POWER:
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypePowerType).ShowDialog(this);
+                    new SingleSelectForm<PowerTypes>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SUMMON_GO:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry).ShowDialog(this);
@@ -2067,7 +2067,7 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_SHEATH:
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSheathState).ShowDialog(this);
+                    new SingleSelectForm<SheathState>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_ACTIVATE_TAXI:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath).ShowDialog(this);
@@ -2101,7 +2101,7 @@ namespace SAI_Editor
                     new MultiSelectForm<NpcFlags>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE:
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSmartAiTemplate).ShowDialog(this);
+                    new SingleSelectForm<SmartAiTemplates>(textBoxToChange).ShowDialog(this);
                     ParameterInstallAiTemplateChanged();
                     break;
             }
@@ -2200,7 +2200,7 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SUMMON_CREATURE:
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeSummonType).ShowDialog(this);
+                    new SingleSelectForm<TempSummonType>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                 case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
@@ -2244,7 +2244,7 @@ namespace SAI_Editor
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_CROSS_CAST:
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeTargetType).ShowDialog(this);
+                    new SingleSelectForm<SmartTarget>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                     new MultiSelectForm<SmartPhaseMasks>(textBoxToChange).ShowDialog(this);
@@ -2307,7 +2307,7 @@ namespace SAI_Editor
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
                 case SmartAction.SMART_ACTION_WP_START:
-                    new SingleSelectForm(textBoxToChange, SingleSelectFormType.SingleSelectFormTypeReactState).ShowDialog(this);
+                    new SingleSelectForm<ReactStates>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                     new MultiSelectForm<SmartPhaseMasks>(textBoxToChange).ShowDialog(this);

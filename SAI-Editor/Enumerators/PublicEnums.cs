@@ -476,4 +476,79 @@
         SMART_EVENT_PHASE_5                 = 0x10,
         SMART_EVENT_PHASE_6                 = 0x20,
     }
+
+    public enum PowerTypes
+    {
+        POWER_MANA                          = 0,
+        POWER_RAGE                          = 1,
+        POWER_FOCUS                         = 2,
+        POWER_ENERGY                        = 3,
+        POWER_HAPPINESS                     = 4,
+        POWER_RUNE                          = 5,
+        POWER_RUNIC_POWER                   = 6,
+        //MAX_POWERS                          = 7,
+        //POWER_ALL                           = 127,    // default for class?
+        //POWER_HEALTH                        = 0xFFFFFFFE    // (-2 as signed value)
+        POWER_HEALTH = -2,
+    }
+
+    public enum GoStates
+    {
+        GO_STATE_NOT_READY                  = 0,
+        GO_STATE_READY                      = 1,
+        GO_STATE_ACTIVATED                  = 2,
+        GO_STATE_DEACTIVATED                = 3,
+    }
+
+    enum MovementGeneratorType
+    {
+        IDLE_MOTION_TYPE      = 0,                              // IdleMovementGenerator.h
+        RANDOM_MOTION_TYPE    = 1,                              // RandomMovementGenerator.h
+        WAYPOINT_MOTION_TYPE  = 2,                              // WaypointMovementGenerator.h
+        MAX_DB_MOTION_TYPE    = 3,                              // *** this and below motion types can't be set in DB.
+        ANIMAL_RANDOM_MOTION_TYPE = MAX_DB_MOTION_TYPE,         // AnimalRandomMovementGenerator.h
+        CONFUSED_MOTION_TYPE  = 4,                              // ConfusedMovementGenerator.h
+        CHASE_MOTION_TYPE     = 5,                              // TargetedMovementGenerator.h
+        HOME_MOTION_TYPE      = 6,                              // HomeMovementGenerator.h
+        FLIGHT_MOTION_TYPE    = 7,                              // WaypointMovementGenerator.h
+        POINT_MOTION_TYPE     = 8,                              // PointMovementGenerator.h
+        FLEEING_MOTION_TYPE   = 9,                              // FleeingMovementGenerator.h
+        DISTRACT_MOTION_TYPE  = 10,                             // IdleMovementGenerator.h
+        ASSISTANCE_MOTION_TYPE= 11,                             // PointMovementGenerator.h (first part of flee for assistance)
+        ASSISTANCE_DISTRACT_MOTION_TYPE = 12,                   // IdleMovementGenerator.h (second part of flee for assistance)
+        TIMED_FLEEING_MOTION_TYPE = 13,                         // FleeingMovementGenerator.h (alt.second part of flee for assistance)
+        FOLLOW_MOTION_TYPE    = 14,
+        ROTATE_MOTION_TYPE    = 15,
+        EFFECT_MOTION_TYPE    = 16,
+    }
+
+    enum SpellSchools
+    {
+        SPELL_SCHOOL_NORMAL                 = 0,
+        SPELL_SCHOOL_HOLY                   = 1,
+        SPELL_SCHOOL_FIRE                   = 2,
+        SPELL_SCHOOL_NATURE                 = 3,
+        SPELL_SCHOOL_FROST                  = 4,
+        SPELL_SCHOOL_SHADOW                 = 5,
+        SPELL_SCHOOL_ARCANE                 = 6
+    }
+
+    enum SheathState
+    {
+        SHEATH_STATE_UNARMED  = 0,                              // non prepared weapon
+        SHEATH_STATE_MELEE    = 1,                              // prepared melee weapon
+        SHEATH_STATE_RANGED   = 2                               // prepared ranged weapon
+    }
+
+    enum TempSummonType
+    {
+        TEMPSUMMON_TIMED_OR_DEAD_DESPAWN       = 1,             // despawns after a specified time OR when the creature disappears
+        TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN     = 2,             // despawns after a specified time OR when the creature dies
+        TEMPSUMMON_TIMED_DESPAWN               = 3,             // despawns after a specified time
+        TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT = 4,             // despawns after a specified time after the creature is out of combat
+        TEMPSUMMON_CORPSE_DESPAWN              = 5,             // despawns instantly after death
+        TEMPSUMMON_CORPSE_TIMED_DESPAWN        = 6,             // despawns after a specified time after death
+        TEMPSUMMON_DEAD_DESPAWN                = 7,             // despawns when the creature disappears
+        TEMPSUMMON_MANUAL_DESPAWN              = 8              // despawns when UnSummon() is called
+    }
 }

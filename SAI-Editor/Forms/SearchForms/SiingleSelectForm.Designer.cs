@@ -1,6 +1,8 @@
-﻿namespace SAI_Editor.SearchForms
+﻿using System;
+
+namespace SAI_Editor.SearchForms
 {
-    partial class SingleSelectForm
+    partial class SingleSelectForm<T> where T : struct, IConvertible
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +30,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SingleSelectForm));
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonContinue = new System.Windows.Forms.Button();
             this.listViewSelectableItems = new System.Windows.Forms.ListView();
@@ -64,6 +65,7 @@
             this.listViewSelectableItems.TabIndex = 4;
             this.listViewSelectableItems.UseCompatibleStateImageBehavior = false;
             this.listViewSelectableItems.View = System.Windows.Forms.View.Details;
+            this.listViewSelectableItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSelectableItems_ColumnClick);
             this.listViewSelectableItems.SelectedIndexChanged += new System.EventHandler(this.listViewSelectableItems_SelectedIndexChanged);
             this.listViewSelectableItems.DoubleClick += new System.EventHandler(this.listViewSelectableItems_DoubleClick);
             // 
@@ -76,7 +78,6 @@
             this.Controls.Add(this.buttonContinue);
             this.Controls.Add(this.listViewSelectableItems);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "SingleSelectForm";
