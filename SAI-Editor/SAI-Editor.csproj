@@ -65,6 +65,7 @@
     <Compile Include="Classes\SmartScriptListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\SortableListView.cs" />
     <Compile Include="Classes\XConverter.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
@@ -127,7 +128,7 @@
     <Compile Include="Forms\SqlOutputForm.Designer.cs">
       <DependentUpon>SqlOutputForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\XListView.cs">
+    <Compile Include="Classes\ForceSelectListView.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />

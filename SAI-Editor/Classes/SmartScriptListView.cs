@@ -13,7 +13,7 @@ using System.Drawing;
 
 namespace System.Windows.Forms
 {
-    public class SmartScriptListView : XListView
+    public class SmartScriptListView : ForceSelectListView
     {
         private List<SmartScript> _smartScripts = new List<SmartScript>();
         private List<string> _excludedProperties = new List<string>();
