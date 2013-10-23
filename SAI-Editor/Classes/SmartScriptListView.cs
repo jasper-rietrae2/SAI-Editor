@@ -11,43 +11,13 @@ using SAI_Editor;
 using SAI_Editor.Properties;
 using System.Drawing;
 
-namespace System.Windows.Forms
+namespace SAI_Editor.Classes
 {
     public class SmartScriptListView : ForceSelectListView
     {
         private List<SmartScript> _smartScripts = new List<SmartScript>();
         private List<string> _excludedProperties = new List<string>();
         private readonly PropertyInfo[] _pinfo;
-
-        public List<SmartScript> SmartScripts
-        {
-            get
-            {
-                return _smartScripts;
-            }
-        }
-
-        public SmartScript SelectedSmartScript
-        {
-            get
-            {
-                if (SelectedItems.Count > 0)
-                    foreach (SmartScript smartScript in _smartScripts)
-                        if (smartScript.entryorguid.ToString() == SelectedItems[0].SubItems[0].Text && smartScript.id.ToString() == SelectedItems[0].SubItems[2].Text)
-                            return smartScript;
-
-                return null;
-            }
-        }
-
-        public SmartScript GetSmartScript(int entryorguid, int id)
-        {
-            foreach (SmartScript smartScript in _smartScripts)
-                if (smartScript.entryorguid == entryorguid && smartScript.id == id)
-                    return smartScript;
-
-            return null;
-        }
 
         public SmartScriptListView()
         {
@@ -85,6 +55,36 @@ namespace System.Windows.Forms
 
             foreach (ColumnHeader header in Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        public List<SmartScript> SmartScripts
+        {
+            get
+            {
+                return _smartScripts;
+            }
+        }
+
+        public SmartScript SelectedSmartScript
+        {
+            get
+            {
+                if (SelectedItems.Count > 0)
+                    foreach (SmartScript smartScript in _smartScripts)
+                        if (smartScript.entryorguid.ToString() == SelectedItems[0].SubItems[0].Text && smartScript.id.ToString() == SelectedItems[0].SubItems[2].Text)
+                            return smartScript;
+
+                return null;
+            }
+        }
+
+        public SmartScript GetSmartScript(int entryorguid, int id)
+        {
+            foreach (SmartScript smartScript in _smartScripts)
+                if (smartScript.entryorguid == entryorguid && smartScript.id == id)
+                    return smartScript;
+
+            return null;
         }
 
         public int AddSmartScript(SmartScript script, bool listViewOnly = false)
