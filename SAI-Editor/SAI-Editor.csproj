@@ -172,7 +172,7 @@
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\TooltipHelper.cs" />
-    <Compile Include="Classes\XToolTip.cs">
+    <Compile Include="Classes\DetailedToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
     <EmbeddedResource Include="Forms\AboutForm.resx">

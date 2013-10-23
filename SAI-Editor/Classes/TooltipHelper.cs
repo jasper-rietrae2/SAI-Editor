@@ -10,24 +10,24 @@ namespace SAI_Editor
 {
     class ToolTipHelper
     {
-        private static readonly Dictionary<string, XToolTip> tooltips = new Dictionary<string, XToolTip>();
+        private static readonly Dictionary<string, DetailedToolTip> tooltips = new Dictionary<string, DetailedToolTip>();
 
         public ToolTipHelper()
         {
 
         }
 
-        public static XToolTip GetControlToolTip(Control control)
+        public static DetailedToolTip GetControlToolTip(Control control)
         {
             if (tooltips.ContainsKey(control.Name))
                 return tooltips[control.Name];
 
-            XToolTip tooltip = new XToolTip();
+            DetailedToolTip tooltip = new DetailedToolTip();
             tooltips.Add(control.Name, tooltip);
             return tooltip;
         }
 
-        public static XToolTip GetExistingToolTip(Control control)
+        public static DetailedToolTip GetExistingToolTip(Control control)
         {
             if (tooltips.ContainsKey(control.Name))
                 return tooltips[control.Name];
@@ -37,7 +37,7 @@ namespace SAI_Editor
 
         public static void DisableOrEnableAllToolTips(bool enable)
         {
-            foreach (XToolTip toolTip in tooltips.Values)
+            foreach (DetailedToolTip toolTip in tooltips.Values)
                 toolTip.Active = enable;
         }
     }

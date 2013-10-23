@@ -1160,7 +1160,7 @@ namespace SAI_Editor
         {
             if (String.IsNullOrWhiteSpace(title) || String.IsNullOrWhiteSpace(text))
             {
-                XToolTip toolTipExistent = ToolTipHelper.GetExistingToolTip(control);
+                DetailedToolTip toolTipExistent = ToolTipHelper.GetExistingToolTip(control);
 
                 if (toolTipExistent != null)
                     toolTipExistent.Active = false;
@@ -1168,7 +1168,7 @@ namespace SAI_Editor
                 return;
             }
 
-            XToolTip toolTip = ToolTipHelper.GetControlToolTip(control);
+            DetailedToolTip toolTip = ToolTipHelper.GetControlToolTip(control);
             toolTip.ToolTipIcon = icon;
             toolTip.ToolTipTitle = title;
             toolTip.IsBalloon = isBallon;
