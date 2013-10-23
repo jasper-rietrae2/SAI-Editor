@@ -11,7 +11,6 @@ namespace SAI_Editor.Classes
     {
         public static List<Color> phaseColors = new List<Color>()
         {
-            { Color.White },
             { Color.Chartreuse },
             { Color.LightSkyBlue },
             { Color.Thistle },

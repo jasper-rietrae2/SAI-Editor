@@ -118,6 +118,9 @@ namespace SAI_Editor.Classes
 
             foreach (SmartScript smartScript in _smartScripts)
             {
+                if (smartScript.event_phase_mask == 0)
+                    continue;
+
                 if (!smartScriptsPhases.ContainsKey(smartScript.event_phase_mask))
                 {
                     List<SmartScript> newSmartScriptList = new List<SmartScript>();
