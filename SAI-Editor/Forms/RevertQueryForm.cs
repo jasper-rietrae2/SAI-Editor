@@ -58,6 +58,12 @@ namespace SAI_Editor.Forms
             string fileName = "Reverts\\" + listViewScripts.SelectedItems[0].Text + ".sql";
             fileName = fileName.Replace(":", ";");
 
+            if (!File.Exists(fileName))
+            {
+                MessageBox.Show("The revert query could not be found!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (await SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(File.ReadAllText(fileName)))
                 MessageBox.Show("The query has been executed succesfully!", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
