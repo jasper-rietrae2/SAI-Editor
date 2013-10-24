@@ -147,7 +147,12 @@ namespace SAI_Editor.Forms
                 Directory.CreateDirectory("Reverts");
 
             filename = filename.Replace(":", ";");
-            File.WriteAllText(filename, revertQuery);
+            File.Create(filename);
+
+            if (File.Exists(filename))
+                File.WriteAllText(filename, revertQuery);
+            else
+                MessageBox.Show("A revert query could not be generated; the file was unable to be created.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private string GetSourceTypeString(SourceTypes sourceType)
