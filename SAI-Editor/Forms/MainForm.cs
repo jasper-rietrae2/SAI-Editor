@@ -75,7 +75,7 @@ namespace SAI_Editor
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
         public int lastSmartScriptIdOfScript = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
-        private bool runningConstructor = false;
+        private bool runningConstructor = false, canGenerateNewComment = true;
 
         public MainForm()
         {
@@ -868,6 +868,7 @@ namespace SAI_Editor
         {
             try
             {
+                canGenerateNewComment = false;
                 SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
 
                 if (Settings.Default.ChangeStaticInfo)
@@ -956,6 +957,7 @@ namespace SAI_Editor
                 textBoxComments.Text = selectedScript.comment;
 
                 AdjustAllParameterFields(event_type, action_type, target_type);
+                canGenerateNewComment = true;
             }
             catch (Exception ex)
             {
@@ -3214,8 +3216,8 @@ namespace SAI_Editor
                 }
             }
 
-            string newComment = await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, false, smartScriptLink);
-
+            string newComment = canGenerateNewComment ? await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, true, smartScriptLink) : selectedScript.comment;
+            
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
