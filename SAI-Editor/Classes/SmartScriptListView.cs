@@ -257,6 +257,7 @@ namespace SAI_Editor.Classes
             }
 
             _smartScripts[_smartScripts.IndexOf(GetSmartScript(script.entryorguid, script.id))] = script;
+            HandleHighlightItems();
         }
 
         public void ReplaceData(List<SmartScript> scripts, List<string> exProps = null)
