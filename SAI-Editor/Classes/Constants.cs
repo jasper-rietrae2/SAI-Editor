@@ -11,7 +11,7 @@ namespace SAI_Editor.Classes
     {
         public static List<Color> phaseColors = new List<Color>()
         {
-            { Color.Chartreuse },
+            { Color.FromArgb(255, 206, 240, 125) }, // lime green
             { Color.LightSkyBlue },
             { Color.Thistle },
             { Color.LightPink },
@@ -22,7 +22,9 @@ namespace SAI_Editor.Classes
             { Color.Linen },
             { Color.LightSteelBlue },
             { Color.OldLace },
-            { Color.PaleGreen }
+            { Color.PaleGreen },
+            { Color.FromArgb(255, 200, 162, 255) }, // purple
+            { Color.FromArgb(255, 193, 193, 193) } // grey
         };
     }
 }
