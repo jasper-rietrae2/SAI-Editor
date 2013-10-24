@@ -29,7 +29,10 @@ namespace SAI_Editor.Forms
             richTextBoxSqlOutput.Text = sqlOutput;
             this.revertQuery = revertQuery;
             this.entriesOrGuidsAndSourceTypes = entriesOrGuidsAndSourceTypes;
+        }
 
+        private void SqlOutputForm_Load(object sender, EventArgs e)
+        {
             this.originalEntryOrGuidAndSourceType = ((MainForm)Owner).originalEntryOrGuidAndSourceType;
 
             richTextBoxSqlOutput.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
