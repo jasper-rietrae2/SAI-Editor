@@ -1432,9 +1432,9 @@ namespace SAI_Editor
                     string errorMessage = "This areatrigger already has its ";
 
                     if (aiName != "SmartTrigger")
-                        errorMessage += "ScriptName set to " + aiName;
+                        errorMessage += "ScriptName set to '" + aiName + "'";
                     else
-                        errorMessage += "AIName set! Do you want to load it instead?";
+                        errorMessage += "AIName set (for SmartAI)! Do you want to load it instead?";
 
                     DialogResult dialogResult = MessageBox.Show(errorMessage, "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
