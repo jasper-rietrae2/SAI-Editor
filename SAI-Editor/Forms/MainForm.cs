@@ -1408,7 +1408,18 @@ namespace SAI_Editor
                 ResetFieldsToDefault();
             }
 
-            int entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
+            int entryorguid = 0;
+
+            try
+            {
+                entryorguid = Int32.Parse(textBoxEntryOrGuid.Text);
+            }
+            catch (OverflowException)
+            {
+                MessageBox.Show("The entryorguid is either too big or too small.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             int source_type = (int)GetSourceTypeByIndex();
             string sourceTypeString = GetSourceTypeString((SourceTypes)source_type);
             string aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(entryorguid, source_type);
