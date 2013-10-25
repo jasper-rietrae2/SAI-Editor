@@ -176,6 +176,7 @@ namespace SAI_Editor
             this.pictureBoxPermanentTooltip = new System.Windows.Forms.PictureBox();
             this.panelPermanentTooltipParameters = new System.Windows.Forms.Panel();
             this.labelPermanentTooltipTextParameters = new System.Windows.Forms.Label();
+            this.labelPermanentTooltipParameterTitleTypes = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonNewLine = new System.Windows.Forms.Button();
             this.buttonGenerateSql = new System.Windows.Forms.Button();
@@ -1967,7 +1968,7 @@ namespace SAI_Editor
             this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTitleTypes);
             this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTextTypes);
             this.panelPermanentTooltipTypes.Controls.Add(this.pictureBoxPermanentTooltip);
-            this.panelPermanentTooltipTypes.Location = new System.Drawing.Point(12, 405);
+            this.panelPermanentTooltipTypes.Location = new System.Drawing.Point(12, 396);
             this.panelPermanentTooltipTypes.Name = "panelPermanentTooltipTypes";
             this.panelPermanentTooltipTypes.Size = new System.Drawing.Size(915, 30);
             this.panelPermanentTooltipTypes.TabIndex = 25;
@@ -1977,18 +1978,18 @@ namespace SAI_Editor
             this.labelPermanentTooltipTitleTypes.AutoSize = true;
             this.labelPermanentTooltipTitleTypes.Location = new System.Drawing.Point(26, 1);
             this.labelPermanentTooltipTitleTypes.Name = "labelPermanentTooltipTitleTypes";
-            this.labelPermanentTooltipTitleTypes.Size = new System.Drawing.Size(144, 13);
+            this.labelPermanentTooltipTitleTypes.Size = new System.Drawing.Size(181, 13);
             this.labelPermanentTooltipTitleTypes.TabIndex = 31;
-            this.labelPermanentTooltipTitleTypes.Text = "SMART_EVENT_SPELLHIT";
+            this.labelPermanentTooltipTitleTypes.Text = "Event type, action type or target type";
             // 
             // labelPermanentTooltipTextTypes
             // 
             this.labelPermanentTooltipTextTypes.AutoSize = true;
             this.labelPermanentTooltipTextTypes.Location = new System.Drawing.Point(26, 15);
             this.labelPermanentTooltipTextTypes.Name = "labelPermanentTooltipTextTypes";
-            this.labelPermanentTooltipTextTypes.Size = new System.Drawing.Size(153, 13);
+            this.labelPermanentTooltipTextTypes.Size = new System.Drawing.Size(144, 13);
             this.labelPermanentTooltipTextTypes.TabIndex = 30;
-            this.labelPermanentTooltipTextTypes.Text = "On creature struck by a spell id";
+            this.labelPermanentTooltipTextTypes.Text = "Event/action/target type text";
             // 
             // pictureBoxPermanentTooltip
             // 
@@ -2004,25 +2005,35 @@ namespace SAI_Editor
             this.panelPermanentTooltipParameters.BackColor = System.Drawing.Color.White;
             this.panelPermanentTooltipParameters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelPermanentTooltipParameters.Controls.Add(this.labelPermanentTooltipTextParameters);
+            this.panelPermanentTooltipParameters.Controls.Add(this.labelPermanentTooltipParameterTitleTypes);
             this.panelPermanentTooltipParameters.Controls.Add(this.pictureBox1);
-            this.panelPermanentTooltipParameters.Location = new System.Drawing.Point(12, 439);
+            this.panelPermanentTooltipParameters.Location = new System.Drawing.Point(12, 428);
             this.panelPermanentTooltipParameters.Name = "panelPermanentTooltipParameters";
-            this.panelPermanentTooltipParameters.Size = new System.Drawing.Size(915, 23);
+            this.panelPermanentTooltipParameters.Size = new System.Drawing.Size(915, 30);
             this.panelPermanentTooltipParameters.TabIndex = 25;
             // 
             // labelPermanentTooltipTextParameters
             // 
             this.labelPermanentTooltipTextParameters.AutoSize = true;
-            this.labelPermanentTooltipTextParameters.Location = new System.Drawing.Point(26, 4);
+            this.labelPermanentTooltipTextParameters.Location = new System.Drawing.Point(26, 15);
             this.labelPermanentTooltipTextParameters.Name = "labelPermanentTooltipTextParameters";
             this.labelPermanentTooltipTextParameters.Size = new System.Drawing.Size(75, 13);
             this.labelPermanentTooltipTextParameters.TabIndex = 30;
             this.labelPermanentTooltipTextParameters.Text = "Parameter info";
             // 
+            // labelPermanentTooltipParameterTitleTypes
+            // 
+            this.labelPermanentTooltipParameterTitleTypes.AutoSize = true;
+            this.labelPermanentTooltipParameterTitleTypes.Location = new System.Drawing.Point(26, 2);
+            this.labelPermanentTooltipParameterTitleTypes.Name = "labelPermanentTooltipParameterTitleTypes";
+            this.labelPermanentTooltipParameterTitleTypes.Size = new System.Drawing.Size(181, 13);
+            this.labelPermanentTooltipParameterTitleTypes.TabIndex = 47;
+            this.labelPermanentTooltipParameterTitleTypes.Text = "Event type, action type or target type";
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::SAI_Editor.Properties.Resources.permanent_tooltip_icon;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(14, 14);
             this.pictureBox1.TabIndex = 29;
@@ -2293,6 +2304,7 @@ namespace SAI_Editor
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateCommentListView;
         private System.Windows.Forms.ToolStripMenuItem menuItemLoadSelectedEntry;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Label labelPermanentTooltipParameterTitleTypes;
     }
 }
 

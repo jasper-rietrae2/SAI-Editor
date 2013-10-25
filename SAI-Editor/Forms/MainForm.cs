@@ -34,7 +34,7 @@ namespace SAI_Editor
         WidthToExpandTo = 957,
         HeightToExpandTo = 505,
 
-        ListViewHeightContract = 57,
+        ListViewHeightContract = 65,
     }
 
     internal enum MaxValues
@@ -2453,7 +2453,40 @@ namespace SAI_Editor
             string toolTipOfType = SAI_Editor_Manager.Instance.GetParameterTooltipById(comboBoxToTarget.SelectedIndex, paramId, scriptTypeId);
 
             if (!String.IsNullOrWhiteSpace(toolTipOfType))
+            {
                 labelPermanentTooltipTextParameters.Text = toolTipOfType;
+                labelPermanentTooltipParameterTitleTypes.Text = comboBoxToTarget.SelectedItem + " - " + labelToTarget.Text;
+            }
+        }
+
+        private int GetSelectedIndexByScriptTypeId(ScriptTypeId scriptTypeId)
+        {
+            switch (scriptTypeId)
+            {
+                case ScriptTypeId.ScriptTypeEvent:
+                    return comboBoxEventType.SelectedIndex;
+                case ScriptTypeId.ScriptTypeAction:
+                    return comboBoxActionType.SelectedIndex;
+                case ScriptTypeId.ScriptTypeTarget:
+                    return comboBoxTargetType.SelectedIndex;
+            }
+
+            return 0;
+        }
+
+        private string GetSelectedItemByScriptTypeId(ScriptTypeId scriptTypeId)
+        {
+            switch (scriptTypeId)
+            {
+                case ScriptTypeId.ScriptTypeEvent:
+                    return comboBoxEventType.SelectedItem.ToString();
+                case ScriptTypeId.ScriptTypeAction:
+                    return comboBoxActionType.SelectedItem.ToString();
+                case ScriptTypeId.ScriptTypeTarget:
+                    return comboBoxTargetType.SelectedItem.ToString();
+            }
+
+            return String.Empty;
         }
 
         private void labelEventParam1_MouseEnter(object sender, EventArgs e)
