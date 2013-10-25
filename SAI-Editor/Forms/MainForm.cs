@@ -3365,9 +3365,9 @@ namespace SAI_Editor
             int newNumber = XConverter.ToInt32(textBoxEventType.Text);
 
             if (e.Delta > 0)
-                newNumber++;
-            else
                 newNumber--;
+            else
+                newNumber++;
 
             if (newNumber < 0)
                 newNumber = 0;
@@ -3383,9 +3383,9 @@ namespace SAI_Editor
             int newNumber = XConverter.ToInt32(textBoxActionType.Text);
 
             if (e.Delta > 0)
-                newNumber++;
-            else
                 newNumber--;
+            else
+                newNumber++;
 
             if (newNumber < 0)
                 newNumber = 0;
@@ -3401,9 +3401,9 @@ namespace SAI_Editor
             int newNumber = XConverter.ToInt32(textBoxTargetType.Text);
 
             if (e.Delta > 0)
-                newNumber++;
-            else
                 newNumber--;
+            else
+                newNumber++;
 
             if (newNumber < 0)
                 newNumber = 0;
