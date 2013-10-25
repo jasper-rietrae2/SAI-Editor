@@ -1587,7 +1587,16 @@ namespace SAI_Editor
             }
             else
             {
-                originalEntryOrGuidAndSourceType.entryOrGuid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
+                try
+                {
+                    originalEntryOrGuidAndSourceType.entryOrGuid = Int32.Parse(textBoxEntryOrGuid.Text);
+                }
+                catch (OverflowException)
+                {
+                    MessageBox.Show("The entryorguid is either too big or too small.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 originalEntryOrGuidAndSourceType.sourceType = GetSourceTypeByIndex();
             }
 

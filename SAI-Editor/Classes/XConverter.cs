@@ -21,6 +21,7 @@ namespace SAI_Editor.Classes
             UInt32.TryParse(str, out output);
             return output;
         }
+
         public static Int32 ToInt32(object str)
         {
             int output;
@@ -32,6 +33,20 @@ namespace SAI_Editor.Classes
         {
             uint output;
             UInt32.TryParse(str.ToString(), out output);
+            return output;
+        }
+
+        public static long ToLong(string str)
+        {
+            long output;
+            long.TryParse(str, out output);
+            return output;
+        }
+
+        public static long Tolong(object str)
+        {
+            long output;
+            long.TryParse(str.ToString(), out output);
             return output;
         }
     }
