@@ -11,11 +11,11 @@ namespace SAI_Editor.Classes
 {
     public class DetailedToolTip : ToolTip
     {
-        public void SetToolTipText(Control control, string caption)
+        public void SetToolTipText(Control control, string caption, int maxLength = 80)
         {
             string newCaption = "";
 
-            if (caption.Length > 80)
+            if (caption.Length > maxLength)
             {
                 string[] splitCaption = caption.Split(Convert.ToChar(" "));
 
@@ -29,7 +29,7 @@ namespace SAI_Editor.Classes
                     totalLength += splitCaption[i].Length + 1;
                     wordsSoFar.Add(splitCaption[i]);
 
-                    if (totalLength > 60 || i == splitCaption.Length - 1)
+                    if (totalLength > maxLength || i == splitCaption.Length - 1)
                     {
                         List<string> wordsSoFarCopy = new List<string>(wordsSoFar);
                         captionChunks.Add(wordsSoFarCopy);
