@@ -153,6 +153,10 @@ namespace SAI_Editor.Classes
                             {
 
                             }
+                            catch (InvalidOperationException)
+                            {
+
+                            }
                             catch (Exception ex)
                             {
                                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);

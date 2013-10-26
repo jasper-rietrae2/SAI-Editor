@@ -27,9 +27,9 @@ namespace SAI_Editor.Classes
             { Color.FromArgb(255, 193, 193, 193) }, // grey
             { Color.FromArgb(255, 240, 128, 128) }, // light coral (red-ish)
             { Color.FromArgb(255, 173, 255, 47) },  // green yellow
-            { Color.FromArgb(255, 152, 251, 152) }, // pale green
             { Color.FromArgb(255, 102, 205, 170) }, // medium aqua marine
             { Color.FromArgb(255, 175, 238, 238) }, // pale turquoise
+            { Color.FromArgb(255, 152, 251, 152) }, // pale green
             { Color.FromArgb(255, 100, 149, 237) }  // corn flower blue
         };
     }
