@@ -147,7 +147,6 @@ namespace SAI_Editor.Classes
                             {
                                 item.BackColor = phaseColors.First();
                                 foundColor = true;
-                                break;
                             }
                             catch (IndexOutOfRangeException)
                             {
@@ -161,6 +160,8 @@ namespace SAI_Editor.Classes
                             {
                                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
+
+                            break;
                         }
                     }
                 }
