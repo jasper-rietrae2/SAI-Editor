@@ -329,5 +329,24 @@ namespace SAI_Editor
         {
             return aiName == "SmartAI" || aiName == "SmartGameObjectAI";
         }
+
+        public List<EntryOrGuidAndSourceType> GetUniqueEntriesOrGuidsAndSourceTypes(List<SmartScript> smartScripts)
+        {
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = new List<EntryOrGuidAndSourceType>();
+
+            foreach (SmartScript smartScript in smartScripts)
+            {
+                EntryOrGuidAndSourceType entryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
+                entryOrGuidAndSourceType.entryOrGuid = smartScript.entryorguid;
+                entryOrGuidAndSourceType.sourceType = (SourceTypes)smartScript.source_type;
+
+                if (entriesOrGuidsAndSourceTypes.Contains(entryOrGuidAndSourceType))
+                    continue;
+
+                entriesOrGuidsAndSourceTypes.Add(entryOrGuidAndSourceType);
+            }
+
+            return entriesOrGuidsAndSourceTypes;
+        }
     }
 }

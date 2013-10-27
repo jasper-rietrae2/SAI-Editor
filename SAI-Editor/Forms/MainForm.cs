@@ -2917,7 +2917,7 @@ namespace SAI_Editor
         {
             string generatedSql = String.Empty;
 
-            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
 
             string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
             string sourceSet = originalEntryOrGuidAndSourceType.entryOrGuid < 0 ? "@GUID" : "@ENTRY";
@@ -3075,7 +3075,7 @@ namespace SAI_Editor
         private async Task<string> GenerateSmartAiRevertQuery()
         {
             string revertQuery = String.Empty;
-            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
 
             foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in entriesOrGuidsAndSourceTypes)
             {
@@ -3131,25 +3131,6 @@ namespace SAI_Editor
             }
 
             return revertQuery;
-        }
-
-        private List<EntryOrGuidAndSourceType> GetUniqueEntriesOrGuidsAndSourceTypes(List<SmartScript> smartScripts)
-        {
-            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = new List<EntryOrGuidAndSourceType>();
-
-            foreach (SmartScript smartScript in smartScripts)
-            {
-                EntryOrGuidAndSourceType entryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
-                entryOrGuidAndSourceType.entryOrGuid = smartScript.entryorguid;
-                entryOrGuidAndSourceType.sourceType = (SourceTypes)smartScript.source_type;
-
-                if (entriesOrGuidsAndSourceTypes.Contains(entryOrGuidAndSourceType))
-                    continue;
-
-                entriesOrGuidsAndSourceTypes.Add(entryOrGuidAndSourceType);
-            }
-
-            return entriesOrGuidsAndSourceTypes;
         }
 
         private void SetPictureBoxEnabled(PictureBox pictureBox, Image image, bool enable)
