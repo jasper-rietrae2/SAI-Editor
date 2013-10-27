@@ -13,11 +13,11 @@ namespace SAI_Editor.Classes
         {
             { Color.FromArgb(255, 206, 240, 125) }, // lime green
             { Color.LightSkyBlue },
-            { Color.Thistle },
+            { Color.Tomato },
             //{ Color.LightPink }, //! A lot like Thistle
             { Color.Khaki },
             { Color.LightCyan },
-            { Color.Beige },
+            //{ Color.Beige },
             { Color.Aquamarine },
             //{ Color.Linen }, //! A lot like Beige (almost identical)
             { Color.LightSteelBlue },

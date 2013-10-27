@@ -131,11 +131,11 @@ namespace SAI_Editor.Classes
                     smartScriptsPhases[smartScript.event_phase_mask].Add(smartScript);
             }
 
-            foreach (List<SmartScript> smartScripts in smartScriptsPhases.Values)
+            foreach (List<SmartScript> smartScriptsPhaseList in smartScriptsPhases.Values)
             {
                 bool foundColor = false;
 
-                foreach (SmartScript smartScript in smartScripts)
+                foreach (SmartScript smartScript in smartScriptsPhaseList)
                 {
                     foreach (ListViewItem item in Items)
                     {
