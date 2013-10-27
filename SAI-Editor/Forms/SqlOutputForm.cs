@@ -128,7 +128,7 @@ namespace SAI_Editor.Forms
             //! [Creature] [33303 - 3330300] 3-10-2013 15.32.40.sql
             string filename = @"Reverts\[" + GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType) + "] [";
 
-            if (entriesOrGuidsAndSourceTypes != null && entriesOrGuidsAndSourceTypes.Count > 1)
+            if (entriesOrGuidsAndSourceTypes != null)
             {
                 for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
                 {
