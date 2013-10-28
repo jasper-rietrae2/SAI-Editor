@@ -19,7 +19,7 @@ namespace SAI_Editor.Forms
     public partial class SqlOutputForm : Form
     {
         private EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
-        private readonly string revertQuery;
+        private readonly string revertQuery, originalSqlOutput;
         private readonly List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes;
 
         public SqlOutputForm(string sqlOutput, string revertQuery = "", List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = null)
@@ -27,6 +27,7 @@ namespace SAI_Editor.Forms
             InitializeComponent();
 
             richTextBoxSqlOutput.Text = sqlOutput;
+            originalSqlOutput = richTextBoxSqlOutput.Text; //! We have to assign it to the .Text instead of `sqlOutput` as it adds some linefeeds here
             this.revertQuery = revertQuery;
             this.entriesOrGuidsAndSourceTypes = entriesOrGuidsAndSourceTypes;
         }
@@ -48,16 +49,8 @@ namespace SAI_Editor.Forms
             {
                 DialogResult dialogResult = MessageBox.Show("Do you only want to execute the selected SQL?", "Selection", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                switch (dialogResult)
-                {
-                    case DialogResult.Yes:
-                        query = richTextBoxSqlOutput.SelectedText;
-                        break;
-                    //case DialogResult.No:
-                    default:
-                        query = richTextBoxSqlOutput.Text;
-                        break;
-                }
+                if (dialogResult == DialogResult.Yes)
+                    query = richTextBoxSqlOutput.SelectedText;
             }
 
             if (await SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(query))
@@ -66,8 +59,16 @@ namespace SAI_Editor.Forms
 
                 if (Settings.Default.CreateRevertQuery)
                 {
+                    if (query != originalSqlOutput)
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Changes have been made to the SQL. Do you still wish you generate a revert query to be able to reset the original SAI (for the entryorguid and source_type that opened this form) to its current state?", "Changes have been made...", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        if (dialogResult != DialogResult.Yes)
+                            return;
+                    }
+
                     CreateRevertQuery();
-                    message += "\n\nA revert query has also been generated to reset the script back to its previous (current) state. To view all revert queries, open the Revert Query Form from the File menu option.";
+                    message += "\n\nA revert query has also been generated to reset the script back to its previous (current) state. To view all revert queries, open the 'Revert Query' form from the 'File' menu option.";
                 }
 
                 MessageBox.Show(message, "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -123,7 +124,7 @@ namespace SAI_Editor.Forms
 
         private void CreateRevertQuery()
         {
-            //! Example output:
+            //! Example filename:
             //! [Creature] [33303] 3-10-2013 15.32.40.sql
             //! [Creature] [33303 - 3330300] 3-10-2013 15.32.40.sql
             string filename = @"Reverts\[" + GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType) + "] [";
