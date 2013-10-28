@@ -55,6 +55,7 @@
             this.listViewSmartScripts.TabIndex = 2;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
+            this.listViewSmartScripts.EnablePhaseHighlighting = false;
             // 
             // label1
             // 

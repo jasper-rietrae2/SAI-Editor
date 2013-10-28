@@ -657,7 +657,6 @@ namespace SAI_Editor
 
         private void AddItemToListView(ListView listView, IEnumerable<Item> items)
         {
-
             List<ListViewItem> lvItems = new List<ListViewItem>();
 
             Invoke((MethodInvoker)delegate

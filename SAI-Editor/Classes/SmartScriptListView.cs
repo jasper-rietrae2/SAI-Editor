@@ -18,6 +18,7 @@ namespace SAI_Editor.Classes
         private List<SmartScript> _smartScripts = new List<SmartScript>();
         private List<string> _excludedProperties = new List<string>();
         private readonly PropertyInfo[] _pinfo;
+        private bool enablePhaseHighlighting = false; //! It's determined by the setting but it should only be used in the MainForm listview
 
         public SmartScriptListView()
         {
@@ -55,6 +56,12 @@ namespace SAI_Editor.Classes
 
             foreach (ColumnHeader header in Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        public bool EnablePhaseHighlighting
+        {
+            get { return enablePhaseHighlighting; }
+            set { enablePhaseHighlighting = value; }
         }
 
         public List<SmartScript> SmartScripts
@@ -110,7 +117,7 @@ namespace SAI_Editor.Classes
 
         public void HandleHighlightItems()
         {
-            if (!Settings.Default.PhaseHighlighting)
+            if (!Settings.Default.PhaseHighlighting || !enablePhaseHighlighting)
                 return;
 
             List<Color> phaseColors = new List<Color>(Constants.phaseColors);

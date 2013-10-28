@@ -2071,7 +2071,7 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_GO_SET_LOOT_STATE:
                     new SingleSelectForm<GoStates>(textBoxToChange).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_SET_POWER: //! Power type
+                case SmartAction.SMART_ACTION_SET_POWER:
                 case SmartAction.SMART_ACTION_ADD_POWER:
                 case SmartAction.SMART_ACTION_REMOVE_POWER:
                     new SingleSelectForm<PowerTypes>(textBoxToChange).ShowDialog(this);
@@ -2091,7 +2091,7 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_REMOVE_ITEM:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry).ShowDialog(this);
                     break;
-                case SmartAction.SMART_ACTION_TELEPORT: //! Map
+                case SmartAction.SMART_ACTION_TELEPORT:
                     new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SUMMON_CREATURE_GROUP:
