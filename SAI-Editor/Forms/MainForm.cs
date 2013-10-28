@@ -1396,7 +1396,7 @@ namespace SAI_Editor
             TryToCreateScript();
         }
 
-        public async void TryToCreateScript()
+        public async void TryToCreateScript(bool fromNewLine = false)
         {
             if (listViewSmartScripts.Items.Count > 0)
             {
@@ -1425,6 +1425,7 @@ namespace SAI_Editor
             string aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(entryorguid, source_type);
             lastSmartScriptIdOfScript = 0;
 
+            //! Allow adding new lines even if the AIName is already set
             if ((SourceTypes)source_type == SourceTypes.SourceTypeAreaTrigger)
             {
                 if (aiName != String.Empty)
@@ -1451,7 +1452,12 @@ namespace SAI_Editor
                     string strAlreadyHasAiName = "This " + sourceTypeString + " already has its AIName set to '" + aiName + "'";
 
                     if (SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName))
+                    {
+                        if (fromNewLine)
+                            goto SkipAiNameAndScriptNameChecks;
+
                         strAlreadyHasAiName += "! Do you want to load it instead?";
+                    }
                     else
                         strAlreadyHasAiName += " and can therefore not have any SmartAI. Do you want to get rid of this AIName right now?";
 
@@ -1478,6 +1484,7 @@ namespace SAI_Editor
                 }
             }
 
+        SkipAiNameAndScriptNameChecks:
             List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entryorguid, source_type);
 
             if (smartScripts != null && smartScripts.Count > 0)
@@ -2618,7 +2625,7 @@ namespace SAI_Editor
                 DialogResult dialogResult = MessageBox.Show("Are you sure you want to create a new script for the given entry and sourcetype?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 if (dialogResult == DialogResult.Yes)
-                    TryToCreateScript();
+                    TryToCreateScript(true);
 
                 return;
             }
