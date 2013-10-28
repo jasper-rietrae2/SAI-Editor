@@ -142,7 +142,7 @@ namespace SAI_Editor.Forms
             else
                 filename += originalEntryOrGuidAndSourceType.entryOrGuid;;
 
-            filename += "] " + DateTime.Now.ToString() + ".sql";
+            filename += "] " + DateTime.Now.ToUniversalTime().ToString() + ".sql";
 
             if (!Directory.Exists("Reverts"))
                 Directory.CreateDirectory("Reverts");
