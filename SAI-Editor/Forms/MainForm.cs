@@ -2622,9 +2622,16 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.Items.Count == 0)
             {
-                DialogResult dialogResult = MessageBox.Show("Are you sure you want to create a new script for the given entry and sourcetype?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                string aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(XConverter.ToInt32(textBoxEntryOrGuid.Text), (int)GetSourceTypeByIndex());
 
-                if (dialogResult == DialogResult.Yes)
+                if (!SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName))
+                {
+                    DialogResult dialogResult = MessageBox.Show("Are you sure you want to create a new script for the given entry and sourcetype?", "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    if (dialogResult == DialogResult.Yes)
+                        TryToCreateScript(true);
+                }
+                else
                     TryToCreateScript(true);
 
                 return;
