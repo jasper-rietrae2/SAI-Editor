@@ -64,13 +64,14 @@ namespace SAI_Editor.Forms
                         DialogResult dialogResult = MessageBox.Show("Changes have been made to the SQL. Do you still wish you generate a revert query to be able to reset the original SAI (for the entryorguid and source_type that opened this form) to its current state?", "Changes have been made...", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                         if (dialogResult != DialogResult.Yes)
-                            return;
+                            goto SkipRevertQueryGenerating;
                     }
 
                     CreateRevertQuery();
                     message += "\n\nA revert query has also been generated to reset the script back to its previous (current) state. To view all revert queries, open the 'Revert Query' form from the 'File' menu option.";
                 }
 
+            SkipRevertQueryGenerating:
                 MessageBox.Show(message, "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
