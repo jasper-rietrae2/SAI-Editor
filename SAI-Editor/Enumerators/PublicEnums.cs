@@ -477,6 +477,27 @@
         SMART_EVENT_PHASE_6                 = 0x20,
     }
 
+    public enum PhaseMasks
+    {
+        PHASEMASK_NEVER    = 0x00,
+        PHASEMASK_2        = 0x02,
+        PHASEMASK_3        = 0x04,
+        PHASEMASK_4        = 0x08,
+        PHASEMASK_5        = 0x10,
+        PHASEMASK_6        = 0x20,
+        PHASEMASK_7        = 0x40,
+        PHASEMASK_8        = 0x80,
+        PHASEMASK_9        = 0x100,
+        PHASEMASK_10       = 0x200,
+        PHASEMASK_11       = 0x400,
+        PHASEMASK_12       = 0x800,
+        PHASEMASK_13       = 0x1000,
+        PHASEMASK_14       = 0x2000,
+        PHASEMASK_15       = 0x4000,
+        // etc....
+        PHASEMASK_ANYWHERE = ~0,   //! -1, 0xFFFFFFFF, etc.
+    }
+
     public enum PowerTypes
     {
         POWER_MANA                          = 0,

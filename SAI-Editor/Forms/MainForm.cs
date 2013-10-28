@@ -1080,8 +1080,8 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_ADD_POWER: //! Power type
                 case SmartAction.SMART_ACTION_REMOVE_POWER: //! Power type
                 case SmartAction.SMART_ACTION_SUMMON_GO: //! Gameobject entry
-                case SmartAction.SMART_ACTION_SET_EVENT_PHASE: //! Event/ingame phase
-                case SmartAction.SMART_ACTION_SET_PHASE_MASK: //! Event/ingame phase
+                case SmartAction.SMART_ACTION_SET_EVENT_PHASE: //! Event phase
+                case SmartAction.SMART_ACTION_SET_PHASE_MASK: //! Ingame phase
                 case SmartAction.SMART_ACTION_ADD_ITEM: //! Item entry
                 case SmartAction.SMART_ACTION_REMOVE_ITEM: //! Item entry
                 case SmartAction.SMART_ACTION_TELEPORT: //! Map id
@@ -2082,8 +2082,10 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SET_EVENT_PHASE:
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
                 case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE:
-                case SmartAction.SMART_ACTION_SET_PHASE_MASK:
                     new MultiSelectForm<SmartPhaseMasks>(textBoxToChange).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_SET_PHASE_MASK:
+                    new MultiSelectForm<PhaseMasks>(textBoxToChange).ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_ADD_ITEM:
                 case SmartAction.SMART_ACTION_REMOVE_ITEM:
