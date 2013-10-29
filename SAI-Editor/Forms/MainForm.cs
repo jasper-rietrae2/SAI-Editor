@@ -2745,7 +2745,7 @@ namespace SAI_Editor
                         smartScript.link = 0;
 
                     if (smartScript.id == newLinkFrom)
-                        smartScript.link = newLinkFrom;
+                        smartScript.link = listViewSmartScripts.SelectedSmartScript.id;
                 }
 
                 listViewSmartScripts.Init();
