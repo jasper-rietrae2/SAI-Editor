@@ -75,7 +75,8 @@ namespace SAI_Editor
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
         public int lastSmartScriptIdOfScript = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
-        private bool runningConstructor = false, canGenerateNewComment = true;
+        private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
+        private int previousLinkFrom = 0;
 
         public MainForm()
         {
@@ -868,7 +869,7 @@ namespace SAI_Editor
         {
             try
             {
-                canGenerateNewComment = false;
+                updatingFieldsBasedOnSelectedScript = true;
                 SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
 
                 if (Settings.Default.ChangeStaticInfo)
@@ -879,6 +880,16 @@ namespace SAI_Editor
 
                 textBoxId.Text = selectedScript.id.ToString();
                 textBoxLinkTo.Text = selectedScript.link.ToString();
+                textBoxLinkFrom.Text = "-1";
+
+                foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
+                {
+                    if (smartScript.link > 0 && smartScript.link == selectedScript.id)
+                    {
+                        textBoxLinkFrom.Text = smartScript.id.ToString();
+                        break;
+                    }
+                }
 
                 int event_type = selectedScript.event_type;
                 comboBoxEventType.SelectedIndex = event_type;
@@ -957,7 +968,7 @@ namespace SAI_Editor
                 textBoxComments.Text = selectedScript.comment;
 
                 AdjustAllParameterFields(event_type, action_type, target_type);
-                canGenerateNewComment = true;
+                updatingFieldsBasedOnSelectedScript = false;
             }
             catch (Exception ex)
             {
@@ -1772,7 +1783,7 @@ namespace SAI_Editor
             textBoxTargetType.Text = "0";
             textBoxEventChance.Text = "100";
             textBoxId.Text = "-1";
-            textBoxLinkFrom.Text = "0";
+            textBoxLinkFrom.Text = "-1";
             textBoxLinkTo.Text = "0";
             textBoxComments.Text = GetDefaultCommentForSourceType(GetSourceTypeByIndex());
             textBoxEventPhasemask.Text = "0";
@@ -2717,7 +2728,30 @@ namespace SAI_Editor
 
         private void textBoxLinkFrom_TextChanged(object sender, EventArgs e)
         {
-            // unused (?)
+            int newLinkFrom = XConverter.ToInt32(textBoxLinkFrom.Text);
+
+            //! Only if the property was changed by hand (by user) and not by selecting a line
+            if (!updatingFieldsBasedOnSelectedScript)
+            {
+                if (previousLinkFrom == newLinkFrom)
+                    return;
+
+                foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
+                {
+                    if (smartScript.entryorguid != originalEntryOrGuidAndSourceType.entryOrGuid || smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType)
+                        continue;
+
+                    if (smartScript.link == previousLinkFrom)
+                        smartScript.link = 0;
+
+                    if (smartScript.id == newLinkFrom)
+                        smartScript.link = newLinkFrom;
+                }
+
+                listViewSmartScripts.Init();
+            }
+
+            previousLinkFrom = newLinkFrom;
         }
 
         private void textBoxEventParam1_TextChanged(object sender, EventArgs e)
@@ -3266,7 +3300,7 @@ namespace SAI_Editor
                 }
             }
 
-            string newComment = canGenerateNewComment ? await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, true, smartScriptLink) : selectedScript.comment;
+            string newComment = !updatingFieldsBasedOnSelectedScript ? await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, true, smartScriptLink) : selectedScript.comment;
             
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
