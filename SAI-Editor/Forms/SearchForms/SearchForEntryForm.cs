@@ -46,8 +46,6 @@ namespace SAI_Editor
                 listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
             }
 
-            listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-
             _cts = new CancellationTokenSource();
         }
 

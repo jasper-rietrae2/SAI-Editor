@@ -17,9 +17,6 @@ namespace SAI_Editor
             this.databaseNames = databaseNames;
             this.textBoxToChange = textBoxToChange;
 
-            listViewDatabases.Columns.Add("Database", 198, HorizontalAlignment.Left);
-            listViewDatabases.ColumnClick += listViewDatabases_ColumnClick;
-
             for (int i = 0; i < databaseNames.Count; ++i)
             {
                 listViewDatabases.Items.Add(databaseNames[i]);

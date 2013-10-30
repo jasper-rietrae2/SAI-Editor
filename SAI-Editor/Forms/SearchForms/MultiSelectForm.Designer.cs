@@ -33,11 +33,14 @@ namespace SAI_Editor
             this.listViewSelectableItems = new System.Windows.Forms.ListView();
             this.buttonContinue = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listViewSelectableItems
             // 
             this.listViewSelectableItems.CheckBoxes = true;
+            this.listViewSelectableItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader});
             this.listViewSelectableItems.FullRowSelect = true;
             this.listViewSelectableItems.Location = new System.Drawing.Point(12, 12);
             this.listViewSelectableItems.Name = "listViewSelectableItems";
@@ -68,6 +71,11 @@ namespace SAI_Editor
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // columnHeader
+            // 
+            this.columnHeader.Text = "";
+            this.columnHeader.Width = 20;
+            // 
             // MultiSelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -92,5 +100,6 @@ namespace SAI_Editor
         private System.Windows.Forms.Button buttonContinue;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ListView listViewSelectableItems;
+        private System.Windows.Forms.ColumnHeader columnHeader;
     }
 }

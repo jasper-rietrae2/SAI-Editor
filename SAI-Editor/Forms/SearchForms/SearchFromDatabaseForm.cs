@@ -267,7 +267,6 @@ namespace SAI_Editor
                 columns[i] = columnsSplit[i];
 
             amountOfListviewColumns = columns.Length - 1;
-            listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             comboBoxSearchType.SelectedIndex = 0;
             FillListView(true);
         }

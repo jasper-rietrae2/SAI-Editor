@@ -182,6 +182,8 @@ namespace SAI_Editor
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
+            this.timerExpandOrContract = new System.Windows.Forms.Timer(this.components);
+            this.timerShowPermanentTooltips = new System.Windows.Forms.Timer(this.components);
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -1972,6 +1974,7 @@ namespace SAI_Editor
             this.panelPermanentTooltipTypes.Name = "panelPermanentTooltipTypes";
             this.panelPermanentTooltipTypes.Size = new System.Drawing.Size(915, 30);
             this.panelPermanentTooltipTypes.TabIndex = 25;
+            this.panelPermanentTooltipTypes.Visible = false;
             // 
             // labelPermanentTooltipTitleTypes
             // 
@@ -2011,6 +2014,7 @@ namespace SAI_Editor
             this.panelPermanentTooltipParameters.Name = "panelPermanentTooltipParameters";
             this.panelPermanentTooltipParameters.Size = new System.Drawing.Size(915, 30);
             this.panelPermanentTooltipParameters.TabIndex = 25;
+            this.panelPermanentTooltipParameters.Visible = false;
             // 
             // labelPermanentTooltipTextParameters
             // 
@@ -2077,6 +2081,7 @@ namespace SAI_Editor
             // 
             // listViewSmartScripts
             // 
+            this.listViewSmartScripts.EnablePhaseHighlighting = true;
             this.listViewSmartScripts.FullRowSelect = true;
             this.listViewSmartScripts.HideSelection = false;
             this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
@@ -2090,7 +2095,16 @@ namespace SAI_Editor
             this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
-            this.listViewSmartScripts.EnablePhaseHighlighting = true;
+            // 
+            // timerExpandOrContract
+            // 
+            this.timerExpandOrContract.Interval = 4;
+            this.timerExpandOrContract.Tick += new System.EventHandler(this.timerExpandOrContract_Tick);
+            // 
+            // timerShowPermanentTooltips
+            // 
+            this.timerShowPermanentTooltips.Interval = 4;
+            this.timerShowPermanentTooltips.Tick += new System.EventHandler(this.timerShowPermanentTooltips_Tick);
             // 
             // MainForm
             // 
@@ -2306,6 +2320,8 @@ namespace SAI_Editor
         private System.Windows.Forms.ToolStripMenuItem menuItemLoadSelectedEntry;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label labelPermanentTooltipParameterTitleTypes;
+        private System.Windows.Forms.Timer timerExpandOrContract;
+        private System.Windows.Forms.Timer timerShowPermanentTooltips;
     }
 }
 

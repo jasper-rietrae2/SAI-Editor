@@ -66,8 +66,6 @@ namespace SAI_Editor
         private readonly List<Control> controlsMainForm = new List<Control>();
         private bool contractingToLoginForm, expandingToMainForm, expandingListView, contractingListView;
         private int originalHeight = 0, originalWidth = 0;
-        private readonly Timer timerExpandOrContract = new Timer { Enabled = false, Interval = 4 };
-        private readonly Timer timerShowPermanentTooltips = new Timer { Enabled = false, Interval = 4 };
         private int WidthToExpandTo = (int)FormSizes.WidthToExpandTo, HeightToExpandTo = (int)FormSizes.HeightToExpandTo;
         private int listViewSmartScriptsInitialHeight, listViewSmartScriptsHeightToChangeTo;
         public int expandAndContractSpeed = 5, expandAndContractSpeedListView = 2;
@@ -113,12 +111,6 @@ namespace SAI_Editor
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            timerExpandOrContract.Tick += timerExpandOrContract_Tick;
-            timerShowPermanentTooltips.Tick += timerShowPermanentTooltips_Tick;
-
-            panelPermanentTooltipTypes.Visible = false;
-            panelPermanentTooltipParameters.Visible = false;
 
             foreach (Control control in Controls)
             {
@@ -169,7 +161,6 @@ namespace SAI_Editor
                 page.AutoScrollMinSize = new Size(page.Width, page.Height);
             }
 
-            //! Temp..
             panelLoginBox.Location = new Point(9, 8);
 
             if (Settings.Default.HidePass)
@@ -181,10 +172,6 @@ namespace SAI_Editor
             panelPermanentTooltipTypes.BackColor = Color.FromArgb(255, 255, 225);
             panelPermanentTooltipParameters.BackColor = Color.FromArgb(255, 255, 225);
             labelPermanentTooltipTextTypes.BackColor = Color.FromArgb(255, 255, 225);
-
-            //! Set them to invisible by default; they become visible when the timer finished
-            panelPermanentTooltipTypes.Visible = false;
-            panelPermanentTooltipParameters.Visible = false;
 
             SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, textBoxEntryOrGuid.Text.Length > 0);
             SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
