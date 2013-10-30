@@ -2754,6 +2754,8 @@ namespace SAI_Editor
 
                     if (smartScript.id == newLinkFrom && listViewSmartScripts.SelectedSmartScript != null)
                         smartScript.link = listViewSmartScripts.SelectedSmartScript.id;
+
+                    GenerateCommentForSmartScript(smartScript);
                 }
 
                 listViewSmartScripts.Init(true);
@@ -3286,29 +3288,9 @@ namespace SAI_Editor
             SmartScript smartScriptLink = null;
 
             if ((SmartEvent)selectedScript.event_type == SmartEvent.SMART_EVENT_LINK)
-            {
-                int i = listViewSmartScripts.SmartScripts.IndexOf(selectedScript);
+                smartScriptLink = GetSmartScriptLinkByIndex(listViewSmartScripts.SmartScripts.IndexOf(selectedScript));
 
-                if (i > 0)
-                {
-                    smartScriptLink = listViewSmartScripts.SmartScripts[i - 1];
-
-                    if (smartScriptLink.link == 0)
-                        smartScriptLink = null;
-                    else
-                    {
-                        int x = i;
-
-                        while (smartScriptLink.event_type == (int)SmartEvent.SMART_EVENT_LINK)
-                        {
-                            smartScriptLink = listViewSmartScripts.SmartScripts[x - 1];
-                            x--;
-                        }
-                    }
-                }
-            }
-
-            string newComment = !updatingFieldsBasedOnSelectedScript ? await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, true, smartScriptLink) : selectedScript.comment;
+            string newComment = updatingFieldsBasedOnSelectedScript ? selectedScript.comment : await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
             
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
@@ -3321,6 +3303,53 @@ namespace SAI_Editor
 
             if (oldComment != newComment)
                 ResizeColumns();
+        }
+
+        private async void GenerateCommentForSmartScript(SmartScript smartScript)
+        {
+            if (smartScript == null || !Settings.Default.GenerateComments)
+                return;
+
+            SmartScript smartScriptLink = null;
+
+            if ((SmartEvent)smartScript.event_type == SmartEvent.SMART_EVENT_LINK)
+                smartScriptLink = GetSmartScriptLinkByIndex(listViewSmartScripts.SmartScripts.IndexOf(smartScript));
+
+            string newComment = updatingFieldsBasedOnSelectedScript ? smartScript.comment : await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+            
+            //! For some reason we have to re-check it here...
+            if (listViewSmartScripts.SelectedItems.Count == 0)
+                return;
+
+            string oldComment = smartScript.comment;
+            smartScript.comment = newComment;
+            listViewSmartScripts.ReplaceSmartScript(smartScript);
+            FillFieldsBasedOnSelectedScript();
+        }
+
+        private SmartScript GetSmartScriptLinkByIndex(int index)
+        {
+            SmartScript smartScriptLink = null;
+
+            if (index > 0)
+            {
+                smartScriptLink = listViewSmartScripts.SmartScripts[index - 1];
+
+                if (smartScriptLink.link == 0)
+                    smartScriptLink = null;
+                else
+                {
+                    int x = index;
+
+                    while (smartScriptLink.event_type == (int)SmartEvent.SMART_EVENT_LINK)
+                    {
+                        smartScriptLink = listViewSmartScripts.SmartScripts[x - 1];
+                        x--;
+                    }
+                }
+            }
+
+            return smartScriptLink;
         }
 
         private void menuItemRevertQuery_Click(object sender, EventArgs e)
