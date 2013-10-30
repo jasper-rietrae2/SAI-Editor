@@ -2750,12 +2750,16 @@ namespace SAI_Editor
                         continue;
 
                     if (smartScript.link == previousLinkFrom)
+                    {
                         smartScript.link = 0;
+                        GenerateCommentForSmartScript(smartScript);
+                    }
 
                     if (smartScript.id == newLinkFrom && listViewSmartScripts.SelectedSmartScript != null)
+                    {
                         smartScript.link = listViewSmartScripts.SelectedSmartScript.id;
-
-                    GenerateCommentForSmartScript(smartScript);
+                        GenerateCommentForSmartScript(smartScript);
+                    }
                 }
 
                 listViewSmartScripts.Init(true);
