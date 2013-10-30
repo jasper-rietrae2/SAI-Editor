@@ -2700,7 +2700,7 @@ namespace SAI_Editor
             {
                 listViewSmartScripts.SelectedSmartScript.comment = textBoxComments.Text;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                GenerateCommentAndResizeColumns();
+                ResizeColumns();
             }
         }
 
@@ -2762,7 +2762,7 @@ namespace SAI_Editor
                     }
                 }
 
-                listViewSmartScripts.Init(true);
+                listViewSmartScripts.Init();
             }
 
             previousLinkFrom = newLinkFrom;
