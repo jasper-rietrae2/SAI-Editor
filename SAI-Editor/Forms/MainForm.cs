@@ -867,7 +867,7 @@ namespace SAI_Editor
 
         private void FillFieldsBasedOnSelectedScript()
         {
-            //try
+            try
             {
                 updatingFieldsBasedOnSelectedScript = true;
                 SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
@@ -978,9 +978,9 @@ namespace SAI_Editor
                 AdjustAllParameterFields(event_type, action_type, target_type);
                 updatingFieldsBasedOnSelectedScript = false;
             }
-            //catch (Exception ex)
+            catch (Exception ex)
             {
-            //    MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
