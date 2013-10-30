@@ -867,7 +867,7 @@ namespace SAI_Editor
 
         private void FillFieldsBasedOnSelectedScript()
         {
-            try
+            //try
             {
                 updatingFieldsBasedOnSelectedScript = true;
                 SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
@@ -880,16 +880,24 @@ namespace SAI_Editor
 
                 textBoxId.Text = selectedScript.id.ToString();
                 textBoxLinkTo.Text = selectedScript.link.ToString();
-                textBoxLinkFrom.Text = "-1";
+
+                bool foundLinkFromField = false;
 
                 foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
                 {
+                    if (smartScript.entryorguid != originalEntryOrGuidAndSourceType.entryOrGuid || smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType)
+                        continue;
+
                     if (smartScript.link > 0 && smartScript.link == selectedScript.id)
                     {
                         textBoxLinkFrom.Text = smartScript.id.ToString();
+                        foundLinkFromField = true;
                         break;
                     }
                 }
+
+                if (!foundLinkFromField)
+                    textBoxLinkFrom.Text = "-1";
 
                 int event_type = selectedScript.event_type;
                 comboBoxEventType.SelectedIndex = event_type;
@@ -970,9 +978,9 @@ namespace SAI_Editor
                 AdjustAllParameterFields(event_type, action_type, target_type);
                 updatingFieldsBasedOnSelectedScript = false;
             }
-            catch (Exception ex)
+            //catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2744,11 +2752,11 @@ namespace SAI_Editor
                     if (smartScript.link == previousLinkFrom)
                         smartScript.link = 0;
 
-                    if (smartScript.id == newLinkFrom)
+                    if (smartScript.id == newLinkFrom && listViewSmartScripts.SelectedSmartScript != null)
                         smartScript.link = listViewSmartScripts.SelectedSmartScript.id;
                 }
 
-                listViewSmartScripts.Init();
+                listViewSmartScripts.Init(true);
             }
 
             previousLinkFrom = newLinkFrom;

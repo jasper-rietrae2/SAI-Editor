@@ -3,7 +3,6 @@
 - Checkbox to only show event_types and action_types for the chosen source_type (so for gameobjects we would hide SMART_EVENT_SPELLHIT, etc.)
 - Possibly pick another logo, this is ugly and boring
 - Make the application support more platforms than just Windows
-- Implement the 'Link from' field
 - Allow resizing the application but just make everything scroll-able if it becomes smaller
 - Implement a sqlite database containing required tables for the tool (creature_template, creature, gameobject, smart_scripts, quest_template, item_template, etc.) and use this if user wants to not use his local database
   - Make this a download option instead (?). The SQLite file would become over 100 MB if we'd do this and it'd make no sense if we'd never use the data.
@@ -19,7 +18,3 @@
 
 Needs to be further into development:
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
-- Improve implementation of the SearchForLinkForm to do the following:
-  - Only allow to link to lines with a higher smart_scripts.id
-    - This could possibly also be implemented as a feature to refactor the SAI of the creature with the id's to be re-ordered (possibly based on a YesNo messagebox question)
-  - We also need to adjust the id chosen to link from/to so the script will still work

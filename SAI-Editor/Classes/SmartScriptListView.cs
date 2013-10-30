@@ -38,8 +38,10 @@ namespace SAI_Editor.Classes
             Init();
         }
 
-        public void Init()
+        public void Init(bool keepSelection = false)
         {
+            int lastSelectedIndex = SelectedIndices.Count > 0 ? SelectedIndices[0] : -1;
+
             Items.Clear();
             Columns.Clear();
 
@@ -56,6 +58,18 @@ namespace SAI_Editor.Classes
 
             foreach (ColumnHeader header in Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+            if (keepSelection && lastSelectedIndex != -1)
+            {
+                foreach (ListViewItem item in Items)
+                {
+                    if (item.Index == lastSelectedIndex)
+                    {
+                        item.Selected = true;
+                        break;
+                    }
+                }
+            }
         }
 
         public bool EnablePhaseHighlighting
