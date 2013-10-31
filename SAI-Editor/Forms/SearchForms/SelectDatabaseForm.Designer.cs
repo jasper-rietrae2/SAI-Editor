@@ -30,10 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectDatabaseForm));
             this.listViewDatabases = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonContinue = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listViewDatabases
@@ -51,6 +51,11 @@
             this.listViewDatabases.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewDatabases_ColumnClick);
             this.listViewDatabases.SelectedIndexChanged += new System.EventHandler(this.listViewDatabases_SelectedIndexChanged);
             this.listViewDatabases.DoubleClick += new System.EventHandler(this.listViewDatabases_DoubleClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Database";
+            this.columnHeader1.Width = 198;
             // 
             // buttonContinue
             // 
@@ -80,11 +85,6 @@
             this.label1.Size = new System.Drawing.Size(188, 13);
             this.label1.TabIndex = 3;
             this.label1.Text = "Double click on a database to select it";
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Database";
-            this.columnHeader1.Width = 198;
             // 
             // SelectDatabaseForm
             // 
