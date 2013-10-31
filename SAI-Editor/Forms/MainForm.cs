@@ -57,7 +57,7 @@ namespace SAI_Editor
     {
         public int entryOrGuid;
         public SourceTypes sourceType;
-    };
+    }
 
     public partial class MainForm : Form
     {
@@ -3340,8 +3340,7 @@ namespace SAI_Editor
             if (formState != FormState.FormStateMain)
                 return;
 
-            if (Directory.Exists("Reverts"))
-                new RevertQueryForm().ShowDialog(this);
+            new RevertQueryForm().ShowDialog(this);
         }
 
         private void checkBoxShowBasicInfo_CheckedChanged(object sender, EventArgs e)

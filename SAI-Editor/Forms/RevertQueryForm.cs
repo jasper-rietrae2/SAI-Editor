@@ -18,6 +18,9 @@ namespace SAI_Editor.Forms
         {
             InitializeComponent();
 
+            if (!Directory.Exists("Reverts"))
+                Directory.CreateDirectory("Reverts");
+
             calenderScriptsToRevert.TodayDate = DateTime.Now.ToUniversalTime();
             FillListViewWithDate();
         }
