@@ -62,6 +62,9 @@
     <Compile Include="Classes\Constants.cs" />
     <Compile Include="Classes\Database\Classes\Creature.cs" />
     <Compile Include="Classes\Database\Classes\Gameobject.cs" />
+    <Compile Include="Classes\PictureBoxDisableable.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\SmartScriptListView.cs">
       <SubType>Component</SubType>
     </Compile>

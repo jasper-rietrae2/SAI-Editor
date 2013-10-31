@@ -173,8 +173,8 @@ namespace SAI_Editor
             panelPermanentTooltipParameters.BackColor = Color.FromArgb(255, 255, 225);
             labelPermanentTooltipTextTypes.BackColor = Color.FromArgb(255, 255, 225);
 
-            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, textBoxEntryOrGuid.Text.Length > 0);
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
+            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+            pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
 
             textBoxEventType.MouseWheel += textBoxEventType_MouseWheel;
             textBoxActionType.MouseWheel += textBoxActionType_MouseWheel;
@@ -747,8 +747,8 @@ namespace SAI_Editor
                         }
                     }
 
-                    SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
-                    SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
+                    pictureBoxLoadScript.Enabled = true;
+                    pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                     return new List<SmartScript>();
                 }
 
@@ -772,7 +772,7 @@ namespace SAI_Editor
                                 foreach (SmartScript item in newSmartScripts)
                                     smartScriptsToReturn.Add(item);
 
-                                SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
+                                pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                             }
                         }
                     }
@@ -788,7 +788,7 @@ namespace SAI_Editor
                             foreach (SmartScript item in newSmartScripts)
                                 smartScriptsToReturn.Add(item);
 
-                            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
+                            pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                         }
                     }
                 }
@@ -802,8 +802,8 @@ namespace SAI_Editor
                     MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
+            pictureBoxLoadScript.Enabled = true;
+            pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             return smartScriptsToReturn;
         }
 
@@ -1186,6 +1186,15 @@ namespace SAI_Editor
             toolTip.SetToolTipText(control, text);
         }
 
+        private void AddTooltip(string controlName, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true, bool active = true, int autoPopDelay = 2100000000, bool showAlways = true)
+        {
+            Control[] controls = Controls.Find(controlName, true);
+
+            if (controls.Length > 0)
+                foreach (Control control in controls)
+                    AddTooltip(control, title, text, icon, isBallon, active, autoPopDelay, showAlways);
+        }
+
         private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true; //! Disallow changing content of the combobox (because setting it to 3D looks like shit)
@@ -1297,7 +1306,7 @@ namespace SAI_Editor
                 ReselectListViewItemWithPrevIndex(prevSelectedIndex);
 
             //! Need to do this if static info is changed
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
+            pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
         }
 
         private void ReselectListViewItemWithPrevIndex(int prevIndex)
@@ -1327,7 +1336,7 @@ namespace SAI_Editor
                     if (listViewSmartScripts.GetSmartScript(newSmartScript.entryorguid, newSmartScript.id) == null)
                         listViewSmartScripts.AddSmartScript(newSmartScript);
 
-                SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
+                pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             }
             else
                 RemoveNonOriginalScriptsFromView();
@@ -1513,8 +1522,8 @@ namespace SAI_Editor
 
             buttonNewLine.Enabled = false;
             checkBoxListActionlistsOrEntries.Text = GetSourceTypeByIndex() == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
-            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, false);
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, false);
+            pictureBoxLoadScript.Enabled = false;
+            pictureBoxCreateScript.Enabled = false;
 
             originalEntryOrGuidAndSourceType.entryOrGuid = entryorguid;
             originalEntryOrGuidAndSourceType.sourceType = (SourceTypes)source_type;
@@ -1569,8 +1578,8 @@ namespace SAI_Editor
 
             buttonNewLine.Enabled = true;
             buttonGenerateComments.Enabled = true;
-            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, true);
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, true);
+            pictureBoxLoadScript.Enabled = true;
+            pictureBoxCreateScript.Enabled = true;
         }
 
         private string GetTemplateTableBySourceType(SourceTypes sourceType)
@@ -1598,8 +1607,8 @@ namespace SAI_Editor
 
             buttonGenerateSql.Enabled = false;
             menuItemGenerateSql.Enabled = false;
-            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, false);
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, false);
+            pictureBoxLoadScript.Enabled = false;
+            pictureBoxCreateScript.Enabled = false;
             lastSmartScriptIdOfScript = 0;
 
             if (entryorguid != -1 && sourceType != SourceTypes.SourceTypeNone)
@@ -1651,7 +1660,7 @@ namespace SAI_Editor
             buttonNewLine.Enabled = true;
             buttonGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
             menuItemGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
+            pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
         }
 
         private void numericField_KeyPress(object sender, KeyPressEventArgs e)
@@ -2930,8 +2939,8 @@ namespace SAI_Editor
 
         private void textBoxEntryOrGuid_TextChanged(object sender, EventArgs e)
         {
-            SetPictureBoxEnabled(pictureBoxLoadScript, Resources.icon_load_script, textBoxEntryOrGuid.Text.Length > 0);
-            SetPictureBoxEnabled(pictureBoxCreateScript, Resources.icon_create_script, textBoxEntryOrGuid.Text.Length > 0);
+            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+            pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
 
             //if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
             //{
@@ -3139,21 +3148,21 @@ namespace SAI_Editor
                         scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
                         aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureAiNameById(entryOrGuidAndSourceType.entryOrGuid);
 
-                        revertQuery += "UPDATE creature_template SET Ainame='" + aiName + "',Scriptname='" + scriptName + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "';";
+                        revertQuery += "UPDATE creature_template SET Ainame='" + aiName + "',Scriptname='" + scriptName + "' WHERE entry='" + entryOrGuidAndSourceType.entryOrGuid + "';";
                         break;
                     case SourceTypes.SourceTypeGameobject:
                         scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
                         aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectAiNameById(entryOrGuidAndSourceType.entryOrGuid);
 
-                        revertQuery += "UPDATE gameobject_template SET Ainame='" + aiName + "',Scriptname='" + await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectScriptNameById(entryOrGuidAndSourceType.entryOrGuid) + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "';";
+                        revertQuery += "UPDATE gameobject_template SET Ainame='" + aiName + "',Scriptname='" + await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectScriptNameById(entryOrGuidAndSourceType.entryOrGuid) + "' WHERE entry='" + entryOrGuidAndSourceType.entryOrGuid + "';";
                         break;
                     case SourceTypes.SourceTypeAreaTrigger:
                         scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetAreaTriggerScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
 
                         if (scriptName != String.Empty)
-                            revertQuery += "UPDATE areatrigger_scripts SET Scriptname='" + scriptName + "' WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "';";
+                            revertQuery += "UPDATE areatrigger_scripts SET Scriptname='" + scriptName + "' WHERE entry='" + entryOrGuidAndSourceType.entryOrGuid + "';";
                         else
-                            revertQuery += "DELETE FROM areatrigger_scripts WHERE entry = '" + entryOrGuidAndSourceType.entryOrGuid + "';";
+                            revertQuery += "DELETE FROM areatrigger_scripts WHERE entry='" + entryOrGuidAndSourceType.entryOrGuid + "';";
 
                         break;
                 }
@@ -3189,30 +3198,6 @@ namespace SAI_Editor
             }
 
             return revertQuery;
-        }
-
-        private void SetPictureBoxEnabled(PictureBox pictureBox, Image image, bool enable)
-        {
-            Bitmap pic = new Bitmap(image);
-            pictureBox.Enabled = enable;
-
-            if (!enable)
-            {
-                for (int w = 0; w < pic.Width; w++)
-                {
-                    for (int h = 0; h < pic.Height; h++)
-                    {
-                        Color pixelColor = pic.GetPixel(w, h);
-
-                        //! We only set the color to gray/white ish with an alpha effect on pixels containing an
-                        //! actual color. Else it looks really weird and not actually disabled at all.
-                        if (pixelColor.A != 0 && pixelColor.B != 0 && pixelColor.G != 0)
-                            pic.SetPixel(w, h, Color.FromArgb(70, pixelColor));
-                    }
-                }
-            }
-
-            pictureBox.Image = pic;
         }
 
         public async void GenerateCommentsForAllItems()
@@ -3289,7 +3274,7 @@ namespace SAI_Editor
                 smartScriptLink = GetSmartScriptLinkByIndex(listViewSmartScripts.SmartScripts.IndexOf(selectedScript));
 
             string newComment = updatingFieldsBasedOnSelectedScript ? selectedScript.comment : await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
-            
+
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;
@@ -3314,7 +3299,7 @@ namespace SAI_Editor
                 smartScriptLink = GetSmartScriptLinkByIndex(listViewSmartScripts.SmartScripts.IndexOf(smartScript));
 
             string newComment = updatingFieldsBasedOnSelectedScript ? smartScript.comment : await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
-            
+
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
                 return;

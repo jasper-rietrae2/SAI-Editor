@@ -230,14 +230,7 @@ namespace SAI_Editor.Classes
                 }
             }
 
-            foreach (SmartScript smartScript in _smartScripts)
-            {
-                if (smartScript.entryorguid == script.entryorguid && smartScript.id == script.id)
-                {
-                    _smartScripts.Remove(smartScript);
-                    break;
-                }
-            }
+            _smartScripts.Remove(script);
         }
 
         public void RemoveSmartScript(int entryorguid, int id)
