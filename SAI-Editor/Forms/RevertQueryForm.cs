@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAI_Editor.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,6 +21,9 @@ namespace SAI_Editor.Forms
 
             if (!Directory.Exists("Reverts"))
                 Directory.CreateDirectory("Reverts");
+
+            if (!Settings.Default.CreateRevertQuery)
+                labelWarningSettingOff.Visible = true;
 
             calenderScriptsToRevert.TodayDate = DateTime.Now.ToUniversalTime();
             FillListViewWithDate();
