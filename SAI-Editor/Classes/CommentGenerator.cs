@@ -252,6 +252,10 @@ namespace SAI_Editor.Classes
                         fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(SourceTypes.SourceTypeGameobject, smartScript.entryorguid, true) + " - ";
                         fullLine += smartEventStrings[(SmartEvent)smartScript.event_type];
                         break;
+                    case 2: //! Areatrigger
+                        fullLine += "Areatrigger - ";
+                        fullLine += smartEventStrings[(SmartEvent)smartScript.event_type];
+                        break;
                     case 9: //! Actionlist
                         if (entryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist)
                         {
@@ -265,8 +269,6 @@ namespace SAI_Editor.Classes
 
                         fullLine += "On Script";
                         break;
-                    case 2: //! Areatrigger
-                        return String.Empty;
                 }
 
                 if (fullLine.Contains("_previousLineComment_"))
