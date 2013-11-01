@@ -250,6 +250,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\database_form_icon.ico" />
+    <Content Include="Resources\FastColoredTextBox.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\icon_add.ico" />
     <Content Include="Resources\icon_add_2.ico" />
     <None Include="Resources\icon_create_script.png" />
