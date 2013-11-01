@@ -8,14 +8,9 @@ using SAI_Editor.Classes;
 
 namespace SAI_Editor
 {
-    class ToolTipHelper
+    public static class ToolTipHelper
     {
         private static readonly Dictionary<string, DetailedToolTip> tooltips = new Dictionary<string, DetailedToolTip>();
-
-        public ToolTipHelper()
-        {
-
-        }
 
         public static DetailedToolTip GetControlToolTip(Control control)
         {
