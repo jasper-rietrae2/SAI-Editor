@@ -1020,6 +1020,10 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_CAST: //! Spell entry & Cast flags
                 case SmartAction.SMART_ACTION_INVOKER_CAST: //! Spell entry & Cast flags
                 case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO: //! Creature entry & Spell entry
+                case SmartAction.SMART_ACTION_SUMMON_CREATURE: //! Creature entry & Summon type
+                case SmartAction.SMART_ACTION_SET_UNIT_FIELD_BYTES_1: //! Bytes1flags & Type
+                case SmartAction.SMART_ACTION_REMOVE_UNIT_FIELD_BYTES_1: //! Bytes1flags & Type
+                case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE: //! Event phase 1 & 2
                     buttonActionParamOneSearch.Visible = true;
                     buttonActionParamTwoSearch.Visible = true;
                     break;
@@ -1028,15 +1032,9 @@ namespace SAI_Editor
                     buttonActionParamTwoSearch.Visible = true; //! Cast flags
                     buttonActionParamThreeSearch.Visible = true; //! Target type
                     break;
-                case SmartAction.SMART_ACTION_SUMMON_CREATURE:
-                    buttonActionParamOneSearch.Visible = true; //! Creature entry
-                    buttonActionParamTwoSearch.Visible = true; //! Summon type
-                    break;
                 case SmartAction.SMART_ACTION_WP_STOP: //! Quest entry
                 case SmartAction.SMART_ACTION_INTERRUPT_SPELL: //! Spell entry
                 case SmartAction.SMART_ACTION_SEND_GOSSIP_MENU: //! Gossip menu id & npc_text.id
-                case SmartAction.SMART_ACTION_SET_UNIT_FIELD_BYTES_1: //! Type
-                case SmartAction.SMART_ACTION_REMOVE_UNIT_FIELD_BYTES_1: //! Type
                     buttonActionParamTwoSearch.Visible = true;
                     break;
                 case SmartAction.SMART_ACTION_WP_START:
@@ -1047,10 +1045,6 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_FOLLOW:
                     buttonActionParamThreeSearch.Visible = true; //! Creature entry
                     buttonActionParamFourSearch.Visible = true; //! Creature entry
-                    break;
-                case SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE: //! Event phase 1 & 2
-                    buttonActionParamOneSearch.Visible = true;
-                    buttonActionParamTwoSearch.Visible = true;
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:  //! Event phase 1-6
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE: //! Emote entry 1-6
@@ -2153,6 +2147,40 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE:
                     new SingleSelectForm<SmartAiTemplates>(textBoxToChange).ShowDialog(this);
                     ParameterInstallAiTemplateChanged();
+                    break;
+                case SmartAction.SMART_ACTION_SET_UNIT_FIELD_BYTES_1:
+                case SmartAction.SMART_ACTION_REMOVE_UNIT_FIELD_BYTES_1:
+                    int searchType = 0;
+
+                    try
+                    {
+                        searchType = Convert.ToInt32(textBoxActionParam2.Text);
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("The second parameter (type) must be set to a valid search type (0, 2 or 3).", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        switch (searchType)
+                        {
+                            case 0:
+                                new SingleSelectForm<UnitStandStateType>(textBoxToChange).ShowDialog(this);
+                                break;
+                            //case 1:
+                            //    break;
+                            case 2:
+                                new MultiSelectForm<UnitStandFlags>(textBoxToChange).ShowDialog(this);
+                                break;
+                            case 3:
+                                new MultiSelectForm<UnitBytes1_Flags>(textBoxToChange).ShowDialog(this);
+                                break;
+                            default:
+                                MessageBox.Show("The second parameter (type) must be set to a valid search type (0, 2 or 3).", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
+                    }
+
                     break;
             }
         }
