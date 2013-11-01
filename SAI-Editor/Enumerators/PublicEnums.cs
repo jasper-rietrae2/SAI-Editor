@@ -573,4 +573,11 @@
         UNIT_STAND_FLAGS_TYPE       = 2,
         UNIT_BYTES1_FLAGS_TYPE      = 3,
     }
+
+    enum ActionlistTimerUpdateType
+    {
+        ACTIONLIST_UPDATE_OUT_OF_COMBAT = 0,
+        ACTIONLIST_UPDATE_IN_COMBAT     = 1,
+        ACTIONLIST_UPDATE_ALWAYS        = 2,
+    }
 }

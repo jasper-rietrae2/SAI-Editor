@@ -1035,6 +1035,7 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_WP_STOP: //! Quest entry
                 case SmartAction.SMART_ACTION_INTERRUPT_SPELL: //! Spell entry
                 case SmartAction.SMART_ACTION_SEND_GOSSIP_MENU: //! Gossip menu id & npc_text.id
+                case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST: //! Timer type
                     buttonActionParamTwoSearch.Visible = true;
                     break;
                 case SmartAction.SMART_ACTION_WP_START:
@@ -2312,6 +2313,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_SET_UNIT_FIELD_BYTES_1:
                 case SmartAction.SMART_ACTION_REMOVE_UNIT_FIELD_BYTES_1:
                     new SingleSelectForm<UnitFieldBytes1Types>(textBoxToChange).ShowDialog(this);
+                    break;
+                case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
+                    new SingleSelectForm<ActionlistTimerUpdateType>(textBoxToChange).ShowDialog(this);
                     break;
             }
         }
