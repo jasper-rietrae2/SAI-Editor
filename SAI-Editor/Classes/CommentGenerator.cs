@@ -271,16 +271,13 @@ namespace SAI_Editor.Classes
                         break;
                 }
 
-                if (fullLine.Contains("_previousLineComment_"))
+                if (fullLine.Contains("_previousLineComment_") && smartScriptLink != null)
                 {
-                    if (smartScriptLink != null)
-                    {
-                        fullLine = fullLine.Replace("_previousLineComment_", smartEventStrings[(SmartEvent)smartScriptLink.event_type]);
-                        smartScript.event_param1 = smartScriptLink.event_param1;
-                        smartScript.event_param2 = smartScriptLink.event_param2;
-                        smartScript.event_param3 = smartScriptLink.event_param3;
-                        smartScript.event_param4 = smartScriptLink.event_param4;
-                    }
+                    fullLine = fullLine.Replace("_previousLineComment_", smartEventStrings[(SmartEvent)smartScriptLink.event_type]);
+                    smartScript.event_param1 = smartScriptLink.event_param1;
+                    smartScript.event_param2 = smartScriptLink.event_param2;
+                    smartScript.event_param3 = smartScriptLink.event_param3;
+                    smartScript.event_param4 = smartScriptLink.event_param4;
                 }
 
                 fullLine = fullLine.Replace("_previousLineComment_", "MISSING LINK");
