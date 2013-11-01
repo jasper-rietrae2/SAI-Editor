@@ -2772,7 +2772,7 @@ namespace SAI_Editor
                     }
                 }
 
-                listViewSmartScripts.Init();
+                listViewSmartScripts.Init(true);
             }
 
             previousLinkFrom = newLinkFrom;
