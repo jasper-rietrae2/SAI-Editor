@@ -31,9 +31,9 @@ namespace SAI_Editor
         private void InitializeComponent()
         {
             this.listViewSelectableItems = new System.Windows.Forms.ListView();
+            this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonContinue = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // listViewSelectableItems
@@ -50,6 +50,11 @@ namespace SAI_Editor
             this.listViewSelectableItems.View = System.Windows.Forms.View.Details;
             this.listViewSelectableItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSelectableItems_ColumnClick);
             this.listViewSelectableItems.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listViewSelectableItems_ItemChecked);
+            // 
+            // columnHeader
+            // 
+            this.columnHeader.Text = "";
+            this.columnHeader.Width = 20;
             // 
             // buttonContinue
             // 
@@ -71,11 +76,6 @@ namespace SAI_Editor
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // columnHeader
-            // 
-            this.columnHeader.Text = "";
-            this.columnHeader.Width = 20;
-            // 
             // MultiSelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -89,7 +89,7 @@ namespace SAI_Editor
             this.MaximizeBox = false;
             this.Name = "MultiSelectForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Select something...";
+            this.Text = "Select items";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MultiSelectForm_KeyDown);
             this.ResumeLayout(false);
 
