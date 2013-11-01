@@ -3506,5 +3506,15 @@ namespace SAI_Editor
             listViewSmartScripts.Items.Clear();
             TryToLoadScript(entryorguid, source_type);
         }
+
+        private void textBoxId_TextChanged(object sender, EventArgs e)
+        {
+            if (listViewSmartScripts.SelectedItems.Count > 0)
+            {
+                listViewSmartScripts.SelectedSmartScript.id = XConverter.ToInt32(textBoxId.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                GenerateCommentAndResizeColumns();
+            }
+        }
     }
 }
