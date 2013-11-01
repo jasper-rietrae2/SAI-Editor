@@ -2970,22 +2970,22 @@ namespace SAI_Editor
             pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
 
-            //if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
-            //{
-            //    listViewSmartScripts.SelectedSmartScript.entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
-            //    listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-            //    GenerateCommentAndResizeColumns();
-            //}
+            if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
+            {
+                listViewSmartScripts.SelectedSmartScript.entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                GenerateCommentAndResizeColumns();
+            }
         }
 
         private void comboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
-            //{
-            //    listViewSmartScripts.SelectedSmartScript.entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
-            //    listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-            //    GenerateCommentAndResizeColumns();
-            //}
+            if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
+            {
+                listViewSmartScripts.SelectedSmartScript.source_type = (int)GetSourceTypeByIndex();
+                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                GenerateCommentAndResizeColumns();
+            }
         }
 
         private async void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
