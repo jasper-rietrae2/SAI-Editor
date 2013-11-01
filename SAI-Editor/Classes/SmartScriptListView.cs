@@ -91,29 +91,13 @@ namespace SAI_Editor.Classes
             get
             {
                 if (SelectedItems.Count > 0)
-                {
                     foreach (SmartScript smartScript in _smartScripts)
-                    {
-
-                        var item = SelectedItems[0];
-
-                        if (smartScript == ((SmartScriptListViewItem)item).Script)
+                        if (smartScript == ((SmartScriptListViewItem)SelectedItems[0]).Script)
                             return smartScript;
-                    }
-                }
 
                 return null;
             }
         }
-
-        //public SmartScript GetSmartScript(int entryorguid, int id)
-        //{
-        //    foreach (SmartScript smartScript in _smartScripts)
-        //        if (smartScript.entryorguid == entryorguid && smartScript.id == id)
-        //            return smartScript;
-
-        //    return null;
-        //}
 
         public int AddSmartScript(SmartScript script, bool listViewOnly = false)
         {
@@ -177,14 +161,8 @@ namespace SAI_Editor.Classes
                                 item.BackColor = phaseColors.First();
                                 foundColor = true;
                             }
-                            catch (IndexOutOfRangeException)
-                            {
-
-                            }
-                            catch (InvalidOperationException)
-                            {
-
-                            }
+                            catch (IndexOutOfRangeException) { }
+                            catch (InvalidOperationException) { }
                             catch (Exception ex)
                             {
                                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);

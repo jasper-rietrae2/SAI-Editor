@@ -10,25 +10,14 @@ namespace SAI_Editor.Classes
 {
     public class SmartScriptListViewItem : ListViewItem
     {
-
-        public SmartScriptListViewItem(string text)
-            : base(text)
-        {
-        }
-
         private SmartScript _script;
+
+        public SmartScriptListViewItem(string text) : base(text) { }
 
         public SmartScript Script
         {
-            get
-            {
-                return _script;
-            }
-            set
-            {
-                _script = value;
-            }
+            get { return _script; }
+            set { _script = value; }
         }
-
     }
 }
