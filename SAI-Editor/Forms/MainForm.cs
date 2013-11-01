@@ -74,7 +74,7 @@ namespace SAI_Editor
         public int lastSmartScriptIdOfScript = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
-        private int previousLinkFrom = 0;
+        private int previousLinkFrom = -1;
 
         public MainForm()
         {
