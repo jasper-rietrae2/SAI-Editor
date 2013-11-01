@@ -1071,7 +1071,7 @@ namespace SAI_Editor
             this.textBoxLinkFrom.Name = "textBoxLinkFrom";
             this.textBoxLinkFrom.Size = new System.Drawing.Size(39, 20);
             this.textBoxLinkFrom.TabIndex = 13;
-            this.textBoxLinkFrom.Text = "0";
+            this.textBoxLinkFrom.Text = "None";
             this.textBoxLinkFrom.TextChanged += new System.EventHandler(this.textBoxLinkFrom_TextChanged);
             this.textBoxLinkFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 

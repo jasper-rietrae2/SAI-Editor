@@ -884,7 +884,7 @@ namespace SAI_Editor
                 }
 
                 if (!foundLinkFromField)
-                    textBoxLinkFrom.Text = "-1";
+                    textBoxLinkFrom.Text = "None";
 
                 int event_type = selectedScript.event_type;
                 comboBoxEventType.SelectedIndex = event_type;
@@ -1787,7 +1787,7 @@ namespace SAI_Editor
             textBoxTargetType.Text = "0";
             textBoxEventChance.Text = "100";
             textBoxId.Text = "-1";
-            textBoxLinkFrom.Text = "-1";
+            textBoxLinkFrom.Text = "None";
             textBoxLinkTo.Text = "0";
             textBoxComments.Text = GetDefaultCommentForSourceType(GetSourceTypeByIndex());
             textBoxEventPhasemask.Text = "0";
@@ -2732,7 +2732,16 @@ namespace SAI_Editor
 
         private void textBoxLinkFrom_TextChanged(object sender, EventArgs e)
         {
-            int newLinkFrom = XConverter.ToInt32(textBoxLinkFrom.Text);
+            int newLinkFrom = 0;// XConverter.ToInt32(textBoxLinkFrom.Text);
+
+            try
+            {
+                newLinkFrom = Int32.Parse(textBoxLinkFrom.Text);
+            }
+            catch (Exception)
+            {
+                return;
+            }
 
             //! Only if the property was changed by hand (by user) and not by selecting a line
             if (!updatingFieldsBasedOnSelectedScript)
