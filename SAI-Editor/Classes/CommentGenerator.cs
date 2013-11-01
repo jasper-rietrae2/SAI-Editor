@@ -688,9 +688,9 @@ namespace SAI_Editor.Classes
 
                 if (fullLine.Contains("_getBytes1Flags_"))
                 {
-                    switch ((UnitFieldBytes1Type)smartScript.action_param2)
+                    switch ((UnitFieldBytes1Types)smartScript.action_param2)
                     {
-                        case UnitFieldBytes1Type.UnitStandStateType:
+                        case UnitFieldBytes1Types.UNIT_STAND_STAND_STATE_TYPE:
                         {
                             switch ((UnitStandStateType)smartScript.action_param1)
                             {
@@ -730,7 +730,12 @@ namespace SAI_Editor.Classes
                             }
                             break;
                         }
-                        case UnitFieldBytes1Type.UnitStandFlags:
+                        case UnitFieldBytes1Types.UNIT_PET_TALENTS_TYPE:
+                        {
+                            fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown bytes1 type>");
+                            break;
+                        }
+                        case UnitFieldBytes1Types.UNIT_STAND_FLAGS_TYPE:
                         {
                             switch ((UnitStandFlags)smartScript.action_param1)
                             {
@@ -751,7 +756,7 @@ namespace SAI_Editor.Classes
                             }
                             break;
                         }
-                        case UnitFieldBytes1Type.UnitBytes1_Flags:
+                        case UnitFieldBytes1Types.UNIT_BYTES1_FLAGS_TYPE:
                         {
                             switch ((UnitBytes1_Flags)smartScript.action_param1)
                             {

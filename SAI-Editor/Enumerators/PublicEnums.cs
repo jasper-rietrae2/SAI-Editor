@@ -325,13 +325,6 @@
         UNIT_DYNFLAG_TAPPED_BY_ALL_THREAT_LIST  = 0x0080        // Lua_UnitIsTappedByAllThreatList
     }
 
-    public enum UnitFieldBytes1Type
-    {
-        UnitStandStateType,
-        UnitStandFlags,
-        UnitBytes1_Flags,
-    }
-
     public enum UnitStandStateType : uint
     {
         UNIT_STAND_STATE_STAND             = 0,
