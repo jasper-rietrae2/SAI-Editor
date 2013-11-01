@@ -2686,6 +2686,14 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
+                if (listViewSmartScripts.SelectedSmartScript.id.ToString() == textBoxLinkTo.Text)
+                {
+                    MessageBox.Show("You can not link to or from the same id you're linking to.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textBoxLinkFrom.Text = GetLinkFromForSelection();
+                    textBoxLinkTo.Text = "0";
+                    return;
+                }
+
                 listViewSmartScripts.SelectedSmartScript.link = XConverter.ToInt32(textBoxLinkTo.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 GenerateCommentAndResizeColumns();
@@ -2751,7 +2759,7 @@ namespace SAI_Editor
             {
                 if (newLinkFrom == listViewSmartScripts.SelectedSmartScript.id)
                 {
-                    MessageBox.Show("You can not link to the same id you're linking to.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("You can not link to or from the same id you're linking to.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBoxLinkFrom.Text = GetLinkFromForSelection();
                     previousLinkFrom = -1;
                     return;
