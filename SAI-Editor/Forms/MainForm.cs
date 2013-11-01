@@ -867,24 +867,7 @@ namespace SAI_Editor
 
                 textBoxId.Text = selectedScript.id.ToString();
                 textBoxLinkTo.Text = selectedScript.link.ToString();
-
-                bool foundLinkFromField = false;
-
-                foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
-                {
-                    if (smartScript.entryorguid != originalEntryOrGuidAndSourceType.entryOrGuid || smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType)
-                        continue;
-
-                    if (smartScript.link > 0 && smartScript.link == selectedScript.id)
-                    {
-                        textBoxLinkFrom.Text = smartScript.id.ToString();
-                        foundLinkFromField = true;
-                        break;
-                    }
-                }
-
-                if (!foundLinkFromField)
-                    textBoxLinkFrom.Text = "None";
+                textBoxLinkFrom.Text = GetLinkFromForSelection();
 
                 int event_type = selectedScript.event_type;
                 comboBoxEventType.SelectedIndex = event_type;
@@ -969,6 +952,20 @@ namespace SAI_Editor
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private string GetLinkFromForSelection()
+        {
+            foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
+            {
+                if (smartScript.entryorguid != originalEntryOrGuidAndSourceType.entryOrGuid || smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType)
+                    continue;
+
+                if (smartScript.link > 0 && smartScript.link == listViewSmartScripts.SelectedSmartScript.id)
+                    return smartScript.id.ToString();
+            }
+
+            return "None";
         }
 
         private void AdjustAllParameterFields(int event_type, int action_type, int target_type)
@@ -2752,6 +2749,14 @@ namespace SAI_Editor
             //! Only if the property was changed by hand (by user) and not by selecting a line
             if (!updatingFieldsBasedOnSelectedScript)
             {
+                if (newLinkFrom == listViewSmartScripts.SelectedSmartScript.id)
+                {
+                    MessageBox.Show("You can not link to the same id you're linking to.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    textBoxLinkFrom.Text = GetLinkFromForSelection();
+                    previousLinkFrom = -1;
+                    return;
+                }
+
                 if (previousLinkFrom == newLinkFrom)
                     return;
 
