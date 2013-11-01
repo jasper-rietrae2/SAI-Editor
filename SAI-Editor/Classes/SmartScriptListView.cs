@@ -91,26 +91,34 @@ namespace SAI_Editor.Classes
             get
             {
                 if (SelectedItems.Count > 0)
+                {
                     foreach (SmartScript smartScript in _smartScripts)
-                        if (smartScript.entryorguid.ToString() == SelectedItems[0].SubItems[0].Text && smartScript.id.ToString() == SelectedItems[0].SubItems[2].Text)
+                    {
+
+                        var item = SelectedItems[0];
+
+                        if (smartScript == ((SmartScriptListViewItem)item).Script)
                             return smartScript;
+                    }
+                }
 
                 return null;
             }
         }
 
-        public SmartScript GetSmartScript(int entryorguid, int id)
-        {
-            foreach (SmartScript smartScript in _smartScripts)
-                if (smartScript.entryorguid == entryorguid && smartScript.id == id)
-                    return smartScript;
+        //public SmartScript GetSmartScript(int entryorguid, int id)
+        //{
+        //    foreach (SmartScript smartScript in _smartScripts)
+        //        if (smartScript.entryorguid == entryorguid && smartScript.id == id)
+        //            return smartScript;
 
-            return null;
-        }
+        //    return null;
+        //}
 
         public int AddSmartScript(SmartScript script, bool listViewOnly = false)
         {
-            ListViewItem lvi = new ListViewItem(script.entryorguid.ToString());
+            SmartScriptListViewItem lvi = new SmartScriptListViewItem(script.entryorguid.ToString());
+            lvi.Script = script;
             lvi.Name = script.entryorguid.ToString();
 
             foreach (PropertyInfo propInfo in _pinfo.Where(p => !p.Name.Equals("entryorguid")))
@@ -158,9 +166,9 @@ namespace SAI_Editor.Classes
 
                 foreach (SmartScript smartScript in smartScriptsPhaseList)
                 {
-                    foreach (ListViewItem item in Items)
+                    foreach (SmartScriptListViewItem item in Items.Cast<SmartScriptListViewItem>())
                     {
-                        if (item.Text == smartScript.entryorguid.ToString() && item.SubItems[2].Text == smartScript.id.ToString())
+                        if (item.Script == smartScript)
                         {
                             //! Try-catch has to be right here and not outside the loops. Otherwise all items coming after an
                             //! item that caused an exception will not be colored.
@@ -195,10 +203,10 @@ namespace SAI_Editor.Classes
         public void AddSmartScripts(List<SmartScript> scripts, bool listViewOnly = false)
         {
             List<ListViewItem> items = new List<ListViewItem>();
-
             foreach (SmartScript script in scripts)
             {
-                ListViewItem lvi = new ListViewItem(script.entryorguid.ToString());
+                SmartScriptListViewItem lvi = new SmartScriptListViewItem(script.entryorguid.ToString());
+                lvi.Script = script;
                 lvi.Name = script.entryorguid.ToString();
 
                 foreach (PropertyInfo propInfo in _pinfo.Where(p => !p.Name.Equals("entryorguid")))
@@ -221,9 +229,9 @@ namespace SAI_Editor.Classes
 
         public void RemoveSmartScript(SmartScript script)
         {
-            foreach (ListViewItem item in Items)
+            foreach (SmartScriptListViewItem item in Items.Cast<SmartScriptListViewItem>())
             {
-                if (item.Text == script.entryorguid.ToString() && item.SubItems[2].Text == script.id.ToString())
+                if (item.Script == script)
                 {
                     Items.Remove(item);
                     break;
@@ -233,32 +241,9 @@ namespace SAI_Editor.Classes
             _smartScripts.Remove(script);
         }
 
-        public void RemoveSmartScript(int entryorguid, int id)
-        {
-            foreach (ListViewItem item in Items)
-            {
-                if (item.Text == entryorguid.ToString() && item.SubItems[2].Text == id.ToString())
-                {
-                    Items.Remove(item);
-                    break;
-                }
-            }
-
-            _smartScripts.Remove(GetSmartScript(entryorguid, id));
-        }
-
         public void ReplaceSmartScript(SmartScript script)
         {
-            ListViewItem lvi = null;
-
-            foreach (ListViewItem item in Items)
-            {
-                if (item.SubItems[0].Text == script.entryorguid.ToString() && item.SubItems[2].Text == script.id.ToString())
-                {
-                    lvi = item;
-                    break;
-                }
-            }
+            SmartScriptListViewItem lvi = Items.Cast<SmartScriptListViewItem>().SingleOrDefault(p => p.Script == script);
 
             if (lvi == null)
                 return;
@@ -275,7 +260,7 @@ namespace SAI_Editor.Classes
                 lvi.SubItems.Add(propInfo.GetValue(script).ToString());
             }
 
-            _smartScripts[_smartScripts.IndexOf(GetSmartScript(script.entryorguid, script.id))] = script;
+            _smartScripts[_smartScripts.IndexOf(lvi.Script)] = script;
             HandleHighlightItems();
         }
 
