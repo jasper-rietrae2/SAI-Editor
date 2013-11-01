@@ -2745,6 +2745,7 @@ namespace SAI_Editor
             }
             catch (Exception)
             {
+                previousLinkFrom = -1;
                 return;
             }
 
