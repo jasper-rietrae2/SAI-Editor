@@ -61,7 +61,7 @@ namespace SAI_Editor
             foreach (ListViewItem item in listViewSelectableItems.CheckedItems)
                 foreach (var en in Enum.GetNames(typeof(T)))
                     if (en.Equals(item.SubItems[1].Text))
-                        mask += XConverter.ToInt32(Enum.Parse(typeof(T), en));
+                        mask += Convert.ToInt32(Enum.Parse(typeof(T), en));
 
             textBoxToChange.Text = mask.ToString();
             Close();
