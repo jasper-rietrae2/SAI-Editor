@@ -1434,6 +1434,11 @@ namespace SAI_Editor
                 MessageBox.Show("The entryorguid is either too big or too small.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            catch (FormatException)
+            {
+                MessageBox.Show("The entryorguid field does not contain a valid number.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             int source_type = (int)GetSourceTypeByIndex();
             string sourceTypeString = GetSourceTypeString((SourceTypes)source_type);
