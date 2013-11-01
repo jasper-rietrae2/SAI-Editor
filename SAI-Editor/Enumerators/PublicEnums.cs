@@ -572,4 +572,12 @@
         TEMPSUMMON_DEAD_DESPAWN                = 7,             // despawns when the creature disappears
         TEMPSUMMON_MANUAL_DESPAWN              = 8              // despawns when UnSummon() is called
     }
+
+    enum UnitFieldBytes1Types
+    {
+        UNIT_STAND_STAND_STATE_TYPE = 0,
+        UNIT_PET_TALENTS_TYPE       = 1,
+        UNIT_STAND_FLAGS_TYPE       = 2,
+        UNIT_BYTES1_FLAGS_TYPE      = 3,
+    }
 }
