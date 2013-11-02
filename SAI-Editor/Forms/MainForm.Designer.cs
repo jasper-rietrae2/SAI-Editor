@@ -70,8 +70,8 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
-            this.pictureBoxCreateScript = new System.Windows.Forms.PictureBox();
-            this.pictureBoxLoadScript = new System.Windows.Forms.PictureBox();
+            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.buttonSearchForCreature = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -170,10 +170,6 @@ namespace SAI_Editor
             this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
-            this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
-            this.labelPermanentTooltipTextTypes = new System.Windows.Forms.Label();
-            this.pictureBoxPermanentTooltip = new System.Windows.Forms.PictureBox();
             this.panelPermanentTooltipParameters = new System.Windows.Forms.Panel();
             this.labelPermanentTooltipTextParameters = new System.Windows.Forms.Label();
             this.labelPermanentTooltipParameterTitleTypes = new System.Windows.Forms.Label();
@@ -181,6 +177,12 @@ namespace SAI_Editor
             this.buttonNewLine = new System.Windows.Forms.Button();
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
+            this.timerExpandOrContract = new System.Windows.Forms.Timer(this.components);
+            this.timerShowPermanentTooltips = new System.Windows.Forms.Timer(this.components);
+            this.pictureBoxPermanentTooltip = new System.Windows.Forms.PictureBox();
+            this.labelPermanentTooltipTextTypes = new System.Windows.Forms.Label();
+            this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
+            this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -197,10 +199,10 @@ namespace SAI_Editor
             this.tabPageAction.SuspendLayout();
             this.tabPageTarget.SuspendLayout();
             this.groupBoxParameters.SuspendLayout();
-            this.panelPermanentTooltipTypes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
+            this.panelPermanentTooltipTypes.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelUser
@@ -572,6 +574,7 @@ namespace SAI_Editor
             this.pictureBoxCreateScript.Image = global::SAI_Editor.Properties.Resources.icon_create_script;
             this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
             this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
             this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
             this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxCreateScript.TabIndex = 16;
@@ -586,6 +589,7 @@ namespace SAI_Editor
             this.pictureBoxLoadScript.Image = global::SAI_Editor.Properties.Resources.icon_load_script1;
             this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
             this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
             this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
             this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxLoadScript.TabIndex = 16;
@@ -1096,7 +1100,7 @@ namespace SAI_Editor
             this.textBoxLinkFrom.Name = "textBoxLinkFrom";
             this.textBoxLinkFrom.Size = new System.Drawing.Size(39, 20);
             this.textBoxLinkFrom.TabIndex = 13;
-            this.textBoxLinkFrom.Text = "0";
+            this.textBoxLinkFrom.Text = "None";
             this.textBoxLinkFrom.TextChanged += new System.EventHandler(this.textBoxLinkFrom_TextChanged);
             this.textBoxLinkFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
@@ -1267,6 +1271,7 @@ namespace SAI_Editor
             this.textBoxId.Size = new System.Drawing.Size(41, 20);
             this.textBoxId.TabIndex = 6;
             this.textBoxId.Text = "0";
+            this.textBoxId.TextChanged += new System.EventHandler(this.textBoxId_TextChanged);
             this.textBoxId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // label8
@@ -1961,45 +1966,6 @@ namespace SAI_Editor
             this.groupBoxParameters.Text = "Parameters";
             this.groupBoxParameters.Visible = false;
             // 
-            // panelPermanentTooltipTypes
-            // 
-            this.panelPermanentTooltipTypes.BackColor = System.Drawing.Color.White;
-            this.panelPermanentTooltipTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTitleTypes);
-            this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTextTypes);
-            this.panelPermanentTooltipTypes.Controls.Add(this.pictureBoxPermanentTooltip);
-            this.panelPermanentTooltipTypes.Location = new System.Drawing.Point(12, 396);
-            this.panelPermanentTooltipTypes.Name = "panelPermanentTooltipTypes";
-            this.panelPermanentTooltipTypes.Size = new System.Drawing.Size(915, 30);
-            this.panelPermanentTooltipTypes.TabIndex = 25;
-            // 
-            // labelPermanentTooltipTitleTypes
-            // 
-            this.labelPermanentTooltipTitleTypes.AutoSize = true;
-            this.labelPermanentTooltipTitleTypes.Location = new System.Drawing.Point(26, 1);
-            this.labelPermanentTooltipTitleTypes.Name = "labelPermanentTooltipTitleTypes";
-            this.labelPermanentTooltipTitleTypes.Size = new System.Drawing.Size(181, 13);
-            this.labelPermanentTooltipTitleTypes.TabIndex = 31;
-            this.labelPermanentTooltipTitleTypes.Text = "Event type, action type or target type";
-            // 
-            // labelPermanentTooltipTextTypes
-            // 
-            this.labelPermanentTooltipTextTypes.AutoSize = true;
-            this.labelPermanentTooltipTextTypes.Location = new System.Drawing.Point(26, 15);
-            this.labelPermanentTooltipTextTypes.Name = "labelPermanentTooltipTextTypes";
-            this.labelPermanentTooltipTextTypes.Size = new System.Drawing.Size(144, 13);
-            this.labelPermanentTooltipTextTypes.TabIndex = 30;
-            this.labelPermanentTooltipTextTypes.Text = "Event/action/target type text";
-            // 
-            // pictureBoxPermanentTooltip
-            // 
-            this.pictureBoxPermanentTooltip.Image = global::SAI_Editor.Properties.Resources.permanent_tooltip_icon;
-            this.pictureBoxPermanentTooltip.Location = new System.Drawing.Point(6, 7);
-            this.pictureBoxPermanentTooltip.Name = "pictureBoxPermanentTooltip";
-            this.pictureBoxPermanentTooltip.Size = new System.Drawing.Size(14, 14);
-            this.pictureBoxPermanentTooltip.TabIndex = 29;
-            this.pictureBoxPermanentTooltip.TabStop = false;
-            // 
             // panelPermanentTooltipParameters
             // 
             this.panelPermanentTooltipParameters.BackColor = System.Drawing.Color.White;
@@ -2011,6 +1977,7 @@ namespace SAI_Editor
             this.panelPermanentTooltipParameters.Name = "panelPermanentTooltipParameters";
             this.panelPermanentTooltipParameters.Size = new System.Drawing.Size(915, 30);
             this.panelPermanentTooltipParameters.TabIndex = 25;
+            this.panelPermanentTooltipParameters.Visible = false;
             // 
             // labelPermanentTooltipTextParameters
             // 
@@ -2042,7 +2009,7 @@ namespace SAI_Editor
             // buttonNewLine
             // 
             this.buttonNewLine.Enabled = false;
-            this.buttonNewLine.Location = new System.Drawing.Point(649, 215);
+            this.buttonNewLine.Location = new System.Drawing.Point(648, 215);
             this.buttonNewLine.Name = "buttonNewLine";
             this.buttonNewLine.Size = new System.Drawing.Size(83, 23);
             this.buttonNewLine.TabIndex = 26;
@@ -2054,7 +2021,7 @@ namespace SAI_Editor
             // buttonGenerateSql
             // 
             this.buttonGenerateSql.Enabled = false;
-            this.buttonGenerateSql.Location = new System.Drawing.Point(844, 215);
+            this.buttonGenerateSql.Location = new System.Drawing.Point(845, 215);
             this.buttonGenerateSql.Name = "buttonGenerateSql";
             this.buttonGenerateSql.Size = new System.Drawing.Size(83, 23);
             this.buttonGenerateSql.TabIndex = 28;
@@ -2075,14 +2042,65 @@ namespace SAI_Editor
             this.buttonGenerateComments.Visible = false;
             this.buttonGenerateComments.Click += new System.EventHandler(this.buttonGenerateComments_Click);
             // 
+            // timerExpandOrContract
+            // 
+            this.timerExpandOrContract.Interval = 4;
+            this.timerExpandOrContract.Tick += new System.EventHandler(this.timerExpandOrContract_Tick);
+            // 
+            // timerShowPermanentTooltips
+            // 
+            this.timerShowPermanentTooltips.Interval = 4;
+            this.timerShowPermanentTooltips.Tick += new System.EventHandler(this.timerShowPermanentTooltips_Tick);
+            // 
+            // pictureBoxPermanentTooltip
+            // 
+            this.pictureBoxPermanentTooltip.Image = global::SAI_Editor.Properties.Resources.permanent_tooltip_icon;
+            this.pictureBoxPermanentTooltip.Location = new System.Drawing.Point(6, 7);
+            this.pictureBoxPermanentTooltip.Name = "pictureBoxPermanentTooltip";
+            this.pictureBoxPermanentTooltip.Size = new System.Drawing.Size(14, 14);
+            this.pictureBoxPermanentTooltip.TabIndex = 29;
+            this.pictureBoxPermanentTooltip.TabStop = false;
+            // 
+            // labelPermanentTooltipTextTypes
+            // 
+            this.labelPermanentTooltipTextTypes.AutoSize = true;
+            this.labelPermanentTooltipTextTypes.Location = new System.Drawing.Point(26, 15);
+            this.labelPermanentTooltipTextTypes.Name = "labelPermanentTooltipTextTypes";
+            this.labelPermanentTooltipTextTypes.Size = new System.Drawing.Size(144, 13);
+            this.labelPermanentTooltipTextTypes.TabIndex = 30;
+            this.labelPermanentTooltipTextTypes.Text = "Event/action/target type text";
+            // 
+            // labelPermanentTooltipTitleTypes
+            // 
+            this.labelPermanentTooltipTitleTypes.AutoSize = true;
+            this.labelPermanentTooltipTitleTypes.Location = new System.Drawing.Point(26, 1);
+            this.labelPermanentTooltipTitleTypes.Name = "labelPermanentTooltipTitleTypes";
+            this.labelPermanentTooltipTitleTypes.Size = new System.Drawing.Size(181, 13);
+            this.labelPermanentTooltipTitleTypes.TabIndex = 31;
+            this.labelPermanentTooltipTitleTypes.Text = "Event type, action type or target type";
+            // 
+            // panelPermanentTooltipTypes
+            // 
+            this.panelPermanentTooltipTypes.BackColor = System.Drawing.Color.White;
+            this.panelPermanentTooltipTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTitleTypes);
+            this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTextTypes);
+            this.panelPermanentTooltipTypes.Controls.Add(this.pictureBoxPermanentTooltip);
+            this.panelPermanentTooltipTypes.Location = new System.Drawing.Point(12, 395);
+            this.panelPermanentTooltipTypes.Name = "panelPermanentTooltipTypes";
+            this.panelPermanentTooltipTypes.Size = new System.Drawing.Size(915, 30);
+            this.panelPermanentTooltipTypes.TabIndex = 25;
+            this.panelPermanentTooltipTypes.Visible = false;
+            // 
             // listViewSmartScripts
             // 
+            this.listViewSmartScripts.EnablePhaseHighlighting = true;
             this.listViewSmartScripts.FullRowSelect = true;
             this.listViewSmartScripts.HideSelection = false;
             this.listViewSmartScripts.Location = new System.Drawing.Point(12, 244);
             this.listViewSmartScripts.MultiSelect = false;
             this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(915, 214);
+            this.listViewSmartScripts.Size = new System.Drawing.Size(915, 213);
             this.listViewSmartScripts.TabIndex = 24;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
@@ -2142,12 +2160,12 @@ namespace SAI_Editor
             this.tabPageTarget.ResumeLayout(false);
             this.tabPageTarget.PerformLayout();
             this.groupBoxParameters.ResumeLayout(false);
-            this.panelPermanentTooltipTypes.ResumeLayout(false);
-            this.panelPermanentTooltipTypes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
             this.panelPermanentTooltipParameters.ResumeLayout(false);
             this.panelPermanentTooltipParameters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
+            this.panelPermanentTooltipTypes.ResumeLayout(false);
+            this.panelPermanentTooltipTypes.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2261,7 +2279,7 @@ namespace SAI_Editor
         private System.Windows.Forms.ToolStripMenuItem menuItemDeleteSelectedRow;
         private System.Windows.Forms.TextBox textBoxTargetO;
         private System.Windows.Forms.Label labelTargetO;
-        public System.Windows.Forms.PictureBox pictureBoxLoadScript;
+        public SAI_Editor.Classes.PictureBoxDisableable pictureBoxLoadScript;
         public System.Windows.Forms.TextBox textBoxEventPhasemask;
         public System.Windows.Forms.TextBox textBoxEventFlags;
         private System.Windows.Forms.Button buttonSearchWorldDb;
@@ -2287,10 +2305,6 @@ namespace SAI_Editor
         private System.Windows.Forms.Button buttonTargetParamOneSearch;
         private System.Windows.Forms.ToolStripMenuItem otherToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem smartAIWikiToolStripMenuItem;
-        private System.Windows.Forms.Panel panelPermanentTooltipTypes;
-        private System.Windows.Forms.PictureBox pictureBoxPermanentTooltip;
-        private System.Windows.Forms.Label labelPermanentTooltipTextTypes;
-        private System.Windows.Forms.Label labelPermanentTooltipTitleTypes;
         private System.Windows.Forms.Panel panelPermanentTooltipParameters;
         private System.Windows.Forms.Label labelPermanentTooltipTextParameters;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -2300,11 +2314,17 @@ namespace SAI_Editor
         public SAI_Editor.Classes.SmartScriptListView listViewSmartScripts;
         private System.Windows.Forms.Button buttonGenerateComments;
         public System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
-        public System.Windows.Forms.PictureBox pictureBoxCreateScript;
+        public SAI_Editor.Classes.PictureBoxDisableable pictureBoxCreateScript;
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateCommentListView;
         private System.Windows.Forms.ToolStripMenuItem menuItemLoadSelectedEntry;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.Label labelPermanentTooltipParameterTitleTypes;
+        private System.Windows.Forms.Timer timerExpandOrContract;
+        private System.Windows.Forms.Timer timerShowPermanentTooltips;
+        private System.Windows.Forms.PictureBox pictureBoxPermanentTooltip;
+        private System.Windows.Forms.Label labelPermanentTooltipTextTypes;
+        private System.Windows.Forms.Label labelPermanentTooltipTitleTypes;
+        private System.Windows.Forms.Panel panelPermanentTooltipTypes;
     }
 }
 

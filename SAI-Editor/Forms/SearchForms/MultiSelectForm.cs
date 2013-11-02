@@ -16,15 +16,13 @@ namespace SAI_Editor
             InitializeComponent();
 
             this.textBoxToChange = textBoxToChange;
-            listViewSelectableItems.Columns.Add("", 20, HorizontalAlignment.Left);
-
-            int bitmask = XConverter.ToInt32(textBoxToChange.Text);
 
             listViewSelectableItems.Columns.Add(typeof(T).Name, 235, HorizontalAlignment.Left);
 
             foreach (var en in Enum.GetNames(typeof(T)))
                 listViewSelectableItems.Items.Add("").SubItems.Add(en);
 
+            int bitmask = XConverter.ToInt32(textBoxToChange.Text);
             bool anyFlag = false;
 
             foreach (ListViewItem item in listViewSelectableItems.Items)
@@ -63,7 +61,7 @@ namespace SAI_Editor
             foreach (ListViewItem item in listViewSelectableItems.CheckedItems)
                 foreach (var en in Enum.GetNames(typeof(T)))
                     if (en.Equals(item.SubItems[1].Text))
-                        mask += XConverter.ToInt32(Enum.Parse(typeof(T), en));
+                        mask += Convert.ToInt32(Enum.Parse(typeof(T), en));
 
             textBoxToChange.Text = mask.ToString();
             Close();

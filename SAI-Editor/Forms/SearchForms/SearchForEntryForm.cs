@@ -19,11 +19,15 @@ namespace SAI_Editor
         private readonly MySqlConnectionStringBuilder connectionString;
         private readonly SourceTypes sourceTypeToSearchFor;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+        private CancellationTokenSource _cts;
         private int previousSearchType = 0;
-
         private bool _isBusy = false;
 
-        private CancellationTokenSource _cts;
+        public class Item
+        {
+            public string ItemName { get; set; }
+            public List<string> SubItems { get; set; }
+        }
 
         public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, string startEntryString, SourceTypes sourceTypeToSearchFor)
         {
@@ -42,11 +46,11 @@ namespace SAI_Editor
                 listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
             }
 
-            listViewEntryResults.ColumnClick += listViewEntryResults_ColumnClick;
-            listViewEntryResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-
             _cts = new CancellationTokenSource();
+        }
 
+        private void SearchForEntryForm_Load(object sender, EventArgs e)
+        {
             switch (sourceTypeToSearchFor)
             {
                 case SourceTypes.SourceTypeCreature:
@@ -657,29 +661,29 @@ namespace SAI_Editor
 
         private void AddItemToListView(ListView listView, IEnumerable<Item> items)
         {
-
-            List<ListViewItem> lvItems = new List<ListViewItem>();
-
-            Invoke((MethodInvoker)delegate
+            try
             {
+                List<ListViewItem> lvItems = new List<ListViewItem>();
 
-                foreach (var item in items)
+                Invoke((MethodInvoker)delegate
                 {
-
-                    var lvi = new ListViewItem(item.ItemName);
-
-                    foreach (string subItem in item.SubItems)
+                    foreach (var item in items)
                     {
-                        lvi.SubItems.Add(subItem);
+                        var lvi = new ListViewItem(item.ItemName);
+
+                        foreach (string subItem in item.SubItems)
+                            lvi.SubItems.Add(subItem);
+
+                        lvItems.Add(lvi);
                     }
 
-                    lvItems.Add(lvi);
-
-                }
-
-                listView.Items.AddRange(lvItems.ToArray());
-            });
-
+                    listView.Items.AddRange(lvItems.ToArray());
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         //private void AddItemToListView(ListView listView, string item, string subItem1, string subItem2, string subItem3, string subItem4)
@@ -770,6 +774,7 @@ namespace SAI_Editor
             //! Disable the 'has ainame' checkbox when the user selected actionlist for search type
             checkBoxHasAiName.Enabled = comboBoxSearchType.SelectedIndex != 8;
             listViewEntryResults.Columns.Clear();
+            bool previousSearchForAreaTrigger = previousSearchType == 6 || previousSearchType == 7;
 
             switch (comboBoxSearchType.SelectedIndex)
             {
@@ -778,7 +783,7 @@ namespace SAI_Editor
                 case 3: //! Gameobject entry
                 case 5: //! Gameobject guid
                 case 8: //! Actionlist
-                    if (previousSearchType == 6 || previousSearchType == 7)
+                    if (previousSearchForAreaTrigger)
                     {
                         StopRunningThread();
                         listViewEntryResults.Items.Clear();
@@ -788,9 +793,20 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
                     listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
                     break;
+                case 1: //! Creature name
+                case 4: //! Gameobject name
+                    if (previousSearchForAreaTrigger)
+                    {
+                        StopRunningThread();
+                        listViewEntryResults.Items.Clear();
+                    }
+
+                    listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
+                    listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
+                    break;
                 case 6: //! Areatrigger id
                 case 7: //! Areatrigger map id
-                    if (!(previousSearchType == 6 || previousSearchType == 7))
+                    if (!previousSearchForAreaTrigger)
                     {
                         StopRunningThread();
                         listViewEntryResults.Items.Clear();
@@ -803,17 +819,6 @@ namespace SAI_Editor
                     listViewEntryResults.Columns.Add("Y", 75, HorizontalAlignment.Left);
                     listViewEntryResults.Columns.Add("Z", 75, HorizontalAlignment.Left);
                     break;
-                case 1: //! Creature name
-                case 4: //! Gameobject name
-                    if (previousSearchType == 6 || previousSearchType == 7)
-                    {
-                        StopRunningThread();
-                        listViewEntryResults.Items.Clear();
-                    }
-
-                    listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
-                    listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
-                    break;
             }
 
             previousSearchType = comboBoxSearchType.SelectedIndex;
@@ -823,15 +828,5 @@ namespace SAI_Editor
         {
             StopRunningThread();
         }
-
-        public class Item
-        {
-
-            public string ItemName { get; set; }
-
-            public List<string> SubItems { get; set; }
-
-        }
-
     }
 }

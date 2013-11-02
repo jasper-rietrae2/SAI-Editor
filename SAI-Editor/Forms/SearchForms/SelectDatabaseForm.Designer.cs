@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectDatabaseForm));
             this.listViewDatabases = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonContinue = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -37,6 +38,8 @@
             // 
             // listViewDatabases
             // 
+            this.listViewDatabases.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
             this.listViewDatabases.FullRowSelect = true;
             this.listViewDatabases.Location = new System.Drawing.Point(12, 25);
             this.listViewDatabases.MultiSelect = false;
@@ -45,8 +48,14 @@
             this.listViewDatabases.TabIndex = 0;
             this.listViewDatabases.UseCompatibleStateImageBehavior = false;
             this.listViewDatabases.View = System.Windows.Forms.View.Details;
+            this.listViewDatabases.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewDatabases_ColumnClick);
             this.listViewDatabases.SelectedIndexChanged += new System.EventHandler(this.listViewDatabases_SelectedIndexChanged);
             this.listViewDatabases.DoubleClick += new System.EventHandler(this.listViewDatabases_DoubleClick);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Database";
+            this.columnHeader1.Width = 198;
             // 
             // buttonContinue
             // 
@@ -105,5 +114,6 @@
         private System.Windows.Forms.Button buttonContinue;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

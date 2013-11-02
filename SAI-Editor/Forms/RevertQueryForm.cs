@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SAI_Editor.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +19,13 @@ namespace SAI_Editor.Forms
         {
             InitializeComponent();
 
-            calenderScriptsToRevert.TodayDate = DateTime.Now;
+            if (!Directory.Exists("Reverts"))
+                Directory.CreateDirectory("Reverts");
+
+            if (!Settings.Default.CreateRevertQuery)
+                labelWarningSettingOff.Visible = true;
+
+            calenderScriptsToRevert.TodayDate = DateTime.Now.ToUniversalTime();
             FillListViewWithDate();
         }
 
@@ -35,7 +42,7 @@ namespace SAI_Editor.Forms
 
             foreach (string file in allFilesList)
             {
-                DateTime createTime = File.GetCreationTime(file);
+                DateTime createTime = File.GetCreationTime(file).ToUniversalTime();
 
                 //! If the file was created after or before the selection of the user, don't list it
                 if (createTime.CompareTo(calenderScriptsToRevert.SelectionStart) < 0 && createTime.CompareTo(calenderScriptsToRevert.SelectionEnd) < 0)

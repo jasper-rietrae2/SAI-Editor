@@ -252,6 +252,10 @@ namespace SAI_Editor.Classes
                         fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(SourceTypes.SourceTypeGameobject, smartScript.entryorguid, true) + " - ";
                         fullLine += smartEventStrings[(SmartEvent)smartScript.event_type];
                         break;
+                    case 2: //! Areatrigger
+                        fullLine += "Areatrigger - ";
+                        fullLine += (SmartEvent)smartScript.event_type != SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER ? "INCORRECT EVENT TYPE" : "On Trigger";
+                        break;
                     case 9: //! Actionlist
                         if (entryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist)
                         {
@@ -265,20 +269,15 @@ namespace SAI_Editor.Classes
 
                         fullLine += "On Script";
                         break;
-                    case 2: //! Areatrigger
-                        return String.Empty;
                 }
 
-                if (fullLine.Contains("_previousLineComment_"))
+                if (fullLine.Contains("_previousLineComment_") && smartScriptLink != null)
                 {
-                    if (smartScriptLink != null)
-                    {
-                        fullLine = fullLine.Replace("_previousLineComment_", smartEventStrings[(SmartEvent)smartScriptLink.event_type]);
-                        smartScript.event_param1 = smartScriptLink.event_param1;
-                        smartScript.event_param2 = smartScriptLink.event_param2;
-                        smartScript.event_param3 = smartScriptLink.event_param3;
-                        smartScript.event_param4 = smartScriptLink.event_param4;
-                    }
+                    fullLine = fullLine.Replace("_previousLineComment_", smartEventStrings[(SmartEvent)smartScriptLink.event_type]);
+                    smartScript.event_param1 = smartScriptLink.event_param1;
+                    smartScript.event_param2 = smartScriptLink.event_param2;
+                    smartScript.event_param3 = smartScriptLink.event_param3;
+                    smartScript.event_param4 = smartScriptLink.event_param4;
                 }
 
                 fullLine = fullLine.Replace("_previousLineComment_", "MISSING LINK");
@@ -689,9 +688,9 @@ namespace SAI_Editor.Classes
 
                 if (fullLine.Contains("_getBytes1Flags_"))
                 {
-                    switch ((UnitFieldBytes1Type)smartScript.action_param2)
+                    switch ((UnitFieldBytes1Types)smartScript.action_param2)
                     {
-                        case UnitFieldBytes1Type.UnitStandStateType:
+                        case UnitFieldBytes1Types.UNIT_STAND_STAND_STATE_TYPE:
                         {
                             switch ((UnitStandStateType)smartScript.action_param1)
                             {
@@ -731,7 +730,12 @@ namespace SAI_Editor.Classes
                             }
                             break;
                         }
-                        case UnitFieldBytes1Type.UnitStandFlags:
+                        case UnitFieldBytes1Types.UNIT_PET_TALENTS_TYPE:
+                        {
+                            fullLine = fullLine.Replace("_getBytes1Flags_", "<Unknown bytes1 type>");
+                            break;
+                        }
+                        case UnitFieldBytes1Types.UNIT_STAND_FLAGS_TYPE:
                         {
                             switch ((UnitStandFlags)smartScript.action_param1)
                             {
@@ -752,7 +756,7 @@ namespace SAI_Editor.Classes
                             }
                             break;
                         }
-                        case UnitFieldBytes1Type.UnitBytes1_Flags:
+                        case UnitFieldBytes1Types.UNIT_BYTES1_FLAGS_TYPE:
                         {
                             switch ((UnitBytes1_Flags)smartScript.action_param1)
                             {

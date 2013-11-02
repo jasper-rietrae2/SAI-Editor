@@ -39,6 +39,7 @@
             this.openFileWithToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDirectoryOfFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteRevertQueryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelWarningSettingOff = new System.Windows.Forms.Label();
             this.listViewContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,9 +66,9 @@
             // 
             // buttonExecuteSelectedScript
             // 
-            this.buttonExecuteSelectedScript.Location = new System.Drawing.Point(433, 186);
+            this.buttonExecuteSelectedScript.Location = new System.Drawing.Point(441, 186);
             this.buttonExecuteSelectedScript.Name = "buttonExecuteSelectedScript";
-            this.buttonExecuteSelectedScript.Size = new System.Drawing.Size(149, 23);
+            this.buttonExecuteSelectedScript.Size = new System.Drawing.Size(141, 23);
             this.buttonExecuteSelectedScript.TabIndex = 3;
             this.buttonExecuteSelectedScript.Text = "Execute selected script";
             this.buttonExecuteSelectedScript.UseVisualStyleBackColor = true;
@@ -120,11 +121,24 @@
             this.deleteRevertQueryToolStripMenuItem.Text = "Delete revert query";
             this.deleteRevertQueryToolStripMenuItem.Click += new System.EventHandler(this.deleteRevertQueryToolStripMenuItem_Click);
             // 
+            // labelWarningSettingOff
+            // 
+            this.labelWarningSettingOff.AutoSize = true;
+            this.labelWarningSettingOff.ForeColor = System.Drawing.Color.Red;
+            this.labelWarningSettingOff.Location = new System.Drawing.Point(18, 192);
+            this.labelWarningSettingOff.Name = "labelWarningSettingOff";
+            this.labelWarningSettingOff.Size = new System.Drawing.Size(418, 13);
+            this.labelWarningSettingOff.TabIndex = 5;
+            this.labelWarningSettingOff.Text = "Warning: revert queries are not currently being generated because the setting is " +
+    "not on.";
+            this.labelWarningSettingOff.Visible = false;
+            // 
             // RevertQueryForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(594, 217);
+            this.Controls.Add(this.labelWarningSettingOff);
             this.Controls.Add(this.calenderScriptsToRevert);
             this.Controls.Add(this.buttonExecuteSelectedScript);
             this.Controls.Add(this.listViewScripts);
@@ -138,6 +152,7 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RevertQueryForm_KeyDown);
             this.listViewContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -152,5 +167,6 @@
         private System.Windows.Forms.ToolStripMenuItem openFileWithToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openDirectoryOfFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteRevertQueryToolStripMenuItem;
+        private System.Windows.Forms.Label labelWarningSettingOff;
     }
 }

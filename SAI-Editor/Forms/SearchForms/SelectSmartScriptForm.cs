@@ -29,9 +29,6 @@ namespace SAI_Editor
 
             foreach (ColumnHeader header in listViewSmartScripts.Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-
-            buttonLoadScript.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
-            listViewSmartScripts.Anchor = AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Left;
         }
 
         private void listBoxGuids_SelectedIndexChanged(object sender, EventArgs e)

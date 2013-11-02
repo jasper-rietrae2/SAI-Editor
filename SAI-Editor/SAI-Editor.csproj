@@ -62,9 +62,13 @@
     <Compile Include="Classes\Constants.cs" />
     <Compile Include="Classes\Database\Classes\Creature.cs" />
     <Compile Include="Classes\Database\Classes\Gameobject.cs" />
+    <Compile Include="Classes\PictureBoxDisableable.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\SmartScriptListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\SmartScriptListViewItem.cs" />
     <Compile Include="Classes\XConverter.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
@@ -246,7 +250,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\1378477411_33795.ico" />
+    <Content Include="Resources\database_form_icon.ico" />
+    <Content Include="Resources\FastColoredTextBox.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\icon_add.ico" />
     <Content Include="Resources\icon_add_2.ico" />
     <None Include="Resources\icon_create_script.png" />

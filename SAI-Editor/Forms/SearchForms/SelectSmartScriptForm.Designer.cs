@@ -47,6 +47,10 @@
             // 
             // listViewSmartScripts
             // 
+            this.listViewSmartScripts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listViewSmartScripts.EnablePhaseHighlighting = false;
             this.listViewSmartScripts.FullRowSelect = true;
             this.listViewSmartScripts.Location = new System.Drawing.Point(67, 25);
             this.listViewSmartScripts.MultiSelect = false;
@@ -69,6 +73,7 @@
             // 
             // buttonLoadScript
             // 
+            this.buttonLoadScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonLoadScript.Location = new System.Drawing.Point(880, 268);
             this.buttonLoadScript.Name = "buttonLoadScript";
             this.buttonLoadScript.Size = new System.Drawing.Size(148, 23);

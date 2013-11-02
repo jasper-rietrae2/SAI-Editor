@@ -23,9 +23,7 @@ namespace SAI_Editor.SearchForms
 
             listViewSelectableItems.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
-            if (String.IsNullOrWhiteSpace(textBoxToChange.Text) || textBoxToChange.Text == "0")
-                listViewSelectableItems.Items[0].Selected = true;
-            else
+            if (!String.IsNullOrWhiteSpace(textBoxToChange.Text) && textBoxToChange.Text != "0")
             {
                 foreach (ListViewItem item in listViewSelectableItems.Items)
                 {
@@ -37,6 +35,8 @@ namespace SAI_Editor.SearchForms
                     }
                 }
             }
+            else
+                listViewSelectableItems.Items[0].Selected = true;
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)

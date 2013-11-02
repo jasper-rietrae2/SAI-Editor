@@ -68,6 +68,7 @@
             this.listViewScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewScripts_ColumnClick);
             this.listViewScripts.SelectedIndexChanged += new System.EventHandler(this.listViewScripts_SelectedIndexChanged);
             this.listViewScripts.DoubleClick += new System.EventHandler(this.listViewScripts_DoubleClick);
+            this.listViewScripts.EnablePhaseHighlighting = false;
             // 
             // SearchForLinkForm
             // 

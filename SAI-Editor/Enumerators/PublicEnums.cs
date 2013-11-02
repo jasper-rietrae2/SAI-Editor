@@ -325,13 +325,6 @@
         UNIT_DYNFLAG_TAPPED_BY_ALL_THREAT_LIST  = 0x0080        // Lua_UnitIsTappedByAllThreatList
     }
 
-    public enum UnitFieldBytes1Type
-    {
-        UnitStandStateType,
-        UnitStandFlags,
-        UnitBytes1_Flags,
-    }
-
     public enum UnitStandStateType : uint
     {
         UNIT_STAND_STATE_STAND             = 0,
@@ -477,6 +470,27 @@
         SMART_EVENT_PHASE_6                 = 0x20,
     }
 
+    public enum PhaseMasks
+    {
+        PHASEMASK_NEVER    = 0x00,
+        PHASEMASK_2        = 0x02,
+        PHASEMASK_3        = 0x04,
+        PHASEMASK_4        = 0x08,
+        PHASEMASK_5        = 0x10,
+        PHASEMASK_6        = 0x20,
+        PHASEMASK_7        = 0x40,
+        PHASEMASK_8        = 0x80,
+        PHASEMASK_9        = 0x100,
+        PHASEMASK_10       = 0x200,
+        PHASEMASK_11       = 0x400,
+        PHASEMASK_12       = 0x800,
+        PHASEMASK_13       = 0x1000,
+        PHASEMASK_14       = 0x2000,
+        PHASEMASK_15       = 0x4000,
+        // etc....
+        PHASEMASK_ANYWHERE = ~0,   //! -1, 0xFFFFFFFF, etc.
+    }
+
     public enum PowerTypes
     {
         POWER_MANA                          = 0,
@@ -550,5 +564,20 @@
         TEMPSUMMON_CORPSE_TIMED_DESPAWN        = 6,             // despawns after a specified time after death
         TEMPSUMMON_DEAD_DESPAWN                = 7,             // despawns when the creature disappears
         TEMPSUMMON_MANUAL_DESPAWN              = 8              // despawns when UnSummon() is called
+    }
+
+    enum UnitFieldBytes1Types
+    {
+        UNIT_STAND_STAND_STATE_TYPE = 0,
+        UNIT_PET_TALENTS_TYPE       = 1,
+        UNIT_STAND_FLAGS_TYPE       = 2,
+        UNIT_BYTES1_FLAGS_TYPE      = 3,
+    }
+
+    enum ActionlistTimerUpdateType
+    {
+        ACTIONLIST_UPDATE_OUT_OF_COMBAT = 0,
+        ACTIONLIST_UPDATE_IN_COMBAT     = 1,
+        ACTIONLIST_UPDATE_ALWAYS        = 2,
     }
 }

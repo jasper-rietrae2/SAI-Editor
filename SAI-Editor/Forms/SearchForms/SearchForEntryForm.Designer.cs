@@ -126,6 +126,9 @@
             // 
             // listViewEntryResults
             // 
+            this.listViewEntryResults.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.listViewEntryResults.FullRowSelect = true;
             this.listViewEntryResults.Location = new System.Drawing.Point(12, 121);
             this.listViewEntryResults.MultiSelect = false;
@@ -134,6 +137,7 @@
             this.listViewEntryResults.TabIndex = 11;
             this.listViewEntryResults.UseCompatibleStateImageBehavior = false;
             this.listViewEntryResults.View = System.Windows.Forms.View.Details;
+            this.listViewEntryResults.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewEntryResults_ColumnClick);
             this.listViewEntryResults.DoubleClick += new System.EventHandler(this.listViewEntryResults_DoubleClick);
             // 
             // SearchForEntryForm
@@ -150,6 +154,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Search for an entry";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchForEntryForm_FormClosing);
+            this.Load += new System.EventHandler(this.SearchForEntryForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchForEntryForm_KeyDown);
             this.groupBoxSearchInfo.ResumeLayout(false);
             this.groupBoxSearchInfo.PerformLayout();

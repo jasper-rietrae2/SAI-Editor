@@ -31,6 +31,7 @@ namespace SAI_Editor
         private void InitializeComponent()
         {
             this.listViewSelectableItems = new System.Windows.Forms.ListView();
+            this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.buttonContinue = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -38,6 +39,8 @@ namespace SAI_Editor
             // listViewSelectableItems
             // 
             this.listViewSelectableItems.CheckBoxes = true;
+            this.listViewSelectableItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader});
             this.listViewSelectableItems.FullRowSelect = true;
             this.listViewSelectableItems.Location = new System.Drawing.Point(12, 12);
             this.listViewSelectableItems.Name = "listViewSelectableItems";
@@ -47,6 +50,11 @@ namespace SAI_Editor
             this.listViewSelectableItems.View = System.Windows.Forms.View.Details;
             this.listViewSelectableItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSelectableItems_ColumnClick);
             this.listViewSelectableItems.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listViewSelectableItems_ItemChecked);
+            // 
+            // columnHeader
+            // 
+            this.columnHeader.Text = "";
+            this.columnHeader.Width = 20;
             // 
             // buttonContinue
             // 
@@ -81,7 +89,7 @@ namespace SAI_Editor
             this.MaximizeBox = false;
             this.Name = "MultiSelectForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Select something...";
+            this.Text = "Select items";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MultiSelectForm_KeyDown);
             this.ResumeLayout(false);
 
@@ -92,5 +100,6 @@ namespace SAI_Editor
         private System.Windows.Forms.Button buttonContinue;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.ListView listViewSelectableItems;
+        private System.Windows.Forms.ColumnHeader columnHeader;
     }
 }
