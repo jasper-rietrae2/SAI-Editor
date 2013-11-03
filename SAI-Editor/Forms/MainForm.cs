@@ -2160,26 +2160,25 @@ namespace SAI_Editor
                     catch (Exception)
                     {
                         MessageBox.Show("The second parameter (type) must be set to a valid search type (0, 2 or 3).", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
-                    finally
+
+                    switch (searchType)
                     {
-                        switch (searchType)
-                        {
-                            case 0:
-                                new SingleSelectForm<UnitStandStateType>(textBoxToChange).ShowDialog(this);
-                                break;
-                            //case 1:
-                            //    break;
-                            case 2:
-                                new MultiSelectForm<UnitStandFlags>(textBoxToChange).ShowDialog(this);
-                                break;
-                            case 3:
-                                new MultiSelectForm<UnitBytes1_Flags>(textBoxToChange).ShowDialog(this);
-                                break;
-                            default:
-                                MessageBox.Show("The second parameter (type) must be set to a valid search type (0, 2 or 3).", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                break;
-                        }
+                        case 0:
+                            new SingleSelectForm<UnitStandStateType>(textBoxToChange).ShowDialog(this);
+                            break;
+                        //case 1:
+                        //    break;
+                        case 2:
+                            new MultiSelectForm<UnitStandFlags>(textBoxToChange).ShowDialog(this);
+                            break;
+                        case 3:
+                            new MultiSelectForm<UnitBytes1_Flags>(textBoxToChange).ShowDialog(this);
+                            break;
+                        default:
+                            MessageBox.Show("The second parameter (type) must be set to a valid search type (0, 2 or 3).", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
                     }
 
                     break;
