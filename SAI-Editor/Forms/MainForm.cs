@@ -2151,34 +2151,27 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_SET_UNIT_FIELD_BYTES_1:
                 case SmartAction.SMART_ACTION_REMOVE_UNIT_FIELD_BYTES_1:
-                    int searchType = 0;
+                    int searchType;
 
-                    try
+                    if (Int32.TryParse(textBoxActionParam2.Text, out searchType))
                     {
-                        searchType = Convert.ToInt32(textBoxActionParam2.Text);
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("The second parameter (type) must be set to a valid search type (0, 2 or 3).", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-
-                    switch (searchType)
-                    {
-                        case 0:
-                            new SingleSelectForm<UnitStandStateType>(textBoxToChange).ShowDialog(this);
-                            break;
-                        //case 1:
-                        //    break;
-                        case 2:
-                            new MultiSelectForm<UnitStandFlags>(textBoxToChange).ShowDialog(this);
-                            break;
-                        case 3:
-                            new MultiSelectForm<UnitBytes1_Flags>(textBoxToChange).ShowDialog(this);
-                            break;
-                        default:
-                            MessageBox.Show("The second parameter (type) must be set to a valid search type (0, 2 or 3).", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
+                        switch (searchType)
+                        {
+                            case 0:
+                                new SingleSelectForm<UnitStandStateType>(textBoxToChange).ShowDialog(this);
+                                break;
+                            //case 1:
+                            //    break;
+                            case 2:
+                                new MultiSelectForm<UnitStandFlags>(textBoxToChange).ShowDialog(this);
+                                break;
+                            case 3:
+                                new MultiSelectForm<UnitBytes1_Flags>(textBoxToChange).ShowDialog(this);
+                                break;
+                            default:
+                                MessageBox.Show("The second parameter (type) must be set to a valid search type (0, 2 or 3).", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                break;
+                        }
                     }
 
                     break;

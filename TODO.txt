@@ -15,3 +15,4 @@
 - Add support to add specific flags to the source. If you for example want a creature to have a gossip, the npcflag also needs to be set accordingly. No idea yet on how to implement this in a good looking way
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
 - Make it a preference if the user only wants to use the tool as a creator, meaning no MySQL database connection would be needed (no comment generating would be possible, though)
+- Add support to the SQLite database for each expansion of the game and keep this up-to-date
