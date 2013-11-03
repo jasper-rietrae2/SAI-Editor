@@ -3225,10 +3225,7 @@ namespace SAI_Editor
                         break;
                 }
 
-                if (smartScripts == null || smartScripts.Count == 0)
-                    continue;
-
-                if (smartScripts.Count > 0)
+                if (smartScripts != null && smartScripts.Count > 0)
                 {
                     revertQuery += "REPLACE INTO smart_scripts VALUES ";
 
