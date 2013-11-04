@@ -2754,7 +2754,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                if (listViewSmartScripts.SelectedSmartScript.id.ToString() == textBoxLinkTo.Text)
+                if (!updatingFieldsBasedOnSelectedScript && listViewSmartScripts.SelectedSmartScript.id.ToString() == textBoxLinkTo.Text)
                 {
                     MessageBox.Show("You can not link to or from the same id you're linking to.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBoxLinkFrom.Text = GetLinkFromForSelection();
