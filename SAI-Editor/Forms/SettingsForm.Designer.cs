@@ -32,6 +32,7 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxPhaseHighlighting = new System.Windows.Forms.CheckBox();
             this.checkBoxCreateRevertQuery = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
             this.checkBoxShowTooltipsPermanently = new System.Windows.Forms.CheckBox();
@@ -46,6 +47,8 @@
             this.checkBoxInstantExpand = new System.Windows.Forms.CheckBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
+            this.radioButtonDontUseDatabase = new System.Windows.Forms.RadioButton();
+            this.radioButtonConnectToMySql = new System.Windows.Forms.RadioButton();
             this.buttonTestConnection = new System.Windows.Forms.Button();
             this.buttonSearchForWorldDb = new System.Windows.Forms.Button();
             this.checkBoxHidePass = new System.Windows.Forms.CheckBox();
@@ -61,7 +64,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonDefaultSettings = new System.Windows.Forms.Button();
-            this.checkBoxPhaseHighlighting = new System.Windows.Forms.CheckBox();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -110,6 +112,16 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPhaseHighlighting
+            // 
+            this.checkBoxPhaseHighlighting.AutoSize = true;
+            this.checkBoxPhaseHighlighting.Location = new System.Drawing.Point(253, 52);
+            this.checkBoxPhaseHighlighting.Name = "checkBoxPhaseHighlighting";
+            this.checkBoxPhaseHighlighting.Size = new System.Drawing.Size(203, 17);
+            this.checkBoxPhaseHighlighting.TabIndex = 10;
+            this.checkBoxPhaseHighlighting.Text = "Show a different color for each phase";
+            this.checkBoxPhaseHighlighting.UseVisualStyleBackColor = true;
             // 
             // checkBoxCreateRevertQuery
             // 
@@ -253,6 +265,8 @@
             // 
             // tabPageConnection
             // 
+            this.tabPageConnection.Controls.Add(this.radioButtonDontUseDatabase);
+            this.tabPageConnection.Controls.Add(this.radioButtonConnectToMySql);
             this.tabPageConnection.Controls.Add(this.buttonTestConnection);
             this.tabPageConnection.Controls.Add(this.buttonSearchForWorldDb);
             this.tabPageConnection.Controls.Add(this.checkBoxHidePass);
@@ -273,6 +287,32 @@
             this.tabPageConnection.TabIndex = 1;
             this.tabPageConnection.Text = "Connection";
             this.tabPageConnection.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonDontUseDatabase
+            // 
+            this.radioButtonDontUseDatabase.AutoSize = true;
+            this.radioButtonDontUseDatabase.Location = new System.Drawing.Point(373, 37);
+            this.radioButtonDontUseDatabase.Name = "radioButtonDontUseDatabase";
+            this.radioButtonDontUseDatabase.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.radioButtonDontUseDatabase.Size = new System.Drawing.Size(126, 17);
+            this.radioButtonDontUseDatabase.TabIndex = 33;
+            this.radioButtonDontUseDatabase.TabStop = true;
+            this.radioButtonDontUseDatabase.Text = "Don\'t use a database";
+            this.radioButtonDontUseDatabase.UseVisualStyleBackColor = true;
+            this.radioButtonDontUseDatabase.CheckedChanged += new System.EventHandler(this.radioButtonDontUseDatabase_CheckedChanged);
+            // 
+            // radioButtonConnectToMySql
+            // 
+            this.radioButtonConnectToMySql.AutoSize = true;
+            this.radioButtonConnectToMySql.Location = new System.Drawing.Point(384, 14);
+            this.radioButtonConnectToMySql.Name = "radioButtonConnectToMySql";
+            this.radioButtonConnectToMySql.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.radioButtonConnectToMySql.Size = new System.Drawing.Size(115, 17);
+            this.radioButtonConnectToMySql.TabIndex = 32;
+            this.radioButtonConnectToMySql.TabStop = true;
+            this.radioButtonConnectToMySql.Text = "Connect to MySQL";
+            this.radioButtonConnectToMySql.UseVisualStyleBackColor = true;
+            this.radioButtonConnectToMySql.CheckedChanged += new System.EventHandler(this.radioButtonConnectToMySql_CheckedChanged);
             // 
             // buttonTestConnection
             // 
@@ -413,16 +453,6 @@
             this.buttonDefaultSettings.UseVisualStyleBackColor = true;
             this.buttonDefaultSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
-            // checkBoxPhaseHighlighting
-            // 
-            this.checkBoxPhaseHighlighting.AutoSize = true;
-            this.checkBoxPhaseHighlighting.Location = new System.Drawing.Point(253, 52);
-            this.checkBoxPhaseHighlighting.Name = "checkBoxPhaseHighlighting";
-            this.checkBoxPhaseHighlighting.Size = new System.Drawing.Size(203, 17);
-            this.checkBoxPhaseHighlighting.TabIndex = 10;
-            this.checkBoxPhaseHighlighting.Text = "Show a different color for each phase";
-            this.checkBoxPhaseHighlighting.UseVisualStyleBackColor = true;
-            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -486,6 +516,8 @@
         private System.Windows.Forms.CheckBox checkBoxAutoGenerateComments;
         private System.Windows.Forms.CheckBox checkBoxCreateRevertQuery;
         private System.Windows.Forms.CheckBox checkBoxPhaseHighlighting;
+        private System.Windows.Forms.RadioButton radioButtonDontUseDatabase;
+        private System.Windows.Forms.RadioButton radioButtonConnectToMySql;
 
     }
 }

@@ -322,5 +322,17 @@ namespace SAI_Editor.Properties {
                 this["PhaseHighlighting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseWorldDatabase {
+            get {
+                return ((bool)(this["UseWorldDatabase"]));
+            }
+            set {
+                this["UseWorldDatabase"] = value;
+            }
+        }
     }
 }

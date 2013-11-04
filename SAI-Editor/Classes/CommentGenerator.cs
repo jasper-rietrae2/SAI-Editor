@@ -230,7 +230,10 @@ namespace SAI_Editor.Classes
 
         public async Task<string> GenerateCommentFor(SmartScript smartScript, EntryOrGuidAndSourceType entryOrGuidAndSourceType, bool forced = false, SmartScript smartScriptLink = null)
         {
-            if (!forced && !Settings.Default.GenerateComments)
+            //! Don't generate a comment when:
+            //- The world database is not supposed to be used;
+            //- The setting to generate comments is turned off and the comment generating was not FORCED.
+            if (!Settings.Default.UseWorldDatabase || (!forced && !Settings.Default.GenerateComments))
                 return String.IsNullOrWhiteSpace(smartScript.comment) ? "Npc - Event - Action (phase) (dungeon difficulty)" : smartScript.comment;
 
             string fullLine = String.Empty;

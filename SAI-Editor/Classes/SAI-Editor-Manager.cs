@@ -29,7 +29,22 @@ namespace SAI_Editor
 
     class SAI_Editor_Manager
     {
-        public WorldDatabase worldDatabase { get; set; }
+        private WorldDatabase _worldDatabase = null;
+        public WorldDatabase worldDatabase
+        {
+            get
+            {
+                if (Settings.Default.UseWorldDatabase)
+                    return _worldDatabase;
+
+                MessageBox.Show("The world database could not be opened as it was never opened.", "No database!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            set
+            {
+                _worldDatabase = value;
+            }
+        }
         public SQLiteDatabase sqliteDatabase { get; set; }
         public List<EventTypeInformation> eventTypeInformations;
         public List<ActionTypeInformation> actionTypeInformations;

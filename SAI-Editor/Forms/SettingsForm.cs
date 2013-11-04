@@ -37,9 +37,10 @@ namespace SAI_Editor
             checkBoxAutoGenerateComments.Checked = Settings.Default.GenerateComments;
             checkBoxCreateRevertQuery.Checked = Settings.Default.CreateRevertQuery;
             checkBoxPhaseHighlighting.Checked = Settings.Default.PhaseHighlighting;
-
             textBoxAnimationSpeed.Text = Settings.Default.AnimationSpeed.ToString();
             textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
+            radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
+            radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -79,9 +80,17 @@ namespace SAI_Editor
             if (textBoxPassword.Text.Length > 0)
                 connectionString.Password = textBoxPassword.Text;
 
-            bool newConnectionSuccesfull = SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString, false);
+            Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
+            Settings.Default.Save();
 
-            if (newConnectionSuccesfull)
+            bool newConnectionSuccesfull = false;
+            
+            if (radioButtonConnectToMySql.Checked)
+                newConnectionSuccesfull = SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString, false);
+
+            //! We also save the settings if no connection was made. It's possible the user unchecked
+            //! the radioboxes, changed some settings and then set it back to no DB connection.
+            if (newConnectionSuccesfull || !radioButtonConnectToMySql.Checked)
             {
                 Settings.Default.Entropy = salt;
                 Settings.Default.Host = textBoxHost.Text;
@@ -90,8 +99,12 @@ namespace SAI_Editor
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.Port = textBoxPort.Text.Length > 0 ? XConverter.ToUInt32(textBoxPort.Text) : 0;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
-                ((MainForm)Owner).connectionString = connectionString;
-                SAI_Editor_Manager.Instance.ResetDatabases();
+
+                if (radioButtonConnectToMySql.Checked)
+                {
+                    ((MainForm)Owner).connectionString = connectionString;
+                    SAI_Editor_Manager.Instance.ResetDatabases();
+                }
             }
 
             Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
@@ -119,8 +132,8 @@ namespace SAI_Editor
                 ((MainForm)Owner).expandAndContractSpeed = XConverter.ToInt32(textBoxAnimationSpeed.Text);
                 ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
             }
-            else
-                MessageBox.Show("The database settings were not saved because no connection could be established.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            else if (radioButtonConnectToMySql.Checked) //! Don't report this if there is no connection to be made anyway
+                MessageBox.Show("The database settings were not saved because no connection could be established. All other changed settings were saved.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             if (checkBoxAutoGenerateComments.Checked != generateComments && checkBoxAutoGenerateComments.Checked)
                 ((MainForm)Owner).GenerateCommentsForAllItems();
@@ -130,6 +143,8 @@ namespace SAI_Editor
 
             if (checkBoxPhaseHighlighting.Checked != phaseHighlighting)
                 ((MainForm)Owner).listViewSmartScripts.Init();
+
+            ((MainForm)Owner).HandleUseWorldDatabaseSettingChanged();
         }
 
         private void buttonExitSettings_Click(object sender, EventArgs e)
@@ -291,6 +306,27 @@ namespace SAI_Editor
 
             if (SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
                 MessageBox.Show("Connection successful!", "Connection status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void radioButtonConnectToMySql_CheckedChanged(object sender, EventArgs e)
+        {
+            HandleRadioButtonUseDatabaseChanged();
+        }
+
+        private void radioButtonDontUseDatabase_CheckedChanged(object sender, EventArgs e)
+        {
+            HandleRadioButtonUseDatabaseChanged();
+        }
+
+        private void HandleRadioButtonUseDatabaseChanged()
+        {
+            textBoxHost.Enabled = radioButtonConnectToMySql.Checked;
+            textBoxUsername.Enabled = radioButtonConnectToMySql.Checked;
+            textBoxPassword.Enabled = radioButtonConnectToMySql.Checked;
+            textBoxWorldDatabase.Enabled = radioButtonConnectToMySql.Checked;
+            textBoxPort.Enabled = radioButtonConnectToMySql.Checked;
+            buttonSearchForWorldDb.Enabled = radioButtonConnectToMySql.Checked;
+            buttonTestConnection.Enabled = radioButtonConnectToMySql.Checked;
         }
     }
 }

@@ -70,9 +70,7 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
-            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.buttonSearchForCreature = new System.Windows.Forms.Button();
+            this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
             this.labelEntryOrGuid = new System.Windows.Forms.Label();
@@ -183,14 +181,16 @@ namespace SAI_Editor
             this.labelPermanentTooltipTextTypes = new System.Windows.Forms.Label();
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
+            this.radioButtonConnectToMySql = new System.Windows.Forms.RadioButton();
+            this.radioButtonDontUseDatabase = new System.Windows.Forms.RadioButton();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
+            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.groupBoxLogin.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -203,12 +203,14 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipTypes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.SuspendLayout();
             // 
             // labelUser
             // 
             this.labelUser.AutoSize = true;
-            this.labelUser.Location = new System.Drawing.Point(34, 48);
+            this.labelUser.Location = new System.Drawing.Point(164, 47);
             this.labelUser.Name = "labelUser";
             this.labelUser.Size = new System.Drawing.Size(58, 13);
             this.labelUser.TabIndex = 0;
@@ -217,7 +219,7 @@ namespace SAI_Editor
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 74);
+            this.label1.Location = new System.Drawing.Point(166, 73);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 1;
@@ -226,7 +228,7 @@ namespace SAI_Editor
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(5, 100);
+            this.label2.Location = new System.Drawing.Point(135, 99);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(87, 13);
             this.label2.TabIndex = 2;
@@ -235,7 +237,7 @@ namespace SAI_Editor
             // labelHost
             // 
             this.labelHost.AutoSize = true;
-            this.labelHost.Location = new System.Drawing.Point(60, 22);
+            this.labelHost.Location = new System.Drawing.Point(190, 21);
             this.labelHost.Name = "labelHost";
             this.labelHost.Size = new System.Drawing.Size(32, 13);
             this.labelHost.TabIndex = 3;
@@ -244,7 +246,7 @@ namespace SAI_Editor
             // labelPort
             // 
             this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(63, 126);
+            this.labelPort.Location = new System.Drawing.Point(193, 125);
             this.labelPort.Name = "labelPort";
             this.labelPort.Size = new System.Drawing.Size(29, 13);
             this.labelPort.TabIndex = 4;
@@ -255,16 +257,16 @@ namespace SAI_Editor
             this.checkBoxSaveSettings.AutoSize = true;
             this.checkBoxSaveSettings.Checked = true;
             this.checkBoxSaveSettings.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSaveSettings.Location = new System.Drawing.Point(8, 149);
+            this.checkBoxSaveSettings.Location = new System.Drawing.Point(13, 124);
             this.checkBoxSaveSettings.Name = "checkBoxSaveSettings";
-            this.checkBoxSaveSettings.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxSaveSettings.Size = new System.Drawing.Size(146, 17);
             this.checkBoxSaveSettings.TabIndex = 5;
-            this.checkBoxSaveSettings.Text = "Save settings";
+            this.checkBoxSaveSettings.Text = "Save connection settings";
             this.checkBoxSaveSettings.UseVisualStyleBackColor = true;
             // 
             // textBoxHost
             // 
-            this.textBoxHost.Location = new System.Drawing.Point(98, 19);
+            this.textBoxHost.Location = new System.Drawing.Point(228, 18);
             this.textBoxHost.Name = "textBoxHost";
             this.textBoxHost.Size = new System.Drawing.Size(130, 20);
             this.textBoxHost.TabIndex = 0;
@@ -272,7 +274,7 @@ namespace SAI_Editor
             // 
             // textBoxPort
             // 
-            this.textBoxPort.Location = new System.Drawing.Point(98, 123);
+            this.textBoxPort.Location = new System.Drawing.Point(228, 122);
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
             this.textBoxPort.TabIndex = 4;
@@ -280,21 +282,21 @@ namespace SAI_Editor
             // 
             // textBoxWorldDatabase
             // 
-            this.textBoxWorldDatabase.Location = new System.Drawing.Point(98, 97);
+            this.textBoxWorldDatabase.Location = new System.Drawing.Point(228, 96);
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
             this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
             this.textBoxWorldDatabase.TabIndex = 3;
             // 
             // textBoxPassword
             // 
-            this.textBoxPassword.Location = new System.Drawing.Point(98, 71);
+            this.textBoxPassword.Location = new System.Drawing.Point(228, 70);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
             this.textBoxPassword.TabIndex = 2;
             // 
             // textBoxUsername
             // 
-            this.textBoxUsername.Location = new System.Drawing.Point(98, 45);
+            this.textBoxUsername.Location = new System.Drawing.Point(228, 44);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
             this.textBoxUsername.TabIndex = 1;
@@ -302,6 +304,8 @@ namespace SAI_Editor
             // 
             // groupBoxLogin
             // 
+            this.groupBoxLogin.Controls.Add(this.radioButtonDontUseDatabase);
+            this.groupBoxLogin.Controls.Add(this.radioButtonConnectToMySql);
             this.groupBoxLogin.Controls.Add(this.buttonSearchWorldDb);
             this.groupBoxLogin.Controls.Add(this.checkBoxAutoConnect);
             this.groupBoxLogin.Controls.Add(this.textBoxHost);
@@ -317,14 +321,14 @@ namespace SAI_Editor
             this.groupBoxLogin.Controls.Add(this.checkBoxSaveSettings);
             this.groupBoxLogin.Location = new System.Drawing.Point(3, 3);
             this.groupBoxLogin.Name = "groupBoxLogin";
-            this.groupBoxLogin.Size = new System.Drawing.Size(237, 170);
+            this.groupBoxLogin.Size = new System.Drawing.Size(364, 149);
             this.groupBoxLogin.TabIndex = 10;
             this.groupBoxLogin.TabStop = false;
             this.groupBoxLogin.Text = "Connect information";
             // 
             // buttonSearchWorldDb
             // 
-            this.buttonSearchWorldDb.Location = new System.Drawing.Point(204, 96);
+            this.buttonSearchWorldDb.Location = new System.Drawing.Point(334, 95);
             this.buttonSearchWorldDb.Name = "buttonSearchWorldDb";
             this.buttonSearchWorldDb.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchWorldDb.TabIndex = 29;
@@ -335,7 +339,7 @@ namespace SAI_Editor
             // checkBoxAutoConnect
             // 
             this.checkBoxAutoConnect.AutoSize = true;
-            this.checkBoxAutoConnect.Location = new System.Drawing.Point(141, 149);
+            this.checkBoxAutoConnect.Location = new System.Drawing.Point(13, 104);
             this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
             this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
             this.checkBoxAutoConnect.TabIndex = 6;
@@ -344,7 +348,7 @@ namespace SAI_Editor
             // 
             // buttonConnect
             // 
-            this.buttonConnect.Location = new System.Drawing.Point(3, 179);
+            this.buttonConnect.Location = new System.Drawing.Point(3, 158);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(75, 23);
             this.buttonConnect.TabIndex = 0;
@@ -354,7 +358,7 @@ namespace SAI_Editor
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(84, 179);
+            this.buttonClear.Location = new System.Drawing.Point(147, 158);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 1;
@@ -364,7 +368,7 @@ namespace SAI_Editor
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(165, 179);
+            this.buttonCancel.Location = new System.Drawing.Point(292, 158);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 2;
@@ -381,7 +385,7 @@ namespace SAI_Editor
             this.otherToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1233, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1318, 24);
             this.menuStrip.TabIndex = 11;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -546,16 +550,16 @@ namespace SAI_Editor
             this.panelLoginBox.Controls.Add(this.buttonConnect);
             this.panelLoginBox.Controls.Add(this.buttonClear);
             this.panelLoginBox.Controls.Add(this.buttonCancel);
-            this.panelLoginBox.Location = new System.Drawing.Point(978, 255);
+            this.panelLoginBox.Location = new System.Drawing.Point(933, 272);
             this.panelLoginBox.Name = "panelLoginBox";
-            this.panelLoginBox.Size = new System.Drawing.Size(243, 207);
+            this.panelLoginBox.Size = new System.Drawing.Size(378, 186);
             this.panelLoginBox.TabIndex = 13;
             // 
             // groupBoxStaticScriptInfo
             // 
             this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBoxCreateScript);
             this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBoxLoadScript);
-            this.groupBoxStaticScriptInfo.Controls.Add(this.buttonSearchForCreature);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.buttonSearchForEntryOrGuid);
             this.groupBoxStaticScriptInfo.Controls.Add(this.label4);
             this.groupBoxStaticScriptInfo.Controls.Add(this.comboBoxSourceType);
             this.groupBoxStaticScriptInfo.Controls.Add(this.labelEntryOrGuid);
@@ -568,44 +572,15 @@ namespace SAI_Editor
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
             // 
-            // pictureBoxCreateScript
+            // buttonSearchForEntryOrGuid
             // 
-            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCreateScript.Image = global::SAI_Editor.Properties.Resources.icon_create_script;
-            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
-            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
-            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
-            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxCreateScript.TabIndex = 16;
-            this.pictureBoxCreateScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
-            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
-            // 
-            // pictureBoxLoadScript
-            // 
-            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = global::SAI_Editor.Properties.Resources.icon_load_script1;
-            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
-            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
-            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
-            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLoadScript.TabIndex = 16;
-            this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
-            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
-            // 
-            // buttonSearchForCreature
-            // 
-            this.buttonSearchForCreature.Location = new System.Drawing.Point(211, 18);
-            this.buttonSearchForCreature.Name = "buttonSearchForCreature";
-            this.buttonSearchForCreature.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchForCreature.TabIndex = 1;
-            this.buttonSearchForCreature.Text = "...";
-            this.buttonSearchForCreature.UseVisualStyleBackColor = true;
-            this.buttonSearchForCreature.Click += new System.EventHandler(this.buttonSearchForEntry_Click);
+            this.buttonSearchForEntryOrGuid.Location = new System.Drawing.Point(211, 18);
+            this.buttonSearchForEntryOrGuid.Name = "buttonSearchForEntryOrGuid";
+            this.buttonSearchForEntryOrGuid.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchForEntryOrGuid.TabIndex = 1;
+            this.buttonSearchForEntryOrGuid.Text = "...";
+            this.buttonSearchForEntryOrGuid.UseVisualStyleBackColor = true;
+            this.buttonSearchForEntryOrGuid.Click += new System.EventHandler(this.buttonSearchForEntry_Click);
             // 
             // label4
             // 
@@ -2009,7 +1984,7 @@ namespace SAI_Editor
             // buttonNewLine
             // 
             this.buttonNewLine.Enabled = false;
-            this.buttonNewLine.Location = new System.Drawing.Point(648, 215);
+            this.buttonNewLine.Location = new System.Drawing.Point(649, 215);
             this.buttonNewLine.Name = "buttonNewLine";
             this.buttonNewLine.Size = new System.Drawing.Size(83, 23);
             this.buttonNewLine.TabIndex = 26;
@@ -2021,7 +1996,7 @@ namespace SAI_Editor
             // buttonGenerateSql
             // 
             this.buttonGenerateSql.Enabled = false;
-            this.buttonGenerateSql.Location = new System.Drawing.Point(845, 215);
+            this.buttonGenerateSql.Location = new System.Drawing.Point(844, 215);
             this.buttonGenerateSql.Name = "buttonGenerateSql";
             this.buttonGenerateSql.Size = new System.Drawing.Size(83, 23);
             this.buttonGenerateSql.TabIndex = 28;
@@ -2092,6 +2067,30 @@ namespace SAI_Editor
             this.panelPermanentTooltipTypes.TabIndex = 25;
             this.panelPermanentTooltipTypes.Visible = false;
             // 
+            // radioButtonConnectToMySql
+            // 
+            this.radioButtonConnectToMySql.AutoSize = true;
+            this.radioButtonConnectToMySql.Checked = true;
+            this.radioButtonConnectToMySql.Location = new System.Drawing.Point(13, 21);
+            this.radioButtonConnectToMySql.Name = "radioButtonConnectToMySql";
+            this.radioButtonConnectToMySql.Size = new System.Drawing.Size(115, 17);
+            this.radioButtonConnectToMySql.TabIndex = 31;
+            this.radioButtonConnectToMySql.TabStop = true;
+            this.radioButtonConnectToMySql.Text = "Connect to MySQL";
+            this.radioButtonConnectToMySql.UseVisualStyleBackColor = true;
+            this.radioButtonConnectToMySql.CheckedChanged += new System.EventHandler(this.radioButtonConnectToMySql_CheckedChanged);
+            // 
+            // radioButtonDontUseDatabase
+            // 
+            this.radioButtonDontUseDatabase.AutoSize = true;
+            this.radioButtonDontUseDatabase.Location = new System.Drawing.Point(13, 47);
+            this.radioButtonDontUseDatabase.Name = "radioButtonDontUseDatabase";
+            this.radioButtonDontUseDatabase.Size = new System.Drawing.Size(126, 17);
+            this.radioButtonDontUseDatabase.TabIndex = 32;
+            this.radioButtonDontUseDatabase.Text = "Don\'t use a database";
+            this.radioButtonDontUseDatabase.UseVisualStyleBackColor = true;
+            this.radioButtonDontUseDatabase.CheckedChanged += new System.EventHandler(this.radioButtonDontUseDatabase_CheckedChanged);
+            // 
             // listViewSmartScripts
             // 
             this.listViewSmartScripts.EnablePhaseHighlighting = true;
@@ -2109,11 +2108,40 @@ namespace SAI_Editor
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
+            // pictureBoxCreateScript
+            // 
+            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCreateScript.Image = global::SAI_Editor.Properties.Resources.icon_create_script;
+            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
+            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
+            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCreateScript.TabIndex = 16;
+            this.pictureBoxCreateScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            // 
+            // pictureBoxLoadScript
+            // 
+            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Enabled = false;
+            this.pictureBoxLoadScript.Image = global::SAI_Editor.Properties.Resources.icon_load_script1;
+            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
+            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
+            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLoadScript.TabIndex = 16;
+            this.pictureBoxLoadScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1233, 474);
+            this.ClientSize = new System.Drawing.Size(1318, 468);
             this.Controls.Add(this.buttonGenerateComments);
             this.Controls.Add(this.buttonGenerateSql);
             this.Controls.Add(this.buttonNewLine);
@@ -2145,8 +2173,6 @@ namespace SAI_Editor
             this.panelLoginBox.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -2166,6 +2192,8 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
             this.panelPermanentTooltipTypes.ResumeLayout(false);
             this.panelPermanentTooltipTypes.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2191,7 +2219,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Panel panelLoginBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelEntryOrGuid;
-        private System.Windows.Forms.Button buttonSearchForCreature;
+        private System.Windows.Forms.Button buttonSearchForEntryOrGuid;
         private System.Windows.Forms.GroupBox groupBoxPreferences;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox checkBoxLockEventId;
@@ -2325,6 +2353,8 @@ namespace SAI_Editor
         private System.Windows.Forms.Label labelPermanentTooltipTextTypes;
         private System.Windows.Forms.Label labelPermanentTooltipTitleTypes;
         private System.Windows.Forms.Panel panelPermanentTooltipTypes;
+        private System.Windows.Forms.RadioButton radioButtonDontUseDatabase;
+        private System.Windows.Forms.RadioButton radioButtonConnectToMySql;
     }
 }
 
