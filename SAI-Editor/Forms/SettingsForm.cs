@@ -27,7 +27,6 @@ namespace SAI_Editor
 
             checkBoxAutoConnect.Checked = Settings.Default.AutoConnect;
             checkBoxInstantExpand.Checked = Settings.Default.InstantExpand;
-            checkBoxLoadScriptInstantly.Checked = Settings.Default.LoadScriptInstantly;
             checkBoxAutoSaveSettings.Checked = Settings.Default.AutoSaveSettings;
             checkBoxPromptToQuit.Checked = Settings.Default.PromptToQuit;
             checkBoxHidePass.Checked = Settings.Default.HidePass;
@@ -108,7 +107,6 @@ namespace SAI_Editor
             }
 
             Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
-            Settings.Default.LoadScriptInstantly = checkBoxLoadScriptInstantly.Checked;
             Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
             Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
             Settings.Default.HidePass = checkBoxHidePass.Checked;
@@ -177,7 +175,6 @@ namespace SAI_Editor
                 textBoxPort.Text == Settings.Default.Port.ToString() &&
                 checkBoxAutoConnect.Checked == Settings.Default.AutoConnect &&
                 checkBoxInstantExpand.Checked == Settings.Default.InstantExpand &&
-                checkBoxLoadScriptInstantly.Checked == Settings.Default.LoadScriptInstantly &&
                 checkBoxHidePass.Checked == Settings.Default.HidePass &&
                 checkBoxPromptToQuit.Checked == Settings.Default.PromptToQuit &&
                 textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() &&
@@ -206,7 +203,6 @@ namespace SAI_Editor
                     checkBoxInstantExpand.Checked = false;
                     checkBoxAutoSaveSettings.Checked = false;
                     checkBoxInstantExpand.Checked = false;
-                    checkBoxLoadScriptInstantly.Checked = false;
                     checkBoxPromptToQuit.Checked = false;
                     textBoxAnimationSpeed.Text = "10";
                     trackBarAnimationSpeed.Value = 10;

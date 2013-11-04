@@ -43,7 +43,6 @@
             this.trackBarAnimationSpeed = new System.Windows.Forms.TrackBar();
             this.checkBoxPromptToQuit = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoSaveSettings = new System.Windows.Forms.CheckBox();
-            this.checkBoxLoadScriptInstantly = new System.Windows.Forms.CheckBox();
             this.checkBoxInstantExpand = new System.Windows.Forms.CheckBox();
             this.tabControlSettings = new System.Windows.Forms.TabControl();
             this.tabPageConnection = new System.Windows.Forms.TabPage();
@@ -103,7 +102,6 @@
             this.tabPageGeneral.Controls.Add(this.trackBarAnimationSpeed);
             this.tabPageGeneral.Controls.Add(this.checkBoxPromptToQuit);
             this.tabPageGeneral.Controls.Add(this.checkBoxAutoSaveSettings);
-            this.tabPageGeneral.Controls.Add(this.checkBoxLoadScriptInstantly);
             this.tabPageGeneral.Controls.Add(this.checkBoxInstantExpand);
             this.tabPageGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabPageGeneral.Name = "tabPageGeneral";
@@ -116,7 +114,7 @@
             // checkBoxPhaseHighlighting
             // 
             this.checkBoxPhaseHighlighting.AutoSize = true;
-            this.checkBoxPhaseHighlighting.Location = new System.Drawing.Point(253, 52);
+            this.checkBoxPhaseHighlighting.Location = new System.Drawing.Point(6, 144);
             this.checkBoxPhaseHighlighting.Name = "checkBoxPhaseHighlighting";
             this.checkBoxPhaseHighlighting.Size = new System.Drawing.Size(203, 17);
             this.checkBoxPhaseHighlighting.TabIndex = 10;
@@ -146,7 +144,7 @@
             // checkBoxShowTooltipsPermanently
             // 
             this.checkBoxShowTooltipsPermanently.AutoSize = true;
-            this.checkBoxShowTooltipsPermanently.Location = new System.Drawing.Point(6, 144);
+            this.checkBoxShowTooltipsPermanently.Location = new System.Drawing.Point(6, 121);
             this.checkBoxShowTooltipsPermanently.Name = "checkBoxShowTooltipsPermanently";
             this.checkBoxShowTooltipsPermanently.Size = new System.Drawing.Size(149, 17);
             this.checkBoxShowTooltipsPermanently.TabIndex = 12;
@@ -158,7 +156,7 @@
             this.checkBoxChangeStaticInfo.AutoSize = true;
             this.checkBoxChangeStaticInfo.Checked = true;
             this.checkBoxChangeStaticInfo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxChangeStaticInfo.Location = new System.Drawing.Point(6, 121);
+            this.checkBoxChangeStaticInfo.Location = new System.Drawing.Point(6, 98);
             this.checkBoxChangeStaticInfo.Name = "checkBoxChangeStaticInfo";
             this.checkBoxChangeStaticInfo.Size = new System.Drawing.Size(219, 17);
             this.checkBoxChangeStaticInfo.TabIndex = 11;
@@ -170,7 +168,7 @@
             this.checkBoxPromptExecuteQuery.AutoSize = true;
             this.checkBoxPromptExecuteQuery.Checked = true;
             this.checkBoxPromptExecuteQuery.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPromptExecuteQuery.Location = new System.Drawing.Point(6, 98);
+            this.checkBoxPromptExecuteQuery.Location = new System.Drawing.Point(6, 75);
             this.checkBoxPromptExecuteQuery.Name = "checkBoxPromptExecuteQuery";
             this.checkBoxPromptExecuteQuery.Size = new System.Drawing.Size(231, 17);
             this.checkBoxPromptExecuteQuery.TabIndex = 10;
@@ -213,7 +211,7 @@
             this.checkBoxPromptToQuit.AutoSize = true;
             this.checkBoxPromptToQuit.Checked = true;
             this.checkBoxPromptToQuit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(6, 75);
+            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(6, 52);
             this.checkBoxPromptToQuit.Name = "checkBoxPromptToQuit";
             this.checkBoxPromptToQuit.Size = new System.Drawing.Size(171, 17);
             this.checkBoxPromptToQuit.TabIndex = 3;
@@ -229,18 +227,6 @@
             this.checkBoxAutoSaveSettings.TabIndex = 0;
             this.checkBoxAutoSaveSettings.Text = "Auto save settings";
             this.checkBoxAutoSaveSettings.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxLoadScriptInstantly
-            // 
-            this.checkBoxLoadScriptInstantly.AutoSize = true;
-            this.checkBoxLoadScriptInstantly.Checked = true;
-            this.checkBoxLoadScriptInstantly.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxLoadScriptInstantly.Location = new System.Drawing.Point(6, 52);
-            this.checkBoxLoadScriptInstantly.Name = "checkBoxLoadScriptInstantly";
-            this.checkBoxLoadScriptInstantly.Size = new System.Drawing.Size(159, 17);
-            this.checkBoxLoadScriptInstantly.TabIndex = 2;
-            this.checkBoxLoadScriptInstantly.Text = "Load script of selected entry";
-            this.checkBoxLoadScriptInstantly.UseVisualStyleBackColor = true;
             // 
             // checkBoxInstantExpand
             // 
@@ -496,7 +482,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox checkBoxInstantExpand;
-        private System.Windows.Forms.CheckBox checkBoxLoadScriptInstantly;
         private System.Windows.Forms.CheckBox checkBoxAutoSaveSettings;
         private System.Windows.Forms.CheckBox checkBoxPromptToQuit;
         private System.Windows.Forms.Label labelAnimationSpeed;

@@ -628,7 +628,7 @@ namespace SAI_Editor
                     break;
             }
 
-            if (Settings.Default.LoadScriptInstantly && ((MainForm)Owner).pictureBoxLoadScript.Enabled)
+            if (((MainForm)Owner).pictureBoxLoadScript.Enabled)
                 ((MainForm)Owner).TryToLoadScript(-1, SourceTypes.SourceTypeNone, true, true);
 
             Close();
