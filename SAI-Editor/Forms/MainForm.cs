@@ -3351,6 +3351,27 @@ namespace SAI_Editor
             Settings.Default.LockSmartScriptId = checkBoxLockEventId.Checked;
             Settings.Default.ListActionLists = checkBoxListActionlistsOrEntries.Checked;
             Settings.Default.AllowChangingEntryAndSourceType = checkBoxAllowChangingEntryAndSourceType.Checked;
+
+            if (formState == FormState.FormStateLogin)
+            {
+                RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+                byte[] buffer = new byte[1024];
+                rng.GetBytes(buffer);
+                string salt = BitConverter.ToString(buffer);
+                rng.Dispose();
+
+                Settings.Default.Entropy = salt;
+                Settings.Default.Host = textBoxHost.Text;
+                Settings.Default.User = textBoxUsername.Text;
+                Settings.Default.Password = textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
+                Settings.Default.Database = textBoxWorldDatabase.Text;
+                Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+                Settings.Default.Port = XConverter.ToUInt32(textBoxPort.Text);
+                Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
+                Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+                Settings.Default.AutoSaveSettings = checkBoxSaveSettings.Checked;
+            }
+
             Settings.Default.Save();
         }
 
