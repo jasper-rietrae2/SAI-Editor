@@ -3623,7 +3623,7 @@ namespace SAI_Editor
 
         public void HandleUseWorldDatabaseSettingChanged()
         {
-            buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase;
+            buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || comboBoxSourceType.SelectedIndex == 2;
             buttonGenerateComments.Enabled = Settings.Default.UseWorldDatabase;
             pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
             checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
