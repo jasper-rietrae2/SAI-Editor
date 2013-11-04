@@ -3311,6 +3311,9 @@ namespace SAI_Editor
 
         public async void GenerateCommentsForAllItems()
         {
+            if (listViewSmartScripts.SmartScripts.Count == 0)
+                return;
+
             for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
             {
                 SmartScript smartScript = listViewSmartScripts.SmartScripts[i];
