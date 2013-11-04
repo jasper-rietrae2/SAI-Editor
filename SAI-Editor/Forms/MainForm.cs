@@ -1596,7 +1596,7 @@ namespace SAI_Editor
             if (Settings.Default.GenerateComments && Settings.Default.UseWorldDatabase)
                 newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
             else if (textBoxComments.Text.Contains(" - Event - Action (phase) (dungeon difficulty)"))
-                newSmartScript.comment = GetDefaultCommentForSourceType((SourceTypes)newSmartScript.source_type);
+                newSmartScript.comment = SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType((SourceTypes)newSmartScript.source_type);
             else
                 newSmartScript.comment = textBoxComments.Text;
 
@@ -1820,7 +1820,7 @@ namespace SAI_Editor
             textBoxId.Text = "-1";
             textBoxLinkFrom.Text = "None";
             textBoxLinkTo.Text = "0";
-            textBoxComments.Text = GetDefaultCommentForSourceType(GetSourceTypeByIndex());
+            textBoxComments.Text = SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType(GetSourceTypeByIndex());
             textBoxEventPhasemask.Text = "0";
             textBoxEventFlags.Text = "0";
 
@@ -2447,31 +2447,14 @@ namespace SAI_Editor
 
         private void textBoxComments_GotFocus(object sender, EventArgs e)
         {
-            if (textBoxComments.Text == GetDefaultCommentForSourceType(GetSourceTypeByIndex()))
+            if (textBoxComments.Text == SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType(GetSourceTypeByIndex()))
                 textBoxComments.Text = "";
         }
 
         private void textBoxComments_LostFocus(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBoxComments.Text))
-                textBoxComments.Text = GetDefaultCommentForSourceType(GetSourceTypeByIndex());
-        }
-
-        private string GetDefaultCommentForSourceType(SourceTypes sourceType)
-        {
-            switch (sourceType)
-            {
-                case SourceTypes.SourceTypeCreature:
-                    return "Npc - Event - Action (phase) (dungeon difficulty)";
-                case SourceTypes.SourceTypeGameobject:
-                    return "Gameobject - Event - Action (phase) (dungeon difficulty)";
-                case SourceTypes.SourceTypeAreaTrigger:
-                    return "Areatrigger - Event - Action (phase) (dungeon difficulty)";
-                case SourceTypes.SourceTypeScriptedActionlist:
-                    return "Source - Event - Action (phase) (dungeon difficulty)";
-            }
-
-            return String.Empty;
+                textBoxComments.Text = SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType(GetSourceTypeByIndex());
         }
 
         public void ExpandToShowPermanentTooltips(bool expand)
@@ -2737,7 +2720,7 @@ namespace SAI_Editor
             if (Settings.Default.GenerateComments && Settings.Default.UseWorldDatabase)
                 newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
             else
-                newSmartScript.comment = GetDefaultCommentForSourceType((SourceTypes)newSmartScript.source_type);
+                newSmartScript.comment = SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType((SourceTypes)newSmartScript.source_type);
 
             newSmartScript.event_chance = 100;
             int index = listViewSmartScripts.AddSmartScript(newSmartScript);

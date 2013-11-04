@@ -234,7 +234,7 @@ namespace SAI_Editor.Classes
             //- The world database is not supposed to be used;
             //- The setting to generate comments is turned off and the comment generating was not FORCED.
             if (!Settings.Default.UseWorldDatabase || (!forced && !Settings.Default.GenerateComments))
-                return String.IsNullOrWhiteSpace(smartScript.comment) ? "Npc - Event - Action (phase) (dungeon difficulty)" : smartScript.comment;
+                return !String.IsNullOrWhiteSpace(smartScript.comment) ? smartScript.comment : SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType((SourceTypes)smartScript.source_type);
 
             string fullLine = String.Empty;
 

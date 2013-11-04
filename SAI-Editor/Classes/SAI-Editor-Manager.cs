@@ -363,5 +363,22 @@ namespace SAI_Editor
 
             return entriesOrGuidsAndSourceTypes;
         }
+
+        public string GetDefaultCommentForSourceType(SourceTypes sourceType)
+        {
+            switch (sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return "Npc - Event - Action (phase) (dungeon difficulty)";
+                case SourceTypes.SourceTypeGameobject:
+                    return "Gameobject - Event - Action (phase) (dungeon difficulty)";
+                case SourceTypes.SourceTypeAreaTrigger:
+                    return "Areatrigger - Event - Action (phase) (dungeon difficulty)";
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    return "Source - Event - Action (phase) (dungeon difficulty)";
+            }
+
+            return String.Empty;
+        }
     }
 }
