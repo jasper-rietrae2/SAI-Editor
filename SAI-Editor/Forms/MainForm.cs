@@ -3126,7 +3126,7 @@ namespace SAI_Editor
                             break;
                         case SourceTypes.SourceTypeAreaTrigger:
                             generatedSql += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
-                            generatedSql += "INSERT INTO areatrigger_scripts VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
+                            generatedSql += "INSERT INTO `areatrigger_scripts` VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
                             break;
                         case SourceTypes.SourceTypeScriptedActionlist:
                             // todo
