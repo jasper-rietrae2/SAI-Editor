@@ -1764,15 +1764,15 @@ namespace SAI_Editor
 
         private void TryToOpenLinkForm(TextBox textBoxToChange)
         {
-            if (listViewSmartScripts.SelectedItems.Count <= 0)
+            if (listViewSmartScripts.Items.Count <= 1)
             {
-                MessageBox.Show("You must first select a line in the script", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There are not enough items in the listview in order to link!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (listViewSmartScripts.SelectedItems.Count > 1)
+            if (listViewSmartScripts.SelectedItems.Count == 0)
             {
-                MessageBox.Show("You may only have one selected event when opening the Link form!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You must first select a line in the script", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
