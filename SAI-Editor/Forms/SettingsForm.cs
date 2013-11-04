@@ -107,7 +107,6 @@ namespace SAI_Editor
             }
 
             Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
-            Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
             Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
             Settings.Default.HidePass = checkBoxHidePass.Checked;
             Settings.Default.AnimationSpeed = XConverter.ToInt32(textBoxAnimationSpeed.Text);

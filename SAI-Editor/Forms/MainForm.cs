@@ -322,7 +322,7 @@ namespace SAI_Editor
 
         private void StartExpandingToMainForm(bool instant = false)
         {
-            if (checkBoxSaveSettings.Checked && !radioButtonConnectToMySql.Checked)
+            if (!radioButtonConnectToMySql.Checked)
             {
                 RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
                 byte[] buffer = new byte[1024];
@@ -407,7 +407,6 @@ namespace SAI_Editor
             textBoxPassword.Text = "";
             textBoxWorldDatabase.Text = "";
             textBoxPort.Text = "";
-            checkBoxSaveSettings.Checked = false;
             checkBoxAutoConnect.Checked = false;
         }
 
@@ -3369,7 +3368,6 @@ namespace SAI_Editor
                 Settings.Default.Port = XConverter.ToUInt32(textBoxPort.Text);
                 Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
-                Settings.Default.AutoSaveSettings = checkBoxSaveSettings.Checked;
             }
 
             Settings.Default.Save();
