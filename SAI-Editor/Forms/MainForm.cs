@@ -619,7 +619,7 @@ namespace SAI_Editor
                     if (showError)
                     {
                         bool showNormalErrorMessage = false;
-                        string message = String.Format("The entryorguid '{0}' could not be found in the smart_scripts table for any source_type!", entryOrGuid);
+                        string message = String.Format("The entryorguid '{0}' could not be found in the smart_scripts table for the given source_type!", entryOrGuid);
                         smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScriptsWithoutSourceType(XConverter.ToInt32(entryOrGuid), (int)sourceType);
 
                         if (smartScripts != null)
