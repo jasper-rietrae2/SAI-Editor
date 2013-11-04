@@ -359,13 +359,13 @@
 
     public enum SmartEventFlags : uint
     {
-        SMART_EVENT_FLAG_NONE               = 0x00,
-        SMART_EVENT_FLAG_NOT_REPEATABLE     = 0x01,
-        SMART_EVENT_FLAG_DIFFICULTY_0       = 0x02,
-        SMART_EVENT_FLAG_DIFFICULTY_1       = 0x04,
-        SMART_EVENT_FLAG_DIFFICULTY_2       = 0x08,
-        SMART_EVENT_FLAG_DIFFICULTY_3       = 0x10,
-        SMART_EVENT_FLAG_DEBUG_ONLY         = 0x80,
+        EVENT_FLAG_NONE               = 0x00,
+        EVENT_FLAG_NOT_REPEATABLE     = 0x01,
+        EVENT_FLAG_NORMAL_DUNGEON     = 0x02,
+        EVENT_FLAG_HEROIC_DUNGEON     = 0x04,
+        EVENT_FLAG_NORMAL_RAID        = 0x08,
+        EVENT_FLAG_HEROIC_RAID        = 0x10,
+        EVENT_FLAG_DEBUG_ONLY         = 0x80,
     }
 
     public enum UnitFlags : uint
