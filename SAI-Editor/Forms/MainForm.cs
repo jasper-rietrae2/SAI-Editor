@@ -3663,6 +3663,11 @@ namespace SAI_Editor
             checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
             menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
             menuItemGenerateCommentListView.Enabled = Settings.Default.UseWorldDatabase;
+
+            if (Settings.Default.UseWorldDatabase)
+                Text = "SAI-Editor - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ", " + textBoxPort.Text;
+            else
+                Text = "SAI-Editor - Creator-only mode, no database connection";
         }
     }
 }
