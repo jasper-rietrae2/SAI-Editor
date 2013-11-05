@@ -3665,7 +3665,7 @@ namespace SAI_Editor
             menuItemGenerateCommentListView.Enabled = Settings.Default.UseWorldDatabase;
 
             if (Settings.Default.UseWorldDatabase)
-                Text = "SAI-Editor - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ", " + textBoxPort.Text;
+                Text = "SAI-Editor - Connection: " + Settings.Default.User + ", " + Settings.Default.Host + ", " + Settings.Default.Port.ToString();
             else
                 Text = "SAI-Editor - Creator-only mode, no database connection";
         }
