@@ -55,6 +55,21 @@ namespace SAI_Editor
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemDeleteSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
+            this.groupBoxLogin = new System.Windows.Forms.GroupBox();
+            this.radioButtonDontUseDatabase = new System.Windows.Forms.RadioButton();
+            this.radioButtonConnectToMySql = new System.Windows.Forms.RadioButton();
+            this.buttonSearchWorldDb = new System.Windows.Forms.Button();
+            this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
+            this.textBoxHost = new System.Windows.Forms.TextBox();
+            this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.labelUser = new System.Windows.Forms.Label();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxWorldDatabase = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxPort = new System.Windows.Forms.TextBox();
+            this.labelHost = new System.Windows.Forms.Label();
+            this.labelPort = new System.Windows.Forms.Label();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -167,27 +182,14 @@ namespace SAI_Editor
             this.labelPermanentTooltipTextTypes = new System.Windows.Forms.Label();
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
+            this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
             this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.labelPort = new System.Windows.Forms.Label();
-            this.labelHost = new System.Windows.Forms.Label();
-            this.textBoxPort = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBoxWorldDatabase = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.labelUser = new System.Windows.Forms.Label();
-            this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.textBoxHost = new System.Windows.Forms.TextBox();
-            this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
-            this.buttonSearchWorldDb = new System.Windows.Forms.Button();
-            this.radioButtonConnectToMySql = new System.Windows.Forms.RadioButton();
-            this.radioButtonDontUseDatabase = new System.Windows.Forms.RadioButton();
-            this.groupBoxLogin = new System.Windows.Forms.GroupBox();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
+            this.groupBoxLogin.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
@@ -203,7 +205,6 @@ namespace SAI_Editor
             this.panelPermanentTooltipTypes.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
-            this.groupBoxLogin.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -407,13 +408,164 @@ namespace SAI_Editor
             // panelLoginBox
             // 
             this.panelLoginBox.Controls.Add(this.groupBoxLogin);
+            this.panelLoginBox.Controls.Add(this.labelDontUseDatabaseWarning);
             this.panelLoginBox.Controls.Add(this.buttonConnect);
             this.panelLoginBox.Controls.Add(this.buttonClear);
             this.panelLoginBox.Controls.Add(this.buttonCancel);
-            this.panelLoginBox.Location = new System.Drawing.Point(933, 272);
+            this.panelLoginBox.Location = new System.Drawing.Point(933, 31);
             this.panelLoginBox.Name = "panelLoginBox";
-            this.panelLoginBox.Size = new System.Drawing.Size(378, 186);
+            this.panelLoginBox.Size = new System.Drawing.Size(378, 224);
             this.panelLoginBox.TabIndex = 13;
+            // 
+            // groupBoxLogin
+            // 
+            this.groupBoxLogin.Controls.Add(this.radioButtonDontUseDatabase);
+            this.groupBoxLogin.Controls.Add(this.radioButtonConnectToMySql);
+            this.groupBoxLogin.Controls.Add(this.buttonSearchWorldDb);
+            this.groupBoxLogin.Controls.Add(this.checkBoxAutoConnect);
+            this.groupBoxLogin.Controls.Add(this.textBoxHost);
+            this.groupBoxLogin.Controls.Add(this.textBoxUsername);
+            this.groupBoxLogin.Controls.Add(this.labelUser);
+            this.groupBoxLogin.Controls.Add(this.textBoxPassword);
+            this.groupBoxLogin.Controls.Add(this.label1);
+            this.groupBoxLogin.Controls.Add(this.textBoxWorldDatabase);
+            this.groupBoxLogin.Controls.Add(this.label2);
+            this.groupBoxLogin.Controls.Add(this.textBoxPort);
+            this.groupBoxLogin.Controls.Add(this.labelHost);
+            this.groupBoxLogin.Controls.Add(this.labelPort);
+            this.groupBoxLogin.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxLogin.Name = "groupBoxLogin";
+            this.groupBoxLogin.Size = new System.Drawing.Size(364, 149);
+            this.groupBoxLogin.TabIndex = 10;
+            this.groupBoxLogin.TabStop = false;
+            this.groupBoxLogin.Text = "Connect information";
+            // 
+            // radioButtonDontUseDatabase
+            // 
+            this.radioButtonDontUseDatabase.AutoSize = true;
+            this.radioButtonDontUseDatabase.Location = new System.Drawing.Point(13, 47);
+            this.radioButtonDontUseDatabase.Name = "radioButtonDontUseDatabase";
+            this.radioButtonDontUseDatabase.Size = new System.Drawing.Size(126, 17);
+            this.radioButtonDontUseDatabase.TabIndex = 32;
+            this.radioButtonDontUseDatabase.Text = "Don\'t use a database";
+            this.radioButtonDontUseDatabase.UseVisualStyleBackColor = true;
+            this.radioButtonDontUseDatabase.CheckedChanged += new System.EventHandler(this.radioButtonDontUseDatabase_CheckedChanged);
+            // 
+            // radioButtonConnectToMySql
+            // 
+            this.radioButtonConnectToMySql.AutoSize = true;
+            this.radioButtonConnectToMySql.Checked = true;
+            this.radioButtonConnectToMySql.Location = new System.Drawing.Point(13, 21);
+            this.radioButtonConnectToMySql.Name = "radioButtonConnectToMySql";
+            this.radioButtonConnectToMySql.Size = new System.Drawing.Size(115, 17);
+            this.radioButtonConnectToMySql.TabIndex = 31;
+            this.radioButtonConnectToMySql.TabStop = true;
+            this.radioButtonConnectToMySql.Text = "Connect to MySQL";
+            this.radioButtonConnectToMySql.UseVisualStyleBackColor = true;
+            this.radioButtonConnectToMySql.CheckedChanged += new System.EventHandler(this.radioButtonConnectToMySql_CheckedChanged);
+            // 
+            // buttonSearchWorldDb
+            // 
+            this.buttonSearchWorldDb.Location = new System.Drawing.Point(334, 95);
+            this.buttonSearchWorldDb.Name = "buttonSearchWorldDb";
+            this.buttonSearchWorldDb.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchWorldDb.TabIndex = 29;
+            this.buttonSearchWorldDb.Text = "...";
+            this.buttonSearchWorldDb.UseVisualStyleBackColor = true;
+            this.buttonSearchWorldDb.Click += new System.EventHandler(this.buttonSearchWorldDb_Click);
+            // 
+            // checkBoxAutoConnect
+            // 
+            this.checkBoxAutoConnect.AutoSize = true;
+            this.checkBoxAutoConnect.Location = new System.Drawing.Point(13, 124);
+            this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
+            this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxAutoConnect.TabIndex = 6;
+            this.checkBoxAutoConnect.Text = "Auto connect";
+            this.checkBoxAutoConnect.UseVisualStyleBackColor = true;
+            // 
+            // textBoxHost
+            // 
+            this.textBoxHost.Location = new System.Drawing.Point(228, 18);
+            this.textBoxHost.Name = "textBoxHost";
+            this.textBoxHost.Size = new System.Drawing.Size(130, 20);
+            this.textBoxHost.TabIndex = 0;
+            this.textBoxHost.Text = "position groupbox 9;8";
+            // 
+            // textBoxUsername
+            // 
+            this.textBoxUsername.Location = new System.Drawing.Point(228, 44);
+            this.textBoxUsername.Name = "textBoxUsername";
+            this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
+            this.textBoxUsername.TabIndex = 1;
+            this.textBoxUsername.Text = "height grpbox + 20";
+            // 
+            // labelUser
+            // 
+            this.labelUser.AutoSize = true;
+            this.labelUser.Location = new System.Drawing.Point(164, 47);
+            this.labelUser.Name = "labelUser";
+            this.labelUser.Size = new System.Drawing.Size(58, 13);
+            this.labelUser.TabIndex = 0;
+            this.labelUser.Text = "Username:";
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Location = new System.Drawing.Point(228, 70);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
+            this.textBoxPassword.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(166, 73);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Password:";
+            // 
+            // textBoxWorldDatabase
+            // 
+            this.textBoxWorldDatabase.Location = new System.Drawing.Point(228, 96);
+            this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
+            this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
+            this.textBoxWorldDatabase.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(135, 99);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "World Database:";
+            // 
+            // textBoxPort
+            // 
+            this.textBoxPort.Location = new System.Drawing.Point(228, 122);
+            this.textBoxPort.Name = "textBoxPort";
+            this.textBoxPort.Size = new System.Drawing.Size(130, 20);
+            this.textBoxPort.TabIndex = 4;
+            this.textBoxPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
+            // 
+            // labelHost
+            // 
+            this.labelHost.AutoSize = true;
+            this.labelHost.Location = new System.Drawing.Point(190, 21);
+            this.labelHost.Name = "labelHost";
+            this.labelHost.Size = new System.Drawing.Size(32, 13);
+            this.labelHost.TabIndex = 3;
+            this.labelHost.Text = "Host:";
+            // 
+            // labelPort
+            // 
+            this.labelPort.AutoSize = true;
+            this.labelPort.Location = new System.Drawing.Point(193, 125);
+            this.labelPort.Name = "labelPort";
+            this.labelPort.Size = new System.Drawing.Size(29, 13);
+            this.labelPort.TabIndex = 4;
+            this.labelPort.Text = "Port:";
             // 
             // groupBoxStaticScriptInfo
             // 
@@ -1927,6 +2079,18 @@ namespace SAI_Editor
             this.panelPermanentTooltipTypes.TabIndex = 25;
             this.panelPermanentTooltipTypes.Visible = false;
             // 
+            // labelDontUseDatabaseWarning
+            // 
+            this.labelDontUseDatabaseWarning.AutoSize = true;
+            this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDontUseDatabaseWarning.ForeColor = System.Drawing.Color.Red;
+            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(-2, 182);
+            this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
+            this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(380, 39);
+            this.labelDontUseDatabaseWarning.TabIndex = 11;
+            this.labelDontUseDatabaseWarning.Text = resources.GetString("labelDontUseDatabaseWarning.Text");
+            this.labelDontUseDatabaseWarning.Visible = false;
+            // 
             // listViewSmartScripts
             // 
             this.listViewSmartScripts.EnablePhaseHighlighting = true;
@@ -1973,156 +2137,6 @@ namespace SAI_Editor
             this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
             this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
-            // labelPort
-            // 
-            this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(193, 125);
-            this.labelPort.Name = "labelPort";
-            this.labelPort.Size = new System.Drawing.Size(29, 13);
-            this.labelPort.TabIndex = 4;
-            this.labelPort.Text = "Port:";
-            // 
-            // labelHost
-            // 
-            this.labelHost.AutoSize = true;
-            this.labelHost.Location = new System.Drawing.Point(190, 21);
-            this.labelHost.Name = "labelHost";
-            this.labelHost.Size = new System.Drawing.Size(32, 13);
-            this.labelHost.TabIndex = 3;
-            this.labelHost.Text = "Host:";
-            // 
-            // textBoxPort
-            // 
-            this.textBoxPort.Location = new System.Drawing.Point(228, 122);
-            this.textBoxPort.Name = "textBoxPort";
-            this.textBoxPort.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPort.TabIndex = 4;
-            this.textBoxPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(135, 99);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "World Database:";
-            // 
-            // textBoxWorldDatabase
-            // 
-            this.textBoxWorldDatabase.Location = new System.Drawing.Point(228, 96);
-            this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
-            this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
-            this.textBoxWorldDatabase.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(166, 73);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Password:";
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Location = new System.Drawing.Point(228, 70);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPassword.TabIndex = 2;
-            // 
-            // labelUser
-            // 
-            this.labelUser.AutoSize = true;
-            this.labelUser.Location = new System.Drawing.Point(164, 47);
-            this.labelUser.Name = "labelUser";
-            this.labelUser.Size = new System.Drawing.Size(58, 13);
-            this.labelUser.TabIndex = 0;
-            this.labelUser.Text = "Username:";
-            // 
-            // textBoxUsername
-            // 
-            this.textBoxUsername.Location = new System.Drawing.Point(228, 44);
-            this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
-            this.textBoxUsername.TabIndex = 1;
-            this.textBoxUsername.Text = "height grpbox + 20";
-            // 
-            // textBoxHost
-            // 
-            this.textBoxHost.Location = new System.Drawing.Point(228, 18);
-            this.textBoxHost.Name = "textBoxHost";
-            this.textBoxHost.Size = new System.Drawing.Size(130, 20);
-            this.textBoxHost.TabIndex = 0;
-            this.textBoxHost.Text = "position groupbox 9;8";
-            // 
-            // checkBoxAutoConnect
-            // 
-            this.checkBoxAutoConnect.AutoSize = true;
-            this.checkBoxAutoConnect.Location = new System.Drawing.Point(13, 124);
-            this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
-            this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxAutoConnect.TabIndex = 6;
-            this.checkBoxAutoConnect.Text = "Auto connect";
-            this.checkBoxAutoConnect.UseVisualStyleBackColor = true;
-            // 
-            // buttonSearchWorldDb
-            // 
-            this.buttonSearchWorldDb.Location = new System.Drawing.Point(334, 95);
-            this.buttonSearchWorldDb.Name = "buttonSearchWorldDb";
-            this.buttonSearchWorldDb.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchWorldDb.TabIndex = 29;
-            this.buttonSearchWorldDb.Text = "...";
-            this.buttonSearchWorldDb.UseVisualStyleBackColor = true;
-            this.buttonSearchWorldDb.Click += new System.EventHandler(this.buttonSearchWorldDb_Click);
-            // 
-            // radioButtonConnectToMySql
-            // 
-            this.radioButtonConnectToMySql.AutoSize = true;
-            this.radioButtonConnectToMySql.Checked = true;
-            this.radioButtonConnectToMySql.Location = new System.Drawing.Point(13, 21);
-            this.radioButtonConnectToMySql.Name = "radioButtonConnectToMySql";
-            this.radioButtonConnectToMySql.Size = new System.Drawing.Size(115, 17);
-            this.radioButtonConnectToMySql.TabIndex = 31;
-            this.radioButtonConnectToMySql.TabStop = true;
-            this.radioButtonConnectToMySql.Text = "Connect to MySQL";
-            this.radioButtonConnectToMySql.UseVisualStyleBackColor = true;
-            this.radioButtonConnectToMySql.CheckedChanged += new System.EventHandler(this.radioButtonConnectToMySql_CheckedChanged);
-            // 
-            // radioButtonDontUseDatabase
-            // 
-            this.radioButtonDontUseDatabase.AutoSize = true;
-            this.radioButtonDontUseDatabase.Location = new System.Drawing.Point(13, 47);
-            this.radioButtonDontUseDatabase.Name = "radioButtonDontUseDatabase";
-            this.radioButtonDontUseDatabase.Size = new System.Drawing.Size(126, 17);
-            this.radioButtonDontUseDatabase.TabIndex = 32;
-            this.radioButtonDontUseDatabase.Text = "Don\'t use a database";
-            this.radioButtonDontUseDatabase.UseVisualStyleBackColor = true;
-            this.radioButtonDontUseDatabase.CheckedChanged += new System.EventHandler(this.radioButtonDontUseDatabase_CheckedChanged);
-            // 
-            // groupBoxLogin
-            // 
-            this.groupBoxLogin.Controls.Add(this.radioButtonDontUseDatabase);
-            this.groupBoxLogin.Controls.Add(this.radioButtonConnectToMySql);
-            this.groupBoxLogin.Controls.Add(this.buttonSearchWorldDb);
-            this.groupBoxLogin.Controls.Add(this.checkBoxAutoConnect);
-            this.groupBoxLogin.Controls.Add(this.textBoxHost);
-            this.groupBoxLogin.Controls.Add(this.textBoxUsername);
-            this.groupBoxLogin.Controls.Add(this.labelUser);
-            this.groupBoxLogin.Controls.Add(this.textBoxPassword);
-            this.groupBoxLogin.Controls.Add(this.label1);
-            this.groupBoxLogin.Controls.Add(this.textBoxWorldDatabase);
-            this.groupBoxLogin.Controls.Add(this.label2);
-            this.groupBoxLogin.Controls.Add(this.textBoxPort);
-            this.groupBoxLogin.Controls.Add(this.labelHost);
-            this.groupBoxLogin.Controls.Add(this.labelPort);
-            this.groupBoxLogin.Location = new System.Drawing.Point(3, 3);
-            this.groupBoxLogin.Name = "groupBoxLogin";
-            this.groupBoxLogin.Size = new System.Drawing.Size(364, 149);
-            this.groupBoxLogin.TabIndex = 10;
-            this.groupBoxLogin.TabStop = false;
-            this.groupBoxLogin.Text = "Connect information";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2155,6 +2169,9 @@ namespace SAI_Editor
             this.menuStrip.PerformLayout();
             this.contextMenuStripListView.ResumeLayout(false);
             this.panelLoginBox.ResumeLayout(false);
+            this.panelLoginBox.PerformLayout();
+            this.groupBoxLogin.ResumeLayout(false);
+            this.groupBoxLogin.PerformLayout();
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
             this.groupBoxPreferences.ResumeLayout(false);
@@ -2178,8 +2195,6 @@ namespace SAI_Editor
             this.panelPermanentTooltipTypes.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
-            this.groupBoxLogin.ResumeLayout(false);
-            this.groupBoxLogin.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2340,6 +2355,7 @@ namespace SAI_Editor
         public System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.Label labelHost;
         private System.Windows.Forms.Label labelPort;
+        private System.Windows.Forms.Label labelDontUseDatabaseWarning;
     }
 }
 

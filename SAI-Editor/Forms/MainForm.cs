@@ -3647,6 +3647,12 @@ namespace SAI_Editor
             textBoxWorldDatabase.Enabled = radioButtonConnectToMySql.Checked;
             textBoxPort.Enabled = radioButtonConnectToMySql.Checked;
             buttonSearchWorldDb.Enabled = radioButtonConnectToMySql.Checked;
+            labelDontUseDatabaseWarning.Visible = !radioButtonConnectToMySql.Checked;
+
+            if (radioButtonConnectToMySql.Checked)
+                Height -= 19;
+            else
+                Height += 19;
         }
 
         public void HandleUseWorldDatabaseSettingChanged()

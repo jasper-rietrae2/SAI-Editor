@@ -123,6 +123,11 @@
   <metadata name="contextMenuStripListView.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>10, 27</value>
   </metadata>
+  <data name="labelDontUseDatabaseWarning.Text" xml:space="preserve">
+    <value>Warning: the following features are not supported unless a database connection
+is made: generating comments, executing and generating revert queries, listing
+actionlists &amp; searching for database stuff like creatures/gameobjects/quests/etc.</value>
+  </data>
   <metadata name="LoadTooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>198, 4</value>
   </metadata>
