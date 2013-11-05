@@ -346,7 +346,7 @@ namespace SAI_Editor
             if (radioButtonConnectToMySql.Checked)
                 Text = "SAI-Editor - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ", " + textBoxPort.Text;
             else
-                Text = "SAI-Editor - Creator-only mode, no connection";
+                Text = "SAI-Editor - Creator-only mode, no database connection";
 
             if (instant)
             {
