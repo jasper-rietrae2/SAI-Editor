@@ -463,7 +463,7 @@ namespace SAI_Editor
         private void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxEventType.Text = comboBoxEventType.SelectedIndex.ToString();
-            textBoxEventType.SelectionStart = 3; //! Set cursot to end of text
+            textBoxEventType.SelectionStart = 3; //! Set cursor to end of text
 
             if (!runningConstructor)
             {
@@ -483,7 +483,7 @@ namespace SAI_Editor
         private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxActionType.Text = comboBoxActionType.SelectedIndex.ToString();
-            textBoxActionType.SelectionStart = 3; //! Set cursot to end of text
+            textBoxActionType.SelectionStart = 3; //! Set cursor to end of text
 
             if (!runningConstructor)
             {
@@ -503,7 +503,7 @@ namespace SAI_Editor
         private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxTargetType.Text = comboBoxTargetType.SelectedIndex.ToString();
-            textBoxTargetType.SelectionStart = 3; //! Set cursot to end of text
+            textBoxTargetType.SelectionStart = 3; //! Set cursor to end of text
 
             if (!runningConstructor)
             {
@@ -3025,6 +3025,15 @@ namespace SAI_Editor
                 listViewSmartScripts.SelectedSmartScript.entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 GenerateCommentAndResizeColumns();
+
+                //! When all entryorguids are the same, also adjust the originalEntryOrGuid data
+                List<EntryOrGuidAndSourceType> uniqueEntriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
+
+                if (uniqueEntriesOrGuidsAndSourceTypes != null && uniqueEntriesOrGuidsAndSourceTypes.Count == 1)
+                {
+                    originalEntryOrGuidAndSourceType.entryOrGuid = uniqueEntriesOrGuidsAndSourceTypes[0].entryOrGuid;
+                    originalEntryOrGuidAndSourceType.sourceType = uniqueEntriesOrGuidsAndSourceTypes[0].sourceType;
+                }
             }
         }
 
