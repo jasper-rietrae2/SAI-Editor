@@ -75,6 +75,7 @@ namespace SAI_Editor
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
         private int previousLinkFrom = -1;
+        private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>();
 
         public MainForm()
         {
@@ -1315,6 +1316,7 @@ namespace SAI_Editor
                 if (listViewSmartScripts.SelectedItems[0].SubItems[2].Text == lastSmartScriptIdOfScript.ToString())
                     lastSmartScriptIdOfScript--;
 
+            lastDeletedSmartScripts.Add(listViewSmartScripts.SelectedSmartScript.Clone());
             listViewSmartScripts.RemoveSmartScript(listViewSmartScripts.SelectedSmartScript);
             buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
 
@@ -3668,6 +3670,18 @@ namespace SAI_Editor
                 Text = "SAI-Editor - Connection: " + Settings.Default.User + ", " + Settings.Default.Host + ", " + Settings.Default.Port.ToString();
             else
                 Text = "SAI-Editor - Creator-only mode, no database connection";
+        }
+
+        private void menuItemRetrieveLastDeletedRow_Click(object sender, EventArgs e)
+        {
+            if (lastDeletedSmartScripts.Count == 0)
+            {
+                MessageBox.Show("There are no items deleted in this session ready to be restored.", "Nothing to retrieve!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            listViewSmartScripts.AddSmartScript(lastDeletedSmartScripts.Last());
+            lastDeletedSmartScripts.Remove(lastDeletedSmartScripts.Last());
         }
     }
 }

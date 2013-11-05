@@ -186,6 +186,7 @@ namespace SAI_Editor
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
             this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.menuItemRetrieveLastDeletedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
@@ -316,7 +317,8 @@ namespace SAI_Editor
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemDeleteSelectedRow});
+            this.menuItemDeleteSelectedRow,
+            this.menuItemRetrieveLastDeletedRow});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -327,7 +329,7 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRow.Name = "menuItemDeleteSelectedRow";
             this.menuItemDeleteSelectedRow.ShortcutKeyDisplayString = "(Ctrl + D)";
             this.menuItemDeleteSelectedRow.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.menuItemDeleteSelectedRow.Size = new System.Drawing.Size(232, 22);
+            this.menuItemDeleteSelectedRow.Size = new System.Drawing.Size(295, 22);
             this.menuItemDeleteSelectedRow.Text = "Delete selected row";
             this.menuItemDeleteSelectedRow.Click += new System.EventHandler(this.menuOptionDeleteSelectedRow_Click);
             // 
@@ -2137,6 +2139,16 @@ namespace SAI_Editor
             this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
             this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
+            // menuItemRetrieveLastDeletedRow
+            // 
+            this.menuItemRetrieveLastDeletedRow.Name = "menuItemRetrieveLastDeletedRow";
+            this.menuItemRetrieveLastDeletedRow.ShortcutKeyDisplayString = "(Ctrl + Shift + Z)";
+            this.menuItemRetrieveLastDeletedRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Z)));
+            this.menuItemRetrieveLastDeletedRow.Size = new System.Drawing.Size(295, 22);
+            this.menuItemRetrieveLastDeletedRow.Text = "Retrieve last deleted row";
+            this.menuItemRetrieveLastDeletedRow.Click += new System.EventHandler(this.menuItemRetrieveLastDeletedRow_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2356,6 +2368,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Label labelHost;
         private System.Windows.Forms.Label labelPort;
         private System.Windows.Forms.Label labelDontUseDatabaseWarning;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRetrieveLastDeletedRow;
     }
 }
 
