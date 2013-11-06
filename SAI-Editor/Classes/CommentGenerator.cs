@@ -185,7 +185,7 @@ namespace SAI_Editor.Classes
             smartActionStrings.Add(SmartAction.SMART_ACTION_CREATE_TIMED_EVENT, "Create Timed Event");
             smartActionStrings.Add(SmartAction.SMART_ACTION_PLAYMOVIE, "Play Movie _actionParamOne_");
             smartActionStrings.Add(SmartAction.SMART_ACTION_MOVE_TO_POS, "Move To _getTargetType_");
-            smartActionStrings.Add(SmartAction.SMART_ACTION_RESPAWN_TARGET, "Respawn Gameobject");
+            smartActionStrings.Add(SmartAction.SMART_ACTION_RESPAWN_TARGET, "Respawn _getTargetType_");
             smartActionStrings.Add(SmartAction.SMART_ACTION_EQUIP, "Change Equipment");
             smartActionStrings.Add(SmartAction.SMART_ACTION_CLOSE_GOSSIP, "Close Gossip");
             smartActionStrings.Add(SmartAction.SMART_ACTION_TRIGGER_TIMED_EVENT, "Trigger Timed Event _actionParamOne_");
