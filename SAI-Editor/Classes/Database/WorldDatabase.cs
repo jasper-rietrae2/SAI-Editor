@@ -370,7 +370,7 @@ namespace SAI_Editor.Database
         public async Task<bool> AreaTriggerHasSmartAI(int entry)
         {
             //DataTable dt = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = '@entry'", new MySqlParameter("@entry", entry));
-            DataTable dt = await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = '" + entry + "'");
+            DataTable dt = await ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = '" + entry + "'");
             return dt.Rows.Count > 0;
         }
 

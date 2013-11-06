@@ -39,6 +39,7 @@ namespace SAI_Editor.Forms
             richTextBoxSqlOutput.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             buttonExecuteScript.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             buttonSaveToFile.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
+            buttonExecuteScript.Enabled = Settings.Default.UseWorldDatabase;
         }
 
         private async void buttonExecuteScript_Click(object sender, EventArgs e)

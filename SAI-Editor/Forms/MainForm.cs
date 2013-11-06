@@ -28,8 +28,8 @@ namespace SAI_Editor
 
     internal enum FormSizes
     {
-        Width = 278,
-        Height = 260,
+        Width = 403,
+        Height = 236,
 
         WidthToExpandTo = 957,
         HeightToExpandTo = 505,
@@ -75,6 +75,7 @@ namespace SAI_Editor
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
         private int previousLinkFrom = -1;
+        private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>();
 
         public MainForm()
         {
@@ -106,6 +107,12 @@ namespace SAI_Editor
                 textBoxWorldDatabase.Text = Settings.Default.Database;
                 textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
                 expandAndContractSpeed = Settings.Default.AnimationSpeed;
+                radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
+                radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
+                checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
+                menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
+                menuItemGenerateCommentListView.Enabled = Settings.Default.UseWorldDatabase;
+                buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || (SourceTypes)Settings.Default.LastSourceType == SourceTypes.SourceTypeAreaTrigger;
             }
             catch (Exception ex)
             {
@@ -132,15 +139,19 @@ namespace SAI_Editor
             if (Settings.Default.AutoConnect)
             {
                 checkBoxAutoConnect.Checked = true;
-                connectionString.Server = textBoxHost.Text;
-                connectionString.UserID = textBoxUsername.Text;
-                connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
-                connectionString.Database = textBoxWorldDatabase.Text;
 
-                if (textBoxPassword.Text.Length > 0)
-                    connectionString.Password = textBoxPassword.Text;
+                if (Settings.Default.UseWorldDatabase)
+                {
+                    connectionString.Server = textBoxHost.Text;
+                    connectionString.UserID = textBoxUsername.Text;
+                    connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
+                    connectionString.Database = textBoxWorldDatabase.Text;
 
-                if (SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString, false))
+                    if (textBoxPassword.Text.Length > 0)
+                        connectionString.Password = textBoxPassword.Text;
+                }
+
+                if (!Settings.Default.UseWorldDatabase || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString, false))
                 {
                     buttonConnect.PerformClick();
 
@@ -173,7 +184,7 @@ namespace SAI_Editor
             panelPermanentTooltipParameters.BackColor = Color.FromArgb(255, 255, 225);
             labelPermanentTooltipTextTypes.BackColor = Color.FromArgb(255, 255, 225);
 
-            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
 
             textBoxEventType.MouseWheel += textBoxEventType_MouseWheel;
@@ -257,54 +268,62 @@ namespace SAI_Editor
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBoxHost.Text))
+            if (radioButtonConnectToMySql.Checked)
             {
-                MessageBox.Show("The host field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (String.IsNullOrEmpty(textBoxHost.Text))
+                {
+                    MessageBox.Show("The host field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (String.IsNullOrEmpty(textBoxUsername.Text))
+                {
+                    MessageBox.Show("The username field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (textBoxPassword.Text.Length > 0 && String.IsNullOrEmpty(textBoxPassword.Text))
+                {
+                    MessageBox.Show("The password field can not consist of only whitespaces!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (String.IsNullOrEmpty(textBoxWorldDatabase.Text))
+                {
+                    MessageBox.Show("The world database field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                if (String.IsNullOrEmpty(textBoxPort.Text))
+                {
+                    MessageBox.Show("The port field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                connectionString.Server = textBoxHost.Text;
+                connectionString.UserID = textBoxUsername.Text;
+                connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
+                connectionString.Database = textBoxWorldDatabase.Text;
+
+                if (textBoxPassword.Text.Length > 0)
+                    connectionString.Password = textBoxPassword.Text;
             }
 
-            if (String.IsNullOrEmpty(textBoxUsername.Text))
-            {
-                MessageBox.Show("The username field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+            Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
+            Settings.Default.Save();
 
-            if (textBoxPassword.Text.Length > 0 && String.IsNullOrEmpty(textBoxPassword.Text))
-            {
-                MessageBox.Show("The password field can not consist of only whitespaces!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (String.IsNullOrEmpty(textBoxWorldDatabase.Text))
-            {
-                MessageBox.Show("The world database field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            if (String.IsNullOrEmpty(textBoxPort.Text))
-            {
-                MessageBox.Show("The port field has to be filled!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            connectionString.Server = textBoxHost.Text;
-            connectionString.UserID = textBoxUsername.Text;
-            connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
-            connectionString.Database = textBoxWorldDatabase.Text;
-
-            if (textBoxPassword.Text.Length > 0)
-                connectionString.Password = textBoxPassword.Text;
-
-            if (SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
+            if (!radioButtonConnectToMySql.Checked || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
             {
                 StartExpandingToMainForm(Settings.Default.InstantExpand);
-                SAI_Editor_Manager.Instance.ResetDatabases();
+
+                if (!radioButtonConnectToMySql.Checked)
+                    SAI_Editor_Manager.Instance.ResetDatabases();
             }
         }
 
         private void StartExpandingToMainForm(bool instant = false)
         {
-            if (checkBoxSaveSettings.Checked)
+            if (!radioButtonConnectToMySql.Checked)
             {
                 RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
                 byte[] buffer = new byte[1024];
@@ -319,11 +338,16 @@ namespace SAI_Editor
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
                 Settings.Default.Port = XConverter.ToUInt32(textBoxPort.Text);
+                Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
                 Settings.Default.Save();
             }
 
             ResetFieldsToDefault();
-            Text = "SAI-Editor - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ", " + textBoxPort.Text;
+
+            if (radioButtonConnectToMySql.Checked)
+                Text = "SAI-Editor - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ", " + textBoxPort.Text;
+            else
+                Text = "SAI-Editor - Creator-only mode, no database connection";
 
             if (instant)
             {
@@ -347,9 +371,6 @@ namespace SAI_Editor
 
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
-
-            //TestForm tf = new TestForm();
-            //tf.Show();
         }
 
         private void StartContractingToLoginForm(bool instant = false)
@@ -387,7 +408,6 @@ namespace SAI_Editor
             textBoxPassword.Text = "";
             textBoxWorldDatabase.Text = "";
             textBoxPort.Text = "";
-            checkBoxSaveSettings.Checked = false;
             checkBoxAutoConnect.Checked = false;
         }
 
@@ -408,7 +428,12 @@ namespace SAI_Editor
                             break;
                         case FormState.FormStateMain:
                             if (textBoxEntryOrGuid.Focused)
-                                pictureBoxLoadScript_Click(pictureBoxLoadScript, null);
+                            {
+                                if (Settings.Default.UseWorldDatabase)
+                                    pictureBoxLoadScript_Click(pictureBoxLoadScript, null);
+                                else
+                                    pictureBoxCreateScript_Click(pictureBoxCreateScript, null);
+                            }
 
                             break;
                     }
@@ -439,7 +464,7 @@ namespace SAI_Editor
         private void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxEventType.Text = comboBoxEventType.SelectedIndex.ToString();
-            textBoxEventType.SelectionStart = 3; //! Set cursot to end of text
+            textBoxEventType.SelectionStart = 3; //! Set cursor to end of text
 
             if (!runningConstructor)
             {
@@ -459,7 +484,7 @@ namespace SAI_Editor
         private void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxActionType.Text = comboBoxActionType.SelectedIndex.ToString();
-            textBoxActionType.SelectionStart = 3; //! Set cursot to end of text
+            textBoxActionType.SelectionStart = 3; //! Set cursor to end of text
 
             if (!runningConstructor)
             {
@@ -479,7 +504,7 @@ namespace SAI_Editor
         private void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
         {
             textBoxTargetType.Text = comboBoxTargetType.SelectedIndex.ToString();
-            textBoxTargetType.SelectionStart = 3; //! Set cursot to end of text
+            textBoxTargetType.SelectionStart = 3; //! Set cursor to end of text
 
             if (!runningConstructor)
             {
@@ -577,7 +602,7 @@ namespace SAI_Editor
             checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
             checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
 
-            if (expanding)
+            if (expanding && radioButtonConnectToMySql.Checked)
                 TryToLoadScript(-1, SourceTypes.SourceTypeNone, false);
         }
 
@@ -594,7 +619,7 @@ namespace SAI_Editor
                     if (showError)
                     {
                         bool showNormalErrorMessage = false;
-                        string message = String.Format("The entryorguid '{0}' could not be found in the smart_scripts table for any source_type!", entryOrGuid);
+                        string message = String.Format("The entryorguid '{0}' could not be found in the smart_scripts table for the given source_type!", entryOrGuid);
                         smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScriptsWithoutSourceType(XConverter.ToInt32(entryOrGuid), (int)sourceType);
 
                         if (smartScripts != null)
@@ -747,7 +772,7 @@ namespace SAI_Editor
                         }
                     }
 
-                    pictureBoxLoadScript.Enabled = true;
+                    pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
                     pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                     return new List<SmartScript>();
                 }
@@ -756,7 +781,7 @@ namespace SAI_Editor
                 {
                     smartScriptsToReturn.Add(smartScripts[i]);
 
-                    if (!checkBoxListActionlistsOrEntries.Checked)
+                    if (!checkBoxListActionlistsOrEntries.Checked || !checkBoxListActionlistsOrEntries.Enabled)
                         continue;
 
                     if (i == smartScripts.Count - 1 && originalEntryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist)
@@ -802,7 +827,7 @@ namespace SAI_Editor
                     MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            pictureBoxLoadScript.Enabled = true;
+            pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             return smartScriptsToReturn;
         }
@@ -1291,8 +1316,9 @@ namespace SAI_Editor
                 if (listViewSmartScripts.SelectedItems[0].SubItems[2].Text == lastSmartScriptIdOfScript.ToString())
                     lastSmartScriptIdOfScript--;
 
+            lastDeletedSmartScripts.Add(listViewSmartScripts.SelectedSmartScript.Clone());
             listViewSmartScripts.RemoveSmartScript(listViewSmartScripts.SelectedSmartScript);
-            buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
+            buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
 
             if (listViewSmartScripts.Items.Count <= 0)
                 ResetFieldsToDefault(Settings.Default.ChangeStaticInfo);
@@ -1388,7 +1414,7 @@ namespace SAI_Editor
 
         public void pictureBoxLoadScript_Click(object sender, EventArgs e)
         {
-            if (!pictureBoxLoadScript.Enabled)
+            if (!pictureBoxLoadScript.Enabled || !Settings.Default.UseWorldDatabase)
                 return;
 
             TryToLoadScript();
@@ -1434,10 +1460,15 @@ namespace SAI_Editor
                 return;
             }
 
+            lastSmartScriptIdOfScript = 0;
             int source_type = (int)GetSourceTypeByIndex();
             string sourceTypeString = GetSourceTypeString((SourceTypes)source_type);
+
+            if (!Settings.Default.UseWorldDatabase)
+                goto SkipWorldDatabaseChecks;
+
             string aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(entryorguid, source_type);
-            lastSmartScriptIdOfScript = 0;
+            List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entryorguid, source_type);
 
             //! Allow adding new lines even if the AIName is already set
             if ((SourceTypes)source_type == SourceTypes.SourceTypeAreaTrigger)
@@ -1463,23 +1494,31 @@ namespace SAI_Editor
             {
                 if (aiName != String.Empty)
                 {
-                    string strAlreadyHasAiName = "This " + sourceTypeString + " already has its AIName set to '" + aiName + "'";
+                    string strAlreadyHasAiName = String.Empty;
+                    bool aiNameIsSmart = SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName);
 
-                    if (SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName))
+                    if (aiNameIsSmart)
                     {
+                        if (smartScripts == null || smartScripts.Count == 0)
+                            goto SkipWorldDatabaseChecks;
+
                         if (fromNewLine)
                             goto SkipAiNameAndScriptNameChecks;
 
+                        strAlreadyHasAiName += "This " + sourceTypeString + " already has its AIName set to '" + aiName + "'";
                         strAlreadyHasAiName += "! Do you want to load it instead?";
                     }
                     else
+                    {
+                        strAlreadyHasAiName += "This " + sourceTypeString + " already has its AIName set to '" + aiName + "'";
                         strAlreadyHasAiName += " and can therefore not have any SmartAI. Do you want to get rid of this AIName right now?";
+                    }
 
                     DialogResult dialogResult = MessageBox.Show(strAlreadyHasAiName, "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (dialogResult == DialogResult.Yes)
                     {
-                        if (SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName))
+                        if (aiNameIsSmart)
                             TryToLoadScript();
                         else
                             //! We don't have to target areatrigger_scripts here, as we've already done this a few lines up
@@ -1499,7 +1538,6 @@ namespace SAI_Editor
             }
 
         SkipAiNameAndScriptNameChecks:
-            List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entryorguid, source_type);
 
             if (smartScripts != null && smartScripts.Count > 0)
             {
@@ -1519,6 +1557,7 @@ namespace SAI_Editor
                 return;
             }
 
+        SkipWorldDatabaseChecks:
             buttonNewLine.Enabled = false;
             checkBoxListActionlistsOrEntries.Text = GetSourceTypeByIndex() == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
             pictureBoxLoadScript.Enabled = false;
@@ -1563,8 +1602,10 @@ namespace SAI_Editor
             newSmartScript.target_z = XConverter.ToInt32(textBoxTargetZ.Text);
             newSmartScript.target_o = XConverter.ToInt32(textBoxTargetO.Text);
 
-            if (Settings.Default.GenerateComments)
+            if (Settings.Default.GenerateComments && Settings.Default.UseWorldDatabase)
                 newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
+            else if (textBoxComments.Text.Contains(" - Event - Action (phase) (dungeon difficulty)"))
+                newSmartScript.comment = SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType((SourceTypes)newSmartScript.source_type);
             else
                 newSmartScript.comment = textBoxComments.Text;
 
@@ -1576,8 +1617,8 @@ namespace SAI_Editor
             listViewSmartScripts.Select();
 
             buttonNewLine.Enabled = true;
-            buttonGenerateComments.Enabled = true;
-            pictureBoxLoadScript.Enabled = true;
+            buttonGenerateComments.Enabled = Settings.Default.UseWorldDatabase;
+            pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
             pictureBoxCreateScript.Enabled = true;
         }
 
@@ -1628,6 +1669,11 @@ namespace SAI_Editor
                     MessageBox.Show("The entryorguid is either too big or too small.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+                catch (FormatException)
+                {
+                    MessageBox.Show("The entryorguid field does not contain a valid number.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 originalEntryOrGuidAndSourceType.sourceType = GetSourceTypeByIndex();
             }
@@ -1637,7 +1683,7 @@ namespace SAI_Editor
             checkBoxListActionlistsOrEntries.Text = originalEntryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
 
             buttonNewLine.Enabled = false;
-            buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0;
+            buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
             HandleShowBasicInfo();
 
             if (listViewSmartScripts.Items.Count > 0)
@@ -1646,7 +1692,7 @@ namespace SAI_Editor
                 listViewSmartScripts.Items[0].Selected = true;
                 listViewSmartScripts.Select(); //! Sets the focus on the listview
 
-                if (checkBoxListActionlistsOrEntries.Checked)
+                if (checkBoxListActionlistsOrEntries.Enabled && checkBoxListActionlistsOrEntries.Checked)
                 {
                     foreach (ListViewItem item in listViewSmartScripts.Items)
                         if (item.Text == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
@@ -1732,15 +1778,15 @@ namespace SAI_Editor
 
         private void TryToOpenLinkForm(TextBox textBoxToChange)
         {
-            if (listViewSmartScripts.SelectedItems.Count <= 0)
+            if (listViewSmartScripts.Items.Count <= 1)
             {
-                MessageBox.Show("You must first select a line in the script", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("There are not enough items in the listview in order to link!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (listViewSmartScripts.SelectedItems.Count > 1)
+            if (listViewSmartScripts.SelectedItems.Count == 0)
             {
-                MessageBox.Show("You may only have one selected event when opening the Link form!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You must first select a line in the script", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -1788,7 +1834,7 @@ namespace SAI_Editor
             textBoxId.Text = "-1";
             textBoxLinkFrom.Text = "None";
             textBoxLinkTo.Text = "0";
-            textBoxComments.Text = GetDefaultCommentForSourceType(GetSourceTypeByIndex());
+            textBoxComments.Text = SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType(GetSourceTypeByIndex());
             textBoxEventPhasemask.Text = "0";
             textBoxEventFlags.Text = "0";
 
@@ -2415,31 +2461,14 @@ namespace SAI_Editor
 
         private void textBoxComments_GotFocus(object sender, EventArgs e)
         {
-            if (textBoxComments.Text == GetDefaultCommentForSourceType(GetSourceTypeByIndex()))
+            if (textBoxComments.Text == SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType(GetSourceTypeByIndex()))
                 textBoxComments.Text = "";
         }
 
         private void textBoxComments_LostFocus(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBoxComments.Text))
-                textBoxComments.Text = GetDefaultCommentForSourceType(GetSourceTypeByIndex());
-        }
-
-        private string GetDefaultCommentForSourceType(SourceTypes sourceType)
-        {
-            switch (sourceType)
-            {
-                case SourceTypes.SourceTypeCreature:
-                    return "Npc - Event - Action (phase) (dungeon difficulty)";
-                case SourceTypes.SourceTypeGameobject:
-                    return "Gameobject - Event - Action (phase) (dungeon difficulty)";
-                case SourceTypes.SourceTypeAreaTrigger:
-                    return "Areatrigger - Event - Action (phase) (dungeon difficulty)";
-                case SourceTypes.SourceTypeScriptedActionlist:
-                    return "Source - Event - Action (phase) (dungeon difficulty)";
-            }
-
-            return String.Empty;
+                textBoxComments.Text = SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType(GetSourceTypeByIndex());
         }
 
         public void ExpandToShowPermanentTooltips(bool expand)
@@ -2671,6 +2700,12 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.Items.Count == 0)
             {
+                if (!Settings.Default.UseWorldDatabase)
+                {
+                    TryToCreateScript(true);
+                    return;
+                }
+
                 string aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(XConverter.ToInt32(textBoxEntryOrGuid.Text), (int)GetSourceTypeByIndex());
 
                 if (!SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName))
@@ -2696,10 +2731,10 @@ namespace SAI_Editor
             else
                 newSmartScript.id = -1;
 
-            if (Settings.Default.GenerateComments)
+            if (Settings.Default.GenerateComments && Settings.Default.UseWorldDatabase)
                 newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
             else
-                newSmartScript.comment = GetDefaultCommentForSourceType((SourceTypes)newSmartScript.source_type);
+                newSmartScript.comment = SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType((SourceTypes)newSmartScript.source_type);
 
             newSmartScript.event_chance = 100;
             int index = listViewSmartScripts.AddSmartScript(newSmartScript);
@@ -2716,7 +2751,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                if (listViewSmartScripts.SelectedSmartScript.id.ToString() == textBoxLinkTo.Text)
+                if (!updatingFieldsBasedOnSelectedScript && listViewSmartScripts.SelectedSmartScript.id.ToString() == textBoxLinkTo.Text)
                 {
                     MessageBox.Show("You can not link to or from the same id you're linking to.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBoxLinkFrom.Text = GetLinkFromForSelection();
@@ -2997,7 +3032,7 @@ namespace SAI_Editor
 
         private void textBoxEntryOrGuid_TextChanged(object sender, EventArgs e)
         {
-            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
 
             if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
@@ -3005,17 +3040,32 @@ namespace SAI_Editor
                 listViewSmartScripts.SelectedSmartScript.entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 GenerateCommentAndResizeColumns();
+
+                //! When all entryorguids are the same, also adjust the originalEntryOrGuid data
+                List<EntryOrGuidAndSourceType> uniqueEntriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
+
+                if (uniqueEntriesOrGuidsAndSourceTypes != null && uniqueEntriesOrGuidsAndSourceTypes.Count == 1)
+                {
+                    originalEntryOrGuidAndSourceType.entryOrGuid = uniqueEntriesOrGuidsAndSourceTypes[0].entryOrGuid;
+                    originalEntryOrGuidAndSourceType.sourceType = uniqueEntriesOrGuidsAndSourceTypes[0].sourceType;
+                }
             }
         }
 
         private void comboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SourceTypes newSourceType = GetSourceTypeByIndex();
+
             if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.source_type = (int)GetSourceTypeByIndex();
+                listViewSmartScripts.SelectedSmartScript.source_type = (int)newSourceType;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 GenerateCommentAndResizeColumns();
             }
+
+            //! When no database connection can be made, only enable the search button if
+            //! we're searching for areatriggers.
+            buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || newSourceType == SourceTypes.SourceTypeAreaTrigger; 
         }
 
         private async void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3037,10 +3087,14 @@ namespace SAI_Editor
 
             List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
 
-            string sourceName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
+            string sourceName = String.Empty;
+            
+            if (Settings.Default.UseWorldDatabase)
+                sourceName = " " + await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
+            
             string sourceSet = originalEntryOrGuidAndSourceType.entryOrGuid < 0 ? "@GUID" : "@ENTRY";
 
-            generatedSql += "-- " + sourceName + " SAI\n";
+            generatedSql += "--" + sourceName + " SAI\n";
             generatedSql += "SET " + sourceSet + " := " + originalEntryOrGuidAndSourceType.entryOrGuid + ";\n";
 
             if (entriesOrGuidsAndSourceTypes.Count == 1)
@@ -3078,7 +3132,7 @@ namespace SAI_Editor
                             break;
                         case SourceTypes.SourceTypeAreaTrigger:
                             generatedSql += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
-                            generatedSql += "INSERT INTO areatrigger_scripts VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
+                            generatedSql += "INSERT INTO `areatrigger_scripts` VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
                             break;
                         case SourceTypes.SourceTypeScriptedActionlist:
                             // todo
@@ -3192,6 +3246,9 @@ namespace SAI_Editor
 
         private async Task<string> GenerateSmartAiRevertQuery()
         {
+            if (!Settings.Default.UseWorldDatabase)
+                return String.Empty;
+
             string revertQuery = String.Empty;
             List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
 
@@ -3257,6 +3314,9 @@ namespace SAI_Editor
 
         public async void GenerateCommentsForAllItems()
         {
+            if (listViewSmartScripts.SmartScripts.Count == 0)
+                return;
+
             for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
             {
                 SmartScript smartScript = listViewSmartScripts.SmartScripts[i];
@@ -3291,6 +3351,9 @@ namespace SAI_Editor
 
         private void buttonGenerateComments_Click(object sender, EventArgs e)
         {
+            if (!Settings.Default.UseWorldDatabase)
+                return;
+
             GenerateCommentsForAllItems();
             ResizeColumns();
         }
@@ -3308,6 +3371,26 @@ namespace SAI_Editor
             Settings.Default.LockSmartScriptId = checkBoxLockEventId.Checked;
             Settings.Default.ListActionLists = checkBoxListActionlistsOrEntries.Checked;
             Settings.Default.AllowChangingEntryAndSourceType = checkBoxAllowChangingEntryAndSourceType.Checked;
+
+            if (formState == FormState.FormStateLogin)
+            {
+                RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+                byte[] buffer = new byte[1024];
+                rng.GetBytes(buffer);
+                string salt = BitConverter.ToString(buffer);
+                rng.Dispose();
+
+                Settings.Default.Entropy = salt;
+                Settings.Default.Host = textBoxHost.Text;
+                Settings.Default.User = textBoxUsername.Text;
+                Settings.Default.Password = textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
+                Settings.Default.Database = textBoxWorldDatabase.Text;
+                Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+                Settings.Default.Port = XConverter.ToUInt32(textBoxPort.Text);
+                Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
+                Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
+            }
+
             Settings.Default.Save();
         }
 
@@ -3556,6 +3639,59 @@ namespace SAI_Editor
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 GenerateCommentAndResizeColumns();
             }
+        }
+
+        private void radioButtonConnectToMySql_CheckedChanged(object sender, EventArgs e)
+        {
+            HandleRadioButtonUseDatabaseChanged();
+        }
+
+        private void radioButtonDontUseDatabase_CheckedChanged(object sender, EventArgs e)
+        {
+            HandleRadioButtonUseDatabaseChanged();
+        }
+
+        private void HandleRadioButtonUseDatabaseChanged()
+        {
+            textBoxHost.Enabled = radioButtonConnectToMySql.Checked;
+            textBoxUsername.Enabled = radioButtonConnectToMySql.Checked;
+            textBoxPassword.Enabled = radioButtonConnectToMySql.Checked;
+            textBoxWorldDatabase.Enabled = radioButtonConnectToMySql.Checked;
+            textBoxPort.Enabled = radioButtonConnectToMySql.Checked;
+            buttonSearchWorldDb.Enabled = radioButtonConnectToMySql.Checked;
+            labelDontUseDatabaseWarning.Visible = !radioButtonConnectToMySql.Checked;
+
+            if (radioButtonConnectToMySql.Checked)
+                Height -= 19;
+            else
+                Height += 19;
+        }
+
+        public void HandleUseWorldDatabaseSettingChanged()
+        {
+            buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || comboBoxSourceType.SelectedIndex == 2;
+            buttonGenerateComments.Enabled = Settings.Default.UseWorldDatabase;
+            pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
+            checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
+            menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
+            menuItemGenerateCommentListView.Enabled = Settings.Default.UseWorldDatabase;
+
+            if (Settings.Default.UseWorldDatabase)
+                Text = "SAI-Editor - Connection: " + Settings.Default.User + ", " + Settings.Default.Host + ", " + Settings.Default.Port.ToString();
+            else
+                Text = "SAI-Editor - Creator-only mode, no database connection";
+        }
+
+        private void menuItemRetrieveLastDeletedRow_Click(object sender, EventArgs e)
+        {
+            if (lastDeletedSmartScripts.Count == 0)
+            {
+                MessageBox.Show("There are no items deleted in this session ready to be restored.", "Nothing to retrieve!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            listViewSmartScripts.AddSmartScript(lastDeletedSmartScripts.Last());
+            lastDeletedSmartScripts.Remove(lastDeletedSmartScripts.Last());
         }
     }
 }

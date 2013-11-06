@@ -62,7 +62,7 @@ namespace SAI_Editor
                     FillListViewWithMySqlQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000");
                     break;
                 case SourceTypes.SourceTypeAreaTrigger:
-                    comboBoxSearchType.SelectedIndex = 6; //! NYI
+                    comboBoxSearchType.SelectedIndex = 6; //! Areatrigger entry
                     listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
                     listViewEntryResults.Columns.Add("Mapid", 52, HorizontalAlignment.Left);
                     listViewEntryResults.Columns.Add("X", 75, HorizontalAlignment.Left);
@@ -176,7 +176,6 @@ namespace SAI_Editor
 
                 if (dt.Rows.Count > 0)
                 {
-
                     List<Item> items = new List<Item>();
 
                     foreach (DataRow row in dt.Rows)
@@ -188,12 +187,9 @@ namespace SAI_Editor
 
                         if (!checkBoxHasAiName.Checked || await SAI_Editor_Manager.Instance.worldDatabase.AreaTriggerHasSmartAI(areaTrigger.id))
                             items.Add(new Item { ItemName = areaTrigger.id.ToString(), SubItems = new List<string> { areaTrigger.map_id.ToString(), areaTrigger.posX.ToString(), areaTrigger.posY.ToString(), areaTrigger.posZ.ToString() } });
-                            //AddItemToListView(listViewEntryResults, areaTrigger.id.ToString(), areaTrigger.map_id.ToString(), areaTrigger.posX.ToString(), areaTrigger.posY.ToString(), areaTrigger.posZ.ToString());
-
                     }
 
                     AddItemToListView(listViewEntryResults, items);
-
                 }
             }
             catch (MySqlException ex)
@@ -632,7 +628,7 @@ namespace SAI_Editor
                     break;
             }
 
-            if (Settings.Default.LoadScriptInstantly && ((MainForm)Owner).pictureBoxLoadScript.Enabled)
+            if (((MainForm)Owner).pictureBoxLoadScript.Enabled)
                 ((MainForm)Owner).TryToLoadScript(-1, SourceTypes.SourceTypeNone, true, true);
 
             Close();

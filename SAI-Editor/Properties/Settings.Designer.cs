@@ -109,18 +109,6 @@ namespace SAI_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool LoadScriptInstantly {
-            get {
-                return ((bool)(this["LoadScriptInstantly"]));
-            }
-            set {
-                this["LoadScriptInstantly"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool AutoSaveSettings {
             get {
@@ -320,6 +308,18 @@ namespace SAI_Editor.Properties {
             }
             set {
                 this["PhaseHighlighting"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseWorldDatabase {
+            get {
+                return ((bool)(this["UseWorldDatabase"]));
+            }
+            set {
+                this["UseWorldDatabase"] = value;
             }
         }
     }

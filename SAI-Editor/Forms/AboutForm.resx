@@ -603,6 +603,8 @@
   <data name="textBoxDescription.Text" xml:space="preserve">
     <value>SAI-Editor is an opensource application written in C# by Jasper 'Discover-' R. for the TrinityCore community.
 
+This software may NOT be sold, shared, advertised and in any shape or form commercialized without explicit owners letter of approval.
+
 The application was designed to make it easier to understand and write SmartAI code (smart_scripts) for the TrinityCore project. TrinityCore is a World of Warcraft emulator.
 
 'SAI' stands for 'SmartAI', which is the main database scripting engine used in TrinityCore. Using the scripting system allows the developer to make certain entities (creatures, gameobjects and areatriggers) perform certain actions, like casting spells or talking, at a given time (event, like when the entity dies).</value>

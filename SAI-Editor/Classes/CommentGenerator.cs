@@ -185,7 +185,7 @@ namespace SAI_Editor.Classes
             smartActionStrings.Add(SmartAction.SMART_ACTION_CREATE_TIMED_EVENT, "Create Timed Event");
             smartActionStrings.Add(SmartAction.SMART_ACTION_PLAYMOVIE, "Play Movie _actionParamOne_");
             smartActionStrings.Add(SmartAction.SMART_ACTION_MOVE_TO_POS, "Move To _getTargetType_");
-            smartActionStrings.Add(SmartAction.SMART_ACTION_RESPAWN_TARGET, "Respawn Gameobject");
+            smartActionStrings.Add(SmartAction.SMART_ACTION_RESPAWN_TARGET, "Respawn _getTargetType_");
             smartActionStrings.Add(SmartAction.SMART_ACTION_EQUIP, "Change Equipment");
             smartActionStrings.Add(SmartAction.SMART_ACTION_CLOSE_GOSSIP, "Close Gossip");
             smartActionStrings.Add(SmartAction.SMART_ACTION_TRIGGER_TIMED_EVENT, "Trigger Timed Event _actionParamOne_");
@@ -230,8 +230,11 @@ namespace SAI_Editor.Classes
 
         public async Task<string> GenerateCommentFor(SmartScript smartScript, EntryOrGuidAndSourceType entryOrGuidAndSourceType, bool forced = false, SmartScript smartScriptLink = null)
         {
-            if (!forced && !Settings.Default.GenerateComments)
-                return String.IsNullOrWhiteSpace(smartScript.comment) ? "Npc - Event - Action (phase) (dungeon difficulty)" : smartScript.comment;
+            //! Don't generate a comment when:
+            //- The world database is not supposed to be used;
+            //- The setting to generate comments is turned off and the comment generating was not FORCED.
+            if (!Settings.Default.UseWorldDatabase || (!forced && !Settings.Default.GenerateComments))
+                return !String.IsNullOrWhiteSpace(smartScript.comment) ? smartScript.comment : SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType((SourceTypes)smartScript.source_type);
 
             string fullLine = String.Empty;
 
@@ -907,36 +910,36 @@ namespace SAI_Editor.Classes
 
                 if (smartScript.event_flags > 0)
                 {
-                    if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_NOT_REPEATABLE) != 0))
+                    if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NOT_REPEATABLE) != 0))
                         fullLine += " (No Repeat)";
 
-                    if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_0) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_1) != 0) &&
-                        (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_2) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_3) != 0))
+                    if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_DUNGEON) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_DUNGEON) != 0) &&
+                        (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_RAID) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_RAID) != 0))
                         fullLine += " (Dungeon & Raid)";
                     else
                     {
-                        if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_0) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_1) != 0))
+                        if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_DUNGEON) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_DUNGEON) != 0))
                             fullLine += " (Dungeon)";
                         else
                         {
-                            if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_0) != 0))
+                            if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_DUNGEON) != 0))
                                 fullLine += " (Normal Dungeon)";
-                            else if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_1) != 0))
+                            else if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_DUNGEON) != 0))
                                 fullLine += " (Heroic Dungeon)";
                         }
 
-                        if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_2) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_3) != 0))
+                        if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_RAID) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_RAID) != 0))
                             fullLine += " (Raid)";
                         else
                         {
-                            if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_2) != 0))
+                            if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_RAID) != 0))
                                 fullLine += " (Normal Raid)";
-                            else if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DIFFICULTY_3) != 0))
+                            else if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_RAID) != 0))
                                 fullLine += " (Heroic Raid)";
                         }
                     }
 
-                    if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.SMART_EVENT_FLAG_DEBUG_ONLY) != 0))
+                    if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_DEBUG_ONLY) != 0))
                         fullLine += " (Debug)";
                 }
 
