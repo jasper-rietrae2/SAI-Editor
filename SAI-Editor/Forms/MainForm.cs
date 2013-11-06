@@ -35,6 +35,9 @@ namespace SAI_Editor
         HeightToExpandTo = 505,
 
         ListViewHeightContract = 65,
+
+        HeightLoginFormShowWarning = 275,
+        HeightLoginFormNormal = 236,
     }
 
     internal enum MaxValues
@@ -588,6 +591,9 @@ namespace SAI_Editor
 
             foreach (var control in controlsMainForm)
                 control.Visible = expanding;
+
+            if (!expanding)
+                HandleHeightLoginFormBasedOnuseDatabaseSetting();
 
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
@@ -3660,11 +3666,18 @@ namespace SAI_Editor
             textBoxPort.Enabled = radioButtonConnectToMySql.Checked;
             buttonSearchWorldDb.Enabled = radioButtonConnectToMySql.Checked;
             labelDontUseDatabaseWarning.Visible = !radioButtonConnectToMySql.Checked;
+            HandleHeightLoginFormBasedOnuseDatabaseSetting();
+        }
 
-            if (radioButtonConnectToMySql.Checked)
-                Height -= 19;
-            else
-                Height += 19;
+        private void HandleHeightLoginFormBasedOnuseDatabaseSetting()
+        {
+            if (formState != FormState.FormStateMain)
+            {
+                if (radioButtonConnectToMySql.Checked)
+                    Height = (int)FormSizes.HeightLoginFormNormal;
+                else
+                    Height = (int)FormSizes.HeightLoginFormShowWarning;
+            }
         }
 
         public void HandleUseWorldDatabaseSettingChanged()

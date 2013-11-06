@@ -584,7 +584,7 @@ namespace SAI_Editor
             this.labelDontUseDatabaseWarning.AutoSize = true;
             this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDontUseDatabaseWarning.ForeColor = System.Drawing.Color.Red;
-            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(-2, 182);
+            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(-2, 184);
             this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
             this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(380, 39);
             this.labelDontUseDatabaseWarning.TabIndex = 11;
