@@ -1468,6 +1468,7 @@ namespace SAI_Editor
                 goto SkipWorldDatabaseChecks;
 
             string aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(entryorguid, source_type);
+            List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entryorguid, source_type);
 
             //! Allow adding new lines even if the AIName is already set
             if ((SourceTypes)source_type == SourceTypes.SourceTypeAreaTrigger)
@@ -1493,23 +1494,31 @@ namespace SAI_Editor
             {
                 if (aiName != String.Empty)
                 {
-                    string strAlreadyHasAiName = "This " + sourceTypeString + " already has its AIName set to '" + aiName + "'";
+                    string strAlreadyHasAiName = String.Empty;
+                    bool aiNameIsSmart = SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName);
 
-                    if (SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName))
+                    if (aiNameIsSmart)
                     {
+                        if (smartScripts == null || smartScripts.Count == 0)
+                            goto SkipWorldDatabaseChecks;
+
                         if (fromNewLine)
                             goto SkipAiNameAndScriptNameChecks;
 
+                        strAlreadyHasAiName += "This " + sourceTypeString + " already has its AIName set to '" + aiName + "'";
                         strAlreadyHasAiName += "! Do you want to load it instead?";
                     }
                     else
+                    {
+                        strAlreadyHasAiName += "This " + sourceTypeString + " already has its AIName set to '" + aiName + "'";
                         strAlreadyHasAiName += " and can therefore not have any SmartAI. Do you want to get rid of this AIName right now?";
+                    }
 
                     DialogResult dialogResult = MessageBox.Show(strAlreadyHasAiName, "Something went wrong", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (dialogResult == DialogResult.Yes)
                     {
-                        if (SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName))
+                        if (aiNameIsSmart)
                             TryToLoadScript();
                         else
                             //! We don't have to target areatrigger_scripts here, as we've already done this a few lines up
@@ -1529,7 +1538,6 @@ namespace SAI_Editor
             }
 
         SkipAiNameAndScriptNameChecks:
-            List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entryorguid, source_type);
 
             if (smartScripts != null && smartScripts.Count > 0)
             {
