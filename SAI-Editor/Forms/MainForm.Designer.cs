@@ -45,6 +45,7 @@ namespace SAI_Editor
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDeleteSelectedRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemRetrieveLastDeletedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +71,10 @@ namespace SAI_Editor
             this.textBoxPort = new System.Windows.Forms.TextBox();
             this.labelHost = new System.Windows.Forms.Label();
             this.labelPort = new System.Windows.Forms.Label();
+            this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
+            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -182,16 +186,14 @@ namespace SAI_Editor
             this.labelPermanentTooltipTextTypes = new System.Windows.Forms.Label();
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
-            this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
-            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.menuItemRetrieveLastDeletedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -204,8 +206,6 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipTypes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -332,6 +332,16 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRow.Size = new System.Drawing.Size(295, 22);
             this.menuItemDeleteSelectedRow.Text = "Delete selected row";
             this.menuItemDeleteSelectedRow.Click += new System.EventHandler(this.menuOptionDeleteSelectedRow_Click);
+            // 
+            // menuItemRetrieveLastDeletedRow
+            // 
+            this.menuItemRetrieveLastDeletedRow.Name = "menuItemRetrieveLastDeletedRow";
+            this.menuItemRetrieveLastDeletedRow.ShortcutKeyDisplayString = "(Ctrl + Shift + Z)";
+            this.menuItemRetrieveLastDeletedRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.Z)));
+            this.menuItemRetrieveLastDeletedRow.Size = new System.Drawing.Size(295, 22);
+            this.menuItemRetrieveLastDeletedRow.Text = "Retrieve last deleted row";
+            this.menuItemRetrieveLastDeletedRow.Click += new System.EventHandler(this.menuItemRetrieveLastDeletedRow_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -569,6 +579,18 @@ namespace SAI_Editor
             this.labelPort.TabIndex = 4;
             this.labelPort.Text = "Port:";
             // 
+            // labelDontUseDatabaseWarning
+            // 
+            this.labelDontUseDatabaseWarning.AutoSize = true;
+            this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDontUseDatabaseWarning.ForeColor = System.Drawing.Color.Red;
+            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(-2, 182);
+            this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
+            this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(380, 39);
+            this.labelDontUseDatabaseWarning.TabIndex = 11;
+            this.labelDontUseDatabaseWarning.Text = resources.GetString("labelDontUseDatabaseWarning.Text");
+            this.labelDontUseDatabaseWarning.Visible = false;
+            // 
             // groupBoxStaticScriptInfo
             // 
             this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBoxCreateScript);
@@ -585,6 +607,35 @@ namespace SAI_Editor
             this.groupBoxStaticScriptInfo.TabStop = false;
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
+            // 
+            // pictureBoxCreateScript
+            // 
+            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCreateScript.Image = global::SAI_Editor.Properties.Resources.icon_create_script;
+            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
+            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
+            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCreateScript.TabIndex = 16;
+            this.pictureBoxCreateScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            // 
+            // pictureBoxLoadScript
+            // 
+            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Enabled = false;
+            this.pictureBoxLoadScript.Image = global::SAI_Editor.Properties.Resources.icon_load_script1;
+            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
+            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
+            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLoadScript.TabIndex = 16;
+            this.pictureBoxLoadScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // buttonSearchForEntryOrGuid
             // 
@@ -2081,18 +2132,6 @@ namespace SAI_Editor
             this.panelPermanentTooltipTypes.TabIndex = 25;
             this.panelPermanentTooltipTypes.Visible = false;
             // 
-            // labelDontUseDatabaseWarning
-            // 
-            this.labelDontUseDatabaseWarning.AutoSize = true;
-            this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDontUseDatabaseWarning.ForeColor = System.Drawing.Color.Red;
-            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(-2, 182);
-            this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
-            this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(380, 39);
-            this.labelDontUseDatabaseWarning.TabIndex = 11;
-            this.labelDontUseDatabaseWarning.Text = resources.GetString("labelDontUseDatabaseWarning.Text");
-            this.labelDontUseDatabaseWarning.Visible = false;
-            // 
             // listViewSmartScripts
             // 
             this.listViewSmartScripts.EnablePhaseHighlighting = true;
@@ -2109,45 +2148,6 @@ namespace SAI_Editor
             this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
-            // 
-            // pictureBoxCreateScript
-            // 
-            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCreateScript.Image = global::SAI_Editor.Properties.Resources.icon_create_script;
-            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
-            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
-            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
-            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxCreateScript.TabIndex = 16;
-            this.pictureBoxCreateScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
-            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
-            // 
-            // pictureBoxLoadScript
-            // 
-            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = global::SAI_Editor.Properties.Resources.icon_load_script1;
-            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
-            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
-            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
-            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLoadScript.TabIndex = 16;
-            this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
-            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
-            // 
-            // menuItemRetrieveLastDeletedRow
-            // 
-            this.menuItemRetrieveLastDeletedRow.Name = "menuItemRetrieveLastDeletedRow";
-            this.menuItemRetrieveLastDeletedRow.ShortcutKeyDisplayString = "(Ctrl + Shift + Z)";
-            this.menuItemRetrieveLastDeletedRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.Z)));
-            this.menuItemRetrieveLastDeletedRow.Size = new System.Drawing.Size(295, 22);
-            this.menuItemRetrieveLastDeletedRow.Text = "Retrieve last deleted row";
-            this.menuItemRetrieveLastDeletedRow.Click += new System.EventHandler(this.menuItemRetrieveLastDeletedRow_Click);
             // 
             // MainForm
             // 
@@ -2186,6 +2186,8 @@ namespace SAI_Editor
             this.groupBoxLogin.PerformLayout();
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -2205,8 +2207,6 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
             this.panelPermanentTooltipTypes.ResumeLayout(false);
             this.panelPermanentTooltipTypes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
