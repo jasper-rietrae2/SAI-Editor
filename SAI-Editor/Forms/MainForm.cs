@@ -876,6 +876,7 @@ namespace SAI_Editor
             menuitemLoadSelectedEntry.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
             menuItemDuplicateRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
             menuItemGenerateComment.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
+            menuItemCopySelectedRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
 
             if (!e.IsSelected)
                 return;
