@@ -3574,6 +3574,21 @@ namespace SAI_Editor
             textBoxComments.Text = listViewSmartScripts.SelectedSmartScript.comment;
         }
 
+        private void menuItemDuplicateSelectedRow_Click(object sender, EventArgs e)
+        {
+            if (formState != FormState.FormStateMain)
+                return;
+
+            SmartScript newSmartScript = listViewSmartScripts.SelectedSmartScript.Clone();
+
+            if (checkBoxLockEventId.Checked)
+                newSmartScript.id = ++lastSmartScriptIdOfScript;
+            else
+                newSmartScript.id = -1;
+
+            listViewSmartScripts.AddSmartScript(newSmartScript);
+        }
+
         private void textBoxEventType_MouseWheel(object sender, MouseEventArgs e)
         {
             int newNumber = XConverter.ToInt32(textBoxEventType.Text);

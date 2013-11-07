@@ -53,6 +53,7 @@ namespace SAI_Editor
             this.contextMenuStripListView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuItemLoadSelectedEntry = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemGenerateCommentListView = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDuplicateSelectedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemDeleteSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
@@ -380,17 +381,18 @@ namespace SAI_Editor
             this.contextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemLoadSelectedEntry,
             this.menuItemGenerateCommentListView,
+            this.menuItemDuplicateSelectedRow,
             this.toolStripSeparator1,
             this.menuItemDeleteSelectedRowListView});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(233, 76);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(254, 120);
             // 
             // menuItemLoadSelectedEntry
             // 
             this.menuItemLoadSelectedEntry.Name = "menuItemLoadSelectedEntry";
             this.menuItemLoadSelectedEntry.ShortcutKeyDisplayString = "(Ctrl + L)";
             this.menuItemLoadSelectedEntry.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.menuItemLoadSelectedEntry.Size = new System.Drawing.Size(232, 22);
+            this.menuItemLoadSelectedEntry.Size = new System.Drawing.Size(253, 22);
             this.menuItemLoadSelectedEntry.Text = "Load selected entry";
             this.menuItemLoadSelectedEntry.Click += new System.EventHandler(this.menuItemLoadSelectedEntry_Click);
             // 
@@ -399,22 +401,31 @@ namespace SAI_Editor
             this.menuItemGenerateCommentListView.Name = "menuItemGenerateCommentListView";
             this.menuItemGenerateCommentListView.ShortcutKeyDisplayString = "(Ctrl + G)";
             this.menuItemGenerateCommentListView.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.menuItemGenerateCommentListView.Size = new System.Drawing.Size(232, 22);
+            this.menuItemGenerateCommentListView.Size = new System.Drawing.Size(253, 22);
             this.menuItemGenerateCommentListView.Text = "Generate comment";
             this.menuItemGenerateCommentListView.Click += new System.EventHandler(this.menuItemGenerateCommentListView_Click);
+            // 
+            // menuItemDuplicateSelectedRow
+            // 
+            this.menuItemDuplicateSelectedRow.Name = "menuItemDuplicateSelectedRow";
+            this.menuItemDuplicateSelectedRow.ShortcutKeyDisplayString = "(Ctrl  + Q)";
+            this.menuItemDuplicateSelectedRow.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.menuItemDuplicateSelectedRow.Size = new System.Drawing.Size(253, 22);
+            this.menuItemDuplicateSelectedRow.Text = "Duplicate selected row";
+            this.menuItemDuplicateSelectedRow.Click += new System.EventHandler(this.menuItemDuplicateSelectedRow_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(229, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(250, 6);
             // 
             // menuItemDeleteSelectedRowListView
             // 
             this.menuItemDeleteSelectedRowListView.Name = "menuItemDeleteSelectedRowListView";
             this.menuItemDeleteSelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + D)";
             this.menuItemDeleteSelectedRowListView.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(232, 22);
-            this.menuItemDeleteSelectedRowListView.Text = "Delete row";
+            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(253, 22);
+            this.menuItemDeleteSelectedRowListView.Text = "Delete selected row";
             this.menuItemDeleteSelectedRowListView.Click += new System.EventHandler(this.testToolStripMenuItemDeleteRow_Click);
             // 
             // panelLoginBox
@@ -611,7 +622,7 @@ namespace SAI_Editor
             // pictureBoxCreateScript
             // 
             this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCreateScript.Image = global::SAI_Editor.Properties.Resources.icon_create_script;
+            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
             this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
             this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
             this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
@@ -626,7 +637,7 @@ namespace SAI_Editor
             // 
             this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = global::SAI_Editor.Properties.Resources.icon_load_script1;
+            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
             this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
             this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
             this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
@@ -2039,7 +2050,7 @@ namespace SAI_Editor
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::SAI_Editor.Properties.Resources.permanent_tooltip_icon;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(6, 6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(14, 14);
@@ -2094,7 +2105,7 @@ namespace SAI_Editor
             // 
             // pictureBoxPermanentTooltip
             // 
-            this.pictureBoxPermanentTooltip.Image = global::SAI_Editor.Properties.Resources.permanent_tooltip_icon;
+            this.pictureBoxPermanentTooltip.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPermanentTooltip.Image")));
             this.pictureBoxPermanentTooltip.Location = new System.Drawing.Point(6, 7);
             this.pictureBoxPermanentTooltip.Name = "pictureBoxPermanentTooltip";
             this.pictureBoxPermanentTooltip.Size = new System.Drawing.Size(14, 14);
@@ -2369,6 +2380,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Label labelPort;
         private System.Windows.Forms.Label labelDontUseDatabaseWarning;
         private System.Windows.Forms.ToolStripMenuItem menuItemRetrieveLastDeletedRow;
+        private System.Windows.Forms.ToolStripMenuItem menuItemDuplicateSelectedRow;
     }
 }
 
