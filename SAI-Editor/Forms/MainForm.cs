@@ -873,6 +873,9 @@ namespace SAI_Editor
             menuItemDeleteSelectedRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
             menuItemGenerateSql.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
             buttonGenerateSql.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
+            menuitemLoadSelectedEntry.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
+            menuItemDuplicateRow.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
+            menuItemGenerateComment.Enabled = listViewSmartScripts.SelectedItems.Count > 0;
 
             if (!e.IsSelected)
                 return;
