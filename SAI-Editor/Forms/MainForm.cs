@@ -1302,7 +1302,7 @@ namespace SAI_Editor
 
         private void menuOptionDeleteSelectedRow_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain)
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
                 return;
 
             if (listViewSmartScripts.SelectedItems.Count <= 0)
@@ -3538,7 +3538,7 @@ namespace SAI_Editor
 
         private async void menuItemGenerateCommentListView_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain)
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
                 return;
 
             for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
@@ -3579,7 +3579,7 @@ namespace SAI_Editor
 
         private void menuItemDuplicateSelectedRow_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain)
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
                 return;
 
             SmartScript newSmartScript = listViewSmartScripts.SelectedSmartScript.Clone();
