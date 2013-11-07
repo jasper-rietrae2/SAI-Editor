@@ -3613,14 +3613,7 @@ namespace SAI_Editor
             if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
                 return;
 
-            SmartScript newSmartScript = listViewSmartScripts.SelectedSmartScript.Clone();
-
-            if (checkBoxLockEventId.Checked)
-                newSmartScript.id = ++lastSmartScriptIdOfScript;
-            else
-                newSmartScript.id = -1;
-
-            listViewSmartScripts.AddSmartScript(newSmartScript);
+            listViewSmartScripts.AddSmartScript(listViewSmartScripts.SelectedSmartScript.Clone());
         }
 
         private void textBoxEventType_MouseWheel(object sender, MouseEventArgs e)
