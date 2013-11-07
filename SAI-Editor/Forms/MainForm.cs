@@ -78,7 +78,7 @@ namespace SAI_Editor
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
         private int previousLinkFrom = -1;
-        private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>();
+        private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
 
         public MainForm()
         {
@@ -1314,6 +1314,29 @@ namespace SAI_Editor
             DeleteSelectedRow();
         }
 
+        private void menuItemCopySelectedRowListView_Click(object sender, EventArgs e)
+        {
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
+                return;
+
+            smartScriptsOnClipBoard.Add(listViewSmartScripts.SelectedSmartScript.Clone());
+        }
+
+        private void menuItemPasteLastCopiedRow_Click(object sender, EventArgs e)
+        {
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
+                return;
+
+            if (smartScriptsOnClipBoard.Count <= 0)
+            {
+                MessageBox.Show("No smart scripts have been copied in this session!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            SmartScript newSmartScript = smartScriptsOnClipBoard.Last().Clone();
+            listViewSmartScripts.AddSmartScript(newSmartScript);
+        }
+
         private void DeleteSelectedRow()
         {
             if (listViewSmartScripts.SelectedItems.Count == 0)
@@ -1527,11 +1550,16 @@ namespace SAI_Editor
 
                     if (dialogResult == DialogResult.Yes)
                     {
-                        if (aiNameIsSmart)
-                            TryToLoadScript();
-                        else
+                        if (!aiNameIsSmart)
+                        {
                             //! We don't have to target areatrigger_scripts here, as we've already done this a few lines up
-                            new SqlOutputForm("UPDATE `" + GetTemplateTableBySourceType((SourceTypes)source_type) + "` SET `AIName`=" + '"' + '"' + " WHERE `entry`=" + entryorguid + ";\n").ShowDialog(this);
+                            string sqlOutput = "UPDATE `" + GetTemplateTableBySourceType((SourceTypes)source_type) + "` SET `AIName`=" + '"' + '"' + " WHERE `entry`=" + entryorguid + ";\n";
+
+                            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(sqlOutput))
+                                sqlOutputForm.ShowDialog(this);
+                        }
+                        else
+                            TryToLoadScript();
                     }
 
                     return;
@@ -1727,12 +1755,14 @@ namespace SAI_Editor
 
         private void buttonSearchPhasemask_Click(object sender, EventArgs e)
         {
-            new MultiSelectForm<SmartPhaseMasks>(textBoxEventPhasemask).ShowDialog(this);
+            using (MultiSelectForm<SmartPhaseMasks> multiSelectForm = new MultiSelectForm<SmartPhaseMasks>(textBoxEventPhasemask))
+                multiSelectForm.ShowDialog(this);
         }
 
         private void buttonSelectEventFlag_Click(object sender, EventArgs e)
         {
-            new MultiSelectForm<SmartEventFlags>(textBoxEventFlags).ShowDialog(this);
+            using (MultiSelectForm<SmartEventFlags> multiSelectForm = new MultiSelectForm<SmartEventFlags>(textBoxEventFlags))
+                multiSelectForm.ShowDialog(this);
         }
 
         private async void buttonSearchWorldDb_Click(object sender, EventArgs e)
@@ -1799,7 +1829,8 @@ namespace SAI_Editor
                 return;
             }
 
-            new SearchForLinkForm(listViewSmartScripts.SmartScripts, listViewSmartScripts.SelectedItems[0].Index, textBoxToChange).ShowDialog(this);
+            using (SearchForLinkForm searchForLinkForm = new SearchForLinkForm(listViewSmartScripts.SmartScripts, listViewSmartScripts.SelectedItems[0].Index, textBoxToChange))
+                searchForLinkForm.ShowDialog(this);
         }
 
         protected override void WndProc(ref Message m)

@@ -191,6 +191,10 @@ namespace SAI_Editor
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
             this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.menuItemCopySelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
+            this.copySelectedRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCopySelectedRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemPasteLastCopiedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
@@ -325,12 +329,14 @@ namespace SAI_Editor
             this.menuItemGenerateComment,
             this.menuItemDuplicateRow,
             this.menuItemDeleteSelectedRow,
+            this.menuItemCopySelectedRow,
             this.toolStripSeparator1,
-            this.menuItemRetrieveLastDeletedRow});
+            this.menuItemRetrieveLastDeletedRow,
+            this.copySelectedRowToolStripMenuItem,
+            this.menuItemPasteLastCopiedRow});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.menuItemGenerateCommentListView_Click);
             // 
             // menuItemDeleteSelectedRow
             // 
@@ -390,16 +396,17 @@ namespace SAI_Editor
             this.menuItemLoadSelectedEntryListView,
             this.menuItemGenerateCommentListView,
             this.menuItemDuplicateSelectedRowListView,
-            this.menuItemDeleteSelectedRowListView});
+            this.menuItemDeleteSelectedRowListView,
+            this.menuItemCopySelectedRowListView});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(254, 92);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(266, 114);
             // 
             // menuItemLoadSelectedEntryListView
             // 
             this.menuItemLoadSelectedEntryListView.Name = "menuItemLoadSelectedEntryListView";
             this.menuItemLoadSelectedEntryListView.ShortcutKeyDisplayString = "(Ctrl + L)";
             this.menuItemLoadSelectedEntryListView.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.menuItemLoadSelectedEntryListView.Size = new System.Drawing.Size(253, 22);
+            this.menuItemLoadSelectedEntryListView.Size = new System.Drawing.Size(265, 22);
             this.menuItemLoadSelectedEntryListView.Text = "Load selected entry";
             this.menuItemLoadSelectedEntryListView.Click += new System.EventHandler(this.menuItemLoadSelectedEntry_Click);
             // 
@@ -408,7 +415,7 @@ namespace SAI_Editor
             this.menuItemGenerateCommentListView.Name = "menuItemGenerateCommentListView";
             this.menuItemGenerateCommentListView.ShortcutKeyDisplayString = "(Ctrl + G)";
             this.menuItemGenerateCommentListView.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.menuItemGenerateCommentListView.Size = new System.Drawing.Size(253, 22);
+            this.menuItemGenerateCommentListView.Size = new System.Drawing.Size(265, 22);
             this.menuItemGenerateCommentListView.Text = "Generate comment";
             this.menuItemGenerateCommentListView.Click += new System.EventHandler(this.menuItemGenerateCommentListView_Click);
             // 
@@ -417,7 +424,7 @@ namespace SAI_Editor
             this.menuItemDuplicateSelectedRowListView.Name = "menuItemDuplicateSelectedRowListView";
             this.menuItemDuplicateSelectedRowListView.ShortcutKeyDisplayString = "(Ctrl  + Q)";
             this.menuItemDuplicateSelectedRowListView.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.menuItemDuplicateSelectedRowListView.Size = new System.Drawing.Size(253, 22);
+            this.menuItemDuplicateSelectedRowListView.Size = new System.Drawing.Size(265, 22);
             this.menuItemDuplicateSelectedRowListView.Text = "Duplicate selected row";
             this.menuItemDuplicateSelectedRowListView.Click += new System.EventHandler(this.menuItemDuplicateSelectedRow_Click);
             // 
@@ -426,7 +433,7 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRowListView.Name = "menuItemDeleteSelectedRowListView";
             this.menuItemDeleteSelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + D)";
             this.menuItemDeleteSelectedRowListView.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(253, 22);
+            this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(265, 22);
             this.menuItemDeleteSelectedRowListView.Text = "Delete selected row";
             this.menuItemDeleteSelectedRowListView.Click += new System.EventHandler(this.testToolStripMenuItemDeleteRow_Click);
             // 
@@ -597,7 +604,7 @@ namespace SAI_Editor
             this.labelDontUseDatabaseWarning.AutoSize = true;
             this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDontUseDatabaseWarning.ForeColor = System.Drawing.Color.Red;
-            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(-2, 184);
+            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(-1, 184);
             this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
             this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(380, 39);
             this.labelDontUseDatabaseWarning.TabIndex = 11;
@@ -2197,6 +2204,48 @@ namespace SAI_Editor
             this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
             this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
+            // menuItemCopySelectedRowListView
+            // 
+            this.menuItemCopySelectedRowListView.Name = "menuItemCopySelectedRowListView";
+            this.menuItemCopySelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + Shift + C)";
+            this.menuItemCopySelectedRowListView.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.C)));
+            this.menuItemCopySelectedRowListView.Size = new System.Drawing.Size(265, 22);
+            this.menuItemCopySelectedRowListView.Text = "Copy selected row";
+            this.menuItemCopySelectedRowListView.Click += new System.EventHandler(this.menuItemCopySelectedRowListView_Click);
+            // 
+            // copySelectedRowToolStripMenuItem
+            // 
+            this.copySelectedRowToolStripMenuItem.Enabled = false;
+            this.copySelectedRowToolStripMenuItem.Name = "copySelectedRowToolStripMenuItem";
+            this.copySelectedRowToolStripMenuItem.ShortcutKeyDisplayString = "(Ctrl + Shift + C)";
+            this.copySelectedRowToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.C)));
+            this.copySelectedRowToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
+            this.copySelectedRowToolStripMenuItem.Text = "Copy selected row";
+            this.copySelectedRowToolStripMenuItem.Click += new System.EventHandler(this.menuItemCopySelectedRowListView_Click);
+            // 
+            // menuItemCopySelectedRow
+            // 
+            this.menuItemCopySelectedRow.Enabled = false;
+            this.menuItemCopySelectedRow.Name = "menuItemCopySelectedRow";
+            this.menuItemCopySelectedRow.ShortcutKeyDisplayString = "(Ctrl + Shift + C)";
+            this.menuItemCopySelectedRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.C)));
+            this.menuItemCopySelectedRow.Size = new System.Drawing.Size(319, 22);
+            this.menuItemCopySelectedRow.Text = "Copy selected row";
+            this.menuItemCopySelectedRow.Click += new System.EventHandler(this.menuItemCopySelectedRowListView_Click);
+            // 
+            // menuItemPasteLastCopiedRow
+            // 
+            this.menuItemPasteLastCopiedRow.Name = "menuItemPasteLastCopiedRow";
+            this.menuItemPasteLastCopiedRow.ShortcutKeyDisplayString = "(Ctrl + Shift + V)";
+            this.menuItemPasteLastCopiedRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.V)));
+            this.menuItemPasteLastCopiedRow.Size = new System.Drawing.Size(319, 22);
+            this.menuItemPasteLastCopiedRow.Text = "Paste last copied row";
+            this.menuItemPasteLastCopiedRow.Click += new System.EventHandler(this.menuItemPasteLastCopiedRow_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2421,6 +2470,10 @@ namespace SAI_Editor
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateComment;
         private System.Windows.Forms.ToolStripMenuItem menuItemDuplicateRow;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCopySelectedRowListView;
+        private System.Windows.Forms.ToolStripMenuItem copySelectedRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuItemCopySelectedRow;
+        private System.Windows.Forms.ToolStripMenuItem menuItemPasteLastCopiedRow;
     }
 }
 
