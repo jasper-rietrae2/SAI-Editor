@@ -2932,7 +2932,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.event_param3 = XConverter.ToInt32(textBoxEventParam4.Text);
+                listViewSmartScripts.SelectedSmartScript.event_param4 = XConverter.ToInt32(textBoxEventParam4.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 GenerateCommentAndResizeColumns();
             }
