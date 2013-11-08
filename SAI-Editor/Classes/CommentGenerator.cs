@@ -270,7 +270,7 @@ namespace SAI_Editor.Classes
                         else
                             fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid, true) + " - ";
 
-                        fullLine += "On Script";
+                        fullLine += (SmartEvent)smartScript.event_type != SmartEvent.SMART_EVENT_UPDATE_IC ? "INCORRECT EVENT TYPE" : "On Script";
                         break;
                 }
 
