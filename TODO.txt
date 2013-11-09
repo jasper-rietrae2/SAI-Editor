@@ -2,7 +2,6 @@
 - Possibly take the workspace-idea by Event Horizon
 - Checkbox to only show event_types and action_types for the chosen source_type (so for gameobjects we would hide SMART_EVENT_SPELLHIT, etc.)
 - Possibly pick another logo, this is ugly and boring
-- Make the application support more platforms than just Windows
 - Allow resizing the application but just make everything scroll-able if it becomes smaller
 - Implement a SQLite database containing required tables for the tool (creature_template, creature, gameobject, smart_scripts, quest_template, item_template, etc.) and use this if user wants to not use his local database
   - Make this a download option instead (?). The SQLite file would become over 100 MB if we'd do this and it'd make no sense if we'd never use the data.
