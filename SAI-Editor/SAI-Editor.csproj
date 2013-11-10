@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icon_write.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FastColoredTextBox">
       <HintPath>Resources\FastColoredTextBox.dll</HintPath>
@@ -250,6 +253,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="icon_write.ico" />
     <Content Include="Resources\database_form_icon.ico" />
     <Content Include="Resources\FastColoredTextBox.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
