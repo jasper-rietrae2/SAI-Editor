@@ -44,8 +44,14 @@ namespace SAI_Editor
             this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuitemLoadSelectedEntry = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemGenerateComment = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemDuplicateRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDeleteSelectedRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemRetrieveLastDeletedRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCopySelectedRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemPasteLastCopiedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,6 +61,7 @@ namespace SAI_Editor
             this.menuItemGenerateCommentListView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDuplicateSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemDeleteSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemCopySelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.groupBoxLogin = new System.Windows.Forms.GroupBox();
             this.radioButtonDontUseDatabase = new System.Windows.Forms.RadioButton();
@@ -73,9 +80,11 @@ namespace SAI_Editor
             this.labelPort = new System.Windows.Forms.Label();
             this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
+            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
+            this.comboBoxSourceType = new SAI_Editor.Classes.SearchableComboBox();
             this.labelEntryOrGuid = new System.Windows.Forms.Label();
             this.textBoxEntryOrGuid = new System.Windows.Forms.TextBox();
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
@@ -88,10 +97,10 @@ namespace SAI_Editor
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
             this.buttonLinkTo = new System.Windows.Forms.Button();
             this.buttonLinkFrom = new System.Windows.Forms.Button();
-            this.comboBoxTargetType = new System.Windows.Forms.ComboBox();
+            this.comboBoxTargetType = new SAI_Editor.Classes.SearchableComboBox();
             this.buttonSelectEventFlag = new System.Windows.Forms.Button();
             this.buttonSearchPhasemask = new System.Windows.Forms.Button();
-            this.comboBoxActionType = new System.Windows.Forms.ComboBox();
+            this.comboBoxActionType = new SAI_Editor.Classes.SearchableComboBox();
             this.buttonSearchEventFlags = new System.Windows.Forms.Button();
             this.textBoxTargetType = new System.Windows.Forms.TextBox();
             this.textBoxEventChance = new System.Windows.Forms.NumericUpDown();
@@ -105,7 +114,7 @@ namespace SAI_Editor
             this.textBoxEventType = new System.Windows.Forms.TextBox();
             this.textBoxLinkTo = new System.Windows.Forms.TextBox();
             this.textBoxLinkFrom = new System.Windows.Forms.TextBox();
-            this.comboBoxEventType = new System.Windows.Forms.ComboBox();
+            this.comboBoxEventType = new SAI_Editor.Classes.SearchableComboBox();
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -184,22 +193,14 @@ namespace SAI_Editor
             this.labelPermanentTooltipTextTypes = new System.Windows.Forms.Label();
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
-            this.menuitemLoadSelectedEntry = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemGenerateComment = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDuplicateRow = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
-            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.menuItemCopySelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
-            this.copySelectedRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemCopySelectedRow = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemPasteLastCopiedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -212,8 +213,6 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipTypes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -329,14 +328,43 @@ namespace SAI_Editor
             this.menuItemGenerateComment,
             this.menuItemDuplicateRow,
             this.menuItemDeleteSelectedRow,
-            this.menuItemCopySelectedRow,
             this.toolStripSeparator1,
             this.menuItemRetrieveLastDeletedRow,
-            this.copySelectedRowToolStripMenuItem,
+            this.menuItemCopySelectedRow,
             this.menuItemPasteLastCopiedRow});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // menuitemLoadSelectedEntry
+            // 
+            this.menuitemLoadSelectedEntry.Enabled = false;
+            this.menuitemLoadSelectedEntry.Name = "menuitemLoadSelectedEntry";
+            this.menuitemLoadSelectedEntry.ShortcutKeyDisplayString = "(Ctrl + L)";
+            this.menuitemLoadSelectedEntry.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
+            this.menuitemLoadSelectedEntry.Size = new System.Drawing.Size(319, 22);
+            this.menuitemLoadSelectedEntry.Text = "Load selected entry";
+            this.menuitemLoadSelectedEntry.Click += new System.EventHandler(this.menuItemLoadSelectedEntry_Click);
+            // 
+            // menuItemGenerateComment
+            // 
+            this.menuItemGenerateComment.Enabled = false;
+            this.menuItemGenerateComment.Name = "menuItemGenerateComment";
+            this.menuItemGenerateComment.ShortcutKeyDisplayString = "(Ctrl + G)";
+            this.menuItemGenerateComment.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
+            this.menuItemGenerateComment.Size = new System.Drawing.Size(319, 22);
+            this.menuItemGenerateComment.Text = "Generate comment for selected row";
+            this.menuItemGenerateComment.Click += new System.EventHandler(this.menuItemGenerateCommentListView_Click);
+            // 
+            // menuItemDuplicateRow
+            // 
+            this.menuItemDuplicateRow.Enabled = false;
+            this.menuItemDuplicateRow.Name = "menuItemDuplicateRow";
+            this.menuItemDuplicateRow.ShortcutKeyDisplayString = "(Ctrl + Q)";
+            this.menuItemDuplicateRow.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.menuItemDuplicateRow.Size = new System.Drawing.Size(319, 22);
+            this.menuItemDuplicateRow.Text = "Duplicate selected row";
+            this.menuItemDuplicateRow.Click += new System.EventHandler(this.menuItemDuplicateSelectedRow_Click);
             // 
             // menuItemDeleteSelectedRow
             // 
@@ -348,6 +376,11 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRow.Text = "Delete selected row";
             this.menuItemDeleteSelectedRow.Click += new System.EventHandler(this.menuOptionDeleteSelectedRow_Click);
             // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(316, 6);
+            // 
             // menuItemRetrieveLastDeletedRow
             // 
             this.menuItemRetrieveLastDeletedRow.Name = "menuItemRetrieveLastDeletedRow";
@@ -357,6 +390,27 @@ namespace SAI_Editor
             this.menuItemRetrieveLastDeletedRow.Size = new System.Drawing.Size(319, 22);
             this.menuItemRetrieveLastDeletedRow.Text = "Retrieve last deleted row";
             this.menuItemRetrieveLastDeletedRow.Click += new System.EventHandler(this.menuItemRetrieveLastDeletedRow_Click);
+            // 
+            // menuItemCopySelectedRow
+            // 
+            this.menuItemCopySelectedRow.Enabled = false;
+            this.menuItemCopySelectedRow.Name = "menuItemCopySelectedRow";
+            this.menuItemCopySelectedRow.ShortcutKeyDisplayString = "(Ctrl + Shift + C)";
+            this.menuItemCopySelectedRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.C)));
+            this.menuItemCopySelectedRow.Size = new System.Drawing.Size(319, 22);
+            this.menuItemCopySelectedRow.Text = "Copy selected row";
+            this.menuItemCopySelectedRow.Click += new System.EventHandler(this.menuItemCopySelectedRowListView_Click);
+            // 
+            // menuItemPasteLastCopiedRow
+            // 
+            this.menuItemPasteLastCopiedRow.Name = "menuItemPasteLastCopiedRow";
+            this.menuItemPasteLastCopiedRow.ShortcutKeyDisplayString = "(Ctrl + Shift + V)";
+            this.menuItemPasteLastCopiedRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.V)));
+            this.menuItemPasteLastCopiedRow.Size = new System.Drawing.Size(319, 22);
+            this.menuItemPasteLastCopiedRow.Text = "Paste last copied row";
+            this.menuItemPasteLastCopiedRow.Click += new System.EventHandler(this.menuItemPasteLastCopiedRow_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -436,6 +490,16 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRowListView.Size = new System.Drawing.Size(265, 22);
             this.menuItemDeleteSelectedRowListView.Text = "Delete selected row";
             this.menuItemDeleteSelectedRowListView.Click += new System.EventHandler(this.testToolStripMenuItemDeleteRow_Click);
+            // 
+            // menuItemCopySelectedRowListView
+            // 
+            this.menuItemCopySelectedRowListView.Name = "menuItemCopySelectedRowListView";
+            this.menuItemCopySelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + Shift + C)";
+            this.menuItemCopySelectedRowListView.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.C)));
+            this.menuItemCopySelectedRowListView.Size = new System.Drawing.Size(265, 22);
+            this.menuItemCopySelectedRowListView.Text = "Copy selected row";
+            this.menuItemCopySelectedRowListView.Click += new System.EventHandler(this.menuItemCopySelectedRowListView_Click);
             // 
             // panelLoginBox
             // 
@@ -627,6 +691,35 @@ namespace SAI_Editor
             this.groupBoxStaticScriptInfo.TabStop = false;
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
+            // 
+            // pictureBoxCreateScript
+            // 
+            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
+            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
+            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
+            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCreateScript.TabIndex = 16;
+            this.pictureBoxCreateScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            // 
+            // pictureBoxLoadScript
+            // 
+            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Enabled = false;
+            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
+            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
+            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
+            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLoadScript.TabIndex = 16;
+            this.pictureBoxLoadScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // buttonSearchForEntryOrGuid
             // 
@@ -2123,41 +2216,6 @@ namespace SAI_Editor
             this.panelPermanentTooltipTypes.TabIndex = 25;
             this.panelPermanentTooltipTypes.Visible = false;
             // 
-            // menuitemLoadSelectedEntry
-            // 
-            this.menuitemLoadSelectedEntry.Enabled = false;
-            this.menuitemLoadSelectedEntry.Name = "menuitemLoadSelectedEntry";
-            this.menuitemLoadSelectedEntry.ShortcutKeyDisplayString = "(Ctrl + L)";
-            this.menuitemLoadSelectedEntry.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.L)));
-            this.menuitemLoadSelectedEntry.Size = new System.Drawing.Size(319, 22);
-            this.menuitemLoadSelectedEntry.Text = "Load selected entry";
-            this.menuitemLoadSelectedEntry.Click += new System.EventHandler(this.menuItemLoadSelectedEntry_Click);
-            // 
-            // menuItemGenerateComment
-            // 
-            this.menuItemGenerateComment.Enabled = false;
-            this.menuItemGenerateComment.Name = "menuItemGenerateComment";
-            this.menuItemGenerateComment.ShortcutKeyDisplayString = "(Ctrl + G)";
-            this.menuItemGenerateComment.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
-            this.menuItemGenerateComment.Size = new System.Drawing.Size(319, 22);
-            this.menuItemGenerateComment.Text = "Generate comment for selected row";
-            this.menuItemGenerateComment.Click += new System.EventHandler(this.menuItemGenerateCommentListView_Click);
-            // 
-            // menuItemDuplicateRow
-            // 
-            this.menuItemDuplicateRow.Enabled = false;
-            this.menuItemDuplicateRow.Name = "menuItemDuplicateRow";
-            this.menuItemDuplicateRow.ShortcutKeyDisplayString = "(Ctrl + Q)";
-            this.menuItemDuplicateRow.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.menuItemDuplicateRow.Size = new System.Drawing.Size(319, 22);
-            this.menuItemDuplicateRow.Text = "Duplicate selected row";
-            this.menuItemDuplicateRow.Click += new System.EventHandler(this.menuItemDuplicateSelectedRow_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(316, 6);
-            // 
             // listViewSmartScripts
             // 
             this.listViewSmartScripts.EnablePhaseHighlighting = true;
@@ -2174,77 +2232,6 @@ namespace SAI_Editor
             this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
-            // 
-            // pictureBoxCreateScript
-            // 
-            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
-            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
-            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
-            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
-            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxCreateScript.TabIndex = 16;
-            this.pictureBoxCreateScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
-            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
-            // 
-            // pictureBoxLoadScript
-            // 
-            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
-            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
-            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
-            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
-            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLoadScript.TabIndex = 16;
-            this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
-            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
-            // 
-            // menuItemCopySelectedRowListView
-            // 
-            this.menuItemCopySelectedRowListView.Name = "menuItemCopySelectedRowListView";
-            this.menuItemCopySelectedRowListView.ShortcutKeyDisplayString = "(Ctrl + Shift + C)";
-            this.menuItemCopySelectedRowListView.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.C)));
-            this.menuItemCopySelectedRowListView.Size = new System.Drawing.Size(265, 22);
-            this.menuItemCopySelectedRowListView.Text = "Copy selected row";
-            this.menuItemCopySelectedRowListView.Click += new System.EventHandler(this.menuItemCopySelectedRowListView_Click);
-            // 
-            // copySelectedRowToolStripMenuItem
-            // 
-            this.copySelectedRowToolStripMenuItem.Enabled = false;
-            this.copySelectedRowToolStripMenuItem.Name = "copySelectedRowToolStripMenuItem";
-            this.copySelectedRowToolStripMenuItem.ShortcutKeyDisplayString = "(Ctrl + Shift + C)";
-            this.copySelectedRowToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.C)));
-            this.copySelectedRowToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
-            this.copySelectedRowToolStripMenuItem.Text = "Copy selected row";
-            this.copySelectedRowToolStripMenuItem.Click += new System.EventHandler(this.menuItemCopySelectedRowListView_Click);
-            // 
-            // menuItemCopySelectedRow
-            // 
-            this.menuItemCopySelectedRow.Enabled = false;
-            this.menuItemCopySelectedRow.Name = "menuItemCopySelectedRow";
-            this.menuItemCopySelectedRow.ShortcutKeyDisplayString = "(Ctrl + Shift + C)";
-            this.menuItemCopySelectedRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.C)));
-            this.menuItemCopySelectedRow.Size = new System.Drawing.Size(319, 22);
-            this.menuItemCopySelectedRow.Text = "Copy selected row";
-            this.menuItemCopySelectedRow.Click += new System.EventHandler(this.menuItemCopySelectedRowListView_Click);
-            // 
-            // menuItemPasteLastCopiedRow
-            // 
-            this.menuItemPasteLastCopiedRow.Name = "menuItemPasteLastCopiedRow";
-            this.menuItemPasteLastCopiedRow.ShortcutKeyDisplayString = "(Ctrl + Shift + V)";
-            this.menuItemPasteLastCopiedRow.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.V)));
-            this.menuItemPasteLastCopiedRow.Size = new System.Drawing.Size(319, 22);
-            this.menuItemPasteLastCopiedRow.Text = "Paste last copied row";
-            this.menuItemPasteLastCopiedRow.Click += new System.EventHandler(this.menuItemPasteLastCopiedRow_Click);
             // 
             // MainForm
             // 
@@ -2283,6 +2270,8 @@ namespace SAI_Editor
             this.groupBoxLogin.PerformLayout();
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -2302,8 +2291,6 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
             this.panelPermanentTooltipTypes.ResumeLayout(false);
             this.panelPermanentTooltipTypes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2334,7 +2321,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabPage tabPageTarget;
-        private System.Windows.Forms.ComboBox comboBoxEventType;
+        private SearchableComboBox comboBoxEventType;
         private System.Windows.Forms.TextBox textBoxEventType;
         private System.Windows.Forms.TextBox textBoxActionType;
         private System.Windows.Forms.Label label13;
@@ -2390,9 +2377,9 @@ namespace SAI_Editor
         private System.Windows.Forms.Label labelTargetY;
         private System.Windows.Forms.TextBox textBoxTargetZ;
         private System.Windows.Forms.TextBox textBoxTargetY;
-        public System.Windows.Forms.ComboBox comboBoxSourceType;
-        private System.Windows.Forms.ComboBox comboBoxActionType;
-        private System.Windows.Forms.ComboBox comboBoxTargetType;
+        public SearchableComboBox comboBoxSourceType;
+        private SearchableComboBox comboBoxActionType;
+        private SearchableComboBox comboBoxTargetType;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.Button buttonLinkTo;
@@ -2471,7 +2458,6 @@ namespace SAI_Editor
         private System.Windows.Forms.ToolStripMenuItem menuItemDuplicateRow;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem menuItemCopySelectedRowListView;
-        private System.Windows.Forms.ToolStripMenuItem copySelectedRowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemCopySelectedRow;
         private System.Windows.Forms.ToolStripMenuItem menuItemPasteLastCopiedRow;
     }
