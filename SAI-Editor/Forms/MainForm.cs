@@ -1224,11 +1224,6 @@ namespace SAI_Editor
                     AddTooltip(control, title, text, icon, isBallon, active, autoPopDelay, showAlways);
         }
 
-        private void comboBox_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = true; //! Disallow changing content of the combobox (because setting it to 3D looks like shit)
-        }
-
         private void textBoxEventTypeId_TextChanged(object sender, EventArgs e)
         {
             if (String.IsNullOrEmpty(textBoxEventType.Text))

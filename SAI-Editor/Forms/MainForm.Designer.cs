@@ -84,7 +84,7 @@ namespace SAI_Editor
             this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBoxSourceType = new SAI_Editor.Classes.SearchableComboBox();
+            this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
             this.labelEntryOrGuid = new System.Windows.Forms.Label();
             this.textBoxEntryOrGuid = new System.Windows.Forms.TextBox();
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
@@ -97,10 +97,10 @@ namespace SAI_Editor
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
             this.buttonLinkTo = new System.Windows.Forms.Button();
             this.buttonLinkFrom = new System.Windows.Forms.Button();
-            this.comboBoxTargetType = new SAI_Editor.Classes.SearchableComboBox();
+            this.comboBoxTargetType = new System.Windows.Forms.ComboBox();
             this.buttonSelectEventFlag = new System.Windows.Forms.Button();
             this.buttonSearchPhasemask = new System.Windows.Forms.Button();
-            this.comboBoxActionType = new SAI_Editor.Classes.SearchableComboBox();
+            this.comboBoxActionType = new System.Windows.Forms.ComboBox();
             this.buttonSearchEventFlags = new System.Windows.Forms.Button();
             this.textBoxTargetType = new System.Windows.Forms.TextBox();
             this.textBoxEventChance = new System.Windows.Forms.NumericUpDown();
@@ -114,7 +114,7 @@ namespace SAI_Editor
             this.textBoxEventType = new System.Windows.Forms.TextBox();
             this.textBoxLinkTo = new System.Windows.Forms.TextBox();
             this.textBoxLinkFrom = new System.Windows.Forms.TextBox();
-            this.comboBoxEventType = new SAI_Editor.Classes.SearchableComboBox();
+            this.comboBoxEventType = new System.Windows.Forms.ComboBox();
             this.textBoxId = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -742,6 +742,8 @@ namespace SAI_Editor
             // 
             // comboBoxSourceType
             // 
+            this.comboBoxSourceType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxSourceType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxSourceType.FormattingEnabled = true;
             this.comboBoxSourceType.Items.AddRange(new object[] {
             "SCRIPT_TYPE_CREATURE",
@@ -753,7 +755,6 @@ namespace SAI_Editor
             this.comboBoxSourceType.Size = new System.Drawing.Size(183, 21);
             this.comboBoxSourceType.TabIndex = 2;
             this.comboBoxSourceType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourceType_SelectedIndexChanged);
-            this.comboBoxSourceType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
             // 
             // labelEntryOrGuid
             // 
@@ -914,6 +915,8 @@ namespace SAI_Editor
             // 
             // comboBoxTargetType
             // 
+            this.comboBoxTargetType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxTargetType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxTargetType.FormattingEnabled = true;
             this.comboBoxTargetType.Items.AddRange(new object[] {
             "TARGET_NONE",
@@ -948,7 +951,6 @@ namespace SAI_Editor
             this.comboBoxTargetType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxTargetType.TabIndex = 4;
             this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
-            this.comboBoxTargetType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
             this.comboBoxTargetType.MouseEnter += new System.EventHandler(this.comboBoxTargetType_MouseEnter);
             // 
             // buttonSelectEventFlag
@@ -973,6 +975,8 @@ namespace SAI_Editor
             // 
             // comboBoxActionType
             // 
+            this.comboBoxActionType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxActionType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxActionType.FormattingEnabled = true;
             this.comboBoxActionType.Items.AddRange(new object[] {
             "ACTION_NONE",
@@ -1091,7 +1095,6 @@ namespace SAI_Editor
             this.comboBoxActionType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxActionType.TabIndex = 2;
             this.comboBoxActionType.SelectedIndexChanged += new System.EventHandler(this.comboBoxActionType_SelectedIndexChanged);
-            this.comboBoxActionType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
             this.comboBoxActionType.MouseEnter += new System.EventHandler(this.comboBoxActionType_MouseEnter);
             // 
             // buttonSearchEventFlags
@@ -1230,6 +1233,8 @@ namespace SAI_Editor
             // 
             // comboBoxEventType
             // 
+            this.comboBoxEventType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxEventType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxEventType.AutoCompleteCustomSource.AddRange(new string[] {
             "SMART_EVENT_UPDATE_IC",
             "SMART_EVENT_UPDATE_OOC",
@@ -1384,7 +1389,6 @@ namespace SAI_Editor
             this.comboBoxEventType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxEventType.TabIndex = 0;
             this.comboBoxEventType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEventType_SelectedIndexChanged);
-            this.comboBoxEventType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBox_KeyPress);
             this.comboBoxEventType.MouseEnter += new System.EventHandler(this.comboBoxEventType_MouseEnter);
             // 
             // textBoxId
@@ -2321,7 +2325,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TabPage tabPageTarget;
-        private SearchableComboBox comboBoxEventType;
+        private System.Windows.Forms.ComboBox comboBoxEventType;
         private System.Windows.Forms.TextBox textBoxEventType;
         private System.Windows.Forms.TextBox textBoxActionType;
         private System.Windows.Forms.Label label13;
@@ -2377,9 +2381,9 @@ namespace SAI_Editor
         private System.Windows.Forms.Label labelTargetY;
         private System.Windows.Forms.TextBox textBoxTargetZ;
         private System.Windows.Forms.TextBox textBoxTargetY;
-        public SearchableComboBox comboBoxSourceType;
-        private SearchableComboBox comboBoxActionType;
-        private SearchableComboBox comboBoxTargetType;
+        public System.Windows.Forms.ComboBox comboBoxSourceType;
+        private System.Windows.Forms.ComboBox comboBoxActionType;
+        private System.Windows.Forms.ComboBox comboBoxTargetType;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.Button buttonLinkTo;
