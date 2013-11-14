@@ -377,8 +377,8 @@ namespace SAI_Editor
 
                         query += " ORDER BY g.guid";
                         break;
-                    case 6:
-                    case 7:
+                    case 6: //! Areatrigger id
+                    case 7: //! Areatrigger map id
                         ClearItemsOfListView(listViewEntryResults);
 
                         try
@@ -406,6 +406,7 @@ namespace SAI_Editor
                         }
                         finally
                         {
+                            _isBusy = false;
                             SetEnabledOfControl(buttonSearch, true);
                             SetEnabledOfControl(buttonStopSearching, false);
                         }
