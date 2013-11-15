@@ -19,6 +19,8 @@ namespace SAI_Editor.Classes
         private List<string> _excludedProperties = new List<string>();
         private readonly PropertyInfo[] _pinfo;
         private bool enablePhaseHighlighting = false; //! It's determined by the setting but it should only be used in the MainForm listview
+        private Stack<Color> _colors = new Stack<Color>(Constants.phaseColors);
+        private Dictionary<int, Color> _phaseColors = new Dictionary<int, Color>();
 
         public SmartScriptListView()
         {
@@ -70,6 +72,22 @@ namespace SAI_Editor.Classes
                     }
                 }
             }
+
+            if (_smartScripts != null)
+            {
+                int[] phasemasks = _smartScripts.Select(p => p.event_phase_mask).Distinct().ToArray();
+
+                if (phasemasks.Length > Constants.phaseColors.Count)
+                {
+                    MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                foreach (int pm in phasemasks)
+                    if (!_phaseColors.ContainsKey(pm))
+                        _phaseColors.Add(pm, _colors.Pop());
+            }
+
         }
 
         public bool EnablePhaseHighlighting
@@ -117,65 +135,22 @@ namespace SAI_Editor.Classes
                 _smartScripts.Add(script);
 
             ListViewItem newItem = Items.Add(lvi);
-            HandleHighlightItems();
+
+            if (!_phaseColors.ContainsKey(script.event_phase_mask))
+            {
+                if (_colors.Count == 0)
+                {
+                    MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return -1;
+                }
+
+                _phaseColors.Add(script.event_phase_mask, _colors.Pop());
+                newItem.BackColor = _phaseColors[script.event_phase_mask];
+            }
+            else
+                lvi.BackColor = _phaseColors[script.event_phase_mask];
+
             return newItem.Index;
-        }
-
-        public void HandleHighlightItems()
-        {
-            if (!Settings.Default.PhaseHighlighting || !enablePhaseHighlighting)
-                return;
-
-            List<Color> phaseColors = new List<Color>(Constants.phaseColors);
-            Dictionary<int /* phase */, List<SmartScript>> smartScriptsPhases = new Dictionary<int, List<SmartScript>>();
-
-            foreach (SmartScript smartScript in _smartScripts)
-            {
-                if (smartScript.event_phase_mask == 0)
-                    continue;
-
-                if (!smartScriptsPhases.ContainsKey(smartScript.event_phase_mask))
-                {
-                    List<SmartScript> newSmartScriptList = new List<SmartScript>();
-                    newSmartScriptList.Add(smartScript);
-                    smartScriptsPhases[smartScript.event_phase_mask] = newSmartScriptList;
-                }
-                else
-                    smartScriptsPhases[smartScript.event_phase_mask].Add(smartScript);
-            }
-
-            foreach (List<SmartScript> smartScriptsPhaseList in smartScriptsPhases.Values)
-            {
-                bool foundColor = false;
-
-                foreach (SmartScript smartScript in smartScriptsPhaseList)
-                {
-                    foreach (SmartScriptListViewItem item in Items.Cast<SmartScriptListViewItem>())
-                    {
-                        if (item.Script == smartScript)
-                        {
-                            //! Try-catch has to be right here and not outside the loops. Otherwise all items coming after an
-                            //! item that caused an exception will not be colored.
-                            try
-                            {
-                                item.BackColor = phaseColors.First();
-                                foundColor = true;
-                            }
-                            catch (IndexOutOfRangeException) { }
-                            catch (InvalidOperationException) { }
-                            catch (Exception ex)
-                            {
-                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-
-                            break;
-                        }
-                    }
-                }
-
-                if (foundColor)
-                    phaseColors.RemoveAt(0);
-            }
         }
 
         public void AddSmartScripts(List<SmartScript> scripts, bool listViewOnly = false)
@@ -198,11 +173,25 @@ namespace SAI_Editor.Classes
                 if (!listViewOnly)
                     _smartScripts.Add(script);
 
+                if (!_phaseColors.ContainsKey(script.event_phase_mask))
+                {
+                    if (_colors.Count == 0)
+                    {
+                        MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    _phaseColors.Add(script.event_phase_mask, _colors.Pop());
+                    lvi.BackColor = _phaseColors[script.event_phase_mask];
+                }
+                else
+                    lvi.BackColor = _phaseColors[script.event_phase_mask];
+
                 items.Add(lvi);
             }
 
             Items.AddRange(items.ToArray());
-            HandleHighlightItems();
+
         }
 
         public void RemoveSmartScript(SmartScript script)
@@ -239,7 +228,20 @@ namespace SAI_Editor.Classes
             }
 
             _smartScripts[_smartScripts.IndexOf(lvi.Script)] = script;
-            HandleHighlightItems();
+
+            if (_phaseColors.ContainsKey(script.event_phase_mask))
+            {
+                if (_colors.Count == 0)
+                {
+                    MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                _phaseColors.Add(script.event_phase_mask, _colors.Pop());
+                lvi.BackColor = _phaseColors[script.event_phase_mask];
+            }
+            else
+                lvi.BackColor = _phaseColors[script.event_phase_mask];
         }
 
         public void ReplaceData(List<SmartScript> scripts, List<string> exProps = null)
@@ -285,10 +287,9 @@ namespace SAI_Editor.Classes
             Init();
         }
 
-        protected override void OnItemSelectionChanged(ListViewItemSelectionChangedEventArgs e)
-        {
-            HandleHighlightItems();
-            base.OnItemSelectionChanged(e);
-        }
+        //protected override void OnItemSelectionChanged(ListViewItemSelectionChangedEventArgs e)
+        //{
+        //    base.OnItemSelectionChanged(e);
+        //}
     }
 }
