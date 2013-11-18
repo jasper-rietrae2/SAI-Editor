@@ -73,6 +73,9 @@ namespace SAI_Editor.Classes
                 }
             }
 
+            _colors = new Stack<Color>(Constants.phaseColors);
+            _phaseColors.Clear();
+
             if (_smartScripts != null)
             {
                 int[] phasemasks = _smartScripts.Select(p => p.event_phase_mask).Distinct().ToArray();
@@ -229,7 +232,7 @@ namespace SAI_Editor.Classes
 
             _smartScripts[_smartScripts.IndexOf(lvi.Script)] = script;
 
-            if (_phaseColors.ContainsKey(script.event_phase_mask))
+            if (!_phaseColors.ContainsKey(script.event_phase_mask))
             {
                 if (_colors.Count == 0)
                 {
@@ -238,10 +241,9 @@ namespace SAI_Editor.Classes
                 }
 
                 _phaseColors.Add(script.event_phase_mask, _colors.Pop());
-                lvi.BackColor = _phaseColors[script.event_phase_mask];
             }
-            else
-                lvi.BackColor = _phaseColors[script.event_phase_mask];
+
+            lvi.BackColor = _phaseColors[script.event_phase_mask];
         }
 
         public void ReplaceData(List<SmartScript> scripts, List<string> exProps = null)
