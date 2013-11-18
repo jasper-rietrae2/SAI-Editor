@@ -86,11 +86,10 @@ namespace SAI_Editor.Classes
                     return;
                 }
 
-                foreach (int pm in phasemasks)
-                    if (!_phaseColors.ContainsKey(pm))
-                        _phaseColors.Add(pm, _colors.Pop());
+                foreach (int phasemask in phasemasks)
+                    if (phasemask != 0 && !_phaseColors.ContainsKey(phasemask))
+                        _phaseColors.Add(phasemask, _colors.Pop());
             }
-
         }
 
         public bool EnablePhaseHighlighting
@@ -139,19 +138,21 @@ namespace SAI_Editor.Classes
 
             ListViewItem newItem = Items.Add(lvi);
 
-            if (!_phaseColors.ContainsKey(script.event_phase_mask))
+            if (script.event_phase_mask != 0)
             {
-                if (_colors.Count == 0)
+                if (!_phaseColors.ContainsKey(script.event_phase_mask))
                 {
-                    MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return -1;
+                    if (_colors.Count == 0)
+                    {
+                        MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return -1;
+                    }
+
+                    _phaseColors.Add(script.event_phase_mask, _colors.Pop());
                 }
 
-                _phaseColors.Add(script.event_phase_mask, _colors.Pop());
                 newItem.BackColor = _phaseColors[script.event_phase_mask];
             }
-            else
-                lvi.BackColor = _phaseColors[script.event_phase_mask];
 
             return newItem.Index;
         }
@@ -176,19 +177,22 @@ namespace SAI_Editor.Classes
                 if (!listViewOnly)
                     _smartScripts.Add(script);
 
-                if (!_phaseColors.ContainsKey(script.event_phase_mask))
+                if (script.event_phase_mask != 0)
                 {
-                    if (_colors.Count == 0)
+                    if (!_phaseColors.ContainsKey(script.event_phase_mask))
                     {
-                        MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        if (_colors.Count == 0)
+                        {
+                            MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        _phaseColors.Add(script.event_phase_mask, _colors.Pop());
+                        lvi.BackColor = _phaseColors[script.event_phase_mask];
                     }
 
-                    _phaseColors.Add(script.event_phase_mask, _colors.Pop());
                     lvi.BackColor = _phaseColors[script.event_phase_mask];
                 }
-                else
-                    lvi.BackColor = _phaseColors[script.event_phase_mask];
 
                 items.Add(lvi);
             }
@@ -232,18 +236,21 @@ namespace SAI_Editor.Classes
 
             _smartScripts[_smartScripts.IndexOf(lvi.Script)] = script;
 
-            if (!_phaseColors.ContainsKey(script.event_phase_mask))
+            if (script.event_phase_mask != 0)
             {
-                if (_colors.Count == 0)
+                if (!_phaseColors.ContainsKey(script.event_phase_mask))
                 {
-                    MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    if (_colors.Count == 0)
+                    {
+                        MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    _phaseColors.Add(script.event_phase_mask, _colors.Pop());
                 }
 
-                _phaseColors.Add(script.event_phase_mask, _colors.Pop());
+                lvi.BackColor = _phaseColors[script.event_phase_mask];
             }
-
-            lvi.BackColor = _phaseColors[script.event_phase_mask];
         }
 
         public void ReplaceData(List<SmartScript> scripts, List<string> exProps = null)
