@@ -3208,16 +3208,14 @@ namespace SAI_Editor
 
         private async Task<string> GenerateSmartAiSqlFromListView()
         {
-            string generatedSql = String.Empty;
-
             List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
-
-            string sourceName = String.Empty;
+            string generatedSql = String.Empty, sourceName = String.Empty;
             
             if (Settings.Default.UseWorldDatabase)
                 sourceName = " " + await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
-            
-            string sourceSet = originalEntryOrGuidAndSourceType.entryOrGuid < 0 ? "@GUID" : "@ENTRY";
+
+            bool originalEntryIsGuid = originalEntryOrGuidAndSourceType.entryOrGuid < 0;
+            string sourceSet = originalEntryIsGuid ? "@GUID" : "@ENTRY";
 
             generatedSql += "--" + sourceName + " SAI\n";
             generatedSql += "SET " + sourceSet + " := " + originalEntryOrGuidAndSourceType.entryOrGuid + ";\n";
@@ -3227,10 +3225,24 @@ namespace SAI_Editor
                 switch ((SourceTypes)originalEntryOrGuidAndSourceType.sourceType)
                 {
                     case SourceTypes.SourceTypeCreature:
-                        generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                        if (originalEntryIsGuid)
+                        {
+                            int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-originalEntryOrGuidAndSourceType.entryOrGuid);
+                            generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + actualEntry + ";\n";
+                        }
+                        else
+                            generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+
                         break;
                     case SourceTypes.SourceTypeGameobject:
-                        generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                        if (originalEntryIsGuid)
+                        {
+                            int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-originalEntryOrGuidAndSourceType.entryOrGuid);
+                            generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + actualEntry + ";\n";
+                        }
+                        else
+                            generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+
                         break;
                     case SourceTypes.SourceTypeAreaTrigger:
                         generatedSql += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
@@ -3250,10 +3262,24 @@ namespace SAI_Editor
                     switch ((SourceTypes)entryOrGuidAndSourceType.sourceType)
                     {
                         case SourceTypes.SourceTypeCreature:
-                            generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                            if (entryOrGuidAndSourceType.entryOrGuid < 0)
+                            {
+                                int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-originalEntryOrGuidAndSourceType.entryOrGuid);
+                                generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + actualEntry + ";\n";
+                            }
+                            else
+                                generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+
                             break;
                         case SourceTypes.SourceTypeGameobject:
-                            generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                            if (entryOrGuidAndSourceType.entryOrGuid < 0)
+                            {
+                                int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-originalEntryOrGuidAndSourceType.entryOrGuid);
+                                generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + actualEntry + ";\n";
+                            }
+                            else
+                                generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+
                             break;
                         case SourceTypes.SourceTypeAreaTrigger:
                             generatedSql += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
