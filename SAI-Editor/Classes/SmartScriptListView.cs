@@ -138,7 +138,7 @@ namespace SAI_Editor.Classes
 
             ListViewItem newItem = Items.Add(lvi);
 
-            if (script.event_phase_mask != 0)
+            if (Settings.Default.PhaseHighlighting && script.event_phase_mask != 0)
             {
                 if (!_phaseColors.ContainsKey(script.event_phase_mask))
                 {
@@ -178,7 +178,7 @@ namespace SAI_Editor.Classes
                 if (!listViewOnly)
                     _smartScripts.Add(script);
 
-                if (script.event_phase_mask != 0)
+                if (Settings.Default.PhaseHighlighting && script.event_phase_mask != 0)
                 {
                     if (!_phaseColors.ContainsKey(script.event_phase_mask))
                     {
@@ -237,7 +237,7 @@ namespace SAI_Editor.Classes
 
             _smartScripts[_smartScripts.IndexOf(lvi.Script)] = script;
 
-            if (script.event_phase_mask != 0)
+            if (Settings.Default.PhaseHighlighting && script.event_phase_mask != 0)
             {
                 if (!_phaseColors.ContainsKey(script.event_phase_mask))
                 {
