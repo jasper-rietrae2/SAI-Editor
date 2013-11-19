@@ -3725,7 +3725,7 @@ namespace SAI_Editor
             if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
                 return;
 
-            listViewSmartScripts.AddSmartScript(listViewSmartScripts.SelectedSmartScript.Clone());
+            listViewSmartScripts.EnsureVisible(listViewSmartScripts.AddSmartScript(listViewSmartScripts.SelectedSmartScript.Clone(), false, true));
         }
 
         private void textBoxEventType_MouseWheel(object sender, MouseEventArgs e)

@@ -119,7 +119,7 @@ namespace SAI_Editor.Classes
             }
         }
 
-        public int AddSmartScript(SmartScript script, bool listViewOnly = false)
+        public int AddSmartScript(SmartScript script, bool listViewOnly = false, bool selectNewItem = false)
         {
             SmartScriptListViewItem lvi = new SmartScriptListViewItem(script.entryorguid.ToString());
             lvi.Script = script;
@@ -154,6 +154,7 @@ namespace SAI_Editor.Classes
                 newItem.BackColor = _phaseColors[script.event_phase_mask];
             }
 
+            newItem.Selected = selectNewItem;
             return newItem.Index;
         }
 
