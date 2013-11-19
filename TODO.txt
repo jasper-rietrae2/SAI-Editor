@@ -14,3 +14,6 @@
 - Add support to add specific flags to the source. If you for example want a creature to have a gossip, the npcflag also needs to be set accordingly. No idea yet on how to implement this in a good looking way
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
 - Add support to the SQLite database for each expansion of the game and keep this up-to-date
+- Fix up linking detection; we need to consider two things:
+  - There can be more than one entryorguid in the listview, so looping through the SmartScriptListView.SmartScripts is not correct;
+  - The line linking to our event can be from a different id than -1. For example searching for actionlist 3665600, guid -202776 id 12 (from 5).
