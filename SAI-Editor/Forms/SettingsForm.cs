@@ -139,7 +139,7 @@ namespace SAI_Editor
                 ((MainForm)Owner).ExpandToShowPermanentTooltips(!checkBoxShowTooltipsPermanently.Checked);
 
             if (checkBoxPhaseHighlighting.Checked != phaseHighlighting)
-                ((MainForm)Owner).listViewSmartScripts.Init();
+                ((MainForm)Owner).listViewSmartScripts.Init(true);
 
             ((MainForm)Owner).HandleUseWorldDatabaseSettingChanged();
         }
