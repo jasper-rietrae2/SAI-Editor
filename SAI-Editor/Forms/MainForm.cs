@@ -3257,37 +3257,65 @@ namespace SAI_Editor
             }
             else
             {
+                Dictionary<SourceTypes, List<EntryOrGuidAndSourceType>> entriesOrGuidsAndSourceTypesPerSourceType = new Dictionary<SourceTypes, List<EntryOrGuidAndSourceType>>();
+
                 foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in entriesOrGuidsAndSourceTypes)
                 {
-                    switch ((SourceTypes)entryOrGuidAndSourceType.sourceType)
+                    if (!entriesOrGuidsAndSourceTypesPerSourceType.ContainsKey(entryOrGuidAndSourceType.sourceType))
                     {
-                        case SourceTypes.SourceTypeCreature:
-                            if (entryOrGuidAndSourceType.entryOrGuid < 0)
-                            {
-                                int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-entryOrGuidAndSourceType.entryOrGuid);
-                                generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + actualEntry + ";\n";
-                            }
-                            else
-                                generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                        List<EntryOrGuidAndSourceType> _newEntryOrGuidAndSourceType = new List<EntryOrGuidAndSourceType>();
+                        _newEntryOrGuidAndSourceType.Add(entryOrGuidAndSourceType);
+                        entriesOrGuidsAndSourceTypesPerSourceType[entryOrGuidAndSourceType.sourceType] = _newEntryOrGuidAndSourceType;
+                    }
+                    else
+                        entriesOrGuidsAndSourceTypesPerSourceType[entryOrGuidAndSourceType.sourceType].Add(entryOrGuidAndSourceType);
+                }
 
-                            break;
-                        case SourceTypes.SourceTypeGameobject:
-                            if (entryOrGuidAndSourceType.entryOrGuid < 0)
-                            {
-                                int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-entryOrGuidAndSourceType.entryOrGuid);
-                                generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + actualEntry + ";\n";
-                            }
-                            else
-                                generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + sourceSet + ";\n";
+                foreach (List<EntryOrGuidAndSourceType> listEntryOrGuidAndSourceTypes in entriesOrGuidsAndSourceTypesPerSourceType.Values)
+                {
+                    bool generatedInitialUpdateQuery = false;
 
-                            break;
-                        case SourceTypes.SourceTypeAreaTrigger:
-                            generatedSql += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
-                            generatedSql += "INSERT INTO `areatrigger_scripts` VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
-                            break;
-                        case SourceTypes.SourceTypeScriptedActionlist:
-                            // todo
-                            break;
+                    for (int i = 0; i < listEntryOrGuidAndSourceTypes.Count; ++i)
+                    {
+                        EntryOrGuidAndSourceType entryOrGuidAndSourceType = listEntryOrGuidAndSourceTypes[i];
+
+                        switch ((SourceTypes)entryOrGuidAndSourceType.sourceType)
+                        {
+                            case SourceTypes.SourceTypeCreature:
+                            case SourceTypes.SourceTypeGameobject:
+                                string entryOrGuidToUse = sourceSet;
+                                bool sourceTypeIsCreature = (SourceTypes)entryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeCreature;
+                                string tableToTarget = sourceTypeIsCreature ? "creature_template" : "gameobject_template";
+                                string newAiName = sourceTypeIsCreature ? "SmartAI" : "SmartGameObjectAI";
+
+                                if (entryOrGuidAndSourceType.entryOrGuid < 0)
+                                    entryOrGuidToUse = (await SAI_Editor_Manager.Instance.worldDatabase.GetObjectIdByGuidAndSourceType(-entryOrGuidAndSourceType.entryOrGuid, (int)entryOrGuidAndSourceType.sourceType)).ToString();
+
+                                if (listEntryOrGuidAndSourceTypes.Count > 1)
+                                {
+                                    if (!generatedInitialUpdateQuery)
+                                    {
+                                        generatedSql += "UPDATE `" + tableToTarget + "` SET `AIName`=" + '"' + newAiName + '"' + " WHERE `entry` IN (" + entryOrGuidToUse;
+                                        generatedInitialUpdateQuery = true;
+                                    }
+                                    else
+                                        generatedSql += "," + entryOrGuidToUse;
+
+                                    if (i == listEntryOrGuidAndSourceTypes.Count - 1)
+                                        generatedSql += ");\n";
+                                }
+                                else
+                                    generatedSql += "UPDATE `" + tableToTarget + "` SET `AIName`=" + '"' + newAiName + '"' + " WHERE `entry`=" + entryOrGuidToUse + ";\n";
+
+                                break;
+                            case SourceTypes.SourceTypeAreaTrigger:
+                                generatedSql += "DELETE FROM `areatrigger_scripts` WHERE `entry`=" + sourceSet + ";\n";
+                                generatedSql += "INSERT INTO `areatrigger_scripts` VALUES (" + sourceSet + "," + '"' + "SmartTrigger" + '"' + ");\n";
+                                break;
+                            case SourceTypes.SourceTypeScriptedActionlist:
+                                // todo
+                                break;
+                        }
                     }
                 }
 
