@@ -647,7 +647,6 @@ namespace SAI_Editor
                             switch (sourceType)
                             {
                                 case SourceTypes.SourceTypeCreature:
-                                {
                                     //! Get `id` from `creature` and check it for SAI
                                     if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
                                     {
@@ -703,9 +702,7 @@ namespace SAI_Editor
                                             showNormalErrorMessage = true;
                                     }
                                     break;
-                                }
                                 case SourceTypes.SourceTypeGameobject:
-                                {
                                     //! Get `id` from `gameobject` and check it for SAI
                                     if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
                                     {
@@ -761,7 +758,6 @@ namespace SAI_Editor
                                             showNormalErrorMessage = true;
                                     }
                                     break;
-                                }
                                 default:
                                     showNormalErrorMessage = true;
                                     break;
@@ -3285,12 +3281,12 @@ namespace SAI_Editor
                     {
                         EntryOrGuidAndSourceType entryOrGuidAndSourceType = listEntryOrGuidAndSourceTypes[i];
 
-                        switch ((SourceTypes)entryOrGuidAndSourceType.sourceType)
+                        switch (entryOrGuidAndSourceType.sourceType)
                         {
                             case SourceTypes.SourceTypeCreature:
                             case SourceTypes.SourceTypeGameobject:
                                 string entryOrGuidToUse = sourceSet;
-                                bool sourceTypeIsCreature = (SourceTypes)entryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeCreature;
+                                bool sourceTypeIsCreature = entryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeCreature;
                                 string tableToTarget = sourceTypeIsCreature ? "creature_template" : "gameobject_template";
                                 string newAiName = sourceTypeIsCreature ? "SmartAI" : "SmartGameObjectAI";
 
@@ -3325,37 +3321,31 @@ namespace SAI_Editor
                     }
                 }
 
-                generatedSql += "DELETE FROM `smart_scripts` WHERE `entryorguid` IN (";
-
-                for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
+                foreach (List<EntryOrGuidAndSourceType> listEntryOrGuidAndSourceTypes in entriesOrGuidsAndSourceTypesPerSourceType.Values)
                 {
-                    string entryorguid = entriesOrGuidsAndSourceTypes[i].entryOrGuid.ToString();
+                    //! If there are more entries
+                    if (listEntryOrGuidAndSourceTypes.Count > 1)
+                    {
+                        generatedSql += "DELETE FROM `smart_scripts` WHERE `entryorguid` IN (";
+                        SourceTypes sourceTypeOfSource = SourceTypes.SourceTypeNone;
 
-                    if (entryorguid == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
-                        entryorguid = sourceSet;
+                        for (int i = 0; i < listEntryOrGuidAndSourceTypes.Count; ++i)
+                        {
+                            EntryOrGuidAndSourceType entryOrGuidAndSourceType = listEntryOrGuidAndSourceTypes[i];
+                            sourceTypeOfSource = entryOrGuidAndSourceType.sourceType;
+                            generatedSql += entryOrGuidAndSourceType.entryOrGuid;
 
-                    if (i == entriesOrGuidsAndSourceTypes.Count - 1)
-                        generatedSql += entryorguid + ")";
-                    else
-                        generatedSql += entryorguid + ",";
+                            if (i != listEntryOrGuidAndSourceTypes.Count - 1)
+                                generatedSql += ",";
+                            else
+                                generatedSql += ")";
+                        }
+
+                        generatedSql += " AND `source_type`=" + (int)sourceTypeOfSource + ";\n";
+                    }
+                    else if (listEntryOrGuidAndSourceTypes.Count == 1)
+                        generatedSql += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + listEntryOrGuidAndSourceTypes[0].entryOrGuid + " AND `source_type`=" + (int)listEntryOrGuidAndSourceTypes[0].sourceType + ";\n";
                 }
-
-                generatedSql += " AND `source_type` IN (";
-                List<int> sourceTypesAdded = new List<int>();
-
-                for (int i = 0; i < entriesOrGuidsAndSourceTypes.Count; ++i)
-                {
-                    if (sourceTypesAdded.Contains((int)entriesOrGuidsAndSourceTypes[i].sourceType))
-                        continue;
-
-                    if (i != 0)
-                        generatedSql += ",";
-
-                    generatedSql += (int)entriesOrGuidsAndSourceTypes[i].sourceType;
-                    sourceTypesAdded.Add((int)entriesOrGuidsAndSourceTypes[i].sourceType);
-                }
-
-                generatedSql += ");\n";
             }
 
             generatedSql += "INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES\n";
