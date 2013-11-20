@@ -6,11 +6,17 @@
   - Make this a download option instead (?). The SQLite file would become over 100 MB if we'd do this and it'd make no sense if we'd never use the data.
 - Find a way around the annoying 500-line limit when inserting SQLite data. When found, implement all sounds into the SQLite database.
 - Make permanent tooltips support multilines (or decrease length of tooltips to a fixed size)
-- Implement SAI conditions support
-- Implement creature text support (?)
+- Implement (SAI) conditions support
+- Implement creature_text support (?)
 - Add support to add specific flags to the source. If you for example want a creature to have a gossip, the npcflag also needs to be set accordingly. No idea yet on how to implement this in a good looking way
 - Make all tabindexes work completely (need to finish pretty much everything before doing this)
 - Add support to the SQLite database for each expansion of the game and keep this up-to-date
 - Fix up linking detection; we need to consider two things:
   - There can be more than one entryorguid in the listview, so looping through the SmartScriptListView.SmartScripts is not correct;
   - The line linking to our event can be from a different id than -1. For example searching for actionlist 3665600, guid -202776 id 12 (from 5).
+- Implement user-controlled SAI templates which can also be shared between users and possibly uploaded somewhere
+- Search or auto update the application when a new version rolled out
+- Add a tutorial to the application
+- Make some exception messagebox reporting be more user-friendly by catching specific exceptions
+- Setting to control the comment generating (rules to follow and whatnot)
+- Fix sorting in the main form's listview
