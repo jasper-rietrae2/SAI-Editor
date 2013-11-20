@@ -7,6 +7,7 @@ using MySql.Data.MySqlClient;
 using SAI_Editor.Classes;
 using SAI_Editor.Properties;
 using SAI_Editor.Security;
+using SAI_Editor.Database;
 
 namespace SAI_Editor
 {
@@ -299,7 +300,21 @@ namespace SAI_Editor
             if (textBoxPassword.Text.Length > 0)
                 connectionString.Password = textBoxPassword.Text;
 
-            if (SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
+            WorldDatabase worldDatabase = null;
+
+            if (!Settings.Default.UseWorldDatabase)
+            {
+                string password = Settings.Default.Password;
+
+                if (password.Length > 0)
+                    password = SecurityExtensions.DecryptString(password, Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
+
+                worldDatabase = new SAI_Editor.Database.WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, password, Settings.Default.Database);
+            }
+            else
+                worldDatabase = SAI_Editor_Manager.Instance.worldDatabase;
+
+            if (worldDatabase.CanConnectToDatabase(connectionString))
                 MessageBox.Show("Connection successful!", "Connection status", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

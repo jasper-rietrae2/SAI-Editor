@@ -23,7 +23,7 @@ namespace SAI_Editor
 
     class SAI_Editor_Manager
     {
-        private WorldDatabase _worldDatabase = null;
+        public WorldDatabase _worldDatabase = null;
         public WorldDatabase worldDatabase
         {
             get
@@ -68,12 +68,22 @@ namespace SAI_Editor
 
         public void ResetDatabases()
         {
+            ResetWorldDatabase();
+            ResetSQLiteDatabase();
+        }
+
+        public void ResetWorldDatabase()
+        {
             string password = Settings.Default.Password;
 
             if (password.Length > 0)
                 password = SecurityExtensions.DecryptString(password, Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
 
             worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, password, Settings.Default.Database);
+        }
+
+        public void ResetSQLiteDatabase()
+        {
             sqliteDatabase = new SQLiteDatabase("Resources/sqlite_database.db");
         }
 
