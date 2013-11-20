@@ -3291,7 +3291,18 @@ namespace SAI_Editor
                                 string newAiName = sourceTypeIsCreature ? "SmartAI" : "SmartGameObjectAI";
 
                                 if (entryOrGuidAndSourceType.entryOrGuid < 0)
+                                {
                                     entryOrGuidToUse = (await SAI_Editor_Manager.Instance.worldDatabase.GetObjectIdByGuidAndSourceType(-entryOrGuidAndSourceType.entryOrGuid, (int)entryOrGuidAndSourceType.sourceType)).ToString();
+
+                                    if (entryOrGuidToUse == "0")
+                                    {
+                                        string sourceTypeString = GetSourceTypeString(entryOrGuidAndSourceType.sourceType);
+                                        string message = "While generating a script for your SmartAI, the " + sourceTypeString + " guid ";
+                                        message += -entryOrGuidAndSourceType.entryOrGuid + " was not spawned in your current database which means the AIName was not properly set.";
+                                        message += "\n\nThis is only a warning, which means the AIName of entry 0 will be set in `" + sourceTypeString + "_template`, which has no effect.";
+                                        MessageBox.Show(message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                    }
+                                }
 
                                 if (listEntryOrGuidAndSourceTypes.Count > 1)
                                 {
