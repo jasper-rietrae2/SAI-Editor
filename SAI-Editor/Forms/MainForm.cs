@@ -3230,6 +3230,12 @@ namespace SAI_Editor
                 switch ((SourceTypes)originalEntryOrGuidAndSourceType.sourceType)
                 {
                     case SourceTypes.SourceTypeCreature:
+                        if (!Settings.Default.UseWorldDatabase)
+                        {
+                            generatedSql += "-- No changes to the AIName were made as there is no world database connection.";
+                            break;
+                        }
+
                         if (originalEntryIsGuid)
                         {
                             int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-originalEntryOrGuidAndSourceType.entryOrGuid);
@@ -3240,6 +3246,12 @@ namespace SAI_Editor
 
                         break;
                     case SourceTypes.SourceTypeGameobject:
+                        if (!Settings.Default.UseWorldDatabase)
+                        {
+                            generatedSql += "-- No changes to the AIName were made as there is no world database connection.";
+                            break;
+                        }
+
                         if (originalEntryIsGuid)
                         {
                             int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-originalEntryOrGuidAndSourceType.entryOrGuid);
@@ -3295,6 +3307,12 @@ namespace SAI_Editor
 
                                 if (entryOrGuidAndSourceType.entryOrGuid < 0)
                                 {
+                                    if (!Settings.Default.UseWorldDatabase)
+                                    {
+                                        generatedSql += "-- No changes to the AIName were made as there is no world database connection.";
+                                        break;
+                                    }
+
                                     entryOrGuidToUse = (await SAI_Editor_Manager.Instance.worldDatabase.GetObjectIdByGuidAndSourceType(-entryOrGuidAndSourceType.entryOrGuid, (int)entryOrGuidAndSourceType.sourceType)).ToString();
 
                                     if (entryOrGuidToUse == "0")
