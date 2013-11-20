@@ -1776,7 +1776,18 @@ namespace SAI_Editor
 
         private void listViewSmartScripts_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            SortListView(SortOrder.None, e.Column);
+            //! Don't use the SortListView method here
+            listViewSmartScripts.ListViewItemSorter = lvwColumnSorter;
+
+            if (e.Column != lvwColumnSorter.SortColumn)
+            {
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+            else
+                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+
+            listViewSmartScripts.Sort();
         }
 
         private void SortListView(SortOrder order, int column)
