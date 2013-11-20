@@ -108,7 +108,7 @@ namespace SAI_Editor
             {
                 textBoxHost.Text = Settings.Default.Host;
                 textBoxUsername.Text = Settings.Default.User;
-                textBoxPassword.Text = GetPasswordSetting();
+                textBoxPassword.Text = SAI_Editor_Manager.Instance.GetPasswordSetting();
                 textBoxWorldDatabase.Text = Settings.Default.Database;
                 textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
                 expandAndContractSpeed = Settings.Default.AnimationSpeed;
