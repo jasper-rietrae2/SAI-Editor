@@ -262,10 +262,10 @@ namespace SAI_Editor.Classes
                     case 9: //! Actionlist
                         if (entryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist)
                         {
-                            TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScript, SourceTypes.SourceTypeScriptedActionlist);
+                            List<EntryOrGuidAndSourceType> timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScript, SourceTypes.SourceTypeScriptedActionlist);
 
-                            if (timedActionListOrEntries.entries != null && timedActionListOrEntries.entries.Count > 0)
-                                fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(timedActionListOrEntries.sourceTypeOfEntry, XConverter.ToInt32(timedActionListOrEntries.entries[0]), true) + " - ";
+                            if (timedActionListOrEntries != null && timedActionListOrEntries.Count > 0)
+                                fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(timedActionListOrEntries[0].sourceType, timedActionListOrEntries[0].entryOrGuid, true) + " - ";
                         }
                         else
                             fullLine += await worldDatabase.GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid, true) + " - ";

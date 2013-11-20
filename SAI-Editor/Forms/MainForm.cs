@@ -58,6 +58,8 @@ namespace SAI_Editor
 
     public struct EntryOrGuidAndSourceType
     {
+        public EntryOrGuidAndSourceType(int _entryOrGuid, SourceTypes _sourceType) { entryOrGuid = _entryOrGuid; sourceType = _sourceType; }
+
         public int entryOrGuid;
         public SourceTypes sourceType;
     }
@@ -794,16 +796,20 @@ namespace SAI_Editor
 
                     if (i == smartScripts.Count - 1 && originalEntryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist)
                     {
-                        TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScripts[i], sourceType);
+                        List<EntryOrGuidAndSourceType> timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScripts[i], sourceType);
 
-                        if (timedActionListOrEntries.sourceTypeOfEntry != SourceTypes.SourceTypeScriptedActionlist)
+                        //if (timedActionListOrEntries.sourceTypeOfEntry != SourceTypes.SourceTypeScriptedActionlist)
                         {
-                            foreach (string scriptEntry in timedActionListOrEntries.entries)
+                            foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in timedActionListOrEntries)
                             {
-                                List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
+                                if (entryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist)
+                                    continue;
 
-                                foreach (SmartScript item in newSmartScripts)
-                                    smartScriptsToReturn.Add(item);
+                                List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(entryOrGuidAndSourceType.entryOrGuid.ToString(), entryOrGuidAndSourceType.sourceType);
+
+                                if (newSmartScripts != null)
+                                    foreach (SmartScript item in newSmartScripts)
+                                        smartScriptsToReturn.Add(item);
 
                                 pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                             }
@@ -812,11 +818,11 @@ namespace SAI_Editor
 
                     if (sourceType == originalEntryOrGuidAndSourceType.sourceType && originalEntryOrGuidAndSourceType.sourceType != SourceTypes.SourceTypeScriptedActionlist)
                     {
-                        TimedActionListOrEntries timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScripts[i], sourceType);
+                        List<EntryOrGuidAndSourceType> timedActionListOrEntries = await SAI_Editor_Manager.Instance.GetTimedActionlistsOrEntries(smartScripts[i], sourceType);
 
-                        foreach (string scriptEntry in timedActionListOrEntries.entries)
+                        foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in timedActionListOrEntries)
                         {
-                            List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(scriptEntry, timedActionListOrEntries.sourceTypeOfEntry);
+                            List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(entryOrGuidAndSourceType.entryOrGuid.ToString(), entryOrGuidAndSourceType.sourceType);
 
                             foreach (SmartScript item in newSmartScripts)
                                 smartScriptsToReturn.Add(item);
@@ -3188,7 +3194,7 @@ namespace SAI_Editor
 
             //! When no database connection can be made, only enable the search button if
             //! we're searching for areatriggers.
-            buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || newSourceType == SourceTypes.SourceTypeAreaTrigger; 
+            buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || newSourceType == SourceTypes.SourceTypeAreaTrigger;
         }
 
         private async void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
@@ -3210,7 +3216,7 @@ namespace SAI_Editor
         {
             List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
             string generatedSql = String.Empty, sourceName = String.Empty;
-            
+
             if (Settings.Default.UseWorldDatabase)
                 sourceName = " " + await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
 

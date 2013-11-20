@@ -14,12 +14,6 @@ using SAI_Editor.Security;
 
 namespace SAI_Editor
 {
-    public struct TimedActionListOrEntries
-    {
-        public List<string> entries;
-        public SourceTypes sourceTypeOfEntry;
-    }
-
     public enum ScriptTypeId
     {
         ScriptTypeEvent,
@@ -208,11 +202,9 @@ namespace SAI_Editor
             return true;
         }
 
-        public async Task<TimedActionListOrEntries> GetTimedActionlistsOrEntries(SmartScript smartScript, SourceTypes sourceType)
+        public async Task<List<EntryOrGuidAndSourceType>> GetTimedActionlistsOrEntries(SmartScript smartScript, SourceTypes sourceType)
         {
-            TimedActionListOrEntries timedActionListOrEntries = new TimedActionListOrEntries();
-            timedActionListOrEntries.entries = new List<string>();
-            timedActionListOrEntries.sourceTypeOfEntry = SourceTypes.SourceTypeScriptedActionlist;
+            List<EntryOrGuidAndSourceType> timedActionListOrEntries = new List<EntryOrGuidAndSourceType>();
 
             if (sourceType == SourceTypes.SourceTypeScriptedActionlist)
             {
@@ -233,18 +225,18 @@ namespace SAI_Editor
                                     _smartScript.action_param5 == smartScript.entryorguid ||
                                     _smartScript.action_param6 == smartScript.entryorguid)
                                 {
-                                    timedActionListOrEntries.entries.Add(_smartScript.entryorguid.ToString());
-                                    timedActionListOrEntries.sourceTypeOfEntry = (SourceTypes)_smartScript.source_type;
+                                    timedActionListOrEntries.Add(new EntryOrGuidAndSourceType(_smartScript.entryorguid, (SourceTypes)_smartScript.source_type));
                                 }
 
                                 break;
                             case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
-                                for (int i = _smartScript.action_param1; i <= _smartScript.action_param2; ++i)
+                                for (int param = _smartScript.action_param1; param <= _smartScript.action_param2; ++param)
                                 {
-                                    if (i == smartScript.entryorguid && !timedActionListOrEntries.entries.Contains(i.ToString()))
+                                    EntryOrGuidAndSourceType entryOrGuidAndSourceType = new EntryOrGuidAndSourceType(param, (SourceTypes)_smartScript.source_type);
+
+                                    if (param == smartScript.entryorguid && !timedActionListOrEntries.Contains(entryOrGuidAndSourceType))
                                     {
-                                        timedActionListOrEntries.entries.Add(_smartScript.entryorguid.ToString());
-                                        timedActionListOrEntries.sourceTypeOfEntry = (SourceTypes)_smartScript.source_type;
+                                        timedActionListOrEntries.Add(entryOrGuidAndSourceType);
                                         break;
                                     }
                                 }
@@ -258,28 +250,29 @@ namespace SAI_Editor
                 switch ((SmartAction)smartScript.action_type)
                 {
                     case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
-                        timedActionListOrEntries.entries.Add(smartScript.action_param1.ToString());
+                        timedActionListOrEntries.Add(new EntryOrGuidAndSourceType(smartScript.action_param1, SourceTypes.SourceTypeScriptedActionlist));
                         break;
                     case SmartAction.SMART_ACTION_CALL_RANDOM_TIMED_ACTIONLIST:
-                        timedActionListOrEntries.entries.Add(smartScript.action_param1.ToString());
-                        timedActionListOrEntries.entries.Add(smartScript.action_param2.ToString());
+                        timedActionListOrEntries.Add(new EntryOrGuidAndSourceType(smartScript.action_param1, SourceTypes.SourceTypeScriptedActionlist));
+                        timedActionListOrEntries.Add(new EntryOrGuidAndSourceType(smartScript.action_param2, SourceTypes.SourceTypeScriptedActionlist));
 
                         if (smartScript.action_param3 > 0)
-                            timedActionListOrEntries.entries.Add(smartScript.action_param3.ToString());
+                            timedActionListOrEntries.Add(new EntryOrGuidAndSourceType(smartScript.action_param3, SourceTypes.SourceTypeScriptedActionlist));
 
                         if (smartScript.action_param4 > 0)
-                            timedActionListOrEntries.entries.Add(smartScript.action_param4.ToString());
+                            timedActionListOrEntries.Add(new EntryOrGuidAndSourceType(smartScript.action_param4, SourceTypes.SourceTypeScriptedActionlist));
 
                         if (smartScript.action_param5 > 0)
-                            timedActionListOrEntries.entries.Add(smartScript.action_param5.ToString());
+                            timedActionListOrEntries.Add(new EntryOrGuidAndSourceType(smartScript.action_param5, SourceTypes.SourceTypeScriptedActionlist));
 
                         if (smartScript.action_param6 > 0)
-                            timedActionListOrEntries.entries.Add(smartScript.action_param6.ToString());
+                            timedActionListOrEntries.Add(new EntryOrGuidAndSourceType(smartScript.action_param6, SourceTypes.SourceTypeScriptedActionlist));
 
                         break;
                     case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
-                        for (int i = smartScript.action_param1; i <= smartScript.action_param2; ++i)
-                            timedActionListOrEntries.entries.Add(i.ToString());
+                        for (int param = smartScript.action_param1; param <= smartScript.action_param2; ++param)
+                            timedActionListOrEntries.Add(new EntryOrGuidAndSourceType(param, SourceTypes.SourceTypeScriptedActionlist));
+
                         break;
                 }
             }
