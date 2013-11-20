@@ -22,7 +22,7 @@ namespace SAI_Editor
 
             textBoxHost.Text = Settings.Default.Host;
             textBoxUsername.Text = Settings.Default.User;
-            textBoxPassword.Text = Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
+            textBoxPassword.Text = SAI_Editor_Manager.Instance.GetPasswordSetting();
             textBoxWorldDatabase.Text = Settings.Default.Database;
             textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
 
@@ -186,7 +186,7 @@ namespace SAI_Editor
                 checkBoxPhaseHighlighting.Checked == Settings.Default.PhaseHighlighting &&
 
                 //! Check password last because it's the most 'expensive' check
-                textBoxPassword.Text == Settings.Default.Password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString())
+                textBoxPassword.Text == SAI_Editor_Manager.Instance.GetPasswordSetting())
                 return;
 
             DialogResult dialogResult = MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -303,14 +303,7 @@ namespace SAI_Editor
             WorldDatabase worldDatabase = null;
 
             if (!Settings.Default.UseWorldDatabase)
-            {
-                string password = Settings.Default.Password;
-
-                if (password.Length > 0)
-                    password = SecurityExtensions.DecryptString(password, Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
-
-                worldDatabase = new SAI_Editor.Database.WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, password, Settings.Default.Database);
-            }
+                worldDatabase = new SAI_Editor.Database.WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, SAI_Editor_Manager.Instance.GetPasswordSetting(), Settings.Default.Database);
             else
                 worldDatabase = SAI_Editor_Manager.Instance.worldDatabase;
 

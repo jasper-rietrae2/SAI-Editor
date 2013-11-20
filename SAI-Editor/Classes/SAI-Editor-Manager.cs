@@ -74,12 +74,7 @@ namespace SAI_Editor
 
         public void ResetWorldDatabase()
         {
-            string password = Settings.Default.Password;
-
-            if (password.Length > 0)
-                password = SecurityExtensions.DecryptString(password, Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
-
-            worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, password, Settings.Default.Database);
+            worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, GetPasswordSetting(), Settings.Default.Database);
         }
 
         public void ResetSQLiteDatabase()
@@ -382,6 +377,16 @@ namespace SAI_Editor
             }
 
             return String.Empty;
+        }
+
+        public string GetPasswordSetting()
+        {
+            string password = Settings.Default.Password;
+
+            if (password.Length > 150)
+                password = SecurityExtensions.DecryptString(password, Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
+
+            return password;
         }
     }
 }
