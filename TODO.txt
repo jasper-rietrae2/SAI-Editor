@@ -19,4 +19,3 @@
 - Add a tutorial to the application
 - Make some exception messagebox reporting be more user-friendly by catching specific exceptions
 - Setting to control the comment generating (rules to follow and whatnot)
-- Fix sorting in the main form's listview
