@@ -3195,6 +3195,9 @@ namespace SAI_Editor
 
         private async void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (formState != FormState.FormStateMain)
+                return;
+
             using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await GenerateSmartAiSqlFromListView(), await GenerateSmartAiRevertQuery()))
                 sqlOutputForm.ShowDialog(this);
         }
@@ -3299,7 +3302,7 @@ namespace SAI_Editor
                                         string sourceTypeString = GetSourceTypeString(entryOrGuidAndSourceType.sourceType);
                                         string message = "While generating a script for your SmartAI, the " + sourceTypeString + " guid ";
                                         message += -entryOrGuidAndSourceType.entryOrGuid + " was not spawned in your current database which means the AIName was not properly set.";
-                                        message += "\n\nThis is only a warning, which means the AIName of entry 0 will be set in `" + sourceTypeString + "_template`, which has no effect.";
+                                        message += "\n\nThis is only a warning, which means the AIName of entry 0 will be set in `" + sourceTypeString + "_template` and this has no effect.";
                                         MessageBox.Show(message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                     }
                                 }
