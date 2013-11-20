@@ -3264,7 +3264,7 @@ namespace SAI_Editor
                         case SourceTypes.SourceTypeCreature:
                             if (entryOrGuidAndSourceType.entryOrGuid < 0)
                             {
-                                int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-originalEntryOrGuidAndSourceType.entryOrGuid);
+                                int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-entryOrGuidAndSourceType.entryOrGuid);
                                 generatedSql += "UPDATE `creature_template` SET `AIName`=" + '"' + "SmartAI" + '"' + " WHERE `entry`=" + actualEntry + ";\n";
                             }
                             else
@@ -3274,7 +3274,7 @@ namespace SAI_Editor
                         case SourceTypes.SourceTypeGameobject:
                             if (entryOrGuidAndSourceType.entryOrGuid < 0)
                             {
-                                int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-originalEntryOrGuidAndSourceType.entryOrGuid);
+                                int actualEntry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-entryOrGuidAndSourceType.entryOrGuid);
                                 generatedSql += "UPDATE `gameobject_template` SET `AIName`=" + '"' + "SmartGameObjectAI" + '"' + " WHERE `entry`=" + actualEntry + ";\n";
                             }
                             else
