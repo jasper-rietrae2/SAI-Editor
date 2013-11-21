@@ -3249,7 +3249,10 @@ namespace SAI_Editor
                 case SourceTypes.SourceTypeCreature:
                 case SourceTypes.SourceTypeGameobject:
                     if (!Settings.Default.UseWorldDatabase)
+                    {
+                        sourceName = "<Could not generate name>";
                         break;
+                    }
 
                     sourceName = " " + await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
                     break;
@@ -3260,7 +3263,10 @@ namespace SAI_Editor
                     if (entriesOrGuidsAndSourceTypes.Count > 1)
                     {
                         if (!Settings.Default.UseWorldDatabase)
+                        {
+                            sourceName = "<Could not generate name>";
                             break;
+                        }
 
                         foreach (List<EntryOrGuidAndSourceType> listEntryOrGuidAndSourceTypes in entriesOrGuidsAndSourceTypesPerSourceType.Values)
                         {
