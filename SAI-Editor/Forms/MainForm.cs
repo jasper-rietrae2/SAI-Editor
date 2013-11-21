@@ -3311,10 +3311,13 @@ namespace SAI_Editor
                         {
                             case SourceTypes.SourceTypeCreature:
                             case SourceTypes.SourceTypeGameobject:
-                                string entryOrGuidToUse = sourceSet;
+                                string entryOrGuidToUse = entryOrGuidAndSourceType.entryOrGuid.ToString();
                                 bool sourceTypeIsCreature = entryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeCreature;
                                 string tableToTarget = sourceTypeIsCreature ? "creature_template" : "gameobject_template";
                                 string newAiName = sourceTypeIsCreature ? "SmartAI" : "SmartGameObjectAI";
+
+                                if (entryOrGuidAndSourceType.entryOrGuid == originalEntryOrGuidAndSourceType.entryOrGuid)
+                                    entryOrGuidToUse = sourceSet;
 
                                 if (entryOrGuidAndSourceType.entryOrGuid < 0)
                                 {
