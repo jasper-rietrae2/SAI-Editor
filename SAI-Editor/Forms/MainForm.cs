@@ -3376,7 +3376,11 @@ namespace SAI_Editor
                         {
                             EntryOrGuidAndSourceType entryOrGuidAndSourceType = listEntryOrGuidAndSourceTypes[i];
                             sourceTypeOfSource = entryOrGuidAndSourceType.sourceType;
-                            generatedSql += entryOrGuidAndSourceType.entryOrGuid;
+
+                            if (entryOrGuidAndSourceType.entryOrGuid == originalEntryOrGuidAndSourceType.entryOrGuid)
+                                generatedSql += sourceSet;
+                            else
+                                generatedSql += entryOrGuidAndSourceType.entryOrGuid;
 
                             if (i != listEntryOrGuidAndSourceTypes.Count - 1)
                                 generatedSql += ",";
@@ -3387,7 +3391,16 @@ namespace SAI_Editor
                         generatedSql += " AND `source_type`=" + (int)sourceTypeOfSource + ";\n";
                     }
                     else if (listEntryOrGuidAndSourceTypes.Count == 1)
-                        generatedSql += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + listEntryOrGuidAndSourceTypes[0].entryOrGuid + " AND `source_type`=" + (int)listEntryOrGuidAndSourceTypes[0].sourceType + ";\n";
+                    {
+                        generatedSql += "DELETE FROM `smart_scripts` WHERE `entryorguid`=";
+
+                        if (listEntryOrGuidAndSourceTypes[0].entryOrGuid == originalEntryOrGuidAndSourceType.entryOrGuid)
+                            generatedSql += sourceSet;
+                        else
+                            generatedSql += listEntryOrGuidAndSourceTypes[0].entryOrGuid;
+
+                        generatedSql += " AND `source_type`=" + (int)listEntryOrGuidAndSourceTypes[0].sourceType + ";\n";
+                    }
                 }
             }
 
