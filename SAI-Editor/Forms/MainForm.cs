@@ -328,7 +328,7 @@ namespace SAI_Editor
 
         private void StartExpandingToMainForm(bool instant = false)
         {
-            if (!radioButtonConnectToMySql.Checked)
+            if (radioButtonConnectToMySql.Checked)
             {
                 RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
                 byte[] buffer = new byte[1024];
