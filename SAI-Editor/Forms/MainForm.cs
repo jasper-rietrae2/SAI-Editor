@@ -3227,8 +3227,61 @@ namespace SAI_Editor
             List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
             string generatedSql = String.Empty, sourceName = String.Empty;
 
-            if (Settings.Default.UseWorldDatabase)
-                sourceName = " " + await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
+            Dictionary<SourceTypes, List<EntryOrGuidAndSourceType>> entriesOrGuidsAndSourceTypesPerSourceType = new Dictionary<SourceTypes, List<EntryOrGuidAndSourceType>>();
+
+            if (entriesOrGuidsAndSourceTypes.Count > 1)
+            {
+                foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in entriesOrGuidsAndSourceTypes)
+                {
+                    if (!entriesOrGuidsAndSourceTypesPerSourceType.ContainsKey(entryOrGuidAndSourceType.sourceType))
+                    {
+                        List<EntryOrGuidAndSourceType> _newEntryOrGuidAndSourceType = new List<EntryOrGuidAndSourceType>();
+                        _newEntryOrGuidAndSourceType.Add(entryOrGuidAndSourceType);
+                        entriesOrGuidsAndSourceTypesPerSourceType[entryOrGuidAndSourceType.sourceType] = _newEntryOrGuidAndSourceType;
+                    }
+                    else
+                        entriesOrGuidsAndSourceTypesPerSourceType[entryOrGuidAndSourceType.sourceType].Add(entryOrGuidAndSourceType);
+                }
+            }
+
+            switch (originalEntryOrGuidAndSourceType.sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                case SourceTypes.SourceTypeGameobject:
+                    if (!Settings.Default.UseWorldDatabase)
+                        break;
+
+                    sourceName = " " + await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType.sourceType, originalEntryOrGuidAndSourceType.entryOrGuid);
+                    break;
+                case SourceTypes.SourceTypeAreaTrigger:
+                    sourceName = " Areatrigger";
+                    break;
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    if (entriesOrGuidsAndSourceTypes.Count > 1)
+                    {
+                        if (!Settings.Default.UseWorldDatabase)
+                            break;
+
+                        foreach (List<EntryOrGuidAndSourceType> listEntryOrGuidAndSourceTypes in entriesOrGuidsAndSourceTypesPerSourceType.Values)
+                        {
+                            foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in listEntryOrGuidAndSourceTypes)
+                            {
+                                if (entryOrGuidAndSourceType.sourceType != SourceTypes.SourceTypeGameobject && entryOrGuidAndSourceType.sourceType != SourceTypes.SourceTypeCreature)
+                                    continue;
+
+                                sourceName = " " + await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid);
+                                break;
+                            }
+                        }
+                    }
+                    else
+                        sourceName = " Actionlist";
+
+                    break;
+                default:
+                    sourceName = "<Could not generate name>";
+                    break;
+            }
 
             bool originalEntryIsGuid = originalEntryOrGuidAndSourceType.entryOrGuid < 0;
             string sourceSet = originalEntryIsGuid ? "@GUID" : "@ENTRY";
@@ -3283,22 +3336,8 @@ namespace SAI_Editor
 
                 generatedSql += "DELETE FROM `smart_scripts` WHERE `entryorguid`=" + sourceSet + " AND `source_type`=" + (int)originalEntryOrGuidAndSourceType.sourceType + ";\n";
             }
-            else
+            else if (entriesOrGuidsAndSourceTypes.Count > 1)
             {
-                Dictionary<SourceTypes, List<EntryOrGuidAndSourceType>> entriesOrGuidsAndSourceTypesPerSourceType = new Dictionary<SourceTypes, List<EntryOrGuidAndSourceType>>();
-
-                foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in entriesOrGuidsAndSourceTypes)
-                {
-                    if (!entriesOrGuidsAndSourceTypesPerSourceType.ContainsKey(entryOrGuidAndSourceType.sourceType))
-                    {
-                        List<EntryOrGuidAndSourceType> _newEntryOrGuidAndSourceType = new List<EntryOrGuidAndSourceType>();
-                        _newEntryOrGuidAndSourceType.Add(entryOrGuidAndSourceType);
-                        entriesOrGuidsAndSourceTypesPerSourceType[entryOrGuidAndSourceType.sourceType] = _newEntryOrGuidAndSourceType;
-                    }
-                    else
-                        entriesOrGuidsAndSourceTypesPerSourceType[entryOrGuidAndSourceType.sourceType].Add(entryOrGuidAndSourceType);
-                }
-
                 foreach (List<EntryOrGuidAndSourceType> listEntryOrGuidAndSourceTypes in entriesOrGuidsAndSourceTypesPerSourceType.Values)
                 {
                     bool generatedInitialUpdateQuery = false;
