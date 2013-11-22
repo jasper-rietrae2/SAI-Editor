@@ -29,16 +29,15 @@ namespace SAI_Editor
 
     internal enum FormSizes
     {
-        Width = 403,
-        Height = 236,
+        LoginFormWidth = 403,
+        LoginFormHeight = 236,
 
-        WidthToExpandTo = 957,
-        HeightToExpandTo = 505,
+        MainFormWidth = 957,
+        MainFormHeight = 505,
 
         ListViewHeightContract = 65,
 
-        HeightLoginFormShowWarning = 275,
-        HeightLoginFormNormal = 236,
+        LoginFormHeightShowWarning = 275,
     }
 
     internal enum MaxValues
@@ -72,7 +71,7 @@ namespace SAI_Editor
         private readonly List<Control> controlsMainForm = new List<Control>();
         private bool contractingToLoginForm, expandingToMainForm, expandingListView, contractingListView;
         private int originalHeight = 0, originalWidth = 0;
-        private int WidthToExpandTo = (int)FormSizes.WidthToExpandTo, HeightToExpandTo = (int)FormSizes.HeightToExpandTo;
+        private int MainFormWidth = (int)FormSizes.MainFormWidth, MainFormHeight = (int)FormSizes.MainFormHeight;
         private int listViewSmartScriptsInitialHeight, listViewSmartScriptsHeightToChangeTo;
         public int expandAndContractSpeed = 5, expandAndContractSpeedListView = 2;
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
@@ -81,7 +80,38 @@ namespace SAI_Editor
         private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
         private int previousLinkFrom = -1;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
-        private FormState formState = FormState.FormStateLogin;
+
+        private FormState _formState = FormState.FormStateLogin;
+        public FormState formState
+        {
+            get
+            {
+                return _formState;
+            }
+            set
+            {
+                _formState = value;
+
+                switch (_formState)
+                {
+                    case FormState.FormStateExpandingOrContracting:
+                        FormBorderStyle = FormBorderStyle.FixedDialog; //! Don't allow resizing by user
+                        MinimumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
+                        MaximumSize = new Size((int)FormSizes.MainFormWidth, (int)FormSizes.MainFormHeight);
+                        break;
+                    case FormState.FormStateLogin:
+                        FormBorderStyle = FormBorderStyle.FixedDialog;
+                        MinimumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
+                        MaximumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
+                        break;
+                    case FormState.FormStateMain:
+                        FormBorderStyle = FormBorderStyle.Sizable;
+                        MinimumSize = new Size((int)FormSizes.MainFormWidth, (int)FormSizes.MainFormHeight);
+                        MaximumSize = new Size((int)FormSizes.MainFormWidth, (int)FormSizes.MainFormHeight + 100);
+                        break;
+                }
+            }
+        }
 
         public MainForm()
         {
@@ -93,17 +123,17 @@ namespace SAI_Editor
             runningConstructor = true;
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
 
-            Width = (int)FormSizes.Width;
-            Height = (int)FormSizes.Height;
+            Width = (int)FormSizes.LoginFormWidth;
+            Height = (int)FormSizes.LoginFormHeight;
 
             originalHeight = Height;
             originalWidth = Width;
 
-            if (WidthToExpandTo > SystemInformation.VirtualScreen.Width)
-                WidthToExpandTo = SystemInformation.VirtualScreen.Width;
+            if (MainFormWidth > SystemInformation.VirtualScreen.Width)
+                MainFormWidth = SystemInformation.VirtualScreen.Width;
 
-            if (HeightToExpandTo > SystemInformation.VirtualScreen.Height)
-                HeightToExpandTo = SystemInformation.VirtualScreen.Height;
+            if (MainFormHeight > SystemInformation.VirtualScreen.Height)
+                MainFormHeight = SystemInformation.VirtualScreen.Height;
 
             try
             {
@@ -204,15 +234,15 @@ namespace SAI_Editor
         {
             if (expandingToMainForm)
             {
-                if (Height < HeightToExpandTo)
+                if (Height < MainFormHeight)
                     Height += expandAndContractSpeed;
                 else
                 {
-                    Height = HeightToExpandTo;
+                    Height = MainFormHeight;
 
-                    if (Width >= WidthToExpandTo && timerExpandOrContract.Enabled) //! If both finished
+                    if (Width >= MainFormWidth && timerExpandOrContract.Enabled) //! If both finished
                     {
-                        Width = WidthToExpandTo;
+                        Width = MainFormWidth;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                         FinishedExpandingOrContracting(true);
@@ -220,15 +250,15 @@ namespace SAI_Editor
                     }
                 }
 
-                if (Width < WidthToExpandTo)
+                if (Width < MainFormWidth)
                     Width += expandAndContractSpeed;
                 else
                 {
-                    Width = WidthToExpandTo;
+                    Width = MainFormWidth;
 
-                    if (Height >= HeightToExpandTo && timerExpandOrContract.Enabled) //! If both finished
+                    if (Height >= MainFormHeight && timerExpandOrContract.Enabled) //! If both finished
                     {
-                        Height = HeightToExpandTo;
+                        Height = MainFormHeight;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
                         FinishedExpandingOrContracting(true);
@@ -357,8 +387,8 @@ namespace SAI_Editor
 
             if (instant)
             {
-                Width = WidthToExpandTo;
-                Height = HeightToExpandTo;
+                Width = MainFormWidth;
+                Height = MainFormHeight;
                 formState = FormState.FormStateMain;
                 FinishedExpandingOrContracting(true);
             }
@@ -3927,9 +3957,9 @@ namespace SAI_Editor
             if (formState != FormState.FormStateMain)
             {
                 if (radioButtonConnectToMySql.Checked)
-                    Height = (int)FormSizes.HeightLoginFormNormal;
+                    Height = (int)FormSizes.LoginFormHeight;
                 else
-                    Height = (int)FormSizes.HeightLoginFormShowWarning;
+                    Height = (int)FormSizes.LoginFormHeightShowWarning;
             }
         }
 
