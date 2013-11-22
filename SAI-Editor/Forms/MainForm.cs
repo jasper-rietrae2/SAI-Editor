@@ -16,10 +16,11 @@ using SAI_Editor.Classes;
 using System.Threading.Tasks;
 using SAI_Editor.Forms;
 using System.IO;
+using System.Text.RegularExpressions;
 
 namespace SAI_Editor
 {
-    internal enum FormState
+    public enum FormState
     {
         FormStateLogin,
         FormStateExpandingOrContracting,
@@ -74,13 +75,13 @@ namespace SAI_Editor
         private int WidthToExpandTo = (int)FormSizes.WidthToExpandTo, HeightToExpandTo = (int)FormSizes.HeightToExpandTo;
         private int listViewSmartScriptsInitialHeight, listViewSmartScriptsHeightToChangeTo;
         public int expandAndContractSpeed = 5, expandAndContractSpeedListView = 2;
-        private FormState formState = FormState.FormStateLogin;
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
         public int lastSmartScriptIdOfScript = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
         private int previousLinkFrom = -1;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
+        private FormState formState = FormState.FormStateLogin;
 
         public MainForm()
         {
@@ -343,7 +344,7 @@ namespace SAI_Editor
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
                 Settings.Default.Port = XConverter.ToUInt32(textBoxPort.Text);
-                Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
+                Settings.Default.UseWorldDatabase = true;
                 Settings.Default.Save();
             }
 
@@ -3517,11 +3518,23 @@ namespace SAI_Editor
             }
 
             //! Replaces '@ENTRY*100[id]' ([id] being like 00, 01, 02, 03, etc.) by '@ENTRY*100+3' for example.
-            for (int i = 0; i < 50; ++i) //! We expect a maximum of 50 scripts for one entry...
-                generatedSql = generatedSql.Replace(sourceSet + "0" + i.ToString(), sourceSet + "*100+" + i.ToString());
+            for (int i = 0; i < 50; ++i) // Regex.Matches(generatedSql, originalEntryOrGuidAndSourceType.entryOrGuid + "0" + i.ToString()).Count
+            {
+                if (!generatedSql.Contains(originalEntryOrGuidAndSourceType.entryOrGuid + "0" + i.ToString() + ","))
+                    continue;
+
+                string _i = i.ToString();
+
+                if (i < 10)
+                    _i = "0" + _i.Substring(0);
+
+                generatedSql = generatedSql.Replace(originalEntryOrGuidAndSourceType.entryOrGuid + "0" + i.ToString() + ",", sourceSet + "*100+" + _i + ",");
+            }
 
             //! Replaces '@ENTRY*100+0' by just '@ENTRY*100' (which is proper codestyle)
-            generatedSql = generatedSql.Replace(sourceSet + "*100+0", sourceSet + "*100");
+            if (generatedSql.Contains(sourceSet + "*100+0"))
+                generatedSql = generatedSql.Replace(sourceSet + "*100+0,", sourceSet + "*100,");
+
             return generatedSql;
         }
 

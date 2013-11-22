@@ -188,15 +188,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RevertQueryForm.resx">
       <DependentUpon>RevertQueryForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SearchForms\AreatriggersForm.resx">
       <DependentUpon>AreatriggersForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dep\ZoomPanImageBox.resx">
       <DependentUpon>ZoomPanImageBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SearchForms\MultiSelectForm.resx">
       <DependentUpon>MultiSelectForm.cs</DependentUpon>
