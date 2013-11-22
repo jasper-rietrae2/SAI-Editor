@@ -2938,9 +2938,21 @@ namespace SAI_Editor
                     return;
                 }
 
-                listViewSmartScripts.SelectedSmartScript.link = XConverter.ToInt32(textBoxLinkTo.Text);
+                int linkTo = XConverter.ToInt32(textBoxLinkTo.Text);
+                listViewSmartScripts.SelectedSmartScript.link = linkTo;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 GenerateCommentAndResizeColumns();
+
+                foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
+                {
+                    if (smartScript.id == linkTo)
+                    {
+                        if ((SmartEvent)smartScript.event_type == SmartEvent.SMART_EVENT_LINK)
+                            GenerateCommentForSmartScript(smartScript);
+
+                        break;
+                    }
+                }
             }
         }
 
