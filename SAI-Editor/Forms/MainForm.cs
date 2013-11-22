@@ -837,7 +837,8 @@ namespace SAI_Editor
 
                                 if (newSmartScripts != null)
                                     foreach (SmartScript item in newSmartScripts)
-                                        smartScriptsToReturn.Add(item);
+                                        if (!ListContainsSmartScript(smartScriptsToReturn, item))
+                                            smartScriptsToReturn.Add(item);
 
                                 pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                             }
@@ -853,7 +854,8 @@ namespace SAI_Editor
                             List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(entryOrGuidAndSourceType.entryOrGuid.ToString(), entryOrGuidAndSourceType.sourceType);
 
                             foreach (SmartScript item in newSmartScripts)
-                                smartScriptsToReturn.Add(item);
+                                if (!ListContainsSmartScript(smartScriptsToReturn, item))
+                                    smartScriptsToReturn.Add(item);
 
                             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                         }
@@ -872,6 +874,15 @@ namespace SAI_Editor
             pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             return smartScriptsToReturn;
+        }
+
+        bool ListContainsSmartScript(List<SmartScript> smartScriptsToReturn, SmartScript item)
+        {
+            foreach (SmartScript itemToReturn in smartScriptsToReturn)
+                if (itemToReturn.entryorguid == item.entryorguid && itemToReturn.id == item.id)
+                    return true;
+
+            return false;
         }
 
         private void menuItemExit_Click(object sender, System.EventArgs e)
@@ -1708,8 +1719,6 @@ namespace SAI_Editor
 
         public async void TryToLoadScript(int entryorguid = -1, SourceTypes sourceType = SourceTypes.SourceTypeNone, bool showErrorIfNoneFound = true, bool promptCreateIfNoneFound = false)
         {
-            // @Debug new AreatriggersForm().Show();
-
             listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
             ResetFieldsToDefault();
 
