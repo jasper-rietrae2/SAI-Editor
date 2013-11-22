@@ -96,8 +96,9 @@ namespace SAI_Editor
                 {
                     case FormState.FormStateExpandingOrContracting:
                         FormBorderStyle = FormBorderStyle.FixedDialog; //! Don't allow resizing by user
+                        MainFormHeight = Settings.Default.MainFormHeight;
                         MinimumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
-                        MaximumSize = new Size((int)FormSizes.MainFormWidth, (int)FormSizes.MainFormHeight);
+                        MaximumSize = new Size(MainFormWidth, MainFormHeight);
                         break;
                     case FormState.FormStateLogin:
                         FormBorderStyle = FormBorderStyle.FixedDialog;
@@ -106,8 +107,8 @@ namespace SAI_Editor
                         break;
                     case FormState.FormStateMain:
                         FormBorderStyle = FormBorderStyle.Sizable;
-                        MinimumSize = new Size((int)FormSizes.MainFormWidth, (int)FormSizes.MainFormHeight);
-                        MaximumSize = new Size((int)FormSizes.MainFormWidth, (int)FormSizes.MainFormHeight + 100);
+                        MinimumSize = new Size(MainFormWidth, (int)FormSizes.MainFormHeight);
+                        MaximumSize = new Size(MainFormWidth, (int)FormSizes.MainFormHeight + 100);
                         break;
                 }
             }
@@ -388,7 +389,7 @@ namespace SAI_Editor
             if (instant)
             {
                 Width = MainFormWidth;
-                Height = MainFormHeight;
+                Height = Settings.Default.MainFormHeight;
                 formState = FormState.FormStateMain;
                 FinishedExpandingOrContracting(true);
             }
@@ -3678,6 +3679,9 @@ namespace SAI_Editor
             Settings.Default.LockSmartScriptId = checkBoxLockEventId.Checked;
             Settings.Default.ListActionLists = checkBoxListActionlistsOrEntries.Checked;
             Settings.Default.AllowChangingEntryAndSourceType = checkBoxAllowChangingEntryAndSourceType.Checked;
+
+            if (formState == FormState.FormStateMain)
+                Settings.Default.MainFormHeight = Height;
 
             if (formState == FormState.FormStateLogin)
             {

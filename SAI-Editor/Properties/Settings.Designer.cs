@@ -322,5 +322,17 @@ namespace SAI_Editor.Properties {
                 this["UseWorldDatabase"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("505")]
+        public int MainFormHeight {
+            get {
+                return ((int)(this["MainFormHeight"]));
+            }
+            set {
+                this["MainFormHeight"] = value;
+            }
+        }
     }
 }
