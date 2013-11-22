@@ -1026,9 +1026,11 @@ namespace SAI_Editor
 
         private string GetLinkFromForSelection()
         {
+            SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
+
             foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
             {
-                if (smartScript.entryorguid != originalEntryOrGuidAndSourceType.entryOrGuid || smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType)
+                if (smartScript.entryorguid != selectedScript.entryorguid || smartScript.source_type != selectedScript.source_type)
                     continue;
 
                 if (smartScript.link > 0 && smartScript.link == listViewSmartScripts.SelectedSmartScript.id)
