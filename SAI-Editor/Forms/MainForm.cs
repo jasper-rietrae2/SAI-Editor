@@ -3571,18 +3571,32 @@ namespace SAI_Editor
                 generatedSql += "\n"; //! White line at end of script to make it easier to select
             }
 
-            //! Replaces '@ENTRY*100[id]' ([id] being like 00, 01, 02, 03, etc.) by '@ENTRY*100+3' for example.
+            //! Replaces '<entry>0[id]' ([id] being like 00, 01, 02, 03, etc.) by '@ENTRY*100+03' for example.
+            //! Example: replaces 2891401 by @ENTRY*100+01 if original entryorguid is 28914.
             for (int i = 0; i < 50; ++i) // Regex.Matches(generatedSql, originalEntryOrGuidAndSourceType.entryOrGuid + "0" + i.ToString()).Count
             {
-                if (!generatedSql.Contains(originalEntryOrGuidAndSourceType.entryOrGuid + "0" + i.ToString() + ","))
-                    continue;
+                string[] charactersToReplace = new string[2] { ",", ")" };
 
-                string _i = i.ToString();
+                for (int j = 0; j < 2; ++j)
+                {
+                    string characterToReplace = charactersToReplace[j];
+                    string stringToReplace = originalEntryOrGuidAndSourceType.entryOrGuid + "0" + i.ToString() + characterToReplace;
 
-                if (i < 10)
-                    _i = "0" + _i.Substring(0);
+                    if (!generatedSql.Contains(stringToReplace))
+                    {
+                        stringToReplace = originalEntryOrGuidAndSourceType.entryOrGuid + "0" + i.ToString() + ")";
 
-                generatedSql = generatedSql.Replace(originalEntryOrGuidAndSourceType.entryOrGuid + "0" + i.ToString() + ",", sourceSet + "*100+" + _i + ",");
+                        if (!generatedSql.Contains(stringToReplace))
+                            continue;
+                    }
+
+                    string _i = i.ToString();
+
+                    if (i < 10)
+                        _i = "0" + _i.Substring(0);
+
+                    generatedSql = generatedSql.Replace(stringToReplace, sourceSet + "*100+" + _i + characterToReplace);
+                }
             }
 
             //! Replaces '@ENTRY*100+0' by just '@ENTRY*100' (which is proper codestyle)
