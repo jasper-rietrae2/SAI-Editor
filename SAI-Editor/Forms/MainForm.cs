@@ -3599,10 +3599,6 @@ namespace SAI_Editor
                 }
             }
 
-            //! Replaces '@ENTRY*100+0' by just '@ENTRY*100' (which is proper codestyle)
-            if (generatedSql.Contains(sourceSet + "*100+0"))
-                generatedSql = generatedSql.Replace(sourceSet + "*100+0,", sourceSet + "*100,");
-
             return generatedSql;
         }
 
