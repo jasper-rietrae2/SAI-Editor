@@ -487,7 +487,7 @@ namespace SAI_Editor
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain)
+            if (listViewSmartScripts.SelectedSmartScript == null || formState != FormState.FormStateMain)
                 return;
 
             panelPermanentTooltipTypes.Visible = false;
@@ -887,6 +887,9 @@ namespace SAI_Editor
 
         private void menuItemExit_Click(object sender, System.EventArgs e)
         {
+            if (listViewSmartScripts.SelectedSmartScript == null)
+                return;
+
             if (formState == FormState.FormStateMain)
                 TryCloseApplication();
         }
@@ -899,7 +902,7 @@ namespace SAI_Editor
 
         private void menuItemSettings_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain)
+            if (listViewSmartScripts.SelectedSmartScript == null || formState != FormState.FormStateMain)
                 return;
 
             using (SettingsForm settingsForm = new SettingsForm())
@@ -908,7 +911,7 @@ namespace SAI_Editor
 
         private void menuItemAbout_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain)
+            if (listViewSmartScripts.SelectedSmartScript == null || formState != FormState.FormStateMain)
                 return;
 
             using (AboutForm aboutForm = new AboutForm())
@@ -3811,7 +3814,7 @@ namespace SAI_Editor
 
         private void menuItemRevertQuery_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain)
+            if (listViewSmartScripts.SelectedSmartScript == null || formState != FormState.FormStateMain)
                 return;
 
             using (RevertQueryForm revertQueryForm = new RevertQueryForm())
@@ -3950,6 +3953,9 @@ namespace SAI_Editor
 
         private void menuItemLoadSelectedEntry_Click(object sender, EventArgs e)
         {
+            if (listViewSmartScripts.SelectedSmartScript == null)
+                return;
+
             int entryorguid = listViewSmartScripts.SelectedSmartScript.entryorguid;
             SourceTypes source_type = (SourceTypes)listViewSmartScripts.SelectedSmartScript.source_type;
             listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
@@ -4017,6 +4023,9 @@ namespace SAI_Editor
 
         private void menuItemRetrieveLastDeletedRow_Click(object sender, EventArgs e)
         {
+            if (listViewSmartScripts.SelectedSmartScript == null)
+                return;
+
             if (lastDeletedSmartScripts.Count == 0)
             {
                 MessageBox.Show("There are no items deleted in this session ready to be restored.", "Nothing to retrieve!", MessageBoxButtons.OK, MessageBoxIcon.Information);
