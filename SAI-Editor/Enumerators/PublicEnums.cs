@@ -264,6 +264,7 @@
         SMARTCAST_INTERRUPT_PREVIOUS = 0x01,
         SMARTCAST_TRIGGERED = 0x02,
         SMARTCAST_AURA_NOT_PRESENT = 0x20,
+        SMARTCAST_COMBAT_MOVE = 0x40,
     }
 
     public enum ReactStates
