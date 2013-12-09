@@ -220,7 +220,7 @@ namespace SAI_Editor
             this.buttonConnect.Location = new System.Drawing.Point(3, 158);
             this.buttonConnect.Name = "buttonConnect";
             this.buttonConnect.Size = new System.Drawing.Size(75, 23);
-            this.buttonConnect.TabIndex = 0;
+            this.buttonConnect.TabIndex = 9;
             this.buttonConnect.Text = "Connect";
             this.buttonConnect.UseVisualStyleBackColor = true;
             this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
@@ -230,7 +230,7 @@ namespace SAI_Editor
             this.buttonClear.Location = new System.Drawing.Point(147, 158);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
-            this.buttonClear.TabIndex = 1;
+            this.buttonClear.TabIndex = 10;
             this.buttonClear.Text = "Clear";
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
@@ -240,7 +240,7 @@ namespace SAI_Editor
             this.buttonCancel.Location = new System.Drawing.Point(292, 158);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 2;
+            this.buttonCancel.TabIndex = 11;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
@@ -255,7 +255,7 @@ namespace SAI_Editor
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1318, 24);
-            this.menuStrip.TabIndex = 11;
+            this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
             // menuHeaderFiles
@@ -542,7 +542,7 @@ namespace SAI_Editor
             this.radioButtonDontUseDatabase.Location = new System.Drawing.Point(13, 47);
             this.radioButtonDontUseDatabase.Name = "radioButtonDontUseDatabase";
             this.radioButtonDontUseDatabase.Size = new System.Drawing.Size(126, 17);
-            this.radioButtonDontUseDatabase.TabIndex = 32;
+            this.radioButtonDontUseDatabase.TabIndex = 1;
             this.radioButtonDontUseDatabase.Text = "Don\'t use a database";
             this.radioButtonDontUseDatabase.UseVisualStyleBackColor = true;
             this.radioButtonDontUseDatabase.CheckedChanged += new System.EventHandler(this.radioButtonDontUseDatabase_CheckedChanged);
@@ -554,7 +554,7 @@ namespace SAI_Editor
             this.radioButtonConnectToMySql.Location = new System.Drawing.Point(13, 21);
             this.radioButtonConnectToMySql.Name = "radioButtonConnectToMySql";
             this.radioButtonConnectToMySql.Size = new System.Drawing.Size(115, 17);
-            this.radioButtonConnectToMySql.TabIndex = 31;
+            this.radioButtonConnectToMySql.TabIndex = 0;
             this.radioButtonConnectToMySql.TabStop = true;
             this.radioButtonConnectToMySql.Text = "Connect to MySQL";
             this.radioButtonConnectToMySql.UseVisualStyleBackColor = true;
@@ -565,7 +565,7 @@ namespace SAI_Editor
             this.buttonSearchWorldDb.Location = new System.Drawing.Point(334, 95);
             this.buttonSearchWorldDb.Name = "buttonSearchWorldDb";
             this.buttonSearchWorldDb.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchWorldDb.TabIndex = 29;
+            this.buttonSearchWorldDb.TabIndex = 7;
             this.buttonSearchWorldDb.Text = "...";
             this.buttonSearchWorldDb.UseVisualStyleBackColor = true;
             this.buttonSearchWorldDb.Click += new System.EventHandler(this.buttonSearchWorldDb_Click);
@@ -576,7 +576,7 @@ namespace SAI_Editor
             this.checkBoxAutoConnect.Location = new System.Drawing.Point(13, 124);
             this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
             this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxAutoConnect.TabIndex = 6;
+            this.checkBoxAutoConnect.TabIndex = 2;
             this.checkBoxAutoConnect.Text = "Auto connect";
             this.checkBoxAutoConnect.UseVisualStyleBackColor = true;
             // 
@@ -585,7 +585,7 @@ namespace SAI_Editor
             this.textBoxHost.Location = new System.Drawing.Point(228, 18);
             this.textBoxHost.Name = "textBoxHost";
             this.textBoxHost.Size = new System.Drawing.Size(130, 20);
-            this.textBoxHost.TabIndex = 0;
+            this.textBoxHost.TabIndex = 3;
             this.textBoxHost.Text = "position groupbox 9;8";
             // 
             // textBoxUsername
@@ -593,7 +593,7 @@ namespace SAI_Editor
             this.textBoxUsername.Location = new System.Drawing.Point(228, 44);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
-            this.textBoxUsername.TabIndex = 1;
+            this.textBoxUsername.TabIndex = 4;
             this.textBoxUsername.Text = "height grpbox + 20";
             // 
             // labelUser
@@ -610,7 +610,7 @@ namespace SAI_Editor
             this.textBoxPassword.Location = new System.Drawing.Point(228, 70);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPassword.TabIndex = 2;
+            this.textBoxPassword.TabIndex = 5;
             // 
             // label1
             // 
@@ -626,7 +626,7 @@ namespace SAI_Editor
             this.textBoxWorldDatabase.Location = new System.Drawing.Point(228, 96);
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
             this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
-            this.textBoxWorldDatabase.TabIndex = 3;
+            this.textBoxWorldDatabase.TabIndex = 6;
             // 
             // label2
             // 
@@ -642,7 +642,7 @@ namespace SAI_Editor
             this.textBoxPort.Location = new System.Drawing.Point(228, 122);
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPort.TabIndex = 4;
+            this.textBoxPort.TabIndex = 8;
             this.textBoxPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // labelHost
@@ -697,7 +697,7 @@ namespace SAI_Editor
             this.buttonSearchForEntryOrGuid.Location = new System.Drawing.Point(211, 18);
             this.buttonSearchForEntryOrGuid.Name = "buttonSearchForEntryOrGuid";
             this.buttonSearchForEntryOrGuid.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchForEntryOrGuid.TabIndex = 1;
+            this.buttonSearchForEntryOrGuid.TabIndex = 13;
             this.buttonSearchForEntryOrGuid.Text = "...";
             this.buttonSearchForEntryOrGuid.UseVisualStyleBackColor = true;
             this.buttonSearchForEntryOrGuid.Click += new System.EventHandler(this.buttonSearchForEntry_Click);
@@ -724,7 +724,7 @@ namespace SAI_Editor
             this.comboBoxSourceType.Location = new System.Drawing.Point(101, 45);
             this.comboBoxSourceType.Name = "comboBoxSourceType";
             this.comboBoxSourceType.Size = new System.Drawing.Size(183, 21);
-            this.comboBoxSourceType.TabIndex = 2;
+            this.comboBoxSourceType.TabIndex = 14;
             this.comboBoxSourceType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourceType_SelectedIndexChanged);
             // 
             // labelEntryOrGuid
@@ -741,7 +741,7 @@ namespace SAI_Editor
             this.textBoxEntryOrGuid.Location = new System.Drawing.Point(101, 19);
             this.textBoxEntryOrGuid.Name = "textBoxEntryOrGuid";
             this.textBoxEntryOrGuid.Size = new System.Drawing.Size(110, 20);
-            this.textBoxEntryOrGuid.TabIndex = 0;
+            this.textBoxEntryOrGuid.TabIndex = 12;
             this.textBoxEntryOrGuid.TextChanged += new System.EventHandler(this.textBoxEntryOrGuid_TextChanged);
             this.textBoxEntryOrGuid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
@@ -767,7 +767,7 @@ namespace SAI_Editor
             this.checkBoxAllowChangingEntryAndSourceType.Location = new System.Drawing.Point(13, 71);
             this.checkBoxAllowChangingEntryAndSourceType.Name = "checkBoxAllowChangingEntryAndSourceType";
             this.checkBoxAllowChangingEntryAndSourceType.Size = new System.Drawing.Size(229, 17);
-            this.checkBoxAllowChangingEntryAndSourceType.TabIndex = 5;
+            this.checkBoxAllowChangingEntryAndSourceType.TabIndex = 19;
             this.checkBoxAllowChangingEntryAndSourceType.Text = "Allow changing entryorguid and sourcetype";
             this.checkBoxAllowChangingEntryAndSourceType.UseVisualStyleBackColor = true;
             // 
@@ -777,7 +777,7 @@ namespace SAI_Editor
             this.checkBoxListActionlistsOrEntries.Location = new System.Drawing.Point(13, 47);
             this.checkBoxListActionlistsOrEntries.Name = "checkBoxListActionlistsOrEntries";
             this.checkBoxListActionlistsOrEntries.Size = new System.Drawing.Size(109, 17);
-            this.checkBoxListActionlistsOrEntries.TabIndex = 4;
+            this.checkBoxListActionlistsOrEntries.TabIndex = 17;
             this.checkBoxListActionlistsOrEntries.Text = "List actionlists too";
             this.checkBoxListActionlistsOrEntries.UseVisualStyleBackColor = true;
             this.checkBoxListActionlistsOrEntries.CheckedChanged += new System.EventHandler(this.checkBoxListActionlists_CheckedChanged);
@@ -788,7 +788,7 @@ namespace SAI_Editor
             this.checkBoxShowBasicInfo.Location = new System.Drawing.Point(140, 24);
             this.checkBoxShowBasicInfo.Name = "checkBoxShowBasicInfo";
             this.checkBoxShowBasicInfo.Size = new System.Drawing.Size(135, 17);
-            this.checkBoxShowBasicInfo.TabIndex = 3;
+            this.checkBoxShowBasicInfo.TabIndex = 16;
             this.checkBoxShowBasicInfo.Text = "Show basic information";
             this.checkBoxShowBasicInfo.UseVisualStyleBackColor = true;
             this.checkBoxShowBasicInfo.CheckedChanged += new System.EventHandler(this.checkBoxShowBasicInfo_CheckedChanged);
@@ -799,7 +799,7 @@ namespace SAI_Editor
             this.checkBoxScriptByGuid.Location = new System.Drawing.Point(140, 47);
             this.checkBoxScriptByGuid.Name = "checkBoxScriptByGuid";
             this.checkBoxScriptByGuid.Size = new System.Drawing.Size(97, 17);
-            this.checkBoxScriptByGuid.TabIndex = 2;
+            this.checkBoxScriptByGuid.TabIndex = 18;
             this.checkBoxScriptByGuid.Text = "Script by GUID";
             this.checkBoxScriptByGuid.UseVisualStyleBackColor = true;
             // 
@@ -809,7 +809,7 @@ namespace SAI_Editor
             this.checkBox3.Location = new System.Drawing.Point(13, 94);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(241, 17);
-            this.checkBox3.TabIndex = 6;
+            this.checkBox3.TabIndex = 20;
             this.checkBox3.Text = "Show events and actions for source type only";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
@@ -821,7 +821,7 @@ namespace SAI_Editor
             this.checkBoxLockEventId.Location = new System.Drawing.Point(13, 24);
             this.checkBoxLockEventId.Name = "checkBoxLockEventId";
             this.checkBoxLockEventId.Size = new System.Drawing.Size(125, 17);
-            this.checkBoxLockEventId.TabIndex = 0;
+            this.checkBoxLockEventId.TabIndex = 15;
             this.checkBoxLockEventId.Text = "Lock smart_scripts.id";
             this.checkBoxLockEventId.UseVisualStyleBackColor = true;
             this.checkBoxLockEventId.CheckedChanged += new System.EventHandler(this.checkBoxLockEventId_CheckedChanged);
@@ -869,7 +869,7 @@ namespace SAI_Editor
             this.buttonLinkTo.Location = new System.Drawing.Point(100, 150);
             this.buttonLinkTo.Name = "buttonLinkTo";
             this.buttonLinkTo.Size = new System.Drawing.Size(24, 22);
-            this.buttonLinkTo.TabIndex = 8;
+            this.buttonLinkTo.TabIndex = 34;
             this.buttonLinkTo.Text = "...";
             this.buttonLinkTo.UseVisualStyleBackColor = true;
             this.buttonLinkTo.Click += new System.EventHandler(this.buttonLinkTo_Click);
@@ -879,7 +879,7 @@ namespace SAI_Editor
             this.buttonLinkFrom.Location = new System.Drawing.Point(302, 150);
             this.buttonLinkFrom.Name = "buttonLinkFrom";
             this.buttonLinkFrom.Size = new System.Drawing.Size(24, 22);
-            this.buttonLinkFrom.TabIndex = 14;
+            this.buttonLinkFrom.TabIndex = 36;
             this.buttonLinkFrom.Text = "...";
             this.buttonLinkFrom.UseVisualStyleBackColor = true;
             this.buttonLinkFrom.Click += new System.EventHandler(this.buttonLinkFrom_Click);
@@ -920,7 +920,7 @@ namespace SAI_Editor
             this.comboBoxTargetType.Location = new System.Drawing.Point(59, 72);
             this.comboBoxTargetType.Name = "comboBoxTargetType";
             this.comboBoxTargetType.Size = new System.Drawing.Size(235, 21);
-            this.comboBoxTargetType.TabIndex = 4;
+            this.comboBoxTargetType.TabIndex = 25;
             this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
             this.comboBoxTargetType.MouseEnter += new System.EventHandler(this.comboBoxTargetType_MouseEnter);
             // 
@@ -929,7 +929,7 @@ namespace SAI_Editor
             this.buttonSelectEventFlag.Location = new System.Drawing.Point(302, 125);
             this.buttonSelectEventFlag.Name = "buttonSelectEventFlag";
             this.buttonSelectEventFlag.Size = new System.Drawing.Size(24, 22);
-            this.buttonSelectEventFlag.TabIndex = 12;
+            this.buttonSelectEventFlag.TabIndex = 32;
             this.buttonSelectEventFlag.Text = "...";
             this.buttonSelectEventFlag.UseVisualStyleBackColor = true;
             this.buttonSelectEventFlag.Click += new System.EventHandler(this.buttonSelectEventFlag_Click);
@@ -939,7 +939,7 @@ namespace SAI_Editor
             this.buttonSearchPhasemask.Location = new System.Drawing.Point(302, 98);
             this.buttonSearchPhasemask.Name = "buttonSearchPhasemask";
             this.buttonSearchPhasemask.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchPhasemask.TabIndex = 10;
+            this.buttonSearchPhasemask.TabIndex = 29;
             this.buttonSearchPhasemask.Text = "...";
             this.buttonSearchPhasemask.UseVisualStyleBackColor = true;
             this.buttonSearchPhasemask.Click += new System.EventHandler(this.buttonSearchPhasemask_Click);
@@ -1064,7 +1064,7 @@ namespace SAI_Editor
             this.comboBoxActionType.Location = new System.Drawing.Point(59, 45);
             this.comboBoxActionType.Name = "comboBoxActionType";
             this.comboBoxActionType.Size = new System.Drawing.Size(235, 21);
-            this.comboBoxActionType.TabIndex = 2;
+            this.comboBoxActionType.TabIndex = 23;
             this.comboBoxActionType.SelectedIndexChanged += new System.EventHandler(this.comboBoxActionType_SelectedIndexChanged);
             this.comboBoxActionType.MouseEnter += new System.EventHandler(this.comboBoxActionType_MouseEnter);
             // 
@@ -1082,7 +1082,7 @@ namespace SAI_Editor
             this.textBoxTargetType.Location = new System.Drawing.Point(299, 73);
             this.textBoxTargetType.Name = "textBoxTargetType";
             this.textBoxTargetType.Size = new System.Drawing.Size(26, 20);
-            this.textBoxTargetType.TabIndex = 5;
+            this.textBoxTargetType.TabIndex = 26;
             this.textBoxTargetType.Text = "0";
             this.textBoxTargetType.TextChanged += new System.EventHandler(this.textBoxTargetTypeId_TextChanged);
             this.textBoxTargetType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1097,7 +1097,7 @@ namespace SAI_Editor
             0});
             this.textBoxEventChance.Name = "textBoxEventChance";
             this.textBoxEventChance.Size = new System.Drawing.Size(64, 20);
-            this.textBoxEventChance.TabIndex = 7;
+            this.textBoxEventChance.TabIndex = 30;
             this.textBoxEventChance.Value = new decimal(new int[] {
             100,
             0,
@@ -1120,7 +1120,7 @@ namespace SAI_Editor
             this.textBoxEventFlags.Location = new System.Drawing.Point(263, 126);
             this.textBoxEventFlags.Name = "textBoxEventFlags";
             this.textBoxEventFlags.Size = new System.Drawing.Size(39, 20);
-            this.textBoxEventFlags.TabIndex = 11;
+            this.textBoxEventFlags.TabIndex = 31;
             this.textBoxEventFlags.Text = "0";
             this.textBoxEventFlags.TextChanged += new System.EventHandler(this.textBoxEventFlags_TextChanged);
             this.textBoxEventFlags.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1148,7 +1148,7 @@ namespace SAI_Editor
             this.textBoxComments.Location = new System.Drawing.Point(59, 177);
             this.textBoxComments.Name = "textBoxComments";
             this.textBoxComments.Size = new System.Drawing.Size(267, 20);
-            this.textBoxComments.TabIndex = 15;
+            this.textBoxComments.TabIndex = 37;
             this.textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
             this.textBoxComments.TextChanged += new System.EventHandler(this.textBoxComments_TextChanged);
             // 
@@ -1157,7 +1157,7 @@ namespace SAI_Editor
             this.textBoxActionType.Location = new System.Drawing.Point(299, 46);
             this.textBoxActionType.Name = "textBoxActionType";
             this.textBoxActionType.Size = new System.Drawing.Size(26, 20);
-            this.textBoxActionType.TabIndex = 3;
+            this.textBoxActionType.TabIndex = 24;
             this.textBoxActionType.Text = "0";
             this.textBoxActionType.TextChanged += new System.EventHandler(this.textBoxActionTypeId_TextChanged);
             this.textBoxActionType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1167,7 +1167,7 @@ namespace SAI_Editor
             this.textBoxEventPhasemask.Location = new System.Drawing.Point(263, 99);
             this.textBoxEventPhasemask.Name = "textBoxEventPhasemask";
             this.textBoxEventPhasemask.Size = new System.Drawing.Size(39, 20);
-            this.textBoxEventPhasemask.TabIndex = 9;
+            this.textBoxEventPhasemask.TabIndex = 28;
             this.textBoxEventPhasemask.Text = "0";
             this.textBoxEventPhasemask.TextChanged += new System.EventHandler(this.textBoxEventPhasemask_TextChanged);
             this.textBoxEventPhasemask.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1177,7 +1177,7 @@ namespace SAI_Editor
             this.textBoxEventType.Location = new System.Drawing.Point(299, 18);
             this.textBoxEventType.Name = "textBoxEventType";
             this.textBoxEventType.Size = new System.Drawing.Size(26, 20);
-            this.textBoxEventType.TabIndex = 1;
+            this.textBoxEventType.TabIndex = 22;
             this.textBoxEventType.Text = "0";
             this.textBoxEventType.TextChanged += new System.EventHandler(this.textBoxEventTypeId_TextChanged);
             this.textBoxEventType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1187,7 +1187,7 @@ namespace SAI_Editor
             this.textBoxLinkTo.Location = new System.Drawing.Point(59, 151);
             this.textBoxLinkTo.Name = "textBoxLinkTo";
             this.textBoxLinkTo.Size = new System.Drawing.Size(41, 20);
-            this.textBoxLinkTo.TabIndex = 19;
+            this.textBoxLinkTo.TabIndex = 33;
             this.textBoxLinkTo.Text = "0";
             this.textBoxLinkTo.TextChanged += new System.EventHandler(this.textBoxLinkTo_TextChanged);
             this.textBoxLinkTo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1197,7 +1197,7 @@ namespace SAI_Editor
             this.textBoxLinkFrom.Location = new System.Drawing.Point(263, 151);
             this.textBoxLinkFrom.Name = "textBoxLinkFrom";
             this.textBoxLinkFrom.Size = new System.Drawing.Size(39, 20);
-            this.textBoxLinkFrom.TabIndex = 13;
+            this.textBoxLinkFrom.TabIndex = 35;
             this.textBoxLinkFrom.Text = "None";
             this.textBoxLinkFrom.TextChanged += new System.EventHandler(this.textBoxLinkFrom_TextChanged);
             this.textBoxLinkFrom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1358,7 +1358,7 @@ namespace SAI_Editor
             this.comboBoxEventType.Location = new System.Drawing.Point(59, 18);
             this.comboBoxEventType.Name = "comboBoxEventType";
             this.comboBoxEventType.Size = new System.Drawing.Size(235, 21);
-            this.comboBoxEventType.TabIndex = 0;
+            this.comboBoxEventType.TabIndex = 21;
             this.comboBoxEventType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEventType_SelectedIndexChanged);
             this.comboBoxEventType.MouseEnter += new System.EventHandler(this.comboBoxEventType_MouseEnter);
             // 
@@ -1368,7 +1368,7 @@ namespace SAI_Editor
             this.textBoxId.Location = new System.Drawing.Point(59, 99);
             this.textBoxId.Name = "textBoxId";
             this.textBoxId.Size = new System.Drawing.Size(41, 20);
-            this.textBoxId.TabIndex = 6;
+            this.textBoxId.TabIndex = 27;
             this.textBoxId.Text = "0";
             this.textBoxId.TextChanged += new System.EventHandler(this.textBoxId_TextChanged);
             this.textBoxId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1451,7 +1451,7 @@ namespace SAI_Editor
             this.textBoxEventParam1.Location = new System.Drawing.Point(144, 4);
             this.textBoxEventParam1.Name = "textBoxEventParam1";
             this.textBoxEventParam1.Size = new System.Drawing.Size(70, 20);
-            this.textBoxEventParam1.TabIndex = 0;
+            this.textBoxEventParam1.TabIndex = 37;
             this.textBoxEventParam1.Text = "0";
             this.textBoxEventParam1.TextChanged += new System.EventHandler(this.textBoxEventParam1_TextChanged);
             this.textBoxEventParam1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1494,7 +1494,7 @@ namespace SAI_Editor
             this.buttonEventParamFourSearch.Location = new System.Drawing.Point(214, 81);
             this.buttonEventParamFourSearch.Name = "buttonEventParamFourSearch";
             this.buttonEventParamFourSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonEventParamFourSearch.TabIndex = 27;
+            this.buttonEventParamFourSearch.TabIndex = 44;
             this.buttonEventParamFourSearch.Text = "...";
             this.buttonEventParamFourSearch.UseVisualStyleBackColor = true;
             this.buttonEventParamFourSearch.Visible = false;
@@ -1505,7 +1505,7 @@ namespace SAI_Editor
             this.buttonEventParamThreeSearch.Location = new System.Drawing.Point(214, 55);
             this.buttonEventParamThreeSearch.Name = "buttonEventParamThreeSearch";
             this.buttonEventParamThreeSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonEventParamThreeSearch.TabIndex = 26;
+            this.buttonEventParamThreeSearch.TabIndex = 42;
             this.buttonEventParamThreeSearch.Text = "...";
             this.buttonEventParamThreeSearch.UseVisualStyleBackColor = true;
             this.buttonEventParamThreeSearch.Visible = false;
@@ -1516,7 +1516,7 @@ namespace SAI_Editor
             this.buttonEventParamTwoSearch.Location = new System.Drawing.Point(214, 29);
             this.buttonEventParamTwoSearch.Name = "buttonEventParamTwoSearch";
             this.buttonEventParamTwoSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonEventParamTwoSearch.TabIndex = 25;
+            this.buttonEventParamTwoSearch.TabIndex = 40;
             this.buttonEventParamTwoSearch.Text = "...";
             this.buttonEventParamTwoSearch.UseVisualStyleBackColor = true;
             this.buttonEventParamTwoSearch.Visible = false;
@@ -1527,7 +1527,7 @@ namespace SAI_Editor
             this.buttonEventParamOneSearch.Location = new System.Drawing.Point(214, 3);
             this.buttonEventParamOneSearch.Name = "buttonEventParamOneSearch";
             this.buttonEventParamOneSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonEventParamOneSearch.TabIndex = 24;
+            this.buttonEventParamOneSearch.TabIndex = 38;
             this.buttonEventParamOneSearch.Text = "...";
             this.buttonEventParamOneSearch.UseVisualStyleBackColor = true;
             this.buttonEventParamOneSearch.Visible = false;
@@ -1568,7 +1568,7 @@ namespace SAI_Editor
             this.textBoxEventParam4.Location = new System.Drawing.Point(144, 82);
             this.textBoxEventParam4.Name = "textBoxEventParam4";
             this.textBoxEventParam4.Size = new System.Drawing.Size(70, 20);
-            this.textBoxEventParam4.TabIndex = 3;
+            this.textBoxEventParam4.TabIndex = 43;
             this.textBoxEventParam4.Text = "0";
             this.textBoxEventParam4.TextChanged += new System.EventHandler(this.textBoxEventParam4_TextChanged);
             this.textBoxEventParam4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1578,7 +1578,7 @@ namespace SAI_Editor
             this.textBoxEventParam3.Location = new System.Drawing.Point(144, 56);
             this.textBoxEventParam3.Name = "textBoxEventParam3";
             this.textBoxEventParam3.Size = new System.Drawing.Size(70, 20);
-            this.textBoxEventParam3.TabIndex = 2;
+            this.textBoxEventParam3.TabIndex = 41;
             this.textBoxEventParam3.Text = "0";
             this.textBoxEventParam3.TextChanged += new System.EventHandler(this.textBoxEventParam3_TextChanged);
             this.textBoxEventParam3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1588,7 +1588,7 @@ namespace SAI_Editor
             this.textBoxEventParam2.Location = new System.Drawing.Point(144, 30);
             this.textBoxEventParam2.Name = "textBoxEventParam2";
             this.textBoxEventParam2.Size = new System.Drawing.Size(70, 20);
-            this.textBoxEventParam2.TabIndex = 1;
+            this.textBoxEventParam2.TabIndex = 39;
             this.textBoxEventParam2.Text = "0";
             this.textBoxEventParam2.TextChanged += new System.EventHandler(this.textBoxEventParam2_TextChanged);
             this.textBoxEventParam2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1626,7 +1626,7 @@ namespace SAI_Editor
             this.buttonActionParamSixSearch.Location = new System.Drawing.Point(214, 133);
             this.buttonActionParamSixSearch.Name = "buttonActionParamSixSearch";
             this.buttonActionParamSixSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamSixSearch.TabIndex = 39;
+            this.buttonActionParamSixSearch.TabIndex = 57;
             this.buttonActionParamSixSearch.Text = "...";
             this.buttonActionParamSixSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamSixSearch.Visible = false;
@@ -1637,7 +1637,7 @@ namespace SAI_Editor
             this.buttonActionParamFiveSearch.Location = new System.Drawing.Point(214, 107);
             this.buttonActionParamFiveSearch.Name = "buttonActionParamFiveSearch";
             this.buttonActionParamFiveSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamFiveSearch.TabIndex = 38;
+            this.buttonActionParamFiveSearch.TabIndex = 54;
             this.buttonActionParamFiveSearch.Text = "...";
             this.buttonActionParamFiveSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamFiveSearch.Visible = false;
@@ -1648,7 +1648,7 @@ namespace SAI_Editor
             this.buttonActionParamFourSearch.Location = new System.Drawing.Point(214, 81);
             this.buttonActionParamFourSearch.Name = "buttonActionParamFourSearch";
             this.buttonActionParamFourSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamFourSearch.TabIndex = 37;
+            this.buttonActionParamFourSearch.TabIndex = 52;
             this.buttonActionParamFourSearch.Text = "...";
             this.buttonActionParamFourSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamFourSearch.Visible = false;
@@ -1659,7 +1659,7 @@ namespace SAI_Editor
             this.buttonActionParamThreeSearch.Location = new System.Drawing.Point(214, 55);
             this.buttonActionParamThreeSearch.Name = "buttonActionParamThreeSearch";
             this.buttonActionParamThreeSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamThreeSearch.TabIndex = 36;
+            this.buttonActionParamThreeSearch.TabIndex = 50;
             this.buttonActionParamThreeSearch.Text = "...";
             this.buttonActionParamThreeSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamThreeSearch.Visible = false;
@@ -1670,7 +1670,7 @@ namespace SAI_Editor
             this.buttonActionParamTwoSearch.Location = new System.Drawing.Point(214, 29);
             this.buttonActionParamTwoSearch.Name = "buttonActionParamTwoSearch";
             this.buttonActionParamTwoSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamTwoSearch.TabIndex = 35;
+            this.buttonActionParamTwoSearch.TabIndex = 48;
             this.buttonActionParamTwoSearch.Text = "...";
             this.buttonActionParamTwoSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamTwoSearch.Visible = false;
@@ -1681,7 +1681,7 @@ namespace SAI_Editor
             this.buttonActionParamOneSearch.Location = new System.Drawing.Point(214, 3);
             this.buttonActionParamOneSearch.Name = "buttonActionParamOneSearch";
             this.buttonActionParamOneSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamOneSearch.TabIndex = 34;
+            this.buttonActionParamOneSearch.TabIndex = 46;
             this.buttonActionParamOneSearch.Text = "...";
             this.buttonActionParamOneSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamOneSearch.Visible = false;
@@ -1742,7 +1742,7 @@ namespace SAI_Editor
             this.textBoxActionParam6.Location = new System.Drawing.Point(144, 134);
             this.textBoxActionParam6.Name = "textBoxActionParam6";
             this.textBoxActionParam6.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam6.TabIndex = 27;
+            this.textBoxActionParam6.TabIndex = 56;
             this.textBoxActionParam6.Text = "0";
             this.textBoxActionParam6.TextChanged += new System.EventHandler(this.textBoxActionParam6_TextChanged);
             this.textBoxActionParam6.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1752,7 +1752,7 @@ namespace SAI_Editor
             this.textBoxActionParam5.Location = new System.Drawing.Point(144, 108);
             this.textBoxActionParam5.Name = "textBoxActionParam5";
             this.textBoxActionParam5.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam5.TabIndex = 28;
+            this.textBoxActionParam5.TabIndex = 53;
             this.textBoxActionParam5.Text = "0";
             this.textBoxActionParam5.TextChanged += new System.EventHandler(this.textBoxActionParam5_TextChanged);
             this.textBoxActionParam5.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1762,7 +1762,7 @@ namespace SAI_Editor
             this.textBoxActionParam4.Location = new System.Drawing.Point(144, 82);
             this.textBoxActionParam4.Name = "textBoxActionParam4";
             this.textBoxActionParam4.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam4.TabIndex = 29;
+            this.textBoxActionParam4.TabIndex = 51;
             this.textBoxActionParam4.Text = "0";
             this.textBoxActionParam4.TextChanged += new System.EventHandler(this.textBoxActionParam4_TextChanged);
             this.textBoxActionParam4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1772,7 +1772,7 @@ namespace SAI_Editor
             this.textBoxActionParam3.Location = new System.Drawing.Point(144, 56);
             this.textBoxActionParam3.Name = "textBoxActionParam3";
             this.textBoxActionParam3.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam3.TabIndex = 30;
+            this.textBoxActionParam3.TabIndex = 49;
             this.textBoxActionParam3.Text = "0";
             this.textBoxActionParam3.TextChanged += new System.EventHandler(this.textBoxActionParam3_TextChanged);
             this.textBoxActionParam3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1782,7 +1782,7 @@ namespace SAI_Editor
             this.textBoxActionParam2.Location = new System.Drawing.Point(144, 30);
             this.textBoxActionParam2.Name = "textBoxActionParam2";
             this.textBoxActionParam2.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam2.TabIndex = 31;
+            this.textBoxActionParam2.TabIndex = 47;
             this.textBoxActionParam2.Text = "0";
             this.textBoxActionParam2.TextChanged += new System.EventHandler(this.textBoxActionParam2_TextChanged);
             this.textBoxActionParam2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1802,7 +1802,7 @@ namespace SAI_Editor
             this.textBoxActionParam1.Location = new System.Drawing.Point(144, 4);
             this.textBoxActionParam1.Name = "textBoxActionParam1";
             this.textBoxActionParam1.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam1.TabIndex = 33;
+            this.textBoxActionParam1.TabIndex = 45;
             this.textBoxActionParam1.Text = "0";
             this.textBoxActionParam1.TextChanged += new System.EventHandler(this.textBoxActionParam1_TextChanged);
             this.textBoxActionParam1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1853,7 +1853,7 @@ namespace SAI_Editor
             this.buttonTargetParamSixSearch.Location = new System.Drawing.Point(214, 133);
             this.buttonTargetParamSixSearch.Name = "buttonTargetParamSixSearch";
             this.buttonTargetParamSixSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamSixSearch.TabIndex = 45;
+            this.buttonTargetParamSixSearch.TabIndex = 69;
             this.buttonTargetParamSixSearch.Text = "...";
             this.buttonTargetParamSixSearch.UseVisualStyleBackColor = true;
             this.buttonTargetParamSixSearch.Visible = false;
@@ -1864,7 +1864,7 @@ namespace SAI_Editor
             this.buttonTargetParamFiveSearch.Location = new System.Drawing.Point(214, 107);
             this.buttonTargetParamFiveSearch.Name = "buttonTargetParamFiveSearch";
             this.buttonTargetParamFiveSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamFiveSearch.TabIndex = 44;
+            this.buttonTargetParamFiveSearch.TabIndex = 67;
             this.buttonTargetParamFiveSearch.Text = "...";
             this.buttonTargetParamFiveSearch.UseVisualStyleBackColor = true;
             this.buttonTargetParamFiveSearch.Visible = false;
@@ -1875,7 +1875,7 @@ namespace SAI_Editor
             this.buttonTargetParamFourSearch.Location = new System.Drawing.Point(214, 81);
             this.buttonTargetParamFourSearch.Name = "buttonTargetParamFourSearch";
             this.buttonTargetParamFourSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamFourSearch.TabIndex = 43;
+            this.buttonTargetParamFourSearch.TabIndex = 65;
             this.buttonTargetParamFourSearch.Text = "...";
             this.buttonTargetParamFourSearch.UseVisualStyleBackColor = true;
             this.buttonTargetParamFourSearch.Visible = false;
@@ -1886,7 +1886,7 @@ namespace SAI_Editor
             this.buttonTargetParamThreeSearch.Location = new System.Drawing.Point(214, 55);
             this.buttonTargetParamThreeSearch.Name = "buttonTargetParamThreeSearch";
             this.buttonTargetParamThreeSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamThreeSearch.TabIndex = 42;
+            this.buttonTargetParamThreeSearch.TabIndex = 63;
             this.buttonTargetParamThreeSearch.Text = "...";
             this.buttonTargetParamThreeSearch.UseVisualStyleBackColor = true;
             this.buttonTargetParamThreeSearch.Visible = false;
@@ -1897,7 +1897,7 @@ namespace SAI_Editor
             this.buttonTargetParamTwoSearch.Location = new System.Drawing.Point(214, 29);
             this.buttonTargetParamTwoSearch.Name = "buttonTargetParamTwoSearch";
             this.buttonTargetParamTwoSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamTwoSearch.TabIndex = 41;
+            this.buttonTargetParamTwoSearch.TabIndex = 61;
             this.buttonTargetParamTwoSearch.Text = "...";
             this.buttonTargetParamTwoSearch.UseVisualStyleBackColor = true;
             this.buttonTargetParamTwoSearch.Visible = false;
@@ -1908,7 +1908,7 @@ namespace SAI_Editor
             this.buttonTargetParamOneSearch.Location = new System.Drawing.Point(214, 3);
             this.buttonTargetParamOneSearch.Name = "buttonTargetParamOneSearch";
             this.buttonTargetParamOneSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamOneSearch.TabIndex = 40;
+            this.buttonTargetParamOneSearch.TabIndex = 59;
             this.buttonTargetParamOneSearch.Text = "...";
             this.buttonTargetParamOneSearch.UseVisualStyleBackColor = true;
             this.buttonTargetParamOneSearch.Visible = false;
@@ -1969,7 +1969,7 @@ namespace SAI_Editor
             this.textBoxTargetZ.Location = new System.Drawing.Point(144, 134);
             this.textBoxTargetZ.Name = "textBoxTargetZ";
             this.textBoxTargetZ.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetZ.TabIndex = 36;
+            this.textBoxTargetZ.TabIndex = 68;
             this.textBoxTargetZ.Text = "0";
             this.textBoxTargetZ.TextChanged += new System.EventHandler(this.textBoxTargetZ_TextChanged);
             this.textBoxTargetZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -1989,7 +1989,7 @@ namespace SAI_Editor
             this.textBoxTargetY.Location = new System.Drawing.Point(144, 108);
             this.textBoxTargetY.Name = "textBoxTargetY";
             this.textBoxTargetY.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetY.TabIndex = 36;
+            this.textBoxTargetY.TabIndex = 66;
             this.textBoxTargetY.Text = "0";
             this.textBoxTargetY.TextChanged += new System.EventHandler(this.textBoxTargetY_TextChanged);
             this.textBoxTargetY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -2009,7 +2009,7 @@ namespace SAI_Editor
             this.textBoxTargetX.Location = new System.Drawing.Point(144, 82);
             this.textBoxTargetX.Name = "textBoxTargetX";
             this.textBoxTargetX.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetX.TabIndex = 36;
+            this.textBoxTargetX.TabIndex = 64;
             this.textBoxTargetX.Text = "0";
             this.textBoxTargetX.TextChanged += new System.EventHandler(this.textBoxTargetX_TextChanged);
             this.textBoxTargetX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -2019,7 +2019,7 @@ namespace SAI_Editor
             this.textBoxTargetParam3.Location = new System.Drawing.Point(144, 56);
             this.textBoxTargetParam3.Name = "textBoxTargetParam3";
             this.textBoxTargetParam3.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetParam3.TabIndex = 36;
+            this.textBoxTargetParam3.TabIndex = 62;
             this.textBoxTargetParam3.Text = "0";
             this.textBoxTargetParam3.TextChanged += new System.EventHandler(this.textBoxTargetParam3_TextChanged);
             this.textBoxTargetParam3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -2029,7 +2029,7 @@ namespace SAI_Editor
             this.textBoxTargetParam2.Location = new System.Drawing.Point(144, 30);
             this.textBoxTargetParam2.Name = "textBoxTargetParam2";
             this.textBoxTargetParam2.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetParam2.TabIndex = 37;
+            this.textBoxTargetParam2.TabIndex = 60;
             this.textBoxTargetParam2.Text = "0";
             this.textBoxTargetParam2.TextChanged += new System.EventHandler(this.textBoxTargetParam2_TextChanged);
             this.textBoxTargetParam2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -2049,7 +2049,7 @@ namespace SAI_Editor
             this.textBoxTargetParam1.Location = new System.Drawing.Point(144, 4);
             this.textBoxTargetParam1.Name = "textBoxTargetParam1";
             this.textBoxTargetParam1.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetParam1.TabIndex = 39;
+            this.textBoxTargetParam1.TabIndex = 58;
             this.textBoxTargetParam1.Text = "0";
             this.textBoxTargetParam1.TextChanged += new System.EventHandler(this.textBoxTargetParam1_TextChanged);
             this.textBoxTargetParam1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -2111,7 +2111,7 @@ namespace SAI_Editor
             this.buttonNewLine.Location = new System.Drawing.Point(649, 215);
             this.buttonNewLine.Name = "buttonNewLine";
             this.buttonNewLine.Size = new System.Drawing.Size(83, 23);
-            this.buttonNewLine.TabIndex = 26;
+            this.buttonNewLine.TabIndex = 70;
             this.buttonNewLine.Text = "New line";
             this.buttonNewLine.UseVisualStyleBackColor = true;
             this.buttonNewLine.Visible = false;
@@ -2123,7 +2123,7 @@ namespace SAI_Editor
             this.buttonGenerateSql.Location = new System.Drawing.Point(844, 215);
             this.buttonGenerateSql.Name = "buttonGenerateSql";
             this.buttonGenerateSql.Size = new System.Drawing.Size(83, 23);
-            this.buttonGenerateSql.TabIndex = 28;
+            this.buttonGenerateSql.TabIndex = 72;
             this.buttonGenerateSql.Text = "Generate SQL";
             this.buttonGenerateSql.UseVisualStyleBackColor = true;
             this.buttonGenerateSql.Visible = false;
@@ -2135,7 +2135,7 @@ namespace SAI_Editor
             this.buttonGenerateComments.Location = new System.Drawing.Point(733, 215);
             this.buttonGenerateComments.Name = "buttonGenerateComments";
             this.buttonGenerateComments.Size = new System.Drawing.Size(110, 23);
-            this.buttonGenerateComments.TabIndex = 29;
+            this.buttonGenerateComments.TabIndex = 71;
             this.buttonGenerateComments.Text = "Generate comments";
             this.buttonGenerateComments.UseVisualStyleBackColor = true;
             this.buttonGenerateComments.Visible = false;
@@ -2202,7 +2202,7 @@ namespace SAI_Editor
             this.listViewSmartScripts.MultiSelect = false;
             this.listViewSmartScripts.Name = "listViewSmartScripts";
             this.listViewSmartScripts.Size = new System.Drawing.Size(915, 213);
-            this.listViewSmartScripts.TabIndex = 24;
+            this.listViewSmartScripts.TabIndex = 73;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
             this.listViewSmartScripts.Visible = false;
