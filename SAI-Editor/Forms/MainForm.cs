@@ -487,7 +487,7 @@ namespace SAI_Editor
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
-            if (listViewSmartScripts.SelectedSmartScript == null || formState != FormState.FormStateMain)
+            if (formState != FormState.FormStateMain)
                 return;
 
             panelPermanentTooltipTypes.Visible = false;
