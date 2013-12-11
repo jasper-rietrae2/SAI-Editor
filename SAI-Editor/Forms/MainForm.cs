@@ -3360,7 +3360,7 @@ namespace SAI_Editor
                     case SourceTypes.SourceTypeCreature:
                         if (!Settings.Default.UseWorldDatabase)
                         {
-                            generatedSql += "-- No changes to the AIName were made as there is no world database connection.";
+                            generatedSql += "-- No changes to the AIName were made as there is no world database connection.\n";
                             break;
                         }
 
@@ -3376,7 +3376,7 @@ namespace SAI_Editor
                     case SourceTypes.SourceTypeGameobject:
                         if (!Settings.Default.UseWorldDatabase)
                         {
-                            generatedSql += "-- No changes to the AIName were made as there is no world database connection.";
+                            generatedSql += "-- No changes to the AIName were made as there is no world database connection.\n";
                             break;
                         }
 
