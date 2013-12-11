@@ -257,7 +257,18 @@ namespace SAI_Editor.Classes
                         break;
                     case 2: //! Areatrigger
                         fullLine += "Areatrigger - ";
-                        fullLine += (SmartEvent)smartScript.event_type != SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER ? "INCORRECT EVENT TYPE" : "On Trigger";
+
+                        switch ((SmartEvent)smartScript.event_type)
+                        {
+                            case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER:
+                            case SmartEvent.SMART_EVENT_LINK:
+                                fullLine += "On Trigger";
+                                break;
+                            default:
+                                fullLine += "INCORRECT EVENT TYPE";
+                                break;
+                        }
+
                         break;
                     case 9: //! Actionlist
                         if (entryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist)
