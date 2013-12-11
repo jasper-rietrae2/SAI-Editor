@@ -3992,6 +3992,7 @@ namespace SAI_Editor
             textBoxPort.Enabled = radioButtonConnectToMySql.Checked;
             buttonSearchWorldDb.Enabled = radioButtonConnectToMySql.Checked;
             labelDontUseDatabaseWarning.Visible = !radioButtonConnectToMySql.Checked;
+
             HandleHeightLoginFormBasedOnuseDatabaseSetting();
         }
 
@@ -4000,9 +4001,15 @@ namespace SAI_Editor
             if (formState != FormState.FormStateMain)
             {
                 if (radioButtonConnectToMySql.Checked)
+                {
+                    MaximumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
                     Height = (int)FormSizes.LoginFormHeight;
+                }
                 else
+                {
+                    MaximumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeightShowWarning);
                     Height = (int)FormSizes.LoginFormHeightShowWarning;
+                }
             }
         }
 
