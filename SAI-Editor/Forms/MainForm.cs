@@ -3027,8 +3027,10 @@ namespace SAI_Editor
                 if (previousLinkFrom == newLinkFrom)
                     return;
 
-                foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
+                for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
                 {
+                    SmartScript smartScript = listViewSmartScripts.SmartScripts[i];
+
                     if (smartScript.entryorguid != originalEntryOrGuidAndSourceType.entryOrGuid || smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType)
                         continue;
 
