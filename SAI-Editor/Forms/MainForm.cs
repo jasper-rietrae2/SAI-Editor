@@ -3752,7 +3752,15 @@ namespace SAI_Editor
 
             SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
             SmartScript smartScriptLink = GetInitialSmartScriptLink(selectedScript);
-            string newComment = updatingFieldsBasedOnSelectedScript ? selectedScript.comment : await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+            string newComment = selectedScript.comment;
+
+            if (!updatingFieldsBasedOnSelectedScript)
+            {
+                newComment = await CommentGenerator.Instance.GenerateCommentFor(selectedScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+
+                if (selectedScript.link != 0 || (SmartEvent)selectedScript.event_type == SmartEvent.SMART_EVENT_LINK)
+                    await GenerateCommentForAllEventsLinkingFromAndToSmartScript(selectedScript);
+            }
 
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
@@ -3773,7 +3781,15 @@ namespace SAI_Editor
                 return;
 
             SmartScript smartScriptLink = GetInitialSmartScriptLink(smartScript);
-            string newComment = updatingFieldsBasedOnSelectedScript ? smartScript.comment : await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+            string newComment = smartScript.comment;
+
+            if (!updatingFieldsBasedOnSelectedScript)
+            {
+                newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+
+                if (smartScript.link != 0 || (SmartEvent)smartScript.event_type == SmartEvent.SMART_EVENT_LINK)
+                    await GenerateCommentForAllEventsLinkingFromAndToSmartScript(smartScript);
+            }
 
             //! For some reason we have to re-check it here...
             if (listViewSmartScripts.SelectedItems.Count == 0)
@@ -3783,6 +3799,25 @@ namespace SAI_Editor
             smartScript.comment = newComment;
             listViewSmartScripts.ReplaceSmartScript(smartScript);
             FillFieldsBasedOnSelectedScript();
+        }
+
+        private async Task GenerateCommentForAllEventsLinkingFromAndToSmartScript(SmartScript smartScript)
+        {
+            if (smartScript == null || !Settings.Default.GenerateComments)
+                return;
+
+            for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
+            {
+                SmartScript smartScriptListView = listViewSmartScripts.SmartScripts[i];
+
+                if (smartScriptListView.entryorguid != smartScript.entryorguid)
+                    continue;
+
+                if (smartScript.link == smartScriptListView.id)
+                    smartScriptListView.comment = await CommentGenerator.Instance.GenerateCommentFor(smartScriptListView, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScriptListView));
+                else if (smartScriptListView.link == smartScript.id)
+                    smartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScript));
+            }
         }
 
         private SmartScript GetInitialSmartScriptLink(SmartScript smartScript)
