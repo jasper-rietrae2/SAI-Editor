@@ -158,6 +158,9 @@ namespace SAI_Editor
 
             foreach (Control control in Controls)
             {
+                if (control.Name == "panelPermanentTooltipTypes" || control.Name == "panelPermanentTooltipParameters")
+                    continue;
+
                 if (control.Visible)
                     controlsLoginForm.Add(control);
                 else
