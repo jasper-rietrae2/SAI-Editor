@@ -1432,8 +1432,8 @@ namespace SAI_Editor
                 List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType);
                 List<SmartScript> newSmartScripts = new List<SmartScript>();
 
+                //! Only add the new smartscript if it doesn't yet exist
                 foreach (SmartScript newSmartScript in smartScripts)
-                    //! Only add the new smartscript if it doesn't yet exist
                     if (!listViewSmartScripts.Items.Cast<SmartScriptListViewItem>().Any(p => p.Script.entryorguid == newSmartScript.entryorguid && p.Script.id == newSmartScript.id))
                         listViewSmartScripts.AddSmartScript(newSmartScript);
 
@@ -3648,6 +3648,7 @@ namespace SAI_Editor
 
                 if (smartScripts != null && smartScripts.Count > 0)
                 {
+                    revertQuery += "DELETE FROM smart_scripts WHERE entryorguid=" + smartScripts[0].entryorguid.ToString() + ";";
                     revertQuery += "REPLACE INTO smart_scripts VALUES ";
 
                     for (int i = 0; i < smartScripts.Count; ++i)
