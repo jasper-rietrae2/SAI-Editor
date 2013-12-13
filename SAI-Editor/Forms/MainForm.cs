@@ -158,6 +158,7 @@ namespace SAI_Editor
 
             foreach (Control control in Controls)
             {
+                //! These two are set manually because otherwise they will always show for a split second before disappearing again.
                 if (control.Name == "panelPermanentTooltipTypes" || control.Name == "panelPermanentTooltipParameters")
                     continue;
 
@@ -4028,6 +4029,8 @@ namespace SAI_Editor
 
         public void HandleUseWorldDatabaseSettingChanged()
         {
+            radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
+            radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
             buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || comboBoxSourceType.SelectedIndex == 2;
             buttonGenerateComments.Enabled = Settings.Default.UseWorldDatabase;
             pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
