@@ -250,8 +250,8 @@ namespace SAI_Editor
                         Width = MainFormWidth;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
-                        FinishedExpandingOrContracting(true);
                         formState = FormState.FormStateMain;
+                        FinishedExpandingOrContracting(true);
                     }
                 }
 
@@ -266,8 +266,8 @@ namespace SAI_Editor
                         Height = MainFormHeight;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
-                        FinishedExpandingOrContracting(true);
                         formState = FormState.FormStateMain;
+                        FinishedExpandingOrContracting(true);
                     }
                 }
             }
@@ -284,8 +284,8 @@ namespace SAI_Editor
                         Width = originalWidth;
                         timerExpandOrContract.Enabled = false;
                         contractingToLoginForm = false;
-                        FinishedExpandingOrContracting(false);
                         formState = FormState.FormStateLogin;
+                        FinishedExpandingOrContracting(false);
                     }
                 }
 
@@ -300,8 +300,8 @@ namespace SAI_Editor
                         Height = originalHeight;
                         timerExpandOrContract.Enabled = false;
                         contractingToLoginForm = false;
-                        FinishedExpandingOrContracting(false);
                         formState = FormState.FormStateLogin;
+                        FinishedExpandingOrContracting(false);
                     }
                 }
             }
@@ -647,7 +647,7 @@ namespace SAI_Editor
             checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
 
             if (expanding && radioButtonConnectToMySql.Checked)
-                TryToLoadScript(-1, SourceTypes.SourceTypeNone, false);
+                TryToLoadScript(showErrorIfNoneFound: false);
         }
 
         private async Task<List<SmartScript>> GetSmartScriptsForEntryAndSourceType(string entryOrGuid, SourceTypes sourceType, bool showError = true, bool promptCreateIfNoneFound = false)
