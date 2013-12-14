@@ -297,9 +297,28 @@ namespace SAI_Editor.Classes
             Init();
         }
 
-        //protected override void OnItemSelectionChanged(ListViewItemSelectionChangedEventArgs e)
-        //{
-        //    base.OnItemSelectionChanged(e);
-        //}
+        protected override void OnLostFocus(EventArgs e)
+        {
+            if (SelectedItems.Count > 0)
+            {
+                //! This is the color given when an item is selected WITH focus...
+                ((SmartScriptListViewItem)SelectedItems[0]).LastBackColor = SelectedItems[0].BackColor;
+                SelectedItems[0].BackColor = Color.FromArgb(51, 153, 254);
+                SelectedItems[0].ForeColor = Color.White;
+            }
+
+            base.OnLostFocus(e);
+        }
+
+        protected override void OnGotFocus(EventArgs e)
+        {
+            if (SelectedItems.Count > 0)
+            {
+                SelectedItems[0].BackColor = ((SmartScriptListViewItem)SelectedItems[0]).LastBackColor;
+                SelectedItems[0].ForeColor = Color.Black;
+            }
+
+            base.OnGotFocus(e);
+        }
     }
 }
