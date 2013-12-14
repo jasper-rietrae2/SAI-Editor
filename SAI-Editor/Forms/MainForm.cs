@@ -3702,6 +3702,7 @@ namespace SAI_Editor
 
             GenerateCommentsForAllItems();
             ResizeColumns();
+            listViewSmartScripts.Select();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
