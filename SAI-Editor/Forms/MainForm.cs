@@ -1059,10 +1059,6 @@ namespace SAI_Editor
         private void AdjustAllParameterFields(int event_type, int action_type, int target_type)
         {
             SetVisibilityOfAllParamButtons(false);
-            labelTargetX.Text = String.Empty;
-            labelTargetY.Text = String.Empty;
-            labelTargetZ.Text = String.Empty;
-            labelTargetO.Text = String.Empty;
 
             switch ((SmartEvent)event_type)
             {
@@ -1212,12 +1208,6 @@ namespace SAI_Editor
                 case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT: //! Gameobject entry
                     buttonTargetParamOneSearch.Visible = true;
                     break;
-                case SmartTarget.SMART_TARGET_POSITION:
-                    labelTargetX.Text = "Target X";
-                    labelTargetY.Text = "Target Y";
-                    labelTargetZ.Text = "Target Z";
-                    labelTargetO.Text = "Target O";
-                    break;
             }
 
             SetEnabledOfParameterFields();
@@ -1240,10 +1230,6 @@ namespace SAI_Editor
             textBoxTargetParam1.Enabled = labelTargetParam1.Text.Length > 0;
             textBoxTargetParam2.Enabled = labelTargetParam2.Text.Length > 0;
             textBoxTargetParam3.Enabled = labelTargetParam3.Text.Length > 0;
-            textBoxTargetX.Enabled = labelTargetX.Text.Length > 0;
-            textBoxTargetY.Enabled = labelTargetY.Text.Length > 0;
-            textBoxTargetZ.Enabled = labelTargetZ.Text.Length > 0;
-            textBoxTargetO.Enabled = labelTargetO.Text.Length > 0;
         }
 
         private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true, bool active = true, int autoPopDelay = 2100000000, bool showAlways = true)
@@ -2401,10 +2387,6 @@ namespace SAI_Editor
             labelTargetParam1.Text = str;
             labelTargetParam2.Text = str;
             labelTargetParam3.Text = str;
-            labelTargetX.Text = str;
-            labelTargetY.Text = str;
-            labelTargetZ.Text = str;
-            labelTargetO.Text = str;
         }
 
         private void ParameterInstallAiTemplateChanged()
