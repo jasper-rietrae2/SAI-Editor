@@ -2096,7 +2096,6 @@ namespace SAI_Editor
             // 
             // panelPermanentTooltipParameters
             // 
-            this.panelPermanentTooltipParameters.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.panelPermanentTooltipParameters.BackColor = System.Drawing.Color.White;
             this.panelPermanentTooltipParameters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelPermanentTooltipParameters.Controls.Add(this.labelPermanentTooltipTextParameters);
@@ -2210,7 +2209,6 @@ namespace SAI_Editor
             // 
             // panelPermanentTooltipTypes
             // 
-            this.panelPermanentTooltipTypes.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.panelPermanentTooltipTypes.BackColor = System.Drawing.Color.White;
             this.panelPermanentTooltipTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTitleTypes);
