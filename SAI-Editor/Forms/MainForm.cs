@@ -3191,6 +3191,8 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
+                textBoxTargetX.Text = textBoxTargetX.Text.Replace(".", ",");
+                textBoxTargetX.SelectionStart = textBoxTargetX.Text.Length + 1; //! Set cursor to end of text
                 listViewSmartScripts.SelectedSmartScript.target_x = XConverter.ToDouble(textBoxTargetX.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
@@ -3201,6 +3203,8 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
+                textBoxTargetY.Text = textBoxTargetY.Text.Replace(".", ",");
+                textBoxTargetY.SelectionStart = textBoxTargetY.Text.Length + 1; //! Set cursor to end of text
                 listViewSmartScripts.SelectedSmartScript.target_y = XConverter.ToDouble(textBoxTargetY.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
@@ -3211,6 +3215,8 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
+                textBoxTargetZ.Text = textBoxTargetZ.Text.Replace(".", ",");
+                textBoxTargetZ.SelectionStart = textBoxTargetZ.Text.Length + 1; //! Set cursor to end of text
                 listViewSmartScripts.SelectedSmartScript.target_z = XConverter.ToDouble(textBoxTargetZ.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
@@ -3221,6 +3227,8 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
+                textBoxTargetO.Text = textBoxTargetO.Text.Replace(".", ",");
+                textBoxTargetO.SelectionStart = textBoxTargetO.Text.Length + 1; //! Set cursor to end of text
                 listViewSmartScripts.SelectedSmartScript.target_o = XConverter.ToDouble(textBoxTargetO.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
