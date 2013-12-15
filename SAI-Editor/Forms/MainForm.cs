@@ -1669,10 +1669,10 @@ namespace SAI_Editor
             newSmartScript.target_param1 = XConverter.ToInt32(textBoxTargetParam1.Text);
             newSmartScript.target_param2 = XConverter.ToInt32(textBoxTargetParam2.Text);
             newSmartScript.target_param3 = XConverter.ToInt32(textBoxTargetParam3.Text);
-            newSmartScript.target_x = XConverter.ToInt32(textBoxTargetX.Text);
-            newSmartScript.target_y = XConverter.ToInt32(textBoxTargetY.Text);
-            newSmartScript.target_z = XConverter.ToInt32(textBoxTargetZ.Text);
-            newSmartScript.target_o = XConverter.ToInt32(textBoxTargetO.Text);
+            newSmartScript.target_x = XConverter.ToDouble(textBoxTargetX.Text);
+            newSmartScript.target_y = XConverter.ToDouble(textBoxTargetY.Text);
+            newSmartScript.target_z = XConverter.ToDouble(textBoxTargetZ.Text);
+            newSmartScript.target_o = XConverter.ToDouble(textBoxTargetO.Text);
 
             if (Settings.Default.GenerateComments && Settings.Default.UseWorldDatabase)
                 newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
