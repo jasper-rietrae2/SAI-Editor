@@ -85,12 +85,6 @@
     <Compile Include="Forms\RevertQueryForm.Designer.cs">
       <DependentUpon>RevertQueryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SearchForms\AreatriggersForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\SearchForms\AreatriggersForm.Designer.cs">
-      <DependentUpon>AreatriggersForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Classes\Database\Classes\ActionTypeInformation.cs" />
     <Compile Include="Classes\Database\Classes\AreaTrigger.cs" />
     <Compile Include="Classes\Database\Classes\BaseTypeInformation.cs" />
@@ -100,15 +94,6 @@
     <Compile Include="Classes\Database\Database.cs" />
     <Compile Include="Classes\Database\SQLiteDatabase.cs" />
     <Compile Include="Classes\Database\WorldDatabase.cs" />
-    <Compile Include="dep\ScrollablePicturebox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="dep\ScrollablePicturebox.Designer.cs">
-      <DependentUpon>ScrollablePicturebox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="dep\ZoomPanImageBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Include="Classes\ListViewColumnSorter.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
@@ -188,13 +173,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RevertQueryForm.resx">
       <DependentUpon>RevertQueryForm.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SearchForms\AreatriggersForm.resx">
-      <DependentUpon>AreatriggersForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dep\ZoomPanImageBox.resx">
-      <DependentUpon>ZoomPanImageBox.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
