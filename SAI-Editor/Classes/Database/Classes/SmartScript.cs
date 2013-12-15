@@ -27,10 +27,10 @@ namespace SAI_Editor.Database.Classes
         public int target_param1 { get; set; }
         public int target_param2 { get; set; }
         public int target_param3 { get; set; }
-        public int target_x { get; set; }
-        public int target_y { get; set; }
-        public int target_z { get; set; }
-        public int target_o { get; set; }
+        public double target_x { get; set; }
+        public double target_y { get; set; }
+        public double target_z { get; set; }
+        public double target_o { get; set; }
         public string comment { get; set; }
 
         public SmartScript Clone(SmartScript smartScript)

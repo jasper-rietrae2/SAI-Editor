@@ -3191,7 +3191,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.target_x = XConverter.ToInt32(textBoxTargetX.Text);
+                listViewSmartScripts.SelectedSmartScript.target_x = XConverter.ToDouble(textBoxTargetX.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
@@ -3201,7 +3201,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.target_y = XConverter.ToInt32(textBoxTargetY.Text);
+                listViewSmartScripts.SelectedSmartScript.target_y = XConverter.ToDouble(textBoxTargetY.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
@@ -3211,7 +3211,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.target_z = XConverter.ToInt32(textBoxTargetZ.Text);
+                listViewSmartScripts.SelectedSmartScript.target_z = XConverter.ToDouble(textBoxTargetZ.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
@@ -3221,7 +3221,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.target_o = XConverter.ToInt32(textBoxTargetO.Text);
+                listViewSmartScripts.SelectedSmartScript.target_o = XConverter.ToDouble(textBoxTargetO.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
