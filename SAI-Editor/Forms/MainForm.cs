@@ -653,6 +653,8 @@ namespace SAI_Editor
             checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
             checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
             checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
+            checkBoxUsePhaseColors.Checked = Settings.Default.PhaseHighlighting;
+            checkBoxUsePermanentTooltips.Checked = Settings.Default.ShowTooltipsPermanently;
 
             if (expanding && radioButtonConnectToMySql.Checked)
                 TryToLoadScript(showErrorIfNoneFound: false);
@@ -3716,6 +3718,8 @@ namespace SAI_Editor
             Settings.Default.LockSmartScriptId = checkBoxLockEventId.Checked;
             Settings.Default.ListActionLists = checkBoxListActionlistsOrEntries.Checked;
             Settings.Default.AllowChangingEntryAndSourceType = checkBoxAllowChangingEntryAndSourceType.Checked;
+            Settings.Default.PhaseHighlighting = checkBoxUsePhaseColors.Checked;
+            Settings.Default.ShowTooltipsPermanently = checkBoxUsePermanentTooltips.Checked;
 
             if (formState == FormState.FormStateMain)
                 Settings.Default.MainFormHeight = Height;
@@ -4051,6 +4055,24 @@ namespace SAI_Editor
 
             listViewSmartScripts.AddSmartScript(lastDeletedSmartScripts.Last());
             lastDeletedSmartScripts.Remove(lastDeletedSmartScripts.Last());
+        }
+
+        private void checkBoxUsePhaseColors_CheckedChanged(object sender, EventArgs e)
+        {
+            Settings.Default.PhaseHighlighting = checkBoxUsePhaseColors.Checked;
+            Settings.Default.Save();
+
+            listViewSmartScripts.Init(true);
+        }
+
+        private void checkBoxUsePermanentTooltips_CheckedChanged(object sender, EventArgs e)
+        {
+            bool settingChanged = Settings.Default.ShowTooltipsPermanently != checkBoxUsePermanentTooltips.Checked;
+            Settings.Default.ShowTooltipsPermanently = checkBoxUsePermanentTooltips.Checked;
+            Settings.Default.Save();
+
+            if (settingChanged)
+                ExpandToShowPermanentTooltips(!checkBoxUsePermanentTooltips.Checked);
         }
     }
 }

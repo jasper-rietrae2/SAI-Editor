@@ -80,16 +80,19 @@ namespace SAI_Editor
             this.labelPort = new System.Windows.Forms.Label();
             this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
+            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
             this.labelEntryOrGuid = new System.Windows.Forms.Label();
             this.textBoxEntryOrGuid = new System.Windows.Forms.TextBox();
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
+            this.checkBoxUsePermanentTooltips = new System.Windows.Forms.CheckBox();
+            this.checkBoxUsePhaseColors = new System.Windows.Forms.CheckBox();
             this.checkBoxAllowChangingEntryAndSourceType = new System.Windows.Forms.CheckBox();
             this.checkBoxListActionlistsOrEntries = new System.Windows.Forms.CheckBox();
             this.checkBoxShowBasicInfo = new System.Windows.Forms.CheckBox();
-            this.checkBoxScriptByGuid = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
@@ -192,13 +195,13 @@ namespace SAI_Editor
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
-            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -211,8 +214,6 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipTypes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -692,6 +693,35 @@ namespace SAI_Editor
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
             // 
+            // pictureBoxCreateScript
+            // 
+            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
+            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
+            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
+            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCreateScript.TabIndex = 16;
+            this.pictureBoxCreateScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            // 
+            // pictureBoxLoadScript
+            // 
+            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Enabled = false;
+            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
+            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
+            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
+            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLoadScript.TabIndex = 16;
+            this.pictureBoxLoadScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
+            // 
             // buttonSearchForEntryOrGuid
             // 
             this.buttonSearchForEntryOrGuid.Location = new System.Drawing.Point(211, 18);
@@ -747,10 +777,11 @@ namespace SAI_Editor
             // 
             // groupBoxPreferences
             // 
+            this.groupBoxPreferences.Controls.Add(this.checkBoxUsePermanentTooltips);
+            this.groupBoxPreferences.Controls.Add(this.checkBoxUsePhaseColors);
             this.groupBoxPreferences.Controls.Add(this.checkBoxAllowChangingEntryAndSourceType);
             this.groupBoxPreferences.Controls.Add(this.checkBoxListActionlistsOrEntries);
             this.groupBoxPreferences.Controls.Add(this.checkBoxShowBasicInfo);
-            this.groupBoxPreferences.Controls.Add(this.checkBoxScriptByGuid);
             this.groupBoxPreferences.Controls.Add(this.checkBox3);
             this.groupBoxPreferences.Controls.Add(this.checkBoxLockEventId);
             this.groupBoxPreferences.Location = new System.Drawing.Point(12, 115);
@@ -761,14 +792,36 @@ namespace SAI_Editor
             this.groupBoxPreferences.Text = "Preferences";
             this.groupBoxPreferences.Visible = false;
             // 
+            // checkBoxUsePermanentTooltips
+            // 
+            this.checkBoxUsePermanentTooltips.AutoSize = true;
+            this.checkBoxUsePermanentTooltips.Location = new System.Drawing.Point(140, 70);
+            this.checkBoxUsePermanentTooltips.Name = "checkBoxUsePermanentTooltips";
+            this.checkBoxUsePermanentTooltips.Size = new System.Drawing.Size(134, 17);
+            this.checkBoxUsePermanentTooltips.TabIndex = 21;
+            this.checkBoxUsePermanentTooltips.Text = "Use permanent tooltips";
+            this.checkBoxUsePermanentTooltips.UseVisualStyleBackColor = true;
+            this.checkBoxUsePermanentTooltips.CheckedChanged += new System.EventHandler(this.checkBoxUsePermanentTooltips_CheckedChanged);
+            // 
+            // checkBoxUsePhaseColors
+            // 
+            this.checkBoxUsePhaseColors.AutoSize = true;
+            this.checkBoxUsePhaseColors.Location = new System.Drawing.Point(13, 69);
+            this.checkBoxUsePhaseColors.Name = "checkBoxUsePhaseColors";
+            this.checkBoxUsePhaseColors.Size = new System.Drawing.Size(108, 17);
+            this.checkBoxUsePhaseColors.TabIndex = 22;
+            this.checkBoxUsePhaseColors.Text = "Use phase colors";
+            this.checkBoxUsePhaseColors.UseVisualStyleBackColor = true;
+            this.checkBoxUsePhaseColors.CheckedChanged += new System.EventHandler(this.checkBoxUsePhaseColors_CheckedChanged);
+            // 
             // checkBoxAllowChangingEntryAndSourceType
             // 
             this.checkBoxAllowChangingEntryAndSourceType.AutoSize = true;
-            this.checkBoxAllowChangingEntryAndSourceType.Location = new System.Drawing.Point(13, 71);
+            this.checkBoxAllowChangingEntryAndSourceType.Location = new System.Drawing.Point(140, 47);
             this.checkBoxAllowChangingEntryAndSourceType.Name = "checkBoxAllowChangingEntryAndSourceType";
-            this.checkBoxAllowChangingEntryAndSourceType.Size = new System.Drawing.Size(229, 17);
+            this.checkBoxAllowChangingEntryAndSourceType.Size = new System.Drawing.Size(146, 17);
             this.checkBoxAllowChangingEntryAndSourceType.TabIndex = 19;
-            this.checkBoxAllowChangingEntryAndSourceType.Text = "Allow changing entryorguid and sourcetype";
+            this.checkBoxAllowChangingEntryAndSourceType.Text = "Allow changing static info";
             this.checkBoxAllowChangingEntryAndSourceType.UseVisualStyleBackColor = true;
             // 
             // checkBoxListActionlistsOrEntries
@@ -793,20 +846,10 @@ namespace SAI_Editor
             this.checkBoxShowBasicInfo.UseVisualStyleBackColor = true;
             this.checkBoxShowBasicInfo.CheckedChanged += new System.EventHandler(this.checkBoxShowBasicInfo_CheckedChanged);
             // 
-            // checkBoxScriptByGuid
-            // 
-            this.checkBoxScriptByGuid.AutoSize = true;
-            this.checkBoxScriptByGuid.Location = new System.Drawing.Point(140, 47);
-            this.checkBoxScriptByGuid.Name = "checkBoxScriptByGuid";
-            this.checkBoxScriptByGuid.Size = new System.Drawing.Size(97, 17);
-            this.checkBoxScriptByGuid.TabIndex = 18;
-            this.checkBoxScriptByGuid.Text = "Script by GUID";
-            this.checkBoxScriptByGuid.UseVisualStyleBackColor = true;
-            // 
             // checkBox3
             // 
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(13, 94);
+            this.checkBox3.Location = new System.Drawing.Point(13, 92);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(241, 17);
             this.checkBox3.TabIndex = 20;
@@ -2209,35 +2252,6 @@ namespace SAI_Editor
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
-            // pictureBoxCreateScript
-            // 
-            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
-            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
-            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
-            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
-            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxCreateScript.TabIndex = 16;
-            this.pictureBoxCreateScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
-            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
-            // 
-            // pictureBoxLoadScript
-            // 
-            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
-            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
-            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
-            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
-            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLoadScript.TabIndex = 16;
-            this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
-            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2275,6 +2289,8 @@ namespace SAI_Editor
             this.groupBoxLogin.PerformLayout();
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -2294,8 +2310,6 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
             this.panelPermanentTooltipTypes.ResumeLayout(false);
             this.panelPermanentTooltipTypes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2339,7 +2353,6 @@ namespace SAI_Editor
         private System.Windows.Forms.CheckBox checkBoxAllowChangingEntryAndSourceType;
         private System.Windows.Forms.CheckBox checkBoxListActionlistsOrEntries;
         private System.Windows.Forms.CheckBox checkBoxShowBasicInfo;
-        private System.Windows.Forms.CheckBox checkBoxScriptByGuid;
         private System.Windows.Forms.Button buttonSearchEventFlags;
         private System.Windows.Forms.NumericUpDown textBoxEventChance;
         private System.Windows.Forms.Label label3;
@@ -2465,6 +2478,8 @@ namespace SAI_Editor
         private System.Windows.Forms.ToolStripMenuItem menuItemCopySelectedRowListView;
         private System.Windows.Forms.ToolStripMenuItem menuItemCopySelectedRow;
         private System.Windows.Forms.ToolStripMenuItem menuItemPasteLastCopiedRow;
+        private System.Windows.Forms.CheckBox checkBoxUsePermanentTooltips;
+        private System.Windows.Forms.CheckBox checkBoxUsePhaseColors;
     }
 }
 
