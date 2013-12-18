@@ -63,14 +63,10 @@ namespace SAI_Editor.Classes
 
             if (keepSelection && lastSelectedIndex != -1)
             {
-                foreach (ListViewItem item in Items)
-                {
-                    if (item.Index == lastSelectedIndex)
-                    {
-                        item.Selected = true;
-                        break;
-                    }
-                }
+                Items[lastSelectedIndex].Selected = true;
+                ((SmartScriptListViewItem)Items[lastSelectedIndex]).LastBackColor = SelectedItems[0].BackColor;
+                Items[lastSelectedIndex].BackColor = Color.FromArgb(51, 153, 254);
+                Items[lastSelectedIndex].ForeColor = Color.White;
             }
 
             _colors = new Stack<Color>(Constants.phaseColors);
