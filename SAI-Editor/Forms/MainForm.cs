@@ -99,16 +99,22 @@ namespace SAI_Editor
                         MainFormHeight = Settings.Default.MainFormHeight;
                         MinimumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
                         MaximumSize = new Size(MainFormWidth, MainFormHeight);
+                        panelPermanentTooltipTypes.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+                        panelPermanentTooltipParameters.Anchor = AnchorStyles.Top | AnchorStyles.Left;
                         break;
                     case FormState.FormStateLogin:
                         FormBorderStyle = FormBorderStyle.FixedDialog;
                         MinimumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
                         MaximumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
+                        panelPermanentTooltipTypes.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+                        panelPermanentTooltipParameters.Anchor = AnchorStyles.Top | AnchorStyles.Left;
                         break;
                     case FormState.FormStateMain:
                         FormBorderStyle = FormBorderStyle.Sizable;
                         MinimumSize = new Size(MainFormWidth, (int)FormSizes.MainFormHeight);
                         MaximumSize = new Size(MainFormWidth, (int)FormSizes.MainFormHeight + 100);
+                        panelPermanentTooltipTypes.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+                        panelPermanentTooltipParameters.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
                         break;
                 }
             }
