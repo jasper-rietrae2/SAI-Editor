@@ -3794,9 +3794,15 @@ namespace SAI_Editor
                     continue;
 
                 if (smartScript.link == smartScriptListView.id)
+                {
                     smartScriptListView.comment = await CommentGenerator.Instance.GenerateCommentFor(smartScriptListView, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScriptListView));
+                    listViewSmartScripts.ReplaceSmartScript(smartScriptListView);
+                }
                 else if (smartScriptListView.link == smartScript.id)
+                {
                     smartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScript));
+                    listViewSmartScripts.ReplaceSmartScript(smartScript);
+                }
             }
         }
 
@@ -4067,12 +4073,7 @@ namespace SAI_Editor
 
         private void checkBoxUsePermanentTooltips_CheckedChanged(object sender, EventArgs e)
         {
-            bool settingChanged = Settings.Default.ShowTooltipsPermanently != checkBoxUsePermanentTooltips.Checked;
-            Settings.Default.ShowTooltipsPermanently = checkBoxUsePermanentTooltips.Checked;
-            Settings.Default.Save();
 
-            if (settingChanged)
-                ExpandToShowPermanentTooltips(!checkBoxUsePermanentTooltips.Checked);
         }
     }
 }
