@@ -886,7 +886,7 @@ namespace SAI_Editor.Classes
 
                 if (fullLine.Contains("_startOrStopBasedOnTargetType_"))
                 {
-                    if (smartscript.target_type == 0)
+                    if (smartScript.target_type == 0)
                     {
                         fullLine = fullLine.Replace("_startOrStopBasedOnTargetType_", "Stop");
                         fullLine = fullLine.Replace("_getTargetType_ ", String.Empty);

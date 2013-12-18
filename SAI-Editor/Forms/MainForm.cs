@@ -309,7 +309,9 @@ namespace SAI_Editor
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            if (radioButtonConnectToMySql.Checked)
+            bool connectToMySql = radioButtonConnectToMySql.Checked;
+
+            if (connectToMySql)
             {
                 if (String.IsNullOrEmpty(textBoxHost.Text))
                 {
@@ -350,14 +352,14 @@ namespace SAI_Editor
                     connectionString.Password = textBoxPassword.Text;
             }
 
-            Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
+            Settings.Default.UseWorldDatabase = connectToMySql;
             Settings.Default.Save();
 
-            if (!radioButtonConnectToMySql.Checked || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
+            if (!connectToMySql || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
             {
                 StartExpandingToMainForm(Settings.Default.InstantExpand);
 
-                if (!radioButtonConnectToMySql.Checked)
+                if (!connectToMySql)
                     SAI_Editor_Manager.Instance.ResetDatabases();
             }
         }
