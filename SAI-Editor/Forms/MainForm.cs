@@ -4120,7 +4120,10 @@ namespace SAI_Editor
 
         private void checkBoxUsePermanentTooltips_CheckedChanged(object sender, EventArgs e)
         {
+            Settings.Default.ShowTooltipsPermanently = checkBoxUsePermanentTooltips.Checked;
+            Settings.Default.Save();
 
+            ExpandToShowPermanentTooltips(!checkBoxUsePermanentTooltips.Checked);
         }
     }
 }
