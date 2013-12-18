@@ -897,11 +897,12 @@ namespace SAI_Editor.Classes
                         fullLine = fullLine.Replace("_startOrStopBasedOnTargetType_", "Start");
                 }
 
-                if (smartScript.event_phase_mask > 0)
+                int event_phase_mask = smartScriptLink != null ? smartScriptLink.event_phase_mask : smartScript.event_phase_mask;
+
+                if ((SmartPhaseMasks)event_phase_mask != SmartPhaseMasks.SMART_EVENT_PHASE_ALWAYS)
                 {
                     List<int> listOfSplitPhases = new List<int>();
 
-                    int event_phase_mask = smartScript.event_phase_mask;
                     int event_phase_mask2 = event_phase_mask;
                     int log2 = 0;
 
@@ -932,38 +933,40 @@ namespace SAI_Editor.Classes
                     fullLine += " " + String.Join(" & ", arrayOfSplitPhases) + ")";
                 }
 
-                if (smartScript.event_flags > 0)
+                SmartEventFlags event_flags = (SmartEventFlags)(smartScriptLink != null ? smartScriptLink.event_flags : smartScript.event_flags);
+
+                if (event_flags != SmartEventFlags.EVENT_FLAG_NONE)
                 {
-                    if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NOT_REPEATABLE) != 0))
+                    if (((event_flags & SmartEventFlags.EVENT_FLAG_NOT_REPEATABLE) != 0))
                         fullLine += " (No Repeat)";
 
-                    if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_DUNGEON) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_DUNGEON) != 0) &&
-                        (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_RAID) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_RAID) != 0))
+                    if (((event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_DUNGEON) != 0) && ((event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_DUNGEON) != 0) &&
+                        ((event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_RAID) != 0) && ((event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_RAID) != 0))
                         fullLine += " (Dungeon & Raid)";
                     else
                     {
-                        if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_DUNGEON) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_DUNGEON) != 0))
+                        if (((event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_DUNGEON) != 0) && ((event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_DUNGEON) != 0))
                             fullLine += " (Dungeon)";
                         else
                         {
-                            if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_DUNGEON) != 0))
+                            if (((event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_DUNGEON) != 0))
                                 fullLine += " (Normal Dungeon)";
-                            else if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_DUNGEON) != 0))
+                            else if (((event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_DUNGEON) != 0))
                                 fullLine += " (Heroic Dungeon)";
                         }
 
-                        if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_RAID) != 0) && (((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_RAID) != 0))
+                        if (((event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_RAID) != 0) && ((event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_RAID) != 0))
                             fullLine += " (Raid)";
                         else
                         {
-                            if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_RAID) != 0))
+                            if (((event_flags & SmartEventFlags.EVENT_FLAG_NORMAL_RAID) != 0))
                                 fullLine += " (Normal Raid)";
-                            else if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_RAID) != 0))
+                            else if (((event_flags & SmartEventFlags.EVENT_FLAG_HEROIC_RAID) != 0))
                                 fullLine += " (Heroic Raid)";
                         }
                     }
 
-                    if ((((SmartEventFlags)smartScript.event_flags & SmartEventFlags.EVENT_FLAG_DEBUG_ONLY) != 0))
+                    if (((event_flags & SmartEventFlags.EVENT_FLAG_DEBUG_ONLY) != 0))
                         fullLine += " (Debug)";
                 }
 
