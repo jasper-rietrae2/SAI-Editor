@@ -3764,8 +3764,8 @@ namespace SAI_Editor
             {
                 newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
 
-                if (smartScript.link != 0 || (SmartEvent)smartScript.event_type == SmartEvent.SMART_EVENT_LINK)
-                    await GenerateCommentForAllEventsLinkingFromAndToSmartScript(smartScript);
+                if (smartScript.link != 0 && (SmartEvent)smartScript.event_type != SmartEvent.SMART_EVENT_LINK)
+                    await GenerateCommentForAllEventsLinkingFromSmartScript(smartScript);
             }
 
             //! For some reason we have to re-check it here...
@@ -3779,6 +3779,28 @@ namespace SAI_Editor
 
             if (oldComment != newComment)
                 ResizeColumns();
+        }
+
+        private async Task GenerateCommentForAllEventsLinkingFromSmartScript(SmartScript smartScript)
+        {
+            if (smartScript == null || !Settings.Default.GenerateComments || smartScript.link == 0)
+                return;
+
+            List<SmartScript> smartScriptsLinkedFrom = GetAllSmartScriptThatLinkFrom(smartScript);
+
+            if (smartScriptsLinkedFrom == null || smartScriptsLinkedFrom.Count == 0)
+                return;
+
+            for (int i = 0; i < smartScriptsLinkedFrom.Count; ++i)
+            {
+                SmartScript smartScriptListView = smartScriptsLinkedFrom[i];
+
+                if (smartScriptListView.entryorguid != smartScript.entryorguid)
+                    continue;
+
+                smartScriptListView.comment = await CommentGenerator.Instance.GenerateCommentFor(smartScriptListView, originalEntryOrGuidAndSourceType, true, smartScript);
+                listViewSmartScripts.ReplaceSmartScript(smartScriptListView);
+            }
         }
 
         private async Task GenerateCommentForAllEventsLinkingFromAndToSmartScript(SmartScript smartScript)
@@ -3831,6 +3853,31 @@ namespace SAI_Editor
             }
 
             return smartScriptLink;
+        }
+
+        //! MUST take initial smartscript of linkings
+        private List<SmartScript> GetAllSmartScriptThatLinkFrom(SmartScript smartScriptInitial)
+        {
+            if (smartScriptInitial == null || smartScriptInitial.link == 0)
+                return null;
+
+            List<SmartScript> smartScriptsLinking = new List<SmartScript>();
+            smartScriptsLinking.Add(smartScriptInitial);
+            SmartScript lastInitialSmartScript = smartScriptInitial;
+
+            foreach (SmartScript smartScriptInListView in listViewSmartScripts.SmartScripts)
+            {
+                if ((SmartEvent)smartScriptInListView.event_type != SmartEvent.SMART_EVENT_LINK)
+                    continue;
+
+                if (smartScriptInListView.id == lastInitialSmartScript.link)
+                {
+                    smartScriptsLinking.Add(smartScriptInListView);
+                    lastInitialSmartScript = smartScriptInListView;
+                }
+            }
+
+            return smartScriptsLinking;
         }
 
         private void menuItemRevertQuery_Click(object sender, EventArgs e)
