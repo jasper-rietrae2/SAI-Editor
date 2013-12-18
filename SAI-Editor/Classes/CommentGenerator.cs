@@ -144,7 +144,7 @@ namespace SAI_Editor.Classes
             smartActionStrings.Add(SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS, "Quest Credit '_questNameActionParamOne_'");
             smartActionStrings.Add(SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO, "Quest Credit '_questNameCastCreatureOrGo_'");
             smartActionStrings.Add(SmartAction.SMART_ACTION_REMOVEAURASFROMSPELL, "Remove Aura '_spellNameActionParamOne_'");
-            smartActionStrings.Add(SmartAction.SMART_ACTION_FOLLOW, "Follow _getTargetType_");
+            smartActionStrings.Add(SmartAction.SMART_ACTION_FOLLOW, "_startOrStopBasedOnTargetType_ Follow _getTargetType_");
             smartActionStrings.Add(SmartAction.SMART_ACTION_RANDOM_PHASE, "Set Random Phase(_actionRandomParameters_)");
             smartActionStrings.Add(SmartAction.SMART_ACTION_RANDOM_PHASE_RANGE, "Set Phase Random Between _actionParamOne_-_actionParamTwo_");
             smartActionStrings.Add(SmartAction.SMART_ACTION_RESET_GOBJECT, "Reset Gameobject");
@@ -882,6 +882,17 @@ namespace SAI_Editor.Classes
                         fullLine = fullLine.Replace("_mountToEntryOrModelActionParams_", "Mount To Model " + smartScript.action_param2);
                     else
                         fullLine = fullLine.Replace("_mountToEntryOrModelActionParams_", "Dismount");
+                }
+
+                if (fullLine.Contains("_startOrStopBasedOnTargetType_"))
+                {
+                    if (smartscript.target_type == 0)
+                    {
+                        fullLine = fullLine.Replace("_startOrStopBasedOnTargetType_", "Stop");
+                        fullLine = fullLine.Replace("_getTargetType_ ", String.Empty);
+                    }
+                    else
+                        fullLine = fullLine.Replace("_startOrStopBasedOnTargetType_", "Start");
                 }
 
                 if (smartScript.event_phase_mask > 0)
