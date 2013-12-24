@@ -69,9 +69,6 @@
     <Compile Include="Classes\PictureBoxDisableable.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\PlaceholderTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Classes\SmartScriptListView.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -68,20 +68,18 @@ namespace SAI_Editor
             this.radioButtonConnectToMySql = new System.Windows.Forms.RadioButton();
             this.buttonSearchWorldDb = new System.Windows.Forms.Button();
             this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
-            this.textBoxHost = new SAI_Editor.Classes.PlaceholderTextBox();
-            this.textBoxUsername = new SAI_Editor.Classes.PlaceholderTextBox();
+            this.textBoxHost = new System.Windows.Forms.TextBox();
+            this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.labelUser = new System.Windows.Forms.Label();
-            this.textBoxPassword = new SAI_Editor.Classes.PlaceholderTextBox();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxWorldDatabase = new SAI_Editor.Classes.PlaceholderTextBox();
+            this.textBoxWorldDatabase = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxPort = new SAI_Editor.Classes.PlaceholderTextBox();
+            this.textBoxPort = new System.Windows.Forms.TextBox();
             this.labelHost = new System.Windows.Forms.Label();
             this.labelPort = new System.Windows.Forms.Label();
             this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
-            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -195,13 +193,13 @@ namespace SAI_Editor
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
+            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -214,6 +212,8 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipTypes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -585,7 +585,6 @@ namespace SAI_Editor
             // 
             this.textBoxHost.Location = new System.Drawing.Point(228, 18);
             this.textBoxHost.Name = "textBoxHost";
-            this.textBoxHost.PlaceHolderText = "localhost";
             this.textBoxHost.Size = new System.Drawing.Size(130, 20);
             this.textBoxHost.TabIndex = 3;
             this.textBoxHost.Text = "position groupbox 9;8";
@@ -594,7 +593,6 @@ namespace SAI_Editor
             // 
             this.textBoxUsername.Location = new System.Drawing.Point(228, 44);
             this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.PlaceHolderText = "root";
             this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
             this.textBoxUsername.TabIndex = 4;
             this.textBoxUsername.Text = "height grpbox + 20";
@@ -612,7 +610,6 @@ namespace SAI_Editor
             // 
             this.textBoxPassword.Location = new System.Drawing.Point(228, 70);
             this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PlaceHolderText = "****";
             this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
             this.textBoxPassword.TabIndex = 5;
             // 
@@ -629,7 +626,6 @@ namespace SAI_Editor
             // 
             this.textBoxWorldDatabase.Location = new System.Drawing.Point(228, 96);
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
-            this.textBoxWorldDatabase.PlaceHolderText = "world";
             this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
             this.textBoxWorldDatabase.TabIndex = 6;
             // 
@@ -646,7 +642,6 @@ namespace SAI_Editor
             // 
             this.textBoxPort.Location = new System.Drawing.Point(228, 122);
             this.textBoxPort.Name = "textBoxPort";
-            this.textBoxPort.PlaceHolderText = "3306";
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
             this.textBoxPort.TabIndex = 8;
             this.textBoxPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
@@ -697,35 +692,6 @@ namespace SAI_Editor
             this.groupBoxStaticScriptInfo.TabStop = false;
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
-            // 
-            // pictureBoxCreateScript
-            // 
-            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
-            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
-            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
-            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
-            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxCreateScript.TabIndex = 16;
-            this.pictureBoxCreateScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
-            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
-            // 
-            // pictureBoxLoadScript
-            // 
-            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
-            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
-            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
-            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
-            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLoadScript.TabIndex = 16;
-            this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
-            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // buttonSearchForEntryOrGuid
             // 
@@ -2257,6 +2223,35 @@ namespace SAI_Editor
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
+            // pictureBoxCreateScript
+            // 
+            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
+            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
+            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
+            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCreateScript.TabIndex = 16;
+            this.pictureBoxCreateScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            // 
+            // pictureBoxLoadScript
+            // 
+            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Enabled = false;
+            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
+            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
+            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
+            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLoadScript.TabIndex = 16;
+            this.pictureBoxLoadScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2294,8 +2289,6 @@ namespace SAI_Editor
             this.groupBoxLogin.PerformLayout();
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -2315,6 +2308,8 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
             this.panelPermanentTooltipTypes.ResumeLayout(false);
             this.panelPermanentTooltipTypes.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2463,14 +2458,14 @@ namespace SAI_Editor
         private System.Windows.Forms.RadioButton radioButtonConnectToMySql;
         private System.Windows.Forms.Button buttonSearchWorldDb;
         public System.Windows.Forms.CheckBox checkBoxAutoConnect;
-        public PlaceholderTextBox textBoxHost;
-        public PlaceholderTextBox textBoxUsername;
+        public System.Windows.Forms.TextBox textBoxHost;
+        public System.Windows.Forms.TextBox textBoxUsername;
         private System.Windows.Forms.Label labelUser;
-        public PlaceholderTextBox textBoxPassword;
+        public System.Windows.Forms.TextBox textBoxPassword;
         private System.Windows.Forms.Label label1;
-        public PlaceholderTextBox textBoxWorldDatabase;
+        public System.Windows.Forms.TextBox textBoxWorldDatabase;
         private System.Windows.Forms.Label label2;
-        public PlaceholderTextBox textBoxPort;
+        public System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.Label labelHost;
         private System.Windows.Forms.Label labelPort;
         private System.Windows.Forms.Label labelDontUseDatabaseWarning;
