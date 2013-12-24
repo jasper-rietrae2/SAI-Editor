@@ -18,9 +18,24 @@ namespace SAI_Editor.Classes
             set { _placeHolderText = value; }
         }
 
+        public new string Text
+        {
+            get
+            {
+                if (ForeColor == Color.Gray)
+                    return String.Empty;
+
+                return base.Text;
+            }
+            set
+            {
+                base.Text = value;
+            }
+        }
+
         protected override void OnGotFocus(EventArgs e)
         {
-            if (Text.Contains(_placeHolderText))
+            if (Text.Contains(_placeHolderText) && ForeColor == Color.Gray)
             {
                 Text = String.Empty;
                 ForeColor = Color.Black;
@@ -30,6 +45,17 @@ namespace SAI_Editor.Classes
         }
 
         protected override void OnLostFocus(EventArgs e)
+        {
+            if (String.IsNullOrEmpty(Text))
+            {
+                Text = _placeHolderText;
+                ForeColor = Color.Gray;
+            }
+
+            base.OnLostFocus(e);
+        }
+
+        protected override void OnTextChanged(EventArgs e)
         {
             if (String.IsNullOrEmpty(Text))
             {
