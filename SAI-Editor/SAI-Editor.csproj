@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.7.4\lib\net40\MySql.Data.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -236,9 +237,7 @@
   <ItemGroup>
     <Content Include="icon_write.ico" />
     <Content Include="Resources\database_form_icon.ico" />
-    <Content Include="Resources\FastColoredTextBox.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Resources\FastColoredTextBox.dll" />
     <Content Include="Resources\icon_add.ico" />
     <Content Include="Resources\icon_add_2.ico" />
     <None Include="Resources\icon_create_script.png" />
