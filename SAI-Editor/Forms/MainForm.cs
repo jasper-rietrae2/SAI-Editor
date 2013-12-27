@@ -367,6 +367,8 @@ namespace SAI_Editor
 
                 if (!connectToMySql)
                     SAI_Editor_Manager.Instance.ResetDatabases();
+
+                HandleUseWorldDatabaseSettingChanged();
             }
         }
 
