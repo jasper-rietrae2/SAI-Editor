@@ -460,6 +460,7 @@ namespace SAI_Editor
             textBoxWorldDatabase.Text = "";
             textBoxPort.Text = "";
             checkBoxAutoConnect.Checked = false;
+            radioButtonConnectToMySql.Checked = true;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
