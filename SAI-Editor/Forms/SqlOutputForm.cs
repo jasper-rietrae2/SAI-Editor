@@ -163,12 +163,11 @@ namespace SAI_Editor.Forms
             else
                 filename += originalEntryOrGuidAndSourceType.entryOrGuid;
 
-            filename += "] " + DateTime.Now.ToUniversalTime().ToString() + ".sql";
+            //! GetUniversalTimeStamp will return something like '27-12-2013 19;55;22'
+            filename += "] " + SAI_Editor_Manager.Instance.GetUniversalTimeStamp() + ".sql";
 
             if (!Directory.Exists("Reverts"))
                 Directory.CreateDirectory("Reverts");
-
-            filename = filename.Replace(":", ";");
 
             try
             {

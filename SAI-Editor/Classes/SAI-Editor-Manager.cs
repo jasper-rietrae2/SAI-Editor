@@ -383,5 +383,18 @@ namespace SAI_Editor
 
             return password;
         }
+
+        //! Will return something like '27-12-2013 19;55;22'
+        public string GetUniversalTimeStamp()
+        {
+            string universalTime = String.Empty;
+            universalTime += DateTime.Now.Day + "-";
+            universalTime += DateTime.Now.Month + "-";
+            universalTime += DateTime.Now.Year + " ";
+            universalTime += DateTime.Now.Hour + ";";
+            universalTime += DateTime.Now.Minute + ";";
+            universalTime += DateTime.Now.Second;
+            return universalTime;
+        }
     }
 }
