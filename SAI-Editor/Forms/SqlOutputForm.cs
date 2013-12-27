@@ -126,8 +126,10 @@ namespace SAI_Editor.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
-                MessageBox.Show(String.Format("The process '{0}' could not be opened!", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult dialogResult = MessageBox.Show(String.Format("The process '{0}' could not be opened! Do you wish to see the error thrown by the application?", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                if (dialogResult == DialogResult.Yes)
+                    MessageBox.Show(ex.Message, "An exception was thrown!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
