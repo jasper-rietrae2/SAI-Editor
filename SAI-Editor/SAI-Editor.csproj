@@ -42,7 +42,8 @@
       <HintPath>Resources\FastColoredTextBox.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.CompilerServices.AsyncTargetingPack.Net4">
+    <Reference Include="Microsoft.CompilerServices.AsyncTargetingPack.Net4, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.CompilerServices.AsyncTargetingPack.1.0.1\lib\net40\Microsoft.CompilerServices.AsyncTargetingPack.Net4.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data">
