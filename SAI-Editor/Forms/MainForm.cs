@@ -2690,6 +2690,7 @@ namespace SAI_Editor
                     timerShowPermanentTooltips.Enabled = false;
                     expandingListView = false;
                     ToolTipHelper.DisableOrEnableAllToolTips(true);
+                    checkBoxUsePermanentTooltips.Enabled = true;
                 }
             }
             else if (contractingListView)
@@ -2703,6 +2704,7 @@ namespace SAI_Editor
                     contractingListView = false;
                     panelPermanentTooltipTypes.Visible = true;
                     panelPermanentTooltipParameters.Visible = true;
+                    checkBoxUsePermanentTooltips.Enabled = true;
                 }
             }
         }
@@ -4128,6 +4130,7 @@ namespace SAI_Editor
 
         private void checkBoxUsePermanentTooltips_CheckedChanged(object sender, EventArgs e)
         {
+            checkBoxUsePermanentTooltips.Enabled = false;
             Settings.Default.ShowTooltipsPermanently = checkBoxUsePermanentTooltips.Checked;
             Settings.Default.Save();
 
