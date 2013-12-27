@@ -277,7 +277,8 @@ namespace SAI_Editor
 
         private async void buttonSearchForWorldDb_Click(object sender, EventArgs e)
         {
-            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
+            WorldDatabase worldDatabase = new WorldDatabase(textBoxHost.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxUsername.Text, textBoxPassword.Text, "");
+            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text, worldDatabase);
 
             if (databaseNames != null && databaseNames.Count > 0)
                 using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))

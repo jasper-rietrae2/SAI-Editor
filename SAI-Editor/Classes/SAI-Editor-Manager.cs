@@ -285,7 +285,7 @@ namespace SAI_Editor
             return timedActionListOrEntries;
         }
 
-        public Task<List<string>> GetDatabasesInConnection(string host, string username, uint port, string password = "")
+        public Task<List<string>> GetDatabasesInConnection(string host, string username, uint port, string password = "", WorldDatabase _worldDatabase = null)
         {
             return Task.Run(() =>
             {
@@ -303,7 +303,9 @@ namespace SAI_Editor
                 if (password.Length > 0)
                     _connectionString.Password = password;
 
-                if (!Instance.worldDatabase.CanConnectToDatabase(_connectionString))
+                WorldDatabase worldDatabase = _worldDatabase != null ? _worldDatabase : Instance.worldDatabase;
+
+                if (!worldDatabase.CanConnectToDatabase(_connectionString))
                     return null;
 
                 var databaseNames = new List<string>();
@@ -334,7 +336,6 @@ namespace SAI_Editor
                 }
 
                 return databaseNames;
-
             });
         }
 
