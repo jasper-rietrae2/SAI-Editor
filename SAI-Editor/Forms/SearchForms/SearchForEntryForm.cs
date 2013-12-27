@@ -677,6 +677,9 @@ namespace SAI_Editor
                     listView.Items.AddRange(lvItems.ToArray());
                 });
             }
+            catch (InvalidOperationException)
+            {
+            }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
