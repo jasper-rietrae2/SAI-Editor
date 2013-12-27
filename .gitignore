@@ -3,7 +3,7 @@
 Thumbs.db
 #Ignore files build by Visual Studio
 *.obj
-*.exe
+ SAI-Editor/bin SAI-Editor/obj 
 *.pdb
 *.user
 *.aps
