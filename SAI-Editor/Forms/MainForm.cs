@@ -3323,7 +3323,7 @@ namespace SAI_Editor
                 case SourceTypes.SourceTypeGameobject:
                     if (!Settings.Default.UseWorldDatabase)
                     {
-                        sourceName = "<Could not generate name>";
+                        sourceName = " <Could not generate name>";
                         break;
                     }
 
@@ -3337,7 +3337,7 @@ namespace SAI_Editor
                     {
                         if (!Settings.Default.UseWorldDatabase)
                         {
-                            sourceName = "<Could not generate name>";
+                            sourceName = " <Could not generate name>";
                             break;
                         }
 
@@ -3358,7 +3358,7 @@ namespace SAI_Editor
 
                     break;
                 default:
-                    sourceName = "<Could not generate name>";
+                    sourceName = " <Could not generate name>";
                     break;
             }
 
