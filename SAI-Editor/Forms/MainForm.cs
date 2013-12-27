@@ -154,7 +154,7 @@ namespace SAI_Editor
                 radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
                 checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
                 menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
-                menuItemGenerateCommentListView.Enabled = Settings.Default.UseWorldDatabase;
+                SetGenerateCommentsEnabled(Settings.Default.UseWorldDatabase);
                 buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || (SourceTypes)Settings.Default.LastSourceType == SourceTypes.SourceTypeAreaTrigger;
             }
             catch (Exception ex)
@@ -1395,7 +1395,7 @@ namespace SAI_Editor
 
             lastDeletedSmartScripts.Add(listViewSmartScripts.SelectedSmartScript.Clone());
             listViewSmartScripts.RemoveSmartScript(listViewSmartScripts.SelectedSmartScript);
-            buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+            SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
 
             if (listViewSmartScripts.Items.Count <= 0)
                 ResetFieldsToDefault(Settings.Default.ChangeStaticInfo);
@@ -1404,6 +1404,12 @@ namespace SAI_Editor
 
             //! Need to do this if static info is changed
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+        }
+
+        private void SetGenerateCommentsEnabled(bool enabled)
+        {
+            buttonGenerateComments.Enabled = enabled;
+            menuItemGenerateComment.Enabled = enabled;
         }
 
         private void ReSelectListViewItemWithPrevIndex(int prevIndex)
@@ -1699,7 +1705,7 @@ namespace SAI_Editor
             listViewSmartScripts.Select();
 
             buttonNewLine.Enabled = true;
-            buttonGenerateComments.Enabled = Settings.Default.UseWorldDatabase;
+            SetGenerateCommentsEnabled(Settings.Default.UseWorldDatabase);
             pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
             pictureBoxCreateScript.Enabled = true;
         }
@@ -1763,7 +1769,7 @@ namespace SAI_Editor
             checkBoxListActionlistsOrEntries.Text = originalEntryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
 
             buttonNewLine.Enabled = false;
-            buttonGenerateComments.Enabled = listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+            SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
             HandleShowBasicInfo();
 
             if (listViewSmartScripts.Items.Count > 0)
@@ -3937,7 +3943,7 @@ namespace SAI_Editor
 
         private async void menuItemGenerateCommentListView_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null || !Settings.Default.UseWorldDatabase)
                 return;
 
             for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
@@ -4086,11 +4092,10 @@ namespace SAI_Editor
             radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
             radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
             buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || comboBoxSourceType.SelectedIndex == 2;
-            buttonGenerateComments.Enabled = Settings.Default.UseWorldDatabase;
             pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
             checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
             menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
-            menuItemGenerateCommentListView.Enabled = Settings.Default.UseWorldDatabase;
+            SetGenerateCommentsEnabled(Settings.Default.UseWorldDatabase);
 
             if (Settings.Default.UseWorldDatabase)
                 Text = "SAI-Editor - Connection: " + Settings.Default.User + ", " + Settings.Default.Host + ", " + Settings.Default.Port.ToString();
