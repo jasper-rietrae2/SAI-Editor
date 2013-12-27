@@ -1,7 +1,6 @@
 - Functionality to check for 'wrong' code; reads selected line for stuff like unused parameters having values, wrong comments, incorrect use of parameters, etc. etc
 - Possibly take the workspace-idea by Event Horizon
 - Checkbox to only show event_types and action_types for the chosen source_type (so for gameobjects we would hide SMART_EVENT_SPELLHIT, etc.)
-- Possibly pick another logo, this is ugly and boring
 - Implement a SQLite database containing required tables for the tool (creature_template, creature, gameobject, smart_scripts, quest_template, item_template, etc.) and use this if user wants to not use his local database
   - Make this a download option instead (?). The SQLite file would become over 100 MB if we'd do this and it'd make no sense if we'd never use the data.
 - Find a way around the annoying 500-line limit when inserting SQLite data. When found, implement all sounds into the SQLite database.
