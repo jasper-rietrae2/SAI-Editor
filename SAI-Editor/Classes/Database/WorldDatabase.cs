@@ -229,9 +229,16 @@ namespace SAI_Editor.Database
                     return newName;
                 case SourceTypes.SourceTypeAreaTrigger:
                     return "Areatrigger";
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    return "Actionlist " + idOrGuid;
             }
 
             return "<Could not generate name>";
+        }
+
+        public async Task<string> GetObjectNameByIdOrGuidAndSourceType(EntryOrGuidAndSourceType entryOrGuidAndSourceType, bool errorIfNoneFound = false)
+        {
+            return await GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid, errorIfNoneFound);
         }
 
         public async Task<List<SmartScript>> GetSmartScripts(int entryorguid)

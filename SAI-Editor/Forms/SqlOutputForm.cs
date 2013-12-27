@@ -77,9 +77,26 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private void buttonSaveToFile_Click(object sender, EventArgs e)
+        private async void buttonSaveToFile_Click(object sender, EventArgs e)
         {
             saveFileDialog.Filter = "SQL files (*.sql)|*.sql|All files (*.*)|*.*";
+
+            switch (originalEntryOrGuidAndSourceType.sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                case SourceTypes.SourceTypeGameobject:
+                case SourceTypes.SourceTypeAreaTrigger:
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    saveFileDialog.FileName = "SAI for " + GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType).ToLower() + " ";
+
+                    if (Settings.Default.UseWorldDatabase)
+                        saveFileDialog.FileName += await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType);
+                    else
+                        saveFileDialog.FileName += originalEntryOrGuidAndSourceType.entryOrGuid;
+
+                    break;
+            }
+
             saveFileDialog.ShowDialog(this);
         }
 
@@ -142,7 +159,7 @@ namespace SAI_Editor.Forms
                 }
             }
             else
-                filename += originalEntryOrGuidAndSourceType.entryOrGuid;;
+                filename += originalEntryOrGuidAndSourceType.entryOrGuid;
 
             filename += "] " + DateTime.Now.ToUniversalTime().ToString() + ".sql";
 
