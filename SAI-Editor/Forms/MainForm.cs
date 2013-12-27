@@ -3263,6 +3263,7 @@ namespace SAI_Editor
         private async void comboBoxSourceType_SelectedIndexChanged(object sender, EventArgs e)
         {
             SourceTypes newSourceType = GetSourceTypeByIndex();
+            textBoxComments.Text = SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType(newSourceType);
 
             if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
             {
