@@ -3590,9 +3590,9 @@ namespace SAI_Editor
             //! Example: replaces 2891401 by @ENTRY*100+01 if original entryorguid is 28914.
             for (int i = 0; i < 50; ++i) // Regex.Matches(generatedSql, originalEntryOrGuidAndSourceType.entryOrGuid + "0" + i.ToString()).Count
             {
-                string[] charactersToReplace = new string[2] { ",", ")" };
+                string[] charactersToReplace = new string[3] { ",", ")", " " };
 
-                for (int j = 0; j < 2; ++j)
+                for (int j = 0; j < 3; ++j)
                 {
                     string characterToReplace = charactersToReplace[j];
                     string stringToReplace = originalEntryOrGuidAndSourceType.entryOrGuid + "0" + i.ToString() + characterToReplace;
