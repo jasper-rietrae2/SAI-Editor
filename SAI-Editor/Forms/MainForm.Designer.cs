@@ -506,14 +506,14 @@ namespace SAI_Editor
             // 
             // panelLoginBox
             // 
-            this.panelLoginBox.Controls.Add(this.groupBoxLogin);
             this.panelLoginBox.Controls.Add(this.labelDontUseDatabaseWarning);
+            this.panelLoginBox.Controls.Add(this.groupBoxLogin);
             this.panelLoginBox.Controls.Add(this.buttonConnect);
             this.panelLoginBox.Controls.Add(this.buttonClear);
             this.panelLoginBox.Controls.Add(this.buttonCancel);
             this.panelLoginBox.Location = new System.Drawing.Point(933, 31);
             this.panelLoginBox.Name = "panelLoginBox";
-            this.panelLoginBox.Size = new System.Drawing.Size(378, 224);
+            this.panelLoginBox.Size = new System.Drawing.Size(378, 258);
             this.panelLoginBox.TabIndex = 13;
             // 
             // groupBoxLogin
@@ -669,11 +669,11 @@ namespace SAI_Editor
             // labelDontUseDatabaseWarning
             // 
             this.labelDontUseDatabaseWarning.AutoSize = true;
-            this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDontUseDatabaseWarning.ForeColor = System.Drawing.Color.Red;
-            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(-1, 184);
+            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(1, 186);
             this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
-            this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(380, 39);
+            this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(375, 65);
             this.labelDontUseDatabaseWarning.TabIndex = 11;
             this.labelDontUseDatabaseWarning.Text = resources.GetString("labelDontUseDatabaseWarning.Text");
             this.labelDontUseDatabaseWarning.Visible = false;

@@ -37,7 +37,7 @@ namespace SAI_Editor
 
         ListViewHeightContract = 65,
 
-        LoginFormHeightShowWarning = 275,
+        LoginFormHeightShowWarning = 309,
     }
 
     internal enum MaxValues
