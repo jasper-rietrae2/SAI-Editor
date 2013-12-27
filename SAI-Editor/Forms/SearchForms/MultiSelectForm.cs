@@ -22,7 +22,7 @@ namespace SAI_Editor
             foreach (var en in Enum.GetNames(typeof(T)))
                 listViewSelectableItems.Items.Add("").SubItems.Add(en);
 
-            int bitmask = XConverter.ToInt32(textBoxToChange.Text);
+            long bitmask = XConverter.ToInt64(textBoxToChange.Text);
             bool anyFlag = false;
 
             foreach (ListViewItem item in listViewSelectableItems.Items)
@@ -33,7 +33,7 @@ namespace SAI_Editor
                     {
                         object enu = Enum.Parse(typeof(T), en);
                         
-                        if ((bitmask & Convert.ToInt32(enu)) == Convert.ToInt32(enu))
+                        if ((bitmask & Convert.ToInt64(enu)) == Convert.ToInt64(enu))
                         {
                             anyFlag = true;
                             item.Checked = true;
@@ -56,12 +56,12 @@ namespace SAI_Editor
         private void buttonContinue_Click(object sender, EventArgs e)
         {
             List<Enum> vals = Enum.GetValues(typeof(T)).OfType<Enum>().ToList();
-            int mask = 0;
+            long mask = 0;
 
             foreach (ListViewItem item in listViewSelectableItems.CheckedItems)
                 foreach (var en in Enum.GetNames(typeof(T)))
                     if (en.Equals(item.SubItems[1].Text))
-                        mask += Convert.ToInt32(Enum.Parse(typeof(T), en));
+                        mask += Convert.ToInt64(Enum.Parse(typeof(T), en));
 
             textBoxToChange.Text = mask.ToString();
             Close();
