@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.Common;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace SAI_Editor
 {
@@ -40,7 +41,8 @@ namespace SAI_Editor
         {
             bool exceptionOccurred = false;
 
-            await Task.Run(() =>
+            //! Using TaskEx makes all sync calls async.
+            await TaskEx.Run(() =>
             {
                 using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                 {
@@ -89,7 +91,8 @@ namespace SAI_Editor
 
         public async Task<DataTable> ExecuteQueryWithCancellation(CancellationToken token, string query, params Parameter[] parameters)
         {
-            return await Task.Run(async() =>
+            //! Using TaskEx makes all sync calls async.
+            return await TaskEx.Run(() =>
             {
                 using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                 {
@@ -102,7 +105,7 @@ namespace SAI_Editor
 
                         try
                         {
-                            var reader = await cmd.ExecuteReaderAsync(token);
+                            var reader = cmd.ExecuteReader();
 
                             if (token.IsCancellationRequested)
                                 token.ThrowIfCancellationRequested();
@@ -116,35 +119,6 @@ namespace SAI_Editor
                         {
                             MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return new DataTable();
-                        }
-                    }
-                }
-            });
-        }
-
-        public async Task<object> ExecuteScalar(string query, params Parameter[] parameters)
-        {
-            return await Task.Run(() =>
-            {
-                using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
-                {
-                    conn.Open();
-
-                    using (Command cmd = (Command)Activator.CreateInstance(typeof(Command), query, conn))
-                    {
-                        foreach (var param in parameters)
-                            cmd.Parameters.Add(param);
-
-                        try
-                        {
-                            object returnVal = cmd.ExecuteScalar();
-                            conn.Close();
-                            return returnVal;
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return null;
                         }
                     }
                 }

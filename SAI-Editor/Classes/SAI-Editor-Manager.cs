@@ -285,9 +285,9 @@ namespace SAI_Editor
             return timedActionListOrEntries;
         }
 
-        public Task<List<string>> GetDatabasesInConnection(string host, string username, uint port, string password = "", WorldDatabase _worldDatabase = null)
+        public async Task<List<string>> GetDatabasesInMySqlConnection(string host, string username, uint port, string password = "", WorldDatabase _worldDatabase = null)
         {
-            return Task.Run(() =>
+            //return Task.Run(() =>
             {
                 if (host.Length <= 0 || username.Length <= 0 || port <= 0)
                 {
@@ -312,23 +312,17 @@ namespace SAI_Editor
 
                 try
                 {
-                    using (var connection = new MySqlConnection(_connectionString.ToString()))
+                    DataTable dt = await worldDatabase.ExecuteQuery("SHOW DATABASES");
+
+                    if (dt.Rows.Count == 0)
                     {
-                        connection.Open();
-                        var returnVal = new MySqlDataAdapter("SHOW DATABASES", connection);
-                        var dataTable = new DataTable();
-                        returnVal.Fill(dataTable);
-
-                        if (dataTable.Rows.Count <= 0)
-                        {
-                            MessageBox.Show("Your connection contains no databases!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return null;
-                        }
-
-                        foreach (DataRow row in dataTable.Rows)
-                            for (int i = 0; i < row.ItemArray.Length; i++)
-                                databaseNames.Add(row.ItemArray[i].ToString());
+                        MessageBox.Show("Your connection contains no databases!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return databaseNames;
                     }
+
+                    foreach (DataRow row in dt.Rows)
+                        for (int i = 0; i < row.ItemArray.Length; i++)
+                            databaseNames.Add(row.ItemArray[i].ToString());
                 }
                 catch (Exception ex)
                 {
@@ -336,7 +330,7 @@ namespace SAI_Editor
                 }
 
                 return databaseNames;
-            });
+            }//);
         }
 
         public bool IsAiNameSmartAi(string aiName)
