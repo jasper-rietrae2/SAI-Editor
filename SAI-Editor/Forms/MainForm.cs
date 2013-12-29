@@ -201,6 +201,7 @@ namespace SAI_Editor
 
                 if (!Settings.Default.UseWorldDatabase || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString, false))
                 {
+                    SAI_Editor_Manager.Instance.ResetWorldDatabase(connectionString);
                     buttonConnect.PerformClick();
 
                     if (Settings.Default.InstantExpand)
@@ -387,7 +388,7 @@ namespace SAI_Editor
                 Settings.Default.Entropy = salt;
                 Settings.Default.Host = textBoxHost.Text;
                 Settings.Default.User = textBoxUsername.Text;
-                Settings.Default.Password = textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
+                Settings.Default.Password = textBoxPassword.Text.Length == 0 ? String.Empty : textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
                 Settings.Default.Port = XConverter.ToUInt32(textBoxPort.Text);
@@ -3749,9 +3750,8 @@ namespace SAI_Editor
                 Settings.Default.Entropy = salt;
                 Settings.Default.Host = textBoxHost.Text;
                 Settings.Default.User = textBoxUsername.Text;
-                Settings.Default.Password = textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
+                Settings.Default.Password = textBoxPassword.Text.Length == 0 ? String.Empty : textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
-                Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
                 Settings.Default.Port = XConverter.ToUInt32(textBoxPort.Text);
                 Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;

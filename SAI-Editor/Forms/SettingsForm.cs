@@ -96,7 +96,7 @@ namespace SAI_Editor
                 Settings.Default.Entropy = salt;
                 Settings.Default.Host = textBoxHost.Text;
                 Settings.Default.User = textBoxUsername.Text;
-                Settings.Default.Password = decryptedPassword.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
+                Settings.Default.Password = decryptedPassword.Length == 0 ? String.Empty : decryptedPassword.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.Port = textBoxPort.Text.Length > 0 ? XConverter.ToUInt32(textBoxPort.Text) : 0;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;

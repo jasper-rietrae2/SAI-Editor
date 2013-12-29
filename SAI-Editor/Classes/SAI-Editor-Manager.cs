@@ -77,17 +77,21 @@ namespace SAI_Editor
             worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, GetPasswordSetting(), Settings.Default.Database);
         }
 
+        public void ResetWorldDatabase(MySqlConnectionStringBuilder _connectionString)
+        {
+            worldDatabase = new WorldDatabase(_connectionString.Server, _connectionString.Port, _connectionString.UserID, _connectionString.Password, _connectionString.Database);
+        }
+
         public void ResetSQLiteDatabase()
         {
             sqliteDatabase = new SQLiteDatabase("Resources/sqlite_database.db");
         }
 
-        public async Task<bool> LoadSQLiteDatabaseInfo()
+        public async Task LoadSQLiteDatabaseInfo()
         {
             eventTypeInformations = await sqliteDatabase.GetEventTypeInformation();
             actionTypeInformations = await sqliteDatabase.GetActionTypeInformation();
             targetTypeInformations = await sqliteDatabase.GetTargetTypeInformation();
-            return true;
         }
 
         private BaseTypeInformation GetTypeByScriptTypeId(int type, ScriptTypeId scriptTypeId)
