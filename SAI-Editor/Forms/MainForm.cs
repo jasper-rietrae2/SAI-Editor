@@ -830,7 +830,7 @@ namespace SAI_Editor
                         }
                     }
 
-                    pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
+                    pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
                     pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                     return new List<SmartScript>();
                 }
@@ -891,7 +891,7 @@ namespace SAI_Editor
                     MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
+            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             return smartScriptsToReturn;
         }
@@ -1712,7 +1712,7 @@ namespace SAI_Editor
 
             buttonNewLine.Enabled = true;
             SetGenerateCommentsEnabled(Settings.Default.UseWorldDatabase);
-            pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
+            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
             pictureBoxCreateScript.Enabled = true;
         }
 
@@ -4100,7 +4100,7 @@ namespace SAI_Editor
             radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
             radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
             buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || comboBoxSourceType.SelectedIndex == 2;
-            pictureBoxLoadScript.Enabled = Settings.Default.UseWorldDatabase;
+            pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
             checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
             menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
             SetGenerateCommentsEnabled(Settings.Default.UseWorldDatabase);
