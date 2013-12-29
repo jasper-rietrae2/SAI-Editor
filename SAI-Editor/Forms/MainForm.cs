@@ -349,6 +349,7 @@ namespace SAI_Editor
                     return;
                 }
 
+                connectionString = new MySqlConnectionStringBuilder();
                 connectionString.Server = textBoxHost.Text;
                 connectionString.UserID = textBoxUsername.Text;
                 connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
