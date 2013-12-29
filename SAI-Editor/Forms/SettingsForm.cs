@@ -310,6 +310,7 @@ namespace SAI_Editor
             else
                 worldDatabase = SAI_Editor_Manager.Instance.worldDatabase;
 
+            //! If no connection was established, it would throw an error in WorldDatabase.CanConnectToDatabase.
             if (worldDatabase.CanConnectToDatabase(_connectionString))
                 MessageBox.Show("Connection successful!", "Connection status", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

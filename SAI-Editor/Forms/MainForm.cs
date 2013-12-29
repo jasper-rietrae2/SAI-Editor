@@ -1511,10 +1511,7 @@ namespace SAI_Editor
 
         private void pictureBoxCreateScript_Click(object sender, EventArgs e)
         {
-            if (!pictureBoxCreateScript.Enabled)
-                return;
-
-            if (String.IsNullOrWhiteSpace(textBoxEntryOrGuid.Text) || comboBoxSourceType.SelectedIndex == -1)
+            if (!pictureBoxCreateScript.Enabled || comboBoxSourceType.SelectedIndex == -1)
                 return;
 
             TryToCreateScript();
@@ -1522,15 +1519,18 @@ namespace SAI_Editor
 
         public async void TryToCreateScript(bool fromNewLine = false)
         {
+            if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
+                return;
+
             if (listViewSmartScripts.Items.Count > 0)
             {
                 DialogResult dialogResult = MessageBox.Show("There is already a script loaded at this moment. Do you want to overwrite this?\n\nWarning: overwriting means local unsaved changes will also be discarded!", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (dialogResult != DialogResult.Yes)
                     return;
-
-                ResetFieldsToDefault();
             }
+
+            ResetFieldsToDefault();
 
             int entryorguid = 0;
 

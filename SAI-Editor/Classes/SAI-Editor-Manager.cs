@@ -309,6 +309,7 @@ namespace SAI_Editor
 
                 WorldDatabase worldDatabase = _worldDatabase != null ? _worldDatabase : Instance.worldDatabase;
 
+                //! Will throw an error message itself if no connection can be made.
                 if (!worldDatabase.CanConnectToDatabase(_connectionString))
                     return null;
 
