@@ -1227,27 +1227,6 @@ namespace SAI_Editor
                     buttonTargetParamOneSearch.Visible = true;
                     break;
             }
-
-            SetEnabledOfParameterFields();
-        }
-
-        private void SetEnabledOfParameterFields()
-        {
-            textBoxEventParam1.Enabled = labelEventParam1.Text.Length > 0;
-            textBoxEventParam2.Enabled = labelEventParam2.Text.Length > 0;
-            textBoxEventParam3.Enabled = labelEventParam3.Text.Length > 0;
-            textBoxEventParam4.Enabled = labelEventParam4.Text.Length > 0;
-
-            textBoxActionParam1.Enabled = labelActionParam1.Text.Length > 0;
-            textBoxActionParam2.Enabled = labelActionParam2.Text.Length > 0;
-            textBoxActionParam3.Enabled = labelActionParam3.Text.Length > 0;
-            textBoxActionParam4.Enabled = labelActionParam4.Text.Length > 0;
-            textBoxActionParam5.Enabled = labelActionParam5.Text.Length > 0;
-            textBoxActionParam6.Enabled = labelActionParam6.Text.Length > 0;
-
-            textBoxTargetParam1.Enabled = labelTargetParam1.Text.Length > 0;
-            textBoxTargetParam2.Enabled = labelTargetParam2.Text.Length > 0;
-            textBoxTargetParam3.Enabled = labelTargetParam3.Text.Length > 0;
         }
 
         private void AddTooltip(Control control, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true, bool active = true, int autoPopDelay = 2100000000, bool showAlways = true)
@@ -2454,8 +2433,6 @@ namespace SAI_Editor
                     labelActionParam6.Text = "Group id";
                     break;
             }
-
-            SetEnabledOfParameterFields();
         }
 
         private void buttonActionParamTwoSearch_Click(object sender, EventArgs e)
