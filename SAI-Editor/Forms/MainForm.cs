@@ -240,6 +240,8 @@ namespace SAI_Editor
             textBoxActionType.MouseWheel += textBoxActionType_MouseWheel;
             textBoxTargetType.MouseWheel += textBoxTargetType_MouseWheel;
 
+            buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+
             runningConstructor = false;
         }
 
@@ -1710,10 +1712,10 @@ namespace SAI_Editor
             listViewSmartScripts.Items[0].Selected = true;
             listViewSmartScripts.Select();
 
-            buttonNewLine.Enabled = true;
+            buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             SetGenerateCommentsEnabled(Settings.Default.UseWorldDatabase);
             pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
-            pictureBoxCreateScript.Enabled = true;
+            pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
         }
 
         private string GetTemplateTableBySourceType(SourceTypes sourceType)
@@ -1794,7 +1796,7 @@ namespace SAI_Editor
                     lastSmartScriptIdOfScript = XConverter.ToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
             }
 
-            buttonNewLine.Enabled = true;
+            buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             buttonGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
             menuItemGenerateSql.Enabled = listViewSmartScripts.Items.Count > 0;
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
@@ -2933,7 +2935,7 @@ namespace SAI_Editor
             listViewSmartScripts.Select();
             listViewSmartScripts.EnsureVisible(index);
 
-            buttonNewLine.Enabled = true;
+            buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
         }
 
         private async void textBoxLinkTo_TextChanged(object sender, EventArgs e)
@@ -3245,6 +3247,7 @@ namespace SAI_Editor
         {
             pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+            buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
 
             if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
             {

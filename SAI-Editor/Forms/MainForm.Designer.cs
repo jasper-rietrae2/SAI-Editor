@@ -46,10 +46,11 @@ namespace SAI_Editor
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuitemLoadSelectedEntry = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemGenerateComment = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemDuplicateRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemDeleteSelectedRow = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemRetrieveLastDeletedRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemDuplicateRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCopySelectedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemPasteLastCopiedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,23 +64,25 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCopySelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.panelLoginBox = new System.Windows.Forms.Panel();
+            this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
             this.groupBoxLogin = new System.Windows.Forms.GroupBox();
             this.radioButtonDontUseDatabase = new System.Windows.Forms.RadioButton();
             this.radioButtonConnectToMySql = new System.Windows.Forms.RadioButton();
             this.buttonSearchWorldDb = new System.Windows.Forms.Button();
             this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
             this.textBoxHost = new System.Windows.Forms.TextBox();
-            this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.labelUser = new System.Windows.Forms.Label();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxWorldDatabase = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.textBoxPort = new System.Windows.Forms.TextBox();
             this.labelHost = new System.Windows.Forms.Label();
+            this.textBoxUsername = new System.Windows.Forms.TextBox();
             this.labelPort = new System.Windows.Forms.Label();
-            this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
+            this.textBoxWorldDatabase = new System.Windows.Forms.TextBox();
+            this.labelUser = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
+            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -192,15 +195,14 @@ namespace SAI_Editor
             this.labelPermanentTooltipTextTypes = new System.Windows.Forms.Label();
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
-            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -213,8 +215,6 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipTypes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -359,15 +359,10 @@ namespace SAI_Editor
             this.menuItemGenerateComment.Text = "Generate comment for selected row";
             this.menuItemGenerateComment.Click += new System.EventHandler(this.menuItemGenerateCommentListView_Click);
             // 
-            // menuItemDuplicateRow
+            // toolStripSeparator3
             // 
-            this.menuItemDuplicateRow.Enabled = false;
-            this.menuItemDuplicateRow.Name = "menuItemDuplicateRow";
-            this.menuItemDuplicateRow.ShortcutKeyDisplayString = "(Ctrl + Q)";
-            this.menuItemDuplicateRow.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
-            this.menuItemDuplicateRow.Size = new System.Drawing.Size(319, 22);
-            this.menuItemDuplicateRow.Text = "Duplicate selected row";
-            this.menuItemDuplicateRow.Click += new System.EventHandler(this.menuItemDuplicateSelectedRow_Click);
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(316, 6);
             // 
             // menuItemDeleteSelectedRow
             // 
@@ -379,11 +374,6 @@ namespace SAI_Editor
             this.menuItemDeleteSelectedRow.Text = "Delete selected row";
             this.menuItemDeleteSelectedRow.Click += new System.EventHandler(this.menuOptionDeleteSelectedRow_Click);
             // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(316, 6);
-            // 
             // menuItemRetrieveLastDeletedRow
             // 
             this.menuItemRetrieveLastDeletedRow.Name = "menuItemRetrieveLastDeletedRow";
@@ -393,6 +383,21 @@ namespace SAI_Editor
             this.menuItemRetrieveLastDeletedRow.Size = new System.Drawing.Size(319, 22);
             this.menuItemRetrieveLastDeletedRow.Text = "Retrieve last deleted row";
             this.menuItemRetrieveLastDeletedRow.Click += new System.EventHandler(this.menuItemRetrieveLastDeletedRow_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(316, 6);
+            // 
+            // menuItemDuplicateRow
+            // 
+            this.menuItemDuplicateRow.Enabled = false;
+            this.menuItemDuplicateRow.Name = "menuItemDuplicateRow";
+            this.menuItemDuplicateRow.ShortcutKeyDisplayString = "(Ctrl + Q)";
+            this.menuItemDuplicateRow.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.menuItemDuplicateRow.Size = new System.Drawing.Size(319, 22);
+            this.menuItemDuplicateRow.Text = "Duplicate selected row";
+            this.menuItemDuplicateRow.Click += new System.EventHandler(this.menuItemDuplicateSelectedRow_Click);
             // 
             // menuItemCopySelectedRow
             // 
@@ -516,6 +521,18 @@ namespace SAI_Editor
             this.panelLoginBox.Size = new System.Drawing.Size(378, 258);
             this.panelLoginBox.TabIndex = 13;
             // 
+            // labelDontUseDatabaseWarning
+            // 
+            this.labelDontUseDatabaseWarning.AutoSize = true;
+            this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDontUseDatabaseWarning.ForeColor = System.Drawing.Color.Red;
+            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(1, 186);
+            this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
+            this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(375, 65);
+            this.labelDontUseDatabaseWarning.TabIndex = 11;
+            this.labelDontUseDatabaseWarning.Text = resources.GetString("labelDontUseDatabaseWarning.Text");
+            this.labelDontUseDatabaseWarning.Visible = false;
+            // 
             // groupBoxLogin
             // 
             this.groupBoxLogin.Controls.Add(this.radioButtonDontUseDatabase);
@@ -591,55 +608,6 @@ namespace SAI_Editor
             this.textBoxHost.TabIndex = 3;
             this.textBoxHost.Text = "position groupbox 9;8";
             // 
-            // textBoxUsername
-            // 
-            this.textBoxUsername.Location = new System.Drawing.Point(228, 70);
-            this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
-            this.textBoxUsername.TabIndex = 4;
-            this.textBoxUsername.Text = "height grpbox + 20";
-            // 
-            // labelUser
-            // 
-            this.labelUser.AutoSize = true;
-            this.labelUser.Location = new System.Drawing.Point(164, 73);
-            this.labelUser.Name = "labelUser";
-            this.labelUser.Size = new System.Drawing.Size(58, 13);
-            this.labelUser.TabIndex = 0;
-            this.labelUser.Text = "Username:";
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Location = new System.Drawing.Point(228, 96);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPassword.TabIndex = 5;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(166, 99);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Password:";
-            // 
-            // textBoxWorldDatabase
-            // 
-            this.textBoxWorldDatabase.Location = new System.Drawing.Point(228, 122);
-            this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
-            this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
-            this.textBoxWorldDatabase.TabIndex = 6;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(135, 125);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "World Database:";
-            // 
             // textBoxPort
             // 
             this.textBoxPort.Location = new System.Drawing.Point(228, 44);
@@ -657,6 +625,14 @@ namespace SAI_Editor
             this.labelHost.TabIndex = 3;
             this.labelHost.Text = "Host:";
             // 
+            // textBoxUsername
+            // 
+            this.textBoxUsername.Location = new System.Drawing.Point(228, 70);
+            this.textBoxUsername.Name = "textBoxUsername";
+            this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
+            this.textBoxUsername.TabIndex = 4;
+            this.textBoxUsername.Text = "height grpbox + 20";
+            // 
             // labelPort
             // 
             this.labelPort.AutoSize = true;
@@ -666,17 +642,46 @@ namespace SAI_Editor
             this.labelPort.TabIndex = 4;
             this.labelPort.Text = "Port:";
             // 
-            // labelDontUseDatabaseWarning
+            // textBoxWorldDatabase
             // 
-            this.labelDontUseDatabaseWarning.AutoSize = true;
-            this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDontUseDatabaseWarning.ForeColor = System.Drawing.Color.Red;
-            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(1, 186);
-            this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
-            this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(375, 65);
-            this.labelDontUseDatabaseWarning.TabIndex = 11;
-            this.labelDontUseDatabaseWarning.Text = resources.GetString("labelDontUseDatabaseWarning.Text");
-            this.labelDontUseDatabaseWarning.Visible = false;
+            this.textBoxWorldDatabase.Location = new System.Drawing.Point(228, 122);
+            this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
+            this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
+            this.textBoxWorldDatabase.TabIndex = 6;
+            // 
+            // labelUser
+            // 
+            this.labelUser.AutoSize = true;
+            this.labelUser.Location = new System.Drawing.Point(164, 73);
+            this.labelUser.Name = "labelUser";
+            this.labelUser.Size = new System.Drawing.Size(58, 13);
+            this.labelUser.TabIndex = 0;
+            this.labelUser.Text = "Username:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(135, 125);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "World Database:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(166, 99);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Password:";
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Location = new System.Drawing.Point(228, 96);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
+            this.textBoxPassword.TabIndex = 5;
             // 
             // groupBoxStaticScriptInfo
             // 
@@ -694,6 +699,35 @@ namespace SAI_Editor
             this.groupBoxStaticScriptInfo.TabStop = false;
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
+            // 
+            // pictureBoxCreateScript
+            // 
+            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
+            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
+            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
+            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCreateScript.TabIndex = 16;
+            this.pictureBoxCreateScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            // 
+            // pictureBoxLoadScript
+            // 
+            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Enabled = false;
+            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
+            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
+            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
+            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLoadScript.TabIndex = 16;
+            this.pictureBoxLoadScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // buttonSearchForEntryOrGuid
             // 
@@ -2124,7 +2158,6 @@ namespace SAI_Editor
             // 
             // buttonNewLine
             // 
-            this.buttonNewLine.Enabled = false;
             this.buttonNewLine.Location = new System.Drawing.Point(649, 215);
             this.buttonNewLine.Name = "buttonNewLine";
             this.buttonNewLine.Size = new System.Drawing.Size(83, 23);
@@ -2208,11 +2241,6 @@ namespace SAI_Editor
             this.panelPermanentTooltipTypes.TabIndex = 25;
             this.panelPermanentTooltipTypes.Visible = false;
             // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(316, 6);
-            // 
             // listViewSmartScripts
             // 
             this.listViewSmartScripts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2230,35 +2258,6 @@ namespace SAI_Editor
             this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
-            // 
-            // pictureBoxCreateScript
-            // 
-            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
-            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
-            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
-            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
-            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxCreateScript.TabIndex = 16;
-            this.pictureBoxCreateScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
-            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
-            // 
-            // pictureBoxLoadScript
-            // 
-            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
-            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
-            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
-            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
-            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLoadScript.TabIndex = 16;
-            this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
-            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // MainForm
             // 
@@ -2297,6 +2296,8 @@ namespace SAI_Editor
             this.groupBoxLogin.PerformLayout();
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -2316,8 +2317,6 @@ namespace SAI_Editor
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
             this.panelPermanentTooltipTypes.ResumeLayout(false);
             this.panelPermanentTooltipTypes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
