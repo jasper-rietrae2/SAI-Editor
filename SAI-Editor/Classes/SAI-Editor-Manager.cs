@@ -52,12 +52,7 @@ namespace SAI_Editor
             get
             {
                 lock (_lock)
-                {
-                    if (_instance == null)
-                        _instance = new SAI_Editor_Manager();
-
-                    return _instance;
-                }
+                    return _instance ?? (_instance = new SAI_Editor_Manager());
             }
         }
 

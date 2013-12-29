@@ -27,12 +27,7 @@ namespace SAI_Editor.Classes
             get
             {
                 lock (_lock)
-                {
-                    if (_instance == null)
-                        _instance = new CommentGenerator();
-
-                    return _instance;
-                }
+                    return _instance ?? (_instance = new CommentGenerator());
             }
         }
 
