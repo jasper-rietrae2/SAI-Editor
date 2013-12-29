@@ -49,7 +49,6 @@ namespace SAI_Editor.Classes
             long.TryParse(str.ToString(), out output);
             return output;
         }
-
         public static double ToDouble(string str)
         {
             double output;

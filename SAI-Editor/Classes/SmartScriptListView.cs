@@ -126,7 +126,7 @@ namespace SAI_Editor.Classes
                 if (_excludedProperties.Contains(propInfo.Name))
                     continue;
 
-                lvi.SubItems.Add(propInfo.GetValue(script, null).ToString());
+                lvi.SubItems.Add(propInfo.GetValue(script).ToString());
             }
 
             if (!listViewOnly)
@@ -168,7 +168,7 @@ namespace SAI_Editor.Classes
                     if (_excludedProperties.Contains(propInfo.Name))
                         continue;
 
-                    lvi.SubItems.Add(propInfo.GetValue(script, null).ToString());
+                    lvi.SubItems.Add(propInfo.GetValue(script).ToString());
                 }
 
                 if (!listViewOnly)
@@ -228,7 +228,7 @@ namespace SAI_Editor.Classes
                 if (_excludedProperties.Contains(propInfo.Name))
                     continue;
 
-                lvi.SubItems.Add(propInfo.GetValue(script, null).ToString());
+                lvi.SubItems.Add(propInfo.GetValue(script).ToString());
             }
 
             _smartScripts[_smartScripts.IndexOf(lvi.Script)] = script;
