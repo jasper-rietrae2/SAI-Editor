@@ -189,6 +189,7 @@ namespace SAI_Editor
 
                 if (Settings.Default.UseWorldDatabase)
                 {
+                    connectionString = new MySqlConnectionStringBuilder();
                     connectionString.Server = textBoxHost.Text;
                     connectionString.UserID = textBoxUsername.Text;
                     connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);

@@ -72,6 +72,7 @@ namespace SAI_Editor
             rng.Dispose();
             string decryptedPassword = textBoxPassword.Text;
 
+            connectionString = new MySqlConnectionStringBuilder();
             connectionString.Server = textBoxHost.Text;
             connectionString.UserID = textBoxUsername.Text;
             connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
@@ -293,13 +294,14 @@ namespace SAI_Editor
 
         private void buttonTestConnection_Click(object sender, EventArgs e)
         {
-            connectionString.Server = textBoxHost.Text;
-            connectionString.UserID = textBoxUsername.Text;
-            connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
-            connectionString.Database = textBoxWorldDatabase.Text;
+            MySqlConnectionStringBuilder _connectionString = new MySqlConnectionStringBuilder();
+            _connectionString.Server = textBoxHost.Text;
+            _connectionString.UserID = textBoxUsername.Text;
+            _connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
+            _connectionString.Database = textBoxWorldDatabase.Text;
 
             if (textBoxPassword.Text.Length > 0)
-                connectionString.Password = textBoxPassword.Text;
+                _connectionString.Password = textBoxPassword.Text;
 
             WorldDatabase worldDatabase = null;
 
@@ -308,7 +310,7 @@ namespace SAI_Editor
             else
                 worldDatabase = SAI_Editor_Manager.Instance.worldDatabase;
 
-            if (worldDatabase.CanConnectToDatabase(connectionString))
+            if (worldDatabase.CanConnectToDatabase(_connectionString))
                 MessageBox.Show("Connection successful!", "Connection status", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
