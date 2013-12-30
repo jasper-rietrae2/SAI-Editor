@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SAI_Editor.Database.Classes
+﻿namespace SAI_Editor.Database.Classes
 {
     public class SmartScript
     {

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
-using SAI_Editor.Classes;
-using System.Linq;
 
 namespace SAI_Editor.SearchForms
 {

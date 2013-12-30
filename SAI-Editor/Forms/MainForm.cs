@@ -4,19 +4,16 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
-using System.Data;
 using System.Linq;
 using System.Drawing;
 using MySql.Data.MySqlClient;
 using SAI_Editor.Properties;
 using SAI_Editor.Database.Classes;
 using SAI_Editor.SearchForms;
-using SAI_Editor.Security;
 using SAI_Editor.Classes;
 using System.Threading.Tasks;
 using SAI_Editor.Forms;
-using System.IO;
-using System.Text.RegularExpressions;
+using SAI_Editor.Security;
 
 namespace SAI_Editor
 {
