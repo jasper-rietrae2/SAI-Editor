@@ -305,10 +305,7 @@ namespace SAI_Editor
 
             WorldDatabase worldDatabase = null;
 
-            if (!Settings.Default.UseWorldDatabase)
-                worldDatabase = new SAI_Editor.Database.WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, SAI_Editor_Manager.Instance.GetPasswordSetting(), Settings.Default.Database);
-            else
-                worldDatabase = SAI_Editor_Manager.Instance.worldDatabase;
+            worldDatabase = !Settings.Default.UseWorldDatabase ? new SAI_Editor.Database.WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, SAI_Editor_Manager.Instance.GetPasswordSetting(), Settings.Default.Database) : SAI_Editor_Manager.Instance.worldDatabase;
 
             //! If no connection was established, it would throw an error in WorldDatabase.CanConnectToDatabase.
             if (worldDatabase.CanConnectToDatabase(_connectionString))

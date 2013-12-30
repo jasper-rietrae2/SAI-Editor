@@ -268,10 +268,7 @@ namespace SAI_Editor
         {
             StopRunningThread();
 
-            if (listViewItemIndexToCopy > 0)
-                textBoxToChange.Text = listViewEntryResults.SelectedItems[0].SubItems[listViewItemIndexToCopy].Text;
-            else
-                textBoxToChange.Text = listViewEntryResults.SelectedItems[0].Text;
+            this.textBoxToChange.Text = this.listViewItemIndexToCopy > 0 ? this.listViewEntryResults.SelectedItems[0].SubItems[this.listViewItemIndexToCopy].Text : this.listViewEntryResults.SelectedItems[0].Text;
 
             Close();
         }
@@ -413,10 +410,7 @@ namespace SAI_Editor
                 {
                     if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
                     {
-                        if (listViewItemIndexToCopy > 0)
-                            textBoxToChange.Text = listViewEntryResults.SelectedItems[0].SubItems[listViewItemIndexToCopy].Text;
-                        else
-                            textBoxToChange.Text = listViewEntryResults.SelectedItems[listViewItemIndexToCopy].Text;
+                        this.textBoxToChange.Text = this.listViewItemIndexToCopy > 0 ? this.listViewEntryResults.SelectedItems[0].SubItems[this.listViewItemIndexToCopy].Text : this.listViewEntryResults.SelectedItems[this.listViewItemIndexToCopy].Text;
 
                         Close();
                     }

@@ -301,26 +301,18 @@ namespace SAI_Editor.Classes
 
                 if (fullLine.Contains("_spellNameEventParamOne_"))
                 {
-                    if (smartScript.event_param1 > 0)
-                        fullLine = fullLine.Replace("_spellNameEventParamOne_", await sqliteDatabase.GetSpellNameById(smartScript.event_param1));
-                    else
-                        fullLine = fullLine.Replace(" '_spellNameEventParamOne_'", String.Empty);
+                    fullLine = smartScript.event_param1 > 0 ? fullLine.Replace("_spellNameEventParamOne_", await sqliteDatabase.GetSpellNameById(smartScript.event_param1)) : fullLine.Replace(" '_spellNameEventParamOne_'", String.Empty);
                 }
 
                 if (fullLine.Contains("_targetCastingSpellName_"))
                 {
-                    if (smartScript.event_param3.ToString() != "0")
-                        fullLine = fullLine.Replace("_targetCastingSpellName_", await sqliteDatabase.GetSpellNameById(smartScript.event_param3));
-                    else
-                        fullLine = fullLine.Replace(" '_targetCastingSpellName_'", String.Empty);
+                    fullLine = smartScript.event_param3.ToString() != "0" ? fullLine.Replace("_targetCastingSpellName_", await sqliteDatabase.GetSpellNameById(smartScript.event_param3)) : fullLine.Replace(" '_targetCastingSpellName_'", String.Empty);
                 }
 
                 if (fullLine.Contains("_questNameEventParamOne_"))
                 {
-                    if (smartScript.event_param1 == 0) //! Any quest (SMART_EVENT_ACCEPTED_QUEST / SMART_EVENT_REWARD_QUEST)
-                        fullLine = fullLine.Replace(" '_questNameEventParamOne_'", String.Empty);
-                    else
-                        fullLine = fullLine.Replace("_questNameEventParamOne_", await worldDatabase.GetQuestTitleById(smartScript.event_param1));
+                    //! Any quest (SMART_EVENT_ACCEPTED_QUEST / SMART_EVENT_REWARD_QUEST)
+                    fullLine = smartScript.event_param1 == 0 ? fullLine.Replace(" '_questNameEventParamOne_'", String.Empty) : fullLine.Replace("_questNameEventParamOne_", await worldDatabase.GetQuestTitleById(smartScript.event_param1));
                 }
 
                 if (fullLine.Contains("_hasAuraEventParamOne_"))
@@ -349,18 +341,12 @@ namespace SAI_Editor.Classes
 
                 if (fullLine.Contains("_spellNameActionParamOne_"))
                 {
-                    if (smartScript.action_param1.ToString() != "0")
-                        fullLine = fullLine.Replace("_spellNameActionParamOne_", await sqliteDatabase.GetSpellNameById(smartScript.action_param1));
-                    else
-                        fullLine = fullLine.Replace(" '_spellNameActionParamOne_'", String.Empty);
+                    fullLine = smartScript.action_param1.ToString() != "0" ? fullLine.Replace("_spellNameActionParamOne_", await sqliteDatabase.GetSpellNameById(smartScript.action_param1)) : fullLine.Replace(" '_spellNameActionParamOne_'", String.Empty);
                 }
 
                 if (fullLine.Contains("_spellNameActionParamTwo_"))
                 {
-                    if (smartScript.action_param2.ToString() != "0")
-                        fullLine = fullLine.Replace("_spellNameActionParamTwo_", await sqliteDatabase.GetSpellNameById(smartScript.action_param2));
-                    else
-                        fullLine = fullLine.Replace(" '_spellNameActionParamTwo_'", String.Empty);
+                    fullLine = smartScript.action_param2.ToString() != "0" ? fullLine.Replace("_spellNameActionParamTwo_", await sqliteDatabase.GetSpellNameById(smartScript.action_param2)) : fullLine.Replace(" '_spellNameActionParamTwo_'", String.Empty);
                 }
 
                 if (fullLine.Contains("_questNameActionParamOne_"))
@@ -494,18 +480,14 @@ namespace SAI_Editor.Classes
 
                 if (fullLine.Contains("_startOrStopActionParamOne_"))
                 {
-                    if (smartScript.action_param1.ToString() == "0")
-                        fullLine = fullLine.Replace("_startOrStopActionParamOne_", "Stop");
-                    else //! Even if above 1 or below 0 we start attacking/allow-combat-movement
-                        fullLine = fullLine.Replace("_startOrStopActionParamOne_", "Start");
+                    fullLine = fullLine.Replace("_startOrStopActionParamOne_", smartScript.action_param1.ToString() == "0" ? "Stop" : "Start");
+                    //! Even if above 1 or below 0 we start attacking/allow-combat-movement
                 }
 
                 if (fullLine.Contains("_enableDisableActionParamOne_"))
                 {
-                    if (smartScript.action_param1.ToString() == "0")
-                        fullLine = fullLine.Replace("_enableDisableActionParamOne_", "Disable");
-                    else //! Even if above 1 or below 0 we start attacking/allow-combat-movement
-                        fullLine = fullLine.Replace("_enableDisableActionParamOne_", "Enable");
+                    fullLine = fullLine.Replace("_enableDisableActionParamOne_", smartScript.action_param1.ToString() == "0" ? "Disable" : "Enable");
+                    //! Even if above 1 or below 0 we start attacking/allow-combat-movement
                 }
 
                 if (fullLine.Contains("_incrementOrDecrementActionParamOne_"))
@@ -538,10 +520,7 @@ namespace SAI_Editor.Classes
 
                 if (fullLine.Contains("_forceDespawnActionParamOne_"))
                 {
-                    if (smartScript.action_param1 > 2)
-                        fullLine = fullLine.Replace("_forceDespawnActionParamOne_", "In " + smartScript.action_param1 + " ms");
-                    else
-                        fullLine = fullLine.Replace("_forceDespawnActionParamOne_", "Instant");
+                    fullLine = smartScript.action_param1 > 2 ? fullLine.Replace("_forceDespawnActionParamOne_", "In " + smartScript.action_param1 + " ms") : fullLine.Replace("_forceDespawnActionParamOne_", "Instant");
                 }
 
                 if (fullLine.Contains("_invincibilityHpActionParamsOneTwo_"))
@@ -558,10 +537,7 @@ namespace SAI_Editor.Classes
 
                 if (fullLine.Contains("_onOffActionParamOne_"))
                 {
-                    if (smartScript.action_param1 == 1)
-                        fullLine = fullLine.Replace("_onOffActionParamOne_", "On");
-                    else
-                        fullLine = fullLine.Replace("_onOffActionParamOne_", "Off");
+                    fullLine = fullLine.Replace("_onOffActionParamOne_", smartScript.action_param1 == 1 ? "On" : "Off");
                 }
 
                 if (fullLine.Contains("_gameobjectNameActionParamOne_"))
@@ -891,7 +867,7 @@ namespace SAI_Editor.Classes
 
                 if ((SmartPhaseMasks)event_phase_mask != SmartPhaseMasks.SMART_EVENT_PHASE_ALWAYS)
                 {
-                    List<int> listOfSplitPhases = new List<int>();
+                    var listOfSplitPhases = new List<int>();
 
                     int event_phase_mask2 = event_phase_mask;
                     int log2 = 0;
@@ -904,7 +880,7 @@ namespace SAI_Editor.Classes
 
                     for (int l2 = log2; l2 >= 0; l2--)
                     {
-                        int power = (int)Math.Pow(2, l2);
+                        var power = (int)Math.Pow(2, l2);
 
                         if (event_phase_mask >= power)
                         {
@@ -923,7 +899,7 @@ namespace SAI_Editor.Classes
                     fullLine += " " + String.Join(" & ", arrayOfSplitPhases) + ")";
                 }
 
-                SmartEventFlags event_flags = (SmartEventFlags)(smartScriptLink != null ? smartScriptLink.event_flags : smartScript.event_flags);
+                var event_flags = (SmartEventFlags)(smartScriptLink != null ? smartScriptLink.event_flags : smartScript.event_flags);
 
                 if (event_flags != SmartEventFlags.EVENT_FLAG_NONE)
                 {

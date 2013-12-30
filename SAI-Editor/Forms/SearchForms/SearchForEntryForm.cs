@@ -284,10 +284,7 @@ namespace SAI_Editor
                                 }
                             }
 
-                            if (checkBoxHasAiName.Checked)
-                                query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid < 0 AND ss.entryorguid = -c.guid AND ss.source_type = 0";
-                            else
-                                query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id";
+                            query = this.checkBoxHasAiName.Checked ? "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid < 0 AND ss.entryorguid = -c.guid AND ss.source_type = 0" : "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id";
                         }
                         else
                         {
@@ -352,10 +349,7 @@ namespace SAI_Editor
                                 }
                             }
 
-                            if (checkBoxHasAiName.Checked)
-                                query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid < 0 AND ss.entryorguid = -g.guid AND ss.source_type = 1";
-                            else
-                                query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id";
+                            query = this.checkBoxHasAiName.Checked ? "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid < 0 AND ss.entryorguid = -g.guid AND ss.source_type = 1" : "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id";
                         }
                         else
                         {

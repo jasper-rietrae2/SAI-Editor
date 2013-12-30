@@ -301,7 +301,7 @@ namespace SAI_Editor
                 if (password.Length > 0)
                     _connectionString.Password = password;
 
-                WorldDatabase worldDatabase = _worldDatabase != null ? _worldDatabase : Instance.worldDatabase;
+                WorldDatabase worldDatabase = _worldDatabase ?? Instance.worldDatabase;
 
                 //! Will throw an error message itself if no connection can be made.
                 if (!worldDatabase.CanConnectToDatabase(_connectionString))
