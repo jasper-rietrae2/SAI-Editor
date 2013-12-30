@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -9,7 +8,6 @@ using MySql.Data.MySqlClient;
 using SAI_Editor.Database;
 using SAI_Editor.Database.Classes;
 using SAI_Editor.Properties;
-using System.Security.Cryptography;
 using SAI_Editor.Security;
 
 namespace SAI_Editor

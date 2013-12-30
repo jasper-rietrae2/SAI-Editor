@@ -1,13 +1,7 @@
-﻿using MySql.Data.MySqlClient;
-using SAI_Editor.Database;
+﻿using SAI_Editor.Database;
 using SAI_Editor.Database.Classes;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SAI_Editor.Properties;

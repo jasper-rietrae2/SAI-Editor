@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Data.SQLite;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.Common;

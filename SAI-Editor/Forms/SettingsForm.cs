@@ -6,8 +6,8 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using SAI_Editor.Classes;
 using SAI_Editor.Properties;
-using SAI_Editor.Security;
 using SAI_Editor.Database;
+using SAI_Editor.Security;
 
 namespace SAI_Editor
 {
@@ -96,7 +96,7 @@ namespace SAI_Editor
                 Settings.Default.Entropy = salt;
                 Settings.Default.Host = textBoxHost.Text;
                 Settings.Default.User = textBoxUsername.Text;
-                Settings.Default.Password = decryptedPassword.Length == 0 ? String.Empty : decryptedPassword.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
+                Settings.Default.Password = textBoxPassword.Text.Length == 0 ? String.Empty : textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.Port = textBoxPort.Text.Length > 0 ? XConverter.ToUInt32(textBoxPort.Text) : 0;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
