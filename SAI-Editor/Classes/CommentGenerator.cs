@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SAI_Editor.Enumerators;
 using SAI_Editor.Properties;
 
 namespace SAI_Editor.Classes

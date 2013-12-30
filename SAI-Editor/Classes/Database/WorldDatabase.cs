@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using SAI_Editor.Classes;
 using SAI_Editor.Database.Classes;
+using SAI_Editor.Enumerators;
 
 namespace SAI_Editor.Database
 {

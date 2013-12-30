@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Drawing;
 using MySql.Data.MySqlClient;
+using SAI_Editor.Enumerators;
 using SAI_Editor.Properties;
 using SAI_Editor.Database.Classes;
 using SAI_Editor.SearchForms;

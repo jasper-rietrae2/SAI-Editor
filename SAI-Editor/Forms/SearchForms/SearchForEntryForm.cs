@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Threading;
+using SAI_Editor.Enumerators;
 using SAI_Editor.Properties;
 using MySql.Data.MySqlClient;
 using SAI_Editor.Database.Classes;
