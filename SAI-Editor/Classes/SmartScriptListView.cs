@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using SAI_Editor.Database.Classes;
+
 using SAI_Editor.Properties;
 using System.Drawing;
 
 namespace SAI_Editor.Classes
 {
+    using SAI_Editor.Classes.Database.Classes;
+
     public class SmartScriptListView : ForceSelectListView
     {
         private List<SmartScript> _smartScripts = new List<SmartScript>();

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
-using SAI_Editor.Classes;
 
-namespace SAI_Editor
+namespace SAI_Editor.Classes
 {
+
     public static class ToolTipHelper
     {
         private static readonly Dictionary<string, DetailedToolTip> tooltips = new Dictionary<string, DetailedToolTip>();

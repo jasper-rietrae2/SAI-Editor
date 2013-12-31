@@ -5,9 +5,11 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms
 {
+
     public partial class RevertQueryForm : Form
     {
         public RevertQueryForm()

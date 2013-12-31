@@ -1,18 +1,19 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Diagnostics;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms
 {
+
     partial class AboutForm : Form
     {
         public AboutForm()
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
-            KeyPreview = true;
-            KeyDown += AboutForm_KeyDown;
+            this.KeyPreview = true;
+            this.KeyDown += this.AboutForm_KeyDown;
         }
 
         #region Assembly Attribute Accessors
@@ -98,17 +99,17 @@ namespace SAI_Editor
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TryToOpenPage("https://github.com/Discover-/SAI-Editor/");
+            this.TryToOpenPage("https://github.com/Discover-/SAI-Editor/");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            TryToOpenPage("https://github.com/Discover-/");
+            this.TryToOpenPage("https://github.com/Discover-/");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            TryToOpenPage("http://www.trinitycore.org/");
+            this.TryToOpenPage("http://www.trinitycore.org/");
         }
 
         private void TryToOpenPage(string url)
@@ -128,7 +129,7 @@ namespace SAI_Editor
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    Close();
+                    this.Close();
                     break;
             }
         }

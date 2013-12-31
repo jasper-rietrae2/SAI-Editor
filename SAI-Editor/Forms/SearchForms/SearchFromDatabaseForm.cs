@@ -6,9 +6,11 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SAI_Editor.Classes;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms.SearchForms
 {
+
     public enum DatabaseSearchFormType
     {
         DatabaseSearchFormTypeSpell,
@@ -48,297 +50,297 @@ namespace SAI_Editor
 
         public SearchFromDatabaseForm(MySqlConnectionStringBuilder connectionString, TextBox textBoxToChange, DatabaseSearchFormType databaseSearchFormType)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.connectionString = connectionString;
             this.textBoxToChange = textBoxToChange;
             this.databaseSearchFormType = databaseSearchFormType;
 
-            MinimumSize = new Size(Width, Height);
-            MaximumSize = new Size(Width, Height + 800);
-            textBoxCriteria.Text = textBoxToChange.Text;
+            this.MinimumSize = new Size(this.Width, this.Height);
+            this.MaximumSize = new Size(this.Width, this.Height + 800);
+            this.textBoxCriteria.Text = textBoxToChange.Text;
 
             switch (databaseSearchFormType)
             {
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSpell:
-                    Text = "Search for a spell";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Spell id");
-                    comboBoxSearchType.Items.Add("Spell name");
-                    baseQuery = "SELECT id, spellName FROM spells";
+                    this.Text = "Search for a spell";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Spell id");
+                    this.comboBoxSearchType.Items.Add("Spell name");
+                    this.baseQuery = "SELECT id, spellName FROM spells";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeFaction:
-                    Text = "Search for a faction";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Faction id");
-                    comboBoxSearchType.Items.Add("Faction name");
-                    baseQuery = "SELECT m_ID, m_name_lang_1 FROM factions";
+                    this.Text = "Search for a faction";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Faction id");
+                    this.comboBoxSearchType.Items.Add("Faction name");
+                    this.baseQuery = "SELECT m_ID, m_name_lang_1 FROM factions";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeEmote:
-                    Text = "Search for an emote";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Emote id");
-                    comboBoxSearchType.Items.Add("Emote name");
-                    baseQuery = "SELECT field0, field1 FROM emotes";
+                    this.Text = "Search for an emote";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Emote id");
+                    this.comboBoxSearchType.Items.Add("Emote name");
+                    this.baseQuery = "SELECT field0, field1 FROM emotes";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeQuest:
-                    Text = "Search for a quest";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Quest id");
-                    comboBoxSearchType.Items.Add("Quest name");
-                    baseQuery = "SELECT id, title FROM quest_template";
-                    useMySQL = true;
+                    this.Text = "Search for a quest";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Quest id");
+                    this.comboBoxSearchType.Items.Add("Quest name");
+                    this.baseQuery = "SELECT id, title FROM quest_template";
+                    this.useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeMap:
-                    Text = "Search for a map id";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Map id");
-                    comboBoxSearchType.Items.Add("Map name");
-                    baseQuery = "SELECT m_ID, m_MapName_lang1 FROM maps";
+                    this.Text = "Search for a map id";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Map id");
+                    this.comboBoxSearchType.Items.Add("Map name");
+                    this.baseQuery = "SELECT m_ID, m_MapName_lang1 FROM maps";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeZone:
-                    Text = "Search for a zone id";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Zone id");
-                    comboBoxSearchType.Items.Add("Zone name");
-                    baseQuery = "SELECT m_ID, m_AreaName_lang FROM areas_and_zones";
+                    this.Text = "Search for a zone id";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Zone id");
+                    this.comboBoxSearchType.Items.Add("Zone name");
+                    this.baseQuery = "SELECT m_ID, m_AreaName_lang FROM areas_and_zones";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry:
-                    Text = "Search for a creature";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Creature entry");
-                    comboBoxSearchType.Items.Add("Creature name");
-                    baseQuery = "SELECT entry, name FROM creature_template";
-                    useMySQL = true;
+                    this.Text = "Search for a creature";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Creature entry");
+                    this.comboBoxSearchType.Items.Add("Creature name");
+                    this.baseQuery = "SELECT entry, name FROM creature_template";
+                    this.useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry:
-                    Text = "Search for a gameobject";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Gameobject entry");
-                    comboBoxSearchType.Items.Add("Gameobject name");
-                    baseQuery = "SELECT entry, name FROM gameobject_template";
-                    useMySQL = true;
+                    this.Text = "Search for a gameobject";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Gameobject entry");
+                    this.comboBoxSearchType.Items.Add("Gameobject name");
+                    this.baseQuery = "SELECT entry, name FROM gameobject_template";
+                    this.useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSound:
-                    Text = "Search for a sound id";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Sound id");
-                    comboBoxSearchType.Items.Add("Sound name");
-                    baseQuery = "SELECT id, name FROM sound_entries";
+                    this.Text = "Search for a sound id";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Sound id");
+                    this.comboBoxSearchType.Items.Add("Sound name");
+                    this.baseQuery = "SELECT id, name FROM sound_entries";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger:
-                    Text = "Search for a sound id";
-                    listViewEntryResults.Columns.Add("Id", 52);
-                    listViewEntryResults.Columns.Add("Mapid", 52);
-                    listViewEntryResults.Columns.Add("X", 75);
-                    listViewEntryResults.Columns.Add("Y", 75);
-                    listViewEntryResults.Columns.Add("Z", 75);
-                    comboBoxSearchType.Items.Add("Areatrigger id");
-                    comboBoxSearchType.Items.Add("Areatrigger map id");
-                    baseQuery = "SELECT m_id, m_mapId, m_posX, m_posY, m_posZ FROM areatriggers";
+                    this.Text = "Search for a sound id";
+                    this.listViewEntryResults.Columns.Add("Id", 52);
+                    this.listViewEntryResults.Columns.Add("Mapid", 52);
+                    this.listViewEntryResults.Columns.Add("X", 75);
+                    this.listViewEntryResults.Columns.Add("Y", 75);
+                    this.listViewEntryResults.Columns.Add("Z", 75);
+                    this.comboBoxSearchType.Items.Add("Areatrigger id");
+                    this.comboBoxSearchType.Items.Add("Areatrigger map id");
+                    this.baseQuery = "SELECT m_id, m_mapId, m_posX, m_posY, m_posZ FROM areatriggers";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid:
-                    Text = "Search for a creature";
-                    listViewEntryResults.Columns.Add("Guid", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Creature guid");
-                    comboBoxSearchType.Items.Add("Creature name");
-                    baseQuery = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id";
-                    useMySQL = true;
+                    this.Text = "Search for a creature";
+                    this.listViewEntryResults.Columns.Add("Guid", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Creature guid");
+                    this.comboBoxSearchType.Items.Add("Creature name");
+                    this.baseQuery = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id";
+                    this.useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid:
-                    Text = "Search for a gameobject";
-                    listViewEntryResults.Columns.Add("Guid", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Gameobject guid");
-                    comboBoxSearchType.Items.Add("Gameobject name");
-                    baseQuery = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id";
-                    useMySQL = true;
+                    this.Text = "Search for a gameobject";
+                    this.listViewEntryResults.Columns.Add("Guid", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Gameobject guid");
+                    this.comboBoxSearchType.Items.Add("Gameobject name");
+                    this.baseQuery = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id";
+                    this.useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent:
-                    Text = "Search for a game event";
-                    listViewEntryResults.Columns.Add("Entry", 45);
-                    listViewEntryResults.Columns.Add("Description", 284);
-                    comboBoxSearchType.Items.Add("Game event entry");
-                    comboBoxSearchType.Items.Add("Game event description");
-                    baseQuery = "SELECT eventEntry, description FROM game_event";
-                    useMySQL = true;
+                    this.Text = "Search for a game event";
+                    this.listViewEntryResults.Columns.Add("Entry", 45);
+                    this.listViewEntryResults.Columns.Add("Description", 284);
+                    this.comboBoxSearchType.Items.Add("Game event entry");
+                    this.comboBoxSearchType.Items.Add("Game event description");
+                    this.baseQuery = "SELECT eventEntry, description FROM game_event";
+                    this.useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry:
-                    Text = "Search for an item";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Item id");
-                    comboBoxSearchType.Items.Add("Item name");
-                    baseQuery = "SELECT entry, name FROM item_template";
-                    useMySQL = true;
+                    this.Text = "Search for an item";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Item id");
+                    this.comboBoxSearchType.Items.Add("Item name");
+                    this.baseQuery = "SELECT entry, name FROM item_template";
+                    this.useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId:
-                    Text = "Search for a summons id";
-                    listViewEntryResults.Columns.Add("Owner", 63);
-                    listViewEntryResults.Columns.Add("Entry", 63);
-                    listViewEntryResults.Columns.Add("Group", 66);
-                    listViewEntryResults.Columns.Add("Type", 66);
-                    listViewEntryResults.Columns.Add("Time", 66);
-                    comboBoxSearchType.Items.Add("Owner entry");
-                    comboBoxSearchType.Items.Add("Target entry");
-                    baseQuery = "SELECT summonerId, entry, groupId, summonType, summonTime FROM creature_summon_groups";
-                    useMySQL = true;
-                    listViewItemIndexToCopy = 2;
+                    this.Text = "Search for a summons id";
+                    this.listViewEntryResults.Columns.Add("Owner", 63);
+                    this.listViewEntryResults.Columns.Add("Entry", 63);
+                    this.listViewEntryResults.Columns.Add("Group", 66);
+                    this.listViewEntryResults.Columns.Add("Type", 66);
+                    this.listViewEntryResults.Columns.Add("Time", 66);
+                    this.comboBoxSearchType.Items.Add("Owner entry");
+                    this.comboBoxSearchType.Items.Add("Target entry");
+                    this.baseQuery = "SELECT summonerId, entry, groupId, summonType, summonTime FROM creature_summon_groups";
+                    this.useMySQL = true;
+                    this.listViewItemIndexToCopy = 2;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath:
-                    Text = "Search for a taxi path";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Name", 284);
-                    comboBoxSearchType.Items.Add("Taxi id");
-                    comboBoxSearchType.Items.Add("Taxi name");
-                    baseQuery = "SELECT id, taxiName FROM taxi_nodes";
+                    this.Text = "Search for a taxi path";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Name", 284);
+                    this.comboBoxSearchType.Items.Add("Taxi id");
+                    this.comboBoxSearchType.Items.Add("Taxi name");
+                    this.baseQuery = "SELECT id, taxiName FROM taxi_nodes";
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate:
-                    Text = "Search for creature equipment";
-                    listViewEntryResults.Columns.Add("Entry", 63);
-                    listViewEntryResults.Columns.Add("Id", 63);
-                    listViewEntryResults.Columns.Add("Item 1", 66);
-                    listViewEntryResults.Columns.Add("Item 2", 66);
-                    listViewEntryResults.Columns.Add("Item 3", 66);
-                    comboBoxSearchType.Items.Add("Entry");
-                    comboBoxSearchType.Items.Add("Item entries");
-                    baseQuery = "SELECT entry, id, itemEntry1, itemEntry2, itemEntry3 FROM creature_equip_template";
-                    useMySQL = true;
+                    this.Text = "Search for creature equipment";
+                    this.listViewEntryResults.Columns.Add("Entry", 63);
+                    this.listViewEntryResults.Columns.Add("Id", 63);
+                    this.listViewEntryResults.Columns.Add("Item 1", 66);
+                    this.listViewEntryResults.Columns.Add("Item 2", 66);
+                    this.listViewEntryResults.Columns.Add("Item 3", 66);
+                    this.comboBoxSearchType.Items.Add("Entry");
+                    this.comboBoxSearchType.Items.Add("Item entries");
+                    this.baseQuery = "SELECT entry, id, itemEntry1, itemEntry2, itemEntry3 FROM creature_equip_template";
+                    this.useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint:
-                    Text = "Search for a waypoints path";
-                    listViewEntryResults.Columns.Add("Entry", 52);
-                    listViewEntryResults.Columns.Add("Point", 52);
-                    listViewEntryResults.Columns.Add("X", 75);
-                    listViewEntryResults.Columns.Add("Y", 75);
-                    listViewEntryResults.Columns.Add("Z", 75);
-                    comboBoxSearchType.Items.Add("Creature entry");
-                    baseQuery = "SELECT entry, pointid, position_x, position_y, position_z FROM waypoints";
-                    useMySQL = true;
+                    this.Text = "Search for a waypoints path";
+                    this.listViewEntryResults.Columns.Add("Entry", 52);
+                    this.listViewEntryResults.Columns.Add("Point", 52);
+                    this.listViewEntryResults.Columns.Add("X", 75);
+                    this.listViewEntryResults.Columns.Add("Y", 75);
+                    this.listViewEntryResults.Columns.Add("Z", 75);
+                    this.comboBoxSearchType.Items.Add("Creature entry");
+                    this.baseQuery = "SELECT entry, pointid, position_x, position_y, position_z FROM waypoints";
+                    this.useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeNpcText:
-                    Text = "Search for an npc_text entry";
-                    listViewEntryResults.Columns.Add("Id", 45);
-                    listViewEntryResults.Columns.Add("Text", 284);
-                    comboBoxSearchType.Items.Add("Id");
-                    comboBoxSearchType.Items.Add("Text");
-                    baseQuery = "SELECT id, text0_0 FROM npc_text";
-                    useMySQL = true;
+                    this.Text = "Search for an npc_text entry";
+                    this.listViewEntryResults.Columns.Add("Id", 45);
+                    this.listViewEntryResults.Columns.Add("Text", 284);
+                    this.comboBoxSearchType.Items.Add("Id");
+                    this.comboBoxSearchType.Items.Add("Text");
+                    this.baseQuery = "SELECT id, text0_0 FROM npc_text";
+                    this.useMySQL = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGossipOptionId:
-                    listViewItemIndexToCopy = 1;
+                    this.listViewItemIndexToCopy = 1;
                     goto case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOption;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOption:
-                    Text = "Search for a gossip item";
-                    listViewEntryResults.Columns.Add("Menu id", 45);
-                    listViewEntryResults.Columns.Add("Id", 284);
-                    listViewEntryResults.Columns.Add("Text", 284);
-                    comboBoxSearchType.Items.Add("Menu");
-                    comboBoxSearchType.Items.Add("Id");
-                    comboBoxSearchType.Items.Add("Text");
-                    baseQuery = "SELECT menu_id, id, option_text FROM gossip_menu_option";
-                    useMySQL = true;
+                    this.Text = "Search for a gossip item";
+                    this.listViewEntryResults.Columns.Add("Menu id", 45);
+                    this.listViewEntryResults.Columns.Add("Id", 284);
+                    this.listViewEntryResults.Columns.Add("Text", 284);
+                    this.comboBoxSearchType.Items.Add("Menu");
+                    this.comboBoxSearchType.Items.Add("Id");
+                    this.comboBoxSearchType.Items.Add("Text");
+                    this.baseQuery = "SELECT menu_id, id, option_text FROM gossip_menu_option";
+                    this.useMySQL = true;
                     break;
                 default:
                     break;
             }
 
-            string[] columnsSplit = baseQuery.Replace("SELECT ", "").Replace(" FROM " + baseQuery.Split(' ').LastOrDefault(), "").Split(',');
-            columns = new string[columnsSplit.Length + 1];
+            string[] columnsSplit = this.baseQuery.Replace("SELECT ", "").Replace(" FROM " + this.baseQuery.Split(' ').LastOrDefault(), "").Split(',');
+            this.columns = new string[columnsSplit.Length + 1];
 
             for (int i = 0; i < columnsSplit.Length; ++i)
-                columns[i] = columnsSplit[i];
+                this.columns[i] = columnsSplit[i];
 
-            amountOfListviewColumns = columns.Length - 1;
-            comboBoxSearchType.SelectedIndex = 0;
-            FillListView(true);
+            this.amountOfListviewColumns = this.columns.Length - 1;
+            this.comboBoxSearchType.SelectedIndex = 0;
+            this.FillListView(true);
         }
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
-            StopRunningThread();
+            this.StopRunningThread();
 
-            if (listViewItemIndexToCopy > 0)
-                textBoxToChange.Text = listViewEntryResults.SelectedItems[0].SubItems[listViewItemIndexToCopy].Text;
+            if (this.listViewItemIndexToCopy > 0)
+                this.textBoxToChange.Text = this.listViewEntryResults.SelectedItems[0].SubItems[this.listViewItemIndexToCopy].Text;
             else
-                textBoxToChange.Text = listViewEntryResults.SelectedItems[0].Text;
+                this.textBoxToChange.Text = this.listViewEntryResults.SelectedItems[0].Text;
 
-            Close();
+            this.Close();
         }
 
         private async void FillListView(bool limit = false)
         {
             try
             {
-                string queryToExecute = baseQuery;
+                string queryToExecute = this.baseQuery;
 
                 if (!limit)
                 {
-                    switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
+                    switch (this.GetSelectedIndexOfComboBox(this.comboBoxSearchType))
                     {
                         case 0: //! First column
-                            if (checkBoxFieldContainsCriteria.Checked)
-                                queryToExecute += " WHERE " + columns[0] + " LIKE '%" + textBoxCriteria.Text + "%'";
+                            if (this.checkBoxFieldContainsCriteria.Checked)
+                                queryToExecute += " WHERE " + this.columns[0] + " LIKE '%" + this.textBoxCriteria.Text + "%'";
                             else
-                                queryToExecute += " WHERE " + columns[0] + " = " + textBoxCriteria.Text;
+                                queryToExecute += " WHERE " + this.columns[0] + " = " + this.textBoxCriteria.Text;
 
                             break;
                         case 1: //! Second column
-                            switch (databaseSearchFormType)
+                            switch (this.databaseSearchFormType)
                             {
                                 case DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate:
                                 {
-                                    if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE itemEntry1 LIKE '%" + textBoxCriteria.Text + "%' OR itemEntry2 LIKE '%" + textBoxCriteria.Text + "%' OR itemEntry3 LIKE '%" + textBoxCriteria.Text + "%'";
+                                    if (this.checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE itemEntry1 LIKE '%" + this.textBoxCriteria.Text + "%' OR itemEntry2 LIKE '%" + this.textBoxCriteria.Text + "%' OR itemEntry3 LIKE '%" + this.textBoxCriteria.Text + "%'";
                                     else
-                                        queryToExecute += " WHERE itemEntry1 = " + textBoxCriteria.Text + " OR itemEntry2 = " + textBoxCriteria.Text + " OR itemEntry3 = " + textBoxCriteria.Text;
+                                        queryToExecute += " WHERE itemEntry1 = " + this.textBoxCriteria.Text + " OR itemEntry2 = " + this.textBoxCriteria.Text + " OR itemEntry3 = " + this.textBoxCriteria.Text;
 
                                     break;
                                 }
                                 default:
                                 {
-                                    if (checkBoxFieldContainsCriteria.Checked)
-                                        queryToExecute += " WHERE " + columns[1] + " LIKE '%" + textBoxCriteria.Text + "%'";
+                                    if (this.checkBoxFieldContainsCriteria.Checked)
+                                        queryToExecute += " WHERE " + this.columns[1] + " LIKE '%" + this.textBoxCriteria.Text + "%'";
                                     else
-                                        queryToExecute += " WHERE " + columns[1] + " = " + textBoxCriteria.Text;
+                                        queryToExecute += " WHERE " + this.columns[1] + " = " + this.textBoxCriteria.Text;
 
                                     break;
                                 }
                             }
                             break;
                         case 2: //! Third column
-                            if (checkBoxFieldContainsCriteria.Checked)
-                                queryToExecute += " WHERE " + columns[2] + " LIKE '%" + textBoxCriteria.Text + "%'";
+                            if (this.checkBoxFieldContainsCriteria.Checked)
+                                queryToExecute += " WHERE " + this.columns[2] + " LIKE '%" + this.textBoxCriteria.Text + "%'";
                             else
-                                queryToExecute += " WHERE " + columns[2] + " = " + textBoxCriteria.Text;
+                                queryToExecute += " WHERE " + this.columns[2] + " = " + this.textBoxCriteria.Text;
 
                             break;
                         default:
                             return;
                     }
 
-                    if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
+                    if (this.databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
                         queryToExecute += " AND m_ParentAreaID = 0";
                 }
-                else if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
+                else if (this.databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
                     queryToExecute += " WHERE m_ParentAreaID = 0";
 
-                queryToExecute += " ORDER BY " + columns[0];
+                queryToExecute += " ORDER BY " + this.columns[0];
 
                 if (limit)
                     queryToExecute += " LIMIT 1000";
 
-                DataTable dt = useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
+                DataTable dt = this.useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
 
                 if (dt.Rows.Count > 0)
                 {
@@ -348,14 +350,14 @@ namespace SAI_Editor
                     {
                         ListViewItem listViewItem = new ListViewItem(row.ItemArray[0].ToString());
 
-                        for (int i = 1; i < amountOfListviewColumns; ++i)
+                        for (int i = 1; i < this.amountOfListviewColumns; ++i)
                             listViewItem.SubItems.Add(row.ItemArray[i].ToString());
 
                         items.Add(listViewItem);
                     }
 
                     //listViewEntryResults.Items.AddRange(items.ToArray());
-                    AddItemRangeToListView(listViewEntryResults, items.ToArray());
+                    this.AddItemRangeToListView(this.listViewEntryResults, items.ToArray());
                 }
             }
             catch (ObjectDisposedException)
@@ -370,37 +372,37 @@ namespace SAI_Editor
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            searchThread = new Thread(StartSearching);
-            searchThread.Start();
+            this.searchThread = new Thread(this.StartSearching);
+            this.searchThread.Start();
         }
 
         private void StartSearching()
         {
             try
             {
-                SetEnabledOfControl(buttonSearch, false);
-                SetEnabledOfControl(buttonStopSearching, true);
-                ClearItemsOfListView(listViewEntryResults);
+                this.SetEnabledOfControl(this.buttonSearch, false);
+                this.SetEnabledOfControl(this.buttonStopSearching, true);
+                this.ClearItemsOfListView(this.listViewEntryResults);
 
                 try
                 {
-                    FillListView();
+                    this.FillListView();
                 }
                 finally
                 {
-                    SetEnabledOfControl(buttonSearch, true);
-                    SetEnabledOfControl(buttonStopSearching, false);
+                    this.SetEnabledOfControl(this.buttonSearch, true);
+                    this.SetEnabledOfControl(this.buttonStopSearching, false);
                 }
             }
             catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
             {
-                SetEnabledOfControl(buttonSearch, true);
-                SetEnabledOfControl(buttonStopSearching, false);
+                this.SetEnabledOfControl(this.buttonSearch, true);
+                this.SetEnabledOfControl(this.buttonStopSearching, false);
             }
             catch (Exception ex)
             {
-                SetEnabledOfControl(buttonSearch, true);
-                SetEnabledOfControl(buttonStopSearching, false);
+                this.SetEnabledOfControl(this.buttonSearch, true);
+                this.SetEnabledOfControl(this.buttonStopSearching, false);
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -411,26 +413,26 @@ namespace SAI_Editor
             {
                 case Keys.Enter:
                 {
-                    if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
+                    if (this.listViewEntryResults.SelectedItems.Count > 0 && this.listViewEntryResults.Focused)
                     {
-                        if (listViewItemIndexToCopy > 0)
-                            textBoxToChange.Text = listViewEntryResults.SelectedItems[0].SubItems[listViewItemIndexToCopy].Text;
+                        if (this.listViewItemIndexToCopy > 0)
+                            this.textBoxToChange.Text = this.listViewEntryResults.SelectedItems[0].SubItems[this.listViewItemIndexToCopy].Text;
                         else
-                            textBoxToChange.Text = listViewEntryResults.SelectedItems[listViewItemIndexToCopy].Text;
+                            this.textBoxToChange.Text = this.listViewEntryResults.SelectedItems[this.listViewItemIndexToCopy].Text;
 
-                        Close();
+                        this.Close();
                     }
                     else
                     {
-                        if (buttonSearch.Enabled)
-                            buttonSearch.PerformClick();
+                        if (this.buttonSearch.Enabled)
+                            this.buttonSearch.PerformClick();
                     }
 
                     break;
                 }
                 case Keys.Escape:
                 {
-                    Close();
+                    this.Close();
                     break;
                 }
             }
@@ -438,15 +440,15 @@ namespace SAI_Editor
 
         private void buttonStopSearchResults_Click(object sender, EventArgs e)
         {
-            StopRunningThread();
+            this.StopRunningThread();
         }
 
         private void StopRunningThread()
         {
-            if (searchThread != null && searchThread.IsAlive)
+            if (this.searchThread != null && this.searchThread.IsAlive)
             {
-                searchThread.Abort();
-                searchThread = null;
+                this.searchThread.Abort();
+                this.searchThread = null;
             }
         }
 
@@ -458,7 +460,7 @@ namespace SAI_Editor
         private int GetSelectedIndexOfComboBox(ComboBox comboBox)
         {
             if (comboBox.InvokeRequired)
-                return (int)comboBox.Invoke(new Func<int>(() => GetSelectedIndexOfComboBox(comboBox)));
+                return (int)comboBox.Invoke(new Func<int>(() => this.GetSelectedIndexOfComboBox(comboBox)));
 
             return comboBox.SelectedIndex;
         }
@@ -467,7 +469,7 @@ namespace SAI_Editor
         {
             if (listView.InvokeRequired)
             {
-                Invoke((MethodInvoker)delegate
+                this.Invoke((MethodInvoker)delegate
                 {
                     listView.Items.AddRange(items);
                 });
@@ -481,7 +483,7 @@ namespace SAI_Editor
         {
             if (control.InvokeRequired)
             {
-                Invoke((MethodInvoker)delegate
+                this.Invoke((MethodInvoker)delegate
                 {
                     control.Enabled = enable;
                 });
@@ -495,7 +497,7 @@ namespace SAI_Editor
         {
             if (listView.InvokeRequired)
             {
-                Invoke((MethodInvoker)delegate
+                this.Invoke((MethodInvoker)delegate
                 {
                     listView.Items.Clear();
                 });
@@ -508,17 +510,17 @@ namespace SAI_Editor
         private void listViewEntryResults_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
-            myListView.ListViewItemSorter = lvwColumnSorter;
+            myListView.ListViewItemSorter = this.lvwColumnSorter;
             //! Determine if clicked column is already the column that is being sorted
-            if (e.Column != lvwColumnSorter.SortColumn)
+            if (e.Column != this.lvwColumnSorter.SortColumn)
             {
                 //! Set the column number that is to be sorted; default to ascending
-                lvwColumnSorter.SortColumn = e.Column;
-                lvwColumnSorter.Order = SortOrder.Ascending;
+                this.lvwColumnSorter.SortColumn = e.Column;
+                this.lvwColumnSorter.Order = SortOrder.Ascending;
             }
             else
                 //! Reverse the current sort direction for this column
-                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                this.lvwColumnSorter.Order = this.lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
 
             //! Perform the sort with these new sort options
             myListView.Sort();
@@ -526,7 +528,7 @@ namespace SAI_Editor
 
         private void SearchFromDatabaseForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            StopRunningThread();
+            this.StopRunningThread();
         }
     }
 }

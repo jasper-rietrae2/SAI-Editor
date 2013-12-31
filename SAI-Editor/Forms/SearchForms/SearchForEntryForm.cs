@@ -4,15 +4,17 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Threading;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using SAI_Editor.Classes.Database.Classes;
 using SAI_Editor.Enumerators;
 using SAI_Editor.Properties;
-using MySql.Data.MySqlClient;
-using SAI_Editor.Database.Classes;
+using SAI_Editor.Classes;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms.SearchForms
 {
+
     public partial class SearchForEntryForm : Form
     {
         private Thread searchThread = null;
@@ -31,48 +33,48 @@ namespace SAI_Editor
 
         public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, string startEntryString, SourceTypes sourceTypeToSearchFor)
         {
-            InitializeComponent();
+            this.InitializeComponent();
 
             this.connectionString = connectionString;
             this.sourceTypeToSearchFor = sourceTypeToSearchFor;
-            textBoxCriteria.Text = startEntryString;
+            this.textBoxCriteria.Text = startEntryString;
 
-            MinimumSize = new Size(Width, Height);
-            MaximumSize = new Size(Width, Height + 800);
+            this.MinimumSize = new Size(this.Width, this.Height);
+            this.MaximumSize = new Size(this.Width, this.Height + 800);
 
             if (sourceTypeToSearchFor != SourceTypes.SourceTypeAreaTrigger)
             {
-                listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
-                listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
+                this.listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
+                this.listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
             }
 
-            _cts = new CancellationTokenSource();
+            this._cts = new CancellationTokenSource();
         }
 
         private void SearchForEntryForm_Load(object sender, EventArgs e)
         {
-            switch (sourceTypeToSearchFor)
+            switch (this.sourceTypeToSearchFor)
             {
                 case SourceTypes.SourceTypeCreature:
-                    comboBoxSearchType.SelectedIndex = 0; //! Creature entry
-                    FillListViewWithMySqlQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000");
+                    this.comboBoxSearchType.SelectedIndex = 0; //! Creature entry
+                    this.FillListViewWithMySqlQuery("SELECT entry, name FROM creature_template ORDER BY entry LIMIT 1000");
                     break;
                 case SourceTypes.SourceTypeGameobject:
-                    comboBoxSearchType.SelectedIndex = 3; //! Gameobject entry
-                    FillListViewWithMySqlQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000");
+                    this.comboBoxSearchType.SelectedIndex = 3; //! Gameobject entry
+                    this.FillListViewWithMySqlQuery("SELECT entry, name FROM gameobject_template ORDER BY entry LIMIT 1000");
                     break;
                 case SourceTypes.SourceTypeAreaTrigger:
-                    comboBoxSearchType.SelectedIndex = 6; //! Areatrigger entry
-                    listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
-                    listViewEntryResults.Columns.Add("Mapid", 52, HorizontalAlignment.Left);
-                    listViewEntryResults.Columns.Add("X", 75, HorizontalAlignment.Left);
-                    listViewEntryResults.Columns.Add("Y", 75, HorizontalAlignment.Left);
-                    listViewEntryResults.Columns.Add("Z", 75, HorizontalAlignment.Left);
-                    FillListViewWithAreaTriggers(String.Empty, String.Empty, true);
+                    this.comboBoxSearchType.SelectedIndex = 6; //! Areatrigger entry
+                    this.listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
+                    this.listViewEntryResults.Columns.Add("Mapid", 52, HorizontalAlignment.Left);
+                    this.listViewEntryResults.Columns.Add("X", 75, HorizontalAlignment.Left);
+                    this.listViewEntryResults.Columns.Add("Y", 75, HorizontalAlignment.Left);
+                    this.listViewEntryResults.Columns.Add("Z", 75, HorizontalAlignment.Left);
+                    this.FillListViewWithAreaTriggers(String.Empty, String.Empty, true);
                     break;
                 case SourceTypes.SourceTypeScriptedActionlist:
-                    checkBoxHasAiName.Enabled = false;
-                    comboBoxSearchType.SelectedIndex = 8; //! Actionlist entry
+                    this.checkBoxHasAiName.Enabled = false;
+                    this.comboBoxSearchType.SelectedIndex = 8; //! Actionlist entry
                     //! We don't list 1000 actionlists like all other source types because we can't get the entry/name combination
                     //! of several sources (considering the actionlist can be called from _ANY_ source_type (including actionlists
                     //! itself). It's simply not worth the time.
@@ -82,17 +84,17 @@ namespace SAI_Editor
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
-            StopRunningThread();
-            FillMainFormFields(sender, e);
+            this.StopRunningThread();
+            this.FillMainFormFields(sender, e);
         }
 
         private void FillListViewWithMySqlQuery(string queryToExecute)
         {
-            _cts = new CancellationTokenSource();
+            this._cts = new CancellationTokenSource();
 
             try
             {
-                using (var connection = new MySqlConnection(connectionString.ToString()))
+                using (var connection = new MySqlConnection(this.connectionString.ToString()))
                 {
                     connection.Open();
 
@@ -104,7 +106,7 @@ namespace SAI_Editor
                         {
                             while (reader != null && reader.Read())
                             {
-                                if (_cts.IsCancellationRequested)
+                                if (this._cts.IsCancellationRequested)
                                     break;
 
                                 items.Add(new Item { ItemName = reader.GetInt32(0).ToString(CultureInfo.InvariantCulture), SubItems = new List<string> { reader.GetString(1) } });
@@ -112,20 +114,20 @@ namespace SAI_Editor
                         }
                     }
 
-                    AddItemToListView(listViewEntryResults, items);
+                    this.AddItemToListView(this.listViewEntryResults, items);
 
                 }
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                StopRunningThread();
+                this.StopRunningThread();
             }
         }
 
         private async void FillListViewWithAreaTriggers(string idFilter, string mapIdFilter, bool limit)
         {
-            _cts = new CancellationTokenSource();
+            this._cts = new CancellationTokenSource();
 
             try
             {
@@ -133,7 +135,7 @@ namespace SAI_Editor
 
                 if (idFilter.Length > 0 || mapIdFilter.Length > 0)
                 {
-                    if (checkBoxFieldContainsCriteria.Checked)
+                    if (this.checkBoxFieldContainsCriteria.Checked)
                     {
                         if (idFilter.Length > 0)
                         {
@@ -172,7 +174,7 @@ namespace SAI_Editor
                 if (limit)
                     queryToExecute += " LIMIT 1000";
 
-                DataTable dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQueryWithCancellation(_cts.Token, queryToExecute);
+                DataTable dt = await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQueryWithCancellation(this._cts.Token, queryToExecute);
 
                 if (dt.Rows.Count > 0)
                 {
@@ -180,45 +182,45 @@ namespace SAI_Editor
 
                     foreach (DataRow row in dt.Rows)
                     {
-                        if (_cts.IsCancellationRequested)
+                        if (this._cts.IsCancellationRequested)
                             break;
 
                         AreaTrigger areaTrigger = SAI_Editor_Manager.Instance.sqliteDatabase.BuildAreaTrigger(row);
 
-                        if (!checkBoxHasAiName.Checked || await SAI_Editor_Manager.Instance.worldDatabase.AreaTriggerHasSmartAI(areaTrigger.id))
+                        if (!this.checkBoxHasAiName.Checked || await SAI_Editor_Manager.Instance.worldDatabase.AreaTriggerHasSmartAI(areaTrigger.id))
                             items.Add(new Item { ItemName = areaTrigger.id.ToString(), SubItems = new List<string> { areaTrigger.map_id.ToString(), areaTrigger.posX.ToString(), areaTrigger.posY.ToString(), areaTrigger.posZ.ToString() } });
                     }
 
-                    AddItemToListView(listViewEntryResults, items);
+                    this.AddItemToListView(this.listViewEntryResults, items);
                 }
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                StopRunningThread();
+                this.StopRunningThread();
             }
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            if (_isBusy)
+            if (this._isBusy)
                 return;
 
-            _isBusy = true;
-            searchThread = new Thread(StartSearching);
-            searchThread.Start();
+            this._isBusy = true;
+            this.searchThread = new Thread(this.StartSearching);
+            this.searchThread.Start();
         }
 
         private async void StartSearching()
         {
-            _cts = new CancellationTokenSource();
+            this._cts = new CancellationTokenSource();
 
             try
             {
                 string query = "";
-                bool criteriaLeftEmpty = String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text);
+                bool criteriaLeftEmpty = String.IsNullOrEmpty(this.textBoxCriteria.Text) || String.IsNullOrWhiteSpace(this.textBoxCriteria.Text);
 
-                if (!criteriaLeftEmpty && IsNumericIndex(GetSelectedIndexOfComboBox(comboBoxSearchType)) && Convert.ToInt32(textBoxCriteria.Text) < 0)
+                if (!criteriaLeftEmpty && this.IsNumericIndex(this.GetSelectedIndexOfComboBox(this.comboBoxSearchType)) && Convert.ToInt32(this.textBoxCriteria.Text) < 0)
                 {
                     bool pressedYes = true;
 
@@ -229,38 +231,38 @@ namespace SAI_Editor
 
                     if (!pressedYes)
                     {
-                        StopRunningThread();
+                        this.StopRunningThread();
                         return;
                     }
 
-                    SetTextOfControl(textBoxCriteria, (Convert.ToInt32(textBoxCriteria.Text) * -1).ToString());
+                    this.SetTextOfControl(this.textBoxCriteria, (Convert.ToInt32(this.textBoxCriteria.Text) * -1).ToString());
                 }
 
-                SetEnabledOfControl(buttonSearch, false);
-                SetEnabledOfControl(buttonStopSearching, true);
+                this.SetEnabledOfControl(this.buttonSearch, false);
+                this.SetEnabledOfControl(this.buttonStopSearching, true);
 
-                switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
+                switch (this.GetSelectedIndexOfComboBox(this.comboBoxSearchType))
                 {
                     case 0: //! Creature entry
                         query = "SELECT entry, name FROM creature_template";
 
                         if (!criteriaLeftEmpty)
                         {
-                            if (checkBoxFieldContainsCriteria.Checked)
-                                query += " WHERE entry LIKE '%" + textBoxCriteria.Text + "%'";
+                            if (this.checkBoxFieldContainsCriteria.Checked)
+                                query += " WHERE entry LIKE '%" + this.textBoxCriteria.Text + "%'";
                             else
-                                query += " WHERE entry=" + textBoxCriteria.Text;
+                                query += " WHERE entry=" + this.textBoxCriteria.Text;
                         }
 
-                        if (checkBoxHasAiName.Checked)
+                        if (this.checkBoxHasAiName.Checked)
                             query += (criteriaLeftEmpty ? " WHERE" : " AND") + " AIName='SmartAI'";
 
                         query += " ORDER BY entry";
                         break;
                     case 1: //! Creature name
-                        query = "SELECT entry, name FROM creature_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
+                        query = "SELECT entry, name FROM creature_template WHERE name LIKE '%" + this.textBoxCriteria.Text + "%'";
 
-                        if (checkBoxHasAiName.Checked)
+                        if (this.checkBoxHasAiName.Checked)
                             query += " AND AIName='SmartAI'";
 
                         query += " ORDER BY entry";
@@ -279,31 +281,31 @@ namespace SAI_Editor
 
                                 if (!pressedYes)
                                 {
-                                    StopRunningThread();
+                                    this.StopRunningThread();
                                     return;
                                 }
                             }
 
-                            if (checkBoxHasAiName.Checked)
+                            if (this.checkBoxHasAiName.Checked)
                                 query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid < 0 AND ss.entryorguid = -c.guid AND ss.source_type = 0";
                             else
                                 query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id";
                         }
                         else
                         {
-                            if (checkBoxHasAiName.Checked)
+                            if (this.checkBoxHasAiName.Checked)
                             {
-                                if (checkBoxFieldContainsCriteria.Checked)
-                                    query = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE c.guid LIKE '%" + textBoxCriteria.Text + "%' AND ss.source_type = 0";
+                                if (this.checkBoxFieldContainsCriteria.Checked)
+                                    query = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE c.guid LIKE '%" + this.textBoxCriteria.Text + "%' AND ss.source_type = 0";
                                 else
-                                    query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE c.guid = " + textBoxCriteria.Text;
+                                    query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE c.guid = " + this.textBoxCriteria.Text;
                             }
                             else
                             {
-                                if (checkBoxFieldContainsCriteria.Checked)
-                                    query = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id WHERE c.guid LIKE '%" + textBoxCriteria.Text + "%'";
+                                if (this.checkBoxFieldContainsCriteria.Checked)
+                                    query = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id WHERE c.guid LIKE '%" + this.textBoxCriteria.Text + "%'";
                                 else
-                                    query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id WHERE c.guid = " + textBoxCriteria.Text;
+                                    query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id WHERE c.guid = " + this.textBoxCriteria.Text;
                             }
                         }
 
@@ -314,21 +316,21 @@ namespace SAI_Editor
 
                         if (!criteriaLeftEmpty)
                         {
-                            if (checkBoxFieldContainsCriteria.Checked)
-                                query += " WHERE entry LIKE '%" + textBoxCriteria.Text + "%'";
+                            if (this.checkBoxFieldContainsCriteria.Checked)
+                                query += " WHERE entry LIKE '%" + this.textBoxCriteria.Text + "%'";
                             else
-                                query += " WHERE entry=" + textBoxCriteria.Text;
+                                query += " WHERE entry=" + this.textBoxCriteria.Text;
                         }
 
-                        if (checkBoxHasAiName.Checked)
+                        if (this.checkBoxHasAiName.Checked)
                             query += (criteriaLeftEmpty ? " WHERE" : " AND") + " AIName='SmartGameObjectAI'";
 
                         query += " ORDER BY entry";
                         break;
                     case 4: //! Gameobject name
-                        query = "SELECT entry, name FROM gameobject_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
+                        query = "SELECT entry, name FROM gameobject_template WHERE name LIKE '%" + this.textBoxCriteria.Text + "%'";
 
-                        if (checkBoxHasAiName.Checked)
+                        if (this.checkBoxHasAiName.Checked)
                             query += " AND AIName='SmartGameObjectAI'";
 
                         query += " ORDER BY entry";
@@ -347,31 +349,31 @@ namespace SAI_Editor
 
                                 if (!pressedYes)
                                 {
-                                    StopRunningThread();
+                                    this.StopRunningThread();
                                     return;
                                 }
                             }
 
-                            if (checkBoxHasAiName.Checked)
+                            if (this.checkBoxHasAiName.Checked)
                                 query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid < 0 AND ss.entryorguid = -g.guid AND ss.source_type = 1";
                             else
                                 query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id";
                         }
                         else
                         {
-                            if (checkBoxHasAiName.Checked)
+                            if (this.checkBoxHasAiName.Checked)
                             {
-                                if (checkBoxFieldContainsCriteria.Checked)
-                                    query = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid = -g.guid WHERE g.guid LIKE '%" + textBoxCriteria.Text + "%' AND ss.source_type = 1";
+                                if (this.checkBoxFieldContainsCriteria.Checked)
+                                    query = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid = -g.guid WHERE g.guid LIKE '%" + this.textBoxCriteria.Text + "%' AND ss.source_type = 1";
                                 else
-                                    query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid = -g.guid WHERE g.guid = " + textBoxCriteria.Text + " AND ss.source_type = 1";
+                                    query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid = -g.guid WHERE g.guid = " + this.textBoxCriteria.Text + " AND ss.source_type = 1";
                             }
                             else
                             {
-                                if (checkBoxFieldContainsCriteria.Checked)
-                                    query = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id WHERE g.guid LIKE '%" + textBoxCriteria.Text + "%'";
+                                if (this.checkBoxFieldContainsCriteria.Checked)
+                                    query = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id WHERE g.guid LIKE '%" + this.textBoxCriteria.Text + "%'";
                                 else
-                                    query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id WHERE g.guid = " + textBoxCriteria.Text;
+                                    query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id WHERE g.guid = " + this.textBoxCriteria.Text;
                             }
                         }
 
@@ -379,44 +381,44 @@ namespace SAI_Editor
                         break;
                     case 6: //! Areatrigger id
                     case 7: //! Areatrigger map id
-                        ClearItemsOfListView(listViewEntryResults);
+                        this.ClearItemsOfListView(this.listViewEntryResults);
 
                         try
                         {
                             string areaTriggerIdFilter = "", areaTriggerMapIdFilter = "";
 
-                            if (GetSelectedIndexOfComboBox(comboBoxSearchType) == 6)
-                                areaTriggerIdFilter = textBoxCriteria.Text;
+                            if (this.GetSelectedIndexOfComboBox(this.comboBoxSearchType) == 6)
+                                areaTriggerIdFilter = this.textBoxCriteria.Text;
                             else
-                                areaTriggerMapIdFilter = textBoxCriteria.Text;
+                                areaTriggerMapIdFilter = this.textBoxCriteria.Text;
 
-                            FillListViewWithAreaTriggers(areaTriggerIdFilter, areaTriggerMapIdFilter, false);
+                            this.FillListViewWithAreaTriggers(areaTriggerIdFilter, areaTriggerMapIdFilter, false);
                         }
                         catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
                         {
-                            SetEnabledOfControl(buttonSearch, true);
-                            SetEnabledOfControl(buttonStopSearching, false);
+                            this.SetEnabledOfControl(this.buttonSearch, true);
+                            this.SetEnabledOfControl(this.buttonStopSearching, false);
                         }
                         catch (Exception ex)
                         {
-                            SetEnabledOfControl(buttonSearch, true);
-                            SetEnabledOfControl(buttonStopSearching, false);
+                            this.SetEnabledOfControl(this.buttonSearch, true);
+                            this.SetEnabledOfControl(this.buttonStopSearching, false);
                             MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            StopRunningThread();
+                            this.StopRunningThread();
                         }
                         finally
                         {
-                            _isBusy = false;
-                            SetEnabledOfControl(buttonSearch, true);
-                            SetEnabledOfControl(buttonStopSearching, false);
+                            this._isBusy = false;
+                            this.SetEnabledOfControl(this.buttonSearch, true);
+                            this.SetEnabledOfControl(this.buttonStopSearching, false);
                         }
                         return;
                     case 8: //! Actionlist entry
-                        ClearItemsOfListView(listViewEntryResults);
+                        this.ClearItemsOfListView(this.listViewEntryResults);
 
                         try
                         {
-                            List<SmartScript> smartScriptActionlists = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScriptActionLists(textBoxCriteria.Text, checkBoxFieldContainsCriteria.Checked);
+                            List<SmartScript> smartScriptActionlists = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScriptActionLists(this.textBoxCriteria.Text, this.checkBoxFieldContainsCriteria.Checked);
 
                             if (smartScriptActionlists != null)
                             {
@@ -425,7 +427,7 @@ namespace SAI_Editor
 
                                 foreach (SmartScript smartScript in smartScriptActionlists)
                                 {
-                                    if (_cts.IsCancellationRequested)
+                                    if (this._cts.IsCancellationRequested)
                                         break;
 
                                     int entryorguid = smartScript.entryorguid;
@@ -478,59 +480,59 @@ namespace SAI_Editor
                                     }
                                 }
 
-                                AddItemToListView(listViewEntryResults, items);
+                                this.AddItemToListView(this.listViewEntryResults, items);
 
                             }
                         }
                         catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
                         {
-                            SetEnabledOfControl(buttonSearch, true);
-                            SetEnabledOfControl(buttonStopSearching, false);
+                            this.SetEnabledOfControl(this.buttonSearch, true);
+                            this.SetEnabledOfControl(this.buttonStopSearching, false);
                         }
                         catch (Exception ex)
                         {
-                            SetEnabledOfControl(buttonSearch, true);
-                            SetEnabledOfControl(buttonStopSearching, false);
+                            this.SetEnabledOfControl(this.buttonSearch, true);
+                            this.SetEnabledOfControl(this.buttonStopSearching, false);
                             MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            StopRunningThread();
+                            this.StopRunningThread();
                         }
                         finally
                         {
-                            _isBusy = false;
-                            SetEnabledOfControl(buttonSearch, true);
-                            SetEnabledOfControl(buttonStopSearching, false);
+                            this._isBusy = false;
+                            this.SetEnabledOfControl(this.buttonSearch, true);
+                            this.SetEnabledOfControl(this.buttonStopSearching, false);
                         }
 
                         return; //! We did everything in the switch block (we only do this for actionlists)
                     default:
                         MessageBox.Show("An unknown index was found in the search type box!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        StopRunningThread();
+                        this.StopRunningThread();
                         return;
                 }
 
-                ClearItemsOfListView(listViewEntryResults);
+                this.ClearItemsOfListView(this.listViewEntryResults);
 
                 try
                 {
-                    FillListViewWithMySqlQuery(query);
+                    this.FillListViewWithMySqlQuery(query);
                 }
                 finally
                 {
-                    SetEnabledOfControl(buttonSearch, true);
-                    SetEnabledOfControl(buttonStopSearching, false);
-                    _isBusy = false;
+                    this.SetEnabledOfControl(this.buttonSearch, true);
+                    this.SetEnabledOfControl(this.buttonStopSearching, false);
+                    this._isBusy = false;
                 }
             }
             catch (ThreadAbortException) //! Don't show a message when the thread was already cancelled
             {
-                SetEnabledOfControl(buttonSearch, true);
-                SetEnabledOfControl(buttonStopSearching, false);
-                StopRunningThread();
+                this.SetEnabledOfControl(this.buttonSearch, true);
+                this.SetEnabledOfControl(this.buttonStopSearching, false);
+                this.StopRunningThread();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                StopRunningThread();
+                this.StopRunningThread();
             }
         }
 
@@ -540,16 +542,16 @@ namespace SAI_Editor
             {
                 case Keys.Enter:
                 {
-                    if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
-                        FillMainFormFields(sender, e);
+                    if (this.listViewEntryResults.SelectedItems.Count > 0 && this.listViewEntryResults.Focused)
+                        this.FillMainFormFields(sender, e);
                     else
-                        buttonSearch.PerformClick();
+                        this.buttonSearch.PerformClick();
 
                     break;
                 }
                 case Keys.Escape:
                 {
-                    Close();
+                    this.Close();
                     break;
                 }
             }
@@ -557,23 +559,23 @@ namespace SAI_Editor
 
         private void buttonStopSearchResults_Click(object sender, EventArgs e)
         {
-            StopRunningThread();
+            this.StopRunningThread();
         }
 
         private void StopRunningThread()
         {
-            if (searchThread != null && _cts != null && searchThread.IsAlive)
-                _cts.Cancel();
+            if (this.searchThread != null && this._cts != null && this.searchThread.IsAlive)
+                this._cts.Cancel();
 
-            _isBusy = false;
+            this._isBusy = false;
         }
 
         private void textBoxCriteria_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text))
+            if (String.IsNullOrEmpty(this.textBoxCriteria.Text) || String.IsNullOrWhiteSpace(this.textBoxCriteria.Text))
                 return;
 
-            switch (comboBoxSearchType.SelectedIndex)
+            switch (this.comboBoxSearchType.SelectedIndex)
             {
                 case 0: //! Creature entry
                 case 2: //! Creature guid
@@ -602,37 +604,37 @@ namespace SAI_Editor
             string entryToPlace = "";
 
             //! If we're searching for a creature guid or gameobject guid we have to make the value negative.
-            if (comboBoxSearchType.SelectedIndex == 2 || comboBoxSearchType.SelectedIndex == 5)
+            if (this.comboBoxSearchType.SelectedIndex == 2 || this.comboBoxSearchType.SelectedIndex == 5)
                 entryToPlace = "-";
 
-            entryToPlace += listViewEntryResults.SelectedItems[0].Text;
-            ((MainForm)Owner).textBoxEntryOrGuid.Text = entryToPlace;
+            entryToPlace += this.listViewEntryResults.SelectedItems[0].Text;
+            ((MainForm)this.Owner).textBoxEntryOrGuid.Text = entryToPlace;
 
-            switch (comboBoxSearchType.SelectedIndex)
+            switch (this.comboBoxSearchType.SelectedIndex)
             {
                 case 0: //! Creature entry
                 case 1: //! Creature name
                 case 2: //! Creature guid
-                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 0;
+                    ((MainForm)this.Owner).comboBoxSourceType.SelectedIndex = 0;
                     break;
                 case 3: //! Gameobject entry
                 case 4: //! Gameobject name
                 case 5: //! Gameobject guid
-                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 1;
+                    ((MainForm)this.Owner).comboBoxSourceType.SelectedIndex = 1;
                     break;
                 case 6: //! Areatrigger id
                 case 7: //! Areatrigger map id
-                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 2;
+                    ((MainForm)this.Owner).comboBoxSourceType.SelectedIndex = 2;
                     break;
                 case 8: //! Actionlist entry
-                    ((MainForm)Owner).comboBoxSourceType.SelectedIndex = 3;
+                    ((MainForm)this.Owner).comboBoxSourceType.SelectedIndex = 3;
                     break;
             }
 
-            if (((MainForm)Owner).pictureBoxLoadScript.Enabled)
-                ((MainForm)Owner).TryToLoadScript(-1, SourceTypes.SourceTypeNone, true, true);
+            if (((MainForm)this.Owner).pictureBoxLoadScript.Enabled)
+                ((MainForm)this.Owner).TryToLoadScript(-1, SourceTypes.SourceTypeNone, true, true);
 
-            Close();
+            this.Close();
         }
 
         private bool IsNumericIndex(int index)
@@ -651,7 +653,7 @@ namespace SAI_Editor
         private int GetSelectedIndexOfComboBox(ComboBox comboBox)
         {
             if (comboBox.InvokeRequired)
-                return (int)comboBox.Invoke(new Func<int>(() => GetSelectedIndexOfComboBox(comboBox)));
+                return (int)comboBox.Invoke(new Func<int>(() => this.GetSelectedIndexOfComboBox(comboBox)));
 
             return comboBox.SelectedIndex;
         }
@@ -662,7 +664,7 @@ namespace SAI_Editor
             {
                 List<ListViewItem> lvItems = new List<ListViewItem>();
 
-                Invoke((MethodInvoker)delegate
+                this.Invoke((MethodInvoker)delegate
                 {
                     foreach (var item in items)
                     {
@@ -712,7 +714,7 @@ namespace SAI_Editor
         {
             if (control.InvokeRequired)
             {
-                Invoke((MethodInvoker)delegate
+                this.Invoke((MethodInvoker)delegate
                 {
                     control.Enabled = enable;
                 });
@@ -726,7 +728,7 @@ namespace SAI_Editor
         {
             if (listView.InvokeRequired)
             {
-                Invoke((MethodInvoker)delegate
+                this.Invoke((MethodInvoker)delegate
                 {
                     listView.Items.Clear();
                 });
@@ -740,7 +742,7 @@ namespace SAI_Editor
         {
             if (control.InvokeRequired)
             {
-                Invoke((MethodInvoker)delegate
+                this.Invoke((MethodInvoker)delegate
                 {
                     control.Text = text;
                 });
@@ -753,17 +755,17 @@ namespace SAI_Editor
         private void listViewEntryResults_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
-            myListView.ListViewItemSorter = lvwColumnSorter;
+            myListView.ListViewItemSorter = this.lvwColumnSorter;
             //! Determine if clicked column is already the column that is being sorted
-            if (e.Column != lvwColumnSorter.SortColumn)
+            if (e.Column != this.lvwColumnSorter.SortColumn)
             {
                 //! Set the column number that is to be sorted; default to ascending
-                lvwColumnSorter.SortColumn = e.Column;
-                lvwColumnSorter.Order = SortOrder.Ascending;
+                this.lvwColumnSorter.SortColumn = e.Column;
+                this.lvwColumnSorter.Order = SortOrder.Ascending;
             }
             else
                 //! Reverse the current sort direction for this column
-                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                this.lvwColumnSorter.Order = this.lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
 
             //! Perform the sort with these new sort options
             myListView.Sort();
@@ -772,11 +774,11 @@ namespace SAI_Editor
         private void comboBoxSearchType_SelectedIndexChanged(object sender, EventArgs e)
         {
             //! Disable the 'has ainame' checkbox when the user selected actionlist for search type
-            checkBoxHasAiName.Enabled = comboBoxSearchType.SelectedIndex != 8;
-            listViewEntryResults.Columns.Clear();
-            bool previousSearchForAreaTrigger = previousSearchType == 6 || previousSearchType == 7;
+            this.checkBoxHasAiName.Enabled = this.comboBoxSearchType.SelectedIndex != 8;
+            this.listViewEntryResults.Columns.Clear();
+            bool previousSearchForAreaTrigger = this.previousSearchType == 6 || this.previousSearchType == 7;
 
-            switch (comboBoxSearchType.SelectedIndex)
+            switch (this.comboBoxSearchType.SelectedIndex)
             {
                 case 0: //! Creature entry
                 case 2: //! Creature guid
@@ -785,48 +787,48 @@ namespace SAI_Editor
                 case 8: //! Actionlist
                     if (previousSearchForAreaTrigger)
                     {
-                        StopRunningThread();
-                        listViewEntryResults.Items.Clear();
+                        this.StopRunningThread();
+                        this.listViewEntryResults.Items.Clear();
                     }
 
-                    textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");
-                    listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
-                    listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
+                    this.textBoxCriteria.Text = Regex.Replace(this.textBoxCriteria.Text, "[^.0-9]", "");
+                    this.listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
+                    this.listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
                     break;
                 case 1: //! Creature name
                 case 4: //! Gameobject name
                     if (previousSearchForAreaTrigger)
                     {
-                        StopRunningThread();
-                        listViewEntryResults.Items.Clear();
+                        this.StopRunningThread();
+                        this.listViewEntryResults.Items.Clear();
                     }
 
-                    listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
-                    listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
+                    this.listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
+                    this.listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
                     break;
                 case 6: //! Areatrigger id
                 case 7: //! Areatrigger map id
                     if (!previousSearchForAreaTrigger)
                     {
-                        StopRunningThread();
-                        listViewEntryResults.Items.Clear();
+                        this.StopRunningThread();
+                        this.listViewEntryResults.Items.Clear();
                     }
 
-                    textBoxCriteria.Text = Regex.Replace(textBoxCriteria.Text, "[^.0-9]", "");
-                    listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
-                    listViewEntryResults.Columns.Add("Mapid", 52, HorizontalAlignment.Left);
-                    listViewEntryResults.Columns.Add("X", 75, HorizontalAlignment.Left);
-                    listViewEntryResults.Columns.Add("Y", 75, HorizontalAlignment.Left);
-                    listViewEntryResults.Columns.Add("Z", 75, HorizontalAlignment.Left);
+                    this.textBoxCriteria.Text = Regex.Replace(this.textBoxCriteria.Text, "[^.0-9]", "");
+                    this.listViewEntryResults.Columns.Add("Id", 53, HorizontalAlignment.Right);
+                    this.listViewEntryResults.Columns.Add("Mapid", 52, HorizontalAlignment.Left);
+                    this.listViewEntryResults.Columns.Add("X", 75, HorizontalAlignment.Left);
+                    this.listViewEntryResults.Columns.Add("Y", 75, HorizontalAlignment.Left);
+                    this.listViewEntryResults.Columns.Add("Z", 75, HorizontalAlignment.Left);
                     break;
             }
 
-            previousSearchType = comboBoxSearchType.SelectedIndex;
+            this.previousSearchType = this.comboBoxSearchType.SelectedIndex;
         }
 
         private void SearchForEntryForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            StopRunningThread();
+            this.StopRunningThread();
         }
     }
 }

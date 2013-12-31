@@ -3,29 +3,30 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using SAI_Editor.Classes;
-using SAI_Editor.Database.Classes;
+using SAI_Editor.Classes.Database.Classes;
 using SAI_Editor.Enumerators;
+using SAI_Editor.Forms;
 
-namespace SAI_Editor.Database
+namespace SAI_Editor.Classes.Database
 {
+
     class WorldDatabase : Database<MySqlConnection, MySqlConnectionStringBuilder, MySqlParameter, MySqlCommand, MySqlTransaction>
     {
         public WorldDatabase(string host, uint port, string username, string password, string databaseName)
         {
-            connectionString = new MySqlConnectionStringBuilder();
-            connectionString.Server = host;
-            connectionString.Port = (uint)port;
-            connectionString.UserID = username;
-            connectionString.Password = password;
-            connectionString.Database = databaseName;
-            connectionString.AllowUserVariables = true;
-            connectionString.AllowZeroDateTime = true;
+            this.connectionString = new MySqlConnectionStringBuilder();
+            this.connectionString.Server = host;
+            this.connectionString.Port = (uint)port;
+            this.connectionString.UserID = username;
+            this.connectionString.Password = password;
+            this.connectionString.Database = databaseName;
+            this.connectionString.AllowUserVariables = true;
+            this.connectionString.AllowZeroDateTime = true;
         }
 
         public async Task<int> GetCreatureIdByGuid(int guid)
         {
-            DataTable dt = await ExecuteQuery("SELECT id FROM creature WHERE guid = '" + guid + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT id FROM creature WHERE guid = '" + guid + "'");
 
             if (dt.Rows.Count == 0)
                 return 0;
@@ -35,7 +36,7 @@ namespace SAI_Editor.Database
 
         public async Task<int> GetGameobjectIdByGuid(int guid)
         {
-            DataTable dt = await ExecuteQuery("SELECT id FROM gameobject WHERE guid = '" + guid + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT id FROM gameobject WHERE guid = '" + guid + "'");
 
             if (dt.Rows.Count == 0)
                 return 0;
@@ -48,9 +49,9 @@ namespace SAI_Editor.Database
             switch ((SourceTypes)source_type)
             {
                 case SourceTypes.SourceTypeCreature:
-                    return await GetCreatureIdByGuid(guid);
+                    return await this.GetCreatureIdByGuid(guid);
                 case SourceTypes.SourceTypeGameobject:
-                    return await GetGameobjectIdByGuid(guid);
+                    return await this.GetGameobjectIdByGuid(guid);
             }
 
             return 0;
@@ -59,16 +60,16 @@ namespace SAI_Editor.Database
         public async Task<string> GetObjectAiName(int entryorguid, int source_type)
         {
             if (entryorguid < 0)
-                entryorguid = await GetObjectIdByGuidAndSourceType(entryorguid, source_type);
+                entryorguid = await this.GetObjectIdByGuidAndSourceType(entryorguid, source_type);
 
             switch ((SourceTypes)source_type)
             {
                 case SourceTypes.SourceTypeCreature:
-                    return await GetCreatureAiNameById(entryorguid);
+                    return await this.GetCreatureAiNameById(entryorguid);
                 case SourceTypes.SourceTypeGameobject:
-                    return await GetGameobjectAiNameById(entryorguid);
+                    return await this.GetGameobjectAiNameById(entryorguid);
                 case SourceTypes.SourceTypeAreaTrigger:
-                    return await GetAreaTriggerScriptNameById(entryorguid);
+                    return await this.GetAreaTriggerScriptNameById(entryorguid);
             }
 
             return String.Empty;
@@ -77,16 +78,16 @@ namespace SAI_Editor.Database
         public async Task<string> GetObjectScriptName(int entryorguid, int source_type)
         {
             if (entryorguid < 0)
-                entryorguid = await GetObjectIdByGuidAndSourceType(entryorguid, source_type);
+                entryorguid = await this.GetObjectIdByGuidAndSourceType(entryorguid, source_type);
 
             switch ((SourceTypes)source_type)
             {
                 case SourceTypes.SourceTypeCreature:
-                    return await GetCreatureScriptNameById(entryorguid);
+                    return await this.GetCreatureScriptNameById(entryorguid);
                 case SourceTypes.SourceTypeGameobject:
-                    return await GetGameobjectScriptNameById(entryorguid);
+                    return await this.GetGameobjectScriptNameById(entryorguid);
                 case SourceTypes.SourceTypeAreaTrigger:
-                    return await GetAreaTriggerScriptNameById(entryorguid);
+                    return await this.GetAreaTriggerScriptNameById(entryorguid);
             }
 
             return String.Empty;
@@ -94,7 +95,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetCreatureAiNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT ainame FROM creature_template WHERE entry = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT ainame FROM creature_template WHERE entry = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -104,7 +105,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetCreatureScriptNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT scriptname FROM creature_template WHERE entry = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT scriptname FROM creature_template WHERE entry = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -114,7 +115,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetGameobjectAiNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT ainame FROM gameobject_template WHERE entry = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT ainame FROM gameobject_template WHERE entry = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -124,7 +125,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetGameobjectScriptNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT scriptname FROM gameobject_template WHERE entry = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT scriptname FROM gameobject_template WHERE entry = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -134,7 +135,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetAreaTriggerScriptNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT scriptname FROM areatrigger_scripts WHERE entry = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT scriptname FROM areatrigger_scripts WHERE entry = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -144,7 +145,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetCreatureNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT name FROM creature_template WHERE entry = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT name FROM creature_template WHERE entry = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -154,7 +155,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetCreatureNameByGuid(int guid)
         {
-            DataTable dt = await ExecuteQuery("SELECT `name` FROM creature_template WHERE entry = '" + await GetCreatureIdByGuid(guid) + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT `name` FROM creature_template WHERE entry = '" + await this.GetCreatureIdByGuid(guid) + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -164,7 +165,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetGameobjectNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -174,7 +175,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetGameobjectNameByGuid(int guid)
         {
-            DataTable dt = await ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '" + await GetGameobjectIdByGuid(guid) + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT name FROM gameobject_template WHERE entry = '" + await this.GetGameobjectIdByGuid(guid) + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -187,9 +188,9 @@ namespace SAI_Editor.Database
             switch ((SourceTypes)source_type)
             {
                 case SourceTypes.SourceTypeCreature:
-                    return await GetCreatureNameById(id);
+                    return await this.GetCreatureNameById(id);
                 case SourceTypes.SourceTypeGameobject:
-                    return await GetGameobjectNameById(id);
+                    return await this.GetGameobjectNameById(id);
             }
 
             return String.Empty;
@@ -200,9 +201,9 @@ namespace SAI_Editor.Database
             switch ((SourceTypes)source_type)
             {
                 case SourceTypes.SourceTypeCreature:
-                    return await GetCreatureNameByGuid(guid);
+                    return await this.GetCreatureNameByGuid(guid);
                 case SourceTypes.SourceTypeGameobject:
-                    return await GetGameobjectNameByGuid(guid);
+                    return await this.GetGameobjectNameByGuid(guid);
             }
 
             return String.Empty;
@@ -215,14 +216,14 @@ namespace SAI_Editor.Database
             switch (sourceType)
             {
                 case SourceTypes.SourceTypeCreature:
-                    newName = idOrGuid < 0 ? await GetCreatureNameByGuid(-idOrGuid) : await GetCreatureNameById(idOrGuid);
+                    newName = idOrGuid < 0 ? await this.GetCreatureNameByGuid(-idOrGuid) : await this.GetCreatureNameById(idOrGuid);
 
                     if (errorIfNoneFound && String.IsNullOrWhiteSpace(newName))
                         newName = "<Could not generate name>";
 
                     return newName;
                 case SourceTypes.SourceTypeGameobject:
-                    newName = idOrGuid < 0 ? await GetGameobjectNameByGuid(-idOrGuid) : await GetGameobjectNameById(idOrGuid);
+                    newName = idOrGuid < 0 ? await this.GetGameobjectNameByGuid(-idOrGuid) : await this.GetGameobjectNameById(idOrGuid);
 
                     if (errorIfNoneFound && String.IsNullOrWhiteSpace(newName))
                         newName = "<Could not generate name>";
@@ -239,12 +240,12 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetObjectNameByIdOrGuidAndSourceType(EntryOrGuidAndSourceType entryOrGuidAndSourceType, bool errorIfNoneFound = false)
         {
-            return await GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid, errorIfNoneFound);
+            return await this.GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid, errorIfNoneFound);
         }
 
         public async Task<List<SmartScript>> GetSmartScripts(int entryorguid)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '" + entryorguid + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '" + entryorguid + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -252,14 +253,14 @@ namespace SAI_Editor.Database
             List<SmartScript> smartScripts = new List<SmartScript>();
 
             foreach (DataRow row in dt.Rows)
-                smartScripts.Add(BuildSmartScript(row));
+                smartScripts.Add(this.BuildSmartScript(row));
 
             return smartScripts;
         }
 
         public async Task<List<SmartScript>> GetSmartScripts(int entryorguid, int source_type)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '" + entryorguid + "' AND source_type = '" + source_type + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '" + entryorguid + "' AND source_type = '" + source_type + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -267,14 +268,14 @@ namespace SAI_Editor.Database
             List<SmartScript> smartScripts = new List<SmartScript>();
 
             foreach (DataRow row in dt.Rows)
-                smartScripts.Add(BuildSmartScript(row));
+                smartScripts.Add(this.BuildSmartScript(row));
 
             return smartScripts;
         }
 
         public async Task<List<SmartScript>> GetSmartScriptsWithoutSourceType(int entryorguid, int source_type)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '" + entryorguid + "' AND source_type != '" + source_type + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '" + entryorguid + "' AND source_type != '" + source_type + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -282,14 +283,14 @@ namespace SAI_Editor.Database
             List<SmartScript> smartScripts = new List<SmartScript>();
 
             foreach (DataRow row in dt.Rows)
-                smartScripts.Add(BuildSmartScript(row));
+                smartScripts.Add(this.BuildSmartScript(row));
 
             return smartScripts;
         }
 
         public async Task<List<SmartScript>> GetSmartScriptActionLists(string criteria, bool useLikeStatement)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9 ORDER BY entryorguid");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9 ORDER BY entryorguid");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -298,7 +299,7 @@ namespace SAI_Editor.Database
             List<SmartScript> smartScriptsClean = new List<SmartScript>();
 
             foreach (DataRow row in dt.Rows)
-                smartScripts.Add(BuildSmartScript(row));
+                smartScripts.Add(this.BuildSmartScript(row));
 
             if (criteria.Length > 0)
             {
@@ -354,7 +355,7 @@ namespace SAI_Editor.Database
 
         public async Task<List<SmartScript>> GetSmartScriptsCallingActionLists()
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9 ORDER BY entryorguid");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM smart_scripts WHERE action_type IN (80,87,88) AND source_type != 9 ORDER BY entryorguid");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -362,20 +363,20 @@ namespace SAI_Editor.Database
             List<SmartScript> smartScripts = new List<SmartScript>();
 
             foreach (DataRow row in dt.Rows)
-                smartScripts.Add(BuildSmartScript(row));
+                smartScripts.Add(this.BuildSmartScript(row));
 
             return smartScripts;
         }
 
         public async Task<bool> AreaTriggerHasSmartAI(int entry)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = '" + entry + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM areatrigger_scripts WHERE ScriptName = 'SmartTrigger' AND entry = '" + entry + "'");
             return dt.Rows.Count > 0;
         }
 
         public async Task<string> GetQuestTitleById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT title FROM quest_template WHERE id = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT title FROM quest_template WHERE id = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -385,7 +386,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetQuestTitleByCriteria(int requiredNpcOrGo1, int requiredNpcOrGo2, int requiredNpcOrGo3, int requiredNpcOrGo4)
         {
-            DataTable dt = await ExecuteQuery("SELECT title FROM quest_template WHERE (RequiredNpcOrGo1 = '" + requiredNpcOrGo1 + "' OR " + "RequiredNpcOrGo1 = '" + requiredNpcOrGo2 + "' OR " + "RequiredNpcOrGo2 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo3 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo4 = '" + requiredNpcOrGo4 + "')");
+            DataTable dt = await this.ExecuteQuery("SELECT title FROM quest_template WHERE (RequiredNpcOrGo1 = '" + requiredNpcOrGo1 + "' OR " + "RequiredNpcOrGo1 = '" + requiredNpcOrGo2 + "' OR " + "RequiredNpcOrGo2 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo3 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo4 = '" + requiredNpcOrGo4 + "')");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -395,7 +396,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetQuestTitleByCriteria(int requiredNpcOrGo1, int requiredNpcOrGo2, int requiredNpcOrGo3, int requiredNpcOrGo4, int requiredSpellCast1)
         {
-            DataTable dt = await ExecuteQuery("SELECT title FROM quest_template WHERE (RequiredNpcOrGo1 = '" + requiredNpcOrGo1 + "' OR " + "RequiredNpcOrGo1 = '" + requiredNpcOrGo2 + "' OR " + "RequiredNpcOrGo2 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo3 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo4 = '" + requiredNpcOrGo4 + "') AND RequiredSpellCast1 = '" + requiredSpellCast1 + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT title FROM quest_template WHERE (RequiredNpcOrGo1 = '" + requiredNpcOrGo1 + "' OR " + "RequiredNpcOrGo1 = '" + requiredNpcOrGo2 + "' OR " + "RequiredNpcOrGo2 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo3 = '" + requiredNpcOrGo3 + "' OR " + "RequiredNpcOrGo4 = '" + requiredNpcOrGo4 + "') AND RequiredSpellCast1 = '" + requiredSpellCast1 + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -405,7 +406,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetItemNameById(int entry)
         {
-            DataTable dt = await ExecuteQuery("SELECT name FROM item_template WHERE entry = '" + entry + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT name FROM item_template WHERE entry = '" + entry + "'");
 
             if (dt.Rows.Count == 0)
                 return String.Empty;
@@ -415,7 +416,7 @@ namespace SAI_Editor.Database
 
         public async Task<List<Creature>> GetCreaturesById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM creature WHERE id = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM creature WHERE id = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -423,14 +424,14 @@ namespace SAI_Editor.Database
             List<Creature> creatures = new List<Creature>();
 
             foreach (DataRow row in dt.Rows)
-                creatures.Add(BuildCreature(row));
+                creatures.Add(this.BuildCreature(row));
 
             return creatures;
         }
 
         public async Task<List<Gameobject>> GetGameobjectsById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM gameobject WHERE id = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM gameobject WHERE id = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -438,7 +439,7 @@ namespace SAI_Editor.Database
             List<Gameobject> gameobjects = new List<Gameobject>();
 
             foreach (DataRow row in dt.Rows)
-                gameobjects.Add(BuildGameobject(row));
+                gameobjects.Add(this.BuildGameobject(row));
 
             return gameobjects;
         }

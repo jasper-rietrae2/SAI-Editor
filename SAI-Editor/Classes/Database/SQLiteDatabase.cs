@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Threading.Tasks;
-using SAI_Editor.Classes;
-using SAI_Editor.Database.Classes;
+using SAI_Editor.Classes.Database.Classes;
 
-namespace SAI_Editor.Database
+namespace SAI_Editor.Classes.Database
 {
+
     class SQLiteDatabase : Database<SQLiteConnection, SQLiteConnectionStringBuilder, SQLiteParameter, SQLiteCommand, SQLiteTransaction>
     {
         public SQLiteDatabase(string file)
         {
-            connectionString = new SQLiteConnectionStringBuilder();
-            connectionString.DataSource = file;
-            connectionString.Version = 3;
+            this.connectionString = new SQLiteConnectionStringBuilder();
+            this.connectionString.DataSource = file;
+            this.connectionString.Version = 3;
         }
 
         public async Task<List<EventTypeInformation>> GetEventTypeInformation()
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM event_type_information");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM event_type_information");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -27,14 +27,14 @@ namespace SAI_Editor.Database
             List<EventTypeInformation> eventTypeInformations = new List<EventTypeInformation>();
 
             foreach (DataRow row in dt.Rows)
-                eventTypeInformations.Add(BuildEventTypeInformation(row));
+                eventTypeInformations.Add(this.BuildEventTypeInformation(row));
 
             return eventTypeInformations;
         }
 
         public async Task<List<ActionTypeInformation>> GetActionTypeInformation()
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM action_type_information");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM action_type_information");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -42,14 +42,14 @@ namespace SAI_Editor.Database
             List<ActionTypeInformation> actionTypeInformations = new List<ActionTypeInformation>();
 
             foreach (DataRow row in dt.Rows)
-                actionTypeInformations.Add(BuildActionTypeInformation(row));
+                actionTypeInformations.Add(this.BuildActionTypeInformation(row));
 
             return actionTypeInformations;
         }
 
         public async Task<List<TargetTypeInformation>> GetTargetTypeInformation()
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM target_type_information");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM target_type_information");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -57,14 +57,14 @@ namespace SAI_Editor.Database
             List<TargetTypeInformation> targetTypeInformations = new List<TargetTypeInformation>();
 
             foreach (DataRow row in dt.Rows)
-                targetTypeInformations.Add(BuildTargetTypeInformation(row));
+                targetTypeInformations.Add(this.BuildTargetTypeInformation(row));
 
             return targetTypeInformations;
         }
 
         public async Task<List<AreaTrigger>> GetAreaTriggers()
         {
-            DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM areatriggers");
 
             if (dt.Rows.Count == 0)
                 return null;
@@ -72,7 +72,7 @@ namespace SAI_Editor.Database
             List<AreaTrigger> areaTriggers = new List<AreaTrigger>();
 
             foreach (DataRow row in dt.Rows)
-                areaTriggers.Add(BuildAreaTrigger(row));
+                areaTriggers.Add(this.BuildAreaTrigger(row));
 
             return areaTriggers;
         }
@@ -80,12 +80,12 @@ namespace SAI_Editor.Database
         public async Task<AreaTrigger> GetAreaTriggerById(int id)
         {
             //DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers WHERE 'id' = @id", new SQLiteParameter("@id", id));
-            DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers WHERE id = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT * FROM areatriggers WHERE id = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return null;
 
-            return BuildAreaTrigger(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
+            return this.BuildAreaTrigger(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
         }
 
         //! We just do this locally because the database has a SHITLOAD of columns and we only need very few. Not going
@@ -107,7 +107,7 @@ namespace SAI_Editor.Database
 
         public async Task<string> GetSpellNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT spellName FROM spells WHERE id = '" + id + "'");
+            DataTable dt = await this.ExecuteQuery("SELECT spellName FROM spells WHERE id = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return "<Spell not found!>";

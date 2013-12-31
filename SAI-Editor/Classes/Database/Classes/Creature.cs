@@ -1,4 +1,4 @@
-﻿namespace SAI_Editor.Database.Classes
+﻿namespace SAI_Editor.Classes.Database.Classes
 {
     public class Creature
     {

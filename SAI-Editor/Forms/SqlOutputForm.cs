@@ -5,9 +5,11 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using SAI_Editor.Properties;
+using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms
 {
+
     public partial class SqlOutputForm : Form
     {
         private EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
