@@ -14,7 +14,6 @@ using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms.SearchForms
 {
-
     public partial class SearchForEntryForm : Form
     {
         private Thread searchThread = null;

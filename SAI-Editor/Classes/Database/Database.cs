@@ -8,7 +8,6 @@ using MySql.Data.MySqlClient;
 
 namespace SAI_Editor.Classes.Database
 {
-
     public class Database<Connection, StrBuilder, Parameter, Command, Transaction>
         where Connection : DbConnection
         where Command : DbCommand

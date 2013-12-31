@@ -9,7 +9,6 @@ using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms
 {
-
     public partial class RevertQueryForm : Form
     {
         public RevertQueryForm()

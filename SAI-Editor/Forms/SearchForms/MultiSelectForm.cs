@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms.SearchForms
 {
-
-    using SAI_Editor.Classes;
-
     public partial class MultiSelectForm<T> : Form where T : struct, IConvertible
     {
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();

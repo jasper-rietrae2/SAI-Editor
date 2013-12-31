@@ -5,7 +5,6 @@ using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms.SearchForms
 {
-
     public partial class SelectDatabaseForm : Form
     {
         private readonly List<string> databaseNames = new List<string>();

@@ -6,7 +6,6 @@ using SAI_Editor.Classes.Database.Classes;
 
 namespace SAI_Editor.Forms.SearchForms
 {
-
     public partial class SelectSmartScriptForm : Form
     {
         private readonly List<List<SmartScript>> items;

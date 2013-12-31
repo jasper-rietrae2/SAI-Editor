@@ -9,7 +9,6 @@ using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms
 {
-
     public partial class SqlOutputForm : Form
     {
         private EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();

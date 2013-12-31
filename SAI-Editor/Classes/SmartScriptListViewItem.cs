@@ -1,10 +1,9 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
+using SAI_Editor.Classes.Database.Classes;
 
 namespace SAI_Editor.Classes
 {
-    using SAI_Editor.Classes.Database.Classes;
-
     public class SmartScriptListViewItem : ListViewItem
     {
         private SmartScript _script;

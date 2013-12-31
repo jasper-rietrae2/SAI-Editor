@@ -7,7 +7,6 @@ using SAI_Editor.Classes.Database.Classes;
 
 namespace SAI_Editor.Forms.SearchForms
 {
-
     public partial class SearchForLinkForm : Form
     {
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();

@@ -13,7 +13,6 @@ using SAI_Editor.Properties;
 
 namespace SAI_Editor.Classes
 {
-
     public enum ScriptTypeId
     {
         ScriptTypeEvent,

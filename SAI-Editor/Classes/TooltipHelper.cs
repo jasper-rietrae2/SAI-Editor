@@ -3,7 +3,6 @@ using System.Windows.Forms;
 
 namespace SAI_Editor.Classes
 {
-
     public static class ToolTipHelper
     {
         private static readonly Dictionary<string, DetailedToolTip> tooltips = new Dictionary<string, DetailedToolTip>();

@@ -5,7 +5,6 @@ using System.Windows.Forms;
 
 namespace SAI_Editor.Forms
 {
-
     partial class AboutForm : Form
     {
         public AboutForm()

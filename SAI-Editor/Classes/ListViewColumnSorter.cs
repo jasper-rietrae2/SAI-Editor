@@ -4,7 +4,6 @@ using System.Windows.Forms;
 
 namespace SAI_Editor.Classes
 {
-
     /// <summary>
     /// This class is an implementation of the 'IComparer' interface.
     /// </summary>

@@ -7,7 +7,6 @@ using System.Text;
 
 namespace SAI_Editor.Classes
 {
-
     public static class SecurityExtensions
     {
         public static string ToSHA1(this string str)

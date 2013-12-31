@@ -10,7 +10,6 @@ using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms.SearchForms
 {
-
     public enum DatabaseSearchFormType
     {
         DatabaseSearchFormTypeSpell,

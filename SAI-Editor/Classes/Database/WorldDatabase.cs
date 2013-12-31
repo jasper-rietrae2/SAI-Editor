@@ -9,7 +9,6 @@ using SAI_Editor.Forms;
 
 namespace SAI_Editor.Classes.Database
 {
-
     class WorldDatabase : Database<MySqlConnection, MySqlConnectionStringBuilder, MySqlParameter, MySqlCommand, MySqlTransaction>
     {
         public WorldDatabase(string host, uint port, string username, string password, string databaseName)
