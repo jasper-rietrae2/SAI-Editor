@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Windows.Forms;
-using System.Linq;
-using System.Drawing;
-using MySql.Data.MySqlClient;
-using SAI_Editor.Properties;
-using SAI_Editor.Database.Classes;
-using SAI_Editor.SearchForms;
-using SAI_Editor.Classes;
 using System.Threading.Tasks;
-using SAI_Editor.Forms;
-using SAI_Editor.Security;
+using System.Windows.Forms;
+using MySql.Data.MySqlClient;
+using SAI_Editor.Classes;
+using SAI_Editor.Classes.Database.Classes;
+using SAI_Editor.Enumerators;
+using SAI_Editor.Forms.SearchForms;
+using SAI_Editor.Properties;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms
 {
     public enum FormState
     {

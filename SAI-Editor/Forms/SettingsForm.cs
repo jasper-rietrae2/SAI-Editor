@@ -5,11 +5,11 @@ using System.Text;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using SAI_Editor.Classes;
+using SAI_Editor.Classes.Database;
+using SAI_Editor.Forms.SearchForms;
 using SAI_Editor.Properties;
-using SAI_Editor.Database;
-using SAI_Editor.Security;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms
 {
     public partial class SettingsForm : Form
     {

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using SAI_Editor.Classes;
-using SAI_Editor.Database.Classes;
+using SAI_Editor.Classes.Database.Classes;
+using SAI_Editor.Enumerators;
+using SAI_Editor.Forms;
 
-namespace SAI_Editor.Database
+namespace SAI_Editor.Classes.Database
 {
     class WorldDatabase : Database<MySqlConnection, MySqlConnectionStringBuilder, MySqlParameter, MySqlCommand, MySqlTransaction>
     {

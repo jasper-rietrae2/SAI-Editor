@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.Threading.Tasks;
-using SAI_Editor.Classes;
-using SAI_Editor.Database.Classes;
+using SAI_Editor.Classes.Database.Classes;
 
-namespace SAI_Editor.Database
+namespace SAI_Editor.Classes.Database
 {
     class SQLiteDatabase : Database<SQLiteConnection, SQLiteConnectionStringBuilder, SQLiteParameter, SQLiteCommand, SQLiteTransaction>
     {

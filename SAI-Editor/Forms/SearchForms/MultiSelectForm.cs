@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using SAI_Editor.Classes;
-using System.Linq;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms.SearchForms
 {
     public partial class MultiSelectForm<T> : Form where T : struct, IConvertible
     {

@@ -6,8 +6,9 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using SAI_Editor.Classes;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms.SearchForms
 {
     public enum DatabaseSearchFormType
     {

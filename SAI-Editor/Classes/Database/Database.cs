@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Data;
+using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using System.Data.Common;
-using System.Data;
 
-namespace SAI_Editor
+namespace SAI_Editor.Classes.Database
 {
     public class Database<Connection, StrBuilder, Parameter, Command, Transaction>
         where Connection : DbConnection

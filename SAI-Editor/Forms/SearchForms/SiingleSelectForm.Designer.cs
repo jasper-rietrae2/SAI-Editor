@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SAI_Editor.SearchForms
+namespace SAI_Editor.Forms.SearchForms
 {
     partial class SingleSelectForm<T> where T : struct, IConvertible
     {

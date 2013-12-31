@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Diagnostics;
 using SAI_Editor.Properties;
+using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms
 {

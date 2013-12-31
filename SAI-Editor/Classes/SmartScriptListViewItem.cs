@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
-using SAI_Editor.Database.Classes;
+using SAI_Editor.Classes.Database.Classes;
 
 namespace SAI_Editor.Classes
 {

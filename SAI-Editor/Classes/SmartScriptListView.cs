@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Windows.Forms;
-using SAI_Editor.Database.Classes;
 using SAI_Editor.Properties;
 using System.Drawing;
+using SAI_Editor.Classes.Database.Classes;
 
 namespace SAI_Editor.Classes
 {

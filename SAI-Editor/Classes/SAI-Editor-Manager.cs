@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using SAI_Editor.Database;
-using SAI_Editor.Database.Classes;
+using SAI_Editor.Classes.Database;
+using SAI_Editor.Classes.Database.Classes;
+using SAI_Editor.Enumerators;
+using SAI_Editor.Forms;
 using SAI_Editor.Properties;
-using SAI_Editor.Security;
 
-namespace SAI_Editor
+namespace SAI_Editor.Classes
 {
     public enum ScriptTypeId
     {
@@ -300,7 +301,7 @@ namespace SAI_Editor
                 if (password.Length > 0)
                     _connectionString.Password = password;
 
-                WorldDatabase worldDatabase = _worldDatabase != null ? _worldDatabase : Instance.worldDatabase;
+                WorldDatabase worldDatabase = _worldDatabase ?? Instance.worldDatabase;
 
                 //! Will throw an error message itself if no connection can be made.
                 if (!worldDatabase.CanConnectToDatabase(_connectionString))

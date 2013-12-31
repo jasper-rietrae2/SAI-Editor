@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms.SearchForms
 {
     partial class MultiSelectForm<T> where T : struct, IConvertible
     {

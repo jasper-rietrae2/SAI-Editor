@@ -1,10 +1,12 @@
-﻿using SAI_Editor.Database;
-using SAI_Editor.Database.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SAI_Editor.Enumerators;
 using SAI_Editor.Properties;
+using SAI_Editor.Classes.Database;
+using SAI_Editor.Classes.Database.Classes;
+using SAI_Editor.Forms;
 
 namespace SAI_Editor.Classes
 {

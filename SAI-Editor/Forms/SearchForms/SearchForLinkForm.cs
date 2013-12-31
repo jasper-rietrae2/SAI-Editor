@@ -1,10 +1,11 @@
-﻿using SAI_Editor.Database.Classes;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using SAI_Editor.Classes;
+using SAI_Editor.Classes.Database.Classes;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms.SearchForms
 {
     public partial class SearchForLinkForm : Form
     {

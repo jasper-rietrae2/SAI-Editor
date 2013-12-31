@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
-using System.Diagnostics;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms
 {
     partial class AboutForm : Form
     {

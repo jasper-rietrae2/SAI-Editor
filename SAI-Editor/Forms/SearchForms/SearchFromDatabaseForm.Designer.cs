@@ -1,4 +1,4 @@
-﻿namespace SAI_Editor
+﻿namespace SAI_Editor.Forms.SearchForms
 {
     partial class SearchFromDatabaseForm
     {

@@ -4,13 +4,15 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Text.RegularExpressions;
-using System.Windows.Forms;
 using System.Threading;
-using SAI_Editor.Properties;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using SAI_Editor.Database.Classes;
+using SAI_Editor.Classes.Database.Classes;
+using SAI_Editor.Enumerators;
+using SAI_Editor.Properties;
+using SAI_Editor.Classes;
 
-namespace SAI_Editor
+namespace SAI_Editor.Forms.SearchForms
 {
     public partial class SearchForEntryForm : Form
     {

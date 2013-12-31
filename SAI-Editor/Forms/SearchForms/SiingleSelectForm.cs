@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
+using SAI_Editor.Classes;
 
-namespace SAI_Editor.SearchForms
+namespace SAI_Editor.Forms.SearchForms
 {
     public partial class SingleSelectForm<T> : Form where T : struct, IConvertible
     {

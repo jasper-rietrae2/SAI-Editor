@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Windows.Forms;
-using SAI_Editor.Classes;
 
-namespace SAI_Editor
+namespace SAI_Editor.Classes
 {
     /// <summary>
     /// This class is an implementation of the 'IComparer' interface.

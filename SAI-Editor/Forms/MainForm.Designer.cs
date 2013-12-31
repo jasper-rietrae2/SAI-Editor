@@ -1,4 +1,4 @@
-﻿namespace SAI_Editor
+﻿namespace SAI_Editor.Forms
 {
     partial class MainForm
     {

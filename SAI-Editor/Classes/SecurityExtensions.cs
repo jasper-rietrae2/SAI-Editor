@@ -5,7 +5,7 @@ using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace SAI_Editor.Security
+namespace SAI_Editor.Classes
 {
     public static class SecurityExtensions
     {
