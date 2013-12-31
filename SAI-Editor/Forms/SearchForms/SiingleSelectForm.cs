@@ -11,19 +11,19 @@ namespace SAI_Editor.Forms.SearchForms
 
         public SingleSelectForm(TextBox textBoxToChange)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             this.textBoxToChange = textBoxToChange;
-            this.listViewSelectableItems.Columns.Add(typeof(T).Name, 235, HorizontalAlignment.Left);
+            listViewSelectableItems.Columns.Add(typeof(T).Name, 235, HorizontalAlignment.Left);
 
             foreach (var en in Enum.GetNames(typeof(T)))
-                this.listViewSelectableItems.Items.Add(en);
+                listViewSelectableItems.Items.Add(en);
 
-            this.listViewSelectableItems.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+            listViewSelectableItems.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 
             if (!String.IsNullOrWhiteSpace(textBoxToChange.Text) && textBoxToChange.Text != "0")
             {
-                foreach (ListViewItem item in this.listViewSelectableItems.Items)
+                foreach (ListViewItem item in listViewSelectableItems.Items)
                 {
                     if (item.Index > 0 && textBoxToChange.Text == item.Index.ToString())
                     {
@@ -34,40 +34,40 @@ namespace SAI_Editor.Forms.SearchForms
                 }
             }
             else
-                this.listViewSelectableItems.Items[0].Selected = true;
+                listViewSelectableItems.Items[0].Selected = true;
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
-            if (this.listViewSelectableItems.SelectedItems.Count == 0)
+            if (listViewSelectableItems.SelectedItems.Count == 0)
                 return;
 
-            string index = this.listViewSelectableItems.SelectedItems[0].Index.ToString();
+            string index = listViewSelectableItems.SelectedItems[0].Index.ToString();
 
             if (index == "7" && typeof(T).Name == "PowerTypes") //! POWER_HEALTH
                 index = "-2";
 
-            this.textBoxToChange.Text = index;
-            this.Close();
+            textBoxToChange.Text = index;
+            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void listViewSelectableItems_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
-            myListView.ListViewItemSorter = this.lvwColumnSorter;
+            myListView.ListViewItemSorter = lvwColumnSorter;
 
-            if (e.Column != this.lvwColumnSorter.SortColumn)
+            if (e.Column != lvwColumnSorter.SortColumn)
             {
-                this.lvwColumnSorter.SortColumn = e.Column;
-                this.lvwColumnSorter.Order = SortOrder.Ascending;
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
             }
             else
-                this.lvwColumnSorter.Order = this.lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
 
             myListView.Sort();
         }
@@ -77,11 +77,11 @@ namespace SAI_Editor.Forms.SearchForms
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    this.Close();
+                    Close();
                     break;
                 case Keys.Enter:
-                    if (this.listViewSelectableItems.SelectedItems.Count > 0)
-                        this.buttonContinue.PerformClick();
+                    if (listViewSelectableItems.SelectedItems.Count > 0)
+                        buttonContinue.PerformClick();
 
                     break;
             }
@@ -89,12 +89,12 @@ namespace SAI_Editor.Forms.SearchForms
 
         private void listViewSelectableItems_DoubleClick(object sender, EventArgs e)
         {
-            this.buttonContinue.PerformClick();
+            buttonContinue.PerformClick();
         }
 
         private void listViewSelectableItems_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.listViewSelectableItems.Items[0].Checked = this.listViewSelectableItems.CheckedItems.Count == 0;
+            listViewSelectableItems.Items[0].Checked = listViewSelectableItems.CheckedItems.Count == 0;
         }
     }
 }

@@ -13,18 +13,18 @@ namespace SAI_Editor.Forms.SearchForms
 
         public SelectDatabaseForm(List<string> databaseNames, TextBox textBoxToChange)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             this.databaseNames = databaseNames;
             this.textBoxToChange = textBoxToChange;
 
             for (int i = 0; i < databaseNames.Count; ++i)
             {
-                this.listViewDatabases.Items.Add(databaseNames[i]);
+                listViewDatabases.Items.Add(databaseNames[i]);
 
                 //! Select the currently used database (if any)
                 if (textBoxToChange.Text == databaseNames[i])
-                    this.listViewDatabases.Items[i].Selected = true;
+                    listViewDatabases.Items[i].Selected = true;
             }
         }
 
@@ -33,45 +33,45 @@ namespace SAI_Editor.Forms.SearchForms
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    this.Close();
+                    Close();
                     break;
             }
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
-            if (this.listViewDatabases.SelectedItems.Count == 0)
+            if (listViewDatabases.SelectedItems.Count == 0)
                 return;
 
-            this.textBoxToChange.Text = this.listViewDatabases.SelectedItems[0].Text;
-            this.Close();
+            textBoxToChange.Text = listViewDatabases.SelectedItems[0].Text;
+            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void listViewDatabases_DoubleClick(object sender, EventArgs e)
         {
-            this.buttonContinue.PerformClick();
+            buttonContinue.PerformClick();
         }
 
         private void listViewDatabases_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
-            myListView.ListViewItemSorter = this.lvwColumnSorter;
+            myListView.ListViewItemSorter = lvwColumnSorter;
 
             //! Determine if clicked column is already the column that is being sorted
-            if (e.Column != this.lvwColumnSorter.SortColumn)
+            if (e.Column != lvwColumnSorter.SortColumn)
             {
                 //! Set the column number that is to be sorted; default to ascending
-                this.lvwColumnSorter.SortColumn = e.Column;
-                this.lvwColumnSorter.Order = SortOrder.Ascending;
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
             }
             else
                 //! Reverse the current sort direction for this column
-                this.lvwColumnSorter.Order = this.lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
 
             //! Perform the sort with these new sort options
             myListView.Sort();
@@ -79,7 +79,7 @@ namespace SAI_Editor.Forms.SearchForms
 
         private void listViewDatabases_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.buttonContinue.Enabled = this.listViewDatabases.SelectedItems.Count > 0;
+            buttonContinue.Enabled = listViewDatabases.SelectedItems.Count > 0;
         }
     }
 }

@@ -16,72 +16,72 @@ namespace SAI_Editor.Forms.SearchForms
 
         public SearchForLinkForm(List<SmartScript> smartScripts, int indexOfLineToDisable, TextBox textBoxToChange)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             this.smartScripts = smartScripts;
             this.indexOfLineToDisable = indexOfLineToDisable;
             this.textBoxToChange = textBoxToChange;
 
             foreach (SmartScript smartScript in smartScripts)
-                this.listViewScripts.AddSmartScript(smartScript);
+                listViewScripts.AddSmartScript(smartScript);
 
-            foreach (ColumnHeader header in this.listViewScripts.Columns)
+            foreach (ColumnHeader header in listViewScripts.Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
 
-            if (this.listViewScripts.Items.Count > indexOfLineToDisable)
-                this.listViewScripts.Items[indexOfLineToDisable].BackColor = SystemColors.Control;
+            if (listViewScripts.Items.Count > indexOfLineToDisable)
+                listViewScripts.Items[indexOfLineToDisable].BackColor = SystemColors.Control;
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
             //! Shouldn't be able to happen
-            if (this.listViewScripts.SelectedItems.Count <= 0)
+            if (listViewScripts.SelectedItems.Count <= 0)
             {
-                this.buttonContinue.Enabled = false;
+                buttonContinue.Enabled = false;
                 return;
             }
 
-            this.textBoxToChange.Text = this.listViewScripts.SelectedItems[0].SubItems[2].Text;
-            this.Close();
+            textBoxToChange.Text = listViewScripts.SelectedItems[0].SubItems[2].Text;
+            Close();
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void listViewScripts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.listViewScripts.SelectedItems.Count > 0)
+            if (listViewScripts.SelectedItems.Count > 0)
             {
-                if (this.listViewScripts.SelectedItems[0].Index == this.indexOfLineToDisable)
+                if (listViewScripts.SelectedItems[0].Index == indexOfLineToDisable)
                 {
-                    this.listViewScripts.SelectedItems[0].Selected = false;
+                    listViewScripts.SelectedItems[0].Selected = false;
                     return;
                 }
 
-                this.buttonContinue.Enabled = true;
+                buttonContinue.Enabled = true;
                 return;
             }
 
-            this.buttonContinue.Enabled = false;
+            buttonContinue.Enabled = false;
         }
 
         private void listViewScripts_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
-            myListView.ListViewItemSorter = this.lvwColumnSorter;
+            myListView.ListViewItemSorter = lvwColumnSorter;
 
             //! Determine if clicked column is already the column that is being sorted
-            if (e.Column != this.lvwColumnSorter.SortColumn)
+            if (e.Column != lvwColumnSorter.SortColumn)
             {
                 //! Set the column number that is to be sorted; default to ascending
-                this.lvwColumnSorter.SortColumn = e.Column;
-                this.lvwColumnSorter.Order = SortOrder.Ascending;
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
             }
             else
                 //! Reverse the current sort direction for this column
-                this.lvwColumnSorter.Order = this.lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
 
             //! Perform the sort with these new sort options
             myListView.Sort();
@@ -89,7 +89,7 @@ namespace SAI_Editor.Forms.SearchForms
 
         private void listViewScripts_DoubleClick(object sender, EventArgs e)
         {
-            this.buttonContinue.PerformClick();
+            buttonContinue.PerformClick();
         }
 
         private void SearchForLinkForm_KeyDown(object sender, KeyEventArgs e)
@@ -97,7 +97,7 @@ namespace SAI_Editor.Forms.SearchForms
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    this.Close();
+                    Close();
                     break;
             }
         }

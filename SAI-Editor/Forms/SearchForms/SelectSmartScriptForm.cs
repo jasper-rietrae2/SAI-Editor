@@ -12,50 +12,50 @@ namespace SAI_Editor.Forms.SearchForms
 
         public SelectSmartScriptForm(List<List<SmartScript>> items)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             this.items = items;
 
             foreach (List<SmartScript> smartScripts in items)
-                this.listBoxGuids.Items.Add(-smartScripts[0].entryorguid);
+                listBoxGuids.Items.Add(-smartScripts[0].entryorguid);
 
-            this.listBoxGuids.SelectedIndex = 0;
+            listBoxGuids.SelectedIndex = 0;
 
-            foreach (ColumnHeader header in this.listViewSmartScripts.Columns)
+            foreach (ColumnHeader header in listViewSmartScripts.Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void listBoxGuids_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.listBoxGuids.SelectedIndex == -1)
-                this.listBoxGuids.SelectedIndex = 0;
+            if (listBoxGuids.SelectedIndex == -1)
+                listBoxGuids.SelectedIndex = 0;
 
-            this.listViewSmartScripts.Items.Clear();
-            this.listViewSmartScripts.AddSmartScripts(this.items[this.listBoxGuids.SelectedIndex]);
+            listViewSmartScripts.Items.Clear();
+            listViewSmartScripts.AddSmartScripts(items[listBoxGuids.SelectedIndex]);
 
-            foreach (ColumnHeader header in this.listViewSmartScripts.Columns)
+            foreach (ColumnHeader header in listViewSmartScripts.Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void buttonLoadScript_Click(object sender, EventArgs e)
         {
-            this.LoadScript();
+            LoadScript();
         }
 
         private void LoadScript()
         {
-            if (this.listBoxGuids.SelectedItem == null)
+            if (listBoxGuids.SelectedItem == null)
                 return;
 
-            ((MainForm)this.Owner).textBoxEntryOrGuid.Text = (-XConverter.ToInt32(this.listBoxGuids.SelectedItem.ToString())).ToString();
-            ((MainForm)this.Owner).comboBoxSourceType.SelectedIndex = (int)SourceTypes.SourceTypeCreature;
-            ((MainForm)this.Owner).TryToLoadScript();
-            this.Close();
+            ((MainForm)Owner).textBoxEntryOrGuid.Text = (-XConverter.ToInt32(listBoxGuids.SelectedItem.ToString())).ToString();
+            ((MainForm)Owner).comboBoxSourceType.SelectedIndex = (int)SourceTypes.SourceTypeCreature;
+            ((MainForm)Owner).TryToLoadScript();
+            Close();
         }
 
         private void listBoxGuids_DoubleClick(object sender, EventArgs e)
         {
-            this.LoadScript();
+            LoadScript();
         }
     }
 }

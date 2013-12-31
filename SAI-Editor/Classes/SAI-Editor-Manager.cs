@@ -28,14 +28,14 @@ namespace SAI_Editor.Classes
             get
             {
                 if (Settings.Default.UseWorldDatabase)
-                    return this._worldDatabase;
+                    return _worldDatabase;
 
                 MessageBox.Show("The world database could not be opened as it was never opened.", "No database!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
             set
             {
-                this._worldDatabase = value;
+                _worldDatabase = value;
             }
         }
         public SQLiteDatabase sqliteDatabase { get; set; }
@@ -57,35 +57,35 @@ namespace SAI_Editor.Classes
 
         public SAI_Editor_Manager()
         {
-            this.ResetDatabases();
+            ResetDatabases();
         }
 
         public void ResetDatabases()
         {
-            this.ResetWorldDatabase();
-            this.ResetSQLiteDatabase();
+            ResetWorldDatabase();
+            ResetSQLiteDatabase();
         }
 
         public void ResetWorldDatabase()
         {
-            this.worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, this.GetPasswordSetting(), Settings.Default.Database);
+            worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, GetPasswordSetting(), Settings.Default.Database);
         }
 
         public void ResetWorldDatabase(MySqlConnectionStringBuilder _connectionString)
         {
-            this.worldDatabase = new WorldDatabase(_connectionString.Server, _connectionString.Port, _connectionString.UserID, _connectionString.Password, _connectionString.Database);
+            worldDatabase = new WorldDatabase(_connectionString.Server, _connectionString.Port, _connectionString.UserID, _connectionString.Password, _connectionString.Database);
         }
 
         public void ResetSQLiteDatabase()
         {
-            this.sqliteDatabase = new SQLiteDatabase("Resources/sqlite_database.db");
+            sqliteDatabase = new SQLiteDatabase("Resources/sqlite_database.db");
         }
 
         public async Task LoadSQLiteDatabaseInfo()
         {
-            this.eventTypeInformations = await this.sqliteDatabase.GetEventTypeInformation();
-            this.actionTypeInformations = await this.sqliteDatabase.GetActionTypeInformation();
-            this.targetTypeInformations = await this.sqliteDatabase.GetTargetTypeInformation();
+            eventTypeInformations = await sqliteDatabase.GetEventTypeInformation();
+            actionTypeInformations = await sqliteDatabase.GetActionTypeInformation();
+            targetTypeInformations = await sqliteDatabase.GetTargetTypeInformation();
         }
 
         private BaseTypeInformation GetTypeByScriptTypeId(int type, ScriptTypeId scriptTypeId)
@@ -93,11 +93,11 @@ namespace SAI_Editor.Classes
             switch (scriptTypeId)
             {
                 case ScriptTypeId.ScriptTypeEvent:
-                    return this.GetEventTypeInformationById(type);
+                    return GetEventTypeInformationById(type);
                 case ScriptTypeId.ScriptTypeAction:
-                    return this.GetActionTypeInformationById(type);
+                    return GetActionTypeInformationById(type);
                 case ScriptTypeId.ScriptTypeTarget:
-                    return this.GetTargetTypeInformationById(type);
+                    return GetTargetTypeInformationById(type);
                 default:
                     return null;
             }
@@ -105,10 +105,10 @@ namespace SAI_Editor.Classes
 
         public EventTypeInformation GetEventTypeInformationById(int event_type)
         {
-            if (this.eventTypeInformations == null)
+            if (eventTypeInformations == null)
                 return null;
 
-            foreach (EventTypeInformation eventTypeInformation in this.eventTypeInformations)
+            foreach (EventTypeInformation eventTypeInformation in eventTypeInformations)
                 if (eventTypeInformation.event_type == event_type)
                     return eventTypeInformation;
 
@@ -117,10 +117,10 @@ namespace SAI_Editor.Classes
 
         public ActionTypeInformation GetActionTypeInformationById(int action_type)
         {
-            if (this.actionTypeInformations == null)
+            if (actionTypeInformations == null)
                 return null;
 
-            foreach (ActionTypeInformation actionTypeInformation in this.actionTypeInformations)
+            foreach (ActionTypeInformation actionTypeInformation in actionTypeInformations)
                 if (actionTypeInformation.action_type == action_type)
                     return actionTypeInformation;
 
@@ -129,10 +129,10 @@ namespace SAI_Editor.Classes
 
         public TargetTypeInformation GetTargetTypeInformationById(int target_type)
         {
-            if (this.targetTypeInformations == null)
+            if (targetTypeInformations == null)
                 return null;
 
-            foreach (TargetTypeInformation targetTypeInformation in this.targetTypeInformations)
+            foreach (TargetTypeInformation targetTypeInformation in targetTypeInformations)
                 if (targetTypeInformation.target_type == target_type)
                     return targetTypeInformation;
 
@@ -141,13 +141,13 @@ namespace SAI_Editor.Classes
 
         public string GetScriptTypeTooltipById(int type, ScriptTypeId scriptTypeId)
         {
-            BaseTypeInformation baseTypeInformation = this.GetTypeByScriptTypeId(type, scriptTypeId);
+            BaseTypeInformation baseTypeInformation = GetTypeByScriptTypeId(type, scriptTypeId);
             return baseTypeInformation != null ? baseTypeInformation.tooltip : String.Empty;
         }
 
         public string GetParameterTooltipById(int type, int paramId, ScriptTypeId scriptTypeId)
         {
-            BaseTypeInformation baseTypeInformation = this.GetTypeByScriptTypeId(type, scriptTypeId);
+            BaseTypeInformation baseTypeInformation = GetTypeByScriptTypeId(type, scriptTypeId);
 
             switch (paramId)
             {
@@ -170,7 +170,7 @@ namespace SAI_Editor.Classes
 
         public string GetParameterStringById(int type, int paramId, ScriptTypeId scriptTypeId)
         {
-            BaseTypeInformation baseTypeInformation = this.GetTypeByScriptTypeId(type, scriptTypeId);
+            BaseTypeInformation baseTypeInformation = GetTypeByScriptTypeId(type, scriptTypeId);
 
             switch (paramId)
             {
@@ -211,7 +211,7 @@ namespace SAI_Editor.Classes
 
             if (sourceType == SourceTypes.SourceTypeScriptedActionlist)
             {
-                List<SmartScript> smartScriptsCallingActionlist = await this.worldDatabase.GetSmartScriptsCallingActionLists();
+                List<SmartScript> smartScriptsCallingActionlist = await worldDatabase.GetSmartScriptsCallingActionLists();
 
                 if (smartScriptsCallingActionlist != null)
                 {

@@ -13,19 +13,19 @@ namespace SAI_Editor.Forms.SearchForms
 
         public MultiSelectForm(TextBox textBoxToChange)
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
             this.textBoxToChange = textBoxToChange;
 
-            this.listViewSelectableItems.Columns.Add(typeof(T).Name, 235, HorizontalAlignment.Left);
+            listViewSelectableItems.Columns.Add(typeof(T).Name, 235, HorizontalAlignment.Left);
 
             foreach (var en in Enum.GetNames(typeof(T)))
-                this.listViewSelectableItems.Items.Add("").SubItems.Add(en);
+                listViewSelectableItems.Items.Add("").SubItems.Add(en);
 
             long bitmask = XConverter.ToInt64(textBoxToChange.Text);
             bool anyFlag = false;
 
-            foreach (ListViewItem item in this.listViewSelectableItems.Items)
+            foreach (ListViewItem item in listViewSelectableItems.Items)
             {
                 foreach (var en in Enum.GetNames(typeof(T)))
                 {
@@ -43,14 +43,14 @@ namespace SAI_Editor.Forms.SearchForms
             }
 
             if (!anyFlag)
-                foreach (ListViewItem item in this.listViewSelectableItems.Items)
+                foreach (ListViewItem item in listViewSelectableItems.Items)
                     if (item.Index > 0)
                         item.Checked = false;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)
@@ -58,13 +58,13 @@ namespace SAI_Editor.Forms.SearchForms
             List<Enum> vals = Enum.GetValues(typeof(T)).OfType<Enum>().ToList();
             long mask = 0;
 
-            foreach (ListViewItem item in this.listViewSelectableItems.CheckedItems)
+            foreach (ListViewItem item in listViewSelectableItems.CheckedItems)
                 foreach (var en in Enum.GetNames(typeof(T)))
                     if (en.Equals(item.SubItems[1].Text))
                         mask += Convert.ToInt64(Enum.Parse(typeof(T), en));
 
-            this.textBoxToChange.Text = mask.ToString();
-            this.Close();
+            textBoxToChange.Text = mask.ToString();
+            Close();
         }
 
         private void MultiSelectForm_KeyDown(object sender, KeyEventArgs e)
@@ -72,7 +72,7 @@ namespace SAI_Editor.Forms.SearchForms
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    this.Close();
+                    Close();
                     break;
             }
         }
@@ -88,26 +88,26 @@ namespace SAI_Editor.Forms.SearchForms
             //}
             //else
             {
-                if (this.listViewSelectableItems.CheckedItems.Count <= 0)
-                    this.listViewSelectableItems.Items[0].Checked = true;
+                if (listViewSelectableItems.CheckedItems.Count <= 0)
+                    listViewSelectableItems.Items[0].Checked = true;
 
                 if (e.Item.Checked && e.Item.Index > 0)
-                    this.listViewSelectableItems.Items[0].Checked = false;
+                    listViewSelectableItems.Items[0].Checked = false;
             }
         }
 
         private void listViewSelectableItems_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
-            myListView.ListViewItemSorter = this.lvwColumnSorter;
+            myListView.ListViewItemSorter = lvwColumnSorter;
 
-            if (e.Column != this.lvwColumnSorter.SortColumn)
+            if (e.Column != lvwColumnSorter.SortColumn)
             {
-                this.lvwColumnSorter.SortColumn = e.Column;
-                this.lvwColumnSorter.Order = SortOrder.Ascending;
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
             }
             else
-                this.lvwColumnSorter.Order = this.lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
 
             myListView.Sort();
         }

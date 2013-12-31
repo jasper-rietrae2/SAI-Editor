@@ -41,7 +41,7 @@ namespace SAI_Editor.Classes.Database
 
             await Task.Run(() =>
             {
-                using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), this.connectionString.ToString()))
+                using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                 {
                     conn.Open();
                     var transaction = conn.BeginTransaction();
@@ -83,14 +83,14 @@ namespace SAI_Editor.Classes.Database
 
         public Task<DataTable> ExecuteQuery(string query, params Parameter[] parameters)
         {
-            return this.ExecuteQueryWithCancellation(new CancellationToken(), query, parameters);
+            return ExecuteQueryWithCancellation(new CancellationToken(), query, parameters);
         }
 
         public async Task<DataTable> ExecuteQueryWithCancellation(CancellationToken token, string query, params Parameter[] parameters)
         {
             return await Task.Run(async() =>
             {
-                using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), this.connectionString.ToString()))
+                using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                 {
                     conn.Open();
 
@@ -125,7 +125,7 @@ namespace SAI_Editor.Classes.Database
         {
             return await Task.Run(() =>
             {
-                using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), this.connectionString.ToString()))
+                using (Connection conn = (Connection)Activator.CreateInstance(typeof(Connection), connectionString.ToString()))
                 {
                     conn.Open();
 

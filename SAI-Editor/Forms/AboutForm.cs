@@ -9,10 +9,10 @@ namespace SAI_Editor.Forms
     {
         public AboutForm()
         {
-            this.InitializeComponent();
+            InitializeComponent();
 
-            this.KeyPreview = true;
-            this.KeyDown += this.AboutForm_KeyDown;
+            KeyPreview = true;
+            KeyDown += AboutForm_KeyDown;
         }
 
         #region Assembly Attribute Accessors
@@ -98,17 +98,17 @@ namespace SAI_Editor.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.TryToOpenPage("https://github.com/Discover-/SAI-Editor/");
+            TryToOpenPage("https://github.com/Discover-/SAI-Editor/");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.TryToOpenPage("https://github.com/Discover-/");
+            TryToOpenPage("https://github.com/Discover-/");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.TryToOpenPage("http://www.trinitycore.org/");
+            TryToOpenPage("http://www.trinitycore.org/");
         }
 
         private void TryToOpenPage(string url)
@@ -128,7 +128,7 @@ namespace SAI_Editor.Forms
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    this.Close();
+                    Close();
                     break;
             }
         }

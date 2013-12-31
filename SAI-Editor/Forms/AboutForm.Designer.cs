@@ -12,9 +12,9 @@
         /// </summary>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (this.components != null))
+            if (disposing && (components != null))
             {
-                this.components.Dispose();
+                components.Dispose();
             }
             base.Dispose(disposing);
         }

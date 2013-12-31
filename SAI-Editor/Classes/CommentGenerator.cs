@@ -10,7 +10,6 @@ using SAI_Editor.Forms;
 
 namespace SAI_Editor.Classes
 {
-
     class CommentGenerator
     {
         private readonly Dictionary<SmartEvent, string> smartEventStrings = new Dictionary<SmartEvent, string>();
