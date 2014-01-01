@@ -43,11 +43,8 @@ namespace SAI_Editor.Classes
             Items.Clear();
             Columns.Clear();
 
-            foreach (PropertyInfo propInfo in _pinfo)
+            foreach (PropertyInfo propInfo in _pinfo.Where(propInfo => !_excludedProperties.Contains(propInfo.Name)))
             {
-                if (_excludedProperties.Contains(propInfo.Name))
-                    continue;
-
                 Columns.Add(propInfo.Name);
             }
 
@@ -78,9 +75,7 @@ namespace SAI_Editor.Classes
                     return;
                 }
 
-                foreach (int phasemask in phasemasks)
-                    if (phasemask != 0 && !_phaseColors.ContainsKey(phasemask))
-                        _phaseColors.Add(phasemask, _colors.Pop());
+                foreach (int phasemask in phasemasks.Where(phasemask => phasemask != 0 && !_phaseColors.ContainsKey(phasemask))) _phaseColors.Add(phasemask, _colors.Pop());
             }
         }
 
@@ -102,10 +97,7 @@ namespace SAI_Editor.Classes
         {
             get
             {
-                if (SelectedItems.Count > 0)
-                    foreach (SmartScript smartScript in _smartScripts)
-                        if (smartScript == ((SmartScriptListViewItem)SelectedItems[0]).Script)
-                            return smartScript;
+                if (SelectedItems.Count > 0) return _smartScripts.FirstOrDefault(smartScript => smartScript == ((SmartScriptListViewItem)SelectedItems[0]).Script);
 
                 return null;
             }
@@ -196,13 +188,10 @@ namespace SAI_Editor.Classes
 
         public void RemoveSmartScript(SmartScript script)
         {
-            foreach (SmartScriptListViewItem item in Items.Cast<SmartScriptListViewItem>())
+            foreach (SmartScriptListViewItem item in Items.Cast<SmartScriptListViewItem>().Where(item => item.Script == script))
             {
-                if (item.Script == script)
-                {
-                    Items.Remove(item);
-                    break;
-                }
+                Items.Remove(item);
+                break;
             }
 
             _smartScripts.Remove(script);

@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Threading.Tasks;
 using SAI_Editor.Classes.Database.Classes;
+using System.Linq;
 
 namespace SAI_Editor.Classes.Database
 {
@@ -23,12 +24,7 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<EventTypeInformation> eventTypeInformations = new List<EventTypeInformation>();
-
-            foreach (DataRow row in dt.Rows)
-                eventTypeInformations.Add(BuildEventTypeInformation(row));
-
-            return eventTypeInformations;
+            return (from DataRow row in dt.Rows select BuildEventTypeInformation(row)).ToList();
         }
 
         public async Task<List<ActionTypeInformation>> GetActionTypeInformation()
@@ -38,12 +34,7 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<ActionTypeInformation> actionTypeInformations = new List<ActionTypeInformation>();
-
-            foreach (DataRow row in dt.Rows)
-                actionTypeInformations.Add(BuildActionTypeInformation(row));
-
-            return actionTypeInformations;
+            return (from DataRow row in dt.Rows select BuildActionTypeInformation(row)).ToList();
         }
 
         public async Task<List<TargetTypeInformation>> GetTargetTypeInformation()
@@ -53,12 +44,7 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<TargetTypeInformation> targetTypeInformations = new List<TargetTypeInformation>();
-
-            foreach (DataRow row in dt.Rows)
-                targetTypeInformations.Add(BuildTargetTypeInformation(row));
-
-            return targetTypeInformations;
+            return (from DataRow row in dt.Rows select BuildTargetTypeInformation(row)).ToList();
         }
 
         public async Task<List<AreaTrigger>> GetAreaTriggers()
@@ -68,12 +54,7 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<AreaTrigger> areaTriggers = new List<AreaTrigger>();
-
-            foreach (DataRow row in dt.Rows)
-                areaTriggers.Add(BuildAreaTrigger(row));
-
-            return areaTriggers;
+            return (from DataRow row in dt.Rows select BuildAreaTrigger(row)).ToList();
         }
 
         public async Task<AreaTrigger> GetAreaTriggerById(int id)

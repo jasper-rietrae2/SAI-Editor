@@ -10,6 +10,7 @@ using SAI_Editor.Classes.Database.Classes;
 using SAI_Editor.Enumerators;
 using SAI_Editor.Forms;
 using SAI_Editor.Properties;
+using System.Linq;
 
 namespace SAI_Editor.Classes
 {
@@ -108,11 +109,7 @@ namespace SAI_Editor.Classes
             if (eventTypeInformations == null)
                 return null;
 
-            foreach (EventTypeInformation eventTypeInformation in eventTypeInformations)
-                if (eventTypeInformation.event_type == event_type)
-                    return eventTypeInformation;
-
-            return null;
+            return eventTypeInformations.FirstOrDefault(eventTypeInformation => eventTypeInformation.event_type == event_type);
         }
 
         public ActionTypeInformation GetActionTypeInformationById(int action_type)
@@ -120,11 +117,7 @@ namespace SAI_Editor.Classes
             if (actionTypeInformations == null)
                 return null;
 
-            foreach (ActionTypeInformation actionTypeInformation in actionTypeInformations)
-                if (actionTypeInformation.action_type == action_type)
-                    return actionTypeInformation;
-
-            return null;
+            return actionTypeInformations.FirstOrDefault(actionTypeInformation => actionTypeInformation.action_type == action_type);
         }
 
         public TargetTypeInformation GetTargetTypeInformationById(int target_type)
@@ -132,11 +125,7 @@ namespace SAI_Editor.Classes
             if (targetTypeInformations == null)
                 return null;
 
-            foreach (TargetTypeInformation targetTypeInformation in targetTypeInformations)
-                if (targetTypeInformation.target_type == target_type)
-                    return targetTypeInformation;
-
-            return null;
+            return targetTypeInformations.FirstOrDefault(targetTypeInformation => targetTypeInformation.target_type == target_type);
         }
 
         public string GetScriptTypeTooltipById(int type, ScriptTypeId scriptTypeId)
@@ -324,9 +313,7 @@ namespace SAI_Editor.Classes
                             return null;
                         }
 
-                        foreach (DataRow row in dataTable.Rows)
-                            for (int i = 0; i < row.ItemArray.Length; i++)
-                                databaseNames.Add(row.ItemArray[i].ToString());
+                        foreach (DataRow row in dataTable.Rows) databaseNames.AddRange(row.ItemArray.Select(t => t.ToString()));
                     }
                 }
                 catch (Exception ex)

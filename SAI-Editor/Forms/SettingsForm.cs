@@ -306,7 +306,7 @@ namespace SAI_Editor.Forms
             WorldDatabase worldDatabase = null;
 
             if (!Settings.Default.UseWorldDatabase)
-                worldDatabase = new SAI_Editor.Database.WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, SAI_Editor_Manager.Instance.GetPasswordSetting(), Settings.Default.Database);
+                worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, SAI_Editor_Manager.Instance.GetPasswordSetting(), Settings.Default.Database);
             else
                 worldDatabase = SAI_Editor_Manager.Instance.worldDatabase;
 

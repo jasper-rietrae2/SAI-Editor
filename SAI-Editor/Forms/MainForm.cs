@@ -854,9 +854,7 @@ namespace SAI_Editor.Forms
                                 List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(entryOrGuidAndSourceType.entryOrGuid.ToString(), entryOrGuidAndSourceType.sourceType);
 
                                 if (newSmartScripts != null)
-                                    foreach (SmartScript item in newSmartScripts)
-                                        if (!ListContainsSmartScript(smartScriptsToReturn, item))
-                                            smartScriptsToReturn.Add(item);
+                                    foreach (SmartScript item in newSmartScripts.Where(item => !ListContainsSmartScript(smartScriptsToReturn, item))) smartScriptsToReturn.Add(item);
 
                                 pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                             }
@@ -871,9 +869,7 @@ namespace SAI_Editor.Forms
                         {
                             List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(entryOrGuidAndSourceType.entryOrGuid.ToString(), entryOrGuidAndSourceType.sourceType);
 
-                            foreach (SmartScript item in newSmartScripts)
-                                if (!ListContainsSmartScript(smartScriptsToReturn, item))
-                                    smartScriptsToReturn.Add(item);
+                            foreach (SmartScript item in newSmartScripts.Where(item => !ListContainsSmartScript(smartScriptsToReturn, item))) smartScriptsToReturn.Add(item);
 
                             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                         }
@@ -896,11 +892,7 @@ namespace SAI_Editor.Forms
 
         bool ListContainsSmartScript(List<SmartScript> smartScriptsToReturn, SmartScript item)
         {
-            foreach (SmartScript itemToReturn in smartScriptsToReturn)
-                if (itemToReturn.entryorguid == item.entryorguid && itemToReturn.id == item.id)
-                    return true;
-
-            return false;
+            return smartScriptsToReturn.Any(itemToReturn => itemToReturn.entryorguid == item.entryorguid && itemToReturn.id == item.id);
         }
 
         private void menuItemExit_Click(object sender, System.EventArgs e)
@@ -1438,11 +1430,7 @@ namespace SAI_Editor.Forms
 
         private void RemoveNonOriginalScriptsFromView()
         {
-            List<SmartScript> smartScriptsToRemove = new List<SmartScript>();
-
-            foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
-                if (smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType)
-                    smartScriptsToRemove.Add(smartScript);
+            List<SmartScript> smartScriptsToRemove = listViewSmartScripts.SmartScripts.Where(smartScript => smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType).ToList();
 
             foreach (SmartScript smartScript in smartScriptsToRemove)
                 listViewSmartScripts.SmartScripts.Remove(smartScript);

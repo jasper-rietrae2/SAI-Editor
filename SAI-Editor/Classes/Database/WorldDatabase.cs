@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using SAI_Editor.Classes.Database.Classes;
 using SAI_Editor.Enumerators;
 using SAI_Editor.Forms;
+using System.Linq;
 
 namespace SAI_Editor.Classes.Database
 {
@@ -249,12 +250,7 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<SmartScript> smartScripts = new List<SmartScript>();
-
-            foreach (DataRow row in dt.Rows)
-                smartScripts.Add(BuildSmartScript(row));
-
-            return smartScripts;
+            return (from DataRow row in dt.Rows select BuildSmartScript(row)).ToList();
         }
 
         public async Task<List<SmartScript>> GetSmartScripts(int entryorguid, int source_type)
@@ -264,12 +260,7 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<SmartScript> smartScripts = new List<SmartScript>();
-
-            foreach (DataRow row in dt.Rows)
-                smartScripts.Add(BuildSmartScript(row));
-
-            return smartScripts;
+            return (from DataRow row in dt.Rows select BuildSmartScript(row)).ToList();
         }
 
         public async Task<List<SmartScript>> GetSmartScriptsWithoutSourceType(int entryorguid, int source_type)
@@ -279,12 +270,7 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<SmartScript> smartScripts = new List<SmartScript>();
-
-            foreach (DataRow row in dt.Rows)
-                smartScripts.Add(BuildSmartScript(row));
-
-            return smartScripts;
+            return (from DataRow row in dt.Rows select BuildSmartScript(row)).ToList();
         }
 
         public async Task<List<SmartScript>> GetSmartScriptActionLists(string criteria, bool useLikeStatement)
@@ -294,11 +280,9 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<SmartScript> smartScripts = new List<SmartScript>();
             List<SmartScript> smartScriptsClean = new List<SmartScript>();
 
-            foreach (DataRow row in dt.Rows)
-                smartScripts.Add(BuildSmartScript(row));
+            List<SmartScript> smartScripts = (from DataRow row in dt.Rows select BuildSmartScript(row)).ToList();
 
             if (criteria.Length > 0)
             {
@@ -359,12 +343,7 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<SmartScript> smartScripts = new List<SmartScript>();
-
-            foreach (DataRow row in dt.Rows)
-                smartScripts.Add(BuildSmartScript(row));
-
-            return smartScripts;
+            return (from DataRow row in dt.Rows select BuildSmartScript(row)).ToList();
         }
 
         public async Task<bool> AreaTriggerHasSmartAI(int entry)
@@ -420,12 +399,7 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<Creature> creatures = new List<Creature>();
-
-            foreach (DataRow row in dt.Rows)
-                creatures.Add(BuildCreature(row));
-
-            return creatures;
+            return (from DataRow row in dt.Rows select BuildCreature(row)).ToList();
         }
 
         public async Task<List<Gameobject>> GetGameobjectsById(int id)
@@ -435,12 +409,7 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
-            List<Gameobject> gameobjects = new List<Gameobject>();
-
-            foreach (DataRow row in dt.Rows)
-                gameobjects.Add(BuildGameobject(row));
-
-            return gameobjects;
+            return (from DataRow row in dt.Rows select BuildGameobject(row)).ToList();
         }
 
         private SmartScript BuildSmartScript(DataRow row)
