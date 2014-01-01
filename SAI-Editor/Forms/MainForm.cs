@@ -648,9 +648,6 @@ namespace SAI_Editor.Forms
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
 
-            if (expanding && Settings.Default.ShowTooltipsPermanently)
-                ExpandToShowPermanentTooltips(false);
-
             textBoxEntryOrGuid.Text = Settings.Default.LastEntryOrGuid;
             comboBoxSourceType.SelectedIndex = Settings.Default.LastSourceType;
             checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
