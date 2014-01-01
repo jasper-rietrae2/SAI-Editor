@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace SAI_Editor.Classes
 {
@@ -35,8 +36,7 @@ namespace SAI_Editor.Classes
 
                 foreach (List<string> listString in captionChunks)
                 {
-                    foreach (string strPart in listString)
-                        newCaption += strPart + " ";
+                    newCaption = listString.Aggregate(newCaption, (current, strPart) => current + (strPart + " "));
 
                     newCaption += "\n";
                 }

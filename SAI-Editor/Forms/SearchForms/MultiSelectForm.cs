@@ -43,9 +43,7 @@ namespace SAI_Editor.Forms.SearchForms
             }
 
             if (!anyFlag)
-                foreach (ListViewItem item in listViewSelectableItems.Items)
-                    if (item.Index > 0)
-                        item.Checked = false;
+                foreach (ListViewItem item in listViewSelectableItems.Items.Cast<ListViewItem>().Where(item => item.Index > 0)) item.Checked = false;
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -56,12 +54,7 @@ namespace SAI_Editor.Forms.SearchForms
         private void buttonContinue_Click(object sender, EventArgs e)
         {
             List<Enum> vals = Enum.GetValues(typeof(T)).OfType<Enum>().ToList();
-            long mask = 0;
-
-            foreach (ListViewItem item in listViewSelectableItems.CheckedItems)
-                foreach (var en in Enum.GetNames(typeof(T)))
-                    if (en.Equals(item.SubItems[1].Text))
-                        mask += Convert.ToInt64(Enum.Parse(typeof(T), en));
+            long mask = (from ListViewItem item in listViewSelectableItems.CheckedItems from en in Enum.GetNames(typeof(T)) where en.Equals(item.SubItems[1].Text) select Convert.ToInt64(Enum.Parse(typeof(T), en))).Sum();
 
             textBoxToChange.Text = mask.ToString();
             Close();
