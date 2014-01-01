@@ -150,7 +150,7 @@ namespace SAI_Editor.Forms
                 radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
                 checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
                 menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
-                SetGenerateCommentsEnabled(Settings.Default.UseWorldDatabase);
+                SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
                 buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || (SourceTypes)Settings.Default.LastSourceType == SourceTypes.SourceTypeAreaTrigger;
             }
             catch (Exception ex)
@@ -1676,7 +1676,7 @@ namespace SAI_Editor.Forms
             listViewSmartScripts.Select();
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
-            SetGenerateCommentsEnabled(Settings.Default.UseWorldDatabase);
+            SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
             pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
         }
@@ -4067,7 +4067,7 @@ namespace SAI_Editor.Forms
             pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
             checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
             menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
-            SetGenerateCommentsEnabled(Settings.Default.UseWorldDatabase);
+            SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
 
             if (Settings.Default.UseWorldDatabase)
                 Text = "SAI-Editor - Connection: " + Settings.Default.User + ", " + Settings.Default.Host + ", " + Settings.Default.Port.ToString();

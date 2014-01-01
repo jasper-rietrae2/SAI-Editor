@@ -44,9 +44,7 @@ namespace SAI_Editor.Classes
             Columns.Clear();
 
             foreach (PropertyInfo propInfo in _pinfo.Where(propInfo => !_excludedProperties.Contains(propInfo.Name)))
-            {
                 Columns.Add(propInfo.Name);
-            }
 
             if (_smartScripts != null)
                 AddSmartScripts(_smartScripts, true);
@@ -97,7 +95,8 @@ namespace SAI_Editor.Classes
         {
             get
             {
-                if (SelectedItems.Count > 0) return _smartScripts.FirstOrDefault(smartScript => smartScript == ((SmartScriptListViewItem)SelectedItems[0]).Script);
+                if (SelectedItems.Count > 0)
+                    return _smartScripts.FirstOrDefault(smartScript => smartScript == ((SmartScriptListViewItem)SelectedItems[0]).Script);
 
                 return null;
             }
