@@ -1,4 +1,6 @@
-﻿namespace SAI_Editor.Enumerators
+﻿using System;
+
+namespace SAI_Editor.Enumerators
 {
     public enum SmartAction
     {
