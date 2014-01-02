@@ -15,142 +15,254 @@ namespace Updater
     public partial class Updater : Form
     {
         private const string BaseRemotePath = "http://dl.dropbox.com/u/84527004/SAI-Editor/";
-        private const string BaseRemoteDownloadPath = "http://dl.dropbox.com/u/84527004/SAI-Editor/"; // 21676524les
-        private readonly string _baseDir;
+        private const string BaseRemoteDownloadPath = "http://dl.dropbox.com/u/84527004/SAI-Editor/SAI-Editor/"; // 21676524les
         readonly List<string> _files = new List<string>();
 
         public Updater()
         {
             InitializeComponent();
-            _baseDir = Directory.GetCurrentDirectory();
         }
 
-        private void UpdaterLoad(object sender, EventArgs e)
+        //! Start the initial search after a second (button is disabled) so the form finishes loading.
+        private void timerStartSearchingOnLaunch_Tick(object sender, EventArgs e)
         {
-            statusLabel.Text = "LOADING";
-            var cl = new WebClient();
+            timerStartSearchingOnLaunch.Enabled = false;
+            CheckForUpdates();
+        }
 
-            // Changelog
-            try
+        private void buttonCheckForUpdates_Click(object sender, EventArgs e)
+        {
+            buttonCheckForUpdates.Enabled = false;
+            buttonCheckForUpdates.Update();
+            buttonUpdateToLatest.Enabled = false;
+            buttonUpdateToLatest.Update();
+            listBoxFilesToUpdate.DataSource = null;
+            listBoxFilesToUpdate.Update();
+            _files.Clear();
+
+            CheckForUpdates();
+            buttonCheckForUpdates.Enabled = true;
+            buttonUpdateToLatest.Enabled = _files.Count > 0;
+        }
+
+        private void CheckForUpdates()
+        {
+            statusLabel.Text = "CHECKING FOR UPDATES...";
+            statusLabel.Update();
+            progressBar.Maximum = GetFilesCountInFileList();
+            progressBar.Value = 0;
+
+            using (WebClient client = new WebClient())
             {
-                Stream st = cl.OpenRead(BaseRemotePath + "news.txt");
-                if (st != null)
+                try
                 {
-                    var rd = new StreamReader(st);
+                    Stream streamNews = client.OpenRead(BaseRemotePath + "news.txt");
 
-                    string content = rd.ReadToEnd();
-                    changelog.Text = content;
-                    st.Close();
-                    rd.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Unable to load news. Error: \r\n\r\n" + ex.Message);
-                changelog.Text = "Unable to load news";
-                statusLabel.Text = "UNABLE TO LOAD";
-                statusLabel.ForeColor = Color.Red;
-            }
-
-            // Filelist
-            //try
-            {
-                Stream str = cl.OpenRead(BaseRemotePath + "filelist.txt");
-                if (str != null)
-                {
-                    var rdr = new StreamReader(str);
-
-                    string currentLine;
-                    while ((currentLine = rdr.ReadLine()) != null)
+                    if (streamNews != null)
                     {
-                        // string filename = currentLine;
-                        // 
-                        string filename = currentLine.Split(',')[0];
-                        string md5 = currentLine.Split(',')[1];
-
-                        if (File.Exists(_baseDir.ToString(CultureInfo.InvariantCulture) + @"\" + filename))
+                        using (StreamReader streamReaderNews = new StreamReader(streamNews))
                         {
-                            if (md5 != GetMD5HashFromFile(_baseDir + @"\" + filename))
-                                _files.Add(filename);
-                        }
-                        else
-                        {
-                            _files.Add(filename);
+                            string content = streamReaderNews.ReadToEnd();
+                            changelog.Text = content;
+                            streamNews.Close();
+                            streamReaderNews.Close();
                         }
                     }
-                    filelist.DataSource = _files;
-                    str.Close();
-                    rdr.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Unable to load news. Error: \r\n\r\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    changelog.Text = "Unable to load news";
+                    statusLabel.Text = "UNABLE TO LOAD";
+                    statusLabel.ForeColor = Color.Red;
+                }
+
+                try
+                {
+                    Stream streamFileList = client.OpenRead(BaseRemotePath + "filelist.txt");
+
+                    if (streamFileList != null)
+                    {
+                        StreamReader streamReaderFileList = new StreamReader(streamFileList);
+                        string currentLine = String.Empty;
+
+                        while ((currentLine = streamReaderFileList.ReadLine()) != null)
+                        {
+                            string[] splitLine = currentLine.Split(',');
+                            string filename = splitLine[0];
+                            string md5 = splitLine[1];
+                            progressBar.Value++;
+
+                            if (File.Exists(Directory.GetCurrentDirectory().ToString(CultureInfo.InvariantCulture) + @"\" + filename))
+                            {
+                                if (md5 != GetMD5HashFromFile(Directory.GetCurrentDirectory() + @"\" + filename))
+                                    _files.Add(filename);
+                            }
+                            else
+                                _files.Add(filename);
+                        }
+
+                        listBoxFilesToUpdate.DataSource = _files;
+                        streamFileList.Close();
+                        streamReaderFileList.Close();
+                    }
+                }
+                catch (Exception exe)
+                {
+                    MessageBox.Show("Unable to load filelist. Error: \r\n\r\n" + exe.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    changelog.Text = "Unable to load filelist";
+                    statusLabel.Text = "UNABLE TO LOAD";
+                    statusLabel.ForeColor = Color.Red;
+                    return;
                 }
             }
-            //catch (Exception exe)
-            //{
-            //    MessageBox.Show("Unable to load filelist. Error: \r\n\r\n" + exe.Message);
-            //    changelog.Text = "Unable to load filelist";
-            //    statusLabel.Text = "UNABLE TO LOAD";
-            //    statusLabel.ForeColor = Color.Red;
-            //    return;
-            //}
 
             statusLabel.Text = _files.Count > 0 ? "UPDATES AVAILABLE" : "ALREADY UP TO DATE";
+            progressBar.Value = 0;
+            buttonUpdateToLatest.Enabled = _files.Count > 0;
+            buttonCheckForUpdates.Enabled = true;
         }
 
-        private void Button1Click(object sender, EventArgs e)
+        private void buttonUpdateToLatest_Click(object sender, EventArgs e)
         {
-            progressBar.Visible = true;
-            backgroundWorker1.RunWorkerAsync();
-        }
+            progressBar.Value = 0;
+            progressBar.Maximum = _files.Count;
+            buttonUpdateToLatest.Enabled = false;
+            buttonUpdateToLatest.Update();
 
-        private void BackgroundWorker1DoWork(object sender, DoWorkEventArgs e)
-        {
-            foreach (string file in _files)
+            buttonCheckForUpdates.Enabled = false;
+            buttonCheckForUpdates.Update();
+
+            for (int i = 0; i < _files.Count; ++i)
             {
+                string file = _files[i];
+                progressBar.Value++;
+
+                if (file.Contains("filelist.txt") || file.Contains("news.txt"))
+                    continue;
+
                 string[] subfolder = file.Split(Char.Parse(@"\"));
-                string currentFolder = _baseDir;
+                string currentFolder = Directory.GetCurrentDirectory();
 
                 foreach (string folder in subfolder)
                 {
-                    if (folder.Contains("."))
+                    if (Path.HasExtension(folder))
                         continue;
 
-                    if (!Directory.Exists(_baseDir.ToString(CultureInfo.InvariantCulture) + @"\" + folder))
+                    if (!Directory.Exists(Directory.GetCurrentDirectory().ToString(CultureInfo.InvariantCulture) + @"\" + folder))
                         Directory.CreateDirectory(currentFolder + @"\" + folder);
 
                     currentFolder = currentFolder + @"\" + folder;
                 }
 
                 string remotefile = BaseRemoteDownloadPath + file;
-                string destfile = _baseDir + @"\" + file;
+                string destfile = Directory.GetCurrentDirectory() + @"\" + file;
 
                 try
                 {
-                    var client = new WebClient();
-                    client.DownloadFile(remotefile, destfile);
+                    using (WebClient client = new WebClient())
+                        client.DownloadFile(remotefile, destfile);
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Update Failed. Error: " + ex.Message);
+                    MessageBox.Show("Update Failed. Error: " + ex.Message, "Someting went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                progressBar.Value += (100 / _files.Count);
             }
-            MessageBox.Show("Updated completed succesfully. \r\nYou can run LES the latest version of LES.");
-            filelist.DataSource = null;
-            filelist.Items.Clear();
+
+            progressBar.Value = 0;
+            listBoxFilesToUpdate.DataSource = null;
+            listBoxFilesToUpdate.Items.Clear();
+            _files.Clear();
+            buttonCheckForUpdates.Enabled = true;
+            MessageBox.Show("Updated completed succesfully.\r\nYou can now run the latest version of SAI-Editor. Closing the updater will automatically open the SAI-Editor.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         protected string GetMD5HashFromFile(string fileName)
         {
-            var file = new FileStream(fileName, FileMode.Open);
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] retVal = md5.ComputeHash(file);
-            file.Close();
+            byte[] retVal = null;
 
-            var sb = new StringBuilder();
-            for (int i = 0; i < retVal.Length; i++)
+            try
             {
-                sb.Append(retVal[i].ToString("x2"));
+                using (FileStream file = new FileStream(fileName, FileMode.Open))
+                {
+                    MD5 md5 = new MD5CryptoServiceProvider();
+                    retVal = md5.ComputeHash(file);
+                    file.Close();
+                }
             }
+            catch (Exception ex)
+            {
+                string errorMessage = "The MD5 hash of the following file could not be read as reading the file threw an exception:\n\n" + fileName + "\n\nError message:\n" + ex.Message;
+                MessageBox.Show(errorMessage, "Someting went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (retVal == null)
+                return String.Empty;
+
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < retVal.Length; i++)
+                sb.Append(retVal[i].ToString("x2"));
+
             return sb.ToString();
+        }
+
+        private void changelog_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true; //! Don't allow writing to the changelog rich textbox
+        }
+
+        private void Updater_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            try
+            {
+                Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor.exe");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The SAI-Editor could not be opened. Please do so manually.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private int GetFilesCountInFileList()
+        {
+            int countOfFiles = 0;
+
+            using (WebClient client = new WebClient())
+            {
+                Stream streamFileList = client.OpenRead(BaseRemotePath + "filelist.txt");
+
+                if (streamFileList != null)
+                {
+                    StreamReader streamReaderFileList = new StreamReader(streamFileList);
+                    string currentLine = String.Empty;
+
+                    while ((currentLine = streamReaderFileList.ReadLine()) != null)
+                    {
+                        string filename = currentLine.Split(',')[0];
+
+                        if (Path.HasExtension(filename))
+                            countOfFiles++;
+                    }
+                }
+            }
+
+            return countOfFiles;
+        }
+
+        private void timerCheckForSaiEditorRunning_Tick(object sender, EventArgs e)
+        {
+            if (IsSaiEditorRunning())
+            {
+                timerCheckForSaiEditorRunning.Enabled = false;
+                MessageBox.Show("There is an instance of SAI-Editor running at the moment. In order for the updater to work, this may not be the case. Please close it before continuing.", "SAI-Editor is running!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                timerCheckForSaiEditorRunning.Enabled = true;
+            }
+        }
+
+        private bool IsSaiEditorRunning()
+        {
+            return Process.GetProcessesByName("SAI-Editor").Length > 0;
         }
     }
 }

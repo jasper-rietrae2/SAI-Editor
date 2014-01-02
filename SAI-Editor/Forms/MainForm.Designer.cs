@@ -51,6 +51,8 @@
             this.menuItemDuplicateRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCopySelectedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemPasteLastCopiedRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -191,11 +193,9 @@
             this.labelPermanentTooltipTextTypes = new System.Windows.Forms.Label();
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
-            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
             this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
@@ -421,6 +421,18 @@
             this.menuItemPasteLastCopiedRow.Size = new System.Drawing.Size(319, 22);
             this.menuItemPasteLastCopiedRow.Text = "Paste last copied row";
             this.menuItemPasteLastCopiedRow.Click += new System.EventHandler(this.menuItemPasteLastCopiedRow_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(316, 6);
+            // 
+            // checkForUpdatesToolStripMenuItem
+            // 
+            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
+            this.checkForUpdatesToolStripMenuItem.Text = "Check for updates";
+            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -2214,13 +2226,6 @@
             this.panelPermanentTooltipTypes.TabIndex = 25;
             this.panelPermanentTooltipTypes.Visible = false;
             // 
-            // checkForUpdatesToolStripMenuItem
-            // 
-            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
-            this.checkForUpdatesToolStripMenuItem.Text = "Check for updates";
-            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
-            // 
             // listViewSmartScripts
             // 
             this.listViewSmartScripts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -2267,11 +2272,6 @@
             this.pictureBoxLoadScript.TabStop = false;
             this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
             this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(316, 6);
             // 
             // MainForm
             // 

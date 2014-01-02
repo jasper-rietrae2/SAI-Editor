@@ -14,6 +14,8 @@ using SAI_Editor.Classes.Database.Classes;
 using SAI_Editor.Enumerators;
 using SAI_Editor.Forms.SearchForms;
 using SAI_Editor.Properties;
+using System.IO;
+using System.Reflection;
 
 namespace SAI_Editor.Forms
 {
@@ -77,6 +79,7 @@ namespace SAI_Editor.Forms
         private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
         private int previousLinkFrom = -1;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
+        private readonly string applicationVersion = String.Empty;
 
         private FormState _formState = FormState.FormStateLogin;
         public FormState formState
@@ -120,6 +123,10 @@ namespace SAI_Editor.Forms
         public MainForm()
         {
             InitializeComponent();
+
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            applicationVersion = "v" + version.Major + "." + version.Minor;
+            Text = "SAI-Editor " + applicationVersion + ": Login";
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
@@ -398,9 +405,9 @@ namespace SAI_Editor.Forms
             ResetFieldsToDefault();
 
             if (radioButtonConnectToMySql.Checked)
-                Text = "SAI-Editor - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ", " + textBoxPort.Text;
+                Text = "SAI-Editor " + applicationVersion + " - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ", " + textBoxPort.Text;
             else
-                Text = "SAI-Editor - Creator-only mode, no database connection";
+                Text = "SAI-Editor " + applicationVersion + " - Creator-only mode, no database connection";
 
             if (instant)
             {
@@ -428,7 +435,7 @@ namespace SAI_Editor.Forms
 
         private void StartContractingToLoginForm(bool instant = false)
         {
-            Text = "SAI-Editor: Login";
+            Text = "SAI-Editor " + applicationVersion + ": Login";
 
             if (Settings.Default.ShowTooltipsPermanently)
                 listViewSmartScripts.Height += (int)FormSizes.ListViewHeightContract;
@@ -4070,9 +4077,9 @@ namespace SAI_Editor.Forms
             SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
 
             if (Settings.Default.UseWorldDatabase)
-                Text = "SAI-Editor - Connection: " + Settings.Default.User + ", " + Settings.Default.Host + ", " + Settings.Default.Port.ToString();
+                Text = "SAI-Editor " + applicationVersion + " - Connection: " + Settings.Default.User + ", " + Settings.Default.Host + ", " + Settings.Default.Port.ToString();
             else
-                Text = "SAI-Editor - Creator-only mode, no database connection";
+                Text = "SAI-Editor " + applicationVersion + " - Creator-only mode, no database connection";
         }
 
         private void menuItemRetrieveLastDeletedRow_Click(object sender, EventArgs e)
@@ -4106,15 +4113,20 @@ namespace SAI_Editor.Forms
 
         private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Thread checkForUpdatesThread = new Thread(CheckForUpdates);
-            checkForUpdatesThread.Start();
-        }
+            DialogResult result = MessageBox.Show("Opening the updater will close the SAI-Editor. The SAI-Editor will be opened afterwards. Are you sure you wish to continue?", "Do you wish to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-        private void CheckForUpdates()
-        {
-            using (Updater.Updater updater = new Updater.Updater())
+            if (result == DialogResult.No)
+                return;
+
+            Close();
+
+            try
             {
-                updater.ShowDialog();
+                Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
