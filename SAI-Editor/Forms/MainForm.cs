@@ -110,7 +110,7 @@ namespace SAI_Editor.Forms
                         panelPermanentTooltipParameters.Anchor = AnchorStyles.Top | AnchorStyles.Left;
                         break;
                     case FormState.FormStateMain:
-                        //FormBorderStyle = FormBorderStyle.Sizable;
+                        FormBorderStyle = FormBorderStyle.Sizable;
                         MinimumSize = new Size(MainFormWidth, (int)FormSizes.MainFormHeight);
                         MaximumSize = new Size(MainFormWidth, (int)FormSizes.MainFormHeight + 100);
                         panelPermanentTooltipTypes.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
