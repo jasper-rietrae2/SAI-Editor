@@ -141,7 +141,10 @@ namespace SAI_Editor.Forms
                 ((MainForm)Owner).ExpandToShowPermanentTooltips(!checkBoxShowTooltipsPermanently.Checked);
 
             if (checkBoxPhaseHighlighting.Checked != phaseHighlighting)
+            {
                 ((MainForm)Owner).listViewSmartScripts.Init(true);
+                ((MainForm)Owner).checkBoxUsePhaseColors.Checked = checkBoxPhaseHighlighting.Checked;
+            }
 
             ((MainForm)Owner).HandleUseWorldDatabaseSettingChanged();
         }

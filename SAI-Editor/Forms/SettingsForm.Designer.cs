@@ -500,9 +500,9 @@
         private System.Windows.Forms.CheckBox checkBoxShowTooltipsPermanently;
         private System.Windows.Forms.CheckBox checkBoxAutoGenerateComments;
         private System.Windows.Forms.CheckBox checkBoxCreateRevertQuery;
-        private System.Windows.Forms.CheckBox checkBoxPhaseHighlighting;
         private System.Windows.Forms.RadioButton radioButtonDontUseDatabase;
         private System.Windows.Forms.RadioButton radioButtonConnectToMySql;
+        public System.Windows.Forms.CheckBox checkBoxPhaseHighlighting;
 
     }
 }

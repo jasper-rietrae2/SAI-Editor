@@ -2676,6 +2676,7 @@ namespace SAI_Editor.Forms
             contractingListView = !expand;
             listViewSmartScriptsHeightToChangeTo = expand ? listViewSmartScripts.Height + (int)FormSizes.ListViewHeightContract : listViewSmartScripts.Height - (int)FormSizes.ListViewHeightContract;
             timerShowPermanentTooltips.Enabled = true;
+            checkBoxUsePermanentTooltips.Checked = !expand;
             ToolTipHelper.DisableOrEnableAllToolTips(false);
 
             if (expand)
