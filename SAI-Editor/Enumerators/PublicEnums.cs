@@ -360,6 +360,7 @@ namespace SAI_Editor.Enumerators
         UNIT_BYTE1_FLAG_ALL             = 0xFF
     }
 
+    [Flags]
     public enum SmartEventFlags : uint
     {
         EVENT_FLAG_NONE               = 0x00,
