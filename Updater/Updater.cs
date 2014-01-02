@@ -45,6 +45,7 @@ namespace Updater
             listBoxFilesToUpdate.DataSource = null;
             listBoxFilesToUpdate.Update();
             _files.Clear();
+            changelog.Text = String.Empty;
 
             CheckForUpdates();
             buttonCheckForUpdates.Enabled = true;
