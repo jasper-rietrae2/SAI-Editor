@@ -468,10 +468,7 @@ namespace SAI_Editor.Forms.SearchForms
         {
             if (listView.InvokeRequired)
             {
-                Invoke((MethodInvoker)delegate
-                {
-                    listView.Items.AddRange(items);
-                });
+                Invoke((MethodInvoker)(() => listView.Items.AddRange(items)));
                 return;
             }
 
@@ -496,10 +493,7 @@ namespace SAI_Editor.Forms.SearchForms
         {
             if (listView.InvokeRequired)
             {
-                Invoke((MethodInvoker)delegate
-                {
-                    listView.Items.Clear();
-                });
+                Invoke((MethodInvoker)(() => listView.Items.Clear()));
                 return;
             }
 
