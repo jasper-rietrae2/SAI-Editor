@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
@@ -106,7 +107,7 @@ namespace SAI_Editor.Forms
                         panelPermanentTooltipParameters.Anchor = AnchorStyles.Top | AnchorStyles.Left;
                         break;
                     case FormState.FormStateMain:
-                        FormBorderStyle = FormBorderStyle.Sizable;
+                        //FormBorderStyle = FormBorderStyle.Sizable;
                         MinimumSize = new Size(MainFormWidth, (int)FormSizes.MainFormHeight);
                         MaximumSize = new Size(MainFormWidth, (int)FormSizes.MainFormHeight + 100);
                         panelPermanentTooltipTypes.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
@@ -4101,6 +4102,20 @@ namespace SAI_Editor.Forms
             Settings.Default.Save();
 
             ExpandToShowPermanentTooltips(!checkBoxUsePermanentTooltips.Checked);
+        }
+
+        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Thread checkForUpdatesThread = new Thread(CheckForUpdates);
+            checkForUpdatesThread.Start();
+        }
+
+        private void CheckForUpdates()
+        {
+            using (Updater.Updater updater = new Updater.Updater())
+            {
+                updater.ShowDialog();
+            }
         }
     }
 }
