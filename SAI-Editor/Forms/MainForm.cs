@@ -16,6 +16,7 @@ using SAI_Editor.Forms.SearchForms;
 using SAI_Editor.Properties;
 using System.IO;
 using System.Reflection;
+using System.Net;
 
 namespace SAI_Editor.Forms
 {
@@ -76,7 +77,7 @@ namespace SAI_Editor.Forms
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
         public int lastSmartScriptIdOfScript = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
-        private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
+        private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false, checkedForUpdates = false;
         private int previousLinkFrom = -1;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
         private readonly string applicationVersion = String.Empty;
@@ -246,7 +247,43 @@ namespace SAI_Editor.Forms
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
 
+            //Thread searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
+            //searchNewUpdates.Start();
+
             runningConstructor = false;
+        }
+
+        private void CheckIfUpdatesAvailable()
+        {
+            using (WebClient client = new WebClient())
+            {
+                Stream streamVersion = client.OpenRead("http://dl.dropbox.com/u/84527004/SAI-Editor/version.txt");
+
+                if (streamVersion != null)
+                {
+                    try
+                    {
+                        using (StreamReader streamReaderVersion = new StreamReader(streamVersion))
+                        {
+                            string newAppVersion = streamReaderVersion.ReadToEnd();
+                            streamVersion.Close();
+                            streamReaderVersion.Close();
+
+                            if (newAppVersion != applicationVersion)
+                            {
+                                DialogResult result = MessageBox.Show("A new version of the application is available (" + newAppVersion + "). Do you wish to start the Updater to get the latest SAI-Editor?", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+
+                                if (result == DialogResult.Yes)
+                                    StartUpdater();
+                            }
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+            }
         }
 
         private void timerExpandOrContract_Tick(object sender, EventArgs e)
@@ -667,6 +704,12 @@ namespace SAI_Editor.Forms
 
             if (expanding && radioButtonConnectToMySql.Checked)
                 TryToLoadScript(showErrorIfNoneFound: false);
+
+            if (expanding && !checkedForUpdates)
+            {
+                checkedForUpdates = true;
+                CheckIfUpdatesAvailable();
+            }
         }
 
         private async Task<List<SmartScript>> GetSmartScriptsForEntryAndSourceType(string entryOrGuid, SourceTypes sourceType, bool showError = true, bool promptCreateIfNoneFound = false)
@@ -4118,6 +4161,11 @@ namespace SAI_Editor.Forms
             if (result == DialogResult.No)
                 return;
 
+            StartUpdater();
+        }
+
+        private void StartUpdater()
+        {
             Close();
 
             try
