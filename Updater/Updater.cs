@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
@@ -14,13 +15,18 @@ namespace Updater
 {
     public partial class Updater : Form
     {
-        private const string BaseRemotePath = "http://dl.dropbox.com/u/84527004/SAI-Editor/";
-        private const string BaseRemoteDownloadPath = "http://dl.dropbox.com/u/84527004/SAI-Editor/SAI-Editor/"; // 21676524les
+        private const string baseRemotePath = "http://dl.dropbox.com/u/84527004/SAI-Editor/";
+        private const string baseRemoteDownloadPath = "http://dl.dropbox.com/u/84527004/SAI-Editor/SAI-Editor/";
+        private readonly string applicationVersion = String.Empty;
         readonly List<string> _files = new List<string>();
 
         public Updater()
         {
             InitializeComponent();
+
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            applicationVersion = "v" + version.Major + "." + version.Minor;
+            Text = "SAI-Editor " + applicationVersion + ": Updater";
         }
 
         //! Start the initial search after a second (button is disabled) so the form finishes loading.
@@ -56,7 +62,7 @@ namespace Updater
             {
                 try
                 {
-                    Stream streamNews = client.OpenRead(BaseRemotePath + "news.txt");
+                    Stream streamNews = client.OpenRead(baseRemotePath + "news.txt");
 
                     if (streamNews != null)
                     {
@@ -79,7 +85,7 @@ namespace Updater
 
                 try
                 {
-                    Stream streamFileList = client.OpenRead(BaseRemotePath + "filelist.txt");
+                    Stream streamFileList = client.OpenRead(baseRemotePath + "filelist.txt");
 
                     if (streamFileList != null)
                     {
@@ -155,7 +161,7 @@ namespace Updater
                     currentFolder = currentFolder + @"\" + folder;
                 }
 
-                string remotefile = BaseRemoteDownloadPath + file;
+                string remotefile = baseRemoteDownloadPath + file;
                 string destfile = Directory.GetCurrentDirectory() + @"\" + file;
 
                 try
@@ -230,7 +236,7 @@ namespace Updater
 
             using (WebClient client = new WebClient())
             {
-                Stream streamFileList = client.OpenRead(BaseRemotePath + "filelist.txt");
+                Stream streamFileList = client.OpenRead(baseRemotePath + "filelist.txt");
 
                 if (streamFileList != null)
                 {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Updater));
             this.statusLabel = new System.Windows.Forms.Label();
             this.buttonUpdateToLatest = new System.Windows.Forms.Button();
@@ -35,8 +36,8 @@
             this.listBoxFilesToUpdate = new System.Windows.Forms.ListBox();
             this.changelog = new System.Windows.Forms.RichTextBox();
             this.buttonCheckForUpdates = new System.Windows.Forms.Button();
-            this.timerCheckForSaiEditorRunning = new System.Windows.Forms.Timer();
-            this.timerStartSearchingOnLaunch = new System.Windows.Forms.Timer();
+            this.timerCheckForSaiEditorRunning = new System.Windows.Forms.Timer(this.components);
+            this.timerStartSearchingOnLaunch = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // statusLabel
@@ -127,7 +128,7 @@
             this.MinimizeBox = false;
             this.Name = "Updater";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SAI-Editor - Updater";
+            this.Text = "SAI-Editor v0.0: Updater";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Updater_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
