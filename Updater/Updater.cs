@@ -62,29 +62,6 @@ namespace Updater
             {
                 try
                 {
-                    Stream streamNews = client.OpenRead(baseRemotePath + "news.txt");
-
-                    if (streamNews != null)
-                    {
-                        using (StreamReader streamReaderNews = new StreamReader(streamNews))
-                        {
-                            string content = streamReaderNews.ReadToEnd();
-                            changelog.Text = content;
-                            streamNews.Close();
-                            streamReaderNews.Close();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Unable to load news. Error: \r\n\r\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    changelog.Text = "Unable to load news";
-                    statusLabel.Text = "UNABLE TO LOAD";
-                    statusLabel.ForeColor = Color.Red;
-                }
-
-                try
-                {
                     Stream streamFileList = client.OpenRead(baseRemotePath + "filelist.txt");
 
                     if (streamFileList != null)
@@ -120,6 +97,32 @@ namespace Updater
                     statusLabel.Text = "UNABLE TO LOAD";
                     statusLabel.ForeColor = Color.Red;
                     return;
+                }
+
+                if (_files.Count > 0)
+                {
+                    try
+                    {
+                        Stream streamNews = client.OpenRead(baseRemotePath + "news.txt");
+
+                        if (streamNews != null)
+                        {
+                            using (StreamReader streamReaderNews = new StreamReader(streamNews))
+                            {
+                                string content = streamReaderNews.ReadToEnd();
+                                changelog.Text = content;
+                                streamNews.Close();
+                                streamReaderNews.Close();
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Unable to load news. Error: \r\n\r\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        changelog.Text = "Unable to load news";
+                        statusLabel.Text = "UNABLE TO LOAD";
+                        statusLabel.ForeColor = Color.Red;
+                    }
                 }
             }
 
