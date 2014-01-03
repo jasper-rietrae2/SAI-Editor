@@ -15,3 +15,5 @@
 - Make some exception messagebox reporting be more user-friendly by catching specific exceptions
 - Setting to control the comment generating (rules to follow and whatnot)
 - Possible add spell tooltips?
+- Run a timer every 30 seconds if no internet connection is found. Every 30 sec we then try to call the Updater and Survey methods so that they will be called once an internet conneciton is found
+- Pass on a parameter to Updater's constructor to determine whether or not it's called by the form instead of from hand. This way we determine whether or not we should open up SAI-Editor.exe when the updater is closed

@@ -133,9 +133,8 @@ namespace SAI_Editor.Forms
 
         private string GetLocalIpAddress()
         {
-            IPHostEntry host;
+            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
             string localIP = String.Empty;
-            host = Dns.GetHostEntry(Dns.GetHostName());
 
             foreach (IPAddress ip in host.AddressList)
                 if (ip.AddressFamily.ToString() == "InterNetwork")
