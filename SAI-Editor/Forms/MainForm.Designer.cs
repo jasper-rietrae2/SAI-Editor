@@ -533,7 +533,7 @@
             this.panelLoginBox.Location = new System.Drawing.Point(933, 31);
             this.panelLoginBox.Name = "panelLoginBox";
             this.panelLoginBox.Size = new System.Drawing.Size(378, 258);
-            this.panelLoginBox.TabIndex = 13;
+            this.panelLoginBox.TabIndex = 14;
             // 
             // labelDontUseDatabaseWarning
             // 
@@ -543,7 +543,7 @@
             this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(1, 186);
             this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
             this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(375, 65);
-            this.labelDontUseDatabaseWarning.TabIndex = 11;
+            this.labelDontUseDatabaseWarning.TabIndex = 12;
             this.labelDontUseDatabaseWarning.Text = resources.GetString("labelDontUseDatabaseWarning.Text");
             this.labelDontUseDatabaseWarning.Visible = false;
             // 
@@ -566,7 +566,7 @@
             this.groupBoxLogin.Location = new System.Drawing.Point(3, 3);
             this.groupBoxLogin.Name = "groupBoxLogin";
             this.groupBoxLogin.Size = new System.Drawing.Size(364, 149);
-            this.groupBoxLogin.TabIndex = 10;
+            this.groupBoxLogin.TabIndex = 13;
             this.groupBoxLogin.TabStop = false;
             this.groupBoxLogin.Text = "Connect information";
             // 
@@ -599,7 +599,7 @@
             this.buttonSearchWorldDb.Location = new System.Drawing.Point(334, 121);
             this.buttonSearchWorldDb.Name = "buttonSearchWorldDb";
             this.buttonSearchWorldDb.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchWorldDb.TabIndex = 7;
+            this.buttonSearchWorldDb.TabIndex = 9;
             this.buttonSearchWorldDb.Text = "...";
             this.buttonSearchWorldDb.UseVisualStyleBackColor = true;
             this.buttonSearchWorldDb.Click += new System.EventHandler(this.buttonSearchWorldDb_Click);
@@ -626,7 +626,7 @@
             this.textBoxPort.Location = new System.Drawing.Point(228, 44);
             this.textBoxPort.Name = "textBoxPort";
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPort.TabIndex = 8;
+            this.textBoxPort.TabIndex = 4;
             this.textBoxPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // labelHost
@@ -643,7 +643,7 @@
             this.textBoxUsername.Location = new System.Drawing.Point(228, 70);
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
-            this.textBoxUsername.TabIndex = 4;
+            this.textBoxUsername.TabIndex = 5;
             // 
             // labelPort
             // 
@@ -659,7 +659,7 @@
             this.textBoxWorldDatabase.Location = new System.Drawing.Point(228, 122);
             this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
             this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
-            this.textBoxWorldDatabase.TabIndex = 6;
+            this.textBoxWorldDatabase.TabIndex = 7;
             // 
             // labelUser
             // 
@@ -693,7 +693,7 @@
             this.textBoxPassword.Location = new System.Drawing.Point(228, 96);
             this.textBoxPassword.Name = "textBoxPassword";
             this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPassword.TabIndex = 5;
+            this.textBoxPassword.TabIndex = 6;
             // 
             // groupBoxStaticScriptInfo
             // 
