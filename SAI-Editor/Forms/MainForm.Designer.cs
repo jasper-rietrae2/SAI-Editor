@@ -2108,7 +2108,7 @@
             this.panelPermanentTooltipParameters.Controls.Add(this.labelPermanentTooltipTextParameters);
             this.panelPermanentTooltipParameters.Controls.Add(this.labelPermanentTooltipParameterTitleTypes);
             this.panelPermanentTooltipParameters.Controls.Add(this.pictureBox1);
-            this.panelPermanentTooltipParameters.Location = new System.Drawing.Point(12, 430);
+            this.panelPermanentTooltipParameters.Location = new System.Drawing.Point(12, 428);
             this.panelPermanentTooltipParameters.Name = "panelPermanentTooltipParameters";
             this.panelPermanentTooltipParameters.Size = new System.Drawing.Size(915, 30);
             this.panelPermanentTooltipParameters.TabIndex = 25;
@@ -2220,7 +2220,7 @@
             this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTitleTypes);
             this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTextTypes);
             this.panelPermanentTooltipTypes.Controls.Add(this.pictureBoxPermanentTooltip);
-            this.panelPermanentTooltipTypes.Location = new System.Drawing.Point(12, 397);
+            this.panelPermanentTooltipTypes.Location = new System.Drawing.Point(12, 395);
             this.panelPermanentTooltipTypes.Name = "panelPermanentTooltipTypes";
             this.panelPermanentTooltipTypes.Size = new System.Drawing.Size(915, 30);
             this.panelPermanentTooltipTypes.TabIndex = 25;
