@@ -284,7 +284,7 @@ namespace SAI_Editor.Forms
 
                 try
                 {
-                    client.UploadValues("http://www.jasper-rietrae.com/survey.php", "POST", data);
+                    client.UploadValues("http://www.jasper-rietrae.com/SAI-Editor/survey.php", "POST", data);
                 }
                 catch (WebException)
                 {
