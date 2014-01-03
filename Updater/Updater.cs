@@ -43,7 +43,7 @@ namespace Updater
             listBoxFilesToUpdate.DataSource = null;
             listBoxFilesToUpdate.Update();
             _files.Clear();
-            changelog.Text = String.Empty;
+            textBoxChangelog.Text = String.Empty;
 
             CheckForUpdates();
             buttonCheckForUpdates.Enabled = true;
@@ -90,7 +90,7 @@ namespace Updater
                     }
                     catch (WebException)
                     {
-                        changelog.Text = String.Empty;
+                        textBoxChangelog.Text = String.Empty;
                         statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
                         statusLabel.ForeColor = Color.Red;
                         statusLabel.Update();
@@ -102,7 +102,7 @@ namespace Updater
                     catch (Exception exe)
                     {
                         MessageBox.Show("Unable to load filelist. Error: \r\n\r\n" + exe.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        changelog.Text = "Unable to load filelist";
+                        textBoxChangelog.Text = "Unable to load filelist";
                         statusLabel.Text = "UNABLE TO LOAD";
                         statusLabel.ForeColor = Color.Red;
                         return;
@@ -112,22 +112,22 @@ namespace Updater
                     {
                         try
                         {
-                            Stream streamNews = client.OpenRead(baseRemotePath + "news.txt");
+                            Stream streamChangelog = client.OpenRead(baseRemotePath + "changelog.txt");
 
-                            if (streamNews != null)
+                            if (streamChangelog != null)
                             {
-                                using (StreamReader streamReaderNews = new StreamReader(streamNews))
+                                using (StreamReader streamReaderChangelog = new StreamReader(streamChangelog))
                                 {
-                                    string content = streamReaderNews.ReadToEnd();
-                                    changelog.Text = content;
-                                    streamNews.Close();
-                                    streamReaderNews.Close();
+                                    string content = streamReaderChangelog.ReadToEnd();
+                                    textBoxChangelog.Text = content;
+                                    streamChangelog.Close();
+                                    streamReaderChangelog.Close();
                                 }
                             }
                         }
                         catch (WebException)
                         {
-                            changelog.Text = String.Empty;
+                            textBoxChangelog.Text = String.Empty;
                             statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
                             statusLabel.ForeColor = Color.Red;
                             statusLabel.Update();
@@ -138,8 +138,8 @@ namespace Updater
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Unable to load news. Error: \r\n\r\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            changelog.Text = String.Empty;
+                            MessageBox.Show("Unable to load changelog. Error: \r\n\r\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            textBoxChangelog.Text = String.Empty;
                             statusLabel.Text = "UNABLE TO LOAD";
                             statusLabel.ForeColor = Color.Red;
                         }
@@ -153,7 +153,7 @@ namespace Updater
             }
             catch (WebException)
             {
-                changelog.Text = String.Empty;
+                textBoxChangelog.Text = String.Empty;
                 statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
                 statusLabel.ForeColor = Color.Red;
                 statusLabel.Update();
@@ -189,7 +189,7 @@ namespace Updater
                 string file = _files[i];
                 progressBar.Value++;
 
-                if (file.Contains("filelist.txt") || file.Contains("news.txt"))
+                if (file.Contains("filelist.txt") || file.Contains("changelog.txt"))
                     continue;
 
                 string[] subfolder = file.Split(Char.Parse(@"\"));
@@ -219,7 +219,7 @@ namespace Updater
                 }
                 catch (WebException)
                 {
-                    changelog.Text = String.Empty;
+                    textBoxChangelog.Text = String.Empty;
                     statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
                     statusLabel.ForeColor = Color.Red;
                     statusLabel.Update();

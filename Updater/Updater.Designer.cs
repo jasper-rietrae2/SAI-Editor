@@ -34,7 +34,7 @@
             this.buttonUpdateToLatest = new System.Windows.Forms.Button();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.listBoxFilesToUpdate = new System.Windows.Forms.ListBox();
-            this.changelog = new System.Windows.Forms.RichTextBox();
+            this.textBoxChangelog = new System.Windows.Forms.RichTextBox();
             this.buttonCheckForUpdates = new System.Windows.Forms.Button();
             this.timerCheckForSaiEditorRunning = new System.Windows.Forms.Timer(this.components);
             this.timerStartSearchingOnLaunch = new System.Windows.Forms.Timer(this.components);
@@ -77,15 +77,15 @@
             this.listBoxFilesToUpdate.Size = new System.Drawing.Size(436, 82);
             this.listBoxFilesToUpdate.TabIndex = 5;
             // 
-            // changelog
+            // textBoxChangelog
             // 
-            this.changelog.Location = new System.Drawing.Point(12, 153);
-            this.changelog.Name = "changelog";
-            this.changelog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.changelog.Size = new System.Drawing.Size(436, 126);
-            this.changelog.TabIndex = 6;
-            this.changelog.Text = "";
-            this.changelog.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.changelog_KeyPress);
+            this.textBoxChangelog.Location = new System.Drawing.Point(12, 153);
+            this.textBoxChangelog.Name = "textBoxChangelog";
+            this.textBoxChangelog.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.textBoxChangelog.Size = new System.Drawing.Size(436, 126);
+            this.textBoxChangelog.TabIndex = 6;
+            this.textBoxChangelog.Text = "";
+            this.textBoxChangelog.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.changelog_KeyPress);
             // 
             // buttonCheckForUpdates
             // 
@@ -117,7 +117,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(460, 291);
             this.Controls.Add(this.buttonCheckForUpdates);
-            this.Controls.Add(this.changelog);
+            this.Controls.Add(this.textBoxChangelog);
             this.Controls.Add(this.listBoxFilesToUpdate);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.buttonUpdateToLatest);
@@ -141,7 +141,7 @@
         private System.Windows.Forms.Button buttonUpdateToLatest;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.ListBox listBoxFilesToUpdate;
-        private System.Windows.Forms.RichTextBox changelog;
+        private System.Windows.Forms.RichTextBox textBoxChangelog;
         private System.Windows.Forms.Button buttonCheckForUpdates;
         private System.Windows.Forms.Timer timerCheckForSaiEditorRunning;
         private System.Windows.Forms.Timer timerStartSearchingOnLaunch;
