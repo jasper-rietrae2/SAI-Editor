@@ -620,7 +620,6 @@
             this.textBoxHost.Name = "textBoxHost";
             this.textBoxHost.Size = new System.Drawing.Size(130, 20);
             this.textBoxHost.TabIndex = 3;
-            this.textBoxHost.Text = "position groupbox 9;8";
             // 
             // textBoxPort
             // 
@@ -645,7 +644,6 @@
             this.textBoxUsername.Name = "textBoxUsername";
             this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
             this.textBoxUsername.TabIndex = 4;
-            this.textBoxUsername.Text = "height grpbox + 20";
             // 
             // labelPort
             // 

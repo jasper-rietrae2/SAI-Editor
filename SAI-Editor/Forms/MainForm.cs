@@ -68,22 +68,19 @@ namespace SAI_Editor.Forms
     public partial class MainForm : Form
     {
         public MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
-        private readonly List<Control> controlsLoginForm = new List<Control>();
-        private readonly List<Control> controlsMainForm = new List<Control>();
+        public int expandAndContractSpeed = 5, expandAndContractSpeedListView = 2, lastSmartScriptIdOfScript = 0, previousLinkFrom = -1;
+        public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
+        private readonly List<Control> controlsLoginForm = new List<Control>(), controlsMainForm = new List<Control>();
+        private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool contractingToLoginForm, expandingToMainForm, expandingListView, contractingListView;
+        private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
         private int originalHeight = 0, originalWidth = 0;
         private int MainFormWidth = (int)FormSizes.MainFormWidth, MainFormHeight = (int)FormSizes.MainFormHeight;
         private int listViewSmartScriptsInitialHeight, listViewSmartScriptsHeightToChangeTo;
-        public int expandAndContractSpeed = 5, expandAndContractSpeedListView = 2;
-        public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
-        public int lastSmartScriptIdOfScript = 0;
-        private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
-        private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
-        private int previousLinkFrom = -1;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
-        private readonly string applicationVersion = String.Empty;
-
         private FormState _formState = FormState.FormStateLogin;
+        private string applicationVersion = String.Empty;
+
         public FormState formState
         {
             get
@@ -125,15 +122,27 @@ namespace SAI_Editor.Forms
         public MainForm()
         {
             InitializeComponent();
-
-            Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            applicationVersion = "v" + version.Major + "." + version.Minor + "." + version.Build;
-            Text = "SAI-Editor " + applicationVersion + ": Login";
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
             runningConstructor = true;
+
+            if (!Settings.Default.InformedAboutSurvey)
+            {
+                DialogResult result = MessageBox.Show("By clicking 'Yes' you agree to the application storing your IP address in a database. This is in order for the developers to keep track of how often the application is being used. Not pressing 'Yes' will close the application and you will be prompted again.", "Agree to the terms", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                if (result != DialogResult.Yes)
+                {
+                    Close();
+                    return;
+                }
+            }
+
+            Version version = Assembly.GetExecutingAssembly().GetName().Version;
+            applicationVersion = "v" + version.Major + "." + version.Minor + "." + version.Build;
+            Text = "SAI-Editor " + applicationVersion + ": Login";
+
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
 
             Width = (int)FormSizes.LoginFormWidth;
@@ -254,6 +263,7 @@ namespace SAI_Editor.Forms
             Thread updateSurveyThread = new Thread(UpdateSurvey);
             updateSurveyThread.Start();
 
+            Settings.Default.InformedAboutSurvey = true;
             runningConstructor = false;
         }
 
