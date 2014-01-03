@@ -6,10 +6,12 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace Updater
 {
@@ -90,6 +92,17 @@ namespace Updater
                             streamReaderFileList.Close();
                         }
                     }
+                    catch (WebException)
+                    {
+                        changelog.Text = "Unable to load news";
+                        statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
+                        statusLabel.ForeColor = Color.Red;
+                        statusLabel.Update();
+                        buttonUpdateToLatest.Enabled = false;
+                        buttonCheckForUpdates.Enabled = true;
+                        MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     catch (Exception exe)
                     {
                         MessageBox.Show("Unable to load filelist. Error: \r\n\r\n" + exe.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -116,6 +129,17 @@ namespace Updater
                                 }
                             }
                         }
+                        catch (WebException)
+                        {
+                            changelog.Text = "Unable to load news";
+                            statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
+                            statusLabel.ForeColor = Color.Red;
+                            statusLabel.Update();
+                            buttonUpdateToLatest.Enabled = false;
+                            buttonCheckForUpdates.Enabled = true;
+                            MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Unable to load news. Error: \r\n\r\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -133,12 +157,23 @@ namespace Updater
             }
             catch (WebException)
             {
-
+                changelog.Text = "Unable to load news";
+                statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
+                statusLabel.ForeColor = Color.Red;
+                statusLabel.Update();
+                buttonUpdateToLatest.Enabled = false;
+                buttonCheckForUpdates.Enabled = true;
+                MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Something went wrong while checking for updates. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public bool HasInternetConnectionWithCurrentNetwork()
+        {
+            return NetworkInterface.GetAllNetworkInterfaces().Any(x => x.OperationalStatus == OperationalStatus.Up);
         }
 
         private void buttonUpdateToLatest_Click(object sender, EventArgs e)
@@ -150,6 +185,8 @@ namespace Updater
 
             buttonCheckForUpdates.Enabled = false;
             buttonCheckForUpdates.Update();
+
+            bool webExceptionOccurred = false;
 
             for (int i = 0; i < _files.Count; ++i)
             {
@@ -191,7 +228,14 @@ namespace Updater
                     }
                     catch (WebException)
                     {
-
+                        changelog.Text = "Unable to load news";
+                        statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
+                        statusLabel.ForeColor = Color.Red;
+                        statusLabel.Update();
+                        buttonUpdateToLatest.Enabled = false;
+                        buttonCheckForUpdates.Enabled = true;
+                        webExceptionOccurred = true;
+                        MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     catch (Exception ex)
                     {
@@ -205,7 +249,9 @@ namespace Updater
             listBoxFilesToUpdate.Items.Clear();
             _files.Clear();
             buttonCheckForUpdates.Enabled = true;
-            MessageBox.Show("Updated completed succesfully.\r\nYou can now run the latest version of SAI-Editor. Closing the updater will automatically open the SAI-Editor.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+
+            if (!webExceptionOccurred)
+                MessageBox.Show("Updated completed succesfully.\r\nYou can now run the latest version of SAI-Editor. Closing the updater will automatically open the SAI-Editor.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
         }
 
         private string GetLocalIpAddress()
