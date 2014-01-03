@@ -312,6 +312,7 @@ namespace SAI_Editor.Forms
 
                                 if (result == DialogResult.Yes)
                                 {
+                                    Settings.Default.Save();
                                     Invoke((MethodInvoker)delegate { Close(); });
 
                                     try
@@ -4208,11 +4209,7 @@ namespace SAI_Editor.Forms
             if (result == DialogResult.No)
                 return;
 
-            StartUpdater();
-        }
-
-        private void StartUpdater()
-        {
+            Settings.Default.Save();
             Close();
 
             try
