@@ -16,7 +16,6 @@ using SAI_Editor.Properties;
 using System.IO;
 using System.Reflection;
 using System.Net;
-using System.Collections.Specialized;
 using System.Threading;
 
 namespace SAI_Editor.Forms
