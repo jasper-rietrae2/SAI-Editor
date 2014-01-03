@@ -54,83 +54,94 @@ namespace Updater
 
         private void CheckForUpdates()
         {
-            statusLabel.Text = "CHECKING FOR UPDATES...";
-            statusLabel.Update();
-            progressBar.Maximum = GetFilesCountInFileList();
-            progressBar.Value = 0;
-
-            using (WebClient client = new WebClient())
+            try
             {
-                try
-                {
-                    Stream streamFileList = client.OpenRead(baseRemotePath + "filelist.txt");
+                statusLabel.Text = "CHECKING FOR UPDATES...";
+                statusLabel.Update();
+                progressBar.Maximum = GetFilesCountInFileList();
+                progressBar.Value = 0;
 
-                    if (streamFileList != null)
-                    {
-                        StreamReader streamReaderFileList = new StreamReader(streamFileList);
-                        string currentLine = String.Empty;
-
-                        while ((currentLine = streamReaderFileList.ReadLine()) != null)
-                        {
-                            string[] splitLine = currentLine.Split(',');
-                            string filename = splitLine[0];
-                            string md5 = splitLine[1];
-                            progressBar.Value++;
-
-                            if (File.Exists(Directory.GetCurrentDirectory().ToString(CultureInfo.InvariantCulture) + @"\" + filename))
-                            {
-                                if (md5 != GetMD5HashFromFile(Directory.GetCurrentDirectory() + @"\" + filename))
-                                    _files.Add(filename);
-                            }
-                            else
-                                _files.Add(filename);
-                        }
-
-                        listBoxFilesToUpdate.DataSource = _files;
-                        streamFileList.Close();
-                        streamReaderFileList.Close();
-                    }
-                }
-                catch (Exception exe)
-                {
-                    MessageBox.Show("Unable to load filelist. Error: \r\n\r\n" + exe.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    changelog.Text = "Unable to load filelist";
-                    statusLabel.Text = "UNABLE TO LOAD";
-                    statusLabel.ForeColor = Color.Red;
-                    return;
-                }
-
-                if (_files.Count > 0)
+                using (WebClient client = new WebClient())
                 {
                     try
                     {
-                        Stream streamNews = client.OpenRead(baseRemotePath + "news.txt");
+                        Stream streamFileList = client.OpenRead(baseRemotePath + "filelist.txt");
 
-                        if (streamNews != null)
+                        if (streamFileList != null)
                         {
-                            using (StreamReader streamReaderNews = new StreamReader(streamNews))
+                            StreamReader streamReaderFileList = new StreamReader(streamFileList);
+                            string currentLine = String.Empty;
+
+                            while ((currentLine = streamReaderFileList.ReadLine()) != null)
                             {
-                                string content = streamReaderNews.ReadToEnd();
-                                changelog.Text = content;
-                                streamNews.Close();
-                                streamReaderNews.Close();
+                                string[] splitLine = currentLine.Split(',');
+                                string filename = splitLine[0];
+                                string md5 = splitLine[1];
+                                progressBar.Value++;
+
+                                if (File.Exists(Directory.GetCurrentDirectory().ToString(CultureInfo.InvariantCulture) + @"\" + filename))
+                                {
+                                    if (md5 != GetMD5HashFromFile(Directory.GetCurrentDirectory() + @"\" + filename))
+                                        _files.Add(filename);
+                                }
+                                else
+                                    _files.Add(filename);
                             }
+
+                            listBoxFilesToUpdate.DataSource = _files;
+                            streamFileList.Close();
+                            streamReaderFileList.Close();
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception exe)
                     {
-                        MessageBox.Show("Unable to load news. Error: \r\n\r\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        changelog.Text = "Unable to load news";
+                        MessageBox.Show("Unable to load filelist. Error: \r\n\r\n" + exe.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        changelog.Text = "Unable to load filelist";
                         statusLabel.Text = "UNABLE TO LOAD";
                         statusLabel.ForeColor = Color.Red;
+                        return;
+                    }
+
+                    if (_files.Count > 0)
+                    {
+                        try
+                        {
+                            Stream streamNews = client.OpenRead(baseRemotePath + "news.txt");
+
+                            if (streamNews != null)
+                            {
+                                using (StreamReader streamReaderNews = new StreamReader(streamNews))
+                                {
+                                    string content = streamReaderNews.ReadToEnd();
+                                    changelog.Text = content;
+                                    streamNews.Close();
+                                    streamReaderNews.Close();
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Unable to load news. Error: \r\n\r\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            changelog.Text = "Unable to load news";
+                            statusLabel.Text = "UNABLE TO LOAD";
+                            statusLabel.ForeColor = Color.Red;
+                        }
                     }
                 }
-            }
 
-            statusLabel.Text = _files.Count > 0 ? "UPDATES AVAILABLE" : "ALREADY UP TO DATE";
-            progressBar.Value = 0;
-            buttonUpdateToLatest.Enabled = _files.Count > 0;
-            buttonCheckForUpdates.Enabled = true;
+                statusLabel.Text = _files.Count > 0 ? "UPDATES AVAILABLE" : "ALREADY UP TO DATE";
+                progressBar.Value = 0;
+                buttonUpdateToLatest.Enabled = _files.Count > 0;
+                buttonCheckForUpdates.Enabled = true;
+            }
+            catch (WebException)
+            {
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong while checking for updates. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void buttonUpdateToLatest_Click(object sender, EventArgs e)
@@ -167,21 +178,28 @@ namespace Updater
 
                 string remotefile = baseRemoteDownloadPath + file;
                 string destfile = Directory.GetCurrentDirectory() + @"\" + file;
-                using (WebClient client = new WebClient())
+                string ipAddress = GetLocalIpAddress();
+
+                if (!String.IsNullOrWhiteSpace(ipAddress))
                 {
                     try
                     {
-                        client.DownloadFile(remotefile, destfile);
+                        using (WebClient client = new WebClient())
+                        {
+                            client.DownloadFile(remotefile, destfile);
+                            NameValueCollection data = new NameValueCollection();
+                            data["ipAddress"] = ipAddress;
+                            client.UploadValues("http://www.jasper-rietrae.com/survey.php", "POST", data);
+                        }
+                    }
+                    catch (WebException)
+                    {
+
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Update Failed. Error: " + ex.Message, "Someting went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Something went wrong while attempting to keep track of the use count. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-                    string ipAddress = GetLocalIpAddress();
-                    NameValueCollection data = new NameValueCollection();
-                    data["ipAddress"] = ipAddress;
-                    client.UploadValues("http://www.jasper-rietrae.com/survey.php", "POST", data);
                 }
             }
 

@@ -281,7 +281,19 @@ namespace SAI_Editor.Forms
             {
                 NameValueCollection data = new NameValueCollection();
                 data["ipAddress"] = ipAddress.Replace(".", "-");
-                client.UploadValues("http://www.jasper-rietrae.com/survey.php", "POST", data);
+
+                try
+                {
+                    client.UploadValues("http://www.jasper-rietrae.com/survey.php", "POST", data);
+                }
+                catch (WebException)
+                {
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong while attempting to keep track of the use count. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -322,9 +334,13 @@ namespace SAI_Editor.Forms
                         }
                     }
                 }
+                catch (WebException)
+                {
+
+                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Something went wrong while checking for updates. Please report the following message to GitHub:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Something went wrong while checking for updates. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
