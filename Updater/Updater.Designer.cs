@@ -128,7 +128,7 @@
             this.MinimizeBox = false;
             this.Name = "Updater";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "SAI-Editor v0.0: Updater";
+            this.Text = "SAI-Editor: Updater";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Updater_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -25,10 +25,6 @@ namespace Updater
         public Updater()
         {
             InitializeComponent();
-
-            Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            applicationVersion = "v" + version.Major + "." + version.Minor;
-            Text = "SAI-Editor " + applicationVersion + ": Updater";
         }
 
         //! Start the initial search after a second (button is disabled) so the form finishes loading.
