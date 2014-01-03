@@ -80,7 +80,7 @@ namespace SAI_Editor.Classes
 
         public void ResetSQLiteDatabase()
         {
-            sqliteDatabase = new SQLiteDatabase("Resources/sqlite_database.db");
+            sqliteDatabase = new SQLiteDatabase("sqlite_database.db");
         }
 
         public async Task LoadSQLiteDatabaseInfo()
