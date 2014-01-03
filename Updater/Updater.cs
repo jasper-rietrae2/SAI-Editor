@@ -19,7 +19,6 @@ namespace Updater
     {
         private const string baseRemotePath = "http://dl.dropbox.com/u/84527004/SAI-Editor/";
         private const string baseRemoteDownloadPath = "http://dl.dropbox.com/u/84527004/SAI-Editor/SAI-Editor/";
-        private readonly string applicationVersion = String.Empty;
         readonly List<string> _files = new List<string>();
 
         public Updater()
@@ -27,7 +26,8 @@ namespace Updater
             InitializeComponent();
         }
 
-        //! Start the initial search after a second (button is disabled) so the form finishes loading.
+        //! Start the initial search after a second (button is disabled in the meantime) so the form
+        //! is able to finish loading visually for the user.
         private void timerStartSearchingOnLaunch_Tick(object sender, EventArgs e)
         {
             timerStartSearchingOnLaunch.Enabled = false;
@@ -90,7 +90,7 @@ namespace Updater
                     }
                     catch (WebException)
                     {
-                        changelog.Text = "Unable to load news";
+                        changelog.Text = String.Empty;
                         statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
                         statusLabel.ForeColor = Color.Red;
                         statusLabel.Update();
@@ -127,7 +127,7 @@ namespace Updater
                         }
                         catch (WebException)
                         {
-                            changelog.Text = "Unable to load news";
+                            changelog.Text = String.Empty;
                             statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
                             statusLabel.ForeColor = Color.Red;
                             statusLabel.Update();
@@ -139,7 +139,7 @@ namespace Updater
                         catch (Exception ex)
                         {
                             MessageBox.Show("Unable to load news. Error: \r\n\r\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            changelog.Text = "Unable to load news";
+                            changelog.Text = String.Empty;
                             statusLabel.Text = "UNABLE TO LOAD";
                             statusLabel.ForeColor = Color.Red;
                         }
@@ -153,7 +153,7 @@ namespace Updater
             }
             catch (WebException)
             {
-                changelog.Text = "Unable to load news";
+                changelog.Text = String.Empty;
                 statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
                 statusLabel.ForeColor = Color.Red;
                 statusLabel.Update();
@@ -219,7 +219,7 @@ namespace Updater
                 }
                 catch (WebException)
                 {
-                    changelog.Text = "Unable to load news";
+                    changelog.Text = String.Empty;
                     statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
                     statusLabel.ForeColor = Color.Red;
                     statusLabel.Update();
@@ -287,7 +287,7 @@ namespace Updater
             }
             catch (Exception)
             {
-                MessageBox.Show("The SAI-Editor could not be opened. Please do so manually.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The SAI-Editor could not be re-opened. Please do so manually.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
