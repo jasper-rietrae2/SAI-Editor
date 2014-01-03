@@ -5,14 +5,12 @@
   - Make this a download option instead (?). The SQLite file would become over 100 MB if we'd do this and it'd make no sense if we'd never use the data.
 - Find a way around the annoying 500-line limit when inserting SQLite data. When found, implement all sounds into the SQLite database.
 - Make permanent tooltips support multilines (or decrease length of tooltips to a fixed size)
-- Implement (SAI) conditions support
-- Implement creature_text support (?)
+- Implement conditions support
+- Implement creature_text support
 - Add support to add specific flags to the source. If you for example want a creature to have a gossip, the npcflag also needs to be set accordingly. No idea yet on how to implement this in a good looking way
 - Add support to the SQLite database for each expansion of the game and keep this up-to-date
 - Implement user-controlled SAI templates which can also be shared between users and possibly uploaded somewhere
-- Search or auto update the application when a new version rolled out
 - Add a tutorial to the application
-- Make some exception messagebox reporting be more user-friendly by catching specific exceptions
 - Setting to control the comment generating (rules to follow and whatnot)
 - Possible add spell tooltips?
 - Run a timer every 30 seconds if no internet connection is found. Every 30 sec we then try to call the Updater and Survey methods so that they will be called once an internet conneciton is found
