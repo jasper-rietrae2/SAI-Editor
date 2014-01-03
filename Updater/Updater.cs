@@ -58,8 +58,6 @@ namespace Updater
             {
                 statusLabel.Text = "CHECKING FOR UPDATES...";
                 statusLabel.Update();
-                progressBar.Maximum = GetFilesCountInFileList();
-                progressBar.Value = 0;
 
                 using (WebClient client = new WebClient())
                 {
@@ -77,7 +75,6 @@ namespace Updater
                                 string[] splitLine = currentLine.Split(',');
                                 string filename = splitLine[0];
                                 string md5 = splitLine[1];
-                                progressBar.Value++;
 
                                 if (File.Exists(Directory.GetCurrentDirectory().ToString(CultureInfo.InvariantCulture) + @"\" + filename))
                                 {
@@ -269,32 +266,6 @@ namespace Updater
             {
                 MessageBox.Show("The SAI-Editor could not be opened. Please do so manually.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private int GetFilesCountInFileList()
-        {
-            int countOfFiles = 0;
-
-            using (WebClient client = new WebClient())
-            {
-                Stream streamFileList = client.OpenRead(baseRemotePath + "filelist.txt");
-
-                if (streamFileList != null)
-                {
-                    StreamReader streamReaderFileList = new StreamReader(streamFileList);
-                    string currentLine = String.Empty;
-
-                    while ((currentLine = streamReaderFileList.ReadLine()) != null)
-                    {
-                        string filename = currentLine.Split(',')[0];
-
-                        if (Path.HasExtension(filename))
-                            countOfFiles++;
-                    }
-                }
-            }
-
-            return countOfFiles;
         }
 
         private void timerCheckForSaiEditorRunning_Tick(object sender, EventArgs e)
