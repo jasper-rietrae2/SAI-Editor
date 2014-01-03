@@ -16,6 +16,8 @@ using SAI_Editor.Properties;
 using System.IO;
 using System.Reflection;
 using System.Net;
+using System.Collections.Specialized;
+using System.Threading;
 
 namespace SAI_Editor.Forms
 {
@@ -127,6 +129,19 @@ namespace SAI_Editor.Forms
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             applicationVersion = "v" + version.Major + "." + version.Minor;
             Text = "SAI-Editor " + applicationVersion + ": Login";
+        }
+
+        private string GetLocalIpAddress()
+        {
+            IPHostEntry host;
+            string localIP = String.Empty;
+            host = Dns.GetHostEntry(Dns.GetHostName());
+
+            foreach (IPAddress ip in host.AddressList)
+                if (ip.AddressFamily.ToString() == "InterNetwork")
+                    localIP = ip.ToString();
+
+            return localIP;
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
@@ -249,7 +264,25 @@ namespace SAI_Editor.Forms
             //Thread searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
             //searchNewUpdates.Start();
 
+            Thread updateSurveyThread = new Thread(UpdateSurvey);
+            updateSurveyThread.Start();
+
             runningConstructor = false;
+        }
+
+        private void UpdateSurvey()
+        {
+            string ipAddress = GetLocalIpAddress();
+
+            if (ipAddress == String.Empty)
+                return;
+
+            using (WebClient client = new WebClient())
+            {
+                NameValueCollection data = new NameValueCollection();
+                data["ipAddress"] = ipAddress.Replace(".", "-");
+                client.UploadValues("http://www.jasper-rietrae.com/survey.php", "POST", data);
+            }
         }
 
         private void CheckIfUpdatesAvailable()

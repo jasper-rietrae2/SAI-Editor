@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
@@ -166,15 +167,21 @@ namespace Updater
 
                 string remotefile = baseRemoteDownloadPath + file;
                 string destfile = Directory.GetCurrentDirectory() + @"\" + file;
-
-                try
+                using (WebClient client = new WebClient())
                 {
-                    using (WebClient client = new WebClient())
+                    try
+                    {
                         client.DownloadFile(remotefile, destfile);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Update Failed. Error: " + ex.Message, "Someting went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Update Failed. Error: " + ex.Message, "Someting went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                    string ipAddress = GetLocalIpAddress();
+                    NameValueCollection data = new NameValueCollection();
+                    data["ipAddress"] = ipAddress;
+                    client.UploadValues("http://www.jasper-rietrae.com/survey.php", "POST", data);
                 }
             }
 
@@ -184,6 +191,19 @@ namespace Updater
             _files.Clear();
             buttonCheckForUpdates.Enabled = true;
             MessageBox.Show("Updated completed succesfully.\r\nYou can now run the latest version of SAI-Editor. Closing the updater will automatically open the SAI-Editor.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+        }
+
+        private string GetLocalIpAddress()
+        {
+            IPHostEntry host;
+            string localIP = String.Empty;
+            host = Dns.GetHostEntry(Dns.GetHostName());
+
+            foreach (IPAddress ip in host.AddressList)
+                if (ip.AddressFamily.ToString() == "InterNetwork")
+                    localIP = ip.ToString();
+
+            return localIP;
         }
 
         protected string GetMD5HashFromFile(string fileName)
