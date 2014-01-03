@@ -131,18 +131,6 @@ namespace SAI_Editor.Forms
             Text = "SAI-Editor " + applicationVersion + ": Login";
         }
 
-        private string GetLocalIpAddress()
-        {
-            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
-            string localIP = String.Empty;
-
-            foreach (IPAddress ip in host.AddressList)
-                if (ip.AddressFamily.ToString() == "InterNetwork")
-                    localIP = ip.ToString();
-
-            return localIP;
-        }
-
         private async void MainForm_Load(object sender, EventArgs e)
         {
             runningConstructor = true;
@@ -271,19 +259,11 @@ namespace SAI_Editor.Forms
 
         private void UpdateSurvey()
         {
-            string ipAddress = GetLocalIpAddress();
-
-            if (ipAddress == String.Empty)
-                return;
-
             using (WebClient client = new WebClient())
             {
-                NameValueCollection data = new NameValueCollection();
-                data["ipAddress"] = ipAddress.Replace(".", "-");
-
                 try
                 {
-                    client.UploadValues("http://www.jasper-rietrae.com/SAI-Editor/survey.php", "POST", data);
+                    client.DownloadData("http://www.jasper-rietrae.com/SAI-Editor/survey.php");
                 }
                 catch (WebException)
                 {

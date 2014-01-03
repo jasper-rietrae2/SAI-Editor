@@ -212,35 +212,29 @@ namespace Updater
 
                 string remotefile = baseRemoteDownloadPath + file;
                 string destfile = Directory.GetCurrentDirectory() + @"\" + file;
-                string ipAddress = GetLocalIpAddress();
 
-                if (!String.IsNullOrWhiteSpace(ipAddress))
+                try
                 {
-                    try
+                    using (WebClient client = new WebClient())
                     {
-                        using (WebClient client = new WebClient())
-                        {
-                            client.DownloadFile(remotefile, destfile);
-                            NameValueCollection data = new NameValueCollection();
-                            data["ipAddress"] = ipAddress;
-                            client.UploadValues("http://www.jasper-rietrae.com/survey.php", "POST", data);
-                        }
+                        client.DownloadFile(remotefile, destfile);
+                        client.DownloadData("http://www.jasper-rietrae.com/SAI-Editor/survey.php");
                     }
-                    catch (WebException)
-                    {
-                        changelog.Text = "Unable to load news";
-                        statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
-                        statusLabel.ForeColor = Color.Red;
-                        statusLabel.Update();
-                        buttonUpdateToLatest.Enabled = false;
-                        buttonCheckForUpdates.Enabled = true;
-                        webExceptionOccurred = true;
-                        MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Something went wrong while attempting to keep track of the use count. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                }
+                catch (WebException)
+                {
+                    changelog.Text = "Unable to load news";
+                    statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
+                    statusLabel.ForeColor = Color.Red;
+                    statusLabel.Update();
+                    buttonUpdateToLatest.Enabled = false;
+                    buttonCheckForUpdates.Enabled = true;
+                    webExceptionOccurred = true;
+                    MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong while attempting to keep track of the use count. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
 
@@ -252,19 +246,6 @@ namespace Updater
 
             if (!webExceptionOccurred)
                 MessageBox.Show("Updated completed succesfully.\r\nYou can now run the latest version of SAI-Editor. Closing the updater will automatically open the SAI-Editor.", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-        }
-
-        private string GetLocalIpAddress()
-        {
-            IPHostEntry host;
-            string localIP = String.Empty;
-            host = Dns.GetHostEntry(Dns.GetHostName());
-
-            foreach (IPAddress ip in host.AddressList)
-                if (ip.AddressFamily.ToString() == "InterNetwork")
-                    localIP = ip.ToString();
-
-            return localIP;
         }
 
         protected string GetMD5HashFromFile(string fileName)
