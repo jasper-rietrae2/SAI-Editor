@@ -78,7 +78,7 @@ namespace SAI_Editor.Forms
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
         public int lastSmartScriptIdOfScript = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
-        private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false, checkedForUpdates = false;
+        private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
         private int previousLinkFrom = -1;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
         private readonly string applicationVersion = String.Empty;
@@ -261,8 +261,8 @@ namespace SAI_Editor.Forms
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
 
-            //Thread searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
-            //searchNewUpdates.Start();
+            Thread searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
+            searchNewUpdates.Start();
 
             Thread updateSurveyThread = new Thread(UpdateSurvey);
             updateSurveyThread.Start();
@@ -289,11 +289,11 @@ namespace SAI_Editor.Forms
         {
             using (WebClient client = new WebClient())
             {
-                Stream streamVersion = client.OpenRead("http://dl.dropbox.com/u/84527004/SAI-Editor/version.txt");
-
-                if (streamVersion != null)
+                try
                 {
-                    try
+                    Stream streamVersion = client.OpenRead("http://dl.dropbox.com/u/84527004/SAI-Editor/version.txt");
+
+                    if (streamVersion != null)
                     {
                         using (StreamReader streamReaderVersion = new StreamReader(streamVersion))
                         {
@@ -306,14 +306,25 @@ namespace SAI_Editor.Forms
                                 DialogResult result = MessageBox.Show("A new version of the application is available (" + newAppVersion + "). Do you wish to start the Updater to get the latest SAI-Editor?", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
 
                                 if (result == DialogResult.Yes)
-                                    StartUpdater();
+                                {
+                                    Invoke((MethodInvoker)delegate { Close(); });
+
+                                    try
+                                    {
+                                        Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
+                                    }
+                                    catch (Exception)
+                                    {
+                                        MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
                             }
                         }
                     }
-                    catch (Exception)
-                    {
-
-                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Something went wrong while checking for updates. Please report the following message to GitHub:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -736,12 +747,6 @@ namespace SAI_Editor.Forms
 
             if (expanding && radioButtonConnectToMySql.Checked)
                 TryToLoadScript(showErrorIfNoneFound: false);
-
-            if (expanding && !checkedForUpdates)
-            {
-                checkedForUpdates = true;
-                CheckIfUpdatesAvailable();
-            }
         }
 
         private async Task<List<SmartScript>> GetSmartScriptsForEntryAndSourceType(string entryOrGuid, SourceTypes sourceType, bool showError = true, bool promptCreateIfNoneFound = false)
