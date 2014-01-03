@@ -51,8 +51,6 @@
             this.menuItemDuplicateRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCopySelectedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemPasteLastCopiedRow = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
-            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -81,6 +79,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
+            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -194,13 +194,15 @@
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
-            this.pictureBoxCreateScript = new SAI_Editor.Classes.PictureBoxDisableable();
-            this.pictureBoxLoadScript = new SAI_Editor.Classes.PictureBoxDisableable();
+            this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -213,8 +215,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipTypes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -334,9 +334,7 @@
             this.toolStripSeparator1,
             this.menuItemDuplicateRow,
             this.menuItemCopySelectedRow,
-            this.menuItemPasteLastCopiedRow,
-            this.toolStripSeparator4,
-            this.checkForUpdatesToolStripMenuItem});
+            this.menuItemPasteLastCopiedRow});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -422,18 +420,6 @@
             this.menuItemPasteLastCopiedRow.Text = "Paste last copied row";
             this.menuItemPasteLastCopiedRow.Click += new System.EventHandler(this.menuItemPasteLastCopiedRow_Click);
             // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(316, 6);
-            // 
-            // checkForUpdatesToolStripMenuItem
-            // 
-            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
-            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
-            this.checkForUpdatesToolStripMenuItem.Text = "Check for updates";
-            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
-            // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -454,6 +440,8 @@
             // otherToolStripMenuItem
             // 
             this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkForUpdatesToolStripMenuItem,
+            this.toolStripSeparator4,
             this.smartAIWikiToolStripMenuItem});
             this.otherToolStripMenuItem.Name = "otherToolStripMenuItem";
             this.otherToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
@@ -462,7 +450,7 @@
             // smartAIWikiToolStripMenuItem
             // 
             this.smartAIWikiToolStripMenuItem.Name = "smartAIWikiToolStripMenuItem";
-            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.smartAIWikiToolStripMenuItem.Text = "SmartAI Wiki...";
             this.smartAIWikiToolStripMenuItem.Click += new System.EventHandler(this.smartAIWikiToolStripMenuItem_Click);
             // 
@@ -713,6 +701,35 @@
             this.groupBoxStaticScriptInfo.TabStop = false;
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
+            // 
+            // pictureBoxCreateScript
+            // 
+            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
+            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
+            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
+            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCreateScript.TabIndex = 16;
+            this.pictureBoxCreateScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            // 
+            // pictureBoxLoadScript
+            // 
+            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Enabled = false;
+            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
+            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
+            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
+            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLoadScript.TabIndex = 16;
+            this.pictureBoxLoadScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // buttonSearchForEntryOrGuid
             // 
@@ -2244,34 +2261,17 @@
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
-            // pictureBoxCreateScript
+            // checkForUpdatesToolStripMenuItem
             // 
-            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
-            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
-            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
-            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
-            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxCreateScript.TabIndex = 16;
-            this.pictureBoxCreateScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
-            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            this.checkForUpdatesToolStripMenuItem.Name = "checkForUpdatesToolStripMenuItem";
+            this.checkForUpdatesToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.checkForUpdatesToolStripMenuItem.Text = "Check for updates";
+            this.checkForUpdatesToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatesToolStripMenuItem_Click);
             // 
-            // pictureBoxLoadScript
+            // toolStripSeparator4
             // 
-            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
-            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
-            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
-            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
-            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLoadScript.TabIndex = 16;
-            this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
-            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(167, 6);
             // 
             // MainForm
             // 
@@ -2310,6 +2310,8 @@
             this.groupBoxLogin.PerformLayout();
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -2329,8 +2331,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
             this.panelPermanentTooltipTypes.ResumeLayout(false);
             this.panelPermanentTooltipTypes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2501,9 +2501,9 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemPasteLastCopiedRow;
         private System.Windows.Forms.CheckBox checkBoxUsePermanentTooltips;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        public System.Windows.Forms.CheckBox checkBoxUsePhaseColors;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
-        public System.Windows.Forms.CheckBox checkBoxUsePhaseColors;
     }
 }
 
