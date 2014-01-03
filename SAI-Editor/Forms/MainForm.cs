@@ -128,17 +128,6 @@ namespace SAI_Editor.Forms
         {
             runningConstructor = true;
 
-            if (!Settings.Default.InformedAboutSurvey)
-            {
-                DialogResult result = MessageBox.Show("By clicking 'Yes' you agree to the application storing your IP address in a database. This is in order for the developers to keep track of how often the application is being used. Not pressing 'Yes' will close the application and you will be prompted again.", "Agree to the terms", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                if (result != DialogResult.Yes)
-                {
-                    Close();
-                    return;
-                }
-            }
-
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             applicationVersion = "v" + version.Major + "." + version.Minor + "." + version.Build;
             Text = "SAI-Editor " + applicationVersion + ": Login";
@@ -257,13 +246,28 @@ namespace SAI_Editor.Forms
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
 
+            if (!Settings.Default.InformedAboutSurvey)
+            {
+                string termsArgeementString = "By clicking 'Yes' you agree to the application keeping a record of its usage in a remote database. Keep ";
+                termsArgeementString += "in mind that this data will not be disclosed to a third party. It is for internal use and bookkeeping only.";
+
+                DialogResult result = MessageBox.Show(termsArgeementString, "Agree to the terms", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                if (result != DialogResult.Yes)
+                {
+                    Close();
+                    return;
+                }
+            }
+
+            Settings.Default.InformedAboutSurvey = true;
+
             Thread searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
             searchNewUpdates.Start();
 
             Thread updateSurveyThread = new Thread(UpdateSurvey);
             updateSurveyThread.Start();
 
-            Settings.Default.InformedAboutSurvey = true;
             runningConstructor = false;
         }
 
