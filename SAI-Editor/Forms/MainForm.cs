@@ -127,7 +127,7 @@ namespace SAI_Editor.Forms
             InitializeComponent();
 
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
-            applicationVersion = "v" + version.Major + "." + version.Minor;
+            applicationVersion = "v" + version.Major + "." + version.Minor + "." + version.Build;
             Text = "SAI-Editor " + applicationVersion + ": Login";
         }
 
