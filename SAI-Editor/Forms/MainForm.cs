@@ -32,8 +32,8 @@ namespace SAI_Editor.Forms
         LoginFormWidth = 403,
         LoginFormHeight = 236,
 
-        MainFormWidth = 957,
-        MainFormHeight = 505,
+        MainFormWidth = 954,
+        MainFormHeight = 501,
 
         ListViewHeightContract = 65,
 
