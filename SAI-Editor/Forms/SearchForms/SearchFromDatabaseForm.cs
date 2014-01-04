@@ -288,6 +288,9 @@ namespace SAI_Editor.Forms.SearchForms
                     switch (GetSelectedIndexOfComboBox(comboBoxSearchType))
                     {
                         case 0: //! First column
+                            if (String.IsNullOrWhiteSpace(textBoxCriteria.Text))
+                                break;
+
                             if (checkBoxFieldContainsCriteria.Checked)
                                 queryToExecute += " WHERE " + columns[0] + " LIKE '%" + textBoxCriteria.Text + "%'";
                             else
@@ -308,6 +311,9 @@ namespace SAI_Editor.Forms.SearchForms
                                 }
                                 default:
                                 {
+                                    if (String.IsNullOrWhiteSpace(textBoxCriteria.Text))
+                                        break;
+
                                     if (checkBoxFieldContainsCriteria.Checked)
                                         queryToExecute += " WHERE " + columns[1] + " LIKE '%" + textBoxCriteria.Text + "%'";
                                     else
@@ -318,6 +324,9 @@ namespace SAI_Editor.Forms.SearchForms
                             }
                             break;
                         case 2: //! Third column
+                            if (String.IsNullOrWhiteSpace(textBoxCriteria.Text))
+                                break;
+
                             if (checkBoxFieldContainsCriteria.Checked)
                                 queryToExecute += " WHERE " + columns[2] + " LIKE '%" + textBoxCriteria.Text + "%'";
                             else
