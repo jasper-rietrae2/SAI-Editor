@@ -47,7 +47,6 @@ namespace SAI_Editor.Forms.SearchForms
                 listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
             }
 
-            _cts = new CancellationTokenSource();
         }
 
         private void SearchForEntryForm_Load(object sender, EventArgs e)
@@ -89,6 +88,9 @@ namespace SAI_Editor.Forms.SearchForms
 
         private void FillListViewWithMySqlQuery(string queryToExecute)
         {
+            if (_cts != null)
+                _cts.Dispose();
+
             _cts = new CancellationTokenSource();
 
             try
@@ -126,6 +128,9 @@ namespace SAI_Editor.Forms.SearchForms
 
         private async void FillListViewWithAreaTriggers(string idFilter, string mapIdFilter, bool limit)
         {
+            if (_cts != null)
+                _cts.Dispose();
+
             _cts = new CancellationTokenSource();
 
             try
@@ -212,6 +217,9 @@ namespace SAI_Editor.Forms.SearchForms
 
         private async void StartSearching()
         {
+            if (_cts != null)
+                _cts.Dispose();
+
             _cts = new CancellationTokenSource();
 
             try
@@ -456,26 +464,22 @@ namespace SAI_Editor.Forms.SearchForms
 
                                             if (smartScript.action_param3 > 0)
                                                 items.Add(new Item { ItemName = smartScript.action_param3.ToString(), SubItems = new List<string> { name } });
-                                                //AddItemToListView(listViewEntryResults, smartScript.action_param3.ToString(), name);
 
                                             if (smartScript.action_param4 > 0)
                                                 items.Add(new Item { ItemName = smartScript.action_param4.ToString(), SubItems = new List<string> { name } });
-                                                //AddItemToListView(listViewEntryResults, smartScript.action_param4.ToString(), name);
 
                                             if (smartScript.action_param5 > 0)
                                                 items.Add(new Item { ItemName = smartScript.action_param5.ToString(), SubItems = new List<string> { name } });
-                                                //AddItemToListView(listViewEntryResults, smartScript.action_param5.ToString(), name);
 
                                             if (smartScript.action_param6 > 0)
                                                 items.Add(new Item { ItemName = smartScript.action_param6.ToString(), SubItems = new List<string> { name } });
-                                                //AddItemToListView(listViewEntryResults, smartScript.action_param6.ToString(), name);
 
                                             break;
                                         case SmartAction.SMART_ACTION_CALL_RANDOM_RANGE_TIMED_ACTIONLIST:
                                             for (int i = actionParam1; i <= actionParam2; ++i)
                                                 items.Add(new Item { ItemName = i.ToString(), SubItems = new List<string> { name } });
-                                                //AddItemToListView(listViewEntryResults, i.ToString(), name);
-                                            break;
+
+                                                break;
                                     }
                                 }
 
@@ -564,7 +568,11 @@ namespace SAI_Editor.Forms.SearchForms
         private void StopRunningThread()
         {
             if (searchThread != null && _cts != null && searchThread.IsAlive)
+            {
                 _cts.Cancel();
+                _cts.Dispose();
+                _cts = null;
+            }
 
             _isBusy = false;
         }
