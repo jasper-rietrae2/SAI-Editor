@@ -763,8 +763,13 @@ namespace SAI_Editor.Forms
             checkBoxUsePhaseColors.Checked = Settings.Default.PhaseHighlighting;
             checkBoxUsePermanentTooltips.Checked = Settings.Default.ShowTooltipsPermanently;
 
-            if (expanding && radioButtonConnectToMySql.Checked)
-                TryToLoadScript(showErrorIfNoneFound: false);
+            if (expanding)
+            {
+                ExpandToShowPermanentTooltips(!checkBoxUsePermanentTooltips.Checked);
+
+                if (radioButtonConnectToMySql.Checked)
+                    TryToLoadScript(showErrorIfNoneFound: false);
+            }
         }
 
         private async Task<List<SmartScript>> GetSmartScriptsForEntryAndSourceType(string entryOrGuid, SourceTypes sourceType, bool showError = true, bool promptCreateIfNoneFound = false)
@@ -2726,6 +2731,9 @@ namespace SAI_Editor.Forms
 
         public void ExpandToShowPermanentTooltips(bool expand)
         {
+            if (expandingListView == expand && contractingListView == !expand)
+                return;
+
             listViewSmartScriptsInitialHeight = listViewSmartScripts.Height;
             expandingListView = expand;
             contractingListView = !expand;
