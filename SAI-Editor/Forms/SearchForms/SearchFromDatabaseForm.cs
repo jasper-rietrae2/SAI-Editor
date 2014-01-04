@@ -291,7 +291,7 @@ namespace SAI_Editor.Forms.SearchForms
                             if (checkBoxFieldContainsCriteria.Checked)
                                 queryToExecute += " WHERE " + columns[0] + " LIKE '%" + textBoxCriteria.Text + "%'";
                             else
-                                queryToExecute += " WHERE " + columns[0] + " = " + textBoxCriteria.Text;
+                                queryToExecute += " WHERE " + columns[0] + " = '" + textBoxCriteria.Text + "'";
 
                             break;
                         case 1: //! Second column
@@ -311,7 +311,7 @@ namespace SAI_Editor.Forms.SearchForms
                                     if (checkBoxFieldContainsCriteria.Checked)
                                         queryToExecute += " WHERE " + columns[1] + " LIKE '%" + textBoxCriteria.Text + "%'";
                                     else
-                                        queryToExecute += " WHERE " + columns[1] + " = " + textBoxCriteria.Text;
+                                        queryToExecute += " WHERE " + columns[1] + " = '" + textBoxCriteria.Text + "'";
 
                                     break;
                                 }
@@ -321,7 +321,7 @@ namespace SAI_Editor.Forms.SearchForms
                             if (checkBoxFieldContainsCriteria.Checked)
                                 queryToExecute += " WHERE " + columns[2] + " LIKE '%" + textBoxCriteria.Text + "%'";
                             else
-                                queryToExecute += " WHERE " + columns[2] + " = " + textBoxCriteria.Text;
+                                queryToExecute += " WHERE " + columns[2] + " = '" + textBoxCriteria.Text + "'";
 
                             break;
                         default:
