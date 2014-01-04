@@ -77,6 +77,7 @@ namespace SAI_Editor.Forms
         private int MainFormWidth = (int)FormSizes.MainFormWidth, MainFormHeight = (int)FormSizes.MainFormHeight;
         private int listViewSmartScriptsInitialHeight, listViewSmartScriptsHeightToChangeTo;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
+        private Thread searchNewUpdates = null, updateSurveyThread = null;
         private FormState _formState = FormState.FormStateLogin;
         private string applicationVersion = String.Empty;
 
@@ -261,10 +262,10 @@ namespace SAI_Editor.Forms
 
             Settings.Default.InformedAboutSurvey = true;
 
-            Thread searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
+            searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
             searchNewUpdates.Start();
 
-            Thread updateSurveyThread = new Thread(UpdateSurvey);
+            updateSurveyThread = new Thread(UpdateSurvey);
             updateSurveyThread.Start();
 
             runningConstructor = false;
@@ -277,6 +278,10 @@ namespace SAI_Editor.Forms
                 try
                 {
                     client.DownloadData("http://www.jasper-rietrae.com/SAI-Editor/survey.php");
+                }
+                catch (ThreadAbortException)
+                {
+
                 }
                 catch (WebException)
                 {
@@ -326,6 +331,10 @@ namespace SAI_Editor.Forms
                             }
                         }
                     }
+                }
+                catch (ThreadAbortException)
+                {
+
                 }
                 catch (WebException)
                 {
@@ -3784,6 +3793,12 @@ namespace SAI_Editor.Forms
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             SaveLastUsedFields();
+
+            if (searchNewUpdates != null)
+                searchNewUpdates.Abort();
+
+            if (updateSurveyThread != null)
+                updateSurveyThread.Abort();
         }
 
         private void SaveLastUsedFields()
