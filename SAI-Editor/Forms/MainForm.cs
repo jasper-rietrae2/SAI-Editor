@@ -78,46 +78,8 @@ namespace SAI_Editor.Forms
         private int listViewSmartScriptsInitialHeight, listViewSmartScriptsHeightToChangeTo;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
         private Thread searchNewUpdates = null, updateSurveyThread = null;
-        private FormState _formState = FormState.FormStateLogin;
+        private FormState formState = FormState.FormStateLogin;
         private string applicationVersion = String.Empty;
-
-        public FormState formState
-        {
-            get
-            {
-                return _formState;
-            }
-            set
-            {
-                _formState = value;
-
-                switch (_formState)
-                {
-                    case FormState.FormStateExpandingOrContracting:
-                        FormBorderStyle = FormBorderStyle.FixedDialog; //! Don't allow resizing by user
-                        MainFormHeight = Settings.Default.MainFormHeight;
-                        MinimumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
-                        MaximumSize = new Size(MainFormWidth, MainFormHeight);
-                        panelPermanentTooltipTypes.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                        panelPermanentTooltipParameters.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                        break;
-                    case FormState.FormStateLogin:
-                        FormBorderStyle = FormBorderStyle.FixedDialog;
-                        MinimumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
-                        MaximumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
-                        panelPermanentTooltipTypes.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                        panelPermanentTooltipParameters.Anchor = AnchorStyles.Top | AnchorStyles.Left;
-                        break;
-                    case FormState.FormStateMain:
-                        FormBorderStyle = FormBorderStyle.Sizable;
-                        MinimumSize = new Size(MainFormWidth, (int)FormSizes.MainFormHeight);
-                        MaximumSize = new Size(MainFormWidth, (int)FormSizes.MainFormHeight + 100);
-                        panelPermanentTooltipTypes.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-                        panelPermanentTooltipParameters.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-                        break;
-                }
-            }
-        }
 
         public MainForm()
         {
@@ -510,7 +472,7 @@ namespace SAI_Editor.Forms
             if (instant)
             {
                 Width = MainFormWidth;
-                Height = Settings.Default.MainFormHeight;
+                Height = MainFormHeight;
                 formState = FormState.FormStateMain;
                 FinishedExpandingOrContracting(true);
             }
@@ -3820,9 +3782,6 @@ namespace SAI_Editor.Forms
             Settings.Default.PhaseHighlighting = checkBoxUsePhaseColors.Checked;
             Settings.Default.ShowTooltipsPermanently = checkBoxUsePermanentTooltips.Checked;
 
-            if (formState == FormState.FormStateMain)
-                Settings.Default.MainFormHeight = Height;
-
             if (formState == FormState.FormStateLogin)
             {
                 RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
@@ -4168,12 +4127,12 @@ namespace SAI_Editor.Forms
             {
                 if (radioButtonConnectToMySql.Checked)
                 {
-                    MaximumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeight);
+                    MaximumSize = new Size((int)FormSizes.MainFormWidth, (int)FormSizes.MainFormHeight);
                     Height = (int)FormSizes.LoginFormHeight;
                 }
                 else
                 {
-                    MaximumSize = new Size((int)FormSizes.LoginFormWidth, (int)FormSizes.LoginFormHeightShowWarning);
+                    MaximumSize = new Size((int)FormSizes.MainFormWidth, (int)FormSizes.MainFormHeight);
                     Height = (int)FormSizes.LoginFormHeightShowWarning;
                 }
             }
