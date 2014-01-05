@@ -588,7 +588,7 @@ namespace SAI_Editor.Forms
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain)
+            if (formState != FormState.FormStateMain || contractingListView || expandingListView)
                 return;
 
             panelPermanentTooltipTypes.Visible = false;
