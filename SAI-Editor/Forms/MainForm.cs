@@ -279,32 +279,31 @@ namespace SAI_Editor.Forms
             {
                 try
                 {
-                    Stream streamVersion = client.OpenRead("http://dl.dropbox.com/u/84527004/SAI-Editor/version.txt");
-
-                    if (streamVersion != null)
+                    using (Stream streamVersion = client.OpenRead("http://dl.dropbox.com/u/84527004/SAI-Editor/version.txt"))
                     {
-                        using (StreamReader streamReaderVersion = new StreamReader(streamVersion))
+                        if (streamVersion != null)
                         {
-                            string newAppVersion = streamReaderVersion.ReadToEnd();
-                            streamVersion.Close();
-                            streamReaderVersion.Close();
-
-                            if (newAppVersion != applicationVersion)
+                            using (StreamReader streamReaderVersion = new StreamReader(streamVersion))
                             {
-                                DialogResult result = MessageBox.Show("A new version of the application is available (" + newAppVersion + "). Do you wish to start the Updater to get the latest SAI-Editor?", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                                string newAppVersion = streamReaderVersion.ReadToEnd();
 
-                                if (result == DialogResult.Yes)
+                                if (newAppVersion != applicationVersion)
                                 {
-                                    Settings.Default.Save();
-                                    Invoke((MethodInvoker)delegate { Close(); });
+                                    DialogResult result = MessageBox.Show("A new version of the application is available (" + newAppVersion + "). Do you wish to start the Updater to get the latest SAI-Editor?", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
 
-                                    try
+                                    if (result == DialogResult.Yes)
                                     {
-                                        Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
-                                    }
-                                    catch (Exception)
-                                    {
-                                        MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        Settings.Default.Save();
+                                        Invoke((MethodInvoker)delegate { Close(); });
+
+                                        try
+                                        {
+                                            Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
+                                        }
+                                        catch (Exception)
+                                        {
+                                            MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
                                     }
                                 }
                             }

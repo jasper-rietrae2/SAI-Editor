@@ -59,31 +59,30 @@ namespace Updater
                 {
                     try
                     {
-                        Stream streamFileList = client.OpenRead(baseRemotePath + "filelist.txt");
-
-                        if (streamFileList != null)
+                        using (Stream streamFileList = client.OpenRead(baseRemotePath + "filelist.txt"))
                         {
-                            StreamReader streamReaderFileList = new StreamReader(streamFileList);
-                            string currentLine = String.Empty;
-
-                            while ((currentLine = streamReaderFileList.ReadLine()) != null)
+                            if (streamFileList != null)
                             {
-                                string[] splitLine = currentLine.Split(',');
-                                string filename = splitLine[0];
-                                string md5 = splitLine[1];
+                                StreamReader streamReaderFileList = new StreamReader(streamFileList);
+                                string currentLine = String.Empty;
 
-                                if (File.Exists(Directory.GetCurrentDirectory().ToString(CultureInfo.InvariantCulture) + @"\" + filename))
+                                while ((currentLine = streamReaderFileList.ReadLine()) != null)
                                 {
-                                    if (md5 != GetMD5HashFromFile(Directory.GetCurrentDirectory() + @"\" + filename))
+                                    string[] splitLine = currentLine.Split(',');
+                                    string filename = splitLine[0];
+                                    string md5 = splitLine[1];
+
+                                    if (File.Exists(Directory.GetCurrentDirectory().ToString(CultureInfo.InvariantCulture) + @"\" + filename))
+                                    {
+                                        if (md5 != GetMD5HashFromFile(Directory.GetCurrentDirectory() + @"\" + filename))
+                                            _files.Add(filename);
+                                    }
+                                    else
                                         _files.Add(filename);
                                 }
-                                else
-                                    _files.Add(filename);
-                            }
 
-                            listBoxFilesToUpdate.DataSource = _files;
-                            streamFileList.Close();
-                            streamReaderFileList.Close();
+                                listBoxFilesToUpdate.DataSource = _files;
+                            }
                         }
                     }
                     catch (WebException)
@@ -110,18 +109,10 @@ namespace Updater
                     {
                         try
                         {
-                            Stream streamChangelog = client.OpenRead(baseRemotePath + "changelog.txt");
-
-                            if (streamChangelog != null)
-                            {
-                                using (StreamReader streamReaderChangelog = new StreamReader(streamChangelog))
-                                {
-                                    string content = streamReaderChangelog.ReadToEnd();
-                                    textBoxChangelog.Text = content;
-                                    streamChangelog.Close();
-                                    streamReaderChangelog.Close();
-                                }
-                            }
+                            using (Stream streamChangelog = client.OpenRead(baseRemotePath + "changelog.txt"))
+                                if (streamChangelog != null)
+                                    using (StreamReader streamReaderChangelog = new StreamReader(streamChangelog))
+                                        textBoxChangelog.Text = streamReaderChangelog.ReadToEnd();
                         }
                         catch (WebException)
                         {
@@ -252,7 +243,6 @@ namespace Updater
                 {
                     MD5 md5 = new MD5CryptoServiceProvider();
                     retVal = md5.ComputeHash(file);
-                    file.Close();
                 }
             }
             catch (Exception ex)
