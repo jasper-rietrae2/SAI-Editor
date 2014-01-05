@@ -49,7 +49,7 @@
             newSmartScript.action_type = smartScript.action_type;
             newSmartScript.action_param1 = smartScript.action_param1;
             newSmartScript.action_param2 = smartScript.action_param2;
-            newSmartScript.action_param2 = smartScript.action_param3;
+            newSmartScript.action_param3 = smartScript.action_param3;
             newSmartScript.action_param4 = smartScript.action_param4;
             newSmartScript.action_param5 = smartScript.action_param5;
             newSmartScript.action_param6 = smartScript.action_param6;
@@ -83,7 +83,7 @@
             newSmartScript.action_type = action_type;
             newSmartScript.action_param1 = action_param1;
             newSmartScript.action_param2 = action_param2;
-            newSmartScript.action_param2 = action_param3;
+            newSmartScript.action_param3 = action_param3;
             newSmartScript.action_param4 = action_param4;
             newSmartScript.action_param5 = action_param5;
             newSmartScript.action_param6 = action_param6;
