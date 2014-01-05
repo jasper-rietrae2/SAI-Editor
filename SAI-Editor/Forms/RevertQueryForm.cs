@@ -34,7 +34,7 @@ namespace SAI_Editor.Forms
         {
             listViewScripts.Items.Clear();
             string[] allFiles = Directory.GetFiles("Reverts");
-            List<string> allFilesList = allFiles.OrderByDescending(file => File.GetCreationTime(file)).ToList();
+            List<string> allFilesList = allFiles.OrderByDescending(File.GetCreationTime).ToList();
 
             foreach (string file in allFilesList)
             {
