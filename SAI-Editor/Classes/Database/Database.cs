@@ -118,7 +118,7 @@ namespace SAI_Editor.Classes.Database
                         }
                     }
                 }
-            });
+            }, token);
         }
 
         public async Task<object> ExecuteScalar(string query, params Parameter[] parameters)

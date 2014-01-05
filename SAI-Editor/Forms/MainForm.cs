@@ -295,7 +295,7 @@ namespace SAI_Editor.Forms
                                     if (result == DialogResult.Yes)
                                     {
                                         Settings.Default.Save();
-                                        Invoke((MethodInvoker)delegate { Close(); });
+                                        Invoke((MethodInvoker)Close);
 
                                         try
                                         {
