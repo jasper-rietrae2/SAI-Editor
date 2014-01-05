@@ -372,7 +372,7 @@ namespace SAI_Editor.Classes
             string password = Settings.Default.Password;
 
             if (password.Length > 150)
-                password = SecurityExtensions.DecryptString(password, Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
+                password = password.DecryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy)).ToInsecureString();
 
             return password;
         }
