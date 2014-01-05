@@ -4208,12 +4208,20 @@ namespace SAI_Editor.Forms
             if (result == DialogResult.No)
                 return;
 
+            string updaterDir = Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe";
+
+            if (!File.Exists(updaterDir))
+            {
+                MessageBox.Show("The executable of the Updater could not be found (SAI-Editor Updater.exe).", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             Settings.Default.Save();
             Close();
 
             try
             {
-                Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
+                Process.Start(updaterDir);
             }
             catch (Exception)
             {
