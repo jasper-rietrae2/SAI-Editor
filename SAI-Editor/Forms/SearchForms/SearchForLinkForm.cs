@@ -11,7 +11,7 @@ namespace SAI_Editor.Forms.SearchForms
     {
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private int indexOfLineToDisable = 0;
-        private List<SmartScript> smartScripts;
+        private List<SmartScript> smartScripts = null;
         private readonly TextBox textBoxToChange = null;
 
         public SearchForLinkForm(List<SmartScript> smartScripts, int indexOfLineToDisable, TextBox textBoxToChange)
