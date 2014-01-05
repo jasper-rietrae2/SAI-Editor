@@ -744,7 +744,8 @@ namespace SAI_Editor.Forms
 
             if (expanding)
             {
-                ExpandToShowPermanentTooltips(!checkBoxUsePermanentTooltips.Checked);
+                if (checkBoxUsePermanentTooltips.Checked)
+                    ExpandToShowPermanentTooltips(false);
 
                 if (radioButtonConnectToMySql.Checked)
                     TryToLoadScript(showErrorIfNoneFound: false);
