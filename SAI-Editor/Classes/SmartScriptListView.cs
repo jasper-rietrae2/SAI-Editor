@@ -14,12 +14,12 @@ namespace SAI_Editor.Classes
         private List<SmartScript> _smartScripts = new List<SmartScript>();
         private List<string> _excludedProperties = new List<string>();
         private readonly PropertyInfo[] _pinfo;
-        private bool enablePhaseHighlighting = false; //! It's determined by the setting but it should only be used in the MainForm listview
         private Stack<Color> _colors = new Stack<Color>(Constants.phaseColors);
         private Dictionary<int, Color> _phaseColors = new Dictionary<int, Color>();
 
         public SmartScriptListView()
         {
+            EnablePhaseHighlighting = false;
             _pinfo = typeof(SmartScript).GetProperties();
             _smartScripts = new List<SmartScript>();
             _excludedProperties = new List<string>();
@@ -29,6 +29,7 @@ namespace SAI_Editor.Classes
 
         public SmartScriptListView(List<SmartScript> scripts, List<string> exProps = null)
         {
+            EnablePhaseHighlighting = false;
             _pinfo = typeof(SmartScript).GetProperties();
             _smartScripts = scripts;
             _excludedProperties = exProps ?? new List<string>();
@@ -77,11 +78,7 @@ namespace SAI_Editor.Classes
             }
         }
 
-        public bool EnablePhaseHighlighting
-        {
-            get { return enablePhaseHighlighting; }
-            set { enablePhaseHighlighting = value; }
-        }
+        public bool EnablePhaseHighlighting { get; set; }
 
         public List<SmartScript> SmartScripts
         {
