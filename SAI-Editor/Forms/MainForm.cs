@@ -67,7 +67,8 @@ namespace SAI_Editor.Forms
     public partial class MainForm : Form
     {
         public MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
-        public int expandAndContractSpeed = 5, expandAndContractSpeedListView = 2, lastSmartScriptIdOfScript = 0, previousLinkFrom = -1;
+        public int expandAndContractSpeed = 5, lastSmartScriptIdOfScript = 0, previousLinkFrom = -1;
+        public const int expandAndContractSpeedListView = 2;
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
         private readonly List<Control> controlsLoginForm = new List<Control>(), controlsMainForm = new List<Control>();
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
