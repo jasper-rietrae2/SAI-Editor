@@ -38,7 +38,6 @@ namespace SAI_Editor.Forms.SearchForms
     public partial class SearchFromDatabaseForm : Form
     {
         private Thread searchThread = null;
-        private readonly MySqlConnectionStringBuilder connectionString;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly TextBox textBoxToChange = null;
         private readonly DatabaseSearchFormType databaseSearchFormType;
@@ -51,7 +50,6 @@ namespace SAI_Editor.Forms.SearchForms
         {
             InitializeComponent();
 
-            this.connectionString = connectionString;
             this.textBoxToChange = textBoxToChange;
             this.databaseSearchFormType = databaseSearchFormType;
 

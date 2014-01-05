@@ -76,7 +76,7 @@ namespace SAI_Editor.Forms
         private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
         private int originalHeight = 0, originalWidth = 0;
         private int MainFormWidth = (int)FormSizes.MainFormWidth, MainFormHeight = (int)FormSizes.MainFormHeight;
-        private int listViewSmartScriptsInitialHeight, listViewSmartScriptsHeightToChangeTo;
+        private int listViewSmartScriptsHeightToChangeTo;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
         private Thread searchNewUpdates = null, updateSurveyThread = null;
         private FormState formState = FormState.FormStateLogin;
@@ -2714,7 +2714,6 @@ namespace SAI_Editor.Forms
             if (expandingListView == expand && contractingListView == !expand)
                 return;
 
-            listViewSmartScriptsInitialHeight = listViewSmartScripts.Height;
             expandingListView = expand;
             contractingListView = !expand;
             listViewSmartScriptsHeightToChangeTo = expand ? listViewSmartScripts.Height + (int)FormSizes.ListViewHeightContract : listViewSmartScripts.Height - (int)FormSizes.ListViewHeightContract;

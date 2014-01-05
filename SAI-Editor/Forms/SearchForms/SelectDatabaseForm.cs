@@ -7,7 +7,6 @@ namespace SAI_Editor.Forms.SearchForms
 {
     public partial class SelectDatabaseForm : Form
     {
-        private readonly List<string> databaseNames = new List<string>();
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly TextBox textBoxToChange = null;
 
@@ -15,7 +14,6 @@ namespace SAI_Editor.Forms.SearchForms
         {
             InitializeComponent();
 
-            this.databaseNames = databaseNames;
             this.textBoxToChange = textBoxToChange;
 
             for (int i = 0; i < databaseNames.Count; ++i)
