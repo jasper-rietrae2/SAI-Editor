@@ -41,10 +41,9 @@ namespace SAI_Editor.Classes
         public int Compare(object x, object y)
         {
             int compareResult = 0;
-            ListViewItem listviewX, listviewY;
             // Cast the objects to be compared to ListViewItem objects
-            listviewX = x as ListViewItem;
-            listviewY = y as ListViewItem;
+            ListViewItem listviewX = x as ListViewItem;
+            ListViewItem listviewY = y as ListViewItem;
 
             if (listviewX != listviewY)
             {
