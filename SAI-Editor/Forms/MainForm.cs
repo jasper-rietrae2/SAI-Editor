@@ -217,12 +217,29 @@ namespace SAI_Editor.Forms
 
                 if (result != DialogResult.Yes)
                 {
+                    //! Hide so the frozen window doesn't bother the user
+                    ShowInTaskbar = false;
+                    Visible = false;
+
+                    //! Not running this in a diff thread because we want this to complete before exiting.
+                    using (WebClient client = new WebClient())
+                    {
+                        try
+                        {
+                            client.DownloadData("http://www.jasper-rietrae.com/SAI-Editor/survey.php?agreed=false");
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+                    }
+
                     Close();
                     return;
                 }
-            }
 
-            Settings.Default.InformedAboutSurvey = true;
+                Settings.Default.InformedAboutSurvey = true;
+            }
 
             searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
             searchNewUpdates.Start();
