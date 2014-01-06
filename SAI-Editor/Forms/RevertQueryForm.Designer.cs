@@ -48,10 +48,10 @@
             this.listViewScripts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader});
             this.listViewScripts.FullRowSelect = true;
-            this.listViewScripts.Location = new System.Drawing.Point(201, 18);
+            this.listViewScripts.Location = new System.Drawing.Point(225, 18);
             this.listViewScripts.MultiSelect = false;
             this.listViewScripts.Name = "listViewScripts";
-            this.listViewScripts.Size = new System.Drawing.Size(381, 162);
+            this.listViewScripts.Size = new System.Drawing.Size(357, 162);
             this.listViewScripts.TabIndex = 2;
             this.listViewScripts.UseCompatibleStateImageBehavior = false;
             this.listViewScripts.View = System.Windows.Forms.View.Details;
@@ -62,7 +62,7 @@
             // columnHeader
             // 
             this.columnHeader.Text = "Scripts";
-            this.columnHeader.Width = 360;
+            this.columnHeader.Width = 336;
             // 
             // buttonExecuteSelectedScript
             // 
@@ -125,7 +125,7 @@
             // 
             this.labelWarningSettingOff.AutoSize = true;
             this.labelWarningSettingOff.ForeColor = System.Drawing.Color.Red;
-            this.labelWarningSettingOff.Location = new System.Drawing.Point(18, 192);
+            this.labelWarningSettingOff.Location = new System.Drawing.Point(18, 191);
             this.labelWarningSettingOff.Name = "labelWarningSettingOff";
             this.labelWarningSettingOff.Size = new System.Drawing.Size(418, 13);
             this.labelWarningSettingOff.TabIndex = 5;

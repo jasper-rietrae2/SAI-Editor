@@ -295,7 +295,7 @@ namespace SAI_Editor.Classes
                 if (!(_worldDatabase ?? Instance.worldDatabase).CanConnectToDatabase(_connectionString))
                     return null;
 
-                var databaseNames = new List<string>();
+                List<string> databaseNames = new List<string>();
 
                 try
                 {
