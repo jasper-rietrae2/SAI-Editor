@@ -257,7 +257,7 @@ namespace SAI_Editor.Forms
             {
                 try
                 {
-                    client.DownloadData("http://www.jasper-rietrae.com/SAI-Editor/survey.php");
+                    client.DownloadData("http://www.jasper-rietrae.com/SAI-Editor/survey.php?version=" + applicationVersion.Replace('.', '-'));
                 }
                 catch (ThreadAbortException)
                 {
