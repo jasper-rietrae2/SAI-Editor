@@ -59,7 +59,7 @@ namespace SAI_Editor.Classes
 
         public SAI_Editor_Manager()
         {
-            ResetDatabases();
+            ResetSQLiteDatabase();
         }
 
         public void ResetDatabases()

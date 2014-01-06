@@ -466,6 +466,8 @@ namespace SAI_Editor.Forms
 
                 if (textBoxPassword.Text.Length > 0)
                     connectionString.Password = textBoxPassword.Text;
+
+                SAI_Editor_Manager.Instance.ResetWorldDatabase(connectionString);
             }
 
             Settings.Default.UseWorldDatabase = connectToMySql;
@@ -474,10 +476,6 @@ namespace SAI_Editor.Forms
             if (!connectToMySql || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
             {
                 StartExpandingToMainForm(Settings.Default.InstantExpand);
-
-                if (!connectToMySql)
-                    SAI_Editor_Manager.Instance.ResetDatabases();
-
                 HandleUseWorldDatabaseSettingChanged();
             }
         }
