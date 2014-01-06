@@ -269,7 +269,11 @@ namespace SAI_Editor.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Something went wrong while attempting to keep track of the use count. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //! Run the messagebox on the mainthread
+                    Invoke(new Action(() =>
+                    {
+                        MessageBox.Show("Something went wrong while attempting to keep track of the use count. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }));
                 }
             }
         }
@@ -294,30 +298,38 @@ namespace SAI_Editor.Forms
 
                                     if (!File.Exists(Directory.GetCurrentDirectory() + @"\\SAI-Editor Updater.exe"))
                                     {
-                                        DialogResult resultOpenDlLink = MessageBox.Show(newVersionAvailable + " However, the updater could not be found in the current directory so it's not possible for you to update. Do you wish to download the application again? (Warning: this opens a webpage on your browser)", "Something went wrong!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                        //! Run the messagebox on the mainthread
+                                        Invoke(new Action(() =>
+                                        {
+                                            DialogResult resultOpenDlLink = MessageBox.Show(this, newVersionAvailable + " However, the updater could not be found in the current directory so it's not possible for you to update. Do you wish to download the application again? (Warning: this opens a webpage on your browser)", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
-                                        if (resultOpenDlLink == DialogResult.Yes)
-                                            Process.Start("http://www.trinitycore.org/f/files/file/17-sai-editor/");
+                                            if (resultOpenDlLink == DialogResult.Yes)
+                                                Process.Start("http://www.trinitycore.org/f/files/file/17-sai-editor/");
+                                        }));
 
                                         return;
                                     }
 
-                                    DialogResult result = MessageBox.Show(newVersionAvailable + " Do you wish to start the Updater to get the latest SAI-Editor?", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
-
-                                    if (result == DialogResult.Yes)
+                                    //! Run the messagebox on the mainthread
+                                    Invoke(new Action(() =>
                                     {
-                                        Settings.Default.Save();
-                                        Invoke((MethodInvoker)Close);
+                                        DialogResult result = MessageBox.Show(this, newVersionAvailable + " Do you wish to start the Updater to get the latest SAI-Editor?", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
 
-                                        try
+                                        if (result == DialogResult.Yes)
                                         {
-                                            Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
+                                            Settings.Default.Save();
+                                            Invoke((MethodInvoker)Close);
+
+                                            try
+                                            {
+                                                Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
+                                            }
+                                            catch (Exception)
+                                            {
+                                                MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            }
                                         }
-                                        catch (Exception)
-                                        {
-                                            MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
-                                    }
+                                    }));
                                 }
                             }
                         }
