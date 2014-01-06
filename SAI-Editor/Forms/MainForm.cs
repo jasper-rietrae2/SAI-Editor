@@ -286,11 +286,23 @@ namespace SAI_Editor.Forms
                         {
                             using (StreamReader streamReaderVersion = new StreamReader(streamVersion))
                             {
-                                string newAppVersion = streamReaderVersion.ReadToEnd();
+                                string newAppVersion = "v1.4.0"; //streamReaderVersion.ReadToEnd();
 
                                 if (newAppVersion != applicationVersion)
                                 {
-                                    DialogResult result = MessageBox.Show("A new version of the application is available (" + newAppVersion + "). Do you wish to start the Updater to get the latest SAI-Editor?", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+                                    string newVersionAvailable = "A new version of the application is available (" + newAppVersion + ").";
+
+                                    if (!File.Exists(Directory.GetCurrentDirectory() + @"\\SAI-Editor Updater.exe"))
+                                    {
+                                        DialogResult resultOpenDlLink = MessageBox.Show(newVersionAvailable + " However, the updater could not be found in the current directory so it's not possible for you to update. Do you wish to download the application again? (Warning: this opens a webpage on your browser)", "Something went wrong!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                                        if (resultOpenDlLink == DialogResult.Yes)
+                                            Process.Start("http://www.trinitycore.org/f/files/file/17-sai-editor/");
+
+                                        return;
+                                    }
+
+                                    DialogResult result = MessageBox.Show(newVersionAvailable + " Do you wish to start the Updater to get the latest SAI-Editor?", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
 
                                     if (result == DialogResult.Yes)
                                     {
