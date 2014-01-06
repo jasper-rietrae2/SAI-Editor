@@ -290,7 +290,7 @@ namespace SAI_Editor.Forms
                         {
                             using (StreamReader streamReaderVersion = new StreamReader(streamVersion))
                             {
-                                string newAppVersion = "v1.4.0"; //streamReaderVersion.ReadToEnd();
+                                string newAppVersion = streamReaderVersion.ReadToEnd();
 
                                 if (newAppVersion != applicationVersion)
                                 {
