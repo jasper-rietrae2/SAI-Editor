@@ -164,6 +164,8 @@ namespace SAI_Editor.Forms
 
                     if (textBoxPassword.Text.Length > 0)
                         connectionString.Password = textBoxPassword.Text;
+
+                    SAI_Editor_Manager.Instance.ResetWorldDatabase(connectionString);
                 }
 
                 if (!Settings.Default.UseWorldDatabase || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString, false))
