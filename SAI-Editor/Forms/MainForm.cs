@@ -3947,6 +3947,7 @@ namespace SAI_Editor.Forms
             if (smartScriptLink != null && (SmartEvent)smartScriptLink.event_type == SmartEvent.SMART_EVENT_LINK)
             {
                 idToCheck = smartScriptLink.id;
+                smartScriptLink = null;
                 goto GetLinkForCurrentSmartScriptLink;
             }
 
