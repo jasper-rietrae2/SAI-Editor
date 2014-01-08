@@ -347,7 +347,10 @@ namespace SAI_Editor.Forms
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Something went wrong while checking for updates. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Invoke(new Action(() =>
+                    {
+                        MessageBox.Show("Something went wrong while checking for updates. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }));
                 }
             }
         }
