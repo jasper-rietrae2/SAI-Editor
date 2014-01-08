@@ -1506,7 +1506,7 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.Items.Count > prevIndex)
                 listViewSmartScripts.Items[prevIndex].Selected = true;
-            else
+            else if (listViewSmartScripts.Items.Count > 0)
                 listViewSmartScripts.Items[prevIndex - 1].Selected = true;
         }
 
