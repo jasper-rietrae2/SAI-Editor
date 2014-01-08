@@ -641,7 +641,6 @@ namespace SAI_Editor.Forms
             {
                 listViewSmartScripts.SelectedSmartScript.event_type = comboBoxEventType.SelectedIndex;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[4].Text = comboBoxEventType.SelectedIndex.ToString();
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
         }
@@ -661,7 +660,6 @@ namespace SAI_Editor.Forms
             {
                 listViewSmartScripts.SelectedSmartScript.action_type = comboBoxActionType.SelectedIndex;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[12].Text = comboBoxActionType.SelectedIndex.ToString();
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
         }
@@ -681,7 +679,6 @@ namespace SAI_Editor.Forms
             {
                 listViewSmartScripts.SelectedSmartScript.target_type = comboBoxTargetType.SelectedIndex;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                //listViewSmartScripts.SelectedItems[0].SubItems[19].Text = comboBoxTargetType.SelectedIndex.ToString();
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
         }
@@ -3784,8 +3781,7 @@ namespace SAI_Editor.Forms
             for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
             {
                 SmartScript smartScript = listViewSmartScripts.SmartScripts[i];
-                SmartScript smartScriptLink = GetInitialSmartScriptLink(smartScript);
-                string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+                string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScript));
                 smartScript.comment = newComment;
                 listViewSmartScripts.ReplaceSmartScript(smartScript);
                 FillFieldsBasedOnSelectedScript();
@@ -3858,12 +3854,11 @@ namespace SAI_Editor.Forms
             if (smartScript == null || !Settings.Default.GenerateComments)
                 return;
 
-            SmartScript smartScriptLink = GetInitialSmartScriptLink(smartScript);
             string newComment = smartScript.comment;
 
             if (!updatingFieldsBasedOnSelectedScript)
             {
-                newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+                newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScript));
 
                 if (smartScript.link != 0 && (SmartEvent)smartScript.event_type != SmartEvent.SMART_EVENT_LINK)
                     await GenerateCommentForAllEventsLinkingFromSmartScript(smartScript);
@@ -3876,7 +3871,9 @@ namespace SAI_Editor.Forms
             string oldComment = smartScript.comment;
             smartScript.comment = newComment;
             listViewSmartScripts.ReplaceSmartScript(smartScript);
-            FillFieldsBasedOnSelectedScript();
+
+            if (!updatingFieldsBasedOnSelectedScript)
+                FillFieldsBasedOnSelectedScript();
 
             if (oldComment != newComment)
                 ResizeColumns();
@@ -4048,8 +4045,7 @@ namespace SAI_Editor.Forms
                 if (smartScript != listViewSmartScripts.SelectedSmartScript)
                     continue;
 
-                SmartScript smartScriptLink = GetInitialSmartScriptLink(smartScript);
-                string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, smartScriptLink);
+                string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScript));
                 smartScript.comment = newComment;
                 listViewSmartScripts.ReplaceSmartScript(smartScript);
                 FillFieldsBasedOnSelectedScript();

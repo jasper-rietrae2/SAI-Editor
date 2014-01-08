@@ -17,6 +17,24 @@ namespace SAI_Editor.Classes
         private Stack<Color> _colors = new Stack<Color>(Constants.phaseColors);
         private Dictionary<int, Color> _phaseColors = new Dictionary<int, Color>();
 
+        public bool EnablePhaseHighlighting { get; set; }
+
+        public List<SmartScript> SmartScripts
+        {
+            get { return _smartScripts; }
+        }
+
+        public SmartScript SelectedSmartScript
+        {
+            get
+            {
+                if (SelectedItems.Count > 0)
+                    return _smartScripts.FirstOrDefault(smartScript => smartScript == ((SmartScriptListViewItem)SelectedItems[0]).Script);
+
+                return null;
+            }
+        }
+
         public SmartScriptListView()
         {
             EnablePhaseHighlighting = false;
@@ -75,27 +93,6 @@ namespace SAI_Editor.Classes
                 }
 
                 foreach (int phasemask in phasemasks.Where(phasemask => phasemask != 0 && !_phaseColors.ContainsKey(phasemask))) _phaseColors.Add(phasemask, _colors.Pop());
-            }
-        }
-
-        public bool EnablePhaseHighlighting { get; set; }
-
-        public List<SmartScript> SmartScripts
-        {
-            get
-            {
-                return _smartScripts;
-            }
-        }
-
-        public SmartScript SelectedSmartScript
-        {
-            get
-            {
-                if (SelectedItems.Count > 0)
-                    return _smartScripts.FirstOrDefault(smartScript => smartScript == ((SmartScriptListViewItem)SelectedItems[0]).Script);
-
-                return null;
             }
         }
 
