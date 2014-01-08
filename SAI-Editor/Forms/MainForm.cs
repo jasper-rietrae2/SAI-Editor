@@ -81,6 +81,7 @@ namespace SAI_Editor.Forms
         private Thread searchNewUpdates = null, updateSurveyThread = null;
         private FormState formState = FormState.FormStateLogin;
         private string applicationVersion = String.Empty;
+        private System.Windows.Forms.Timer timerCheckForInternetConnection = new System.Windows.Forms.Timer();
 
         public MainForm()
         {
@@ -211,6 +212,12 @@ namespace SAI_Editor.Forms
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
 
+            bool hasInternetConnection = SAI_Editor_Manager.Instance.HasInternetConnection();
+
+            timerCheckForInternetConnection.Interval = 600000; //! 10 minutes
+            timerCheckForInternetConnection.Tick += timerCheckForInternetConnection_Tick;
+            timerCheckForInternetConnection.Enabled = !hasInternetConnection;
+
             if (!Settings.Default.InformedAboutSurvey)
             {
                 string termsArgeementString = "By clicking 'Yes' you agree to the application keeping a record of its usage in a remote database. Keep ";
@@ -245,10 +252,15 @@ namespace SAI_Editor.Forms
             }
 
             searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
-            searchNewUpdates.Start();
-
             updateSurveyThread = new Thread(UpdateSurvey);
-            updateSurveyThread.Start();
+
+            //! If the bool is false, it means we have already started running a timer that ticks every
+            //! 10 minutes to check for an internet connection. Once one is found, it runs the threads.
+            if (hasInternetConnection)
+            {
+                searchNewUpdates.Start();
+                updateSurveyThread.Start();
+            }
 
             runningConstructor = false;
         }
@@ -267,7 +279,11 @@ namespace SAI_Editor.Forms
                 }
                 catch (WebException)
                 {
-
+                    //! Try to connect to google.com. If it can't connect, it means no internet connection
+                    //! is available. We then start a timer which checks for an internet connection every
+                    //! 10 minutes.
+                    if (!SAI_Editor_Manager.Instance.HasInternetConnection())
+                        timerCheckForInternetConnection.Enabled = true;
                 }
                 catch (Exception ex)
                 {
@@ -343,7 +359,11 @@ namespace SAI_Editor.Forms
                 }
                 catch (WebException)
                 {
-
+                    //! Try to connect to google.com. If it can't connect, it means no internet connection
+                    //! is available. We then start a timer which checks for an internet connection every
+                    //! 10 minutes.
+                    if (!SAI_Editor_Manager.Instance.HasInternetConnection())
+                        timerCheckForInternetConnection.Enabled = true;
                 }
                 catch (Exception ex)
                 {
@@ -352,6 +372,18 @@ namespace SAI_Editor.Forms
                         MessageBox.Show("Something went wrong while checking for updates. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }));
                 }
+            }
+        }
+
+        private void timerCheckForInternetConnection_Tick(object sender, EventArgs e)
+        {
+            //! Try to connect to google.com. If it can't connect, it means no internet connection
+            //! is available.
+            if (SAI_Editor_Manager.Instance.HasInternetConnection())
+            {
+                timerCheckForInternetConnection.Enabled = false;
+                searchNewUpdates.Start();
+                updateSurveyThread.Start();
             }
         }
 

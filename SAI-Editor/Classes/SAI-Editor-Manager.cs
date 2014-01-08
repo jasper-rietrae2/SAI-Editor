@@ -12,6 +12,8 @@ using SAI_Editor.Forms;
 using SAI_Editor.Properties;
 using System.Linq;
 using System.Net.NetworkInformation;
+using System.Net;
+using System.IO;
 
 namespace SAI_Editor.Classes
 {
@@ -391,6 +393,20 @@ namespace SAI_Editor.Classes
         public bool HasInternetConnectionWithCurrentNetwork()
         {
             return NetworkInterface.GetAllNetworkInterfaces().Any(x => x.OperationalStatus == OperationalStatus.Up);
+        }
+
+        public bool HasInternetConnection()
+        {
+            try
+            {
+                using (WebClient client = new WebClient())
+                    using (Stream stream = client.OpenRead("http://www.google.com"))
+                        return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
