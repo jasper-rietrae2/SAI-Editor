@@ -3486,7 +3486,7 @@ namespace SAI_Editor.Forms
 
             if (entriesOrGuidsAndSourceTypes.Count == 1)
             {
-                switch ((SourceTypes)originalEntryOrGuidAndSourceType.sourceType)
+                switch (originalEntryOrGuidAndSourceType.sourceType)
                 {
                     case SourceTypes.SourceTypeCreature:
                         if (!Settings.Default.UseWorldDatabase)

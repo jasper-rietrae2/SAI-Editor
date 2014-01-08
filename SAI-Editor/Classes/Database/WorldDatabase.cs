@@ -16,7 +16,7 @@ namespace SAI_Editor.Classes.Database
         {
             connectionString = new MySqlConnectionStringBuilder();
             connectionString.Server = host;
-            connectionString.Port = (uint)port;
+            connectionString.Port = port;
             connectionString.UserID = username;
             connectionString.Password = password;
             connectionString.Database = databaseName;
