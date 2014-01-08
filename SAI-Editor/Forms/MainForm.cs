@@ -90,7 +90,33 @@ namespace SAI_Editor.Forms
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
+            ShowInTaskbar = false;
+            Visible = false;
+
+            if (Process.GetProcessesByName("Updaters-Updater").Length > 0)
+            {
+                Close();
+                return;
+            }
+
+            if (File.Exists(Directory.GetCurrentDirectory() + @"\Updaters-Updater.exe"))
+            {
+                string[] args = Environment.GetCommandLineArgs();
+
+                if (args.Length > 1 && args[1] == "RemoveUpdatersUpdater")
+                    File.Delete(Directory.GetCurrentDirectory() + @"\Updaters-Updater.exe");
+                else
+                {
+                    Process.Start("Updaters-Updater.exe", "debug");
+                    Close();
+                    return;
+                }
+            }
+
             runningConstructor = true;
+
+            ShowInTaskbar = true;
+            Visible = true;
 
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             applicationVersion = "v" + version.Major + "." + version.Minor + "." + version.Build;
