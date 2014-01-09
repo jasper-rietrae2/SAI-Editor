@@ -3781,21 +3781,21 @@ namespace SAI_Editor.Forms
                         scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
                         aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureAiNameById(entryOrGuidAndSourceType.entryOrGuid);
 
-                        revertQuery += "UPDATE creature_template SET Ainame='" + aiName + "',Scriptname='" + scriptName + "' WHERE entry='" + entryOrGuidAndSourceType.entryOrGuid + "';";
+                        revertQuery += "UPDATE creature_template SET Ainame='" + aiName + "',Scriptname='" + scriptName + "' WHERE entry=" + entryOrGuidAndSourceType.entryOrGuid + ";";
                         break;
                     case SourceTypes.SourceTypeGameobject:
                         scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
                         aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectAiNameById(entryOrGuidAndSourceType.entryOrGuid);
 
-                        revertQuery += "UPDATE gameobject_template SET Ainame='" + aiName + "',Scriptname='" + await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectScriptNameById(entryOrGuidAndSourceType.entryOrGuid) + "' WHERE entry='" + entryOrGuidAndSourceType.entryOrGuid + "';";
+                        revertQuery += "UPDATE gameobject_template SET Ainame='" + aiName + "',Scriptname='" + await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectScriptNameById(entryOrGuidAndSourceType.entryOrGuid) + "' WHERE entry=" + entryOrGuidAndSourceType.entryOrGuid + ";";
                         break;
                     case SourceTypes.SourceTypeAreaTrigger:
                         scriptName = await SAI_Editor_Manager.Instance.worldDatabase.GetAreaTriggerScriptNameById(entryOrGuidAndSourceType.entryOrGuid);
 
                         if (scriptName != String.Empty)
-                            revertQuery += "UPDATE areatrigger_scripts SET Scriptname='" + scriptName + "' WHERE entry='" + entryOrGuidAndSourceType.entryOrGuid + "';";
+                            revertQuery += "UPDATE areatrigger_scripts SET Scriptname='" + scriptName + "' WHERE entry=" + entryOrGuidAndSourceType.entryOrGuid + ";";
                         else
-                            revertQuery += "DELETE FROM areatrigger_scripts WHERE entry='" + entryOrGuidAndSourceType.entryOrGuid + "';";
+                            revertQuery += "DELETE FROM areatrigger_scripts WHERE entry=" + entryOrGuidAndSourceType.entryOrGuid + ";";
 
                         break;
                 }
@@ -3825,7 +3825,7 @@ namespace SAI_Editor.Forms
                     }
                 }
                 else
-                    revertQuery += "DELETE FROM smart_scripts WHERE entryorguid='" + entryOrGuidAndSourceType.entryOrGuid + "';";
+                    revertQuery += "DELETE FROM smart_scripts WHERE entryorguid=" + entryOrGuidAndSourceType.entryOrGuid + ";";
             }
 
             return revertQuery;
