@@ -97,18 +97,21 @@ namespace SAI_Editor.Forms
                 return;
             }
 
-            if (File.Exists(Directory.GetCurrentDirectory() + @"\Updaters-Updater.exe"))
+            if (!Debugger.IsAttached)
             {
-                string[] args = Environment.GetCommandLineArgs();
-
-                //! The first argument in the array (index 0) is the vshost.
-                if (args.Length > 1 && args[1] == "RemoveUpdatersUpdater")
-                    File.Delete(Directory.GetCurrentDirectory() + @"\Updaters-Updater.exe");
-                else
+                if (File.Exists(Directory.GetCurrentDirectory() + @"\Updaters-Updater.exe"))
                 {
-                    Process.Start("Updaters-Updater.exe", "RanFromSaiEditor");
-                    Close();
-                    return;
+                    string[] args = Environment.GetCommandLineArgs();
+
+                    //! The first argument in the array (index 0) is the vshost.
+                    if (args.Length > 1 && args[1] == "RemoveUpdatersUpdater")
+                        File.Delete(Directory.GetCurrentDirectory() + @"\Updaters-Updater.exe");
+                    else
+                    {
+                        Process.Start("Updaters-Updater.exe", "RanFromSaiEditor");
+                        Close();
+                        return;
+                    }
                 }
             }
 
