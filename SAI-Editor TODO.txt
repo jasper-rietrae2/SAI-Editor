@@ -12,5 +12,3 @@
 - Add a tutorial to the application
 - Setting to control the comment generating (rules to follow and whatnot)
 - Take a look into reloading the smart_scripts table (thus executing the `.reload smart` GM command in-game or in the console) from the application.
-- Make it possible to update the Updater for the users. Once found:
-  - The updater currently calls the survey X times when it updates (X being the amount of files that are being updated). This was testcode that I forgot to remove.

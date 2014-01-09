@@ -207,7 +207,6 @@ namespace Updater
                     using (WebClient client = new WebClient())
                     {
                         client.DownloadFile(remotefile, destfile);
-                        client.DownloadData("http://www.jasper-rietrae.com/SAI-Editor/survey.php");
                     }
                 }
                 catch (WebException)
