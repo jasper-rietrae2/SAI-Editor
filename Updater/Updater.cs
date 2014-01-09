@@ -17,11 +17,15 @@ namespace Updater
     {
         private const string baseRemotePath = "http://dl.dropbox.com/u/84527004/SAI-Editor/";
         private const string baseRemoteDownloadPath = "http://dl.dropbox.com/u/84527004/SAI-Editor/SAI-Editor/";
+        private readonly bool startSaiEditorOnClose = false;
         readonly List<string> _files = new List<string>();
 
         public Updater()
         {
             InitializeComponent();
+
+            string[] args = Environment.GetCommandLineArgs();
+            startSaiEditorOnClose = args.Length > 1 && args[1] == "RanFromSaiEditor";
         }
 
         //! Start the initial search after a second (button is disabled in the meantime) so the form
@@ -269,6 +273,9 @@ namespace Updater
 
         private void Updater_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (!startSaiEditorOnClose)
+                return;
+
             try
             {
                 Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor.exe");

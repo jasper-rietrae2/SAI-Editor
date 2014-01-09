@@ -366,7 +366,7 @@ namespace SAI_Editor.Forms
 
                                             try
                                             {
-                                                Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
+                                                Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe", "RanFromSaiEditor");
                                             }
                                             catch (Exception)
                                             {

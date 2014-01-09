@@ -13,6 +13,4 @@
 - Setting to control the comment generating (rules to follow and whatnot)
 - Take a look into reloading the smart_scripts table (thus executing the `.reload smart` GM command in-game or in the console) from the application.
 - Make it possible to update the Updater for the users. Once found:
-  - Perhaps add a new item to the dropbox and filelist.txt which would basically be an updater for the updater. Once it was created and SAI-Editor is launched, it checks if the second updater exists. If it does, it runs that instead of the SAI-Editor. Thus it closes the SAI-Editor, replaces the SAI-Editor Updater and voila!
-  - Pass on a parameter to Updater's constructor to determine whether or not it's called by the form instead of from hand. This way we determine whether or not we should open up SAI-Editor.exe when the updater is closed
   - The updater currently calls the survey X times when it updates (X being the amount of files that are being updated). This was testcode that I forgot to remove.
