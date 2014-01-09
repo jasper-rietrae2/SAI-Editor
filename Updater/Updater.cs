@@ -54,10 +54,7 @@ namespace Updater
 
         private void CheckForUpdates()
         {
-            //! If there's a SAI-Editor running, it throws a message box. The reason we want to do this twice is
-            //! because the user often clicks away the error without reading it.
-            for (int i = 0; i < 2; ++i)
-                CheckIfSaiEditorRunning();
+            while (CheckIfSaiEditorRunning()) ;
 
             try
             {
@@ -298,14 +295,17 @@ namespace Updater
             CheckIfSaiEditorRunning();
         }
 
-        private void CheckIfSaiEditorRunning()
+        private bool CheckIfSaiEditorRunning()
         {
             if (Process.GetProcessesByName("SAI-Editor").Length > 0)
             {
                 timerCheckForSaiEditorRunning.Enabled = false;
                 MessageBox.Show("There is an instance of SAI-Editor running at the moment. In order for the updater to work, this may not be the case. Please close it before continuing.", "SAI-Editor is running!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 timerCheckForSaiEditorRunning.Enabled = true;
+                return true;
             }
+
+            return false;
         }
     }
 }
