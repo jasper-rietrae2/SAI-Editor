@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Updater));
             this.statusLabel = new System.Windows.Forms.Label();
             this.buttonUpdateToLatest = new System.Windows.Forms.Button();
@@ -36,8 +35,8 @@
             this.listBoxFilesToUpdate = new System.Windows.Forms.ListBox();
             this.textBoxChangelog = new System.Windows.Forms.RichTextBox();
             this.buttonCheckForUpdates = new System.Windows.Forms.Button();
-            this.timerCheckForSaiEditorRunning = new System.Windows.Forms.Timer(this.components);
-            this.timerStartSearchingOnLaunch = new System.Windows.Forms.Timer(this.components);
+            this.timerCheckForSaiEditorRunning = new System.Windows.Forms.Timer();
+            this.timerStartSearchingOnLaunch = new System.Windows.Forms.Timer();
             this.SuspendLayout();
             // 
             // statusLabel

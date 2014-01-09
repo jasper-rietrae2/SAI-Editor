@@ -90,11 +90,9 @@ namespace SAI_Editor.Forms
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            ShowInTaskbar = false;
-            Visible = false;
-
             if (Process.GetProcessesByName("Updaters-Updater").Length > 0)
             {
+                MessageBox.Show("There is currently a console running that is supposed to update the updater. This can not be ran along with the SAI-Editor, so please wait til it finishes.", "Can't launch right now!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();
                 return;
             }
@@ -103,20 +101,22 @@ namespace SAI_Editor.Forms
             {
                 string[] args = Environment.GetCommandLineArgs();
 
+                //! The first argument in the array (index 0) is the vshost.
                 if (args.Length > 1 && args[1] == "RemoveUpdatersUpdater")
                     File.Delete(Directory.GetCurrentDirectory() + @"\Updaters-Updater.exe");
                 else
                 {
-                    Process.Start("Updaters-Updater.exe", "debug");
+                    Process.Start("Updaters-Updater.exe", "RanFromSaiEditor");
                     Close();
                     return;
                 }
             }
 
-            runningConstructor = true;
+            //! The application starts minimized so it's not visible for the user when they have
+            //! to first run the Updater's Updater.
+            WindowState = FormWindowState.Normal;
 
-            ShowInTaskbar = true;
-            Visible = true;
+            runningConstructor = true;
 
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             applicationVersion = "v" + version.Major + "." + version.Minor + "." + version.Build;
