@@ -73,7 +73,7 @@ namespace SAI_Editor.Forms
         private readonly List<Control> controlsLoginForm = new List<Control>(), controlsMainForm = new List<Control>();
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool contractingToLoginForm, expandingToMainForm, expandingListView, contractingListView;
-        private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false;
+        private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false, adjustedLoginSettings = false;
         private int originalHeight = 0, originalWidth = 0;
         private int MainFormWidth = (int)FormSizes.MainFormWidth, MainFormHeight = (int)FormSizes.MainFormHeight;
         private int listViewSmartScriptsHeightToChangeTo;
@@ -153,6 +153,7 @@ namespace SAI_Editor.Forms
                 menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
                 SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
                 buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || (SourceTypes)Settings.Default.LastSourceType == SourceTypes.SourceTypeAreaTrigger;
+                adjustedLoginSettings = true;
             }
             catch (Exception ex)
             {
@@ -3863,7 +3864,8 @@ namespace SAI_Editor.Forms
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveLastUsedFields();
+            if (adjustedLoginSettings)
+                SaveLastUsedFields();
 
             if (searchNewUpdates != null)
                 searchNewUpdates.Abort();
