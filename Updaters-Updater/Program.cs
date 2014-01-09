@@ -38,8 +38,12 @@ namespace Updaters_Updater
                 {
                     //! Download the Updater from the dropbox to the users' folder
                     string remotefile = "http://dl.dropbox.com/u/84527004/SAI-Editor/SAI-Editor Updater/SAI-Editor Updater.exe";
-                    string destfile = Directory.GetCurrentDirectory() + @"\SAI-Editor Updater.exe";
-                    client.DownloadFile(remotefile, destfile);
+
+                    if (DoesUrlExist(remotefile))
+                    {
+                        string destfile = Directory.GetCurrentDirectory() + @"\SAI-Editor Updater.exe";
+                        client.DownloadFile(remotefile, destfile);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -51,6 +55,20 @@ namespace Updaters_Updater
             //! We start the SAI-Editor.exe with arguments to remove this executable because
             //! all it does is update the Updater.
             Process.Start(Directory.GetCurrentDirectory() + @"\SAI-Editor.exe", "RemoveUpdatersUpdater");
+        }
+
+        public static bool DoesUrlExist(string url)
+        {
+            try
+            {
+                WebRequest req = WebRequest.Create(url);
+                WebResponse res = req.GetResponse();
+                return true;
+            }
+            catch (WebException ex)
+            {
+                return false;
+            }
         }
     }
 }
