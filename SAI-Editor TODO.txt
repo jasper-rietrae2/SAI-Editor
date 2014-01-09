@@ -12,6 +12,5 @@
 - Add a tutorial to the application
 - Setting to control the comment generating (rules to follow and whatnot)
 - Take a look into reloading the smart_scripts table (thus executing the `.reload smart` GM command in-game or in the console) from the application.
-- Don't add the item to the files to update (listBox) in the Updater if GetMD5HashFromFile returned an empty string
 - The Updater.exe is removed if the updater was not found in the dropbox (?)
 - Something goes wrong with settings that is related to the Updater and the Updater's Updater

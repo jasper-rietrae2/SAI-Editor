@@ -83,7 +83,9 @@ namespace Updater
 
                                     if (File.Exists(Directory.GetCurrentDirectory().ToString(CultureInfo.InvariantCulture) + @"\" + filename))
                                     {
-                                        if (md5 != GetMD5HashFromFile(Directory.GetCurrentDirectory() + @"\" + filename))
+                                        string currentMd5 = GetMD5HashFromFile(Directory.GetCurrentDirectory() + @"\" + filename);
+
+                                        if (!String.IsNullOrWhiteSpace(currentMd5) && md5 != currentMd5)
                                             _files.Add(filename);
                                     }
                                     else
