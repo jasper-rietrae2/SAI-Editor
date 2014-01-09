@@ -54,7 +54,9 @@ namespace Updater
 
         private void CheckForUpdates()
         {
+            timerCheckForSaiEditorRunning.Enabled = false;
             while (CheckIfSaiEditorRunning()) ;
+            timerCheckForSaiEditorRunning.Enabled = true;
 
             try
             {
