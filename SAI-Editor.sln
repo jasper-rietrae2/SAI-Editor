@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAI-Editor", "SAI-Editor\SA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updater", "Updater\Updater.csproj", "{4A716B33-92C3-4C26-9682-22DE6E300459}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Updaters-Updater", "Updaters-Updater\Updaters-Updater.csproj", "{548B3483-E695-4289-9F97-86D65390F9F8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,16 +35,6 @@ Global
 		{4A716B33-92C3-4C26-9682-22DE6E300459}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{4A716B33-92C3-4C26-9682-22DE6E300459}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{4A716B33-92C3-4C26-9682-22DE6E300459}.Release|x86.ActiveCfg = Release|Any CPU
-		{548B3483-E695-4289-9F97-86D65390F9F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{548B3483-E695-4289-9F97-86D65390F9F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{548B3483-E695-4289-9F97-86D65390F9F8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{548B3483-E695-4289-9F97-86D65390F9F8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{548B3483-E695-4289-9F97-86D65390F9F8}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{548B3483-E695-4289-9F97-86D65390F9F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{548B3483-E695-4289-9F97-86D65390F9F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{548B3483-E695-4289-9F97-86D65390F9F8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{548B3483-E695-4289-9F97-86D65390F9F8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{548B3483-E695-4289-9F97-86D65390F9F8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -257,10 +257,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Updaters-Updater\Updaters-Updater.csproj">
-      <Project>{548b3483-e695-4289-9f97-86d65390f9f8}</Project>
-      <Name>Updaters-Updater</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Updater\Updater.csproj">
       <Project>{4a716b33-92c3-4c26-9682-22de6e300459}</Project>
       <Name>Updater</Name>
