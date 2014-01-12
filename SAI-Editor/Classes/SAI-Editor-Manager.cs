@@ -408,5 +408,19 @@ namespace SAI_Editor.Classes
                 return false;
             }
         }
+
+        public bool DoesUrlExist(string url)
+        {
+            try
+            {
+                WebRequest req = WebRequest.Create(url);
+                WebResponse res = req.GetResponse();
+                return true;
+            }
+            catch (WebException ex)
+            {
+                return false;
+            }
+        }
     }
 }

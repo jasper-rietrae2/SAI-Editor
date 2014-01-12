@@ -90,33 +90,57 @@ namespace SAI_Editor.Forms
 
         private async void MainForm_Load(object sender, EventArgs e)
         {
-            if (Process.GetProcessesByName("Updaters-Updater").Length > 0)
-            {
-                MessageBox.Show("There is currently a console running that is supposed to update the updater. This can not be ran along with the SAI-Editor, so please wait til it finishes.", "Can't launch right now!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close();
-                return;
-            }
+            Visible = false;
 
-            if (!Debugger.IsAttached)
+            bool hasInternetConnection = SAI_Editor_Manager.Instance.HasInternetConnection();
+            string updateUpdaterDir = Directory.GetCurrentDirectory() + @"\update_updater.txt";
+
+            if (hasInternetConnection && File.Exists(updateUpdaterDir))
             {
-                if (File.Exists(Directory.GetCurrentDirectory() + @"\Updaters-Updater.exe"))
+                using (WebClient client = new WebClient())
                 {
-                    string[] args = Environment.GetCommandLineArgs();
+                    //! Only actually update our updater if the file is not empty
+                    using (Stream streamUpdateUpdater = client.OpenRead(updateUpdaterDir))
+                        using (StreamReader streamReaderUpdateUpdater = new StreamReader(streamUpdateUpdater))
+                            if (String.IsNullOrWhiteSpace(streamReaderUpdateUpdater.ReadToEnd()))
+                                goto SkipUpdateUpdaterCode;
 
-                    //! The first argument in the array (index 0) is the vshost.
-                    if (args.Length > 1 && args[1] == "RemoveUpdatersUpdater")
-                        File.Delete(Directory.GetCurrentDirectory() + @"\Updaters-Updater.exe");
-                    else
+                    MessageBox.Show("There is an updater available for the SAI-Editor Updater. Pressing OK will start the process. There might be lag for a few seconds.", "Update available for the updater!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    //! Keep showing this error until the process was closed. The MessageBox halts the
+                    //! thread so it will only check for the updater once the messagebox is closed.
+                    while (Process.GetProcessesByName("SAI-Editor Updater").Length > 0)
+                        MessageBox.Show("There is currently an instance of the SAI-Editor Updater running which has to be closed.", "The Updater has to be closed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    //! Empty the file
+                    File.WriteAllText(updateUpdaterDir, String.Empty);
+
+                    try
                     {
-                        Process.Start("Updaters-Updater.exe", "RanFromSaiEditor");
-                        Close();
-                        return;
+                        //! Download the Updater from the dropbox to the users' folder
+                        string remotefile = "http://dl.dropbox.com/u/84527004/SAI-Editor/SAI-Editor/SAI-Editor Updater.exe";
+
+                        //! We check if the URL exists before trying to download the file because if it
+                        //! doesn't exist for whatever reason, the existing Updater of the user is removed
+                        //! because it was being replaced but ended up being replaced by a non-existent file.
+                        if (SAI_Editor_Manager.Instance.DoesUrlExist(remotefile))
+                            //! Download the new file to the existing updater.
+                            client.DownloadFile(remotefile, Directory.GetCurrentDirectory() + @"\SAI-Editor Updater.exe");
+                        else
+                            MessageBox.Show("The Updater executable could not be found on Dropbox.", "Updater not found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
 
+        SkipUpdateUpdaterCode:
+
             //! The application starts minimized so it's not visible for the user when they have
             //! to first run the Updater's Updater.
+            Visible = true;
             WindowState = FormWindowState.Normal;
 
             runningConstructor = true;
@@ -241,8 +265,6 @@ namespace SAI_Editor.Forms
             textBoxTargetType.MouseWheel += textBoxTargetType_MouseWheel;
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
-
-            bool hasInternetConnection = SAI_Editor_Manager.Instance.HasInternetConnection();
 
             timerCheckForInternetConnection.Interval = 600000; //! 10 minutes
             timerCheckForInternetConnection.Tick += timerCheckForInternetConnection_Tick;
