@@ -94,7 +94,7 @@ namespace Updater
                             }
                         }
                     }
-                    catch (WebException)
+                    catch (WebException ex)
                     {
                         textBoxChangelog.Text = String.Empty;
                         statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
@@ -102,7 +102,7 @@ namespace Updater
                         statusLabel.Update();
                         buttonUpdateToLatest.Enabled = false;
                         buttonCheckForUpdates.Enabled = true;
-                        MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found. The following error was thrown:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                     catch (Exception exe)
@@ -123,7 +123,7 @@ namespace Updater
                                     using (StreamReader streamReaderChangelog = new StreamReader(streamChangelog))
                                         textBoxChangelog.Text = streamReaderChangelog.ReadToEnd();
                         }
-                        catch (WebException)
+                        catch (WebException ex)
                         {
                             textBoxChangelog.Text = String.Empty;
                             statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
@@ -131,7 +131,7 @@ namespace Updater
                             statusLabel.Update();
                             buttonUpdateToLatest.Enabled = false;
                             buttonCheckForUpdates.Enabled = true;
-                            MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found. The following error was thrown:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
                         catch (Exception ex)
@@ -149,7 +149,7 @@ namespace Updater
                 buttonUpdateToLatest.Enabled = _files.Count > 0;
                 buttonCheckForUpdates.Enabled = true;
             }
-            catch (WebException)
+            catch (WebException ex)
             {
                 textBoxChangelog.Text = String.Empty;
                 statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
@@ -157,7 +157,7 @@ namespace Updater
                 statusLabel.Update();
                 buttonUpdateToLatest.Enabled = false;
                 buttonCheckForUpdates.Enabled = true;
-                MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found. The following error was thrown:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception ex)
             {
@@ -214,7 +214,7 @@ namespace Updater
                         client.DownloadFile(remotefile, destfile);
                     }
                 }
-                catch (WebException)
+                catch (WebException ex)
                 {
                     textBoxChangelog.Text = String.Empty;
                     statusLabel.Text = "COULD NOT CONNECT TO WEBSERVER";
@@ -223,7 +223,7 @@ namespace Updater
                     buttonUpdateToLatest.Enabled = false;
                     buttonCheckForUpdates.Enabled = true;
                     webExceptionOccurred = true;
-                    MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("It seems like the application was unable to connect to the internet and therefore there are no updates found. The following error was thrown:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 catch (Exception ex)
                 {
