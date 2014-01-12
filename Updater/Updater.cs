@@ -69,9 +69,8 @@ namespace Updater
                     {
                         using (Stream streamFileList = client.OpenRead(baseRemotePath + "filelist.txt"))
                         {
-                            if (streamFileList != null)
+                            using (StreamReader streamReaderFileList = new StreamReader(streamFileList))
                             {
-                                StreamReader streamReaderFileList = new StreamReader(streamFileList);
                                 string currentLine = String.Empty;
 
                                 while ((currentLine = streamReaderFileList.ReadLine()) != null)
