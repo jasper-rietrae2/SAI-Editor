@@ -97,7 +97,7 @@ namespace SAI_Editor.Forms
             applicationVersion = "v" + version.Major + "." + version.Minor + "." + version.Build;
             Text = "SAI-Editor " + applicationVersion + ": Login";
 
-            string updateUpdaterDir = Directory.GetCurrentDirectory() + @"\update_updater";
+            string updateUpdaterDir = Directory.GetCurrentDirectory() + @"\update_updater.txt";
 
             //! Check if file exists first because the check for internet takes a few seconds
             //! for most users.
