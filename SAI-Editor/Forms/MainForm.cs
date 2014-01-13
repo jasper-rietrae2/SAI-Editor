@@ -103,7 +103,7 @@ namespace SAI_Editor.Forms
             //! for most users.
             if (File.Exists(updateUpdaterDir))
             {
-                MessageBox.Show("There is an updater available for the SAI-Editor Updater. Pressing OK will start the updating. The applicaiton might freeze up for a few seconds.", "Update available for the updater!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("There is an updater available for the SAI-Editor Updater. Pressing OK will start the updating. The application might freeze up for a few seconds.", "Update available for the updater!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 if (SAI_Editor_Manager.Instance.HasInternetConnection())
                 {
