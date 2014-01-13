@@ -93,10 +93,11 @@ namespace SAI_Editor.Forms
         {
             Visible = false;
 
-            bool hasInternetConnection = SAI_Editor_Manager.Instance.HasInternetConnection();
             string updateUpdaterDir = Directory.GetCurrentDirectory() + @"\update_updater.txt";
 
-            if (hasInternetConnection && File.Exists(updateUpdaterDir))
+            //! Check if file exists first because the check for internet takes a few seconds
+            //! for most users.
+            if (File.Exists(updateUpdaterDir) && SAI_Editor_Manager.Instance.HasInternetConnection())
             {
                 using (WebClient client = new WebClient())
                 {
@@ -269,7 +270,7 @@ namespace SAI_Editor.Forms
 
             timerCheckForInternetConnection.Interval = 600000; //! 10 minutes
             timerCheckForInternetConnection.Tick += timerCheckForInternetConnection_Tick;
-            timerCheckForInternetConnection.Enabled = !hasInternetConnection;
+            timerCheckForInternetConnection.Enabled = false;
 
             if (!Settings.Default.InformedAboutSurvey)
             {
@@ -307,13 +308,8 @@ namespace SAI_Editor.Forms
             searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
             updateSurveyThread = new Thread(UpdateSurvey);
 
-            //! If the bool is false, it means we have already started running a timer that ticks every
-            //! 10 minutes to check for an internet connection. Once one is found, it runs the threads.
-            if (hasInternetConnection)
-            {
-                searchNewUpdates.Start();
-                updateSurveyThread.Start();
-            }
+            searchNewUpdates.Start();
+            updateSurveyThread.Start();
 
             runningConstructor = false;
         }
