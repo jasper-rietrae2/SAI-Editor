@@ -17,6 +17,7 @@ using System.IO;
 using System.Reflection;
 using System.Net;
 using System.Threading;
+using System.Runtime.InteropServices;
 
 namespace SAI_Editor.Forms
 {
@@ -105,14 +106,14 @@ namespace SAI_Editor.Forms
                             if (String.IsNullOrWhiteSpace(streamReaderUpdateUpdater.ReadToEnd()))
                                 goto SkipUpdateUpdaterCode;
 
-                    MessageBox.Show("There is an updater available for the SAI-Editor Updater. Pressing OK will start the process. There might be lag for a few seconds.", "Update available for the updater!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("There is an updater available for the SAI-Editor Updater. Pressing OK will start the updating. The applicaiton might freeze up for a few seconds.", "Update available for the updater!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     
                     //! Keep showing this error until the process was closed. The MessageBox halts the
                     //! thread so it will only check for the updater once the messagebox is closed.
                     while (Process.GetProcessesByName("SAI-Editor Updater").Length > 0)
                         MessageBox.Show("There is currently an instance of the SAI-Editor Updater running which has to be closed.", "The Updater has to be closed", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    //! Empty the file
+                    //! Delete the file
                     File.WriteAllText(updateUpdaterDir, String.Empty);
 
                     try
@@ -348,6 +349,22 @@ namespace SAI_Editor.Forms
             }
         }
 
+        [DllImportAttribute("user32.dll")]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        [DllImportAttribute("user32.dll")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        public static void ShowToFront(string windowName)
+        {
+            IntPtr firstInstance = FindWindow(null, windowName);
+            ShowWindow(firstInstance, 1);
+            SetForegroundWindow(firstInstance);
+        }
+
         private void CheckIfUpdatesAvailable()
         {
             using (WebClient client = new WebClient())
@@ -393,6 +410,7 @@ namespace SAI_Editor.Forms
                                             try
                                             {
                                                 Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe", "RanFromSaiEditor");
+                                                ShowToFront(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
                                             }
                                             catch (Exception)
                                             {
@@ -4330,6 +4348,7 @@ namespace SAI_Editor.Forms
             try
             {
                 Process.Start(updaterDir);
+                ShowToFront(updaterDir);
             }
             catch (Exception)
             {

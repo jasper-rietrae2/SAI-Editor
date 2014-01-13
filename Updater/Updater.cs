@@ -10,6 +10,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Updater
 {
@@ -275,6 +276,22 @@ namespace Updater
             e.Handled = true; //! Don't allow writing to the changelog rich textbox
         }
 
+        [DllImportAttribute("user32.dll")]
+        public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        [DllImportAttribute("user32.dll")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        public static void ShowToFront(string windowName)
+        {
+            IntPtr firstInstance = FindWindow(null, windowName);
+            ShowWindow(firstInstance, 1);
+            SetForegroundWindow(firstInstance);
+        }
+
         private void Updater_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (!startSaiEditorOnClose)
@@ -283,6 +300,7 @@ namespace Updater
             try
             {
                 Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor.exe");
+                ShowToFront(Directory.GetCurrentDirectory() + "\\SAI-Editor.exe");
             }
             catch (Exception)
             {
