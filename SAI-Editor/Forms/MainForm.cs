@@ -137,6 +137,8 @@ namespace SAI_Editor.Forms
                         MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                else
+                    MessageBox.Show("The application was unable to connect to the internet and the Updater could therefore not be updated.", "No internet!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
