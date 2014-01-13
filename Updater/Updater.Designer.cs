@@ -100,7 +100,6 @@
             // 
             // timerCheckForSaiEditorRunning
             // 
-            this.timerCheckForSaiEditorRunning.Enabled = true;
             this.timerCheckForSaiEditorRunning.Interval = 500;
             this.timerCheckForSaiEditorRunning.Tick += new System.EventHandler(this.timerCheckForSaiEditorRunning_Tick);
             // 
