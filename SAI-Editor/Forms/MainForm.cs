@@ -1987,6 +1987,7 @@ namespace SAI_Editor.Forms
 
         private async void buttonSearchWorldDb_Click(object sender, EventArgs e)
         {
+            SAI_Editor_Manager.Instance.ResetWorldDatabase();
             List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
