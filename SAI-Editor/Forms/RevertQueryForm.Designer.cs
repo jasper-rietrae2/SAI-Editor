@@ -147,6 +147,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "RevertQueryForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select a script to revert to";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.RevertQueryForm_KeyDown);

@@ -88,6 +88,7 @@ namespace SAI_Editor.Forms.SearchForms
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "MultiSelectForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select items";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MultiSelectForm_KeyDown);

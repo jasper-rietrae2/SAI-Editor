@@ -86,7 +86,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1040, 297);
+            this.ClientSize = new System.Drawing.Size(1040, 298);
             this.Controls.Add(this.buttonLoadScript);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listViewSmartScripts);
@@ -96,6 +96,7 @@
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1056, 336);
             this.Name = "SelectSmartScriptForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select a script to load";
             this.ResumeLayout(false);

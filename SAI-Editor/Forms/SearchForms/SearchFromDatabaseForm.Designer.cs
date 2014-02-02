@@ -129,6 +129,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "SearchFromDatabaseForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Search for something..";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchFromDatabaseForm_FormClosing);

@@ -151,6 +151,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "SearchForEntryForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Search for an entry";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SearchForEntryForm_FormClosing);

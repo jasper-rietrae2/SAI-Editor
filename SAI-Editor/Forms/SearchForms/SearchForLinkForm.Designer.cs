@@ -57,6 +57,7 @@
             // 
             // listViewScripts
             // 
+            this.listViewScripts.EnablePhaseHighlighting = false;
             this.listViewScripts.FullRowSelect = true;
             this.listViewScripts.Location = new System.Drawing.Point(12, 12);
             this.listViewScripts.MultiSelect = false;
@@ -68,7 +69,6 @@
             this.listViewScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewScripts_ColumnClick);
             this.listViewScripts.SelectedIndexChanged += new System.EventHandler(this.listViewScripts_SelectedIndexChanged);
             this.listViewScripts.DoubleClick += new System.EventHandler(this.listViewScripts_DoubleClick);
-            this.listViewScripts.EnablePhaseHighlighting = false;
             // 
             // SearchForLinkForm
             // 
@@ -83,6 +83,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "SearchForLinkForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Search for a link";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SearchForLinkForm_KeyDown);

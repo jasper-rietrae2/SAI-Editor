@@ -100,6 +100,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "SelectDatabaseForm";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select a database";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SelectDatabaseForm_KeyDown);
