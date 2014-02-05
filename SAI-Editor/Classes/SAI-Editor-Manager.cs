@@ -417,7 +417,7 @@ namespace SAI_Editor.Classes
                 WebResponse res = req.GetResponse();
                 return true;
             }
-            catch (WebException ex)
+            catch (WebException)
             {
                 return false;
             }
