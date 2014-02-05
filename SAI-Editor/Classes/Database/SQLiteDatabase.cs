@@ -47,44 +47,6 @@ namespace SAI_Editor.Classes.Database
             return (from DataRow row in dt.Rows select BuildTargetTypeInformation(row)).ToList();
         }
 
-        public async Task<List<AreaTrigger>> GetAreaTriggers()
-        {
-            DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers");
-
-            if (dt.Rows.Count == 0)
-                return null;
-
-            return (from DataRow row in dt.Rows select BuildAreaTrigger(row)).ToList();
-        }
-
-        public async Task<AreaTrigger> GetAreaTriggerById(int id)
-        {
-            //DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers WHERE 'id' = @id", new SQLiteParameter("@id", id));
-            DataTable dt = await ExecuteQuery("SELECT * FROM areatriggers WHERE id = '" + id + "'");
-
-            if (dt.Rows.Count == 0)
-                return null;
-
-            return BuildAreaTrigger(dt.Rows[0]); //! Always take first index; should not be possible to have multiple instances per id, but still
-        }
-
-        //! We just do this locally because the database has a SHITLOAD of columns and we only need very few. Not going
-        //! to create a class just for that...
-        //public async Task<List<Spell>> GetSpells()
-        //{
-        //    DataTable dt = await ExecuteQuery("SELECT * FROM spells");
-
-        //    if (dt.Rows.Count == 0)
-        //        return null;
-
-        //    List<Spell> spells = new List<Spell>();
-
-        //    foreach (DataRow row in dt.Rows)
-        //        spells.Add(BuidSpell(row));
-
-        //    return spells;
-        //}
-
         public async Task<string> GetSpellNameById(int id)
         {
             DataTable dt = await ExecuteQuery("SELECT spellName FROM spells WHERE id = '" + id + "'");

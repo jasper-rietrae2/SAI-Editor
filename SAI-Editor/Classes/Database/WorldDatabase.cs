@@ -196,19 +196,6 @@ namespace SAI_Editor.Classes.Database
             return String.Empty;
         }
 
-        public async Task<string> GetObjectNameByGuidAndSourceType(int guid, int source_type)
-        {
-            switch ((SourceTypes)source_type)
-            {
-                case SourceTypes.SourceTypeCreature:
-                    return await GetCreatureNameByGuid(guid);
-                case SourceTypes.SourceTypeGameobject:
-                    return await GetGameobjectNameByGuid(guid);
-            }
-
-            return String.Empty;
-        }
-
         public async Task<string> GetObjectNameByIdOrGuidAndSourceType(SourceTypes sourceType, int idOrGuid, bool errorIfNoneFound = false)
         {
             string newName = String.Empty;
@@ -241,16 +228,6 @@ namespace SAI_Editor.Classes.Database
         public async Task<string> GetObjectNameByIdOrGuidAndSourceType(EntryOrGuidAndSourceType entryOrGuidAndSourceType, bool errorIfNoneFound = false)
         {
             return await GetObjectNameByIdOrGuidAndSourceType(entryOrGuidAndSourceType.sourceType, entryOrGuidAndSourceType.entryOrGuid, errorIfNoneFound);
-        }
-
-        public async Task<List<SmartScript>> GetSmartScripts(int entryorguid)
-        {
-            DataTable dt = await ExecuteQuery("SELECT * FROM smart_scripts WHERE entryorguid = '" + entryorguid + "'");
-
-            if (dt.Rows.Count == 0)
-                return null;
-
-            return (from DataRow row in dt.Rows select BuildSmartScript(row)).ToList();
         }
 
         public async Task<List<SmartScript>> GetSmartScripts(int entryorguid, int source_type)
