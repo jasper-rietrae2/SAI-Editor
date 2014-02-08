@@ -94,6 +94,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1056, 336);
             this.Name = "SelectSmartScriptForm";
             this.ShowInTaskbar = false;
