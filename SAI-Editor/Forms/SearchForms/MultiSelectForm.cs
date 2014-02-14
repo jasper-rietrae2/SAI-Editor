@@ -22,28 +22,32 @@ namespace SAI_Editor.Forms.SearchForms
             foreach (var en in Enum.GetNames(typeof(T)))
                 listViewSelectableItems.Items.Add("").SubItems.Add(en);
 
-            long bitmask = XConverter.ToInt64(textBoxToChange.Text);
-            bool anyFlag = false;
-
-            foreach (ListViewItem item in listViewSelectableItems.Items)
+            if (textBoxToChange != null)
             {
-                foreach (var en in Enum.GetNames(typeof(T)))
+                long bitmask = XConverter.ToInt64(textBoxToChange.Text);
+                bool anyFlag = false;
+
+                foreach (ListViewItem item in listViewSelectableItems.Items)
                 {
-                    if (en.Equals(item.SubItems[1].Text))
+                    foreach (var en in Enum.GetNames(typeof(T)))
                     {
-                        object enu = Enum.Parse(typeof(T), en);
-                        
-                        if ((bitmask & Convert.ToInt64(enu)) == Convert.ToInt64(enu))
+                        if (en.Equals(item.SubItems[1].Text))
                         {
-                            anyFlag = true;
-                            item.Checked = true;
+                            object enu = Enum.Parse(typeof(T), en);
+
+                            if ((bitmask & Convert.ToInt64(enu)) == Convert.ToInt64(enu))
+                            {
+                                anyFlag = true;
+                                item.Checked = true;
+                            }
                         }
                     }
                 }
-            }
 
-            if (!anyFlag)
-                foreach (ListViewItem item in listViewSelectableItems.Items.Cast<ListViewItem>().Where(item => item.Index > 0)) item.Checked = false;
+                if (!anyFlag)
+                    foreach (ListViewItem item in listViewSelectableItems.Items.Cast<ListViewItem>().Where(item => item.Index > 0))
+                        item.Checked = false;
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -56,8 +60,18 @@ namespace SAI_Editor.Forms.SearchForms
             List<Enum> vals = Enum.GetValues(typeof(T)).OfType<Enum>().ToList();
             long mask = (from ListViewItem item in listViewSelectableItems.CheckedItems from en in Enum.GetNames(typeof(T)) where en.Equals(item.SubItems[1].Text) select Convert.ToInt64(Enum.Parse(typeof(T), en))).Sum();
 
-            textBoxToChange.Text = mask.ToString();
-            Close();
+            if (textBoxToChange != null)
+            {
+                textBoxToChange.Text = mask.ToString();
+                Close();
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show(String.Format("The bitmask of all selected items together is {0}. Do you wish to close the form?", mask), "Outcome", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                if (result == DialogResult.Yes)
+                    Close();
+            }
         }
 
         private void MultiSelectForm_KeyDown(object sender, KeyEventArgs e)

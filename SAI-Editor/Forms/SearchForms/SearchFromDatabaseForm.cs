@@ -41,21 +41,26 @@ namespace SAI_Editor.Forms.SearchForms
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly TextBox textBoxToChange = null;
         private readonly DatabaseSearchFormType databaseSearchFormType;
-        private string baseQuery;
+        private int amountOfListviewColumns = 2, listViewItemIndexToCopy = 0;
+        private string baseQuery = String.Empty;
         private string[] columns = new string[7];
         private bool useMySQL = false;
-        private int amountOfListviewColumns = 2, listViewItemIndexToCopy = 0;
 
         public SearchFromDatabaseForm(MySqlConnectionStringBuilder connectionString, TextBox textBoxToChange, DatabaseSearchFormType databaseSearchFormType)
         {
             InitializeComponent();
-
-            this.textBoxToChange = textBoxToChange;
             this.databaseSearchFormType = databaseSearchFormType;
 
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 800);
-            textBoxCriteria.Text = textBoxToChange.Text;
+
+            //! If the textboxtochange is null, the search form is called from a place where it's just searching and not using
+            //! the search results anywhere.
+            if (textBoxToChange != null)
+            {
+                this.textBoxToChange = textBoxToChange;
+                textBoxCriteria.Text = textBoxToChange.Text;
+            }
 
             switch (databaseSearchFormType)
             {
@@ -265,6 +270,11 @@ namespace SAI_Editor.Forms.SearchForms
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
+            //! If the textboxtochange is null, the search form is called from a place where it's just searching and not using
+            //! the search results anywhere.
+            if (textBoxToChange == null)
+                return;
+
             StopRunningThread();
 
             if (listViewItemIndexToCopy > 0)
@@ -419,7 +429,9 @@ namespace SAI_Editor.Forms.SearchForms
             {
                 case Keys.Enter:
                 {
-                    if (listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
+                    //! If the textboxtochange is null, the search form is called from a place where it's just searching and not using
+                    //! the search results anywhere.
+                    if (textBoxToChange != null && listViewEntryResults.SelectedItems.Count > 0 && listViewEntryResults.Focused)
                     {
                         if (listViewItemIndexToCopy > 0)
                             textBoxToChange.Text = listViewEntryResults.SelectedItems[0].SubItems[listViewItemIndexToCopy].Text;
@@ -428,11 +440,8 @@ namespace SAI_Editor.Forms.SearchForms
 
                         Close();
                     }
-                    else
-                    {
-                        if (buttonSearch.Enabled)
-                            buttonSearch.PerformClick();
-                    }
+                    else if (buttonSearch.Enabled)
+                        buttonSearch.PerformClick();
 
                     break;
                 }

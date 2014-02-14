@@ -169,6 +169,19 @@ namespace SAI_Editor.Forms
                 menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
                 SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
                 buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || (SourceTypes)Settings.Default.LastSourceType == SourceTypes.SourceTypeAreaTrigger;
+                searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
+                searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGameobjectEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGameobjectGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGameEventToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAnItemEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForACreatureSummonsIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAnEquipmentTemplateToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAWaypointToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForANpcTextToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGossipMenuOptionToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGossipOptionIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
                 adjustedLoginSettings = true;
             }
             catch (Exception ex)
@@ -4278,6 +4291,19 @@ namespace SAI_Editor.Forms
             checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
             menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
             SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
+            searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
+            searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForAGameobjectEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForAGameobjectGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForAGameEventToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForAnItemEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForACreatureSummonsIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForAnEquipmentTemplateToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForAWaypointToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForANpcTextToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForAGossipMenuOptionToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+            searchForAGossipOptionIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
 
             if (Settings.Default.UseWorldDatabase)
                 Text = "SAI-Editor " + applicationVersion + " - Connection: " + Settings.Default.User + ", " + Settings.Default.Host + ", " + Settings.Default.Port.ToString();
@@ -4341,6 +4367,282 @@ namespace SAI_Editor.Forms
             {
                 MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void searchForGameobjectFlagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (MultiSelectForm<GoFlags> multiSelectForm = new MultiSelectForm<GoFlags>(null))
+                multiSelectForm.ShowDialog(this);
+        }
+
+        private void searchForUnitFlagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (MultiSelectForm<UnitFlags> multiSelectForm = new MultiSelectForm<UnitFlags>(null))
+                multiSelectForm.ShowDialog(this);
+        }
+
+        private void searchForUnitFlags2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (MultiSelectForm<UnitFlags2> multiSelectForm = new MultiSelectForm<UnitFlags2>(null))
+                multiSelectForm.ShowDialog(this);
+        }
+
+        private void searchForDynamicFlagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (MultiSelectForm<DynamicFlags> multiSelectForm = new MultiSelectForm<DynamicFlags>(null))
+                multiSelectForm.ShowDialog(this);
+        }
+
+        private void searchForNpcFlagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (MultiSelectForm<NpcFlags> multiSelectForm = new MultiSelectForm<NpcFlags>(null))
+                multiSelectForm.ShowDialog(this);
+        }
+
+        private void searchForUnitStandFlagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<UnitStandStateType> singleSelectForm = new SingleSelectForm<UnitStandStateType>(null))
+                    singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForUnitBytes1FlagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (MultiSelectForm<UnitBytes1_Flags> multiSelectForm = new MultiSelectForm<UnitBytes1_Flags>(null))
+                multiSelectForm.ShowDialog(this);
+        }
+
+        private void searchForASpellToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAFactionToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeFaction))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAnEmoteToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAMapToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAQuestToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeMap))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAZoneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeZone))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForACreatureEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForACreatureGuidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAGameobjectEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAGameobjectGuidToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForASoundToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeSound))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAnAreatriggerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAGameEventToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAnItemEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForACreatureSummonsIdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForATaxiPathToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAnEquipmentTemplateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAWaypointToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForANpcTextToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeNpcText))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAGossipOptionIdToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOption))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForAGossipMenuOptionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeGossipOptionId))
+                searchFromDatabaseForm.ShowDialog(this);
+        }
+
+        private void searchForSAIPhaseMasksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (MultiSelectForm<SmartPhaseMasks> multiSelectForm = new MultiSelectForm<SmartPhaseMasks>(null))
+                multiSelectForm.ShowDialog(this);
+        }
+
+        private void searchForSAIEventFlagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (MultiSelectForm<SmartEventFlags> multiSelectForm = new MultiSelectForm<SmartEventFlags>(null))
+                multiSelectForm.ShowDialog(this);
+        }
+
+        private void searchForSAICastFlagsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (MultiSelectForm<SmartCastFlags> multiSelectForm = new MultiSelectForm<SmartCastFlags>(null))
+                multiSelectForm.ShowDialog(this);
+        }
+
+        private void searchForSAITemplatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<SmartAiTemplates> singleSelectForm = new SingleSelectForm<SmartAiTemplates>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForSAIRespawnConditionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<SmartScriptRespawnCondition> singleSelectForm = new SingleSelectForm<SmartScriptRespawnCondition>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForSAIEventTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<SmartEvent> singleSelectForm = new SingleSelectForm<SmartEvent>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForSAIActionTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<SmartAction> singleSelectForm = new SingleSelectForm<SmartAction>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForSAITargetTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<SmartTarget> singleSelectForm = new SingleSelectForm<SmartTarget>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForSAIActionlistTimerUpdateTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<ActionlistTimerUpdateType> singleSelectForm = new SingleSelectForm<ActionlistTimerUpdateType>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForGameobjectStatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<GoStates> singleSelectForm = new SingleSelectForm<GoStates>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForReactStatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<ReactStates> singleSelectForm = new SingleSelectForm<ReactStates>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForSheathStatesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<SheathState> singleSelectForm = new SingleSelectForm<SheathState>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForMovementGeneratorTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<MovementGeneratorType> singleSelectForm = new SingleSelectForm<MovementGeneratorType>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForSpellSchoolsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<SpellSchools> singleSelectForm = new SingleSelectForm<SpellSchools>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForPowerTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<PowerTypes> singleSelectForm = new SingleSelectForm<PowerTypes>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForUnitStandStateTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<UnitStandStateType> singleSelectForm = new SingleSelectForm<UnitStandStateType>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForTempSummonTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<TempSummonType> singleSelectForm = new SingleSelectForm<TempSummonType>(null))
+                singleSelectForm.ShowDialog(this);
+        }
+
+        private void searchForUnitFieldBytes1TypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (SingleSelectForm<UnitFieldBytes1Types> singleSelectForm = new SingleSelectForm<UnitFieldBytes1Types>(null))
+                singleSelectForm.ShowDialog(this);
         }
     }
 }

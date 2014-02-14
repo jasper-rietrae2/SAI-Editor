@@ -82,6 +82,7 @@ namespace SAI_Editor.Forms.SearchForms
 
         private void listViewEntryResults_DoubleClick(object sender, EventArgs e)
         {
+
             StopRunningThread();
             FillMainFormFields(sender, e);
         }

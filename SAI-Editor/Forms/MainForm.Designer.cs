@@ -51,6 +51,59 @@
             this.menuItemDuplicateRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCopySelectedRow = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemPasteLastCopiedRow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.menuItemSearchForSomething = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAFlagToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForGameobjectFlagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForUnitFlagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForUnitFlags2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForDynamicFlagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForNpcFlagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForUnitStandFlagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForUnitBytes1FlagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchTheDatabaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForASpellToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAFactionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAnEmoteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAMapToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAQuestToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAZoneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForACreatureEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForACreatureGuidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAGameobjectEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAGameobjectGuidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForASoundToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAnAreatriggerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAGameEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAnItemEntryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForACreatureSummonsIdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForATaxiPathToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAnEquipmentTemplateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAWaypointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForANpcTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAGossipMenuOptionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForAGossipOptionIdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSAIRelatedInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSAIPhaseMasksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSAIEventFlagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSAICastFlagsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSAITemplatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSAIRespawnConditionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSAITargetTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSAIEventTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSAITargetTypesToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSAIActionlistTimerUpdateTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForGameobjectStatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForReactStatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSheathStatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchOtherInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForMovementGeneratorTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForSpellSchoolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForPowerTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForUnitStandStateTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForTempSummonTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForUnitFieldBytes1TypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -334,7 +387,9 @@
             this.toolStripSeparator1,
             this.menuItemDuplicateRow,
             this.menuItemCopySelectedRow,
-            this.menuItemPasteLastCopiedRow});
+            this.menuItemPasteLastCopiedRow,
+            this.toolStripSeparator5,
+            this.menuItemSearchForSomething});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -419,6 +474,427 @@
             this.menuItemPasteLastCopiedRow.Size = new System.Drawing.Size(319, 22);
             this.menuItemPasteLastCopiedRow.Text = "Paste last copied row";
             this.menuItemPasteLastCopiedRow.Click += new System.EventHandler(this.menuItemPasteLastCopiedRow_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(316, 6);
+            // 
+            // menuItemSearchForSomething
+            // 
+            this.menuItemSearchForSomething.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchForAFlagToolStripMenuItem,
+            this.searchTheDatabaseToolStripMenuItem,
+            this.searchForSAIRelatedInformationToolStripMenuItem,
+            this.searchForStateToolStripMenuItem,
+            this.searchOtherInformationToolStripMenuItem});
+            this.menuItemSearchForSomething.Name = "menuItemSearchForSomething";
+            this.menuItemSearchForSomething.ShortcutKeyDisplayString = "";
+            this.menuItemSearchForSomething.Size = new System.Drawing.Size(319, 22);
+            this.menuItemSearchForSomething.Text = "Search for something";
+            // 
+            // searchForAFlagToolStripMenuItem
+            // 
+            this.searchForAFlagToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchForGameobjectFlagsToolStripMenuItem,
+            this.searchForUnitFlagsToolStripMenuItem,
+            this.searchForUnitFlags2ToolStripMenuItem,
+            this.searchForDynamicFlagsToolStripMenuItem,
+            this.searchForNpcFlagsToolStripMenuItem,
+            this.searchForUnitStandFlagsToolStripMenuItem,
+            this.searchForUnitBytes1FlagsToolStripMenuItem});
+            this.searchForAFlagToolStripMenuItem.Name = "searchForAFlagToolStripMenuItem";
+            this.searchForAFlagToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.searchForAFlagToolStripMenuItem.Text = "Search for a flag";
+            // 
+            // searchForGameobjectFlagsToolStripMenuItem
+            // 
+            this.searchForGameobjectFlagsToolStripMenuItem.Name = "searchForGameobjectFlagsToolStripMenuItem";
+            this.searchForGameobjectFlagsToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.searchForGameobjectFlagsToolStripMenuItem.Text = "Search for gameobject flags";
+            this.searchForGameobjectFlagsToolStripMenuItem.Click += new System.EventHandler(this.searchForGameobjectFlagsToolStripMenuItem_Click);
+            // 
+            // searchForUnitFlagsToolStripMenuItem
+            // 
+            this.searchForUnitFlagsToolStripMenuItem.Name = "searchForUnitFlagsToolStripMenuItem";
+            this.searchForUnitFlagsToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.searchForUnitFlagsToolStripMenuItem.Text = "Search for unit flags";
+            this.searchForUnitFlagsToolStripMenuItem.Click += new System.EventHandler(this.searchForUnitFlagsToolStripMenuItem_Click);
+            // 
+            // searchForUnitFlags2ToolStripMenuItem
+            // 
+            this.searchForUnitFlags2ToolStripMenuItem.Name = "searchForUnitFlags2ToolStripMenuItem";
+            this.searchForUnitFlags2ToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.searchForUnitFlags2ToolStripMenuItem.Text = "Search for unit flags 2";
+            this.searchForUnitFlags2ToolStripMenuItem.Click += new System.EventHandler(this.searchForUnitFlags2ToolStripMenuItem_Click);
+            // 
+            // searchForDynamicFlagsToolStripMenuItem
+            // 
+            this.searchForDynamicFlagsToolStripMenuItem.Name = "searchForDynamicFlagsToolStripMenuItem";
+            this.searchForDynamicFlagsToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.searchForDynamicFlagsToolStripMenuItem.Text = "Search for dynamic flags";
+            this.searchForDynamicFlagsToolStripMenuItem.Click += new System.EventHandler(this.searchForDynamicFlagsToolStripMenuItem_Click);
+            // 
+            // searchForNpcFlagsToolStripMenuItem
+            // 
+            this.searchForNpcFlagsToolStripMenuItem.Name = "searchForNpcFlagsToolStripMenuItem";
+            this.searchForNpcFlagsToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.searchForNpcFlagsToolStripMenuItem.Text = "Search for npc flags";
+            this.searchForNpcFlagsToolStripMenuItem.Click += new System.EventHandler(this.searchForNpcFlagsToolStripMenuItem_Click);
+            // 
+            // searchForUnitStandFlagsToolStripMenuItem
+            // 
+            this.searchForUnitStandFlagsToolStripMenuItem.Name = "searchForUnitStandFlagsToolStripMenuItem";
+            this.searchForUnitStandFlagsToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.searchForUnitStandFlagsToolStripMenuItem.Text = "Search for unit stand flags";
+            this.searchForUnitStandFlagsToolStripMenuItem.Click += new System.EventHandler(this.searchForUnitStandFlagsToolStripMenuItem_Click);
+            // 
+            // searchForUnitBytes1FlagsToolStripMenuItem
+            // 
+            this.searchForUnitBytes1FlagsToolStripMenuItem.Name = "searchForUnitBytes1FlagsToolStripMenuItem";
+            this.searchForUnitBytes1FlagsToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.searchForUnitBytes1FlagsToolStripMenuItem.Text = "Search for unit bytes1 flags";
+            this.searchForUnitBytes1FlagsToolStripMenuItem.Click += new System.EventHandler(this.searchForUnitBytes1FlagsToolStripMenuItem_Click);
+            // 
+            // searchTheDatabaseToolStripMenuItem
+            // 
+            this.searchTheDatabaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchForASpellToolStripMenuItem1,
+            this.searchForAFactionToolStripMenuItem1,
+            this.searchForAnEmoteToolStripMenuItem1,
+            this.searchForAMapToolStripMenuItem1,
+            this.searchForAQuestToolStripMenuItem1,
+            this.searchForAZoneToolStripMenuItem,
+            this.searchForACreatureEntryToolStripMenuItem,
+            this.searchForACreatureGuidToolStripMenuItem,
+            this.searchForAGameobjectEntryToolStripMenuItem,
+            this.searchForAGameobjectGuidToolStripMenuItem,
+            this.searchForASoundToolStripMenuItem,
+            this.searchForAnAreatriggerToolStripMenuItem,
+            this.searchForAGameEventToolStripMenuItem,
+            this.searchForAnItemEntryToolStripMenuItem,
+            this.searchForACreatureSummonsIdToolStripMenuItem,
+            this.searchForATaxiPathToolStripMenuItem,
+            this.searchForAnEquipmentTemplateToolStripMenuItem,
+            this.searchForAWaypointToolStripMenuItem,
+            this.searchForANpcTextToolStripMenuItem,
+            this.searchForAGossipMenuOptionToolStripMenuItem,
+            this.searchForAGossipOptionIdToolStripMenuItem});
+            this.searchTheDatabaseToolStripMenuItem.Name = "searchTheDatabaseToolStripMenuItem";
+            this.searchTheDatabaseToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.searchTheDatabaseToolStripMenuItem.Text = "Search the database/dbc";
+            // 
+            // searchForASpellToolStripMenuItem1
+            // 
+            this.searchForASpellToolStripMenuItem1.Name = "searchForASpellToolStripMenuItem1";
+            this.searchForASpellToolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
+            this.searchForASpellToolStripMenuItem1.Text = "Search for a spell";
+            this.searchForASpellToolStripMenuItem1.Click += new System.EventHandler(this.searchForASpellToolStripMenuItem1_Click);
+            // 
+            // searchForAFactionToolStripMenuItem1
+            // 
+            this.searchForAFactionToolStripMenuItem1.Name = "searchForAFactionToolStripMenuItem1";
+            this.searchForAFactionToolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
+            this.searchForAFactionToolStripMenuItem1.Text = "Search for a faction";
+            this.searchForAFactionToolStripMenuItem1.Click += new System.EventHandler(this.searchForAFactionToolStripMenuItem1_Click);
+            // 
+            // searchForAnEmoteToolStripMenuItem1
+            // 
+            this.searchForAnEmoteToolStripMenuItem1.Name = "searchForAnEmoteToolStripMenuItem1";
+            this.searchForAnEmoteToolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
+            this.searchForAnEmoteToolStripMenuItem1.Text = "Search for an emote";
+            this.searchForAnEmoteToolStripMenuItem1.Click += new System.EventHandler(this.searchForAnEmoteToolStripMenuItem1_Click);
+            // 
+            // searchForAMapToolStripMenuItem1
+            // 
+            this.searchForAMapToolStripMenuItem1.Name = "searchForAMapToolStripMenuItem1";
+            this.searchForAMapToolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
+            this.searchForAMapToolStripMenuItem1.Text = "Search for a map";
+            this.searchForAMapToolStripMenuItem1.Click += new System.EventHandler(this.searchForAMapToolStripMenuItem1_Click);
+            // 
+            // searchForAQuestToolStripMenuItem1
+            // 
+            this.searchForAQuestToolStripMenuItem1.Name = "searchForAQuestToolStripMenuItem1";
+            this.searchForAQuestToolStripMenuItem1.Size = new System.Drawing.Size(254, 22);
+            this.searchForAQuestToolStripMenuItem1.Text = "Search for a quest";
+            this.searchForAQuestToolStripMenuItem1.Click += new System.EventHandler(this.searchForAQuestToolStripMenuItem1_Click);
+            // 
+            // searchForAZoneToolStripMenuItem
+            // 
+            this.searchForAZoneToolStripMenuItem.Name = "searchForAZoneToolStripMenuItem";
+            this.searchForAZoneToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForAZoneToolStripMenuItem.Text = "Search for a zone";
+            this.searchForAZoneToolStripMenuItem.Click += new System.EventHandler(this.searchForAZoneToolStripMenuItem_Click);
+            // 
+            // searchForACreatureEntryToolStripMenuItem
+            // 
+            this.searchForACreatureEntryToolStripMenuItem.Name = "searchForACreatureEntryToolStripMenuItem";
+            this.searchForACreatureEntryToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForACreatureEntryToolStripMenuItem.Text = "Search for a creature entry";
+            this.searchForACreatureEntryToolStripMenuItem.Click += new System.EventHandler(this.searchForACreatureEntryToolStripMenuItem_Click);
+            // 
+            // searchForACreatureGuidToolStripMenuItem
+            // 
+            this.searchForACreatureGuidToolStripMenuItem.Name = "searchForACreatureGuidToolStripMenuItem";
+            this.searchForACreatureGuidToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForACreatureGuidToolStripMenuItem.Text = "Search for a creature guid";
+            this.searchForACreatureGuidToolStripMenuItem.Click += new System.EventHandler(this.searchForACreatureGuidToolStripMenuItem_Click);
+            // 
+            // searchForAGameobjectEntryToolStripMenuItem
+            // 
+            this.searchForAGameobjectEntryToolStripMenuItem.Name = "searchForAGameobjectEntryToolStripMenuItem";
+            this.searchForAGameobjectEntryToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForAGameobjectEntryToolStripMenuItem.Text = "Search for a gameobject entry";
+            this.searchForAGameobjectEntryToolStripMenuItem.Click += new System.EventHandler(this.searchForAGameobjectEntryToolStripMenuItem_Click);
+            // 
+            // searchForAGameobjectGuidToolStripMenuItem
+            // 
+            this.searchForAGameobjectGuidToolStripMenuItem.Name = "searchForAGameobjectGuidToolStripMenuItem";
+            this.searchForAGameobjectGuidToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForAGameobjectGuidToolStripMenuItem.Text = "Search for a gameobject guid";
+            this.searchForAGameobjectGuidToolStripMenuItem.Click += new System.EventHandler(this.searchForAGameobjectGuidToolStripMenuItem_Click);
+            // 
+            // searchForASoundToolStripMenuItem
+            // 
+            this.searchForASoundToolStripMenuItem.Name = "searchForASoundToolStripMenuItem";
+            this.searchForASoundToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForASoundToolStripMenuItem.Text = "Search for a sound";
+            this.searchForASoundToolStripMenuItem.Click += new System.EventHandler(this.searchForASoundToolStripMenuItem_Click);
+            // 
+            // searchForAnAreatriggerToolStripMenuItem
+            // 
+            this.searchForAnAreatriggerToolStripMenuItem.Name = "searchForAnAreatriggerToolStripMenuItem";
+            this.searchForAnAreatriggerToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForAnAreatriggerToolStripMenuItem.Text = "Search for an areatrigger";
+            this.searchForAnAreatriggerToolStripMenuItem.Click += new System.EventHandler(this.searchForAnAreatriggerToolStripMenuItem_Click);
+            // 
+            // searchForAGameEventToolStripMenuItem
+            // 
+            this.searchForAGameEventToolStripMenuItem.Name = "searchForAGameEventToolStripMenuItem";
+            this.searchForAGameEventToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForAGameEventToolStripMenuItem.Text = "Search for a game event";
+            this.searchForAGameEventToolStripMenuItem.Click += new System.EventHandler(this.searchForAGameEventToolStripMenuItem_Click);
+            // 
+            // searchForAnItemEntryToolStripMenuItem
+            // 
+            this.searchForAnItemEntryToolStripMenuItem.Name = "searchForAnItemEntryToolStripMenuItem";
+            this.searchForAnItemEntryToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForAnItemEntryToolStripMenuItem.Text = "Search for an item entry";
+            this.searchForAnItemEntryToolStripMenuItem.Click += new System.EventHandler(this.searchForAnItemEntryToolStripMenuItem_Click);
+            // 
+            // searchForACreatureSummonsIdToolStripMenuItem
+            // 
+            this.searchForACreatureSummonsIdToolStripMenuItem.Name = "searchForACreatureSummonsIdToolStripMenuItem";
+            this.searchForACreatureSummonsIdToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForACreatureSummonsIdToolStripMenuItem.Text = "Search for a creature summons id";
+            this.searchForACreatureSummonsIdToolStripMenuItem.Click += new System.EventHandler(this.searchForACreatureSummonsIdToolStripMenuItem_Click);
+            // 
+            // searchForATaxiPathToolStripMenuItem
+            // 
+            this.searchForATaxiPathToolStripMenuItem.Name = "searchForATaxiPathToolStripMenuItem";
+            this.searchForATaxiPathToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForATaxiPathToolStripMenuItem.Text = "Search for a taxi path";
+            this.searchForATaxiPathToolStripMenuItem.Click += new System.EventHandler(this.searchForATaxiPathToolStripMenuItem_Click);
+            // 
+            // searchForAnEquipmentTemplateToolStripMenuItem
+            // 
+            this.searchForAnEquipmentTemplateToolStripMenuItem.Name = "searchForAnEquipmentTemplateToolStripMenuItem";
+            this.searchForAnEquipmentTemplateToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForAnEquipmentTemplateToolStripMenuItem.Text = "Search for an equipment template";
+            this.searchForAnEquipmentTemplateToolStripMenuItem.Click += new System.EventHandler(this.searchForAnEquipmentTemplateToolStripMenuItem_Click);
+            // 
+            // searchForAWaypointToolStripMenuItem
+            // 
+            this.searchForAWaypointToolStripMenuItem.Name = "searchForAWaypointToolStripMenuItem";
+            this.searchForAWaypointToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForAWaypointToolStripMenuItem.Text = "Search for a waypoint";
+            this.searchForAWaypointToolStripMenuItem.Click += new System.EventHandler(this.searchForAWaypointToolStripMenuItem_Click);
+            // 
+            // searchForANpcTextToolStripMenuItem
+            // 
+            this.searchForANpcTextToolStripMenuItem.Name = "searchForANpcTextToolStripMenuItem";
+            this.searchForANpcTextToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForANpcTextToolStripMenuItem.Text = "Search for a npc text";
+            this.searchForANpcTextToolStripMenuItem.Click += new System.EventHandler(this.searchForANpcTextToolStripMenuItem_Click);
+            // 
+            // searchForAGossipMenuOptionToolStripMenuItem
+            // 
+            this.searchForAGossipMenuOptionToolStripMenuItem.Name = "searchForAGossipMenuOptionToolStripMenuItem";
+            this.searchForAGossipMenuOptionToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForAGossipMenuOptionToolStripMenuItem.Text = "Search for a gossip menu option";
+            this.searchForAGossipMenuOptionToolStripMenuItem.Click += new System.EventHandler(this.searchForAGossipMenuOptionToolStripMenuItem_Click);
+            // 
+            // searchForAGossipOptionIdToolStripMenuItem
+            // 
+            this.searchForAGossipOptionIdToolStripMenuItem.Name = "searchForAGossipOptionIdToolStripMenuItem";
+            this.searchForAGossipOptionIdToolStripMenuItem.Size = new System.Drawing.Size(254, 22);
+            this.searchForAGossipOptionIdToolStripMenuItem.Text = "Search for a gossip option id";
+            this.searchForAGossipOptionIdToolStripMenuItem.Click += new System.EventHandler(this.searchForAGossipOptionIdToolStripMenuItem_Click);
+            // 
+            // searchForSAIRelatedInformationToolStripMenuItem
+            // 
+            this.searchForSAIRelatedInformationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchForSAIPhaseMasksToolStripMenuItem,
+            this.searchForSAIEventFlagsToolStripMenuItem,
+            this.searchForSAICastFlagsToolStripMenuItem,
+            this.searchForSAITemplatesToolStripMenuItem,
+            this.searchForSAIRespawnConditionsToolStripMenuItem,
+            this.searchForSAITargetTypesToolStripMenuItem,
+            this.searchForSAIEventTypesToolStripMenuItem,
+            this.searchForSAITargetTypesToolStripMenuItem1,
+            this.searchForSAIActionlistTimerUpdateTypeToolStripMenuItem});
+            this.searchForSAIRelatedInformationToolStripMenuItem.Name = "searchForSAIRelatedInformationToolStripMenuItem";
+            this.searchForSAIRelatedInformationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.searchForSAIRelatedInformationToolStripMenuItem.Text = "Search SAI related information";
+            // 
+            // searchForSAIPhaseMasksToolStripMenuItem
+            // 
+            this.searchForSAIPhaseMasksToolStripMenuItem.Name = "searchForSAIPhaseMasksToolStripMenuItem";
+            this.searchForSAIPhaseMasksToolStripMenuItem.Size = new System.Drawing.Size(300, 22);
+            this.searchForSAIPhaseMasksToolStripMenuItem.Text = "Search for SAI phase masks";
+            this.searchForSAIPhaseMasksToolStripMenuItem.Click += new System.EventHandler(this.searchForSAIPhaseMasksToolStripMenuItem_Click);
+            // 
+            // searchForSAIEventFlagsToolStripMenuItem
+            // 
+            this.searchForSAIEventFlagsToolStripMenuItem.Name = "searchForSAIEventFlagsToolStripMenuItem";
+            this.searchForSAIEventFlagsToolStripMenuItem.Size = new System.Drawing.Size(300, 22);
+            this.searchForSAIEventFlagsToolStripMenuItem.Text = "Search for SAI event flags";
+            this.searchForSAIEventFlagsToolStripMenuItem.Click += new System.EventHandler(this.searchForSAIEventFlagsToolStripMenuItem_Click);
+            // 
+            // searchForSAICastFlagsToolStripMenuItem
+            // 
+            this.searchForSAICastFlagsToolStripMenuItem.Name = "searchForSAICastFlagsToolStripMenuItem";
+            this.searchForSAICastFlagsToolStripMenuItem.Size = new System.Drawing.Size(300, 22);
+            this.searchForSAICastFlagsToolStripMenuItem.Text = "Search for SAI cast flags";
+            this.searchForSAICastFlagsToolStripMenuItem.Click += new System.EventHandler(this.searchForSAICastFlagsToolStripMenuItem_Click);
+            // 
+            // searchForSAITemplatesToolStripMenuItem
+            // 
+            this.searchForSAITemplatesToolStripMenuItem.Name = "searchForSAITemplatesToolStripMenuItem";
+            this.searchForSAITemplatesToolStripMenuItem.Size = new System.Drawing.Size(300, 22);
+            this.searchForSAITemplatesToolStripMenuItem.Text = "Search for SAI templates";
+            this.searchForSAITemplatesToolStripMenuItem.Click += new System.EventHandler(this.searchForSAITemplatesToolStripMenuItem_Click);
+            // 
+            // searchForSAIRespawnConditionsToolStripMenuItem
+            // 
+            this.searchForSAIRespawnConditionsToolStripMenuItem.Name = "searchForSAIRespawnConditionsToolStripMenuItem";
+            this.searchForSAIRespawnConditionsToolStripMenuItem.Size = new System.Drawing.Size(300, 22);
+            this.searchForSAIRespawnConditionsToolStripMenuItem.Text = "Search for SAI respawn conditions";
+            this.searchForSAIRespawnConditionsToolStripMenuItem.Click += new System.EventHandler(this.searchForSAIRespawnConditionsToolStripMenuItem_Click);
+            // 
+            // searchForSAITargetTypesToolStripMenuItem
+            // 
+            this.searchForSAITargetTypesToolStripMenuItem.Name = "searchForSAITargetTypesToolStripMenuItem";
+            this.searchForSAITargetTypesToolStripMenuItem.Size = new System.Drawing.Size(300, 22);
+            this.searchForSAITargetTypesToolStripMenuItem.Text = "Search for SAI event types";
+            this.searchForSAITargetTypesToolStripMenuItem.Click += new System.EventHandler(this.searchForSAIEventTypesToolStripMenuItem_Click);
+            // 
+            // searchForSAIEventTypesToolStripMenuItem
+            // 
+            this.searchForSAIEventTypesToolStripMenuItem.Name = "searchForSAIEventTypesToolStripMenuItem";
+            this.searchForSAIEventTypesToolStripMenuItem.Size = new System.Drawing.Size(300, 22);
+            this.searchForSAIEventTypesToolStripMenuItem.Text = "Search for SAI action types";
+            this.searchForSAIEventTypesToolStripMenuItem.Click += new System.EventHandler(this.searchForSAIActionTypesToolStripMenuItem_Click);
+            // 
+            // searchForSAITargetTypesToolStripMenuItem1
+            // 
+            this.searchForSAITargetTypesToolStripMenuItem1.Name = "searchForSAITargetTypesToolStripMenuItem1";
+            this.searchForSAITargetTypesToolStripMenuItem1.Size = new System.Drawing.Size(300, 22);
+            this.searchForSAITargetTypesToolStripMenuItem1.Text = "Search for SAI target types";
+            this.searchForSAITargetTypesToolStripMenuItem1.Click += new System.EventHandler(this.searchForSAITargetTypesToolStripMenuItem_Click);
+            // 
+            // searchForSAIActionlistTimerUpdateTypeToolStripMenuItem
+            // 
+            this.searchForSAIActionlistTimerUpdateTypeToolStripMenuItem.Name = "searchForSAIActionlistTimerUpdateTypeToolStripMenuItem";
+            this.searchForSAIActionlistTimerUpdateTypeToolStripMenuItem.Size = new System.Drawing.Size(300, 22);
+            this.searchForSAIActionlistTimerUpdateTypeToolStripMenuItem.Text = "Search for SAI actionlist timer update types";
+            this.searchForSAIActionlistTimerUpdateTypeToolStripMenuItem.Click += new System.EventHandler(this.searchForSAIActionlistTimerUpdateTypeToolStripMenuItem_Click);
+            // 
+            // searchForStateToolStripMenuItem
+            // 
+            this.searchForStateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchForGameobjectStatesToolStripMenuItem,
+            this.searchForReactStatesToolStripMenuItem,
+            this.searchForSheathStatesToolStripMenuItem});
+            this.searchForStateToolStripMenuItem.Name = "searchForStateToolStripMenuItem";
+            this.searchForStateToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.searchForStateToolStripMenuItem.Text = "Search for states";
+            // 
+            // searchForGameobjectStatesToolStripMenuItem
+            // 
+            this.searchForGameobjectStatesToolStripMenuItem.Name = "searchForGameobjectStatesToolStripMenuItem";
+            this.searchForGameobjectStatesToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.searchForGameobjectStatesToolStripMenuItem.Text = "Search for gameobject states";
+            this.searchForGameobjectStatesToolStripMenuItem.Click += new System.EventHandler(this.searchForGameobjectStatesToolStripMenuItem_Click);
+            // 
+            // searchForReactStatesToolStripMenuItem
+            // 
+            this.searchForReactStatesToolStripMenuItem.Name = "searchForReactStatesToolStripMenuItem";
+            this.searchForReactStatesToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.searchForReactStatesToolStripMenuItem.Text = "Search for react states";
+            this.searchForReactStatesToolStripMenuItem.Click += new System.EventHandler(this.searchForReactStatesToolStripMenuItem_Click);
+            // 
+            // searchForSheathStatesToolStripMenuItem
+            // 
+            this.searchForSheathStatesToolStripMenuItem.Name = "searchForSheathStatesToolStripMenuItem";
+            this.searchForSheathStatesToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.searchForSheathStatesToolStripMenuItem.Text = "Search for sheath states";
+            this.searchForSheathStatesToolStripMenuItem.Click += new System.EventHandler(this.searchForSheathStatesToolStripMenuItem_Click);
+            // 
+            // searchOtherInformationToolStripMenuItem
+            // 
+            this.searchOtherInformationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.searchForMovementGeneratorTypesToolStripMenuItem,
+            this.searchForSpellSchoolsToolStripMenuItem,
+            this.searchForPowerTypesToolStripMenuItem,
+            this.searchForUnitStandStateTypesToolStripMenuItem,
+            this.searchForTempSummonTypesToolStripMenuItem,
+            this.searchForUnitFieldBytes1TypesToolStripMenuItem});
+            this.searchOtherInformationToolStripMenuItem.Name = "searchOtherInformationToolStripMenuItem";
+            this.searchOtherInformationToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
+            this.searchOtherInformationToolStripMenuItem.Text = "Search other information";
+            // 
+            // searchForMovementGeneratorTypesToolStripMenuItem
+            // 
+            this.searchForMovementGeneratorTypesToolStripMenuItem.Name = "searchForMovementGeneratorTypesToolStripMenuItem";
+            this.searchForMovementGeneratorTypesToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.searchForMovementGeneratorTypesToolStripMenuItem.Text = "Search for movement generator types";
+            this.searchForMovementGeneratorTypesToolStripMenuItem.Click += new System.EventHandler(this.searchForMovementGeneratorTypesToolStripMenuItem_Click);
+            // 
+            // searchForSpellSchoolsToolStripMenuItem
+            // 
+            this.searchForSpellSchoolsToolStripMenuItem.Name = "searchForSpellSchoolsToolStripMenuItem";
+            this.searchForSpellSchoolsToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.searchForSpellSchoolsToolStripMenuItem.Text = "Search for spell schools";
+            this.searchForSpellSchoolsToolStripMenuItem.Click += new System.EventHandler(this.searchForSpellSchoolsToolStripMenuItem_Click);
+            // 
+            // searchForPowerTypesToolStripMenuItem
+            // 
+            this.searchForPowerTypesToolStripMenuItem.Name = "searchForPowerTypesToolStripMenuItem";
+            this.searchForPowerTypesToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.searchForPowerTypesToolStripMenuItem.Text = "Search for power types";
+            this.searchForPowerTypesToolStripMenuItem.Click += new System.EventHandler(this.searchForPowerTypesToolStripMenuItem_Click);
+            // 
+            // searchForUnitStandStateTypesToolStripMenuItem
+            // 
+            this.searchForUnitStandStateTypesToolStripMenuItem.Name = "searchForUnitStandStateTypesToolStripMenuItem";
+            this.searchForUnitStandStateTypesToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.searchForUnitStandStateTypesToolStripMenuItem.Text = "Search for unit stand state types";
+            this.searchForUnitStandStateTypesToolStripMenuItem.Click += new System.EventHandler(this.searchForUnitStandStateTypesToolStripMenuItem_Click);
+            // 
+            // searchForTempSummonTypesToolStripMenuItem
+            // 
+            this.searchForTempSummonTypesToolStripMenuItem.Name = "searchForTempSummonTypesToolStripMenuItem";
+            this.searchForTempSummonTypesToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.searchForTempSummonTypesToolStripMenuItem.Text = "Search for temp summon types";
+            this.searchForTempSummonTypesToolStripMenuItem.Click += new System.EventHandler(this.searchForTempSummonTypesToolStripMenuItem_Click);
+            // 
+            // searchForUnitFieldBytes1TypesToolStripMenuItem
+            // 
+            this.searchForUnitFieldBytes1TypesToolStripMenuItem.Name = "searchForUnitFieldBytes1TypesToolStripMenuItem";
+            this.searchForUnitFieldBytes1TypesToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
+            this.searchForUnitFieldBytes1TypesToolStripMenuItem.Text = "Search for unit field bytes1 types";
+            this.searchForUnitFieldBytes1TypesToolStripMenuItem.Click += new System.EventHandler(this.searchForUnitFieldBytes1TypesToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -2502,6 +2978,59 @@
         public System.Windows.Forms.CheckBox checkBoxUsePhaseColors;
         private System.Windows.Forms.ToolStripMenuItem checkForUpdatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSearchForSomething;
+        private System.Windows.Forms.ToolStripMenuItem searchForAFlagToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchTheDatabaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForASpellToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem searchForAFactionToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem searchForAnEmoteToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem searchForAMapToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem searchForAQuestToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem searchForAZoneToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForACreatureEntryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForACreatureGuidToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForAGameobjectEntryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForAGameobjectGuidToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForASoundToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForAnAreatriggerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForAGameEventToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForAnItemEntryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForACreatureSummonsIdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForATaxiPathToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForAnEquipmentTemplateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForAWaypointToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForANpcTextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForAGossipMenuOptionToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForAGossipOptionIdToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForGameobjectFlagsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForUnitFlagsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForUnitFlags2ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForDynamicFlagsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForNpcFlagsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForUnitStandFlagsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForUnitBytes1FlagsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSAIRelatedInformationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSAIPhaseMasksToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSAIEventFlagsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSAICastFlagsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSAITemplatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSAIRespawnConditionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSAITargetTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSAIEventTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSAITargetTypesToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem searchForSAIActionlistTimerUpdateTypeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForStateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForGameobjectStatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForReactStatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSheathStatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchOtherInformationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForMovementGeneratorTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForSpellSchoolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForPowerTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForUnitStandStateTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForTempSummonTypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForUnitFieldBytes1TypesToolStripMenuItem;
     }
 }
 
