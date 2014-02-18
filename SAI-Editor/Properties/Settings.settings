@@ -51,7 +51,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="LastEntryOrGuid" Type="System.String" Scope="User">
-      <Value Profile="(Default)">33303</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="LastSourceType" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
