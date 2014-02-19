@@ -345,7 +345,7 @@ namespace SAI_Editor.Forms.SearchForms
                             return;
                     }
 
-                    if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
+                    if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone && !String.IsNullOrWhiteSpace(textBoxCriteria.Text))
                         queryToExecute += " AND m_ParentAreaID = 0";
                 }
                 else if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
