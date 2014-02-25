@@ -3910,6 +3910,9 @@ namespace SAI_Editor.Forms
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            foreach (Control control in Controls)
+                control.Enabled = false;
+
             if (adjustedLoginSettings)
                 SaveLastUsedFields();
 
