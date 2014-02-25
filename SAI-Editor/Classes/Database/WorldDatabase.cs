@@ -415,10 +415,10 @@ namespace SAI_Editor.Classes.Database
             smartScript.target_param1 = row["target_param1"] != DBNull.Value ? XConverter.ToInt32(row["target_param1"]) : 0;
             smartScript.target_param2 = row["target_param2"] != DBNull.Value ? XConverter.ToInt32(row["target_param2"]) : 0;
             smartScript.target_param3 = row["target_param3"] != DBNull.Value ? XConverter.ToInt32(row["target_param3"]) : 0;
-            smartScript.target_x = row["target_x"] != DBNull.Value ? XConverter.ToInt32(row["target_x"]) : 0;
-            smartScript.target_y = row["target_y"] != DBNull.Value ? XConverter.ToInt32(row["target_y"]) : 0;
-            smartScript.target_z = row["target_z"] != DBNull.Value ? XConverter.ToInt32(row["target_z"]) : 0;
-            smartScript.target_o = row["target_o"] != DBNull.Value ? XConverter.ToInt32(row["target_o"]) : 0;
+            smartScript.target_x = row["target_x"] != DBNull.Value ? XConverter.ToDouble(row["target_x"]) : 0;
+            smartScript.target_y = row["target_y"] != DBNull.Value ? XConverter.ToDouble(row["target_y"]) : 0;
+            smartScript.target_z = row["target_z"] != DBNull.Value ? XConverter.ToDouble(row["target_z"]) : 0;
+            smartScript.target_o = row["target_o"] != DBNull.Value ? XConverter.ToDouble(row["target_o"]) : 0;
             smartScript.comment = row["comment"] != DBNull.Value ? (string)row["comment"] : String.Empty;
             return smartScript;
         }

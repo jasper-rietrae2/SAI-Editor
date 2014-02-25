@@ -3377,7 +3377,7 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                textBoxTargetX.Text = textBoxTargetX.Text.Replace(",", ".");
+                textBoxTargetX.Text = textBoxTargetX.Text.Replace(".", ",");
                 textBoxTargetX.SelectionStart = textBoxTargetX.Text.Length + 1; //! Set cursor to end of text
                 listViewSmartScripts.SelectedSmartScript.target_x = XConverter.ToDouble(textBoxTargetX.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
@@ -3389,7 +3389,7 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                textBoxTargetY.Text = textBoxTargetY.Text.Replace(",", ".");
+                textBoxTargetY.Text = textBoxTargetY.Text.Replace(".", ",");
                 textBoxTargetY.SelectionStart = textBoxTargetY.Text.Length + 1; //! Set cursor to end of text
                 listViewSmartScripts.SelectedSmartScript.target_y = XConverter.ToDouble(textBoxTargetY.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
@@ -3401,7 +3401,7 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                textBoxTargetZ.Text = textBoxTargetZ.Text.Replace(",", ".");
+                textBoxTargetZ.Text = textBoxTargetZ.Text.Replace(".", ",");
                 textBoxTargetZ.SelectionStart = textBoxTargetZ.Text.Length + 1; //! Set cursor to end of text
                 listViewSmartScripts.SelectedSmartScript.target_z = XConverter.ToDouble(textBoxTargetZ.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
@@ -3413,7 +3413,7 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                textBoxTargetO.Text = textBoxTargetO.Text.Replace(",", ".");
+                textBoxTargetO.Text = textBoxTargetO.Text.Replace(".", ",");
                 textBoxTargetO.SelectionStart = textBoxTargetO.Text.Length + 1; //! Set cursor to end of text
                 listViewSmartScripts.SelectedSmartScript.target_o = XConverter.ToDouble(textBoxTargetO.Text);
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
@@ -3759,13 +3759,19 @@ namespace SAI_Editor.Forms
                             targetParameters[x] = XConverter.ToInt32(sourceSet);
                 }
 
+                //! SQL accepts a period instead of a comma for float/double values
+                string target_x = smartScript.target_x.ToString().Replace(",", ".");
+                string target_y = smartScript.target_y.ToString().Replace(",", ".");
+                string target_z = smartScript.target_z.ToString().Replace(",", ".");
+                string target_o = smartScript.target_o.ToString().Replace(",", ".");
+
                 generatedSql += "(" + actualSourceSet + "," + smartScript.source_type + "," + smartScript.id + "," + smartScript.link + "," + smartScript.event_type + "," +
                                               smartScript.event_phase_mask + "," + smartScript.event_chance + "," + smartScript.event_flags + "," + eventParameters[0] + "," +
                                               eventParameters[1] + "," + eventParameters[2] + "," + eventParameters[3] + "," + smartScript.action_type + "," +
                                               actionParameters[0] + "," + actionParameters[1] + "," + actionParameters[2] + "," + actionParameters[3] + "," +
                                               actionParameters[4] + "," + actionParameters[5] + "," + smartScript.target_type + "," + targetParameters[0] + "," +
-                                              targetParameters[1] + "," + targetParameters[2] + "," + smartScript.target_x + "," + smartScript.target_y + "," +
-                                              smartScript.target_z + "," + smartScript.target_o + "," + '"' + smartScript.comment + '"' + ")";
+                                              targetParameters[1] + "," + targetParameters[2] + "," + target_x + "," + target_y + "," + target_z + "," + target_o + "," +
+                                              '"' + smartScript.comment + '"' + ")";
 
                 if (i == smartScripts.Count - 1)
                     generatedSql += ";";
