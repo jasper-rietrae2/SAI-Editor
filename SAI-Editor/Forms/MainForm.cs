@@ -4169,7 +4169,12 @@ namespace SAI_Editor.Forms
             if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
                 return;
 
-            listViewSmartScripts.EnsureVisible(listViewSmartScripts.AddSmartScript(listViewSmartScripts.SelectedSmartScript.Clone(), false, true));
+            SmartScript clonedSmartScript = listViewSmartScripts.SelectedSmartScript.Clone();
+
+            if (!Settings.Default.DuplicatePrimaryFields)
+                clonedSmartScript.id = ++lastSmartScriptIdOfScript;
+
+            listViewSmartScripts.EnsureVisible(listViewSmartScripts.AddSmartScript(clonedSmartScript, selectNewItem: true));
         }
 
         private void textBoxEventType_MouseWheel(object sender, MouseEventArgs e)

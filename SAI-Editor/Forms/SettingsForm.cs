@@ -41,6 +41,7 @@ namespace SAI_Editor.Forms
             textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
             radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
             radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
+            checkBoxDuplicatePrimaryFields.Checked = Settings.Default.DuplicatePrimaryFields;
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -118,6 +119,7 @@ namespace SAI_Editor.Forms
             Settings.Default.GenerateComments = checkBoxAutoGenerateComments.Checked;
             Settings.Default.CreateRevertQuery = checkBoxCreateRevertQuery.Checked;
             Settings.Default.PhaseHighlighting = checkBoxPhaseHighlighting.Checked;
+            Settings.Default.DuplicatePrimaryFields = checkBoxDuplicatePrimaryFields.Checked;
             Settings.Default.Save();
 
             if (newConnectionSuccesfull)
@@ -188,6 +190,7 @@ namespace SAI_Editor.Forms
                 checkBoxAutoGenerateComments.Checked == Settings.Default.GenerateComments &&
                 checkBoxCreateRevertQuery.Checked == Settings.Default.CreateRevertQuery &&
                 checkBoxPhaseHighlighting.Checked == Settings.Default.PhaseHighlighting &&
+                checkBoxDuplicatePrimaryFields.Checked == Settings.Default.DuplicatePrimaryFields &&
 
                 //! Check password last because it's the most 'expensive' check
                 textBoxPassword.Text == SAI_Editor_Manager.Instance.GetPasswordSetting())
@@ -216,6 +219,7 @@ namespace SAI_Editor.Forms
                     checkBoxAutoGenerateComments.Checked = false;
                     checkBoxCreateRevertQuery.Checked = false;
                     checkBoxPhaseHighlighting.Checked = true;
+                    checkBoxDuplicatePrimaryFields.Checked = false;
                     break;
                 case 1: // ! 'Connection' tab
                     textBoxHost.Text = "";

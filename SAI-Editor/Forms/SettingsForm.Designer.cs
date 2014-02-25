@@ -32,6 +32,7 @@
             this.buttonExitSettings = new System.Windows.Forms.Button();
             this.buttonSaveSettings = new System.Windows.Forms.Button();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
+            this.checkBoxDuplicatePrimaryFields = new System.Windows.Forms.CheckBox();
             this.checkBoxPhaseHighlighting = new System.Windows.Forms.CheckBox();
             this.checkBoxCreateRevertQuery = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
@@ -91,6 +92,7 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.checkBoxDuplicatePrimaryFields);
             this.tabPageGeneral.Controls.Add(this.checkBoxPhaseHighlighting);
             this.tabPageGeneral.Controls.Add(this.checkBoxCreateRevertQuery);
             this.tabPageGeneral.Controls.Add(this.checkBoxAutoGenerateComments);
@@ -110,6 +112,16 @@
             this.tabPageGeneral.TabIndex = 0;
             this.tabPageGeneral.Text = "General";
             this.tabPageGeneral.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxDuplicatePrimaryFields
+            // 
+            this.checkBoxDuplicatePrimaryFields.AutoSize = true;
+            this.checkBoxDuplicatePrimaryFields.Location = new System.Drawing.Point(251, 52);
+            this.checkBoxDuplicatePrimaryFields.Name = "checkBoxDuplicatePrimaryFields";
+            this.checkBoxDuplicatePrimaryFields.Size = new System.Drawing.Size(253, 17);
+            this.checkBoxDuplicatePrimaryFields.TabIndex = 10;
+            this.checkBoxDuplicatePrimaryFields.Text = "Duplicate primary fields like `id` when duplicating";
+            this.checkBoxDuplicatePrimaryFields.UseVisualStyleBackColor = true;
             // 
             // checkBoxPhaseHighlighting
             // 
@@ -505,6 +517,7 @@
         private System.Windows.Forms.RadioButton radioButtonDontUseDatabase;
         private System.Windows.Forms.RadioButton radioButtonConnectToMySql;
         public System.Windows.Forms.CheckBox checkBoxPhaseHighlighting;
+        private System.Windows.Forms.CheckBox checkBoxDuplicatePrimaryFields;
 
     }
 }
