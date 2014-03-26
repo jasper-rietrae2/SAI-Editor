@@ -41,13 +41,6 @@ namespace SAI_Editor.Forms
         LoginFormHeightShowWarning = 309,
     }
 
-    internal enum MaxValues
-    {
-        MaxEventType = 74,
-        MaxActionType = 110,
-        MaxTargetType = 26,
-    }
-
     public enum SourceTypes
     {
         SourceTypeNone = -1,
@@ -1479,10 +1472,10 @@ namespace SAI_Editor.Forms
                 int eventType;
                 Int32.TryParse(textBoxEventType.Text, out eventType);
 
-                if (eventType > (int)MaxValues.MaxEventType)
+                if (eventType > (int)SmartEvent.SMART_EVENT_MAX - 1)
                 {
-                    comboBoxEventType.SelectedIndex = (int)MaxValues.MaxEventType;
-                    textBoxEventType.Text = ((int)MaxValues.MaxEventType).ToString();
+                    comboBoxEventType.SelectedIndex = (int)SmartEvent.SMART_EVENT_MAX - 1;
+                    textBoxEventType.Text = ((int)SmartEvent.SMART_EVENT_MAX - 1).ToString();
                     textBoxEventType.SelectionStart = 3; //! Set cursor position to end of the line
                 }
                 else
@@ -1503,10 +1496,10 @@ namespace SAI_Editor.Forms
                 int actionType;
                 Int32.TryParse(textBoxActionType.Text, out actionType);
 
-                if (actionType > (int)MaxValues.MaxActionType)
+                if (actionType > (int)SmartAction.SMART_ACTION_MAX - 1)
                 {
-                    comboBoxActionType.SelectedIndex = (int)MaxValues.MaxActionType;
-                    textBoxActionType.Text = ((int)MaxValues.MaxActionType).ToString();
+                    comboBoxActionType.SelectedIndex = (int)SmartAction.SMART_ACTION_MAX - 1;
+                    textBoxActionType.Text = ((int)SmartAction.SMART_ACTION_MAX - 1).ToString();
                     textBoxActionType.SelectionStart = 3; //! Set cursor position to end of the line
                 }
                 else
@@ -1527,10 +1520,10 @@ namespace SAI_Editor.Forms
                 int targetType;
                 Int32.TryParse(textBoxTargetType.Text, out targetType);
 
-                if (targetType > (int)MaxValues.MaxTargetType)
+                if (targetType > (int)SmartTarget.SMART_TARGET_MAX - 1)
                 {
-                    comboBoxTargetType.SelectedIndex = (int)MaxValues.MaxTargetType;
-                    textBoxTargetType.Text = ((int)MaxValues.MaxTargetType).ToString();
+                    comboBoxTargetType.SelectedIndex = (int)SmartTarget.SMART_TARGET_MAX - 1;
+                    textBoxTargetType.Text = ((int)SmartTarget.SMART_TARGET_MAX - 1).ToString();
                     textBoxTargetType.SelectionStart = 3; //! Set cursor position to end of the line
                 }
                 else
@@ -4213,8 +4206,8 @@ namespace SAI_Editor.Forms
             if (newNumber < 0)
                 newNumber = 0;
 
-            if (newNumber > (int)MaxValues.MaxEventType)
-                newNumber = (int)MaxValues.MaxEventType;
+            if (newNumber > (int)SmartEvent.SMART_EVENT_MAX - 1)
+                newNumber = (int)SmartEvent.SMART_EVENT_MAX - 1;
 
             textBoxEventType.Text = newNumber.ToString();
         }
@@ -4231,8 +4224,8 @@ namespace SAI_Editor.Forms
             if (newNumber < 0)
                 newNumber = 0;
 
-            if (newNumber > (int)MaxValues.MaxActionType)
-                newNumber = (int)MaxValues.MaxActionType;
+            if (newNumber > (int)SmartAction.SMART_ACTION_MAX - 1)
+                newNumber = (int)SmartAction.SMART_ACTION_MAX - 1;
 
             textBoxActionType.Text = newNumber.ToString();
         }
@@ -4249,8 +4242,8 @@ namespace SAI_Editor.Forms
             if (newNumber < 0)
                 newNumber = 0;
 
-            if (newNumber > (int)MaxValues.MaxTargetType)
-                newNumber = (int)MaxValues.MaxTargetType;
+            if (newNumber > (int)SmartTarget.SMART_TARGET_MAX - 1)
+                newNumber = (int)SmartTarget.SMART_TARGET_MAX - 1;
 
             textBoxTargetType.Text = newNumber.ToString();
         }
