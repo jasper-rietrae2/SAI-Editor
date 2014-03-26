@@ -194,6 +194,8 @@ namespace SAI_Editor.Enumerators
         SMART_EVENT_ACTION_DONE = 72,
         SMART_EVENT_ON_SPELLCLICK = 73,
         SMART_EVENT_FRIENDLY_HEALTH_PCT = 74,
+        SMART_EVENT_DISTANCE_CREATURE = 75,
+        SMART_EVENT_DISTANCE_GAMEOBJECT = 76,
     }
 
     public enum SmartTarget

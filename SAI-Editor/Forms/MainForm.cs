@@ -1287,6 +1287,8 @@ namespace SAI_Editor.Forms
                 case SmartEvent.SMART_EVENT_SPELLHIT: //! Spell entry & Spell school
                 case SmartEvent.SMART_EVENT_SPELLHIT_TARGET: //! Spell entry & Spell school
                 case SmartEvent.SMART_EVENT_GOSSIP_SELECT: //! Gossip menu id & gossip id
+                case SmartEvent.SMART_EVENT_DISTANCE_CREATURE: //! Creature guid
+                case SmartEvent.SMART_EVENT_DISTANCE_GAMEOBJECT: //! Gameobject guid & entry
                     buttonEventParamOneSearch.Visible = true;
                     buttonEventParamTwoSearch.Visible = true;
                     break;
@@ -2254,6 +2256,14 @@ namespace SAI_Editor.Forms
                     using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOption))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
+                case SmartEvent.SMART_EVENT_DISTANCE_CREATURE: //! Creature guid
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid))
+                        searchFromDatabaseForm.ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_DISTANCE_GAMEOBJECT: //! Gameobject guid
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid))
+                        searchFromDatabaseForm.ShowDialog(this);
+                    break;
             }
         }
 
@@ -2278,6 +2288,14 @@ namespace SAI_Editor.Forms
                     break;
                 case SmartEvent.SMART_EVENT_GOSSIP_SELECT: //! Gossip id
                     using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGossipOptionId))
+                        searchFromDatabaseForm.ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_DISTANCE_CREATURE: //! Creature entry
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                        searchFromDatabaseForm.ShowDialog(this);
+                    break;
+                case SmartEvent.SMART_EVENT_DISTANCE_GAMEOBJECT: //! Gameobject entry
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
