@@ -260,6 +260,7 @@ namespace SAI_Editor.Enumerators
         TEMPSUMMON_MANUAL_DESPAWN = 8
     }
 
+    [Flags]
     public enum SmartCastFlags
     {
         SMARTCAST_NONE = 0x00,
@@ -293,14 +294,15 @@ namespace SAI_Editor.Enumerators
 
     public enum SmartAiTemplates
     {
-        SMARTAI_TEMPLATE_BASIC,
-        SMARTAI_TEMPLATE_CASTER,
-        SMARTAI_TEMPLATE_TURRET,
-        SMARTAI_TEMPLATE_PASSIVE,
-        SMARTAI_TEMPLATE_CAGED_GO_PART,
-        SMARTAI_TEMPLATE_CAGED_NPC_PART,
+        SMARTAI_TEMPLATE_BASIC = 0,
+        SMARTAI_TEMPLATE_CASTER = 1,
+        SMARTAI_TEMPLATE_TURRET = 2,
+        SMARTAI_TEMPLATE_PASSIVE = 3,
+        SMARTAI_TEMPLATE_CAGED_GO_PART = 4,
+        SMARTAI_TEMPLATE_CAGED_NPC_PART = 5,
     }
 
+    [Flags]
     public enum GoFlags : uint
     {
         GO_FLAG_NONE                    = 0x00000000,
@@ -315,6 +317,7 @@ namespace SAI_Editor.Enumerators
         GO_FLAG_DESTROYED               = 0x00000400,
     }
 
+    [Flags]
     public enum DynamicFlags : uint
     {
         UNIT_DYNFLAG_NONE                       = 0x0000,
@@ -342,6 +345,7 @@ namespace SAI_Editor.Enumerators
         UNIT_STAND_STATE_SUBMERGED         = 9
     }
 
+    [Flags]
     public enum UnitStandFlags : uint
     {
         UNIT_STAND_FLAGS_UNK1         = 0x01,
@@ -352,6 +356,7 @@ namespace SAI_Editor.Enumerators
         UNIT_STAND_FLAGS_ALL          = 0xFF
     }
 
+    [Flags]
     public enum UnitBytes1_Flags : uint
     {
         UNIT_BYTE1_FLAG_ALWAYS_STAND    = 0x01,
@@ -372,6 +377,7 @@ namespace SAI_Editor.Enumerators
         EVENT_FLAG_DEBUG_ONLY         = 0x80,
     }
 
+    [Flags]
     public enum UnitFlags : uint
     {
         UNIT_FLAG_NONE                  = 0x00000000,
@@ -409,6 +415,7 @@ namespace SAI_Editor.Enumerators
         UNIT_FLAG_UNK_31                = 0x80000000,
     }
 
+    [Flags]
     public enum UnitFlags2 : uint
     {
         UNIT_FLAG2_NONE                         = 0x00000000,
@@ -432,6 +439,7 @@ namespace SAI_Editor.Enumerators
         UNIT_FLAG2_ALLOW_CHEAT_SPELLS           = 0x00040000    // Allows casting spells with AttributesEx7 & SPELL_ATTR7_IS_CHEAT_SPELL
     }
 
+    [Flags]
     public enum NpcFlags : uint
     {
         UNIT_NPC_FLAG_NONE                  = 0x00000000,
@@ -463,6 +471,7 @@ namespace SAI_Editor.Enumerators
         UNIT_NPC_FLAG_PLAYER_VEHICLE        = 0x02000000        // players with mounts that have vehicle data should have it set
     }
 
+    [Flags]
     public enum SmartPhaseMasks
     {
         SMART_EVENT_PHASE_ALWAYS            = 0x00,
@@ -474,6 +483,7 @@ namespace SAI_Editor.Enumerators
         SMART_EVENT_PHASE_6                 = 0x20,
     }
 
+    [Flags]
     public enum PhaseMasks
     {
         PHASEMASK_NEVER    = 0x00,
