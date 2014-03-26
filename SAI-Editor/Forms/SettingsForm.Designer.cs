@@ -394,7 +394,6 @@
             this.textBoxPort.Size = new System.Drawing.Size(130, 20);
             this.textBoxPort.TabIndex = 4;
             this.textBoxPort.KeyDown += new System.Windows.Forms.KeyEventHandler(this.settingTextBox_KeyDown);
-            this.textBoxPort.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numericField_KeyPress);
             // 
             // label3
             // 

@@ -82,7 +82,6 @@
             this.textBoxCriteria.Name = "textBoxCriteria";
             this.textBoxCriteria.Size = new System.Drawing.Size(190, 20);
             this.textBoxCriteria.TabIndex = 8;
-            this.textBoxCriteria.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCriteria_KeyPress);
             // 
             // comboBoxSearchType
             // 
