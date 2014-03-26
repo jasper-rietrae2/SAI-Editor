@@ -307,9 +307,6 @@ namespace SAI_Editor.Forms
             searchNewUpdates.Start();
             updateSurveyThread.Start();
 
-            using (ConditionForm conditionForm = new ConditionForm())
-                conditionForm.ShowDialog(this);
-
             runningConstructor = false;
         }
 
