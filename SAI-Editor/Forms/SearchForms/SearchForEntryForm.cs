@@ -578,33 +578,10 @@ namespace SAI_Editor.Forms.SearchForms
             _isBusy = false;
         }
 
-        private void textBoxCriteria_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text))
-                return;
-
-            switch (comboBoxSearchType.SelectedIndex)
-            {
-                case 0: //! Creature entry
-                case 2: //! Creature guid
-                case 3: //! Gameobject entry
-                case 5: //! Gameobject guid
-                case 6: //! Areatrigger id
-                case 7: //! Areatrigger map id
-                case 8: //! Actionlist entry
-                    //if (!Char.IsNumber(e.KeyChar))
-                    //    e.Handled = e.KeyChar != (Char)Keys.Back && e.KeyChar != (Char)Keys.OemMinus;
-                    break;
-                case 1: //! Creature name
-                case 4: //! Gameobject name
-                    //! Allow any characters when searching for names
-                    break;
-            }
-        }
-
         private void comboBoxSearchType_KeyPress(object sender, KeyPressEventArgs e)
         {
-            e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
+            if (Char.IsLetter(e.KeyChar) || Char.IsNumber(e.KeyChar))
+                e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
         }
 
         private void FillMainFormFields(object sender, EventArgs e)
