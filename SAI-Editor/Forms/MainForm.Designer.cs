@@ -249,6 +249,8 @@
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
             this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.conditionEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
@@ -305,8 +307,9 @@
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuHeaderFiles,
             this.optionsToolStripMenuItem,
-            this.aboutToolStripMenuItem,
-            this.otherToolStripMenuItem});
+            this.toolsToolStripMenuItem,
+            this.otherToolStripMenuItem,
+            this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(1318, 24);
@@ -2747,6 +2750,21 @@
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.conditionEditorToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // conditionEditorToolStripMenuItem
+            // 
+            this.conditionEditorToolStripMenuItem.Name = "conditionEditorToolStripMenuItem";
+            this.conditionEditorToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
+            this.conditionEditorToolStripMenuItem.Text = "Condition editor";
+            this.conditionEditorToolStripMenuItem.Click += new System.EventHandler(this.conditionEditorToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3031,6 +3049,8 @@
         private System.Windows.Forms.ToolStripMenuItem searchForUnitStandStateTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchForTempSummonTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchForUnitFieldBytes1TypesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem conditionEditorToolStripMenuItem;
     }
 }
 

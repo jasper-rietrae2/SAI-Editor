@@ -314,6 +314,9 @@ namespace SAI_Editor.Forms
             searchNewUpdates.Start();
             updateSurveyThread.Start();
 
+            using (ConditionForm conditionForm = new ConditionForm())
+                conditionForm.ShowDialog(this);
+
             runningConstructor = false;
         }
 
@@ -4657,6 +4660,12 @@ namespace SAI_Editor.Forms
         {
             using (SingleSelectForm<UnitFieldBytes1Types> singleSelectForm = new SingleSelectForm<UnitFieldBytes1Types>(null))
                 singleSelectForm.ShowDialog(this);
+        }
+
+        private void conditionEditorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (ConditionForm conditionForm = new ConditionForm())
+                conditionForm.ShowDialog(this);
         }
     }
 }
