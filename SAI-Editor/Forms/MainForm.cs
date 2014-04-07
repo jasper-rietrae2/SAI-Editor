@@ -4664,8 +4664,8 @@ namespace SAI_Editor.Forms
 
         private void conditionEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (ConditionForm conditionForm = new ConditionForm())
-                conditionForm.ShowDialog(this);
+            //using (ConditionForm conditionForm = new ConditionForm())
+            //    conditionForm.ShowDialog(this);
         }
     }
 }
