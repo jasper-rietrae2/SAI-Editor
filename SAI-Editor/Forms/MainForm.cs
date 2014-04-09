@@ -2123,52 +2123,19 @@ namespace SAI_Editor.Forms
 
         private void SetVisibilityOfAllParamButtons(bool visible)
         {
-            buttonEventParamOneSearch.Visible = visible;
-            buttonEventParamTwoSearch.Visible = visible;
-            buttonEventParamThreeSearch.Visible = visible;
-            buttonEventParamFourSearch.Visible = visible;
-            buttonActionParamOneSearch.Visible = visible;
-            buttonActionParamTwoSearch.Visible = visible;
-            buttonActionParamThreeSearch.Visible = visible;
-            buttonActionParamFourSearch.Visible = visible;
-            buttonActionParamFiveSearch.Visible = visible;
-            buttonActionParamSixSearch.Visible = visible;
-            buttonTargetParamOneSearch.Visible = visible;
-            buttonTargetParamTwoSearch.Visible = visible;
-            buttonTargetParamThreeSearch.Visible = visible;
-            buttonTargetParamFourSearch.Visible = visible;
-            buttonTargetParamFiveSearch.Visible = visible;
-            buttonTargetParamSixSearch.Visible = visible;
-            buttonTargetParamSevenSearch.Visible = visible;
+            foreach (TabPage page in tabControlParameters.TabPages)
+                foreach (Control control in page.Controls)
+                    if (control is Button)
+                        control.Visible = visible;
         }
 
-        private void SetVisibilityOfAllEventParamButtons(bool visible)
+        private void SetVisibilityOfAllParamButtonsInTab(string tabText, bool visible)
         {
-            buttonEventParamOneSearch.Visible = visible;
-            buttonEventParamTwoSearch.Visible = visible;
-            buttonEventParamThreeSearch.Visible = visible;
-            buttonEventParamFourSearch.Visible = visible;
-        }
-
-        private void SetVisibilityOfAllActionParamButtons(bool visible)
-        {
-            buttonActionParamOneSearch.Visible = visible;
-            buttonActionParamTwoSearch.Visible = visible;
-            buttonActionParamThreeSearch.Visible = visible;
-            buttonActionParamFourSearch.Visible = visible;
-            buttonActionParamFiveSearch.Visible = visible;
-            buttonActionParamSixSearch.Visible = visible;
-        }
-
-        private void SetVisibilityOfAllTargetParamButtons(bool visible)
-        {
-            buttonTargetParamOneSearch.Visible = visible;
-            buttonTargetParamTwoSearch.Visible = visible;
-            buttonTargetParamThreeSearch.Visible = visible;
-            buttonTargetParamFourSearch.Visible = visible;
-            buttonTargetParamFiveSearch.Visible = visible;
-            buttonTargetParamSixSearch.Visible = visible;
-            buttonTargetParamSevenSearch.Visible = visible;
+            foreach (TabPage page in tabControlParameters.TabPages)
+                if (page.Text == tabText)
+                    foreach (Control control in page.Controls)
+                        if (control is Button)
+                            control.Visible = visible;
         }
 
         private string GetSourceTypeString(SourceTypes sourceType)
@@ -2598,8 +2565,8 @@ namespace SAI_Editor.Forms
 
         private void ParameterInstallAiTemplateChanged()
         {
-            SetVisibilityOfAllActionParamButtons(false);
-            SetVisibilityOfAllTargetParamButtons(false);
+            SetVisibilityOfAllParamButtonsInTab("Action", false);
+            SetVisibilityOfAllParamButtonsInTab("Target", false);
             SetTextOfAllActionParameterLabels("");
 
             labelActionParam1.Text = "Template entry";
