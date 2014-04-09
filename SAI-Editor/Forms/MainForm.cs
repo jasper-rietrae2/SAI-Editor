@@ -867,6 +867,8 @@ namespace SAI_Editor.Forms
 
                 if (radioButtonConnectToMySql.Checked)
                     TryToLoadScript(showErrorIfNoneFound: false);
+
+                conditionEditorToolStripMenuItem.PerformClick();
             }
         }
 
@@ -4664,8 +4666,8 @@ namespace SAI_Editor.Forms
 
         private void conditionEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //using (ConditionForm conditionForm = new ConditionForm())
-            //    conditionForm.ShowDialog(this);
+            ConditionForm conditionForm = new ConditionForm();
+            conditionForm.Show();
         }
     }
 }

@@ -66,6 +66,9 @@
     <Compile Include="Classes\Constants.cs" />
     <Compile Include="Classes\Database\Classes\Creature.cs" />
     <Compile Include="Classes\Database\Classes\Gameobject.cs" />
+    <Compile Include="Classes\LineSeparator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Classes\PictureBoxDisableable.cs">
       <SubType>Component</SubType>
     </Compile>
