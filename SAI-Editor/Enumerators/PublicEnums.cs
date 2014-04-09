@@ -283,7 +283,7 @@ namespace SAI_Editor.Enumerators
         REACT_AGGRESSIVE = 2,
     }
 
-    public enum SmartScriptRespawnCondition
+    public enum SmartRespawnCondition
     {
         RESPAWN_CONDITION_NONE = 0,
         RESPAWN_CONDITION_MAP = 1,
@@ -594,7 +594,7 @@ namespace SAI_Editor.Enumerators
         UNIT_BYTES1_FLAGS_TYPE      = 3,
     }
 
-    public enum ActionlistTimerUpdateType
+    public enum SmartActionlistTimerUpdateType
     {
         ACTIONLIST_UPDATE_OUT_OF_COMBAT = 0,
         ACTIONLIST_UPDATE_IN_COMBAT     = 1,

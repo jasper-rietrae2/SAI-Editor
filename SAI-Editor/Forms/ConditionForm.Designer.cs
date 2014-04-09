@@ -46,7 +46,17 @@
             this.textBoxComment = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.textBoxCondValue1 = new System.Windows.Forms.TextBox();
+            this.textBoxCondValue2 = new System.Windows.Forms.TextBox();
+            this.textBoxCondValue3 = new System.Windows.Forms.TextBox();
             this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBoxConditionSourceTypes
@@ -133,51 +143,53 @@
             this.comboBoxConditionTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBoxConditionTypes.Size = new System.Drawing.Size(290, 21);
             this.comboBoxConditionTypes.TabIndex = 1;
+            this.comboBoxConditionTypes.SelectedIndexChanged += new System.EventHandler(this.comboBoxConditionTypes_SelectedIndexChanged);
+            this.comboBoxConditionTypes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxesConditions_KeyPress);
             // 
             // labelSourceType
             // 
             this.labelSourceType.AutoSize = true;
             this.labelSourceType.Location = new System.Drawing.Point(12, 16);
             this.labelSourceType.Name = "labelSourceType";
-            this.labelSourceType.Size = new System.Drawing.Size(67, 13);
+            this.labelSourceType.Size = new System.Drawing.Size(64, 13);
             this.labelSourceType.TabIndex = 2;
-            this.labelSourceType.Text = "Source type:";
+            this.labelSourceType.Text = "Source type";
             // 
             // labelConditionType
             // 
             this.labelConditionType.AutoSize = true;
             this.labelConditionType.Location = new System.Drawing.Point(12, 122);
             this.labelConditionType.Name = "labelConditionType";
-            this.labelConditionType.Size = new System.Drawing.Size(77, 13);
+            this.labelConditionType.Size = new System.Drawing.Size(74, 13);
             this.labelConditionType.TabIndex = 3;
-            this.labelConditionType.Text = "Condition type:";
+            this.labelConditionType.Text = "Condition type";
             // 
             // labelCondValue1
             // 
             this.labelCondValue1.AutoSize = true;
-            this.labelCondValue1.Location = new System.Drawing.Point(12, 152);
+            this.labelCondValue1.Location = new System.Drawing.Point(12, 149);
             this.labelCondValue1.Name = "labelCondValue1";
-            this.labelCondValue1.Size = new System.Drawing.Size(75, 13);
+            this.labelCondValue1.Size = new System.Drawing.Size(89, 13);
             this.labelCondValue1.TabIndex = 4;
-            this.labelCondValue1.Text = "lblCondValue1";
+            this.labelCondValue1.Text = "Condition value 1";
             // 
             // labelCondValue2
             // 
             this.labelCondValue2.AutoSize = true;
-            this.labelCondValue2.Location = new System.Drawing.Point(391, 210);
+            this.labelCondValue2.Location = new System.Drawing.Point(12, 175);
             this.labelCondValue2.Name = "labelCondValue2";
-            this.labelCondValue2.Size = new System.Drawing.Size(75, 13);
+            this.labelCondValue2.Size = new System.Drawing.Size(89, 13);
             this.labelCondValue2.TabIndex = 5;
-            this.labelCondValue2.Text = "lblCondValue2";
+            this.labelCondValue2.Text = "Condition value 2";
             // 
             // labelCondValue3
             // 
             this.labelCondValue3.AutoSize = true;
-            this.labelCondValue3.Location = new System.Drawing.Point(391, 223);
+            this.labelCondValue3.Location = new System.Drawing.Point(12, 201);
             this.labelCondValue3.Name = "labelCondValue3";
-            this.labelCondValue3.Size = new System.Drawing.Size(75, 13);
+            this.labelCondValue3.Size = new System.Drawing.Size(89, 13);
             this.labelCondValue3.TabIndex = 6;
-            this.labelCondValue3.Text = "lblCondValue3";
+            this.labelCondValue3.Text = "Condition value 3";
             // 
             // labelSourceGroup
             // 
@@ -202,9 +214,9 @@
             this.labelConditionTarget.AutoSize = true;
             this.labelConditionTarget.Location = new System.Drawing.Point(12, 43);
             this.labelConditionTarget.Name = "labelConditionTarget";
-            this.labelConditionTarget.Size = new System.Drawing.Size(84, 13);
+            this.labelConditionTarget.Size = new System.Drawing.Size(81, 13);
             this.labelConditionTarget.TabIndex = 9;
-            this.labelConditionTarget.Text = "Condition target:";
+            this.labelConditionTarget.Text = "Condition target";
             // 
             // comboBoxConditionTarget
             // 
@@ -213,7 +225,7 @@
             this.comboBoxConditionTarget.Name = "comboBoxConditionTarget";
             this.comboBoxConditionTarget.Size = new System.Drawing.Size(290, 21);
             this.comboBoxConditionTarget.TabIndex = 10;
-            this.comboBoxConditionTarget.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxConditionTarget_KeyPress);
+            this.comboBoxConditionTarget.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxesConditions_KeyPress);
             // 
             // textBoxSourceGroup
             // 
@@ -234,9 +246,9 @@
             this.labelComment.AutoSize = true;
             this.labelComment.Location = new System.Drawing.Point(12, 70);
             this.labelComment.Name = "labelComment";
-            this.labelComment.Size = new System.Drawing.Size(54, 13);
+            this.labelComment.Size = new System.Drawing.Size(51, 13);
             this.labelComment.TabIndex = 14;
-            this.labelComment.Text = "Comment:";
+            this.labelComment.Text = "Comment";
             // 
             // textBoxComment
             // 
@@ -263,6 +275,27 @@
             this.label2.TabIndex = 17;
             this.label2.Text = ":";
             // 
+            // textBoxCondValue1
+            // 
+            this.textBoxCondValue1.Location = new System.Drawing.Point(119, 146);
+            this.textBoxCondValue1.Name = "textBoxCondValue1";
+            this.textBoxCondValue1.Size = new System.Drawing.Size(149, 20);
+            this.textBoxCondValue1.TabIndex = 18;
+            // 
+            // textBoxCondValue2
+            // 
+            this.textBoxCondValue2.Location = new System.Drawing.Point(119, 172);
+            this.textBoxCondValue2.Name = "textBoxCondValue2";
+            this.textBoxCondValue2.Size = new System.Drawing.Size(149, 20);
+            this.textBoxCondValue2.TabIndex = 18;
+            // 
+            // textBoxCondValue3
+            // 
+            this.textBoxCondValue3.Location = new System.Drawing.Point(119, 198);
+            this.textBoxCondValue3.Name = "textBoxCondValue3";
+            this.textBoxCondValue3.Size = new System.Drawing.Size(149, 20);
+            this.textBoxCondValue3.TabIndex = 18;
+            // 
             // lineSeparator1
             // 
             this.lineSeparator1.Location = new System.Drawing.Point(-1, 102);
@@ -272,12 +305,85 @@
             this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
             this.lineSeparator1.TabIndex = 13;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(107, 149);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(10, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = ":";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(107, 175);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(10, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = ":";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(107, 201);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(10, 13);
+            this.label5.TabIndex = 16;
+            this.label5.Text = ":";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(103, 70);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(10, 13);
+            this.label6.TabIndex = 16;
+            this.label6.Text = ":";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(103, 43);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(10, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = ":";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(103, 16);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(10, 13);
+            this.label8.TabIndex = 16;
+            this.label8.Text = ":";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(107, 122);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(10, 13);
+            this.label9.TabIndex = 16;
+            this.label9.Text = ":";
+            // 
             // ConditionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 377);
+            this.Controls.Add(this.textBoxCondValue3);
+            this.Controls.Add(this.textBoxCondValue2);
+            this.Controls.Add(this.textBoxCondValue1);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxComment);
             this.Controls.Add(this.labelComment);
@@ -329,5 +435,15 @@
         private System.Windows.Forms.TextBox textBoxComment;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxCondValue1;
+        private System.Windows.Forms.TextBox textBoxCondValue2;
+        private System.Windows.Forms.TextBox textBoxCondValue3;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

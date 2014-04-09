@@ -2113,7 +2113,7 @@ namespace SAI_Editor.Forms
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Respawn condition
-                    using (SingleSelectForm<SmartScriptRespawnCondition> singleSelectForm = new SingleSelectForm<SmartScriptRespawnCondition>(textBoxToChange))
+                    using (SingleSelectForm<SmartRespawnCondition> singleSelectForm = new SingleSelectForm<SmartRespawnCondition>(textBoxToChange))
                         singleSelectForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
@@ -2616,7 +2616,7 @@ namespace SAI_Editor.Forms
                         singleSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
-                    using (SingleSelectForm<ActionlistTimerUpdateType> singleSelectForm = new SingleSelectForm<ActionlistTimerUpdateType>(textBoxToChange))
+                    using (SingleSelectForm<SmartActionlistTimerUpdateType> singleSelectForm = new SingleSelectForm<SmartActionlistTimerUpdateType>(textBoxToChange))
                         singleSelectForm.ShowDialog(this);
                     break;
             }
@@ -4215,48 +4215,6 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private void searchForGameobjectFlagsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (MultiSelectForm<GoFlags> multiSelectForm = new MultiSelectForm<GoFlags>(null))
-                multiSelectForm.ShowDialog(this);
-        }
-
-        private void searchForUnitFlagsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (MultiSelectForm<UnitFlags> multiSelectForm = new MultiSelectForm<UnitFlags>(null))
-                multiSelectForm.ShowDialog(this);
-        }
-
-        private void searchForUnitFlags2ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (MultiSelectForm<UnitFlags2> multiSelectForm = new MultiSelectForm<UnitFlags2>(null))
-                multiSelectForm.ShowDialog(this);
-        }
-
-        private void searchForDynamicFlagsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (MultiSelectForm<DynamicFlags> multiSelectForm = new MultiSelectForm<DynamicFlags>(null))
-                multiSelectForm.ShowDialog(this);
-        }
-
-        private void searchForNpcFlagsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (MultiSelectForm<NpcFlags> multiSelectForm = new MultiSelectForm<NpcFlags>(null))
-                multiSelectForm.ShowDialog(this);
-        }
-
-        private void searchForUnitStandFlagsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<UnitStandStateType> singleSelectForm = new SingleSelectForm<UnitStandStateType>(null))
-                    singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForUnitBytes1FlagsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (MultiSelectForm<UnitBytes1_Flags> multiSelectForm = new MultiSelectForm<UnitBytes1_Flags>(null))
-                multiSelectForm.ShowDialog(this);
-        }
-
         private void searchForASpellToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
@@ -4383,118 +4341,44 @@ namespace SAI_Editor.Forms
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
-        private void searchForSAIPhaseMasksToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (MultiSelectForm<SmartPhaseMasks> multiSelectForm = new MultiSelectForm<SmartPhaseMasks>(null))
-                multiSelectForm.ShowDialog(this);
-        }
-
-        private void searchForSAIEventFlagsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (MultiSelectForm<SmartEventFlags> multiSelectForm = new MultiSelectForm<SmartEventFlags>(null))
-                multiSelectForm.ShowDialog(this);
-        }
-
-        private void searchForSAICastFlagsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (MultiSelectForm<SmartCastFlags> multiSelectForm = new MultiSelectForm<SmartCastFlags>(null))
-                multiSelectForm.ShowDialog(this);
-        }
-
-        private void searchForSAITemplatesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<SmartAiTemplates> singleSelectForm = new SingleSelectForm<SmartAiTemplates>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForSAIRespawnConditionsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<SmartScriptRespawnCondition> singleSelectForm = new SingleSelectForm<SmartScriptRespawnCondition>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForSAIEventTypesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<SmartEvent> singleSelectForm = new SingleSelectForm<SmartEvent>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForSAIActionTypesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<SmartAction> singleSelectForm = new SingleSelectForm<SmartAction>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForSAITargetTypesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<SmartTarget> singleSelectForm = new SingleSelectForm<SmartTarget>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForSAIActionlistTimerUpdateTypeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<ActionlistTimerUpdateType> singleSelectForm = new SingleSelectForm<ActionlistTimerUpdateType>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForGameobjectStatesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<GoStates> singleSelectForm = new SingleSelectForm<GoStates>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForReactStatesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<ReactStates> singleSelectForm = new SingleSelectForm<ReactStates>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForSheathStatesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<SheathState> singleSelectForm = new SingleSelectForm<SheathState>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForMovementGeneratorTypesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<MovementGeneratorType> singleSelectForm = new SingleSelectForm<MovementGeneratorType>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForSpellSchoolsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<SpellSchools> singleSelectForm = new SingleSelectForm<SpellSchools>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForPowerTypesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<PowerTypes> singleSelectForm = new SingleSelectForm<PowerTypes>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForUnitStandStateTypesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<UnitStandStateType> singleSelectForm = new SingleSelectForm<UnitStandStateType>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForTempSummonTypesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<TempSummonType> singleSelectForm = new SingleSelectForm<TempSummonType>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
-        private void searchForUnitFieldBytes1TypesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            using (SingleSelectForm<UnitFieldBytes1Types> singleSelectForm = new SingleSelectForm<UnitFieldBytes1Types>(null))
-                singleSelectForm.ShowDialog(this);
-        }
-
         private void conditionEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ConditionForm conditionForm = new ConditionForm();
             conditionForm.Show();
+        }
+
+        Dictionary<string, Type> searchEventHandlers = new Dictionary<string, Type>()
+        {
+	        {"Search for gameobject flags", typeof(MultiSelectForm<GoFlags>)},
+	        {"Search for unit flags", typeof(MultiSelectForm<UnitFlags>)},
+	        {"Search for unit flags 2", typeof(MultiSelectForm<UnitFlags2>)},
+	        {"Search for dynamic flags", typeof(MultiSelectForm<DynamicFlags>)},
+	        {"Search for npc flags", typeof(MultiSelectForm<NpcFlags>)},
+	        {"Search for unit stand flags", typeof(SingleSelectForm<UnitStandStateType>)},
+	        {"Search for unit bytes1 flags", typeof(MultiSelectForm<UnitBytes1_Flags>)},
+	        {"Search for SAI event flags", typeof(MultiSelectForm<SmartEventFlags>)},
+	        {"Search for SAI phase masks", typeof(MultiSelectForm<SmartPhaseMasks>)},
+	        {"Search for SAI cast flags", typeof(MultiSelectForm<SmartCastFlags>)},
+	        {"Search for SAI templates", typeof(SingleSelectForm<SmartAiTemplates>)},
+	        {"Search for SAI respawn conditions", typeof(SingleSelectForm<SmartRespawnCondition>)},
+	        {"Search for SAI event types", typeof(SingleSelectForm<SmartEvent>)},
+	        {"Search for SAI action types", typeof(SingleSelectForm<SmartAction>)},
+	        {"Search for SAI target types", typeof(SingleSelectForm<SmartTarget>)},
+	        {"Search for SAI actionlist timer update types", typeof(SingleSelectForm<SmartActionlistTimerUpdateType>)},
+	        {"Search for gameobject states", typeof(SingleSelectForm<GoStates>)},
+	        {"Search for react states", typeof(SingleSelectForm<ReactStates>)},
+	        {"Search for sheath states", typeof(SingleSelectForm<SheathState>)},
+	        {"Search for movement generator types", typeof(SingleSelectForm<MovementGeneratorType>)},
+	        {"Search for spell schools", typeof(SingleSelectForm<SpellSchools>)},
+	        {"Search for power types", typeof(SingleSelectForm<PowerTypes>)},
+	        {"Search for unit stand state types", typeof(SingleSelectForm<UnitStandStateType>)},
+	        {"Search for temp summon types", typeof(SingleSelectForm<TempSummonType>)},
+        };
+
+        private void searchForFlagsMenuItem_Click(object sender, EventArgs e)
+        {
+            using (Form selectForm = (Form)Activator.CreateInstance(searchEventHandlers[((ToolStripItem)sender).Text], new object[] { null }))
+                selectForm.ShowDialog(this);
         }
     }
 }

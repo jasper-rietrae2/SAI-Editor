@@ -106,7 +106,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private void comboBoxConditionTarget_KeyPress(object sender, KeyPressEventArgs e)
+        private void comboBoxesConditions_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (Char.IsLetter(e.KeyChar) || Char.IsNumber(e.KeyChar))
                 e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
@@ -145,6 +145,11 @@ namespace SAI_Editor.Forms
 
             if (comboBoxConditionTarget.Items.Count > 0)
                 comboBoxConditionTarget.SelectedIndex = 0;
+        }
+
+        private void comboBoxConditionTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
