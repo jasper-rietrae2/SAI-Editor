@@ -524,9 +524,7 @@ namespace SAI_Editor.Forms
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
-            bool connectToMySql = radioButtonConnectToMySql.Checked;
-
-            if (connectToMySql)
+            if (radioButtonConnectToMySql.Checked)
             {
                 if (String.IsNullOrEmpty(textBoxHost.Text))
                 {
@@ -570,10 +568,10 @@ namespace SAI_Editor.Forms
                 SAI_Editor_Manager.Instance.ResetWorldDatabase(connectionString);
             }
 
-            Settings.Default.UseWorldDatabase = connectToMySql;
+            Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
             Settings.Default.Save();
 
-            if (!connectToMySql || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
+            if (!radioButtonConnectToMySql.Checked || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
             {
                 StartExpandingToMainForm(Settings.Default.InstantExpand);
                 HandleUseWorldDatabaseSettingChanged();
@@ -662,11 +660,11 @@ namespace SAI_Editor.Forms
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            textBoxHost.Text = "";
-            textBoxUsername.Text = "";
-            textBoxPassword.Text = "";
-            textBoxWorldDatabase.Text = "";
-            textBoxPort.Text = "";
+            textBoxHost.Text = String.Empty;
+            textBoxUsername.Text = String.Empty;
+            textBoxPassword.Text = String.Empty;
+            textBoxWorldDatabase.Text = String.Empty;
+            textBoxPort.Text = String.Empty;
             checkBoxAutoConnect.Checked = false;
             radioButtonConnectToMySql.Checked = true;
         }
@@ -1939,7 +1937,7 @@ namespace SAI_Editor.Forms
             List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
-                using (Control selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
+                using (SelectDatabaseForm selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
                     selectDatabaseForm.ShowDialog(this);
         }
 
@@ -2512,7 +2510,7 @@ namespace SAI_Editor.Forms
         {
             SetVisibilityOfAllParamButtonsInTab("Action", false);
             SetVisibilityOfAllParamButtonsInTab("Target", false);
-            SetTextOfAllActionParameterLabels("");
+            SetTextOfAllActionParameterLabels(String.Empty);
 
             labelActionParam1.Text = "Template entry";
             buttonActionParamOneSearch.Visible = true;
@@ -2744,7 +2742,7 @@ namespace SAI_Editor.Forms
         private void textBoxComments_GotFocus(object sender, EventArgs e)
         {
             if (textBoxComments.Text == SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType(GetSourceTypeByIndex()))
-                textBoxComments.Text = "";
+                textBoxComments.Text = String.Empty;
         }
 
         private void textBoxComments_LostFocus(object sender, EventArgs e)
