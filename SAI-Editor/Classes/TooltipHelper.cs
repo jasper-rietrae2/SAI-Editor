@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using SAI_Editor.Classes.CustomControls;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace SAI_Editor.Classes

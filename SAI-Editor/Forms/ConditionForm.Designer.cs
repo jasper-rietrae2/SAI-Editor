@@ -46,7 +46,7 @@
             this.textBoxComment = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lineSeparator1 = new SAI_Editor.Classes.LineSeparator();
+            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.SuspendLayout();
             // 
             // comboBoxConditionSourceTypes
@@ -324,7 +324,7 @@
         private System.Windows.Forms.ComboBox comboBoxConditionTarget;
         private System.Windows.Forms.TextBox textBoxSourceGroup;
         private System.Windows.Forms.TextBox textBoxSourceEntry;
-        private Classes.LineSeparator lineSeparator1;
+        private Classes.CustomControls.LineSeparator lineSeparator1;
         private System.Windows.Forms.Label labelComment;
         private System.Windows.Forms.TextBox textBoxComment;
         private System.Windows.Forms.Label label1;

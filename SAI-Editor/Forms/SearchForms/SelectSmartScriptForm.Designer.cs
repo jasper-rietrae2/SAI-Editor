@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SelectSmartScriptForm));
             this.listBoxGuids = new System.Windows.Forms.ListBox();
-            this.listViewSmartScripts = new SAI_Editor.Classes.SmartScriptListView();
+            this.listViewSmartScripts = new SAI_Editor.Classes.CustomControls.SmartScriptListView();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonLoadScript = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -108,7 +108,7 @@
         #endregion
 
         private System.Windows.Forms.ListBox listBoxGuids;
-        private SAI_Editor.Classes.SmartScriptListView listViewSmartScripts;
+        private SAI_Editor.Classes.CustomControls.SmartScriptListView listViewSmartScripts;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonLoadScript;
 

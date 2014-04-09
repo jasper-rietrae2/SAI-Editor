@@ -7,7 +7,7 @@ using SAI_Editor.Properties;
 using System.Drawing;
 using SAI_Editor.Classes.Database.Classes;
 
-namespace SAI_Editor.Classes
+namespace SAI_Editor.Classes.CustomControls
 {
     public class SmartScriptListView : ForceSelectListView
     {

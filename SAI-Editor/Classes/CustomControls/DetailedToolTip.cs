@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
 
-namespace SAI_Editor.Classes
+namespace SAI_Editor.Classes.CustomControls
 {
     public class DetailedToolTip : ToolTip
     {

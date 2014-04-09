@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SAI_Editor.Classes
+namespace SAI_Editor.Classes.CustomControls
 {
     public partial class LineSeparator : UserControl
     {
