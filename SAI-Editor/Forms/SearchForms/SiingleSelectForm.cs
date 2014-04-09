@@ -40,7 +40,13 @@ namespace SAI_Editor.Forms.SearchForms
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
-            if (textBoxToChange == null || listViewSelectableItems.SelectedItems.Count == 0)
+            if (textBoxToChange == null)
+            {
+                Close();
+                return;
+            }
+
+            if (listViewSelectableItems.SelectedItems.Count == 0)
                 return;
 
             string index = listViewSelectableItems.SelectedItems[0].Index.ToString();
