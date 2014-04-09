@@ -18,6 +18,7 @@ using System.Reflection;
 using System.Net;
 using System.Threading;
 using System.Runtime.InteropServices;
+using SAI_Editor.Classes.CustomControls;
 
 namespace SAI_Editor.Forms
 {
@@ -2927,17 +2928,6 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private void UpdatePermanentTooltipOfParameter(Label labelToTarget, int paramId, ComboBox comboBoxToTarget, ScriptTypeId scriptTypeId)
-        {
-            string toolTipOfType = SAI_Editor_Manager.Instance.GetParameterTooltipById(comboBoxToTarget.SelectedIndex, paramId, scriptTypeId);
-
-            if (!String.IsNullOrWhiteSpace(toolTipOfType))
-            {
-                labelPermanentTooltipTextParameters.Text = toolTipOfType;
-                labelPermanentTooltipParameterTitleTypes.Text = comboBoxToTarget.SelectedItem + " - " + labelToTarget.Text;
-            }
-        }
-
         private int GetSelectedIndexByScriptTypeId(ScriptTypeId scriptTypeId)
         {
             switch (scriptTypeId)
@@ -2968,106 +2958,33 @@ namespace SAI_Editor.Forms
             return String.Empty;
         }
 
-        private void labelEventParam1_MouseEnter(object sender, EventArgs e)
+        private void UpdatePermanentTooltipOfParameter(Label labelToTarget, int paramId, ComboBox comboBoxToTarget, ScriptTypeId scriptTypeId)
         {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 1, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+            string toolTipOfType = SAI_Editor_Manager.Instance.GetParameterTooltipById(comboBoxToTarget.SelectedIndex, paramId, scriptTypeId);
+
+            if (!String.IsNullOrWhiteSpace(toolTipOfType))
+            {
+                labelPermanentTooltipTextParameters.Text = toolTipOfType;
+                labelPermanentTooltipParameterTitleTypes.Text = comboBoxToTarget.SelectedItem + " - " + labelToTarget.Text;
+            }
         }
 
-        private void labelEventParam2_MouseEnter(object sender, EventArgs e)
+        private void labelEventParams_MouseEnter(object sender, EventArgs e)
         {
             if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 2, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+                UpdatePermanentTooltipOfParameter(sender as Label, (sender as LabelWithTooltip).TooltipParameterId, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
         }
 
-        private void labelEventParam3_MouseEnter(object sender, EventArgs e)
+        private void labelActionParams_MouseEnter(object sender, EventArgs e)
         {
             if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 3, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+                UpdatePermanentTooltipOfParameter(sender as Label, (sender as LabelWithTooltip).TooltipParameterId, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
         }
 
-        private void labelEventParam4_MouseEnter(object sender, EventArgs e)
+        private void labelTargetParams_MouseEnter(object sender, EventArgs e)
         {
             if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 4, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
-        }
-
-        private void labelActionParam1_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 1, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
-        }
-
-        private void labelActionParam2_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 2, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
-        }
-
-        private void labelActionParam3_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 3, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
-        }
-
-        private void labelActionParam4_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 4, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
-        }
-
-        private void labelActionParam5_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 5, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
-        }
-
-        private void labelActionParam6_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 6, comboBoxActionType, ScriptTypeId.ScriptTypeAction);
-        }
-
-        private void labelTargetParam1_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 1, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
-        }
-
-        private void labelTargetParam2_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 2, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
-        }
-
-        private void labelTargetParam3_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 3, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
-        }
-
-        private void labelTargetX_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 4, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
-        }
-
-        private void labelTargetY_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 5, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
-        }
-
-        private void labelTargetZ_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 6, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
-        }
-
-        private void labelTargetO_MouseEnter(object sender, EventArgs e)
-        {
-            if (Settings.Default.ShowTooltipsPermanently)
-                UpdatePermanentTooltipOfParameter(sender as Label, 7, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+                UpdatePermanentTooltipOfParameter(sender as Label, (sender as LabelWithTooltip).TooltipParameterId, comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
         }
 
         private async void buttonNewLine_Click(object sender, EventArgs e)
