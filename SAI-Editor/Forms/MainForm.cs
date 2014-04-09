@@ -653,10 +653,10 @@ namespace SAI_Editor.Forms
                 contractingToLoginForm = true;
             }
 
-            foreach (var control in controlsLoginForm)
+            foreach (Control control in controlsLoginForm)
                 control.Visible = instant;
 
-            foreach (var control in controlsMainForm)
+            foreach (Control control in controlsMainForm)
                 control.Visible = false;
         }
 
@@ -687,13 +687,14 @@ namespace SAI_Editor.Forms
                             buttonConnect.PerformClick();
                             break;
                         case FormState.FormStateMain:
-                            if (textBoxEntryOrGuid.Focused)
-                            {
-                                if (Settings.Default.UseWorldDatabase)
-                                    pictureBoxLoadScript_Click(pictureBoxLoadScript, null);
-                                else
-                                    pictureBoxCreateScript_Click(pictureBoxCreateScript, null);
-                            }
+                            if (!textBoxEntryOrGuid.Focused)
+                                break;
+
+                            //! Load the script of the entryorguid when no world database can be used. Otherwise create a new one.
+                            if (Settings.Default.UseWorldDatabase)
+                                TryToLoadScript();
+                            else
+                                TryToCreateScript();
 
                             break;
                     }
@@ -704,7 +705,7 @@ namespace SAI_Editor.Forms
         private void buttonSearchForEntry_Click(object sender, EventArgs e)
         {
             //! Just keep it in main thread; no purpose starting a new thread for this (unless workspaces get implemented, maybe)
-            using (var entryForm = new SearchForEntryForm(connectionString, textBoxEntryOrGuid.Text, GetSourceTypeByIndex()))
+            using (SearchForEntryForm entryForm = new SearchForEntryForm(connectionString, textBoxEntryOrGuid.Text, GetSourceTypeByIndex()))
                 entryForm.ShowDialog(this);
         }
 
@@ -723,56 +724,45 @@ namespace SAI_Editor.Forms
 
         private async void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxEventType.Text = comboBoxEventType.SelectedIndex.ToString();
-            textBoxEventType.SelectionStart = 3; //! Set cursor to end of text
-
-            if (!runningConstructor)
-            {
-                ChangeParameterFieldsBasedOnType();
-                UpdatePermanentTooltipOfTypes(comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
-            }
-
-            if (listViewSmartScripts.SelectedItems.Count > 0)
-            {
-                listViewSmartScripts.SelectedSmartScript.event_type = comboBoxEventType.SelectedIndex;
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
-            }
+            await HandleComboBoxTypeIdSelectedIndexChanged(comboBoxEventType, textBoxEventType, ScriptTypeId.ScriptTypeEvent);
         }
 
         private async void comboBoxActionType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxActionType.Text = comboBoxActionType.SelectedIndex.ToString();
-            textBoxActionType.SelectionStart = 3; //! Set cursor to end of text
-
-            if (!runningConstructor)
-            {
-                ChangeParameterFieldsBasedOnType();
-                UpdatePermanentTooltipOfTypes(comboBoxActionType, ScriptTypeId.ScriptTypeAction);
-            }
-
-            if (listViewSmartScripts.SelectedItems.Count > 0)
-            {
-                listViewSmartScripts.SelectedSmartScript.action_type = comboBoxActionType.SelectedIndex;
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
-            }
+            await HandleComboBoxTypeIdSelectedIndexChanged(comboBoxActionType, textBoxActionType, ScriptTypeId.ScriptTypeAction);
         }
 
         private async void comboBoxTargetType_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBoxTargetType.Text = comboBoxTargetType.SelectedIndex.ToString();
-            textBoxTargetType.SelectionStart = 3; //! Set cursor to end of text
+            await HandleComboBoxTypeIdSelectedIndexChanged(comboBoxTargetType, textBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+        }
+
+        private async Task HandleComboBoxTypeIdSelectedIndexChanged(ComboBox comboBox, TextBox textBox, ScriptTypeId scriptTypeId)
+        {
+            textBox.Text = comboBox.SelectedIndex.ToString();
+            textBox.SelectionStart = 3; //! Set cursor to end of text
 
             if (!runningConstructor)
             {
                 ChangeParameterFieldsBasedOnType();
-                UpdatePermanentTooltipOfTypes(comboBoxTargetType, ScriptTypeId.ScriptTypeTarget);
+                UpdatePermanentTooltipOfTypes(comboBox, scriptTypeId);
             }
 
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.target_type = comboBoxTargetType.SelectedIndex;
+                switch (scriptTypeId)
+                {
+                    case ScriptTypeId.ScriptTypeEvent:
+                        listViewSmartScripts.SelectedSmartScript.event_type = comboBox.SelectedIndex;
+                        break;
+                    case ScriptTypeId.ScriptTypeAction:
+                        listViewSmartScripts.SelectedSmartScript.action_type = comboBox.SelectedIndex;
+                        break;
+                    case ScriptTypeId.ScriptTypeTarget:
+                        listViewSmartScripts.SelectedSmartScript.target_type = comboBox.SelectedIndex;
+                        break;
+                }
+
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
@@ -840,10 +830,10 @@ namespace SAI_Editor.Forms
 
         private void FinishedExpandingOrContracting(bool expanding)
         {
-            foreach (var control in controlsLoginForm)
+            foreach (Control control in controlsLoginForm)
                 control.Visible = !expanding;
 
-            foreach (var control in controlsMainForm)
+            foreach (Control control in controlsMainForm)
                 control.Visible = expanding;
 
             if (!expanding)
@@ -1450,84 +1440,42 @@ namespace SAI_Editor.Forms
             toolTip.SetToolTipText(control, text);
         }
 
-        private void AddTooltip(string controlName, string title, string text, ToolTipIcon icon = ToolTipIcon.Info, bool isBallon = true, bool active = true, int autoPopDelay = 2100000000, bool showAlways = true)
-        {
-            Control[] controls = Controls.Find(controlName, true);
-
-            if (controls.Length > 0)
-                foreach (Control control in controls)
-                    AddTooltip(control, title, text, icon, isBallon, active, autoPopDelay, showAlways);
-        }
-
         private void textBoxEventTypeId_TextChanged(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBoxEventType.Text))
-            {
-                comboBoxEventType.SelectedIndex = 0;
-                textBoxEventType.Text = "0";
-                textBoxEventType.SelectionStart = 3; //! Set cursor position to end of the line
-            }
-            else
-            {
-                int eventType;
-                Int32.TryParse(textBoxEventType.Text, out eventType);
-
-                if (eventType > (int)SmartEvent.SMART_EVENT_MAX - 1)
-                {
-                    comboBoxEventType.SelectedIndex = (int)SmartEvent.SMART_EVENT_MAX - 1;
-                    textBoxEventType.Text = ((int)SmartEvent.SMART_EVENT_MAX - 1).ToString();
-                    textBoxEventType.SelectionStart = 3; //! Set cursor position to end of the line
-                }
-                else
-                    comboBoxEventType.SelectedIndex = eventType;
-            }
+            HandleTextBoxTypeIdTextChanged(textBoxEventType, comboBoxEventType, (int)SmartEvent.SMART_EVENT_MAX - 1);
         }
 
         private void textBoxActionTypeId_TextChanged(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBoxActionType.Text))
-            {
-                comboBoxActionType.SelectedIndex = 0;
-                textBoxActionType.Text = "0";
-                textBoxActionType.SelectionStart = 3; //! Set cursor position to end of the line
-            }
-            else
-            {
-                int actionType;
-                Int32.TryParse(textBoxActionType.Text, out actionType);
-
-                if (actionType > (int)SmartAction.SMART_ACTION_MAX - 1)
-                {
-                    comboBoxActionType.SelectedIndex = (int)SmartAction.SMART_ACTION_MAX - 1;
-                    textBoxActionType.Text = ((int)SmartAction.SMART_ACTION_MAX - 1).ToString();
-                    textBoxActionType.SelectionStart = 3; //! Set cursor position to end of the line
-                }
-                else
-                    comboBoxActionType.SelectedIndex = actionType;
-            }
+            HandleTextBoxTypeIdTextChanged(textBoxActionType, comboBoxActionType, (int)SmartAction.SMART_ACTION_MAX - 1);
         }
 
         private void textBoxTargetTypeId_TextChanged(object sender, EventArgs e)
         {
-            if (String.IsNullOrEmpty(textBoxTargetType.Text))
+            HandleTextBoxTypeIdTextChanged(textBoxTargetType, comboBoxTargetType, (int)SmartTarget.SMART_TARGET_MAX - 1);
+        }
+
+        private void HandleTextBoxTypeIdTextChanged(TextBox textBox, ComboBox comboBox, int max)
+        {
+            if (String.IsNullOrEmpty(textBox.Text))
             {
-                comboBoxTargetType.SelectedIndex = 0;
-                textBoxTargetType.Text = "0";
-                textBoxTargetType.SelectionStart = 3; //! Set cursor position to end of the line
+                comboBox.SelectedIndex = 0;
+                textBox.Text = "0";
+                textBox.SelectionStart = 3; //! Set cursor position to end of the line
             }
             else
             {
                 int targetType;
-                Int32.TryParse(textBoxTargetType.Text, out targetType);
+                Int32.TryParse(textBox.Text, out targetType);
 
-                if (targetType > (int)SmartTarget.SMART_TARGET_MAX - 1)
+                if (targetType > max)
                 {
-                    comboBoxTargetType.SelectedIndex = (int)SmartTarget.SMART_TARGET_MAX - 1;
-                    textBoxTargetType.Text = ((int)SmartTarget.SMART_TARGET_MAX - 1).ToString();
-                    textBoxTargetType.SelectionStart = 3; //! Set cursor position to end of the line
+                    comboBox.SelectedIndex = max;
+                    textBox.Text = (max).ToString();
+                    textBox.SelectionStart = 3; //! Set cursor position to end of the line
                 }
                 else
-                    comboBoxTargetType.SelectedIndex = targetType;
+                    comboBox.SelectedIndex = targetType;
             }
         }
 
@@ -1679,25 +1627,19 @@ namespace SAI_Editor.Forms
 
         public void pictureBoxLoadScript_Click(object sender, EventArgs e)
         {
-            if (!pictureBoxLoadScript.Enabled || !Settings.Default.UseWorldDatabase)
-                return;
-
             TryToLoadScript();
         }
 
         private void pictureBoxCreateScript_Click(object sender, EventArgs e)
         {
-            if (!pictureBoxCreateScript.Enabled)
-                return;
-
-            if (String.IsNullOrWhiteSpace(textBoxEntryOrGuid.Text) || comboBoxSourceType.SelectedIndex == -1)
-                return;
-
             TryToCreateScript();
         }
 
         public async void TryToCreateScript(bool fromNewLine = false)
         {
+            if (!pictureBoxCreateScript.Enabled || String.IsNullOrWhiteSpace(textBoxEntryOrGuid.Text) || comboBoxSourceType.SelectedIndex == -1)
+                return;
+
             if (listViewSmartScripts.Items.Count > 0)
             {
                 DialogResult dialogResult = MessageBox.Show("There is already a script loaded at this moment. Do you want to overwrite this?\n\nWarning: overwriting means local unsaved changes will also be discarded!", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -1907,6 +1849,9 @@ namespace SAI_Editor.Forms
 
         public async void TryToLoadScript(int entryorguid = -1, SourceTypes sourceType = SourceTypes.SourceTypeNone, bool showErrorIfNoneFound = true, bool promptCreateIfNoneFound = false)
         {
+            if (!pictureBoxLoadScript.Enabled || !Settings.Default.UseWorldDatabase)
+                return;
+
             listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
             ResetFieldsToDefault();
 
@@ -1994,7 +1939,7 @@ namespace SAI_Editor.Forms
             List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
-                using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
+                using (Control selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
                     selectDatabaseForm.ShowDialog(this);
         }
 
