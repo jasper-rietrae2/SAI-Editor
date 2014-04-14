@@ -237,6 +237,8 @@ namespace SAI_Editor.Classes.Database
             if (dt.Rows.Count == 0)
                 return null;
 
+            List<SmartScript> d = (from DataRow row in dt.Rows select BuildSmartScript(row)).ToList();
+
             return (from DataRow row in dt.Rows select BuildSmartScript(row)).ToList();
         }
 
@@ -415,10 +417,10 @@ namespace SAI_Editor.Classes.Database
             smartScript.target_param1 = row["target_param1"] != DBNull.Value ? XConverter.ToInt32(row["target_param1"]) : 0;
             smartScript.target_param2 = row["target_param2"] != DBNull.Value ? XConverter.ToInt32(row["target_param2"]) : 0;
             smartScript.target_param3 = row["target_param3"] != DBNull.Value ? XConverter.ToInt32(row["target_param3"]) : 0;
-            smartScript.target_x = row["target_x"] != DBNull.Value ? XConverter.ToDouble(row["target_x"]) : 0;
-            smartScript.target_y = row["target_y"] != DBNull.Value ? XConverter.ToDouble(row["target_y"]) : 0;
-            smartScript.target_z = row["target_z"] != DBNull.Value ? XConverter.ToDouble(row["target_z"]) : 0;
-            smartScript.target_o = row["target_o"] != DBNull.Value ? XConverter.ToDouble(row["target_o"]) : 0;
+            smartScript.target_x = row["target_x"] != DBNull.Value ? row["target_x"].ToString() : String.Empty;
+            smartScript.target_y = row["target_y"] != DBNull.Value ? row["target_y"].ToString() : String.Empty;
+            smartScript.target_z = row["target_z"] != DBNull.Value ? row["target_z"].ToString() : String.Empty;
+            smartScript.target_o = row["target_o"] != DBNull.Value ? row["target_o"].ToString() : String.Empty;
             smartScript.comment = row["comment"] != DBNull.Value ? (string)row["comment"] : String.Empty;
             return smartScript;
         }

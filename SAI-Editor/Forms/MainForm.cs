@@ -1228,10 +1228,10 @@ namespace SAI_Editor.Forms
                     AddTooltip(labelTargetParam3, labelTargetParam3.Text, SAI_Editor_Manager.Instance.GetParameterTooltipById(target_type, 3, ScriptTypeId.ScriptTypeTarget));
                 }
 
-                textBoxTargetX.Text = selectedScript.target_x.ToString();
-                textBoxTargetY.Text = selectedScript.target_y.ToString();
-                textBoxTargetZ.Text = selectedScript.target_z.ToString();
-                textBoxTargetO.Text = selectedScript.target_o.ToString();
+                textBoxTargetX.Text = selectedScript.target_x;
+                textBoxTargetY.Text = selectedScript.target_y;
+                textBoxTargetZ.Text = selectedScript.target_z;
+                textBoxTargetO.Text = selectedScript.target_o;
                 textBoxComments.Text = selectedScript.comment;
 
                 AdjustAllParameterFields(event_type, action_type, target_type);
@@ -1807,10 +1807,10 @@ namespace SAI_Editor.Forms
             newSmartScript.target_param1 = XConverter.ToInt32(textBoxTargetParam1.Text);
             newSmartScript.target_param2 = XConverter.ToInt32(textBoxTargetParam2.Text);
             newSmartScript.target_param3 = XConverter.ToInt32(textBoxTargetParam3.Text);
-            newSmartScript.target_x = XConverter.ToDouble(textBoxTargetX.Text);
-            newSmartScript.target_y = XConverter.ToDouble(textBoxTargetY.Text);
-            newSmartScript.target_z = XConverter.ToDouble(textBoxTargetZ.Text);
-            newSmartScript.target_o = XConverter.ToDouble(textBoxTargetO.Text);
+            newSmartScript.target_x = textBoxTargetX.Text;
+            newSmartScript.target_y = textBoxTargetY.Text;
+            newSmartScript.target_z = textBoxTargetZ.Text;
+            newSmartScript.target_o = textBoxTargetO.Text;
 
             if (Settings.Default.GenerateComments && Settings.Default.UseWorldDatabase)
                 newSmartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(newSmartScript, originalEntryOrGuidAndSourceType);
@@ -3180,13 +3180,25 @@ namespace SAI_Editor.Forms
             }
         }
 
+        private void textBoxTargetCoordinateParams_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsPunctuation(e.KeyChar) && !Char.IsNumber(e.KeyChar) && !Char.IsDigit(e.KeyChar))
+                return;
+
+            string str = (sender as TextBox).Text + e.KeyChar;
+            double result;
+
+            if (!Double.TryParse(str, out result))
+                e.Handled = true;
+        }
+
         private async void textBoxTargetX_TextChanged(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
                 textBoxTargetX.Text = textBoxTargetX.Text.Replace(".", ",");
                 textBoxTargetX.SelectionStart = textBoxTargetX.Text.Length + 1; //! Set cursor to end of text
-                listViewSmartScripts.SelectedSmartScript.target_x = XConverter.ToDouble(textBoxTargetX.Text);
+                listViewSmartScripts.SelectedSmartScript.target_x = textBoxTargetX.Text;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
@@ -3198,7 +3210,7 @@ namespace SAI_Editor.Forms
             {
                 textBoxTargetY.Text = textBoxTargetY.Text.Replace(".", ",");
                 textBoxTargetY.SelectionStart = textBoxTargetY.Text.Length + 1; //! Set cursor to end of text
-                listViewSmartScripts.SelectedSmartScript.target_y = XConverter.ToDouble(textBoxTargetY.Text);
+                listViewSmartScripts.SelectedSmartScript.target_y = textBoxTargetY.Text;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
@@ -3210,7 +3222,7 @@ namespace SAI_Editor.Forms
             {
                 textBoxTargetZ.Text = textBoxTargetZ.Text.Replace(".", ",");
                 textBoxTargetZ.SelectionStart = textBoxTargetZ.Text.Length + 1; //! Set cursor to end of text
-                listViewSmartScripts.SelectedSmartScript.target_z = XConverter.ToDouble(textBoxTargetZ.Text);
+                listViewSmartScripts.SelectedSmartScript.target_z = textBoxTargetZ.Text;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
@@ -3222,7 +3234,7 @@ namespace SAI_Editor.Forms
             {
                 textBoxTargetO.Text = textBoxTargetO.Text.Replace(".", ",");
                 textBoxTargetO.SelectionStart = textBoxTargetO.Text.Length + 1; //! Set cursor to end of text
-                listViewSmartScripts.SelectedSmartScript.target_o = XConverter.ToDouble(textBoxTargetO.Text);
+                listViewSmartScripts.SelectedSmartScript.target_o = textBoxTargetO.Text;
                 listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
             }
@@ -3567,10 +3579,10 @@ namespace SAI_Editor.Forms
                 }
 
                 //! SQL accepts a period instead of a comma for float/double values
-                string target_x = smartScript.target_x.ToString().Replace(",", ".");
-                string target_y = smartScript.target_y.ToString().Replace(",", ".");
-                string target_z = smartScript.target_z.ToString().Replace(",", ".");
-                string target_o = smartScript.target_o.ToString().Replace(",", ".");
+                string target_x = smartScript.target_x.Replace(",", ".");
+                string target_y = smartScript.target_y.Replace(",", ".");
+                string target_z = smartScript.target_z.Replace(",", ".");
+                string target_o = smartScript.target_o.Replace(",", ".");
 
                 generatedSql += "(" + actualSourceSet + "," + smartScript.source_type + "," + smartScript.id + "," + smartScript.link + "," + smartScript.event_type + "," +
                                               smartScript.event_phase_mask + "," + smartScript.event_chance + "," + smartScript.event_flags + "," + eventParameters[0] + "," +

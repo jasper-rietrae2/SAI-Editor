@@ -25,10 +25,14 @@
         public int target_param1 { get; set; }
         public int target_param2 { get; set; }
         public int target_param3 { get; set; }
-        public double target_x { get; set; }
-        public double target_y { get; set; }
-        public double target_z { get; set; }
-        public double target_o { get; set; }
+
+        //! The target_<coord> fields are strings in the code and converted to doubles when the SQL is generated. Reason
+        //! for this is that it would not be possible to add a comma while writing, as it would instantly try to convert
+        //! numbers like '4,' to '4,0', and thus write it as '4', therefore erasing the newly written comma.
+        public string target_x { get; set; }
+        public string target_y { get; set; }
+        public string target_z { get; set; }
+        public string target_o { get; set; }
         public string comment { get; set; }
 
         public SmartScript Clone(SmartScript smartScript)

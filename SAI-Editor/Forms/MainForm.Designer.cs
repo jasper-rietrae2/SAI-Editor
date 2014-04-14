@@ -2409,6 +2409,7 @@
             this.textBoxTargetO.TabIndex = 36;
             this.textBoxTargetO.Text = "0";
             this.textBoxTargetO.TextChanged += new System.EventHandler(this.textBoxTargetO_TextChanged);
+            this.textBoxTargetO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
             // 
             // textBoxTargetZ
             // 
@@ -2418,6 +2419,7 @@
             this.textBoxTargetZ.TabIndex = 68;
             this.textBoxTargetZ.Text = "0";
             this.textBoxTargetZ.TextChanged += new System.EventHandler(this.textBoxTargetZ_TextChanged);
+            this.textBoxTargetZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
             // 
             // textBoxTargetY
             // 
@@ -2427,6 +2429,7 @@
             this.textBoxTargetY.TabIndex = 66;
             this.textBoxTargetY.Text = "0";
             this.textBoxTargetY.TextChanged += new System.EventHandler(this.textBoxTargetY_TextChanged);
+            this.textBoxTargetY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
             // 
             // textBoxTargetX
             // 
@@ -2436,6 +2439,7 @@
             this.textBoxTargetX.TabIndex = 64;
             this.textBoxTargetX.Text = "0";
             this.textBoxTargetX.TextChanged += new System.EventHandler(this.textBoxTargetX_TextChanged);
+            this.textBoxTargetX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
             // 
             // textBoxTargetParam3
             // 
