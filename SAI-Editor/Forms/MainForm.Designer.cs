@@ -179,7 +179,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
-            this.labelEventParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.textBoxEventParam1 = new System.Windows.Forms.TextBox();
             this.tabControlParameters = new System.Windows.Forms.TabControl();
             this.tabPageEvent = new System.Windows.Forms.TabPage();
@@ -193,6 +192,7 @@
             this.textBoxEventParam4 = new System.Windows.Forms.TextBox();
             this.textBoxEventParam3 = new System.Windows.Forms.TextBox();
             this.textBoxEventParam2 = new System.Windows.Forms.TextBox();
+            this.labelEventParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.tabPageAction = new System.Windows.Forms.TabPage();
             this.buttonActionParamSixSearch = new System.Windows.Forms.Button();
             this.buttonActionParamFiveSearch = new System.Windows.Forms.Button();
@@ -200,40 +200,36 @@
             this.buttonActionParamThreeSearch = new System.Windows.Forms.Button();
             this.buttonActionParamTwoSearch = new System.Windows.Forms.Button();
             this.buttonActionParamOneSearch = new System.Windows.Forms.Button();
-            this.labelActionParam6 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam5 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam4 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.textBoxActionParam6 = new System.Windows.Forms.TextBox();
             this.textBoxActionParam5 = new System.Windows.Forms.TextBox();
             this.textBoxActionParam4 = new System.Windows.Forms.TextBox();
             this.textBoxActionParam3 = new System.Windows.Forms.TextBox();
             this.textBoxActionParam2 = new System.Windows.Forms.TextBox();
-            this.labelActionParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.textBoxActionParam1 = new System.Windows.Forms.TextBox();
+            this.labelActionParam6 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam5 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam4 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.tabPageTarget = new System.Windows.Forms.TabPage();
-            this.buttonTargetParamSevenSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamSixSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamFiveSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamFourSearch = new System.Windows.Forms.Button();
             this.buttonTargetParamThreeSearch = new System.Windows.Forms.Button();
             this.buttonTargetParamTwoSearch = new System.Windows.Forms.Button();
             this.buttonTargetParamOneSearch = new System.Windows.Forms.Button();
+            this.textBoxTargetO = new System.Windows.Forms.TextBox();
+            this.textBoxTargetZ = new System.Windows.Forms.TextBox();
+            this.textBoxTargetY = new System.Windows.Forms.TextBox();
+            this.textBoxTargetX = new System.Windows.Forms.TextBox();
+            this.textBoxTargetParam3 = new System.Windows.Forms.TextBox();
+            this.textBoxTargetParam2 = new System.Windows.Forms.TextBox();
+            this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
             this.labelTargetO = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.labelTargetZ = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.labelTargetY = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.labelTargetX = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.textBoxTargetO = new System.Windows.Forms.TextBox();
-            this.textBoxTargetZ = new System.Windows.Forms.TextBox();
             this.labelTargetParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.textBoxTargetY = new System.Windows.Forms.TextBox();
             this.labelTargetParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.textBoxTargetX = new System.Windows.Forms.TextBox();
-            this.textBoxTargetParam3 = new System.Windows.Forms.TextBox();
-            this.textBoxTargetParam2 = new System.Windows.Forms.TextBox();
             this.labelTargetParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.panelPermanentTooltipParameters = new System.Windows.Forms.Panel();
@@ -1016,7 +1012,7 @@
             this.panelLoginBox.Controls.Add(this.buttonConnect);
             this.panelLoginBox.Controls.Add(this.buttonClear);
             this.panelLoginBox.Controls.Add(this.buttonCancel);
-            this.panelLoginBox.Location = new System.Drawing.Point(933, 31);
+            this.panelLoginBox.Location = new System.Drawing.Point(933, 28);
             this.panelLoginBox.Name = "panelLoginBox";
             this.panelLoginBox.Size = new System.Drawing.Size(378, 258);
             this.panelLoginBox.TabIndex = 14;
@@ -1976,17 +1972,6 @@
             this.label10.TabIndex = 25;
             this.label10.Text = "Phasemask:";
             // 
-            // labelEventParam1
-            // 
-            this.labelEventParam1.AutoSize = true;
-            this.labelEventParam1.Location = new System.Drawing.Point(1, 7);
-            this.labelEventParam1.Name = "labelEventParam1";
-            this.labelEventParam1.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam1.TabIndex = 23;
-            this.labelEventParam1.Text = "Param 1";
-            this.labelEventParam1.TooltipParameterId = 1;
-            this.labelEventParam1.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
-            // 
             // textBoxEventParam1
             // 
             this.textBoxEventParam1.Location = new System.Drawing.Point(144, 4);
@@ -2133,6 +2118,17 @@
             this.textBoxEventParam2.Text = "0";
             this.textBoxEventParam2.TextChanged += new System.EventHandler(this.textBoxEventParam2_TextChanged);
             // 
+            // labelEventParam1
+            // 
+            this.labelEventParam1.AutoSize = true;
+            this.labelEventParam1.Location = new System.Drawing.Point(1, 7);
+            this.labelEventParam1.Name = "labelEventParam1";
+            this.labelEventParam1.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam1.TabIndex = 23;
+            this.labelEventParam1.Text = "Param 1";
+            this.labelEventParam1.TooltipParameterId = 1;
+            this.labelEventParam1.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
+            // 
             // tabPageAction
             // 
             this.tabPageAction.BackColor = System.Drawing.SystemColors.Window;
@@ -2142,18 +2138,18 @@
             this.tabPageAction.Controls.Add(this.buttonActionParamThreeSearch);
             this.tabPageAction.Controls.Add(this.buttonActionParamTwoSearch);
             this.tabPageAction.Controls.Add(this.buttonActionParamOneSearch);
-            this.tabPageAction.Controls.Add(this.labelActionParam6);
-            this.tabPageAction.Controls.Add(this.labelActionParam5);
-            this.tabPageAction.Controls.Add(this.labelActionParam4);
-            this.tabPageAction.Controls.Add(this.labelActionParam3);
-            this.tabPageAction.Controls.Add(this.labelActionParam2);
             this.tabPageAction.Controls.Add(this.textBoxActionParam6);
             this.tabPageAction.Controls.Add(this.textBoxActionParam5);
             this.tabPageAction.Controls.Add(this.textBoxActionParam4);
             this.tabPageAction.Controls.Add(this.textBoxActionParam3);
             this.tabPageAction.Controls.Add(this.textBoxActionParam2);
-            this.tabPageAction.Controls.Add(this.labelActionParam1);
             this.tabPageAction.Controls.Add(this.textBoxActionParam1);
+            this.tabPageAction.Controls.Add(this.labelActionParam6);
+            this.tabPageAction.Controls.Add(this.labelActionParam5);
+            this.tabPageAction.Controls.Add(this.labelActionParam4);
+            this.tabPageAction.Controls.Add(this.labelActionParam3);
+            this.tabPageAction.Controls.Add(this.labelActionParam2);
+            this.tabPageAction.Controls.Add(this.labelActionParam1);
             this.tabPageAction.Location = new System.Drawing.Point(4, 22);
             this.tabPageAction.Name = "tabPageAction";
             this.tabPageAction.Padding = new System.Windows.Forms.Padding(3);
@@ -2227,6 +2223,60 @@
             this.buttonActionParamOneSearch.Visible = false;
             this.buttonActionParamOneSearch.Click += new System.EventHandler(this.buttonActionParamOneSearch_Click);
             // 
+            // textBoxActionParam6
+            // 
+            this.textBoxActionParam6.Location = new System.Drawing.Point(144, 134);
+            this.textBoxActionParam6.Name = "textBoxActionParam6";
+            this.textBoxActionParam6.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam6.TabIndex = 56;
+            this.textBoxActionParam6.Text = "0";
+            this.textBoxActionParam6.TextChanged += new System.EventHandler(this.textBoxActionParam6_TextChanged);
+            // 
+            // textBoxActionParam5
+            // 
+            this.textBoxActionParam5.Location = new System.Drawing.Point(144, 108);
+            this.textBoxActionParam5.Name = "textBoxActionParam5";
+            this.textBoxActionParam5.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam5.TabIndex = 53;
+            this.textBoxActionParam5.Text = "0";
+            this.textBoxActionParam5.TextChanged += new System.EventHandler(this.textBoxActionParam5_TextChanged);
+            // 
+            // textBoxActionParam4
+            // 
+            this.textBoxActionParam4.Location = new System.Drawing.Point(144, 82);
+            this.textBoxActionParam4.Name = "textBoxActionParam4";
+            this.textBoxActionParam4.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam4.TabIndex = 51;
+            this.textBoxActionParam4.Text = "0";
+            this.textBoxActionParam4.TextChanged += new System.EventHandler(this.textBoxActionParam4_TextChanged);
+            // 
+            // textBoxActionParam3
+            // 
+            this.textBoxActionParam3.Location = new System.Drawing.Point(144, 56);
+            this.textBoxActionParam3.Name = "textBoxActionParam3";
+            this.textBoxActionParam3.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam3.TabIndex = 49;
+            this.textBoxActionParam3.Text = "0";
+            this.textBoxActionParam3.TextChanged += new System.EventHandler(this.textBoxActionParam3_TextChanged);
+            // 
+            // textBoxActionParam2
+            // 
+            this.textBoxActionParam2.Location = new System.Drawing.Point(144, 30);
+            this.textBoxActionParam2.Name = "textBoxActionParam2";
+            this.textBoxActionParam2.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam2.TabIndex = 47;
+            this.textBoxActionParam2.Text = "0";
+            this.textBoxActionParam2.TextChanged += new System.EventHandler(this.textBoxActionParam2_TextChanged);
+            // 
+            // textBoxActionParam1
+            // 
+            this.textBoxActionParam1.Location = new System.Drawing.Point(144, 4);
+            this.textBoxActionParam1.Name = "textBoxActionParam1";
+            this.textBoxActionParam1.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam1.TabIndex = 45;
+            this.textBoxActionParam1.Text = "0";
+            this.textBoxActionParam1.TextChanged += new System.EventHandler(this.textBoxActionParam1_TextChanged);
+            // 
             // labelActionParam6
             // 
             this.labelActionParam6.AutoSize = true;
@@ -2282,51 +2332,6 @@
             this.labelActionParam2.TooltipParameterId = 2;
             this.labelActionParam2.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
             // 
-            // textBoxActionParam6
-            // 
-            this.textBoxActionParam6.Location = new System.Drawing.Point(144, 134);
-            this.textBoxActionParam6.Name = "textBoxActionParam6";
-            this.textBoxActionParam6.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam6.TabIndex = 56;
-            this.textBoxActionParam6.Text = "0";
-            this.textBoxActionParam6.TextChanged += new System.EventHandler(this.textBoxActionParam6_TextChanged);
-            // 
-            // textBoxActionParam5
-            // 
-            this.textBoxActionParam5.Location = new System.Drawing.Point(144, 108);
-            this.textBoxActionParam5.Name = "textBoxActionParam5";
-            this.textBoxActionParam5.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam5.TabIndex = 53;
-            this.textBoxActionParam5.Text = "0";
-            this.textBoxActionParam5.TextChanged += new System.EventHandler(this.textBoxActionParam5_TextChanged);
-            // 
-            // textBoxActionParam4
-            // 
-            this.textBoxActionParam4.Location = new System.Drawing.Point(144, 82);
-            this.textBoxActionParam4.Name = "textBoxActionParam4";
-            this.textBoxActionParam4.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam4.TabIndex = 51;
-            this.textBoxActionParam4.Text = "0";
-            this.textBoxActionParam4.TextChanged += new System.EventHandler(this.textBoxActionParam4_TextChanged);
-            // 
-            // textBoxActionParam3
-            // 
-            this.textBoxActionParam3.Location = new System.Drawing.Point(144, 56);
-            this.textBoxActionParam3.Name = "textBoxActionParam3";
-            this.textBoxActionParam3.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam3.TabIndex = 49;
-            this.textBoxActionParam3.Text = "0";
-            this.textBoxActionParam3.TextChanged += new System.EventHandler(this.textBoxActionParam3_TextChanged);
-            // 
-            // textBoxActionParam2
-            // 
-            this.textBoxActionParam2.Location = new System.Drawing.Point(144, 30);
-            this.textBoxActionParam2.Name = "textBoxActionParam2";
-            this.textBoxActionParam2.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam2.TabIndex = 47;
-            this.textBoxActionParam2.Text = "0";
-            this.textBoxActionParam2.TextChanged += new System.EventHandler(this.textBoxActionParam2_TextChanged);
-            // 
             // labelActionParam1
             // 
             this.labelActionParam1.AutoSize = true;
@@ -2338,88 +2343,31 @@
             this.labelActionParam1.TooltipParameterId = 1;
             this.labelActionParam1.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
             // 
-            // textBoxActionParam1
-            // 
-            this.textBoxActionParam1.Location = new System.Drawing.Point(144, 4);
-            this.textBoxActionParam1.Name = "textBoxActionParam1";
-            this.textBoxActionParam1.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam1.TabIndex = 45;
-            this.textBoxActionParam1.Text = "0";
-            this.textBoxActionParam1.TextChanged += new System.EventHandler(this.textBoxActionParam1_TextChanged);
-            // 
             // tabPageTarget
             // 
             this.tabPageTarget.BackColor = System.Drawing.SystemColors.Window;
-            this.tabPageTarget.Controls.Add(this.buttonTargetParamSevenSearch);
-            this.tabPageTarget.Controls.Add(this.buttonTargetParamSixSearch);
-            this.tabPageTarget.Controls.Add(this.buttonTargetParamFiveSearch);
-            this.tabPageTarget.Controls.Add(this.buttonTargetParamFourSearch);
             this.tabPageTarget.Controls.Add(this.buttonTargetParamThreeSearch);
             this.tabPageTarget.Controls.Add(this.buttonTargetParamTwoSearch);
             this.tabPageTarget.Controls.Add(this.buttonTargetParamOneSearch);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetO);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetZ);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetY);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetX);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetParam3);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetParam2);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetParam1);
             this.tabPageTarget.Controls.Add(this.labelTargetO);
             this.tabPageTarget.Controls.Add(this.labelTargetZ);
             this.tabPageTarget.Controls.Add(this.labelTargetY);
             this.tabPageTarget.Controls.Add(this.labelTargetX);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetO);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetZ);
             this.tabPageTarget.Controls.Add(this.labelTargetParam3);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetY);
             this.tabPageTarget.Controls.Add(this.labelTargetParam2);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetX);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetParam3);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetParam2);
             this.tabPageTarget.Controls.Add(this.labelTargetParam1);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetParam1);
             this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
             this.tabPageTarget.Name = "tabPageTarget";
             this.tabPageTarget.Size = new System.Drawing.Size(256, 127);
             this.tabPageTarget.TabIndex = 2;
             this.tabPageTarget.Text = "Target";
-            // 
-            // buttonTargetParamSevenSearch
-            // 
-            this.buttonTargetParamSevenSearch.Location = new System.Drawing.Point(214, 159);
-            this.buttonTargetParamSevenSearch.Name = "buttonTargetParamSevenSearch";
-            this.buttonTargetParamSevenSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamSevenSearch.TabIndex = 46;
-            this.buttonTargetParamSevenSearch.Text = "...";
-            this.buttonTargetParamSevenSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamSevenSearch.Visible = false;
-            this.buttonTargetParamSevenSearch.Click += new System.EventHandler(this.buttonTargetParamSevenSearch_Click);
-            // 
-            // buttonTargetParamSixSearch
-            // 
-            this.buttonTargetParamSixSearch.Location = new System.Drawing.Point(214, 133);
-            this.buttonTargetParamSixSearch.Name = "buttonTargetParamSixSearch";
-            this.buttonTargetParamSixSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamSixSearch.TabIndex = 69;
-            this.buttonTargetParamSixSearch.Text = "...";
-            this.buttonTargetParamSixSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamSixSearch.Visible = false;
-            this.buttonTargetParamSixSearch.Click += new System.EventHandler(this.buttonTargetParamSixSearch_Click);
-            // 
-            // buttonTargetParamFiveSearch
-            // 
-            this.buttonTargetParamFiveSearch.Location = new System.Drawing.Point(214, 107);
-            this.buttonTargetParamFiveSearch.Name = "buttonTargetParamFiveSearch";
-            this.buttonTargetParamFiveSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamFiveSearch.TabIndex = 67;
-            this.buttonTargetParamFiveSearch.Text = "...";
-            this.buttonTargetParamFiveSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamFiveSearch.Visible = false;
-            this.buttonTargetParamFiveSearch.Click += new System.EventHandler(this.buttonTargetParamFiveSearch_Click);
-            // 
-            // buttonTargetParamFourSearch
-            // 
-            this.buttonTargetParamFourSearch.Location = new System.Drawing.Point(214, 81);
-            this.buttonTargetParamFourSearch.Name = "buttonTargetParamFourSearch";
-            this.buttonTargetParamFourSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamFourSearch.TabIndex = 65;
-            this.buttonTargetParamFourSearch.Text = "...";
-            this.buttonTargetParamFourSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamFourSearch.Visible = false;
-            this.buttonTargetParamFourSearch.Click += new System.EventHandler(this.buttonTargetParamFourSearch_Click);
             // 
             // buttonTargetParamThreeSearch
             // 
@@ -2430,7 +2378,6 @@
             this.buttonTargetParamThreeSearch.Text = "...";
             this.buttonTargetParamThreeSearch.UseVisualStyleBackColor = true;
             this.buttonTargetParamThreeSearch.Visible = false;
-            this.buttonTargetParamThreeSearch.Click += new System.EventHandler(this.buttonTargetParamThreeSearch_Click);
             // 
             // buttonTargetParamTwoSearch
             // 
@@ -2453,6 +2400,69 @@
             this.buttonTargetParamOneSearch.UseVisualStyleBackColor = true;
             this.buttonTargetParamOneSearch.Visible = false;
             this.buttonTargetParamOneSearch.Click += new System.EventHandler(this.buttonTargetParamOneSearch_Click);
+            // 
+            // textBoxTargetO
+            // 
+            this.textBoxTargetO.Location = new System.Drawing.Point(144, 160);
+            this.textBoxTargetO.Name = "textBoxTargetO";
+            this.textBoxTargetO.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetO.TabIndex = 36;
+            this.textBoxTargetO.Text = "0";
+            this.textBoxTargetO.TextChanged += new System.EventHandler(this.textBoxTargetO_TextChanged);
+            // 
+            // textBoxTargetZ
+            // 
+            this.textBoxTargetZ.Location = new System.Drawing.Point(144, 134);
+            this.textBoxTargetZ.Name = "textBoxTargetZ";
+            this.textBoxTargetZ.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetZ.TabIndex = 68;
+            this.textBoxTargetZ.Text = "0";
+            this.textBoxTargetZ.TextChanged += new System.EventHandler(this.textBoxTargetZ_TextChanged);
+            // 
+            // textBoxTargetY
+            // 
+            this.textBoxTargetY.Location = new System.Drawing.Point(144, 108);
+            this.textBoxTargetY.Name = "textBoxTargetY";
+            this.textBoxTargetY.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetY.TabIndex = 66;
+            this.textBoxTargetY.Text = "0";
+            this.textBoxTargetY.TextChanged += new System.EventHandler(this.textBoxTargetY_TextChanged);
+            // 
+            // textBoxTargetX
+            // 
+            this.textBoxTargetX.Location = new System.Drawing.Point(144, 82);
+            this.textBoxTargetX.Name = "textBoxTargetX";
+            this.textBoxTargetX.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetX.TabIndex = 64;
+            this.textBoxTargetX.Text = "0";
+            this.textBoxTargetX.TextChanged += new System.EventHandler(this.textBoxTargetX_TextChanged);
+            // 
+            // textBoxTargetParam3
+            // 
+            this.textBoxTargetParam3.Location = new System.Drawing.Point(144, 56);
+            this.textBoxTargetParam3.Name = "textBoxTargetParam3";
+            this.textBoxTargetParam3.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetParam3.TabIndex = 62;
+            this.textBoxTargetParam3.Text = "0";
+            this.textBoxTargetParam3.TextChanged += new System.EventHandler(this.textBoxTargetParam3_TextChanged);
+            // 
+            // textBoxTargetParam2
+            // 
+            this.textBoxTargetParam2.Location = new System.Drawing.Point(144, 30);
+            this.textBoxTargetParam2.Name = "textBoxTargetParam2";
+            this.textBoxTargetParam2.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetParam2.TabIndex = 60;
+            this.textBoxTargetParam2.Text = "0";
+            this.textBoxTargetParam2.TextChanged += new System.EventHandler(this.textBoxTargetParam2_TextChanged);
+            // 
+            // textBoxTargetParam1
+            // 
+            this.textBoxTargetParam1.Location = new System.Drawing.Point(144, 4);
+            this.textBoxTargetParam1.Name = "textBoxTargetParam1";
+            this.textBoxTargetParam1.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetParam1.TabIndex = 58;
+            this.textBoxTargetParam1.Text = "0";
+            this.textBoxTargetParam1.TextChanged += new System.EventHandler(this.textBoxTargetParam1_TextChanged);
             // 
             // labelTargetO
             // 
@@ -2498,24 +2508,6 @@
             this.labelTargetX.TooltipParameterId = 4;
             this.labelTargetX.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
             // 
-            // textBoxTargetO
-            // 
-            this.textBoxTargetO.Location = new System.Drawing.Point(144, 160);
-            this.textBoxTargetO.Name = "textBoxTargetO";
-            this.textBoxTargetO.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetO.TabIndex = 36;
-            this.textBoxTargetO.Text = "0";
-            this.textBoxTargetO.TextChanged += new System.EventHandler(this.textBoxTargetO_TextChanged);
-            // 
-            // textBoxTargetZ
-            // 
-            this.textBoxTargetZ.Location = new System.Drawing.Point(144, 134);
-            this.textBoxTargetZ.Name = "textBoxTargetZ";
-            this.textBoxTargetZ.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetZ.TabIndex = 68;
-            this.textBoxTargetZ.Text = "0";
-            this.textBoxTargetZ.TextChanged += new System.EventHandler(this.textBoxTargetZ_TextChanged);
-            // 
             // labelTargetParam3
             // 
             this.labelTargetParam3.AutoSize = true;
@@ -2526,15 +2518,6 @@
             this.labelTargetParam3.Text = "Param 3";
             this.labelTargetParam3.TooltipParameterId = 3;
             this.labelTargetParam3.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
-            // 
-            // textBoxTargetY
-            // 
-            this.textBoxTargetY.Location = new System.Drawing.Point(144, 108);
-            this.textBoxTargetY.Name = "textBoxTargetY";
-            this.textBoxTargetY.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetY.TabIndex = 66;
-            this.textBoxTargetY.Text = "0";
-            this.textBoxTargetY.TextChanged += new System.EventHandler(this.textBoxTargetY_TextChanged);
             // 
             // labelTargetParam2
             // 
@@ -2547,33 +2530,6 @@
             this.labelTargetParam2.TooltipParameterId = 2;
             this.labelTargetParam2.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
             // 
-            // textBoxTargetX
-            // 
-            this.textBoxTargetX.Location = new System.Drawing.Point(144, 82);
-            this.textBoxTargetX.Name = "textBoxTargetX";
-            this.textBoxTargetX.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetX.TabIndex = 64;
-            this.textBoxTargetX.Text = "0";
-            this.textBoxTargetX.TextChanged += new System.EventHandler(this.textBoxTargetX_TextChanged);
-            // 
-            // textBoxTargetParam3
-            // 
-            this.textBoxTargetParam3.Location = new System.Drawing.Point(144, 56);
-            this.textBoxTargetParam3.Name = "textBoxTargetParam3";
-            this.textBoxTargetParam3.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetParam3.TabIndex = 62;
-            this.textBoxTargetParam3.Text = "0";
-            this.textBoxTargetParam3.TextChanged += new System.EventHandler(this.textBoxTargetParam3_TextChanged);
-            // 
-            // textBoxTargetParam2
-            // 
-            this.textBoxTargetParam2.Location = new System.Drawing.Point(144, 30);
-            this.textBoxTargetParam2.Name = "textBoxTargetParam2";
-            this.textBoxTargetParam2.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetParam2.TabIndex = 60;
-            this.textBoxTargetParam2.Text = "0";
-            this.textBoxTargetParam2.TextChanged += new System.EventHandler(this.textBoxTargetParam2_TextChanged);
-            // 
             // labelTargetParam1
             // 
             this.labelTargetParam1.AutoSize = true;
@@ -2584,15 +2540,6 @@
             this.labelTargetParam1.Text = "Param 1";
             this.labelTargetParam1.TooltipParameterId = 1;
             this.labelTargetParam1.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
-            // 
-            // textBoxTargetParam1
-            // 
-            this.textBoxTargetParam1.Location = new System.Drawing.Point(144, 4);
-            this.textBoxTargetParam1.Name = "textBoxTargetParam1";
-            this.textBoxTargetParam1.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetParam1.TabIndex = 58;
-            this.textBoxTargetParam1.Text = "0";
-            this.textBoxTargetParam1.TextChanged += new System.EventHandler(this.textBoxTargetParam1_TextChanged);
             // 
             // groupBoxParameters
             // 
@@ -2921,10 +2868,6 @@
         private System.Windows.Forms.Button buttonActionParamThreeSearch;
         private System.Windows.Forms.Button buttonActionParamTwoSearch;
         private System.Windows.Forms.Button buttonActionParamOneSearch;
-        private System.Windows.Forms.Button buttonTargetParamSevenSearch;
-        private System.Windows.Forms.Button buttonTargetParamSixSearch;
-        private System.Windows.Forms.Button buttonTargetParamFiveSearch;
-        private System.Windows.Forms.Button buttonTargetParamFourSearch;
         private System.Windows.Forms.Button buttonTargetParamThreeSearch;
         private System.Windows.Forms.Button buttonTargetParamTwoSearch;
         private System.Windows.Forms.Button buttonTargetParamOneSearch;

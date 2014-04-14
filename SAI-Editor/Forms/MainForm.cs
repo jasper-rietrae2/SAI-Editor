@@ -2287,31 +2287,6 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private void buttonTargetParamThreeSearch_Click(object sender, EventArgs e)
-        {
-            TextBox textBoxToChange = textBoxTargetParam3;
-        }
-
-        private void buttonTargetParamFourSearch_Click(object sender, EventArgs e)
-        {
-            TextBox textBoxToChange = textBoxTargetX;
-        }
-
-        private void buttonTargetParamFiveSearch_Click(object sender, EventArgs e)
-        {
-            TextBox textBoxToChange = textBoxTargetY;
-        }
-
-        private void buttonTargetParamSixSearch_Click(object sender, EventArgs e)
-        {
-            TextBox textBoxToChange = textBoxTargetZ;
-        }
-
-        private void buttonTargetParamSevenSearch_Click(object sender, EventArgs e)
-        {
-            TextBox textBoxToChange = textBoxTargetO;
-        }
-
         private void buttonActionParamOneSearch_Click(object sender, EventArgs e)
         {
             TextBox textBoxToChange = textBoxActionParam1;
