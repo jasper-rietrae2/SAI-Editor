@@ -19,6 +19,9 @@ namespace SAI_Editor.Forms
 
             comboBoxConditionSourceTypes.SelectedIndex = 0;
             comboBoxConditionTypes.SelectedIndex = 0;
+
+            panelPermanentTooltipConditionType.BackColor = Color.FromArgb(255, 255, 225);
+            panelPermanentTooltipSourceType.BackColor = Color.FromArgb(255, 255, 225);
         }
 
         private void comboBoxConditionSourceTypes_SelectedIndexChanged(object sender, EventArgs e)
@@ -37,60 +40,60 @@ namespace SAI_Editor.Forms
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_REFERENCE_LOOT_TEMPLATE:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SKINNING_LOOT_TEMPLATE:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_LOOT_TEMPLATE:
-                    SetSourceGroupValues("Loot entry");
+                    SetSourceGroupValues("Loot entry", true);
                     SetSourceEntryValues("Item entry");
                     SetConditionTargetValues(null);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_IMPLICIT_TARGET:
-                    SetSourceGroupValues("Effect mask (1, 2, 4)");
-                    SetSourceEntryValues("Spell entry");
+                    SetSourceGroupValues("Effect mask (1, 2, 4)", true);
+                    SetSourceEntryValues("Spell entry", true);
                     SetConditionTargetValues(new string[] { "Normal target", "Caster" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU_OPTION:
-                    SetSourceGroupValues("Gossip menu entry");
-                    SetSourceEntryValues("Gossip menu text entry");
+                    SetSourceGroupValues("Gossip menu entry", true);
+                    SetSourceEntryValues("Gossip menu text entry", true);
                     SetConditionTargetValues(new string[] { "Player who can see the gossip text", "Object providing the gossip" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_TEMPLATE_VEHICLE:
                     SetSourceGroupValues(" - ");
-                    SetSourceEntryValues("Creature entry");
+                    SetSourceEntryValues("Creature entry", true);
                     SetConditionTargetValues(new string[] { "Player riding the vehicle", "Vehicle itself" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL:
                     SetSourceGroupValues(" - ");
-                    SetSourceEntryValues("Spell entry");
+                    SetSourceEntryValues("Spell entry", true);
                     SetConditionTargetValues(new string[] { "Caster of the spell", "Actual spell target" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_CLICK_EVENT:
-                    SetSourceGroupValues("Creature entry");
-                    SetSourceEntryValues("Spell entry");
+                    SetSourceGroupValues("Creature entry", true);
+                    SetSourceEntryValues("Spell entry", true);
                     SetConditionTargetValues(new string[] { "Clicker", "Spellclick target (clickee)" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_ACCEPT:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK:
                     SetSourceGroupValues("?");
-                    SetSourceEntryValues("Quest entry");
+                    SetSourceEntryValues("Quest entry", true);
                     SetConditionTargetValues(null);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_VEHICLE_SPELL:
-                    SetSourceGroupValues("Creature entry");
-                    SetSourceEntryValues("Spell entry");
+                    SetSourceGroupValues("Creature entry", true);
+                    SetSourceEntryValues("Spell entry", true);
                     SetConditionTargetValues(new string[] { "Player on vehicle", "Vehicle itself" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SMART_EVENT:
-                    SetSourceGroupValues("Smart script id");
-                    SetSourceEntryValues("Smart script entryorguid");
+                    SetSourceGroupValues("Smart script id", true);
+                    SetSourceEntryValues("Smart script entryorguid", true);
                     SetConditionTargetValues(new string[] { "Invoker", "Object itself" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_NPC_VENDOR:
-                    SetSourceGroupValues("Vendor entry");
-                    SetSourceEntryValues("Item entry");
+                    SetSourceGroupValues("Vendor entry", true);
+                    SetSourceEntryValues("Item entry", true);
                     SetConditionTargetValues(null);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_PROC:
                     SetSourceGroupValues(" - ");
-                    SetSourceEntryValues("Spell id of the aura");
+                    SetSourceEntryValues("Spell id of the aura", true);
                     SetConditionTargetValues(new string[] { "Actor", "Action target" });
                     break;
                 //case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PHASE_DEFINITION:
@@ -112,22 +115,26 @@ namespace SAI_Editor.Forms
                 e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
         }
 
-        private void SetSourceGroupValues(string value)
+        private void SetSourceGroupValues(string value, bool searchable = false)
         {
             labelSourceGroup.Text = value;
             textBoxSourceGroup.Enabled = value != " - ";
 
             if (value == " - ") //! Empty/unused source group
                 textBoxSourceGroup.Text = String.Empty;
+
+            buttonSearchSourceGroup.Enabled = searchable;
         }
 
-        private void SetSourceEntryValues(string value)
+        private void SetSourceEntryValues(string value, bool searchable = false)
         {
             labelSourceEntry.Text = value;
             textBoxSourceEntry.Enabled = value != " - ";
 
             if (value == " - ") //! Empty/unused source Entry
                 textBoxSourceEntry.Text = String.Empty;
+
+            buttonSearchSourceEntry.Enabled = searchable;
         }
 
         private void SetConditionTargetValues(string[] items)
@@ -148,6 +155,286 @@ namespace SAI_Editor.Forms
         }
 
         private void comboBoxConditionTypes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
+            {
+                case ConditionTypes.CONDITION_AURA:
+                    SetConditionValues(new string[] { "Spell entry", "Spell effect index (0-2)", "" }, new bool[] { true, true, false });
+                    break;
+                case ConditionTypes.CONDITION_ITEM:
+                    SetConditionValues(new string[] { "Item entry", "Item count", "In bank (0/1)" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_ITEM_EQUIPPED:
+                    SetConditionValues(new string[] { "Item entry", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_ZONEID:
+                    SetConditionValues(new string[] { "Zone id", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_REPUTATION_RANK:
+                    SetConditionValues(new string[] { "Faction entry", "Facion rank", "" }, new bool[] { true, true, false });
+                    break;
+                case ConditionTypes.CONDITION_TEAM:
+                    SetConditionValues(new string[] { "Team id", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_SKILL:
+                    SetConditionValues(new string[] { "Skill entry", "Skill value", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_QUESTREWARDED:
+                    SetConditionValues(new string[] { "Quest entry", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_QUESTTAKEN:
+                    SetConditionValues(new string[] { "Quest entry", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_DRUNKENSTATE:
+                    SetConditionValues(new string[] { "Drunken state", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_WORLD_STATE:
+                    SetConditionValues(new string[] { "World state index", "World state value", "" }, new bool[] { true, true, false });
+                    break;
+                case ConditionTypes.CONDITION_ACTIVE_EVENT:
+                    SetConditionValues(new string[] { "Game event entry", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_INSTANCE_INFO:
+                    SetConditionValues(new string[] { "Instance entry", "Instance data", "Instance type" }, new bool[] { true, false, true });
+                    break;
+                case ConditionTypes.CONDITION_QUEST_NONE:
+                    SetConditionValues(new string[] { "Quest entry", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_CLASS:
+                    SetConditionValues(new string[] { "Class mask", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_RACE:
+                    SetConditionValues(new string[] { "Race mask", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_ACHIEVEMENT:
+                    SetConditionValues(new string[] { "Achievement id", "", "" }, new bool[] { true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_TITLE:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_SPAWNMASK:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_GENDER:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_UNIT_STATE:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_MAPID:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_AREAID:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_CREATURE_TYPE:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_SPELL:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_PHASEMASK:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_LEVEL:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_QUEST_COMPLETE:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_NEAR_CREATURE:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_NEAR_GAMEOBJECT:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_OBJECT_ENTRY:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_TYPE_MASK:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_RELATION_TO:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_REACTION_TO:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_DISTANCE_TO:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_ALIVE:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_HP_VAL:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_HP_PCT:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+                default:
+                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    break;
+            }
+        }
+
+        private void SetConditionValues(string[] values, bool[] searchables)
+        {
+            Dictionary<string, Control> condValues = new Dictionary<string, Control>()
+            {
+                { "1lbl", labelCondValue1 }, { "2lbl", labelCondValue2 }, { "3lbl", labelCondValue3 },
+                { "1txt", textBoxCondValue1 }, { "2txt", textBoxCondValue2 }, { "3txt", textBoxCondValue3 },
+                { "1btn", buttonSearchConditionValue1 }, { "2btn", buttonSearchConditionValue2 }, { "3btn", buttonSearchConditionValue3 },
+            };
+
+            for (int i = 0; i < 3; ++i)
+            {
+                string value = values[i];
+                bool searchable = searchables[i];
+                string iKey = (i + 1).ToString();
+
+                if (!String.IsNullOrWhiteSpace(value))
+                {
+                    condValues[iKey.ToString() + "lbl"].Text = value;
+                    condValues[iKey.ToString() + "txt"].Enabled = value != " - ";
+
+                    if (value == " - ") //! Empty/unused source Entry
+                        condValues[iKey.ToString() + "txt"].Text = String.Empty;
+
+                    condValues[iKey.ToString() + "btn"].Enabled = searchable;
+                }
+            }
+        }
+
+        private void buttonSearchSourceGroup_Click(object sender, EventArgs e)
+        {
+            switch ((ConditionSourceTypes)comboBoxConditionSourceTypes.SelectedIndex)
+            {
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_DISENCHANT_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_FISHING_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GAMEOBJECT_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_ITEM_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_MAIL_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_MILLING_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PICKPOCKETING_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PROSPECTING_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_REFERENCE_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SKINNING_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_IMPLICIT_TARGET:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU_OPTION:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_TEMPLATE_VEHICLE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_CLICK_EVENT:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_ACCEPT:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_VEHICLE_SPELL:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SMART_EVENT:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_NPC_VENDOR:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_PROC:
+                    break;
+                //case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PHASE_DEFINITION:
+                //    break;
+                default:
+                    break;
+            }
+        }
+
+        private void buttonSearchSourceEntry_Click(object sender, EventArgs e)
+        {
+            switch ((ConditionSourceTypes)comboBoxConditionSourceTypes.SelectedIndex)
+            {
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_DISENCHANT_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_FISHING_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GAMEOBJECT_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_ITEM_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_MAIL_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_MILLING_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PICKPOCKETING_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PROSPECTING_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_REFERENCE_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SKINNING_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_LOOT_TEMPLATE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_IMPLICIT_TARGET:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU_OPTION:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_TEMPLATE_VEHICLE:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_CLICK_EVENT:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_ACCEPT:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_VEHICLE_SPELL:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SMART_EVENT:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_NPC_VENDOR:
+                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_PROC:
+                    break;
+                //case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PHASE_DEFINITION:
+                //    break;
+                default:
+                    break;
+            }
+        }
+
+        private void buttonSearchConditionValue1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSearchConditionValue2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonSearchConditionValue3_Click(object sender, EventArgs e)
         {
 
         }

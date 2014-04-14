@@ -49,7 +49,6 @@
             this.textBoxCondValue1 = new System.Windows.Forms.TextBox();
             this.textBoxCondValue2 = new System.Windows.Forms.TextBox();
             this.textBoxCondValue3 = new System.Windows.Forms.TextBox();
-            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -57,6 +56,24 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.buttonSearchSourceGroup = new System.Windows.Forms.Button();
+            this.buttonSearchSourceEntry = new System.Windows.Forms.Button();
+            this.panelPermanentTooltipSourceType = new System.Windows.Forms.Panel();
+            this.labelPermanentTooltipSourceType = new System.Windows.Forms.Label();
+            this.labelPermanentTooltipSourceTypeValues = new System.Windows.Forms.Label();
+            this.pictureBoxPermanentTooltip = new System.Windows.Forms.PictureBox();
+            this.panelPermanentTooltipConditionType = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.buttonSearchConditionValue1 = new System.Windows.Forms.Button();
+            this.buttonSearchConditionValue2 = new System.Windows.Forms.Button();
+            this.buttonSearchConditionValue3 = new System.Windows.Forms.Button();
+            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
+            this.panelPermanentTooltipSourceType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
+            this.panelPermanentTooltipConditionType.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // comboBoxConditionSourceTypes
@@ -231,14 +248,14 @@
             // 
             this.textBoxSourceGroup.Location = new System.Drawing.Point(552, 13);
             this.textBoxSourceGroup.Name = "textBoxSourceGroup";
-            this.textBoxSourceGroup.Size = new System.Drawing.Size(90, 20);
+            this.textBoxSourceGroup.Size = new System.Drawing.Size(66, 20);
             this.textBoxSourceGroup.TabIndex = 11;
             // 
             // textBoxSourceEntry
             // 
             this.textBoxSourceEntry.Location = new System.Drawing.Point(552, 40);
             this.textBoxSourceEntry.Name = "textBoxSourceEntry";
-            this.textBoxSourceEntry.Size = new System.Drawing.Size(90, 20);
+            this.textBoxSourceEntry.Size = new System.Drawing.Size(66, 20);
             this.textBoxSourceEntry.TabIndex = 12;
             // 
             // labelComment
@@ -279,31 +296,22 @@
             // 
             this.textBoxCondValue1.Location = new System.Drawing.Point(119, 146);
             this.textBoxCondValue1.Name = "textBoxCondValue1";
-            this.textBoxCondValue1.Size = new System.Drawing.Size(149, 20);
+            this.textBoxCondValue1.Size = new System.Drawing.Size(66, 20);
             this.textBoxCondValue1.TabIndex = 18;
             // 
             // textBoxCondValue2
             // 
             this.textBoxCondValue2.Location = new System.Drawing.Point(119, 172);
             this.textBoxCondValue2.Name = "textBoxCondValue2";
-            this.textBoxCondValue2.Size = new System.Drawing.Size(149, 20);
+            this.textBoxCondValue2.Size = new System.Drawing.Size(66, 20);
             this.textBoxCondValue2.TabIndex = 18;
             // 
             // textBoxCondValue3
             // 
             this.textBoxCondValue3.Location = new System.Drawing.Point(119, 198);
             this.textBoxCondValue3.Name = "textBoxCondValue3";
-            this.textBoxCondValue3.Size = new System.Drawing.Size(149, 20);
+            this.textBoxCondValue3.Size = new System.Drawing.Size(66, 20);
             this.textBoxCondValue3.TabIndex = 18;
-            // 
-            // lineSeparator1
-            // 
-            this.lineSeparator1.Location = new System.Drawing.Point(-1, 102);
-            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
-            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
-            this.lineSeparator1.Name = "lineSeparator1";
-            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
-            this.lineSeparator1.TabIndex = 13;
             // 
             // label3
             // 
@@ -368,11 +376,160 @@
             this.label9.TabIndex = 16;
             this.label9.Text = ":";
             // 
+            // buttonSearchSourceGroup
+            // 
+            this.buttonSearchSourceGroup.Enabled = false;
+            this.buttonSearchSourceGroup.Location = new System.Drawing.Point(618, 12);
+            this.buttonSearchSourceGroup.Name = "buttonSearchSourceGroup";
+            this.buttonSearchSourceGroup.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchSourceGroup.TabIndex = 19;
+            this.buttonSearchSourceGroup.Text = "...";
+            this.buttonSearchSourceGroup.UseVisualStyleBackColor = true;
+            this.buttonSearchSourceGroup.Click += new System.EventHandler(this.buttonSearchSourceGroup_Click);
+            // 
+            // buttonSearchSourceEntry
+            // 
+            this.buttonSearchSourceEntry.Enabled = false;
+            this.buttonSearchSourceEntry.Location = new System.Drawing.Point(618, 39);
+            this.buttonSearchSourceEntry.Name = "buttonSearchSourceEntry";
+            this.buttonSearchSourceEntry.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchSourceEntry.TabIndex = 19;
+            this.buttonSearchSourceEntry.Text = "...";
+            this.buttonSearchSourceEntry.UseVisualStyleBackColor = true;
+            this.buttonSearchSourceEntry.Click += new System.EventHandler(this.buttonSearchSourceEntry_Click);
+            // 
+            // panelPermanentTooltipSourceType
+            // 
+            this.panelPermanentTooltipSourceType.BackColor = System.Drawing.Color.White;
+            this.panelPermanentTooltipSourceType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelPermanentTooltipSourceType.Controls.Add(this.labelPermanentTooltipSourceType);
+            this.panelPermanentTooltipSourceType.Controls.Add(this.labelPermanentTooltipSourceTypeValues);
+            this.panelPermanentTooltipSourceType.Controls.Add(this.pictureBoxPermanentTooltip);
+            this.panelPermanentTooltipSourceType.Location = new System.Drawing.Point(15, 306);
+            this.panelPermanentTooltipSourceType.Name = "panelPermanentTooltipSourceType";
+            this.panelPermanentTooltipSourceType.Size = new System.Drawing.Size(627, 30);
+            this.panelPermanentTooltipSourceType.TabIndex = 26;
+            // 
+            // labelPermanentTooltipSourceType
+            // 
+            this.labelPermanentTooltipSourceType.AutoSize = true;
+            this.labelPermanentTooltipSourceType.Location = new System.Drawing.Point(26, 1);
+            this.labelPermanentTooltipSourceType.Name = "labelPermanentTooltipSourceType";
+            this.labelPermanentTooltipSourceType.Size = new System.Drawing.Size(181, 13);
+            this.labelPermanentTooltipSourceType.TabIndex = 31;
+            this.labelPermanentTooltipSourceType.Text = "Event type, action type or target type";
+            // 
+            // labelPermanentTooltipSourceTypeValues
+            // 
+            this.labelPermanentTooltipSourceTypeValues.AutoSize = true;
+            this.labelPermanentTooltipSourceTypeValues.Location = new System.Drawing.Point(26, 15);
+            this.labelPermanentTooltipSourceTypeValues.Name = "labelPermanentTooltipSourceTypeValues";
+            this.labelPermanentTooltipSourceTypeValues.Size = new System.Drawing.Size(144, 13);
+            this.labelPermanentTooltipSourceTypeValues.TabIndex = 30;
+            this.labelPermanentTooltipSourceTypeValues.Text = "Event/action/target type text";
+            // 
+            // pictureBoxPermanentTooltip
+            // 
+            this.pictureBoxPermanentTooltip.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPermanentTooltip.Image")));
+            this.pictureBoxPermanentTooltip.Location = new System.Drawing.Point(6, 7);
+            this.pictureBoxPermanentTooltip.Name = "pictureBoxPermanentTooltip";
+            this.pictureBoxPermanentTooltip.Size = new System.Drawing.Size(14, 14);
+            this.pictureBoxPermanentTooltip.TabIndex = 29;
+            this.pictureBoxPermanentTooltip.TabStop = false;
+            // 
+            // panelPermanentTooltipConditionType
+            // 
+            this.panelPermanentTooltipConditionType.BackColor = System.Drawing.Color.White;
+            this.panelPermanentTooltipConditionType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelPermanentTooltipConditionType.Controls.Add(this.label10);
+            this.panelPermanentTooltipConditionType.Controls.Add(this.label11);
+            this.panelPermanentTooltipConditionType.Controls.Add(this.pictureBox1);
+            this.panelPermanentTooltipConditionType.Location = new System.Drawing.Point(15, 342);
+            this.panelPermanentTooltipConditionType.Name = "panelPermanentTooltipConditionType";
+            this.panelPermanentTooltipConditionType.Size = new System.Drawing.Size(627, 30);
+            this.panelPermanentTooltipConditionType.TabIndex = 26;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(26, 1);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(181, 13);
+            this.label10.TabIndex = 31;
+            this.label10.Text = "Event type, action type or target type";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(26, 15);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(144, 13);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Event/action/target type text";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(6, 7);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(14, 14);
+            this.pictureBox1.TabIndex = 29;
+            this.pictureBox1.TabStop = false;
+            // 
+            // buttonSearchConditionValue1
+            // 
+            this.buttonSearchConditionValue1.Enabled = false;
+            this.buttonSearchConditionValue1.Location = new System.Drawing.Point(185, 145);
+            this.buttonSearchConditionValue1.Name = "buttonSearchConditionValue1";
+            this.buttonSearchConditionValue1.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchConditionValue1.TabIndex = 19;
+            this.buttonSearchConditionValue1.Text = "...";
+            this.buttonSearchConditionValue1.UseVisualStyleBackColor = true;
+            this.buttonSearchConditionValue1.Click += new System.EventHandler(this.buttonSearchConditionValue1_Click);
+            // 
+            // buttonSearchConditionValue2
+            // 
+            this.buttonSearchConditionValue2.Enabled = false;
+            this.buttonSearchConditionValue2.Location = new System.Drawing.Point(185, 172);
+            this.buttonSearchConditionValue2.Name = "buttonSearchConditionValue2";
+            this.buttonSearchConditionValue2.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchConditionValue2.TabIndex = 19;
+            this.buttonSearchConditionValue2.Text = "...";
+            this.buttonSearchConditionValue2.UseVisualStyleBackColor = true;
+            this.buttonSearchConditionValue2.Click += new System.EventHandler(this.buttonSearchConditionValue2_Click);
+            // 
+            // buttonSearchConditionValue3
+            // 
+            this.buttonSearchConditionValue3.Enabled = false;
+            this.buttonSearchConditionValue3.Location = new System.Drawing.Point(185, 197);
+            this.buttonSearchConditionValue3.Name = "buttonSearchConditionValue3";
+            this.buttonSearchConditionValue3.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchConditionValue3.TabIndex = 19;
+            this.buttonSearchConditionValue3.Text = "...";
+            this.buttonSearchConditionValue3.UseVisualStyleBackColor = true;
+            this.buttonSearchConditionValue3.Click += new System.EventHandler(this.buttonSearchConditionValue3_Click);
+            // 
+            // lineSeparator1
+            // 
+            this.lineSeparator1.Location = new System.Drawing.Point(-1, 102);
+            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
+            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
+            this.lineSeparator1.Name = "lineSeparator1";
+            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
+            this.lineSeparator1.TabIndex = 13;
+            // 
             // ConditionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(671, 377);
+            this.Controls.Add(this.panelPermanentTooltipConditionType);
+            this.Controls.Add(this.panelPermanentTooltipSourceType);
+            this.Controls.Add(this.buttonSearchSourceEntry);
+            this.Controls.Add(this.buttonSearchConditionValue3);
+            this.Controls.Add(this.buttonSearchConditionValue2);
+            this.Controls.Add(this.buttonSearchConditionValue1);
+            this.Controls.Add(this.buttonSearchSourceGroup);
             this.Controls.Add(this.textBoxCondValue3);
             this.Controls.Add(this.textBoxCondValue2);
             this.Controls.Add(this.textBoxCondValue1);
@@ -410,6 +567,12 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Condition Editor";
+            this.panelPermanentTooltipSourceType.ResumeLayout(false);
+            this.panelPermanentTooltipSourceType.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
+            this.panelPermanentTooltipConditionType.ResumeLayout(false);
+            this.panelPermanentTooltipConditionType.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -421,9 +584,6 @@
         private System.Windows.Forms.ComboBox comboBoxConditionTypes;
         private System.Windows.Forms.Label labelSourceType;
         private System.Windows.Forms.Label labelConditionType;
-        private System.Windows.Forms.Label labelCondValue1;
-        private System.Windows.Forms.Label labelCondValue2;
-        private System.Windows.Forms.Label labelCondValue3;
         private System.Windows.Forms.Label labelSourceGroup;
         private System.Windows.Forms.Label labelSourceEntry;
         private System.Windows.Forms.Label labelConditionTarget;
@@ -445,5 +605,21 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button buttonSearchSourceGroup;
+        private System.Windows.Forms.Button buttonSearchSourceEntry;
+        private System.Windows.Forms.Panel panelPermanentTooltipSourceType;
+        private System.Windows.Forms.Label labelPermanentTooltipSourceType;
+        private System.Windows.Forms.Label labelPermanentTooltipSourceTypeValues;
+        private System.Windows.Forms.PictureBox pictureBoxPermanentTooltip;
+        private System.Windows.Forms.Panel panelPermanentTooltipConditionType;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button buttonSearchConditionValue1;
+        private System.Windows.Forms.Button buttonSearchConditionValue2;
+        private System.Windows.Forms.Button buttonSearchConditionValue3;
+        private System.Windows.Forms.Label labelCondValue1;
+        private System.Windows.Forms.Label labelCondValue2;
+        private System.Windows.Forms.Label labelCondValue3;
     }
 }
