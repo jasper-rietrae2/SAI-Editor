@@ -270,17 +270,13 @@ namespace SAI_Editor.Forms
 
             if (!Settings.Default.InformedAboutSurvey)
             {
-                string termsArgeementString = "By clicking 'Yes' you agree to the application keeping a record of its usage in a remote database. Keep ";
-                termsArgeementString += "in mind that this data will not be disclosed to a third party. It is for internal use and bookkeeping only.";
+                string termsArgeementString = "By clicking 'Yes' you agree to the application keeping a record of its usage in a remote database. Keep " +
+                                              "in mind that this data will not be disclosed to a third party. It is for internal use and bookkeeping only.";
 
                 DialogResult result = MessageBox.Show(termsArgeementString, "Agree to the terms", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                 if (result != DialogResult.Yes)
                 {
-                    //! Hide so the frozen window doesn't bother the user
-                    ShowInTaskbar = false;
-                    Visible = false;
-
                     //! Not running this in a diff thread because we want this to complete before exiting.
                     using (WebClient client = new WebClient())
                     {
@@ -293,12 +289,10 @@ namespace SAI_Editor.Forms
 
                         }
                     }
-
-                    Close();
-                    return;
                 }
 
                 Settings.Default.InformedAboutSurvey = true;
+                Settings.Default.AgreedToSurvey = result == DialogResult.Yes;
             }
 
             searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
@@ -316,7 +310,14 @@ namespace SAI_Editor.Forms
             {
                 try
                 {
-                    client.DownloadData("http://www.jasper-rietrae.com/SAI-Editor/survey.php?version=" + applicationVersion.Replace('.', '-'));
+                    string url = "http://www.jasper-rietrae.com/SAI-Editor/survey.php?";
+
+                    if (!Settings.Default.AgreedToSurvey)
+                        url += "agreed=false";
+                    else
+                        url += "version=" + applicationVersion.Replace('.', '-');
+
+                    client.DownloadData(url);
                 }
                 catch (ThreadAbortException)
                 {
