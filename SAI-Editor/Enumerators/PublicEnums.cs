@@ -675,4 +675,11 @@ namespace SAI_Editor.Enumerators
         CONDITION_HP_PCT                = 38,                   // hpPct            ComparisonType 0                  true if unit's hp matches given pct
         CONDITION_MAX                   = 39                    // MAX
     }
+
+    enum SpellEffIndex
+    {
+        EFFECT_0 = 0,
+        EFFECT_1 = 1,
+        EFFECT_2 = 2
+    }
 }

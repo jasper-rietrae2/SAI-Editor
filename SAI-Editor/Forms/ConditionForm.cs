@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SAI_Editor.Enumerators;
+using SAI_Editor.Forms.SearchForms;
 
 namespace SAI_Editor.Forms
 {
@@ -159,121 +160,121 @@ namespace SAI_Editor.Forms
             switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
             {
                 case ConditionTypes.CONDITION_AURA:
-                    SetConditionValues(new string[] { "Spell entry", "Spell effect index (0-2)", "" }, new bool[] { true, true, false });
+                    SetConditionValues(new string[] { "Spell entry", "Spell effect index (0-2)", "", "" }, new bool[] { true, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_ITEM:
-                    SetConditionValues(new string[] { "Item entry", "Item count", "In bank (0/1)" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Item entry", "Item count", "In bank (0/1)", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_ITEM_EQUIPPED:
-                    SetConditionValues(new string[] { "Item entry", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Item entry", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_ZONEID:
-                    SetConditionValues(new string[] { "Zone id", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Zone id", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_REPUTATION_RANK:
-                    SetConditionValues(new string[] { "Faction entry", "Facion rank", "" }, new bool[] { true, true, false });
+                    SetConditionValues(new string[] { "Faction entry", "Facion rank", "", "" }, new bool[] { true, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_TEAM:
-                    SetConditionValues(new string[] { "Team id", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Team id", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_SKILL:
-                    SetConditionValues(new string[] { "Skill entry", "Skill value", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Skill entry", "Skill value", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_QUESTREWARDED:
-                    SetConditionValues(new string[] { "Quest entry", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Quest entry", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_QUESTTAKEN:
-                    SetConditionValues(new string[] { "Quest entry", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Quest entry", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_DRUNKENSTATE:
-                    SetConditionValues(new string[] { "Drunken state", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Drunken state", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_WORLD_STATE:
-                    SetConditionValues(new string[] { "World state index", "World state value", "" }, new bool[] { true, true, false });
+                    SetConditionValues(new string[] { "World state index", "World state value", "", "" }, new bool[] { true, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_ACTIVE_EVENT:
-                    SetConditionValues(new string[] { "Game event entry", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Game event entry", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_INSTANCE_INFO:
-                    SetConditionValues(new string[] { "Instance entry", "Instance data", "Instance type" }, new bool[] { true, false, true });
+                    SetConditionValues(new string[] { "Instance entry", "Instance data", "Instance type", "" }, new bool[] { true, false, true, false });
                     break;
                 case ConditionTypes.CONDITION_QUEST_NONE:
-                    SetConditionValues(new string[] { "Quest entry", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Quest entry", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_CLASS:
-                    SetConditionValues(new string[] { "Class mask", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Class mask", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_RACE:
-                    SetConditionValues(new string[] { "Race mask", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Race mask", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_ACHIEVEMENT:
-                    SetConditionValues(new string[] { "Achievement id", "", "" }, new bool[] { true, false, false });
+                    SetConditionValues(new string[] { "Achievement id", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_TITLE:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Title id", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_SPAWNMASK:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Spawnmask", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_GENDER:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Gender", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_UNIT_STATE:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Unit state", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_MAPID:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Map id", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_AREAID:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Area id", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_CREATURE_TYPE:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    //SetConditionValues(new string[] { "", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_SPELL:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Spell entry", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_PHASEMASK:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Phasemask", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_LEVEL:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Player level", "Compare type", "", "" }, new bool[] { false, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_QUEST_COMPLETE:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Quest entry", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_NEAR_CREATURE:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Creature entry", "Distance", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_NEAR_GAMEOBJECT:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Gameobject entry", "Distance", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_OBJECT_ENTRY:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Type id", "Object entry", "", "" }, new bool[] { true, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_TYPE_MASK:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Typemask", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_RELATION_TO:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Condition target", "Relation type", "", "" }, new bool[] { true, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_REACTION_TO:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Condition target", "Rank mask", "", "" }, new bool[] { true, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_DISTANCE_TO:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Condition target", "Distance", "Compare type", "" }, new bool[] { true, true, true, false });
                     break;
                 case ConditionTypes.CONDITION_ALIVE:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "", "", "", "Condition (0/1)" }, new bool[] { false, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_HP_VAL:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Health points", "Compare type", "", "" }, new bool[] { false, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_HP_PCT:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "Health percentage", "Compare type", "", "" }, new bool[] { false, true, false, false });
                     break;
                 default:
-                    SetConditionValues(new string[] { "", "", "" }, new bool[] { false, false, false });
+                    SetConditionValues(new string[] { "", "", "", "" }, new bool[] { false, false, false, false });
                     break;
             }
         }
@@ -282,12 +283,12 @@ namespace SAI_Editor.Forms
         {
             Dictionary<string, Control> condValues = new Dictionary<string, Control>()
             {
-                { "1lbl", labelCondValue1 }, { "2lbl", labelCondValue2 }, { "3lbl", labelCondValue3 },
-                { "1txt", textBoxCondValue1 }, { "2txt", textBoxCondValue2 }, { "3txt", textBoxCondValue3 },
-                { "1btn", buttonSearchConditionValue1 }, { "2btn", buttonSearchConditionValue2 }, { "3btn", buttonSearchConditionValue3 },
+                { "1lbl", labelCondValue1 }, { "2lbl", labelCondValue2 }, { "3lbl", labelCondValue3 }, { "4lbl", labelCondValue4 },
+                { "1txt", textBoxCondValue1 }, { "2txt", textBoxCondValue2 }, { "3txt", textBoxCondValue3 }, { "4txt", textBoxCondValue4 },
+                { "1btn", buttonSearchConditionValue1 }, { "2btn", buttonSearchConditionValue2 }, { "3btn", buttonSearchConditionValue3 }, { "4btn", buttonSearchConditionValue4 },
             };
 
-            for (int i = 0; i < 3; ++i)
+            for (int i = 0; i < 4; ++i)
             {
                 string value = values[i];
                 bool searchable = searchables[i];
@@ -335,34 +336,38 @@ namespace SAI_Editor.Forms
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_LOOT_TEMPLATE:
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_IMPLICIT_TARGET:
+                    using (SingleSelectForm<SpellEffIndex> singleSelectForm = new SingleSelectForm<SpellEffIndex>(textBoxSourceGroup))
+                        singleSelectForm.ShowDialog(this);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU:
-                    break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU_OPTION:
-                    break;
-                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_TEMPLATE_VEHICLE:
-                    break;
-                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL:
+                    ShowSearchFromDatabaseForm(textBoxSourceGroup, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionId);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_CLICK_EVENT:
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_VEHICLE_SPELL:
+                    ShowSearchFromDatabaseForm(textBoxSourceGroup, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_ACCEPT:
-                    break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK:
-                    break;
-                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_VEHICLE_SPELL:
+                    //????
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SMART_EVENT:
+                    //????
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_NPC_VENDOR:
-                    break;
-                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_PROC:
+                    //ShowSearchFromDatabaseForm(textBoxSourceGroup, DatabaseSearchFormType.Vendor);
                     break;
                 //case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PHASE_DEFINITION:
                 //    break;
                 default:
                     break;
             }
+        }
+
+        private void ShowSearchFromDatabaseForm(TextBox textBoxToChange, DatabaseSearchFormType searchType)
+        {
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, searchType))
+                searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void buttonSearchSourceEntry_Click(object sender, EventArgs e)
@@ -393,29 +398,29 @@ namespace SAI_Editor.Forms
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_LOOT_TEMPLATE:
                     break;
-                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_IMPLICIT_TARGET:
-                    break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU:
-                    break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU_OPTION:
+                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionId);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_TEMPLATE_VEHICLE:
+                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry);
                     break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_IMPLICIT_TARGET:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL:
-                    break;
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_PROC:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_CLICK_EVENT:
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_VEHICLE_SPELL:
+                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeSpell);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_ACCEPT:
-                    break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK:
-                    break;
-                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_VEHICLE_SPELL:
+                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeQuest);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SMART_EVENT:
+                    //ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_NPC_VENDOR:
-                    break;
-                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_PROC:
+                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry);
                     break;
                 //case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PHASE_DEFINITION:
                 //    break;

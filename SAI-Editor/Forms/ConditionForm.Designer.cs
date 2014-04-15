@@ -70,6 +70,10 @@
             this.buttonSearchConditionValue2 = new System.Windows.Forms.Button();
             this.buttonSearchConditionValue3 = new System.Windows.Forms.Button();
             this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
+            this.labelCondValue4 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBoxCondValue4 = new System.Windows.Forms.TextBox();
+            this.buttonSearchConditionValue4 = new System.Windows.Forms.Button();
             this.panelPermanentTooltipSourceType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipConditionType.SuspendLayout();
@@ -518,6 +522,42 @@
             this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
             this.lineSeparator1.TabIndex = 13;
             // 
+            // labelCondValue4
+            // 
+            this.labelCondValue4.AutoSize = true;
+            this.labelCondValue4.Location = new System.Drawing.Point(12, 227);
+            this.labelCondValue4.Name = "labelCondValue4";
+            this.labelCondValue4.Size = new System.Drawing.Size(96, 13);
+            this.labelCondValue4.TabIndex = 6;
+            this.labelCondValue4.Text = "Negative condition";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(107, 227);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(10, 13);
+            this.label13.TabIndex = 16;
+            this.label13.Text = ":";
+            // 
+            // textBoxCondValue4
+            // 
+            this.textBoxCondValue4.Location = new System.Drawing.Point(119, 224);
+            this.textBoxCondValue4.Name = "textBoxCondValue4";
+            this.textBoxCondValue4.Size = new System.Drawing.Size(66, 20);
+            this.textBoxCondValue4.TabIndex = 18;
+            // 
+            // buttonSearchConditionValue4
+            // 
+            this.buttonSearchConditionValue4.Enabled = false;
+            this.buttonSearchConditionValue4.Location = new System.Drawing.Point(185, 223);
+            this.buttonSearchConditionValue4.Name = "buttonSearchConditionValue4";
+            this.buttonSearchConditionValue4.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchConditionValue4.TabIndex = 19;
+            this.buttonSearchConditionValue4.Text = "...";
+            this.buttonSearchConditionValue4.UseVisualStyleBackColor = true;
+            this.buttonSearchConditionValue4.Click += new System.EventHandler(this.buttonSearchConditionValue3_Click);
+            // 
             // ConditionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -526,14 +566,17 @@
             this.Controls.Add(this.panelPermanentTooltipConditionType);
             this.Controls.Add(this.panelPermanentTooltipSourceType);
             this.Controls.Add(this.buttonSearchSourceEntry);
+            this.Controls.Add(this.buttonSearchConditionValue4);
             this.Controls.Add(this.buttonSearchConditionValue3);
             this.Controls.Add(this.buttonSearchConditionValue2);
             this.Controls.Add(this.buttonSearchConditionValue1);
             this.Controls.Add(this.buttonSearchSourceGroup);
+            this.Controls.Add(this.textBoxCondValue4);
             this.Controls.Add(this.textBoxCondValue3);
             this.Controls.Add(this.textBoxCondValue2);
             this.Controls.Add(this.textBoxCondValue1);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label13);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label8);
@@ -551,6 +594,7 @@
             this.Controls.Add(this.labelConditionTarget);
             this.Controls.Add(this.labelSourceEntry);
             this.Controls.Add(this.labelSourceGroup);
+            this.Controls.Add(this.labelCondValue4);
             this.Controls.Add(this.labelCondValue3);
             this.Controls.Add(this.labelCondValue2);
             this.Controls.Add(this.labelCondValue1);
@@ -621,5 +665,9 @@
         private System.Windows.Forms.Label labelCondValue1;
         private System.Windows.Forms.Label labelCondValue2;
         private System.Windows.Forms.Label labelCondValue3;
+        private System.Windows.Forms.Label labelCondValue4;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBoxCondValue4;
+        private System.Windows.Forms.Button buttonSearchConditionValue4;
     }
 }
