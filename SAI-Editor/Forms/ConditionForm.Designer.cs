@@ -77,12 +77,15 @@
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageEditing = new System.Windows.Forms.TabPage();
+            this.buttonSaveCondition = new System.Windows.Forms.Button();
             this.tabPageSql = new System.Windows.Forms.TabPage();
             this.richTextBoxSql = new System.Windows.Forms.RichTextBox();
-            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
-            this.buttonSaveCondition = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.buttonDuplicateCondition = new System.Windows.Forms.Button();
+            this.buttonDeleteCondition = new System.Windows.Forms.Button();
+            this.buttonLoadCondition = new System.Windows.Forms.Button();
+            this.listViewConditions = new System.Windows.Forms.ListView();
+            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.panelPermanentTooltipSourceType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipConditionType.SuspendLayout();
@@ -122,7 +125,7 @@
             "SOURCE_TYPE_SMART_EVENT",
             "SOURCE_TYPE_NPC_VENDOR",
             "SOURCE_TYPE_SPELL_PROC"});
-            this.comboBoxConditionSourceTypes.Location = new System.Drawing.Point(119, 6);
+            this.comboBoxConditionSourceTypes.Location = new System.Drawing.Point(119, 7);
             this.comboBoxConditionSourceTypes.Name = "comboBoxConditionSourceTypes";
             this.comboBoxConditionSourceTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBoxConditionSourceTypes.Size = new System.Drawing.Size(290, 21);
@@ -183,7 +186,7 @@
             // labelSourceType
             // 
             this.labelSourceType.AutoSize = true;
-            this.labelSourceType.Location = new System.Drawing.Point(12, 9);
+            this.labelSourceType.Location = new System.Drawing.Point(12, 10);
             this.labelSourceType.Name = "labelSourceType";
             this.labelSourceType.Size = new System.Drawing.Size(64, 13);
             this.labelSourceType.TabIndex = 2;
@@ -228,7 +231,7 @@
             // labelSourceGroup
             // 
             this.labelSourceGroup.AutoSize = true;
-            this.labelSourceGroup.Location = new System.Drawing.Point(422, 9);
+            this.labelSourceGroup.Location = new System.Drawing.Point(422, 10);
             this.labelSourceGroup.Name = "labelSourceGroup";
             this.labelSourceGroup.Size = new System.Drawing.Size(80, 13);
             this.labelSourceGroup.TabIndex = 7;
@@ -237,7 +240,7 @@
             // labelSourceEntry
             // 
             this.labelSourceEntry.AutoSize = true;
-            this.labelSourceEntry.Location = new System.Drawing.Point(422, 36);
+            this.labelSourceEntry.Location = new System.Drawing.Point(422, 37);
             this.labelSourceEntry.Name = "labelSourceEntry";
             this.labelSourceEntry.Size = new System.Drawing.Size(75, 13);
             this.labelSourceEntry.TabIndex = 8;
@@ -246,7 +249,7 @@
             // labelConditionTarget
             // 
             this.labelConditionTarget.AutoSize = true;
-            this.labelConditionTarget.Location = new System.Drawing.Point(12, 36);
+            this.labelConditionTarget.Location = new System.Drawing.Point(12, 37);
             this.labelConditionTarget.Name = "labelConditionTarget";
             this.labelConditionTarget.Size = new System.Drawing.Size(81, 13);
             this.labelConditionTarget.TabIndex = 9;
@@ -255,7 +258,7 @@
             // comboBoxConditionTarget
             // 
             this.comboBoxConditionTarget.FormattingEnabled = true;
-            this.comboBoxConditionTarget.Location = new System.Drawing.Point(119, 33);
+            this.comboBoxConditionTarget.Location = new System.Drawing.Point(119, 34);
             this.comboBoxConditionTarget.Name = "comboBoxConditionTarget";
             this.comboBoxConditionTarget.Size = new System.Drawing.Size(290, 21);
             this.comboBoxConditionTarget.TabIndex = 10;
@@ -263,14 +266,14 @@
             // 
             // textBoxSourceGroup
             // 
-            this.textBoxSourceGroup.Location = new System.Drawing.Point(552, 6);
+            this.textBoxSourceGroup.Location = new System.Drawing.Point(552, 7);
             this.textBoxSourceGroup.Name = "textBoxSourceGroup";
             this.textBoxSourceGroup.Size = new System.Drawing.Size(66, 20);
             this.textBoxSourceGroup.TabIndex = 11;
             // 
             // textBoxSourceEntry
             // 
-            this.textBoxSourceEntry.Location = new System.Drawing.Point(552, 33);
+            this.textBoxSourceEntry.Location = new System.Drawing.Point(552, 34);
             this.textBoxSourceEntry.Name = "textBoxSourceEntry";
             this.textBoxSourceEntry.Size = new System.Drawing.Size(66, 20);
             this.textBoxSourceEntry.TabIndex = 12;
@@ -278,7 +281,7 @@
             // labelComment
             // 
             this.labelComment.AutoSize = true;
-            this.labelComment.Location = new System.Drawing.Point(12, 63);
+            this.labelComment.Location = new System.Drawing.Point(12, 64);
             this.labelComment.Name = "labelComment";
             this.labelComment.Size = new System.Drawing.Size(51, 13);
             this.labelComment.TabIndex = 14;
@@ -286,7 +289,7 @@
             // 
             // textBoxComment
             // 
-            this.textBoxComment.Location = new System.Drawing.Point(119, 60);
+            this.textBoxComment.Location = new System.Drawing.Point(119, 61);
             this.textBoxComment.Name = "textBoxComment";
             this.textBoxComment.Size = new System.Drawing.Size(523, 20);
             this.textBoxComment.TabIndex = 15;
@@ -294,7 +297,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(537, 10);
+            this.label1.Location = new System.Drawing.Point(537, 11);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(10, 13);
             this.label1.TabIndex = 16;
@@ -303,7 +306,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(537, 36);
+            this.label2.Location = new System.Drawing.Point(537, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(10, 13);
             this.label2.TabIndex = 17;
@@ -360,7 +363,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(103, 63);
+            this.label6.Location = new System.Drawing.Point(103, 64);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(10, 13);
             this.label6.TabIndex = 16;
@@ -369,7 +372,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(103, 36);
+            this.label7.Location = new System.Drawing.Point(103, 37);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(10, 13);
             this.label7.TabIndex = 16;
@@ -378,7 +381,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(103, 9);
+            this.label8.Location = new System.Drawing.Point(103, 10);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(10, 13);
             this.label8.TabIndex = 16;
@@ -396,7 +399,7 @@
             // buttonSearchSourceGroup
             // 
             this.buttonSearchSourceGroup.Enabled = false;
-            this.buttonSearchSourceGroup.Location = new System.Drawing.Point(618, 5);
+            this.buttonSearchSourceGroup.Location = new System.Drawing.Point(618, 6);
             this.buttonSearchSourceGroup.Name = "buttonSearchSourceGroup";
             this.buttonSearchSourceGroup.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchSourceGroup.TabIndex = 19;
@@ -407,7 +410,7 @@
             // buttonSearchSourceEntry
             // 
             this.buttonSearchSourceEntry.Enabled = false;
-            this.buttonSearchSourceEntry.Location = new System.Drawing.Point(618, 32);
+            this.buttonSearchSourceEntry.Location = new System.Drawing.Point(618, 33);
             this.buttonSearchSourceEntry.Name = "buttonSearchSourceEntry";
             this.buttonSearchSourceEntry.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchSourceEntry.TabIndex = 19;
@@ -564,7 +567,7 @@
             // 
             // buttonGenerateComment
             // 
-            this.buttonGenerateComment.Location = new System.Drawing.Point(517, 86);
+            this.buttonGenerateComment.Location = new System.Drawing.Point(517, 87);
             this.buttonGenerateComment.Name = "buttonGenerateComment";
             this.buttonGenerateComment.Size = new System.Drawing.Size(125, 23);
             this.buttonGenerateComment.TabIndex = 27;
@@ -645,6 +648,16 @@
             this.tabPageEditing.Text = "Condition editing";
             this.tabPageEditing.UseVisualStyleBackColor = true;
             // 
+            // buttonSaveCondition
+            // 
+            this.buttonSaveCondition.Location = new System.Drawing.Point(386, 230);
+            this.buttonSaveCondition.Name = "buttonSaveCondition";
+            this.buttonSaveCondition.Size = new System.Drawing.Size(125, 23);
+            this.buttonSaveCondition.TabIndex = 28;
+            this.buttonSaveCondition.Text = "Save condition";
+            this.buttonSaveCondition.UseVisualStyleBackColor = true;
+            this.buttonSaveCondition.Click += new System.EventHandler(this.buttonSaveCondition_Click);
+            // 
             // tabPageSql
             // 
             this.tabPageSql.Controls.Add(this.richTextBoxSql);
@@ -658,11 +671,68 @@
             // 
             // richTextBoxSql
             // 
-            this.richTextBoxSql.Location = new System.Drawing.Point(0, 0);
+            this.richTextBoxSql.Location = new System.Drawing.Point(0, -22);
             this.richTextBoxSql.Name = "richTextBoxSql";
             this.richTextBoxSql.Size = new System.Drawing.Size(660, 372);
             this.richTextBoxSql.TabIndex = 0;
             this.richTextBoxSql.Text = "";
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.buttonDuplicateCondition);
+            this.tabPage1.Controls.Add(this.buttonDeleteCondition);
+            this.tabPage1.Controls.Add(this.buttonLoadCondition);
+            this.tabPage1.Controls.Add(this.listViewConditions);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(656, 378);
+            this.tabPage1.TabIndex = 2;
+            this.tabPage1.Text = "Conditions overview";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // buttonDuplicateCondition
+            // 
+            this.buttonDuplicateCondition.Enabled = false;
+            this.buttonDuplicateCondition.Location = new System.Drawing.Point(6, 350);
+            this.buttonDuplicateCondition.Name = "buttonDuplicateCondition";
+            this.buttonDuplicateCondition.Size = new System.Drawing.Size(210, 23);
+            this.buttonDuplicateCondition.TabIndex = 2;
+            this.buttonDuplicateCondition.Text = "Duplicate selected condition";
+            this.buttonDuplicateCondition.UseVisualStyleBackColor = true;
+            this.buttonDuplicateCondition.Click += new System.EventHandler(this.buttonDuplicateCondition_Click);
+            // 
+            // buttonDeleteCondition
+            // 
+            this.buttonDeleteCondition.Enabled = false;
+            this.buttonDeleteCondition.Location = new System.Drawing.Point(222, 350);
+            this.buttonDeleteCondition.Name = "buttonDeleteCondition";
+            this.buttonDeleteCondition.Size = new System.Drawing.Size(210, 23);
+            this.buttonDeleteCondition.TabIndex = 2;
+            this.buttonDeleteCondition.Text = "Delete selected condition";
+            this.buttonDeleteCondition.UseVisualStyleBackColor = true;
+            this.buttonDeleteCondition.Click += new System.EventHandler(this.buttonDeleteCondition_Click);
+            // 
+            // buttonLoadCondition
+            // 
+            this.buttonLoadCondition.Enabled = false;
+            this.buttonLoadCondition.Location = new System.Drawing.Point(438, 350);
+            this.buttonLoadCondition.Name = "buttonLoadCondition";
+            this.buttonLoadCondition.Size = new System.Drawing.Size(210, 23);
+            this.buttonLoadCondition.TabIndex = 1;
+            this.buttonLoadCondition.Text = "Load and edit selected condition";
+            this.buttonLoadCondition.UseVisualStyleBackColor = true;
+            this.buttonLoadCondition.Click += new System.EventHandler(this.buttonLoadCondition_Click);
+            // 
+            // listViewConditions
+            // 
+            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
+            this.listViewConditions.MultiSelect = false;
+            this.listViewConditions.Name = "listViewConditions";
+            this.listViewConditions.Size = new System.Drawing.Size(660, 344);
+            this.listViewConditions.TabIndex = 0;
+            this.listViewConditions.UseCompatibleStateImageBehavior = false;
+            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
             // 
             // lineSeparator1
             // 
@@ -673,40 +743,11 @@
             this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
             this.lineSeparator1.TabIndex = 13;
             // 
-            // buttonSaveCondition
-            // 
-            this.buttonSaveCondition.Location = new System.Drawing.Point(386, 230);
-            this.buttonSaveCondition.Name = "buttonSaveCondition";
-            this.buttonSaveCondition.Size = new System.Drawing.Size(125, 23);
-            this.buttonSaveCondition.TabIndex = 28;
-            this.buttonSaveCondition.Text = "Save condition";
-            this.buttonSaveCondition.UseVisualStyleBackColor = true;
-            this.buttonSaveCondition.Click += new System.EventHandler(this.buttonSaveCondition_Click);
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.listView1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(656, 378);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "Conditions overview";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // listView1
-            // 
-            this.listView1.Location = new System.Drawing.Point(0, 0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(660, 382);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
             // ConditionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(694, 434);
+            this.ClientSize = new System.Drawing.Size(687, 427);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -787,6 +828,9 @@
         private System.Windows.Forms.RichTextBox richTextBoxSql;
         private System.Windows.Forms.Button buttonSaveCondition;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView listViewConditions;
+        private System.Windows.Forms.Button buttonDuplicateCondition;
+        private System.Windows.Forms.Button buttonDeleteCondition;
+        private System.Windows.Forms.Button buttonLoadCondition;
     }
 }

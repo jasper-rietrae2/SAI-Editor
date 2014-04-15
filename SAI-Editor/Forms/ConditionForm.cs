@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using SAI_Editor.Enumerators;
 using SAI_Editor.Forms.SearchForms;
 using SAI_Editor.Classes.Database.Classes;
+using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms
 {
@@ -293,20 +294,15 @@ namespace SAI_Editor.Forms
 
             for (int i = 0; i < 4; ++i)
             {
-                string value = values[i];
-                bool searchable = searchables[i];
-                string iKey = (i + 1).ToString();
+                string value = String.IsNullOrWhiteSpace(values[i]) ? " - " : values[i];
 
-                if (!String.IsNullOrWhiteSpace(value))
-                {
-                    condValues[iKey.ToString() + "lbl"].Text = value;
-                    condValues[iKey.ToString() + "txt"].Enabled = value != " - ";
+                condValues[(i + 1).ToString() + "lbl"].Text = value;
+                condValues[(i + 1).ToString() + "txt"].Enabled = value != " - ";
 
-                    if (value == " - ") //! Empty/unused source Entry
-                        condValues[iKey.ToString() + "txt"].Text = String.Empty;
+                if (value == " - ") //! Empty/unused source Entry
+                    condValues[(i + 1).ToString() + "txt"].Text = String.Empty;
 
-                    condValues[iKey.ToString() + "btn"].Enabled = searchable;
-                }
+                condValues[(i + 1).ToString() + "btn"].Enabled = searchables[i];
             }
         }
 
@@ -585,7 +581,61 @@ namespace SAI_Editor.Forms
 
         private void buttonSaveCondition_Click(object sender, EventArgs e)
         {
+            Condition condition = new Condition();
+            condition.SourceTypeOrReferenceId = comboBoxConditionSourceTypes.SelectedIndex;
+            condition.SourceGroup = XConverter.ToInt32(textBoxSourceGroup.Text);
+            condition.SourceEntry = XConverter.ToInt32(textBoxSourceEntry.Text);
+            //condition.SourceId = XConverter.ToInt32(.Text);
+            //condition.ElseGroup = XConverter.ToInt32(.Text);
+            condition.ConditionTypeOrReference = comboBoxConditionTypes.SelectedIndex;
+            condition.ConditionTarget = comboBoxConditionTarget.SelectedIndex;
+            condition.ConditionValue1 = XConverter.ToInt32(textBoxCondValue1.Text);
+            condition.ConditionValue2 = XConverter.ToInt32(textBoxCondValue2.Text);
+            condition.ConditionValue3 = XConverter.ToInt32(textBoxCondValue3.Text);
+            condition.NegativeCondition = XConverter.ToInt32(textBoxCondValue4.Text);
+            //condition.ErrorType
+            //condition.ErrorTextId
+            //condition.ScriptName
+            condition.Comment = textBoxComment.Text;
+            conditions.Add(condition);
 
+            ClearAllFields();
+        }
+
+        private void ClearAllFields()
+        {
+            foreach (Control control in tabControl.TabPages[0].Controls)
+                if (control is TextBox)
+                    control.Text = String.Empty;
+
+            labelSourceGroup.Text = " - ";
+            labelSourceEntry.Text = " - ";
+            labelCondValue1.Text = " - ";
+            labelCondValue2.Text = " - ";
+            labelCondValue3.Text = " - ";
+            labelCondValue4.Text = " - ";
+        }
+
+        private void listViewConditions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buttonDeleteCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
+            buttonDuplicateCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
+            buttonLoadCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
+        }
+
+        private void buttonDeleteCondition_Click(object sender, EventArgs e)
+        {
+            //conditions.Remove();
+        }
+
+        private void buttonLoadCondition_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 0;
+        }
+
+        private void buttonDuplicateCondition_Click(object sender, EventArgs e)
+        {
+            listViewConditions.Items.Add(listViewConditions.SelectedItems[0]);
         }
     }
 }
