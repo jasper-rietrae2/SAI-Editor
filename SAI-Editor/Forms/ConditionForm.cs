@@ -9,11 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SAI_Editor.Enumerators;
 using SAI_Editor.Forms.SearchForms;
+using SAI_Editor.Classes.Database.Classes;
 
 namespace SAI_Editor.Forms
 {
     public partial class ConditionForm : Form
     {
+        private List<Condition> conditions = new List<Condition>();
+
         public ConditionForm()
         {
             InitializeComponent();
@@ -431,15 +434,156 @@ namespace SAI_Editor.Forms
 
         private void buttonSearchConditionValue1_Click(object sender, EventArgs e)
         {
+            TextBox textBoxToChange = textBoxCondValue1;
 
+            switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
+            {
+                case ConditionTypes.CONDITION_AURA:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell);
+                    break;
+                case ConditionTypes.CONDITION_ITEM:
+                case ConditionTypes.CONDITION_ITEM_EQUIPPED:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry);
+                    break;
+                case ConditionTypes.CONDITION_ZONEID:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeZone);
+                    break;
+                case ConditionTypes.CONDITION_REPUTATION_RANK:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeFaction);
+                    break;
+                case ConditionTypes.CONDITION_TEAM:
+                    //ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.Team); //! Team id
+                    break;
+                case ConditionTypes.CONDITION_SKILL:
+                    //ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.Skill); //! Skill entry
+                    break;
+                case ConditionTypes.CONDITION_QUESTREWARDED:
+                case ConditionTypes.CONDITION_QUESTTAKEN:
+                case ConditionTypes.CONDITION_QUEST_NONE:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest);
+                    break;
+                case ConditionTypes.CONDITION_DRUNKENSTATE:
+                    //! Drunken state
+                    break;
+                case ConditionTypes.CONDITION_WORLD_STATE:
+                    //! Worldstate index
+                    break;
+                case ConditionTypes.CONDITION_ACTIVE_EVENT:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent);
+                    break;
+                case ConditionTypes.CONDITION_INSTANCE_INFO:
+                    //! Instance entry
+                    break;
+                case ConditionTypes.CONDITION_CLASS:
+                    //! Classmask
+                    break;
+                case ConditionTypes.CONDITION_RACE:
+                    //! Racemask
+                    break;
+                case ConditionTypes.CONDITION_ACHIEVEMENT:
+                    //! Achievement id
+                    break;
+                case ConditionTypes.CONDITION_TITLE:
+                    //! Title id
+                    break;
+                case ConditionTypes.CONDITION_SPAWNMASK:
+                    //! Spawnmask
+                    break;
+                case ConditionTypes.CONDITION_GENDER:
+                    //! Gender
+                    break;
+                case ConditionTypes.CONDITION_UNIT_STATE:
+                    //SetConditionValues(new string[] { "Unit state", "", "", "" }, new bool[] { true, false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_MAPID:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap);
+                    break;
+                case ConditionTypes.CONDITION_AREAID:
+                    //ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.);
+                    break;
+                case ConditionTypes.CONDITION_CREATURE_TYPE:
+                    //! ??
+                    break;
+                case ConditionTypes.CONDITION_SPELL:
+                    SetConditionValues(new string[] { "Spell entry", "", "", "" }, new bool[] { true, false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_PHASEMASK:
+                    SetConditionValues(new string[] { "Phasemask", "", "", "" }, new bool[] { true, false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_QUEST_COMPLETE:
+                    SetConditionValues(new string[] { "Quest entry", "", "", "" }, new bool[] { true, false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_NEAR_CREATURE:
+                    SetConditionValues(new string[] { "Creature entry", "Distance", "", "" }, new bool[] { true, false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_NEAR_GAMEOBJECT:
+                    SetConditionValues(new string[] { "Gameobject entry", "Distance", "", "" }, new bool[] { true, false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_OBJECT_ENTRY:
+                    SetConditionValues(new string[] { "Type id", "Object entry", "", "" }, new bool[] { true, true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_TYPE_MASK:
+                    SetConditionValues(new string[] { "Typemask", "", "", "" }, new bool[] { true, false, false, false });
+                    break;
+                case ConditionTypes.CONDITION_RELATION_TO:
+                    SetConditionValues(new string[] { "Condition target", "Relation type", "", "" }, new bool[] { true, true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_REACTION_TO:
+                    SetConditionValues(new string[] { "Condition target", "Rank mask", "", "" }, new bool[] { true, true, false, false });
+                    break;
+                case ConditionTypes.CONDITION_DISTANCE_TO:
+                    SetConditionValues(new string[] { "Condition target", "Distance", "Compare type", "" }, new bool[] { true, true, true, false });
+                    break;
+                default:
+                    SetConditionValues(new string[] { "", "", "", "" }, new bool[] { false, false, false, false });
+                    break;
+            }
         }
 
         private void buttonSearchConditionValue2_Click(object sender, EventArgs e)
         {
+            TextBox textBoxToChange = textBoxCondValue2;
+
+            switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
+            {
+                case ConditionTypes.CONDITION_AURA:
+                    //ShowSingleSelectForm<SpellSchools>(SpellSchools, textBoxToChange);
+                    break;
+            }
+        }
+
+        //private void ShowSingleSelectForm(T obj, TextBox textBoxToChange)
+        //{
+        //    using (SingleSelectForm<T> singleSelectForm = new SingleSelectForm<T>(textBoxToChange))
+        //        singleSelectForm.ShowDialog(this);
+        //}
+
+        private void buttonSearchConditionValue3_Click(object sender, EventArgs e)
+        {
+            TextBox textBoxToChange = textBoxCondValue2;
+        }
+
+        private void ConditionForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    Close();
+                    break;
+            }
+        }
+
+        private void buttonGenerateSql_Click(object sender, EventArgs e)
+        {
+            tabControl.SelectedIndex = 1;
+        }
+
+        private void buttonGenerateComment_Click(object sender, EventArgs e)
+        {
 
         }
 
-        private void buttonSearchConditionValue3_Click(object sender, EventArgs e)
+        private void buttonSaveCondition_Click(object sender, EventArgs e)
         {
 
         }

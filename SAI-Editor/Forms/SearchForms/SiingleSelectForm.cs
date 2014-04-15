@@ -4,8 +4,7 @@ using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms.SearchForms
 {
-    public partial class SingleSelectForm<T> : Form
-        where T : struct, IConvertible
+    public partial class SingleSelectForm<T> : Form where T : struct, IConvertible
     {
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly TextBox textBoxToChange = null;
