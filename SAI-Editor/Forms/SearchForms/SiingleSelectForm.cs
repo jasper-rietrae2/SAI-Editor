@@ -103,5 +103,10 @@ namespace SAI_Editor.Forms.SearchForms
         {
             listViewSelectableItems.Items[0].Checked = listViewSelectableItems.CheckedItems.Count == 0;
         }
+
+        private void SingleSelectForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

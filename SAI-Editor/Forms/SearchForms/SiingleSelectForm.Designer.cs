@@ -85,6 +85,7 @@ namespace SAI_Editor.Forms.SearchForms
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Select something...";
+            this.Load += new System.EventHandler(this.SingleSelectForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SingleSelectForm_KeyDown);
             this.ResumeLayout(false);
 

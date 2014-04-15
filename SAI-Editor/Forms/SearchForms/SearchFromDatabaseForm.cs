@@ -31,8 +31,8 @@ namespace SAI_Editor.Forms.SearchForms
         DatabaseSearchFormTypeEquipTemplate,
         DatabaseSearchFormTypeWaypoint,
         DatabaseSearchFormTypeNpcText,
-        DatabaseSearchFormTypeGossipMenuOption,
-        DatabaseSearchFormTypeGossipOptionId,
+        DatabaseSearchFormTypeGossipMenuOptionMenuId,
+        DatabaseSearchFormTypeGossipMenuOptionId,
     }
 
     public partial class SearchFromDatabaseForm : Form
@@ -46,7 +46,7 @@ namespace SAI_Editor.Forms.SearchForms
         private string[] columns = new string[7];
         private bool useMySQL = false;
 
-        public SearchFromDatabaseForm(MySqlConnectionStringBuilder connectionString, TextBox textBoxToChange, DatabaseSearchFormType databaseSearchFormType)
+        public SearchFromDatabaseForm(TextBox textBoxToChange, DatabaseSearchFormType databaseSearchFormType)
         {
             InitializeComponent();
             this.databaseSearchFormType = databaseSearchFormType;
@@ -239,10 +239,10 @@ namespace SAI_Editor.Forms.SearchForms
                     baseQuery = "SELECT id, text0_0 FROM npc_text";
                     useMySQL = true;
                     break;
-                case DatabaseSearchFormType.DatabaseSearchFormTypeGossipOptionId:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionId:
                     listViewItemIndexToCopy = 1;
-                    goto case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOption;
-                case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOption:
+                    goto case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionMenuId;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionMenuId:
                     Text = "Search for a gossip item";
                     listViewEntryResults.Columns.Add("Menu id", 45);
                     listViewEntryResults.Columns.Add("Id", 284);

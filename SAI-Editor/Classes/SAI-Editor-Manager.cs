@@ -42,10 +42,13 @@ namespace SAI_Editor.Classes
                 _worldDatabase = value;
             }
         }
+
         public SQLiteDatabase sqliteDatabase { get; set; }
         public List<EventTypeInformation> eventTypeInformations;
         public List<ActionTypeInformation> actionTypeInformations;
         public List<TargetTypeInformation> targetTypeInformations;
+
+        public MySqlConnectionStringBuilder connString;
 
         private static object _lock = new object();
         private static SAI_Editor_Manager _instance;
@@ -66,18 +69,16 @@ namespace SAI_Editor.Classes
 
         public void ResetDatabases()
         {
-            ResetWorldDatabase();
+            ResetWorldDatabase(false);
             ResetSQLiteDatabase();
         }
 
-        public void ResetWorldDatabase()
+        public void ResetWorldDatabase(bool useConnStr)
         {
-            worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, GetPasswordSetting(), Settings.Default.Database);
-        }
-
-        public void ResetWorldDatabase(MySqlConnectionStringBuilder _connectionString)
-        {
-            worldDatabase = new WorldDatabase(_connectionString.Server, _connectionString.Port, _connectionString.UserID, _connectionString.Password, _connectionString.Database);
+            if (useConnStr)
+                worldDatabase = new WorldDatabase(SAI_Editor_Manager.Instance.connString.Server, SAI_Editor_Manager.Instance.connString.Port, SAI_Editor_Manager.Instance.connString.UserID, SAI_Editor_Manager.Instance.connString.Password, SAI_Editor_Manager.Instance.connString.Database);
+            else
+                worldDatabase = new WorldDatabase(Settings.Default.Host, Settings.Default.Port, Settings.Default.User, GetPasswordSetting(), Settings.Default.Database);
         }
 
         public void ResetSQLiteDatabase()

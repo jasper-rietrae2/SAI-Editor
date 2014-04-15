@@ -14,7 +14,6 @@ namespace SAI_Editor.Forms
     public partial class SettingsForm : Form
     {
         private bool closedFormByHand = false;
-        MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
 
         public SettingsForm()
         {
@@ -73,14 +72,14 @@ namespace SAI_Editor.Forms
             rng.Dispose();
             string decryptedPassword = textBoxPassword.Text;
 
-            connectionString = new MySqlConnectionStringBuilder();
-            connectionString.Server = textBoxHost.Text;
-            connectionString.UserID = textBoxUsername.Text;
-            connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
-            connectionString.Database = textBoxWorldDatabase.Text;
+            SAI_Editor_Manager.Instance.connString = new MySqlConnectionStringBuilder();
+            SAI_Editor_Manager.Instance.connString.Server = textBoxHost.Text;
+            SAI_Editor_Manager.Instance.connString.UserID = textBoxUsername.Text;
+            SAI_Editor_Manager.Instance.connString.Port = XConverter.ToUInt32(textBoxPort.Text);
+            SAI_Editor_Manager.Instance.connString.Database = textBoxWorldDatabase.Text;
 
             if (textBoxPassword.Text.Length > 0)
-                connectionString.Password = textBoxPassword.Text;
+                SAI_Editor_Manager.Instance.connString.Password = textBoxPassword.Text;
 
             Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
             Settings.Default.Save();
@@ -88,7 +87,7 @@ namespace SAI_Editor.Forms
             bool newConnectionSuccesfull = false;
             
             if (radioButtonConnectToMySql.Checked)
-                newConnectionSuccesfull = SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString, false);
+                newConnectionSuccesfull = SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(SAI_Editor_Manager.Instance.connString, false);
 
             //! We also save the settings if no connection was made. It's possible the user unchecked
             //! the radioboxes, changed some settings and then set it back to no DB connection.
@@ -103,10 +102,7 @@ namespace SAI_Editor.Forms
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
 
                 if (radioButtonConnectToMySql.Checked)
-                {
-                    ((MainForm)Owner).connectionString = connectionString;
                     SAI_Editor_Manager.Instance.ResetDatabases();
-                }
             }
 
             Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;

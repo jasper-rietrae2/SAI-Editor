@@ -17,7 +17,6 @@ namespace SAI_Editor.Forms.SearchForms
     public partial class SearchForEntryForm : Form
     {
         private Thread searchThread = null;
-        private readonly MySqlConnectionStringBuilder connectionString;
         private readonly SourceTypes sourceTypeToSearchFor;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private CancellationTokenSource _cts;
@@ -30,11 +29,10 @@ namespace SAI_Editor.Forms.SearchForms
             public List<string> SubItems { get; set; }
         }
 
-        public SearchForEntryForm(MySqlConnectionStringBuilder connectionString, string startEntryString, SourceTypes sourceTypeToSearchFor)
+        public SearchForEntryForm(string startEntryString, SourceTypes sourceTypeToSearchFor)
         {
             InitializeComponent();
 
-            this.connectionString = connectionString;
             this.sourceTypeToSearchFor = sourceTypeToSearchFor;
             textBoxCriteria.Text = startEntryString;
 
@@ -96,7 +94,7 @@ namespace SAI_Editor.Forms.SearchForms
 
             try
             {
-                using (var connection = new MySqlConnection(connectionString.ToString()))
+                using (var connection = new MySqlConnection(SAI_Editor_Manager.Instance.connString.ToString()))
                 {
                     connection.Open();
 

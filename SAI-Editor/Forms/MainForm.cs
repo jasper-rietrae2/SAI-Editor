@@ -61,7 +61,6 @@ namespace SAI_Editor.Forms
 
     public partial class MainForm : Form
     {
-        public MySqlConnectionStringBuilder connectionString = new MySqlConnectionStringBuilder();
         public int expandAndContractSpeed = 5, lastSmartScriptIdOfScript = 0, previousLinkFrom = -1;
         public const int expandAndContractSpeedListView = 2;
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
@@ -210,21 +209,21 @@ namespace SAI_Editor.Forms
 
                 if (Settings.Default.UseWorldDatabase)
                 {
-                    connectionString = new MySqlConnectionStringBuilder();
-                    connectionString.Server = textBoxHost.Text;
-                    connectionString.UserID = textBoxUsername.Text;
-                    connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
-                    connectionString.Database = textBoxWorldDatabase.Text;
+                    SAI_Editor_Manager.Instance.connString = new MySqlConnectionStringBuilder();
+                    SAI_Editor_Manager.Instance.connString.Server = textBoxHost.Text;
+                    SAI_Editor_Manager.Instance.connString.UserID = textBoxUsername.Text;
+                    SAI_Editor_Manager.Instance.connString.Port = XConverter.ToUInt32(textBoxPort.Text);
+                    SAI_Editor_Manager.Instance.connString.Database = textBoxWorldDatabase.Text;
 
                     if (textBoxPassword.Text.Length > 0)
-                        connectionString.Password = textBoxPassword.Text;
+                        SAI_Editor_Manager.Instance.connString.Password = textBoxPassword.Text;
 
-                    SAI_Editor_Manager.Instance.ResetWorldDatabase(connectionString);
+                    SAI_Editor_Manager.Instance.ResetWorldDatabase(false);
                 }
 
-                if (!Settings.Default.UseWorldDatabase || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString, false))
+                if (!Settings.Default.UseWorldDatabase || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(SAI_Editor_Manager.Instance.connString, false))
                 {
-                    SAI_Editor_Manager.Instance.ResetWorldDatabase(connectionString);
+                    SAI_Editor_Manager.Instance.ResetWorldDatabase(false);
                     buttonConnect.PerformClick();
 
                     if (Settings.Default.InstantExpand)
@@ -556,22 +555,22 @@ namespace SAI_Editor.Forms
                     return;
                 }
 
-                connectionString = new MySqlConnectionStringBuilder();
-                connectionString.Server = textBoxHost.Text;
-                connectionString.UserID = textBoxUsername.Text;
-                connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
-                connectionString.Database = textBoxWorldDatabase.Text;
+                SAI_Editor_Manager.Instance.connString = new MySqlConnectionStringBuilder();
+                SAI_Editor_Manager.Instance.connString.Server = textBoxHost.Text;
+                SAI_Editor_Manager.Instance.connString.UserID = textBoxUsername.Text;
+                SAI_Editor_Manager.Instance.connString.Port = XConverter.ToUInt32(textBoxPort.Text);
+                SAI_Editor_Manager.Instance.connString.Database = textBoxWorldDatabase.Text;
 
                 if (textBoxPassword.Text.Length > 0)
-                    connectionString.Password = textBoxPassword.Text;
+                    SAI_Editor_Manager.Instance.connString.Password = textBoxPassword.Text;
 
-                SAI_Editor_Manager.Instance.ResetWorldDatabase(connectionString);
+                SAI_Editor_Manager.Instance.ResetWorldDatabase(false);
             }
 
             Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
             Settings.Default.Save();
 
-            if (!radioButtonConnectToMySql.Checked || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(connectionString))
+            if (!radioButtonConnectToMySql.Checked || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(SAI_Editor_Manager.Instance.connString))
             {
                 StartExpandingToMainForm(Settings.Default.InstantExpand);
                 HandleUseWorldDatabaseSettingChanged();
@@ -703,7 +702,7 @@ namespace SAI_Editor.Forms
         private void buttonSearchForEntry_Click(object sender, EventArgs e)
         {
             //! Just keep it in main thread; no purpose starting a new thread for this (unless workspaces get implemented, maybe)
-            using (SearchForEntryForm entryForm = new SearchForEntryForm(connectionString, textBoxEntryOrGuid.Text, GetSourceTypeByIndex()))
+            using (SearchForEntryForm entryForm = new SearchForEntryForm(textBoxEntryOrGuid.Text, GetSourceTypeByIndex()))
                 entryForm.ShowDialog(this);
         }
 
@@ -1933,7 +1932,7 @@ namespace SAI_Editor.Forms
 
         private async void buttonSearchWorldDb_Click(object sender, EventArgs e)
         {
-            SAI_Editor_Manager.Instance.ResetWorldDatabase();
+            SAI_Editor_Manager.Instance.ResetWorldDatabase(false);
             List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
@@ -2098,6 +2097,12 @@ namespace SAI_Editor.Forms
             }
         }
 
+        //public void ShowSearchFromDatabaseForm(TextBox textBoxToChange, DatabaseSearchFormType searchType)
+        //{
+        //    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, searchType))
+        //        searchFromDatabaseForm.ShowDialog(this);
+        //}
+
         private void buttonEventParamOneSearch_Click(object sender, EventArgs e)
         {
             TextBox textBoxToChange = textBoxEventParam1;
@@ -2109,7 +2114,7 @@ namespace SAI_Editor.Forms
                 case SmartEvent.SMART_EVENT_HAS_AURA: //! Spell id
                 case SmartEvent.SMART_EVENT_TARGET_BUFFED: //! Spell id
                 case SmartEvent.SMART_EVENT_SPELLHIT_TARGET: //! Spell id
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Respawn condition
@@ -2118,11 +2123,11 @@ namespace SAI_Editor.Forms
                     break;
                 case SmartEvent.SMART_EVENT_SUMMON_DESPAWNED: //! Creature entry
                 case SmartEvent.SMART_EVENT_SUMMONED_UNIT: //! Creature entry
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_AREATRIGGER_ONTRIGGER: //! Areatrigger entry
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_GO_STATE_CHANGED: //! Go state
@@ -2131,7 +2136,7 @@ namespace SAI_Editor.Forms
                     break;
                 case SmartEvent.SMART_EVENT_GAME_EVENT_START: //! Game event entry
                 case SmartEvent.SMART_EVENT_GAME_EVENT_END: //! Game event entry
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_MOVEMENTINFORM: //! Motion type
@@ -2140,23 +2145,23 @@ namespace SAI_Editor.Forms
                     break;
                 case SmartEvent.SMART_EVENT_ACCEPTED_QUEST: //! Quest id
                 case SmartEvent.SMART_EVENT_REWARD_QUEST: //! Quest id
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_RECEIVE_EMOTE: //! Emote id
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_GOSSIP_SELECT: //! Gossip menu id
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOption))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionMenuId))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_DISTANCE_CREATURE: //! Creature guid
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_DISTANCE_GAMEOBJECT: //! Gameobject guid
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
@@ -2174,23 +2179,23 @@ namespace SAI_Editor.Forms
                         singleSelectForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Map
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_TEXT_OVER: //! Creature entry
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_GOSSIP_SELECT: //! Gossip id
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGossipOptionId))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionId))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_DISTANCE_CREATURE: //! Creature entry
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_DISTANCE_GAMEOBJECT: //! Gameobject entry
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
@@ -2203,11 +2208,11 @@ namespace SAI_Editor.Forms
             switch ((SmartEvent)comboBoxEventType.SelectedIndex)
             {
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Zone
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeZone))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeZone))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_VICTIM_CASTING: //! Spell id
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
@@ -2220,7 +2225,7 @@ namespace SAI_Editor.Forms
             switch ((SmartEvent)comboBoxEventType.SelectedIndex)
             {
                 case SmartEvent.SMART_EVENT_KILL: //! Creature entry
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
@@ -2235,21 +2240,21 @@ namespace SAI_Editor.Forms
                 case SmartTarget.SMART_TARGET_CREATURE_RANGE: //! Creature entry
                 case SmartTarget.SMART_TARGET_CREATURE_DISTANCE:
                 case SmartTarget.SMART_TARGET_CLOSEST_CREATURE:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartTarget.SMART_TARGET_CREATURE_GUID: //! Creature guid
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_RANGE:
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_DISTANCE:
                 case SmartTarget.SMART_TARGET_CLOSEST_GAMEOBJECT: //! Gameobject entry
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID: //! Gameobject guid
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
@@ -2277,11 +2282,11 @@ namespace SAI_Editor.Forms
             switch ((SmartTarget)comboBoxTargetType.SelectedIndex)
             {
                 case SmartTarget.SMART_TARGET_CREATURE_GUID: //! Creature entry
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartTarget.SMART_TARGET_GAMEOBJECT_GUID: //! Gameobject entry
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
@@ -2298,24 +2303,24 @@ namespace SAI_Editor.Forms
                 case SmartAction.SMART_ACTION_CROSS_CAST:
                 case SmartAction.SMART_ACTION_REMOVEAURASFROMSPELL:
                 case SmartAction.SMART_ACTION_ADD_AURA:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_FACTION:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeFaction))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeFaction))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_EMOTE:
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                 case SmartAction.SMART_ACTION_SET_EMOTE_STATE:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_FAIL_QUEST:
                 case SmartAction.SMART_ACTION_ADD_QUEST:
                 case SmartAction.SMART_ACTION_CALL_AREAEXPLOREDOREVENTHAPPENS:
                 case SmartAction.SMART_ACTION_CALL_GROUPEVENTHAPPENS:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_REACT_STATE:
@@ -2323,7 +2328,7 @@ namespace SAI_Editor.Forms
                         singleSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SOUND:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSound))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSound))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_MORPH_TO_ENTRY_OR_MODEL:
@@ -2332,7 +2337,7 @@ namespace SAI_Editor.Forms
                 case SmartAction.SMART_ACTION_KILLED_MONSTER:
                 case SmartAction.SMART_ACTION_UPDATE_TEMPLATE:
                 case SmartAction.SMART_ACTION_MOUNT_TO_ENTRY_OR_MODEL:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_GO_SET_LOOT_STATE:
@@ -2346,7 +2351,7 @@ namespace SAI_Editor.Forms
                         singleSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SUMMON_GO:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_EVENT_PHASE:
@@ -2361,15 +2366,15 @@ namespace SAI_Editor.Forms
                     break;
                 case SmartAction.SMART_ACTION_ADD_ITEM:
                 case SmartAction.SMART_ACTION_REMOVE_ITEM:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_TELEPORT:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SUMMON_CREATURE_GROUP:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_SHEATH:
@@ -2377,7 +2382,7 @@ namespace SAI_Editor.Forms
                         singleSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_ACTIVATE_TAXI:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_UNIT_FLAG:
@@ -2409,7 +2414,7 @@ namespace SAI_Editor.Forms
                         multiSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_EQUIP:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_NPC_FLAG:
@@ -2537,12 +2542,12 @@ namespace SAI_Editor.Forms
                         multiSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_WP_STOP:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_INTERRUPT_SPELL:
                 case SmartAction.SMART_ACTION_CALL_CASTEDCREATUREORGO:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SUMMON_CREATURE:
@@ -2555,7 +2560,7 @@ namespace SAI_Editor.Forms
                         multiSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE:
@@ -2564,25 +2569,25 @@ namespace SAI_Editor.Forms
                     {
                         case SmartAiTemplates.SMARTAI_TEMPLATE_CASTER:
                         case SmartAiTemplates.SMARTAI_TEMPLATE_TURRET:
-                            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
+                            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
                                 searchFromDatabaseForm.ShowDialog(this);
                             break;
                         case SmartAiTemplates.SMARTAI_TEMPLATE_CAGED_GO_PART:
-                            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                                 searchFromDatabaseForm.ShowDialog(this);
                             break;
                         case SmartAiTemplates.SMARTAI_TEMPLATE_CAGED_NPC_PART:
-                            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
+                            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
                                 searchFromDatabaseForm.ShowDialog(this);
                             break;
                     }
                     break;
                 case SmartAction.SMART_ACTION_WP_START:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SEND_GOSSIP_MENU:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeNpcText))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeNpcText))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_UNIT_FIELD_BYTES_1:
@@ -2604,7 +2609,7 @@ namespace SAI_Editor.Forms
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
                 case SmartAction.SMART_ACTION_FOLLOW:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_CROSS_CAST:
@@ -2616,11 +2621,11 @@ namespace SAI_Editor.Forms
                         multiSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_EQUIP:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
@@ -2633,11 +2638,11 @@ namespace SAI_Editor.Forms
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
                 case SmartAction.SMART_ACTION_FOLLOW:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_WP_START:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
@@ -2645,11 +2650,11 @@ namespace SAI_Editor.Forms
                         multiSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_EQUIP:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
@@ -2666,11 +2671,11 @@ namespace SAI_Editor.Forms
                         multiSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_EQUIP:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
@@ -2691,7 +2696,7 @@ namespace SAI_Editor.Forms
                         multiSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
             }
@@ -4204,127 +4209,127 @@ namespace SAI_Editor.Forms
 
         private void searchForASpellToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeSpell))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAFactionToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeFaction))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeFaction))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAnEmoteToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeEmote))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAMapToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeQuest))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAQuestToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeMap))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeMap))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAZoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeZone))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeZone))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForACreatureEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForACreatureGuidToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAGameobjectEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAGameobjectGuidToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForASoundToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeSound))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeSound))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAnAreatriggerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAGameEventToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAnItemEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForACreatureSummonsIdToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForATaxiPathToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAnEquipmentTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAWaypointToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForANpcTextToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeNpcText))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeNpcText))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAGossipOptionIdToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOption))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionMenuId))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
         private void searchForAGossipMenuOptionToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(connectionString, null, DatabaseSearchFormType.DatabaseSearchFormTypeGossipOptionId))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionId))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 
