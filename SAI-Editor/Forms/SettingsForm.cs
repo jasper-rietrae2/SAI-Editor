@@ -274,12 +274,16 @@ namespace SAI_Editor.Forms
 
         private async void buttonSearchForWorldDb_Click(object sender, EventArgs e)
         {
+            buttonSearchForWorldDb.Enabled = false;
+
             WorldDatabase worldDatabase = new WorldDatabase(textBoxHost.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxUsername.Text, textBoxPassword.Text, "");
             List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text, worldDatabase);
 
             if (databaseNames != null && databaseNames.Count > 0)
                 using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
                     selectDatabaseForm.ShowDialog(this);
+
+            buttonSearchForWorldDb.Enabled = true;
         }
 
         private void settingTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -290,6 +294,8 @@ namespace SAI_Editor.Forms
 
         private void buttonTestConnection_Click(object sender, EventArgs e)
         {
+            buttonTestConnection.Enabled = false;
+
             MySqlConnectionStringBuilder _connectionString = new MySqlConnectionStringBuilder();
             _connectionString.Server = textBoxHost.Text;
             _connectionString.UserID = textBoxUsername.Text;
@@ -309,6 +315,8 @@ namespace SAI_Editor.Forms
             //! If no connection was established, it would throw an error in WorldDatabase.CanConnectToDatabase.
             if (worldDatabase.CanConnectToDatabase(_connectionString))
                 MessageBox.Show("Connection successful!", "Connection status", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            buttonTestConnection.Enabled = true;
         }
 
         private void radioButtonConnectToMySql_CheckedChanged(object sender, EventArgs e)

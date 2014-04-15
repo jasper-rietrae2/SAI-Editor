@@ -568,6 +568,8 @@ namespace SAI_Editor.Forms
                 SAI_Editor_Manager.Instance.ResetWorldDatabase(false);
             }
 
+            buttonConnect.Enabled = false;
+
             Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
             Settings.Default.Save();
 
@@ -576,6 +578,8 @@ namespace SAI_Editor.Forms
                 StartExpandingToMainForm(Settings.Default.InstantExpand);
                 HandleUseWorldDatabaseSettingChanged();
             }
+
+            buttonConnect.Enabled = true;
         }
 
         private void StartExpandingToMainForm(bool instant = false)
@@ -1933,12 +1937,16 @@ namespace SAI_Editor.Forms
 
         private async void buttonSearchWorldDb_Click(object sender, EventArgs e)
         {
+            buttonSearchWorldDb.Enabled = false;
+
             SAI_Editor_Manager.Instance.ResetWorldDatabase(false);
             List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
                 using (SelectDatabaseForm selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
                     selectDatabaseForm.ShowDialog(this);
+
+            buttonSearchWorldDb.Enabled = true;
         }
 
         private void listViewSmartScripts_ColumnClick(object sender, ColumnClickEventArgs e)
