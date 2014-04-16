@@ -244,9 +244,9 @@ namespace SAI_Editor.Forms.SearchForms
                     goto case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionMenuId;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionMenuId:
                     Text = "Search for a gossip item";
-                    listViewEntryResults.Columns.Add("Menu id", 45);
-                    listViewEntryResults.Columns.Add("Id", 284);
-                    listViewEntryResults.Columns.Add("Text", 284);
+                    listViewEntryResults.Columns.Add("Menu id", 55);
+                    listViewEntryResults.Columns.Add("Id", 35);
+                    listViewEntryResults.Columns.Add("Text", 239);
                     comboBoxSearchType.Items.Add("Menu");
                     comboBoxSearchType.Items.Add("Id");
                     comboBoxSearchType.Items.Add("Text");
