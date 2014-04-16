@@ -1,6 +1,6 @@
 ﻿namespace SAI_Editor.Classes.Database.Classes
 {
-    public class Condition
+    public class Condition : DatabaseClass
     {
         public int SourceTypeOrReferenceId { get; set; }
         public int SourceGroup { get; set; }

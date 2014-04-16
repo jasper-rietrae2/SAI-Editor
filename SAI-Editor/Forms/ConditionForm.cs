@@ -585,21 +585,24 @@ namespace SAI_Editor.Forms
             condition.SourceTypeOrReferenceId = comboBoxConditionSourceTypes.SelectedIndex;
             condition.SourceGroup = XConverter.ToInt32(textBoxSourceGroup.Text);
             condition.SourceEntry = XConverter.ToInt32(textBoxSourceEntry.Text);
-            //condition.SourceId = XConverter.ToInt32(.Text);
-            //condition.ElseGroup = XConverter.ToInt32(.Text);
+            condition.SourceId = 0;
+            condition.ElseGroup = 0;
             condition.ConditionTypeOrReference = comboBoxConditionTypes.SelectedIndex;
             condition.ConditionTarget = comboBoxConditionTarget.SelectedIndex;
             condition.ConditionValue1 = XConverter.ToInt32(textBoxCondValue1.Text);
             condition.ConditionValue2 = XConverter.ToInt32(textBoxCondValue2.Text);
             condition.ConditionValue3 = XConverter.ToInt32(textBoxCondValue3.Text);
             condition.NegativeCondition = XConverter.ToInt32(textBoxCondValue4.Text);
-            //condition.ErrorType
-            //condition.ErrorTextId
-            //condition.ScriptName
+            condition.ErrorType = 0;
+            condition.ErrorTextId = 0;
+            condition.ScriptName = String.Empty;
             condition.Comment = textBoxComment.Text;
             conditions.Add(condition);
 
             ClearAllFields();
+
+            listViewConditions.AddCondition(condition);
+            tabControl.SelectedIndex = 2;
         }
 
         private void ClearAllFields()
@@ -616,26 +619,46 @@ namespace SAI_Editor.Forms
             labelCondValue4.Text = " - ";
         }
 
-        private void listViewConditions_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            buttonDeleteCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
-            buttonDuplicateCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
-            buttonLoadCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
-        }
-
         private void buttonDeleteCondition_Click(object sender, EventArgs e)
         {
-            //conditions.Remove();
+            conditions.Remove(listViewConditions.SelectedCondition);
+            listViewConditions.RemoveCondition(listViewConditions.SelectedCondition);
         }
 
         private void buttonLoadCondition_Click(object sender, EventArgs e)
         {
+            ClearAllFields();
+
+            Condition selectedCond = listViewConditions.SelectedCondition;
+            comboBoxConditionSourceTypes.SelectedIndex = listViewConditions.SelectedCondition.SourceTypeOrReferenceId;
+            textBoxSourceGroup.Text = selectedCond.SourceGroup.ToString();
+            textBoxSourceEntry.Text = selectedCond.SourceEntry.ToString();
+            //selectedCond.SourceId;
+            //selectedCond.ElseGroup;
+            comboBoxConditionTypes.SelectedIndex = listViewConditions.SelectedCondition.ConditionTypeOrReference;
+            comboBoxConditionTarget.SelectedIndex = selectedCond.ConditionTarget;
+            textBoxCondValue1.Text = selectedCond.ConditionValue1.ToString();
+            textBoxCondValue2.Text = selectedCond.ConditionValue2.ToString();
+            textBoxCondValue3.Text = selectedCond.ConditionValue3.ToString();
+            textBoxCondValue4.Text = selectedCond.NegativeCondition.ToString();
+            //selectedCond.ErrorType = 0;
+            //selectedCond.ErrorTextId = 0;
+            //selectedCond.ScriptName = String.Empty;
+            textBoxComment.Text = selectedCond.Comment;
+
             tabControl.SelectedIndex = 0;
         }
 
         private void buttonDuplicateCondition_Click(object sender, EventArgs e)
         {
             listViewConditions.Items.Add(listViewConditions.SelectedItems[0]);
+        }
+
+        private void listViewConditions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buttonDeleteCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
+            buttonDuplicateCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
+            buttonLoadCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
         }
     }
 }

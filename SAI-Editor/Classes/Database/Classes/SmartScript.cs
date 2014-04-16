@@ -1,6 +1,6 @@
 ﻿namespace SAI_Editor.Classes.Database.Classes
 {
-    public class SmartScript
+    public class SmartScript : DatabaseClass
     {
         public int entryorguid { get; set; }
         public int source_type { get; set; }

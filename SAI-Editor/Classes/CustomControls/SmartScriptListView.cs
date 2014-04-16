@@ -29,7 +29,7 @@ namespace SAI_Editor.Classes.CustomControls
             get
             {
                 if (SelectedItems.Count > 0)
-                    return _smartScripts.FirstOrDefault(smartScript => smartScript == ((SmartScriptListViewItem)SelectedItems[0]).Script);
+                    return _smartScripts.FirstOrDefault(smartScript => smartScript == ((CustomListViewItem)SelectedItems[0]).Script);
 
                 return null;
             }
@@ -74,7 +74,7 @@ namespace SAI_Editor.Classes.CustomControls
             if (keepSelection && lastSelectedIndex != -1)
             {
                 Items[lastSelectedIndex].Selected = true;
-                ((SmartScriptListViewItem)Items[lastSelectedIndex]).LastBackColor = SelectedItems[0].BackColor;
+                ((CustomListViewItem)Items[lastSelectedIndex]).LastBackColor = SelectedItems[0].BackColor;
                 Items[lastSelectedIndex].BackColor = Color.FromArgb(51, 153, 254);
                 Items[lastSelectedIndex].ForeColor = Color.White;
             }
@@ -92,13 +92,14 @@ namespace SAI_Editor.Classes.CustomControls
                     return;
                 }
 
-                foreach (int phasemask in phasemasks.Where(phasemask => phasemask != 0 && !_phaseColors.ContainsKey(phasemask))) _phaseColors.Add(phasemask, _colors.Pop());
+                foreach (int phasemask in phasemasks.Where(phasemask => phasemask != 0 && !_phaseColors.ContainsKey(phasemask)))
+                    _phaseColors.Add(phasemask, _colors.Pop());
             }
         }
 
         public int AddSmartScript(SmartScript script, bool listViewOnly = false, bool selectNewItem = false)
         {
-            SmartScriptListViewItem lvi = new SmartScriptListViewItem(script.entryorguid.ToString());
+            CustomListViewItem lvi = new CustomListViewItem(script.entryorguid.ToString());
             lvi.Script = script;
             lvi.Name = script.entryorguid.ToString();
 
@@ -140,7 +141,7 @@ namespace SAI_Editor.Classes.CustomControls
             List<ListViewItem> items = new List<ListViewItem>();
             foreach (SmartScript script in scripts)
             {
-                SmartScriptListViewItem lvi = new SmartScriptListViewItem(script.entryorguid.ToString());
+                CustomListViewItem lvi = new CustomListViewItem(script.entryorguid.ToString());
                 lvi.Script = script;
                 lvi.Name = script.entryorguid.ToString();
 
@@ -181,7 +182,7 @@ namespace SAI_Editor.Classes.CustomControls
 
         public void RemoveSmartScript(SmartScript script)
         {
-            foreach (SmartScriptListViewItem item in Items.Cast<SmartScriptListViewItem>().Where(item => item.Script == script))
+            foreach (CustomListViewItem item in Items.Cast<CustomListViewItem>().Where(item => item.Script == script))
             {
                 Items.Remove(item);
                 break;
@@ -192,7 +193,7 @@ namespace SAI_Editor.Classes.CustomControls
 
         public void ReplaceSmartScript(SmartScript script)
         {
-            SmartScriptListViewItem lvi = Items.Cast<SmartScriptListViewItem>().SingleOrDefault(p => p.Script == script);
+            CustomListViewItem lvi = Items.Cast<CustomListViewItem>().SingleOrDefault(p => p.Script == script);
 
             if (lvi == null)
                 return;
@@ -209,7 +210,7 @@ namespace SAI_Editor.Classes.CustomControls
                 lvi.SubItems.Add(propInfo.GetValue(script).ToString());
             }
 
-            _smartScripts[_smartScripts.IndexOf(lvi.Script)] = script;
+            _smartScripts[_smartScripts.IndexOf(lvi.Script as SmartScript)] = script;
 
             if (Settings.Default.PhaseHighlighting && script.event_phase_mask != 0)
             {
@@ -276,7 +277,7 @@ namespace SAI_Editor.Classes.CustomControls
             if (SelectedItems.Count > 0)
             {
                 //! This is the color given when an item is selected WITH focus...
-                ((SmartScriptListViewItem)SelectedItems[0]).LastBackColor = SelectedItems[0].BackColor;
+                ((CustomListViewItem)SelectedItems[0]).LastBackColor = SelectedItems[0].BackColor;
                 SelectedItems[0].BackColor = Color.FromArgb(51, 153, 254);
                 SelectedItems[0].ForeColor = Color.White;
             }
@@ -288,7 +289,7 @@ namespace SAI_Editor.Classes.CustomControls
         {
             if (SelectedItems.Count > 0)
             {
-                SelectedItems[0].BackColor = ((SmartScriptListViewItem)SelectedItems[0]).LastBackColor;
+                SelectedItems[0].BackColor = ((CustomListViewItem)SelectedItems[0]).LastBackColor;
                 SelectedItems[0].ForeColor = Color.Black;
             }
 

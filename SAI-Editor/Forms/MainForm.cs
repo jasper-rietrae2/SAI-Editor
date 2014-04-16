@@ -1572,7 +1572,7 @@ namespace SAI_Editor.Forms
 
                 //! Only add the new smartscript if it doesn't yet exist
                 foreach (SmartScript newSmartScript in smartScripts)
-                    if (!listViewSmartScripts.Items.Cast<SmartScriptListViewItem>().Any(p => p.Script.entryorguid == newSmartScript.entryorguid && p.Script.id == newSmartScript.id))
+                    if (!listViewSmartScripts.Items.Cast<CustomListViewItem>().Any(p => (p.Script as SmartScript).entryorguid == newSmartScript.entryorguid && (p.Script as SmartScript).id == newSmartScript.id))
                         listViewSmartScripts.AddSmartScript(newSmartScript);
 
                 pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
