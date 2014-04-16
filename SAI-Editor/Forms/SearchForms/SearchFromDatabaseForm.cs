@@ -254,6 +254,7 @@ namespace SAI_Editor.Forms.SearchForms
                     useMySQL = true;
                     break;
                 default:
+                    MessageBox.Show("Unknown database search type!", "Something went wrong...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
 
