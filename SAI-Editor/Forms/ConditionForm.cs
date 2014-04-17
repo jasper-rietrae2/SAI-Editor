@@ -123,7 +123,6 @@ namespace SAI_Editor.Forms
         private void SetSourceGroupValues(string value, bool searchable = false)
         {
             labelSourceGroup.Text = value;
-            textBoxSourceGroup.Enabled = value != " - ";
 
             if (value == " - ") //! Empty/unused source group
                 textBoxSourceGroup.Text = String.Empty;
@@ -134,7 +133,6 @@ namespace SAI_Editor.Forms
         private void SetSourceEntryValues(string value, bool searchable = false)
         {
             labelSourceEntry.Text = value;
-            textBoxSourceEntry.Enabled = value != " - ";
 
             if (value == " - ") //! Empty/unused source Entry
                 textBoxSourceEntry.Text = String.Empty;
@@ -297,7 +295,6 @@ namespace SAI_Editor.Forms
                 string value = String.IsNullOrWhiteSpace(values[i]) ? " - " : values[i];
 
                 condValues[(i + 1).ToString() + "lbl"].Text = value;
-                condValues[(i + 1).ToString() + "txt"].Enabled = value != " - ";
 
                 if (value == " - ") //! Empty/unused source Entry
                     condValues[(i + 1).ToString() + "txt"].Text = String.Empty;
@@ -572,6 +569,8 @@ namespace SAI_Editor.Forms
             { "TempSummonType", typeof(SingleSelectForm<TempSummonType>)},
             { "SpellEffIndex", typeof(SingleSelectForm<SpellEffIndex>)},
             { "SpellSchools", typeof(SingleSelectForm<SpellSchools>)},
+            { "SpellCastResult", typeof(SingleSelectForm<SpellCastResult>)},
+            { "SpellCustomErrors", typeof(SingleSelectForm<SpellCustomErrors>)},
         };
 
         private void ShowSelectForm(string formTemplate, TextBox textBoxToChange)
@@ -607,15 +606,15 @@ namespace SAI_Editor.Forms
                     sql += "DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=" + conditions[0].SourceTypeOrReferenceId;
                     sql += " AND `SourceGroup`=" + conditions[0].SourceGroup + " AND `SourceEntry`=" + conditions[0].SourceEntry + ";\n";
                     sql += "INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`SourceId`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionTarget`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES\n";
-                    sql += "(" + conditions[0].SourceTypeOrReferenceId + ", " + conditions[0].SourceGroup + ", " + conditions[0].SourceEntry + ", ";
-                    sql += ", " + conditions[0].SourceId + ", " + conditions[0].ElseGroup + ", " + conditions[0].ConditionTypeOrReference + ", ";
-                    sql += ", " + conditions[0].ConditionTarget + ", " + conditions[0].ConditionValue1 + ", ";
-                    sql += ", " + conditions[0].ConditionValue2 + ", " + conditions[0].ConditionValue3 + ", " + conditions[0].ErrorTextId + ", ";
-                    sql += ", " + conditions[0].ScriptName + ", " + conditions[0].Comment + ");";
+                    sql += "(" + conditions[0].SourceTypeOrReferenceId + "," + conditions[0].SourceGroup + "," + conditions[0].SourceEntry;
+                    sql += "," + conditions[0].SourceId + "," + conditions[0].ElseGroup + "," + conditions[0].ConditionTypeOrReference;
+                    sql += "," + conditions[0].ConditionTarget + "," + conditions[0].ConditionValue1;
+                    sql += "," + conditions[0].ConditionValue2 + "," + conditions[0].ConditionValue3 + "," + conditions[0].ErrorTextId;
+                    sql += "," + '"' + conditions[0].ScriptName + '"' + "," + '"' + conditions[0].Comment + '"' + ");";
                     richTextBoxSql.Text = sql;
                     break;
                 default:
-
+                    //foreach (Condition condition in conditions)
                     break;
             }
 
@@ -641,8 +640,8 @@ namespace SAI_Editor.Forms
             condition.ConditionValue2 = XConverter.ToInt32(textBoxCondValue2.Text);
             condition.ConditionValue3 = XConverter.ToInt32(textBoxCondValue3.Text);
             condition.NegativeCondition = XConverter.ToInt32(textBoxCondValue4.Text);
-            condition.ErrorType = 0;
-            condition.ErrorTextId = 0;
+            condition.ErrorType = XConverter.ToInt32(textBoxErrorType.Text);
+            condition.ErrorTextId = XConverter.ToInt32(textBoxErrorTextId.Text);
             condition.ScriptName = textBoxScriptName.Text;
             condition.Comment = textBoxComment.Text;
             conditions.Add(condition);
@@ -670,7 +669,11 @@ namespace SAI_Editor.Forms
         private void buttonDeleteCondition_Click(object sender, EventArgs e)
         {
             conditions.Remove(listViewConditions.SelectedCondition);
+
             listViewConditions.RemoveCondition(listViewConditions.SelectedCondition);
+
+            if (listViewConditions.Items.Count > 0)
+                listViewConditions.Items[0].Selected = true;
         }
 
         private void buttonLoadCondition_Click(object sender, EventArgs e)
@@ -707,6 +710,16 @@ namespace SAI_Editor.Forms
             buttonDeleteCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
             buttonDuplicateCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
             buttonLoadCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
+        }
+
+        private void buttonSearchErrorType_Click(object sender, EventArgs e)
+        {
+            ShowSelectForm("SpellCastResult", textBoxErrorType);
+        }
+
+        private void buttonSearchErrorTextId_Click(object sender, EventArgs e)
+        {
+            ShowSelectForm("SpellCustomErrors", textBoxErrorTextId);
         }
     }
 }
