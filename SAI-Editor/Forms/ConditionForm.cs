@@ -634,7 +634,7 @@ namespace SAI_Editor.Forms
             condition.SourceGroup = XConverter.ToInt32(textBoxSourceGroup.Text);
             condition.SourceEntry = XConverter.ToInt32(textBoxSourceEntry.Text);
             condition.SourceId = 0;
-            condition.ElseGroup = 0;
+            condition.ElseGroup = XConverter.ToInt32(textBoxElseGroup.Text);
             condition.ConditionTypeOrReference = comboBoxConditionTypes.SelectedIndex;
             condition.ConditionTarget = comboBoxConditionTarget.SelectedIndex;
             condition.ConditionValue1 = XConverter.ToInt32(textBoxCondValue1.Text);
@@ -643,14 +643,14 @@ namespace SAI_Editor.Forms
             condition.NegativeCondition = XConverter.ToInt32(textBoxCondValue4.Text);
             condition.ErrorType = 0;
             condition.ErrorTextId = 0;
-            condition.ScriptName = String.Empty;
+            condition.ScriptName = textBoxScriptName.Text;
             condition.Comment = textBoxComment.Text;
             conditions.Add(condition);
 
-            ClearAllFields();
-
             listViewConditions.AddCondition(condition);
             tabControl.SelectedIndex = 2;
+
+            ClearAllFields();
         }
 
         private void ClearAllFields()
@@ -682,7 +682,7 @@ namespace SAI_Editor.Forms
             textBoxSourceGroup.Text = selectedCond.SourceGroup.ToString();
             textBoxSourceEntry.Text = selectedCond.SourceEntry.ToString();
             //selectedCond.SourceId;
-            //selectedCond.ElseGroup;
+            textBoxElseGroup.Text = selectedCond.ElseGroup.ToString();
             comboBoxConditionTypes.SelectedIndex = listViewConditions.SelectedCondition.ConditionTypeOrReference;
             comboBoxConditionTarget.SelectedIndex = selectedCond.ConditionTarget;
             textBoxCondValue1.Text = selectedCond.ConditionValue1.ToString();
@@ -691,7 +691,7 @@ namespace SAI_Editor.Forms
             textBoxCondValue4.Text = selectedCond.NegativeCondition.ToString();
             //selectedCond.ErrorType = 0;
             //selectedCond.ErrorTextId = 0;
-            //selectedCond.ScriptName = String.Empty;
+            textBoxScriptName.Text = selectedCond.ScriptName;
             textBoxComment.Text = selectedCond.Comment;
 
             tabControl.SelectedIndex = 0;
@@ -707,11 +707,6 @@ namespace SAI_Editor.Forms
             buttonDeleteCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
             buttonDuplicateCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
             buttonLoadCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
-        }
-
-        private void ConditionForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

@@ -78,7 +78,13 @@
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageEditing = new System.Windows.Forms.TabPage();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBoxScriptName = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.buttonSaveCondition = new System.Windows.Forms.Button();
+            this.labelElseGroup = new System.Windows.Forms.Label();
+            this.textBoxElseGroup = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.tabPageSql = new System.Windows.Forms.TabPage();
             this.richTextBoxSql = new FastColoredTextBoxNS.FastColoredTextBox();
@@ -284,7 +290,7 @@
             // labelComment
             // 
             this.labelComment.AutoSize = true;
-            this.labelComment.Location = new System.Drawing.Point(12, 64);
+            this.labelComment.Location = new System.Drawing.Point(12, 90);
             this.labelComment.Name = "labelComment";
             this.labelComment.Size = new System.Drawing.Size(51, 13);
             this.labelComment.TabIndex = 14;
@@ -292,7 +298,7 @@
             // 
             // textBoxComment
             // 
-            this.textBoxComment.Location = new System.Drawing.Point(119, 61);
+            this.textBoxComment.Location = new System.Drawing.Point(119, 87);
             this.textBoxComment.Name = "textBoxComment";
             this.textBoxComment.Size = new System.Drawing.Size(523, 20);
             this.textBoxComment.TabIndex = 15;
@@ -300,7 +306,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(537, 11);
+            this.label1.Location = new System.Drawing.Point(538, 10);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(10, 13);
             this.label1.TabIndex = 16;
@@ -309,7 +315,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(537, 37);
+            this.label2.Location = new System.Drawing.Point(538, 37);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(10, 13);
             this.label2.TabIndex = 17;
@@ -366,7 +372,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(103, 64);
+            this.label6.Location = new System.Drawing.Point(105, 89);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(10, 13);
             this.label6.TabIndex = 16;
@@ -375,7 +381,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(103, 37);
+            this.label7.Location = new System.Drawing.Point(105, 37);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(10, 13);
             this.label7.TabIndex = 16;
@@ -384,7 +390,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(103, 10);
+            this.label8.Location = new System.Drawing.Point(105, 10);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(10, 13);
             this.label8.TabIndex = 16;
@@ -570,7 +576,7 @@
             // 
             // buttonGenerateComment
             // 
-            this.buttonGenerateComment.Location = new System.Drawing.Point(517, 87);
+            this.buttonGenerateComment.Location = new System.Drawing.Point(517, 201);
             this.buttonGenerateComment.Name = "buttonGenerateComment";
             this.buttonGenerateComment.Size = new System.Drawing.Size(125, 23);
             this.buttonGenerateComment.TabIndex = 27;
@@ -601,6 +607,9 @@
             // 
             // tabPageEditing
             // 
+            this.tabPageEditing.Controls.Add(this.label14);
+            this.tabPageEditing.Controls.Add(this.textBoxScriptName);
+            this.tabPageEditing.Controls.Add(this.label12);
             this.tabPageEditing.Controls.Add(this.comboBoxConditionSourceTypes);
             this.tabPageEditing.Controls.Add(this.buttonSaveCondition);
             this.tabPageEditing.Controls.Add(this.buttonGenerateSql);
@@ -620,6 +629,7 @@
             this.tabPageEditing.Controls.Add(this.buttonSearchConditionValue2);
             this.tabPageEditing.Controls.Add(this.labelSourceGroup);
             this.tabPageEditing.Controls.Add(this.buttonSearchConditionValue1);
+            this.tabPageEditing.Controls.Add(this.labelElseGroup);
             this.tabPageEditing.Controls.Add(this.labelSourceEntry);
             this.tabPageEditing.Controls.Add(this.buttonSearchSourceGroup);
             this.tabPageEditing.Controls.Add(this.labelConditionTarget);
@@ -627,9 +637,11 @@
             this.tabPageEditing.Controls.Add(this.comboBoxConditionTarget);
             this.tabPageEditing.Controls.Add(this.textBoxCondValue3);
             this.tabPageEditing.Controls.Add(this.textBoxSourceGroup);
+            this.tabPageEditing.Controls.Add(this.textBoxElseGroup);
             this.tabPageEditing.Controls.Add(this.textBoxCondValue2);
             this.tabPageEditing.Controls.Add(this.textBoxSourceEntry);
             this.tabPageEditing.Controls.Add(this.textBoxCondValue1);
+            this.tabPageEditing.Controls.Add(this.label15);
             this.tabPageEditing.Controls.Add(this.lineSeparator1);
             this.tabPageEditing.Controls.Add(this.label2);
             this.tabPageEditing.Controls.Add(this.labelComment);
@@ -651,6 +663,31 @@
             this.tabPageEditing.Text = "Condition editing";
             this.tabPageEditing.UseVisualStyleBackColor = true;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(105, 63);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(10, 13);
+            this.label14.TabIndex = 31;
+            this.label14.Text = ":";
+            // 
+            // textBoxScriptName
+            // 
+            this.textBoxScriptName.Location = new System.Drawing.Point(119, 61);
+            this.textBoxScriptName.Name = "textBoxScriptName";
+            this.textBoxScriptName.Size = new System.Drawing.Size(290, 20);
+            this.textBoxScriptName.TabIndex = 30;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(12, 64);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(62, 13);
+            this.label12.TabIndex = 29;
+            this.label12.Text = "ScriptName";
+            // 
             // buttonSaveCondition
             // 
             this.buttonSaveCondition.Location = new System.Drawing.Point(386, 230);
@@ -660,6 +697,31 @@
             this.buttonSaveCondition.Text = "Save condition";
             this.buttonSaveCondition.UseVisualStyleBackColor = true;
             this.buttonSaveCondition.Click += new System.EventHandler(this.buttonSaveCondition_Click);
+            // 
+            // labelElseGroup
+            // 
+            this.labelElseGroup.AutoSize = true;
+            this.labelElseGroup.Location = new System.Drawing.Point(422, 64);
+            this.labelElseGroup.Name = "labelElseGroup";
+            this.labelElseGroup.Size = new System.Drawing.Size(66, 13);
+            this.labelElseGroup.TabIndex = 8;
+            this.labelElseGroup.Text = "lblElseGroup";
+            // 
+            // textBoxElseGroup
+            // 
+            this.textBoxElseGroup.Location = new System.Drawing.Point(552, 60);
+            this.textBoxElseGroup.Name = "textBoxElseGroup";
+            this.textBoxElseGroup.Size = new System.Drawing.Size(66, 20);
+            this.textBoxElseGroup.TabIndex = 12;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(538, 63);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(10, 13);
+            this.label15.TabIndex = 17;
+            this.label15.Text = ":";
             // 
             // lineSeparator1
             // 
@@ -683,7 +745,7 @@
             // 
             // richTextBoxSql
             // 
-            this.richTextBoxSql.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.richTextBoxSql.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.richTextBoxSql.BackBrush = null;
             this.richTextBoxSql.CharHeight = 14;
             this.richTextBoxSql.CharWidth = 8;
@@ -783,7 +845,6 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Condition-Editor";
-            this.Load += new System.EventHandler(this.ConditionForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConditionForm_KeyDown);
             this.panelPermanentTooltipSourceType.ResumeLayout(false);
             this.panelPermanentTooltipSourceType.PerformLayout();
@@ -862,5 +923,11 @@
         private System.Windows.Forms.Button buttonLoadCondition;
         private Classes.CustomControls.ConditionListView listViewConditions;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBoxScriptName;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label labelElseGroup;
+        private System.Windows.Forms.TextBox textBoxElseGroup;
+        private System.Windows.Forms.Label label15;
     }
 }

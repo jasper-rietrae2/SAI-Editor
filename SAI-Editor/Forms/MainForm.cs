@@ -1055,7 +1055,8 @@ namespace SAI_Editor.Forms
                                 List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(entryOrGuidAndSourceType.entryOrGuid.ToString(), entryOrGuidAndSourceType.sourceType);
 
                                 if (newSmartScripts != null)
-                                    foreach (SmartScript item in newSmartScripts.Where(item => !ListContainsSmartScript(smartScriptsToReturn, item))) smartScriptsToReturn.Add(item);
+                                    foreach (SmartScript item in newSmartScripts.Where(item => !ListContainsSmartScript(smartScriptsToReturn, item)))
+                                        smartScriptsToReturn.Add(item);
 
                                 pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                             }
