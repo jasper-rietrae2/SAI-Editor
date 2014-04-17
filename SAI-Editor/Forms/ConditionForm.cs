@@ -308,6 +308,8 @@ namespace SAI_Editor.Forms
 
         private void buttonSearchSourceGroup_Click(object sender, EventArgs e)
         {
+            TextBox textBoxToChange = textBoxSourceGroup;
+
             switch ((ConditionSourceTypes)comboBoxConditionSourceTypes.SelectedIndex)
             {
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_LOOT_TEMPLATE:
@@ -335,8 +337,7 @@ namespace SAI_Editor.Forms
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_LOOT_TEMPLATE:
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_IMPLICIT_TARGET:
-                    using (SingleSelectForm<SpellEffIndex> singleSelectForm = new SingleSelectForm<SpellEffIndex>(textBoxSourceGroup))
-                        singleSelectForm.ShowDialog(this);
+                    ShowSelectForm("SpellEffIndex", textBoxToChange);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU_OPTION:
@@ -543,16 +544,41 @@ namespace SAI_Editor.Forms
             switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
             {
                 case ConditionTypes.CONDITION_AURA:
-                    //ShowSingleSelectForm<SpellSchools>(SpellSchools, textBoxToChange);
+                    ShowSelectForm("SpellSchools", textBoxToChange);
                     break;
             }
         }
 
-        //private void ShowSingleSelectForm(T obj, TextBox textBoxToChange)
-        //{
-        //    using (SingleSelectForm<T> singleSelectForm = new SingleSelectForm<T>(textBoxToChange))
-        //        singleSelectForm.ShowDialog(this);
-        //}
+        Dictionary<string, Type> searchForms = new Dictionary<string, Type>()
+        {
+	        { "GoFlags", typeof(MultiSelectForm<GoFlags>)},
+	        { "UnitFlags", typeof(MultiSelectForm<UnitFlags>)},
+	        { "UnitFlags2", typeof(MultiSelectForm<UnitFlags2>)},
+	        { "DynamicFlags", typeof(MultiSelectForm<DynamicFlags>)},
+	        { "NpcFlags", typeof(MultiSelectForm<NpcFlags>)},
+	        { "UnitBytes1_Flags", typeof(MultiSelectForm<UnitBytes1_Flags>)},
+	        { "SmartEventFlags", typeof(MultiSelectForm<SmartEventFlags>)},
+	        { "SmartPhaseMasks", typeof(MultiSelectForm<SmartPhaseMasks>)},
+	        { "SmartCastFlags", typeof(MultiSelectForm<SmartCastFlags>)},
+	        { "SmartAiTemplates", typeof(SingleSelectForm<SmartAiTemplates>)},
+	        { "SmartRespawnCondition", typeof(SingleSelectForm<SmartRespawnCondition>)},
+	        { "SmartActionlistTimerUpdateType", typeof(SingleSelectForm<SmartActionlistTimerUpdateType>)},
+            { "GoStates", typeof(SingleSelectForm<GoStates>)},
+            { "ReactStates", typeof(SingleSelectForm<ReactStates>)},
+            { "SheathState}", typeof(SingleSelectForm<SheathState>)},
+            { "MovementGeneratorType", typeof(SingleSelectForm<MovementGeneratorType>)},
+            { "PowerTypes", typeof(SingleSelectForm<PowerTypes>)},
+            { "UnitStandStateType", typeof(SingleSelectForm<UnitStandStateType>)},
+            { "TempSummonType", typeof(SingleSelectForm<TempSummonType>)},
+            { "SpellEffIndex", typeof(SingleSelectForm<SpellEffIndex>)},
+            { "SpellSchools", typeof(SingleSelectForm<SpellSchools>)},
+        };
+
+        private void ShowSelectForm(string formTemplate, TextBox textBoxToChange)
+        {
+            using (Form selectForm = (Form)Activator.CreateInstance(searchForms[formTemplate], new object[] { textBoxToChange }))
+                selectForm.ShowDialog(this);
+        }
 
         private void buttonSearchConditionValue3_Click(object sender, EventArgs e)
         {
@@ -571,6 +597,28 @@ namespace SAI_Editor.Forms
 
         private void buttonGenerateSql_Click(object sender, EventArgs e)
         {
+            switch (conditions.Count)
+            {
+                case 0:
+                    MessageBox.Show("There are no conditions in the current session.", "No conditions!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                case 1:
+                    string sql = String.Empty;
+                    sql += "DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=" + conditions[0].SourceTypeOrReferenceId;
+                    sql += " AND `SourceGroup`=" + conditions[0].SourceGroup + " AND `SourceEntry`=" + conditions[0].SourceEntry + ";\n";
+                    sql += "INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`SourceId`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionTarget`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES\n";
+                    sql += "(" + conditions[0].SourceTypeOrReferenceId + ", " + conditions[0].SourceGroup + ", " + conditions[0].SourceEntry + ", ";
+                    sql += ", " + conditions[0].SourceId + ", " + conditions[0].ElseGroup + ", " + conditions[0].ConditionTypeOrReference + ", ";
+                    sql += ", " + conditions[0].ConditionTarget + ", " + conditions[0].ConditionValue1 + ", ";
+                    sql += ", " + conditions[0].ConditionValue2 + ", " + conditions[0].ConditionValue3 + ", " + conditions[0].ErrorTextId + ", ";
+                    sql += ", " + conditions[0].ScriptName + ", " + conditions[0].Comment + ");";
+                    richTextBoxSql.Text = sql;
+                    break;
+                default:
+
+                    break;
+            }
+
             tabControl.SelectedIndex = 1;
         }
 
@@ -659,6 +707,11 @@ namespace SAI_Editor.Forms
             buttonDeleteCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
             buttonDuplicateCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
             buttonLoadCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
+        }
+
+        private void ConditionForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

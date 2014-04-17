@@ -135,8 +135,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxPassword = new System.Windows.Forms.TextBox();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
-            this.pictureBoxCreateScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
-            this.pictureBoxLoadScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
@@ -186,13 +184,9 @@
             this.buttonEventParamThreeSearch = new System.Windows.Forms.Button();
             this.buttonEventParamTwoSearch = new System.Windows.Forms.Button();
             this.buttonEventParamOneSearch = new System.Windows.Forms.Button();
-            this.labelEventParam4 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelEventParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelEventParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.textBoxEventParam4 = new System.Windows.Forms.TextBox();
             this.textBoxEventParam3 = new System.Windows.Forms.TextBox();
             this.textBoxEventParam2 = new System.Windows.Forms.TextBox();
-            this.labelEventParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.tabPageAction = new System.Windows.Forms.TabPage();
             this.buttonActionParamSixSearch = new System.Windows.Forms.Button();
             this.buttonActionParamFiveSearch = new System.Windows.Forms.Button();
@@ -206,12 +200,6 @@
             this.textBoxActionParam3 = new System.Windows.Forms.TextBox();
             this.textBoxActionParam2 = new System.Windows.Forms.TextBox();
             this.textBoxActionParam1 = new System.Windows.Forms.TextBox();
-            this.labelActionParam6 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam5 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam4 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.tabPageTarget = new System.Windows.Forms.TabPage();
             this.buttonTargetParamThreeSearch = new System.Windows.Forms.Button();
             this.buttonTargetParamTwoSearch = new System.Windows.Forms.Button();
@@ -223,13 +211,6 @@
             this.textBoxTargetParam3 = new System.Windows.Forms.TextBox();
             this.textBoxTargetParam2 = new System.Windows.Forms.TextBox();
             this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
-            this.labelTargetO = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetZ = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetY = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetX = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.panelPermanentTooltipParameters = new System.Windows.Forms.Panel();
@@ -246,13 +227,30 @@
             this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
             this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
             this.listViewSmartScripts = new SAI_Editor.Classes.CustomControls.SmartScriptListView();
+            this.labelEventParam4 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelEventParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelEventParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelEventParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam6 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam5 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam4 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetO = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetZ = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetY = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetX = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.pictureBoxCreateScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
+            this.pictureBoxLoadScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
@@ -265,6 +263,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipTypes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -898,8 +898,8 @@
             // conditionEditorToolStripMenuItem
             // 
             this.conditionEditorToolStripMenuItem.Name = "conditionEditorToolStripMenuItem";
-            this.conditionEditorToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
-            this.conditionEditorToolStripMenuItem.Text = "Condition editor";
+            this.conditionEditorToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.conditionEditorToolStripMenuItem.Text = "Condition-Editor";
             this.conditionEditorToolStripMenuItem.Click += new System.EventHandler(this.conditionEditorToolStripMenuItem_Click);
             // 
             // otherToolStripMenuItem
@@ -1192,35 +1192,6 @@
             this.groupBoxStaticScriptInfo.TabStop = false;
             this.groupBoxStaticScriptInfo.Text = "Static script information";
             this.groupBoxStaticScriptInfo.Visible = false;
-            // 
-            // pictureBoxCreateScript
-            // 
-            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
-            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
-            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
-            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
-            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxCreateScript.TabIndex = 16;
-            this.pictureBoxCreateScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
-            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
-            // 
-            // pictureBoxLoadScript
-            // 
-            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
-            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
-            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
-            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
-            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLoadScript.TabIndex = 16;
-            this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
-            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // buttonSearchForEntryOrGuid
             // 
@@ -2058,39 +2029,6 @@
             this.buttonEventParamOneSearch.Visible = false;
             this.buttonEventParamOneSearch.Click += new System.EventHandler(this.buttonEventParamOneSearch_Click);
             // 
-            // labelEventParam4
-            // 
-            this.labelEventParam4.AutoSize = true;
-            this.labelEventParam4.Location = new System.Drawing.Point(1, 85);
-            this.labelEventParam4.Name = "labelEventParam4";
-            this.labelEventParam4.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam4.TabIndex = 23;
-            this.labelEventParam4.Text = "Param 4";
-            this.labelEventParam4.TooltipParameterId = 4;
-            this.labelEventParam4.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
-            // 
-            // labelEventParam3
-            // 
-            this.labelEventParam3.AutoSize = true;
-            this.labelEventParam3.Location = new System.Drawing.Point(1, 59);
-            this.labelEventParam3.Name = "labelEventParam3";
-            this.labelEventParam3.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam3.TabIndex = 23;
-            this.labelEventParam3.Text = "Param 3";
-            this.labelEventParam3.TooltipParameterId = 3;
-            this.labelEventParam3.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
-            // 
-            // labelEventParam2
-            // 
-            this.labelEventParam2.AutoSize = true;
-            this.labelEventParam2.Location = new System.Drawing.Point(1, 33);
-            this.labelEventParam2.Name = "labelEventParam2";
-            this.labelEventParam2.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam2.TabIndex = 23;
-            this.labelEventParam2.Text = "Param 2";
-            this.labelEventParam2.TooltipParameterId = 2;
-            this.labelEventParam2.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
-            // 
             // textBoxEventParam4
             // 
             this.textBoxEventParam4.Location = new System.Drawing.Point(144, 82);
@@ -2117,17 +2055,6 @@
             this.textBoxEventParam2.TabIndex = 39;
             this.textBoxEventParam2.Text = "0";
             this.textBoxEventParam2.TextChanged += new System.EventHandler(this.textBoxEventParam2_TextChanged);
-            // 
-            // labelEventParam1
-            // 
-            this.labelEventParam1.AutoSize = true;
-            this.labelEventParam1.Location = new System.Drawing.Point(1, 7);
-            this.labelEventParam1.Name = "labelEventParam1";
-            this.labelEventParam1.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam1.TabIndex = 23;
-            this.labelEventParam1.Text = "Param 1";
-            this.labelEventParam1.TooltipParameterId = 1;
-            this.labelEventParam1.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
             // 
             // tabPageAction
             // 
@@ -2277,72 +2204,6 @@
             this.textBoxActionParam1.Text = "0";
             this.textBoxActionParam1.TextChanged += new System.EventHandler(this.textBoxActionParam1_TextChanged);
             // 
-            // labelActionParam6
-            // 
-            this.labelActionParam6.AutoSize = true;
-            this.labelActionParam6.Location = new System.Drawing.Point(1, 137);
-            this.labelActionParam6.Name = "labelActionParam6";
-            this.labelActionParam6.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam6.TabIndex = 24;
-            this.labelActionParam6.Text = "Param 6";
-            this.labelActionParam6.TooltipParameterId = 6;
-            this.labelActionParam6.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // labelActionParam5
-            // 
-            this.labelActionParam5.AutoSize = true;
-            this.labelActionParam5.Location = new System.Drawing.Point(1, 111);
-            this.labelActionParam5.Name = "labelActionParam5";
-            this.labelActionParam5.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam5.TabIndex = 24;
-            this.labelActionParam5.Text = "Param 5";
-            this.labelActionParam5.TooltipParameterId = 5;
-            this.labelActionParam5.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // labelActionParam4
-            // 
-            this.labelActionParam4.AutoSize = true;
-            this.labelActionParam4.Location = new System.Drawing.Point(1, 85);
-            this.labelActionParam4.Name = "labelActionParam4";
-            this.labelActionParam4.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam4.TabIndex = 24;
-            this.labelActionParam4.Text = "Param 4";
-            this.labelActionParam4.TooltipParameterId = 4;
-            this.labelActionParam4.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // labelActionParam3
-            // 
-            this.labelActionParam3.AutoSize = true;
-            this.labelActionParam3.Location = new System.Drawing.Point(1, 59);
-            this.labelActionParam3.Name = "labelActionParam3";
-            this.labelActionParam3.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam3.TabIndex = 25;
-            this.labelActionParam3.Text = "Param 3";
-            this.labelActionParam3.TooltipParameterId = 3;
-            this.labelActionParam3.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // labelActionParam2
-            // 
-            this.labelActionParam2.AutoSize = true;
-            this.labelActionParam2.Location = new System.Drawing.Point(1, 33);
-            this.labelActionParam2.Name = "labelActionParam2";
-            this.labelActionParam2.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam2.TabIndex = 26;
-            this.labelActionParam2.Text = "Param 2";
-            this.labelActionParam2.TooltipParameterId = 2;
-            this.labelActionParam2.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // labelActionParam1
-            // 
-            this.labelActionParam1.AutoSize = true;
-            this.labelActionParam1.Location = new System.Drawing.Point(1, 7);
-            this.labelActionParam1.Name = "labelActionParam1";
-            this.labelActionParam1.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam1.TabIndex = 32;
-            this.labelActionParam1.Text = "Param 1";
-            this.labelActionParam1.TooltipParameterId = 1;
-            this.labelActionParam1.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
             // tabPageTarget
             // 
             this.tabPageTarget.BackColor = System.Drawing.SystemColors.Window;
@@ -2467,83 +2328,6 @@
             this.textBoxTargetParam1.TabIndex = 58;
             this.textBoxTargetParam1.Text = "0";
             this.textBoxTargetParam1.TextChanged += new System.EventHandler(this.textBoxTargetParam1_TextChanged);
-            // 
-            // labelTargetO
-            // 
-            this.labelTargetO.AutoSize = true;
-            this.labelTargetO.Location = new System.Drawing.Point(1, 163);
-            this.labelTargetO.Name = "labelTargetO";
-            this.labelTargetO.Size = new System.Drawing.Size(49, 13);
-            this.labelTargetO.TabIndex = 34;
-            this.labelTargetO.Text = "Target O";
-            this.labelTargetO.TooltipParameterId = 7;
-            this.labelTargetO.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
-            // 
-            // labelTargetZ
-            // 
-            this.labelTargetZ.AutoSize = true;
-            this.labelTargetZ.Location = new System.Drawing.Point(1, 137);
-            this.labelTargetZ.Name = "labelTargetZ";
-            this.labelTargetZ.Size = new System.Drawing.Size(48, 13);
-            this.labelTargetZ.TabIndex = 34;
-            this.labelTargetZ.Text = "Target Z";
-            this.labelTargetZ.TooltipParameterId = 6;
-            this.labelTargetZ.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
-            // 
-            // labelTargetY
-            // 
-            this.labelTargetY.AutoSize = true;
-            this.labelTargetY.Location = new System.Drawing.Point(1, 111);
-            this.labelTargetY.Name = "labelTargetY";
-            this.labelTargetY.Size = new System.Drawing.Size(48, 13);
-            this.labelTargetY.TabIndex = 34;
-            this.labelTargetY.Text = "Target Y";
-            this.labelTargetY.TooltipParameterId = 5;
-            this.labelTargetY.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
-            // 
-            // labelTargetX
-            // 
-            this.labelTargetX.AutoSize = true;
-            this.labelTargetX.Location = new System.Drawing.Point(1, 85);
-            this.labelTargetX.Name = "labelTargetX";
-            this.labelTargetX.Size = new System.Drawing.Size(48, 13);
-            this.labelTargetX.TabIndex = 34;
-            this.labelTargetX.Text = "Target X";
-            this.labelTargetX.TooltipParameterId = 4;
-            this.labelTargetX.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
-            // 
-            // labelTargetParam3
-            // 
-            this.labelTargetParam3.AutoSize = true;
-            this.labelTargetParam3.Location = new System.Drawing.Point(1, 59);
-            this.labelTargetParam3.Name = "labelTargetParam3";
-            this.labelTargetParam3.Size = new System.Drawing.Size(46, 13);
-            this.labelTargetParam3.TabIndex = 34;
-            this.labelTargetParam3.Text = "Param 3";
-            this.labelTargetParam3.TooltipParameterId = 3;
-            this.labelTargetParam3.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
-            // 
-            // labelTargetParam2
-            // 
-            this.labelTargetParam2.AutoSize = true;
-            this.labelTargetParam2.Location = new System.Drawing.Point(1, 33);
-            this.labelTargetParam2.Name = "labelTargetParam2";
-            this.labelTargetParam2.Size = new System.Drawing.Size(46, 13);
-            this.labelTargetParam2.TabIndex = 35;
-            this.labelTargetParam2.Text = "Param 2";
-            this.labelTargetParam2.TooltipParameterId = 2;
-            this.labelTargetParam2.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
-            // 
-            // labelTargetParam1
-            // 
-            this.labelTargetParam1.AutoSize = true;
-            this.labelTargetParam1.Location = new System.Drawing.Point(1, 7);
-            this.labelTargetParam1.Name = "labelTargetParam1";
-            this.labelTargetParam1.Size = new System.Drawing.Size(46, 13);
-            this.labelTargetParam1.TabIndex = 38;
-            this.labelTargetParam1.Text = "Param 1";
-            this.labelTargetParam1.TooltipParameterId = 1;
-            this.labelTargetParam1.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
             // 
             // groupBoxParameters
             // 
@@ -2699,6 +2483,222 @@
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
+            // labelEventParam4
+            // 
+            this.labelEventParam4.AutoSize = true;
+            this.labelEventParam4.Location = new System.Drawing.Point(1, 85);
+            this.labelEventParam4.Name = "labelEventParam4";
+            this.labelEventParam4.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam4.TabIndex = 23;
+            this.labelEventParam4.Text = "Param 4";
+            this.labelEventParam4.TooltipParameterId = 4;
+            this.labelEventParam4.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
+            // 
+            // labelEventParam3
+            // 
+            this.labelEventParam3.AutoSize = true;
+            this.labelEventParam3.Location = new System.Drawing.Point(1, 59);
+            this.labelEventParam3.Name = "labelEventParam3";
+            this.labelEventParam3.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam3.TabIndex = 23;
+            this.labelEventParam3.Text = "Param 3";
+            this.labelEventParam3.TooltipParameterId = 3;
+            this.labelEventParam3.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
+            // 
+            // labelEventParam2
+            // 
+            this.labelEventParam2.AutoSize = true;
+            this.labelEventParam2.Location = new System.Drawing.Point(1, 33);
+            this.labelEventParam2.Name = "labelEventParam2";
+            this.labelEventParam2.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam2.TabIndex = 23;
+            this.labelEventParam2.Text = "Param 2";
+            this.labelEventParam2.TooltipParameterId = 2;
+            this.labelEventParam2.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
+            // 
+            // labelEventParam1
+            // 
+            this.labelEventParam1.AutoSize = true;
+            this.labelEventParam1.Location = new System.Drawing.Point(1, 7);
+            this.labelEventParam1.Name = "labelEventParam1";
+            this.labelEventParam1.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam1.TabIndex = 23;
+            this.labelEventParam1.Text = "Param 1";
+            this.labelEventParam1.TooltipParameterId = 1;
+            this.labelEventParam1.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
+            // 
+            // labelActionParam6
+            // 
+            this.labelActionParam6.AutoSize = true;
+            this.labelActionParam6.Location = new System.Drawing.Point(1, 137);
+            this.labelActionParam6.Name = "labelActionParam6";
+            this.labelActionParam6.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam6.TabIndex = 24;
+            this.labelActionParam6.Text = "Param 6";
+            this.labelActionParam6.TooltipParameterId = 6;
+            this.labelActionParam6.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelActionParam5
+            // 
+            this.labelActionParam5.AutoSize = true;
+            this.labelActionParam5.Location = new System.Drawing.Point(1, 111);
+            this.labelActionParam5.Name = "labelActionParam5";
+            this.labelActionParam5.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam5.TabIndex = 24;
+            this.labelActionParam5.Text = "Param 5";
+            this.labelActionParam5.TooltipParameterId = 5;
+            this.labelActionParam5.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelActionParam4
+            // 
+            this.labelActionParam4.AutoSize = true;
+            this.labelActionParam4.Location = new System.Drawing.Point(1, 85);
+            this.labelActionParam4.Name = "labelActionParam4";
+            this.labelActionParam4.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam4.TabIndex = 24;
+            this.labelActionParam4.Text = "Param 4";
+            this.labelActionParam4.TooltipParameterId = 4;
+            this.labelActionParam4.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelActionParam3
+            // 
+            this.labelActionParam3.AutoSize = true;
+            this.labelActionParam3.Location = new System.Drawing.Point(1, 59);
+            this.labelActionParam3.Name = "labelActionParam3";
+            this.labelActionParam3.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam3.TabIndex = 25;
+            this.labelActionParam3.Text = "Param 3";
+            this.labelActionParam3.TooltipParameterId = 3;
+            this.labelActionParam3.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelActionParam2
+            // 
+            this.labelActionParam2.AutoSize = true;
+            this.labelActionParam2.Location = new System.Drawing.Point(1, 33);
+            this.labelActionParam2.Name = "labelActionParam2";
+            this.labelActionParam2.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam2.TabIndex = 26;
+            this.labelActionParam2.Text = "Param 2";
+            this.labelActionParam2.TooltipParameterId = 2;
+            this.labelActionParam2.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelActionParam1
+            // 
+            this.labelActionParam1.AutoSize = true;
+            this.labelActionParam1.Location = new System.Drawing.Point(1, 7);
+            this.labelActionParam1.Name = "labelActionParam1";
+            this.labelActionParam1.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam1.TabIndex = 32;
+            this.labelActionParam1.Text = "Param 1";
+            this.labelActionParam1.TooltipParameterId = 1;
+            this.labelActionParam1.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelTargetO
+            // 
+            this.labelTargetO.AutoSize = true;
+            this.labelTargetO.Location = new System.Drawing.Point(1, 163);
+            this.labelTargetO.Name = "labelTargetO";
+            this.labelTargetO.Size = new System.Drawing.Size(49, 13);
+            this.labelTargetO.TabIndex = 34;
+            this.labelTargetO.Text = "Target O";
+            this.labelTargetO.TooltipParameterId = 7;
+            this.labelTargetO.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
+            // 
+            // labelTargetZ
+            // 
+            this.labelTargetZ.AutoSize = true;
+            this.labelTargetZ.Location = new System.Drawing.Point(1, 137);
+            this.labelTargetZ.Name = "labelTargetZ";
+            this.labelTargetZ.Size = new System.Drawing.Size(48, 13);
+            this.labelTargetZ.TabIndex = 34;
+            this.labelTargetZ.Text = "Target Z";
+            this.labelTargetZ.TooltipParameterId = 6;
+            this.labelTargetZ.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
+            // 
+            // labelTargetY
+            // 
+            this.labelTargetY.AutoSize = true;
+            this.labelTargetY.Location = new System.Drawing.Point(1, 111);
+            this.labelTargetY.Name = "labelTargetY";
+            this.labelTargetY.Size = new System.Drawing.Size(48, 13);
+            this.labelTargetY.TabIndex = 34;
+            this.labelTargetY.Text = "Target Y";
+            this.labelTargetY.TooltipParameterId = 5;
+            this.labelTargetY.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
+            // 
+            // labelTargetX
+            // 
+            this.labelTargetX.AutoSize = true;
+            this.labelTargetX.Location = new System.Drawing.Point(1, 85);
+            this.labelTargetX.Name = "labelTargetX";
+            this.labelTargetX.Size = new System.Drawing.Size(48, 13);
+            this.labelTargetX.TabIndex = 34;
+            this.labelTargetX.Text = "Target X";
+            this.labelTargetX.TooltipParameterId = 4;
+            this.labelTargetX.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
+            // 
+            // labelTargetParam3
+            // 
+            this.labelTargetParam3.AutoSize = true;
+            this.labelTargetParam3.Location = new System.Drawing.Point(1, 59);
+            this.labelTargetParam3.Name = "labelTargetParam3";
+            this.labelTargetParam3.Size = new System.Drawing.Size(46, 13);
+            this.labelTargetParam3.TabIndex = 34;
+            this.labelTargetParam3.Text = "Param 3";
+            this.labelTargetParam3.TooltipParameterId = 3;
+            this.labelTargetParam3.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
+            // 
+            // labelTargetParam2
+            // 
+            this.labelTargetParam2.AutoSize = true;
+            this.labelTargetParam2.Location = new System.Drawing.Point(1, 33);
+            this.labelTargetParam2.Name = "labelTargetParam2";
+            this.labelTargetParam2.Size = new System.Drawing.Size(46, 13);
+            this.labelTargetParam2.TabIndex = 35;
+            this.labelTargetParam2.Text = "Param 2";
+            this.labelTargetParam2.TooltipParameterId = 2;
+            this.labelTargetParam2.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
+            // 
+            // labelTargetParam1
+            // 
+            this.labelTargetParam1.AutoSize = true;
+            this.labelTargetParam1.Location = new System.Drawing.Point(1, 7);
+            this.labelTargetParam1.Name = "labelTargetParam1";
+            this.labelTargetParam1.Size = new System.Drawing.Size(46, 13);
+            this.labelTargetParam1.TabIndex = 38;
+            this.labelTargetParam1.Text = "Param 1";
+            this.labelTargetParam1.TooltipParameterId = 1;
+            this.labelTargetParam1.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
+            // 
+            // pictureBoxCreateScript
+            // 
+            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
+            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
+            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
+            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCreateScript.TabIndex = 16;
+            this.pictureBoxCreateScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            // 
+            // pictureBoxLoadScript
+            // 
+            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Enabled = false;
+            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
+            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
+            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
+            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLoadScript.TabIndex = 16;
+            this.pictureBoxLoadScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2736,8 +2736,6 @@
             this.groupBoxLogin.PerformLayout();
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
             this.groupBoxScriptInfo.ResumeLayout(false);
@@ -2757,6 +2755,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
             this.panelPermanentTooltipTypes.ResumeLayout(false);
             this.panelPermanentTooltipTypes.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

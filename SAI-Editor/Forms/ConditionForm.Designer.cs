@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConditionForm));
             this.comboBoxConditionSourceTypes = new System.Windows.Forms.ComboBox();
             this.comboBoxConditionTypes = new System.Windows.Forms.ComboBox();
@@ -80,7 +81,7 @@
             this.buttonSaveCondition = new System.Windows.Forms.Button();
             this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.tabPageSql = new System.Windows.Forms.TabPage();
-            this.richTextBoxSql = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxSql = new FastColoredTextBoxNS.FastColoredTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
@@ -94,6 +95,7 @@
             this.tabControl.SuspendLayout();
             this.tabPageEditing.SuspendLayout();
             this.tabPageSql.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.richTextBoxSql)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -681,11 +683,20 @@
             // 
             // richTextBoxSql
             // 
+            this.richTextBoxSql.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.richTextBoxSql.BackBrush = null;
+            this.richTextBoxSql.CharHeight = 14;
+            this.richTextBoxSql.CharWidth = 8;
+            this.richTextBoxSql.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.richTextBoxSql.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.richTextBoxSql.IsReplaceMode = false;
             this.richTextBoxSql.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxSql.Name = "richTextBoxSql";
+            this.richTextBoxSql.Paddings = new System.Windows.Forms.Padding(0);
+            this.richTextBoxSql.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
             this.richTextBoxSql.Size = new System.Drawing.Size(656, 340);
             this.richTextBoxSql.TabIndex = 0;
-            this.richTextBoxSql.Text = "";
+            this.richTextBoxSql.Zoom = 100;
             // 
             // tabPage1
             // 
@@ -771,7 +782,8 @@
             this.Name = "ConditionForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Condition Editor";
+            this.Text = "Condition-Editor";
+            this.Load += new System.EventHandler(this.ConditionForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConditionForm_KeyDown);
             this.panelPermanentTooltipSourceType.ResumeLayout(false);
             this.panelPermanentTooltipSourceType.PerformLayout();
@@ -783,6 +795,7 @@
             this.tabPageEditing.ResumeLayout(false);
             this.tabPageEditing.PerformLayout();
             this.tabPageSql.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.richTextBoxSql)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
@@ -841,7 +854,7 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageEditing;
         private System.Windows.Forms.TabPage tabPageSql;
-        private System.Windows.Forms.RichTextBox richTextBoxSql;
+        private FastColoredTextBoxNS.FastColoredTextBox richTextBoxSql;
         private System.Windows.Forms.Button buttonSaveCondition;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button buttonDuplicateCondition;
