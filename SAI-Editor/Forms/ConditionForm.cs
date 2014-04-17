@@ -632,7 +632,7 @@ namespace SAI_Editor.Forms
             condition.SourceTypeOrReferenceId = comboBoxConditionSourceTypes.SelectedIndex;
             condition.SourceGroup = XConverter.ToInt32(textBoxSourceGroup.Text);
             condition.SourceEntry = XConverter.ToInt32(textBoxSourceEntry.Text);
-            condition.SourceId = 0;
+            condition.SourceId = XConverter.ToInt32(textBoxSourceId.Text);
             condition.ElseGroup = XConverter.ToInt32(textBoxElseGroup.Text);
             condition.ConditionTypeOrReference = comboBoxConditionTypes.SelectedIndex;
             condition.ConditionTarget = comboBoxConditionTarget.SelectedIndex;
@@ -684,7 +684,7 @@ namespace SAI_Editor.Forms
             comboBoxConditionSourceTypes.SelectedIndex = listViewConditions.SelectedCondition.SourceTypeOrReferenceId;
             textBoxSourceGroup.Text = selectedCond.SourceGroup.ToString();
             textBoxSourceEntry.Text = selectedCond.SourceEntry.ToString();
-            //selectedCond.SourceId;
+            textBoxSourceId.Text = selectedCond.SourceId.ToString();
             textBoxElseGroup.Text = selectedCond.ElseGroup.ToString();
             comboBoxConditionTypes.SelectedIndex = listViewConditions.SelectedCondition.ConditionTypeOrReference;
             comboBoxConditionTarget.SelectedIndex = selectedCond.ConditionTarget;
