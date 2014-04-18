@@ -58,7 +58,8 @@ namespace SAI_Editor.Forms.SearchForms
         private void buttonContinue_Click(object sender, EventArgs e)
         {
             List<Enum> vals = Enum.GetValues(typeof(T)).OfType<Enum>().ToList();
-            long mask = (from ListViewItem item in listViewSelectableItems.CheckedItems from en in Enum.GetNames(typeof(T)) where en.Equals(item.SubItems[1].Text) select Convert.ToInt64(Enum.Parse(typeof(T), en))).Sum();
+            long mask = (from ListViewItem item in listViewSelectableItems.CheckedItems from en in Enum.GetNames(typeof(T))
+                         where en.Equals(item.SubItems[1].Text) select Convert.ToInt64(Enum.Parse(typeof(T), en))).Sum();
 
             if (textBoxToChange != null)
             {

@@ -25,7 +25,9 @@ namespace SAI_Editor.Forms.SearchForms
             {
                 foreach (ListViewItem item in listViewSelectableItems.Items)
                 {
-                    if (item.Index > 0 && textBoxToChange.Text == item.Index.ToString())
+                    string value = (Enum.Parse(typeof(T), item.Text)).ToString();
+
+                    if (item.Index > 0 && textBoxToChange.Text == value)
                     {
                         item.Selected = true;
                         item.EnsureVisible();
@@ -48,12 +50,8 @@ namespace SAI_Editor.Forms.SearchForms
             if (listViewSelectableItems.SelectedItems.Count == 0)
                 return;
 
-            string index = listViewSelectableItems.SelectedItems[0].Index.ToString();
-
-            if (index == "7" && typeof(T).Name == "PowerTypes") //! POWER_HEALTH
-                index = "-2";
-
-            textBoxToChange.Text = index;
+            int selectedValue = (int)Enum.Parse(typeof(T), listViewSelectableItems.SelectedItems[0].Text);
+            textBoxToChange.Text = selectedValue.ToString();
             Close();
         }
 
@@ -101,11 +99,6 @@ namespace SAI_Editor.Forms.SearchForms
         private void listViewSelectableItems_SelectedIndexChanged(object sender, EventArgs e)
         {
             listViewSelectableItems.Items[0].Checked = listViewSelectableItems.CheckedItems.Count == 0;
-        }
-
-        private void SingleSelectForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

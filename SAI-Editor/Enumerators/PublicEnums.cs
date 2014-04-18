@@ -511,7 +511,7 @@ namespace SAI_Editor.Enumerators
         PHASEMASK_ANYWHERE = ~0,   //! -1, 0xFFFFFFFF, etc.
     }
 
-    public enum PowerTypes
+    public enum PowerTypes : int
     {
         POWER_MANA                          = 0,
         POWER_RAGE                          = 1,
@@ -686,6 +686,7 @@ namespace SAI_Editor.Enumerators
     //! ErrorType in Conditions
     public enum SpellCastResult
     {
+        NONE = 0,
         AFFECTING_COMBAT = 1,
         ALREADY_AT_FULL_HEALTH = 2,
         ALREADY_AT_FULL_MANA = 3,
@@ -877,6 +878,7 @@ namespace SAI_Editor.Enumerators
     //! ErrorTextId
     public enum SpellCustomErrors
     {
+        ERROR_NONE                             =  0,
         ERROR_CUSTOM_MSG                       =  1, // Something bad happened, and we want to display a custom message!
         ERROR_ALEX_BROKE_QUEST                 =  2, // Alex broke your quest! Thank him later!
         ERROR_NEED_HELPLESS_VILLAGER           =  3, // This spell may only be used on Helpless Wintergarde Villagers that have not been rescued.
