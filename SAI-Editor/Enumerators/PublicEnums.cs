@@ -354,6 +354,7 @@ namespace SAI_Editor.Enumerators
     [Flags]
     public enum UnitStandFlags : uint
     {
+        UNIT_STAND_FLAGS_NONE         = 0x00,
         UNIT_STAND_FLAGS_UNK1         = 0x01,
         UNIT_STAND_FLAGS_CREEP        = 0x02,
         UNIT_STAND_FLAGS_UNTRACKABLE  = 0x04,
@@ -1066,6 +1067,7 @@ namespace SAI_Editor.Enumerators
     [Flags]
     enum SpawnMask
     {
+        SPAWNMASK_NONE = 0,
         SPAWNMASK_CONTINENT = (1 << Difficulty.REGULAR_DIFFICULTY), // any maps without spawn modes
 
         SPAWNMASK_DUNGEON_NORMAL = (1 << Difficulty.DUNGEON_DIFFICULTY_NORMAL),
