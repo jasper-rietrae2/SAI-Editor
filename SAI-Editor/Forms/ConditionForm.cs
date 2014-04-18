@@ -192,13 +192,13 @@ namespace SAI_Editor.Forms
                     SetConditionValues(new string[] { "Drunken state", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_WORLD_STATE:
-                    SetConditionValues(new string[] { "World state index", "World state value", "", "" }, new bool[] { true, true, false, false });
+                    SetConditionValues(new string[] { "World state index", "World state value", "", "" }, new bool[] { false, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_ACTIVE_EVENT:
                     SetConditionValues(new string[] { "Game event entry", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_INSTANCE_INFO:
-                    SetConditionValues(new string[] { "Instance entry", "Instance data", "Instance type", "" }, new bool[] { true, false, true, false });
+                    SetConditionValues(new string[] { "Data value", "Data outcome", "Compare type", "" }, new bool[] { false, false, true, false });
                     break;
                 case ConditionTypes.CONDITION_QUEST_NONE:
                     SetConditionValues(new string[] { "Quest entry", "", "", "" }, new bool[] { true, false, false, false });
@@ -443,10 +443,8 @@ namespace SAI_Editor.Forms
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeZone);
                     break;
                 case ConditionTypes.CONDITION_REPUTATION_RANK:
+                case ConditionTypes.CONDITION_TEAM: //! Team id and faction rank are the same, apparently. Both use Faction.dbc
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeFaction);
-                    break;
-                case ConditionTypes.CONDITION_TEAM:
-                    //ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.Team); //! Team id
                     break;
                 case ConditionTypes.CONDITION_SKILL:
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSkill);
@@ -457,31 +455,25 @@ namespace SAI_Editor.Forms
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest);
                     break;
                 case ConditionTypes.CONDITION_DRUNKENSTATE:
-                    //! Drunken state
-                    break;
-                case ConditionTypes.CONDITION_WORLD_STATE:
-                    //! Worldstate index
+                    ShowSelectForm("DrunkenState", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_ACTIVE_EVENT:
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent);
                     break;
-                case ConditionTypes.CONDITION_INSTANCE_INFO:
-                    //! Instance entry
-                    break;
                 case ConditionTypes.CONDITION_CLASS:
-                    //! Classmask
+                    ShowSelectForm("Classes", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_RACE:
-                    //! Racemask
+                    ShowSelectForm("Races", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_ACHIEVEMENT:
-                    //! Achievement id
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeAchievement);
                     break;
                 case ConditionTypes.CONDITION_TITLE:
-                    //! Title id
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypePlayerTitles);
                     break;
                 case ConditionTypes.CONDITION_SPAWNMASK:
-                    //! Spawnmask
+                    ShowSelectForm("SpawnMask", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_GENDER:
                     //! Gender
@@ -499,37 +491,37 @@ namespace SAI_Editor.Forms
                     //! ??
                     break;
                 case ConditionTypes.CONDITION_SPELL:
-                    SetConditionValues(new string[] { "Spell entry", "", "", "" }, new bool[] { true, false, false, false });
+                    //SetConditionValues(new string[] { "Spell entry", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_PHASEMASK:
-                    SetConditionValues(new string[] { "Phasemask", "", "", "" }, new bool[] { true, false, false, false });
+                    //SetConditionValues(new string[] { "Phasemask", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_QUEST_COMPLETE:
-                    SetConditionValues(new string[] { "Quest entry", "", "", "" }, new bool[] { true, false, false, false });
+                    //SetConditionValues(new string[] { "Quest entry", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_NEAR_CREATURE:
-                    SetConditionValues(new string[] { "Creature entry", "Distance", "", "" }, new bool[] { true, false, false, false });
+                    //SetConditionValues(new string[] { "Creature entry", "Distance", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_NEAR_GAMEOBJECT:
-                    SetConditionValues(new string[] { "Gameobject entry", "Distance", "", "" }, new bool[] { true, false, false, false });
+                    //SetConditionValues(new string[] { "Gameobject entry", "Distance", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_OBJECT_ENTRY:
-                    SetConditionValues(new string[] { "Type id", "Object entry", "", "" }, new bool[] { true, true, false, false });
+                    //SetConditionValues(new string[] { "Type id", "Object entry", "", "" }, new bool[] { true, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_TYPE_MASK:
-                    SetConditionValues(new string[] { "Typemask", "", "", "" }, new bool[] { true, false, false, false });
+                    //SetConditionValues(new string[] { "Typemask", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_RELATION_TO:
-                    SetConditionValues(new string[] { "Condition target", "Relation type", "", "" }, new bool[] { true, true, false, false });
+                    //SetConditionValues(new string[] { "Condition target", "Relation type", "", "" }, new bool[] { true, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_REACTION_TO:
-                    SetConditionValues(new string[] { "Condition target", "Rank mask", "", "" }, new bool[] { true, true, false, false });
+                    //SetConditionValues(new string[] { "Condition target", "Rank mask", "", "" }, new bool[] { true, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_DISTANCE_TO:
-                    SetConditionValues(new string[] { "Condition target", "Distance", "Compare type", "" }, new bool[] { true, true, true, false });
+                    //SetConditionValues(new string[] { "Condition target", "Distance", "Compare type", "" }, new bool[] { true, true, true, false });
                     break;
                 default:
-                    SetConditionValues(new string[] { "", "", "", "" }, new bool[] { false, false, false, false });
+                    //SetConditionValues(new string[] { "", "", "", "" }, new bool[] { false, false, false, false });
                     break;
             }
         }
@@ -575,8 +567,11 @@ namespace SAI_Editor.Forms
             { "SpellCastResult", typeof(SingleSelectForm<SpellCastResult>)},
             { "SpellCustomErrors", typeof(SingleSelectForm<SpellCustomErrors>)},
             { "ReputationRank", typeof(SingleSelectForm<ReputationRank>)},
-            //{ "", typeof(SingleSelectForm<>)},
-            //{ "", typeof(SingleSelectForm<>)},
+            { "DrunkenState", typeof(SingleSelectForm<DrunkenState>)},
+            { "InstanceInfo", typeof(SingleSelectForm<InstanceInfo>)},
+            { "Classes", typeof(SingleSelectForm<PlayerClasses>)},
+            { "Races", typeof(SingleSelectForm<Races>)},
+            { "SpawnMask", typeof(MultiSelectForm<SpawnMask>)},
             //{ "", typeof(SingleSelectForm<>)},
             //{ "", typeof(SingleSelectForm<>)},
             //{ "", typeof(SingleSelectForm<>)},
@@ -590,7 +585,14 @@ namespace SAI_Editor.Forms
 
         private void buttonSearchConditionValue3_Click(object sender, EventArgs e)
         {
-            TextBox textBoxToChange = textBoxCondValue2;
+            TextBox textBoxToChange = textBoxCondValue3;
+
+            switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
+            {
+                case ConditionTypes.CONDITION_INSTANCE_INFO:
+                    ShowSelectForm("InstanceInfo", textBoxToChange);
+                    break;
+            }
         }
 
         private void ConditionForm_KeyDown(object sender, KeyEventArgs e)

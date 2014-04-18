@@ -34,6 +34,8 @@ namespace SAI_Editor.Forms.SearchForms
         DatabaseSearchFormTypeGossipMenuOptionMenuId,
         DatabaseSearchFormTypeGossipMenuOptionId,
         DatabaseSearchFormTypeSkill,
+        DatabaseSearchFormTypeAchievement,
+        DatabaseSearchFormTypePlayerTitles,
     }
 
     public partial class SearchFromDatabaseForm : Form
@@ -261,6 +263,22 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Skill id");
                     comboBoxSearchType.Items.Add("Skill name");
                     baseQuery = "SELECT id, name FROM skills";
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeAchievement:
+                    Text = "Search for an achievement";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Achievement id");
+                    comboBoxSearchType.Items.Add("Achievement name");
+                    baseQuery = "SELECT id, name FROM achievements";
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypePlayerTitles:
+                    Text = "Search for a title";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Title id");
+                    comboBoxSearchType.Items.Add("Title");
+                    baseQuery = "SELECT id, title FROM player_titles";
                     break;
                 default:
                     MessageBox.Show("Unknown database search type!", "Something went wrong...", MessageBoxButtons.OK, MessageBoxIcon.Error);

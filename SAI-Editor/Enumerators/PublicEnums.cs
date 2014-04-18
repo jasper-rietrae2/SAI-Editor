@@ -991,4 +991,95 @@ namespace SAI_Editor.Enumerators
         REP_REVERED     = 6,
         REP_EXALTED     = 7
     }
+
+    enum DrunkenState
+    {
+        DRUNKEN_STATE_SOBER,
+        DRUNKEN_STATE_TIPSY,
+        DRUNKEN_STATE_DRUNK,
+        DRUNKEN_STATE_SMASHED,
+    }
+
+    enum InstanceInfo
+    {
+        INSTANCE_INFO_DATA,
+        INSTANCE_INFO_DATA64,
+        INSTANCE_INFO_BOSS_STATE
+    }
+
+    enum PlayerClasses
+    {
+        CLASS_NONE          = 0,
+        CLASS_WARRIOR       = 1,
+        CLASS_PALADIN       = 2,
+        CLASS_HUNTER        = 3,
+        CLASS_ROGUE         = 4,
+        CLASS_PRIEST        = 5,
+        CLASS_DEATH_KNIGHT  = 6,
+        CLASS_SHAMAN        = 7,
+        CLASS_MAGE          = 8,
+        CLASS_WARLOCK       = 9,
+        //CLASS_UNK           = 10,
+        CLASS_DRUID         = 11
+    }
+
+    enum Races
+    {
+        RACE_NONE               = 0,
+        RACE_HUMAN              = 1,
+        RACE_ORC                = 2,
+        RACE_DWARF              = 3,
+        RACE_NIGHTELF           = 4,
+        RACE_UNDEAD_PLAYER      = 5,
+        RACE_TAUREN             = 6,
+        RACE_GNOME              = 7,
+        RACE_TROLL              = 8,
+        //RACE_GOBLIN             = 9,
+        RACE_BLOODELF           = 10,
+        RACE_DRAENEI            = 11
+        //RACE_FEL_ORC            = 12,
+        //RACE_NAGA               = 13,
+        //RACE_BROKEN             = 14,
+        //RACE_SKELETON           = 15,
+        //RACE_VRYKUL             = 16,
+        //RACE_TUSKARR            = 17,
+        //RACE_FOREST_TROLL       = 18,
+        //RACE_TAUNKA             = 19,
+        //RACE_NORTHREND_SKELETON = 20,
+        //RACE_ICE_TROLL          = 21
+    }
+
+    enum Difficulty
+    {
+        REGULAR_DIFFICULTY = 0,
+
+        DUNGEON_DIFFICULTY_NORMAL = 0,
+        DUNGEON_DIFFICULTY_HEROIC = 1,
+        DUNGEON_DIFFICULTY_EPIC = 2,
+
+        RAID_DIFFICULTY_10MAN_NORMAL = 0,
+        RAID_DIFFICULTY_25MAN_NORMAL = 1,
+        RAID_DIFFICULTY_10MAN_HEROIC = 2,
+        RAID_DIFFICULTY_25MAN_HEROIC = 3
+    }
+
+    [Flags]
+    enum SpawnMask
+    {
+        SPAWNMASK_CONTINENT = (1 << Difficulty.REGULAR_DIFFICULTY), // any maps without spawn modes
+
+        SPAWNMASK_DUNGEON_NORMAL = (1 << Difficulty.DUNGEON_DIFFICULTY_NORMAL),
+        SPAWNMASK_DUNGEON_HEROIC = (1 << Difficulty.DUNGEON_DIFFICULTY_HEROIC),
+        SPAWNMASK_DUNGEON_ALL = (SPAWNMASK_DUNGEON_NORMAL | SPAWNMASK_DUNGEON_HEROIC),
+
+        SPAWNMASK_RAID_10MAN_NORMAL = (1 << Difficulty.RAID_DIFFICULTY_10MAN_NORMAL),
+        SPAWNMASK_RAID_25MAN_NORMAL = (1 << Difficulty.RAID_DIFFICULTY_25MAN_NORMAL),
+        SPAWNMASK_RAID_NORMAL_ALL = (SPAWNMASK_RAID_10MAN_NORMAL | SPAWNMASK_RAID_25MAN_NORMAL),
+
+        SPAWNMASK_RAID_10MAN_HEROIC = (1 << Difficulty.RAID_DIFFICULTY_10MAN_HEROIC),
+        SPAWNMASK_RAID_25MAN_HEROIC = (1 << Difficulty.RAID_DIFFICULTY_25MAN_HEROIC),
+        SPAWNMASK_RAID_HEROIC_ALL = (SPAWNMASK_RAID_10MAN_HEROIC | SPAWNMASK_RAID_25MAN_HEROIC),
+
+        SPAWNMASK_RAID_ALL = (SPAWNMASK_RAID_NORMAL_ALL | SPAWNMASK_RAID_HEROIC_ALL)
+    }
 }
