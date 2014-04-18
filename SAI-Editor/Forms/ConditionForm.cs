@@ -476,10 +476,10 @@ namespace SAI_Editor.Forms
                     ShowSelectForm("SpawnMask", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_GENDER:
-                    //! Gender
+                    ShowSelectForm("Gender", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_UNIT_STATE:
-                    //SetConditionValues(new string[] { "Unit state", "", "", "" }, new bool[] { true, false, false, false });
+                    ShowSelectForm("UnitState", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_MAPID:
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap);
@@ -572,6 +572,10 @@ namespace SAI_Editor.Forms
             { "Classes", typeof(SingleSelectForm<PlayerClasses>)},
             { "Races", typeof(SingleSelectForm<Races>)},
             { "SpawnMask", typeof(MultiSelectForm<SpawnMask>)},
+            { "Gender", typeof(SingleSelectForm<Gender>)},
+            { "UnitState", typeof(MultiSelectForm<UnitState>)},
+            //{ "", typeof(SingleSelectForm<>)},
+            //{ "", typeof(SingleSelectForm<>)},
             //{ "", typeof(SingleSelectForm<>)},
             //{ "", typeof(SingleSelectForm<>)},
             //{ "", typeof(SingleSelectForm<>)},
