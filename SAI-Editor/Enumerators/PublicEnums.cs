@@ -276,7 +276,7 @@ namespace SAI_Editor.Enumerators
         SMARTCAST_COMBAT_MOVE = 0x40,
     }
 
-    public enum ReactStates
+    public enum ReactState
     {
         REACT_PASSIVE = 0,
         REACT_DEFENSIVE = 1,
@@ -978,5 +978,17 @@ namespace SAI_Editor.Enumerators
         ERROR_MAX_NUMBER_OF_VOLUNTEERS         = 97, // You already have the max number of volunteers.
         ERROR_FROSTMOURNE_RENDERED_RESSURECT   = 98, // Frostmourne has rendered you unable to ressurect.
         ERROR_CANT_MOUNT_WITH_SHAPESHIFT       = 99  // You can't mount while affected by that shapeshift.
+    }
+
+    enum ReputationRank
+    {
+        REP_HATED       = 0,
+        REP_HOSTILE     = 1,
+        REP_UNFRIENDLY  = 2,
+        REP_NEUTRAL     = 3,
+        REP_FRIENDLY    = 4,
+        REP_HONORED     = 5,
+        REP_REVERED     = 6,
+        REP_EXALTED     = 7
     }
 }

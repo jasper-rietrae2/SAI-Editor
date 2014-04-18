@@ -95,7 +95,7 @@
             this.searchForSAIActionlistTimerUpdateTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchForStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchForGameobjectStatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.searchForReactStatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.searchForReactStateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchForSheathStatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchOtherInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchForMovementGeneratorTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -813,7 +813,7 @@
             // 
             this.searchForStateToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.searchForGameobjectStatesToolStripMenuItem,
-            this.searchForReactStatesToolStripMenuItem,
+            this.searchForReactStateToolStripMenuItem,
             this.searchForSheathStatesToolStripMenuItem});
             this.searchForStateToolStripMenuItem.Name = "searchForStateToolStripMenuItem";
             this.searchForStateToolStripMenuItem.Size = new System.Drawing.Size(234, 22);
@@ -826,12 +826,12 @@
             this.searchForGameobjectStatesToolStripMenuItem.Text = "Search for gameobject states";
             this.searchForGameobjectStatesToolStripMenuItem.Click += new System.EventHandler(this.searchForFlagsMenuItem_Click);
             // 
-            // searchForReactStatesToolStripMenuItem
+            // searchForReactStateToolStripMenuItem
             // 
-            this.searchForReactStatesToolStripMenuItem.Name = "searchForReactStatesToolStripMenuItem";
-            this.searchForReactStatesToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
-            this.searchForReactStatesToolStripMenuItem.Text = "Search for react states";
-            this.searchForReactStatesToolStripMenuItem.Click += new System.EventHandler(this.searchForFlagsMenuItem_Click);
+            this.searchForReactStateToolStripMenuItem.Name = "searchForReactStateToolStripMenuItem";
+            this.searchForReactStateToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.searchForReactStateToolStripMenuItem.Text = "Search for react states";
+            this.searchForReactStateToolStripMenuItem.Click += new System.EventHandler(this.searchForFlagsMenuItem_Click);
             // 
             // searchForSheathStatesToolStripMenuItem
             // 
@@ -2970,7 +2970,7 @@
         private System.Windows.Forms.ToolStripMenuItem searchForSAIActionlistTimerUpdateTypeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchForStateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchForGameobjectStatesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem searchForReactStatesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem searchForReactStateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchForSheathStatesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchOtherInformationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem searchForMovementGeneratorTypesToolStripMenuItem;

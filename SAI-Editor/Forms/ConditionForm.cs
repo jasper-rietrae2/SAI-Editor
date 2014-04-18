@@ -449,7 +449,7 @@ namespace SAI_Editor.Forms
                     //ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.Team); //! Team id
                     break;
                 case ConditionTypes.CONDITION_SKILL:
-                    //ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.Skill); //! Skill entry
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSkill);
                     break;
                 case ConditionTypes.CONDITION_QUESTREWARDED:
                 case ConditionTypes.CONDITION_QUESTTAKEN:
@@ -541,7 +541,10 @@ namespace SAI_Editor.Forms
             switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
             {
                 case ConditionTypes.CONDITION_AURA:
-                    ShowSelectForm("SpellSchools", textBoxToChange);
+                    ShowSelectForm("SpellEffIndex", textBoxToChange);
+                    break;
+                case ConditionTypes.CONDITION_REPUTATION_RANK:
+                    ShowSelectForm("ReputationRank", textBoxToChange);
                     break;
             }
         }
@@ -561,7 +564,7 @@ namespace SAI_Editor.Forms
 	        { "SmartRespawnCondition", typeof(SingleSelectForm<SmartRespawnCondition>)},
 	        { "SmartActionlistTimerUpdateType", typeof(SingleSelectForm<SmartActionlistTimerUpdateType>)},
             { "GoStates", typeof(SingleSelectForm<GoStates>)},
-            { "ReactStates", typeof(SingleSelectForm<ReactStates>)},
+            { "ReactState", typeof(SingleSelectForm<ReactState>)},
             { "SheathState}", typeof(SingleSelectForm<SheathState>)},
             { "MovementGeneratorType", typeof(SingleSelectForm<MovementGeneratorType>)},
             { "PowerTypes", typeof(SingleSelectForm<PowerTypes>)},
@@ -571,6 +574,12 @@ namespace SAI_Editor.Forms
             { "SpellSchools", typeof(SingleSelectForm<SpellSchools>)},
             { "SpellCastResult", typeof(SingleSelectForm<SpellCastResult>)},
             { "SpellCustomErrors", typeof(SingleSelectForm<SpellCustomErrors>)},
+            { "ReputationRank", typeof(SingleSelectForm<ReputationRank>)},
+            //{ "", typeof(SingleSelectForm<>)},
+            //{ "", typeof(SingleSelectForm<>)},
+            //{ "", typeof(SingleSelectForm<>)},
+            //{ "", typeof(SingleSelectForm<>)},
+            //{ "", typeof(SingleSelectForm<>)},
         };
 
         private void ShowSelectForm(string formTemplate, TextBox textBoxToChange)

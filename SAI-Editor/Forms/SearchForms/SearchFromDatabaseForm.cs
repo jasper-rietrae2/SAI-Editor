@@ -33,6 +33,7 @@ namespace SAI_Editor.Forms.SearchForms
         DatabaseSearchFormTypeNpcText,
         DatabaseSearchFormTypeGossipMenuOptionMenuId,
         DatabaseSearchFormTypeGossipMenuOptionId,
+        DatabaseSearchFormTypeSkill,
     }
 
     public partial class SearchFromDatabaseForm : Form
@@ -252,6 +253,14 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Text");
                     baseQuery = "SELECT menu_id, id, option_text FROM gossip_menu_option";
                     useMySQL = true;
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSkill:
+                    Text = "Search for a skill";
+                    listViewEntryResults.Columns.Add("Id", 45);
+                    listViewEntryResults.Columns.Add("Name", 284);
+                    comboBoxSearchType.Items.Add("Skill id");
+                    comboBoxSearchType.Items.Add("Skill name");
+                    baseQuery = "SELECT id, name FROM skills";
                     break;
                 default:
                     MessageBox.Show("Unknown database search type!", "Something went wrong...", MessageBoxButtons.OK, MessageBoxIcon.Error);

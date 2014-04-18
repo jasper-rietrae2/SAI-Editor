@@ -2334,7 +2334,7 @@ namespace SAI_Editor.Forms
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SET_REACT_STATE:
-                    using (SingleSelectForm<ReactStates> singleSelectForm = new SingleSelectForm<ReactStates>(textBoxToChange))
+                    using (SingleSelectForm<ReactState> singleSelectForm = new SingleSelectForm<ReactState>(textBoxToChange))
                         singleSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_SOUND:
@@ -2698,7 +2698,7 @@ namespace SAI_Editor.Forms
             switch ((SmartAction)comboBoxActionType.SelectedIndex)
             {
                 case SmartAction.SMART_ACTION_WP_START:
-                    using (SingleSelectForm<ReactStates> singleSelectForm = new SingleSelectForm<ReactStates>(textBoxToChange))
+                    using (SingleSelectForm<ReactState> singleSelectForm = new SingleSelectForm<ReactState>(textBoxToChange))
                         singleSelectForm.ShowDialog(this);
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:
@@ -4368,7 +4368,7 @@ namespace SAI_Editor.Forms
 	        {"Search for SAI target types", typeof(SingleSelectForm<SmartTarget>)},
 	        {"Search for SAI actionlist timer update types", typeof(SingleSelectForm<SmartActionlistTimerUpdateType>)},
 	        {"Search for gameobject states", typeof(SingleSelectForm<GoStates>)},
-	        {"Search for react states", typeof(SingleSelectForm<ReactStates>)},
+	        {"Search for react states", typeof(SingleSelectForm<ReactState>)},
 	        {"Search for sheath states", typeof(SingleSelectForm<SheathState>)},
 	        {"Search for movement generator types", typeof(SingleSelectForm<MovementGeneratorType>)},
 	        {"Search for spell schools", typeof(SingleSelectForm<SpellSchools>)},
