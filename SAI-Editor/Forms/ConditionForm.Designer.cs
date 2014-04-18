@@ -86,10 +86,13 @@
             this.label17 = new System.Windows.Forms.Label();
             this.buttonSearchErrorTextId = new System.Windows.Forms.Button();
             this.buttonSearchErrorType = new System.Windows.Forms.Button();
+            this.label21 = new System.Windows.Forms.Label();
             this.labelElseGroup = new System.Windows.Forms.Label();
+            this.textBoxSourceId = new System.Windows.Forms.TextBox();
             this.textBoxElseGroup = new System.Windows.Forms.TextBox();
             this.textBoxErrorTextId = new System.Windows.Forms.TextBox();
             this.textBoxErrorType = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.label18 = new System.Windows.Forms.Label();
@@ -102,9 +105,6 @@
             this.buttonDuplicateCondition = new System.Windows.Forms.Button();
             this.buttonDeleteCondition = new System.Windows.Forms.Button();
             this.buttonLoadCondition = new System.Windows.Forms.Button();
-            this.label20 = new System.Windows.Forms.Label();
-            this.textBoxSourceId = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
             this.panelPermanentTooltipSourceType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipConditionType.SuspendLayout();
@@ -746,7 +746,6 @@
             // 
             // buttonSearchErrorTextId
             // 
-            this.buttonSearchErrorTextId.Enabled = false;
             this.buttonSearchErrorTextId.Location = new System.Drawing.Point(385, 180);
             this.buttonSearchErrorTextId.Name = "buttonSearchErrorTextId";
             this.buttonSearchErrorTextId.Size = new System.Drawing.Size(24, 22);
@@ -757,7 +756,6 @@
             // 
             // buttonSearchErrorType
             // 
-            this.buttonSearchErrorType.Enabled = false;
             this.buttonSearchErrorType.Location = new System.Drawing.Point(385, 154);
             this.buttonSearchErrorType.Name = "buttonSearchErrorType";
             this.buttonSearchErrorType.Size = new System.Drawing.Size(24, 22);
@@ -765,6 +763,15 @@
             this.buttonSearchErrorType.Text = "...";
             this.buttonSearchErrorType.UseVisualStyleBackColor = true;
             this.buttonSearchErrorType.Click += new System.EventHandler(this.buttonSearchErrorType_Click);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(422, 90);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(52, 13);
+            this.label21.TabIndex = 8;
+            this.label21.Text = "Source id";
             // 
             // labelElseGroup
             // 
@@ -774,6 +781,14 @@
             this.labelElseGroup.Size = new System.Drawing.Size(57, 13);
             this.labelElseGroup.TabIndex = 8;
             this.labelElseGroup.Text = "Else group";
+            // 
+            // textBoxSourceId
+            // 
+            this.textBoxSourceId.Location = new System.Drawing.Point(552, 86);
+            this.textBoxSourceId.Name = "textBoxSourceId";
+            this.textBoxSourceId.Size = new System.Drawing.Size(66, 20);
+            this.textBoxSourceId.TabIndex = 12;
+            this.textBoxSourceId.Text = "0";
             // 
             // textBoxElseGroup
             // 
@@ -798,6 +813,15 @@
             this.textBoxErrorType.Size = new System.Drawing.Size(65, 20);
             this.textBoxErrorType.TabIndex = 18;
             this.textBoxErrorType.Text = "0";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(538, 89);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(10, 13);
+            this.label20.TabIndex = 17;
+            this.label20.Text = ":";
             // 
             // label15
             // 
@@ -854,6 +878,7 @@
             this.richTextBoxSql.CharWidth = 8;
             this.richTextBoxSql.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBoxSql.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.richTextBoxSql.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.richTextBoxSql.IsReplaceMode = false;
             this.richTextBoxSql.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxSql.Name = "richTextBoxSql";
@@ -933,32 +958,6 @@
             this.buttonLoadCondition.Text = "Load and edit selected condition";
             this.buttonLoadCondition.UseVisualStyleBackColor = true;
             this.buttonLoadCondition.Click += new System.EventHandler(this.buttonLoadCondition_Click);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(538, 89);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(10, 13);
-            this.label20.TabIndex = 17;
-            this.label20.Text = ":";
-            // 
-            // textBoxSourceId
-            // 
-            this.textBoxSourceId.Location = new System.Drawing.Point(552, 86);
-            this.textBoxSourceId.Name = "textBoxSourceId";
-            this.textBoxSourceId.Size = new System.Drawing.Size(66, 20);
-            this.textBoxSourceId.TabIndex = 12;
-            this.textBoxSourceId.Text = "0";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(422, 90);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(52, 13);
-            this.label21.TabIndex = 8;
-            this.label21.Text = "Source id";
             // 
             // ConditionForm
             // 
