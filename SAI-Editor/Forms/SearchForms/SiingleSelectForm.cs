@@ -25,9 +25,9 @@ namespace SAI_Editor.Forms.SearchForms
             {
                 foreach (ListViewItem item in listViewSelectableItems.Items)
                 {
-                    string value = (Enum.Parse(typeof(T), item.Text)).ToString();
+                    int value = (int)Enum.Parse(typeof(T), item.Text);
 
-                    if (item.Index > 0 && textBoxToChange.Text == value)
+                    if (item.Index > 0 && textBoxToChange.Text == value.ToString())
                     {
                         item.Selected = true;
                         item.EnsureVisible();
