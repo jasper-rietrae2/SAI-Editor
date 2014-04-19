@@ -2218,7 +2218,7 @@ namespace SAI_Editor.Forms
             switch ((SmartEvent)comboBoxEventType.SelectedIndex)
             {
                 case SmartEvent.SMART_EVENT_RESPAWN: //! Zone
-                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeZone))
+                    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeAreaOrZone))
                         searchFromDatabaseForm.ShowDialog(this);
                     break;
                 case SmartEvent.SMART_EVENT_VICTIM_CASTING: //! Spell id
@@ -4249,7 +4249,7 @@ namespace SAI_Editor.Forms
 
         private void searchForAZoneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeZone))
+            using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(null, DatabaseSearchFormType.DatabaseSearchFormTypeAreaOrZone))
                 searchFromDatabaseForm.ShowDialog(this);
         }
 

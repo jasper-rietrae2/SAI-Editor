@@ -681,7 +681,6 @@ namespace SAI_Editor.Enumerators
         CONDITION_SOURCE_TYPE_SMART_EVENT                    = 22,
         CONDITION_SOURCE_TYPE_NPC_VENDOR                     = 23,
         CONDITION_SOURCE_TYPE_SPELL_PROC                     = 24,
-        //CONDITION_SOURCE_TYPE_PHASE_DEFINITION               = 25,
         CONDITION_SOURCE_TYPE_MAX,
     }
 
@@ -1142,5 +1141,68 @@ namespace SAI_Editor.Enumerators
         GENDER_MALE                        = 0,
         GENDER_FEMALE                      = 1,
         GENDER_NONE                        = 2
+    }
+
+    enum CreatureType
+    {
+        CREATURE_TYPE_BEAST            = 1,
+        CREATURE_TYPE_DRAGONKIN        = 2,
+        CREATURE_TYPE_DEMON            = 3,
+        CREATURE_TYPE_ELEMENTAL        = 4,
+        CREATURE_TYPE_GIANT            = 5,
+        CREATURE_TYPE_UNDEAD           = 6,
+        CREATURE_TYPE_HUMANOID         = 7,
+        CREATURE_TYPE_CRITTER          = 8,
+        CREATURE_TYPE_MECHANICAL       = 9,
+        CREATURE_TYPE_NOT_SPECIFIED    = 10,
+        CREATURE_TYPE_TOTEM            = 11,
+        CREATURE_TYPE_NON_COMBAT_PET   = 12,
+        CREATURE_TYPE_GAS_CLOUD        = 13
+    }
+
+    enum TypeID
+    {
+        TYPEID_OBJECT        = 0,
+        TYPEID_ITEM          = 1,
+        TYPEID_CONTAINER     = 2,
+        TYPEID_UNIT          = 3,
+        TYPEID_PLAYER        = 4,
+        TYPEID_GAMEOBJECT    = 5,
+        TYPEID_DYNAMICOBJECT = 6,
+        TYPEID_CORPSE        = 7,
+    }
+
+    [Flags]
+    enum TypeMask
+    {
+        TYPEMASK_NONE           = 0x0000,
+        TYPEMASK_OBJECT         = 0x0001,
+        TYPEMASK_ITEM           = 0x0002,
+        TYPEMASK_CONTAINER      = 0x0006,                       // TYPEMASK_ITEM | 0x0004
+        TYPEMASK_UNIT           = 0x0008,                       // creature
+        TYPEMASK_PLAYER         = 0x0010,
+        TYPEMASK_GAMEOBJECT     = 0x0020,
+        TYPEMASK_DYNAMICOBJECT  = 0x0040,
+        TYPEMASK_CORPSE         = 0x0080,
+        TYPEMASK_SEER           = TYPEMASK_PLAYER | TYPEMASK_UNIT | TYPEMASK_DYNAMICOBJECT
+    }
+
+    enum CondRelationType
+    {
+        RELATION_SELF,
+        RELATION_IN_PARTY,
+        RELATION_IN_RAID_OR_PARTY,
+        RELATION_OWNED_BY,
+        RELATION_PASSENGER_OF,
+        RELATION_CREATED_BY,
+    }
+
+    enum ComparisionType
+    {
+        COMP_TYPE_EQ,
+        COMP_TYPE_HIGH,
+        COMP_TYPE_LOW,
+        COMP_TYPE_HIGH_EQ,
+        COMP_TYPE_LOW_EQ,
     }
 }

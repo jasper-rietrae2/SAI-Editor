@@ -84,9 +84,10 @@
             this.buttonSaveCondition = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
+            this.buttonSearchSourceId = new System.Windows.Forms.Button();
             this.buttonSearchErrorTextId = new System.Windows.Forms.Button();
             this.buttonSearchErrorType = new System.Windows.Forms.Button();
-            this.label21 = new System.Windows.Forms.Label();
+            this.labelSourceId = new System.Windows.Forms.Label();
             this.labelElseGroup = new System.Windows.Forms.Label();
             this.textBoxSourceId = new System.Windows.Forms.TextBox();
             this.textBoxElseGroup = new System.Windows.Forms.TextBox();
@@ -94,17 +95,17 @@
             this.textBoxErrorType = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPageSql = new System.Windows.Forms.TabPage();
             this.richTextBoxSql = new FastColoredTextBoxNS.FastColoredTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.buttonDuplicateCondition = new System.Windows.Forms.Button();
             this.buttonDeleteCondition = new System.Windows.Forms.Button();
             this.buttonLoadCondition = new System.Windows.Forms.Button();
-            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
-            this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.panelPermanentTooltipSourceType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipConditionType.SuspendLayout();
@@ -639,6 +640,7 @@
             this.tabPageEditing.Controls.Add(this.label19);
             this.tabPageEditing.Controls.Add(this.label17);
             this.tabPageEditing.Controls.Add(this.labelCondValue1);
+            this.tabPageEditing.Controls.Add(this.buttonSearchSourceId);
             this.tabPageEditing.Controls.Add(this.buttonSearchSourceEntry);
             this.tabPageEditing.Controls.Add(this.labelCondValue2);
             this.tabPageEditing.Controls.Add(this.buttonSearchConditionValue4);
@@ -650,7 +652,7 @@
             this.tabPageEditing.Controls.Add(this.labelSourceGroup);
             this.tabPageEditing.Controls.Add(this.buttonSearchErrorType);
             this.tabPageEditing.Controls.Add(this.buttonSearchConditionValue1);
-            this.tabPageEditing.Controls.Add(this.label21);
+            this.tabPageEditing.Controls.Add(this.labelSourceId);
             this.tabPageEditing.Controls.Add(this.labelElseGroup);
             this.tabPageEditing.Controls.Add(this.labelSourceEntry);
             this.tabPageEditing.Controls.Add(this.buttonSearchSourceGroup);
@@ -744,6 +746,17 @@
             this.label17.TabIndex = 4;
             this.label17.Text = "Error type";
             // 
+            // buttonSearchSourceId
+            // 
+            this.buttonSearchSourceId.Enabled = false;
+            this.buttonSearchSourceId.Location = new System.Drawing.Point(618, 85);
+            this.buttonSearchSourceId.Name = "buttonSearchSourceId";
+            this.buttonSearchSourceId.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchSourceId.TabIndex = 19;
+            this.buttonSearchSourceId.Text = "...";
+            this.buttonSearchSourceId.UseVisualStyleBackColor = true;
+            this.buttonSearchSourceId.Click += new System.EventHandler(this.buttonSearchSourceId_Click);
+            // 
             // buttonSearchErrorTextId
             // 
             this.buttonSearchErrorTextId.Location = new System.Drawing.Point(385, 180);
@@ -764,14 +777,14 @@
             this.buttonSearchErrorType.UseVisualStyleBackColor = true;
             this.buttonSearchErrorType.Click += new System.EventHandler(this.buttonSearchErrorType_Click);
             // 
-            // label21
+            // labelSourceId
             // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(422, 90);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(52, 13);
-            this.label21.TabIndex = 8;
-            this.label21.Text = "Source id";
+            this.labelSourceId.AutoSize = true;
+            this.labelSourceId.Location = new System.Drawing.Point(422, 90);
+            this.labelSourceId.Name = "labelSourceId";
+            this.labelSourceId.Size = new System.Drawing.Size(52, 13);
+            this.labelSourceId.TabIndex = 8;
+            this.labelSourceId.Text = "Source id";
             // 
             // labelElseGroup
             // 
@@ -832,6 +845,15 @@
             this.label15.TabIndex = 17;
             this.label15.Text = ":";
             // 
+            // lineSeparator1
+            // 
+            this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
+            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
+            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
+            this.lineSeparator1.Name = "lineSeparator1";
+            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
+            this.lineSeparator1.TabIndex = 13;
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -863,12 +885,13 @@
             // 
             // richTextBoxSql
             // 
-            this.richTextBoxSql.AutoScrollMinSize = new System.Drawing.Size(27, 14);
+            this.richTextBoxSql.AutoScrollMinSize = new System.Drawing.Size(2, 14);
             this.richTextBoxSql.BackBrush = null;
             this.richTextBoxSql.CharHeight = 14;
             this.richTextBoxSql.CharWidth = 8;
             this.richTextBoxSql.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBoxSql.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.richTextBoxSql.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.richTextBoxSql.IsReplaceMode = false;
             this.richTextBoxSql.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxSql.Name = "richTextBoxSql";
@@ -903,6 +926,19 @@
             this.checkBox1.Text = "Show basic info";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // listViewConditions
+            // 
+            this.listViewConditions.EnablePhaseHighlighting = false;
+            this.listViewConditions.FullRowSelect = true;
+            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
+            this.listViewConditions.MultiSelect = false;
+            this.listViewConditions.Name = "listViewConditions";
+            this.listViewConditions.Size = new System.Drawing.Size(656, 301);
+            this.listViewConditions.TabIndex = 3;
+            this.listViewConditions.UseCompatibleStateImageBehavior = false;
+            this.listViewConditions.View = System.Windows.Forms.View.Details;
+            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
+            // 
             // buttonDuplicateCondition
             // 
             this.buttonDuplicateCondition.Enabled = false;
@@ -935,28 +971,6 @@
             this.buttonLoadCondition.Text = "Load and edit selected condition";
             this.buttonLoadCondition.UseVisualStyleBackColor = true;
             this.buttonLoadCondition.Click += new System.EventHandler(this.buttonLoadCondition_Click);
-            // 
-            // lineSeparator1
-            // 
-            this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
-            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
-            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
-            this.lineSeparator1.Name = "lineSeparator1";
-            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
-            this.lineSeparator1.TabIndex = 13;
-            // 
-            // listViewConditions
-            // 
-            this.listViewConditions.EnablePhaseHighlighting = false;
-            this.listViewConditions.FullRowSelect = true;
-            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
-            this.listViewConditions.MultiSelect = false;
-            this.listViewConditions.Name = "listViewConditions";
-            this.listViewConditions.Size = new System.Drawing.Size(656, 301);
-            this.listViewConditions.TabIndex = 3;
-            this.listViewConditions.UseCompatibleStateImageBehavior = false;
-            this.listViewConditions.View = System.Windows.Forms.View.Details;
-            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
             // 
             // ConditionForm
             // 
@@ -1064,8 +1078,9 @@
         private System.Windows.Forms.Button buttonSearchErrorTextId;
         private System.Windows.Forms.TextBox textBoxErrorTextId;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label labelSourceId;
         private System.Windows.Forms.TextBox textBoxSourceId;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button buttonSearchSourceId;
     }
 }

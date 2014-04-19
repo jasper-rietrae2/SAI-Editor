@@ -17,7 +17,7 @@ namespace SAI_Editor.Forms.SearchForms
         DatabaseSearchFormTypeEmote,
         DatabaseSearchFormTypeQuest,
         DatabaseSearchFormTypeMap,
-        DatabaseSearchFormTypeZone,
+        DatabaseSearchFormTypeAreaOrZone,
         DatabaseSearchFormTypeCreatureEntry,
         DatabaseSearchFormTypeGameobjectEntry,
         DatabaseSearchFormTypeSound,
@@ -36,6 +36,11 @@ namespace SAI_Editor.Forms.SearchForms
         DatabaseSearchFormTypeSkill,
         DatabaseSearchFormTypeAchievement,
         DatabaseSearchFormTypePlayerTitles,
+        DatabaseSearchFormTypeSmartScriptId,
+        DatabaseSearchFormTypeSmartScriptEntryOrGuid,
+        DatabaseSearchFormTypeSmartScriptSourceType,
+        DatabaseSearchFormTypeVendorEntry,
+        DatabaseSearchFormTypeVendorItemEntry,
     }
 
     public partial class SearchFromDatabaseForm : Form
@@ -108,7 +113,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Map name");
                     baseQuery = "SELECT m_ID, m_MapName_lang1 FROM maps";
                     break;
-                case DatabaseSearchFormType.DatabaseSearchFormTypeZone:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeAreaOrZone:
                     Text = "Search for a zone id";
                     listViewEntryResults.Columns.Add("Id", 45);
                     listViewEntryResults.Columns.Add("Name", 284);
@@ -280,6 +285,36 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Title");
                     baseQuery = "SELECT id, title FROM player_titles";
                     break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptId:
+                    listViewItemIndexToCopy = 1;
+                    goto case DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptEntryOrGuid;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptSourceType:
+                    listViewItemIndexToCopy = 2;
+                    goto case DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptEntryOrGuid;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptEntryOrGuid:
+                    useMySQL = true;
+                    Text = "Search for a smart script";
+                    listViewEntryResults.Columns.Add("Entryorguid", 75);
+                    listViewEntryResults.Columns.Add("Id", 75);
+                    listViewEntryResults.Columns.Add("Sourcetype", 75);
+                    listViewEntryResults.Columns.Add("Event", 52);
+                    listViewEntryResults.Columns.Add("Action", 52);
+                    comboBoxSearchType.Items.Add("Smart script id");
+                    comboBoxSearchType.Items.Add("Smart script entryorguid");
+                    baseQuery = "SELECT entryorguid, id, source_type, event_type, action_type FROM smart_scripts";
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeVendorItemEntry:
+                    listViewItemIndexToCopy = 1;
+                    goto case DatabaseSearchFormType.DatabaseSearchFormTypeVendorEntry;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeVendorEntry:
+                    useMySQL = true;
+                    Text = "Search for a vendor (item) entry";
+                    listViewEntryResults.Columns.Add("Vendor entry", 164);
+                    listViewEntryResults.Columns.Add("Item entry", 164);
+                    comboBoxSearchType.Items.Add("Vendor entry");
+                    comboBoxSearchType.Items.Add("Vendor item entry");
+                    baseQuery = "SELECT entry, item FROM npc_vendor";
+                    break;
                 default:
                     MessageBox.Show("Unknown database search type!", "Something went wrong...", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
@@ -373,10 +408,10 @@ namespace SAI_Editor.Forms.SearchForms
                             return;
                     }
 
-                    if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone && !String.IsNullOrWhiteSpace(textBoxCriteria.Text))
+                    if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeAreaOrZone && !String.IsNullOrWhiteSpace(textBoxCriteria.Text))
                         queryToExecute += " AND m_ParentAreaID = 0";
                 }
-                else if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeZone)
+                else if (databaseSearchFormType == DatabaseSearchFormType.DatabaseSearchFormTypeAreaOrZone)
                     queryToExecute += " WHERE m_ParentAreaID = 0";
 
                 queryToExecute += " ORDER BY " + columns[0];

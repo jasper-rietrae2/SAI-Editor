@@ -31,7 +31,16 @@ namespace SAI_Editor.Forms
 
         private void comboBoxConditionSourceTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch ((ConditionSourceTypes)comboBoxConditionSourceTypes.SelectedIndex)
+            //! Reset the values
+            SetSourceGroupValues(" - ");
+            SetSourceEntryValues(" - ");
+            SetSourceIdValues(" - ");
+            SetConditionTargetValues(null);
+
+            ConditionSourceTypes selectedType = (ConditionSourceTypes)comboBoxConditionSourceTypes.SelectedIndex;
+            buttonSearchSourceId.Enabled = selectedType == ConditionSourceTypes.CONDITION_SOURCE_TYPE_SMART_EVENT;
+
+            switch (selectedType)
             {
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_LOOT_TEMPLATE:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_DISENCHANT_LOOT_TEMPLATE:
@@ -77,7 +86,7 @@ namespace SAI_Editor.Forms
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_ACCEPT:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK:
-                    SetSourceGroupValues("?");
+                    SetSourceGroupValues(" - ");
                     SetSourceEntryValues("Quest entry", true);
                     SetConditionTargetValues(null);
                     break;
@@ -89,6 +98,7 @@ namespace SAI_Editor.Forms
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SMART_EVENT:
                     SetSourceGroupValues("Smart script id", true);
                     SetSourceEntryValues("Smart script entryorguid", true);
+                    SetSourceIdValues("Smart script sourcetype", true);
                     SetConditionTargetValues(new string[] { "Invoker", "Object itself" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_NPC_VENDOR:
@@ -101,15 +111,7 @@ namespace SAI_Editor.Forms
                     SetSourceEntryValues("Spell id of the aura", true);
                     SetConditionTargetValues(new string[] { "Actor", "Action target" });
                     break;
-                //case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PHASE_DEFINITION:
-                //    SetSourceGroupValues("";
-                //    SetSourceEntryValues("";
-                //    SetConditionTargetValues(new string[] { "", "" });
-                //    break;
                 default:
-                    SetSourceGroupValues(" - ");
-                    SetSourceEntryValues(" - ");
-                    SetConditionTargetValues(null);
                     break;
             }
         }
@@ -140,6 +142,16 @@ namespace SAI_Editor.Forms
             buttonSearchSourceEntry.Enabled = searchable;
         }
 
+        private void SetSourceIdValues(string value, bool searchable = false)
+        {
+            labelSourceId.Text = value;
+
+            if (value == " - ") //! Empty/unused source Entry
+                textBoxSourceId.Text = String.Empty;
+
+            buttonSearchSourceId.Enabled = searchable;
+        }
+
         private void SetConditionTargetValues(string[] items)
         {
             comboBoxConditionTarget.Items.Clear();
@@ -159,6 +171,9 @@ namespace SAI_Editor.Forms
 
         private void comboBoxConditionTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //! Reset the values
+            SetConditionValues(new string[] { "", "", "", "" }, new bool[] { false, false, false, false });
+
             switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
             {
                 case ConditionTypes.CONDITION_AURA:
@@ -231,7 +246,7 @@ namespace SAI_Editor.Forms
                     SetConditionValues(new string[] { "Area id", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_CREATURE_TYPE:
-                    //SetConditionValues(new string[] { "", "", "", "" }, new bool[] { true, false, false, false });
+                    SetConditionValues(new string[] { "Creature type", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_SPELL:
                     SetConditionValues(new string[] { "Spell entry", "", "", "" }, new bool[] { true, false, false, false });
@@ -258,13 +273,13 @@ namespace SAI_Editor.Forms
                     SetConditionValues(new string[] { "Typemask", "", "", "" }, new bool[] { true, false, false, false });
                     break;
                 case ConditionTypes.CONDITION_RELATION_TO:
-                    SetConditionValues(new string[] { "Condition target", "Relation type", "", "" }, new bool[] { true, true, false, false });
+                    SetConditionValues(new string[] { "Condition target", "Relation type", "", "" }, new bool[] { false, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_REACTION_TO:
-                    SetConditionValues(new string[] { "Condition target", "Rank mask", "", "" }, new bool[] { true, true, false, false });
+                    SetConditionValues(new string[] { "Condition target", "Rank mask", "", "" }, new bool[] { false, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_DISTANCE_TO:
-                    SetConditionValues(new string[] { "Condition target", "Distance", "Compare type", "" }, new bool[] { true, true, true, false });
+                    SetConditionValues(new string[] { "Condition target", "Distance", "Compare type", "" }, new bool[] { false, false, true, false });
                     break;
                 case ConditionTypes.CONDITION_ALIVE:
                     SetConditionValues(new string[] { "", "", "", "Condition (0/1)" }, new bool[] { false, false, false, false });
@@ -276,7 +291,6 @@ namespace SAI_Editor.Forms
                     SetConditionValues(new string[] { "Health percentage", "Compare type", "", "" }, new bool[] { false, true, false, false });
                     break;
                 default:
-                    SetConditionValues(new string[] { "", "", "", "" }, new bool[] { false, false, false, false });
                     break;
             }
         }
@@ -349,13 +363,11 @@ namespace SAI_Editor.Forms
                     //????
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SMART_EVENT:
-                    //????
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptId);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_NPC_VENDOR:
-                    //ShowSearchFromDatabaseForm(textBoxSourceGroup, DatabaseSearchFormType.Vendor);
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeVendorEntry);
                     break;
-                //case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PHASE_DEFINITION:
-                //    break;
                 default:
                     break;
             }
@@ -369,6 +381,8 @@ namespace SAI_Editor.Forms
 
         private void buttonSearchSourceEntry_Click(object sender, EventArgs e)
         {
+            TextBox textBoxToChange = textBoxSourceEntry;
+
             switch ((ConditionSourceTypes)comboBoxConditionSourceTypes.SelectedIndex)
             {
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_LOOT_TEMPLATE:
@@ -397,31 +411,41 @@ namespace SAI_Editor.Forms
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU_OPTION:
-                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionId);
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionId);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_TEMPLATE_VEHICLE:
-                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry);
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_IMPLICIT_TARGET:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_PROC:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_CLICK_EVENT:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_VEHICLE_SPELL:
-                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeSpell);
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_ACCEPT:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK:
-                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeQuest);
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SMART_EVENT:
-                    //ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.);
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptEntryOrGuid);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_NPC_VENDOR:
-                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry);
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeVendorItemEntry);
                     break;
-                //case ConditionSourceTypes.CONDITION_SOURCE_TYPE_PHASE_DEFINITION:
-                //    break;
                 default:
+                    break;
+            }
+        }
+
+        private void buttonSearchSourceId_Click(object sender, EventArgs e)
+        {
+            TextBox textBoxToChange = textBoxSourceId;
+
+            switch ((ConditionSourceTypes)comboBoxConditionSourceTypes.SelectedIndex)
+            {
+                case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SMART_EVENT:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptSourceType);
                     break;
             }
         }
@@ -433,6 +457,7 @@ namespace SAI_Editor.Forms
             switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
             {
                 case ConditionTypes.CONDITION_AURA:
+                case ConditionTypes.CONDITION_SPELL:
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeSpell);
                     break;
                 case ConditionTypes.CONDITION_ITEM:
@@ -440,7 +465,7 @@ namespace SAI_Editor.Forms
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry);
                     break;
                 case ConditionTypes.CONDITION_ZONEID:
-                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeZone);
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeAreaOrZone);
                     break;
                 case ConditionTypes.CONDITION_REPUTATION_RANK:
                 case ConditionTypes.CONDITION_TEAM: //! Team id and faction rank are the same, apparently. Both use Faction.dbc
@@ -452,6 +477,7 @@ namespace SAI_Editor.Forms
                 case ConditionTypes.CONDITION_QUESTREWARDED:
                 case ConditionTypes.CONDITION_QUESTTAKEN:
                 case ConditionTypes.CONDITION_QUEST_NONE:
+                case ConditionTypes.CONDITION_QUEST_COMPLETE:
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeQuest);
                     break;
                 case ConditionTypes.CONDITION_DRUNKENSTATE:
@@ -485,43 +511,27 @@ namespace SAI_Editor.Forms
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeMap);
                     break;
                 case ConditionTypes.CONDITION_AREAID:
-                    //ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.);
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeAreaOrZone);
                     break;
                 case ConditionTypes.CONDITION_CREATURE_TYPE:
-                    //! ??
-                    break;
-                case ConditionTypes.CONDITION_SPELL:
-                    //SetConditionValues(new string[] { "Spell entry", "", "", "" }, new bool[] { true, false, false, false });
+                    ShowSelectForm("CreatureType", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_PHASEMASK:
-                    //SetConditionValues(new string[] { "Phasemask", "", "", "" }, new bool[] { true, false, false, false });
-                    break;
-                case ConditionTypes.CONDITION_QUEST_COMPLETE:
-                    //SetConditionValues(new string[] { "Quest entry", "", "", "" }, new bool[] { true, false, false, false });
+                    ShowSelectForm("PhaseMasks", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_NEAR_CREATURE:
-                    //SetConditionValues(new string[] { "Creature entry", "Distance", "", "" }, new bool[] { true, false, false, false });
+                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry);
                     break;
                 case ConditionTypes.CONDITION_NEAR_GAMEOBJECT:
-                    //SetConditionValues(new string[] { "Gameobject entry", "Distance", "", "" }, new bool[] { true, false, false, false });
+                    ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry);
                     break;
                 case ConditionTypes.CONDITION_OBJECT_ENTRY:
-                    //SetConditionValues(new string[] { "Type id", "Object entry", "", "" }, new bool[] { true, true, false, false });
+                    ShowSelectForm("TypeID", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_TYPE_MASK:
-                    //SetConditionValues(new string[] { "Typemask", "", "", "" }, new bool[] { true, false, false, false });
-                    break;
-                case ConditionTypes.CONDITION_RELATION_TO:
-                    //SetConditionValues(new string[] { "Condition target", "Relation type", "", "" }, new bool[] { true, true, false, false });
-                    break;
-                case ConditionTypes.CONDITION_REACTION_TO:
-                    //SetConditionValues(new string[] { "Condition target", "Rank mask", "", "" }, new bool[] { true, true, false, false });
-                    break;
-                case ConditionTypes.CONDITION_DISTANCE_TO:
-                    //SetConditionValues(new string[] { "Condition target", "Distance", "Compare type", "" }, new bool[] { true, true, true, false });
+                    ShowSelectForm("TypeMask", textBoxToChange);
                     break;
                 default:
-                    //SetConditionValues(new string[] { "", "", "", "" }, new bool[] { false, false, false, false });
                     break;
             }
         }
@@ -537,6 +547,72 @@ namespace SAI_Editor.Forms
                     break;
                 case ConditionTypes.CONDITION_REPUTATION_RANK:
                     ShowSelectForm("ReputationRank", textBoxToChange);
+                    break;
+                case ConditionTypes.CONDITION_OBJECT_ENTRY:
+                    string condValue1 = textBoxCondValue1.Text;
+                    bool showError = false;
+
+                    if (!String.IsNullOrWhiteSpace(condValue1))
+                    {
+                        int intCondValue1;
+
+                        if (Int32.TryParse(condValue1, out intCondValue1))
+                        {
+                            if (intCondValue1 < 0 || intCondValue1 > (int)TypeID.TYPEID_CORPSE)
+                                showError = true;
+                            else
+                            {
+                                switch ((TypeID)intCondValue1)
+                                {
+                                    case TypeID.TYPEID_UNIT:
+                                        ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry);
+                                        break;
+                                    case TypeID.TYPEID_GAMEOBJECT:
+                                        ShowSearchFromDatabaseForm(textBoxSourceEntry, DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry);
+                                        break;
+                                    case TypeID.TYPEID_PLAYER:
+                                    case TypeID.TYPEID_CORPSE:
+                                        MessageBox.Show("The type ID's for players and corpses don't require an entry.", "Not required!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        break;
+                                    default:
+                                        showError = true;
+                                        break;
+                                }
+                            }
+                        }
+                    }
+                    else
+                        showError = true;
+
+                    if (showError)
+                        MessageBox.Show("This condition type requires the condition value 1 to be a proper Type ID in order to search for the second parameter.", "Required field missing!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                case ConditionTypes.CONDITION_RELATION_TO:
+                    ShowSelectForm("CondRelationType", textBoxToChange);
+                    break;
+                case ConditionTypes.CONDITION_REACTION_TO:
+                    ShowSelectForm("ReputationRank", textBoxToChange);
+                    break;
+                case ConditionTypes.CONDITION_HP_VAL:
+                case ConditionTypes.CONDITION_HP_PCT:
+                    ShowSelectForm("ComparisionType", textBoxToChange);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void buttonSearchConditionValue3_Click(object sender, EventArgs e)
+        {
+            TextBox textBoxToChange = textBoxCondValue3;
+
+            switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
+            {
+                case ConditionTypes.CONDITION_INSTANCE_INFO:
+                    ShowSelectForm("InstanceInfo", textBoxToChange);
+                    break;
+                case ConditionTypes.CONDITION_DISTANCE_TO:
+                    ShowSelectForm("ComparisionType", textBoxToChange);
                     break;
             }
         }
@@ -574,6 +650,16 @@ namespace SAI_Editor.Forms
             { "SpawnMask", typeof(MultiSelectForm<SpawnMask>)},
             { "Gender", typeof(SingleSelectForm<Gender>)},
             { "UnitState", typeof(MultiSelectForm<UnitState>)},
+            { "CreatureType", typeof(SingleSelectForm<CreatureType>)}, //! SingleSelectForm because the cond check with == operator
+            { "PhaseMasks", typeof(MultiSelectForm<PhaseMasks>)},
+            { "TypeID", typeof(SingleSelectForm<TypeID>)},
+            { "TypeMask", typeof(MultiSelectForm<TypeMask>)},
+            { "CondRelationType", typeof(SingleSelectForm<CondRelationType>)},
+            { "ComparisionType", typeof(SingleSelectForm<ComparisionType>)},
+            //{ "", typeof(SingleSelectForm<>)},
+            //{ "", typeof(SingleSelectForm<>)},
+            //{ "", typeof(SingleSelectForm<>)},
+            //{ "", typeof(SingleSelectForm<>)},
             //{ "", typeof(SingleSelectForm<>)},
             //{ "", typeof(SingleSelectForm<>)},
             //{ "", typeof(SingleSelectForm<>)},
@@ -585,18 +671,6 @@ namespace SAI_Editor.Forms
         {
             using (Form selectForm = (Form)Activator.CreateInstance(searchForms[formTemplate], new object[] { textBoxToChange }))
                 selectForm.ShowDialog(this);
-        }
-
-        private void buttonSearchConditionValue3_Click(object sender, EventArgs e)
-        {
-            TextBox textBoxToChange = textBoxCondValue3;
-
-            switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
-            {
-                case ConditionTypes.CONDITION_INSTANCE_INFO:
-                    ShowSelectForm("InstanceInfo", textBoxToChange);
-                    break;
-            }
         }
 
         private void ConditionForm_KeyDown(object sender, KeyEventArgs e)
