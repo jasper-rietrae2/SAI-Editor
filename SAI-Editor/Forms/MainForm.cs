@@ -4348,6 +4348,15 @@ namespace SAI_Editor.Forms
 
         private void conditionEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.Name == "ConditionForm")
+                {
+                    form.BringToFront();
+                    return;
+                }
+            }
+
             ConditionForm conditionForm = new ConditionForm();
             conditionForm.Show();
         }
