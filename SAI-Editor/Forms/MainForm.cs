@@ -3062,7 +3062,7 @@ namespace SAI_Editor.Forms
             previousLinkFrom = newLinkFrom;
         }
 
-        private async void textBoxEventParam1_TextChanged(object sender, EventArgs e)
+        private async void textBoxEventParam1_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3072,7 +3072,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxEventParam2_TextChanged(object sender, EventArgs e)
+        private async void textBoxEventParam2_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3082,7 +3082,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxEventParam3_TextChanged(object sender, EventArgs e)
+        private async void textBoxEventParam3_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3092,7 +3092,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxEventParam4_TextChanged(object sender, EventArgs e)
+        private async void textBoxEventParam4_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3102,7 +3102,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxActionParam1_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam1_Leave(object sender, EventArgs e)
         {
             if ((SmartAction)comboBoxActionType.SelectedIndex == SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE)
                 ParameterInstallAiTemplateChanged();
@@ -3115,7 +3115,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxActionParam2_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam2_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3125,7 +3125,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxActionParam3_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam3_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3135,7 +3135,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxActionParam4_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam4_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3145,7 +3145,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxActionParam5_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam5_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3155,7 +3155,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxActionParam6_TextChanged(object sender, EventArgs e)
+        private async void textBoxActionParam6_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3165,7 +3165,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxTargetParam1_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetParam1_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3175,7 +3175,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxTargetParam2_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetParam2_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3185,7 +3185,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxTargetParam3_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetParam3_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3206,7 +3206,7 @@ namespace SAI_Editor.Forms
                 e.Handled = true;
         }
 
-        private async void textBoxTargetX_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetX_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3218,7 +3218,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxTargetY_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetY_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3230,7 +3230,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxTargetZ_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetZ_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
@@ -3242,7 +3242,7 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private async void textBoxTargetO_TextChanged(object sender, EventArgs e)
+        private async void textBoxTargetO_Leave(object sender, EventArgs e)
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {

@@ -809,7 +809,7 @@ namespace SAI_Editor.Forms
                 e.Handled = true;
         }
 
-        private void textBoxesConditionEditor_TextChanged(object sender, EventArgs e)
+        private void textBoxesConditionEditor_Leave(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
 

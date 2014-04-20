@@ -1950,7 +1950,7 @@
             this.textBoxEventParam1.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam1.TabIndex = 37;
             this.textBoxEventParam1.Text = "0";
-            this.textBoxEventParam1.TextChanged += new System.EventHandler(this.textBoxEventParam1_TextChanged);
+            this.textBoxEventParam1.Leave += new System.EventHandler(this.textBoxEventParam1_Leave);
             // 
             // tabControlParameters
             // 
@@ -2036,7 +2036,7 @@
             this.textBoxEventParam4.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam4.TabIndex = 43;
             this.textBoxEventParam4.Text = "0";
-            this.textBoxEventParam4.TextChanged += new System.EventHandler(this.textBoxEventParam4_TextChanged);
+            this.textBoxEventParam4.Leave += new System.EventHandler(this.textBoxEventParam4_Leave);
             // 
             // textBoxEventParam3
             // 
@@ -2045,7 +2045,7 @@
             this.textBoxEventParam3.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam3.TabIndex = 41;
             this.textBoxEventParam3.Text = "0";
-            this.textBoxEventParam3.TextChanged += new System.EventHandler(this.textBoxEventParam3_TextChanged);
+            this.textBoxEventParam3.Leave += new System.EventHandler(this.textBoxEventParam3_Leave);
             // 
             // textBoxEventParam2
             // 
@@ -2054,7 +2054,7 @@
             this.textBoxEventParam2.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam2.TabIndex = 39;
             this.textBoxEventParam2.Text = "0";
-            this.textBoxEventParam2.TextChanged += new System.EventHandler(this.textBoxEventParam2_TextChanged);
+            this.textBoxEventParam2.Leave += new System.EventHandler(this.textBoxEventParam2_Leave);
             // 
             // tabPageAction
             // 
@@ -2157,7 +2157,7 @@
             this.textBoxActionParam6.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam6.TabIndex = 56;
             this.textBoxActionParam6.Text = "0";
-            this.textBoxActionParam6.TextChanged += new System.EventHandler(this.textBoxActionParam6_TextChanged);
+            this.textBoxActionParam6.Leave += new System.EventHandler(this.textBoxActionParam6_Leave);
             // 
             // textBoxActionParam5
             // 
@@ -2166,7 +2166,7 @@
             this.textBoxActionParam5.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam5.TabIndex = 53;
             this.textBoxActionParam5.Text = "0";
-            this.textBoxActionParam5.TextChanged += new System.EventHandler(this.textBoxActionParam5_TextChanged);
+            this.textBoxActionParam5.Leave += new System.EventHandler(this.textBoxActionParam5_Leave);
             // 
             // textBoxActionParam4
             // 
@@ -2175,7 +2175,7 @@
             this.textBoxActionParam4.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam4.TabIndex = 51;
             this.textBoxActionParam4.Text = "0";
-            this.textBoxActionParam4.TextChanged += new System.EventHandler(this.textBoxActionParam4_TextChanged);
+            this.textBoxActionParam4.Leave += new System.EventHandler(this.textBoxActionParam4_Leave);
             // 
             // textBoxActionParam3
             // 
@@ -2184,7 +2184,7 @@
             this.textBoxActionParam3.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam3.TabIndex = 49;
             this.textBoxActionParam3.Text = "0";
-            this.textBoxActionParam3.TextChanged += new System.EventHandler(this.textBoxActionParam3_TextChanged);
+            this.textBoxActionParam3.Leave += new System.EventHandler(this.textBoxActionParam3_Leave);
             // 
             // textBoxActionParam2
             // 
@@ -2193,7 +2193,7 @@
             this.textBoxActionParam2.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam2.TabIndex = 47;
             this.textBoxActionParam2.Text = "0";
-            this.textBoxActionParam2.TextChanged += new System.EventHandler(this.textBoxActionParam2_TextChanged);
+            this.textBoxActionParam2.Leave += new System.EventHandler(this.textBoxActionParam2_Leave);
             // 
             // textBoxActionParam1
             // 
@@ -2202,7 +2202,7 @@
             this.textBoxActionParam1.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam1.TabIndex = 45;
             this.textBoxActionParam1.Text = "0";
-            this.textBoxActionParam1.TextChanged += new System.EventHandler(this.textBoxActionParam1_TextChanged);
+            this.textBoxActionParam1.Leave += new System.EventHandler(this.textBoxActionParam1_Leave);
             // 
             // tabPageTarget
             // 
@@ -2269,7 +2269,7 @@
             this.textBoxTargetO.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetO.TabIndex = 36;
             this.textBoxTargetO.Text = "0";
-            this.textBoxTargetO.TextChanged += new System.EventHandler(this.textBoxTargetO_TextChanged);
+            this.textBoxTargetO.Leave += new System.EventHandler(this.textBoxTargetO_Leave);
             this.textBoxTargetO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
             // 
             // textBoxTargetZ
@@ -2279,7 +2279,7 @@
             this.textBoxTargetZ.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetZ.TabIndex = 68;
             this.textBoxTargetZ.Text = "0";
-            this.textBoxTargetZ.TextChanged += new System.EventHandler(this.textBoxTargetZ_TextChanged);
+            this.textBoxTargetZ.Leave += new System.EventHandler(this.textBoxTargetZ_Leave);
             this.textBoxTargetZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
             // 
             // textBoxTargetY
@@ -2289,7 +2289,7 @@
             this.textBoxTargetY.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetY.TabIndex = 66;
             this.textBoxTargetY.Text = "0";
-            this.textBoxTargetY.TextChanged += new System.EventHandler(this.textBoxTargetY_TextChanged);
+            this.textBoxTargetY.Leave += new System.EventHandler(this.textBoxTargetY_Leave);
             this.textBoxTargetY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
             // 
             // textBoxTargetX
@@ -2299,7 +2299,7 @@
             this.textBoxTargetX.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetX.TabIndex = 64;
             this.textBoxTargetX.Text = "0";
-            this.textBoxTargetX.TextChanged += new System.EventHandler(this.textBoxTargetX_TextChanged);
+            this.textBoxTargetX.Leave += new System.EventHandler(this.textBoxTargetX_Leave);
             this.textBoxTargetX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
             // 
             // textBoxTargetParam3
@@ -2309,7 +2309,7 @@
             this.textBoxTargetParam3.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetParam3.TabIndex = 62;
             this.textBoxTargetParam3.Text = "0";
-            this.textBoxTargetParam3.TextChanged += new System.EventHandler(this.textBoxTargetParam3_TextChanged);
+            this.textBoxTargetParam3.Leave += new System.EventHandler(this.textBoxTargetParam3_Leave);
             // 
             // textBoxTargetParam2
             // 
@@ -2318,7 +2318,7 @@
             this.textBoxTargetParam2.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetParam2.TabIndex = 60;
             this.textBoxTargetParam2.Text = "0";
-            this.textBoxTargetParam2.TextChanged += new System.EventHandler(this.textBoxTargetParam2_TextChanged);
+            this.textBoxTargetParam2.Leave += new System.EventHandler(this.textBoxTargetParam2_Leave);
             // 
             // textBoxTargetParam1
             // 
@@ -2327,7 +2327,7 @@
             this.textBoxTargetParam1.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetParam1.TabIndex = 58;
             this.textBoxTargetParam1.Text = "0";
-            this.textBoxTargetParam1.TextChanged += new System.EventHandler(this.textBoxTargetParam1_TextChanged);
+            this.textBoxTargetParam1.Leave += new System.EventHandler(this.textBoxTargetParam1_Leave);
             // 
             // groupBoxParameters
             // 
