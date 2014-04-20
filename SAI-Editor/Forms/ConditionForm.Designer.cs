@@ -292,6 +292,8 @@
             this.textBoxSourceGroup.Size = new System.Drawing.Size(66, 20);
             this.textBoxSourceGroup.TabIndex = 11;
             this.textBoxSourceGroup.Text = "0";
+            this.textBoxSourceGroup.TextChanged += new System.EventHandler(this.textBoxesConditionEditor_TextChanged);
+            this.textBoxSourceGroup.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             // 
             // textBoxSourceEntry
             // 
@@ -300,6 +302,8 @@
             this.textBoxSourceEntry.Size = new System.Drawing.Size(66, 20);
             this.textBoxSourceEntry.TabIndex = 12;
             this.textBoxSourceEntry.Text = "0";
+            this.textBoxSourceEntry.TextChanged += new System.EventHandler(this.textBoxesConditionEditor_TextChanged);
+            this.textBoxSourceEntry.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             // 
             // labelComment
             // 
@@ -342,6 +346,8 @@
             this.textBoxCondValue1.Size = new System.Drawing.Size(66, 20);
             this.textBoxCondValue1.TabIndex = 18;
             this.textBoxCondValue1.Text = "0";
+            this.textBoxCondValue1.TextChanged += new System.EventHandler(this.textBoxesConditionEditor_TextChanged);
+            this.textBoxCondValue1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             // 
             // textBoxCondValue2
             // 
@@ -350,6 +356,8 @@
             this.textBoxCondValue2.Size = new System.Drawing.Size(66, 20);
             this.textBoxCondValue2.TabIndex = 18;
             this.textBoxCondValue2.Text = "0";
+            this.textBoxCondValue2.TextChanged += new System.EventHandler(this.textBoxesConditionEditor_TextChanged);
+            this.textBoxCondValue2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             // 
             // textBoxCondValue3
             // 
@@ -358,6 +366,8 @@
             this.textBoxCondValue3.Size = new System.Drawing.Size(66, 20);
             this.textBoxCondValue3.TabIndex = 18;
             this.textBoxCondValue3.Text = "0";
+            this.textBoxCondValue3.TextChanged += new System.EventHandler(this.textBoxesConditionEditor_TextChanged);
+            this.textBoxCondValue3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             // 
             // label3
             // 
@@ -580,6 +590,8 @@
             this.textBoxCondValue4.Size = new System.Drawing.Size(66, 20);
             this.textBoxCondValue4.TabIndex = 18;
             this.textBoxCondValue4.Text = "0";
+            this.textBoxCondValue4.TextChanged += new System.EventHandler(this.textBoxesConditionEditor_TextChanged);
+            this.textBoxCondValue4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             // 
             // buttonSearchConditionValue4
             // 
@@ -802,6 +814,8 @@
             this.textBoxSourceId.Size = new System.Drawing.Size(66, 20);
             this.textBoxSourceId.TabIndex = 12;
             this.textBoxSourceId.Text = "0";
+            this.textBoxSourceId.TextChanged += new System.EventHandler(this.textBoxesConditionEditor_TextChanged);
+            this.textBoxSourceId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             // 
             // textBoxElseGroup
             // 
@@ -810,6 +824,8 @@
             this.textBoxElseGroup.Size = new System.Drawing.Size(66, 20);
             this.textBoxElseGroup.TabIndex = 12;
             this.textBoxElseGroup.Text = "0";
+            this.textBoxElseGroup.TextChanged += new System.EventHandler(this.textBoxesConditionEditor_TextChanged);
+            this.textBoxElseGroup.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             // 
             // textBoxErrorTextId
             // 
@@ -818,6 +834,8 @@
             this.textBoxErrorTextId.Size = new System.Drawing.Size(65, 20);
             this.textBoxErrorTextId.TabIndex = 18;
             this.textBoxErrorTextId.Text = "0";
+            this.textBoxErrorTextId.TextChanged += new System.EventHandler(this.textBoxesConditionEditor_TextChanged);
+            this.textBoxErrorTextId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             // 
             // textBoxErrorType
             // 
@@ -826,6 +844,8 @@
             this.textBoxErrorType.Size = new System.Drawing.Size(65, 20);
             this.textBoxErrorType.TabIndex = 18;
             this.textBoxErrorType.Text = "0";
+            this.textBoxErrorType.TextChanged += new System.EventHandler(this.textBoxesConditionEditor_TextChanged);
+            this.textBoxErrorType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             // 
             // label20
             // 

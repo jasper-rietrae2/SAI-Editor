@@ -117,7 +117,7 @@ namespace SAI_Editor.Forms
             {
                 Process.Start(url);
             }
-            catch (Exception)
+            catch
             {
                 MessageBox.Show("The webpage could not be opened!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

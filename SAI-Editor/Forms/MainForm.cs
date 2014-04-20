@@ -284,7 +284,7 @@ namespace SAI_Editor.Forms
                         {
                             client.DownloadData("http://www.jasper-rietrae.com/SAI-Editor/survey.php?agreed=false");
                         }
-                        catch (Exception)
+                        catch
                         {
 
                         }
@@ -405,7 +405,7 @@ namespace SAI_Editor.Forms
                                                 Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe", "RanFromSaiEditor");
                                                 ShowToFront(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
                                             }
-                                            catch (Exception)
+                                            catch
                                             {
                                                 MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                             }
@@ -2718,7 +2718,7 @@ namespace SAI_Editor.Forms
             {
                 Process.Start(url);
             }
-            catch (Exception)
+            catch
             {
                 MessageBox.Show("The webpage could not be opened!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
@@ -3016,7 +3016,7 @@ namespace SAI_Editor.Forms
             {
                 newLinkFrom = Int32.Parse(textBoxLinkFrom.Text);
             }
-            catch (Exception)
+            catch
             {
                 previousLinkFrom = -1;
                 return;
@@ -3197,13 +3197,12 @@ namespace SAI_Editor.Forms
 
         private void textBoxTargetCoordinateParams_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsPunctuation(e.KeyChar) && !Char.IsNumber(e.KeyChar) && !Char.IsDigit(e.KeyChar))
+            if (!Char.IsPunctuation(e.KeyChar) && !Char.IsDigit(e.KeyChar))
                 return;
 
-            string str = (sender as TextBox).Text + e.KeyChar;
             double result;
 
-            if (!Double.TryParse(str, out result))
+            if (!Double.TryParse((sender as TextBox).Text + e.KeyChar, out result))
                 e.Handled = true;
         }
 
@@ -4211,7 +4210,7 @@ namespace SAI_Editor.Forms
                 Process.Start(updaterDir);
                 ShowToFront(updaterDir);
             }
-            catch (Exception)
+            catch
             {
                 MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

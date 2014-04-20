@@ -578,7 +578,7 @@ namespace SAI_Editor.Forms.SearchForms
 
         private void comboBoxSearchType_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsLetter(e.KeyChar) || Char.IsNumber(e.KeyChar))
+            if (Char.IsLetter(e.KeyChar) || Char.IsDigit(e.KeyChar))
                 e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
         }
 

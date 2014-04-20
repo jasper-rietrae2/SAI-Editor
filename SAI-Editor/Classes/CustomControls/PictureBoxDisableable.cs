@@ -54,7 +54,7 @@ namespace SAI_Editor.Classes.CustomControls
                     }
                     Image = originalImage;
                 }
-                catch (Exception)
+                catch
                 {
 
                 }
