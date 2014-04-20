@@ -1044,6 +1044,19 @@ namespace SAI_Editor.Enumerators
         REP_EXALTED     = 7
     }
 
+    enum ReputationRankMask
+    {
+        REP_NONE        = 0,
+        REP_HATED       = 1,
+        REP_HOSTILE     = 2,
+        REP_UNFRIENDLY  = 4,
+        REP_NEUTRAL     = 8,
+        REP_FRIENDLY    = 16,
+        REP_HONORED     = 32,
+        REP_REVERED     = 64,
+        REP_EXALTED     = 128
+    }
+
     enum DrunkenState
     {
         DRUNKEN_STATE_SOBER,

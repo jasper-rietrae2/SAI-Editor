@@ -118,7 +118,7 @@ namespace SAI_Editor.Forms
 
         private void comboBoxesConditions_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Char.IsLetter(e.KeyChar) || Char.IsNumber(e.KeyChar))
+            if (Char.IsLetter(e.KeyChar) || Char.IsDigit(e.KeyChar))
                 e.Handled = true; //! Disallow changing content of the combobox, but setting it to 3D looks like shit
         }
 
@@ -591,7 +591,7 @@ namespace SAI_Editor.Forms
                     ShowSelectForm("CondRelationType", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_REACTION_TO:
-                    ShowSelectForm("ReputationRank", textBoxToChange);
+                    ShowSelectForm("ReputationRankMask", textBoxToChange);
                     break;
                 case ConditionTypes.CONDITION_HP_VAL:
                 case ConditionTypes.CONDITION_HP_PCT:
@@ -650,21 +650,13 @@ namespace SAI_Editor.Forms
             { "SpawnMask", typeof(MultiSelectForm<SpawnMask>)},
             { "Gender", typeof(SingleSelectForm<Gender>)},
             { "UnitState", typeof(MultiSelectForm<UnitState>)},
-            { "CreatureType", typeof(SingleSelectForm<CreatureType>)}, //! SingleSelectForm because the cond check with == operator
+            { "CreatureType", typeof(SingleSelectForm<CreatureType>)}, //! SingleSelectForm because the cond checks with == operator
             { "PhaseMasks", typeof(MultiSelectForm<PhaseMasks>)},
             { "TypeID", typeof(SingleSelectForm<TypeID>)},
             { "TypeMask", typeof(MultiSelectForm<TypeMask>)},
             { "CondRelationType", typeof(SingleSelectForm<CondRelationType>)},
             { "ComparisionType", typeof(SingleSelectForm<ComparisionType>)},
-            //{ "", typeof(SingleSelectForm<>)},
-            //{ "", typeof(SingleSelectForm<>)},
-            //{ "", typeof(SingleSelectForm<>)},
-            //{ "", typeof(SingleSelectForm<>)},
-            //{ "", typeof(SingleSelectForm<>)},
-            //{ "", typeof(SingleSelectForm<>)},
-            //{ "", typeof(SingleSelectForm<>)},
-            //{ "", typeof(SingleSelectForm<>)},
-            //{ "", typeof(SingleSelectForm<>)},
+            { "ReputationRankMask", typeof(MultiSelectForm<ReputationRankMask>)},
         };
 
         private void ShowSelectForm(string formTemplate, TextBox textBoxToChange)
@@ -809,6 +801,23 @@ namespace SAI_Editor.Forms
         private void buttonSearchErrorTextId_Click(object sender, EventArgs e)
         {
             ShowSelectForm("SpellCustomErrors", textBoxErrorTextId);
+        }
+
+        private void textBoxesConditionEditor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsControl(e.KeyChar) && !Char.IsDigit(e.KeyChar) && e.KeyChar != '.' && e.KeyChar != '-')
+                e.Handled = true;
+        }
+
+        private void textBoxesConditionEditor_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (String.IsNullOrWhiteSpace(textBox.Text))
+            {
+                textBox.Text = "0";
+                textBox.SelectionStart = 1;
+            }
         }
     }
 }
