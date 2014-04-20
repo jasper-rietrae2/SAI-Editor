@@ -722,6 +722,10 @@ namespace SAI_Editor.Forms
             ResetFieldsToDefault();
             listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
             StartContractingToLoginForm(Settings.Default.InstantExpand);
+
+            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
+                if (Application.OpenForms[i] != this)
+                    Application.OpenForms[i].Close();
         }
 
         private async void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
