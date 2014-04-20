@@ -95,17 +95,17 @@
             this.textBoxErrorType = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPageSql = new System.Windows.Forms.TabPage();
             this.richTextBoxSql = new FastColoredTextBoxNS.FastColoredTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.buttonDuplicateCondition = new System.Windows.Forms.Button();
             this.buttonDeleteCondition = new System.Windows.Forms.Button();
             this.buttonLoadCondition = new System.Windows.Forms.Button();
+            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
+            this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.panelPermanentTooltipSourceType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
             this.panelPermanentTooltipConditionType.SuspendLayout();
@@ -200,7 +200,7 @@
             this.comboBoxConditionTypes.Name = "comboBoxConditionTypes";
             this.comboBoxConditionTypes.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.comboBoxConditionTypes.Size = new System.Drawing.Size(290, 21);
-            this.comboBoxConditionTypes.TabIndex = 1;
+            this.comboBoxConditionTypes.TabIndex = 11;
             this.comboBoxConditionTypes.SelectedIndexChanged += new System.EventHandler(this.comboBoxConditionTypes_SelectedIndexChanged);
             this.comboBoxConditionTypes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxesConditions_KeyPress);
             // 
@@ -282,7 +282,7 @@
             this.comboBoxConditionTarget.Location = new System.Drawing.Point(119, 34);
             this.comboBoxConditionTarget.Name = "comboBoxConditionTarget";
             this.comboBoxConditionTarget.Size = new System.Drawing.Size(290, 21);
-            this.comboBoxConditionTarget.TabIndex = 10;
+            this.comboBoxConditionTarget.TabIndex = 1;
             this.comboBoxConditionTarget.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.comboBoxesConditions_KeyPress);
             // 
             // textBoxSourceGroup
@@ -290,7 +290,7 @@
             this.textBoxSourceGroup.Location = new System.Drawing.Point(552, 7);
             this.textBoxSourceGroup.Name = "textBoxSourceGroup";
             this.textBoxSourceGroup.Size = new System.Drawing.Size(66, 20);
-            this.textBoxSourceGroup.TabIndex = 11;
+            this.textBoxSourceGroup.TabIndex = 4;
             this.textBoxSourceGroup.Text = "0";
             this.textBoxSourceGroup.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             this.textBoxSourceGroup.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
@@ -300,7 +300,7 @@
             this.textBoxSourceEntry.Location = new System.Drawing.Point(552, 34);
             this.textBoxSourceEntry.Name = "textBoxSourceEntry";
             this.textBoxSourceEntry.Size = new System.Drawing.Size(66, 20);
-            this.textBoxSourceEntry.TabIndex = 12;
+            this.textBoxSourceEntry.TabIndex = 6;
             this.textBoxSourceEntry.Text = "0";
             this.textBoxSourceEntry.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             this.textBoxSourceEntry.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
@@ -319,7 +319,7 @@
             this.textBoxComment.Location = new System.Drawing.Point(119, 87);
             this.textBoxComment.Name = "textBoxComment";
             this.textBoxComment.Size = new System.Drawing.Size(290, 20);
-            this.textBoxComment.TabIndex = 15;
+            this.textBoxComment.TabIndex = 3;
             // 
             // label1
             // 
@@ -344,7 +344,7 @@
             this.textBoxCondValue1.Location = new System.Drawing.Point(119, 155);
             this.textBoxCondValue1.Name = "textBoxCondValue1";
             this.textBoxCondValue1.Size = new System.Drawing.Size(66, 20);
-            this.textBoxCondValue1.TabIndex = 18;
+            this.textBoxCondValue1.TabIndex = 12;
             this.textBoxCondValue1.Text = "0";
             this.textBoxCondValue1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             this.textBoxCondValue1.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
@@ -354,7 +354,7 @@
             this.textBoxCondValue2.Location = new System.Drawing.Point(119, 181);
             this.textBoxCondValue2.Name = "textBoxCondValue2";
             this.textBoxCondValue2.Size = new System.Drawing.Size(66, 20);
-            this.textBoxCondValue2.TabIndex = 18;
+            this.textBoxCondValue2.TabIndex = 14;
             this.textBoxCondValue2.Text = "0";
             this.textBoxCondValue2.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             this.textBoxCondValue2.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
@@ -364,7 +364,7 @@
             this.textBoxCondValue3.Location = new System.Drawing.Point(119, 207);
             this.textBoxCondValue3.Name = "textBoxCondValue3";
             this.textBoxCondValue3.Size = new System.Drawing.Size(66, 20);
-            this.textBoxCondValue3.TabIndex = 18;
+            this.textBoxCondValue3.TabIndex = 16;
             this.textBoxCondValue3.Text = "0";
             this.textBoxCondValue3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             this.textBoxCondValue3.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
@@ -438,7 +438,7 @@
             this.buttonSearchSourceGroup.Location = new System.Drawing.Point(618, 6);
             this.buttonSearchSourceGroup.Name = "buttonSearchSourceGroup";
             this.buttonSearchSourceGroup.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchSourceGroup.TabIndex = 19;
+            this.buttonSearchSourceGroup.TabIndex = 5;
             this.buttonSearchSourceGroup.Text = "...";
             this.buttonSearchSourceGroup.UseVisualStyleBackColor = true;
             this.buttonSearchSourceGroup.Click += new System.EventHandler(this.buttonSearchSourceGroup_Click);
@@ -449,7 +449,7 @@
             this.buttonSearchSourceEntry.Location = new System.Drawing.Point(618, 33);
             this.buttonSearchSourceEntry.Name = "buttonSearchSourceEntry";
             this.buttonSearchSourceEntry.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchSourceEntry.TabIndex = 19;
+            this.buttonSearchSourceEntry.TabIndex = 7;
             this.buttonSearchSourceEntry.Text = "...";
             this.buttonSearchSourceEntry.UseVisualStyleBackColor = true;
             this.buttonSearchSourceEntry.Click += new System.EventHandler(this.buttonSearchSourceEntry_Click);
@@ -538,7 +538,7 @@
             this.buttonSearchConditionValue1.Location = new System.Drawing.Point(185, 154);
             this.buttonSearchConditionValue1.Name = "buttonSearchConditionValue1";
             this.buttonSearchConditionValue1.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchConditionValue1.TabIndex = 19;
+            this.buttonSearchConditionValue1.TabIndex = 13;
             this.buttonSearchConditionValue1.Text = "...";
             this.buttonSearchConditionValue1.UseVisualStyleBackColor = true;
             this.buttonSearchConditionValue1.Click += new System.EventHandler(this.buttonSearchConditionValue1_Click);
@@ -549,7 +549,7 @@
             this.buttonSearchConditionValue2.Location = new System.Drawing.Point(185, 180);
             this.buttonSearchConditionValue2.Name = "buttonSearchConditionValue2";
             this.buttonSearchConditionValue2.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchConditionValue2.TabIndex = 19;
+            this.buttonSearchConditionValue2.TabIndex = 15;
             this.buttonSearchConditionValue2.Text = "...";
             this.buttonSearchConditionValue2.UseVisualStyleBackColor = true;
             this.buttonSearchConditionValue2.Click += new System.EventHandler(this.buttonSearchConditionValue2_Click);
@@ -560,7 +560,7 @@
             this.buttonSearchConditionValue3.Location = new System.Drawing.Point(185, 206);
             this.buttonSearchConditionValue3.Name = "buttonSearchConditionValue3";
             this.buttonSearchConditionValue3.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchConditionValue3.TabIndex = 19;
+            this.buttonSearchConditionValue3.TabIndex = 17;
             this.buttonSearchConditionValue3.Text = "...";
             this.buttonSearchConditionValue3.UseVisualStyleBackColor = true;
             this.buttonSearchConditionValue3.Click += new System.EventHandler(this.buttonSearchConditionValue3_Click);
@@ -609,7 +609,7 @@
             this.buttonGenerateComment.Location = new System.Drawing.Point(517, 201);
             this.buttonGenerateComment.Name = "buttonGenerateComment";
             this.buttonGenerateComment.Size = new System.Drawing.Size(125, 23);
-            this.buttonGenerateComment.TabIndex = 27;
+            this.buttonGenerateComment.TabIndex = 24;
             this.buttonGenerateComment.Text = "Generate comment";
             this.buttonGenerateComment.UseVisualStyleBackColor = true;
             this.buttonGenerateComment.Click += new System.EventHandler(this.buttonGenerateComment_Click);
@@ -619,7 +619,7 @@
             this.buttonGenerateSql.Location = new System.Drawing.Point(517, 230);
             this.buttonGenerateSql.Name = "buttonGenerateSql";
             this.buttonGenerateSql.Size = new System.Drawing.Size(125, 23);
-            this.buttonGenerateSql.TabIndex = 28;
+            this.buttonGenerateSql.TabIndex = 26;
             this.buttonGenerateSql.Text = "Generate SQL";
             this.buttonGenerateSql.UseVisualStyleBackColor = true;
             this.buttonGenerateSql.Click += new System.EventHandler(this.buttonGenerateSql_Click);
@@ -719,7 +719,7 @@
             this.textBoxScriptName.Location = new System.Drawing.Point(119, 61);
             this.textBoxScriptName.Name = "textBoxScriptName";
             this.textBoxScriptName.Size = new System.Drawing.Size(290, 20);
-            this.textBoxScriptName.TabIndex = 30;
+            this.textBoxScriptName.TabIndex = 2;
             // 
             // label12
             // 
@@ -735,7 +735,7 @@
             this.buttonSaveCondition.Location = new System.Drawing.Point(386, 230);
             this.buttonSaveCondition.Name = "buttonSaveCondition";
             this.buttonSaveCondition.Size = new System.Drawing.Size(125, 23);
-            this.buttonSaveCondition.TabIndex = 28;
+            this.buttonSaveCondition.TabIndex = 25;
             this.buttonSaveCondition.Text = "Save condition";
             this.buttonSaveCondition.UseVisualStyleBackColor = true;
             this.buttonSaveCondition.Click += new System.EventHandler(this.buttonSaveCondition_Click);
@@ -764,7 +764,7 @@
             this.buttonSearchSourceId.Location = new System.Drawing.Point(618, 85);
             this.buttonSearchSourceId.Name = "buttonSearchSourceId";
             this.buttonSearchSourceId.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchSourceId.TabIndex = 19;
+            this.buttonSearchSourceId.TabIndex = 10;
             this.buttonSearchSourceId.Text = "...";
             this.buttonSearchSourceId.UseVisualStyleBackColor = true;
             this.buttonSearchSourceId.Click += new System.EventHandler(this.buttonSearchSourceId_Click);
@@ -774,7 +774,7 @@
             this.buttonSearchErrorTextId.Location = new System.Drawing.Point(385, 180);
             this.buttonSearchErrorTextId.Name = "buttonSearchErrorTextId";
             this.buttonSearchErrorTextId.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchErrorTextId.TabIndex = 19;
+            this.buttonSearchErrorTextId.TabIndex = 23;
             this.buttonSearchErrorTextId.Text = "...";
             this.buttonSearchErrorTextId.UseVisualStyleBackColor = true;
             this.buttonSearchErrorTextId.Click += new System.EventHandler(this.buttonSearchErrorTextId_Click);
@@ -784,7 +784,7 @@
             this.buttonSearchErrorType.Location = new System.Drawing.Point(385, 154);
             this.buttonSearchErrorType.Name = "buttonSearchErrorType";
             this.buttonSearchErrorType.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchErrorType.TabIndex = 19;
+            this.buttonSearchErrorType.TabIndex = 21;
             this.buttonSearchErrorType.Text = "...";
             this.buttonSearchErrorType.UseVisualStyleBackColor = true;
             this.buttonSearchErrorType.Click += new System.EventHandler(this.buttonSearchErrorType_Click);
@@ -812,7 +812,7 @@
             this.textBoxSourceId.Location = new System.Drawing.Point(552, 86);
             this.textBoxSourceId.Name = "textBoxSourceId";
             this.textBoxSourceId.Size = new System.Drawing.Size(66, 20);
-            this.textBoxSourceId.TabIndex = 12;
+            this.textBoxSourceId.TabIndex = 9;
             this.textBoxSourceId.Text = "0";
             this.textBoxSourceId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             this.textBoxSourceId.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
@@ -822,7 +822,7 @@
             this.textBoxElseGroup.Location = new System.Drawing.Point(552, 60);
             this.textBoxElseGroup.Name = "textBoxElseGroup";
             this.textBoxElseGroup.Size = new System.Drawing.Size(66, 20);
-            this.textBoxElseGroup.TabIndex = 12;
+            this.textBoxElseGroup.TabIndex = 8;
             this.textBoxElseGroup.Text = "0";
             this.textBoxElseGroup.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             this.textBoxElseGroup.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
@@ -832,7 +832,7 @@
             this.textBoxErrorTextId.Location = new System.Drawing.Point(320, 181);
             this.textBoxErrorTextId.Name = "textBoxErrorTextId";
             this.textBoxErrorTextId.Size = new System.Drawing.Size(65, 20);
-            this.textBoxErrorTextId.TabIndex = 18;
+            this.textBoxErrorTextId.TabIndex = 22;
             this.textBoxErrorTextId.Text = "0";
             this.textBoxErrorTextId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             this.textBoxErrorTextId.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
@@ -842,7 +842,7 @@
             this.textBoxErrorType.Location = new System.Drawing.Point(320, 155);
             this.textBoxErrorType.Name = "textBoxErrorType";
             this.textBoxErrorType.Size = new System.Drawing.Size(65, 20);
-            this.textBoxErrorType.TabIndex = 18;
+            this.textBoxErrorType.TabIndex = 20;
             this.textBoxErrorType.Text = "0";
             this.textBoxErrorType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             this.textBoxErrorType.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
@@ -864,15 +864,6 @@
             this.label15.Size = new System.Drawing.Size(10, 13);
             this.label15.TabIndex = 17;
             this.label15.Text = ":";
-            // 
-            // lineSeparator1
-            // 
-            this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
-            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
-            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
-            this.lineSeparator1.Name = "lineSeparator1";
-            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
-            this.lineSeparator1.TabIndex = 13;
             // 
             // label18
             // 
@@ -905,7 +896,7 @@
             // 
             // richTextBoxSql
             // 
-            this.richTextBoxSql.AutoScrollMinSize = new System.Drawing.Size(2, 14);
+            this.richTextBoxSql.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.richTextBoxSql.BackBrush = null;
             this.richTextBoxSql.CharHeight = 14;
             this.richTextBoxSql.CharWidth = 8;
@@ -945,19 +936,6 @@
             this.checkBox1.Text = "Show basic info";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // listViewConditions
-            // 
-            this.listViewConditions.EnablePhaseHighlighting = false;
-            this.listViewConditions.FullRowSelect = true;
-            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
-            this.listViewConditions.MultiSelect = false;
-            this.listViewConditions.Name = "listViewConditions";
-            this.listViewConditions.Size = new System.Drawing.Size(656, 301);
-            this.listViewConditions.TabIndex = 3;
-            this.listViewConditions.UseCompatibleStateImageBehavior = false;
-            this.listViewConditions.View = System.Windows.Forms.View.Details;
-            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
-            // 
             // buttonDuplicateCondition
             // 
             this.buttonDuplicateCondition.Enabled = false;
@@ -990,6 +968,28 @@
             this.buttonLoadCondition.Text = "Load and edit selected condition";
             this.buttonLoadCondition.UseVisualStyleBackColor = true;
             this.buttonLoadCondition.Click += new System.EventHandler(this.buttonLoadCondition_Click);
+            // 
+            // lineSeparator1
+            // 
+            this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
+            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
+            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
+            this.lineSeparator1.Name = "lineSeparator1";
+            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
+            this.lineSeparator1.TabIndex = 13;
+            // 
+            // listViewConditions
+            // 
+            this.listViewConditions.EnablePhaseHighlighting = false;
+            this.listViewConditions.FullRowSelect = true;
+            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
+            this.listViewConditions.MultiSelect = false;
+            this.listViewConditions.Name = "listViewConditions";
+            this.listViewConditions.Size = new System.Drawing.Size(656, 301);
+            this.listViewConditions.TabIndex = 3;
+            this.listViewConditions.UseCompatibleStateImageBehavior = false;
+            this.listViewConditions.View = System.Windows.Forms.View.Details;
+            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
             // 
             // ConditionForm
             // 
