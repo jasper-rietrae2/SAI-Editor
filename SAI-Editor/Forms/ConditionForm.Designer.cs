@@ -911,7 +911,6 @@
             this.richTextBoxSql.CharWidth = 8;
             this.richTextBoxSql.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBoxSql.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.richTextBoxSql.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.richTextBoxSql.IsReplaceMode = false;
             this.richTextBoxSql.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxSql.Name = "richTextBoxSql";

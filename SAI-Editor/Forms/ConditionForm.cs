@@ -32,9 +32,9 @@ namespace SAI_Editor.Forms
         private void comboBoxConditionSourceTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             //! Reset the values
-            SetSourceGroupValues(" - ");
-            SetSourceEntryValues(" - ");
-            SetSourceIdValues(" - ");
+            labelSourceGroup.Text = " - ";
+            labelSourceEntry.Text = " - ";
+            labelSourceId.Text = " - ";
             SetConditionTargetValues(null);
 
             ConditionSourceTypes selectedType = (ConditionSourceTypes)comboBoxConditionSourceTypes.SelectedIndex;
@@ -125,30 +125,18 @@ namespace SAI_Editor.Forms
         private void SetSourceGroupValues(string value, bool searchable = false)
         {
             labelSourceGroup.Text = value;
-
-            if (value == " - ") //! Empty/unused source group
-                textBoxSourceGroup.Text = String.Empty;
-
             buttonSearchSourceGroup.Enabled = searchable;
         }
 
         private void SetSourceEntryValues(string value, bool searchable = false)
         {
             labelSourceEntry.Text = value;
-
-            if (value == " - ") //! Empty/unused source Entry
-                textBoxSourceEntry.Text = String.Empty;
-
             buttonSearchSourceEntry.Enabled = searchable;
         }
 
         private void SetSourceIdValues(string value, bool searchable = false)
         {
             labelSourceId.Text = value;
-
-            if (value == " - ") //! Empty/unused source Entry
-                textBoxSourceId.Text = String.Empty;
-
             buttonSearchSourceId.Enabled = searchable;
         }
 
@@ -306,14 +294,8 @@ namespace SAI_Editor.Forms
 
             for (int i = 0; i < 4; ++i)
             {
-                string value = String.IsNullOrWhiteSpace(values[i]) ? " - " : values[i];
-
-                condValues[(i + 1).ToString() + "lbl"].Text = value;
-
-                if (value == " - ") //! Empty/unused source Entry
-                    condValues[(i + 1).ToString() + "txt"].Text = String.Empty;
-
-                condValues[(i + 1).ToString() + "btn"].Enabled = searchables[i];
+                condValues[(i + 1).ToString() + "lbl"].Text = String.IsNullOrWhiteSpace(values[i]) ? " - " : values[i]; //! Label
+                condValues[(i + 1).ToString() + "btn"].Enabled = searchables[i]; //! Button
             }
         }
 
@@ -737,7 +719,7 @@ namespace SAI_Editor.Forms
         {
             foreach (Control control in tabControl.TabPages[0].Controls)
                 if (control is TextBox)
-                    control.Text = String.Empty;
+                    control.Text = "0";
 
             labelSourceGroup.Text = " - ";
             labelSourceEntry.Text = " - ";
