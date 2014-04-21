@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Net;
 using System.IO;
+using SAI_Editor.Forms.SearchForms;
 
 namespace SAI_Editor.Classes
 {
@@ -42,6 +43,52 @@ namespace SAI_Editor.Classes
                 _worldDatabase = value;
             }
         }
+
+        public static Dictionary<string, Type> SearchFormsContainer = new Dictionary<string, Type>()
+        {
+	        { "GoFlags", typeof(MultiSelectForm<GoFlags>)},
+	        { "UnitFlags", typeof(MultiSelectForm<UnitFlags>)},
+	        { "UnitFlags2", typeof(MultiSelectForm<UnitFlags2>)},
+	        { "DynamicFlags", typeof(MultiSelectForm<DynamicFlags>)},
+	        { "NpcFlags", typeof(MultiSelectForm<NpcFlags>)},
+	        { "UnitBytes1_Flags", typeof(MultiSelectForm<UnitBytes1_Flags>)},
+	        { "SmartEventFlags", typeof(MultiSelectForm<SmartEventFlags>)},
+	        { "SmartPhaseMasks", typeof(MultiSelectForm<SmartPhaseMasks>)},
+	        { "SmartCastFlags", typeof(MultiSelectForm<SmartCastFlags>)},
+	        { "SmartAiTemplates", typeof(SingleSelectForm<SmartAiTemplates>)},
+	        { "SmartRespawnCondition", typeof(SingleSelectForm<SmartRespawnCondition>)},
+	        { "SmartActionlistTimerUpdateType", typeof(SingleSelectForm<SmartActionlistTimerUpdateType>)},
+            { "GoStates", typeof(SingleSelectForm<GoStates>)},
+            { "ReactState", typeof(SingleSelectForm<ReactState>)},
+            { "SheathState}", typeof(SingleSelectForm<SheathState>)},
+            { "MovementGeneratorType", typeof(SingleSelectForm<MovementGeneratorType>)},
+            { "PowerTypes", typeof(SingleSelectForm<PowerTypes>)},
+            { "UnitStandStateType", typeof(SingleSelectForm<UnitStandStateType>)},
+            { "UnitStandFlags", typeof(MultiSelectForm<UnitStandFlags>)},
+            { "TempSummonType", typeof(SingleSelectForm<TempSummonType>)},
+            { "SpellEffIndex", typeof(SingleSelectForm<SpellEffIndex>)},
+            { "SpellSchools", typeof(SingleSelectForm<SpellSchools>)},
+            { "SpellCastResult", typeof(SingleSelectForm<SpellCastResult>)},
+            { "SpellCustomErrors", typeof(SingleSelectForm<SpellCustomErrors>)},
+            { "ReputationRank", typeof(SingleSelectForm<ReputationRank>)},
+            { "DrunkenState", typeof(SingleSelectForm<DrunkenState>)},
+            { "InstanceInfo", typeof(SingleSelectForm<InstanceInfo>)},
+            { "Classes", typeof(SingleSelectForm<PlayerClasses>)},
+            { "Races", typeof(SingleSelectForm<Races>)},
+            { "SpawnMask", typeof(MultiSelectForm<SpawnMask>)},
+            { "Gender", typeof(SingleSelectForm<Gender>)},
+            { "UnitState", typeof(MultiSelectForm<UnitState>)},
+            { "CreatureType", typeof(SingleSelectForm<CreatureType>)}, //! SingleSelectForm because the cond checks with == operator
+            { "PhaseMasks", typeof(MultiSelectForm<PhaseMasks>)},
+            { "TypeID", typeof(SingleSelectForm<TypeID>)},
+            { "TypeMask", typeof(MultiSelectForm<TypeMask>)},
+            { "CondRelationType", typeof(SingleSelectForm<CondRelationType>)},
+            { "ComparisionType", typeof(SingleSelectForm<ComparisionType>)},
+            { "ReputationRankMask", typeof(MultiSelectForm<ReputationRankMask>)},
+            { "SmartEvent", typeof(SingleSelectForm<SmartEvent>)},
+            { "SmartAction", typeof(SingleSelectForm<SmartAction>)},
+            { "SmartTarget", typeof(SingleSelectForm<SmartTarget>)},
+        };
 
         public SQLiteDatabase sqliteDatabase { get; set; }
         public List<EventTypeInformation> eventTypeInformations;

@@ -599,51 +599,9 @@ namespace SAI_Editor.Forms
             }
         }
 
-        Dictionary<string, Type> searchForms = new Dictionary<string, Type>()
-        {
-	        { "GoFlags", typeof(MultiSelectForm<GoFlags>)},
-	        { "UnitFlags", typeof(MultiSelectForm<UnitFlags>)},
-	        { "UnitFlags2", typeof(MultiSelectForm<UnitFlags2>)},
-	        { "DynamicFlags", typeof(MultiSelectForm<DynamicFlags>)},
-	        { "NpcFlags", typeof(MultiSelectForm<NpcFlags>)},
-	        { "UnitBytes1_Flags", typeof(MultiSelectForm<UnitBytes1_Flags>)},
-	        { "SmartEventFlags", typeof(MultiSelectForm<SmartEventFlags>)},
-	        { "SmartPhaseMasks", typeof(MultiSelectForm<SmartPhaseMasks>)},
-	        { "SmartCastFlags", typeof(MultiSelectForm<SmartCastFlags>)},
-	        { "SmartAiTemplates", typeof(SingleSelectForm<SmartAiTemplates>)},
-	        { "SmartRespawnCondition", typeof(SingleSelectForm<SmartRespawnCondition>)},
-	        { "SmartActionlistTimerUpdateType", typeof(SingleSelectForm<SmartActionlistTimerUpdateType>)},
-            { "GoStates", typeof(SingleSelectForm<GoStates>)},
-            { "ReactState", typeof(SingleSelectForm<ReactState>)},
-            { "SheathState}", typeof(SingleSelectForm<SheathState>)},
-            { "MovementGeneratorType", typeof(SingleSelectForm<MovementGeneratorType>)},
-            { "PowerTypes", typeof(SingleSelectForm<PowerTypes>)},
-            { "UnitStandStateType", typeof(SingleSelectForm<UnitStandStateType>)},
-            { "TempSummonType", typeof(SingleSelectForm<TempSummonType>)},
-            { "SpellEffIndex", typeof(SingleSelectForm<SpellEffIndex>)},
-            { "SpellSchools", typeof(SingleSelectForm<SpellSchools>)},
-            { "SpellCastResult", typeof(SingleSelectForm<SpellCastResult>)},
-            { "SpellCustomErrors", typeof(SingleSelectForm<SpellCustomErrors>)},
-            { "ReputationRank", typeof(SingleSelectForm<ReputationRank>)},
-            { "DrunkenState", typeof(SingleSelectForm<DrunkenState>)},
-            { "InstanceInfo", typeof(SingleSelectForm<InstanceInfo>)},
-            { "Classes", typeof(SingleSelectForm<PlayerClasses>)},
-            { "Races", typeof(SingleSelectForm<Races>)},
-            { "SpawnMask", typeof(MultiSelectForm<SpawnMask>)},
-            { "Gender", typeof(SingleSelectForm<Gender>)},
-            { "UnitState", typeof(MultiSelectForm<UnitState>)},
-            { "CreatureType", typeof(SingleSelectForm<CreatureType>)}, //! SingleSelectForm because the cond checks with == operator
-            { "PhaseMasks", typeof(MultiSelectForm<PhaseMasks>)},
-            { "TypeID", typeof(SingleSelectForm<TypeID>)},
-            { "TypeMask", typeof(MultiSelectForm<TypeMask>)},
-            { "CondRelationType", typeof(SingleSelectForm<CondRelationType>)},
-            { "ComparisionType", typeof(SingleSelectForm<ComparisionType>)},
-            { "ReputationRankMask", typeof(MultiSelectForm<ReputationRankMask>)},
-        };
-
         private void ShowSelectForm(string formTemplate, TextBox textBoxToChange)
         {
-            using (Form selectForm = (Form)Activator.CreateInstance(searchForms[formTemplate], new object[] { textBoxToChange }))
+            using (Form selectForm = (Form)Activator.CreateInstance(SAI_Editor_Manager.SearchFormsContainer[formTemplate], new object[] { textBoxToChange }))
                 selectForm.ShowDialog(this);
         }
 
