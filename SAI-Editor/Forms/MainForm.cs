@@ -174,12 +174,12 @@ namespace SAI_Editor.Forms
                     if (textBoxPassword.Text.Length > 0)
                         SAI_Editor_Manager.Instance.connString.Password = textBoxPassword.Text;
 
-                    SAI_Editor_Manager.Instance.ResetWorldDatabase(false);
+                    SAI_Editor_Manager.Instance.ResetWorldDatabase(true);
                 }
 
                 if (!Settings.Default.UseWorldDatabase || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(SAI_Editor_Manager.Instance.connString, false))
                 {
-                    SAI_Editor_Manager.Instance.ResetWorldDatabase(false);
+                    SAI_Editor_Manager.Instance.ResetWorldDatabase(true);
                     buttonConnect.PerformClick();
 
                     if (Settings.Default.InstantExpand)
@@ -437,7 +437,7 @@ namespace SAI_Editor.Forms
                 if (textBoxPassword.Text.Length > 0)
                     SAI_Editor_Manager.Instance.connString.Password = textBoxPassword.Text;
 
-                SAI_Editor_Manager.Instance.ResetWorldDatabase(false);
+                SAI_Editor_Manager.Instance.ResetWorldDatabase(true);
             }
 
             buttonConnect.Enabled = false;
@@ -1982,12 +1982,6 @@ namespace SAI_Editor.Forms
                     return "unknown";
             }
         }
-
-        //public void ShowSearchFromDatabaseForm(TextBox textBoxToChange, DatabaseSearchFormType searchType)
-        //{
-        //    using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, searchType))
-        //        searchFromDatabaseForm.ShowDialog(this);
-        //}
 
         private void buttonEventParamOneSearch_Click(object sender, EventArgs e)
         {
