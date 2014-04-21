@@ -61,7 +61,7 @@ namespace SAI_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("trinitycore_world")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string Database {
             get {
                 return ((string)(this["Database"]));
