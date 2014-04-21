@@ -370,9 +370,10 @@ namespace SAI_Editor.Forms
                         {
                             using (StreamReader streamReaderVersion = new StreamReader(streamVersion))
                             {
-                                string newAppVersion = streamReaderVersion.ReadToEnd();
+                                int newAppVersion = XConverter.ToInt32(streamReaderVersion.ReadToEnd().Replace("v", String.Empty).Replace(".", String.Empty));
+                                int currAppVersion = XConverter.ToInt32(applicationVersion.Replace("v", String.Empty).Replace(".", String.Empty));
 
-                                if (newAppVersion != applicationVersion)
+                                if (newAppVersion > 0 && currAppVersion > 0 && newAppVersion > currAppVersion)
                                 {
                                     string newVersionAvailable = "A new version of the application is available (" + newAppVersion + ").";
 
