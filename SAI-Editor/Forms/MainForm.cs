@@ -766,7 +766,7 @@ namespace SAI_Editor.Forms
                             {
                                 textBoxEntryOrGuid.Text = smartScripts[0].entryorguid.ToString();
                                 comboBoxSourceType.SelectedIndex = GetIndexBySourceType((SourceTypes)smartScripts[0].source_type);
-                                TryToLoadScript();
+                                TryToLoadScript(forced: true);
                             }
                         }
                         else
@@ -1726,9 +1726,9 @@ namespace SAI_Editor.Forms
             return "<unknown template table>";
         }
 
-        public async void TryToLoadScript(int entryorguid = -1, SourceTypes sourceType = SourceTypes.SourceTypeNone, bool showErrorIfNoneFound = true, bool promptCreateIfNoneFound = false)
+        public async void TryToLoadScript(int entryorguid = -1, SourceTypes sourceType = SourceTypes.SourceTypeNone, bool showErrorIfNoneFound = true, bool promptCreateIfNoneFound = false, bool forced = false)
         {
-            if (!pictureBoxLoadScript.Enabled || !Settings.Default.UseWorldDatabase)
+            if ((!forced && !pictureBoxLoadScript.Enabled) || !Settings.Default.UseWorldDatabase)
                 return;
 
             listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
