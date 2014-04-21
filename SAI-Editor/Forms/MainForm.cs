@@ -72,7 +72,7 @@ namespace SAI_Editor.Forms
         private int MainFormWidth = (int)FormSizes.MainFormWidth, MainFormHeight = (int)FormSizes.MainFormHeight;
         private int listViewSmartScriptsHeightToChangeTo;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
-        private Thread searchNewUpdates = null, updateSurveyThread = null;
+        private Thread updateSurveyThread = null;
         private FormState formState = FormState.FormStateLogin;
         private string applicationVersion = String.Empty;
         private System.Windows.Forms.Timer timerCheckForInternetConnection = new System.Windows.Forms.Timer();
@@ -89,50 +89,6 @@ namespace SAI_Editor.Forms
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             applicationVersion = "v" + version.Major + "." + version.Minor + "." + version.Build;
             Text = "SAI-Editor " + applicationVersion + ": Login";
-
-            string updateUpdaterDir = Directory.GetCurrentDirectory() + @"\update_updater.txt";
-
-            //! Check if file exists first because the check for internet takes a few seconds
-            //! for most users.
-            if (File.Exists(updateUpdaterDir))
-            {
-                MessageBox.Show("There is an updater available for the SAI-Editor Updater. Pressing OK will start the updating. The application might freeze up for a few seconds.", "Update available for the updater!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                if (SAI_Editor_Manager.Instance.HasInternetConnection())
-                {
-                    //! Keep showing this error until the process was closed. The MessageBox halts the
-                    //! thread so it will only check for the updater once the messagebox is closed.
-                    while (Process.GetProcessesByName("SAI-Editor Updater").Length > 0)
-                        MessageBox.Show("There is currently an instance of the SAI-Editor Updater running which has to be closed.", "The Updater has to be closed", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    //! Delete the file
-                    File.Delete(updateUpdaterDir);
-
-                    try
-                    {
-                        //! Download the Updater from the dropbox to the users' folder
-                        string remotefile = "http://dl.dropbox.com/u/84527004/SAI-Editor/SAI-Editor/SAI-Editor Updater.exe";
-
-                        //! We check if the URL exists before trying to download the file because if it
-                        //! doesn't exist for whatever reason, the existing Updater of the user is removed
-                        //! because it was being replaced but ended up being replaced by a non-existent file.
-                        if (SAI_Editor_Manager.Instance.DoesUrlExist(remotefile))
-                        {
-                            //! Download the new file to the existing updater.
-                            using (WebClient client = new WebClient())
-                                client.DownloadFile(remotefile, Directory.GetCurrentDirectory() + @"\SAI-Editor Updater.exe");
-                        }
-                        else
-                            MessageBox.Show("The Updater executable could not be found on Dropbox.", "Updater not found!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                    MessageBox.Show("The application was unable to connect to the internet and the Updater could therefore not be updated.", "No internet!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
 
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
 
@@ -295,10 +251,7 @@ namespace SAI_Editor.Forms
                 Settings.Default.AgreedToSurvey = result == DialogResult.Yes;
             }
 
-            searchNewUpdates = new Thread(CheckIfUpdatesAvailable);
             updateSurveyThread = new Thread(UpdateSurvey);
-
-            searchNewUpdates.Start();
             updateSurveyThread.Start();
 
             runningConstructor = false;
@@ -358,87 +311,6 @@ namespace SAI_Editor.Forms
             SetForegroundWindow(firstInstance);
         }
 
-        private void CheckIfUpdatesAvailable()
-        {
-            using (WebClient client = new WebClient())
-            {
-                try
-                {
-                    using (Stream streamVersion = client.OpenRead("http://dl.dropbox.com/u/84527004/SAI-Editor/version.txt"))
-                    {
-                        if (streamVersion != null)
-                        {
-                            using (StreamReader streamReaderVersion = new StreamReader(streamVersion))
-                            {
-                                int newAppVersion = XConverter.ToInt32(streamReaderVersion.ReadToEnd().Replace("v", String.Empty).Replace(".", String.Empty));
-                                int currAppVersion = XConverter.ToInt32(applicationVersion.Replace("v", String.Empty).Replace(".", String.Empty));
-
-                                if (newAppVersion > 0 && currAppVersion > 0 && newAppVersion > currAppVersion)
-                                {
-                                    string newVersionAvailable = "A new version of the application is available (" + newAppVersion + ").";
-
-                                    if (!File.Exists(Directory.GetCurrentDirectory() + @"\\SAI-Editor Updater.exe"))
-                                    {
-                                        //! Run the messagebox on the mainthread
-                                        Invoke(new Action(() =>
-                                        {
-                                            DialogResult resultOpenDlLink = MessageBox.Show(this, newVersionAvailable + " However, the updater could not be found in the current directory so it's not possible for you to update. Do you wish to download the application again? (Warning: this opens a webpage on your browser)", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                                            if (resultOpenDlLink == DialogResult.Yes)
-                                                Process.Start("http://www.trinitycore.org/f/files/file/17-sai-editor/");
-                                        }));
-
-                                        return;
-                                    }
-
-                                    //! Run the messagebox on the mainthread
-                                    Invoke(new Action(() =>
-                                    {
-                                        DialogResult result = MessageBox.Show(this, newVersionAvailable + " Do you wish to start the Updater to get the latest SAI-Editor?", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
-
-                                        if (result == DialogResult.Yes)
-                                        {
-                                            Settings.Default.Save();
-                                            Invoke((MethodInvoker)Close);
-
-                                            try
-                                            {
-                                                Process.Start(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe", "RanFromSaiEditor");
-                                                ShowToFront(Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe");
-                                            }
-                                            catch
-                                            {
-                                                MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                            }
-                                        }
-                                    }));
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (ThreadAbortException)
-                {
-
-                }
-                catch (WebException)
-                {
-                    //! Try to connect to google.com. If it can't connect, it means no internet connection
-                    //! is available. We then start a timer which checks for an internet connection every
-                    //! 10 minutes.
-                    if (!SAI_Editor_Manager.Instance.HasInternetConnection())
-                        timerCheckForInternetConnection.Enabled = true;
-                }
-                catch (Exception ex)
-                {
-                    Invoke(new Action(() =>
-                    {
-                        MessageBox.Show("Something went wrong while checking for updates. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }));
-                }
-            }
-        }
-
         private void timerCheckForInternetConnection_Tick(object sender, EventArgs e)
         {
             //! Try to connect to google.com. If it can't connect, it means no internet connection
@@ -446,7 +318,6 @@ namespace SAI_Editor.Forms
             if (SAI_Editor_Manager.Instance.HasInternetConnection())
             {
                 timerCheckForInternetConnection.Enabled = false;
-                searchNewUpdates.Start();
                 updateSurveyThread.Start();
             }
         }
@@ -3754,9 +3625,6 @@ namespace SAI_Editor.Forms
             if (adjustedLoginSettings)
                 SaveLastUsedFields();
 
-            if (searchNewUpdates != null)
-                searchNewUpdates.Abort();
-
             if (updateSurveyThread != null)
                 updateSurveyThread.Abort();
         }
@@ -4190,35 +4058,6 @@ namespace SAI_Editor.Forms
             Settings.Default.Save();
 
             ExpandToShowPermanentTooltips(!checkBoxUsePermanentTooltips.Checked);
-        }
-
-        private void checkForUpdatesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show("Opening the updater will close the SAI-Editor. The SAI-Editor will be opened afterwards. Are you sure you wish to continue?", "Do you wish to continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-            if (result == DialogResult.No)
-                return;
-
-            string updaterDir = Directory.GetCurrentDirectory() + "\\SAI-Editor Updater.exe";
-
-            if (!File.Exists(updaterDir))
-            {
-                MessageBox.Show("The executable of the Updater could not be found (SAI-Editor Updater.exe).", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            Settings.Default.Save();
-            Close();
-
-            try
-            {
-                Process.Start(updaterDir);
-                ShowToFront(updaterDir);
-            }
-            catch
-            {
-                MessageBox.Show("The updater could not be opened.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
         private void searchForASpellToolStripMenuItem1_Click(object sender, EventArgs e)
