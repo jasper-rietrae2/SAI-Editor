@@ -87,10 +87,10 @@
             this.buttonSearchSourceId = new System.Windows.Forms.Button();
             this.buttonSearchErrorTextId = new System.Windows.Forms.Button();
             this.buttonSearchErrorType = new System.Windows.Forms.Button();
-            this.labelSourceId = new System.Windows.Forms.Label();
             this.labelElseGroup = new System.Windows.Forms.Label();
-            this.textBoxSourceId = new System.Windows.Forms.TextBox();
+            this.labelSourceId = new System.Windows.Forms.Label();
             this.textBoxElseGroup = new System.Windows.Forms.TextBox();
+            this.textBoxSourceId = new System.Windows.Forms.TextBox();
             this.textBoxErrorTextId = new System.Windows.Forms.TextBox();
             this.textBoxErrorType = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -104,6 +104,7 @@
             this.buttonDuplicateCondition = new System.Windows.Forms.Button();
             this.buttonDeleteCondition = new System.Windows.Forms.Button();
             this.buttonLoadCondition = new System.Windows.Forms.Button();
+            this.buttonResetSession = new System.Windows.Forms.Button();
             this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.panelPermanentTooltipSourceType.SuspendLayout();
@@ -641,6 +642,7 @@
             this.tabPageEditing.Controls.Add(this.textBoxScriptName);
             this.tabPageEditing.Controls.Add(this.label12);
             this.tabPageEditing.Controls.Add(this.comboBoxConditionSourceTypes);
+            this.tabPageEditing.Controls.Add(this.buttonResetSession);
             this.tabPageEditing.Controls.Add(this.buttonSaveCondition);
             this.tabPageEditing.Controls.Add(this.buttonGenerateSql);
             this.tabPageEditing.Controls.Add(this.comboBoxConditionTypes);
@@ -664,8 +666,8 @@
             this.tabPageEditing.Controls.Add(this.labelSourceGroup);
             this.tabPageEditing.Controls.Add(this.buttonSearchErrorType);
             this.tabPageEditing.Controls.Add(this.buttonSearchConditionValue1);
-            this.tabPageEditing.Controls.Add(this.labelSourceId);
             this.tabPageEditing.Controls.Add(this.labelElseGroup);
+            this.tabPageEditing.Controls.Add(this.labelSourceId);
             this.tabPageEditing.Controls.Add(this.labelSourceEntry);
             this.tabPageEditing.Controls.Add(this.buttonSearchSourceGroup);
             this.tabPageEditing.Controls.Add(this.labelConditionTarget);
@@ -673,8 +675,8 @@
             this.tabPageEditing.Controls.Add(this.comboBoxConditionTarget);
             this.tabPageEditing.Controls.Add(this.textBoxCondValue3);
             this.tabPageEditing.Controls.Add(this.textBoxSourceGroup);
-            this.tabPageEditing.Controls.Add(this.textBoxSourceId);
             this.tabPageEditing.Controls.Add(this.textBoxElseGroup);
+            this.tabPageEditing.Controls.Add(this.textBoxSourceId);
             this.tabPageEditing.Controls.Add(this.textBoxErrorTextId);
             this.tabPageEditing.Controls.Add(this.textBoxCondValue2);
             this.tabPageEditing.Controls.Add(this.textBoxErrorType);
@@ -761,7 +763,7 @@
             // buttonSearchSourceId
             // 
             this.buttonSearchSourceId.Enabled = false;
-            this.buttonSearchSourceId.Location = new System.Drawing.Point(618, 85);
+            this.buttonSearchSourceId.Location = new System.Drawing.Point(618, 59);
             this.buttonSearchSourceId.Name = "buttonSearchSourceId";
             this.buttonSearchSourceId.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchSourceId.TabIndex = 10;
@@ -789,43 +791,43 @@
             this.buttonSearchErrorType.UseVisualStyleBackColor = true;
             this.buttonSearchErrorType.Click += new System.EventHandler(this.buttonSearchErrorType_Click);
             // 
-            // labelSourceId
-            // 
-            this.labelSourceId.AutoSize = true;
-            this.labelSourceId.Location = new System.Drawing.Point(422, 90);
-            this.labelSourceId.Name = "labelSourceId";
-            this.labelSourceId.Size = new System.Drawing.Size(52, 13);
-            this.labelSourceId.TabIndex = 8;
-            this.labelSourceId.Text = "Source id";
-            // 
             // labelElseGroup
             // 
             this.labelElseGroup.AutoSize = true;
-            this.labelElseGroup.Location = new System.Drawing.Point(422, 64);
+            this.labelElseGroup.Location = new System.Drawing.Point(422, 90);
             this.labelElseGroup.Name = "labelElseGroup";
             this.labelElseGroup.Size = new System.Drawing.Size(57, 13);
             this.labelElseGroup.TabIndex = 8;
             this.labelElseGroup.Text = "Else group";
             // 
-            // textBoxSourceId
+            // labelSourceId
             // 
-            this.textBoxSourceId.Location = new System.Drawing.Point(552, 86);
-            this.textBoxSourceId.Name = "textBoxSourceId";
-            this.textBoxSourceId.Size = new System.Drawing.Size(66, 20);
-            this.textBoxSourceId.TabIndex = 9;
-            this.textBoxSourceId.Text = "0";
-            this.textBoxSourceId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
-            this.textBoxSourceId.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
+            this.labelSourceId.AutoSize = true;
+            this.labelSourceId.Location = new System.Drawing.Point(422, 64);
+            this.labelSourceId.Name = "labelSourceId";
+            this.labelSourceId.Size = new System.Drawing.Size(52, 13);
+            this.labelSourceId.TabIndex = 8;
+            this.labelSourceId.Text = "Source id";
             // 
             // textBoxElseGroup
             // 
-            this.textBoxElseGroup.Location = new System.Drawing.Point(552, 60);
+            this.textBoxElseGroup.Location = new System.Drawing.Point(552, 86);
             this.textBoxElseGroup.Name = "textBoxElseGroup";
             this.textBoxElseGroup.Size = new System.Drawing.Size(66, 20);
-            this.textBoxElseGroup.TabIndex = 8;
+            this.textBoxElseGroup.TabIndex = 9;
             this.textBoxElseGroup.Text = "0";
             this.textBoxElseGroup.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
             this.textBoxElseGroup.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
+            // 
+            // textBoxSourceId
+            // 
+            this.textBoxSourceId.Location = new System.Drawing.Point(552, 60);
+            this.textBoxSourceId.Name = "textBoxSourceId";
+            this.textBoxSourceId.Size = new System.Drawing.Size(66, 20);
+            this.textBoxSourceId.TabIndex = 8;
+            this.textBoxSourceId.Text = "0";
+            this.textBoxSourceId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
+            this.textBoxSourceId.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
             // 
             // textBoxErrorTextId
             // 
@@ -969,6 +971,16 @@
             this.buttonLoadCondition.UseVisualStyleBackColor = true;
             this.buttonLoadCondition.Click += new System.EventHandler(this.buttonLoadCondition_Click);
             // 
+            // buttonResetSession
+            // 
+            this.buttonResetSession.Location = new System.Drawing.Point(255, 230);
+            this.buttonResetSession.Name = "buttonResetSession";
+            this.buttonResetSession.Size = new System.Drawing.Size(125, 23);
+            this.buttonResetSession.TabIndex = 25;
+            this.buttonResetSession.Text = "Reset session";
+            this.buttonResetSession.UseVisualStyleBackColor = true;
+            this.buttonResetSession.Click += new System.EventHandler(this.buttonResetSession_Click);
+            // 
             // lineSeparator1
             // 
             this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
@@ -1086,8 +1098,8 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox textBoxScriptName;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label labelElseGroup;
-        private System.Windows.Forms.TextBox textBoxElseGroup;
+        private System.Windows.Forms.Label labelSourceId;
+        private System.Windows.Forms.TextBox textBoxSourceId;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Button buttonSearchErrorType;
@@ -1097,9 +1109,10 @@
         private System.Windows.Forms.Button buttonSearchErrorTextId;
         private System.Windows.Forms.TextBox textBoxErrorTextId;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label labelSourceId;
-        private System.Windows.Forms.TextBox textBoxSourceId;
+        private System.Windows.Forms.Label labelElseGroup;
+        private System.Windows.Forms.TextBox textBoxElseGroup;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button buttonSearchSourceId;
+        private System.Windows.Forms.Button buttonResetSession;
     }
 }

@@ -34,7 +34,7 @@ namespace SAI_Editor.Forms
             //! Reset the values
             labelSourceGroup.Text = " - ";
             labelSourceEntry.Text = " - ";
-            labelSourceId.Text = " - ";
+            labelElseGroup.Text = " - ";
             SetConditionTargetValues(null);
 
             ConditionSourceTypes selectedType = (ConditionSourceTypes)comboBoxConditionSourceTypes.SelectedIndex;
@@ -136,7 +136,7 @@ namespace SAI_Editor.Forms
 
         private void SetSourceIdValues(string value, bool searchable = false)
         {
-            labelSourceId.Text = value;
+            labelElseGroup.Text = value;
             buttonSearchSourceId.Enabled = searchable;
         }
 
@@ -422,7 +422,7 @@ namespace SAI_Editor.Forms
 
         private void buttonSearchSourceId_Click(object sender, EventArgs e)
         {
-            TextBox textBoxToChange = textBoxSourceId;
+            TextBox textBoxToChange = textBoxElseGroup;
 
             switch ((ConditionSourceTypes)comboBoxConditionSourceTypes.SelectedIndex)
             {
@@ -653,8 +653,8 @@ namespace SAI_Editor.Forms
             condition.SourceTypeOrReferenceId = comboBoxConditionSourceTypes.SelectedIndex;
             condition.SourceGroup = XConverter.ToInt32(textBoxSourceGroup.Text);
             condition.SourceEntry = XConverter.ToInt32(textBoxSourceEntry.Text);
-            condition.SourceId = XConverter.ToInt32(textBoxSourceId.Text);
-            condition.ElseGroup = XConverter.ToInt32(textBoxElseGroup.Text);
+            condition.SourceId = XConverter.ToInt32(textBoxElseGroup.Text);
+            condition.ElseGroup = XConverter.ToInt32(textBoxSourceId.Text);
             condition.ConditionTypeOrReference = comboBoxConditionTypes.SelectedIndex;
             condition.ConditionTarget = comboBoxConditionTarget.SelectedIndex;
             condition.ConditionValue1 = XConverter.ToInt32(textBoxCondValue1.Text);
@@ -705,8 +705,8 @@ namespace SAI_Editor.Forms
             comboBoxConditionSourceTypes.SelectedIndex = listViewConditions.SelectedCondition.SourceTypeOrReferenceId;
             textBoxSourceGroup.Text = selectedCond.SourceGroup.ToString();
             textBoxSourceEntry.Text = selectedCond.SourceEntry.ToString();
-            textBoxSourceId.Text = selectedCond.SourceId.ToString();
-            textBoxElseGroup.Text = selectedCond.ElseGroup.ToString();
+            textBoxElseGroup.Text = selectedCond.SourceId.ToString();
+            textBoxSourceId.Text = selectedCond.ElseGroup.ToString();
             comboBoxConditionTypes.SelectedIndex = listViewConditions.SelectedCondition.ConditionTypeOrReference;
             comboBoxConditionTarget.SelectedIndex = selectedCond.ConditionTarget;
             textBoxCondValue1.Text = selectedCond.ConditionValue1.ToString();
@@ -757,6 +757,34 @@ namespace SAI_Editor.Forms
             {
                 textBox.Text = "0";
                 textBox.SelectionStart = 1;
+            }
+        }
+
+        private void buttonResetSession_Click(object sender, EventArgs e)
+        {
+            ResetSession();
+        }
+
+        private void ResetSession()
+        {
+            conditions.Clear();
+            listViewConditions.ReplaceConditions(new List<Condition>());
+            labelSourceGroup.Text = " - ";
+            labelSourceEntry.Text = " - ";
+            labelElseGroup.Text = " - ";
+            SetConditionTargetValues(null);
+            SetConditionValues(new string[] { "", "", "", "" }, new bool[] { false, false, false, false });
+            richTextBoxSql.Text = String.Empty;
+            listViewConditions.Items.Clear();
+
+            foreach (Control control in tabControl.TabPages[0].Controls)
+            {
+                if (control is TextBox && control.Name != "textBoxScriptName" && control.Name != "textBoxComment")
+                    control.Text = "0";
+                else if (control is ComboBox)
+                    (control as ComboBox).SelectedIndex = 0;
+                else if (control is Button && control.Text == "...")
+                    control.Enabled = false;
             }
         }
     }

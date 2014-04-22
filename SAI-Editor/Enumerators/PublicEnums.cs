@@ -2,6 +2,12 @@
 
 namespace SAI_Editor.Enumerators
 {
+    public enum ScriptTypeId
+    {
+        ScriptTypeEvent,
+        ScriptTypeAction,
+        ScriptTypeTarget,
+    }
 
     public enum SmartEvent
     {

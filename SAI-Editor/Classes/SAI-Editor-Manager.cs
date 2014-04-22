@@ -18,13 +18,6 @@ using SAI_Editor.Forms.SearchForms;
 
 namespace SAI_Editor.Classes
 {
-    public enum ScriptTypeId
-    {
-        ScriptTypeEvent,
-        ScriptTypeAction,
-        ScriptTypeTarget,
-    }
-
     class SAI_Editor_Manager
     {
         public WorldDatabase _worldDatabase = null;
