@@ -136,7 +136,7 @@ namespace SAI_Editor.Forms
 
         private void SetSourceIdValues(string value, bool searchable = false)
         {
-            labelElseGroup.Text = value;
+            labelSourceId.Text = value;
             buttonSearchSourceId.Enabled = searchable;
         }
 
@@ -653,8 +653,8 @@ namespace SAI_Editor.Forms
             condition.SourceTypeOrReferenceId = comboBoxConditionSourceTypes.SelectedIndex;
             condition.SourceGroup = XConverter.ToInt32(textBoxSourceGroup.Text);
             condition.SourceEntry = XConverter.ToInt32(textBoxSourceEntry.Text);
-            condition.SourceId = XConverter.ToInt32(textBoxElseGroup.Text);
-            condition.ElseGroup = XConverter.ToInt32(textBoxSourceId.Text);
+            condition.SourceId = XConverter.ToInt32(textBoxSourceId.Text);
+            condition.ElseGroup = XConverter.ToInt32(textBoxElseGroup.Text);
             condition.ConditionTypeOrReference = comboBoxConditionTypes.SelectedIndex;
             condition.ConditionTarget = comboBoxConditionTarget.SelectedIndex;
             condition.ConditionValue1 = XConverter.ToInt32(textBoxCondValue1.Text);
@@ -705,16 +705,16 @@ namespace SAI_Editor.Forms
             comboBoxConditionSourceTypes.SelectedIndex = listViewConditions.SelectedCondition.SourceTypeOrReferenceId;
             textBoxSourceGroup.Text = selectedCond.SourceGroup.ToString();
             textBoxSourceEntry.Text = selectedCond.SourceEntry.ToString();
-            textBoxElseGroup.Text = selectedCond.SourceId.ToString();
-            textBoxSourceId.Text = selectedCond.ElseGroup.ToString();
+            textBoxElseGroup.Text = selectedCond.ElseGroup.ToString();
+            textBoxSourceId.Text = selectedCond.SourceId.ToString();
             comboBoxConditionTypes.SelectedIndex = listViewConditions.SelectedCondition.ConditionTypeOrReference;
             comboBoxConditionTarget.SelectedIndex = selectedCond.ConditionTarget;
             textBoxCondValue1.Text = selectedCond.ConditionValue1.ToString();
             textBoxCondValue2.Text = selectedCond.ConditionValue2.ToString();
             textBoxCondValue3.Text = selectedCond.ConditionValue3.ToString();
             textBoxCondValue4.Text = selectedCond.NegativeCondition.ToString();
-            //selectedCond.ErrorType = 0;
-            //selectedCond.ErrorTextId = 0;
+            textBoxErrorType.Text = selectedCond.ErrorType.ToString();
+            textBoxErrorTextId.Text = selectedCond.ErrorTextId.ToString();
             textBoxScriptName.Text = selectedCond.ScriptName;
             textBoxComment.Text = selectedCond.Comment;
 
