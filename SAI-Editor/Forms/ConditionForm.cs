@@ -607,7 +607,7 @@ namespace SAI_Editor.Forms
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    Close();
+                    Hide();
                     break;
             }
         }
