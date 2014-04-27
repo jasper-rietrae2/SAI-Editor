@@ -4082,17 +4082,29 @@ namespace SAI_Editor.Forms
 
         private void conditionEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.Name == "ConditionForm")
-                {
-                    form.BringToFront();
-                    return;
-                }
-            }
+            if (TryToBringOpenFormToFront("ConditionForm"))
+                return;
 
             ConditionForm conditionForm = new ConditionForm();
             conditionForm.Show();
+        }
+
+        private bool TryToBringOpenFormToFront(string formName, bool show = true)
+        {
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.Name == formName)
+                {
+                    form.BringToFront();
+
+                    if (show)
+                        form.Show();
+
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         Dictionary<string, Type> searchEventHandlers = new Dictionary<string, Type>()

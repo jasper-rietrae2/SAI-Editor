@@ -787,5 +787,12 @@ namespace SAI_Editor.Forms
                     control.Enabled = false;
             }
         }
+
+        //! Don't allow closign the condition editor. It will automatically hide itself so the session is never lost.
+        private void ConditionForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            Hide();
+        }
     }
 }

@@ -81,6 +81,7 @@
             this.label14 = new System.Windows.Forms.Label();
             this.textBoxScriptName = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.buttonResetSession = new System.Windows.Forms.Button();
             this.buttonSaveCondition = new System.Windows.Forms.Button();
             this.label19 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -104,7 +105,6 @@
             this.buttonDuplicateCondition = new System.Windows.Forms.Button();
             this.buttonDeleteCondition = new System.Windows.Forms.Button();
             this.buttonLoadCondition = new System.Windows.Forms.Button();
-            this.buttonResetSession = new System.Windows.Forms.Button();
             this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.panelPermanentTooltipSourceType.SuspendLayout();
@@ -732,6 +732,16 @@
             this.label12.TabIndex = 29;
             this.label12.Text = "ScriptName";
             // 
+            // buttonResetSession
+            // 
+            this.buttonResetSession.Location = new System.Drawing.Point(255, 230);
+            this.buttonResetSession.Name = "buttonResetSession";
+            this.buttonResetSession.Size = new System.Drawing.Size(125, 23);
+            this.buttonResetSession.TabIndex = 25;
+            this.buttonResetSession.Text = "Reset session";
+            this.buttonResetSession.UseVisualStyleBackColor = true;
+            this.buttonResetSession.Click += new System.EventHandler(this.buttonResetSession_Click);
+            // 
             // buttonSaveCondition
             // 
             this.buttonSaveCondition.Location = new System.Drawing.Point(386, 230);
@@ -971,16 +981,6 @@
             this.buttonLoadCondition.UseVisualStyleBackColor = true;
             this.buttonLoadCondition.Click += new System.EventHandler(this.buttonLoadCondition_Click);
             // 
-            // buttonResetSession
-            // 
-            this.buttonResetSession.Location = new System.Drawing.Point(255, 230);
-            this.buttonResetSession.Name = "buttonResetSession";
-            this.buttonResetSession.Size = new System.Drawing.Size(125, 23);
-            this.buttonResetSession.TabIndex = 25;
-            this.buttonResetSession.Text = "Reset session";
-            this.buttonResetSession.UseVisualStyleBackColor = true;
-            this.buttonResetSession.Click += new System.EventHandler(this.buttonResetSession_Click);
-            // 
             // lineSeparator1
             // 
             this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
@@ -1017,6 +1017,7 @@
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Condition-Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConditionForm_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConditionForm_KeyDown);
             this.panelPermanentTooltipSourceType.ResumeLayout(false);
             this.panelPermanentTooltipSourceType.PerformLayout();
