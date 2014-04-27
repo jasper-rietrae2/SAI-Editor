@@ -117,26 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="pictureBoxPermanentTooltip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAI9JREFUKFNj+P//IQQdu/cpYfFtiYpTcATkAgXhCqBKa7c8RFaEjPJW30MoBXLQ
-        pNEQ0CCQUqAVaBIfv/8BIjRBoDIGNPcB0aN3P648+4omCFTGgCaEB2FR+h8M0ASBiEZKMb2FVSnIW5iB
-        hVUpKLAwowpTKTQKgBhTNTKCqEMoBSKgFWjuBnKBglAF/x8CADKKWnWQtKCuAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAI9JREFUKFNj+P//IQQdu/cpYfFtiYpTcATkAgXhCqBKa7c8RFaEjPJW30MoBXLQ
-        pNEQ0CCQUqAVaBIfv/8BIjRBoDIGNPcB0aN3P648+4omCFTGgCaEB2FR+h8M0ASBiEZKMb2FVSnIW5iB
-        hVUpKLAwowpTKTQKgBhTNTKCqEMoBSKgFWjuBnKBglAF/x8CADKKWnWQtKCuAAAAAElFTkSuQmCC
-</value>
-  </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>53</value>
   </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAABAAIAICAAAAEAIACoEAAAJgAAABAQAAABACAAaAQAAM4QAAAoAAAAIAAAAEAAAAABACAAAAAAAAAQ

@@ -24,9 +24,6 @@ namespace SAI_Editor.Forms
 
             comboBoxConditionSourceTypes.SelectedIndex = 0;
             comboBoxConditionTypes.SelectedIndex = 0;
-
-            panelPermanentTooltipConditionType.BackColor = Color.FromArgb(255, 255, 225);
-            panelPermanentTooltipSourceType.BackColor = Color.FromArgb(255, 255, 225);
         }
 
         private void comboBoxConditionSourceTypes_SelectedIndexChanged(object sender, EventArgs e)

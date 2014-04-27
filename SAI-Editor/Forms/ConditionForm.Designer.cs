@@ -59,14 +59,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.buttonSearchSourceGroup = new System.Windows.Forms.Button();
             this.buttonSearchSourceEntry = new System.Windows.Forms.Button();
-            this.panelPermanentTooltipSourceType = new System.Windows.Forms.Panel();
-            this.labelPermanentTooltipSourceType = new System.Windows.Forms.Label();
-            this.labelPermanentTooltipSourceTypeValues = new System.Windows.Forms.Label();
-            this.pictureBoxPermanentTooltip = new System.Windows.Forms.PictureBox();
-            this.panelPermanentTooltipConditionType = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonSearchConditionValue1 = new System.Windows.Forms.Button();
             this.buttonSearchConditionValue2 = new System.Windows.Forms.Button();
             this.buttonSearchConditionValue3 = new System.Windows.Forms.Button();
@@ -96,21 +88,17 @@
             this.textBoxErrorType = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPageSql = new System.Windows.Forms.TabPage();
             this.richTextBoxSql = new FastColoredTextBoxNS.FastColoredTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.buttonDuplicateCondition = new System.Windows.Forms.Button();
             this.buttonDeleteCondition = new System.Windows.Forms.Button();
             this.buttonLoadCondition = new System.Windows.Forms.Button();
-            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
-            this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
-            this.panelPermanentTooltipSourceType.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
-            this.panelPermanentTooltipConditionType.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPageEditing.SuspendLayout();
             this.tabPageSql.SuspendLayout();
@@ -455,84 +443,6 @@
             this.buttonSearchSourceEntry.UseVisualStyleBackColor = true;
             this.buttonSearchSourceEntry.Click += new System.EventHandler(this.buttonSearchSourceEntry_Click);
             // 
-            // panelPermanentTooltipSourceType
-            // 
-            this.panelPermanentTooltipSourceType.BackColor = System.Drawing.Color.White;
-            this.panelPermanentTooltipSourceType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelPermanentTooltipSourceType.Controls.Add(this.labelPermanentTooltipSourceType);
-            this.panelPermanentTooltipSourceType.Controls.Add(this.labelPermanentTooltipSourceTypeValues);
-            this.panelPermanentTooltipSourceType.Controls.Add(this.pictureBoxPermanentTooltip);
-            this.panelPermanentTooltipSourceType.Location = new System.Drawing.Point(15, 264);
-            this.panelPermanentTooltipSourceType.Name = "panelPermanentTooltipSourceType";
-            this.panelPermanentTooltipSourceType.Size = new System.Drawing.Size(627, 30);
-            this.panelPermanentTooltipSourceType.TabIndex = 26;
-            // 
-            // labelPermanentTooltipSourceType
-            // 
-            this.labelPermanentTooltipSourceType.AutoSize = true;
-            this.labelPermanentTooltipSourceType.Location = new System.Drawing.Point(26, 1);
-            this.labelPermanentTooltipSourceType.Name = "labelPermanentTooltipSourceType";
-            this.labelPermanentTooltipSourceType.Size = new System.Drawing.Size(181, 13);
-            this.labelPermanentTooltipSourceType.TabIndex = 31;
-            this.labelPermanentTooltipSourceType.Text = "Event type, action type or target type";
-            // 
-            // labelPermanentTooltipSourceTypeValues
-            // 
-            this.labelPermanentTooltipSourceTypeValues.AutoSize = true;
-            this.labelPermanentTooltipSourceTypeValues.Location = new System.Drawing.Point(26, 15);
-            this.labelPermanentTooltipSourceTypeValues.Name = "labelPermanentTooltipSourceTypeValues";
-            this.labelPermanentTooltipSourceTypeValues.Size = new System.Drawing.Size(144, 13);
-            this.labelPermanentTooltipSourceTypeValues.TabIndex = 30;
-            this.labelPermanentTooltipSourceTypeValues.Text = "Event/action/target type text";
-            // 
-            // pictureBoxPermanentTooltip
-            // 
-            this.pictureBoxPermanentTooltip.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPermanentTooltip.Image")));
-            this.pictureBoxPermanentTooltip.Location = new System.Drawing.Point(6, 7);
-            this.pictureBoxPermanentTooltip.Name = "pictureBoxPermanentTooltip";
-            this.pictureBoxPermanentTooltip.Size = new System.Drawing.Size(14, 14);
-            this.pictureBoxPermanentTooltip.TabIndex = 29;
-            this.pictureBoxPermanentTooltip.TabStop = false;
-            // 
-            // panelPermanentTooltipConditionType
-            // 
-            this.panelPermanentTooltipConditionType.BackColor = System.Drawing.Color.White;
-            this.panelPermanentTooltipConditionType.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelPermanentTooltipConditionType.Controls.Add(this.label10);
-            this.panelPermanentTooltipConditionType.Controls.Add(this.label11);
-            this.panelPermanentTooltipConditionType.Controls.Add(this.pictureBox1);
-            this.panelPermanentTooltipConditionType.Location = new System.Drawing.Point(15, 300);
-            this.panelPermanentTooltipConditionType.Name = "panelPermanentTooltipConditionType";
-            this.panelPermanentTooltipConditionType.Size = new System.Drawing.Size(627, 30);
-            this.panelPermanentTooltipConditionType.TabIndex = 26;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(26, 1);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(181, 13);
-            this.label10.TabIndex = 31;
-            this.label10.Text = "Event type, action type or target type";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(26, 15);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(144, 13);
-            this.label11.TabIndex = 30;
-            this.label11.Text = "Event/action/target type text";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(6, 7);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(14, 14);
-            this.pictureBox1.TabIndex = 29;
-            this.pictureBox1.TabStop = false;
-            // 
             // buttonSearchConditionValue1
             // 
             this.buttonSearchConditionValue1.Enabled = false;
@@ -633,7 +543,7 @@
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(664, 362);
+            this.tabControl.Size = new System.Drawing.Size(664, 290);
             this.tabControl.TabIndex = 29;
             // 
             // tabPageEditing
@@ -648,9 +558,7 @@
             this.tabPageEditing.Controls.Add(this.comboBoxConditionTypes);
             this.tabPageEditing.Controls.Add(this.buttonGenerateComment);
             this.tabPageEditing.Controls.Add(this.labelSourceType);
-            this.tabPageEditing.Controls.Add(this.panelPermanentTooltipConditionType);
             this.tabPageEditing.Controls.Add(this.labelConditionType);
-            this.tabPageEditing.Controls.Add(this.panelPermanentTooltipSourceType);
             this.tabPageEditing.Controls.Add(this.label19);
             this.tabPageEditing.Controls.Add(this.label17);
             this.tabPageEditing.Controls.Add(this.labelCondValue1);
@@ -702,7 +610,7 @@
             this.tabPageEditing.Location = new System.Drawing.Point(4, 22);
             this.tabPageEditing.Name = "tabPageEditing";
             this.tabPageEditing.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEditing.Size = new System.Drawing.Size(656, 336);
+            this.tabPageEditing.Size = new System.Drawing.Size(656, 264);
             this.tabPageEditing.TabIndex = 0;
             this.tabPageEditing.Text = "Condition editing";
             this.tabPageEditing.UseVisualStyleBackColor = true;
@@ -877,6 +785,15 @@
             this.label15.TabIndex = 17;
             this.label15.Text = ":";
             // 
+            // lineSeparator1
+            // 
+            this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
+            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
+            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
+            this.lineSeparator1.Name = "lineSeparator1";
+            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
+            this.lineSeparator1.TabIndex = 13;
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -901,7 +818,7 @@
             this.tabPageSql.Location = new System.Drawing.Point(4, 22);
             this.tabPageSql.Name = "tabPageSql";
             this.tabPageSql.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSql.Size = new System.Drawing.Size(656, 336);
+            this.tabPageSql.Size = new System.Drawing.Size(656, 264);
             this.tabPageSql.TabIndex = 1;
             this.tabPageSql.Text = "Condition SQL";
             this.tabPageSql.UseVisualStyleBackColor = true;
@@ -914,12 +831,13 @@
             this.richTextBoxSql.CharWidth = 8;
             this.richTextBoxSql.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBoxSql.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
+            this.richTextBoxSql.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.richTextBoxSql.IsReplaceMode = false;
             this.richTextBoxSql.Location = new System.Drawing.Point(0, 0);
             this.richTextBoxSql.Name = "richTextBoxSql";
             this.richTextBoxSql.Paddings = new System.Windows.Forms.Padding(0);
             this.richTextBoxSql.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.richTextBoxSql.Size = new System.Drawing.Size(656, 340);
+            this.richTextBoxSql.Size = new System.Drawing.Size(656, 265);
             this.richTextBoxSql.TabIndex = 0;
             this.richTextBoxSql.Zoom = 100;
             // 
@@ -933,7 +851,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(656, 336);
+            this.tabPage1.Size = new System.Drawing.Size(656, 264);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Conditions overview";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -941,17 +859,30 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(549, 255);
+            this.checkBox1.Location = new System.Drawing.Point(540, 183);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(101, 17);
             this.checkBox1.TabIndex = 4;
             this.checkBox1.Text = "Show basic info";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
+            // listViewConditions
+            // 
+            this.listViewConditions.EnablePhaseHighlighting = false;
+            this.listViewConditions.FullRowSelect = true;
+            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
+            this.listViewConditions.MultiSelect = false;
+            this.listViewConditions.Name = "listViewConditions";
+            this.listViewConditions.Size = new System.Drawing.Size(656, 228);
+            this.listViewConditions.TabIndex = 3;
+            this.listViewConditions.UseCompatibleStateImageBehavior = false;
+            this.listViewConditions.View = System.Windows.Forms.View.Details;
+            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
+            // 
             // buttonDuplicateCondition
             // 
             this.buttonDuplicateCondition.Enabled = false;
-            this.buttonDuplicateCondition.Location = new System.Drawing.Point(8, 307);
+            this.buttonDuplicateCondition.Location = new System.Drawing.Point(8, 234);
             this.buttonDuplicateCondition.Name = "buttonDuplicateCondition";
             this.buttonDuplicateCondition.Size = new System.Drawing.Size(210, 23);
             this.buttonDuplicateCondition.TabIndex = 2;
@@ -962,7 +893,7 @@
             // buttonDeleteCondition
             // 
             this.buttonDeleteCondition.Enabled = false;
-            this.buttonDeleteCondition.Location = new System.Drawing.Point(224, 307);
+            this.buttonDeleteCondition.Location = new System.Drawing.Point(224, 234);
             this.buttonDeleteCondition.Name = "buttonDeleteCondition";
             this.buttonDeleteCondition.Size = new System.Drawing.Size(210, 23);
             this.buttonDeleteCondition.TabIndex = 2;
@@ -973,7 +904,7 @@
             // buttonLoadCondition
             // 
             this.buttonLoadCondition.Enabled = false;
-            this.buttonLoadCondition.Location = new System.Drawing.Point(440, 307);
+            this.buttonLoadCondition.Location = new System.Drawing.Point(440, 234);
             this.buttonLoadCondition.Name = "buttonLoadCondition";
             this.buttonLoadCondition.Size = new System.Drawing.Size(210, 23);
             this.buttonLoadCondition.TabIndex = 1;
@@ -981,33 +912,11 @@
             this.buttonLoadCondition.UseVisualStyleBackColor = true;
             this.buttonLoadCondition.Click += new System.EventHandler(this.buttonLoadCondition_Click);
             // 
-            // lineSeparator1
-            // 
-            this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
-            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
-            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
-            this.lineSeparator1.Name = "lineSeparator1";
-            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
-            this.lineSeparator1.TabIndex = 13;
-            // 
-            // listViewConditions
-            // 
-            this.listViewConditions.EnablePhaseHighlighting = false;
-            this.listViewConditions.FullRowSelect = true;
-            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
-            this.listViewConditions.MultiSelect = false;
-            this.listViewConditions.Name = "listViewConditions";
-            this.listViewConditions.Size = new System.Drawing.Size(656, 301);
-            this.listViewConditions.TabIndex = 3;
-            this.listViewConditions.UseCompatibleStateImageBehavior = false;
-            this.listViewConditions.View = System.Windows.Forms.View.Details;
-            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
-            // 
             // ConditionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 382);
+            this.ClientSize = new System.Drawing.Size(687, 311);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1019,12 +928,6 @@
             this.Text = "Condition-Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConditionForm_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ConditionForm_KeyDown);
-            this.panelPermanentTooltipSourceType.ResumeLayout(false);
-            this.panelPermanentTooltipSourceType.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
-            this.panelPermanentTooltipConditionType.ResumeLayout(false);
-            this.panelPermanentTooltipConditionType.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPageEditing.ResumeLayout(false);
             this.tabPageEditing.PerformLayout();
@@ -1065,14 +968,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button buttonSearchSourceGroup;
         private System.Windows.Forms.Button buttonSearchSourceEntry;
-        private System.Windows.Forms.Panel panelPermanentTooltipSourceType;
-        private System.Windows.Forms.Label labelPermanentTooltipSourceType;
-        private System.Windows.Forms.Label labelPermanentTooltipSourceTypeValues;
-        private System.Windows.Forms.PictureBox pictureBoxPermanentTooltip;
-        private System.Windows.Forms.Panel panelPermanentTooltipConditionType;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonSearchConditionValue1;
         private System.Windows.Forms.Button buttonSearchConditionValue2;
         private System.Windows.Forms.Button buttonSearchConditionValue3;
