@@ -41,6 +41,33 @@ namespace SAI_Editor.Forms.SearchForms
         DatabaseSearchFormTypeSmartScriptSourceType,
         DatabaseSearchFormTypeVendorEntry,
         DatabaseSearchFormTypeVendorItemEntry,
+        DatabaseSearchFormTypeLootTemplateBase,
+
+        DatabaseSearchFormTypeCreatureLootTemplateEntry,
+        DatabaseSearchFormTypeDisenchantLootTemplateEntry,
+        DatabaseSearchFormTypeFishingLootTemplateEntry,
+        DatabaseSearchFormTypeGameobjectLootTemplateEntry,
+        DatabaseSearchFormTypeItemLootTemplateEntry,
+        DatabaseSearchFormTypeMailLootTemplateEntry,
+        DatabaseSearchFormTypeMillingLootTemplateEntry,
+        DatabaseSearchFormTypePickpocketingLootTemplateEntry,
+        DatabaseSearchFormTypeProspectingLootTemplateEntry,
+        DatabaseSearchFormTypeReferenceLootTemplateEntry,
+        DatabaseSearchFormTypeSkinningLootTemplateEntry,
+        DatabaseSearchFormTypeSpellLootTemplateEntry,
+
+        DatabaseSearchFormTypeCreatureLootTemplateItem,
+        DatabaseSearchFormTypeDisenchantLootTemplateItem,
+        DatabaseSearchFormTypeFishingLootTemplateItem,
+        DatabaseSearchFormTypeGameobjectLootTemplateItem,
+        DatabaseSearchFormTypeItemLootTemplateItem,
+        DatabaseSearchFormTypeMailLootTemplateItem,
+        DatabaseSearchFormTypeMillingLootTemplateItem,
+        DatabaseSearchFormTypePickpocketingLootTemplateItem,
+        DatabaseSearchFormTypeProspectingLootTemplateItem,
+        DatabaseSearchFormTypeReferenceLootTemplateItem,
+        DatabaseSearchFormTypeSkinningLootTemplateItem,
+        DatabaseSearchFormTypeSpellLootTemplateItem,
     }
 
     public partial class SearchFromDatabaseForm : Form
@@ -69,6 +96,8 @@ namespace SAI_Editor.Forms.SearchForms
                 this.textBoxToChange = textBoxToChange;
                 textBoxCriteria.Text = textBoxToChange.Text;
             }
+
+            string lootTemplateKey = databaseSearchFormType.ToString().Replace("DatabaseSearchFormType", "").Replace("LootTemplateEntry", "").Replace("LootTemplateItem", "");
 
             switch (databaseSearchFormType)
             {
@@ -314,6 +343,41 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Vendor entry");
                     comboBoxSearchType.Items.Add("Vendor item entry");
                     baseQuery = "SELECT entry, item FROM npc_vendor";
+                    break;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeDisenchantLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeFishingLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeItemLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeMailLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeMillingLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypePickpocketingLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeProspectingLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeReferenceLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSkinningLootTemplateItem:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSpellLootTemplateItem:
+                    listViewItemIndexToCopy = 1;
+                    goto case DatabaseSearchFormType.DatabaseSearchFormTypeLootTemplateBase;
+                case DatabaseSearchFormType.DatabaseSearchFormTypeDisenchantLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeFishingLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeItemLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeMailLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeMillingLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypePickpocketingLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeProspectingLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeReferenceLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSkinningLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeSpellLootTemplateEntry:
+                case DatabaseSearchFormType.DatabaseSearchFormTypeLootTemplateBase:
+                    Text = "Search for a loot template";
+                    listViewEntryResults.Columns.Add("Loot entry", 164);
+                    listViewEntryResults.Columns.Add("Item entry", 164);
+                    comboBoxSearchType.Items.Add("Loot entry");
+                    comboBoxSearchType.Items.Add("Item entry");
+                    baseQuery = "SELECT entry, item FROM " + lootTemplateKey + "_loot_template";
+                    useMySQL = true;
                     break;
                 default:
                     MessageBox.Show("Unknown database search type!", "Something went wrong...", MessageBoxButtons.OK, MessageBoxIcon.Error);
