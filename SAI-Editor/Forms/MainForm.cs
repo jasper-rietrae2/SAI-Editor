@@ -179,7 +179,7 @@ namespace SAI_Editor.Forms
 
                 if (!Settings.Default.UseWorldDatabase || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(SAI_Editor_Manager.Instance.connString, false))
                 {
-                    SAI_Editor_Manager.Instance.ResetWorldDatabase(true);
+                    SAI_Editor_Manager.Instance.ResetWorldDatabase(Settings.Default.UseWorldDatabase);
                     buttonConnect.PerformClick();
 
                     if (Settings.Default.InstantExpand)
