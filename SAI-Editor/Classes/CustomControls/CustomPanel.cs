@@ -9,7 +9,6 @@ namespace SAI_Editor.Classes.CustomControls
 {
     public class CustomPanel : Panel
     {
-
         public CustomPanel()
         {
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
@@ -23,6 +22,5 @@ namespace SAI_Editor.Classes.CustomControls
                 return true;
             }
         }
-
     }
 }

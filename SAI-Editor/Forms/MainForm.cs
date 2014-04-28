@@ -61,11 +61,9 @@ namespace SAI_Editor.Forms
 
     public partial class MainForm : Form
     {
-
         public int expandAndContractSpeed = 5, lastSmartScriptIdOfScript = 0, previousLinkFrom = -1;
         public const int expandAndContractSpeedListView = 2;
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
-        private readonly List<Control> controlsLoginForm = new List<Control>(), controlsMainForm = new List<Control>();
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool contractingToLoginForm, expandingToMainForm, expandingListView, contractingListView;
         private bool runningConstructor = false, updatingFieldsBasedOnSelectedScript = false, adjustedLoginSettings = false;
@@ -80,12 +78,10 @@ namespace SAI_Editor.Forms
 
         public MainForm()
         {
-
             InitializeComponent();
 
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
             ResizeRedraw = true;
-
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
@@ -144,22 +140,7 @@ namespace SAI_Editor.Forms
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            //foreach (Control control in Controls)
-            //{
-            //    //! These two are set manually because otherwise they will always show for a split second before disappearing again.
-            //    if (control.Name == "panelPermanentTooltipTypes" || control.Name == "panelPermanentTooltipParameters")
-            //        continue;
-
-            //    if (control.Visible)
-            //        controlsLoginForm.Add(control);
-            //    else
-            //        controlsMainForm.Add(control);
-            //}
-
-            customPanel1.Visible = false;
-
-            //controlsLoginForm.Add(customPanel2);
-            //controlsMainForm.Add(customPanel1);
+            customPanelMain.Visible = false;
 
             comboBoxSourceType.SelectedIndex = 0;
             comboBoxEventType.SelectedIndex = 0;
@@ -210,7 +191,7 @@ namespace SAI_Editor.Forms
                 page.AutoScrollMinSize = new Size(page.Width, page.Height);
             }
 
-            customPanel2.Location = new Point(9, 8);
+            customPanelLogin.Location = new Point(9, 8);
 
             if (Settings.Default.HidePass)
                 textBoxPassword.PasswordChar = '●';
@@ -339,12 +320,10 @@ namespace SAI_Editor.Forms
             {
                 if (Height < MainFormHeight)
                 {
-
                     Height += expandAndContractSpeed;
 
                     if (Height >= MainFormHeight)
                         timerExpandOrContract_Tick(sender, e);
-
                 }
                 else
                 {
@@ -362,12 +341,10 @@ namespace SAI_Editor.Forms
 
                 if (Width < MainFormWidth)
                 {
-
                     Width += expandAndContractSpeed;
 
                     if (Width >= MainFormWidth)
                         timerExpandOrContract_Tick(sender, e);
-
                 }
                 else
                 {
@@ -521,13 +498,7 @@ namespace SAI_Editor.Forms
                 expandingToMainForm = true;
             }
 
-            customPanel2.Visible = false;
-
-            //foreach (Control control in controlsLoginForm)
-            //    control.Visible = false;
-
-            //foreach (Control control in controlsMainForm)
-            //    control.Visible = instant;
+            customPanelLogin.Visible = false;
 
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
@@ -554,8 +525,7 @@ namespace SAI_Editor.Forms
                 contractingToLoginForm = true;
             }
 
-            customPanel1.Visible = false;
-            
+            customPanelMain.Visible = false;
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -732,35 +702,10 @@ namespace SAI_Editor.Forms
 
         private void FinishedExpandingOrContracting(bool expanding)
         {
-
-            if (expanding)
-            {
-
-                customPanel2.Visible = false;
-                customPanel1.Visible = true;
-
-                menuStrip.Visible = true;
-
-                Invalidate();
-
-            }
-            else
-            {
-
-                customPanel2.Visible = true;
-                customPanel1.Visible = false;
-
-                menuStrip.Visible = false;
-
-                Invalidate();
-
-            }
-
-            //foreach (Control control in controlsLoginForm)
-            //    control.Visible = !expanding;
-
-            //foreach (Control control in controlsMainForm)
-            //    control.Visible = expanding;
+            customPanelLogin.Visible = !expanding;
+            customPanelMain.Visible = expanding;
+            menuStrip.Visible = expanding;
+            Invalidate();
 
             if (!expanding)
                 HandleHeightLoginFormBasedOnuseDatabaseSetting();
@@ -785,7 +730,7 @@ namespace SAI_Editor.Forms
                 if (radioButtonConnectToMySql.Checked)
                     TryToLoadScript(showErrorIfNoneFound: false);
 
-                //conditionEditorToolStripMenuItem.PerformClick();
+                conditionEditorToolStripMenuItem.PerformClick();
             }
         }
 

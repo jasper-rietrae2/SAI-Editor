@@ -115,7 +115,7 @@
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.timerExpandOrContract = new System.Windows.Forms.Timer(this.components);
             this.timerShowPermanentTooltips = new System.Windows.Forms.Timer(this.components);
-            this.customPanel2 = new SAI_Editor.Classes.CustomControls.CustomPanel();
+            this.customPanelLogin = new SAI_Editor.Classes.CustomControls.CustomPanel();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
             this.groupBoxLogin = new System.Windows.Forms.GroupBox();
@@ -136,7 +136,7 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.customPanel1 = new SAI_Editor.Classes.CustomControls.CustomPanel();
+            this.customPanelMain = new SAI_Editor.Classes.CustomControls.CustomPanel();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.buttonNewLine = new System.Windows.Forms.Button();
@@ -248,10 +248,10 @@
             this.textBoxEntryOrGuid = new System.Windows.Forms.TextBox();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
-            this.customPanel2.SuspendLayout();
+            this.customPanelLogin.SuspendLayout();
             this.panelLoginBox.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
-            this.customPanel1.SuspendLayout();
+            this.customPanelMain.SuspendLayout();
             this.panelPermanentTooltipParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelPermanentTooltipTypes.SuspendLayout();
@@ -973,13 +973,13 @@
             this.timerShowPermanentTooltips.Interval = 4;
             this.timerShowPermanentTooltips.Tick += new System.EventHandler(this.timerShowPermanentTooltips_Tick);
             // 
-            // customPanel2
+            // customPanelLogin
             // 
-            this.customPanel2.Controls.Add(this.panelLoginBox);
-            this.customPanel2.Location = new System.Drawing.Point(936, 31);
-            this.customPanel2.Name = "customPanel2";
-            this.customPanel2.Size = new System.Drawing.Size(382, 275);
-            this.customPanel2.TabIndex = 16;
+            this.customPanelLogin.Controls.Add(this.panelLoginBox);
+            this.customPanelLogin.Location = new System.Drawing.Point(936, 31);
+            this.customPanelLogin.Name = "customPanelLogin";
+            this.customPanelLogin.Size = new System.Drawing.Size(382, 275);
+            this.customPanelLogin.TabIndex = 16;
             // 
             // panelLoginBox
             // 
@@ -1182,22 +1182,22 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // customPanel1
+            // customPanelMain
             // 
-            this.customPanel1.Controls.Add(this.buttonGenerateComments);
-            this.customPanel1.Controls.Add(this.buttonGenerateSql);
-            this.customPanel1.Controls.Add(this.buttonNewLine);
-            this.customPanel1.Controls.Add(this.panelPermanentTooltipParameters);
-            this.customPanel1.Controls.Add(this.panelPermanentTooltipTypes);
-            this.customPanel1.Controls.Add(this.listViewSmartScripts);
-            this.customPanel1.Controls.Add(this.groupBoxParameters);
-            this.customPanel1.Controls.Add(this.groupBoxScriptInfo);
-            this.customPanel1.Controls.Add(this.groupBoxPreferences);
-            this.customPanel1.Controls.Add(this.groupBoxStaticScriptInfo);
-            this.customPanel1.Location = new System.Drawing.Point(12, 31);
-            this.customPanel1.Name = "customPanel1";
-            this.customPanel1.Size = new System.Drawing.Size(918, 439);
-            this.customPanel1.TabIndex = 15;
+            this.customPanelMain.Controls.Add(this.buttonGenerateComments);
+            this.customPanelMain.Controls.Add(this.buttonGenerateSql);
+            this.customPanelMain.Controls.Add(this.buttonNewLine);
+            this.customPanelMain.Controls.Add(this.panelPermanentTooltipParameters);
+            this.customPanelMain.Controls.Add(this.panelPermanentTooltipTypes);
+            this.customPanelMain.Controls.Add(this.listViewSmartScripts);
+            this.customPanelMain.Controls.Add(this.groupBoxParameters);
+            this.customPanelMain.Controls.Add(this.groupBoxScriptInfo);
+            this.customPanelMain.Controls.Add(this.groupBoxPreferences);
+            this.customPanelMain.Controls.Add(this.groupBoxStaticScriptInfo);
+            this.customPanelMain.Location = new System.Drawing.Point(12, 31);
+            this.customPanelMain.Name = "customPanelMain";
+            this.customPanelMain.Size = new System.Drawing.Size(918, 439);
+            this.customPanelMain.TabIndex = 15;
             // 
             // buttonGenerateComments
             // 
@@ -2621,8 +2621,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1318, 468);
-            this.Controls.Add(this.customPanel2);
-            this.Controls.Add(this.customPanel1);
+            this.Controls.Add(this.customPanelLogin);
+            this.Controls.Add(this.customPanelMain);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -2639,12 +2639,12 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.contextMenuStripListView.ResumeLayout(false);
-            this.customPanel2.ResumeLayout(false);
+            this.customPanelLogin.ResumeLayout(false);
             this.panelLoginBox.ResumeLayout(false);
             this.panelLoginBox.PerformLayout();
             this.groupBoxLogin.ResumeLayout(false);
             this.groupBoxLogin.PerformLayout();
-            this.customPanel1.ResumeLayout(false);
+            this.customPanelMain.ResumeLayout(false);
             this.panelPermanentTooltipParameters.ResumeLayout(false);
             this.panelPermanentTooltipParameters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -2780,7 +2780,7 @@
         private System.Windows.Forms.ToolStripMenuItem searchForTempSummonTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem conditionEditorToolStripMenuItem;
-        private Classes.CustomControls.CustomPanel customPanel1;
+        private Classes.CustomControls.CustomPanel customPanelMain;
         private System.Windows.Forms.Button buttonGenerateComments;
         private System.Windows.Forms.Button buttonGenerateSql;
         private System.Windows.Forms.Button buttonNewLine;
@@ -2890,7 +2890,7 @@
         public System.Windows.Forms.ComboBox comboBoxSourceType;
         private System.Windows.Forms.Label labelEntryOrGuid;
         public System.Windows.Forms.TextBox textBoxEntryOrGuid;
-        private Classes.CustomControls.CustomPanel customPanel2;
+        private Classes.CustomControls.CustomPanel customPanelLogin;
     }
 }
 
