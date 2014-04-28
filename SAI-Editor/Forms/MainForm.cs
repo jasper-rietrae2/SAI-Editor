@@ -61,6 +61,7 @@ namespace SAI_Editor.Forms
 
     public partial class MainForm : Form
     {
+
         public int expandAndContractSpeed = 5, lastSmartScriptIdOfScript = 0, previousLinkFrom = -1;
         public const int expandAndContractSpeedListView = 2;
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
@@ -79,7 +80,12 @@ namespace SAI_Editor.Forms
 
         public MainForm()
         {
+
             InitializeComponent();
+
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
+            ResizeRedraw = true;
+
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
@@ -138,17 +144,22 @@ namespace SAI_Editor.Forms
                 MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            foreach (Control control in Controls)
-            {
-                //! These two are set manually because otherwise they will always show for a split second before disappearing again.
-                if (control.Name == "panelPermanentTooltipTypes" || control.Name == "panelPermanentTooltipParameters")
-                    continue;
+            //foreach (Control control in Controls)
+            //{
+            //    //! These two are set manually because otherwise they will always show for a split second before disappearing again.
+            //    if (control.Name == "panelPermanentTooltipTypes" || control.Name == "panelPermanentTooltipParameters")
+            //        continue;
 
-                if (control.Visible)
-                    controlsLoginForm.Add(control);
-                else
-                    controlsMainForm.Add(control);
-            }
+            //    if (control.Visible)
+            //        controlsLoginForm.Add(control);
+            //    else
+            //        controlsMainForm.Add(control);
+            //}
+
+            customPanel1.Visible = false;
+
+            //controlsLoginForm.Add(customPanel2);
+            //controlsMainForm.Add(customPanel1);
 
             comboBoxSourceType.SelectedIndex = 0;
             comboBoxEventType.SelectedIndex = 0;
@@ -199,7 +210,7 @@ namespace SAI_Editor.Forms
                 page.AutoScrollMinSize = new Size(page.Width, page.Height);
             }
 
-            panelLoginBox.Location = new Point(9, 8);
+            customPanel2.Location = new Point(9, 8);
 
             if (Settings.Default.HidePass)
                 textBoxPassword.PasswordChar = '●';
@@ -327,7 +338,14 @@ namespace SAI_Editor.Forms
             if (expandingToMainForm)
             {
                 if (Height < MainFormHeight)
+                {
+
                     Height += expandAndContractSpeed;
+
+                    if (Height >= MainFormHeight)
+                        timerExpandOrContract_Tick(sender, e);
+
+                }
                 else
                 {
                     Height = MainFormHeight;
@@ -343,7 +361,14 @@ namespace SAI_Editor.Forms
                 }
 
                 if (Width < MainFormWidth)
+                {
+
                     Width += expandAndContractSpeed;
+
+                    if (Width >= MainFormWidth)
+                        timerExpandOrContract_Tick(sender, e);
+
+                }
                 else
                 {
                     Width = MainFormWidth;
@@ -496,11 +521,13 @@ namespace SAI_Editor.Forms
                 expandingToMainForm = true;
             }
 
-            foreach (Control control in controlsLoginForm)
-                control.Visible = false;
+            customPanel2.Visible = false;
 
-            foreach (Control control in controlsMainForm)
-                control.Visible = instant;
+            //foreach (Control control in controlsLoginForm)
+            //    control.Visible = false;
+
+            //foreach (Control control in controlsMainForm)
+            //    control.Visible = instant;
 
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
@@ -527,11 +554,8 @@ namespace SAI_Editor.Forms
                 contractingToLoginForm = true;
             }
 
-            foreach (Control control in controlsLoginForm)
-                control.Visible = instant;
-
-            foreach (Control control in controlsMainForm)
-                control.Visible = false;
+            customPanel1.Visible = false;
+            
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -708,11 +732,35 @@ namespace SAI_Editor.Forms
 
         private void FinishedExpandingOrContracting(bool expanding)
         {
-            foreach (Control control in controlsLoginForm)
-                control.Visible = !expanding;
 
-            foreach (Control control in controlsMainForm)
-                control.Visible = expanding;
+            if (expanding)
+            {
+
+                customPanel2.Visible = false;
+                customPanel1.Visible = true;
+
+                menuStrip.Visible = true;
+
+                Invalidate();
+
+            }
+            else
+            {
+
+                customPanel2.Visible = true;
+                customPanel1.Visible = false;
+
+                menuStrip.Visible = false;
+
+                Invalidate();
+
+            }
+
+            //foreach (Control control in controlsLoginForm)
+            //    control.Visible = !expanding;
+
+            //foreach (Control control in controlsMainForm)
+            //    control.Visible = expanding;
 
             if (!expanding)
                 HandleHeightLoginFormBasedOnuseDatabaseSetting();
@@ -737,7 +785,7 @@ namespace SAI_Editor.Forms
                 if (radioButtonConnectToMySql.Checked)
                     TryToLoadScript(showErrorIfNoneFound: false);
 
-                conditionEditorToolStripMenuItem.PerformClick();
+                //conditionEditorToolStripMenuItem.PerformClick();
             }
         }
 
@@ -4140,5 +4188,17 @@ namespace SAI_Editor.Forms
             using (Form selectForm = (Form)Activator.CreateInstance(searchEventHandlers[((ToolStripItem)sender).Text], new object[] { null }))
                 selectForm.ShowDialog(this);
         }
+
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams handleParam = base.CreateParams;
+                handleParam.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED       
+                return handleParam;
+            }
+        }
+
     }
 }
