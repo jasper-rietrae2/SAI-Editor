@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Windows.Forms;
+using SAI_Editor.Classes;
 
 namespace SAI_Editor.Forms
 {
@@ -98,29 +99,17 @@ namespace SAI_Editor.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TryToOpenPage("https://github.com/Discover-/SAI-Editor/");
+            SAI_Editor_Manager.Instance.StartProcess("https://github.com/Discover-/SAI-Editor/");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            TryToOpenPage("https://github.com/Discover-/");
+            SAI_Editor_Manager.Instance.StartProcess("https://github.com/Discover-/");
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            TryToOpenPage("http://www.trinitycore.org/");
-        }
-
-        private void TryToOpenPage(string url)
-        {
-            try
-            {
-                Process.Start(url);
-            }
-            catch
-            {
-                MessageBox.Show("The webpage could not be opened!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            SAI_Editor_Manager.Instance.StartProcess("http://www.trinitycore.org/");
         }
 
         private void AboutForm_KeyDown(object sender, KeyEventArgs e)

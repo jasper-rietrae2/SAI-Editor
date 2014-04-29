@@ -163,7 +163,7 @@ namespace SAI_Editor.Forms
             switch ((ConditionTypes)comboBoxConditionTypes.SelectedIndex)
             {
                 case ConditionTypes.CONDITION_AURA:
-                    SetConditionValues(new string[] { "Spell entry", "Spell effect index (0-2)", "", "" }, new bool[] { true, true, false, false });
+                    SetConditionValues(new string[] { "Spell entry", "Spell effect index", "", "" }, new bool[] { true, true, false, false });
                     break;
                 case ConditionTypes.CONDITION_ITEM:
                     SetConditionValues(new string[] { "Item entry", "Item count", "In bank (0/1)", "" }, new bool[] { true, false, false, false });

@@ -118,9 +118,9 @@ namespace SAI_Editor.Forms.SearchForms
 
                 }
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something went wrong retrieving the results from your database.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 StopRunningThread();
             }
         }
@@ -197,9 +197,9 @@ namespace SAI_Editor.Forms.SearchForms
                     AddItemToListView(listViewEntryResults, items);
                 }
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something went wrong retrieving the results from your database.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 StopRunningThread();
             }
         }
@@ -405,11 +405,11 @@ namespace SAI_Editor.Forms.SearchForms
                             SetEnabledOfControl(buttonSearch, true);
                             SetEnabledOfControl(buttonStopSearching, false);
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             SetEnabledOfControl(buttonSearch, true);
                             SetEnabledOfControl(buttonStopSearching, false);
-                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Something went wrong retrieving the results from your database.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             StopRunningThread();
                         }
                         finally
@@ -418,6 +418,7 @@ namespace SAI_Editor.Forms.SearchForms
                             SetEnabledOfControl(buttonSearch, true);
                             SetEnabledOfControl(buttonStopSearching, false);
                         }
+
                         return;
                     case 8: //! Actionlist entry
                         ClearItemsOfListView(listViewEntryResults);
@@ -491,11 +492,11 @@ namespace SAI_Editor.Forms.SearchForms
                             SetEnabledOfControl(buttonSearch, true);
                             SetEnabledOfControl(buttonStopSearching, false);
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             SetEnabledOfControl(buttonSearch, true);
                             SetEnabledOfControl(buttonStopSearching, false);
-                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Something went wrong retrieving the results from your database.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             StopRunningThread();
                         }
                         finally
@@ -531,9 +532,9 @@ namespace SAI_Editor.Forms.SearchForms
                 SetEnabledOfControl(buttonStopSearching, false);
                 StopRunningThread();
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something went wrong retrieving the results from your database.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 StopRunningThread();
             }
         }
@@ -665,9 +666,9 @@ namespace SAI_Editor.Forms.SearchForms
             catch (InvalidOperationException)
             {
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something went wrong retrieving the results from your database.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

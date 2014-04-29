@@ -135,9 +135,9 @@ namespace SAI_Editor.Forms
                 searchForAGossipOptionIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
                 adjustedLoginSettings = true;
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something went wrong when loading the settings.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             customPanelMain.Visible = false;
@@ -281,7 +281,7 @@ namespace SAI_Editor.Forms
                     //! Run the messagebox on the mainthread
                     Invoke(new Action(() =>
                     {
-                        MessageBox.Show("Something went wrong while attempting to keep track of the use count. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Something went wrong while attempting to keep track of the use count. Please report the following message to developers:\n\n" + ex.ToString(), "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }));
                 }
             }
@@ -950,10 +950,10 @@ namespace SAI_Editor.Forms
                 foreach (ColumnHeader header in listViewSmartScripts.Columns)
                     header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
             }
-            catch (Exception ex)
+            catch
             {
                 if (showError)
-                    MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("An exception was thrown while trying to load the smart_scripts for entryorguid " + entryOrGuid.ToString() + ".", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             pictureBoxLoadScript.Enabled = textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
@@ -1111,9 +1111,9 @@ namespace SAI_Editor.Forms
                 AdjustAllParameterFields(event_type, action_type, target_type);
                 updatingFieldsBasedOnSelectedScript = false;
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something went wrong while attempting to edit the fields based on the new selection.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -2496,21 +2496,9 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private void TryToOpenPage(string url)
-        {
-            try
-            {
-                Process.Start(url);
-            }
-            catch
-            {
-                MessageBox.Show("The webpage could not be opened!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
         private void smartAIWikiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TryToOpenPage("http://collab.kpsn.org/display/tc/smart_scripts");
+            SAI_Editor_Manager.Instance.StartProcess("http://collab.kpsn.org/display/tc/smart_scripts");
         }
 
         private void textBoxComments_GotFocus(object sender, EventArgs e)
@@ -4082,17 +4070,14 @@ namespace SAI_Editor.Forms
             conditionForm.Show();
         }
 
-        private bool TryToBringOpenFormToFront(string formName, bool show = true)
+        private bool TryToBringOpenFormToFront(string formName)
         {
             foreach (Form form in Application.OpenForms)
             {
                 if (form.Name == formName)
                 {
                     form.BringToFront();
-
-                    if (show)
-                        form.Show();
-
+                    form.Show(); //! Show the form in case it's hidden
                     return true;
                 }
             }
@@ -4134,16 +4119,14 @@ namespace SAI_Editor.Forms
                 selectForm.ShowDialog(this);
         }
 
-
         protected override CreateParams CreateParams
         {
             get
             {
                 CreateParams handleParam = base.CreateParams;
-                handleParam.ExStyle |= 0x02000000;   // WS_EX_COMPOSITED       
+                handleParam.ExStyle |= 0x02000000; // WS_EX_COMPOSITED       
                 return handleParam;
             }
         }
-
     }
 }

@@ -47,7 +47,6 @@
             this.richTextBoxSqlOutput.CommentPrefix = "--";
             this.richTextBoxSqlOutput.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBoxSqlOutput.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.richTextBoxSqlOutput.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.richTextBoxSqlOutput.IsReplaceMode = false;
             this.richTextBoxSqlOutput.Language = FastColoredTextBoxNS.Language.SQL;
             this.richTextBoxSqlOutput.LeftBracket = '(';

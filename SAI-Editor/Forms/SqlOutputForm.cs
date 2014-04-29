@@ -99,31 +99,16 @@ namespace SAI_Editor.Forms
             {
                 File.WriteAllText(saveFileDialog.FileName, richTextBoxSqlOutput.Text);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The file could not be saved.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             DialogResult dialogResult = MessageBox.Show("The file has been saved succesfully! Do you want to open it?", "Success!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (dialogResult == DialogResult.Yes)
-                StartProcess(saveFileDialog.FileName);
-        }
-
-        private void StartProcess(string filename, string argument = "")
-        {
-            try
-            {
-                Process.Start(filename, argument);
-            }
-            catch (Exception ex)
-            {
-                DialogResult dialogResult = MessageBox.Show(String.Format("The process '{0}' could not be opened! Do you wish to see the error thrown by the application?", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-
-                if (dialogResult == DialogResult.Yes)
-                    MessageBox.Show(ex.Message, "An exception was thrown!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                SAI_Editor_Manager.Instance.StartProcess(saveFileDialog.FileName);
         }
 
         private void SqlOutputForm_KeyDown(object sender, KeyEventArgs e)
@@ -166,9 +151,9 @@ namespace SAI_Editor.Forms
             {
                 File.WriteAllText(filename, revertQuery);
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The revert query could not be generated.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

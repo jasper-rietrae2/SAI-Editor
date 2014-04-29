@@ -24,10 +24,10 @@ namespace SAI_Editor.Classes.Database
                 using (MySqlConnection connection = new MySqlConnection(_connectionString.ToString()))
                     connection.Open();
             }
-            catch (MySqlException ex)
+            catch (MySqlException)
             {
                 if (showErrorMessage)
-                    MessageBox.Show(ex.Message, "Could not connect", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("A MySQL database connection could not be established with your database.", "Could not connect", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return false;
             }
@@ -58,18 +58,18 @@ namespace SAI_Editor.Classes.Database
                             cmd.ExecuteNonQuery();
                             transaction.Commit();
                         }
-                        catch (Exception ex)
+                        catch
                         {
                             exceptionOccurred = true;
 
                             try
                             {
-                                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Something went wrong executing a query to your database.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 transaction.Rollback();
                             }
-                            catch (Exception ex2)
+                            catch
                             {
-                                MessageBox.Show(ex2.Message, "Something went wrong while rolling back!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Something went wrong rolling back the last query to your database.", "Something went wrong while rolling back!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -111,9 +111,9 @@ namespace SAI_Editor.Classes.Database
                             conn.Close();
                             return dt;
                         }
-                        catch (Exception ex)
+                        catch
                         {
-                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Something went wrong while sending a query to your database.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return new DataTable();
                         }
                     }
@@ -140,9 +140,9 @@ namespace SAI_Editor.Classes.Database
                             conn.Close();
                             return returnVal;
                         }
-                        catch (Exception ex)
+                        catch
                         {
-                            MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Something went wrong while sending a query to your database.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return null;
                         }
                     }

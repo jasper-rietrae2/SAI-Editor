@@ -507,9 +507,9 @@ namespace SAI_Editor.Forms.SearchForms
             {
 
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The data could not be read from the database.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -542,11 +542,11 @@ namespace SAI_Editor.Forms.SearchForms
                 SetEnabledOfControl(buttonSearch, true);
                 SetEnabledOfControl(buttonStopSearching, false);
             }
-            catch (Exception ex)
+            catch
             {
                 SetEnabledOfControl(buttonSearch, true);
                 SetEnabledOfControl(buttonStopSearching, false);
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Something went wrong while trying to search for items.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

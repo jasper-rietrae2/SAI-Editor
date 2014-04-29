@@ -98,7 +98,7 @@ namespace SAI_Editor.Forms
 
             string fileName = @"Reverts\" + listViewScripts.SelectedItems[0].Text + ".sql";
             fileName = fileName.Replace(":", ";");
-            StartProcess(fileName);
+            SAI_Editor_Manager.Instance.StartProcess(fileName);
         }
 
         private void openFileWithToolStripMenuItem_Click(object sender, EventArgs e)
@@ -108,7 +108,7 @@ namespace SAI_Editor.Forms
 
             string fileName = @"Reverts\" + listViewScripts.SelectedItems[0].Text + ".sql";
             fileName = fileName.Replace(":", ";");
-            StartProcess("rundll32.exe", "shell32.dll, OpenAs_RunDLL " + fileName);
+            SAI_Editor_Manager.Instance.StartProcess("rundll32.exe", "shell32.dll, OpenAs_RunDLL " + fileName);
         }
 
         private void openDirectoryOfFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -118,22 +118,7 @@ namespace SAI_Editor.Forms
 
             string fileName = @"Reverts\" + listViewScripts.SelectedItems[0].Text + ".sql";
             fileName = fileName.Replace(":", ";");
-            StartProcess("explorer.exe", String.Format("/select,\"{0}\"", fileName));
-        }
-
-        private void StartProcess(string filename, string argument = "")
-        {
-            try
-            {
-                Process.Start(filename, argument);
-            }
-            catch (Exception ex)
-            {
-                DialogResult dialogResult = MessageBox.Show(String.Format("The process '{0}' could not be opened! Do you wish to see the error thrown by the application?", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
-                
-                if (dialogResult == DialogResult.Yes)
-                    MessageBox.Show(ex.Message, "An exception was thrown!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            SAI_Editor_Manager.Instance.StartProcess("explorer.exe", String.Format("/select,\"{0}\"", fileName));
         }
 
         private void listViewScripts_MouseClick(object sender, MouseEventArgs e)

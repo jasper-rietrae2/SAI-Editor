@@ -963,9 +963,9 @@ namespace SAI_Editor.Classes
 
                 return fullLine;
             }
-            catch (Exception ex)
+            catch
             {
-                MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The comment generating threw back an error and could not finish. The new comment might be incomplete.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             return fullLine;

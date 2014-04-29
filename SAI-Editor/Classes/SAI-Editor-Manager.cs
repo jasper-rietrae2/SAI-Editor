@@ -15,6 +15,7 @@ using System.Net.NetworkInformation;
 using System.Net;
 using System.IO;
 using SAI_Editor.Forms.SearchForms;
+using System.Diagnostics;
 
 namespace SAI_Editor.Classes
 {
@@ -358,9 +359,9 @@ namespace SAI_Editor.Classes
                         foreach (DataRow row in dataTable.Rows) databaseNames.AddRange(row.ItemArray.Select(t => t.ToString()));
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
-                    MessageBox.Show(ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("The databases could not be displayed.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 return databaseNames;
@@ -462,6 +463,28 @@ namespace SAI_Editor.Classes
             {
                 return false;
             }
+        }
+
+        public bool StartProcess(string filename, string argument = "", bool showException = false)
+        {
+            try
+            {
+                Process.Start(filename, argument);
+            }
+            catch (Exception ex)
+            {
+                if (showException)
+                    return false;
+
+                DialogResult dialogResult = MessageBox.Show(String.Format("The process '{0}' could not be opened! Do you wish to see the error thrown by the application?", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+                if (dialogResult == DialogResult.Yes)
+                    MessageBox.Show(ex.Message, "An exception was thrown!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return false;
+            }
+
+            return true;
         }
     }
 }
