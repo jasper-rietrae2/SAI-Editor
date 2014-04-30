@@ -432,7 +432,7 @@ namespace SAI_Editor.Classes
         public string GetUniversalTimeStamp()
         {
             string universalTime = String.Empty;
-            universalTime += DateTime.Now.Day + "-";
+            universalTime  = DateTime.Now.Day + "-";
             universalTime += DateTime.Now.Month + "-";
             universalTime += DateTime.Now.Year + " ";
             universalTime += DateTime.Now.Hour + ";";
@@ -465,7 +465,7 @@ namespace SAI_Editor.Classes
             try
             {
                 WebRequest req = WebRequest.Create(url);
-                WebResponse res = req.GetResponse();
+                req.GetResponse();
                 return true;
             }
             catch (WebException)
@@ -501,15 +501,15 @@ namespace SAI_Editor.Classes
             switch (sourceType)
             {
                 case SourceTypes.SourceTypeCreature:
-                    return "creature";
+                    return "Creature";
                 case SourceTypes.SourceTypeGameobject:
-                    return "gameobject";
+                    return "Gameobject";
                 case SourceTypes.SourceTypeAreaTrigger:
-                    return "areatrigger";
+                    return "Areatrigger";
                 case SourceTypes.SourceTypeScriptedActionlist:
-                    return "actionlist";
+                    return "Actionlist";
                 default:
-                    return "unknown";
+                    return "Unknown";
             }
         }
     }

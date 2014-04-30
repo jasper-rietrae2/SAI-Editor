@@ -744,7 +744,7 @@ namespace SAI_Editor.Forms
 
                         if (smartScripts != null)
                         {
-                            message += "\n\nA script was found with this entry using sourcetype " + smartScripts[0].source_type + " (" + SAI_Editor_Manager.Instance.GetSourceTypeString((SourceTypes)smartScripts[0].source_type) + "). Do you wish to load this instead?";
+                            message += "\n\nA script was found with this entry using sourcetype " + smartScripts[0].source_type + " (" + SAI_Editor_Manager.Instance.GetSourceTypeString((SourceTypes)smartScripts[0].source_type).ToLower() + "). Do you wish to load this instead?";
                             DialogResult dialogResult = MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
                             if (dialogResult == DialogResult.Yes)
@@ -1533,7 +1533,7 @@ namespace SAI_Editor.Forms
 
             lastSmartScriptIdOfScript = 0;
             int source_type = (int)GetSourceTypeByIndex();
-            string sourceTypeString = SAI_Editor_Manager.Instance.GetSourceTypeString((SourceTypes)source_type);
+            string sourceTypeString = SAI_Editor_Manager.Instance.GetSourceTypeString((SourceTypes)source_type).ToLower();
 
             if (!Settings.Default.UseWorldDatabase)
                 goto SkipWorldDatabaseChecks;
@@ -1594,7 +1594,7 @@ namespace SAI_Editor.Forms
                             //! We don't have to target areatrigger_scripts here, as we've already done this a few lines up
                             string sqlOutput = "UPDATE `" + GetTemplateTableBySourceType((SourceTypes)source_type) + "` SET `AIName`=" + '"' + '"' + " WHERE `entry`=" + entryorguid + ";\n";
 
-                            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(sqlOutput))
+                            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(sqlOutput, false, saveToFile: false))
                                 sqlOutputForm.ShowDialog(this);
                         }
                         else
@@ -3048,7 +3048,7 @@ namespace SAI_Editor.Forms
             if (formState != FormState.FormStateMain)
                 return;
 
-            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await GenerateSmartAiSqlFromListView(), await GenerateSmartAiRevertQuery()))
+            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await GenerateSmartAiSqlFromListView(), true, await GenerateSmartAiRevertQuery()))
                 sqlOutputForm.ShowDialog(this);
         }
 
@@ -3057,7 +3057,7 @@ namespace SAI_Editor.Forms
             if (formState != FormState.FormStateMain)
                 return;
 
-            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await GenerateSmartAiSqlFromListView(), await GenerateSmartAiRevertQuery()))
+            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await GenerateSmartAiSqlFromListView(), true, await GenerateSmartAiRevertQuery()))
                 sqlOutputForm.ShowDialog(this);
         }
 
@@ -3215,7 +3215,7 @@ namespace SAI_Editor.Forms
 
                                     if (entryOrGuidToUse == "0")
                                     {
-                                        string sourceTypeString = SAI_Editor_Manager.Instance.GetSourceTypeString(entryOrGuidAndSourceType.sourceType);
+                                        string sourceTypeString = SAI_Editor_Manager.Instance.GetSourceTypeString(entryOrGuidAndSourceType.sourceType).ToLower();
                                         string message = "While generating a script for your SmartAI, the " + sourceTypeString + " guid ";
                                         message += -entryOrGuidAndSourceType.entryOrGuid + " was not spawned in your current database which means the AIName was not properly set.";
                                         message += "\n\nThis is only a warning, which means the AIName of entry 0 will be set in `" + sourceTypeString + "_template` and this has no effect.";
