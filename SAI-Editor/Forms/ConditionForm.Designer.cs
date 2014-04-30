@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConditionForm));
             this.comboBoxConditionSourceTypes = new System.Windows.Forms.ComboBox();
             this.comboBoxConditionTypes = new System.Windows.Forms.ComboBox();
@@ -91,8 +90,6 @@
             this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.tabPageSql = new System.Windows.Forms.TabPage();
-            this.richTextBoxSql = new FastColoredTextBoxNS.FastColoredTextBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
@@ -101,8 +98,6 @@
             this.buttonLoadCondition = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPageEditing.SuspendLayout();
-            this.tabPageSql.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.richTextBoxSql)).BeginInit();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -538,7 +533,6 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPageEditing);
-            this.tabControl.Controls.Add(this.tabPageSql);
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
@@ -812,35 +806,6 @@
             this.label16.TabIndex = 16;
             this.label16.Text = ":";
             // 
-            // tabPageSql
-            // 
-            this.tabPageSql.Controls.Add(this.richTextBoxSql);
-            this.tabPageSql.Location = new System.Drawing.Point(4, 22);
-            this.tabPageSql.Name = "tabPageSql";
-            this.tabPageSql.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageSql.Size = new System.Drawing.Size(656, 264);
-            this.tabPageSql.TabIndex = 1;
-            this.tabPageSql.Text = "Condition SQL";
-            this.tabPageSql.UseVisualStyleBackColor = true;
-            // 
-            // richTextBoxSql
-            // 
-            this.richTextBoxSql.AutoScrollMinSize = new System.Drawing.Size(27, 14);
-            this.richTextBoxSql.BackBrush = null;
-            this.richTextBoxSql.CharHeight = 14;
-            this.richTextBoxSql.CharWidth = 8;
-            this.richTextBoxSql.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.richTextBoxSql.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.richTextBoxSql.Font = new System.Drawing.Font("Courier New", 9.75F);
-            this.richTextBoxSql.IsReplaceMode = false;
-            this.richTextBoxSql.Location = new System.Drawing.Point(0, 0);
-            this.richTextBoxSql.Name = "richTextBoxSql";
-            this.richTextBoxSql.Paddings = new System.Windows.Forms.Padding(0);
-            this.richTextBoxSql.SelectionColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(255)))));
-            this.richTextBoxSql.Size = new System.Drawing.Size(656, 265);
-            this.richTextBoxSql.TabIndex = 0;
-            this.richTextBoxSql.Zoom = 100;
-            // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.checkBox1);
@@ -931,8 +896,6 @@
             this.tabControl.ResumeLayout(false);
             this.tabPageEditing.ResumeLayout(false);
             this.tabPageEditing.PerformLayout();
-            this.tabPageSql.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.richTextBoxSql)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
@@ -982,8 +945,6 @@
         private System.Windows.Forms.Button buttonGenerateSql;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPageEditing;
-        private System.Windows.Forms.TabPage tabPageSql;
-        private FastColoredTextBoxNS.FastColoredTextBox richTextBoxSql;
         private System.Windows.Forms.Button buttonSaveCondition;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button buttonDuplicateCondition;

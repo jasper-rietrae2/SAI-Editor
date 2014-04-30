@@ -14,8 +14,9 @@ namespace SAI_Editor.Forms
         private EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
         private readonly string revertQuery, originalSqlOutput;
         private readonly List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes;
+        private readonly bool sqlForSmartScripts, saveToFile;
 
-        public SqlOutputForm(string sqlOutput, string revertQuery = "", List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = null)
+        public SqlOutputForm(string sqlOutput, bool sqlForSmartScripts, string revertQuery = "", List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = null, bool saveToFile = true)
         {
             InitializeComponent();
 
@@ -23,12 +24,16 @@ namespace SAI_Editor.Forms
             originalSqlOutput = richTextBoxSqlOutput.Text; //! We have to assign it to the .Text instead of `sqlOutput` as it adds some linefeeds here
             this.revertQuery = revertQuery;
             this.entriesOrGuidsAndSourceTypes = entriesOrGuidsAndSourceTypes;
+            this.sqlForSmartScripts = sqlForSmartScripts;
+            this.saveToFile = saveToFile;
         }
 
         private void SqlOutputForm_Load(object sender, EventArgs e)
         {
-            this.originalEntryOrGuidAndSourceType = ((MainForm)Owner).originalEntryOrGuidAndSourceType;
+            if (sqlForSmartScripts)
+                originalEntryOrGuidAndSourceType = ((MainForm)Owner).originalEntryOrGuidAndSourceType;
 
+            buttonSaveToFile.Enabled = saveToFile;
             richTextBoxSqlOutput.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             buttonExecuteScript.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             buttonSaveToFile.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
@@ -49,9 +54,9 @@ namespace SAI_Editor.Forms
 
             if (await SAI_Editor_Manager.Instance.worldDatabase.ExecuteNonQuery(query))
             {
-                string message = "The query has been executed succesfully!";
+                string message = "The SQL has been executed succesfully!";
 
-                if (Settings.Default.CreateRevertQuery)
+                if (Settings.Default.CreateRevertQuery && sqlForSmartScripts)
                 {
                     if (query != originalSqlOutput)
                     {
@@ -80,12 +85,17 @@ namespace SAI_Editor.Forms
                 case SourceTypes.SourceTypeGameobject:
                 case SourceTypes.SourceTypeAreaTrigger:
                 case SourceTypes.SourceTypeScriptedActionlist:
-                    saveFileDialog.FileName = "SAI for " + GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType).ToLower() + " ";
+                    if (sqlForSmartScripts)
+                    {
+                        saveFileDialog.FileName = "SAI for " + SAI_Editor_Manager.Instance.GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType).ToLower() + " ";
 
-                    if (Settings.Default.UseWorldDatabase)
-                        saveFileDialog.FileName += await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType);
+                        if (Settings.Default.UseWorldDatabase)
+                            saveFileDialog.FileName += await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType);
+                        else
+                            saveFileDialog.FileName += originalEntryOrGuidAndSourceType.entryOrGuid;
+                    }
                     else
-                        saveFileDialog.FileName += originalEntryOrGuidAndSourceType.entryOrGuid;
+                        saveFileDialog.FileName = "Condition SQL";
 
                     break;
             }
@@ -123,10 +133,13 @@ namespace SAI_Editor.Forms
 
         private void CreateRevertQuery()
         {
+            if (!sqlForSmartScripts)
+                return;
+
             //! Example filename:
             //! [Creature] [33303] 3-10-2013 15.32.40.sql
             //! [Creature] [33303 - 3330300] 3-10-2013 15.32.40.sql
-            string filename = @"Reverts\[" + GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType) + "] [";
+            string filename = @"Reverts\[" + SAI_Editor_Manager.Instance.GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType) + "] [";
 
             if (entriesOrGuidsAndSourceTypes != null)
             {
@@ -154,23 +167,6 @@ namespace SAI_Editor.Forms
             catch
             {
                 MessageBox.Show("The revert query could not be generated.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private string GetSourceTypeString(SourceTypes sourceType)
-        {
-            switch (sourceType)
-            {
-                case SourceTypes.SourceTypeCreature:
-                    return "Creature";
-                case SourceTypes.SourceTypeGameobject:
-                    return "Gameobject";
-                case SourceTypes.SourceTypeAreaTrigger:
-                    return "Areatrigger";
-                case SourceTypes.SourceTypeScriptedActionlist:
-                    return "Actionlist";
-                default:
-                    return "Unknown";
             }
         }
     }

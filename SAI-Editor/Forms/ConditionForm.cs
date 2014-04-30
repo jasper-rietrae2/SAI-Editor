@@ -639,14 +639,15 @@ namespace SAI_Editor.Forms
 
         private void buttonGenerateSql_Click(object sender, EventArgs e)
         {
+            string sql = String.Empty;
+
             switch (conditions.Count)
             {
                 case 0:
-                    MessageBox.Show("There are no conditions in the current session.", "No conditions!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("There are no conditions in this session.", "No conditions!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 case 1:
-                    string sql = String.Empty;
-                    sql += "DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=" + conditions[0].SourceTypeOrReferenceId;
+                    sql  = "DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=" + conditions[0].SourceTypeOrReferenceId;
                     sql += " AND `SourceGroup`=" + conditions[0].SourceGroup + " AND `SourceEntry`=" + conditions[0].SourceEntry + ";\n";
                     sql += "INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`SourceId`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionTarget`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES\n";
                     sql += "(" + conditions[0].SourceTypeOrReferenceId + "," + conditions[0].SourceGroup + "," + conditions[0].SourceEntry;
@@ -654,14 +655,33 @@ namespace SAI_Editor.Forms
                     sql += "," + conditions[0].ConditionTarget + "," + conditions[0].ConditionValue1;
                     sql += "," + conditions[0].ConditionValue2 + "," + conditions[0].ConditionValue3 + "," + conditions[0].ErrorTextId;
                     sql += "," + '"' + conditions[0].ScriptName + '"' + "," + '"' + conditions[0].Comment + '"' + ");";
-                    richTextBoxSql.Text = sql;
                     break;
                 default:
-                    //foreach (Condition condition in conditions)
+                    string deleteFromString = String.Empty;
+                    sql =  "_replaceThisWithDeleteFrom_";
+                    sql += "INSERT INTO `conditions` (`SourceTypeOrReferenceId`,`SourceGroup`,`SourceEntry`,`SourceId`,`ElseGroup`,`ConditionTypeOrReference`,`ConditionTarget`,`ConditionValue1`,`ConditionValue2`,`ConditionValue3`,`ErrorTextId`,`ScriptName`,`Comment`) VALUES\n";
+
+                    for (int i = 0; i < conditions.Count; ++i)
+                    {
+                        Condition condition = conditions[i];
+
+                        deleteFromString += "DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=" + condition.SourceTypeOrReferenceId;
+                        deleteFromString += " AND `SourceGroup`=" + condition.SourceGroup + " AND `SourceEntry`=" + condition.SourceEntry + ";\n";
+
+                        sql += "(" + condition.SourceTypeOrReferenceId + "," + condition.SourceGroup + "," + condition.SourceEntry;
+                        sql += "," + condition.SourceId + "," + condition.ElseGroup + "," + condition.ConditionTypeOrReference;
+                        sql += "," + condition.ConditionTarget + "," + condition.ConditionValue1;
+                        sql += "," + condition.ConditionValue2 + "," + condition.ConditionValue3 + "," + condition.ErrorTextId;
+                        sql += "," + '"' + condition.ScriptName + '"' + "," + '"' + condition.Comment + '"' + ")";
+                        sql += (i != conditions.Count - 1) ? ",\n" : ";\n";
+                    }
+
+                    sql = sql.Replace("_replaceThisWithDeleteFrom_", deleteFromString);
                     break;
             }
 
-            tabControl.SelectedIndex = 1;
+            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(sql, false))
+                sqlOutputForm.ShowDialog();
         }
 
         private void buttonGenerateComment_Click(object sender, EventArgs e)
@@ -690,7 +710,7 @@ namespace SAI_Editor.Forms
             conditions.Add(condition);
 
             listViewConditions.AddCondition(condition);
-            tabControl.SelectedIndex = 2;
+            tabControl.SelectedIndex = 1;
 
             ClearAllFields();
         }
@@ -796,7 +816,6 @@ namespace SAI_Editor.Forms
             labelElseGroup.Text = " - ";
             SetConditionTargetValues(null);
             SetConditionValues(new string[] { "", "", "", "" }, new bool[] { false, false, false, false });
-            richTextBoxSql.Text = String.Empty;
             listViewConditions.Items.Clear();
 
             foreach (Control control in tabControl.TabPages[0].Controls)

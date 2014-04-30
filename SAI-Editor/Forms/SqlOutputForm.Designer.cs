@@ -65,7 +65,7 @@
             this.buttonExecuteScript.Name = "buttonExecuteScript";
             this.buttonExecuteScript.Size = new System.Drawing.Size(85, 23);
             this.buttonExecuteScript.TabIndex = 1;
-            this.buttonExecuteScript.Text = "Execute script";
+            this.buttonExecuteScript.Text = "Execute SQL";
             this.buttonExecuteScript.UseVisualStyleBackColor = true;
             this.buttonExecuteScript.Click += new System.EventHandler(this.buttonExecuteScript_Click);
             // 
