@@ -765,7 +765,7 @@ namespace SAI_Editor.Forms
 
         private void buttonDuplicateCondition_Click(object sender, EventArgs e)
         {
-            listViewConditions.Items.Add(listViewConditions.SelectedItems[0]);
+            listViewConditions.AddCondition(listViewConditions.SelectedCondition, selectNewItem: true);
         }
 
         private void listViewConditions_SelectedIndexChanged(object sender, EventArgs e)
