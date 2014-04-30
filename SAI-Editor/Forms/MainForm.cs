@@ -518,6 +518,7 @@ namespace SAI_Editor.Forms
             }
 
             customPanelMain.Visible = false;
+            menuStrip.Visible = false;
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
