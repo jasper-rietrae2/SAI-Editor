@@ -823,6 +823,8 @@ namespace SAI_Editor.Forms
             {
                 if (control is TextBox && control.Name != "textBoxScriptName" && control.Name != "textBoxComment")
                     control.Text = "0";
+                else if (control is TextBox)
+                    control.Text = String.Empty;
                 else if (control is ComboBox)
                     (control as ComboBox).SelectedIndex = 0;
                 else if (control is Button && control.Text == "...")
