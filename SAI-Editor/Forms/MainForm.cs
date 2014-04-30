@@ -51,15 +51,6 @@ namespace SAI_Editor.Forms
         SourceTypeScriptedActionlist = 9,
     }
 
-    public class EntryOrGuidAndSourceType
-    {
-        public EntryOrGuidAndSourceType() { entryOrGuid = 0; sourceType = SourceTypes.SourceTypeNone; }
-        public EntryOrGuidAndSourceType(int _entryOrGuid, SourceTypes _sourceType) { entryOrGuid = _entryOrGuid; sourceType = _sourceType; }
-
-        public int entryOrGuid;
-        public SourceTypes sourceType;
-    }
-
     public partial class MainForm : Form
     {
         public int expandAndContractSpeed = 5, lastSmartScriptIdOfScript = 0, previousLinkFrom = -1;

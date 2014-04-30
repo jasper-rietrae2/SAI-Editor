@@ -19,6 +19,15 @@ using System.Diagnostics;
 
 namespace SAI_Editor.Classes
 {
+    public class EntryOrGuidAndSourceType
+    {
+        public EntryOrGuidAndSourceType() { entryOrGuid = 0; sourceType = SourceTypes.SourceTypeNone; }
+        public EntryOrGuidAndSourceType(int _entryOrGuid, SourceTypes _sourceType) { entryOrGuid = _entryOrGuid; sourceType = _sourceType; }
+
+        public int entryOrGuid;
+        public SourceTypes sourceType;
+    }
+
     class SAI_Editor_Manager
     {
         public WorldDatabase _worldDatabase = null;
