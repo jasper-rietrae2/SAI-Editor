@@ -51,8 +51,9 @@ namespace SAI_Editor.Forms
         SourceTypeScriptedActionlist = 9,
     }
 
-    public struct EntryOrGuidAndSourceType
+    public class EntryOrGuidAndSourceType
     {
+        public EntryOrGuidAndSourceType() { entryOrGuid = 0; sourceType = SourceTypes.SourceTypeNone; }
         public EntryOrGuidAndSourceType(int _entryOrGuid, SourceTypes _sourceType) { entryOrGuid = _entryOrGuid; sourceType = _sourceType; }
 
         public int entryOrGuid;
@@ -752,7 +753,7 @@ namespace SAI_Editor.Forms
 
                         if (smartScripts != null)
                         {
-                            message += "\n\nA script was found with this entry using sourcetype " + smartScripts[0].source_type + " (" + GetSourceTypeString((SourceTypes)smartScripts[0].source_type) + "). Do you wish to load this instead?";
+                            message += "\n\nA script was found with this entry using sourcetype " + smartScripts[0].source_type + " (" + SAI_Editor_Manager.Instance.GetSourceTypeString((SourceTypes)smartScripts[0].source_type) + "). Do you wish to load this instead?";
                             DialogResult dialogResult = MessageBox.Show(message, "No scripts found!", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
                             if (dialogResult == DialogResult.Yes)
@@ -1541,7 +1542,7 @@ namespace SAI_Editor.Forms
 
             lastSmartScriptIdOfScript = 0;
             int source_type = (int)GetSourceTypeByIndex();
-            string sourceTypeString = GetSourceTypeString((SourceTypes)source_type);
+            string sourceTypeString = SAI_Editor_Manager.Instance.GetSourceTypeString((SourceTypes)source_type);
 
             if (!Settings.Default.UseWorldDatabase)
                 goto SkipWorldDatabaseChecks;
@@ -1955,23 +1956,6 @@ namespace SAI_Editor.Forms
                     foreach (Control control in page.Controls)
                         if (control is Button)
                             control.Visible = visible;
-        }
-
-        private string GetSourceTypeString(SourceTypes sourceType)
-        {
-            switch (sourceType)
-            {
-                case SourceTypes.SourceTypeCreature:
-                    return "creature";
-                case SourceTypes.SourceTypeGameobject:
-                    return "gameobject";
-                case SourceTypes.SourceTypeAreaTrigger:
-                    return "areatrigger";
-                case SourceTypes.SourceTypeScriptedActionlist:
-                    return "actionlist";
-                default:
-                    return "unknown";
-            }
         }
 
         private void ShowSearchFromDatabaseForm(TextBox textBoxToChange, DatabaseSearchFormType searchType)
@@ -3240,7 +3224,7 @@ namespace SAI_Editor.Forms
 
                                     if (entryOrGuidToUse == "0")
                                     {
-                                        string sourceTypeString = GetSourceTypeString(entryOrGuidAndSourceType.sourceType);
+                                        string sourceTypeString = SAI_Editor_Manager.Instance.GetSourceTypeString(entryOrGuidAndSourceType.sourceType);
                                         string message = "While generating a script for your SmartAI, the " + sourceTypeString + " guid ";
                                         message += -entryOrGuidAndSourceType.entryOrGuid + " was not spawned in your current database which means the AIName was not properly set.";
                                         message += "\n\nThis is only a warning, which means the AIName of entry 0 will be set in `" + sourceTypeString + "_template` and this has no effect.";

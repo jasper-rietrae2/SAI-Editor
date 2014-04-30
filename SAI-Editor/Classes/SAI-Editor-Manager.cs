@@ -486,5 +486,22 @@ namespace SAI_Editor.Classes
 
             return true;
         }
+
+        public string GetSourceTypeString(SourceTypes sourceType)
+        {
+            switch (sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                    return "creature";
+                case SourceTypes.SourceTypeGameobject:
+                    return "gameobject";
+                case SourceTypes.SourceTypeAreaTrigger:
+                    return "areatrigger";
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    return "actionlist";
+                default:
+                    return "unknown";
+            }
+        }
     }
 }
