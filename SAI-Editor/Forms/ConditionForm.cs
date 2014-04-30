@@ -17,6 +17,7 @@ namespace SAI_Editor.Forms
     public partial class ConditionForm : Form
     {
         private List<Condition> conditions = new List<Condition>();
+        public bool formHidden = false;
 
         public ConditionForm()
         {
@@ -832,8 +833,12 @@ namespace SAI_Editor.Forms
         //! Don't allow closign the condition editor. It will automatically hide itself so the session is never lost.
         private void ConditionForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (formHidden)
+                return;
+
             e.Cancel = true;
             Hide();
+            formHidden = true;
         }
     }
 }

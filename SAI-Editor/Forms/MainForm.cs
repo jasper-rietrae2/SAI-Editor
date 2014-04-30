@@ -574,16 +574,16 @@ namespace SAI_Editor.Forms
             if (formState != FormState.FormStateMain || contractingListView || expandingListView)
                 return;
 
+            for (int i = 0; i < Application.OpenForms.Count; ++i)
+                if (Application.OpenForms[i] != this)
+                    Application.OpenForms[i].Close();
+
             panelPermanentTooltipTypes.Visible = false;
             panelPermanentTooltipParameters.Visible = false;
             SaveLastUsedFields();
             ResetFieldsToDefault();
             listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
             StartContractingToLoginForm(Settings.Default.InstantExpand);
-
-            for (int i = Application.OpenForms.Count - 1; i >= 0; i--)
-                if (Application.OpenForms[i] != this)
-                    Application.OpenForms[i].Close();
         }
 
         private async void comboBoxEventType_SelectedIndexChanged(object sender, EventArgs e)
@@ -4038,10 +4038,19 @@ namespace SAI_Editor.Forms
 
         private void conditionEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (TryToBringOpenFormToFront("ConditionForm"))
-                return;
+            foreach (Form form in Application.OpenForms)
+            {
+                if (form.Name == "ConditionForm")
+                {
+                    form.BringToFront();
+                    form.Show(); //! Show the form in case it's hidden
+                    (form as ConditionForm).formHidden = false;
+                    return;
+                }
+            }
 
             ConditionForm conditionForm = new ConditionForm();
+            conditionForm.formHidden = false;
             conditionForm.Show();
         }
 
