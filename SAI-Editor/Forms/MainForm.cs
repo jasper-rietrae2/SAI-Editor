@@ -2308,36 +2308,17 @@ namespace SAI_Editor.Forms
             }
         }
 
-        private void SetTextOfAllEventParameterLabels(string str)
-        {
-            labelEventParam1.Text = str;
-            labelEventParam2.Text = str;
-            labelEventParam3.Text = str;
-            labelEventParam4.Text = str;
-        }
-
-        private void SetTextOfAllActionParameterLabels(string str)
-        {
-            labelActionParam1.Text = str;
-            labelActionParam2.Text = str;
-            labelActionParam3.Text = str;
-            labelActionParam4.Text = str;
-            labelActionParam5.Text = str;
-            labelActionParam6.Text = str;
-        }
-
-        private void SetTextOfAllTargetParameterLabels(string str)
-        {
-            labelTargetParam1.Text = str;
-            labelTargetParam2.Text = str;
-            labelTargetParam3.Text = str;
-        }
-
         private void ParameterInstallAiTemplateChanged()
         {
             SetVisibilityOfAllParamButtonsInTab("Action", false);
             SetVisibilityOfAllParamButtonsInTab("Target", false);
-            SetTextOfAllActionParameterLabels(String.Empty);
+
+            labelActionParam1.Text = String.Empty;
+            labelActionParam2.Text = String.Empty;
+            labelActionParam3.Text = String.Empty;
+            labelActionParam4.Text = String.Empty;
+            labelActionParam5.Text = String.Empty;
+            labelActionParam6.Text = String.Empty;
 
             labelActionParam1.Text = "Template entry";
             buttonActionParamOneSearch.Visible = true;
@@ -2724,6 +2705,12 @@ namespace SAI_Editor.Forms
                 newSmartScript.comment = SAI_Editor_Manager.Instance.GetDefaultCommentForSourceType((SourceTypes)newSmartScript.source_type);
 
             newSmartScript.event_chance = 100;
+
+            //! All strings have to be initialized otherwise they become null and give cause an exception in the future.
+            newSmartScript.target_x = String.Empty;
+            newSmartScript.target_y = String.Empty;
+            newSmartScript.target_z = String.Empty;
+            newSmartScript.target_o = String.Empty;
             int index = listViewSmartScripts.AddSmartScript(newSmartScript);
             HandleShowBasicInfo();
 
