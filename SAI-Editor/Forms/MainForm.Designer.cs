@@ -978,6 +978,7 @@
             this.pictureBoxCreateScript.TabIndex = 16;
             this.pictureBoxCreateScript.TabStop = false;
             this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
             // 
             // pictureBoxLoadScript
             // 
@@ -992,6 +993,7 @@
             this.pictureBoxLoadScript.TabIndex = 16;
             this.pictureBoxLoadScript.TabStop = false;
             this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
             // 
             // timerExpandOrContract
             // 
@@ -1238,6 +1240,7 @@
             this.buttonGenerateComments.TabIndex = 81;
             this.buttonGenerateComments.Text = "Generate comments";
             this.buttonGenerateComments.UseVisualStyleBackColor = true;
+            this.buttonGenerateComments.Click += new System.EventHandler(this.buttonGenerateComments_Click);
             // 
             // buttonGenerateSql
             // 
@@ -1248,6 +1251,7 @@
             this.buttonGenerateSql.TabIndex = 82;
             this.buttonGenerateSql.Text = "Generate SQL";
             this.buttonGenerateSql.UseVisualStyleBackColor = true;
+            this.buttonGenerateSql.Click += new System.EventHandler(this.buttonGenerateSql_Click);
             // 
             // buttonNewLine
             // 
@@ -1257,6 +1261,7 @@
             this.buttonNewLine.TabIndex = 80;
             this.buttonNewLine.Text = "New line";
             this.buttonNewLine.UseVisualStyleBackColor = true;
+            this.buttonNewLine.Click += new System.EventHandler(this.buttonNewLine_Click);
             // 
             // panelPermanentTooltipParameters
             // 
@@ -1349,6 +1354,9 @@
             this.listViewSmartScripts.TabIndex = 83;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
+            this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
+            this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
+            this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
             // groupBoxParameters
             // 
@@ -1402,6 +1410,7 @@
             this.buttonEventParamFourSearch.Text = "...";
             this.buttonEventParamFourSearch.UseVisualStyleBackColor = true;
             this.buttonEventParamFourSearch.Visible = false;
+            this.buttonEventParamFourSearch.Click += new System.EventHandler(this.buttonEventParamFourSearch_Click);
             // 
             // buttonEventParamThreeSearch
             // 
@@ -1412,6 +1421,7 @@
             this.buttonEventParamThreeSearch.Text = "...";
             this.buttonEventParamThreeSearch.UseVisualStyleBackColor = true;
             this.buttonEventParamThreeSearch.Visible = false;
+            this.buttonEventParamThreeSearch.Click += new System.EventHandler(this.buttonEventParamThreeSearch_Click);
             // 
             // buttonEventParamTwoSearch
             // 
@@ -1422,6 +1432,7 @@
             this.buttonEventParamTwoSearch.Text = "...";
             this.buttonEventParamTwoSearch.UseVisualStyleBackColor = true;
             this.buttonEventParamTwoSearch.Visible = false;
+            this.buttonEventParamTwoSearch.Click += new System.EventHandler(this.buttonEventParamTwoSearch_Click);
             // 
             // buttonEventParamOneSearch
             // 
@@ -1432,6 +1443,7 @@
             this.buttonEventParamOneSearch.Text = "...";
             this.buttonEventParamOneSearch.UseVisualStyleBackColor = true;
             this.buttonEventParamOneSearch.Visible = false;
+            this.buttonEventParamOneSearch.Click += new System.EventHandler(this.buttonEventParamOneSearch_Click);
             // 
             // labelEventParam4
             // 
@@ -1442,6 +1454,7 @@
             this.labelEventParam4.TabIndex = 23;
             this.labelEventParam4.Text = "Param 4";
             this.labelEventParam4.TooltipParameterId = 4;
+            this.labelEventParam4.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
             // 
             // labelEventParam3
             // 
@@ -1452,6 +1465,7 @@
             this.labelEventParam3.TabIndex = 23;
             this.labelEventParam3.Text = "Param 3";
             this.labelEventParam3.TooltipParameterId = 3;
+            this.labelEventParam3.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
             // 
             // labelEventParam2
             // 
@@ -1462,6 +1476,7 @@
             this.labelEventParam2.TabIndex = 23;
             this.labelEventParam2.Text = "Param 2";
             this.labelEventParam2.TooltipParameterId = 2;
+            this.labelEventParam2.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
             // 
             // textBoxEventParam4
             // 
@@ -1470,6 +1485,7 @@
             this.textBoxEventParam4.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam4.TabIndex = 43;
             this.textBoxEventParam4.Text = "0";
+            this.textBoxEventParam4.Leave += new System.EventHandler(this.textBoxEventParam4_Leave);
             // 
             // textBoxEventParam3
             // 
@@ -1478,6 +1494,7 @@
             this.textBoxEventParam3.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam3.TabIndex = 41;
             this.textBoxEventParam3.Text = "0";
+            this.textBoxEventParam3.Leave += new System.EventHandler(this.textBoxEventParam3_Leave);
             // 
             // textBoxEventParam2
             // 
@@ -1486,6 +1503,7 @@
             this.textBoxEventParam2.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam2.TabIndex = 39;
             this.textBoxEventParam2.Text = "0";
+            this.textBoxEventParam2.Leave += new System.EventHandler(this.textBoxEventParam2_Leave);
             // 
             // labelEventParam1
             // 
@@ -1496,6 +1514,7 @@
             this.labelEventParam1.TabIndex = 23;
             this.labelEventParam1.Text = "Param 1";
             this.labelEventParam1.TooltipParameterId = 1;
+            this.labelEventParam1.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
             // 
             // textBoxEventParam1
             // 
@@ -1504,6 +1523,7 @@
             this.textBoxEventParam1.Size = new System.Drawing.Size(70, 20);
             this.textBoxEventParam1.TabIndex = 37;
             this.textBoxEventParam1.Text = "0";
+            this.textBoxEventParam1.Leave += new System.EventHandler(this.textBoxEventParam1_Leave);
             // 
             // tabPageAction
             // 
@@ -1542,6 +1562,7 @@
             this.buttonActionParamSixSearch.Text = "...";
             this.buttonActionParamSixSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamSixSearch.Visible = false;
+            this.buttonActionParamSixSearch.Click += new System.EventHandler(this.buttonActionParamSixSearch_Click);
             // 
             // buttonActionParamFiveSearch
             // 
@@ -1552,6 +1573,7 @@
             this.buttonActionParamFiveSearch.Text = "...";
             this.buttonActionParamFiveSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamFiveSearch.Visible = false;
+            this.buttonActionParamFiveSearch.Click += new System.EventHandler(this.buttonActionParamFiveSearch_Click);
             // 
             // buttonActionParamFourSearch
             // 
@@ -1562,6 +1584,7 @@
             this.buttonActionParamFourSearch.Text = "...";
             this.buttonActionParamFourSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamFourSearch.Visible = false;
+            this.buttonActionParamFourSearch.Click += new System.EventHandler(this.buttonActionParamFourSearch_Click);
             // 
             // buttonActionParamThreeSearch
             // 
@@ -1572,6 +1595,7 @@
             this.buttonActionParamThreeSearch.Text = "...";
             this.buttonActionParamThreeSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamThreeSearch.Visible = false;
+            this.buttonActionParamThreeSearch.Click += new System.EventHandler(this.buttonActionParamThreeSearch_Click);
             // 
             // buttonActionParamTwoSearch
             // 
@@ -1582,6 +1606,7 @@
             this.buttonActionParamTwoSearch.Text = "...";
             this.buttonActionParamTwoSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamTwoSearch.Visible = false;
+            this.buttonActionParamTwoSearch.Click += new System.EventHandler(this.buttonActionParamTwoSearch_Click);
             // 
             // buttonActionParamOneSearch
             // 
@@ -1592,6 +1617,7 @@
             this.buttonActionParamOneSearch.Text = "...";
             this.buttonActionParamOneSearch.UseVisualStyleBackColor = true;
             this.buttonActionParamOneSearch.Visible = false;
+            this.buttonActionParamOneSearch.Click += new System.EventHandler(this.buttonActionParamOneSearch_Click);
             // 
             // textBoxActionParam6
             // 
@@ -1600,6 +1626,7 @@
             this.textBoxActionParam6.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam6.TabIndex = 56;
             this.textBoxActionParam6.Text = "0";
+            this.textBoxActionParam6.Leave += new System.EventHandler(this.textBoxActionParam6_Leave);
             // 
             // textBoxActionParam5
             // 
@@ -1608,6 +1635,7 @@
             this.textBoxActionParam5.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam5.TabIndex = 53;
             this.textBoxActionParam5.Text = "0";
+            this.textBoxActionParam5.Leave += new System.EventHandler(this.textBoxActionParam5_Leave);
             // 
             // textBoxActionParam4
             // 
@@ -1616,6 +1644,7 @@
             this.textBoxActionParam4.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam4.TabIndex = 51;
             this.textBoxActionParam4.Text = "0";
+            this.textBoxActionParam4.Leave += new System.EventHandler(this.textBoxActionParam4_Leave);
             // 
             // textBoxActionParam3
             // 
@@ -1624,6 +1653,7 @@
             this.textBoxActionParam3.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam3.TabIndex = 49;
             this.textBoxActionParam3.Text = "0";
+            this.textBoxActionParam3.Leave += new System.EventHandler(this.textBoxActionParam3_Leave);
             // 
             // textBoxActionParam2
             // 
@@ -1632,6 +1662,7 @@
             this.textBoxActionParam2.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam2.TabIndex = 47;
             this.textBoxActionParam2.Text = "0";
+            this.textBoxActionParam2.Leave += new System.EventHandler(this.textBoxActionParam2_Leave);
             // 
             // textBoxActionParam1
             // 
@@ -1640,6 +1671,7 @@
             this.textBoxActionParam1.Size = new System.Drawing.Size(70, 20);
             this.textBoxActionParam1.TabIndex = 45;
             this.textBoxActionParam1.Text = "0";
+            this.textBoxActionParam1.Leave += new System.EventHandler(this.textBoxActionParam1_Leave);
             // 
             // labelActionParam6
             // 
@@ -1650,6 +1682,7 @@
             this.labelActionParam6.TabIndex = 24;
             this.labelActionParam6.Text = "Param 6";
             this.labelActionParam6.TooltipParameterId = 6;
+            this.labelActionParam6.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
             // 
             // labelActionParam5
             // 
@@ -1660,6 +1693,7 @@
             this.labelActionParam5.TabIndex = 24;
             this.labelActionParam5.Text = "Param 5";
             this.labelActionParam5.TooltipParameterId = 5;
+            this.labelActionParam5.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
             // 
             // labelActionParam4
             // 
@@ -1670,6 +1704,7 @@
             this.labelActionParam4.TabIndex = 24;
             this.labelActionParam4.Text = "Param 4";
             this.labelActionParam4.TooltipParameterId = 4;
+            this.labelActionParam4.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
             // 
             // labelActionParam3
             // 
@@ -1680,6 +1715,7 @@
             this.labelActionParam3.TabIndex = 25;
             this.labelActionParam3.Text = "Param 3";
             this.labelActionParam3.TooltipParameterId = 3;
+            this.labelActionParam3.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
             // 
             // labelActionParam2
             // 
@@ -1690,6 +1726,7 @@
             this.labelActionParam2.TabIndex = 26;
             this.labelActionParam2.Text = "Param 2";
             this.labelActionParam2.TooltipParameterId = 2;
+            this.labelActionParam2.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
             // 
             // labelActionParam1
             // 
@@ -1700,6 +1737,7 @@
             this.labelActionParam1.TabIndex = 32;
             this.labelActionParam1.Text = "Param 1";
             this.labelActionParam1.TooltipParameterId = 1;
+            this.labelActionParam1.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
             // 
             // tabPageTarget
             // 
@@ -1746,6 +1784,7 @@
             this.buttonTargetParamTwoSearch.Text = "...";
             this.buttonTargetParamTwoSearch.UseVisualStyleBackColor = true;
             this.buttonTargetParamTwoSearch.Visible = false;
+            this.buttonTargetParamTwoSearch.Click += new System.EventHandler(this.buttonTargetParamTwoSearch_Click);
             // 
             // buttonTargetParamOneSearch
             // 
@@ -1756,6 +1795,7 @@
             this.buttonTargetParamOneSearch.Text = "...";
             this.buttonTargetParamOneSearch.UseVisualStyleBackColor = true;
             this.buttonTargetParamOneSearch.Visible = false;
+            this.buttonTargetParamOneSearch.Click += new System.EventHandler(this.buttonTargetParamOneSearch_Click);
             // 
             // textBoxTargetO
             // 
@@ -1764,6 +1804,8 @@
             this.textBoxTargetO.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetO.TabIndex = 36;
             this.textBoxTargetO.Text = "0";
+            this.textBoxTargetO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
+            this.textBoxTargetO.Leave += new System.EventHandler(this.textBoxTargetO_Leave);
             // 
             // textBoxTargetZ
             // 
@@ -1772,6 +1814,8 @@
             this.textBoxTargetZ.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetZ.TabIndex = 68;
             this.textBoxTargetZ.Text = "0";
+            this.textBoxTargetZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
+            this.textBoxTargetZ.Leave += new System.EventHandler(this.textBoxTargetZ_Leave);
             // 
             // textBoxTargetY
             // 
@@ -1780,6 +1824,8 @@
             this.textBoxTargetY.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetY.TabIndex = 66;
             this.textBoxTargetY.Text = "0";
+            this.textBoxTargetY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
+            this.textBoxTargetY.Leave += new System.EventHandler(this.textBoxTargetY_Leave);
             // 
             // textBoxTargetX
             // 
@@ -1788,6 +1834,8 @@
             this.textBoxTargetX.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetX.TabIndex = 64;
             this.textBoxTargetX.Text = "0";
+            this.textBoxTargetX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
+            this.textBoxTargetX.Leave += new System.EventHandler(this.textBoxTargetX_Leave);
             // 
             // textBoxTargetParam3
             // 
@@ -1796,6 +1844,7 @@
             this.textBoxTargetParam3.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetParam3.TabIndex = 62;
             this.textBoxTargetParam3.Text = "0";
+            this.textBoxTargetParam3.Leave += new System.EventHandler(this.textBoxTargetParam3_Leave);
             // 
             // textBoxTargetParam2
             // 
@@ -1804,6 +1853,7 @@
             this.textBoxTargetParam2.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetParam2.TabIndex = 60;
             this.textBoxTargetParam2.Text = "0";
+            this.textBoxTargetParam2.Leave += new System.EventHandler(this.textBoxTargetParam2_Leave);
             // 
             // textBoxTargetParam1
             // 
@@ -1812,6 +1862,7 @@
             this.textBoxTargetParam1.Size = new System.Drawing.Size(70, 20);
             this.textBoxTargetParam1.TabIndex = 58;
             this.textBoxTargetParam1.Text = "0";
+            this.textBoxTargetParam1.Leave += new System.EventHandler(this.textBoxTargetParam1_Leave);
             // 
             // labelTargetO
             // 
@@ -1862,6 +1913,7 @@
             this.labelTargetParam3.TabIndex = 34;
             this.labelTargetParam3.Text = "Param 3";
             this.labelTargetParam3.TooltipParameterId = 3;
+            this.labelTargetParam3.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
             // 
             // labelTargetParam2
             // 
@@ -1872,6 +1924,7 @@
             this.labelTargetParam2.TabIndex = 35;
             this.labelTargetParam2.Text = "Param 2";
             this.labelTargetParam2.TooltipParameterId = 2;
+            this.labelTargetParam2.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
             // 
             // labelTargetParam1
             // 
@@ -1882,6 +1935,7 @@
             this.labelTargetParam1.TabIndex = 38;
             this.labelTargetParam1.Text = "Param 1";
             this.labelTargetParam1.TooltipParameterId = 1;
+            this.labelTargetParam1.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
             // 
             // groupBoxScriptInfo
             // 
@@ -1928,6 +1982,7 @@
             this.buttonLinkTo.TabIndex = 34;
             this.buttonLinkTo.Text = "...";
             this.buttonLinkTo.UseVisualStyleBackColor = true;
+            this.buttonLinkTo.Click += new System.EventHandler(this.buttonLinkTo_Click);
             // 
             // buttonLinkFrom
             // 
@@ -1937,6 +1992,7 @@
             this.buttonLinkFrom.TabIndex = 36;
             this.buttonLinkFrom.Text = "...";
             this.buttonLinkFrom.UseVisualStyleBackColor = true;
+            this.buttonLinkFrom.Click += new System.EventHandler(this.buttonLinkFrom_Click);
             // 
             // comboBoxTargetType
             // 
@@ -1975,6 +2031,8 @@
             this.comboBoxTargetType.Name = "comboBoxTargetType";
             this.comboBoxTargetType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxTargetType.TabIndex = 25;
+            this.comboBoxTargetType.SelectedIndexChanged += new System.EventHandler(this.comboBoxTargetType_SelectedIndexChanged);
+            this.comboBoxTargetType.MouseEnter += new System.EventHandler(this.comboBoxTargetType_MouseEnter);
             // 
             // buttonSelectEventFlag
             // 
@@ -1984,6 +2042,7 @@
             this.buttonSelectEventFlag.TabIndex = 32;
             this.buttonSelectEventFlag.Text = "...";
             this.buttonSelectEventFlag.UseVisualStyleBackColor = true;
+            this.buttonSelectEventFlag.Click += new System.EventHandler(this.buttonSelectEventFlag_Click);
             // 
             // buttonSearchPhasemask
             // 
@@ -1993,6 +2052,7 @@
             this.buttonSearchPhasemask.TabIndex = 29;
             this.buttonSearchPhasemask.Text = "...";
             this.buttonSearchPhasemask.UseVisualStyleBackColor = true;
+            this.buttonSearchPhasemask.Click += new System.EventHandler(this.buttonSearchPhasemask_Click);
             // 
             // comboBoxActionType
             // 
@@ -2115,6 +2175,8 @@
             this.comboBoxActionType.Name = "comboBoxActionType";
             this.comboBoxActionType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxActionType.TabIndex = 23;
+            this.comboBoxActionType.SelectedIndexChanged += new System.EventHandler(this.comboBoxActionType_SelectedIndexChanged);
+            this.comboBoxActionType.MouseEnter += new System.EventHandler(this.comboBoxActionType_MouseEnter);
             // 
             // buttonSearchEventFlags
             // 
@@ -2132,6 +2194,7 @@
             this.textBoxTargetType.Size = new System.Drawing.Size(26, 20);
             this.textBoxTargetType.TabIndex = 26;
             this.textBoxTargetType.Text = "0";
+            this.textBoxTargetType.TextChanged += new System.EventHandler(this.textBoxTargetTypeId_TextChanged);
             // 
             // textBoxEventChance
             // 
@@ -2149,6 +2212,7 @@
             0,
             0,
             0});
+            this.textBoxEventChance.ValueChanged += new System.EventHandler(this.textBoxEventChance_ValueChanged);
             // 
             // label14
             // 
@@ -2166,6 +2230,7 @@
             this.textBoxEventFlags.Size = new System.Drawing.Size(39, 20);
             this.textBoxEventFlags.TabIndex = 31;
             this.textBoxEventFlags.Text = "0";
+            this.textBoxEventFlags.TextChanged += new System.EventHandler(this.textBoxEventFlags_TextChanged);
             // 
             // label13
             // 
@@ -2192,6 +2257,7 @@
             this.textBoxComments.Size = new System.Drawing.Size(267, 20);
             this.textBoxComments.TabIndex = 37;
             this.textBoxComments.Text = "Npc - Event - Action (phase) (dungeon difficulty)";
+            this.textBoxComments.TextChanged += new System.EventHandler(this.textBoxComments_TextChanged);
             // 
             // textBoxActionType
             // 
@@ -2200,6 +2266,7 @@
             this.textBoxActionType.Size = new System.Drawing.Size(26, 20);
             this.textBoxActionType.TabIndex = 24;
             this.textBoxActionType.Text = "0";
+            this.textBoxActionType.TextChanged += new System.EventHandler(this.textBoxActionTypeId_TextChanged);
             // 
             // textBoxEventPhasemask
             // 
@@ -2208,6 +2275,7 @@
             this.textBoxEventPhasemask.Size = new System.Drawing.Size(39, 20);
             this.textBoxEventPhasemask.TabIndex = 28;
             this.textBoxEventPhasemask.Text = "0";
+            this.textBoxEventPhasemask.TextChanged += new System.EventHandler(this.textBoxEventPhasemask_TextChanged);
             // 
             // textBoxEventType
             // 
@@ -2216,6 +2284,7 @@
             this.textBoxEventType.Size = new System.Drawing.Size(26, 20);
             this.textBoxEventType.TabIndex = 22;
             this.textBoxEventType.Text = "0";
+            this.textBoxEventType.TextChanged += new System.EventHandler(this.textBoxEventTypeId_TextChanged);
             // 
             // textBoxLinkTo
             // 
@@ -2224,6 +2293,7 @@
             this.textBoxLinkTo.Size = new System.Drawing.Size(41, 20);
             this.textBoxLinkTo.TabIndex = 33;
             this.textBoxLinkTo.Text = "0";
+            this.textBoxLinkTo.TextChanged += new System.EventHandler(this.textBoxLinkTo_TextChanged);
             // 
             // textBoxLinkFrom
             // 
@@ -2232,6 +2302,7 @@
             this.textBoxLinkFrom.Size = new System.Drawing.Size(39, 20);
             this.textBoxLinkFrom.TabIndex = 35;
             this.textBoxLinkFrom.Text = "None";
+            this.textBoxLinkFrom.TextChanged += new System.EventHandler(this.textBoxLinkFrom_TextChanged);
             // 
             // comboBoxEventType
             // 
@@ -2392,6 +2463,8 @@
             this.comboBoxEventType.Name = "comboBoxEventType";
             this.comboBoxEventType.Size = new System.Drawing.Size(235, 21);
             this.comboBoxEventType.TabIndex = 21;
+            this.comboBoxEventType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEventType_SelectedIndexChanged);
+            this.comboBoxEventType.MouseEnter += new System.EventHandler(this.comboBoxEventType_MouseEnter);
             // 
             // textBoxId
             // 
@@ -2401,6 +2474,7 @@
             this.textBoxId.Size = new System.Drawing.Size(41, 20);
             this.textBoxId.TabIndex = 27;
             this.textBoxId.Text = "0";
+            this.textBoxId.TextChanged += new System.EventHandler(this.textBoxId_TextChanged);
             // 
             // label8
             // 
@@ -2490,6 +2564,7 @@
             this.checkBoxUsePermanentTooltips.TabIndex = 21;
             this.checkBoxUsePermanentTooltips.Text = "Use permanent tooltips";
             this.checkBoxUsePermanentTooltips.UseVisualStyleBackColor = true;
+            this.checkBoxUsePermanentTooltips.CheckedChanged += new System.EventHandler(this.checkBoxUsePermanentTooltips_CheckedChanged);
             // 
             // checkBoxUsePhaseColors
             // 
@@ -2500,6 +2575,7 @@
             this.checkBoxUsePhaseColors.TabIndex = 22;
             this.checkBoxUsePhaseColors.Text = "Use phase colors";
             this.checkBoxUsePhaseColors.UseVisualStyleBackColor = true;
+            this.checkBoxUsePhaseColors.CheckedChanged += new System.EventHandler(this.checkBoxUsePhaseColors_CheckedChanged);
             // 
             // checkBoxAllowChangingEntryAndSourceType
             // 
@@ -2520,6 +2596,7 @@
             this.checkBoxListActionlistsOrEntries.TabIndex = 17;
             this.checkBoxListActionlistsOrEntries.Text = "List actionlists too";
             this.checkBoxListActionlistsOrEntries.UseVisualStyleBackColor = true;
+            this.checkBoxListActionlistsOrEntries.CheckedChanged += new System.EventHandler(this.checkBoxListActionlists_CheckedChanged);
             // 
             // checkBoxShowBasicInfo
             // 
@@ -2530,6 +2607,7 @@
             this.checkBoxShowBasicInfo.TabIndex = 16;
             this.checkBoxShowBasicInfo.Text = "Show basic information";
             this.checkBoxShowBasicInfo.UseVisualStyleBackColor = true;
+            this.checkBoxShowBasicInfo.CheckedChanged += new System.EventHandler(this.checkBoxShowBasicInfo_CheckedChanged);
             // 
             // checkBox3
             // 
@@ -2553,6 +2631,7 @@
             this.checkBoxLockEventId.TabIndex = 15;
             this.checkBoxLockEventId.Text = "Lock smart_scripts.id";
             this.checkBoxLockEventId.UseVisualStyleBackColor = true;
+            this.checkBoxLockEventId.CheckedChanged += new System.EventHandler(this.checkBoxLockEventId_CheckedChanged);
             // 
             // groupBoxStaticScriptInfo
             // 
@@ -2578,6 +2657,7 @@
             this.buttonSearchForEntryOrGuid.TabIndex = 13;
             this.buttonSearchForEntryOrGuid.Text = "...";
             this.buttonSearchForEntryOrGuid.UseVisualStyleBackColor = true;
+            this.buttonSearchForEntryOrGuid.Click += new System.EventHandler(this.buttonSearchForEntry_Click);
             // 
             // label4
             // 
@@ -2602,6 +2682,7 @@
             this.comboBoxSourceType.Name = "comboBoxSourceType";
             this.comboBoxSourceType.Size = new System.Drawing.Size(183, 21);
             this.comboBoxSourceType.TabIndex = 14;
+            this.comboBoxSourceType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourceType_SelectedIndexChanged);
             // 
             // labelEntryOrGuid
             // 
@@ -2618,6 +2699,7 @@
             this.textBoxEntryOrGuid.Name = "textBoxEntryOrGuid";
             this.textBoxEntryOrGuid.Size = new System.Drawing.Size(110, 20);
             this.textBoxEntryOrGuid.TabIndex = 12;
+            this.textBoxEntryOrGuid.TextChanged += new System.EventHandler(this.textBoxEntryOrGuid_TextChanged);
             // 
             // MainForm
             // 
