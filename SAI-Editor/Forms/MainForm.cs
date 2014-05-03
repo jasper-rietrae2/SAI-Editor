@@ -63,7 +63,7 @@ namespace SAI_Editor.Forms
         private int MainFormWidth = (int)FormSizes.MainFormWidth, MainFormHeight = (int)FormSizes.MainFormHeight;
         private int listViewSmartScriptsHeightToChangeTo;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
-        private Thread updateSurveyThread = null;
+        private Thread updateSurveyThread = null, checkIfUpdatesAvailableThread = null;
         private FormState formState = FormState.FormStateLogin;
         private string applicationVersion = String.Empty;
         private System.Windows.Forms.Timer timerCheckForInternetConnection = new System.Windows.Forms.Timer();
@@ -238,6 +238,9 @@ namespace SAI_Editor.Forms
             updateSurveyThread = new Thread(UpdateSurvey);
             updateSurveyThread.Start();
 
+            checkIfUpdatesAvailableThread = new Thread(CheckIfUpdatesAvailable);
+            checkIfUpdatesAvailableThread.Start();
+
             runningConstructor = false;
         }
 
@@ -279,6 +282,59 @@ namespace SAI_Editor.Forms
             }
         }
 
+        private void CheckIfUpdatesAvailable()
+        {
+            using (WebClient client = new WebClient())
+            {
+                try
+                {
+                    using (Stream streamVersion = client.OpenRead("http://dl.dropbox.com/u/84527004/SAI-Editor/version.txt"))
+                    {
+                        if (streamVersion != null)
+                        {
+                            using (StreamReader streamReaderVersion = new StreamReader(streamVersion))
+                            {
+                                string newAppVersionStr = streamReaderVersion.ReadToEnd();
+                                int newAppVersion = XConverter.ToInt32(newAppVersionStr.Replace("v", String.Empty).Replace(".", String.Empty));
+                                int currAppVersion = XConverter.ToInt32(applicationVersion.Replace("v", String.Empty).Replace(".", String.Empty));
+
+                                if (newAppVersion > 0 && currAppVersion > 0 && newAppVersion > currAppVersion)
+                                {
+                                    //! Run the messagebox in the mainthread
+                                    Invoke(new Action(() =>
+                                    {
+                                        DialogResult result = MessageBox.Show(this, "A new version of the application is available (" + newAppVersionStr + "). Do you wish to go to the download page?", "New version available!", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk);
+
+                                        if (result == DialogResult.Yes)
+                                            SAI_Editor_Manager.Instance.StartProcess("http://www.trinitycore.org/f/files/file/17-sai-editor/");
+                                    }));
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (ThreadAbortException)
+                {
+
+                }
+                catch (WebException)
+                {
+                    //! Try to connect to google.com. If it can't connect, it means no internet connection
+                    //! is available. We then start a timer which checks for an internet connection every
+                    //! 10 minutes.
+                    if (!SAI_Editor_Manager.Instance.HasInternetConnection())
+                        timerCheckForInternetConnection.Enabled = true;
+                }
+                catch (Exception ex)
+                {
+                    Invoke(new Action(() =>
+                    {
+                        MessageBox.Show("Something went wrong while checking for updates. Please report the following message to developers:\n\n" + ex.Message, "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }));
+                }
+            }
+        }
+
         [DllImportAttribute("user32.dll")]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
@@ -288,13 +344,6 @@ namespace SAI_Editor.Forms
         [DllImportAttribute("user32.dll")]
         public static extern bool SetForegroundWindow(IntPtr hWnd);
 
-        public static void ShowToFront(string windowName)
-        {
-            IntPtr firstInstance = FindWindow(null, windowName);
-            ShowWindow(firstInstance, 1);
-            SetForegroundWindow(firstInstance);
-        }
-
         private void timerCheckForInternetConnection_Tick(object sender, EventArgs e)
         {
             //! Try to connect to google.com. If it can't connect, it means no internet connection
@@ -302,6 +351,7 @@ namespace SAI_Editor.Forms
             if (SAI_Editor_Manager.Instance.HasInternetConnection())
             {
                 timerCheckForInternetConnection.Enabled = false;
+                checkIfUpdatesAvailableThread.Start();
                 updateSurveyThread.Start();
             }
         }
