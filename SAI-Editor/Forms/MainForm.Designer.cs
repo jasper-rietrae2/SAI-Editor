@@ -870,7 +870,10 @@
             // conditionEditorToolStripMenuItem
             // 
             this.conditionEditorToolStripMenuItem.Name = "conditionEditorToolStripMenuItem";
-            this.conditionEditorToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.conditionEditorToolStripMenuItem.ShortcutKeyDisplayString = "(Ctrl + Shift + G)";
+            this.conditionEditorToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.G)));
+            this.conditionEditorToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
             this.conditionEditorToolStripMenuItem.Text = "Condition-Editor";
             this.conditionEditorToolStripMenuItem.Click += new System.EventHandler(this.conditionEditorToolStripMenuItem_Click);
             // 
@@ -885,8 +888,8 @@
             // smartAIWikiToolStripMenuItem
             // 
             this.smartAIWikiToolStripMenuItem.Name = "smartAIWikiToolStripMenuItem";
-            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
-            this.smartAIWikiToolStripMenuItem.Text = "SmartAI Wiki...";
+            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.smartAIWikiToolStripMenuItem.Text = "SmartAI Wiki (TC)";
             this.smartAIWikiToolStripMenuItem.Click += new System.EventHandler(this.smartAIWikiToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem

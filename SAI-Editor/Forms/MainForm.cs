@@ -722,8 +722,6 @@ namespace SAI_Editor.Forms
 
                 if (radioButtonConnectToMySql.Checked)
                     TryToLoadScript(showErrorIfNoneFound: false);
-
-                conditionEditorToolStripMenuItem.PerformClick();
             }
         }
 
