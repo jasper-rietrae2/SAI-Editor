@@ -220,13 +220,14 @@ namespace SAI_Editor.Forms.SearchForms
                 _cts.Dispose();
 
             _cts = new CancellationTokenSource();
+            string criteria = textBoxCriteria.Text.Trim();
 
             try
             {
                 string query = "";
-                bool criteriaLeftEmpty = String.IsNullOrEmpty(textBoxCriteria.Text) || String.IsNullOrWhiteSpace(textBoxCriteria.Text);
+                bool criteriaLeftEmpty = String.IsNullOrEmpty(criteria) || String.IsNullOrWhiteSpace(criteria);
 
-                if (!criteriaLeftEmpty && IsNumericIndex(GetSelectedIndexOfComboBox(comboBoxSearchType)) && Convert.ToInt32(textBoxCriteria.Text) < 0)
+                if (!criteriaLeftEmpty && IsNumericIndex(GetSelectedIndexOfComboBox(comboBoxSearchType)) && Convert.ToInt32(criteria) < 0)
                 {
                     bool pressedYes = true;
 
@@ -241,7 +242,7 @@ namespace SAI_Editor.Forms.SearchForms
                         return;
                     }
 
-                    SetTextOfControl(textBoxCriteria, (Convert.ToInt32(textBoxCriteria.Text) * -1).ToString());
+                    SetTextOfControl(textBoxCriteria, (Convert.ToInt32(criteria) * -1).ToString());
                 }
 
                 SetEnabledOfControl(buttonSearch, false);
@@ -255,9 +256,9 @@ namespace SAI_Editor.Forms.SearchForms
                         if (!criteriaLeftEmpty)
                         {
                             if (checkBoxFieldContainsCriteria.Checked)
-                                query += " WHERE entry LIKE '%" + textBoxCriteria.Text + "%'";
+                                query += " WHERE entry LIKE '%" + criteria + "%'";
                             else
-                                query += " WHERE entry=" + textBoxCriteria.Text;
+                                query += " WHERE entry=" + criteria;
                         }
 
                         if (checkBoxHasAiName.Checked)
@@ -266,7 +267,7 @@ namespace SAI_Editor.Forms.SearchForms
                         query += " ORDER BY entry";
                         break;
                     case 1: //! Creature name
-                        query = "SELECT entry, name FROM creature_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
+                        query = "SELECT entry, name FROM creature_template WHERE name LIKE '%" + criteria + "%'";
 
                         if (checkBoxHasAiName.Checked)
                             query += " AND AIName='SmartAI'";
@@ -302,16 +303,16 @@ namespace SAI_Editor.Forms.SearchForms
                             if (checkBoxHasAiName.Checked)
                             {
                                 if (checkBoxFieldContainsCriteria.Checked)
-                                    query = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE c.guid LIKE '%" + textBoxCriteria.Text + "%' AND ss.source_type = 0";
+                                    query = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE c.guid LIKE '%" + criteria + "%' AND ss.source_type = 0";
                                 else
-                                    query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE c.guid = " + textBoxCriteria.Text;
+                                    query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id JOIN smart_scripts ss ON ss.entryorguid = -c.guid WHERE c.guid = " + criteria;
                             }
                             else
                             {
                                 if (checkBoxFieldContainsCriteria.Checked)
-                                    query = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id WHERE c.guid LIKE '%" + textBoxCriteria.Text + "%'";
+                                    query = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id WHERE c.guid LIKE '%" + criteria + "%'";
                                 else
-                                    query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id WHERE c.guid = " + textBoxCriteria.Text;
+                                    query = "SELECT c.guid, ct.name FROM creature_template ct JOIN creature c ON ct.entry = c.id WHERE c.guid = " + criteria;
                             }
                         }
 
@@ -323,9 +324,9 @@ namespace SAI_Editor.Forms.SearchForms
                         if (!criteriaLeftEmpty)
                         {
                             if (checkBoxFieldContainsCriteria.Checked)
-                                query += " WHERE entry LIKE '%" + textBoxCriteria.Text + "%'";
+                                query += " WHERE entry LIKE '%" + criteria + "%'";
                             else
-                                query += " WHERE entry=" + textBoxCriteria.Text;
+                                query += " WHERE entry=" + criteria;
                         }
 
                         if (checkBoxHasAiName.Checked)
@@ -334,7 +335,7 @@ namespace SAI_Editor.Forms.SearchForms
                         query += " ORDER BY entry";
                         break;
                     case 4: //! Gameobject name
-                        query = "SELECT entry, name FROM gameobject_template WHERE name LIKE '%" + textBoxCriteria.Text + "%'";
+                        query = "SELECT entry, name FROM gameobject_template WHERE name LIKE '%" + criteria + "%'";
 
                         if (checkBoxHasAiName.Checked)
                             query += " AND AIName='SmartGameObjectAI'";
@@ -370,16 +371,16 @@ namespace SAI_Editor.Forms.SearchForms
                             if (checkBoxHasAiName.Checked)
                             {
                                 if (checkBoxFieldContainsCriteria.Checked)
-                                    query = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid = -g.guid WHERE g.guid LIKE '%" + textBoxCriteria.Text + "%' AND ss.source_type = 1";
+                                    query = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid = -g.guid WHERE g.guid LIKE '%" + criteria + "%' AND ss.source_type = 1";
                                 else
-                                    query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid = -g.guid WHERE g.guid = " + textBoxCriteria.Text + " AND ss.source_type = 1";
+                                    query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id JOIN smart_scripts ss ON ss.entryorguid = -g.guid WHERE g.guid = " + criteria + " AND ss.source_type = 1";
                             }
                             else
                             {
                                 if (checkBoxFieldContainsCriteria.Checked)
-                                    query = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id WHERE g.guid LIKE '%" + textBoxCriteria.Text + "%'";
+                                    query = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id WHERE g.guid LIKE '%" + criteria + "%'";
                                 else
-                                    query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id WHERE g.guid = " + textBoxCriteria.Text;
+                                    query = "SELECT g.guid, gt.name FROM gameobject_template gt JOIN gameobject g ON gt.entry = g.id WHERE g.guid = " + criteria;
                             }
                         }
 
@@ -394,9 +395,9 @@ namespace SAI_Editor.Forms.SearchForms
                             string areaTriggerIdFilter = "", areaTriggerMapIdFilter = "";
 
                             if (GetSelectedIndexOfComboBox(comboBoxSearchType) == 6)
-                                areaTriggerIdFilter = textBoxCriteria.Text;
+                                areaTriggerIdFilter = criteria;
                             else
-                                areaTriggerMapIdFilter = textBoxCriteria.Text;
+                                areaTriggerMapIdFilter = criteria;
 
                             FillListViewWithAreaTriggers(areaTriggerIdFilter, areaTriggerMapIdFilter, false);
                         }
@@ -425,7 +426,7 @@ namespace SAI_Editor.Forms.SearchForms
 
                         try
                         {
-                            List<SmartScript> smartScriptActionlists = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScriptActionLists(textBoxCriteria.Text, checkBoxFieldContainsCriteria.Checked);
+                            List<SmartScript> smartScriptActionlists = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScriptActionLists(criteria, checkBoxFieldContainsCriteria.Checked);
 
                             if (smartScriptActionlists != null)
                             {
