@@ -2707,10 +2707,10 @@ namespace SAI_Editor.Forms
             newSmartScript.event_chance = 100;
 
             //! All strings have to be initialized otherwise they become null and give cause an exception in the future.
-            newSmartScript.target_x = String.Empty;
-            newSmartScript.target_y = String.Empty;
-            newSmartScript.target_z = String.Empty;
-            newSmartScript.target_o = String.Empty;
+            newSmartScript.target_x = "0";
+            newSmartScript.target_y = "0";
+            newSmartScript.target_z = "0";
+            newSmartScript.target_o = "0";
             int index = listViewSmartScripts.AddSmartScript(newSmartScript);
             HandleShowBasicInfo();
 
