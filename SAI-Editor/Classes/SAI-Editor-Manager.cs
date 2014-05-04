@@ -217,19 +217,19 @@ namespace SAI_Editor.Classes
             switch (paramId)
             {
                 case 1:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString1 : String.Empty;
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString1 : "Unused Parameter";
                 case 2:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString2 : String.Empty;
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString2 : "Unused Parameter";
                 case 3:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString3 : String.Empty;
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString3 : "Unused Parameter";
                 case 4:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString4 : String.Empty;
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString4 : "Unused Parameter";
                 case 5:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString5 : String.Empty;
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString5 : "Unused Parameter";
                 case 6:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString6 : String.Empty;
+                    return baseTypeInformation != null ? baseTypeInformation.parameterString6 : "Unused Parameter";
                 default:
-                    return String.Empty;
+                    return "Unused Parameter";
             }
         }
 
