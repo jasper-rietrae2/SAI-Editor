@@ -1350,7 +1350,7 @@
             this.listViewSmartScripts.Location = new System.Drawing.Point(0, 212);
             this.listViewSmartScripts.MultiSelect = false;
             this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(915, 219);
+            this.listViewSmartScripts.Size = new System.Drawing.Size(915, 214);
             this.listViewSmartScripts.TabIndex = 83;
             this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
             this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
