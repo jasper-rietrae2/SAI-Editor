@@ -63,7 +63,7 @@ namespace SAI_Editor.Classes
 	        { "SmartActionlistTimerUpdateType", typeof(SingleSelectForm<SmartActionlistTimerUpdateType>)},
             { "GoStates", typeof(SingleSelectForm<GoStates>)},
             { "ReactState", typeof(SingleSelectForm<ReactState>)},
-            { "SheathState}", typeof(SingleSelectForm<SheathState>)},
+            { "SheathState", typeof(SingleSelectForm<SheathState>)},
             { "MovementGeneratorType", typeof(SingleSelectForm<MovementGeneratorType>)},
             { "PowerTypes", typeof(SingleSelectForm<PowerTypes>)},
             { "UnitStandStateType", typeof(SingleSelectForm<UnitStandStateType>)},
