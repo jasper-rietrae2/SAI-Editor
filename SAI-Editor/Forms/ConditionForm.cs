@@ -732,7 +732,7 @@ namespace SAI_Editor.Forms
 
         private void buttonDeleteCondition_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK != MessageBox.Show("Are you sure you want to get rid of this condition?", "Are you sure?", MessageBoxButtons.OK, MessageBoxIcon.Information))
+            if (DialogResult.OK != MessageBox.Show("Are you sure you want to get rid of this condition?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
                 return;
 
             conditions.Remove(listViewConditions.SelectedCondition);
@@ -744,7 +744,7 @@ namespace SAI_Editor.Forms
 
         private void buttonLoadCondition_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK != MessageBox.Show("Are you sure you want to load this condition and get rid of the local changes?", "Are you sure?", MessageBoxButtons.OK, MessageBoxIcon.Information))
+            if (DialogResult.OK != MessageBox.Show("Are you sure you want to load this condition and get rid of the local changes?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
                 return;
 
             ClearAllFields();
@@ -771,7 +771,7 @@ namespace SAI_Editor.Forms
 
         private void buttonDuplicateCondition_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK != MessageBox.Show("Are you sure you want to duplicate this condition?", "Are you sure?", MessageBoxButtons.OK, MessageBoxIcon.Information))
+            if (DialogResult.OK != MessageBox.Show("Are you sure you want to duplicate this condition?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
                 return;
 
             listViewConditions.AddCondition(listViewConditions.SelectedCondition, selectNewItem: true);
@@ -813,7 +813,7 @@ namespace SAI_Editor.Forms
 
         private void buttonResetSession_Click(object sender, EventArgs e)
         {
-            if (DialogResult.OK != MessageBox.Show("Are you sure you want to get rid of all conditions in this session?", "Are you sure?", MessageBoxButtons.OK, MessageBoxIcon.Information))
+            if (DialogResult.OK != MessageBox.Show("Are you sure you want to get rid of all conditions in this session?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
                 return;
 
             ResetSession();
