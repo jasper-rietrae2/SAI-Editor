@@ -22,35 +22,6 @@ using SAI_Editor.Classes.CustomControls;
 
 namespace SAI_Editor.Forms
 {
-    public enum FormState
-    {
-        FormStateLogin,
-        FormStateExpandingOrContracting,
-        FormStateMain,
-    }
-
-    internal enum FormSizes
-    {
-        LoginFormWidth = 403,
-        LoginFormHeight = 236,
-
-        MainFormWidth = 954,
-        MainFormHeight = 501,
-
-        ListViewHeightContract = 65,
-
-        LoginFormHeightShowWarning = 309,
-    }
-
-    public enum SourceTypes
-    {
-        SourceTypeNone = -1,
-        SourceTypeCreature = 0,
-        SourceTypeGameobject = 1,
-        SourceTypeAreaTrigger = 2,
-        SourceTypeScriptedActionlist = 9,
-    }
-
     public partial class MainForm : Form
     {
         public int expandAndContractSpeed = 5, lastSmartScriptIdOfScript = 0, previousLinkFrom = -1;
@@ -74,6 +45,16 @@ namespace SAI_Editor.Forms
 
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.UserPaint, true);
             ResizeRedraw = true;
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                CreateParams handleParam = base.CreateParams;
+                handleParam.ExStyle |= 0x02000000; // WS_EX_COMPOSITED       
+                return handleParam;
+            }
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
@@ -4093,21 +4074,6 @@ namespace SAI_Editor.Forms
             conditionForm.Show();
         }
 
-        private bool TryToBringOpenFormToFront(string formName)
-        {
-            foreach (Form form in Application.OpenForms)
-            {
-                if (form.Name == formName)
-                {
-                    form.BringToFront();
-                    form.Show(); //! Show the form in case it's hidden
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         Dictionary<string, Type> searchEventHandlers = new Dictionary<string, Type>()
         {
             {"Search for gameobject flags", typeof(MultiSelectForm<GoFlags>)},
@@ -4140,16 +4106,6 @@ namespace SAI_Editor.Forms
         {
             using (Form selectForm = (Form)Activator.CreateInstance(searchEventHandlers[((ToolStripItem)sender).Text], new object[] { null }))
                 selectForm.ShowDialog(this);
-        }
-
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                CreateParams handleParam = base.CreateParams;
-                handleParam.ExStyle |= 0x02000000; // WS_EX_COMPOSITED       
-                return handleParam;
-            }
         }
     }
 }

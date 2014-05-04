@@ -2,6 +2,35 @@
 
 namespace SAI_Editor.Enumerators
 {
+    public enum FormState
+    {
+        FormStateLogin,
+        FormStateExpandingOrContracting,
+        FormStateMain,
+    }
+
+    internal enum FormSizes
+    {
+        LoginFormWidth = 403,
+        LoginFormHeight = 236,
+
+        MainFormWidth = 954,
+        MainFormHeight = 501,
+
+        ListViewHeightContract = 65,
+
+        LoginFormHeightShowWarning = 309,
+    }
+
+    public enum SourceTypes
+    {
+        SourceTypeNone = -1,
+        SourceTypeCreature = 0,
+        SourceTypeGameobject = 1,
+        SourceTypeAreaTrigger = 2,
+        SourceTypeScriptedActionlist = 9,
+    }
+
     public enum ScriptTypeId
     {
         ScriptTypeEvent,

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using SAI_Editor.Classes;
 using SAI_Editor.Classes.Database.Classes;
+using SAI_Editor.Enumerators;
 
 namespace SAI_Editor.Forms.SearchForms
 {

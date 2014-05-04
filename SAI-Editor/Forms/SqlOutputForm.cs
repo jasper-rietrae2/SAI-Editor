@@ -6,6 +6,7 @@ using System.IO;
 using System.Diagnostics;
 using SAI_Editor.Properties;
 using SAI_Editor.Classes;
+using SAI_Editor.Enumerators;
 
 namespace SAI_Editor.Forms
 {
