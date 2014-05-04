@@ -4074,6 +4074,9 @@ namespace SAI_Editor.Forms
 
         private void conditionEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (formState != FormState.FormStateMain)
+                return;
+
             foreach (Form form in Application.OpenForms)
             {
                 if (form.Name == "ConditionForm")
