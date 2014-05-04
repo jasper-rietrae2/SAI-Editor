@@ -90,6 +90,7 @@ namespace SAI_Editor.Classes
             { "SmartEvent", typeof(SingleSelectForm<SmartEvent>)},
             { "SmartAction", typeof(SingleSelectForm<SmartAction>)},
             { "SmartTarget", typeof(SingleSelectForm<SmartTarget>)},
+            { "UnitFieldBytes1Types", typeof(SingleSelectForm<UnitFieldBytes1Types>)},
         };
 
         public SQLiteDatabase sqliteDatabase { get; set; }
