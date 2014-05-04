@@ -67,6 +67,9 @@
     <Compile Include="Classes\CustomControls\ConditionListView.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\CustomControls\CustomListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\CustomControls\CustomPanel.cs">
       <SubType>Component</SubType>
     </Compile>

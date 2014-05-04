@@ -9,67 +9,45 @@ using SAI_Editor.Classes.Database.Classes;
 
 namespace SAI_Editor.Classes.CustomControls
 {
-    public class SmartScriptListView : ForceSelectListView
+    public class SmartScriptListView : CustomListView
     {
-        private List<SmartScript> _smartScripts = new List<SmartScript>();
-        private List<string> _excludedProperties = new List<string>();
-        private readonly PropertyInfo[] _pinfo;
         private Stack<Color> _colors = new Stack<Color>(Constants.phaseColors);
         private Dictionary<int, Color> _phaseColors = new Dictionary<int, Color>();
 
         public bool EnablePhaseHighlighting { get; set; }
 
-        public List<SmartScript> SmartScripts
+        public SmartScriptListView()
+            : base(CustomListViewType.CustomListViewSmartScript)
         {
-            get { return _smartScripts; }
+
         }
 
-        public SmartScript SelectedSmartScript
+        public SmartScriptListView(List<DatabaseClass> scripts, List<string> exProps = null)
+            : base(CustomListViewType.CustomListViewSmartScript, scripts, exProps)
+        {
+
+        }
+
+        public SmartScript SelectedScript
         {
             get
             {
                 if (SelectedItems.Count > 0)
-                    return _smartScripts.FirstOrDefault(smartScript => smartScript == ((CustomListViewItem)SelectedItems[0]).Script);
+                    return (_scripts.FirstOrDefault(script => script == ((CustomListViewItem)SelectedItems[0]).Script) as SmartScript);
 
                 return null;
             }
         }
 
-        public SmartScriptListView()
+        public List<SmartScript> Scripts
         {
-            EnablePhaseHighlighting = false;
-            _pinfo = typeof(SmartScript).GetProperties();
-            _smartScripts = new List<SmartScript>();
-            _excludedProperties = new List<string>();
-
-            Init();
+            get { return _scripts.Cast<SmartScript>().ToList(); }
         }
 
-        public SmartScriptListView(List<SmartScript> scripts, List<string> exProps = null)
-        {
-            EnablePhaseHighlighting = false;
-            _pinfo = typeof(SmartScript).GetProperties();
-            _smartScripts = scripts;
-            _excludedProperties = exProps ?? new List<string>();
-
-            Init();
-        }
-
-        public void Init(bool keepSelection = false)
+        public override void Init(bool keepSelection = false)
         {
             int lastSelectedIndex = SelectedIndices.Count > 0 ? SelectedIndices[0] : -1;
-
-            Items.Clear();
-            Columns.Clear();
-
-            foreach (PropertyInfo propInfo in _pinfo.Where(propInfo => !_excludedProperties.Contains(propInfo.Name)))
-                Columns.Add(propInfo.Name);
-
-            if (_smartScripts != null)
-                AddSmartScripts(_smartScripts, true);
-
-            foreach (ColumnHeader header in Columns)
-                header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            base.Init(keepSelection);
 
             if (keepSelection && lastSelectedIndex != -1)
             {
@@ -82,9 +60,9 @@ namespace SAI_Editor.Classes.CustomControls
             _colors = new Stack<Color>(Constants.phaseColors);
             _phaseColors.Clear();
 
-            if (_smartScripts != null)
+            if (_scripts != null)
             {
-                int[] phasemasks = _smartScripts.Select(p => p.event_phase_mask).Distinct().ToArray();
+                int[] phasemasks = _scripts.Select(p => (p as SmartScript).event_phase_mask).Distinct().ToArray();
 
                 if (phasemasks.Length > Constants.phaseColors.Count)
                 {
@@ -97,24 +75,11 @@ namespace SAI_Editor.Classes.CustomControls
             }
         }
 
-        public int AddSmartScript(SmartScript script, bool listViewOnly = false, bool selectNewItem = false)
+        public int AddScript(SmartScript script, bool listViewOnly = false, bool selectNewItem = false)
         {
-            CustomListViewItem lvi = new CustomListViewItem(script.entryorguid.ToString());
-            lvi.Script = script;
-            lvi.Name = script.entryorguid.ToString();
+            int index = base.AddScript(script, listViewOnly, selectNewItem);
 
-            foreach (PropertyInfo propInfo in _pinfo.Where(p => !p.Name.Equals("entryorguid")))
-            {
-                if (_excludedProperties.Contains(propInfo.Name))
-                    continue;
-
-                lvi.SubItems.Add(propInfo.GetValue(script).ToString());
-            }
-
-            if (!listViewOnly)
-                _smartScripts.Add(script);
-
-            ListViewItem newItem = Items.Add(lvi);
+            ListViewItem newItem = Items[index];
 
             if (Settings.Default.PhaseHighlighting && script.event_phase_mask != 0)
             {
@@ -133,12 +98,15 @@ namespace SAI_Editor.Classes.CustomControls
             }
 
             newItem.Selected = selectNewItem;
-            return newItem.Index;
+            Select();
+            EnsureVisible(index);
+            return index;
         }
 
-        public void AddSmartScripts(List<SmartScript> scripts, bool listViewOnly = false)
+        public void AddScripts(List<SmartScript> scripts, bool listViewOnly = false)
         {
             List<ListViewItem> items = new List<ListViewItem>();
+
             foreach (SmartScript script in scripts)
             {
                 CustomListViewItem lvi = new CustomListViewItem(script.entryorguid.ToString());
@@ -154,7 +122,7 @@ namespace SAI_Editor.Classes.CustomControls
                 }
 
                 if (!listViewOnly)
-                    _smartScripts.Add(script);
+                    _scripts.Add(script);
 
                 if (Settings.Default.PhaseHighlighting && script.event_phase_mask != 0)
                 {
@@ -177,40 +145,13 @@ namespace SAI_Editor.Classes.CustomControls
             }
 
             Items.AddRange(items.ToArray());
-
         }
 
-        public void RemoveSmartScript(SmartScript script)
+        public void ReplaceScript(SmartScript script)
         {
-            foreach (CustomListViewItem item in Items.Cast<CustomListViewItem>().Where(item => item.Script == script))
-            {
-                Items.Remove(item);
-                break;
-            }
+            base.ReplaceScript(script);
 
-            _smartScripts.Remove(script);
-        }
-
-        public void ReplaceSmartScript(SmartScript script)
-        {
             CustomListViewItem lvi = Items.Cast<CustomListViewItem>().SingleOrDefault(p => p.Script == script);
-
-            if (lvi == null)
-                return;
-
-            lvi.SubItems.Clear();
-            lvi.Name = script.entryorguid.ToString();
-            lvi.Text = script.entryorguid.ToString();
-
-            foreach (PropertyInfo propInfo in _pinfo.Where(p => !p.Name.Equals("entryorguid")))
-            {
-                if (_excludedProperties.Contains(propInfo.Name))
-                    continue;
-
-                lvi.SubItems.Add(propInfo.GetValue(script).ToString());
-            }
-
-            _smartScripts[_smartScripts.IndexOf(lvi.Script as SmartScript)] = script;
 
             if (Settings.Default.PhaseHighlighting && script.event_phase_mask != 0)
             {
@@ -227,49 +168,6 @@ namespace SAI_Editor.Classes.CustomControls
 
                 lvi.BackColor = _phaseColors[script.event_phase_mask];
             }
-        }
-
-        public void ReplaceData(List<SmartScript> scripts, List<string> exProps = null)
-        {
-            _smartScripts = scripts;
-            _excludedProperties = exProps ?? new List<string>();
-            Init();
-        }
-
-        public void ReplaceSmartScripts(List<SmartScript> scripts)
-        {
-            _smartScripts = scripts;
-            Init();
-        }
-
-        public void IncludeProperty(string propName)
-        {
-            _excludedProperties.Remove(propName);
-            Init();
-        }
-
-        public void ExcludeProperty(string propName)
-        {
-            _excludedProperties.Add(propName);
-            Init();
-        }
-
-        public void IncludeProperties(List<string> propNames)
-        {
-            foreach (string propName in propNames)
-                _excludedProperties.Remove(propName);
-
-            Init();
-        }
-
-        public void ExcludeProperties(List<string> propNames)
-        {
-            _excludedProperties.Clear();
-
-            foreach (string propName in propNames)
-                _excludedProperties.Add(propName);
-
-            Init();
         }
 
         protected override void OnLostFocus(EventArgs e)

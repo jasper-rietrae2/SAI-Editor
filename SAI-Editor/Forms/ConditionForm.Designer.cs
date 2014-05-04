@@ -866,7 +866,6 @@
             // 
             // listViewConditions
             // 
-            this.listViewConditions.EnablePhaseHighlighting = false;
             this.listViewConditions.FullRowSelect = true;
             this.listViewConditions.Location = new System.Drawing.Point(0, 0);
             this.listViewConditions.MultiSelect = false;

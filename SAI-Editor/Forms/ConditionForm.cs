@@ -710,7 +710,7 @@ namespace SAI_Editor.Forms
             condition.Comment = textBoxComment.Text;
             conditions.Add(condition);
 
-            listViewConditions.AddCondition(condition, selectNewItem: true);
+            listViewConditions.AddScript(condition, selectNewItem: true);
             tabControl.SelectedIndex = 1;
 
             ClearAllFields();
@@ -735,8 +735,8 @@ namespace SAI_Editor.Forms
             if (DialogResult.OK != MessageBox.Show("Are you sure you want to get rid of this condition?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
                 return;
 
-            conditions.Remove(listViewConditions.SelectedCondition);
-            listViewConditions.RemoveCondition(listViewConditions.SelectedCondition);
+            conditions.Remove(listViewConditions.SelectedScript);
+            listViewConditions.RemoveScript(listViewConditions.SelectedScript);
 
             if (listViewConditions.Items.Count > 0)
                 listViewConditions.Items[0].Selected = true;
@@ -749,13 +749,13 @@ namespace SAI_Editor.Forms
 
             ClearAllFields();
 
-            Condition selectedCond = listViewConditions.SelectedCondition;
-            comboBoxConditionSourceTypes.SelectedIndex = listViewConditions.SelectedCondition.SourceTypeOrReferenceId;
+            Condition selectedCond = listViewConditions.SelectedScript;
+            comboBoxConditionSourceTypes.SelectedIndex = selectedCond.SourceTypeOrReferenceId;
             textBoxSourceGroup.Text = selectedCond.SourceGroup.ToString();
             textBoxSourceEntry.Text = selectedCond.SourceEntry.ToString();
             textBoxElseGroup.Text = selectedCond.ElseGroup.ToString();
             textBoxSourceId.Text = selectedCond.SourceId.ToString();
-            comboBoxConditionTypes.SelectedIndex = listViewConditions.SelectedCondition.ConditionTypeOrReference;
+            comboBoxConditionTypes.SelectedIndex = selectedCond.ConditionTypeOrReference;
             comboBoxConditionTarget.SelectedIndex = selectedCond.ConditionTarget;
             textBoxCondValue1.Text = selectedCond.ConditionValue1.ToString();
             textBoxCondValue2.Text = selectedCond.ConditionValue2.ToString();
@@ -774,7 +774,7 @@ namespace SAI_Editor.Forms
             if (DialogResult.OK != MessageBox.Show("Are you sure you want to duplicate this condition?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
                 return;
 
-            listViewConditions.AddCondition(listViewConditions.SelectedCondition, selectNewItem: true);
+            listViewConditions.AddScript(listViewConditions.SelectedScript, selectNewItem: true);
         }
 
         private void listViewConditions_SelectedIndexChanged(object sender, EventArgs e)
@@ -822,7 +822,7 @@ namespace SAI_Editor.Forms
         private void ResetSession()
         {
             conditions.Clear();
-            listViewConditions.ReplaceConditions(new List<Condition>());
+            listViewConditions.ClearScripts();
             labelSourceGroup.Text = " - ";
             labelSourceEntry.Text = " - ";
             labelElseGroup.Text = " - ";

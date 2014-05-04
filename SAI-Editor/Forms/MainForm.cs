@@ -614,7 +614,7 @@ namespace SAI_Editor.Forms
             panelPermanentTooltipParameters.Visible = false;
             SaveLastUsedFields();
             ResetFieldsToDefault();
-            listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
+            listViewSmartScripts.ClearScripts();
             StartContractingToLoginForm(Settings.Default.InstantExpand);
         }
 
@@ -649,18 +649,18 @@ namespace SAI_Editor.Forms
                 switch (scriptTypeId)
                 {
                     case ScriptTypeId.ScriptTypeEvent:
-                        listViewSmartScripts.SelectedSmartScript.event_type = comboBox.SelectedIndex;
+                        listViewSmartScripts.SelectedScript.event_type = comboBox.SelectedIndex;
                         break;
                     case ScriptTypeId.ScriptTypeAction:
-                        listViewSmartScripts.SelectedSmartScript.action_type = comboBox.SelectedIndex;
+                        listViewSmartScripts.SelectedScript.action_type = comboBox.SelectedIndex;
                         break;
                     case ScriptTypeId.ScriptTypeTarget:
-                        listViewSmartScripts.SelectedSmartScript.target_type = comboBox.SelectedIndex;
+                        listViewSmartScripts.SelectedScript.target_type = comboBox.SelectedIndex;
                         break;
                 }
 
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -1042,7 +1042,7 @@ namespace SAI_Editor.Forms
             try
             {
                 updatingFieldsBasedOnSelectedScript = true;
-                SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
+                SmartScript selectedScript = listViewSmartScripts.SelectedScript;
 
                 if (Settings.Default.ChangeStaticInfo)
                 {
@@ -1141,14 +1141,14 @@ namespace SAI_Editor.Forms
 
         private string GetLinkFromForSelection()
         {
-            SmartScript selectedScript = listViewSmartScripts.SelectedSmartScript;
+            SmartScript selectedScript = listViewSmartScripts.SelectedScript;
 
-            foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
+            foreach (SmartScript smartScript in listViewSmartScripts.Scripts)
             {
                 if (smartScript.entryorguid != selectedScript.entryorguid || smartScript.source_type != selectedScript.source_type)
                     continue;
 
-                if (smartScript.link > 0 && smartScript.link == listViewSmartScripts.SelectedSmartScript.id)
+                if (smartScript.link > 0 && smartScript.link == listViewSmartScripts.SelectedScript.id)
                     return smartScript.id.ToString();
             }
 
@@ -1375,7 +1375,7 @@ namespace SAI_Editor.Forms
 
         private void menuOptionDeleteSelectedRow_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedScript == null)
                 return;
 
             if (listViewSmartScripts.SelectedItems.Count <= 0)
@@ -1389,15 +1389,15 @@ namespace SAI_Editor.Forms
 
         private void menuItemCopySelectedRowListView_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedScript == null)
                 return;
 
-            smartScriptsOnClipBoard.Add(listViewSmartScripts.SelectedSmartScript.Clone());
+            smartScriptsOnClipBoard.Add(listViewSmartScripts.SelectedScript.Clone());
         }
 
         private void menuItemPasteLastCopiedRow_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedScript == null)
                 return;
 
             if (smartScriptsOnClipBoard.Count <= 0)
@@ -1407,7 +1407,7 @@ namespace SAI_Editor.Forms
             }
 
             SmartScript newSmartScript = smartScriptsOnClipBoard.Last().Clone();
-            listViewSmartScripts.AddSmartScript(newSmartScript);
+            listViewSmartScripts.AddScript(newSmartScript);
         }
 
         private void DeleteSelectedRow()
@@ -1421,8 +1421,8 @@ namespace SAI_Editor.Forms
                 if (listViewSmartScripts.SelectedItems[0].SubItems[2].Text == lastSmartScriptIdOfScript.ToString())
                     lastSmartScriptIdOfScript--;
 
-            lastDeletedSmartScripts.Add(listViewSmartScripts.SelectedSmartScript.Clone());
-            listViewSmartScripts.RemoveSmartScript(listViewSmartScripts.SelectedSmartScript);
+            lastDeletedSmartScripts.Add(listViewSmartScripts.SelectedScript.Clone());
+            listViewSmartScripts.RemoveScript(listViewSmartScripts.SelectedScript);
             SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
 
             if (listViewSmartScripts.Items.Count <= 0)
@@ -1465,7 +1465,7 @@ namespace SAI_Editor.Forms
                 //! Only add the new smartscript if it doesn't yet exist
                 foreach (SmartScript newSmartScript in smartScripts)
                     if (!listViewSmartScripts.Items.Cast<CustomListViewItem>().Any(p => (p.Script as SmartScript).entryorguid == newSmartScript.entryorguid && (p.Script as SmartScript).id == newSmartScript.id))
-                        listViewSmartScripts.AddSmartScript(newSmartScript);
+                        listViewSmartScripts.AddScript(newSmartScript);
 
                 pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             }
@@ -1483,10 +1483,10 @@ namespace SAI_Editor.Forms
 
         private void RemoveNonOriginalScriptsFromView()
         {
-            List<SmartScript> smartScriptsToRemove = listViewSmartScripts.SmartScripts.Where(smartScript => smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType).ToList();
+            List<DatabaseClass> smartScriptsToRemove = listViewSmartScripts.Scripts.Where(smartScript => smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType).Cast<DatabaseClass>().ToList();
 
             foreach (SmartScript smartScript in smartScriptsToRemove)
-                listViewSmartScripts.SmartScripts.Remove(smartScript);
+                listViewSmartScripts.Scripts.Remove(smartScript);
         }
 
         public SourceTypes GetSourceTypeByIndex()
@@ -1672,7 +1672,7 @@ namespace SAI_Editor.Forms
             originalEntryOrGuidAndSourceType.entryOrGuid = entryorguid;
             originalEntryOrGuidAndSourceType.sourceType = (SourceTypes)source_type;
 
-            listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
+            listViewSmartScripts.ClearScripts();
 
             SmartScript newSmartScript = new SmartScript();
             newSmartScript.entryorguid = entryorguid;
@@ -1715,12 +1715,9 @@ namespace SAI_Editor.Forms
             else
                 newSmartScript.comment = textBoxComments.Text;
 
-            listViewSmartScripts.AddSmartScript(newSmartScript);
+            listViewSmartScripts.AddScript(newSmartScript, selectNewItem: true);
 
             HandleShowBasicInfo();
-
-            listViewSmartScripts.Items[0].Selected = true;
-            listViewSmartScripts.Select();
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             SetGenerateCommentsEnabled(listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase);
@@ -1746,7 +1743,7 @@ namespace SAI_Editor.Forms
             if ((!forced && !pictureBoxLoadScript.Enabled) || !Settings.Default.UseWorldDatabase)
                 return;
 
-            listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
+            listViewSmartScripts.ClearScripts();
             ResetFieldsToDefault();
 
             if (String.IsNullOrEmpty(textBoxEntryOrGuid.Text))
@@ -1786,7 +1783,7 @@ namespace SAI_Editor.Forms
             }
 
             List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType, showErrorIfNoneFound, promptCreateIfNoneFound);
-            listViewSmartScripts.ReplaceSmartScripts(smartScripts);
+            listViewSmartScripts.ReplaceScripts(smartScripts.Cast<DatabaseClass>().ToList());
             checkBoxListActionlistsOrEntries.Text = originalEntryOrGuidAndSourceType.sourceType == SourceTypes.SourceTypeScriptedActionlist ? "List entries too" : "List actionlists too";
 
             buttonNewLine.Enabled = false;
@@ -1905,7 +1902,7 @@ namespace SAI_Editor.Forms
                 return;
             }
 
-            using (SearchForLinkForm searchForLinkForm = new SearchForLinkForm(listViewSmartScripts.SmartScripts, listViewSmartScripts.SelectedItems[0].Index, textBoxToChange))
+            using (SearchForLinkForm searchForLinkForm = new SearchForLinkForm(listViewSmartScripts.Scripts, listViewSmartScripts.SelectedItems[0].Index, textBoxToChange))
                 searchForLinkForm.ShowDialog(this);
         }
 
@@ -1983,12 +1980,16 @@ namespace SAI_Editor.Forms
         {
             using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, searchType))
                 searchFromDatabaseForm.ShowDialog(this);
+
+            textBoxToChange.Focus();
         }
 
         private void ShowSelectForm(string formTemplate, TextBox textBoxToChange)
         {
             using (Form selectForm = (Form)Activator.CreateInstance(SAI_Editor_Manager.SearchFormsContainer[formTemplate], new object[] { textBoxToChange }))
                 selectForm.ShowDialog(this);
+
+            textBoxToChange.Focus();
         }
 
         private void buttonEventParamOneSearch_Click(object sender, EventArgs e)
@@ -2692,12 +2693,8 @@ namespace SAI_Editor.Forms
             newSmartScript.target_y = "0";
             newSmartScript.target_z = "0";
             newSmartScript.target_o = "0";
-            int index = listViewSmartScripts.AddSmartScript(newSmartScript);
+            int index = listViewSmartScripts.AddScript(newSmartScript, selectNewItem: true);
             HandleShowBasicInfo();
-
-            listViewSmartScripts.Items[index].Selected = true;
-            listViewSmartScripts.Select();
-            listViewSmartScripts.EnsureVisible(index);
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
         }
@@ -2706,7 +2703,7 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                if (!updatingFieldsBasedOnSelectedScript && listViewSmartScripts.SelectedSmartScript.id.ToString() == textBoxLinkTo.Text)
+                if (!updatingFieldsBasedOnSelectedScript && listViewSmartScripts.SelectedScript.id.ToString() == textBoxLinkTo.Text)
                 {
                     MessageBox.Show("You can not link to or from the same id you're linking to.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBoxLinkFrom.Text = GetLinkFromForSelection();
@@ -2715,11 +2712,11 @@ namespace SAI_Editor.Forms
                 }
 
                 int linkTo = XConverter.ToInt32(textBoxLinkTo.Text);
-                listViewSmartScripts.SelectedSmartScript.link = linkTo;
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.link = linkTo;
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
 
-                foreach (SmartScript smartScript in listViewSmartScripts.SmartScripts)
+                foreach (SmartScript smartScript in listViewSmartScripts.Scripts)
                 {
                     if (smartScript.id == linkTo)
                     {
@@ -2736,8 +2733,8 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.comment = textBoxComments.Text;
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.comment = textBoxComments.Text;
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 ResizeColumns();
             }
         }
@@ -2746,9 +2743,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.event_phase_mask = XConverter.ToInt32(textBoxEventPhasemask.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.event_phase_mask = XConverter.ToInt32(textBoxEventPhasemask.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2756,9 +2753,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.event_chance = (int)textBoxEventChance.Value; //! Using .Text propert results in wrong value
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.event_chance = (int)textBoxEventChance.Value; //! Using .Text propert results in wrong value
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2766,9 +2763,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.event_flags = XConverter.ToInt32(textBoxEventFlags.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.event_flags = XConverter.ToInt32(textBoxEventFlags.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2789,7 +2786,7 @@ namespace SAI_Editor.Forms
             //! Only if the property was changed by hand (by user) and not by selecting a line
             if (!updatingFieldsBasedOnSelectedScript)
             {
-                if (newLinkFrom == listViewSmartScripts.SelectedSmartScript.id)
+                if (newLinkFrom == listViewSmartScripts.SelectedScript.id)
                 {
                     MessageBox.Show("You can not link to or from the same id you're linking to.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     textBoxLinkFrom.Text = GetLinkFromForSelection();
@@ -2800,9 +2797,9 @@ namespace SAI_Editor.Forms
                 if (previousLinkFrom == newLinkFrom)
                     return;
 
-                for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
+                for (int i = 0; i < listViewSmartScripts.Scripts.Count; ++i)
                 {
-                    SmartScript smartScript = listViewSmartScripts.SmartScripts[i];
+                    SmartScript smartScript = listViewSmartScripts.Scripts[i];
 
                     if (smartScript.entryorguid != originalEntryOrGuidAndSourceType.entryOrGuid || smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType)
                         continue;
@@ -2813,9 +2810,9 @@ namespace SAI_Editor.Forms
                         await GenerateCommentForSmartScript(smartScript, false);
                     }
 
-                    if (smartScript.id == newLinkFrom && listViewSmartScripts.SelectedSmartScript != null)
+                    if (smartScript.id == newLinkFrom && listViewSmartScripts.SelectedScript != null)
                     {
-                        smartScript.link = listViewSmartScripts.SelectedSmartScript.id;
+                        smartScript.link = listViewSmartScripts.SelectedScript.id;
                         await GenerateCommentForSmartScript(smartScript, false);
                     }
                 }
@@ -2830,9 +2827,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.event_param1 = XConverter.ToInt32(textBoxEventParam1.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.event_param1 = XConverter.ToInt32(textBoxEventParam1.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2840,9 +2837,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.event_param2 = XConverter.ToInt32(textBoxEventParam2.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.event_param2 = XConverter.ToInt32(textBoxEventParam2.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2850,9 +2847,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.event_param3 = XConverter.ToInt32(textBoxEventParam3.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.event_param3 = XConverter.ToInt32(textBoxEventParam3.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2860,9 +2857,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.event_param4 = XConverter.ToInt32(textBoxEventParam4.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.event_param4 = XConverter.ToInt32(textBoxEventParam4.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2873,9 +2870,9 @@ namespace SAI_Editor.Forms
 
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.action_param1 = XConverter.ToInt32(textBoxActionParam1.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.action_param1 = XConverter.ToInt32(textBoxActionParam1.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2883,9 +2880,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.action_param2 = XConverter.ToInt32(textBoxActionParam2.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.action_param2 = XConverter.ToInt32(textBoxActionParam2.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2893,9 +2890,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.action_param3 = XConverter.ToInt32(textBoxActionParam3.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.action_param3 = XConverter.ToInt32(textBoxActionParam3.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2903,9 +2900,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.action_param4 = XConverter.ToInt32(textBoxActionParam4.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.action_param4 = XConverter.ToInt32(textBoxActionParam4.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2913,9 +2910,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.action_param5 = XConverter.ToInt32(textBoxActionParam5.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.action_param5 = XConverter.ToInt32(textBoxActionParam5.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2923,9 +2920,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.action_param6 = XConverter.ToInt32(textBoxActionParam6.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.action_param6 = XConverter.ToInt32(textBoxActionParam6.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2933,9 +2930,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.target_param1 = XConverter.ToInt32(textBoxTargetParam1.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.target_param1 = XConverter.ToInt32(textBoxTargetParam1.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2943,9 +2940,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.target_param2 = XConverter.ToInt32(textBoxTargetParam2.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.target_param2 = XConverter.ToInt32(textBoxTargetParam2.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2953,9 +2950,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.target_param3 = XConverter.ToInt32(textBoxTargetParam3.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.target_param3 = XConverter.ToInt32(textBoxTargetParam3.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2976,9 +2973,9 @@ namespace SAI_Editor.Forms
             {
                 textBoxTargetX.Text = textBoxTargetX.Text.Replace(".", ",");
                 textBoxTargetX.SelectionStart = textBoxTargetX.Text.Length + 1; //! Set cursor to end of text
-                listViewSmartScripts.SelectedSmartScript.target_x = textBoxTargetX.Text;
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.target_x = textBoxTargetX.Text;
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -2988,9 +2985,9 @@ namespace SAI_Editor.Forms
             {
                 textBoxTargetY.Text = textBoxTargetY.Text.Replace(".", ",");
                 textBoxTargetY.SelectionStart = textBoxTargetY.Text.Length + 1; //! Set cursor to end of text
-                listViewSmartScripts.SelectedSmartScript.target_y = textBoxTargetY.Text;
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.target_y = textBoxTargetY.Text;
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -3000,9 +2997,9 @@ namespace SAI_Editor.Forms
             {
                 textBoxTargetZ.Text = textBoxTargetZ.Text.Replace(".", ",");
                 textBoxTargetZ.SelectionStart = textBoxTargetZ.Text.Length + 1; //! Set cursor to end of text
-                listViewSmartScripts.SelectedSmartScript.target_z = textBoxTargetZ.Text;
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.target_z = textBoxTargetZ.Text;
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -3012,9 +3009,9 @@ namespace SAI_Editor.Forms
             {
                 textBoxTargetO.Text = textBoxTargetO.Text.Replace(".", ",");
                 textBoxTargetO.SelectionStart = textBoxTargetO.Text.Length + 1; //! Set cursor to end of text
-                listViewSmartScripts.SelectedSmartScript.target_o = textBoxTargetO.Text;
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.target_o = textBoxTargetO.Text;
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -3026,12 +3023,12 @@ namespace SAI_Editor.Forms
 
             if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
 
                 //! When all entryorguids are the same, also adjust the originalEntryOrGuid data
-                List<EntryOrGuidAndSourceType> uniqueEntriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
+                List<EntryOrGuidAndSourceType> uniqueEntriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.Scripts);
 
                 if (uniqueEntriesOrGuidsAndSourceTypes != null && uniqueEntriesOrGuidsAndSourceTypes.Count == 1)
                 {
@@ -3050,9 +3047,9 @@ namespace SAI_Editor.Forms
 
             if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.source_type = (int)newSourceType;
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.source_type = (int)newSourceType;
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
 
             //! When no database connection can be made, only enable the search button if
@@ -3080,7 +3077,7 @@ namespace SAI_Editor.Forms
 
         private async Task<string> GenerateSmartAiSqlFromListView()
         {
-            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.Scripts);
             string generatedSql = String.Empty, sourceName = String.Empty;
 
             Dictionary<SourceTypes, List<EntryOrGuidAndSourceType>> entriesOrGuidsAndSourceTypesPerSourceType = new Dictionary<SourceTypes, List<EntryOrGuidAndSourceType>>();
@@ -3312,7 +3309,7 @@ namespace SAI_Editor.Forms
 
             generatedSql += "INSERT INTO `smart_scripts` (`entryorguid`,`source_type`,`id`,`link`,`event_type`,`event_phase_mask`,`event_chance`,`event_flags`,`event_param1`,`event_param2`,`event_param3`,`event_param4`,`action_type`,`action_param1`,`action_param2`,`action_param3`,`action_param4`,`action_param5`,`action_param6`,`target_type`,`target_param1`,`target_param2`,`target_param3`,`target_x`,`target_y`,`target_z`,`target_o`,`comment`) VALUES\n";
 
-            List<SmartScript> smartScripts = listViewSmartScripts.SmartScripts;
+            List<SmartScript> smartScripts = listViewSmartScripts.Scripts;
             smartScripts = smartScripts.OrderBy(smartScript => smartScript.entryorguid).ToList();
 
             for (int i = 0; i < smartScripts.Count; ++i)
@@ -3415,7 +3412,7 @@ namespace SAI_Editor.Forms
                 return String.Empty;
 
             string revertQuery = String.Empty;
-            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.SmartScripts);
+            List<EntryOrGuidAndSourceType> entriesOrGuidsAndSourceTypes = SAI_Editor_Manager.Instance.GetUniqueEntriesOrGuidsAndSourceTypes(listViewSmartScripts.Scripts);
 
             foreach (EntryOrGuidAndSourceType entryOrGuidAndSourceType in entriesOrGuidsAndSourceTypes)
             {
@@ -3480,19 +3477,19 @@ namespace SAI_Editor.Forms
 
         public async void GenerateCommentsForAllItems()
         {
-            if (listViewSmartScripts.SmartScripts.Count == 0)
+            if (listViewSmartScripts.Scripts.Count == 0)
                 return;
 
-            for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
+            for (int i = 0; i < listViewSmartScripts.Scripts.Count; ++i)
             {
-                SmartScript smartScript = listViewSmartScripts.SmartScripts[i];
+                SmartScript smartScript = listViewSmartScripts.Scripts[i];
                 string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScript));
                 smartScript.comment = newComment;
-                listViewSmartScripts.ReplaceSmartScript(smartScript);
+                listViewSmartScripts.ReplaceScript(smartScript);
                 FillFieldsBasedOnSelectedScript();
             }
 
-            textBoxComments.Text = listViewSmartScripts.SelectedSmartScript.comment;
+            textBoxComments.Text = listViewSmartScripts.SelectedScript.comment;
         }
 
         private void buttonGenerateComments_Click(object sender, EventArgs e)
@@ -3576,7 +3573,7 @@ namespace SAI_Editor.Forms
 
             string oldComment = smartScript.comment;
             smartScript.comment = newComment;
-            listViewSmartScripts.ReplaceSmartScript(smartScript);
+            listViewSmartScripts.ReplaceScript(smartScript);
 
             if (!updatingFieldsBasedOnSelectedScript)
                 FillFieldsBasedOnSelectedScript();
@@ -3603,7 +3600,7 @@ namespace SAI_Editor.Forms
                     continue;
 
                 smartScriptListView.comment = await CommentGenerator.Instance.GenerateCommentFor(smartScriptListView, originalEntryOrGuidAndSourceType, true, smartScript);
-                listViewSmartScripts.ReplaceSmartScript(smartScriptListView);
+                listViewSmartScripts.ReplaceScript(smartScriptListView);
             }
         }
 
@@ -3612,9 +3609,9 @@ namespace SAI_Editor.Forms
             if (smartScript == null || !Settings.Default.GenerateComments)
                 return;
 
-            for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
+            for (int i = 0; i < listViewSmartScripts.Scripts.Count; ++i)
             {
-                SmartScript smartScriptListView = listViewSmartScripts.SmartScripts[i];
+                SmartScript smartScriptListView = listViewSmartScripts.Scripts[i];
 
                 if (smartScriptListView.entryorguid != smartScript.entryorguid)
                     continue;
@@ -3622,12 +3619,12 @@ namespace SAI_Editor.Forms
                 if (smartScript.link == smartScriptListView.id)
                 {
                     smartScriptListView.comment = await CommentGenerator.Instance.GenerateCommentFor(smartScriptListView, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScriptListView));
-                    listViewSmartScripts.ReplaceSmartScript(smartScriptListView);
+                    listViewSmartScripts.ReplaceScript(smartScriptListView);
                 }
                 else if (smartScriptListView.link == smartScript.id)
                 {
                     smartScript.comment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScript));
-                    listViewSmartScripts.ReplaceSmartScript(smartScript);
+                    listViewSmartScripts.ReplaceScript(smartScript);
                 }
             }
         }
@@ -3641,7 +3638,7 @@ namespace SAI_Editor.Forms
             int idToCheck = smartScript.id;
 
         GetLinkForCurrentSmartScriptLink:
-            foreach (SmartScript smartScriptInListView in listViewSmartScripts.SmartScripts)
+            foreach (SmartScript smartScriptInListView in listViewSmartScripts.Scripts)
             {
                 if (smartScriptInListView.link == idToCheck)
                 {
@@ -3670,7 +3667,7 @@ namespace SAI_Editor.Forms
             smartScriptsLinking.Add(smartScriptInitial);
             SmartScript lastInitialSmartScript = smartScriptInitial;
 
-            foreach (SmartScript smartScriptInListView in listViewSmartScripts.SmartScripts)
+            foreach (SmartScript smartScriptInListView in listViewSmartScripts.Scripts)
             {
                 if ((SmartEvent)smartScriptInListView.event_type != SmartEvent.SMART_EVENT_LINK)
                     continue;
@@ -3742,36 +3739,36 @@ namespace SAI_Editor.Forms
 
         private async void menuItemGenerateCommentListView_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null || !Settings.Default.UseWorldDatabase)
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedScript == null || !Settings.Default.UseWorldDatabase)
                 return;
 
-            for (int i = 0; i < listViewSmartScripts.SmartScripts.Count; ++i)
+            for (int i = 0; i < listViewSmartScripts.Scripts.Count; ++i)
             {
-                SmartScript smartScript = listViewSmartScripts.SmartScripts[i];
+                SmartScript smartScript = listViewSmartScripts.Scripts[i];
 
-                if (smartScript != listViewSmartScripts.SelectedSmartScript)
+                if (smartScript != listViewSmartScripts.SelectedScript)
                     continue;
 
                 string newComment = await CommentGenerator.Instance.GenerateCommentFor(smartScript, originalEntryOrGuidAndSourceType, true, GetInitialSmartScriptLink(smartScript));
                 smartScript.comment = newComment;
-                listViewSmartScripts.ReplaceSmartScript(smartScript);
+                listViewSmartScripts.ReplaceScript(smartScript);
                 FillFieldsBasedOnSelectedScript();
             }
 
-            textBoxComments.Text = listViewSmartScripts.SelectedSmartScript.comment;
+            textBoxComments.Text = listViewSmartScripts.SelectedScript.comment;
         }
 
         private void menuItemDuplicateSelectedRow_Click(object sender, EventArgs e)
         {
-            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedSmartScript == null)
+            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedScript == null)
                 return;
 
-            SmartScript clonedSmartScript = listViewSmartScripts.SelectedSmartScript.Clone();
+            SmartScript clonedSmartScript = listViewSmartScripts.SelectedScript.Clone();
 
             if (!Settings.Default.DuplicatePrimaryFields)
                 clonedSmartScript.id = ++lastSmartScriptIdOfScript;
 
-            listViewSmartScripts.EnsureVisible(listViewSmartScripts.AddSmartScript(clonedSmartScript, selectNewItem: true));
+            listViewSmartScripts.EnsureVisible(listViewSmartScripts.AddScript(clonedSmartScript, selectNewItem: true));
         }
 
         private void textBoxEventType_MouseWheel(object sender, MouseEventArgs e)
@@ -3830,12 +3827,12 @@ namespace SAI_Editor.Forms
 
         private void menuItemLoadSelectedEntry_Click(object sender, EventArgs e)
         {
-            if (listViewSmartScripts.SelectedSmartScript == null)
+            if (listViewSmartScripts.SelectedScript == null)
                 return;
 
-            int entryorguid = listViewSmartScripts.SelectedSmartScript.entryorguid;
-            SourceTypes source_type = (SourceTypes)listViewSmartScripts.SelectedSmartScript.source_type;
-            listViewSmartScripts.ReplaceSmartScripts(new List<SmartScript>());
+            int entryorguid = listViewSmartScripts.SelectedScript.entryorguid;
+            SourceTypes source_type = (SourceTypes)listViewSmartScripts.SelectedScript.source_type;
+            listViewSmartScripts.ClearScripts();
             listViewSmartScripts.Items.Clear();
             TryToLoadScript(entryorguid, source_type);
         }
@@ -3844,9 +3841,9 @@ namespace SAI_Editor.Forms
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedSmartScript.id = XConverter.ToInt32(textBoxId.Text);
-                listViewSmartScripts.ReplaceSmartScript(listViewSmartScripts.SelectedSmartScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedSmartScript);
+                listViewSmartScripts.SelectedScript.id = XConverter.ToInt32(textBoxId.Text);
+                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
         }
 
@@ -3927,7 +3924,7 @@ namespace SAI_Editor.Forms
                 return;
             }
 
-            listViewSmartScripts.AddSmartScript(lastDeletedSmartScripts.Last());
+            listViewSmartScripts.AddScript(lastDeletedSmartScripts.Last());
             lastDeletedSmartScripts.Remove(lastDeletedSmartScripts.Last());
         }
 

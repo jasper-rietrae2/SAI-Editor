@@ -9,9 +9,9 @@ namespace SAI_Editor.Classes
         public Color LastBackColor = Color.White;
         public DatabaseClass Script;
 
-        public CustomListViewItem(string text/*, DatabaseClass scriptClass*/) : base(text)
+        public CustomListViewItem(string text) : base(text)
         {
-            //Script = scriptClass;
+
         }
     }
 }

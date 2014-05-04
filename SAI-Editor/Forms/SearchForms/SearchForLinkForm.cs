@@ -21,7 +21,7 @@ namespace SAI_Editor.Forms.SearchForms
             this.textBoxToChange = textBoxToChange;
 
             foreach (SmartScript smartScript in smartScripts)
-                listViewScripts.AddSmartScript(smartScript);
+                listViewScripts.AddScript(smartScript);
 
             foreach (ColumnHeader header in listViewScripts.Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);

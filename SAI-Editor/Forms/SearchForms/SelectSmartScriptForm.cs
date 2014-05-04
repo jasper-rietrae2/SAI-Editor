@@ -32,7 +32,7 @@ namespace SAI_Editor.Forms.SearchForms
                 listBoxGuids.SelectedIndex = 0;
 
             listViewSmartScripts.Items.Clear();
-            listViewSmartScripts.AddSmartScripts(items[listBoxGuids.SelectedIndex]);
+            listViewSmartScripts.AddScripts(items[listBoxGuids.SelectedIndex]);
 
             foreach (ColumnHeader header in listViewSmartScripts.Columns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
