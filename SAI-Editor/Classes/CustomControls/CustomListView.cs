@@ -119,10 +119,15 @@ namespace SAI_Editor.Classes.CustomControls
                 _scripts.Add(script);
 
             ListViewItem newItem = Items.Add(lvi);
-            newItem.Selected = selectNewItem;
-            Select();
-            Focus();
-            EnsureVisible(newItem.Index);
+
+            if (selectNewItem)
+            {
+                newItem.Selected = true;
+                newItem.Focused = true;
+                Select();
+                EnsureVisible(newItem.Index);
+            }
+
             return newItem.Index;
         }
 

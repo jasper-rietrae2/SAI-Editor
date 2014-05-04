@@ -710,8 +710,8 @@ namespace SAI_Editor.Forms
             condition.Comment = textBoxComment.Text;
             conditions.Add(condition);
 
-            listViewConditions.AddScript(condition, selectNewItem: true);
             tabControl.SelectedIndex = 1;
+            listViewConditions.AddScript(condition, selectNewItem: true);
 
             ClearAllFields();
         }
