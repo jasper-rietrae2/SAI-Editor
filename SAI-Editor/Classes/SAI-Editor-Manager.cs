@@ -19,9 +19,8 @@ using System.Diagnostics;
 
 namespace SAI_Editor.Classes
 {
-    public class EntryOrGuidAndSourceType
+    public struct EntryOrGuidAndSourceType
     {
-        public EntryOrGuidAndSourceType() { entryOrGuid = 0; sourceType = SourceTypes.SourceTypeNone; }
         public EntryOrGuidAndSourceType(int _entryOrGuid, SourceTypes _sourceType) { entryOrGuid = _entryOrGuid; sourceType = _sourceType; }
 
         public int entryOrGuid;
