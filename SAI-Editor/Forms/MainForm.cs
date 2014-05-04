@@ -222,6 +222,9 @@ namespace SAI_Editor.Forms
             checkIfUpdatesAvailableThread = new Thread(CheckIfUpdatesAvailable);
             checkIfUpdatesAvailableThread.Start();
 
+            UpdatePermanentTooltipOfTypes(comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+            UpdatePermanentTooltipOfParameter(labelEventParam1, 1, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+
             runningConstructor = false;
         }
 
