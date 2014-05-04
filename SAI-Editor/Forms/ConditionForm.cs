@@ -713,21 +713,22 @@ namespace SAI_Editor.Forms
             tabControl.SelectedIndex = 1;
             listViewConditions.AddScript(condition, selectNewItem: true);
 
-            ClearAllFields();
+            ResetAllFields();
         }
 
-        private void ClearAllFields()
+        private void ResetAllFields()
         {
             foreach (Control control in tabControl.TabPages[0].Controls)
-                if (control is TextBox)
+            {
+                if (control is TextBox && control.Name != "textBoxScriptName" && control.Name != "textBoxComment")
                     control.Text = "0";
-
-            labelSourceGroup.Text = " - ";
-            labelSourceEntry.Text = " - ";
-            labelCondValue1.Text = " - ";
-            labelCondValue2.Text = " - ";
-            labelCondValue3.Text = " - ";
-            labelCondValue4.Text = " - ";
+                else if (control is TextBox)
+                    control.Text = String.Empty;
+                else if (control is ComboBox)
+                    (control as ComboBox).SelectedIndex = 0;
+                else if (control is Button && control.Text == "...")
+                    control.Enabled = false;
+            }
         }
 
         private void buttonDeleteCondition_Click(object sender, EventArgs e)
@@ -747,7 +748,7 @@ namespace SAI_Editor.Forms
             if (DialogResult.OK != MessageBox.Show("Are you sure you want to load this condition and get rid of the local changes?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Information))
                 return;
 
-            ClearAllFields();
+            ResetAllFields();
 
             Condition selectedCond = listViewConditions.SelectedScript;
             comboBoxConditionSourceTypes.SelectedIndex = selectedCond.SourceTypeOrReferenceId;
@@ -822,25 +823,8 @@ namespace SAI_Editor.Forms
         private void ResetSession()
         {
             conditions.Clear();
-            listViewConditions.ClearScripts();
-            labelSourceGroup.Text = " - ";
-            labelSourceEntry.Text = " - ";
-            labelElseGroup.Text = " - ";
-            SetConditionTargetValues(null);
-            SetConditionValues(new string[] { "", "", "", "" }, new bool[] { false, false, false, false });
-            listViewConditions.Items.Clear();
-
-            foreach (Control control in tabControl.TabPages[0].Controls)
-            {
-                if (control is TextBox && control.Name != "textBoxScriptName" && control.Name != "textBoxComment")
-                    control.Text = "0";
-                else if (control is TextBox)
-                    control.Text = String.Empty;
-                else if (control is ComboBox)
-                    (control as ComboBox).SelectedIndex = 0;
-                else if (control is Button && control.Text == "...")
-                    control.Enabled = false;
-            }
+            listViewConditions.ClearScripts(); //! Also clears Items of the listview
+            ResetAllFields();
         }
 
         //! Don't allow closign the condition editor. It will automatically hide itself so the session is never lost.
