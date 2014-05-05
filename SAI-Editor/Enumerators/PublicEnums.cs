@@ -344,7 +344,7 @@ namespace SAI_Editor.Enumerators
     }
 
     [Flags]
-    public enum GoFlags : uint
+    public enum GoFlags
     {
         GO_FLAG_NONE                    = 0x00000000,
         GO_FLAG_IN_USE                  = 0x00000001,
@@ -359,7 +359,7 @@ namespace SAI_Editor.Enumerators
     }
 
     [Flags]
-    public enum DynamicFlags : uint
+    public enum DynamicFlags
     {
         UNIT_DYNFLAG_NONE                       = 0x0000,
         UNIT_DYNFLAG_LOOTABLE                   = 0x0001,
@@ -372,7 +372,7 @@ namespace SAI_Editor.Enumerators
         UNIT_DYNFLAG_TAPPED_BY_ALL_THREAT_LIST  = 0x0080        // Lua_UnitIsTappedByAllThreatList
     }
 
-    public enum UnitStandStateType : uint
+    public enum UnitStandStateType
     {
         UNIT_STAND_STATE_STAND             = 0,
         UNIT_STAND_STATE_SIT               = 1,
@@ -387,7 +387,7 @@ namespace SAI_Editor.Enumerators
     }
 
     [Flags]
-    public enum UnitStandFlags : uint
+    public enum UnitStandFlags
     {
         UNIT_STAND_FLAGS_NONE         = 0x00,
         UNIT_STAND_FLAGS_UNK1         = 0x01,
@@ -399,7 +399,7 @@ namespace SAI_Editor.Enumerators
     }
 
     [Flags]
-    public enum UnitBytes1_Flags : uint
+    public enum UnitBytes1_Flags
     {
         UNIT_BYTE1_FLAG_ALWAYS_STAND    = 0x01,
         UNIT_BYTE1_FLAG_HOVER           = 0x02,
@@ -408,7 +408,7 @@ namespace SAI_Editor.Enumerators
     }
 
     [Flags]
-    public enum SmartEventFlags : uint
+    public enum SmartEventFlags
     {
         EVENT_FLAG_NONE               = 0x00,
         EVENT_FLAG_NOT_REPEATABLE     = 0x01,
@@ -420,7 +420,7 @@ namespace SAI_Editor.Enumerators
     }
 
     [Flags]
-    public enum UnitFlags : uint
+    public enum UnitFlags
     {
         UNIT_FLAG_NONE                  = 0x00000000,
         UNIT_FLAG_SERVER_CONTROLLED     = 0x00000001,           // set only when unit movement is controlled by server - by SPLINE/MONSTER_MOVE packets, together with UNIT_FLAG_STUNNED; only set to units controlled by client; client function CGUnit_C::IsClientControlled returns false when set for owner
@@ -454,11 +454,10 @@ namespace SAI_Editor.Enumerators
         UNIT_FLAG_UNK_28                = 0x10000000,
         UNIT_FLAG_UNK_29                = 0x20000000,           // used in Feing Death spell
         UNIT_FLAG_SHEATHE               = 0x40000000,
-        UNIT_FLAG_UNK_31                = 0x80000000,
     }
 
     [Flags]
-    public enum UnitFlags2 : uint
+    public enum UnitFlags2
     {
         UNIT_FLAG2_NONE                         = 0x00000000,
         UNIT_FLAG2_FEIGN_DEATH                  = 0x00000001,
@@ -481,7 +480,7 @@ namespace SAI_Editor.Enumerators
         UNIT_FLAG2_ALLOW_CHEAT_SPELLS           = 0x00040000    // Allows casting spells with AttributesEx7 & SPELL_ATTR7_IS_CHEAT_SPELL
     }
 
-    enum UnitState : uint
+    enum UnitState
     {
         UNIT_STATE_NONE            = 0x00000000,
         UNIT_STATE_DIED            = 0x00000001,                     // player has fake death aura
@@ -534,7 +533,7 @@ namespace SAI_Editor.Enumerators
     }
 
     [Flags]
-    public enum NpcFlags : uint
+    public enum NpcFlags
     {
         UNIT_NPC_FLAG_NONE                  = 0x00000000,
         UNIT_NPC_FLAG_GOSSIP                = 0x00000001,       // 100%
