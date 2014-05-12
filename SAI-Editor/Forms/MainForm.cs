@@ -1641,7 +1641,7 @@ namespace SAI_Editor.Forms
 
                 if (scriptName != String.Empty)
                 {
-                    MessageBox.Show("This " + sourceTypeString + " already has a ScriptName set (to '" + scriptName + "')!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("This " + sourceTypeString + " already has its ScriptName set (to '" + scriptName + "')!", "Something went wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
