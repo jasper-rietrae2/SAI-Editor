@@ -27,6 +27,11 @@ namespace SAI_Editor.Forms
             comboBoxConditionTypes.SelectedIndex = 0;
         }
 
+        private void ConditionForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void comboBoxConditionSourceTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             //! Reset the values
@@ -146,8 +151,8 @@ namespace SAI_Editor.Forms
 
             if (items != null && items.Length > 0)
             {
-                foreach (string item in items)
-                    comboBoxConditionTarget.Items.Add(item);
+                for (int i = 0; i < items.Length; ++i)
+                    comboBoxConditionTarget.Items.Add(items[i] + String.Format(" ({0})", i));
             }
             else
                 comboBoxConditionTarget.Items.Add("Always 0");
