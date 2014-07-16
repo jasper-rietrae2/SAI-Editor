@@ -87,15 +87,15 @@
             this.textBoxErrorType = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.buttonDuplicateCondition = new System.Windows.Forms.Button();
             this.buttonDeleteCondition = new System.Windows.Forms.Button();
             this.buttonLoadCondition = new System.Windows.Forms.Button();
+            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
+            this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.tabControl.SuspendLayout();
             this.tabPageEditing.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -512,6 +512,7 @@
             // 
             // buttonGenerateComment
             // 
+            this.buttonGenerateComment.Enabled = false;
             this.buttonGenerateComment.Location = new System.Drawing.Point(517, 201);
             this.buttonGenerateComment.Name = "buttonGenerateComment";
             this.buttonGenerateComment.Size = new System.Drawing.Size(125, 23);
@@ -779,15 +780,6 @@
             this.label15.TabIndex = 17;
             this.label15.Text = ":";
             // 
-            // lineSeparator1
-            // 
-            this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
-            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
-            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
-            this.lineSeparator1.Name = "lineSeparator1";
-            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
-            this.lineSeparator1.TabIndex = 13;
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
@@ -831,19 +823,6 @@
             this.checkBox1.Text = "Show basic info";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
-            // listViewConditions
-            // 
-            this.listViewConditions.FullRowSelect = true;
-            this.listViewConditions.HideSelection = false;
-            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
-            this.listViewConditions.MultiSelect = false;
-            this.listViewConditions.Name = "listViewConditions";
-            this.listViewConditions.Size = new System.Drawing.Size(656, 228);
-            this.listViewConditions.TabIndex = 3;
-            this.listViewConditions.UseCompatibleStateImageBehavior = false;
-            this.listViewConditions.View = System.Windows.Forms.View.Details;
-            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
-            // 
             // buttonDuplicateCondition
             // 
             this.buttonDuplicateCondition.Enabled = false;
@@ -876,6 +855,28 @@
             this.buttonLoadCondition.Text = "Load and edit selected condition";
             this.buttonLoadCondition.UseVisualStyleBackColor = true;
             this.buttonLoadCondition.Click += new System.EventHandler(this.buttonLoadCondition_Click);
+            // 
+            // lineSeparator1
+            // 
+            this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
+            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
+            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
+            this.lineSeparator1.Name = "lineSeparator1";
+            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
+            this.lineSeparator1.TabIndex = 13;
+            // 
+            // listViewConditions
+            // 
+            this.listViewConditions.FullRowSelect = true;
+            this.listViewConditions.HideSelection = false;
+            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
+            this.listViewConditions.MultiSelect = false;
+            this.listViewConditions.Name = "listViewConditions";
+            this.listViewConditions.Size = new System.Drawing.Size(656, 228);
+            this.listViewConditions.TabIndex = 3;
+            this.listViewConditions.UseCompatibleStateImageBehavior = false;
+            this.listViewConditions.View = System.Windows.Forms.View.Details;
+            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
             // 
             // ConditionForm
             // 

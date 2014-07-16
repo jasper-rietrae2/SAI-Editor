@@ -3917,7 +3917,7 @@ namespace SAI_Editor.Forms
         {
             if (lastDeletedSmartScripts.Count == 0)
             {
-                MessageBox.Show("There are no items deleted in this session ready to be restored.", "Nothing to retrieve!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("There are no items deleted in this session ready to be restored.", "Nothing to retrieve!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
