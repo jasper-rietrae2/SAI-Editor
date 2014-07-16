@@ -650,7 +650,7 @@ namespace SAI_Editor.Forms
             switch (conditions.Count)
             {
                 case 0:
-                    MessageBox.Show("There are no conditions in this session.", "No conditions!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("You did not save any conditions in this session yet. If you want to generate SQL for the open condition, first press the Save Condition button.", "No conditions!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 case 1:
                     sql  = "DELETE FROM `conditions` WHERE `SourceTypeOrReferenceId`=" + conditions[0].SourceTypeOrReferenceId;
