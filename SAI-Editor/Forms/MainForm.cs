@@ -1981,6 +1981,12 @@ namespace SAI_Editor.Forms
 
         private void ShowSearchFromDatabaseForm(TextBox textBoxToChange, DatabaseSearchFormType searchType)
         {
+            if (!Settings.Default.UseWorldDatabase)
+            {
+                MessageBox.Show("You are unable to search for this in the creator-mode because a database connection is required.", "Can't search in creator-mode", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             using (SearchFromDatabaseForm searchFromDatabaseForm = new SearchFromDatabaseForm(textBoxToChange, searchType))
                 searchFromDatabaseForm.ShowDialog(this);
 
