@@ -114,6 +114,9 @@ namespace SAI_Editor.Forms
             }
 
             customPanelMain.Visible = false;
+            customPanelLogin.Visible = true;
+
+            customPanelLogin.Location = new Point(9, 8);
 
             comboBoxSourceType.SelectedIndex = 0;
             comboBoxEventType.SelectedIndex = 0;
@@ -163,8 +166,6 @@ namespace SAI_Editor.Forms
                 page.AutoScroll = true;
                 page.AutoScrollMinSize = new Size(page.Width, page.Height);
             }
-
-            customPanelLogin.Location = new Point(9, 8);
 
             if (Settings.Default.HidePass)
                 textBoxPassword.PasswordChar = '●';
