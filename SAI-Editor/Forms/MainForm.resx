@@ -126,6 +126,12 @@
   <metadata name="LoadTooltip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>198, 4</value>
   </metadata>
+  <metadata name="timerExpandOrContract.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>299, 9</value>
+  </metadata>
+  <metadata name="timerShowStaticTooltips.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>298, 28</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBoxCreateScript.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -245,18 +251,13 @@
         hVU9AAAAAElFTkSuQmCC
 </value>
   </data>
-  <metadata name="timerExpandOrContract.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>299, 9</value>
-  </metadata>
-  <metadata name="timerShowStaticTooltips.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>298, 28</value>
-  </metadata>
-  <data name="labelDontUseDatabaseWarning.Text" xml:space="preserve">
-    <value>The following features are not enabled unless a database connection is made:
-- Generating comments;
-- Executing and generating revert queries;
-- Listing actionlists and entries;
-- Searching for database properties like creatures/gameobjects/quests/etc.</value>
+  <data name="pictureBoxStaticTooltip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        vAAADrwBlbxySQAAAI9JREFUKFNj+P//IQQdu/cpYfFtiYpTcATkAgXhCqBKa7c8RFaEjPJW30MoBXLQ
+        pNEQ0CCQUqAVaBIfv/8BIjRBoDIGNPcB0aN3P648+4omCFTGgCaEB2FR+h8M0ASBiEZKMb2FVSnIW5iB
+        hVUpKLAwowpTKTQKgBhTNTKCqEMoBSKgFWjuBnKBglAF/x8CADKKWnWQtKCuAAAAAElFTkSuQmCC
+</value>
   </data>
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -266,13 +267,12 @@
         hVUpKLAwowpTKTQKgBhTNTKCqEMoBSKgFWjuBnKBglAF/x8CADKKWnWQtKCuAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pictureBoxStaticTooltip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vAAADrwBlbxySQAAAI9JREFUKFNj+P//IQQdu/cpYfFtiYpTcATkAgXhCqBKa7c8RFaEjPJW30MoBXLQ
-        pNEQ0CCQUqAVaBIfv/8BIjRBoDIGNPcB0aN3P648+4omCFTGgCaEB2FR+h8M0ASBiEZKMb2FVSnIW5iB
-        hVUpKLAwowpTKTQKgBhTNTKCqEMoBSKgFWjuBnKBglAF/x8CADKKWnWQtKCuAAAAAElFTkSuQmCC
-</value>
+  <data name="labelDontUseDatabaseWarning.Text" xml:space="preserve">
+    <value>The following features are not enabled unless a database connection is made:
+- Generating comments;
+- Executing and generating revert queries;
+- Listing actionlists and entries;
+- Searching for database properties like creatures/gameobjects/quests/etc.</value>
   </data>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>25</value>

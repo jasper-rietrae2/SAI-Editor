@@ -113,96 +113,17 @@
             this.menuItemDeleteSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCopySelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
-            this.pictureBoxCreateScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
-            this.pictureBoxLoadScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
             this.timerExpandOrContract = new System.Windows.Forms.Timer(this.components);
             this.timerShowStaticTooltips = new System.Windows.Forms.Timer(this.components);
-            this.customPanelLogin = new SAI_Editor.Classes.CustomControls.CustomPanel();
-            this.panelLoginBox = new System.Windows.Forms.Panel();
-            this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
-            this.groupBoxLogin = new System.Windows.Forms.GroupBox();
-            this.radioButtonDontUseDatabase = new System.Windows.Forms.RadioButton();
-            this.radioButtonConnectToMySql = new System.Windows.Forms.RadioButton();
-            this.buttonSearchWorldDb = new System.Windows.Forms.Button();
-            this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
-            this.textBoxHost = new System.Windows.Forms.TextBox();
-            this.textBoxPort = new System.Windows.Forms.TextBox();
-            this.labelHost = new System.Windows.Forms.Label();
-            this.textBoxUsername = new System.Windows.Forms.TextBox();
-            this.labelPort = new System.Windows.Forms.Label();
-            this.textBoxWorldDatabase = new System.Windows.Forms.TextBox();
-            this.labelUser = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.buttonConnect = new System.Windows.Forms.Button();
-            this.buttonClear = new System.Windows.Forms.Button();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.customPanelMain = new SAI_Editor.Classes.CustomControls.CustomPanel();
+            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
+            this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
+            this.labelEntryOrGuid = new System.Windows.Forms.Label();
+            this.textBoxEntryOrGuid = new System.Windows.Forms.TextBox();
             this.buttonGenerateComments = new System.Windows.Forms.Button();
-            this.buttonGenerateSql = new System.Windows.Forms.Button();
-            this.buttonNewLine = new System.Windows.Forms.Button();
-            this.panelStaticTooltipParameters = new System.Windows.Forms.Panel();
-            this.labelStaticTooltipTextParameters = new System.Windows.Forms.Label();
-            this.labelStaticTooltipParameterTitleTypes = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panelStaticTooltipTypes = new System.Windows.Forms.Panel();
-            this.labelStaticTooltipTitleTypes = new System.Windows.Forms.Label();
-            this.labelStaticTooltipTextTypes = new System.Windows.Forms.Label();
-            this.pictureBoxStaticTooltip = new System.Windows.Forms.PictureBox();
-            this.listViewSmartScripts = new SAI_Editor.Classes.CustomControls.SmartScriptListView();
-            this.groupBoxParameters = new System.Windows.Forms.GroupBox();
-            this.tabControlParameters = new System.Windows.Forms.TabControl();
-            this.tabPageEvent = new System.Windows.Forms.TabPage();
-            this.buttonEventParamFourSearch = new System.Windows.Forms.Button();
-            this.buttonEventParamThreeSearch = new System.Windows.Forms.Button();
-            this.buttonEventParamTwoSearch = new System.Windows.Forms.Button();
-            this.buttonEventParamOneSearch = new System.Windows.Forms.Button();
-            this.labelEventParam4 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelEventParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelEventParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.textBoxEventParam4 = new System.Windows.Forms.TextBox();
-            this.textBoxEventParam3 = new System.Windows.Forms.TextBox();
-            this.textBoxEventParam2 = new System.Windows.Forms.TextBox();
-            this.labelEventParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.textBoxEventParam1 = new System.Windows.Forms.TextBox();
-            this.tabPageAction = new System.Windows.Forms.TabPage();
-            this.buttonActionParamSixSearch = new System.Windows.Forms.Button();
-            this.buttonActionParamFiveSearch = new System.Windows.Forms.Button();
-            this.buttonActionParamFourSearch = new System.Windows.Forms.Button();
-            this.buttonActionParamThreeSearch = new System.Windows.Forms.Button();
-            this.buttonActionParamTwoSearch = new System.Windows.Forms.Button();
-            this.buttonActionParamOneSearch = new System.Windows.Forms.Button();
-            this.textBoxActionParam6 = new System.Windows.Forms.TextBox();
-            this.textBoxActionParam5 = new System.Windows.Forms.TextBox();
-            this.textBoxActionParam4 = new System.Windows.Forms.TextBox();
-            this.textBoxActionParam3 = new System.Windows.Forms.TextBox();
-            this.textBoxActionParam2 = new System.Windows.Forms.TextBox();
-            this.textBoxActionParam1 = new System.Windows.Forms.TextBox();
-            this.labelActionParam6 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam5 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam4 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelActionParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.tabPageTarget = new System.Windows.Forms.TabPage();
-            this.buttonTargetParamThreeSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamTwoSearch = new System.Windows.Forms.Button();
-            this.buttonTargetParamOneSearch = new System.Windows.Forms.Button();
-            this.textBoxTargetO = new System.Windows.Forms.TextBox();
-            this.textBoxTargetZ = new System.Windows.Forms.TextBox();
-            this.textBoxTargetY = new System.Windows.Forms.TextBox();
-            this.textBoxTargetX = new System.Windows.Forms.TextBox();
-            this.textBoxTargetParam3 = new System.Windows.Forms.TextBox();
-            this.textBoxTargetParam2 = new System.Windows.Forms.TextBox();
-            this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
-            this.labelTargetO = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetZ = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetY = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetX = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
-            this.labelTargetParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
             this.groupBoxScriptInfo = new System.Windows.Forms.GroupBox();
             this.buttonLinkTo = new System.Windows.Forms.Button();
             this.buttonLinkFrom = new System.Windows.Forms.Button();
@@ -232,6 +153,42 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
+            this.buttonGenerateSql = new System.Windows.Forms.Button();
+            this.groupBoxParameters = new System.Windows.Forms.GroupBox();
+            this.tabControlParameters = new System.Windows.Forms.TabControl();
+            this.tabPageEvent = new System.Windows.Forms.TabPage();
+            this.buttonEventParamFourSearch = new System.Windows.Forms.Button();
+            this.buttonEventParamThreeSearch = new System.Windows.Forms.Button();
+            this.buttonEventParamTwoSearch = new System.Windows.Forms.Button();
+            this.buttonEventParamOneSearch = new System.Windows.Forms.Button();
+            this.textBoxEventParam4 = new System.Windows.Forms.TextBox();
+            this.textBoxEventParam3 = new System.Windows.Forms.TextBox();
+            this.textBoxEventParam2 = new System.Windows.Forms.TextBox();
+            this.textBoxEventParam1 = new System.Windows.Forms.TextBox();
+            this.tabPageAction = new System.Windows.Forms.TabPage();
+            this.buttonActionParamSixSearch = new System.Windows.Forms.Button();
+            this.buttonActionParamFiveSearch = new System.Windows.Forms.Button();
+            this.buttonActionParamFourSearch = new System.Windows.Forms.Button();
+            this.buttonActionParamThreeSearch = new System.Windows.Forms.Button();
+            this.buttonActionParamTwoSearch = new System.Windows.Forms.Button();
+            this.buttonActionParamOneSearch = new System.Windows.Forms.Button();
+            this.textBoxActionParam6 = new System.Windows.Forms.TextBox();
+            this.textBoxActionParam5 = new System.Windows.Forms.TextBox();
+            this.textBoxActionParam4 = new System.Windows.Forms.TextBox();
+            this.textBoxActionParam3 = new System.Windows.Forms.TextBox();
+            this.textBoxActionParam2 = new System.Windows.Forms.TextBox();
+            this.textBoxActionParam1 = new System.Windows.Forms.TextBox();
+            this.tabPageTarget = new System.Windows.Forms.TabPage();
+            this.buttonTargetParamThreeSearch = new System.Windows.Forms.Button();
+            this.buttonTargetParamTwoSearch = new System.Windows.Forms.Button();
+            this.buttonTargetParamOneSearch = new System.Windows.Forms.Button();
+            this.textBoxTargetO = new System.Windows.Forms.TextBox();
+            this.textBoxTargetZ = new System.Windows.Forms.TextBox();
+            this.textBoxTargetY = new System.Windows.Forms.TextBox();
+            this.textBoxTargetX = new System.Windows.Forms.TextBox();
+            this.textBoxTargetParam3 = new System.Windows.Forms.TextBox();
+            this.textBoxTargetParam2 = new System.Windows.Forms.TextBox();
+            this.textBoxTargetParam1 = new System.Windows.Forms.TextBox();
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
             this.checkBoxUseStaticTooltips = new System.Windows.Forms.CheckBox();
             this.checkBoxUsePhaseColors = new System.Windows.Forms.CheckBox();
@@ -240,33 +197,78 @@
             this.checkBoxShowBasicInfo = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.checkBoxLockEventId = new System.Windows.Forms.CheckBox();
-            this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
-            this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBoxSourceType = new System.Windows.Forms.ComboBox();
-            this.labelEntryOrGuid = new System.Windows.Forms.Label();
-            this.textBoxEntryOrGuid = new System.Windows.Forms.TextBox();
+            this.buttonNewLine = new System.Windows.Forms.Button();
+            this.panelStaticTooltipTypes = new System.Windows.Forms.Panel();
+            this.labelStaticTooltipTitleTypes = new System.Windows.Forms.Label();
+            this.labelStaticTooltipTextTypes = new System.Windows.Forms.Label();
+            this.pictureBoxStaticTooltip = new System.Windows.Forms.PictureBox();
+            this.panelStaticTooltipParameters = new System.Windows.Forms.Panel();
+            this.labelStaticTooltipTextParameters = new System.Windows.Forms.Label();
+            this.labelStaticTooltipParameterTitleTypes = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxCreateScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
+            this.pictureBoxLoadScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
+            this.labelEventParam4 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelEventParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelEventParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelEventParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam6 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam5 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam4 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelActionParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetO = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetZ = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetY = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetX = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetParam3 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetParam2 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.labelTargetParam1 = new SAI_Editor.Classes.CustomControls.LabelWithTooltip();
+            this.listViewSmartScripts = new SAI_Editor.Classes.CustomControls.SmartScriptListView();
+            this.customPanelLogin = new SAI_Editor.Classes.CustomControls.CustomPanel();
+            this.panelLoginBox = new System.Windows.Forms.Panel();
+            this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
+            this.groupBoxLogin = new System.Windows.Forms.GroupBox();
+            this.radioButtonDontUseDatabase = new System.Windows.Forms.RadioButton();
+            this.radioButtonConnectToMySql = new System.Windows.Forms.RadioButton();
+            this.buttonSearchWorldDb = new System.Windows.Forms.Button();
+            this.checkBoxAutoConnect = new System.Windows.Forms.CheckBox();
+            this.textBoxHost = new System.Windows.Forms.TextBox();
+            this.textBoxPort = new System.Windows.Forms.TextBox();
+            this.labelHost = new System.Windows.Forms.Label();
+            this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.labelPort = new System.Windows.Forms.Label();
+            this.textBoxWorldDatabase = new System.Windows.Forms.TextBox();
+            this.labelUser = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.buttonConnect = new System.Windows.Forms.Button();
+            this.buttonClear = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
-            this.customPanelLogin.SuspendLayout();
-            this.panelLoginBox.SuspendLayout();
-            this.groupBoxLogin.SuspendLayout();
-            this.customPanelMain.SuspendLayout();
-            this.panelStaticTooltipParameters.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panelStaticTooltipTypes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStaticTooltip)).BeginInit();
+            this.tabControl.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.groupBoxStaticScriptInfo.SuspendLayout();
+            this.groupBoxScriptInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
             this.groupBoxParameters.SuspendLayout();
             this.tabControlParameters.SuspendLayout();
             this.tabPageEvent.SuspendLayout();
             this.tabPageAction.SuspendLayout();
             this.tabPageTarget.SuspendLayout();
-            this.groupBoxScriptInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).BeginInit();
             this.groupBoxPreferences.SuspendLayout();
-            this.groupBoxStaticScriptInfo.SuspendLayout();
+            this.panelStaticTooltipTypes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStaticTooltip)).BeginInit();
+            this.panelStaticTooltipParameters.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
+            this.customPanelLogin.SuspendLayout();
+            this.panelLoginBox.SuspendLayout();
+            this.groupBoxLogin.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -279,7 +281,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
-            this.menuStrip.Size = new System.Drawing.Size(1318, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1339, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -966,35 +968,6 @@
             this.menuItemCopySelectedRowListView.Text = "Copy selected row";
             this.menuItemCopySelectedRowListView.Click += new System.EventHandler(this.menuItemCopySelectedRowListView_Click);
             // 
-            // pictureBoxCreateScript
-            // 
-            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
-            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
-            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
-            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
-            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxCreateScript.TabIndex = 16;
-            this.pictureBoxCreateScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
-            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
-            // 
-            // pictureBoxLoadScript
-            // 
-            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxLoadScript.Enabled = false;
-            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
-            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
-            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
-            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
-            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
-            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxLoadScript.TabIndex = 16;
-            this.pictureBoxLoadScript.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
-            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
-            // 
             // timerExpandOrContract
             // 
             this.timerExpandOrContract.Interval = 4;
@@ -1005,937 +978,115 @@
             this.timerShowStaticTooltips.Interval = 4;
             this.timerShowStaticTooltips.Tick += new System.EventHandler(this.timerShowStaticTooltips_Tick);
             // 
-            // customPanelLogin
+            // tabControl
             // 
-            this.customPanelLogin.Controls.Add(this.panelLoginBox);
-            this.customPanelLogin.Location = new System.Drawing.Point(936, 31);
-            this.customPanelLogin.Name = "customPanelLogin";
-            this.customPanelLogin.Size = new System.Drawing.Size(382, 275);
-            this.customPanelLogin.TabIndex = 16;
+            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.Location = new System.Drawing.Point(11, 27);
+            this.tabControl.Name = "tabControl";
+            this.tabControl.SelectedIndex = 0;
+            this.tabControl.Size = new System.Drawing.Size(938, 466);
+            this.tabControl.TabIndex = 84;
+            this.tabControl.Visible = false;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
-            // panelLoginBox
+            // tabPage1
             // 
-            this.panelLoginBox.Controls.Add(this.labelDontUseDatabaseWarning);
-            this.panelLoginBox.Controls.Add(this.groupBoxLogin);
-            this.panelLoginBox.Controls.Add(this.buttonConnect);
-            this.panelLoginBox.Controls.Add(this.buttonClear);
-            this.panelLoginBox.Controls.Add(this.buttonCancel);
-            this.panelLoginBox.Location = new System.Drawing.Point(3, 3);
-            this.panelLoginBox.Name = "panelLoginBox";
-            this.panelLoginBox.Size = new System.Drawing.Size(378, 258);
-            this.panelLoginBox.TabIndex = 14;
+            this.tabPage1.Controls.Add(this.groupBoxStaticScriptInfo);
+            this.tabPage1.Controls.Add(this.buttonGenerateComments);
+            this.tabPage1.Controls.Add(this.groupBoxScriptInfo);
+            this.tabPage1.Controls.Add(this.buttonGenerateSql);
+            this.tabPage1.Controls.Add(this.groupBoxParameters);
+            this.tabPage1.Controls.Add(this.groupBoxPreferences);
+            this.tabPage1.Controls.Add(this.buttonNewLine);
+            this.tabPage1.Controls.Add(this.listViewSmartScripts);
+            this.tabPage1.Controls.Add(this.panelStaticTooltipTypes);
+            this.tabPage1.Controls.Add(this.panelStaticTooltipParameters);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(930, 440);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Tab 1";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // labelDontUseDatabaseWarning
+            // groupBoxStaticScriptInfo
             // 
-            this.labelDontUseDatabaseWarning.AutoSize = true;
-            this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDontUseDatabaseWarning.ForeColor = System.Drawing.Color.Red;
-            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(1, 186);
-            this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
-            this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(375, 65);
-            this.labelDontUseDatabaseWarning.TabIndex = 12;
-            this.labelDontUseDatabaseWarning.Text = resources.GetString("labelDontUseDatabaseWarning.Text");
-            this.labelDontUseDatabaseWarning.Visible = false;
+            this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBoxCreateScript);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBoxLoadScript);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.buttonSearchForEntryOrGuid);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.label4);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.comboBoxSourceType);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.labelEntryOrGuid);
+            this.groupBoxStaticScriptInfo.Controls.Add(this.textBoxEntryOrGuid);
+            this.groupBoxStaticScriptInfo.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxStaticScriptInfo.Name = "groupBoxStaticScriptInfo";
+            this.groupBoxStaticScriptInfo.Size = new System.Drawing.Size(290, 75);
+            this.groupBoxStaticScriptInfo.TabIndex = 74;
+            this.groupBoxStaticScriptInfo.TabStop = false;
+            this.groupBoxStaticScriptInfo.Text = "Static script information";
             // 
-            // groupBoxLogin
+            // buttonSearchForEntryOrGuid
             // 
-            this.groupBoxLogin.Controls.Add(this.radioButtonDontUseDatabase);
-            this.groupBoxLogin.Controls.Add(this.radioButtonConnectToMySql);
-            this.groupBoxLogin.Controls.Add(this.buttonSearchWorldDb);
-            this.groupBoxLogin.Controls.Add(this.checkBoxAutoConnect);
-            this.groupBoxLogin.Controls.Add(this.textBoxHost);
-            this.groupBoxLogin.Controls.Add(this.textBoxPort);
-            this.groupBoxLogin.Controls.Add(this.labelHost);
-            this.groupBoxLogin.Controls.Add(this.textBoxUsername);
-            this.groupBoxLogin.Controls.Add(this.labelPort);
-            this.groupBoxLogin.Controls.Add(this.textBoxWorldDatabase);
-            this.groupBoxLogin.Controls.Add(this.labelUser);
-            this.groupBoxLogin.Controls.Add(this.label2);
-            this.groupBoxLogin.Controls.Add(this.label1);
-            this.groupBoxLogin.Controls.Add(this.textBoxPassword);
-            this.groupBoxLogin.Location = new System.Drawing.Point(3, 3);
-            this.groupBoxLogin.Name = "groupBoxLogin";
-            this.groupBoxLogin.Size = new System.Drawing.Size(364, 149);
-            this.groupBoxLogin.TabIndex = 13;
-            this.groupBoxLogin.TabStop = false;
-            this.groupBoxLogin.Text = "Connect information";
+            this.buttonSearchForEntryOrGuid.Location = new System.Drawing.Point(211, 18);
+            this.buttonSearchForEntryOrGuid.Name = "buttonSearchForEntryOrGuid";
+            this.buttonSearchForEntryOrGuid.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchForEntryOrGuid.TabIndex = 13;
+            this.buttonSearchForEntryOrGuid.Text = "...";
+            this.buttonSearchForEntryOrGuid.UseVisualStyleBackColor = true;
+            this.buttonSearchForEntryOrGuid.Click += new System.EventHandler(this.buttonSearchForEntry_Click);
             // 
-            // radioButtonDontUseDatabase
+            // label4
             // 
-            this.radioButtonDontUseDatabase.AutoSize = true;
-            this.radioButtonDontUseDatabase.Location = new System.Drawing.Point(13, 47);
-            this.radioButtonDontUseDatabase.Name = "radioButtonDontUseDatabase";
-            this.radioButtonDontUseDatabase.Size = new System.Drawing.Size(126, 17);
-            this.radioButtonDontUseDatabase.TabIndex = 1;
-            this.radioButtonDontUseDatabase.Text = "Don\'t use a database";
-            this.radioButtonDontUseDatabase.UseVisualStyleBackColor = true;
-            this.radioButtonDontUseDatabase.CheckedChanged += new System.EventHandler(this.radioButtonDontUseDatabase_CheckedChanged);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(17, 48);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 13);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Source type:";
             // 
-            // radioButtonConnectToMySql
+            // comboBoxSourceType
             // 
-            this.radioButtonConnectToMySql.AutoSize = true;
-            this.radioButtonConnectToMySql.Checked = true;
-            this.radioButtonConnectToMySql.Location = new System.Drawing.Point(13, 21);
-            this.radioButtonConnectToMySql.Name = "radioButtonConnectToMySql";
-            this.radioButtonConnectToMySql.Size = new System.Drawing.Size(115, 17);
-            this.radioButtonConnectToMySql.TabIndex = 0;
-            this.radioButtonConnectToMySql.TabStop = true;
-            this.radioButtonConnectToMySql.Text = "Connect to MySQL";
-            this.radioButtonConnectToMySql.UseVisualStyleBackColor = true;
-            this.radioButtonConnectToMySql.CheckedChanged += new System.EventHandler(this.radioButtonConnectToMySql_CheckedChanged);
+            this.comboBoxSourceType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBoxSourceType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.comboBoxSourceType.FormattingEnabled = true;
+            this.comboBoxSourceType.Items.AddRange(new object[] {
+            "SCRIPT_TYPE_CREATURE",
+            "SCRIPT_TYPE_GAMEOBJECT",
+            "SCRIPT_TYPE_AREATRIGGER",
+            "SCRIPT_TYPE_TIMED_ACTIONLIST"});
+            this.comboBoxSourceType.Location = new System.Drawing.Point(101, 45);
+            this.comboBoxSourceType.Name = "comboBoxSourceType";
+            this.comboBoxSourceType.Size = new System.Drawing.Size(183, 21);
+            this.comboBoxSourceType.TabIndex = 14;
+            this.comboBoxSourceType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourceType_SelectedIndexChanged);
             // 
-            // buttonSearchWorldDb
+            // labelEntryOrGuid
             // 
-            this.buttonSearchWorldDb.Location = new System.Drawing.Point(334, 121);
-            this.buttonSearchWorldDb.Name = "buttonSearchWorldDb";
-            this.buttonSearchWorldDb.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchWorldDb.TabIndex = 9;
-            this.buttonSearchWorldDb.Text = "...";
-            this.buttonSearchWorldDb.UseVisualStyleBackColor = true;
-            this.buttonSearchWorldDb.Click += new System.EventHandler(this.buttonSearchWorldDb_Click);
+            this.labelEntryOrGuid.AutoSize = true;
+            this.labelEntryOrGuid.Location = new System.Drawing.Point(15, 22);
+            this.labelEntryOrGuid.Name = "labelEntryOrGuid";
+            this.labelEntryOrGuid.Size = new System.Drawing.Size(69, 13);
+            this.labelEntryOrGuid.TabIndex = 14;
+            this.labelEntryOrGuid.Text = "Entry or guid:";
             // 
-            // checkBoxAutoConnect
+            // textBoxEntryOrGuid
             // 
-            this.checkBoxAutoConnect.AutoSize = true;
-            this.checkBoxAutoConnect.Location = new System.Drawing.Point(13, 124);
-            this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
-            this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxAutoConnect.TabIndex = 2;
-            this.checkBoxAutoConnect.Text = "Auto connect";
-            this.checkBoxAutoConnect.UseVisualStyleBackColor = true;
-            // 
-            // textBoxHost
-            // 
-            this.textBoxHost.Location = new System.Drawing.Point(228, 18);
-            this.textBoxHost.Name = "textBoxHost";
-            this.textBoxHost.Size = new System.Drawing.Size(130, 20);
-            this.textBoxHost.TabIndex = 3;
-            // 
-            // textBoxPort
-            // 
-            this.textBoxPort.Location = new System.Drawing.Point(228, 44);
-            this.textBoxPort.Name = "textBoxPort";
-            this.textBoxPort.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPort.TabIndex = 4;
-            // 
-            // labelHost
-            // 
-            this.labelHost.AutoSize = true;
-            this.labelHost.Location = new System.Drawing.Point(190, 21);
-            this.labelHost.Name = "labelHost";
-            this.labelHost.Size = new System.Drawing.Size(32, 13);
-            this.labelHost.TabIndex = 3;
-            this.labelHost.Text = "Host:";
-            // 
-            // textBoxUsername
-            // 
-            this.textBoxUsername.Location = new System.Drawing.Point(228, 70);
-            this.textBoxUsername.Name = "textBoxUsername";
-            this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
-            this.textBoxUsername.TabIndex = 5;
-            // 
-            // labelPort
-            // 
-            this.labelPort.AutoSize = true;
-            this.labelPort.Location = new System.Drawing.Point(192, 47);
-            this.labelPort.Name = "labelPort";
-            this.labelPort.Size = new System.Drawing.Size(29, 13);
-            this.labelPort.TabIndex = 4;
-            this.labelPort.Text = "Port:";
-            // 
-            // textBoxWorldDatabase
-            // 
-            this.textBoxWorldDatabase.Location = new System.Drawing.Point(228, 122);
-            this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
-            this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
-            this.textBoxWorldDatabase.TabIndex = 7;
-            // 
-            // labelUser
-            // 
-            this.labelUser.AutoSize = true;
-            this.labelUser.Location = new System.Drawing.Point(164, 73);
-            this.labelUser.Name = "labelUser";
-            this.labelUser.Size = new System.Drawing.Size(58, 13);
-            this.labelUser.TabIndex = 0;
-            this.labelUser.Text = "Username:";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(135, 125);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(87, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "World Database:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(166, 99);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Password:";
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Location = new System.Drawing.Point(228, 96);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
-            this.textBoxPassword.TabIndex = 6;
-            // 
-            // buttonConnect
-            // 
-            this.buttonConnect.Location = new System.Drawing.Point(3, 158);
-            this.buttonConnect.Name = "buttonConnect";
-            this.buttonConnect.Size = new System.Drawing.Size(75, 23);
-            this.buttonConnect.TabIndex = 9;
-            this.buttonConnect.Text = "Connect";
-            this.buttonConnect.UseVisualStyleBackColor = true;
-            this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
-            // 
-            // buttonClear
-            // 
-            this.buttonClear.Location = new System.Drawing.Point(147, 158);
-            this.buttonClear.Name = "buttonClear";
-            this.buttonClear.Size = new System.Drawing.Size(75, 23);
-            this.buttonClear.TabIndex = 10;
-            this.buttonClear.Text = "Clear";
-            this.buttonClear.UseVisualStyleBackColor = true;
-            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Location = new System.Drawing.Point(292, 158);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 11;
-            this.buttonCancel.Text = "Cancel";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // customPanelMain
-            // 
-            this.customPanelMain.Controls.Add(this.buttonGenerateComments);
-            this.customPanelMain.Controls.Add(this.buttonGenerateSql);
-            this.customPanelMain.Controls.Add(this.buttonNewLine);
-            this.customPanelMain.Controls.Add(this.panelStaticTooltipParameters);
-            this.customPanelMain.Controls.Add(this.panelStaticTooltipTypes);
-            this.customPanelMain.Controls.Add(this.listViewSmartScripts);
-            this.customPanelMain.Controls.Add(this.groupBoxParameters);
-            this.customPanelMain.Controls.Add(this.groupBoxScriptInfo);
-            this.customPanelMain.Controls.Add(this.groupBoxPreferences);
-            this.customPanelMain.Controls.Add(this.groupBoxStaticScriptInfo);
-            this.customPanelMain.Location = new System.Drawing.Point(12, 31);
-            this.customPanelMain.Name = "customPanelMain";
-            this.customPanelMain.Size = new System.Drawing.Size(918, 439);
-            this.customPanelMain.TabIndex = 15;
+            this.textBoxEntryOrGuid.Location = new System.Drawing.Point(101, 19);
+            this.textBoxEntryOrGuid.Name = "textBoxEntryOrGuid";
+            this.textBoxEntryOrGuid.Size = new System.Drawing.Size(110, 20);
+            this.textBoxEntryOrGuid.TabIndex = 12;
+            this.textBoxEntryOrGuid.TextChanged += new System.EventHandler(this.textBoxEntryOrGuid_TextChanged);
             // 
             // buttonGenerateComments
             // 
             this.buttonGenerateComments.Enabled = false;
-            this.buttonGenerateComments.Location = new System.Drawing.Point(721, 183);
+            this.buttonGenerateComments.Location = new System.Drawing.Point(727, 190);
             this.buttonGenerateComments.Name = "buttonGenerateComments";
             this.buttonGenerateComments.Size = new System.Drawing.Size(110, 23);
             this.buttonGenerateComments.TabIndex = 81;
             this.buttonGenerateComments.Text = "Generate comments";
             this.buttonGenerateComments.UseVisualStyleBackColor = true;
             this.buttonGenerateComments.Click += new System.EventHandler(this.buttonGenerateComments_Click);
-            // 
-            // buttonGenerateSql
-            // 
-            this.buttonGenerateSql.Enabled = false;
-            this.buttonGenerateSql.Location = new System.Drawing.Point(832, 183);
-            this.buttonGenerateSql.Name = "buttonGenerateSql";
-            this.buttonGenerateSql.Size = new System.Drawing.Size(83, 23);
-            this.buttonGenerateSql.TabIndex = 82;
-            this.buttonGenerateSql.Text = "Generate SQL";
-            this.buttonGenerateSql.UseVisualStyleBackColor = true;
-            this.buttonGenerateSql.Click += new System.EventHandler(this.buttonGenerateSql_Click);
-            // 
-            // buttonNewLine
-            // 
-            this.buttonNewLine.Location = new System.Drawing.Point(637, 183);
-            this.buttonNewLine.Name = "buttonNewLine";
-            this.buttonNewLine.Size = new System.Drawing.Size(83, 23);
-            this.buttonNewLine.TabIndex = 80;
-            this.buttonNewLine.Text = "New line";
-            this.buttonNewLine.UseVisualStyleBackColor = true;
-            this.buttonNewLine.Click += new System.EventHandler(this.buttonNewLine_Click);
-            // 
-            // panelStaticTooltipParameters
-            // 
-            this.panelStaticTooltipParameters.BackColor = System.Drawing.Color.White;
-            this.panelStaticTooltipParameters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelStaticTooltipParameters.Controls.Add(this.labelStaticTooltipTextParameters);
-            this.panelStaticTooltipParameters.Controls.Add(this.labelStaticTooltipParameterTitleTypes);
-            this.panelStaticTooltipParameters.Controls.Add(this.pictureBox1);
-            this.panelStaticTooltipParameters.Location = new System.Drawing.Point(0, 396);
-            this.panelStaticTooltipParameters.Name = "panelStaticTooltipParameters";
-            this.panelStaticTooltipParameters.Size = new System.Drawing.Size(915, 30);
-            this.panelStaticTooltipParameters.TabIndex = 78;
-            // 
-            // labelStaticTooltipTextParameters
-            // 
-            this.labelStaticTooltipTextParameters.AutoSize = true;
-            this.labelStaticTooltipTextParameters.Location = new System.Drawing.Point(26, 15);
-            this.labelStaticTooltipTextParameters.Name = "labelStaticTooltipTextParameters";
-            this.labelStaticTooltipTextParameters.Size = new System.Drawing.Size(75, 13);
-            this.labelStaticTooltipTextParameters.TabIndex = 30;
-            this.labelStaticTooltipTextParameters.Text = "Parameter info";
-            // 
-            // labelStaticTooltipParameterTitleTypes
-            // 
-            this.labelStaticTooltipParameterTitleTypes.AutoSize = true;
-            this.labelStaticTooltipParameterTitleTypes.Location = new System.Drawing.Point(26, 2);
-            this.labelStaticTooltipParameterTitleTypes.Name = "labelStaticTooltipParameterTitleTypes";
-            this.labelStaticTooltipParameterTitleTypes.Size = new System.Drawing.Size(181, 13);
-            this.labelStaticTooltipParameterTitleTypes.TabIndex = 47;
-            this.labelStaticTooltipParameterTitleTypes.Text = "Event type, action type or target type";
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(14, 14);
-            this.pictureBox1.TabIndex = 29;
-            this.pictureBox1.TabStop = false;
-            // 
-            // panelStaticTooltipTypes
-            // 
-            this.panelStaticTooltipTypes.BackColor = System.Drawing.Color.White;
-            this.panelStaticTooltipTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelStaticTooltipTypes.Controls.Add(this.labelStaticTooltipTitleTypes);
-            this.panelStaticTooltipTypes.Controls.Add(this.labelStaticTooltipTextTypes);
-            this.panelStaticTooltipTypes.Controls.Add(this.pictureBoxStaticTooltip);
-            this.panelStaticTooltipTypes.Location = new System.Drawing.Point(0, 363);
-            this.panelStaticTooltipTypes.Name = "panelStaticTooltipTypes";
-            this.panelStaticTooltipTypes.Size = new System.Drawing.Size(915, 30);
-            this.panelStaticTooltipTypes.TabIndex = 79;
-            // 
-            // labelStaticTooltipTitleTypes
-            // 
-            this.labelStaticTooltipTitleTypes.AutoSize = true;
-            this.labelStaticTooltipTitleTypes.Location = new System.Drawing.Point(26, 1);
-            this.labelStaticTooltipTitleTypes.Name = "labelStaticTooltipTitleTypes";
-            this.labelStaticTooltipTitleTypes.Size = new System.Drawing.Size(181, 13);
-            this.labelStaticTooltipTitleTypes.TabIndex = 31;
-            this.labelStaticTooltipTitleTypes.Text = "Event type, action type or target type";
-            // 
-            // labelStaticTooltipTextTypes
-            // 
-            this.labelStaticTooltipTextTypes.AutoSize = true;
-            this.labelStaticTooltipTextTypes.Location = new System.Drawing.Point(26, 15);
-            this.labelStaticTooltipTextTypes.Name = "labelStaticTooltipTextTypes";
-            this.labelStaticTooltipTextTypes.Size = new System.Drawing.Size(144, 13);
-            this.labelStaticTooltipTextTypes.TabIndex = 30;
-            this.labelStaticTooltipTextTypes.Text = "Event/action/target type text";
-            // 
-            // pictureBoxStaticTooltip
-            // 
-            this.pictureBoxStaticTooltip.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxStaticTooltip.Image")));
-            this.pictureBoxStaticTooltip.Location = new System.Drawing.Point(6, 7);
-            this.pictureBoxStaticTooltip.Name = "pictureBoxStaticTooltip";
-            this.pictureBoxStaticTooltip.Size = new System.Drawing.Size(14, 14);
-            this.pictureBoxStaticTooltip.TabIndex = 29;
-            this.pictureBoxStaticTooltip.TabStop = false;
-            // 
-            // listViewSmartScripts
-            // 
-            this.listViewSmartScripts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listViewSmartScripts.EnablePhaseHighlighting = true;
-            this.listViewSmartScripts.FullRowSelect = true;
-            this.listViewSmartScripts.Location = new System.Drawing.Point(0, 212);
-            this.listViewSmartScripts.MultiSelect = false;
-            this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(915, 214);
-            this.listViewSmartScripts.TabIndex = 83;
-            this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
-            this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
-            this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
-            this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
-            this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
-            // 
-            // groupBoxParameters
-            // 
-            this.groupBoxParameters.Controls.Add(this.tabControlParameters);
-            this.groupBoxParameters.Location = new System.Drawing.Point(637, -1);
-            this.groupBoxParameters.Name = "groupBoxParameters";
-            this.groupBoxParameters.Size = new System.Drawing.Size(278, 178);
-            this.groupBoxParameters.TabIndex = 77;
-            this.groupBoxParameters.TabStop = false;
-            this.groupBoxParameters.Text = "Parameters";
-            // 
-            // tabControlParameters
-            // 
-            this.tabControlParameters.Controls.Add(this.tabPageEvent);
-            this.tabControlParameters.Controls.Add(this.tabPageAction);
-            this.tabControlParameters.Controls.Add(this.tabPageTarget);
-            this.tabControlParameters.Location = new System.Drawing.Point(8, 19);
-            this.tabControlParameters.Name = "tabControlParameters";
-            this.tabControlParameters.SelectedIndex = 0;
-            this.tabControlParameters.Size = new System.Drawing.Size(264, 153);
-            this.tabControlParameters.TabIndex = 0;
-            // 
-            // tabPageEvent
-            // 
-            this.tabPageEvent.BackColor = System.Drawing.SystemColors.Window;
-            this.tabPageEvent.Controls.Add(this.buttonEventParamFourSearch);
-            this.tabPageEvent.Controls.Add(this.buttonEventParamThreeSearch);
-            this.tabPageEvent.Controls.Add(this.buttonEventParamTwoSearch);
-            this.tabPageEvent.Controls.Add(this.buttonEventParamOneSearch);
-            this.tabPageEvent.Controls.Add(this.labelEventParam4);
-            this.tabPageEvent.Controls.Add(this.labelEventParam3);
-            this.tabPageEvent.Controls.Add(this.labelEventParam2);
-            this.tabPageEvent.Controls.Add(this.textBoxEventParam4);
-            this.tabPageEvent.Controls.Add(this.textBoxEventParam3);
-            this.tabPageEvent.Controls.Add(this.textBoxEventParam2);
-            this.tabPageEvent.Controls.Add(this.labelEventParam1);
-            this.tabPageEvent.Controls.Add(this.textBoxEventParam1);
-            this.tabPageEvent.Location = new System.Drawing.Point(4, 22);
-            this.tabPageEvent.Name = "tabPageEvent";
-            this.tabPageEvent.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEvent.Size = new System.Drawing.Size(256, 127);
-            this.tabPageEvent.TabIndex = 0;
-            this.tabPageEvent.Text = "Event";
-            // 
-            // buttonEventParamFourSearch
-            // 
-            this.buttonEventParamFourSearch.Location = new System.Drawing.Point(214, 81);
-            this.buttonEventParamFourSearch.Name = "buttonEventParamFourSearch";
-            this.buttonEventParamFourSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonEventParamFourSearch.TabIndex = 44;
-            this.buttonEventParamFourSearch.Text = "...";
-            this.buttonEventParamFourSearch.UseVisualStyleBackColor = true;
-            this.buttonEventParamFourSearch.Visible = false;
-            this.buttonEventParamFourSearch.Click += new System.EventHandler(this.buttonEventParamFourSearch_Click);
-            // 
-            // buttonEventParamThreeSearch
-            // 
-            this.buttonEventParamThreeSearch.Location = new System.Drawing.Point(214, 55);
-            this.buttonEventParamThreeSearch.Name = "buttonEventParamThreeSearch";
-            this.buttonEventParamThreeSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonEventParamThreeSearch.TabIndex = 42;
-            this.buttonEventParamThreeSearch.Text = "...";
-            this.buttonEventParamThreeSearch.UseVisualStyleBackColor = true;
-            this.buttonEventParamThreeSearch.Visible = false;
-            this.buttonEventParamThreeSearch.Click += new System.EventHandler(this.buttonEventParamThreeSearch_Click);
-            // 
-            // buttonEventParamTwoSearch
-            // 
-            this.buttonEventParamTwoSearch.Location = new System.Drawing.Point(214, 29);
-            this.buttonEventParamTwoSearch.Name = "buttonEventParamTwoSearch";
-            this.buttonEventParamTwoSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonEventParamTwoSearch.TabIndex = 40;
-            this.buttonEventParamTwoSearch.Text = "...";
-            this.buttonEventParamTwoSearch.UseVisualStyleBackColor = true;
-            this.buttonEventParamTwoSearch.Visible = false;
-            this.buttonEventParamTwoSearch.Click += new System.EventHandler(this.buttonEventParamTwoSearch_Click);
-            // 
-            // buttonEventParamOneSearch
-            // 
-            this.buttonEventParamOneSearch.Location = new System.Drawing.Point(214, 3);
-            this.buttonEventParamOneSearch.Name = "buttonEventParamOneSearch";
-            this.buttonEventParamOneSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonEventParamOneSearch.TabIndex = 38;
-            this.buttonEventParamOneSearch.Text = "...";
-            this.buttonEventParamOneSearch.UseVisualStyleBackColor = true;
-            this.buttonEventParamOneSearch.Visible = false;
-            this.buttonEventParamOneSearch.Click += new System.EventHandler(this.buttonEventParamOneSearch_Click);
-            // 
-            // labelEventParam4
-            // 
-            this.labelEventParam4.AutoSize = true;
-            this.labelEventParam4.Location = new System.Drawing.Point(1, 85);
-            this.labelEventParam4.Name = "labelEventParam4";
-            this.labelEventParam4.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam4.TabIndex = 23;
-            this.labelEventParam4.Text = "Param 4";
-            this.labelEventParam4.TooltipParameterId = 4;
-            this.labelEventParam4.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
-            // 
-            // labelEventParam3
-            // 
-            this.labelEventParam3.AutoSize = true;
-            this.labelEventParam3.Location = new System.Drawing.Point(1, 59);
-            this.labelEventParam3.Name = "labelEventParam3";
-            this.labelEventParam3.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam3.TabIndex = 23;
-            this.labelEventParam3.Text = "Param 3";
-            this.labelEventParam3.TooltipParameterId = 3;
-            this.labelEventParam3.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
-            // 
-            // labelEventParam2
-            // 
-            this.labelEventParam2.AutoSize = true;
-            this.labelEventParam2.Location = new System.Drawing.Point(1, 33);
-            this.labelEventParam2.Name = "labelEventParam2";
-            this.labelEventParam2.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam2.TabIndex = 23;
-            this.labelEventParam2.Text = "Param 2";
-            this.labelEventParam2.TooltipParameterId = 2;
-            this.labelEventParam2.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
-            // 
-            // textBoxEventParam4
-            // 
-            this.textBoxEventParam4.Location = new System.Drawing.Point(144, 82);
-            this.textBoxEventParam4.Name = "textBoxEventParam4";
-            this.textBoxEventParam4.Size = new System.Drawing.Size(70, 20);
-            this.textBoxEventParam4.TabIndex = 43;
-            this.textBoxEventParam4.Text = "0";
-            this.textBoxEventParam4.Leave += new System.EventHandler(this.textBoxEventParam4_Leave);
-            // 
-            // textBoxEventParam3
-            // 
-            this.textBoxEventParam3.Location = new System.Drawing.Point(144, 56);
-            this.textBoxEventParam3.Name = "textBoxEventParam3";
-            this.textBoxEventParam3.Size = new System.Drawing.Size(70, 20);
-            this.textBoxEventParam3.TabIndex = 41;
-            this.textBoxEventParam3.Text = "0";
-            this.textBoxEventParam3.Leave += new System.EventHandler(this.textBoxEventParam3_Leave);
-            // 
-            // textBoxEventParam2
-            // 
-            this.textBoxEventParam2.Location = new System.Drawing.Point(144, 30);
-            this.textBoxEventParam2.Name = "textBoxEventParam2";
-            this.textBoxEventParam2.Size = new System.Drawing.Size(70, 20);
-            this.textBoxEventParam2.TabIndex = 39;
-            this.textBoxEventParam2.Text = "0";
-            this.textBoxEventParam2.Leave += new System.EventHandler(this.textBoxEventParam2_Leave);
-            // 
-            // labelEventParam1
-            // 
-            this.labelEventParam1.AutoSize = true;
-            this.labelEventParam1.Location = new System.Drawing.Point(1, 7);
-            this.labelEventParam1.Name = "labelEventParam1";
-            this.labelEventParam1.Size = new System.Drawing.Size(46, 13);
-            this.labelEventParam1.TabIndex = 23;
-            this.labelEventParam1.Text = "Param 1";
-            this.labelEventParam1.TooltipParameterId = 1;
-            this.labelEventParam1.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
-            // 
-            // textBoxEventParam1
-            // 
-            this.textBoxEventParam1.Location = new System.Drawing.Point(144, 4);
-            this.textBoxEventParam1.Name = "textBoxEventParam1";
-            this.textBoxEventParam1.Size = new System.Drawing.Size(70, 20);
-            this.textBoxEventParam1.TabIndex = 37;
-            this.textBoxEventParam1.Text = "0";
-            this.textBoxEventParam1.Leave += new System.EventHandler(this.textBoxEventParam1_Leave);
-            // 
-            // tabPageAction
-            // 
-            this.tabPageAction.BackColor = System.Drawing.SystemColors.Window;
-            this.tabPageAction.Controls.Add(this.buttonActionParamSixSearch);
-            this.tabPageAction.Controls.Add(this.buttonActionParamFiveSearch);
-            this.tabPageAction.Controls.Add(this.buttonActionParamFourSearch);
-            this.tabPageAction.Controls.Add(this.buttonActionParamThreeSearch);
-            this.tabPageAction.Controls.Add(this.buttonActionParamTwoSearch);
-            this.tabPageAction.Controls.Add(this.buttonActionParamOneSearch);
-            this.tabPageAction.Controls.Add(this.textBoxActionParam6);
-            this.tabPageAction.Controls.Add(this.textBoxActionParam5);
-            this.tabPageAction.Controls.Add(this.textBoxActionParam4);
-            this.tabPageAction.Controls.Add(this.textBoxActionParam3);
-            this.tabPageAction.Controls.Add(this.textBoxActionParam2);
-            this.tabPageAction.Controls.Add(this.textBoxActionParam1);
-            this.tabPageAction.Controls.Add(this.labelActionParam6);
-            this.tabPageAction.Controls.Add(this.labelActionParam5);
-            this.tabPageAction.Controls.Add(this.labelActionParam4);
-            this.tabPageAction.Controls.Add(this.labelActionParam3);
-            this.tabPageAction.Controls.Add(this.labelActionParam2);
-            this.tabPageAction.Controls.Add(this.labelActionParam1);
-            this.tabPageAction.Location = new System.Drawing.Point(4, 22);
-            this.tabPageAction.Name = "tabPageAction";
-            this.tabPageAction.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageAction.Size = new System.Drawing.Size(256, 127);
-            this.tabPageAction.TabIndex = 1;
-            this.tabPageAction.Text = "Action";
-            // 
-            // buttonActionParamSixSearch
-            // 
-            this.buttonActionParamSixSearch.Location = new System.Drawing.Point(214, 133);
-            this.buttonActionParamSixSearch.Name = "buttonActionParamSixSearch";
-            this.buttonActionParamSixSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamSixSearch.TabIndex = 57;
-            this.buttonActionParamSixSearch.Text = "...";
-            this.buttonActionParamSixSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamSixSearch.Visible = false;
-            this.buttonActionParamSixSearch.Click += new System.EventHandler(this.buttonActionParamSixSearch_Click);
-            // 
-            // buttonActionParamFiveSearch
-            // 
-            this.buttonActionParamFiveSearch.Location = new System.Drawing.Point(214, 107);
-            this.buttonActionParamFiveSearch.Name = "buttonActionParamFiveSearch";
-            this.buttonActionParamFiveSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamFiveSearch.TabIndex = 54;
-            this.buttonActionParamFiveSearch.Text = "...";
-            this.buttonActionParamFiveSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamFiveSearch.Visible = false;
-            this.buttonActionParamFiveSearch.Click += new System.EventHandler(this.buttonActionParamFiveSearch_Click);
-            // 
-            // buttonActionParamFourSearch
-            // 
-            this.buttonActionParamFourSearch.Location = new System.Drawing.Point(214, 81);
-            this.buttonActionParamFourSearch.Name = "buttonActionParamFourSearch";
-            this.buttonActionParamFourSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamFourSearch.TabIndex = 52;
-            this.buttonActionParamFourSearch.Text = "...";
-            this.buttonActionParamFourSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamFourSearch.Visible = false;
-            this.buttonActionParamFourSearch.Click += new System.EventHandler(this.buttonActionParamFourSearch_Click);
-            // 
-            // buttonActionParamThreeSearch
-            // 
-            this.buttonActionParamThreeSearch.Location = new System.Drawing.Point(214, 55);
-            this.buttonActionParamThreeSearch.Name = "buttonActionParamThreeSearch";
-            this.buttonActionParamThreeSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamThreeSearch.TabIndex = 50;
-            this.buttonActionParamThreeSearch.Text = "...";
-            this.buttonActionParamThreeSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamThreeSearch.Visible = false;
-            this.buttonActionParamThreeSearch.Click += new System.EventHandler(this.buttonActionParamThreeSearch_Click);
-            // 
-            // buttonActionParamTwoSearch
-            // 
-            this.buttonActionParamTwoSearch.Location = new System.Drawing.Point(214, 29);
-            this.buttonActionParamTwoSearch.Name = "buttonActionParamTwoSearch";
-            this.buttonActionParamTwoSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamTwoSearch.TabIndex = 48;
-            this.buttonActionParamTwoSearch.Text = "...";
-            this.buttonActionParamTwoSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamTwoSearch.Visible = false;
-            this.buttonActionParamTwoSearch.Click += new System.EventHandler(this.buttonActionParamTwoSearch_Click);
-            // 
-            // buttonActionParamOneSearch
-            // 
-            this.buttonActionParamOneSearch.Location = new System.Drawing.Point(214, 3);
-            this.buttonActionParamOneSearch.Name = "buttonActionParamOneSearch";
-            this.buttonActionParamOneSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonActionParamOneSearch.TabIndex = 46;
-            this.buttonActionParamOneSearch.Text = "...";
-            this.buttonActionParamOneSearch.UseVisualStyleBackColor = true;
-            this.buttonActionParamOneSearch.Visible = false;
-            this.buttonActionParamOneSearch.Click += new System.EventHandler(this.buttonActionParamOneSearch_Click);
-            // 
-            // textBoxActionParam6
-            // 
-            this.textBoxActionParam6.Location = new System.Drawing.Point(144, 134);
-            this.textBoxActionParam6.Name = "textBoxActionParam6";
-            this.textBoxActionParam6.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam6.TabIndex = 56;
-            this.textBoxActionParam6.Text = "0";
-            this.textBoxActionParam6.Leave += new System.EventHandler(this.textBoxActionParam6_Leave);
-            // 
-            // textBoxActionParam5
-            // 
-            this.textBoxActionParam5.Location = new System.Drawing.Point(144, 108);
-            this.textBoxActionParam5.Name = "textBoxActionParam5";
-            this.textBoxActionParam5.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam5.TabIndex = 53;
-            this.textBoxActionParam5.Text = "0";
-            this.textBoxActionParam5.Leave += new System.EventHandler(this.textBoxActionParam5_Leave);
-            // 
-            // textBoxActionParam4
-            // 
-            this.textBoxActionParam4.Location = new System.Drawing.Point(144, 82);
-            this.textBoxActionParam4.Name = "textBoxActionParam4";
-            this.textBoxActionParam4.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam4.TabIndex = 51;
-            this.textBoxActionParam4.Text = "0";
-            this.textBoxActionParam4.Leave += new System.EventHandler(this.textBoxActionParam4_Leave);
-            // 
-            // textBoxActionParam3
-            // 
-            this.textBoxActionParam3.Location = new System.Drawing.Point(144, 56);
-            this.textBoxActionParam3.Name = "textBoxActionParam3";
-            this.textBoxActionParam3.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam3.TabIndex = 49;
-            this.textBoxActionParam3.Text = "0";
-            this.textBoxActionParam3.Leave += new System.EventHandler(this.textBoxActionParam3_Leave);
-            // 
-            // textBoxActionParam2
-            // 
-            this.textBoxActionParam2.Location = new System.Drawing.Point(144, 30);
-            this.textBoxActionParam2.Name = "textBoxActionParam2";
-            this.textBoxActionParam2.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam2.TabIndex = 47;
-            this.textBoxActionParam2.Text = "0";
-            this.textBoxActionParam2.Leave += new System.EventHandler(this.textBoxActionParam2_Leave);
-            // 
-            // textBoxActionParam1
-            // 
-            this.textBoxActionParam1.Location = new System.Drawing.Point(144, 4);
-            this.textBoxActionParam1.Name = "textBoxActionParam1";
-            this.textBoxActionParam1.Size = new System.Drawing.Size(70, 20);
-            this.textBoxActionParam1.TabIndex = 45;
-            this.textBoxActionParam1.Text = "0";
-            this.textBoxActionParam1.Leave += new System.EventHandler(this.textBoxActionParam1_Leave);
-            // 
-            // labelActionParam6
-            // 
-            this.labelActionParam6.AutoSize = true;
-            this.labelActionParam6.Location = new System.Drawing.Point(1, 137);
-            this.labelActionParam6.Name = "labelActionParam6";
-            this.labelActionParam6.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam6.TabIndex = 24;
-            this.labelActionParam6.Text = "Param 6";
-            this.labelActionParam6.TooltipParameterId = 6;
-            this.labelActionParam6.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // labelActionParam5
-            // 
-            this.labelActionParam5.AutoSize = true;
-            this.labelActionParam5.Location = new System.Drawing.Point(1, 111);
-            this.labelActionParam5.Name = "labelActionParam5";
-            this.labelActionParam5.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam5.TabIndex = 24;
-            this.labelActionParam5.Text = "Param 5";
-            this.labelActionParam5.TooltipParameterId = 5;
-            this.labelActionParam5.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // labelActionParam4
-            // 
-            this.labelActionParam4.AutoSize = true;
-            this.labelActionParam4.Location = new System.Drawing.Point(1, 85);
-            this.labelActionParam4.Name = "labelActionParam4";
-            this.labelActionParam4.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam4.TabIndex = 24;
-            this.labelActionParam4.Text = "Param 4";
-            this.labelActionParam4.TooltipParameterId = 4;
-            this.labelActionParam4.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // labelActionParam3
-            // 
-            this.labelActionParam3.AutoSize = true;
-            this.labelActionParam3.Location = new System.Drawing.Point(1, 59);
-            this.labelActionParam3.Name = "labelActionParam3";
-            this.labelActionParam3.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam3.TabIndex = 25;
-            this.labelActionParam3.Text = "Param 3";
-            this.labelActionParam3.TooltipParameterId = 3;
-            this.labelActionParam3.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // labelActionParam2
-            // 
-            this.labelActionParam2.AutoSize = true;
-            this.labelActionParam2.Location = new System.Drawing.Point(1, 33);
-            this.labelActionParam2.Name = "labelActionParam2";
-            this.labelActionParam2.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam2.TabIndex = 26;
-            this.labelActionParam2.Text = "Param 2";
-            this.labelActionParam2.TooltipParameterId = 2;
-            this.labelActionParam2.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // labelActionParam1
-            // 
-            this.labelActionParam1.AutoSize = true;
-            this.labelActionParam1.Location = new System.Drawing.Point(1, 7);
-            this.labelActionParam1.Name = "labelActionParam1";
-            this.labelActionParam1.Size = new System.Drawing.Size(46, 13);
-            this.labelActionParam1.TabIndex = 32;
-            this.labelActionParam1.Text = "Param 1";
-            this.labelActionParam1.TooltipParameterId = 1;
-            this.labelActionParam1.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
-            // 
-            // tabPageTarget
-            // 
-            this.tabPageTarget.BackColor = System.Drawing.SystemColors.Window;
-            this.tabPageTarget.Controls.Add(this.buttonTargetParamThreeSearch);
-            this.tabPageTarget.Controls.Add(this.buttonTargetParamTwoSearch);
-            this.tabPageTarget.Controls.Add(this.buttonTargetParamOneSearch);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetO);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetZ);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetY);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetX);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetParam3);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetParam2);
-            this.tabPageTarget.Controls.Add(this.textBoxTargetParam1);
-            this.tabPageTarget.Controls.Add(this.labelTargetO);
-            this.tabPageTarget.Controls.Add(this.labelTargetZ);
-            this.tabPageTarget.Controls.Add(this.labelTargetY);
-            this.tabPageTarget.Controls.Add(this.labelTargetX);
-            this.tabPageTarget.Controls.Add(this.labelTargetParam3);
-            this.tabPageTarget.Controls.Add(this.labelTargetParam2);
-            this.tabPageTarget.Controls.Add(this.labelTargetParam1);
-            this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
-            this.tabPageTarget.Name = "tabPageTarget";
-            this.tabPageTarget.Size = new System.Drawing.Size(256, 127);
-            this.tabPageTarget.TabIndex = 2;
-            this.tabPageTarget.Text = "Target";
-            // 
-            // buttonTargetParamThreeSearch
-            // 
-            this.buttonTargetParamThreeSearch.Location = new System.Drawing.Point(214, 55);
-            this.buttonTargetParamThreeSearch.Name = "buttonTargetParamThreeSearch";
-            this.buttonTargetParamThreeSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamThreeSearch.TabIndex = 63;
-            this.buttonTargetParamThreeSearch.Text = "...";
-            this.buttonTargetParamThreeSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamThreeSearch.Visible = false;
-            // 
-            // buttonTargetParamTwoSearch
-            // 
-            this.buttonTargetParamTwoSearch.Location = new System.Drawing.Point(214, 29);
-            this.buttonTargetParamTwoSearch.Name = "buttonTargetParamTwoSearch";
-            this.buttonTargetParamTwoSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamTwoSearch.TabIndex = 61;
-            this.buttonTargetParamTwoSearch.Text = "...";
-            this.buttonTargetParamTwoSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamTwoSearch.Visible = false;
-            this.buttonTargetParamTwoSearch.Click += new System.EventHandler(this.buttonTargetParamTwoSearch_Click);
-            // 
-            // buttonTargetParamOneSearch
-            // 
-            this.buttonTargetParamOneSearch.Location = new System.Drawing.Point(214, 3);
-            this.buttonTargetParamOneSearch.Name = "buttonTargetParamOneSearch";
-            this.buttonTargetParamOneSearch.Size = new System.Drawing.Size(24, 22);
-            this.buttonTargetParamOneSearch.TabIndex = 59;
-            this.buttonTargetParamOneSearch.Text = "...";
-            this.buttonTargetParamOneSearch.UseVisualStyleBackColor = true;
-            this.buttonTargetParamOneSearch.Visible = false;
-            this.buttonTargetParamOneSearch.Click += new System.EventHandler(this.buttonTargetParamOneSearch_Click);
-            // 
-            // textBoxTargetO
-            // 
-            this.textBoxTargetO.Location = new System.Drawing.Point(144, 160);
-            this.textBoxTargetO.Name = "textBoxTargetO";
-            this.textBoxTargetO.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetO.TabIndex = 36;
-            this.textBoxTargetO.Text = "0";
-            this.textBoxTargetO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
-            this.textBoxTargetO.Leave += new System.EventHandler(this.textBoxTargetO_Leave);
-            // 
-            // textBoxTargetZ
-            // 
-            this.textBoxTargetZ.Location = new System.Drawing.Point(144, 134);
-            this.textBoxTargetZ.Name = "textBoxTargetZ";
-            this.textBoxTargetZ.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetZ.TabIndex = 68;
-            this.textBoxTargetZ.Text = "0";
-            this.textBoxTargetZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
-            this.textBoxTargetZ.Leave += new System.EventHandler(this.textBoxTargetZ_Leave);
-            // 
-            // textBoxTargetY
-            // 
-            this.textBoxTargetY.Location = new System.Drawing.Point(144, 108);
-            this.textBoxTargetY.Name = "textBoxTargetY";
-            this.textBoxTargetY.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetY.TabIndex = 66;
-            this.textBoxTargetY.Text = "0";
-            this.textBoxTargetY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
-            this.textBoxTargetY.Leave += new System.EventHandler(this.textBoxTargetY_Leave);
-            // 
-            // textBoxTargetX
-            // 
-            this.textBoxTargetX.Location = new System.Drawing.Point(144, 82);
-            this.textBoxTargetX.Name = "textBoxTargetX";
-            this.textBoxTargetX.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetX.TabIndex = 64;
-            this.textBoxTargetX.Text = "0";
-            this.textBoxTargetX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
-            this.textBoxTargetX.Leave += new System.EventHandler(this.textBoxTargetX_Leave);
-            // 
-            // textBoxTargetParam3
-            // 
-            this.textBoxTargetParam3.Location = new System.Drawing.Point(144, 56);
-            this.textBoxTargetParam3.Name = "textBoxTargetParam3";
-            this.textBoxTargetParam3.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetParam3.TabIndex = 62;
-            this.textBoxTargetParam3.Text = "0";
-            this.textBoxTargetParam3.Leave += new System.EventHandler(this.textBoxTargetParam3_Leave);
-            // 
-            // textBoxTargetParam2
-            // 
-            this.textBoxTargetParam2.Location = new System.Drawing.Point(144, 30);
-            this.textBoxTargetParam2.Name = "textBoxTargetParam2";
-            this.textBoxTargetParam2.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetParam2.TabIndex = 60;
-            this.textBoxTargetParam2.Text = "0";
-            this.textBoxTargetParam2.Leave += new System.EventHandler(this.textBoxTargetParam2_Leave);
-            // 
-            // textBoxTargetParam1
-            // 
-            this.textBoxTargetParam1.Location = new System.Drawing.Point(144, 4);
-            this.textBoxTargetParam1.Name = "textBoxTargetParam1";
-            this.textBoxTargetParam1.Size = new System.Drawing.Size(70, 20);
-            this.textBoxTargetParam1.TabIndex = 58;
-            this.textBoxTargetParam1.Text = "0";
-            this.textBoxTargetParam1.Leave += new System.EventHandler(this.textBoxTargetParam1_Leave);
-            // 
-            // labelTargetO
-            // 
-            this.labelTargetO.AutoSize = true;
-            this.labelTargetO.Location = new System.Drawing.Point(1, 163);
-            this.labelTargetO.Name = "labelTargetO";
-            this.labelTargetO.Size = new System.Drawing.Size(49, 13);
-            this.labelTargetO.TabIndex = 34;
-            this.labelTargetO.Text = "Target O";
-            this.labelTargetO.TooltipParameterId = 7;
-            // 
-            // labelTargetZ
-            // 
-            this.labelTargetZ.AutoSize = true;
-            this.labelTargetZ.Location = new System.Drawing.Point(1, 137);
-            this.labelTargetZ.Name = "labelTargetZ";
-            this.labelTargetZ.Size = new System.Drawing.Size(48, 13);
-            this.labelTargetZ.TabIndex = 34;
-            this.labelTargetZ.Text = "Target Z";
-            this.labelTargetZ.TooltipParameterId = 6;
-            // 
-            // labelTargetY
-            // 
-            this.labelTargetY.AutoSize = true;
-            this.labelTargetY.Location = new System.Drawing.Point(1, 111);
-            this.labelTargetY.Name = "labelTargetY";
-            this.labelTargetY.Size = new System.Drawing.Size(48, 13);
-            this.labelTargetY.TabIndex = 34;
-            this.labelTargetY.Text = "Target Y";
-            this.labelTargetY.TooltipParameterId = 5;
-            // 
-            // labelTargetX
-            // 
-            this.labelTargetX.AutoSize = true;
-            this.labelTargetX.Location = new System.Drawing.Point(1, 85);
-            this.labelTargetX.Name = "labelTargetX";
-            this.labelTargetX.Size = new System.Drawing.Size(48, 13);
-            this.labelTargetX.TabIndex = 34;
-            this.labelTargetX.Text = "Target X";
-            this.labelTargetX.TooltipParameterId = 4;
-            // 
-            // labelTargetParam3
-            // 
-            this.labelTargetParam3.AutoSize = true;
-            this.labelTargetParam3.Location = new System.Drawing.Point(1, 59);
-            this.labelTargetParam3.Name = "labelTargetParam3";
-            this.labelTargetParam3.Size = new System.Drawing.Size(46, 13);
-            this.labelTargetParam3.TabIndex = 34;
-            this.labelTargetParam3.Text = "Param 3";
-            this.labelTargetParam3.TooltipParameterId = 3;
-            this.labelTargetParam3.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
-            // 
-            // labelTargetParam2
-            // 
-            this.labelTargetParam2.AutoSize = true;
-            this.labelTargetParam2.Location = new System.Drawing.Point(1, 33);
-            this.labelTargetParam2.Name = "labelTargetParam2";
-            this.labelTargetParam2.Size = new System.Drawing.Size(46, 13);
-            this.labelTargetParam2.TabIndex = 35;
-            this.labelTargetParam2.Text = "Param 2";
-            this.labelTargetParam2.TooltipParameterId = 2;
-            this.labelTargetParam2.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
-            // 
-            // labelTargetParam1
-            // 
-            this.labelTargetParam1.AutoSize = true;
-            this.labelTargetParam1.Location = new System.Drawing.Point(1, 7);
-            this.labelTargetParam1.Name = "labelTargetParam1";
-            this.labelTargetParam1.Size = new System.Drawing.Size(46, 13);
-            this.labelTargetParam1.TabIndex = 38;
-            this.labelTargetParam1.Text = "Param 1";
-            this.labelTargetParam1.TooltipParameterId = 1;
-            this.labelTargetParam1.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
             // 
             // groupBoxScriptInfo
             // 
@@ -1967,7 +1118,7 @@
             this.groupBoxScriptInfo.Controls.Add(this.label6);
             this.groupBoxScriptInfo.Controls.Add(this.label11);
             this.groupBoxScriptInfo.Controls.Add(this.label10);
-            this.groupBoxScriptInfo.Location = new System.Drawing.Point(296, -1);
+            this.groupBoxScriptInfo.Location = new System.Drawing.Point(302, 6);
             this.groupBoxScriptInfo.Name = "groupBoxScriptInfo";
             this.groupBoxScriptInfo.Size = new System.Drawing.Size(335, 207);
             this.groupBoxScriptInfo.TabIndex = 75;
@@ -2539,6 +1690,413 @@
             this.label10.TabIndex = 25;
             this.label10.Text = "Phasemask:";
             // 
+            // buttonGenerateSql
+            // 
+            this.buttonGenerateSql.Enabled = false;
+            this.buttonGenerateSql.Location = new System.Drawing.Point(838, 190);
+            this.buttonGenerateSql.Name = "buttonGenerateSql";
+            this.buttonGenerateSql.Size = new System.Drawing.Size(83, 23);
+            this.buttonGenerateSql.TabIndex = 82;
+            this.buttonGenerateSql.Text = "Generate SQL";
+            this.buttonGenerateSql.UseVisualStyleBackColor = true;
+            this.buttonGenerateSql.Click += new System.EventHandler(this.buttonGenerateSql_Click);
+            // 
+            // groupBoxParameters
+            // 
+            this.groupBoxParameters.Controls.Add(this.tabControlParameters);
+            this.groupBoxParameters.Location = new System.Drawing.Point(643, 6);
+            this.groupBoxParameters.Name = "groupBoxParameters";
+            this.groupBoxParameters.Size = new System.Drawing.Size(278, 178);
+            this.groupBoxParameters.TabIndex = 77;
+            this.groupBoxParameters.TabStop = false;
+            this.groupBoxParameters.Text = "Parameters";
+            // 
+            // tabControlParameters
+            // 
+            this.tabControlParameters.Controls.Add(this.tabPageEvent);
+            this.tabControlParameters.Controls.Add(this.tabPageAction);
+            this.tabControlParameters.Controls.Add(this.tabPageTarget);
+            this.tabControlParameters.Location = new System.Drawing.Point(8, 19);
+            this.tabControlParameters.Name = "tabControlParameters";
+            this.tabControlParameters.SelectedIndex = 0;
+            this.tabControlParameters.Size = new System.Drawing.Size(264, 153);
+            this.tabControlParameters.TabIndex = 0;
+            // 
+            // tabPageEvent
+            // 
+            this.tabPageEvent.BackColor = System.Drawing.SystemColors.Window;
+            this.tabPageEvent.Controls.Add(this.buttonEventParamFourSearch);
+            this.tabPageEvent.Controls.Add(this.buttonEventParamThreeSearch);
+            this.tabPageEvent.Controls.Add(this.buttonEventParamTwoSearch);
+            this.tabPageEvent.Controls.Add(this.buttonEventParamOneSearch);
+            this.tabPageEvent.Controls.Add(this.labelEventParam4);
+            this.tabPageEvent.Controls.Add(this.labelEventParam3);
+            this.tabPageEvent.Controls.Add(this.labelEventParam2);
+            this.tabPageEvent.Controls.Add(this.textBoxEventParam4);
+            this.tabPageEvent.Controls.Add(this.textBoxEventParam3);
+            this.tabPageEvent.Controls.Add(this.textBoxEventParam2);
+            this.tabPageEvent.Controls.Add(this.labelEventParam1);
+            this.tabPageEvent.Controls.Add(this.textBoxEventParam1);
+            this.tabPageEvent.Location = new System.Drawing.Point(4, 22);
+            this.tabPageEvent.Name = "tabPageEvent";
+            this.tabPageEvent.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageEvent.Size = new System.Drawing.Size(256, 127);
+            this.tabPageEvent.TabIndex = 0;
+            this.tabPageEvent.Text = "Event";
+            // 
+            // buttonEventParamFourSearch
+            // 
+            this.buttonEventParamFourSearch.Location = new System.Drawing.Point(214, 81);
+            this.buttonEventParamFourSearch.Name = "buttonEventParamFourSearch";
+            this.buttonEventParamFourSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonEventParamFourSearch.TabIndex = 44;
+            this.buttonEventParamFourSearch.Text = "...";
+            this.buttonEventParamFourSearch.UseVisualStyleBackColor = true;
+            this.buttonEventParamFourSearch.Visible = false;
+            this.buttonEventParamFourSearch.Click += new System.EventHandler(this.buttonEventParamFourSearch_Click);
+            // 
+            // buttonEventParamThreeSearch
+            // 
+            this.buttonEventParamThreeSearch.Location = new System.Drawing.Point(214, 55);
+            this.buttonEventParamThreeSearch.Name = "buttonEventParamThreeSearch";
+            this.buttonEventParamThreeSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonEventParamThreeSearch.TabIndex = 42;
+            this.buttonEventParamThreeSearch.Text = "...";
+            this.buttonEventParamThreeSearch.UseVisualStyleBackColor = true;
+            this.buttonEventParamThreeSearch.Visible = false;
+            this.buttonEventParamThreeSearch.Click += new System.EventHandler(this.buttonEventParamThreeSearch_Click);
+            // 
+            // buttonEventParamTwoSearch
+            // 
+            this.buttonEventParamTwoSearch.Location = new System.Drawing.Point(214, 29);
+            this.buttonEventParamTwoSearch.Name = "buttonEventParamTwoSearch";
+            this.buttonEventParamTwoSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonEventParamTwoSearch.TabIndex = 40;
+            this.buttonEventParamTwoSearch.Text = "...";
+            this.buttonEventParamTwoSearch.UseVisualStyleBackColor = true;
+            this.buttonEventParamTwoSearch.Visible = false;
+            this.buttonEventParamTwoSearch.Click += new System.EventHandler(this.buttonEventParamTwoSearch_Click);
+            // 
+            // buttonEventParamOneSearch
+            // 
+            this.buttonEventParamOneSearch.Location = new System.Drawing.Point(214, 3);
+            this.buttonEventParamOneSearch.Name = "buttonEventParamOneSearch";
+            this.buttonEventParamOneSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonEventParamOneSearch.TabIndex = 38;
+            this.buttonEventParamOneSearch.Text = "...";
+            this.buttonEventParamOneSearch.UseVisualStyleBackColor = true;
+            this.buttonEventParamOneSearch.Visible = false;
+            this.buttonEventParamOneSearch.Click += new System.EventHandler(this.buttonEventParamOneSearch_Click);
+            // 
+            // textBoxEventParam4
+            // 
+            this.textBoxEventParam4.Location = new System.Drawing.Point(144, 82);
+            this.textBoxEventParam4.Name = "textBoxEventParam4";
+            this.textBoxEventParam4.Size = new System.Drawing.Size(70, 20);
+            this.textBoxEventParam4.TabIndex = 43;
+            this.textBoxEventParam4.Text = "0";
+            this.textBoxEventParam4.Leave += new System.EventHandler(this.textBoxEventParam4_Leave);
+            // 
+            // textBoxEventParam3
+            // 
+            this.textBoxEventParam3.Location = new System.Drawing.Point(144, 56);
+            this.textBoxEventParam3.Name = "textBoxEventParam3";
+            this.textBoxEventParam3.Size = new System.Drawing.Size(70, 20);
+            this.textBoxEventParam3.TabIndex = 41;
+            this.textBoxEventParam3.Text = "0";
+            this.textBoxEventParam3.Leave += new System.EventHandler(this.textBoxEventParam3_Leave);
+            // 
+            // textBoxEventParam2
+            // 
+            this.textBoxEventParam2.Location = new System.Drawing.Point(144, 30);
+            this.textBoxEventParam2.Name = "textBoxEventParam2";
+            this.textBoxEventParam2.Size = new System.Drawing.Size(70, 20);
+            this.textBoxEventParam2.TabIndex = 39;
+            this.textBoxEventParam2.Text = "0";
+            this.textBoxEventParam2.Leave += new System.EventHandler(this.textBoxEventParam2_Leave);
+            // 
+            // textBoxEventParam1
+            // 
+            this.textBoxEventParam1.Location = new System.Drawing.Point(144, 4);
+            this.textBoxEventParam1.Name = "textBoxEventParam1";
+            this.textBoxEventParam1.Size = new System.Drawing.Size(70, 20);
+            this.textBoxEventParam1.TabIndex = 37;
+            this.textBoxEventParam1.Text = "0";
+            this.textBoxEventParam1.Leave += new System.EventHandler(this.textBoxEventParam1_Leave);
+            // 
+            // tabPageAction
+            // 
+            this.tabPageAction.BackColor = System.Drawing.SystemColors.Window;
+            this.tabPageAction.Controls.Add(this.buttonActionParamSixSearch);
+            this.tabPageAction.Controls.Add(this.buttonActionParamFiveSearch);
+            this.tabPageAction.Controls.Add(this.buttonActionParamFourSearch);
+            this.tabPageAction.Controls.Add(this.buttonActionParamThreeSearch);
+            this.tabPageAction.Controls.Add(this.buttonActionParamTwoSearch);
+            this.tabPageAction.Controls.Add(this.buttonActionParamOneSearch);
+            this.tabPageAction.Controls.Add(this.textBoxActionParam6);
+            this.tabPageAction.Controls.Add(this.textBoxActionParam5);
+            this.tabPageAction.Controls.Add(this.textBoxActionParam4);
+            this.tabPageAction.Controls.Add(this.textBoxActionParam3);
+            this.tabPageAction.Controls.Add(this.textBoxActionParam2);
+            this.tabPageAction.Controls.Add(this.textBoxActionParam1);
+            this.tabPageAction.Controls.Add(this.labelActionParam6);
+            this.tabPageAction.Controls.Add(this.labelActionParam5);
+            this.tabPageAction.Controls.Add(this.labelActionParam4);
+            this.tabPageAction.Controls.Add(this.labelActionParam3);
+            this.tabPageAction.Controls.Add(this.labelActionParam2);
+            this.tabPageAction.Controls.Add(this.labelActionParam1);
+            this.tabPageAction.Location = new System.Drawing.Point(4, 22);
+            this.tabPageAction.Name = "tabPageAction";
+            this.tabPageAction.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageAction.Size = new System.Drawing.Size(256, 127);
+            this.tabPageAction.TabIndex = 1;
+            this.tabPageAction.Text = "Action";
+            // 
+            // buttonActionParamSixSearch
+            // 
+            this.buttonActionParamSixSearch.Location = new System.Drawing.Point(214, 133);
+            this.buttonActionParamSixSearch.Name = "buttonActionParamSixSearch";
+            this.buttonActionParamSixSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamSixSearch.TabIndex = 57;
+            this.buttonActionParamSixSearch.Text = "...";
+            this.buttonActionParamSixSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamSixSearch.Visible = false;
+            this.buttonActionParamSixSearch.Click += new System.EventHandler(this.buttonActionParamSixSearch_Click);
+            // 
+            // buttonActionParamFiveSearch
+            // 
+            this.buttonActionParamFiveSearch.Location = new System.Drawing.Point(214, 107);
+            this.buttonActionParamFiveSearch.Name = "buttonActionParamFiveSearch";
+            this.buttonActionParamFiveSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamFiveSearch.TabIndex = 54;
+            this.buttonActionParamFiveSearch.Text = "...";
+            this.buttonActionParamFiveSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamFiveSearch.Visible = false;
+            this.buttonActionParamFiveSearch.Click += new System.EventHandler(this.buttonActionParamFiveSearch_Click);
+            // 
+            // buttonActionParamFourSearch
+            // 
+            this.buttonActionParamFourSearch.Location = new System.Drawing.Point(214, 81);
+            this.buttonActionParamFourSearch.Name = "buttonActionParamFourSearch";
+            this.buttonActionParamFourSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamFourSearch.TabIndex = 52;
+            this.buttonActionParamFourSearch.Text = "...";
+            this.buttonActionParamFourSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamFourSearch.Visible = false;
+            this.buttonActionParamFourSearch.Click += new System.EventHandler(this.buttonActionParamFourSearch_Click);
+            // 
+            // buttonActionParamThreeSearch
+            // 
+            this.buttonActionParamThreeSearch.Location = new System.Drawing.Point(214, 55);
+            this.buttonActionParamThreeSearch.Name = "buttonActionParamThreeSearch";
+            this.buttonActionParamThreeSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamThreeSearch.TabIndex = 50;
+            this.buttonActionParamThreeSearch.Text = "...";
+            this.buttonActionParamThreeSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamThreeSearch.Visible = false;
+            this.buttonActionParamThreeSearch.Click += new System.EventHandler(this.buttonActionParamThreeSearch_Click);
+            // 
+            // buttonActionParamTwoSearch
+            // 
+            this.buttonActionParamTwoSearch.Location = new System.Drawing.Point(214, 29);
+            this.buttonActionParamTwoSearch.Name = "buttonActionParamTwoSearch";
+            this.buttonActionParamTwoSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamTwoSearch.TabIndex = 48;
+            this.buttonActionParamTwoSearch.Text = "...";
+            this.buttonActionParamTwoSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamTwoSearch.Visible = false;
+            this.buttonActionParamTwoSearch.Click += new System.EventHandler(this.buttonActionParamTwoSearch_Click);
+            // 
+            // buttonActionParamOneSearch
+            // 
+            this.buttonActionParamOneSearch.Location = new System.Drawing.Point(214, 3);
+            this.buttonActionParamOneSearch.Name = "buttonActionParamOneSearch";
+            this.buttonActionParamOneSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonActionParamOneSearch.TabIndex = 46;
+            this.buttonActionParamOneSearch.Text = "...";
+            this.buttonActionParamOneSearch.UseVisualStyleBackColor = true;
+            this.buttonActionParamOneSearch.Visible = false;
+            this.buttonActionParamOneSearch.Click += new System.EventHandler(this.buttonActionParamOneSearch_Click);
+            // 
+            // textBoxActionParam6
+            // 
+            this.textBoxActionParam6.Location = new System.Drawing.Point(144, 134);
+            this.textBoxActionParam6.Name = "textBoxActionParam6";
+            this.textBoxActionParam6.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam6.TabIndex = 56;
+            this.textBoxActionParam6.Text = "0";
+            this.textBoxActionParam6.Leave += new System.EventHandler(this.textBoxActionParam6_Leave);
+            // 
+            // textBoxActionParam5
+            // 
+            this.textBoxActionParam5.Location = new System.Drawing.Point(144, 108);
+            this.textBoxActionParam5.Name = "textBoxActionParam5";
+            this.textBoxActionParam5.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam5.TabIndex = 53;
+            this.textBoxActionParam5.Text = "0";
+            this.textBoxActionParam5.Leave += new System.EventHandler(this.textBoxActionParam5_Leave);
+            // 
+            // textBoxActionParam4
+            // 
+            this.textBoxActionParam4.Location = new System.Drawing.Point(144, 82);
+            this.textBoxActionParam4.Name = "textBoxActionParam4";
+            this.textBoxActionParam4.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam4.TabIndex = 51;
+            this.textBoxActionParam4.Text = "0";
+            this.textBoxActionParam4.Leave += new System.EventHandler(this.textBoxActionParam4_Leave);
+            // 
+            // textBoxActionParam3
+            // 
+            this.textBoxActionParam3.Location = new System.Drawing.Point(144, 56);
+            this.textBoxActionParam3.Name = "textBoxActionParam3";
+            this.textBoxActionParam3.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam3.TabIndex = 49;
+            this.textBoxActionParam3.Text = "0";
+            this.textBoxActionParam3.Leave += new System.EventHandler(this.textBoxActionParam3_Leave);
+            // 
+            // textBoxActionParam2
+            // 
+            this.textBoxActionParam2.Location = new System.Drawing.Point(144, 30);
+            this.textBoxActionParam2.Name = "textBoxActionParam2";
+            this.textBoxActionParam2.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam2.TabIndex = 47;
+            this.textBoxActionParam2.Text = "0";
+            this.textBoxActionParam2.Leave += new System.EventHandler(this.textBoxActionParam2_Leave);
+            // 
+            // textBoxActionParam1
+            // 
+            this.textBoxActionParam1.Location = new System.Drawing.Point(144, 4);
+            this.textBoxActionParam1.Name = "textBoxActionParam1";
+            this.textBoxActionParam1.Size = new System.Drawing.Size(70, 20);
+            this.textBoxActionParam1.TabIndex = 45;
+            this.textBoxActionParam1.Text = "0";
+            this.textBoxActionParam1.Leave += new System.EventHandler(this.textBoxActionParam1_Leave);
+            // 
+            // tabPageTarget
+            // 
+            this.tabPageTarget.BackColor = System.Drawing.SystemColors.Window;
+            this.tabPageTarget.Controls.Add(this.buttonTargetParamThreeSearch);
+            this.tabPageTarget.Controls.Add(this.buttonTargetParamTwoSearch);
+            this.tabPageTarget.Controls.Add(this.buttonTargetParamOneSearch);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetO);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetZ);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetY);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetX);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetParam3);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetParam2);
+            this.tabPageTarget.Controls.Add(this.textBoxTargetParam1);
+            this.tabPageTarget.Controls.Add(this.labelTargetO);
+            this.tabPageTarget.Controls.Add(this.labelTargetZ);
+            this.tabPageTarget.Controls.Add(this.labelTargetY);
+            this.tabPageTarget.Controls.Add(this.labelTargetX);
+            this.tabPageTarget.Controls.Add(this.labelTargetParam3);
+            this.tabPageTarget.Controls.Add(this.labelTargetParam2);
+            this.tabPageTarget.Controls.Add(this.labelTargetParam1);
+            this.tabPageTarget.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTarget.Name = "tabPageTarget";
+            this.tabPageTarget.Size = new System.Drawing.Size(256, 127);
+            this.tabPageTarget.TabIndex = 2;
+            this.tabPageTarget.Text = "Target";
+            // 
+            // buttonTargetParamThreeSearch
+            // 
+            this.buttonTargetParamThreeSearch.Location = new System.Drawing.Point(214, 55);
+            this.buttonTargetParamThreeSearch.Name = "buttonTargetParamThreeSearch";
+            this.buttonTargetParamThreeSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonTargetParamThreeSearch.TabIndex = 63;
+            this.buttonTargetParamThreeSearch.Text = "...";
+            this.buttonTargetParamThreeSearch.UseVisualStyleBackColor = true;
+            this.buttonTargetParamThreeSearch.Visible = false;
+            // 
+            // buttonTargetParamTwoSearch
+            // 
+            this.buttonTargetParamTwoSearch.Location = new System.Drawing.Point(214, 29);
+            this.buttonTargetParamTwoSearch.Name = "buttonTargetParamTwoSearch";
+            this.buttonTargetParamTwoSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonTargetParamTwoSearch.TabIndex = 61;
+            this.buttonTargetParamTwoSearch.Text = "...";
+            this.buttonTargetParamTwoSearch.UseVisualStyleBackColor = true;
+            this.buttonTargetParamTwoSearch.Visible = false;
+            this.buttonTargetParamTwoSearch.Click += new System.EventHandler(this.buttonTargetParamTwoSearch_Click);
+            // 
+            // buttonTargetParamOneSearch
+            // 
+            this.buttonTargetParamOneSearch.Location = new System.Drawing.Point(214, 3);
+            this.buttonTargetParamOneSearch.Name = "buttonTargetParamOneSearch";
+            this.buttonTargetParamOneSearch.Size = new System.Drawing.Size(24, 22);
+            this.buttonTargetParamOneSearch.TabIndex = 59;
+            this.buttonTargetParamOneSearch.Text = "...";
+            this.buttonTargetParamOneSearch.UseVisualStyleBackColor = true;
+            this.buttonTargetParamOneSearch.Visible = false;
+            this.buttonTargetParamOneSearch.Click += new System.EventHandler(this.buttonTargetParamOneSearch_Click);
+            // 
+            // textBoxTargetO
+            // 
+            this.textBoxTargetO.Location = new System.Drawing.Point(144, 160);
+            this.textBoxTargetO.Name = "textBoxTargetO";
+            this.textBoxTargetO.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetO.TabIndex = 36;
+            this.textBoxTargetO.Text = "0";
+            this.textBoxTargetO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
+            this.textBoxTargetO.Leave += new System.EventHandler(this.textBoxTargetO_Leave);
+            // 
+            // textBoxTargetZ
+            // 
+            this.textBoxTargetZ.Location = new System.Drawing.Point(144, 134);
+            this.textBoxTargetZ.Name = "textBoxTargetZ";
+            this.textBoxTargetZ.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetZ.TabIndex = 68;
+            this.textBoxTargetZ.Text = "0";
+            this.textBoxTargetZ.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
+            this.textBoxTargetZ.Leave += new System.EventHandler(this.textBoxTargetZ_Leave);
+            // 
+            // textBoxTargetY
+            // 
+            this.textBoxTargetY.Location = new System.Drawing.Point(144, 108);
+            this.textBoxTargetY.Name = "textBoxTargetY";
+            this.textBoxTargetY.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetY.TabIndex = 66;
+            this.textBoxTargetY.Text = "0";
+            this.textBoxTargetY.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
+            this.textBoxTargetY.Leave += new System.EventHandler(this.textBoxTargetY_Leave);
+            // 
+            // textBoxTargetX
+            // 
+            this.textBoxTargetX.Location = new System.Drawing.Point(144, 82);
+            this.textBoxTargetX.Name = "textBoxTargetX";
+            this.textBoxTargetX.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetX.TabIndex = 64;
+            this.textBoxTargetX.Text = "0";
+            this.textBoxTargetX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxTargetCoordinateParams_KeyPress);
+            this.textBoxTargetX.Leave += new System.EventHandler(this.textBoxTargetX_Leave);
+            // 
+            // textBoxTargetParam3
+            // 
+            this.textBoxTargetParam3.Location = new System.Drawing.Point(144, 56);
+            this.textBoxTargetParam3.Name = "textBoxTargetParam3";
+            this.textBoxTargetParam3.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetParam3.TabIndex = 62;
+            this.textBoxTargetParam3.Text = "0";
+            this.textBoxTargetParam3.Leave += new System.EventHandler(this.textBoxTargetParam3_Leave);
+            // 
+            // textBoxTargetParam2
+            // 
+            this.textBoxTargetParam2.Location = new System.Drawing.Point(144, 30);
+            this.textBoxTargetParam2.Name = "textBoxTargetParam2";
+            this.textBoxTargetParam2.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetParam2.TabIndex = 60;
+            this.textBoxTargetParam2.Text = "0";
+            this.textBoxTargetParam2.Leave += new System.EventHandler(this.textBoxTargetParam2_Leave);
+            // 
+            // textBoxTargetParam1
+            // 
+            this.textBoxTargetParam1.Location = new System.Drawing.Point(144, 4);
+            this.textBoxTargetParam1.Name = "textBoxTargetParam1";
+            this.textBoxTargetParam1.Size = new System.Drawing.Size(70, 20);
+            this.textBoxTargetParam1.TabIndex = 58;
+            this.textBoxTargetParam1.Text = "0";
+            this.textBoxTargetParam1.Leave += new System.EventHandler(this.textBoxTargetParam1_Leave);
+            // 
             // groupBoxPreferences
             // 
             this.groupBoxPreferences.Controls.Add(this.checkBoxUseStaticTooltips);
@@ -2548,7 +2106,7 @@
             this.groupBoxPreferences.Controls.Add(this.checkBoxShowBasicInfo);
             this.groupBoxPreferences.Controls.Add(this.checkBox3);
             this.groupBoxPreferences.Controls.Add(this.checkBoxLockEventId);
-            this.groupBoxPreferences.Location = new System.Drawing.Point(0, 83);
+            this.groupBoxPreferences.Location = new System.Drawing.Point(6, 90);
             this.groupBoxPreferences.Name = "groupBoxPreferences";
             this.groupBoxPreferences.Size = new System.Drawing.Size(290, 123);
             this.groupBoxPreferences.TabIndex = 76;
@@ -2633,81 +2191,539 @@
             this.checkBoxLockEventId.UseVisualStyleBackColor = true;
             this.checkBoxLockEventId.CheckedChanged += new System.EventHandler(this.checkBoxLockEventId_CheckedChanged);
             // 
-            // groupBoxStaticScriptInfo
+            // buttonNewLine
             // 
-            this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBoxCreateScript);
-            this.groupBoxStaticScriptInfo.Controls.Add(this.pictureBoxLoadScript);
-            this.groupBoxStaticScriptInfo.Controls.Add(this.buttonSearchForEntryOrGuid);
-            this.groupBoxStaticScriptInfo.Controls.Add(this.label4);
-            this.groupBoxStaticScriptInfo.Controls.Add(this.comboBoxSourceType);
-            this.groupBoxStaticScriptInfo.Controls.Add(this.labelEntryOrGuid);
-            this.groupBoxStaticScriptInfo.Controls.Add(this.textBoxEntryOrGuid);
-            this.groupBoxStaticScriptInfo.Location = new System.Drawing.Point(0, -1);
-            this.groupBoxStaticScriptInfo.Name = "groupBoxStaticScriptInfo";
-            this.groupBoxStaticScriptInfo.Size = new System.Drawing.Size(290, 75);
-            this.groupBoxStaticScriptInfo.TabIndex = 74;
-            this.groupBoxStaticScriptInfo.TabStop = false;
-            this.groupBoxStaticScriptInfo.Text = "Static script information";
+            this.buttonNewLine.Location = new System.Drawing.Point(643, 190);
+            this.buttonNewLine.Name = "buttonNewLine";
+            this.buttonNewLine.Size = new System.Drawing.Size(83, 23);
+            this.buttonNewLine.TabIndex = 80;
+            this.buttonNewLine.Text = "New line";
+            this.buttonNewLine.UseVisualStyleBackColor = true;
+            this.buttonNewLine.Click += new System.EventHandler(this.buttonNewLine_Click);
             // 
-            // buttonSearchForEntryOrGuid
+            // panelStaticTooltipTypes
             // 
-            this.buttonSearchForEntryOrGuid.Location = new System.Drawing.Point(211, 18);
-            this.buttonSearchForEntryOrGuid.Name = "buttonSearchForEntryOrGuid";
-            this.buttonSearchForEntryOrGuid.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchForEntryOrGuid.TabIndex = 13;
-            this.buttonSearchForEntryOrGuid.Text = "...";
-            this.buttonSearchForEntryOrGuid.UseVisualStyleBackColor = true;
-            this.buttonSearchForEntryOrGuid.Click += new System.EventHandler(this.buttonSearchForEntry_Click);
+            this.panelStaticTooltipTypes.BackColor = System.Drawing.Color.White;
+            this.panelStaticTooltipTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelStaticTooltipTypes.Controls.Add(this.labelStaticTooltipTitleTypes);
+            this.panelStaticTooltipTypes.Controls.Add(this.labelStaticTooltipTextTypes);
+            this.panelStaticTooltipTypes.Controls.Add(this.pictureBoxStaticTooltip);
+            this.panelStaticTooltipTypes.Location = new System.Drawing.Point(6, 370);
+            this.panelStaticTooltipTypes.Name = "panelStaticTooltipTypes";
+            this.panelStaticTooltipTypes.Size = new System.Drawing.Size(915, 30);
+            this.panelStaticTooltipTypes.TabIndex = 79;
             // 
-            // label4
+            // labelStaticTooltipTitleTypes
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(17, 48);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(67, 13);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Source type:";
+            this.labelStaticTooltipTitleTypes.AutoSize = true;
+            this.labelStaticTooltipTitleTypes.Location = new System.Drawing.Point(26, 1);
+            this.labelStaticTooltipTitleTypes.Name = "labelStaticTooltipTitleTypes";
+            this.labelStaticTooltipTitleTypes.Size = new System.Drawing.Size(181, 13);
+            this.labelStaticTooltipTitleTypes.TabIndex = 31;
+            this.labelStaticTooltipTitleTypes.Text = "Event type, action type or target type";
             // 
-            // comboBoxSourceType
+            // labelStaticTooltipTextTypes
             // 
-            this.comboBoxSourceType.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.comboBoxSourceType.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.comboBoxSourceType.FormattingEnabled = true;
-            this.comboBoxSourceType.Items.AddRange(new object[] {
-            "SCRIPT_TYPE_CREATURE",
-            "SCRIPT_TYPE_GAMEOBJECT",
-            "SCRIPT_TYPE_AREATRIGGER",
-            "SCRIPT_TYPE_TIMED_ACTIONLIST"});
-            this.comboBoxSourceType.Location = new System.Drawing.Point(101, 45);
-            this.comboBoxSourceType.Name = "comboBoxSourceType";
-            this.comboBoxSourceType.Size = new System.Drawing.Size(183, 21);
-            this.comboBoxSourceType.TabIndex = 14;
-            this.comboBoxSourceType.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourceType_SelectedIndexChanged);
+            this.labelStaticTooltipTextTypes.AutoSize = true;
+            this.labelStaticTooltipTextTypes.Location = new System.Drawing.Point(26, 15);
+            this.labelStaticTooltipTextTypes.Name = "labelStaticTooltipTextTypes";
+            this.labelStaticTooltipTextTypes.Size = new System.Drawing.Size(144, 13);
+            this.labelStaticTooltipTextTypes.TabIndex = 30;
+            this.labelStaticTooltipTextTypes.Text = "Event/action/target type text";
             // 
-            // labelEntryOrGuid
+            // pictureBoxStaticTooltip
             // 
-            this.labelEntryOrGuid.AutoSize = true;
-            this.labelEntryOrGuid.Location = new System.Drawing.Point(15, 22);
-            this.labelEntryOrGuid.Name = "labelEntryOrGuid";
-            this.labelEntryOrGuid.Size = new System.Drawing.Size(69, 13);
-            this.labelEntryOrGuid.TabIndex = 14;
-            this.labelEntryOrGuid.Text = "Entry or guid:";
+            this.pictureBoxStaticTooltip.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxStaticTooltip.Image")));
+            this.pictureBoxStaticTooltip.Location = new System.Drawing.Point(6, 7);
+            this.pictureBoxStaticTooltip.Name = "pictureBoxStaticTooltip";
+            this.pictureBoxStaticTooltip.Size = new System.Drawing.Size(14, 14);
+            this.pictureBoxStaticTooltip.TabIndex = 29;
+            this.pictureBoxStaticTooltip.TabStop = false;
             // 
-            // textBoxEntryOrGuid
+            // panelStaticTooltipParameters
             // 
-            this.textBoxEntryOrGuid.Location = new System.Drawing.Point(101, 19);
-            this.textBoxEntryOrGuid.Name = "textBoxEntryOrGuid";
-            this.textBoxEntryOrGuid.Size = new System.Drawing.Size(110, 20);
-            this.textBoxEntryOrGuid.TabIndex = 12;
-            this.textBoxEntryOrGuid.TextChanged += new System.EventHandler(this.textBoxEntryOrGuid_TextChanged);
+            this.panelStaticTooltipParameters.BackColor = System.Drawing.Color.White;
+            this.panelStaticTooltipParameters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelStaticTooltipParameters.Controls.Add(this.labelStaticTooltipTextParameters);
+            this.panelStaticTooltipParameters.Controls.Add(this.labelStaticTooltipParameterTitleTypes);
+            this.panelStaticTooltipParameters.Controls.Add(this.pictureBox1);
+            this.panelStaticTooltipParameters.Location = new System.Drawing.Point(6, 403);
+            this.panelStaticTooltipParameters.Name = "panelStaticTooltipParameters";
+            this.panelStaticTooltipParameters.Size = new System.Drawing.Size(915, 30);
+            this.panelStaticTooltipParameters.TabIndex = 78;
+            // 
+            // labelStaticTooltipTextParameters
+            // 
+            this.labelStaticTooltipTextParameters.AutoSize = true;
+            this.labelStaticTooltipTextParameters.Location = new System.Drawing.Point(26, 15);
+            this.labelStaticTooltipTextParameters.Name = "labelStaticTooltipTextParameters";
+            this.labelStaticTooltipTextParameters.Size = new System.Drawing.Size(75, 13);
+            this.labelStaticTooltipTextParameters.TabIndex = 30;
+            this.labelStaticTooltipTextParameters.Text = "Parameter info";
+            // 
+            // labelStaticTooltipParameterTitleTypes
+            // 
+            this.labelStaticTooltipParameterTitleTypes.AutoSize = true;
+            this.labelStaticTooltipParameterTitleTypes.Location = new System.Drawing.Point(26, 2);
+            this.labelStaticTooltipParameterTitleTypes.Name = "labelStaticTooltipParameterTitleTypes";
+            this.labelStaticTooltipParameterTitleTypes.Size = new System.Drawing.Size(181, 13);
+            this.labelStaticTooltipParameterTitleTypes.TabIndex = 47;
+            this.labelStaticTooltipParameterTitleTypes.Text = "Event type, action type or target type";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(6, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(14, 14);
+            this.pictureBox1.TabIndex = 29;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBoxCreateScript
+            // 
+            this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxCreateScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxCreateScript.Image")));
+            this.pictureBoxCreateScript.Location = new System.Drawing.Point(235, 19);
+            this.pictureBoxCreateScript.Name = "pictureBoxCreateScript";
+            this.pictureBoxCreateScript.ResourceImageStr = "icon_create_script";
+            this.pictureBoxCreateScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxCreateScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxCreateScript.TabIndex = 16;
+            this.pictureBoxCreateScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxCreateScript, "Create a new script using the given source type and entry or guid");
+            this.pictureBoxCreateScript.Click += new System.EventHandler(this.pictureBoxCreateScript_Click);
+            // 
+            // pictureBoxLoadScript
+            // 
+            this.pictureBoxLoadScript.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBoxLoadScript.Enabled = false;
+            this.pictureBoxLoadScript.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxLoadScript.Image")));
+            this.pictureBoxLoadScript.Location = new System.Drawing.Point(260, 19);
+            this.pictureBoxLoadScript.Name = "pictureBoxLoadScript";
+            this.pictureBoxLoadScript.ResourceImageStr = "icon_load_script";
+            this.pictureBoxLoadScript.Size = new System.Drawing.Size(24, 20);
+            this.pictureBoxLoadScript.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxLoadScript.TabIndex = 16;
+            this.pictureBoxLoadScript.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
+            this.pictureBoxLoadScript.Click += new System.EventHandler(this.pictureBoxLoadScript_Click);
+            // 
+            // labelEventParam4
+            // 
+            this.labelEventParam4.AutoSize = true;
+            this.labelEventParam4.Location = new System.Drawing.Point(1, 85);
+            this.labelEventParam4.Name = "labelEventParam4";
+            this.labelEventParam4.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam4.TabIndex = 23;
+            this.labelEventParam4.Text = "Param 4";
+            this.labelEventParam4.TooltipParameterId = 4;
+            this.labelEventParam4.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
+            // 
+            // labelEventParam3
+            // 
+            this.labelEventParam3.AutoSize = true;
+            this.labelEventParam3.Location = new System.Drawing.Point(1, 59);
+            this.labelEventParam3.Name = "labelEventParam3";
+            this.labelEventParam3.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam3.TabIndex = 23;
+            this.labelEventParam3.Text = "Param 3";
+            this.labelEventParam3.TooltipParameterId = 3;
+            this.labelEventParam3.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
+            // 
+            // labelEventParam2
+            // 
+            this.labelEventParam2.AutoSize = true;
+            this.labelEventParam2.Location = new System.Drawing.Point(1, 33);
+            this.labelEventParam2.Name = "labelEventParam2";
+            this.labelEventParam2.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam2.TabIndex = 23;
+            this.labelEventParam2.Text = "Param 2";
+            this.labelEventParam2.TooltipParameterId = 2;
+            this.labelEventParam2.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
+            // 
+            // labelEventParam1
+            // 
+            this.labelEventParam1.AutoSize = true;
+            this.labelEventParam1.Location = new System.Drawing.Point(1, 7);
+            this.labelEventParam1.Name = "labelEventParam1";
+            this.labelEventParam1.Size = new System.Drawing.Size(46, 13);
+            this.labelEventParam1.TabIndex = 23;
+            this.labelEventParam1.Text = "Param 1";
+            this.labelEventParam1.TooltipParameterId = 1;
+            this.labelEventParam1.MouseEnter += new System.EventHandler(this.labelEventParams_MouseEnter);
+            // 
+            // labelActionParam6
+            // 
+            this.labelActionParam6.AutoSize = true;
+            this.labelActionParam6.Location = new System.Drawing.Point(1, 137);
+            this.labelActionParam6.Name = "labelActionParam6";
+            this.labelActionParam6.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam6.TabIndex = 24;
+            this.labelActionParam6.Text = "Param 6";
+            this.labelActionParam6.TooltipParameterId = 6;
+            this.labelActionParam6.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelActionParam5
+            // 
+            this.labelActionParam5.AutoSize = true;
+            this.labelActionParam5.Location = new System.Drawing.Point(1, 111);
+            this.labelActionParam5.Name = "labelActionParam5";
+            this.labelActionParam5.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam5.TabIndex = 24;
+            this.labelActionParam5.Text = "Param 5";
+            this.labelActionParam5.TooltipParameterId = 5;
+            this.labelActionParam5.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelActionParam4
+            // 
+            this.labelActionParam4.AutoSize = true;
+            this.labelActionParam4.Location = new System.Drawing.Point(1, 85);
+            this.labelActionParam4.Name = "labelActionParam4";
+            this.labelActionParam4.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam4.TabIndex = 24;
+            this.labelActionParam4.Text = "Param 4";
+            this.labelActionParam4.TooltipParameterId = 4;
+            this.labelActionParam4.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelActionParam3
+            // 
+            this.labelActionParam3.AutoSize = true;
+            this.labelActionParam3.Location = new System.Drawing.Point(1, 59);
+            this.labelActionParam3.Name = "labelActionParam3";
+            this.labelActionParam3.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam3.TabIndex = 25;
+            this.labelActionParam3.Text = "Param 3";
+            this.labelActionParam3.TooltipParameterId = 3;
+            this.labelActionParam3.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelActionParam2
+            // 
+            this.labelActionParam2.AutoSize = true;
+            this.labelActionParam2.Location = new System.Drawing.Point(1, 33);
+            this.labelActionParam2.Name = "labelActionParam2";
+            this.labelActionParam2.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam2.TabIndex = 26;
+            this.labelActionParam2.Text = "Param 2";
+            this.labelActionParam2.TooltipParameterId = 2;
+            this.labelActionParam2.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelActionParam1
+            // 
+            this.labelActionParam1.AutoSize = true;
+            this.labelActionParam1.Location = new System.Drawing.Point(1, 7);
+            this.labelActionParam1.Name = "labelActionParam1";
+            this.labelActionParam1.Size = new System.Drawing.Size(46, 13);
+            this.labelActionParam1.TabIndex = 32;
+            this.labelActionParam1.Text = "Param 1";
+            this.labelActionParam1.TooltipParameterId = 1;
+            this.labelActionParam1.MouseEnter += new System.EventHandler(this.labelActionParams_MouseEnter);
+            // 
+            // labelTargetO
+            // 
+            this.labelTargetO.AutoSize = true;
+            this.labelTargetO.Location = new System.Drawing.Point(1, 163);
+            this.labelTargetO.Name = "labelTargetO";
+            this.labelTargetO.Size = new System.Drawing.Size(49, 13);
+            this.labelTargetO.TabIndex = 34;
+            this.labelTargetO.Text = "Target O";
+            this.labelTargetO.TooltipParameterId = 7;
+            // 
+            // labelTargetZ
+            // 
+            this.labelTargetZ.AutoSize = true;
+            this.labelTargetZ.Location = new System.Drawing.Point(1, 137);
+            this.labelTargetZ.Name = "labelTargetZ";
+            this.labelTargetZ.Size = new System.Drawing.Size(48, 13);
+            this.labelTargetZ.TabIndex = 34;
+            this.labelTargetZ.Text = "Target Z";
+            this.labelTargetZ.TooltipParameterId = 6;
+            // 
+            // labelTargetY
+            // 
+            this.labelTargetY.AutoSize = true;
+            this.labelTargetY.Location = new System.Drawing.Point(1, 111);
+            this.labelTargetY.Name = "labelTargetY";
+            this.labelTargetY.Size = new System.Drawing.Size(48, 13);
+            this.labelTargetY.TabIndex = 34;
+            this.labelTargetY.Text = "Target Y";
+            this.labelTargetY.TooltipParameterId = 5;
+            // 
+            // labelTargetX
+            // 
+            this.labelTargetX.AutoSize = true;
+            this.labelTargetX.Location = new System.Drawing.Point(1, 85);
+            this.labelTargetX.Name = "labelTargetX";
+            this.labelTargetX.Size = new System.Drawing.Size(48, 13);
+            this.labelTargetX.TabIndex = 34;
+            this.labelTargetX.Text = "Target X";
+            this.labelTargetX.TooltipParameterId = 4;
+            // 
+            // labelTargetParam3
+            // 
+            this.labelTargetParam3.AutoSize = true;
+            this.labelTargetParam3.Location = new System.Drawing.Point(1, 59);
+            this.labelTargetParam3.Name = "labelTargetParam3";
+            this.labelTargetParam3.Size = new System.Drawing.Size(46, 13);
+            this.labelTargetParam3.TabIndex = 34;
+            this.labelTargetParam3.Text = "Param 3";
+            this.labelTargetParam3.TooltipParameterId = 3;
+            this.labelTargetParam3.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
+            // 
+            // labelTargetParam2
+            // 
+            this.labelTargetParam2.AutoSize = true;
+            this.labelTargetParam2.Location = new System.Drawing.Point(1, 33);
+            this.labelTargetParam2.Name = "labelTargetParam2";
+            this.labelTargetParam2.Size = new System.Drawing.Size(46, 13);
+            this.labelTargetParam2.TabIndex = 35;
+            this.labelTargetParam2.Text = "Param 2";
+            this.labelTargetParam2.TooltipParameterId = 2;
+            this.labelTargetParam2.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
+            // 
+            // labelTargetParam1
+            // 
+            this.labelTargetParam1.AutoSize = true;
+            this.labelTargetParam1.Location = new System.Drawing.Point(1, 7);
+            this.labelTargetParam1.Name = "labelTargetParam1";
+            this.labelTargetParam1.Size = new System.Drawing.Size(46, 13);
+            this.labelTargetParam1.TabIndex = 38;
+            this.labelTargetParam1.Text = "Param 1";
+            this.labelTargetParam1.TooltipParameterId = 1;
+            this.labelTargetParam1.MouseEnter += new System.EventHandler(this.labelTargetParams_MouseEnter);
+            // 
+            // listViewSmartScripts
+            // 
+            this.listViewSmartScripts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.listViewSmartScripts.EnablePhaseHighlighting = true;
+            this.listViewSmartScripts.FullRowSelect = true;
+            this.listViewSmartScripts.Location = new System.Drawing.Point(6, 219);
+            this.listViewSmartScripts.MultiSelect = false;
+            this.listViewSmartScripts.Name = "listViewSmartScripts";
+            this.listViewSmartScripts.Size = new System.Drawing.Size(915, 213);
+            this.listViewSmartScripts.TabIndex = 83;
+            this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
+            this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
+            this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
+            this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
+            this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
+            // 
+            // customPanelLogin
+            // 
+            this.customPanelLogin.Controls.Add(this.panelLoginBox);
+            this.customPanelLogin.Location = new System.Drawing.Point(951, 27);
+            this.customPanelLogin.Name = "customPanelLogin";
+            this.customPanelLogin.Size = new System.Drawing.Size(382, 275);
+            this.customPanelLogin.TabIndex = 16;
+            // 
+            // panelLoginBox
+            // 
+            this.panelLoginBox.Controls.Add(this.labelDontUseDatabaseWarning);
+            this.panelLoginBox.Controls.Add(this.groupBoxLogin);
+            this.panelLoginBox.Controls.Add(this.buttonConnect);
+            this.panelLoginBox.Controls.Add(this.buttonClear);
+            this.panelLoginBox.Controls.Add(this.buttonCancel);
+            this.panelLoginBox.Location = new System.Drawing.Point(3, 3);
+            this.panelLoginBox.Name = "panelLoginBox";
+            this.panelLoginBox.Size = new System.Drawing.Size(378, 258);
+            this.panelLoginBox.TabIndex = 14;
+            // 
+            // labelDontUseDatabaseWarning
+            // 
+            this.labelDontUseDatabaseWarning.AutoSize = true;
+            this.labelDontUseDatabaseWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDontUseDatabaseWarning.ForeColor = System.Drawing.Color.Red;
+            this.labelDontUseDatabaseWarning.Location = new System.Drawing.Point(1, 186);
+            this.labelDontUseDatabaseWarning.Name = "labelDontUseDatabaseWarning";
+            this.labelDontUseDatabaseWarning.Size = new System.Drawing.Size(375, 65);
+            this.labelDontUseDatabaseWarning.TabIndex = 12;
+            this.labelDontUseDatabaseWarning.Text = resources.GetString("labelDontUseDatabaseWarning.Text");
+            this.labelDontUseDatabaseWarning.Visible = false;
+            // 
+            // groupBoxLogin
+            // 
+            this.groupBoxLogin.Controls.Add(this.radioButtonDontUseDatabase);
+            this.groupBoxLogin.Controls.Add(this.radioButtonConnectToMySql);
+            this.groupBoxLogin.Controls.Add(this.buttonSearchWorldDb);
+            this.groupBoxLogin.Controls.Add(this.checkBoxAutoConnect);
+            this.groupBoxLogin.Controls.Add(this.textBoxHost);
+            this.groupBoxLogin.Controls.Add(this.textBoxPort);
+            this.groupBoxLogin.Controls.Add(this.labelHost);
+            this.groupBoxLogin.Controls.Add(this.textBoxUsername);
+            this.groupBoxLogin.Controls.Add(this.labelPort);
+            this.groupBoxLogin.Controls.Add(this.textBoxWorldDatabase);
+            this.groupBoxLogin.Controls.Add(this.labelUser);
+            this.groupBoxLogin.Controls.Add(this.label2);
+            this.groupBoxLogin.Controls.Add(this.label1);
+            this.groupBoxLogin.Controls.Add(this.textBoxPassword);
+            this.groupBoxLogin.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxLogin.Name = "groupBoxLogin";
+            this.groupBoxLogin.Size = new System.Drawing.Size(364, 149);
+            this.groupBoxLogin.TabIndex = 13;
+            this.groupBoxLogin.TabStop = false;
+            this.groupBoxLogin.Text = "Connect information";
+            // 
+            // radioButtonDontUseDatabase
+            // 
+            this.radioButtonDontUseDatabase.AutoSize = true;
+            this.radioButtonDontUseDatabase.Location = new System.Drawing.Point(13, 47);
+            this.radioButtonDontUseDatabase.Name = "radioButtonDontUseDatabase";
+            this.radioButtonDontUseDatabase.Size = new System.Drawing.Size(126, 17);
+            this.radioButtonDontUseDatabase.TabIndex = 1;
+            this.radioButtonDontUseDatabase.Text = "Don\'t use a database";
+            this.radioButtonDontUseDatabase.UseVisualStyleBackColor = true;
+            this.radioButtonDontUseDatabase.CheckedChanged += new System.EventHandler(this.radioButtonDontUseDatabase_CheckedChanged);
+            // 
+            // radioButtonConnectToMySql
+            // 
+            this.radioButtonConnectToMySql.AutoSize = true;
+            this.radioButtonConnectToMySql.Checked = true;
+            this.radioButtonConnectToMySql.Location = new System.Drawing.Point(13, 21);
+            this.radioButtonConnectToMySql.Name = "radioButtonConnectToMySql";
+            this.radioButtonConnectToMySql.Size = new System.Drawing.Size(115, 17);
+            this.radioButtonConnectToMySql.TabIndex = 0;
+            this.radioButtonConnectToMySql.TabStop = true;
+            this.radioButtonConnectToMySql.Text = "Connect to MySQL";
+            this.radioButtonConnectToMySql.UseVisualStyleBackColor = true;
+            this.radioButtonConnectToMySql.CheckedChanged += new System.EventHandler(this.radioButtonConnectToMySql_CheckedChanged);
+            // 
+            // buttonSearchWorldDb
+            // 
+            this.buttonSearchWorldDb.Location = new System.Drawing.Point(334, 121);
+            this.buttonSearchWorldDb.Name = "buttonSearchWorldDb";
+            this.buttonSearchWorldDb.Size = new System.Drawing.Size(24, 22);
+            this.buttonSearchWorldDb.TabIndex = 9;
+            this.buttonSearchWorldDb.Text = "...";
+            this.buttonSearchWorldDb.UseVisualStyleBackColor = true;
+            this.buttonSearchWorldDb.Click += new System.EventHandler(this.buttonSearchWorldDb_Click);
+            // 
+            // checkBoxAutoConnect
+            // 
+            this.checkBoxAutoConnect.AutoSize = true;
+            this.checkBoxAutoConnect.Location = new System.Drawing.Point(13, 124);
+            this.checkBoxAutoConnect.Name = "checkBoxAutoConnect";
+            this.checkBoxAutoConnect.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxAutoConnect.TabIndex = 2;
+            this.checkBoxAutoConnect.Text = "Auto connect";
+            this.checkBoxAutoConnect.UseVisualStyleBackColor = true;
+            // 
+            // textBoxHost
+            // 
+            this.textBoxHost.Location = new System.Drawing.Point(228, 18);
+            this.textBoxHost.Name = "textBoxHost";
+            this.textBoxHost.Size = new System.Drawing.Size(130, 20);
+            this.textBoxHost.TabIndex = 3;
+            // 
+            // textBoxPort
+            // 
+            this.textBoxPort.Location = new System.Drawing.Point(228, 44);
+            this.textBoxPort.Name = "textBoxPort";
+            this.textBoxPort.Size = new System.Drawing.Size(130, 20);
+            this.textBoxPort.TabIndex = 4;
+            // 
+            // labelHost
+            // 
+            this.labelHost.AutoSize = true;
+            this.labelHost.Location = new System.Drawing.Point(190, 21);
+            this.labelHost.Name = "labelHost";
+            this.labelHost.Size = new System.Drawing.Size(32, 13);
+            this.labelHost.TabIndex = 3;
+            this.labelHost.Text = "Host:";
+            // 
+            // textBoxUsername
+            // 
+            this.textBoxUsername.Location = new System.Drawing.Point(228, 70);
+            this.textBoxUsername.Name = "textBoxUsername";
+            this.textBoxUsername.Size = new System.Drawing.Size(130, 20);
+            this.textBoxUsername.TabIndex = 5;
+            // 
+            // labelPort
+            // 
+            this.labelPort.AutoSize = true;
+            this.labelPort.Location = new System.Drawing.Point(192, 47);
+            this.labelPort.Name = "labelPort";
+            this.labelPort.Size = new System.Drawing.Size(29, 13);
+            this.labelPort.TabIndex = 4;
+            this.labelPort.Text = "Port:";
+            // 
+            // textBoxWorldDatabase
+            // 
+            this.textBoxWorldDatabase.Location = new System.Drawing.Point(228, 122);
+            this.textBoxWorldDatabase.Name = "textBoxWorldDatabase";
+            this.textBoxWorldDatabase.Size = new System.Drawing.Size(106, 20);
+            this.textBoxWorldDatabase.TabIndex = 7;
+            // 
+            // labelUser
+            // 
+            this.labelUser.AutoSize = true;
+            this.labelUser.Location = new System.Drawing.Point(164, 73);
+            this.labelUser.Name = "labelUser";
+            this.labelUser.Size = new System.Drawing.Size(58, 13);
+            this.labelUser.TabIndex = 0;
+            this.labelUser.Text = "Username:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(135, 125);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(87, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "World Database:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(166, 99);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Password:";
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Location = new System.Drawing.Point(228, 96);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.Size = new System.Drawing.Size(130, 20);
+            this.textBoxPassword.TabIndex = 6;
+            // 
+            // buttonConnect
+            // 
+            this.buttonConnect.Location = new System.Drawing.Point(3, 158);
+            this.buttonConnect.Name = "buttonConnect";
+            this.buttonConnect.Size = new System.Drawing.Size(75, 23);
+            this.buttonConnect.TabIndex = 9;
+            this.buttonConnect.Text = "Connect";
+            this.buttonConnect.UseVisualStyleBackColor = true;
+            this.buttonConnect.Click += new System.EventHandler(this.buttonConnect_Click);
+            // 
+            // buttonClear
+            // 
+            this.buttonClear.Location = new System.Drawing.Point(147, 158);
+            this.buttonClear.Name = "buttonClear";
+            this.buttonClear.Size = new System.Drawing.Size(75, 23);
+            this.buttonClear.TabIndex = 10;
+            this.buttonClear.Text = "Clear";
+            this.buttonClear.UseVisualStyleBackColor = true;
+            this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Location = new System.Drawing.Point(292, 158);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(75, 23);
+            this.buttonCancel.TabIndex = 11;
+            this.buttonCancel.Text = "Cancel";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1318, 468);
+            this.ClientSize = new System.Drawing.Size(1339, 503);
+            this.Controls.Add(this.tabControl);
             this.Controls.Add(this.customPanelLogin);
-            this.Controls.Add(this.customPanelMain);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -2724,20 +2740,13 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.contextMenuStripListView.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
-            this.customPanelLogin.ResumeLayout(false);
-            this.panelLoginBox.ResumeLayout(false);
-            this.panelLoginBox.PerformLayout();
-            this.groupBoxLogin.ResumeLayout(false);
-            this.groupBoxLogin.PerformLayout();
-            this.customPanelMain.ResumeLayout(false);
-            this.panelStaticTooltipParameters.ResumeLayout(false);
-            this.panelStaticTooltipParameters.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panelStaticTooltipTypes.ResumeLayout(false);
-            this.panelStaticTooltipTypes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStaticTooltip)).EndInit();
+            this.tabControl.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.groupBoxStaticScriptInfo.ResumeLayout(false);
+            this.groupBoxStaticScriptInfo.PerformLayout();
+            this.groupBoxScriptInfo.ResumeLayout(false);
+            this.groupBoxScriptInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).EndInit();
             this.groupBoxParameters.ResumeLayout(false);
             this.tabControlParameters.ResumeLayout(false);
             this.tabPageEvent.ResumeLayout(false);
@@ -2746,13 +2755,21 @@
             this.tabPageAction.PerformLayout();
             this.tabPageTarget.ResumeLayout(false);
             this.tabPageTarget.PerformLayout();
-            this.groupBoxScriptInfo.ResumeLayout(false);
-            this.groupBoxScriptInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textBoxEventChance)).EndInit();
             this.groupBoxPreferences.ResumeLayout(false);
             this.groupBoxPreferences.PerformLayout();
-            this.groupBoxStaticScriptInfo.ResumeLayout(false);
-            this.groupBoxStaticScriptInfo.PerformLayout();
+            this.panelStaticTooltipTypes.ResumeLayout(false);
+            this.panelStaticTooltipTypes.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStaticTooltip)).EndInit();
+            this.panelStaticTooltipParameters.ResumeLayout(false);
+            this.panelStaticTooltipParameters.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
+            this.customPanelLogin.ResumeLayout(false);
+            this.panelLoginBox.ResumeLayout(false);
+            this.panelLoginBox.PerformLayout();
+            this.groupBoxLogin.ResumeLayout(false);
+            this.groupBoxLogin.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2865,7 +2882,9 @@
         private System.Windows.Forms.ToolStripMenuItem searchForTempSummonTypesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem conditionEditorToolStripMenuItem;
-        private Classes.CustomControls.CustomPanel customPanelMain;
+        private Classes.CustomControls.CustomPanel customPanelLogin;
+        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button buttonGenerateComments;
         private System.Windows.Forms.Button buttonGenerateSql;
         private System.Windows.Forms.Button buttonNewLine;
@@ -2975,7 +2994,6 @@
         public System.Windows.Forms.ComboBox comboBoxSourceType;
         private System.Windows.Forms.Label labelEntryOrGuid;
         public System.Windows.Forms.TextBox textBoxEntryOrGuid;
-        private Classes.CustomControls.CustomPanel customPanelLogin;
     }
 }
 

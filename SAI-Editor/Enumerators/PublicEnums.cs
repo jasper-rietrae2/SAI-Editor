@@ -15,7 +15,7 @@ namespace SAI_Editor.Enumerators
         LoginFormHeight = 236,
 
         MainFormWidth = 954,
-        MainFormHeight = 501,
+        MainFormHeight = 535,
 
         ListViewHeightContract = 65,
 

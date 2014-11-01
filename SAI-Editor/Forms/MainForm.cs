@@ -113,7 +113,7 @@ namespace SAI_Editor.Forms
                 MessageBox.Show("Something went wrong when loading the settings.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            customPanelMain.Visible = false;
+            tabControl.Visible = false;
             customPanelLogin.Visible = true;
 
             customPanelLogin.Location = new Point(9, 8);
@@ -225,6 +225,9 @@ namespace SAI_Editor.Forms
 
             UpdateStaticTooltipOfTypes(comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
             UpdateStaticTooltipOfParameter(labelEventParam1, 1, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
+
+            tabControl.TabPages.Clear();
+            CreateTabControl(true);
 
             runningConstructor = false;
         }
@@ -552,7 +555,7 @@ namespace SAI_Editor.Forms
                 contractingToLoginForm = true;
             }
 
-            customPanelMain.Visible = false;
+            tabControl.Visible = false;
             menuStrip.Visible = false;
         }
 
@@ -731,7 +734,7 @@ namespace SAI_Editor.Forms
         private void FinishedExpandingOrContracting(bool expanding)
         {
             customPanelLogin.Visible = !expanding;
-            customPanelMain.Visible = expanding;
+            tabControl.Visible = expanding;
             menuStrip.Visible = expanding;
             Invalidate();
 
@@ -4107,6 +4110,31 @@ namespace SAI_Editor.Forms
         {
             using (Form selectForm = (Form)Activator.CreateInstance(searchEventHandlers[((ToolStripItem)sender).Text], new object[] { null }))
                 selectForm.ShowDialog(this);
+        }
+
+        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (tabControl.SelectedTab == null || tabControl.SelectedTab.Text != "+")
+                return;
+
+            CreateTabControl();
+        }
+
+        private void CreateTabControl(bool first = false)
+        {
+            if (!first)
+                tabControl.TabPages.RemoveAt(tabControl.TabPages.Count - 1);
+
+            UserControlTabPage userControlTabPage = new UserControlTabPage();
+            TabPage newPage = new TabPage();
+            newPage.Text = "Tab " + (tabControl.TabPages.Count + 1).ToString();
+            newPage.Controls.Add(userControlTabPage);
+            tabControl.TabPages.Add(newPage);
+
+            tabControl.TabPages.Add(new TabPage("+"));
+
+            if (!first)
+                tabControl.SelectedIndex = tabControl.TabPages.Count - 2;
         }
     }
 }
