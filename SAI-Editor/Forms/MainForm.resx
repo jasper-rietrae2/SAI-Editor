@@ -248,7 +248,7 @@
   <metadata name="timerExpandOrContract.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>299, 9</value>
   </metadata>
-  <metadata name="timerShowPermanentTooltips.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="timerShowStaticTooltips.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>298, 28</value>
   </metadata>
   <data name="labelDontUseDatabaseWarning.Text" xml:space="preserve">
@@ -266,7 +266,7 @@
         hVUpKLAwowpTKTQKgBhTNTKCqEMoBSKgFWjuBnKBglAF/x8CADKKWnWQtKCuAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="pictureBoxPermanentTooltip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="pictureBoxStaticTooltip.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAIAAACQKrqGAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
         vAAADrwBlbxySQAAAI9JREFUKFNj+P//IQQdu/cpYfFtiYpTcATkAgXhCqBKa7c8RFaEjPJW30MoBXLQ

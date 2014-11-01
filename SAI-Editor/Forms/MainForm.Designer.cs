@@ -116,7 +116,7 @@
             this.pictureBoxCreateScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
             this.pictureBoxLoadScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
             this.timerExpandOrContract = new System.Windows.Forms.Timer(this.components);
-            this.timerShowPermanentTooltips = new System.Windows.Forms.Timer(this.components);
+            this.timerShowStaticTooltips = new System.Windows.Forms.Timer(this.components);
             this.customPanelLogin = new SAI_Editor.Classes.CustomControls.CustomPanel();
             this.panelLoginBox = new System.Windows.Forms.Panel();
             this.labelDontUseDatabaseWarning = new System.Windows.Forms.Label();
@@ -142,14 +142,14 @@
             this.buttonGenerateComments = new System.Windows.Forms.Button();
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.buttonNewLine = new System.Windows.Forms.Button();
-            this.panelPermanentTooltipParameters = new System.Windows.Forms.Panel();
-            this.labelPermanentTooltipTextParameters = new System.Windows.Forms.Label();
-            this.labelPermanentTooltipParameterTitleTypes = new System.Windows.Forms.Label();
+            this.panelStaticTooltipParameters = new System.Windows.Forms.Panel();
+            this.labelStaticTooltipTextParameters = new System.Windows.Forms.Label();
+            this.labelStaticTooltipParameterTitleTypes = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panelPermanentTooltipTypes = new System.Windows.Forms.Panel();
-            this.labelPermanentTooltipTitleTypes = new System.Windows.Forms.Label();
-            this.labelPermanentTooltipTextTypes = new System.Windows.Forms.Label();
-            this.pictureBoxPermanentTooltip = new System.Windows.Forms.PictureBox();
+            this.panelStaticTooltipTypes = new System.Windows.Forms.Panel();
+            this.labelStaticTooltipTitleTypes = new System.Windows.Forms.Label();
+            this.labelStaticTooltipTextTypes = new System.Windows.Forms.Label();
+            this.pictureBoxStaticTooltip = new System.Windows.Forms.PictureBox();
             this.listViewSmartScripts = new SAI_Editor.Classes.CustomControls.SmartScriptListView();
             this.groupBoxParameters = new System.Windows.Forms.GroupBox();
             this.tabControlParameters = new System.Windows.Forms.TabControl();
@@ -233,7 +233,7 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBoxPreferences = new System.Windows.Forms.GroupBox();
-            this.checkBoxUsePermanentTooltips = new System.Windows.Forms.CheckBox();
+            this.checkBoxUseStaticTooltips = new System.Windows.Forms.CheckBox();
             this.checkBoxUsePhaseColors = new System.Windows.Forms.CheckBox();
             this.checkBoxAllowChangingEntryAndSourceType = new System.Windows.Forms.CheckBox();
             this.checkBoxListActionlistsOrEntries = new System.Windows.Forms.CheckBox();
@@ -254,10 +254,10 @@
             this.panelLoginBox.SuspendLayout();
             this.groupBoxLogin.SuspendLayout();
             this.customPanelMain.SuspendLayout();
-            this.panelPermanentTooltipParameters.SuspendLayout();
+            this.panelStaticTooltipParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panelPermanentTooltipTypes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).BeginInit();
+            this.panelStaticTooltipTypes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStaticTooltip)).BeginInit();
             this.groupBoxParameters.SuspendLayout();
             this.tabControlParameters.SuspendLayout();
             this.tabPageEvent.SuspendLayout();
@@ -1000,10 +1000,10 @@
             this.timerExpandOrContract.Interval = 4;
             this.timerExpandOrContract.Tick += new System.EventHandler(this.timerExpandOrContract_Tick);
             // 
-            // timerShowPermanentTooltips
+            // timerShowStaticTooltips
             // 
-            this.timerShowPermanentTooltips.Interval = 4;
-            this.timerShowPermanentTooltips.Tick += new System.EventHandler(this.timerShowPermanentTooltips_Tick);
+            this.timerShowStaticTooltips.Interval = 4;
+            this.timerShowStaticTooltips.Tick += new System.EventHandler(this.timerShowStaticTooltips_Tick);
             // 
             // customPanelLogin
             // 
@@ -1219,8 +1219,8 @@
             this.customPanelMain.Controls.Add(this.buttonGenerateComments);
             this.customPanelMain.Controls.Add(this.buttonGenerateSql);
             this.customPanelMain.Controls.Add(this.buttonNewLine);
-            this.customPanelMain.Controls.Add(this.panelPermanentTooltipParameters);
-            this.customPanelMain.Controls.Add(this.panelPermanentTooltipTypes);
+            this.customPanelMain.Controls.Add(this.panelStaticTooltipParameters);
+            this.customPanelMain.Controls.Add(this.panelStaticTooltipTypes);
             this.customPanelMain.Controls.Add(this.listViewSmartScripts);
             this.customPanelMain.Controls.Add(this.groupBoxParameters);
             this.customPanelMain.Controls.Add(this.groupBoxScriptInfo);
@@ -1263,35 +1263,35 @@
             this.buttonNewLine.UseVisualStyleBackColor = true;
             this.buttonNewLine.Click += new System.EventHandler(this.buttonNewLine_Click);
             // 
-            // panelPermanentTooltipParameters
+            // panelStaticTooltipParameters
             // 
-            this.panelPermanentTooltipParameters.BackColor = System.Drawing.Color.White;
-            this.panelPermanentTooltipParameters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelPermanentTooltipParameters.Controls.Add(this.labelPermanentTooltipTextParameters);
-            this.panelPermanentTooltipParameters.Controls.Add(this.labelPermanentTooltipParameterTitleTypes);
-            this.panelPermanentTooltipParameters.Controls.Add(this.pictureBox1);
-            this.panelPermanentTooltipParameters.Location = new System.Drawing.Point(0, 396);
-            this.panelPermanentTooltipParameters.Name = "panelPermanentTooltipParameters";
-            this.panelPermanentTooltipParameters.Size = new System.Drawing.Size(915, 30);
-            this.panelPermanentTooltipParameters.TabIndex = 78;
+            this.panelStaticTooltipParameters.BackColor = System.Drawing.Color.White;
+            this.panelStaticTooltipParameters.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelStaticTooltipParameters.Controls.Add(this.labelStaticTooltipTextParameters);
+            this.panelStaticTooltipParameters.Controls.Add(this.labelStaticTooltipParameterTitleTypes);
+            this.panelStaticTooltipParameters.Controls.Add(this.pictureBox1);
+            this.panelStaticTooltipParameters.Location = new System.Drawing.Point(0, 396);
+            this.panelStaticTooltipParameters.Name = "panelStaticTooltipParameters";
+            this.panelStaticTooltipParameters.Size = new System.Drawing.Size(915, 30);
+            this.panelStaticTooltipParameters.TabIndex = 78;
             // 
-            // labelPermanentTooltipTextParameters
+            // labelStaticTooltipTextParameters
             // 
-            this.labelPermanentTooltipTextParameters.AutoSize = true;
-            this.labelPermanentTooltipTextParameters.Location = new System.Drawing.Point(26, 15);
-            this.labelPermanentTooltipTextParameters.Name = "labelPermanentTooltipTextParameters";
-            this.labelPermanentTooltipTextParameters.Size = new System.Drawing.Size(75, 13);
-            this.labelPermanentTooltipTextParameters.TabIndex = 30;
-            this.labelPermanentTooltipTextParameters.Text = "Parameter info";
+            this.labelStaticTooltipTextParameters.AutoSize = true;
+            this.labelStaticTooltipTextParameters.Location = new System.Drawing.Point(26, 15);
+            this.labelStaticTooltipTextParameters.Name = "labelStaticTooltipTextParameters";
+            this.labelStaticTooltipTextParameters.Size = new System.Drawing.Size(75, 13);
+            this.labelStaticTooltipTextParameters.TabIndex = 30;
+            this.labelStaticTooltipTextParameters.Text = "Parameter info";
             // 
-            // labelPermanentTooltipParameterTitleTypes
+            // labelStaticTooltipParameterTitleTypes
             // 
-            this.labelPermanentTooltipParameterTitleTypes.AutoSize = true;
-            this.labelPermanentTooltipParameterTitleTypes.Location = new System.Drawing.Point(26, 2);
-            this.labelPermanentTooltipParameterTitleTypes.Name = "labelPermanentTooltipParameterTitleTypes";
-            this.labelPermanentTooltipParameterTitleTypes.Size = new System.Drawing.Size(181, 13);
-            this.labelPermanentTooltipParameterTitleTypes.TabIndex = 47;
-            this.labelPermanentTooltipParameterTitleTypes.Text = "Event type, action type or target type";
+            this.labelStaticTooltipParameterTitleTypes.AutoSize = true;
+            this.labelStaticTooltipParameterTitleTypes.Location = new System.Drawing.Point(26, 2);
+            this.labelStaticTooltipParameterTitleTypes.Name = "labelStaticTooltipParameterTitleTypes";
+            this.labelStaticTooltipParameterTitleTypes.Size = new System.Drawing.Size(181, 13);
+            this.labelStaticTooltipParameterTitleTypes.TabIndex = 47;
+            this.labelStaticTooltipParameterTitleTypes.Text = "Event type, action type or target type";
             // 
             // pictureBox1
             // 
@@ -1302,44 +1302,44 @@
             this.pictureBox1.TabIndex = 29;
             this.pictureBox1.TabStop = false;
             // 
-            // panelPermanentTooltipTypes
+            // panelStaticTooltipTypes
             // 
-            this.panelPermanentTooltipTypes.BackColor = System.Drawing.Color.White;
-            this.panelPermanentTooltipTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTitleTypes);
-            this.panelPermanentTooltipTypes.Controls.Add(this.labelPermanentTooltipTextTypes);
-            this.panelPermanentTooltipTypes.Controls.Add(this.pictureBoxPermanentTooltip);
-            this.panelPermanentTooltipTypes.Location = new System.Drawing.Point(0, 363);
-            this.panelPermanentTooltipTypes.Name = "panelPermanentTooltipTypes";
-            this.panelPermanentTooltipTypes.Size = new System.Drawing.Size(915, 30);
-            this.panelPermanentTooltipTypes.TabIndex = 79;
+            this.panelStaticTooltipTypes.BackColor = System.Drawing.Color.White;
+            this.panelStaticTooltipTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelStaticTooltipTypes.Controls.Add(this.labelStaticTooltipTitleTypes);
+            this.panelStaticTooltipTypes.Controls.Add(this.labelStaticTooltipTextTypes);
+            this.panelStaticTooltipTypes.Controls.Add(this.pictureBoxStaticTooltip);
+            this.panelStaticTooltipTypes.Location = new System.Drawing.Point(0, 363);
+            this.panelStaticTooltipTypes.Name = "panelStaticTooltipTypes";
+            this.panelStaticTooltipTypes.Size = new System.Drawing.Size(915, 30);
+            this.panelStaticTooltipTypes.TabIndex = 79;
             // 
-            // labelPermanentTooltipTitleTypes
+            // labelStaticTooltipTitleTypes
             // 
-            this.labelPermanentTooltipTitleTypes.AutoSize = true;
-            this.labelPermanentTooltipTitleTypes.Location = new System.Drawing.Point(26, 1);
-            this.labelPermanentTooltipTitleTypes.Name = "labelPermanentTooltipTitleTypes";
-            this.labelPermanentTooltipTitleTypes.Size = new System.Drawing.Size(181, 13);
-            this.labelPermanentTooltipTitleTypes.TabIndex = 31;
-            this.labelPermanentTooltipTitleTypes.Text = "Event type, action type or target type";
+            this.labelStaticTooltipTitleTypes.AutoSize = true;
+            this.labelStaticTooltipTitleTypes.Location = new System.Drawing.Point(26, 1);
+            this.labelStaticTooltipTitleTypes.Name = "labelStaticTooltipTitleTypes";
+            this.labelStaticTooltipTitleTypes.Size = new System.Drawing.Size(181, 13);
+            this.labelStaticTooltipTitleTypes.TabIndex = 31;
+            this.labelStaticTooltipTitleTypes.Text = "Event type, action type or target type";
             // 
-            // labelPermanentTooltipTextTypes
+            // labelStaticTooltipTextTypes
             // 
-            this.labelPermanentTooltipTextTypes.AutoSize = true;
-            this.labelPermanentTooltipTextTypes.Location = new System.Drawing.Point(26, 15);
-            this.labelPermanentTooltipTextTypes.Name = "labelPermanentTooltipTextTypes";
-            this.labelPermanentTooltipTextTypes.Size = new System.Drawing.Size(144, 13);
-            this.labelPermanentTooltipTextTypes.TabIndex = 30;
-            this.labelPermanentTooltipTextTypes.Text = "Event/action/target type text";
+            this.labelStaticTooltipTextTypes.AutoSize = true;
+            this.labelStaticTooltipTextTypes.Location = new System.Drawing.Point(26, 15);
+            this.labelStaticTooltipTextTypes.Name = "labelStaticTooltipTextTypes";
+            this.labelStaticTooltipTextTypes.Size = new System.Drawing.Size(144, 13);
+            this.labelStaticTooltipTextTypes.TabIndex = 30;
+            this.labelStaticTooltipTextTypes.Text = "Event/action/target type text";
             // 
-            // pictureBoxPermanentTooltip
+            // pictureBoxStaticTooltip
             // 
-            this.pictureBoxPermanentTooltip.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxPermanentTooltip.Image")));
-            this.pictureBoxPermanentTooltip.Location = new System.Drawing.Point(6, 7);
-            this.pictureBoxPermanentTooltip.Name = "pictureBoxPermanentTooltip";
-            this.pictureBoxPermanentTooltip.Size = new System.Drawing.Size(14, 14);
-            this.pictureBoxPermanentTooltip.TabIndex = 29;
-            this.pictureBoxPermanentTooltip.TabStop = false;
+            this.pictureBoxStaticTooltip.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxStaticTooltip.Image")));
+            this.pictureBoxStaticTooltip.Location = new System.Drawing.Point(6, 7);
+            this.pictureBoxStaticTooltip.Name = "pictureBoxStaticTooltip";
+            this.pictureBoxStaticTooltip.Size = new System.Drawing.Size(14, 14);
+            this.pictureBoxStaticTooltip.TabIndex = 29;
+            this.pictureBoxStaticTooltip.TabStop = false;
             // 
             // listViewSmartScripts
             // 
@@ -2541,7 +2541,7 @@
             // 
             // groupBoxPreferences
             // 
-            this.groupBoxPreferences.Controls.Add(this.checkBoxUsePermanentTooltips);
+            this.groupBoxPreferences.Controls.Add(this.checkBoxUseStaticTooltips);
             this.groupBoxPreferences.Controls.Add(this.checkBoxUsePhaseColors);
             this.groupBoxPreferences.Controls.Add(this.checkBoxAllowChangingEntryAndSourceType);
             this.groupBoxPreferences.Controls.Add(this.checkBoxListActionlistsOrEntries);
@@ -2555,16 +2555,16 @@
             this.groupBoxPreferences.TabStop = false;
             this.groupBoxPreferences.Text = "Preferences";
             // 
-            // checkBoxUsePermanentTooltips
+            // checkBoxUseStaticTooltips
             // 
-            this.checkBoxUsePermanentTooltips.AutoSize = true;
-            this.checkBoxUsePermanentTooltips.Location = new System.Drawing.Point(140, 70);
-            this.checkBoxUsePermanentTooltips.Name = "checkBoxUsePermanentTooltips";
-            this.checkBoxUsePermanentTooltips.Size = new System.Drawing.Size(134, 17);
-            this.checkBoxUsePermanentTooltips.TabIndex = 21;
-            this.checkBoxUsePermanentTooltips.Text = "Use permanent tooltips";
-            this.checkBoxUsePermanentTooltips.UseVisualStyleBackColor = true;
-            this.checkBoxUsePermanentTooltips.CheckedChanged += new System.EventHandler(this.checkBoxUsePermanentTooltips_CheckedChanged);
+            this.checkBoxUseStaticTooltips.AutoSize = true;
+            this.checkBoxUseStaticTooltips.Location = new System.Drawing.Point(140, 70);
+            this.checkBoxUseStaticTooltips.Name = "checkBoxUseStaticTooltips";
+            this.checkBoxUseStaticTooltips.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxUseStaticTooltips.TabIndex = 21;
+            this.checkBoxUseStaticTooltips.Text = "Use static tooltips";
+            this.checkBoxUseStaticTooltips.UseVisualStyleBackColor = true;
+            this.checkBoxUseStaticTooltips.CheckedChanged += new System.EventHandler(this.checkBoxUseStaticTooltips_CheckedChanged);
             // 
             // checkBoxUsePhaseColors
             // 
@@ -2732,12 +2732,12 @@
             this.groupBoxLogin.ResumeLayout(false);
             this.groupBoxLogin.PerformLayout();
             this.customPanelMain.ResumeLayout(false);
-            this.panelPermanentTooltipParameters.ResumeLayout(false);
-            this.panelPermanentTooltipParameters.PerformLayout();
+            this.panelStaticTooltipParameters.ResumeLayout(false);
+            this.panelStaticTooltipParameters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panelPermanentTooltipTypes.ResumeLayout(false);
-            this.panelPermanentTooltipTypes.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxPermanentTooltip)).EndInit();
+            this.panelStaticTooltipTypes.ResumeLayout(false);
+            this.panelStaticTooltipTypes.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStaticTooltip)).EndInit();
             this.groupBoxParameters.ResumeLayout(false);
             this.tabControlParameters.ResumeLayout(false);
             this.tabPageEvent.ResumeLayout(false);
@@ -2784,7 +2784,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemGenerateCommentListView;
         private System.Windows.Forms.ToolStripMenuItem menuItemLoadSelectedEntryListView;
         private System.Windows.Forms.Timer timerExpandOrContract;
-        private System.Windows.Forms.Timer timerShowPermanentTooltips;
+        private System.Windows.Forms.Timer timerShowStaticTooltips;
         private System.Windows.Forms.GroupBox groupBoxLogin;
         private System.Windows.Forms.RadioButton radioButtonDontUseDatabase;
         private System.Windows.Forms.RadioButton radioButtonConnectToMySql;
@@ -2869,14 +2869,14 @@
         private System.Windows.Forms.Button buttonGenerateComments;
         private System.Windows.Forms.Button buttonGenerateSql;
         private System.Windows.Forms.Button buttonNewLine;
-        private System.Windows.Forms.Panel panelPermanentTooltipParameters;
-        private System.Windows.Forms.Label labelPermanentTooltipTextParameters;
-        private System.Windows.Forms.Label labelPermanentTooltipParameterTitleTypes;
+        private System.Windows.Forms.Panel panelStaticTooltipParameters;
+        private System.Windows.Forms.Label labelStaticTooltipTextParameters;
+        private System.Windows.Forms.Label labelStaticTooltipParameterTitleTypes;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Panel panelPermanentTooltipTypes;
-        private System.Windows.Forms.Label labelPermanentTooltipTitleTypes;
-        private System.Windows.Forms.Label labelPermanentTooltipTextTypes;
-        private System.Windows.Forms.PictureBox pictureBoxPermanentTooltip;
+        private System.Windows.Forms.Panel panelStaticTooltipTypes;
+        private System.Windows.Forms.Label labelStaticTooltipTitleTypes;
+        private System.Windows.Forms.Label labelStaticTooltipTextTypes;
+        private System.Windows.Forms.PictureBox pictureBoxStaticTooltip;
         public Classes.CustomControls.SmartScriptListView listViewSmartScripts;
         private System.Windows.Forms.GroupBox groupBoxParameters;
         private System.Windows.Forms.TabControl tabControlParameters;
@@ -2960,7 +2960,7 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBoxPreferences;
-        private System.Windows.Forms.CheckBox checkBoxUsePermanentTooltips;
+        private System.Windows.Forms.CheckBox checkBoxUseStaticTooltips;
         public System.Windows.Forms.CheckBox checkBoxUsePhaseColors;
         private System.Windows.Forms.CheckBox checkBoxAllowChangingEntryAndSourceType;
         private System.Windows.Forms.CheckBox checkBoxListActionlistsOrEntries;

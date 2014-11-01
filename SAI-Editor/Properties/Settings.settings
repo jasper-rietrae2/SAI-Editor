@@ -44,7 +44,7 @@
     <Setting Name="Entropy" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ShowTooltipsPermanently" Type="System.Boolean" Scope="User">
+    <Setting Name="ShowTooltipsStaticly" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="GenerateComments" Type="System.Boolean" Scope="User">

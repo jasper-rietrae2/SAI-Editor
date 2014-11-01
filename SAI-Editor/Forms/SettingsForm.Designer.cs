@@ -36,7 +36,7 @@
             this.checkBoxPhaseHighlighting = new System.Windows.Forms.CheckBox();
             this.checkBoxCreateRevertQuery = new System.Windows.Forms.CheckBox();
             this.checkBoxAutoGenerateComments = new System.Windows.Forms.CheckBox();
-            this.checkBoxShowTooltipsPermanently = new System.Windows.Forms.CheckBox();
+            this.checkBoxShowTooltipsStaticly = new System.Windows.Forms.CheckBox();
             this.checkBoxChangeStaticInfo = new System.Windows.Forms.CheckBox();
             this.checkBoxPromptExecuteQuery = new System.Windows.Forms.CheckBox();
             this.textBoxAnimationSpeed = new System.Windows.Forms.TextBox();
@@ -96,7 +96,7 @@
             this.tabPageGeneral.Controls.Add(this.checkBoxPhaseHighlighting);
             this.tabPageGeneral.Controls.Add(this.checkBoxCreateRevertQuery);
             this.tabPageGeneral.Controls.Add(this.checkBoxAutoGenerateComments);
-            this.tabPageGeneral.Controls.Add(this.checkBoxShowTooltipsPermanently);
+            this.tabPageGeneral.Controls.Add(this.checkBoxShowTooltipsStaticly);
             this.tabPageGeneral.Controls.Add(this.checkBoxChangeStaticInfo);
             this.tabPageGeneral.Controls.Add(this.checkBoxPromptExecuteQuery);
             this.tabPageGeneral.Controls.Add(this.textBoxAnimationSpeed);
@@ -153,15 +153,15 @@
             this.checkBoxAutoGenerateComments.Text = "Automatically generate comments";
             this.checkBoxAutoGenerateComments.UseVisualStyleBackColor = true;
             // 
-            // checkBoxShowTooltipsPermanently
+            // checkBoxShowTooltipsStaticly
             // 
-            this.checkBoxShowTooltipsPermanently.AutoSize = true;
-            this.checkBoxShowTooltipsPermanently.Location = new System.Drawing.Point(6, 121);
-            this.checkBoxShowTooltipsPermanently.Name = "checkBoxShowTooltipsPermanently";
-            this.checkBoxShowTooltipsPermanently.Size = new System.Drawing.Size(149, 17);
-            this.checkBoxShowTooltipsPermanently.TabIndex = 12;
-            this.checkBoxShowTooltipsPermanently.Text = "Show tooltips permanently";
-            this.checkBoxShowTooltipsPermanently.UseVisualStyleBackColor = true;
+            this.checkBoxShowTooltipsStaticly.AutoSize = true;
+            this.checkBoxShowTooltipsStaticly.Location = new System.Drawing.Point(6, 121);
+            this.checkBoxShowTooltipsStaticly.Name = "checkBoxShowTooltipsStaticly";
+            this.checkBoxShowTooltipsStaticly.Size = new System.Drawing.Size(149, 17);
+            this.checkBoxShowTooltipsStaticly.TabIndex = 12;
+            this.checkBoxShowTooltipsStaticly.Text = "Show tooltips permanently";
+            this.checkBoxShowTooltipsStaticly.UseVisualStyleBackColor = true;
             // 
             // checkBoxChangeStaticInfo
             // 
@@ -510,7 +510,7 @@
         public System.Windows.Forms.TextBox textBoxWorldDatabase;
         public System.Windows.Forms.TextBox textBoxPort;
         private System.Windows.Forms.Button buttonTestConnection;
-        private System.Windows.Forms.CheckBox checkBoxShowTooltipsPermanently;
+        private System.Windows.Forms.CheckBox checkBoxShowTooltipsStaticly;
         private System.Windows.Forms.CheckBox checkBoxAutoGenerateComments;
         private System.Windows.Forms.CheckBox checkBoxCreateRevertQuery;
         private System.Windows.Forms.RadioButton radioButtonDontUseDatabase;

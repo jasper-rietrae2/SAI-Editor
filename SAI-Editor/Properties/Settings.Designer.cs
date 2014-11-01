@@ -194,12 +194,12 @@ namespace SAI_Editor.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ShowTooltipsPermanently {
+        public bool ShowTooltipsStaticly {
             get {
-                return ((bool)(this["ShowTooltipsPermanently"]));
+                return ((bool)(this["ShowTooltipsStaticly"]));
             }
             set {
-                this["ShowTooltipsPermanently"] = value;
+                this["ShowTooltipsStaticly"] = value;
             }
         }
         

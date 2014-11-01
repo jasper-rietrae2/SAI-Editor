@@ -32,7 +32,7 @@ namespace SAI_Editor.Forms
             checkBoxHidePass.Checked = Settings.Default.HidePass;
             checkBoxPromptExecuteQuery.Checked = Settings.Default.PromptExecuteQuery;
             checkBoxChangeStaticInfo.Checked = Settings.Default.ChangeStaticInfo;
-            checkBoxShowTooltipsPermanently.Checked = Settings.Default.ShowTooltipsPermanently;
+            checkBoxShowTooltipsStaticly.Checked = Settings.Default.ShowTooltipsStaticly;
             checkBoxAutoGenerateComments.Checked = Settings.Default.GenerateComments;
             checkBoxCreateRevertQuery.Checked = Settings.Default.CreateRevertQuery;
             checkBoxPhaseHighlighting.Checked = Settings.Default.PhaseHighlighting;
@@ -59,7 +59,7 @@ namespace SAI_Editor.Forms
                 ((MainForm)Owner).comboBoxSourceType.SelectedIndex = ((MainForm)Owner).GetIndexBySourceType(originalEntryOrGuidAndSourceType.sourceType);
             }
 
-            bool showTooltipsPermanently = Settings.Default.ShowTooltipsPermanently;
+            bool showTooltipsStaticly = Settings.Default.ShowTooltipsStaticly;
             bool generateComments = Settings.Default.GenerateComments;
             bool phaseHighlighting = Settings.Default.PhaseHighlighting;
 
@@ -111,7 +111,7 @@ namespace SAI_Editor.Forms
             Settings.Default.AnimationSpeed = XConverter.ToInt32(textBoxAnimationSpeed.Text);
             Settings.Default.PromptExecuteQuery = checkBoxPromptExecuteQuery.Checked;
             Settings.Default.ChangeStaticInfo = checkBoxChangeStaticInfo.Checked;
-            Settings.Default.ShowTooltipsPermanently = checkBoxShowTooltipsPermanently.Checked;
+            Settings.Default.ShowTooltipsStaticly = checkBoxShowTooltipsStaticly.Checked;
             Settings.Default.GenerateComments = checkBoxAutoGenerateComments.Checked;
             Settings.Default.CreateRevertQuery = checkBoxCreateRevertQuery.Checked;
             Settings.Default.PhaseHighlighting = checkBoxPhaseHighlighting.Checked;
@@ -135,8 +135,8 @@ namespace SAI_Editor.Forms
             if (checkBoxAutoGenerateComments.Checked != generateComments && checkBoxAutoGenerateComments.Checked)
                 ((MainForm)Owner).GenerateCommentsForAllItems();
             
-            if (checkBoxShowTooltipsPermanently.Checked != showTooltipsPermanently)
-                ((MainForm)Owner).ExpandToShowPermanentTooltips(!checkBoxShowTooltipsPermanently.Checked);
+            if (checkBoxShowTooltipsStaticly.Checked != showTooltipsStaticly)
+                ((MainForm)Owner).ExpandToShowStaticTooltips(!checkBoxShowTooltipsStaticly.Checked);
 
             if (checkBoxPhaseHighlighting.Checked != phaseHighlighting)
             {
@@ -182,7 +182,7 @@ namespace SAI_Editor.Forms
                 textBoxAnimationSpeed.Text == Settings.Default.AnimationSpeed.ToString() &&
                 checkBoxPromptExecuteQuery.Checked == Settings.Default.PromptExecuteQuery &&
                 checkBoxChangeStaticInfo.Checked == Settings.Default.ChangeStaticInfo &&
-                checkBoxShowTooltipsPermanently.Checked == Settings.Default.ShowTooltipsPermanently &&
+                checkBoxShowTooltipsStaticly.Checked == Settings.Default.ShowTooltipsStaticly &&
                 checkBoxAutoGenerateComments.Checked == Settings.Default.GenerateComments &&
                 checkBoxCreateRevertQuery.Checked == Settings.Default.CreateRevertQuery &&
                 checkBoxPhaseHighlighting.Checked == Settings.Default.PhaseHighlighting &&
@@ -211,7 +211,7 @@ namespace SAI_Editor.Forms
                     trackBarAnimationSpeed.Value = 10;
                     checkBoxPromptExecuteQuery.Checked = true;
                     checkBoxChangeStaticInfo.Checked = true;
-                    checkBoxShowTooltipsPermanently.Checked = false;
+                    checkBoxShowTooltipsStaticly.Checked = false;
                     checkBoxAutoGenerateComments.Checked = false;
                     checkBoxCreateRevertQuery.Checked = false;
                     checkBoxPhaseHighlighting.Checked = true;
