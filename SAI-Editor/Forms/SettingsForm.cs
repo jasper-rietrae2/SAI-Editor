@@ -136,7 +136,7 @@ namespace SAI_Editor.Forms
                 ((MainForm)Owner).GetActiveUserControl().GenerateCommentsForAllItems();
             
             if (checkBoxShowTooltipsStaticly.Checked != showTooltipsStaticly)
-                ((MainForm)Owner).GetActiveUserControl().ExpandToShowStaticTooltips(!checkBoxShowTooltipsStaticly.Checked);
+                ((MainForm)Owner).GetActiveUserControl().ExpandOrContractToShowStaticTooltips(!checkBoxShowTooltipsStaticly.Checked);
 
             if (checkBoxPhaseHighlighting.Checked != phaseHighlighting)
             {

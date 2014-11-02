@@ -765,15 +765,6 @@ namespace SAI_Editor.Forms
                 sqlOutputForm.ShowDialog(this);
         }
 
-        private async void buttonGenerateSql_Click(object sender, EventArgs e)
-        {
-            if (formState != FormState.FormStateMain)
-                return;
-
-            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await GetActiveUserControl().GenerateSmartAiSqlFromListView(), true, await GetActiveUserControl().GenerateSmartAiRevertQuery()))
-                sqlOutputForm.ShowDialog(this);
-        }
-
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             foreach (UserControlTabPage uc in userControls)
@@ -1120,6 +1111,8 @@ namespace SAI_Editor.Forms
                 tabControl.TabPages.RemoveAt(tabControl.TabPages.Count - 1);
 
             UserControlTabPage userControlTabPage = new UserControlTabPage();
+            userControlTabPage.Parent = this;
+            userControlTabPage.LoadUserControl();
             TabPage newPage = new TabPage();
             newPage.Text = "Tab " + (tabControl.TabPages.Count + 1).ToString();
             newPage.Controls.Add(userControlTabPage);

@@ -42,7 +42,7 @@ namespace SAI_Editor
             InitializeComponent();
         }
 
-        public void UserControlTabPage_Load(object sender, EventArgs e)
+        public void LoadUserControl()
         {
             MainForm = Parent as MainForm;
 
@@ -124,32 +124,39 @@ namespace SAI_Editor
 
         private async Task HandleComboBoxTypeIdSelectedIndexChanged(ComboBox comboBox, TextBox textBox, ScriptTypeId scriptTypeId)
         {
-            textBox.Text = comboBox.SelectedIndex.ToString();
-            textBox.SelectionStart = 3; //! Set cursor to end of text
-
-            if (!MainForm.runningConstructor)
+            try
             {
-                ChangeParameterFieldsBasedOnType();
-                UpdateStaticTooltipOfTypes(comboBox, scriptTypeId);
-            }
+                textBox.Text = comboBox.SelectedIndex.ToString();
+                textBox.SelectionStart = 3; //! Set cursor to end of text
 
-            if (listViewSmartScripts.SelectedItems.Count > 0)
-            {
-                switch (scriptTypeId)
+                if (!MainForm.runningConstructor)
                 {
-                    case ScriptTypeId.ScriptTypeEvent:
-                        listViewSmartScripts.SelectedScript.event_type = comboBox.SelectedIndex;
-                        break;
-                    case ScriptTypeId.ScriptTypeAction:
-                        listViewSmartScripts.SelectedScript.action_type = comboBox.SelectedIndex;
-                        break;
-                    case ScriptTypeId.ScriptTypeTarget:
-                        listViewSmartScripts.SelectedScript.target_type = comboBox.SelectedIndex;
-                        break;
+                    ChangeParameterFieldsBasedOnType();
+                    UpdateStaticTooltipOfTypes(comboBox, scriptTypeId);
                 }
 
-                listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
-                await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
+                if (listViewSmartScripts.SelectedItems.Count > 0)
+                {
+                    switch (scriptTypeId)
+                    {
+                        case ScriptTypeId.ScriptTypeEvent:
+                            listViewSmartScripts.SelectedScript.event_type = comboBox.SelectedIndex;
+                            break;
+                        case ScriptTypeId.ScriptTypeAction:
+                            listViewSmartScripts.SelectedScript.action_type = comboBox.SelectedIndex;
+                            break;
+                        case ScriptTypeId.ScriptTypeTarget:
+                            listViewSmartScripts.SelectedScript.target_type = comboBox.SelectedIndex;
+                            break;
+                    }
+
+                    listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
+                    await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
 
@@ -3033,7 +3040,7 @@ namespace SAI_Editor
             Settings.Default.ShowTooltipsStaticly = checkBoxUseStaticTooltips.Checked;
             Settings.Default.Save();
 
-            ExpandToShowStaticTooltips(!checkBoxUseStaticTooltips.Checked);
+            ExpandOrContractToShowStaticTooltips(!checkBoxUseStaticTooltips.Checked);
         }
 
         public void FinishedExpandingOrContracting(bool expanding)
@@ -3041,7 +3048,7 @@ namespace SAI_Editor
             if (expanding)
             {
                 if (checkBoxUseStaticTooltips.Checked)
-                    ExpandToShowStaticTooltips(false);
+                    ExpandOrContractToShowStaticTooltips(false);
 
                 if (MainForm.radioButtonConnectToMySql.Checked)
                     TryToLoadScript(showErrorIfNoneFound: false);
@@ -3055,7 +3062,7 @@ namespace SAI_Editor
                     MainForm.contextMenuStripListView.Show(Cursor.Position);
         }
 
-        public void ExpandToShowStaticTooltips(bool expand)
+        public void ExpandOrContractToShowStaticTooltips(bool expand)
         {
             if (expandingListView == expand && contractingListView == !expand)
                 return;
@@ -3143,6 +3150,12 @@ namespace SAI_Editor
             listViewSmartScripts.ClearScripts();
             listViewSmartScripts.Items.Clear();
             TryToLoadScript(entryorguid, source_type);
+        }
+
+        private async void buttonGenerateSql_Click(object sender, EventArgs e)
+        {
+            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await GenerateSmartAiSqlFromListView(), true, await GenerateSmartAiRevertQuery()))
+                sqlOutputForm.ShowDialog(this);
         }
     }
 }
