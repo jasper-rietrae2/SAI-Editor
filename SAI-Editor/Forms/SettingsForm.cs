@@ -54,9 +54,9 @@ namespace SAI_Editor.Forms
         {
             if (checkBoxChangeStaticInfo.Checked != Settings.Default.ChangeStaticInfo)
             {
-                EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = ((MainForm)Owner).originalEntryOrGuidAndSourceType;
-                ((MainForm)Owner).textBoxEntryOrGuid.Text = originalEntryOrGuidAndSourceType.entryOrGuid.ToString();
-                ((MainForm)Owner).comboBoxSourceType.SelectedIndex = ((MainForm)Owner).GetIndexBySourceType(originalEntryOrGuidAndSourceType.sourceType);
+                EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = ((MainForm)Owner).GetActiveUserControl().originalEntryOrGuidAndSourceType;
+                ((MainForm)Owner).GetActiveUserControl().textBoxEntryOrGuid.Text = originalEntryOrGuidAndSourceType.entryOrGuid.ToString();
+                ((MainForm)Owner).GetActiveUserControl().comboBoxSourceType.SelectedIndex = ((MainForm)Owner).GetActiveUserControl().GetIndexBySourceType(originalEntryOrGuidAndSourceType.sourceType);
             }
 
             bool showTooltipsStaticly = Settings.Default.ShowTooltipsStaticly;
@@ -133,15 +133,15 @@ namespace SAI_Editor.Forms
                 MessageBox.Show("The database settings were not saved because no connection could be established. All other changed settings were saved.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             if (checkBoxAutoGenerateComments.Checked != generateComments && checkBoxAutoGenerateComments.Checked)
-                ((MainForm)Owner).GenerateCommentsForAllItems();
+                ((MainForm)Owner).GetActiveUserControl().GenerateCommentsForAllItems();
             
             if (checkBoxShowTooltipsStaticly.Checked != showTooltipsStaticly)
-                ((MainForm)Owner).ExpandToShowStaticTooltips(!checkBoxShowTooltipsStaticly.Checked);
+                ((MainForm)Owner).GetActiveUserControl().ExpandToShowStaticTooltips(!checkBoxShowTooltipsStaticly.Checked);
 
             if (checkBoxPhaseHighlighting.Checked != phaseHighlighting)
             {
-                ((MainForm)Owner).listViewSmartScripts.Init(true);
-                ((MainForm)Owner).checkBoxUsePhaseColors.Checked = checkBoxPhaseHighlighting.Checked;
+                ((MainForm)Owner).GetActiveUserControl().listViewSmartScripts.Init(true);
+                ((MainForm)Owner).GetActiveUserControl().checkBoxUsePhaseColors.Checked = checkBoxPhaseHighlighting.Checked;
             }
 
             ((MainForm)Owner).HandleUseWorldDatabaseSettingChanged();

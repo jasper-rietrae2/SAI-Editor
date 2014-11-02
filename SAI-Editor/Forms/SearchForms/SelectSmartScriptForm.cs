@@ -48,9 +48,9 @@ namespace SAI_Editor.Forms.SearchForms
             if (listBoxGuids.SelectedItem == null)
                 return;
 
-            ((MainForm)Owner).textBoxEntryOrGuid.Text = (-XConverter.ToInt32(listBoxGuids.SelectedItem.ToString())).ToString();
-            ((MainForm)Owner).comboBoxSourceType.SelectedIndex = (int)SourceTypes.SourceTypeCreature;
-            ((MainForm)Owner).TryToLoadScript();
+            ((MainForm)Owner).GetActiveUserControl().textBoxEntryOrGuid.Text = (-XConverter.ToInt32(listBoxGuids.SelectedItem.ToString())).ToString();
+            ((MainForm)Owner).GetActiveUserControl().comboBoxSourceType.SelectedIndex = (int)SourceTypes.SourceTypeCreature;
+            ((MainForm)Owner).GetActiveUserControl().TryToLoadScript();
             Close();
         }
 
