@@ -480,7 +480,7 @@ namespace SAI_Editor.Forms
 
             if (!radioButtonConnectToMySql.Checked || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(SAI_Editor_Manager.Instance.connString))
             {
-                //StartExpandingToMainForm(Settings.Default.InstantExpand);
+                StartExpandingToMainForm(Settings.Default.InstantExpand);
                 HandleUseWorldDatabaseSettingChanged();
             }
 
