@@ -217,30 +217,6 @@ namespace SAI_Editor.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LastEntryOrGuid {
-            get {
-                return ((string)(this["LastEntryOrGuid"]));
-            }
-            set {
-                this["LastEntryOrGuid"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int LastSourceType {
-            get {
-                return ((int)(this["LastSourceType"]));
-            }
-            set {
-                this["LastSourceType"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool CreateRevertQuery {
             get {
@@ -248,18 +224,6 @@ namespace SAI_Editor.Properties {
             }
             set {
                 this["CreateRevertQuery"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ShowBasicInfo {
-            get {
-                return ((bool)(this["ShowBasicInfo"]));
-            }
-            set {
-                this["ShowBasicInfo"] = value;
             }
         }
         
@@ -356,6 +320,18 @@ namespace SAI_Editor.Properties {
             }
             set {
                 this["AgreedToSurvey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowBasicInfo {
+            get {
+                return ((bool)(this["ShowBasicInfo"]));
+            }
+            set {
+                this["ShowBasicInfo"] = value;
             }
         }
     }

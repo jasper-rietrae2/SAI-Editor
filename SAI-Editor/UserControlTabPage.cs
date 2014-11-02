@@ -71,6 +71,26 @@ namespace SAI_Editor
             UpdateStaticTooltipOfParameter(labelEventParam1, 1, comboBoxEventType, ScriptTypeId.ScriptTypeEvent);
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+
+            if (MainForm.userControls.Count > 0)
+            {
+                checkBoxLockEventId.Checked = MainForm.userControls[0].checkBoxLockEventId.Checked;
+                checkBoxListActionlistsOrEntries.Checked = MainForm.userControls[0].checkBoxListActionlistsOrEntries.Checked;
+                checkBoxShowBasicInfo.Checked = MainForm.userControls[0].checkBoxShowBasicInfo.Checked;
+                checkBoxAllowChangingEntryAndSourceType.Checked = MainForm.userControls[0].checkBoxAllowChangingEntryAndSourceType.Checked;
+                checkBoxUseStaticTooltips.Checked = MainForm.userControls[0].checkBoxUseStaticTooltips.Checked;
+                checkBoxUsePhaseColors.Checked = MainForm.userControls[0].checkBoxUsePhaseColors.Checked;
+                checkBox3.Checked = MainForm.userControls[0].checkBox3.Checked;
+            }
+            else
+            {
+                checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
+                checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
+                checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
+                checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
+                checkBoxUsePhaseColors.Checked = Settings.Default.PhaseHighlighting;
+                checkBoxUseStaticTooltips.Checked = Settings.Default.ShowTooltipsStaticly;
+            }
         }
 
         public void UserControlTabPage_KeyDown(object sender, KeyEventArgs e)
@@ -218,6 +238,7 @@ namespace SAI_Editor
         public void checkBoxLockEventId_CheckedChanged(object sender, EventArgs e)
         {
             textBoxId.Enabled = !checkBoxLockEventId.Checked;
+            SynchronizeAllUserControlCheckBoxes();
         }
 
         bool ListContainsSmartScript(List<SmartScript> smartScriptsToReturn, SmartScript item)
@@ -860,6 +881,8 @@ namespace SAI_Editor
 
         private async void checkBoxListActionlistsOrEntries_CheckedChanged(object sender, EventArgs e)
         {
+            SynchronizeAllUserControlCheckBoxes();
+
             if (listViewSmartScripts.Items.Count == 0)
                 return;
 
@@ -2919,6 +2942,7 @@ namespace SAI_Editor
         public void checkBoxShowBasicInfo_CheckedChanged(object sender, EventArgs e)
         {
             HandleShowBasicInfo();
+            SynchronizeAllUserControlCheckBoxes();
         }
 
         public void HandleShowBasicInfo()
@@ -3032,6 +3056,7 @@ namespace SAI_Editor
             Settings.Default.Save();
 
             listViewSmartScripts.Init(true);
+            SynchronizeAllUserControlCheckBoxes();
         }
 
         public void checkBoxUseStaticTooltips_CheckedChanged(object sender, EventArgs e)
@@ -3041,6 +3066,7 @@ namespace SAI_Editor
             Settings.Default.Save();
 
             ExpandOrContractToShowStaticTooltips(!checkBoxUseStaticTooltips.Checked);
+            SynchronizeAllUserControlCheckBoxes();
         }
 
         public void FinishedExpandingOrContracting(bool expanding)
@@ -3156,6 +3182,33 @@ namespace SAI_Editor
         {
             using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await GenerateSmartAiSqlFromListView(), true, await GenerateSmartAiRevertQuery()))
                 sqlOutputForm.ShowDialog(this);
+        }
+
+        private void checkBoxAllowChangingEntryAndSourceType_CheckedChanged(object sender, EventArgs e)
+        {
+            SynchronizeAllUserControlCheckBoxes();
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            SynchronizeAllUserControlCheckBoxes();
+        }
+
+        private void SynchronizeAllUserControlCheckBoxes()
+        {
+            foreach (UserControlTabPage uc in MainForm.userControls)
+            {
+                if (uc == this)
+                    continue;
+
+                uc.checkBoxLockEventId.Checked = checkBoxLockEventId.Checked;
+                uc.checkBoxListActionlistsOrEntries.Checked = checkBoxListActionlistsOrEntries.Checked;
+                uc.checkBoxShowBasicInfo.Checked = checkBoxShowBasicInfo.Checked;
+                uc.checkBoxAllowChangingEntryAndSourceType.Checked = checkBoxAllowChangingEntryAndSourceType.Checked;
+                uc.checkBoxUseStaticTooltips.Checked = checkBoxUseStaticTooltips.Checked;
+                uc.checkBoxUsePhaseColors.Checked = checkBoxUsePhaseColors.Checked;
+                uc.checkBox3.Checked = checkBox3.Checked;
+            }
         }
     }
 }

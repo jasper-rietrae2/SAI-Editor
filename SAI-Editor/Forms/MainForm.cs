@@ -35,7 +35,7 @@ namespace SAI_Editor.Forms
         private string applicationVersion = String.Empty;
         private System.Windows.Forms.Timer timerCheckForInternetConnection = new System.Windows.Forms.Timer();
 
-        private List<UserControlTabPage> userControls = new List<UserControlTabPage>();
+        public List<UserControlTabPage> userControls = new List<UserControlTabPage>();
 
         public MainForm()
         {
@@ -86,7 +86,7 @@ namespace SAI_Editor.Forms
                 {
                     uc.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
                     uc.buttonGenerateComments.Enabled = uc.listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
-                    uc.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || (SourceTypes)Settings.Default.LastSourceType == SourceTypes.SourceTypeAreaTrigger;
+                    uc.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase;
                 }
 
                 menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
@@ -645,8 +645,6 @@ namespace SAI_Editor.Forms
 
             foreach (UserControlTabPage uc in userControls)
             {
-                uc.textBoxEntryOrGuid.Text = Settings.Default.LastEntryOrGuid;
-                uc.comboBoxSourceType.SelectedIndex = Settings.Default.LastSourceType;
                 uc.checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
                 uc.checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
                 uc.checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
@@ -783,14 +781,12 @@ namespace SAI_Editor.Forms
 
         private void SaveLastUsedFields()
         {
-            //Settings.Default.LastEntryOrGuid = textBoxEntryOrGuid.Text;
-            //Settings.Default.LastSourceType = comboBoxSourceType.SelectedIndex;
-            //Settings.Default.ShowBasicInfo = checkBoxShowBasicInfo.Checked;
-            //Settings.Default.LockSmartScriptId = checkBoxLockEventId.Checked;
-            //Settings.Default.ListActionLists = checkBoxListActionlistsOrEntries.Checked;
-            //Settings.Default.AllowChangingEntryAndSourceType = checkBoxAllowChangingEntryAndSourceType.Checked;
-            //Settings.Default.PhaseHighlighting = checkBoxUsePhaseColors.Checked;
-            //Settings.Default.ShowTooltipsStaticly = checkBoxUseStaticTooltips.Checked;
+            Settings.Default.ShowBasicInfo = GetActiveUserControl().checkBoxShowBasicInfo.Checked;
+            Settings.Default.LockSmartScriptId = GetActiveUserControl().checkBoxLockEventId.Checked;
+            Settings.Default.ListActionLists = GetActiveUserControl().checkBoxListActionlistsOrEntries.Checked;
+            Settings.Default.AllowChangingEntryAndSourceType = GetActiveUserControl().checkBoxAllowChangingEntryAndSourceType.Checked;
+            Settings.Default.PhaseHighlighting = GetActiveUserControl().checkBoxUsePhaseColors.Checked;
+            Settings.Default.ShowTooltipsStaticly = GetActiveUserControl().checkBoxUseStaticTooltips.Checked;
 
             if (formState == FormState.FormStateLogin)
             {
