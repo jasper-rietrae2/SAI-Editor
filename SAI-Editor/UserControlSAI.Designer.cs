@@ -1,6 +1,6 @@
 ﻿namespace SAI_Editor
 {
-    partial class UserControlTabPage
+    partial class UserControlSAI
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlTabPage));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserControlSAI));
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
             this.pictureBoxCreateScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
             this.pictureBoxLoadScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
@@ -1663,7 +1663,7 @@
             this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
             this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
             // 
-            // UserControlTabPage
+            // UserControlSAI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1678,9 +1678,9 @@
             this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.panelStaticTooltipTypes);
             this.Controls.Add(this.panelStaticTooltipParameters);
-            this.Name = "UserControlTabPage";
+            this.Name = "UserControlSAI";
             this.Size = new System.Drawing.Size(925, 437);
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserControlTabPage_KeyDown);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserControlSAI_KeyDown);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();

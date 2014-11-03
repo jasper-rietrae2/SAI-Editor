@@ -35,7 +35,7 @@ namespace SAI_Editor.Forms
         private string applicationVersion = String.Empty;
         private System.Windows.Forms.Timer timerCheckForInternetConnection = new System.Windows.Forms.Timer();
 
-        public List<UserControlTabPage> userControls = new List<UserControlTabPage>();
+        public List<UserControlSAI> userControls = new List<UserControlSAI>();
 
         public MainForm()
         {
@@ -82,7 +82,7 @@ namespace SAI_Editor.Forms
                 radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
                 radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
 
-                foreach (UserControlTabPage uc in userControls)
+                foreach (UserControlSAI uc in userControls)
                 {
                     uc.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
                     uc.buttonGenerateComments.Enabled = uc.listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
@@ -147,7 +147,7 @@ namespace SAI_Editor.Forms
                 }
             }
 
-            foreach (UserControlTabPage uc in userControls)
+            foreach (UserControlSAI uc in userControls)
             {
                 uc.tabControlParameters.AutoScrollOffset = new Point(5, 5);
 
@@ -205,7 +205,7 @@ namespace SAI_Editor.Forms
             runningConstructor = false;
         }
 
-        public UserControlTabPage GetActiveUserControl()
+        public UserControlSAI GetActiveUserControl()
         {
             if (userControls.Count == 0)
                 return null;
@@ -532,7 +532,7 @@ namespace SAI_Editor.Forms
 
             customPanelLogin.Visible = false;
 
-            foreach (UserControlTabPage uc in userControls)
+            foreach (UserControlSAI uc in userControls)
             {
                 uc.panelStaticTooltipTypes.Visible = false;
                 uc.panelStaticTooltipParameters.Visible = false;
@@ -541,7 +541,7 @@ namespace SAI_Editor.Forms
 
         private void ResetFieldsToDefault()
         {
-            foreach (UserControlTabPage uc in userControls)
+            foreach (UserControlSAI uc in userControls)
                 uc.ResetFieldsToDefault();
         }
 
@@ -550,7 +550,7 @@ namespace SAI_Editor.Forms
             Text = "SAI-Editor " + applicationVersion + ": Login";
 
             if (Settings.Default.ShowTooltipsStaticly)
-                foreach (UserControlTabPage uc in userControls)
+                foreach (UserControlSAI uc in userControls)
                     uc.listViewSmartScripts.Height += (int)FormSizes.ListViewHeightContract;
 
             if (instant)
@@ -613,7 +613,7 @@ namespace SAI_Editor.Forms
                 if (Application.OpenForms[i] != this)
                     Application.OpenForms[i].Close();
 
-            foreach (UserControlTabPage uc in userControls)
+            foreach (UserControlSAI uc in userControls)
             {
                 uc.panelStaticTooltipTypes.Visible = false;
                 uc.panelStaticTooltipParameters.Visible = false;
@@ -622,7 +622,7 @@ namespace SAI_Editor.Forms
             SaveLastUsedFields();
             ResetFieldsToDefault();
 
-            foreach (UserControlTabPage uc in userControls)
+            foreach (UserControlSAI uc in userControls)
                 uc.listViewSmartScripts.ClearScripts();
 
             StartContractingToLoginForm(Settings.Default.InstantExpand);
@@ -638,13 +638,13 @@ namespace SAI_Editor.Forms
             if (!expanding)
                 HandleHeightLoginFormBasedOnuseDatabaseSetting();
 
-            foreach (UserControlTabPage uc in userControls)
+            foreach (UserControlSAI uc in userControls)
             {
                 uc.panelStaticTooltipTypes.Visible = false;
                 uc.panelStaticTooltipParameters.Visible = false;
             }
 
-            foreach (UserControlTabPage uc in userControls)
+            foreach (UserControlSAI uc in userControls)
             {
                 uc.checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
                 uc.checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
@@ -654,7 +654,7 @@ namespace SAI_Editor.Forms
                 uc.checkBoxUseStaticTooltips.Checked = Settings.Default.ShowTooltipsStaticly;
             }
 
-            foreach (UserControlTabPage uc in userControls)
+            foreach (UserControlSAI uc in userControls)
                 uc.FinishedExpandingOrContracting(expanding);
         }
 
@@ -766,7 +766,7 @@ namespace SAI_Editor.Forms
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach (UserControlTabPage uc in userControls)
+            foreach (UserControlSAI uc in userControls)
                 foreach (Control control in uc.Controls)
                     control.Enabled = false;
 
@@ -885,7 +885,7 @@ namespace SAI_Editor.Forms
             radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
             radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
 
-            foreach (UserControlTabPage uc in userControls)
+            foreach (UserControlSAI uc in userControls)
             {
                 uc.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || uc.comboBoxSourceType.SelectedIndex == 2;
                 uc.pictureBoxLoadScript.Enabled = uc.textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
@@ -1107,15 +1107,15 @@ namespace SAI_Editor.Forms
             if (!first)
                 tabControl.TabPages.RemoveAt(tabControl.TabPages.Count - 1);
 
-            UserControlTabPage userControlTabPage = new UserControlTabPage();
-            userControlTabPage.Parent = this;
-            userControlTabPage.LoadUserControl();
+            UserControlSAI UserControlSAI = new UserControlSAI();
+            UserControlSAI.Parent = this;
+            UserControlSAI.LoadUserControl();
             TabPage newPage = new TabPage();
             newPage.Text = "Workspace " + (tabControl.TabPages.Count + 1).ToString();
-            newPage.Controls.Add(userControlTabPage);
+            newPage.Controls.Add(UserControlSAI);
             tabControl.TabPages.Add(newPage);
             tabControl.TabPages.Add(new TabPage("+"));
-            userControls.Add(userControlTabPage);
+            userControls.Add(UserControlSAI);
 
             if (!first)
                 tabControl.SelectedIndex = tabControl.TabPages.Count - 2;

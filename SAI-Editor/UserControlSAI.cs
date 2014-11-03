@@ -23,7 +23,7 @@ using SAI_Editor.Forms;
 
 namespace SAI_Editor
 {
-    public partial class UserControlTabPage : UserControl
+    public partial class UserControlSAI : UserControl
     {
         public int lastSmartScriptIdOfScript = 0, previousLinkFrom = -1;
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
@@ -37,7 +37,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Timer timerCheckForInternetConnection = new System.Windows.Forms.Timer();
         private MainForm MainForm;
 
-        public UserControlTabPage()
+        public UserControlSAI()
         {
             InitializeComponent();
         }
@@ -93,7 +93,7 @@ namespace SAI_Editor
             }
         }
 
-        public void UserControlTabPage_KeyDown(object sender, KeyEventArgs e)
+        public void UserControlSAI_KeyDown(object sender, KeyEventArgs e)
         {
             if (!textBoxEntryOrGuid.Focused)
                 return;
@@ -3221,7 +3221,7 @@ namespace SAI_Editor
 
         private void SynchronizeAllUserControlCheckBoxes()
         {
-            foreach (UserControlTabPage uc in MainForm.userControls)
+            foreach (UserControlSAI uc in MainForm.userControls)
             {
                 if (uc == this)
                     continue;
