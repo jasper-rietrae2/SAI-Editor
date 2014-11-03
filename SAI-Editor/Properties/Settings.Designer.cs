@@ -334,5 +334,17 @@ namespace SAI_Editor.Properties {
                 this["ShowBasicInfo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastStaticInfoPerTab {
+            get {
+                return ((string)(this["LastStaticInfoPerTab"]));
+            }
+            set {
+                this["LastStaticInfoPerTab"] = value;
+            }
+        }
     }
 }

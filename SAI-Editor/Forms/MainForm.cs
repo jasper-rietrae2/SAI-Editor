@@ -69,7 +69,10 @@ namespace SAI_Editor.Forms
 
             //! HAS to be called before try-catch block
             tabControl.TabPages.Clear(); //! We only have it in the designer to get an idea of how stuff looks
-            CreateTabControl(true);
+
+            //! Create all tabs based on settings
+            for (int i = 1; i < Settings.Default.LastStaticInfoPerTab.Split(',').Length; ++i)
+                CreateTabControl(tabControl.TabPages.Count == 0);
 
             try
             {
@@ -642,16 +645,26 @@ namespace SAI_Editor.Forms
             {
                 uc.panelStaticTooltipTypes.Visible = false;
                 uc.panelStaticTooltipParameters.Visible = false;
-            }
-
-            foreach (UserControlSAI uc in userControls)
-            {
                 uc.checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
                 uc.checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
                 uc.checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
                 uc.checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
                 uc.checkBoxUsePhaseColors.Checked = Settings.Default.PhaseHighlighting;
                 uc.checkBoxUseStaticTooltips.Checked = Settings.Default.ShowTooltipsStaticly;
+            }
+
+            //1234-1,5555-3
+            string[] lastStaticInfoPerTab = Settings.Default.LastStaticInfoPerTab.Split(',');
+
+            for (int i = 0; i < lastStaticInfoPerTab.Length; ++i)
+            {
+                string[] splitSections = lastStaticInfoPerTab[i].Split('-');
+
+                if (splitSections.Length == 1 && splitSections[0] == String.Empty)
+                    continue;
+
+                userControls[i].textBoxEntryOrGuid.Text = splitSections[0];
+                userControls[i].comboBoxSourceType.SelectedIndex = Convert.ToInt32(splitSections[1]);
             }
 
             foreach (UserControlSAI uc in userControls)
@@ -788,6 +801,14 @@ namespace SAI_Editor.Forms
             Settings.Default.AllowChangingEntryAndSourceType = GetActiveUserControl().checkBoxAllowChangingEntryAndSourceType.Checked;
             Settings.Default.PhaseHighlighting = GetActiveUserControl().checkBoxUsePhaseColors.Checked;
             Settings.Default.ShowTooltipsStaticly = GetActiveUserControl().checkBoxUseStaticTooltips.Checked;
+
+            string lastStaticInfoPerTab = String.Empty;
+
+            //entryorguid,sourceTypeIndex,entryorguid,sourceTypeIndex,entryorguid,sourceTypeIndex,....
+            foreach (UserControlSAI uc in userControls)
+                lastStaticInfoPerTab += uc.textBoxEntryOrGuid.Text + "-" + uc.comboBoxSourceType.SelectedIndex + ",";
+
+            Settings.Default.LastStaticInfoPerTab = lastStaticInfoPerTab;
 
             if (formState == FormState.FormStateLogin)
             {

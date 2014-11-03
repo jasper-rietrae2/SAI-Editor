@@ -191,10 +191,10 @@
     <Compile Include="Classes\CustomControls\DetailedToolTip.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="UserControlSAI.cs">
+    <Compile Include="UserControls\UserControlSAI.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UserControlSAI.Designer.cs">
+    <Compile Include="UserControls\UserControlSAI.Designer.cs">
       <DependentUpon>UserControlSAI.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Forms\AboutForm.resx">
@@ -249,7 +249,7 @@
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControlSAI.resx">
+    <EmbeddedResource Include="UserControls\UserControlSAI.resx">
       <DependentUpon>UserControlSAI.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
