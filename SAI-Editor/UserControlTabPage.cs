@@ -689,6 +689,7 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_PHASE:  //! Event phase 1-6
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE: //! Emote entry 1-6
+                case SmartAction.SMART_ACTION_START_CLOSEST_WAYPOINT: //! Wp 1-6
                     buttonActionParamOneSearch.Visible = true;
                     buttonActionParamTwoSearch.Visible = true;
                     buttonActionParamThreeSearch.Visible = true;
@@ -742,6 +743,8 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_ADD_NPC_FLAG: //! Npc flags
                 case SmartAction.SMART_ACTION_REMOVE_NPC_FLAG: //! Npc flags
                 case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE: //! AI template
+                case SmartAction.SMART_ACTION_GAME_EVENT_START: //! Game event entry
+                case SmartAction.SMART_ACTION_GAME_EVENT_STOP: //! Game event entry
                     buttonActionParamOneSearch.Visible = true;
                     break;
             }
@@ -1674,6 +1677,13 @@ namespace SAI_Editor
                     }
 
                     break;
+                case SmartAction.SMART_ACTION_GAME_EVENT_START: //! Game event entry
+                case SmartAction.SMART_ACTION_GAME_EVENT_STOP: //! Game event entry
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent);
+                    break;
+                case SmartAction.SMART_ACTION_START_CLOSEST_WAYPOINT:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint);
+                    break;
             }
         }
 
@@ -1783,6 +1793,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_CALL_TIMED_ACTIONLIST:
                     ShowSelectForm("SmartActionlistTimerUpdateType", textBoxToChange);
                     break;
+                case SmartAction.SMART_ACTION_START_CLOSEST_WAYPOINT:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint);
+                    break;
             }
         }
 
@@ -1806,6 +1819,9 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote);
+                    break;
+                case SmartAction.SMART_ACTION_START_CLOSEST_WAYPOINT:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint);
                     break;
             }
         }
@@ -1831,6 +1847,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote);
                     break;
+                case SmartAction.SMART_ACTION_START_CLOSEST_WAYPOINT:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint);
+                    break;
             }
         }
 
@@ -1849,6 +1868,9 @@ namespace SAI_Editor
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote);
                     break;
+                case SmartAction.SMART_ACTION_START_CLOSEST_WAYPOINT:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint);
+                    break;
             }
         }
 
@@ -1866,6 +1888,9 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_RANDOM_EMOTE:
                     ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeEmote);
+                    break;
+                case SmartAction.SMART_ACTION_START_CLOSEST_WAYPOINT:
+                    ShowSearchFromDatabaseForm(textBoxToChange, DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint);
                     break;
             }
         }

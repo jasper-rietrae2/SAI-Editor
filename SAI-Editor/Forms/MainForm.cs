@@ -197,6 +197,7 @@ namespace SAI_Editor.Forms
 
             updateSurveyThread = new Thread(UpdateSurvey);
             updateSurveyThread.Start();
+            //Task.Run(async () => UpdateSurvey());
 
             checkIfUpdatesAvailableThread = new Thread(CheckIfUpdatesAvailable);
             checkIfUpdatesAvailableThread.Start();
@@ -1110,7 +1111,7 @@ namespace SAI_Editor.Forms
             userControlTabPage.Parent = this;
             userControlTabPage.LoadUserControl();
             TabPage newPage = new TabPage();
-            newPage.Text = "Tab " + (tabControl.TabPages.Count + 1).ToString();
+            newPage.Text = "Workspace " + (tabControl.TabPages.Count + 1).ToString();
             newPage.Controls.Add(userControlTabPage);
             tabControl.TabPages.Add(newPage);
             tabControl.TabPages.Add(new TabPage("+"));
