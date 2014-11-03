@@ -570,13 +570,16 @@ namespace SAI_Editor.Enumerators
     [Flags]
     public enum SmartPhaseMasks
     {
-        SMART_EVENT_PHASE_ALWAYS            = 0x00,
-        SMART_EVENT_PHASE_1                 = 0x01,
-        SMART_EVENT_PHASE_2                 = 0x02,
-        SMART_EVENT_PHASE_3                 = 0x04,
-        SMART_EVENT_PHASE_4                 = 0x08,
-        SMART_EVENT_PHASE_5                 = 0x10,
-        SMART_EVENT_PHASE_6                 = 0x20,
+        SMART_EVENT_PHASE_ALWAYS            = 0x000,
+        SMART_EVENT_PHASE_1                 = 0x001,
+        SMART_EVENT_PHASE_2                 = 0x002,
+        SMART_EVENT_PHASE_3                 = 0x004,
+        SMART_EVENT_PHASE_4                 = 0x008,
+        SMART_EVENT_PHASE_5                 = 0x010,
+        SMART_EVENT_PHASE_6                 = 0x020,
+        SMART_EVENT_PHASE_7                 = 0x040,
+        SMART_EVENT_PHASE_8                 = 0x080,
+        SMART_EVENT_PHASE_9                 = 0x100,
     }
 
     [Flags]
@@ -599,6 +602,21 @@ namespace SAI_Editor.Enumerators
         PHASEMASK_15       = 0x4000,
         // etc....
         PHASEMASK_ANYWHERE = ~0,   //! -1, 0xFFFFFFFF, etc.
+    }
+
+    enum SMART_EVENT_PHASE_BITS
+    {
+        SMART_EVENT_PHASE_ALWAYS_BIT   = 0,
+        SMART_EVENT_PHASE_1_BIT        = 1,
+        SMART_EVENT_PHASE_2_BIT        = 2,
+        SMART_EVENT_PHASE_3_BIT        = 4,
+        SMART_EVENT_PHASE_4_BIT        = 8,
+        SMART_EVENT_PHASE_5_BIT        = 16,
+        SMART_EVENT_PHASE_6_BIT        = 32,
+        SMART_EVENT_PHASE_7_BIT        = 64,
+        SMART_EVENT_PHASE_8_BIT        = 128,
+        SMART_EVENT_PHASE_9_BIT        = 256,
+        SMART_EVENT_PHASE_ALL          = SMART_EVENT_PHASE_1_BIT + SMART_EVENT_PHASE_2_BIT + SMART_EVENT_PHASE_3_BIT + SMART_EVENT_PHASE_4_BIT + SMART_EVENT_PHASE_5_BIT + SMART_EVENT_PHASE_6_BIT
     }
 
     public enum PowerTypes : int
