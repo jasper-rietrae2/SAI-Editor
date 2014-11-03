@@ -103,6 +103,8 @@ namespace SAI_Editor.Classes
             smartEventStrings.Add(SmartEvent.SMART_EVENT_IS_BEHIND_TARGET, "On Behind Target");
             smartEventStrings.Add(SmartEvent.SMART_EVENT_GO_STATE_CHANGED, "On Gameobject State Changed");
             smartEventStrings.Add(SmartEvent.SMART_EVENT_ON_SPELLCLICK, "On Spellclick");
+            smartEventStrings.Add(SmartEvent.SMART_EVENT_DISTANCE_CREATURE, "On Distance To Creature");
+            smartEventStrings.Add(SmartEvent.SMART_EVENT_DISTANCE_GAMEOBJECT, "On Distance To GameObject");
             smartEventStrings.Add(SmartEvent.SMART_EVENT_LINK, "_previousLineComment_");
 
             //! Filling up actions
