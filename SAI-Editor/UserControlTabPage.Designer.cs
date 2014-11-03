@@ -449,7 +449,7 @@
             "ACTION_SET_FLY",
             "ACTION_SET_SWIM",
             "ACTION_TELEPORT",
-            "ACTION_STORE_VARIABLE_DECIMAL",
+            "ACTION_UNUSED_63",
             "ACTION_STORE_TARGET_LIST",
             "ACTION_WP_RESUME",
             "ACTION_SET_ORIENTATION",
