@@ -67,6 +67,7 @@ namespace SAI_Editor.Forms
             if (MainFormHeight > SystemInformation.VirtualScreen.Height)
                 MainFormHeight = SystemInformation.VirtualScreen.Height;
 
+            tabControl.DisplayStyleProvider.ShowTabCloser = true;
             //! HAS to be called before try-catch block
             tabControl.TabPages.Clear(); //! We only have it in the designer to get an idea of how stuff looks
             CreateTabControl(true);
