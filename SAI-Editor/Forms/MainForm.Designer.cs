@@ -117,7 +117,7 @@
             this.pictureBoxLoadScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
             this.timerExpandOrContract = new System.Windows.Forms.Timer(this.components);
             this.timerShowStaticTooltips = new System.Windows.Forms.Timer(this.components);
-            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabControl = new System.Windows.Forms.CustomTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
@@ -2799,7 +2799,7 @@
         public System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem conditionEditorToolStripMenuItem;
         public Classes.CustomControls.CustomPanel customPanelLogin;
-        public System.Windows.Forms.TabControl tabControl;
+        public System.Windows.Forms.CustomTabControl tabControl;
         public System.Windows.Forms.TabPage tabPage1;
         public System.Windows.Forms.GroupBox groupBoxStaticScriptInfo;
         public Classes.CustomControls.PictureBoxDisableable pictureBoxCreateScript;
