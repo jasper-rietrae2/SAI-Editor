@@ -247,6 +247,7 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.deleteAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
@@ -361,7 +362,8 @@
             this.menuItemCopySelectedRow,
             this.menuItemPasteLastCopiedRow,
             this.toolStripSeparator5,
-            this.menuItemSearchForSomething});
+            this.menuItemSearchForSomething,
+            this.deleteAllToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -1006,6 +1008,24 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPage1);
+            // 
+            // 
+            // 
+            this.tabControl.DisplayStyleProvider.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.tabControl.DisplayStyleProvider.BorderColorHot = System.Drawing.SystemColors.ControlDark;
+            this.tabControl.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
+            this.tabControl.DisplayStyleProvider.CloserColor = System.Drawing.Color.Empty;
+            this.tabControl.DisplayStyleProvider.FocusTrack = true;
+            this.tabControl.DisplayStyleProvider.HotTrack = true;
+            this.tabControl.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tabControl.DisplayStyleProvider.Opacity = 1F;
+            this.tabControl.DisplayStyleProvider.Overlap = 0;
+            this.tabControl.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
+            this.tabControl.DisplayStyleProvider.ShowTabCloser = false;
+            this.tabControl.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
+            this.tabControl.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
+            this.tabControl.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
+            this.tabControl.HotTrack = true;
             this.tabControl.Location = new System.Drawing.Point(11, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -1026,10 +1046,10 @@
             this.tabPage1.Controls.Add(this.listViewSmartScripts);
             this.tabPage1.Controls.Add(this.panelStaticTooltipTypes);
             this.tabPage1.Controls.Add(this.panelStaticTooltipParameters);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 23);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(926, 440);
+            this.tabPage1.Size = new System.Drawing.Size(926, 439);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Workspace 1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -2633,6 +2653,12 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // deleteAllToolStripMenuItem
+            // 
+            this.deleteAllToolStripMenuItem.Name = "deleteAllToolStripMenuItem";
+            this.deleteAllToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
+            this.deleteAllToolStripMenuItem.Text = "Delete all";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2910,6 +2936,7 @@
         public System.Windows.Forms.Label labelStaticTooltipTextParameters;
         public System.Windows.Forms.Label labelStaticTooltipParameterTitleTypes;
         public System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem deleteAllToolStripMenuItem;
     }
 }
 

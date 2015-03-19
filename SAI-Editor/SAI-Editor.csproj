@@ -76,6 +76,9 @@
     <Compile Include="Classes\CustomControls\CustomPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\CustomControls\CustomTabControlX.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\CustomControls\LabelWithTooltip.cs">
       <SubType>Component</SubType>
     </Compile>
