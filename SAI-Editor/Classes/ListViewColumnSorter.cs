@@ -47,8 +47,8 @@ namespace SAI_Editor.Classes
 
             if (listviewX != listviewY)
             {
-                if (XConverter.ToInt32(listviewX.SubItems[ColumnToSort].Text) > 0 && XConverter.ToInt32(listviewY.SubItems[ColumnToSort].Text) > 0)
-                    compareResult = Decimal.Compare(XConverter.ToInt32(listviewX.SubItems[ColumnToSort].Text), XConverter.ToInt32(listviewY.SubItems[ColumnToSort].Text));
+                if (CustomConverter.ToInt32(listviewX.SubItems[ColumnToSort].Text) > 0 && CustomConverter.ToInt32(listviewY.SubItems[ColumnToSort].Text) > 0)
+                    compareResult = Decimal.Compare(CustomConverter.ToInt32(listviewX.SubItems[ColumnToSort].Text), CustomConverter.ToInt32(listviewY.SubItems[ColumnToSort].Text));
                 else
                     compareResult = String.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
             }

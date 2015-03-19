@@ -100,7 +100,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\CustomListViewItem.cs" />
-    <Compile Include="Classes\XConverter.cs" />
+    <Compile Include="Classes\CustomConverter.cs" />
     <Compile Include="Forms\AboutForm.cs">
       <SubType>Form</SubType>
     </Compile>

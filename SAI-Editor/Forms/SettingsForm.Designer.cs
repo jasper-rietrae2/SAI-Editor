@@ -116,7 +116,7 @@
             // checkBoxDuplicatePrimaryFields
             // 
             this.checkBoxDuplicatePrimaryFields.AutoSize = true;
-            this.checkBoxDuplicatePrimaryFields.Location = new System.Drawing.Point(251, 52);
+            this.checkBoxDuplicatePrimaryFields.Location = new System.Drawing.Point(253, 52);
             this.checkBoxDuplicatePrimaryFields.Name = "checkBoxDuplicatePrimaryFields";
             this.checkBoxDuplicatePrimaryFields.Size = new System.Drawing.Size(253, 17);
             this.checkBoxDuplicatePrimaryFields.TabIndex = 10;

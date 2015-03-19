@@ -2,7 +2,7 @@
 
 namespace SAI_Editor.Classes
 {
-    static class XConverter
+    static class CustomConverter
     {
         public static Int32 ToInt32(object str)
         {

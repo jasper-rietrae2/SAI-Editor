@@ -144,7 +144,7 @@ namespace SAI_Editor.Forms
                     SAI_Editor_Manager.Instance.connString = new MySqlConnectionStringBuilder();
                     SAI_Editor_Manager.Instance.connString.Server = textBoxHost.Text;
                     SAI_Editor_Manager.Instance.connString.UserID = textBoxUsername.Text;
-                    SAI_Editor_Manager.Instance.connString.Port = XConverter.ToUInt32(textBoxPort.Text);
+                    SAI_Editor_Manager.Instance.connString.Port = CustomConverter.ToUInt32(textBoxPort.Text);
                     SAI_Editor_Manager.Instance.connString.Database = textBoxWorldDatabase.Text;
 
                     if (textBoxPassword.Text.Length > 0)
@@ -301,8 +301,8 @@ namespace SAI_Editor.Forms
                             using (StreamReader streamReaderVersion = new StreamReader(streamVersion))
                             {
                                 string newAppVersionStr = streamReaderVersion.ReadToEnd();
-                                int newAppVersion = XConverter.ToInt32(newAppVersionStr.Replace("v", String.Empty).Replace(".", String.Empty));
-                                int currAppVersion = XConverter.ToInt32(applicationVersion.Replace("v", String.Empty).Replace(".", String.Empty));
+                                int newAppVersion = CustomConverter.ToInt32(newAppVersionStr.Replace("v", String.Empty).Replace(".", String.Empty));
+                                int currAppVersion = CustomConverter.ToInt32(applicationVersion.Replace("v", String.Empty).Replace(".", String.Empty));
 
                                 if (newAppVersion > 0 && currAppVersion > 0 && newAppVersion > currAppVersion)
                                 {
@@ -481,7 +481,7 @@ namespace SAI_Editor.Forms
                 SAI_Editor_Manager.Instance.connString = new MySqlConnectionStringBuilder();
                 SAI_Editor_Manager.Instance.connString.Server = textBoxHost.Text;
                 SAI_Editor_Manager.Instance.connString.UserID = textBoxUsername.Text;
-                SAI_Editor_Manager.Instance.connString.Port = XConverter.ToUInt32(textBoxPort.Text);
+                SAI_Editor_Manager.Instance.connString.Port = CustomConverter.ToUInt32(textBoxPort.Text);
                 SAI_Editor_Manager.Instance.connString.Database = textBoxWorldDatabase.Text;
 
                 if (textBoxPassword.Text.Length > 0)
@@ -520,7 +520,7 @@ namespace SAI_Editor.Forms
                 Settings.Default.Password = textBoxPassword.Text.Length == 0 ? String.Empty : textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
-                Settings.Default.Port = XConverter.ToUInt32(textBoxPort.Text);
+                Settings.Default.Port = CustomConverter.ToUInt32(textBoxPort.Text);
                 Settings.Default.UseWorldDatabase = true;
                 Settings.Default.Save();
             }
@@ -763,7 +763,7 @@ namespace SAI_Editor.Forms
             buttonSearchWorldDb.Enabled = false;
 
             SAI_Editor_Manager.Instance.ResetWorldDatabase(false);
-            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
+            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, CustomConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text);
 
             if (databaseNames != null && databaseNames.Count > 0)
                 using (SelectDatabaseForm selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
@@ -837,7 +837,7 @@ namespace SAI_Editor.Forms
                 Settings.Default.User = textBoxUsername.Text;
                 Settings.Default.Password = textBoxPassword.Text.Length == 0 ? String.Empty : textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
-                Settings.Default.Port = XConverter.ToUInt32(textBoxPort.Text);
+                Settings.Default.Port = CustomConverter.ToUInt32(textBoxPort.Text);
                 Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
             }

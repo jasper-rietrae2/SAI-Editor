@@ -699,18 +699,18 @@ namespace SAI_Editor.Forms
         {
             Condition condition = new Condition();
             condition.SourceTypeOrReferenceId = comboBoxConditionSourceTypes.SelectedIndex;
-            condition.SourceGroup = XConverter.ToInt32(textBoxSourceGroup.Text);
-            condition.SourceEntry = XConverter.ToInt32(textBoxSourceEntry.Text);
-            condition.SourceId = XConverter.ToInt32(textBoxSourceId.Text);
-            condition.ElseGroup = XConverter.ToInt32(textBoxElseGroup.Text);
+            condition.SourceGroup = CustomConverter.ToInt32(textBoxSourceGroup.Text);
+            condition.SourceEntry = CustomConverter.ToInt32(textBoxSourceEntry.Text);
+            condition.SourceId = CustomConverter.ToInt32(textBoxSourceId.Text);
+            condition.ElseGroup = CustomConverter.ToInt32(textBoxElseGroup.Text);
             condition.ConditionTypeOrReference = comboBoxConditionTypes.SelectedIndex;
             condition.ConditionTarget = comboBoxConditionTarget.SelectedIndex;
-            condition.ConditionValue1 = XConverter.ToInt32(textBoxCondValue1.Text);
-            condition.ConditionValue2 = XConverter.ToInt32(textBoxCondValue2.Text);
-            condition.ConditionValue3 = XConverter.ToInt32(textBoxCondValue3.Text);
-            condition.NegativeCondition = XConverter.ToInt32(textBoxCondValue4.Text);
-            condition.ErrorType = XConverter.ToInt32(textBoxErrorType.Text);
-            condition.ErrorTextId = XConverter.ToInt32(textBoxErrorTextId.Text);
+            condition.ConditionValue1 = CustomConverter.ToInt32(textBoxCondValue1.Text);
+            condition.ConditionValue2 = CustomConverter.ToInt32(textBoxCondValue2.Text);
+            condition.ConditionValue3 = CustomConverter.ToInt32(textBoxCondValue3.Text);
+            condition.NegativeCondition = CustomConverter.ToInt32(textBoxCondValue4.Text);
+            condition.ErrorType = CustomConverter.ToInt32(textBoxErrorType.Text);
+            condition.ErrorTextId = CustomConverter.ToInt32(textBoxErrorTextId.Text);
             condition.ScriptName = textBoxScriptName.Text;
             condition.Comment = textBoxComment.Text;
             conditions.Add(condition);

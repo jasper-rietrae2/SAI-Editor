@@ -252,7 +252,7 @@ namespace SAI_Editor
 
             try
             {
-                List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(XConverter.ToInt32(entryOrGuid), (int)sourceType);
+                List<SmartScript> smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(CustomConverter.ToInt32(entryOrGuid), (int)sourceType);
 
                 if (smartScripts == null)
                 {
@@ -260,7 +260,7 @@ namespace SAI_Editor
                     {
                         bool showNormalErrorMessage = false;
                         string message = String.Format("The entryorguid '{0}' could not be found in the smart_scripts table for the given source_type!", entryOrGuid);
-                        smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScriptsWithoutSourceType(XConverter.ToInt32(entryOrGuid), (int)sourceType);
+                        smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScriptsWithoutSourceType(CustomConverter.ToInt32(entryOrGuid), (int)sourceType);
 
                         if (smartScripts != null)
                         {
@@ -280,9 +280,9 @@ namespace SAI_Editor
                             {
                                 case SourceTypes.SourceTypeCreature:
                                     //! Get `id` from `creature` and check it for SAI
-                                    if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
+                                    if (CustomConverter.ToInt32(entryOrGuid) < 0) //! Guid
                                     {
-                                        int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-XConverter.ToInt32(entryOrGuid));
+                                        int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetCreatureIdByGuid(-CustomConverter.ToInt32(entryOrGuid));
                                         smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeCreature);
 
                                         if (smartScripts != null)
@@ -303,7 +303,7 @@ namespace SAI_Editor
                                     //! Get all `guid` instances from `creature` for the given `id` and allow user to select a script
                                     else //! Non-guid (entry)
                                     {
-                                        int actualEntry = XConverter.ToInt32(entryOrGuid);
+                                        int actualEntry = CustomConverter.ToInt32(entryOrGuid);
                                         List<Creature> creatures = await SAI_Editor_Manager.Instance.worldDatabase.GetCreaturesById(actualEntry);
 
                                         if (creatures != null)
@@ -336,9 +336,9 @@ namespace SAI_Editor
                                     break;
                                 case SourceTypes.SourceTypeGameobject:
                                     //! Get `id` from `gameobject` and check it for SAI
-                                    if (XConverter.ToInt32(entryOrGuid) < 0) //! Guid
+                                    if (CustomConverter.ToInt32(entryOrGuid) < 0) //! Guid
                                     {
-                                        int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-XConverter.ToInt32(entryOrGuid));
+                                        int entry = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectIdByGuid(-CustomConverter.ToInt32(entryOrGuid));
                                         smartScripts = await SAI_Editor_Manager.Instance.worldDatabase.GetSmartScripts(entry, (int)SourceTypes.SourceTypeGameobject);
 
                                         if (smartScripts != null)
@@ -359,7 +359,7 @@ namespace SAI_Editor
                                     //! Get all `guid` instances from `gameobject` for the given `id` and allow user to select a script
                                     else //! Non-guid (entry)
                                     {
-                                        int actualEntry = XConverter.ToInt32(entryOrGuid);
+                                        int actualEntry = CustomConverter.ToInt32(entryOrGuid);
                                         List<Gameobject> gameobjects = await SAI_Editor_Manager.Instance.worldDatabase.GetGameobjectsById(actualEntry);
 
                                         if (gameobjects != null)
@@ -1104,26 +1104,26 @@ namespace SAI_Editor
             else
                 newSmartScript.id = -1;
 
-            newSmartScript.link = XConverter.ToInt32(textBoxLinkTo.Text);
-            newSmartScript.event_type = XConverter.ToInt32(textBoxEventType.Text);
-            newSmartScript.event_phase_mask = XConverter.ToInt32(textBoxEventPhasemask.Text);
-            newSmartScript.event_chance = XConverter.ToInt32(textBoxEventChance.Value);
-            newSmartScript.event_flags = XConverter.ToInt32(textBoxEventFlags.Text);
-            newSmartScript.event_param1 = XConverter.ToInt32(textBoxEventParam1.Text);
-            newSmartScript.event_param2 = XConverter.ToInt32(textBoxEventParam2.Text);
-            newSmartScript.event_param3 = XConverter.ToInt32(textBoxEventParam3.Text);
-            newSmartScript.event_param4 = XConverter.ToInt32(textBoxEventParam4.Text);
-            newSmartScript.action_type = XConverter.ToInt32(textBoxActionType.Text);
-            newSmartScript.action_param1 = XConverter.ToInt32(textBoxActionParam1.Text);
-            newSmartScript.action_param2 = XConverter.ToInt32(textBoxActionParam2.Text);
-            newSmartScript.action_param3 = XConverter.ToInt32(textBoxActionParam3.Text);
-            newSmartScript.action_param4 = XConverter.ToInt32(textBoxActionParam4.Text);
-            newSmartScript.action_param5 = XConverter.ToInt32(textBoxActionParam5.Text);
-            newSmartScript.action_param6 = XConverter.ToInt32(textBoxActionParam6.Text);
-            newSmartScript.target_type = XConverter.ToInt32(textBoxTargetType.Text);
-            newSmartScript.target_param1 = XConverter.ToInt32(textBoxTargetParam1.Text);
-            newSmartScript.target_param2 = XConverter.ToInt32(textBoxTargetParam2.Text);
-            newSmartScript.target_param3 = XConverter.ToInt32(textBoxTargetParam3.Text);
+            newSmartScript.link = CustomConverter.ToInt32(textBoxLinkTo.Text);
+            newSmartScript.event_type = CustomConverter.ToInt32(textBoxEventType.Text);
+            newSmartScript.event_phase_mask = CustomConverter.ToInt32(textBoxEventPhasemask.Text);
+            newSmartScript.event_chance = CustomConverter.ToInt32(textBoxEventChance.Value);
+            newSmartScript.event_flags = CustomConverter.ToInt32(textBoxEventFlags.Text);
+            newSmartScript.event_param1 = CustomConverter.ToInt32(textBoxEventParam1.Text);
+            newSmartScript.event_param2 = CustomConverter.ToInt32(textBoxEventParam2.Text);
+            newSmartScript.event_param3 = CustomConverter.ToInt32(textBoxEventParam3.Text);
+            newSmartScript.event_param4 = CustomConverter.ToInt32(textBoxEventParam4.Text);
+            newSmartScript.action_type = CustomConverter.ToInt32(textBoxActionType.Text);
+            newSmartScript.action_param1 = CustomConverter.ToInt32(textBoxActionParam1.Text);
+            newSmartScript.action_param2 = CustomConverter.ToInt32(textBoxActionParam2.Text);
+            newSmartScript.action_param3 = CustomConverter.ToInt32(textBoxActionParam3.Text);
+            newSmartScript.action_param4 = CustomConverter.ToInt32(textBoxActionParam4.Text);
+            newSmartScript.action_param5 = CustomConverter.ToInt32(textBoxActionParam5.Text);
+            newSmartScript.action_param6 = CustomConverter.ToInt32(textBoxActionParam6.Text);
+            newSmartScript.target_type = CustomConverter.ToInt32(textBoxTargetType.Text);
+            newSmartScript.target_param1 = CustomConverter.ToInt32(textBoxTargetParam1.Text);
+            newSmartScript.target_param2 = CustomConverter.ToInt32(textBoxTargetParam2.Text);
+            newSmartScript.target_param3 = CustomConverter.ToInt32(textBoxTargetParam3.Text);
             newSmartScript.target_x = textBoxTargetX.Text;
             newSmartScript.target_y = textBoxTargetY.Text;
             newSmartScript.target_z = textBoxTargetZ.Text;
@@ -1221,10 +1221,10 @@ namespace SAI_Editor
                 {
                     foreach (ListViewItem item in listViewSmartScripts.Items)
                         if (item.Text == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
-                            lastSmartScriptIdOfScript = XConverter.ToInt32(item.SubItems[2].Text);
+                            lastSmartScriptIdOfScript = CustomConverter.ToInt32(item.SubItems[2].Text);
                 }
                 else
-                    lastSmartScriptIdOfScript = XConverter.ToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
+                    lastSmartScriptIdOfScript = CustomConverter.ToInt32(listViewSmartScripts.Items[listViewSmartScripts.Items.Count - 1].SubItems[2].Text);
             }
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
@@ -1517,7 +1517,7 @@ namespace SAI_Editor
             {
                 case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE:
                     //! This button is different based on the number in the first parameter field
-                    switch ((SmartAiTemplates)XConverter.ToInt32(textBoxActionParam1.Text))
+                    switch ((SmartAiTemplates)CustomConverter.ToInt32(textBoxActionParam1.Text))
                     {
                         case SmartAiTemplates.SMARTAI_TEMPLATE_CASTER:
                         case SmartAiTemplates.SMARTAI_TEMPLATE_TURRET:
@@ -1701,7 +1701,7 @@ namespace SAI_Editor
 
             labelActionParam1.Text = "Template entry";
             buttonActionParamOneSearch.Visible = true;
-            int newTemplateId = XConverter.ToInt32(textBoxActionParam1.Text);
+            int newTemplateId = CustomConverter.ToInt32(textBoxActionParam1.Text);
 
             switch ((SmartAiTemplates)newTemplateId)
             {
@@ -1766,7 +1766,7 @@ namespace SAI_Editor
                     break;
                 case SmartAction.SMART_ACTION_INSTALL_AI_TEMPLATE:
                     //! This button is different based on the number in the first parameter field
-                    switch ((SmartAiTemplates)XConverter.ToInt32(textBoxActionParam1.Text))
+                    switch ((SmartAiTemplates)CustomConverter.ToInt32(textBoxActionParam1.Text))
                     {
                         case SmartAiTemplates.SMARTAI_TEMPLATE_CASTER:
                         case SmartAiTemplates.SMARTAI_TEMPLATE_TURRET:
@@ -2000,7 +2000,7 @@ namespace SAI_Editor
                     return;
                 }
 
-                string aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(XConverter.ToInt32(textBoxEntryOrGuid.Text), (int)GetSourceTypeByIndex());
+                string aiName = await SAI_Editor_Manager.Instance.worldDatabase.GetObjectAiName(CustomConverter.ToInt32(textBoxEntryOrGuid.Text), (int)GetSourceTypeByIndex());
 
                 if (!SAI_Editor_Manager.Instance.IsAiNameSmartAi(aiName))
                 {
@@ -2055,7 +2055,7 @@ namespace SAI_Editor
                     return;
                 }
 
-                int linkTo = XConverter.ToInt32(textBoxLinkTo.Text);
+                int linkTo = CustomConverter.ToInt32(textBoxLinkTo.Text);
                 listViewSmartScripts.SelectedScript.link = linkTo;
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
@@ -2087,7 +2087,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.event_phase_mask = XConverter.ToInt32(textBoxEventPhasemask.Text);
+                listViewSmartScripts.SelectedScript.event_phase_mask = CustomConverter.ToInt32(textBoxEventPhasemask.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2107,7 +2107,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.event_flags = XConverter.ToInt32(textBoxEventFlags.Text);
+                listViewSmartScripts.SelectedScript.event_flags = CustomConverter.ToInt32(textBoxEventFlags.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2115,7 +2115,7 @@ namespace SAI_Editor
 
         private async void textBoxLinkFrom_TextChanged(object sender, EventArgs e)
         {
-            int newLinkFrom = 0;// XConverter.ToInt32(textBoxLinkFrom.Text);
+            int newLinkFrom = 0;// CustomConverter.ToInt32(textBoxLinkFrom.Text);
 
             try
             {
@@ -2171,7 +2171,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.event_param1 = XConverter.ToInt32(textBoxEventParam1.Text);
+                listViewSmartScripts.SelectedScript.event_param1 = CustomConverter.ToInt32(textBoxEventParam1.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2181,7 +2181,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.event_param2 = XConverter.ToInt32(textBoxEventParam2.Text);
+                listViewSmartScripts.SelectedScript.event_param2 = CustomConverter.ToInt32(textBoxEventParam2.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2191,7 +2191,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.event_param3 = XConverter.ToInt32(textBoxEventParam3.Text);
+                listViewSmartScripts.SelectedScript.event_param3 = CustomConverter.ToInt32(textBoxEventParam3.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2201,7 +2201,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.event_param4 = XConverter.ToInt32(textBoxEventParam4.Text);
+                listViewSmartScripts.SelectedScript.event_param4 = CustomConverter.ToInt32(textBoxEventParam4.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2214,7 +2214,7 @@ namespace SAI_Editor
 
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.action_param1 = XConverter.ToInt32(textBoxActionParam1.Text);
+                listViewSmartScripts.SelectedScript.action_param1 = CustomConverter.ToInt32(textBoxActionParam1.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2224,7 +2224,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.action_param2 = XConverter.ToInt32(textBoxActionParam2.Text);
+                listViewSmartScripts.SelectedScript.action_param2 = CustomConverter.ToInt32(textBoxActionParam2.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2234,7 +2234,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.action_param3 = XConverter.ToInt32(textBoxActionParam3.Text);
+                listViewSmartScripts.SelectedScript.action_param3 = CustomConverter.ToInt32(textBoxActionParam3.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2244,7 +2244,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.action_param4 = XConverter.ToInt32(textBoxActionParam4.Text);
+                listViewSmartScripts.SelectedScript.action_param4 = CustomConverter.ToInt32(textBoxActionParam4.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2254,7 +2254,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.action_param5 = XConverter.ToInt32(textBoxActionParam5.Text);
+                listViewSmartScripts.SelectedScript.action_param5 = CustomConverter.ToInt32(textBoxActionParam5.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2264,7 +2264,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.action_param6 = XConverter.ToInt32(textBoxActionParam6.Text);
+                listViewSmartScripts.SelectedScript.action_param6 = CustomConverter.ToInt32(textBoxActionParam6.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2274,7 +2274,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.target_param1 = XConverter.ToInt32(textBoxTargetParam1.Text);
+                listViewSmartScripts.SelectedScript.target_param1 = CustomConverter.ToInt32(textBoxTargetParam1.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2284,7 +2284,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.target_param2 = XConverter.ToInt32(textBoxTargetParam2.Text);
+                listViewSmartScripts.SelectedScript.target_param2 = CustomConverter.ToInt32(textBoxTargetParam2.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2294,7 +2294,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.target_param3 = XConverter.ToInt32(textBoxTargetParam3.Text);
+                listViewSmartScripts.SelectedScript.target_param3 = CustomConverter.ToInt32(textBoxTargetParam3.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }
@@ -2367,7 +2367,7 @@ namespace SAI_Editor
 
             if (checkBoxAllowChangingEntryAndSourceType.Checked && listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.entryorguid = XConverter.ToInt32(textBoxEntryOrGuid.Text);
+                listViewSmartScripts.SelectedScript.entryorguid = CustomConverter.ToInt32(textBoxEntryOrGuid.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
 
@@ -2669,14 +2669,14 @@ namespace SAI_Editor
                 {
                     if (x < 4)
                         if (eventParameters[x].ToString() == sourceSet)
-                            eventParameters[x] = XConverter.ToInt32(sourceSet);
+                            eventParameters[x] = CustomConverter.ToInt32(sourceSet);
 
                     if (actionParameters[x].ToString() == sourceSet)
-                        actionParameters[x] = XConverter.ToInt32(sourceSet);
+                        actionParameters[x] = CustomConverter.ToInt32(sourceSet);
 
                     if (x < 3)
                         if (targetParameters[x].ToString() == sourceSet)
-                            targetParameters[x] = XConverter.ToInt32(sourceSet);
+                            targetParameters[x] = CustomConverter.ToInt32(sourceSet);
                 }
 
                 //! SQL accepts a period instead of a comma for float/double values
@@ -3013,7 +3013,7 @@ namespace SAI_Editor
 
         public void textBoxEventType_MouseWheel(object sender, MouseEventArgs e)
         {
-            int newNumber = XConverter.ToInt32(textBoxEventType.Text);
+            int newNumber = CustomConverter.ToInt32(textBoxEventType.Text);
 
             if (e.Delta > 0)
                 newNumber--;
@@ -3031,7 +3031,7 @@ namespace SAI_Editor
 
         public void textBoxActionType_MouseWheel(object sender, MouseEventArgs e)
         {
-            int newNumber = XConverter.ToInt32(textBoxActionType.Text);
+            int newNumber = CustomConverter.ToInt32(textBoxActionType.Text);
 
             if (e.Delta > 0)
                 newNumber--;
@@ -3049,7 +3049,7 @@ namespace SAI_Editor
 
         public void textBoxTargetType_MouseWheel(object sender, MouseEventArgs e)
         {
-            int newNumber = XConverter.ToInt32(textBoxTargetType.Text);
+            int newNumber = CustomConverter.ToInt32(textBoxTargetType.Text);
 
             if (e.Delta > 0)
                 newNumber--;
@@ -3069,7 +3069,7 @@ namespace SAI_Editor
         {
             if (listViewSmartScripts.SelectedItems.Count > 0)
             {
-                listViewSmartScripts.SelectedScript.id = XConverter.ToInt32(textBoxId.Text);
+                listViewSmartScripts.SelectedScript.id = CustomConverter.ToInt32(textBoxId.Text);
                 listViewSmartScripts.ReplaceScript(listViewSmartScripts.SelectedScript);
                 await GenerateCommentForSmartScript(listViewSmartScripts.SelectedScript);
             }

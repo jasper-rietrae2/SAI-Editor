@@ -24,7 +24,7 @@ namespace SAI_Editor.Forms.SearchForms
 
             if (textBoxToChange != null)
             {
-                long bitmask = XConverter.ToInt64(textBoxToChange.Text);
+                long bitmask = CustomConverter.ToInt64(textBoxToChange.Text);
                 bool anyFlag = false;
 
                 foreach (ListViewItem item in listViewSelectableItems.Items)

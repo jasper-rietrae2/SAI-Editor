@@ -13,7 +13,7 @@ namespace SAI_Editor.Forms
 {
     public partial class SettingsForm : Form
     {
-        private bool closedFormByHand = false;
+        private bool closedFormManually = false;
 
         public SettingsForm()
         {
@@ -46,7 +46,7 @@ namespace SAI_Editor.Forms
         private void buttonSaveSettings_Click(object sender, EventArgs e)
         {
             SaveSettings();
-            closedFormByHand = true;
+            closedFormManually = true;
             Close();
         }
 
@@ -75,7 +75,7 @@ namespace SAI_Editor.Forms
             SAI_Editor_Manager.Instance.connString = new MySqlConnectionStringBuilder();
             SAI_Editor_Manager.Instance.connString.Server = textBoxHost.Text;
             SAI_Editor_Manager.Instance.connString.UserID = textBoxUsername.Text;
-            SAI_Editor_Manager.Instance.connString.Port = XConverter.ToUInt32(textBoxPort.Text);
+            SAI_Editor_Manager.Instance.connString.Port = CustomConverter.ToUInt32(textBoxPort.Text);
             SAI_Editor_Manager.Instance.connString.Database = textBoxWorldDatabase.Text;
 
             if (textBoxPassword.Text.Length > 0)
@@ -98,7 +98,7 @@ namespace SAI_Editor.Forms
                 Settings.Default.User = textBoxUsername.Text;
                 Settings.Default.Password = textBoxPassword.Text.Length == 0 ? String.Empty : textBoxPassword.Text.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(salt));
                 Settings.Default.Database = textBoxWorldDatabase.Text;
-                Settings.Default.Port = textBoxPort.Text.Length > 0 ? XConverter.ToUInt32(textBoxPort.Text) : 0;
+                Settings.Default.Port = textBoxPort.Text.Length > 0 ? CustomConverter.ToUInt32(textBoxPort.Text) : 0;
                 Settings.Default.AutoConnect = checkBoxAutoConnect.Checked;
 
                 if (radioButtonConnectToMySql.Checked)
@@ -108,7 +108,7 @@ namespace SAI_Editor.Forms
             Settings.Default.InstantExpand = checkBoxInstantExpand.Checked;
             Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
             Settings.Default.HidePass = checkBoxHidePass.Checked;
-            Settings.Default.AnimationSpeed = XConverter.ToInt32(textBoxAnimationSpeed.Text);
+            Settings.Default.AnimationSpeed = CustomConverter.ToInt32(textBoxAnimationSpeed.Text);
             Settings.Default.PromptExecuteQuery = checkBoxPromptExecuteQuery.Checked;
             Settings.Default.ChangeStaticInfo = checkBoxChangeStaticInfo.Checked;
             Settings.Default.ShowTooltipsStaticly = checkBoxShowTooltipsStaticly.Checked;
@@ -126,7 +126,7 @@ namespace SAI_Editor.Forms
                 ((MainForm)Owner).textBoxPassword.Text = decryptedPassword;
                 ((MainForm)Owner).textBoxWorldDatabase.Text = textBoxWorldDatabase.Text;
                 ((MainForm)Owner).checkBoxAutoConnect.Checked = checkBoxAutoConnect.Checked;
-                ((MainForm)Owner).expandAndContractSpeed = XConverter.ToInt32(textBoxAnimationSpeed.Text);
+                ((MainForm)Owner).expandAndContractSpeed = CustomConverter.ToInt32(textBoxAnimationSpeed.Text);
                 ((MainForm)Owner).textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
             }
             else if (radioButtonConnectToMySql.Checked) //! Don't report this if there is no connection to be made anyway
@@ -150,7 +150,7 @@ namespace SAI_Editor.Forms
         private void buttonExitSettings_Click(object sender, EventArgs e)
         {
             PromptSaveSettingsOnClose();
-            closedFormByHand = true;
+            closedFormManually = true;
             Close();
         }
 
@@ -158,7 +158,7 @@ namespace SAI_Editor.Forms
         {
             //! Only call this prompt method if the form was closed by the user itself and the form was not
             //! already closed before because we called Form::Close() (by pressing 'Exit' or so).
-            if (e.CloseReason == CloseReason.UserClosing && !closedFormByHand)
+            if (e.CloseReason == CloseReason.UserClosing && !closedFormManually)
                 PromptSaveSettingsOnClose();
         }
 
@@ -192,7 +192,7 @@ namespace SAI_Editor.Forms
                 textBoxPassword.Text == SAI_Editor_Manager.Instance.GetPasswordSetting())
                 return;
 
-            DialogResult dialogResult = MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show("Do you wish to save the edited settings?", "Save settings", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (dialogResult == DialogResult.Yes)
                 SaveSettings();
@@ -235,7 +235,7 @@ namespace SAI_Editor.Forms
             {
                 case Keys.Escape:
                     PromptSaveSettingsOnClose();
-                    closedFormByHand = true;
+                    closedFormManually = true;
                     Close();
                     break;
             }
@@ -248,7 +248,7 @@ namespace SAI_Editor.Forms
 
         private void textBoxAnimationSpeed_TextChanged(object sender, EventArgs e)
         {
-            int newValue = XConverter.ToInt32(textBoxAnimationSpeed.Text);
+            int newValue = CustomConverter.ToInt32(textBoxAnimationSpeed.Text);
 
             if (newValue > 12)
                 newValue = 12;
@@ -258,7 +258,7 @@ namespace SAI_Editor.Forms
 
             trackBarAnimationSpeed.Value = newValue;
 
-            if (newValue != XConverter.ToInt32(textBoxAnimationSpeed.Text))
+            if (newValue != CustomConverter.ToInt32(textBoxAnimationSpeed.Text))
                 textBoxAnimationSpeed.Text = newValue.ToString();
         }
 
@@ -276,8 +276,8 @@ namespace SAI_Editor.Forms
         {
             buttonSearchForWorldDb.Enabled = false;
 
-            WorldDatabase worldDatabase = new WorldDatabase(textBoxHost.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxUsername.Text, textBoxPassword.Text, "");
-            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, XConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text, worldDatabase);
+            WorldDatabase worldDatabase = new WorldDatabase(textBoxHost.Text, CustomConverter.ToUInt32(textBoxPort.Text), textBoxUsername.Text, textBoxPassword.Text, "");
+            List<string> databaseNames = await SAI_Editor_Manager.Instance.GetDatabasesInConnection(textBoxHost.Text, textBoxUsername.Text, CustomConverter.ToUInt32(textBoxPort.Text), textBoxPassword.Text, worldDatabase);
 
             if (databaseNames != null && databaseNames.Count > 0)
                 using (var selectDatabaseForm = new SelectDatabaseForm(databaseNames, textBoxWorldDatabase))
@@ -299,7 +299,7 @@ namespace SAI_Editor.Forms
             MySqlConnectionStringBuilder _connectionString = new MySqlConnectionStringBuilder();
             _connectionString.Server = textBoxHost.Text;
             _connectionString.UserID = textBoxUsername.Text;
-            _connectionString.Port = XConverter.ToUInt32(textBoxPort.Text);
+            _connectionString.Port = CustomConverter.ToUInt32(textBoxPort.Text);
             _connectionString.Database = textBoxWorldDatabase.Text;
 
             if (textBoxPassword.Text.Length > 0)
