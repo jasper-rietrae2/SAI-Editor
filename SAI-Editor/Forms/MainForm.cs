@@ -1204,6 +1204,9 @@ namespace SAI_Editor.Forms
                 case WowExpansion.ExpansionWod:
                     Text += ": Warlords of Draenor";
                     break;
+                default:
+                    Text += ": ERROR - No expansion!";
+                    break;
             }
         }
     }
