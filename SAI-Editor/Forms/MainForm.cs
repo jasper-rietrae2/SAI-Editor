@@ -51,7 +51,7 @@ namespace SAI_Editor.Forms
 
             Version version = Assembly.GetExecutingAssembly().GetName().Version;
             applicationVersion = "v" + version.Major + "." + version.Minor + "." + version.Build;
-            Text = "SAI-Editor " + applicationVersion + ": Login";
+            SetFormTitle("SAI-Editor " + applicationVersion + ": Login");
 
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
             pictureBoxDonate.Visible = false;
@@ -97,6 +97,7 @@ namespace SAI_Editor.Forms
                 expandAndContractSpeed = Settings.Default.AnimationSpeed;
                 radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
                 radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
+                SAI_Editor_Manager.Instance.Expansion = (WowExpansion)Settings.Default.WowExpansionIndex;
 
                 foreach (UserControlSAI uc in userControls)
                 {
@@ -528,9 +529,9 @@ namespace SAI_Editor.Forms
             ResetFieldsToDefault();
 
             if (radioButtonConnectToMySql.Checked)
-                Text = "SAI-Editor " + applicationVersion + " - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ", " + textBoxPort.Text;
+                SetFormTitle("SAI-Editor " + applicationVersion + " - Connection: " + textBoxUsername.Text + ", " + textBoxHost.Text + ", " + textBoxPort.Text);
             else
-                Text = "SAI-Editor " + applicationVersion + " - Creator-only mode, no database connection";
+                SetFormTitle("SAI-Editor " + applicationVersion + " - Creator-only mode, no database connection");
 
             if (instant)
             {
@@ -563,7 +564,7 @@ namespace SAI_Editor.Forms
 
         private void StartContractingToLoginForm(bool instant = false)
         {
-            Text = "SAI-Editor " + applicationVersion + ": Login";
+            SetFormTitle("SAI-Editor " + applicationVersion + ": Login");
 
             if (Settings.Default.ShowTooltipsStaticly)
                 foreach (UserControlSAI uc in userControls)
@@ -944,12 +945,14 @@ namespace SAI_Editor.Forms
             searchForAGossipMenuOptionToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
             searchForAGossipOptionIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
 
-            Text = "SAI-Editor " + applicationVersion + " - ";
+            string newTitle = "SAI-Editor " + applicationVersion + " - ";
 
             if (Settings.Default.UseWorldDatabase)
-                Text += "Connection: " + Settings.Default.User + ", " + Settings.Default.Host + ", " + Settings.Default.Port.ToString();
+                newTitle += "Connection: " + Settings.Default.User + ", " + Settings.Default.Host + ", " + Settings.Default.Port.ToString();
             else
-                Text += "Creator-only mode, no database connection";
+                newTitle += "Creator-only mode, no database connection";
+
+            SetFormTitle(newTitle);
         }
 
         private void menuItemRetrieveLastDeletedRow_Click(object sender, EventArgs e)
@@ -1180,6 +1183,27 @@ namespace SAI_Editor.Forms
             catch
             {
                 MessageBox.Show("Something went wrong attempting to open the donation page.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        void SetFormTitle(string title)
+        {
+            Text = title;
+
+            switch (SAI_Editor_Manager.Instance.Expansion)
+            {
+                case WowExpansion.ExpansionWotlk:
+                    Text += ": Wrath of the Lich King";
+                    break;
+                case WowExpansion.ExpansionCata:
+                    Text += ": Cataclysm";
+                    break;
+                case WowExpansion.ExpansionMop:
+                    Text += ": Mists of Pandaria";
+                    break;
+                case WowExpansion.ExpansionWod:
+                    Text += ": Warlords of Draenor";
+                    break;
             }
         }
     }

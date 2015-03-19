@@ -8,6 +8,7 @@ using SAI_Editor.Classes;
 using SAI_Editor.Classes.Database;
 using SAI_Editor.Forms.SearchForms;
 using SAI_Editor.Properties;
+using SAI_Editor.Enumerators;
 
 namespace SAI_Editor.Forms
 {
@@ -41,6 +42,12 @@ namespace SAI_Editor.Forms
             radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
             radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
             checkBoxDuplicatePrimaryFields.Checked = Settings.Default.DuplicatePrimaryFields;
+            comboBoxWowExpansion.SelectedIndex = (int)Settings.Default.WowExpansionIndex;
+        }
+
+        private void SettingsForm_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void buttonSaveSettings_Click(object sender, EventArgs e)
@@ -116,6 +123,8 @@ namespace SAI_Editor.Forms
             Settings.Default.CreateRevertQuery = checkBoxCreateRevertQuery.Checked;
             Settings.Default.PhaseHighlighting = checkBoxPhaseHighlighting.Checked;
             Settings.Default.DuplicatePrimaryFields = checkBoxDuplicatePrimaryFields.Checked;
+            Settings.Default.WowExpansionIndex = (uint)comboBoxWowExpansion.SelectedIndex;
+            SAI_Editor_Manager.Instance.Expansion = (WowExpansion)Settings.Default.WowExpansionIndex;
             Settings.Default.Save();
 
             if (newConnectionSuccesfull)
@@ -187,6 +196,7 @@ namespace SAI_Editor.Forms
                 checkBoxCreateRevertQuery.Checked == Settings.Default.CreateRevertQuery &&
                 checkBoxPhaseHighlighting.Checked == Settings.Default.PhaseHighlighting &&
                 checkBoxDuplicatePrimaryFields.Checked == Settings.Default.DuplicatePrimaryFields &&
+                comboBoxWowExpansion.SelectedIndex == (int)Settings.Default.WowExpansionIndex &&
 
                 //! Check password last because it's the most 'expensive' check
                 textBoxPassword.Text == SAI_Editor_Manager.Instance.GetPasswordSetting())
@@ -216,6 +226,7 @@ namespace SAI_Editor.Forms
                     checkBoxCreateRevertQuery.Checked = false;
                     checkBoxPhaseHighlighting.Checked = true;
                     checkBoxDuplicatePrimaryFields.Checked = false;
+                    comboBoxWowExpansion.SelectedIndex = 0;
                     break;
                 case 1: // ! 'Connection' tab
                     textBoxHost.Text = "";
@@ -338,6 +349,24 @@ namespace SAI_Editor.Forms
             textBoxPort.Enabled = radioButtonConnectToMySql.Checked;
             buttonSearchForWorldDb.Enabled = radioButtonConnectToMySql.Checked;
             buttonTestConnection.Enabled = radioButtonConnectToMySql.Checked;
+        }
+
+        private void comboBoxWowExpansion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (comboBoxWowExpansion.SelectedIndex == -1)
+            {
+                comboBoxWowExpansion.SelectedIndex = 0;
+                return;
+            }
+
+            switch ((WowExpansion)comboBoxWowExpansion.SelectedIndex)
+            {
+                case WowExpansion.ExpansionMop:
+                case WowExpansion.ExpansionWod:
+                    MessageBox.Show("This expansion is currently not supported.", "Not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    comboBoxWowExpansion.SelectedIndex = 0;
+                    break;
+            }
         }
     }
 }

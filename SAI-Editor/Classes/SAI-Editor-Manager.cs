@@ -29,6 +29,8 @@ namespace SAI_Editor.Classes
 
     class SAI_Editor_Manager
     {
+        public WowExpansion Expansion = WowExpansion.ExpansionWotlk;
+
         public WorldDatabase _worldDatabase = null;
         public WorldDatabase worldDatabase
         {
@@ -121,6 +123,14 @@ namespace SAI_Editor.Classes
         {
             ResetWorldDatabase(false);
             ResetSQLiteDatabase();
+        }
+
+        public async Task<DataTable> ExecuteQuery(bool useWorldDatabase, string queryToExecute)
+        {
+            if (useWorldDatabase)
+                return await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute);
+
+            return await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
         }
 
         public void ResetWorldDatabase(bool useConnStr)
@@ -511,6 +521,73 @@ namespace SAI_Editor.Classes
                 default:
                     return "Unknown";
             }
+        }
+
+        public static string GetPrefixTableName()
+        {
+            switch (Instance.Expansion)
+            {
+                case WowExpansion.ExpansionWotlk:
+                    return "wotlk";
+                case WowExpansion.ExpansionCata:
+                    return "cata";
+                case WowExpansion.ExpansionMop:
+                    return "mop";
+                case WowExpansion.ExpansionWod:
+                    return "wod";
+            }
+
+            return String.Empty;
+        }
+
+        public static string GetSpellTableName()
+        {
+            return "spells_" + GetPrefixTableName();
+        }
+
+        public static string GetAreatriggerTableName()
+        {
+            return "areatriggers_" + GetPrefixTableName();
+        }
+
+        public static string GetFactionsTableName()
+        {
+            return "factions_" + GetPrefixTableName();
+        }
+
+        public static string GetEmotesTableName()
+        {
+            return "emotes_" + GetPrefixTableName();
+        }
+
+        public static string GetMapsTableName()
+        {
+            return "maps_" + GetPrefixTableName();
+        }
+
+        public static string GetAreasAndZonesTableName()
+        {
+            return "areas_and_zones_" + GetPrefixTableName();
+        }
+
+        public static string GetSoundEntriesTableName()
+        {
+            return "sound_entries_" + GetPrefixTableName();
+        }
+
+        public static string GetSkillsTableName()
+        {
+            return "skills_" + GetPrefixTableName();
+        }
+
+        public static string GetAchievementsTableName()
+        {
+            return "achievements_" + GetPrefixTableName();
+        }
+
+        public static string GetPlayerTitlesTableName()
+        {
+            return "player_titles_" + GetPrefixTableName();
         }
     }
 }

@@ -9,6 +9,14 @@ namespace SAI_Editor.Enumerators
         FormStateMain,
     }
 
+    public enum WowExpansion
+    {
+        ExpansionWotlk = 0,
+        ExpansionCata,
+        ExpansionMop,
+        ExpansionWod,
+    }
+
     internal enum FormSizes
     {
         LoginFormWidth = 403,

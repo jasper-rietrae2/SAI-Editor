@@ -134,7 +134,7 @@ namespace SAI_Editor.Forms.SearchForms
 
             try
             {
-                string queryToExecute = "SELECT * FROM areatriggers";
+                string queryToExecute = "SELECT * FROM " + SAI_Editor_Manager.GetAreatriggerTableName();
 
                 if (idFilter.Length > 0 || mapIdFilter.Length > 0)
                 {

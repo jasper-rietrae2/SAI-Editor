@@ -346,5 +346,17 @@ namespace SAI_Editor.Properties {
                 this["LastStaticInfoPerTab"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public uint WowExpansionIndex {
+            get {
+                return ((uint)(this["WowExpansionIndex"]));
+            }
+            set {
+                this["WowExpansionIndex"] = value;
+            }
+        }
     }
 }

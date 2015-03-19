@@ -64,6 +64,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.buttonDefaultSettings = new System.Windows.Forms.Button();
+            this.comboBoxWowExpansion = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabPageGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarAnimationSpeed)).BeginInit();
             this.tabControlSettings.SuspendLayout();
@@ -92,6 +94,8 @@
             // 
             // tabPageGeneral
             // 
+            this.tabPageGeneral.Controls.Add(this.label1);
+            this.tabPageGeneral.Controls.Add(this.comboBoxWowExpansion);
             this.tabPageGeneral.Controls.Add(this.checkBoxDuplicatePrimaryFields);
             this.tabPageGeneral.Controls.Add(this.checkBoxPhaseHighlighting);
             this.tabPageGeneral.Controls.Add(this.checkBoxCreateRevertQuery);
@@ -450,6 +454,30 @@
             this.buttonDefaultSettings.UseVisualStyleBackColor = true;
             this.buttonDefaultSettings.Click += new System.EventHandler(this.buttonClearSettings_Click);
             // 
+            // comboBoxWowExpansion
+            // 
+            this.comboBoxWowExpansion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxWowExpansion.FormattingEnabled = true;
+            this.comboBoxWowExpansion.Items.AddRange(new object[] {
+            "Wrath of the Lich King",
+            "Cataclysm",
+            "Mists of the Pandaria",
+            "Warlords of Draenor"});
+            this.comboBoxWowExpansion.Location = new System.Drawing.Point(346, 73);
+            this.comboBoxWowExpansion.Name = "comboBoxWowExpansion";
+            this.comboBoxWowExpansion.Size = new System.Drawing.Size(159, 21);
+            this.comboBoxWowExpansion.TabIndex = 10;
+            this.comboBoxWowExpansion.SelectedIndexChanged += new System.EventHandler(this.comboBoxWowExpansion_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(253, 76);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(89, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "WoW expansion:";
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -469,6 +497,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "SAI-Editor Settings";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.SettingsForm_FormClosed);
+            this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SettingsForm_KeyDown);
             this.tabPageGeneral.ResumeLayout(false);
             this.tabPageGeneral.PerformLayout();
@@ -517,6 +546,8 @@
         private System.Windows.Forms.RadioButton radioButtonConnectToMySql;
         public System.Windows.Forms.CheckBox checkBoxPhaseHighlighting;
         private System.Windows.Forms.CheckBox checkBoxDuplicatePrimaryFields;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxWowExpansion;
 
     }
 }

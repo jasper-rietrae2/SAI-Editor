@@ -79,7 +79,7 @@ namespace SAI_Editor.Forms.SearchForms
         private int amountOfListviewColumns = 2, listViewItemIndexToCopy = 0;
         private string baseQuery = String.Empty;
         private string[] columns = new string[7];
-        private bool useMySQL = false;
+        private bool useWorldDatabase = false;
 
         public SearchFromDatabaseForm(TextBox textBoxToChange, DatabaseSearchFormType databaseSearchFormType)
         {
@@ -107,7 +107,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Spell id");
                     comboBoxSearchType.Items.Add("Spell name");
-                    baseQuery = "SELECT id, spellName FROM spells";
+                    baseQuery = "SELECT id, spellName FROM " + SAI_Editor_Manager.GetSpellTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeFaction:
                     Text = "Search for a faction";
@@ -115,7 +115,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Faction id");
                     comboBoxSearchType.Items.Add("Faction name");
-                    baseQuery = "SELECT m_ID, m_name_lang_1 FROM factions";
+                    baseQuery = "SELECT m_ID, m_name_lang_1 FROM " + SAI_Editor_Manager.GetFactionsTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeEmote:
                     Text = "Search for an emote";
@@ -123,7 +123,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Emote id");
                     comboBoxSearchType.Items.Add("Emote name");
-                    baseQuery = "SELECT field0, field1 FROM emotes";
+                    baseQuery = "SELECT field0, field1 FROM " + SAI_Editor_Manager.GetEmotesTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeQuest:
                     Text = "Search for a quest";
@@ -132,7 +132,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Quest id");
                     comboBoxSearchType.Items.Add("Quest name");
                     baseQuery = "SELECT id, title FROM quest_template";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeMap:
                     Text = "Search for a map id";
@@ -140,7 +140,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Map id");
                     comboBoxSearchType.Items.Add("Map name");
-                    baseQuery = "SELECT m_ID, m_MapName_lang1 FROM maps";
+                    baseQuery = "SELECT m_ID, m_MapName_lang1 FROM " + SAI_Editor_Manager.GetMapsTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeAreaOrZone:
                     Text = "Search for a zone id";
@@ -148,7 +148,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Zone id");
                     comboBoxSearchType.Items.Add("Zone name");
-                    baseQuery = "SELECT m_ID, m_AreaName_lang FROM areas_and_zones";
+                    baseQuery = "SELECT m_ID, m_AreaName_lang FROM " + SAI_Editor_Manager.GetAreasAndZonesTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureEntry:
                     Text = "Search for a creature";
@@ -157,7 +157,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Creature entry");
                     comboBoxSearchType.Items.Add("Creature name");
                     baseQuery = "SELECT entry, name FROM creature_template";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectEntry:
                     Text = "Search for a gameobject";
@@ -166,7 +166,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Gameobject entry");
                     comboBoxSearchType.Items.Add("Gameobject name");
                     baseQuery = "SELECT entry, name FROM gameobject_template";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSound:
                     Text = "Search for a sound id";
@@ -174,7 +174,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Sound id");
                     comboBoxSearchType.Items.Add("Sound name");
-                    baseQuery = "SELECT id, name FROM sound_entries";
+                    baseQuery = "SELECT id, name FROM " + SAI_Editor_Manager.GetSoundEntriesTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeAreaTrigger:
                     Text = "Search for a sound id";
@@ -185,7 +185,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Z", 75);
                     comboBoxSearchType.Items.Add("Areatrigger id");
                     comboBoxSearchType.Items.Add("Areatrigger map id");
-                    baseQuery = "SELECT m_id, m_mapId, m_posX, m_posY, m_posZ FROM areatriggers";
+                    baseQuery = "SELECT m_id, m_mapId, m_posX, m_posY, m_posZ FROM " + SAI_Editor_Manager.GetAreatriggerTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureGuid:
                     Text = "Search for a creature";
@@ -194,7 +194,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Creature guid");
                     comboBoxSearchType.Items.Add("Creature name");
                     baseQuery = "SELECT c.guid, ct.name FROM creature c JOIN creature_template ct ON ct.entry = c.id";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGameobjectGuid:
                     Text = "Search for a gameobject";
@@ -203,7 +203,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Gameobject guid");
                     comboBoxSearchType.Items.Add("Gameobject name");
                     baseQuery = "SELECT g.guid, gt.name FROM gameobject g JOIN gameobject_template gt ON gt.entry = g.id";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGameEvent:
                     Text = "Search for a game event";
@@ -212,7 +212,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Game event entry");
                     comboBoxSearchType.Items.Add("Game event description");
                     baseQuery = "SELECT eventEntry, description FROM game_event";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeItemEntry:
                     Text = "Search for an item";
@@ -221,7 +221,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Item id");
                     comboBoxSearchType.Items.Add("Item name");
                     baseQuery = "SELECT entry, name FROM item_template";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSummonsId:
                     Text = "Search for a summons id";
@@ -233,7 +233,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Owner entry");
                     comboBoxSearchType.Items.Add("Target entry");
                     baseQuery = "SELECT summonerId, entry, groupId, summonType, summonTime FROM creature_summon_groups";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     listViewItemIndexToCopy = 2;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeTaxiPath:
@@ -254,7 +254,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Entry");
                     comboBoxSearchType.Items.Add("Item entries");
                     baseQuery = "SELECT entry, id, itemEntry1, itemEntry2, itemEntry3 FROM creature_equip_template";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeWaypoint:
                     Text = "Search for a waypoints path";
@@ -265,7 +265,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Z", 75);
                     comboBoxSearchType.Items.Add("Creature entry");
                     baseQuery = "SELECT entry, pointid, position_x, position_y, position_z FROM waypoints";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeNpcText:
                     Text = "Search for an npc_text entry";
@@ -274,7 +274,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Id");
                     comboBoxSearchType.Items.Add("Text");
                     baseQuery = "SELECT id, text0_0 FROM npc_text";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeGossipMenuOptionId:
                     listViewItemIndexToCopy = 1;
@@ -288,7 +288,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Id");
                     comboBoxSearchType.Items.Add("Text");
                     baseQuery = "SELECT menu_id, id, option_text FROM gossip_menu_option";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSkill:
                     Text = "Search for a skill";
@@ -296,7 +296,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Skill id");
                     comboBoxSearchType.Items.Add("Skill name");
-                    baseQuery = "SELECT id, name FROM skills";
+                    baseQuery = "SELECT id, name FROM " + SAI_Editor_Manager.GetSkillsTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeAchievement:
                     Text = "Search for an achievement";
@@ -304,7 +304,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Achievement id");
                     comboBoxSearchType.Items.Add("Achievement name");
-                    baseQuery = "SELECT id, name FROM achievements";
+                    baseQuery = "SELECT id, name FROM " + SAI_Editor_Manager.GetAchievementsTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypePlayerTitles:
                     Text = "Search for a title";
@@ -312,7 +312,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Title id");
                     comboBoxSearchType.Items.Add("Title");
-                    baseQuery = "SELECT id, title FROM player_titles";
+                    baseQuery = "SELECT id, title FROM " + SAI_Editor_Manager.GetPlayerTitlesTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptId:
                     listViewItemIndexToCopy = 1;
@@ -321,7 +321,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewItemIndexToCopy = 2;
                     goto case DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptEntryOrGuid;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeSmartScriptEntryOrGuid:
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     Text = "Search for a smart script";
                     listViewEntryResults.Columns.Add("Entryorguid", 75);
                     listViewEntryResults.Columns.Add("Id", 75);
@@ -336,7 +336,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewItemIndexToCopy = 1;
                     goto case DatabaseSearchFormType.DatabaseSearchFormTypeVendorEntry;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeVendorEntry:
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     Text = "Search for a vendor (item) entry";
                     listViewEntryResults.Columns.Add("Vendor entry", 164);
                     listViewEntryResults.Columns.Add("Item entry", 164);
@@ -377,7 +377,7 @@ namespace SAI_Editor.Forms.SearchForms
                     comboBoxSearchType.Items.Add("Loot entry");
                     comboBoxSearchType.Items.Add("Item entry");
                     baseQuery = "SELECT entry, item FROM " + lootTemplateKey + "_loot_template";
-                    useMySQL = true;
+                    useWorldDatabase = true;
                     break;
                 default:
                     MessageBox.Show("Unknown database search type!", "Something went wrong...", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -483,7 +483,7 @@ namespace SAI_Editor.Forms.SearchForms
                 if (limit)
                     queryToExecute += " LIMIT 1000";
 
-                DataTable dt = useMySQL ? await SAI_Editor_Manager.Instance.worldDatabase.ExecuteQuery(queryToExecute) : await SAI_Editor_Manager.Instance.sqliteDatabase.ExecuteQuery(queryToExecute);
+                DataTable dt = await SAI_Editor_Manager.Instance.ExecuteQuery(useWorldDatabase, queryToExecute);
 
                 if (dt.Rows.Count > 0)
                 {

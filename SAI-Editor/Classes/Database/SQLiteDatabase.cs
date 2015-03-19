@@ -5,6 +5,7 @@ using System.Data.SQLite;
 using System.Threading.Tasks;
 using SAI_Editor.Classes.Database.Classes;
 using System.Linq;
+using SAI_Editor.Enumerators;
 
 namespace SAI_Editor.Classes.Database
 {
@@ -49,7 +50,7 @@ namespace SAI_Editor.Classes.Database
 
         public async Task<string> GetSpellNameById(int id)
         {
-            DataTable dt = await ExecuteQuery("SELECT spellName FROM spells WHERE id = '" + id + "'");
+            DataTable dt = await ExecuteQuery("SELECT spellName FROM " + SAI_Editor_Manager.GetSpellTableName() + " WHERE id = '" + id + "'");
 
             if (dt.Rows.Count == 0)
                 return "<Spell not found!>";
