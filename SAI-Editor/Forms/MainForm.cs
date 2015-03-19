@@ -54,6 +54,12 @@ namespace SAI_Editor.Forms
             Text = "SAI-Editor " + applicationVersion + ": Login";
 
             menuStrip.Visible = false; //! Doing this in main code so we can actually see the menustrip in designform
+            pictureBoxDonate.Visible = false;
+
+            //ImageList imgList = new ImageList();
+            //imgList.Images.Add()
+            //imgList.TransparentColor = Color.White;
+            //pictureBoxDonate.Image = imgList.Images[0];
 
             Width = (int)FormSizes.LoginFormWidth;
             Height = (int)FormSizes.LoginFormHeight;
@@ -640,6 +646,7 @@ namespace SAI_Editor.Forms
             customPanelLogin.Visible = !expanding;
             tabControl.Visible = expanding;
             menuStrip.Visible = expanding;
+            pictureBoxDonate.Visible = expanding;
             Invalidate();
 
             if (!expanding)
@@ -1144,6 +1151,24 @@ namespace SAI_Editor.Forms
 
             if (!first)
                 tabControl.SelectedIndex = tabControl.TabPages.Count - 2;
+        }
+
+        private void pictureBoxDonate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start("https://www.paypal.com/cgi-bin/webscr" +
+                    "?cmd=" + "_donations" +
+                    "&business=jasper.rietrae@gmail.com" +
+                    "&lc=NL" +
+                    "&item_name=Donating to the creator of SAI-Editor" +
+                    "&currency_code=USD" +
+                    "&bn=" + "PP%2dDonationsBF");
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong attempting to open the donation page.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

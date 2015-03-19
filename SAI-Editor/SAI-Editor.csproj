@@ -39,8 +39,9 @@
       <HintPath>Resources\FastColoredTextBox.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="JacksonSoft.CustomTabControl">
-      <HintPath>..\Lib\JacksonSoft.CustomTabControl.dll</HintPath>
+    <Reference Include="JacksonSoft.CustomTabControl, Version=1.0.1.7, Culture=neutral, PublicKeyToken=53c237210c7e462d, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Users\Jasper\Desktop\JacksonSoft.CustomTabControl.dll</HintPath>
     </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.7.4\lib\net40\MySql.Data.dll</HintPath>
@@ -74,6 +75,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\CustomControls\CustomPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\CustomControls\CustomTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\CustomControls\CustomTabControlX.cs">

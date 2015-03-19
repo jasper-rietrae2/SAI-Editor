@@ -100,6 +100,7 @@
             this.searchForPowerTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchForUnitStandStateTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchForTempSummonTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conditionEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -115,6 +116,7 @@
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.pictureBoxCreateScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
             this.pictureBoxLoadScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
+            this.pictureBoxDonate = new System.Windows.Forms.PictureBox();
             this.timerExpandOrContract = new System.Windows.Forms.Timer(this.components);
             this.timerShowStaticTooltips = new System.Windows.Forms.Timer(this.components);
             this.tabControl = new System.Windows.Forms.CustomTabControl();
@@ -247,11 +249,11 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.deleteAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
@@ -282,6 +284,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
+            this.menuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.menuStrip.Size = new System.Drawing.Size(1339, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
@@ -862,6 +865,12 @@
             this.searchForTempSummonTypesToolStripMenuItem.Text = "Search for temp summon types";
             this.searchForTempSummonTypesToolStripMenuItem.Click += new System.EventHandler(this.searchForFlagsMenuItem_Click);
             // 
+            // deleteAllToolStripMenuItem
+            // 
+            this.deleteAllToolStripMenuItem.Name = "deleteAllToolStripMenuItem";
+            this.deleteAllToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
+            this.deleteAllToolStripMenuItem.Text = "Delete all";
+            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -996,6 +1005,20 @@
             this.pictureBoxLoadScript.TabStop = false;
             this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
             // 
+            // pictureBoxDonate
+            // 
+            this.pictureBoxDonate.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxDonate.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxDonate.Image")));
+            this.pictureBoxDonate.Location = new System.Drawing.Point(853, -1);
+            this.pictureBoxDonate.Name = "pictureBoxDonate";
+            this.pictureBoxDonate.Size = new System.Drawing.Size(88, 23);
+            this.pictureBoxDonate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxDonate.TabIndex = 85;
+            this.pictureBoxDonate.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxDonate, "If you like the application, please consider donating. The project is opensource " +
+        "and free otherwise.");
+            this.pictureBoxDonate.Click += new System.EventHandler(this.pictureBoxDonate_Click);
+            // 
             // timerExpandOrContract
             // 
             this.timerExpandOrContract.Interval = 4;
@@ -1021,7 +1044,7 @@
             this.tabControl.DisplayStyleProvider.Opacity = 1F;
             this.tabControl.DisplayStyleProvider.Overlap = 0;
             this.tabControl.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
-            this.tabControl.DisplayStyleProvider.ShowTabCloser = false;
+            this.tabControl.DisplayStyleProvider.ShowTabCloser = true;
             this.tabControl.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
             this.tabControl.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
             this.tabControl.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
@@ -2653,17 +2676,12 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // deleteAllToolStripMenuItem
-            // 
-            this.deleteAllToolStripMenuItem.Name = "deleteAllToolStripMenuItem";
-            this.deleteAllToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
-            this.deleteAllToolStripMenuItem.Text = "Delete all";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1339, 503);
+            this.Controls.Add(this.pictureBoxDonate);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.customPanelLogin);
             this.Controls.Add(this.menuStrip);
@@ -2684,6 +2702,7 @@
             this.contextMenuStripListView.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
@@ -2937,6 +2956,7 @@
         public System.Windows.Forms.Label labelStaticTooltipParameterTitleTypes;
         public System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ToolStripMenuItem deleteAllToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBoxDonate;
     }
 }
 
