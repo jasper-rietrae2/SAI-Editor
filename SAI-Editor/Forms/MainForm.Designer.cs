@@ -100,7 +100,6 @@
             this.searchForPowerTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchForUnitStandStateTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.searchForTempSummonTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conditionEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -365,8 +364,7 @@
             this.menuItemCopySelectedRow,
             this.menuItemPasteLastCopiedRow,
             this.toolStripSeparator5,
-            this.menuItemSearchForSomething,
-            this.deleteAllToolStripMenuItem});
+            this.menuItemSearchForSomething});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -864,12 +862,6 @@
             this.searchForTempSummonTypesToolStripMenuItem.Size = new System.Drawing.Size(273, 22);
             this.searchForTempSummonTypesToolStripMenuItem.Text = "Search for temp summon types";
             this.searchForTempSummonTypesToolStripMenuItem.Click += new System.EventHandler(this.searchForFlagsMenuItem_Click);
-            // 
-            // deleteAllToolStripMenuItem
-            // 
-            this.deleteAllToolStripMenuItem.Name = "deleteAllToolStripMenuItem";
-            this.deleteAllToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
-            this.deleteAllToolStripMenuItem.Text = "Delete all";
             // 
             // toolsToolStripMenuItem
             // 
@@ -2955,7 +2947,6 @@
         public System.Windows.Forms.Label labelStaticTooltipTextParameters;
         public System.Windows.Forms.Label labelStaticTooltipParameterTitleTypes;
         public System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ToolStripMenuItem deleteAllToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBoxDonate;
     }
 }

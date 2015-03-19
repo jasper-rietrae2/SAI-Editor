@@ -1163,7 +1163,7 @@ namespace SAI_Editor.Forms
                     "&lc=NL" +
                     "&item_name=Donating to the creator of SAI-Editor" +
                     "&currency_code=USD" +
-                    "&bn=" + "PP%2dDonationsBF");
+                    "&bn=PP%2dDonationsBF");
             }
             catch
             {
