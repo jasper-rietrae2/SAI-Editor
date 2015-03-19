@@ -242,7 +242,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Taxi id");
                     comboBoxSearchType.Items.Add("Taxi name");
-                    baseQuery = "SELECT id, taxiName FROM taxi_nodes";
+                    baseQuery = "SELECT id, taxiName FROM " + SAI_Editor_Manager.GetTaxiNodesTableName();;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeEquipTemplate:
                     Text = "Search for creature equipment";
@@ -336,13 +336,13 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewItemIndexToCopy = 1;
                     goto case DatabaseSearchFormType.DatabaseSearchFormTypeVendorEntry;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeVendorEntry:
-                    useWorldDatabase = true;
                     Text = "Search for a vendor (item) entry";
                     listViewEntryResults.Columns.Add("Vendor entry", 164);
                     listViewEntryResults.Columns.Add("Item entry", 164);
                     comboBoxSearchType.Items.Add("Vendor entry");
                     comboBoxSearchType.Items.Add("Vendor item entry");
                     baseQuery = "SELECT entry, item FROM npc_vendor";
+                    useWorldDatabase = true;
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeCreatureLootTemplateItem:
                 case DatabaseSearchFormType.DatabaseSearchFormTypeDisenchantLootTemplateItem:

@@ -589,5 +589,10 @@ namespace SAI_Editor.Classes
         {
             return "player_titles_" + GetPrefixTableName();
         }
+
+        public static string GetTaxiNodesTableName()
+        {
+            return "taxi_nodes_" + GetPrefixTableName();
+        }
     }
 }
