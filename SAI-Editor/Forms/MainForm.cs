@@ -1131,10 +1131,8 @@ namespace SAI_Editor.Forms
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl.SelectedTab == null || tabControl.SelectedTab.Text != "+")
-                return;
-
-            CreateTabControl();
+            if (tabControl.SelectedTab != null && tabControl.SelectedTab.Text == "+")
+                CreateTabControl();
         }
 
         private void CreateTabControl(bool first = false)
@@ -1142,15 +1140,26 @@ namespace SAI_Editor.Forms
             if (!first)
                 tabControl.TabPages.RemoveAt(tabControl.TabPages.Count - 1);
 
-            UserControlSAI UserControlSAI = new UserControlSAI();
-            UserControlSAI.Parent = this;
-            UserControlSAI.LoadUserControl();
+            UserControlSAI userControlSAI = new UserControlSAI();
+            userControlSAI.Parent = this;
+            userControlSAI.LoadUserControl();
+
             TabPage newPage = new TabPage();
             newPage.Text = "Workspace " + (tabControl.TabPages.Count + 1).ToString();
-            newPage.Controls.Add(UserControlSAI);
+            newPage.Controls.Add(userControlSAI);
+
+            for (int i = 0; i < tabControl.TabPages.Count; i++)
+            {
+                if (tabControl.TabPages[i].Text == "+")
+                {
+                    tabControl.TabPages.RemoveAt(i);
+                    break;
+                }
+            }
+
             tabControl.TabPages.Add(newPage);
             tabControl.TabPages.Add(new TabPage("+"));
-            userControls.Add(UserControlSAI);
+            userControls.Add(userControlSAI);
 
             if (!first)
                 tabControl.SelectedIndex = tabControl.TabPages.Count - 2;
