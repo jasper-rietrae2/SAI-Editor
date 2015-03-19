@@ -81,6 +81,9 @@ namespace SAI_Editor.Forms
             for (int i = 1; i < Settings.Default.LastStaticInfoPerTab.Split(',').Length; ++i)
                 CreateTabControl(tabControl.TabPages.Count == 0);
 
+            if (tabControl.TabPages.Count == 0)
+                CreateTabControl(true);
+
             if (tabControl.TabPages.Count > 0)
                 tabControl.SelectedIndex = 0;
 
