@@ -225,20 +225,23 @@ namespace SAI_Editor.Classes
         {
             BaseTypeInformation baseTypeInformation = GetTypeByScriptTypeId(type, scriptTypeId);
 
+            if (baseTypeInformation == null)
+                return "Unused Parameter";
+
             switch (paramId)
             {
                 case 1:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString1 : "Unused Parameter";
+                    return !String.IsNullOrEmpty(baseTypeInformation.parameterString1) ? baseTypeInformation.parameterString1 : "Unused Parameter";
                 case 2:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString2 : "Unused Parameter";
+                    return !String.IsNullOrEmpty(baseTypeInformation.parameterString2) ? baseTypeInformation.parameterString2 : "Unused Parameter";
                 case 3:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString3 : "Unused Parameter";
+                    return !String.IsNullOrEmpty(baseTypeInformation.parameterString3) ? baseTypeInformation.parameterString3 : "Unused Parameter";
                 case 4:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString4 : "Unused Parameter";
+                    return !String.IsNullOrEmpty(baseTypeInformation.parameterString4) ? baseTypeInformation.parameterString4 : "Unused Parameter";
                 case 5:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString5 : "Unused Parameter";
+                    return !String.IsNullOrEmpty(baseTypeInformation.parameterString5) ? baseTypeInformation.parameterString5 : "Unused Parameter";
                 case 6:
-                    return baseTypeInformation != null ? baseTypeInformation.parameterString6 : "Unused Parameter";
+                    return !String.IsNullOrEmpty(baseTypeInformation.parameterString6) ? baseTypeInformation.parameterString6 : "Unused Parameter";
                 default:
                     return "Unused Parameter";
             }
