@@ -24,7 +24,7 @@ namespace SAI_Editor.Forms
 {
     public partial class MainForm : Form
     {
-        public int expandAndContractSpeed = 5;
+        public int expandAndContractSpeed = 5, lastSelectedWorkspaceIndex = 0;
         public bool runningConstructor = false;
         private bool contractingToLoginForm = false, expandingToMainForm = false, adjustedLoginSettings = false;
         private int originalHeight = 0, originalWidth = 0;
@@ -673,6 +673,9 @@ namespace SAI_Editor.Forms
 
             for (int i = 0; i < lastStaticInfoPerTab.Length; ++i)
             {
+                if (i >= userControls.Count)
+                    continue;
+
                 string[] splitSections = lastStaticInfoPerTab[i].Split('-');
 
                 if (splitSections.Length == 1 && splitSections[0] == String.Empty)
@@ -1135,11 +1138,25 @@ namespace SAI_Editor.Forms
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (tabControl.SelectedTab != null && tabControl.SelectedTab.Text == "+")
+            {
+                if (tabControl.TabPages.Count > (int)MiscEnumerators.MaxWorkSpaceCount)
+                {
+                    MessageBox.Show("You can't have more than 6 different workspaces open at the same time to avoid start-up delays.", "Workspace limit", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    tabControl.SelectedIndex = lastSelectedWorkspaceIndex;
+                    return;
+                }
+
                 CreateTabControl();
+            }
+
+            lastSelectedWorkspaceIndex = tabControl.SelectedIndex;
         }
 
         private void CreateTabControl(bool first = false)
         {
+            if (tabControl.TabPages.Count > (int)MiscEnumerators.MaxWorkSpaceCount)
+                return;
+
             if (!first)
                 tabControl.TabPages.RemoveAt(tabControl.TabPages.Count - 1);
 

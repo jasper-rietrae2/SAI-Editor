@@ -1281,4 +1281,9 @@ namespace SAI_Editor.Enumerators
         COMP_TYPE_HIGH_EQ,
         COMP_TYPE_LOW_EQ,
     }
+
+    enum MiscEnumerators : int
+    {
+        MaxWorkSpaceCount = 6,
+    }
 }
