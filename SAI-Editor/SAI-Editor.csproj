@@ -178,11 +178,11 @@
     <Compile Include="Forms\SearchForms\SearchFromDatabaseForm.Designer.cs">
       <DependentUpon>SearchFromDatabaseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\SearchForms\SiingleSelectForm.cs">
+    <Compile Include="Forms\SearchForms\SingleSelectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\SearchForms\SiingleSelectForm.Designer.cs">
-      <DependentUpon>SiingleSelectForm.cs</DependentUpon>
+    <Compile Include="Forms\SearchForms\SingleSelectForm.Designer.cs">
+      <DependentUpon>SingleSelectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\SecurityExtensions.cs" />
     <Compile Include="Forms\SearchForms\SelectDatabaseForm.cs">
@@ -253,8 +253,8 @@
     <EmbeddedResource Include="Forms\SearchForms\SelectDatabaseForm.resx">
       <DependentUpon>SelectDatabaseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\SearchForms\SiingleSelectForm.resx">
-      <DependentUpon>SiingleSelectForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\SearchForms\SingleSelectForm.resx">
+      <DependentUpon>SingleSelectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>

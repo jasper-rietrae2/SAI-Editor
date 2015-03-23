@@ -44,7 +44,7 @@
             this.listViewDatabases.Location = new System.Drawing.Point(12, 25);
             this.listViewDatabases.MultiSelect = false;
             this.listViewDatabases.Name = "listViewDatabases";
-            this.listViewDatabases.Size = new System.Drawing.Size(220, 163);
+            this.listViewDatabases.Size = new System.Drawing.Size(260, 278);
             this.listViewDatabases.TabIndex = 0;
             this.listViewDatabases.UseCompatibleStateImageBehavior = false;
             this.listViewDatabases.View = System.Windows.Forms.View.Details;
@@ -55,11 +55,11 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Database";
-            this.columnHeader1.Width = 198;
+            this.columnHeader1.Width = 242;
             // 
             // buttonContinue
             // 
-            this.buttonContinue.Location = new System.Drawing.Point(12, 194);
+            this.buttonContinue.Location = new System.Drawing.Point(12, 309);
             this.buttonContinue.Name = "buttonContinue";
             this.buttonContinue.Size = new System.Drawing.Size(75, 23);
             this.buttonContinue.TabIndex = 1;
@@ -69,7 +69,7 @@
             // 
             // buttonCancel
             // 
-            this.buttonCancel.Location = new System.Drawing.Point(157, 194);
+            this.buttonCancel.Location = new System.Drawing.Point(197, 309);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 2;
@@ -80,7 +80,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 9);
+            this.label1.Location = new System.Drawing.Point(12, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(188, 13);
             this.label1.TabIndex = 3;
@@ -90,7 +90,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(244, 224);
+            this.ClientSize = new System.Drawing.Size(284, 344);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonContinue);

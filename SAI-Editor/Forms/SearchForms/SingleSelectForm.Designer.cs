@@ -2,7 +2,7 @@
 
 namespace SAI_Editor.Forms.SearchForms
 {
-    partial class MultiSelectForm<T> where T : struct, IConvertible
+    partial class SingleSelectForm<T> where T : struct, IConvertible
     {
         /// <summary>
         /// Required designer variable.
@@ -30,53 +30,46 @@ namespace SAI_Editor.Forms.SearchForms
         /// </summary>
         private void InitializeComponent()
         {
-            this.listViewSelectableItems = new System.Windows.Forms.ListView();
-            this.columnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.buttonContinue = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonContinue = new System.Windows.Forms.Button();
+            this.listViewSelectableItems = new System.Windows.Forms.ListView();
             this.SuspendLayout();
-            // 
-            // listViewSelectableItems
-            // 
-            this.listViewSelectableItems.CheckBoxes = true;
-            this.listViewSelectableItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader});
-            this.listViewSelectableItems.FullRowSelect = true;
-            this.listViewSelectableItems.Location = new System.Drawing.Point(12, 12);
-            this.listViewSelectableItems.Name = "listViewSelectableItems";
-            this.listViewSelectableItems.Size = new System.Drawing.Size(329, 291);
-            this.listViewSelectableItems.TabIndex = 1;
-            this.listViewSelectableItems.UseCompatibleStateImageBehavior = false;
-            this.listViewSelectableItems.View = System.Windows.Forms.View.Details;
-            this.listViewSelectableItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSelectableItems_ColumnClick);
-            this.listViewSelectableItems.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listViewSelectableItems_ItemChecked);
-            // 
-            // columnHeader
-            // 
-            this.columnHeader.Text = "";
-            this.columnHeader.Width = 20;
-            // 
-            // buttonContinue
-            // 
-            this.buttonContinue.Location = new System.Drawing.Point(12, 309);
-            this.buttonContinue.Name = "buttonContinue";
-            this.buttonContinue.Size = new System.Drawing.Size(75, 23);
-            this.buttonContinue.TabIndex = 2;
-            this.buttonContinue.Text = "Continue";
-            this.buttonContinue.UseVisualStyleBackColor = true;
-            this.buttonContinue.Click += new System.EventHandler(this.buttonContinue_Click);
             // 
             // buttonCancel
             // 
             this.buttonCancel.Location = new System.Drawing.Point(266, 309);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
-            this.buttonCancel.TabIndex = 3;
+            this.buttonCancel.TabIndex = 6;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // MultiSelectForm
+            // buttonContinue
+            // 
+            this.buttonContinue.Location = new System.Drawing.Point(12, 309);
+            this.buttonContinue.Name = "buttonContinue";
+            this.buttonContinue.Size = new System.Drawing.Size(75, 23);
+            this.buttonContinue.TabIndex = 5;
+            this.buttonContinue.Text = "Continue";
+            this.buttonContinue.UseVisualStyleBackColor = true;
+            this.buttonContinue.Click += new System.EventHandler(this.buttonContinue_Click);
+            // 
+            // listViewSelectableItems
+            // 
+            this.listViewSelectableItems.FullRowSelect = true;
+            this.listViewSelectableItems.Location = new System.Drawing.Point(12, 12);
+            this.listViewSelectableItems.MultiSelect = false;
+            this.listViewSelectableItems.Name = "listViewSelectableItems";
+            this.listViewSelectableItems.Size = new System.Drawing.Size(329, 291);
+            this.listViewSelectableItems.TabIndex = 4;
+            this.listViewSelectableItems.UseCompatibleStateImageBehavior = false;
+            this.listViewSelectableItems.View = System.Windows.Forms.View.Details;
+            this.listViewSelectableItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSelectableItems_ColumnClick);
+            this.listViewSelectableItems.SelectedIndexChanged += new System.EventHandler(this.listViewSelectableItems_SelectedIndexChanged);
+            this.listViewSelectableItems.DoubleClick += new System.EventHandler(this.listViewSelectableItems_DoubleClick);
+            // 
+            // SingleSelectForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -88,20 +81,19 @@ namespace SAI_Editor.Forms.SearchForms
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "MultiSelectForm";
+            this.Name = "SingleSelectForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Select items";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MultiSelectForm_KeyDown);
+            this.Text = "Select something...";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SingleSelectForm_KeyDown);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button buttonContinue;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Button buttonContinue;
         private System.Windows.Forms.ListView listViewSelectableItems;
-        private System.Windows.Forms.ColumnHeader columnHeader;
     }
 }
