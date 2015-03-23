@@ -1226,5 +1226,14 @@ namespace SAI_Editor.Forms
                     break;
             }
         }
+
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (formState != FormState.FormStateMain)
+                return;
+
+            using (SettingsForm settingsForm = new SettingsForm())
+                settingsForm.ShowDialog(this);
+        }
     }
 }
