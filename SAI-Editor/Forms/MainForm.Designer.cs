@@ -868,7 +868,7 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.conditionEditorToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // conditionEditorToolStripMenuItem
@@ -892,7 +892,7 @@
             // smartAIWikiToolStripMenuItem
             // 
             this.smartAIWikiToolStripMenuItem.Name = "smartAIWikiToolStripMenuItem";
-            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
+            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
             this.smartAIWikiToolStripMenuItem.Text = "SmartAI Wiki (TC)";
             this.smartAIWikiToolStripMenuItem.Click += new System.EventHandler(this.smartAIWikiToolStripMenuItem_Click);
             // 
@@ -1047,6 +1047,7 @@
             this.tabControl.Size = new System.Drawing.Size(934, 466);
             this.tabControl.TabIndex = 84;
             this.tabControl.Visible = false;
+            this.tabControl.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.tabControl_TabClosing);
             this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPage1

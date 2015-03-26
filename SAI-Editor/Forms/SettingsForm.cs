@@ -149,7 +149,7 @@ namespace SAI_Editor.Forms
 
             if (checkBoxPhaseHighlighting.Checked != phaseHighlighting)
             {
-                ((MainForm)Owner).GetActiveUserControl().listViewSmartScripts.Init(true);
+                ((MainForm)Owner).GetActiveUserControl().ListViewList.Apply(true);
                 ((MainForm)Owner).GetActiveUserControl().checkBoxUsePhaseColors.Checked = checkBoxPhaseHighlighting.Checked;
             }
 

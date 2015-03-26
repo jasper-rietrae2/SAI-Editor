@@ -73,6 +73,7 @@ namespace SAI_Editor.Forms
             if (MainFormHeight > SystemInformation.VirtualScreen.Height)
                 MainFormHeight = SystemInformation.VirtualScreen.Height;
 
+            tabControl.DisplayStyle = TabStyle.VisualStudio;
             tabControl.DisplayStyleProvider.ShowTabCloser = true;
             //! HAS to be called before try-catch block
             tabControl.TabPages.Clear(); //! We only have it in the designer to get an idea of how stuff looks
@@ -102,12 +103,12 @@ namespace SAI_Editor.Forms
                 foreach (UserControlSAI uc in userControls)
                 {
                     uc.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
-                    uc.buttonGenerateComments.Enabled = uc.listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+                    uc.buttonGenerateComments.Enabled = uc.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
                     uc.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase;
                 }
 
                 menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
-                menuItemGenerateComment.Enabled = GetActiveUserControl().listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+                menuItemGenerateComment.Enabled = GetActiveUserControl().ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
                 searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
                 searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
                 searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
@@ -227,7 +228,8 @@ namespace SAI_Editor.Forms
             if (userControls.Count == 0)
                 return null;
 
-            return userControls[tabControl.SelectedIndex];
+            return userControls.First();
+            //return userControls[tabControl.SelectedIndex];
         }
 
         protected override CreateParams CreateParams
@@ -568,7 +570,7 @@ namespace SAI_Editor.Forms
 
             if (Settings.Default.ShowTooltipsStaticly)
                 foreach (UserControlSAI uc in userControls)
-                    uc.listViewSmartScripts.Height += (int)FormSizes.ListViewHeightContract;
+                    uc.ListView.Height += (int)FormSizes.ListViewHeightContract;
 
             if (instant)
             {
@@ -640,7 +642,7 @@ namespace SAI_Editor.Forms
             ResetFieldsToDefault();
 
             foreach (UserControlSAI uc in userControls)
-                uc.listViewSmartScripts.ClearScripts();
+                uc.ListViewList.ClearScripts();
 
             StartContractingToLoginForm(Settings.Default.InstantExpand);
         }
@@ -721,9 +723,9 @@ namespace SAI_Editor.Forms
 
         private void menuOptionDeleteSelectedRow_Click(object sender, EventArgs e)
         {
-            SmartScriptListView listViewSmartScripts = GetActiveUserControl().listViewSmartScripts;
+            CustomObjectListView listViewSmartScripts = GetActiveUserControl().ListView;
 
-            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedScript == null)
+            if (formState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
                 return;
 
             if (listViewSmartScripts.SelectedItems.Count <= 0)
@@ -737,19 +739,19 @@ namespace SAI_Editor.Forms
 
         private void menuItemCopySelectedRowListView_Click(object sender, EventArgs e)
         {
-            SmartScriptListView listViewSmartScripts = GetActiveUserControl().listViewSmartScripts;
+            CustomObjectListView listViewSmartScripts = GetActiveUserControl().ListView;
 
-            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedScript == null)
+            if (formState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
                 return;
 
-            smartScriptsOnClipBoard.Add(listViewSmartScripts.SelectedScript.Clone());
+            smartScriptsOnClipBoard.Add(((SmartScriptList)listViewSmartScripts.List).SelectedScript.Clone());
         }
 
         private void menuItemPasteLastCopiedRow_Click(object sender, EventArgs e)
         {
-            SmartScriptListView listViewSmartScripts = GetActiveUserControl().listViewSmartScripts;
+            CustomObjectListView listViewSmartScripts = GetActiveUserControl().ListView;
 
-            if (formState != FormState.FormStateMain || listViewSmartScripts.SelectedScript == null)
+            if (formState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
                 return;
 
             if (smartScriptsOnClipBoard.Count <= 0)
@@ -759,7 +761,7 @@ namespace SAI_Editor.Forms
             }
 
             SmartScript newSmartScript = smartScriptsOnClipBoard.Last().Clone();
-            listViewSmartScripts.AddScript(newSmartScript);
+            listViewSmartScripts.List.AddScript(newSmartScript);
         }
 
         private async void buttonSearchWorldDb_Click(object sender, EventArgs e)
@@ -929,11 +931,11 @@ namespace SAI_Editor.Forms
                 uc.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || uc.comboBoxSourceType.SelectedIndex == 2;
                 uc.pictureBoxLoadScript.Enabled = uc.textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
                 uc.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
-                uc.buttonGenerateComments.Enabled = uc.listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+                uc.buttonGenerateComments.Enabled = uc.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
             }
 
             menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
-            menuItemGenerateComment.Enabled = GetActiveUserControl().listViewSmartScripts.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+            menuItemGenerateComment.Enabled = GetActiveUserControl().ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
             searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
             searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
             searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
@@ -966,7 +968,7 @@ namespace SAI_Editor.Forms
                 return;
             }
 
-            GetActiveUserControl().listViewSmartScripts.AddScript(lastDeletedSmartScripts.Last());
+            GetActiveUserControl().ListViewList.AddScript(lastDeletedSmartScripts.Last());
             lastDeletedSmartScripts.Remove(lastDeletedSmartScripts.Last());
         }
 
@@ -1149,6 +1151,15 @@ namespace SAI_Editor.Forms
                 CreateTabControl();
             }
 
+            var uc = userControls.First();
+
+            if (lastSelectedWorkspaceIndex < tabControl.TabPages.Count)
+                tabControl.TabPages[lastSelectedWorkspaceIndex].Controls.Remove(uc);
+
+            tabControl.TabPages[tabControl.SelectedIndex].Controls.Add(uc);
+
+            uc.CurrentState = uc.States[tabControl.SelectedIndex];
+
             lastSelectedWorkspaceIndex = tabControl.SelectedIndex;
         }
 
@@ -1160,12 +1171,20 @@ namespace SAI_Editor.Forms
             if (!first)
                 tabControl.TabPages.RemoveAt(tabControl.TabPages.Count - 1);
 
-            UserControlSAI userControlSAI = new UserControlSAI();
-            userControlSAI.Parent = this;
-            userControlSAI.LoadUserControl();
+            UserControlSAI userControlSAI;
+            if (first && userControls.Count == 0)
+            {
+                userControlSAI = new UserControlSAI();
+                userControlSAI.Parent = this;
+                userControlSAI.LoadUserControl();
+            }
+            else
+            {
+                userControlSAI = userControls.Single();
+            }
 
             TabPage newPage = new TabPage();
-            newPage.Text = "Workspace " + (tabControl.TabPages.Count + 1).ToString();
+            newPage.Text = "Workspace " + (tabControl.TabPages.Count + 1);
             newPage.Controls.Add(userControlSAI);
 
             for (int i = 0; i < tabControl.TabPages.Count; i++)
@@ -1179,7 +1198,11 @@ namespace SAI_Editor.Forms
 
             tabControl.TabPages.Add(newPage);
             tabControl.TabPages.Add(new TabPage("+"));
-            userControls.Add(userControlSAI);
+
+            userControlSAI.AddWorkSpace();
+
+            if (first && userControls.Count == 0)
+                userControls.Add(userControlSAI);
 
             if (!first)
                 tabControl.SelectedIndex = tabControl.TabPages.Count - 2;
@@ -1225,6 +1248,11 @@ namespace SAI_Editor.Forms
                     Text += ": ERROR - No expansion!";
                     break;
             }
+        }
+
+        private void tabControl_TabClosing(object sender, TabControlCancelEventArgs e)
+        {
+            userControls.First().States.RemoveAt(e.TabPageIndex);
         }
     }
 }

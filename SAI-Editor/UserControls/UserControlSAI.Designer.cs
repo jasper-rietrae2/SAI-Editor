@@ -139,7 +139,7 @@
             this.labelStaticTooltipParameterTitleTypes = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timerShowStaticTooltips = new System.Windows.Forms.Timer(this.components);
-            this.listViewSmartScripts = new SAI_Editor.Classes.CustomControls.SmartScriptListView();
+            this.customObjectListView = new SAI_Editor.Classes.CustomControls.CustomObjectListView();
             this.groupBoxStaticScriptInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
@@ -155,6 +155,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStaticTooltip)).BeginInit();
             this.panelStaticTooltipParameters.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customObjectListView)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBoxStaticScriptInfo
@@ -1646,28 +1647,25 @@
             this.timerShowStaticTooltips.Interval = 4;
             this.timerShowStaticTooltips.Tick += new System.EventHandler(this.timerShowStaticTooltips_Tick);
             // 
-            // listViewSmartScripts
+            // customObjectListView
             // 
-            this.listViewSmartScripts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.listViewSmartScripts.EnablePhaseHighlighting = true;
-            this.listViewSmartScripts.FullRowSelect = true;
-            this.listViewSmartScripts.Location = new System.Drawing.Point(3, 216);
-            this.listViewSmartScripts.MultiSelect = false;
-            this.listViewSmartScripts.Name = "listViewSmartScripts";
-            this.listViewSmartScripts.Size = new System.Drawing.Size(915, 214);
-            this.listViewSmartScripts.TabIndex = 93;
-            this.listViewSmartScripts.UseCompatibleStateImageBehavior = false;
-            this.listViewSmartScripts.View = System.Windows.Forms.View.Details;
-            this.listViewSmartScripts.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewSmartScripts_ColumnClick);
-            this.listViewSmartScripts.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSmartScripts_ItemSelectionChanged);
-            this.listViewSmartScripts.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewSmartScripts_MouseClick);
+            this.customObjectListView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.customObjectListView.List = null;
+            this.customObjectListView.Location = new System.Drawing.Point(0, 222);
+            this.customObjectListView.Name = "customObjectListView";
+            this.customObjectListView.ShowGroups = false;
+            this.customObjectListView.Size = new System.Drawing.Size(925, 215);
+            this.customObjectListView.TabIndex = 94;
+            this.customObjectListView.UseCompatibleStateImageBehavior = false;
+            this.customObjectListView.View = System.Windows.Forms.View.Details;
+            this.customObjectListView.VirtualMode = true;
             // 
             // UserControlSAI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.customObjectListView);
             this.Controls.Add(this.groupBoxStaticScriptInfo);
             this.Controls.Add(this.buttonGenerateComments);
             this.Controls.Add(this.groupBoxScriptInfo);
@@ -1675,7 +1673,6 @@
             this.Controls.Add(this.groupBoxParameters);
             this.Controls.Add(this.groupBoxPreferences);
             this.Controls.Add(this.buttonNewLine);
-            this.Controls.Add(this.listViewSmartScripts);
             this.Controls.Add(this.panelStaticTooltipTypes);
             this.Controls.Add(this.panelStaticTooltipParameters);
             this.Name = "UserControlSAI";
@@ -1704,6 +1701,7 @@
             this.panelStaticTooltipParameters.ResumeLayout(false);
             this.panelStaticTooltipParameters.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customObjectListView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1720,7 +1718,6 @@
         public System.Windows.Forms.TextBox textBoxLinkTo;
         public System.Windows.Forms.TextBox textBoxLinkFrom;
         public System.Windows.Forms.CheckBox checkBoxUsePhaseColors;
-        public Classes.CustomControls.SmartScriptListView listViewSmartScripts;
         public System.Windows.Forms.Button buttonSearchForEntryOrGuid;
         public System.Windows.Forms.Label label4;
         public System.Windows.Forms.Label labelEntryOrGuid;
@@ -1820,5 +1817,6 @@
         public System.Windows.Forms.Label labelStaticTooltipParameterTitleTypes;
         public System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Timer timerShowStaticTooltips;
+        private Classes.CustomControls.CustomObjectListView customObjectListView;
     }
 }
