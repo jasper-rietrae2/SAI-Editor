@@ -1250,7 +1250,6 @@ namespace SAI_Editor.Forms
             }
         }
 
-<<<<<<< HEAD
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (formState != FormState.FormStateMain)
@@ -1258,11 +1257,11 @@ namespace SAI_Editor.Forms
 
             using (SettingsForm settingsForm = new SettingsForm())
                 settingsForm.ShowDialog(this);
-=======
+    	}
+
         private void tabControl_TabClosing(object sender, TabControlCancelEventArgs e)
         {
             userControls.First().States.RemoveAt(e.TabPageIndex);
->>>>>>> a4049b33433495f4def3f05191b41a1fa37654f1
         }
     }
 }
