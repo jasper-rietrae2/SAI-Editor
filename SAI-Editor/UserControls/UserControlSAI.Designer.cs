@@ -1659,6 +1659,7 @@
             this.customObjectListView.UseCompatibleStateImageBehavior = false;
             this.customObjectListView.View = System.Windows.Forms.View.Details;
             this.customObjectListView.VirtualMode = true;
+            this.customObjectListView.FullRowSelect = true;
             // 
             // UserControlSAI
             // 
