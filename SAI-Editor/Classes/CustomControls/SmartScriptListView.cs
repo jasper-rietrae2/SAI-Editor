@@ -25,7 +25,6 @@ namespace SAI_Editor.Classes.CustomControls
         public SmartScriptListView(List<DatabaseClass> scripts, List<string> exProps = null)
             : base(CustomListViewType.CustomListViewSmartScript, scripts, exProps)
         {
-
         }
 
         public SmartScript SelectedScript
