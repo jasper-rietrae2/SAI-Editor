@@ -34,6 +34,7 @@
             this.buttonExecuteScript = new System.Windows.Forms.Button();
             this.buttonSaveToFile = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.buttonUploadToPastebin = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.richTextBoxSqlOutput)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +48,6 @@
             this.richTextBoxSqlOutput.CommentPrefix = "--";
             this.richTextBoxSqlOutput.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBoxSqlOutput.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.richTextBoxSqlOutput.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.richTextBoxSqlOutput.IsReplaceMode = false;
             this.richTextBoxSqlOutput.Language = FastColoredTextBoxNS.Language.SQL;
             this.richTextBoxSqlOutput.LeftBracket = '(';
@@ -84,11 +84,22 @@
             // 
             this.saveFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog_FileOk);
             // 
+            // buttonUploadToPastebin
+            // 
+            this.buttonUploadToPastebin.Location = new System.Drawing.Point(12, 340);
+            this.buttonUploadToPastebin.Name = "buttonUploadToPastebin";
+            this.buttonUploadToPastebin.Size = new System.Drawing.Size(154, 23);
+            this.buttonUploadToPastebin.TabIndex = 3;
+            this.buttonUploadToPastebin.Text = "Upload to Pastebin.com";
+            this.buttonUploadToPastebin.UseVisualStyleBackColor = true;
+            this.buttonUploadToPastebin.Click += new System.EventHandler(this.buttonUploadToPastebin_Click);
+            // 
             // SqlOutputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 368);
+            this.Controls.Add(this.buttonUploadToPastebin);
             this.Controls.Add(this.buttonSaveToFile);
             this.Controls.Add(this.buttonExecuteScript);
             this.Controls.Add(this.richTextBoxSqlOutput);
@@ -112,5 +123,6 @@
         private System.Windows.Forms.Button buttonExecuteScript;
         private System.Windows.Forms.Button buttonSaveToFile;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button buttonUploadToPastebin;
     }
 }
