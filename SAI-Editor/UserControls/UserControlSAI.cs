@@ -1303,6 +1303,7 @@ namespace SAI_Editor
             buttonGenerateSql.Enabled = customObjectListView.Items.Count > 0;
             MainForm.menuItemGenerateSql.Enabled = customObjectListView.Items.Count > 0;
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
+            ResizeColumns();
         }
 
         public void buttonSearchPhasemask_Click(object sender, EventArgs e)
@@ -3041,6 +3042,7 @@ namespace SAI_Editor
         {
             HandleShowBasicInfo();
             SynchronizeAllUserControlCheckBoxes();
+            ResizeColumns();
         }
 
         public void HandleShowBasicInfo()
@@ -3182,6 +3184,8 @@ namespace SAI_Editor
 
                 if (MainForm.radioButtonConnectToMySql.Checked)
                     TryToLoadScript(showErrorIfNoneFound: false);
+
+                ResizeColumns();
             }
         }
 

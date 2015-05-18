@@ -137,8 +137,8 @@ namespace SAI_Editor.Classes
             {
                 if (control.Key.Name == name)
                 {
-                    control.Key.Text = value.ToString();
-                    //Controls[control.Key] = value;
+                    //control.Key.Text = value.ToString();
+                    Controls[control.Key] = value;
                     break;
                 }
             }
