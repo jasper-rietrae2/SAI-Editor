@@ -48,7 +48,7 @@
             this.listViewScripts.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader});
             this.listViewScripts.FullRowSelect = true;
-            this.listViewScripts.Location = new System.Drawing.Point(225, 18);
+            this.listViewScripts.Location = new System.Drawing.Point(257, 18);
             this.listViewScripts.MultiSelect = false;
             this.listViewScripts.Name = "listViewScripts";
             this.listViewScripts.Size = new System.Drawing.Size(357, 162);
@@ -66,7 +66,7 @@
             // 
             // buttonExecuteSelectedScript
             // 
-            this.buttonExecuteSelectedScript.Location = new System.Drawing.Point(441, 186);
+            this.buttonExecuteSelectedScript.Location = new System.Drawing.Point(473, 186);
             this.buttonExecuteSelectedScript.Name = "buttonExecuteSelectedScript";
             this.buttonExecuteSelectedScript.Size = new System.Drawing.Size(141, 23);
             this.buttonExecuteSelectedScript.TabIndex = 3;
@@ -137,7 +137,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 217);
+            this.ClientSize = new System.Drawing.Size(628, 217);
             this.Controls.Add(this.labelWarningSettingOff);
             this.Controls.Add(this.calenderScriptsToRevert);
             this.Controls.Add(this.buttonExecuteSelectedScript);
