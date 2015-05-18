@@ -15,7 +15,8 @@ namespace SAI_Editor.Classes
 
         static SAIUserControlState()
         {
-            var states = new List<ControlState>();
+            List<ControlState> states = new List<ControlState>();
+
             states.Add(new ControlState<TextBox>((d, c) =>
             {
                 d.Add(c, c.Text);
@@ -38,7 +39,18 @@ namespace SAI_Editor.Classes
                 cb.SelectedIndex = selected;
             }));
 
-            states.Add(new ControlState<NumericUpDown>((d, c) => d.Add(c, ((NumericUpDown)c).Value), (c, o) => ((NumericUpDown)c).Value = (decimal)o));
+            states.Add(new ControlState<NumericUpDown>((d, c) =>
+            {
+                d.Add(c, ((NumericUpDown)c).Value);
+            }, (c, o) =>
+            {
+                NumericUpDown nup = (NumericUpDown)c;
+                decimal value = (decimal)o;
+
+                nup.Value = value;
+            }));
+
+            //states.Add(new ControlState<NumericUpDown>((d, c) => d.Add(c, ((NumericUpDown)c).Value), (c, o) => ((NumericUpDown)c).Value = (decimal)o));
             states.Add(new ControlState<CheckBox>((d, c) => d.Add(c, ((CheckBox)c).Checked), (c, o) => ((CheckBox)c).Checked = (bool)o));
             states.Add(new ControlState<CustomObjectListView>((d, c) =>
             {
@@ -70,7 +82,6 @@ namespace SAI_Editor.Classes
             foreach (var ctrl in Controls)
             {
                 Type ctrlType = ctrl.Key.GetType();
-
                 StatesByType[ctrlType].Deserializer(ctrl.Key, ctrl.Value);
             }
         }
@@ -93,21 +104,13 @@ namespace SAI_Editor.Classes
             foreach (Control ctrl in control.Controls)
             {
                 if (ctrl is TextBox)
-                {
-                    ((TextBox)ctrl).Text = string.Empty;
-                }
+                    ((TextBox)ctrl).Text = String.Empty;
                 else if (ctrl is NumericUpDown)
-                {
                     ((NumericUpDown)ctrl).Value = 0;
-                }
                 else if (ctrl is CheckBox)
-                {
                     ((CheckBox)ctrl).Checked = false;
-                }
                 else if (ctrl is ListView)
-                {
                     ((ListView)ctrl).Items.Clear();
-                }
             }
         }
 
@@ -121,15 +124,42 @@ namespace SAI_Editor.Classes
             foreach (Control c in parent.Controls)
             {
                 if (c.HasChildren)
-                {
                     foreach (Control c2 in GetChildControls(c))
-                    {
                         yield return c2;
-                    }
-                }
 
                 yield return c;
             }
+        }
+
+        public void SetControlValueByName(string name, object value)
+        {
+            foreach (KeyValuePair<Control, object> control in Controls)
+            {
+                if (control.Key.Name == name)
+                {
+                    control.Key.Text = value.ToString();
+                    //Controls[control.Key] = value;
+                    break;
+                }
+            }
+        }
+
+        public Control GetControlByName(string name)
+        {
+            foreach (KeyValuePair<Control, object> control in Controls)
+                if (control.Key.Name == name)
+                    return control.Key;
+
+            return null;
+        }
+
+        public object GetControlValueName(string name)
+        {
+            foreach (KeyValuePair<Control, object> control in Controls)
+                if (control.Key.Name == name)
+                    return control.Value;
+
+            return null;
         }
     }
 }

@@ -39,6 +39,8 @@
             this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuitemLoadSelectedEntry = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemGenerateComment = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
@@ -118,7 +120,7 @@
             this.pictureBoxDonate = new System.Windows.Forms.PictureBox();
             this.timerExpandOrContract = new System.Windows.Forms.Timer(this.components);
             this.timerShowStaticTooltips = new System.Windows.Forms.Timer(this.components);
-            this.tabControl = new System.Windows.Forms.CustomTabControl();
+            this.tabControlWorkspaces = new System.Windows.Forms.CustomTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBoxStaticScriptInfo = new System.Windows.Forms.GroupBox();
             this.buttonSearchForEntryOrGuid = new System.Windows.Forms.Button();
@@ -248,14 +250,12 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).BeginInit();
-            this.tabControl.SuspendLayout();
+            this.tabControlWorkspaces.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
             this.groupBoxScriptInfo.SuspendLayout();
@@ -372,6 +372,20 @@
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.ShortcutKeyDisplayString = "(F1)";
+            this.settingsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(316, 6);
             // 
             // menuitemLoadSelectedEntry
             // 
@@ -872,7 +886,7 @@
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.conditionEditorToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
             // 
             // conditionEditorToolStripMenuItem
@@ -896,7 +910,7 @@
             // smartAIWikiToolStripMenuItem
             // 
             this.smartAIWikiToolStripMenuItem.Name = "smartAIWikiToolStripMenuItem";
-            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(167, 22);
+            this.smartAIWikiToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.smartAIWikiToolStripMenuItem.Text = "SmartAI Wiki (TC)";
             this.smartAIWikiToolStripMenuItem.Click += new System.EventHandler(this.smartAIWikiToolStripMenuItem_Click);
             // 
@@ -1024,35 +1038,35 @@
             // 
             this.timerShowStaticTooltips.Interval = 4;
             // 
-            // tabControl
+            // tabControlWorkspaces
             // 
-            this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControlWorkspaces.Controls.Add(this.tabPage1);
             // 
             // 
             // 
-            this.tabControl.DisplayStyleProvider.BorderColor = System.Drawing.SystemColors.ControlDark;
-            this.tabControl.DisplayStyleProvider.BorderColorHot = System.Drawing.SystemColors.ControlDark;
-            this.tabControl.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
-            this.tabControl.DisplayStyleProvider.CloserColor = System.Drawing.Color.Empty;
-            this.tabControl.DisplayStyleProvider.FocusTrack = true;
-            this.tabControl.DisplayStyleProvider.HotTrack = true;
-            this.tabControl.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tabControl.DisplayStyleProvider.Opacity = 1F;
-            this.tabControl.DisplayStyleProvider.Overlap = 0;
-            this.tabControl.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
-            this.tabControl.DisplayStyleProvider.ShowTabCloser = true;
-            this.tabControl.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
-            this.tabControl.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
-            this.tabControl.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
-            this.tabControl.HotTrack = true;
-            this.tabControl.Location = new System.Drawing.Point(11, 27);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(934, 466);
-            this.tabControl.TabIndex = 84;
-            this.tabControl.Visible = false;
-            this.tabControl.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.tabControl_TabClosing);
-            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            this.tabControlWorkspaces.DisplayStyleProvider.BorderColor = System.Drawing.SystemColors.ControlDark;
+            this.tabControlWorkspaces.DisplayStyleProvider.BorderColorHot = System.Drawing.SystemColors.ControlDark;
+            this.tabControlWorkspaces.DisplayStyleProvider.BorderColorSelected = System.Drawing.Color.FromArgb(((int)(((byte)(127)))), ((int)(((byte)(157)))), ((int)(((byte)(185)))));
+            this.tabControlWorkspaces.DisplayStyleProvider.CloserColor = System.Drawing.Color.Empty;
+            this.tabControlWorkspaces.DisplayStyleProvider.FocusTrack = true;
+            this.tabControlWorkspaces.DisplayStyleProvider.HotTrack = true;
+            this.tabControlWorkspaces.DisplayStyleProvider.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tabControlWorkspaces.DisplayStyleProvider.Opacity = 1F;
+            this.tabControlWorkspaces.DisplayStyleProvider.Overlap = 0;
+            this.tabControlWorkspaces.DisplayStyleProvider.Padding = new System.Drawing.Point(6, 3);
+            this.tabControlWorkspaces.DisplayStyleProvider.ShowTabCloser = true;
+            this.tabControlWorkspaces.DisplayStyleProvider.TextColor = System.Drawing.SystemColors.ControlText;
+            this.tabControlWorkspaces.DisplayStyleProvider.TextColorDisabled = System.Drawing.SystemColors.ControlDark;
+            this.tabControlWorkspaces.DisplayStyleProvider.TextColorSelected = System.Drawing.SystemColors.ControlText;
+            this.tabControlWorkspaces.HotTrack = true;
+            this.tabControlWorkspaces.Location = new System.Drawing.Point(11, 27);
+            this.tabControlWorkspaces.Name = "tabControlWorkspaces";
+            this.tabControlWorkspaces.SelectedIndex = 0;
+            this.tabControlWorkspaces.Size = new System.Drawing.Size(934, 466);
+            this.tabControlWorkspaces.TabIndex = 84;
+            this.tabControlWorkspaces.Visible = false;
+            this.tabControlWorkspaces.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.tabControlWorkspaces_TabClosing);
+            this.tabControlWorkspaces.SelectedIndexChanged += new System.EventHandler(this.tabControlWorkspaces_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -2673,27 +2687,13 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.ShortcutKeyDisplayString = "(F1)";
-            this.settingsToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(319, 22);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(316, 6);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1339, 503);
             this.Controls.Add(this.pictureBoxDonate);
-            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.tabControlWorkspaces);
             this.Controls.Add(this.customPanelLogin);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
@@ -2714,7 +2714,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).EndInit();
-            this.tabControl.ResumeLayout(false);
+            this.tabControlWorkspaces.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.PerformLayout();
@@ -2855,7 +2855,7 @@
         public System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem conditionEditorToolStripMenuItem;
         public Classes.CustomControls.CustomPanel customPanelLogin;
-        public System.Windows.Forms.CustomTabControl tabControl;
+        public System.Windows.Forms.CustomTabControl tabControlWorkspaces;
         public System.Windows.Forms.TabPage tabPage1;
         public System.Windows.Forms.GroupBox groupBoxStaticScriptInfo;
         public Classes.CustomControls.PictureBoxDisableable pictureBoxCreateScript;

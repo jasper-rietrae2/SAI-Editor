@@ -147,9 +147,8 @@ namespace SAI_Editor
 
         public void AddWorkSpace()
         {
-            var newState = (SAIUserControlState)DefaultState.Clone();
+            SAIUserControlState newState = (SAIUserControlState)DefaultState.Clone();
             States.Add(newState);
-
             CurrentState = newState;
         }
 

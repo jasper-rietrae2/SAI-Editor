@@ -73,20 +73,20 @@ namespace SAI_Editor.Forms
             if (MainFormHeight > SystemInformation.VirtualScreen.Height)
                 MainFormHeight = SystemInformation.VirtualScreen.Height;
 
-            tabControl.DisplayStyle = TabStyle.VisualStudio;
-            tabControl.DisplayStyleProvider.ShowTabCloser = true;
+            tabControlWorkspaces.DisplayStyle = TabStyle.VisualStudio;
+            tabControlWorkspaces.DisplayStyleProvider.ShowTabCloser = true;
             //! HAS to be called before try-catch block
-            tabControl.TabPages.Clear(); //! We only have it in the designer to get an idea of how stuff looks
+            tabControlWorkspaces.TabPages.Clear(); //! We only have it in the designer to get an idea of how stuff looks
 
             //! Create all tabs based on settings
             for (int i = 1; i < Settings.Default.LastStaticInfoPerTab.Split(',').Length; ++i)
-                CreateTabControl(tabControl.TabPages.Count == 0);
+                CreateTabControl(tabControlWorkspaces.TabPages.Count == 0);
 
-            if (tabControl.TabPages.Count == 0)
+            if (tabControlWorkspaces.TabPages.Count == 0)
                 CreateTabControl(true);
 
-            if (tabControl.TabPages.Count > 0)
-                tabControl.SelectedIndex = 0;
+            if (tabControlWorkspaces.TabPages.Count > 0)
+                tabControlWorkspaces.SelectedIndex = 0;
 
             try
             {
@@ -129,7 +129,7 @@ namespace SAI_Editor.Forms
                 MessageBox.Show("Something went wrong when loading the settings.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            tabControl.Visible = false;
+            tabControlWorkspaces.Visible = false;
             customPanelLogin.Visible = true;
 
             customPanelLogin.Location = new Point(9, 8);
@@ -586,7 +586,7 @@ namespace SAI_Editor.Forms
                 contractingToLoginForm = true;
             }
 
-            tabControl.Visible = false;
+            tabControlWorkspaces.Visible = false;
             menuStrip.Visible = false;
         }
 
@@ -650,7 +650,7 @@ namespace SAI_Editor.Forms
         private void FinishedExpandingOrContracting(bool expanding)
         {
             customPanelLogin.Visible = !expanding;
-            tabControl.Visible = expanding;
+            tabControlWorkspaces.Visible = expanding;
             menuStrip.Visible = expanding;
             pictureBoxDonate.Visible = expanding;
             Invalidate();
@@ -673,18 +673,23 @@ namespace SAI_Editor.Forms
             //1234-1,5555-3
             string[] lastStaticInfoPerTab = Settings.Default.LastStaticInfoPerTab.Split(',');
 
-            for (int i = 0; i < lastStaticInfoPerTab.Length; ++i)
+            if (userControls.Count > 0)
             {
-                if (i >= userControls.Count)
-                    continue;
+                for (int i = 0; i < userControls.Single().States.Count; ++i)
+                {
+                    SAIUserControlState uc = userControls.Single().States[i];
 
-                string[] splitSections = lastStaticInfoPerTab[i].Split('-');
+                    string[] splitSections = lastStaticInfoPerTab[i].Split('-');
 
-                if (splitSections.Length == 1 && splitSections[0] == String.Empty)
-                    continue;
+                    //! If entryorguid text saved is empty, don't bother setting anything
+                    if (splitSections.Length == 1 && splitSections[0] == String.Empty)
+                        continue;
 
-                userControls[i].textBoxEntryOrGuid.Text = splitSections[0];
-                userControls[i].comboBoxSourceType.SelectedIndex = Convert.ToInt32(splitSections[1]);
+                    uc.SetControlValueByName("textBoxEntryOrGuid", splitSections[0]);
+                    uc.SetControlValueByName("comboBoxSourceType", Convert.ToInt32(splitSections[1]));
+                    //uc.GetControlByName("textBoxEntryOrGuid").Text = splitSections[0];
+                    //((ComboBox)uc.GetControlByName("comboBoxSourceType")).SelectedIndex = Convert.ToInt32(splitSections[1]);
+                }
             }
 
             foreach (UserControlSAI uc in userControls)
@@ -825,8 +830,21 @@ namespace SAI_Editor.Forms
             string lastStaticInfoPerTab = String.Empty;
 
             //entryorguid,sourceTypeIndex,entryorguid,sourceTypeIndex,entryorguid,sourceTypeIndex,....
-            foreach (UserControlSAI uc in userControls)
-                lastStaticInfoPerTab += uc.textBoxEntryOrGuid.Text + "-" + uc.comboBoxSourceType.SelectedIndex + ",";
+            if (userControls.Count > 0)
+            {
+                foreach (SAIUserControlState uc in userControls.Single().States)
+                {
+                    string entryOrGuidStr = uc.GetControlValueName("textBoxEntryOrGuid").ToString();
+
+                    if (String.IsNullOrWhiteSpace(entryOrGuidStr))
+                        entryOrGuidStr = uc.GetControlByName("textBoxEntryOrGuid").Text;
+
+                    if (String.IsNullOrWhiteSpace(entryOrGuidStr))
+                        entryOrGuidStr = "0";
+
+                    lastStaticInfoPerTab += entryOrGuidStr + "-" + uc.GetControlValueName("comboBoxSourceType").ToString() + ",";
+                }
+            }
 
             Settings.Default.LastStaticInfoPerTab = lastStaticInfoPerTab;
 
@@ -1137,41 +1155,44 @@ namespace SAI_Editor.Forms
                 selectForm.ShowDialog(this);
         }
 
-        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabControlWorkspaces_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (tabControl.SelectedTab != null && tabControl.SelectedTab.Text == "+")
+            //! New workspace is being created
+            if (tabControlWorkspaces.SelectedTab != null && tabControlWorkspaces.SelectedTab.Text == "+")
             {
-                if (tabControl.TabPages.Count > (int)MiscEnumerators.MaxWorkSpaceCount)
+                if (tabControlWorkspaces.TabPages.Count > (int)MiscEnumerators.MaxWorkSpaceCount)
                 {
-                    MessageBox.Show("You can't have more than 6 different workspaces open at the same time to avoid start-up delays.", "Workspace limit", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    tabControl.SelectedIndex = lastSelectedWorkspaceIndex;
+                    MessageBox.Show("You can't have more than " + (int)MiscEnumerators.MaxWorkSpaceCount + 
+                        " different workspaces open at the same time to avoid start-up delays.", "Workspace limit", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    tabControlWorkspaces.SelectedIndex = lastSelectedWorkspaceIndex;
                     return;
                 }
 
                 CreateTabControl();
             }
 
+            //! No new workspace created but different workspace selected
             var uc = userControls.First();
 
-            if (lastSelectedWorkspaceIndex < tabControl.TabPages.Count)
-                tabControl.TabPages[lastSelectedWorkspaceIndex].Controls.Remove(uc);
+            if (lastSelectedWorkspaceIndex < tabControlWorkspaces.TabPages.Count)
+                tabControlWorkspaces.TabPages[lastSelectedWorkspaceIndex].Controls.Remove(uc);
 
-            tabControl.TabPages[tabControl.SelectedIndex].Controls.Add(uc);
+            tabControlWorkspaces.TabPages[tabControlWorkspaces.SelectedIndex].Controls.Add(uc);
+            uc.CurrentState = uc.States[tabControlWorkspaces.SelectedIndex];
 
-            uc.CurrentState = uc.States[tabControl.SelectedIndex];
-
-            lastSelectedWorkspaceIndex = tabControl.SelectedIndex;
+            lastSelectedWorkspaceIndex = tabControlWorkspaces.SelectedIndex;
         }
 
         private void CreateTabControl(bool first = false)
         {
-            if (tabControl.TabPages.Count > (int)MiscEnumerators.MaxWorkSpaceCount)
+            if (tabControlWorkspaces.TabPages.Count > (int)MiscEnumerators.MaxWorkSpaceCount)
                 return;
 
             if (!first)
-                tabControl.TabPages.RemoveAt(tabControl.TabPages.Count - 1);
+                tabControlWorkspaces.TabPages.RemoveAt(tabControlWorkspaces.TabPages.Count - 1);
 
             UserControlSAI userControlSAI;
+
             if (first && userControls.Count == 0)
             {
                 userControlSAI = new UserControlSAI();
@@ -1179,25 +1200,23 @@ namespace SAI_Editor.Forms
                 userControlSAI.LoadUserControl();
             }
             else
-            {
                 userControlSAI = userControls.Single();
-            }
 
             TabPage newPage = new TabPage();
-            newPage.Text = "Workspace " + (tabControl.TabPages.Count + 1);
+            newPage.Text = "Workspace " + (tabControlWorkspaces.TabPages.Count + 1);
             newPage.Controls.Add(userControlSAI);
 
-            for (int i = 0; i < tabControl.TabPages.Count; i++)
+            for (int i = 0; i < tabControlWorkspaces.TabPages.Count; i++)
             {
-                if (tabControl.TabPages[i].Text == "+")
+                if (tabControlWorkspaces.TabPages[i].Text == "+")
                 {
-                    tabControl.TabPages.RemoveAt(i);
+                    tabControlWorkspaces.TabPages.RemoveAt(i);
                     break;
                 }
             }
 
-            tabControl.TabPages.Add(newPage);
-            tabControl.TabPages.Add(new TabPage("+"));
+            tabControlWorkspaces.TabPages.Add(newPage);
+            tabControlWorkspaces.TabPages.Add(new TabPage("+"));
 
             userControlSAI.AddWorkSpace();
 
@@ -1205,7 +1224,7 @@ namespace SAI_Editor.Forms
                 userControls.Add(userControlSAI);
 
             if (!first)
-                tabControl.SelectedIndex = tabControl.TabPages.Count - 2;
+                tabControlWorkspaces.SelectedIndex = tabControlWorkspaces.TabPages.Count - 2;
         }
 
         private void pictureBoxDonate_Click(object sender, EventArgs e)
@@ -1259,7 +1278,7 @@ namespace SAI_Editor.Forms
                 settingsForm.ShowDialog(this);
     	}
 
-        private void tabControl_TabClosing(object sender, TabControlCancelEventArgs e)
+        private void tabControlWorkspaces_TabClosing(object sender, TabControlCancelEventArgs e)
         {
             userControls.First().States.RemoveAt(e.TabPageIndex);
         }
