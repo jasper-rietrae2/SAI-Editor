@@ -2113,6 +2113,7 @@ namespace SAI_Editor
             newSmartScript.target_o = "0";
             ListViewList.AddScript(newSmartScript, selectNewItem: true);
             HandleShowBasicInfo();
+            ResizeColumns();
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
         }
