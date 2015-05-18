@@ -1660,6 +1660,7 @@
             this.customObjectListView.View = System.Windows.Forms.View.Details;
             this.customObjectListView.VirtualMode = true;
             this.customObjectListView.FullRowSelect = true;
+            this.customObjectListView.ItemSelectionChanged += customObjectListView_ItemSelectionChanged;
             // 
             // UserControlSAI
             // 
