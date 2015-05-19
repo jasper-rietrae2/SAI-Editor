@@ -1654,7 +1654,7 @@
             this.customObjectListView.Location = new System.Drawing.Point(3, 222);
             this.customObjectListView.Name = "customObjectListView";
             this.customObjectListView.ShowGroups = false;
-            this.customObjectListView.Size = new System.Drawing.Size(919, 212);
+            this.customObjectListView.Size = new System.Drawing.Size(915, 208);
             this.customObjectListView.TabIndex = 94;
             this.customObjectListView.UseCompatibleStateImageBehavior = false;
             this.customObjectListView.View = System.Windows.Forms.View.Details;

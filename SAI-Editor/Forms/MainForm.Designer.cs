@@ -1068,6 +1068,7 @@
             this.tabControlWorkspaces.Visible = false;
             this.tabControlWorkspaces.TabClosing += new System.EventHandler<System.Windows.Forms.TabControlCancelEventArgs>(this.tabControlWorkspaces_TabClosing);
             this.tabControlWorkspaces.SelectedIndexChanged += new System.EventHandler(this.tabControlWorkspaces_SelectedIndexChanged);
+            this.tabControlWorkspaces.SizeChanged += new System.EventHandler(this.tabControlWorkspaces_SizeChanged);
             // 
             // tabPage1
             // 

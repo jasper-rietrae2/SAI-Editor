@@ -582,6 +582,8 @@ namespace SAI_Editor.Forms
 
         private void StartContractingToLoginForm(bool instant = false)
         {
+            SetSizable(false);
+
             SetFormTitle("SAI-Editor " + applicationVersion + ": Login");
 
             if (Settings.Default.ShowTooltipsStaticly)
@@ -604,6 +606,7 @@ namespace SAI_Editor.Forms
 
             tabControlWorkspaces.Visible = false;
             menuStrip.Visible = false;
+            pictureBoxDonate.Visible = false;
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -668,6 +671,7 @@ namespace SAI_Editor.Forms
             customPanelLogin.Visible = !expanding;
             tabControlWorkspaces.Visible = expanding;
             menuStrip.Visible = expanding;
+            pictureBoxDonate.Visible = expanding;
             pictureBoxDonate.Visible = expanding;
             Invalidate();
 
@@ -1299,6 +1303,25 @@ namespace SAI_Editor.Forms
         private void tabControlWorkspaces_TabClosing(object sender, TabControlCancelEventArgs e)
         {
             userControls.First().States.RemoveAt(e.TabPageIndex);
+        }
+
+        int oldWidthTabControlWorkspaces = 0, oldHeightTabControlWorkspaces = 0;
+
+        private void tabControlWorkspaces_SizeChanged(object sender, EventArgs e)
+        {
+            if (oldWidthTabControlWorkspaces == 0)
+                oldWidthTabControlWorkspaces = tabControlWorkspaces.Width;
+
+            if (oldHeightTabControlWorkspaces == 0)
+                oldHeightTabControlWorkspaces = tabControlWorkspaces.Height;
+
+            if (oldWidthTabControlWorkspaces == tabControlWorkspaces.Width && oldHeightTabControlWorkspaces == tabControlWorkspaces.Height)
+                return;
+
+            userControls.First().Width = tabControlWorkspaces.Width;
+            userControls.First().Height = tabControlWorkspaces.Height;
+            userControls.First().ListView.Width = tabControlWorkspaces.Width - 15;
+            userControls.First().ListView.Height = tabControlWorkspaces.Height - 255; //! Not sure why but height is really off...
         }
     }
 }
