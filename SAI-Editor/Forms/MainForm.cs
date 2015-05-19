@@ -189,8 +189,11 @@ namespace SAI_Editor.Forms
 
                 states = SAIUserControlState.StatesFromJson(Settings.Default.LastStaticInfoPerTab, userControls.First());
 
-                userControls.Single().States.Add(states.First().Value);
-                userControls.Single().CurrentState = states.First().Value;
+                if (states != null && states.Count > 0)
+                {
+                    userControls.Single().States.Add(states.First().Value);
+                    userControls.Single().CurrentState = states.First().Value;
+                }
             }
 
             if (!string.IsNullOrEmpty(Settings.Default.LastStaticInfoPerTab) && states != null)

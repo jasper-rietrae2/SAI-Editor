@@ -91,9 +91,13 @@ namespace SAI_Editor.Classes
 
         public static Dictionary<int, SAIUserControlState> StatesFromJson(string json, Control control)
         {
-            var objs = JsonConvert.DeserializeAnonymousType(json, new
+            Dictionary<int, SAIUserControlState> states = null;
+
+            try
             {
-                Workspaces = new[]
+                var objs = JsonConvert.DeserializeAnonymousType(json, new
+                {
+                    Workspaces = new[]
                 {
                     new
                     {
@@ -101,42 +105,47 @@ namespace SAI_Editor.Classes
                         Value = new List<StateObject>()
                     }
                 }
-            });
+                });
 
-            var controls = GetChildControls(control).ToList();
+                var controls = GetChildControls(control).ToList();
 
-            var grouped = (
-                           from c in controls
-                           from w in objs.Workspaces
-                           from s in w.Value
-                           where s.Key == c.Name
-                           let z = new
-                           {
-                               Workspace = w,
-                               Control = c,
-                               State = s
-                           }
-                           group z by z.Workspace.Workspace into g
-                           select g);
+                var grouped = (
+                               from c in controls
+                               from w in objs.Workspaces
+                               from s in w.Value
+                               where s.Key == c.Name
+                               let z = new
+                               {
+                                   Workspace = w,
+                                   Control = c,
+                                   State = s
+                               }
+                               group z by z.Workspace.Workspace into g
+                               select g);
 
-            var states = new Dictionary<int, SAIUserControlState>();
+                states = new Dictionary<int, SAIUserControlState>();
 
-            foreach (var group in grouped)
-            {
-                SAIUserControlState state = new SAIUserControlState();
-
-                foreach (var g in group)
+                foreach (var group in grouped)
                 {
-                    if (g.Control is CustomObjectListView)
+                    SAIUserControlState state = new SAIUserControlState();
+
+                    foreach (var g in group)
                     {
-                        continue;
+                        if (g.Control is CustomObjectListView)
+                        {
+                            continue;
+                        }
+
+                        state.Controls.Add(g.Control, g.State.Value);
                     }
 
-                    state.Controls.Add(g.Control, g.State.Value);
+                    //state.Save(controls);
+                    states.Add(group.Key, state);
                 }
+            }
+            catch (JsonReaderException ex)
+            {
 
-                //state.Save(controls);
-                states.Add(group.Key, state);
             }
 
             return states;
