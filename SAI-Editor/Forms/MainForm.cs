@@ -18,7 +18,9 @@ using System.Reflection;
 using System.Net;
 using System.Threading;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json;
 using SAI_Editor.Classes.CustomControls;
+using SAI_Editor.Classes.Serialization;
 
 namespace SAI_Editor.Forms
 {
@@ -78,55 +80,14 @@ namespace SAI_Editor.Forms
             tabControlWorkspaces.TabPages.Clear(); //! We only have it in the designer to get an idea of how stuff looks
 
             //! Create all tabs based on settings
-            for (int i = 1; i < Settings.Default.LastStaticInfoPerTab.Split(',').Length; ++i)
-                CreateTabControl(tabControlWorkspaces.TabPages.Count == 0);
+            //for (int i = 1; i < Settings.Default.LastStaticInfoPerTab.Split(',').Length; ++i)
+            //    CreateTabControl(tabControlWorkspaces.TabPages.Count == 0);
 
-            if (tabControlWorkspaces.TabPages.Count == 0)
-                CreateTabControl(true);
+            //if (tabControlWorkspaces.TabPages.Count == 0)
+            //    CreateTabControl(true);
 
-            if (tabControlWorkspaces.TabPages.Count > 0)
-                tabControlWorkspaces.SelectedIndex = 0;
-
-            try
-            {
-                textBoxHost.Text = Settings.Default.Host;
-                textBoxUsername.Text = Settings.Default.User;
-                textBoxPassword.Text = SAI_Editor_Manager.Instance.GetPasswordSetting();
-                textBoxWorldDatabase.Text = Settings.Default.Database;
-                textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
-                expandAndContractSpeed = Settings.Default.AnimationSpeed;
-                radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
-                radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
-                SAI_Editor_Manager.Instance.Expansion = (WowExpansion)Settings.Default.WowExpansionIndex;
-
-                foreach (UserControlSAI uc in userControls)
-                {
-                    uc.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
-                    uc.buttonGenerateComments.Enabled = uc.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
-                    uc.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase;
-                }
-
-                menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
-                menuItemGenerateComment.Enabled = GetActiveUserControl().ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
-                searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
-                searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAGameobjectEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAGameobjectGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAGameEventToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAnItemEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForACreatureSummonsIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAnEquipmentTemplateToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAWaypointToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForANpcTextToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAGossipMenuOptionToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAGossipOptionIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                adjustedLoginSettings = true;
-            }
-            catch
-            {
-                MessageBox.Show("Something went wrong when loading the settings.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //if (tabControlWorkspaces.TabPages.Count > 0)
+            //    tabControlWorkspaces.SelectedIndex = 0;
 
             tabControlWorkspaces.Visible = false;
             customPanelLogin.Visible = true;
@@ -218,6 +179,76 @@ namespace SAI_Editor.Forms
 
             checkIfUpdatesAvailableThread = new Thread(CheckIfUpdatesAvailable);
             checkIfUpdatesAvailableThread.Start();
+
+
+            Dictionary<int, SAIUserControlState> states = null;
+            if (tabControlWorkspaces.TabPages.Count == 0)
+            {
+                CreateTabControl(true);
+                tabControlWorkspaces.SelectedIndex = 0;
+
+                states = SAIUserControlState.StatesFromJson(Settings.Default.LastStaticInfoPerTab, userControls.First());
+
+                userControls.Single().States.Add(states.First().Value);
+                userControls.Single().CurrentState = states.First().Value;
+            }
+
+            if (!string.IsNullOrEmpty(Settings.Default.LastStaticInfoPerTab) && states != null)
+            {
+                int ctr = 0;
+                foreach (var kvp in states.Skip(1))
+                {
+                    userControls.Single().States.Add(kvp.Value);
+
+                    CreateTabControl();
+                    ctr++;
+                }
+
+                tabControlWorkspaces.SelectedIndex = 0;
+                userControls.Single().States.First().Load();
+                userControls.Single().CurrentState = userControls.Single().States.First();
+            }
+
+            try
+            {
+                textBoxHost.Text = Settings.Default.Host;
+                textBoxUsername.Text = Settings.Default.User;
+                textBoxPassword.Text = SAI_Editor_Manager.Instance.GetPasswordSetting();
+                textBoxWorldDatabase.Text = Settings.Default.Database;
+                textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
+                expandAndContractSpeed = Settings.Default.AnimationSpeed;
+                radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
+                radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
+                SAI_Editor_Manager.Instance.Expansion = (WowExpansion)Settings.Default.WowExpansionIndex;
+
+                foreach (UserControlSAI uc in userControls)
+                {
+                    uc.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
+                    uc.buttonGenerateComments.Enabled = uc.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+                    uc.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase;
+                }
+
+                menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
+                menuItemGenerateComment.Enabled = GetActiveUserControl().ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+                searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
+                searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGameobjectEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGameobjectGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGameEventToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAnItemEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForACreatureSummonsIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAnEquipmentTemplateToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAWaypointToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForANpcTextToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGossipMenuOptionToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGossipOptionIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                adjustedLoginSettings = true;
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong when loading the settings.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             runningConstructor = false;
         }
@@ -693,26 +724,26 @@ namespace SAI_Editor.Forms
             }
 
             //1234-1,5555-3
-            string[] lastStaticInfoPerTab = Settings.Default.LastStaticInfoPerTab.Split(',');
+            //string[] lastStaticInfoPerTab = Settings.Default.LastStaticInfoPerTab.Split(',');
 
-            if (userControls.Count > 0)
-            {
-                for (int i = 0; i < userControls.Single().States.Count; ++i)
-                {
-                    SAIUserControlState uc = userControls.Single().States[i];
+            //if (userControls.Count > 0)
+            //{
+            //    for (int i = 0; i < userControls.Single().States.Count; ++i)
+            //    {
+            //        SAIUserControlState uc = userControls.Single().States[i];
 
-                    string[] splitSections = lastStaticInfoPerTab[i].Split('-');
+            //        string[] splitSections = lastStaticInfoPerTab[i].Split('-');
 
-                    //! If entryorguid text saved is empty, don't bother setting anything
-                    if (splitSections.Length == 1 && splitSections[0] == String.Empty)
-                        continue;
+            //        //! If entryorguid text saved is empty, don't bother setting anything
+            //        if (splitSections.Length == 1 && splitSections[0] == String.Empty)
+            //            continue;
 
-                    uc.SetControlValueByName("textBoxEntryOrGuid", splitSections[0]);
-                    uc.SetControlValueByName("comboBoxSourceType", Convert.ToInt32(splitSections[1]));
-                    //uc.GetControlByName("textBoxEntryOrGuid").Text = splitSections[0];
-                    //((ComboBox)uc.GetControlByName("comboBoxSourceType")).SelectedIndex = Convert.ToInt32(splitSections[1]);
-                }
-            }
+            //        uc.SetControlValueByName("textBoxEntryOrGuid", splitSections[0]);
+            //        uc.SetControlValueByName("comboBoxSourceType", Convert.ToInt32(splitSections[1]));
+            //        //uc.GetControlByName("textBoxEntryOrGuid").Text = splitSections[0];
+            //        //((ComboBox)uc.GetControlByName("comboBoxSourceType")).SelectedIndex = Convert.ToInt32(splitSections[1]);
+            //    }
+            //}
 
             foreach (UserControlSAI uc in userControls)
                 uc.FinishedExpandingOrContracting(expanding);
@@ -856,23 +887,37 @@ namespace SAI_Editor.Forms
             string lastStaticInfoPerTab = String.Empty;
 
             //entryorguid,sourceTypeIndex,entryorguid,sourceTypeIndex,entryorguid,sourceTypeIndex,....
-            if (userControls.Count > 0)
+            //if (userControls.Count > 0)
+            //{
+            //    foreach (SAIUserControlState uc in userControls.Single().States)
+            //    {
+            //        string entryOrGuidStr = uc.GetControlValueName("textBoxEntryOrGuid").ToString();
+
+            //        if (String.IsNullOrWhiteSpace(entryOrGuidStr))
+            //            entryOrGuidStr = uc.GetControlByName("textBoxEntryOrGuid").Text;
+
+            //        if (String.IsNullOrWhiteSpace(entryOrGuidStr))
+            //            entryOrGuidStr = "0";
+
+            //        lastStaticInfoPerTab += entryOrGuidStr + "-" + uc.GetControlValueName("comboBoxSourceType").ToString() + ",";
+            //    }
+            //}
+
+            var objs = new List<object>();
+
+            userControls.Single().CurrentState.Save(userControls.Single());
+
+            int ctr = 0;
+            foreach (SAIUserControlState state in userControls.Single().States)
             {
-                foreach (SAIUserControlState uc in userControls.Single().States)
+                objs.Add(new
                 {
-                    string entryOrGuidStr = uc.GetControlValueName("textBoxEntryOrGuid").ToString();
-
-                    if (String.IsNullOrWhiteSpace(entryOrGuidStr))
-                        entryOrGuidStr = uc.GetControlByName("textBoxEntryOrGuid").Text;
-
-                    if (String.IsNullOrWhiteSpace(entryOrGuidStr))
-                        entryOrGuidStr = "0";
-
-                    lastStaticInfoPerTab += entryOrGuidStr + "-" + uc.GetControlValueName("comboBoxSourceType").ToString() + ",";
-                }
+                    Workspace = ctr++,
+                    Value = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(state.ToStateObjects(), new CustomStateSerializer()))
+                });
             }
 
-            Settings.Default.LastStaticInfoPerTab = lastStaticInfoPerTab;
+            Settings.Default.LastStaticInfoPerTab = JsonConvert.SerializeObject(new { Workspaces = objs }, Formatting.Indented);
 
             if (SAI_Editor_Manager.Instance.FormState == FormState.FormStateLogin)
             {
@@ -1188,11 +1233,13 @@ namespace SAI_Editor.Forms
             {
                 if (tabControlWorkspaces.TabPages.Count > (int)MiscEnumerators.MaxWorkSpaceCount)
                 {
-                    MessageBox.Show("You can't have more than " + (int)MiscEnumerators.MaxWorkSpaceCount + 
+                    MessageBox.Show("You can't have more than " + (int)MiscEnumerators.MaxWorkSpaceCount +
                         " different workspaces open at the same time to avoid start-up delays.", "Workspace limit", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     tabControlWorkspaces.SelectedIndex = lastSelectedWorkspaceIndex;
                     return;
                 }
+
+                userControls.Single().AddWorkSpace();
 
                 CreateTabControl();
             }
@@ -1204,12 +1251,14 @@ namespace SAI_Editor.Forms
                 tabControlWorkspaces.TabPages[lastSelectedWorkspaceIndex].Controls.Remove(uc);
 
             tabControlWorkspaces.TabPages[tabControlWorkspaces.SelectedIndex].Controls.Add(uc);
-            uc.CurrentState = uc.States[tabControlWorkspaces.SelectedIndex];
+
+            if (tabControlWorkspaces.SelectedIndex < uc.States.Count)
+                uc.CurrentState = uc.States[tabControlWorkspaces.SelectedIndex];
 
             lastSelectedWorkspaceIndex = tabControlWorkspaces.SelectedIndex;
         }
 
-        private void CreateTabControl(bool first = false)
+        private void CreateTabControl(bool first = false, bool addWorkspace = false)
         {
             if (tabControlWorkspaces.TabPages.Count > (int)MiscEnumerators.MaxWorkSpaceCount)
                 return;
@@ -1244,13 +1293,15 @@ namespace SAI_Editor.Forms
             tabControlWorkspaces.TabPages.Add(newPage);
             tabControlWorkspaces.TabPages.Add(new TabPage("+"));
 
-            userControlSAI.AddWorkSpace();
+            if (addWorkspace)
+                userControlSAI.AddWorkSpace();
 
             if (first && userControls.Count == 0)
                 userControls.Add(userControlSAI);
 
             if (!first)
                 tabControlWorkspaces.SelectedIndex = tabControlWorkspaces.TabPages.Count - 2;
+
         }
 
         private void pictureBoxDonate_Click(object sender, EventArgs e)
@@ -1302,7 +1353,7 @@ namespace SAI_Editor.Forms
 
             using (SettingsForm settingsForm = new SettingsForm())
                 settingsForm.ShowDialog(this);
-    	}
+        }
 
         private void tabControlWorkspaces_TabClosing(object sender, TabControlCancelEventArgs e)
         {

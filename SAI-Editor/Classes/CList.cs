@@ -6,13 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using Newtonsoft.Json;
 using SAI_Editor.Classes.Database.Classes;
 
 namespace SAI_Editor.Classes
 {
+    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public abstract class CList : ICloneable
     {
-        protected List<DatabaseClass> Scripts = new List<DatabaseClass>();
+        public List<DatabaseClass> Scripts { get; protected set; }
         protected List<string> ExcludedProperties = new List<string>();
 
         protected readonly PropertyInfo[] PropInfo;
@@ -26,6 +28,7 @@ namespace SAI_Editor.Classes
         {
             ListView = listView;
             PropInfo = type.GetProperties();
+            Scripts = new List<DatabaseClass>();
         }
 
         public virtual void Apply(bool keepSelection = false)

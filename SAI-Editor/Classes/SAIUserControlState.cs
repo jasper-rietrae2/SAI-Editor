@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using SAI_Editor.Classes.CustomControls;
+using SAI_Editor.Classes.Serialization;
 using SAI_Editor.Classes.State;
 
 namespace SAI_Editor.Classes
@@ -19,10 +22,10 @@ namespace SAI_Editor.Classes
 
             states.Add(new ControlState<TextBox>((d, c) =>
             {
-                d.Add(c, c.Text);
+                d[c] = c.Text;
             }, (c, o) =>
             {
-                string str = o as string;
+                string str = o.ToString();
 
                 if (c.Text != str)
                     c.Text = str;
@@ -30,31 +33,31 @@ namespace SAI_Editor.Classes
 
             states.Add(new ControlState<ComboBox>((d, c) =>
             {
-                d.Add(c, ((ComboBox)c).SelectedIndex);
+                d[c] = ((ComboBox)c).SelectedIndex;
             }, (c, o) =>
             {
                 ComboBox cb = (ComboBox)c;
-                int selected = (int)o;
+                int selected = (int)Convert.ChangeType(o, typeof(int));
 
                 cb.SelectedIndex = selected;
             }));
 
             states.Add(new ControlState<NumericUpDown>((d, c) =>
             {
-                d.Add(c, ((NumericUpDown)c).Value);
+                d[c] = ((NumericUpDown)c).Value;
             }, (c, o) =>
             {
                 NumericUpDown nup = (NumericUpDown)c;
-                decimal value = (decimal)o;
+                decimal value = (decimal)Convert.ChangeType(o, typeof(decimal));
 
                 nup.Value = value;
             }));
 
             //states.Add(new ControlState<NumericUpDown>((d, c) => d.Add(c, ((NumericUpDown)c).Value), (c, o) => ((NumericUpDown)c).Value = (decimal)o));
-            states.Add(new ControlState<CheckBox>((d, c) => d.Add(c, ((CheckBox)c).Checked), (c, o) => ((CheckBox)c).Checked = (bool)o));
+            states.Add(new ControlState<CheckBox>((d, c) => d[c] = ((CheckBox)c).Checked, (c, o) => ((CheckBox)c).Checked = (bool)Convert.ChangeType(o, typeof(bool))));
             states.Add(new ControlState<CustomObjectListView>((d, c) =>
             {
-                d.Add(c, ((CustomObjectListView)c).List);
+                d[c] = ((CustomObjectListView)c).List;
             }, (c, o) =>
             {
                 CustomObjectListView listView = (CustomObjectListView)c;
@@ -86,11 +89,67 @@ namespace SAI_Editor.Classes
             }
         }
 
+        public static Dictionary<int, SAIUserControlState> StatesFromJson(string json, Control control)
+        {
+            var objs = JsonConvert.DeserializeAnonymousType(json, new
+            {
+                Workspaces = new[]
+                {
+                    new
+                    {
+                        Workspace = 0,
+                        Value = new List<StateObject>()
+                    }
+                }
+            });
+
+            var controls = GetChildControls(control).ToList();
+
+            var grouped = (
+                           from c in controls
+                           from w in objs.Workspaces
+                           from s in w.Value
+                           where s.Key == c.Name
+                           let z = new
+                           {
+                               Workspace = w,
+                               Control = c,
+                               State = s
+                           }
+                           group z by z.Workspace.Workspace into g
+                           select g);
+
+            var states = new Dictionary<int, SAIUserControlState>();
+
+            foreach (var group in grouped)
+            {
+                SAIUserControlState state = new SAIUserControlState();
+
+                foreach (var g in group)
+                {
+                    if (g.Control is CustomObjectListView)
+                    {
+                        continue;
+                    }
+
+                    state.Controls.Add(g.Control, g.State.Value);
+                }
+
+                //state.Save(controls);
+                states.Add(group.Key, state);
+            }
+
+            return states;
+        }
+
         public virtual void Save(Control control)
         {
-            Controls.Clear();
+            Save(GetChildControls(control));
+        }
 
-            foreach (Control ctrl in GetChildControls(control))
+        public virtual void Save(IEnumerable<Control> controls)
+        {
+            foreach (Control ctrl in controls)
             {
                 Type type = ctrl.GetType();
 
@@ -119,7 +178,7 @@ namespace SAI_Editor.Classes
             return new SAIUserControlState(Controls);
         }
 
-        private IEnumerable<Control> GetChildControls(Control parent)
+        private static IEnumerable<Control> GetChildControls(Control parent)
         {
             foreach (Control c in parent.Controls)
             {
@@ -160,6 +219,28 @@ namespace SAI_Editor.Classes
                     return control.Value;
 
             return null;
+        }
+
+        public List<StateObject> ToStateObjects()
+        {
+            var objs = new List<StateObject>();
+
+            foreach (var kvp in Controls)
+            {
+                if (kvp.Key is CustomObjectListView)
+                {
+                    continue;
+                }
+
+                objs.Add(new StateObject { Key = kvp.Key.Name, ControlValue = kvp.Value });
+            }
+
+            return objs;
+        }
+
+        public override string ToString()
+        {
+            return JsonConvert.SerializeObject(ToStateObjects(), Formatting.Indented, new CustomStateSerializer());
         }
     }
 }
