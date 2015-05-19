@@ -47,6 +47,10 @@
       <HintPath>..\packages\MySql.Data.6.7.4\lib\net40\MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ObjectListView">
       <HintPath>..\packages\ObjectListView.Official.2.8.1\lib\net20\ObjectListView.dll</HintPath>
     </Reference>
@@ -109,6 +113,8 @@
     <Compile Include="Classes\CustomListViewItem.cs" />
     <Compile Include="Classes\CustomConverter.cs" />
     <Compile Include="Classes\SAIUserControlState.cs" />
+    <Compile Include="Classes\Serialization\CustomStateSerializer.cs" />
+    <Compile Include="Classes\Serialization\StateObject.cs" />
     <Compile Include="Classes\SmartScriptList.cs" />
     <Compile Include="Classes\State\ControlState.cs" />
     <Compile Include="Forms\AboutForm.cs">

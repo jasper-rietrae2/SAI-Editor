@@ -64,6 +64,9 @@ namespace SAI_Editor
                 if (_currentState != null)
                     _currentState.Save(this);
 
+                if (_currentState == value)
+                    return;
+
                 _currentState = value;
                 _currentState.Load();
             }
