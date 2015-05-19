@@ -461,6 +461,9 @@ namespace SAI_Editor.Forms
                     }
                 }
             }
+
+            Invalidate();
+            Update();
         }
 
         private void buttonConnect_Click(object sender, EventArgs e)
