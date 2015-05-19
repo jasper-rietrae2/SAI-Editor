@@ -108,6 +108,7 @@
             this.smartAIWikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.feedbackbugsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemReportIssue = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemGiveFeedback = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripListView = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -252,7 +253,6 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.menuItemGiveFeedback = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).BeginInit();
@@ -934,6 +934,13 @@
             this.menuItemReportIssue.Size = new System.Drawing.Size(200, 22);
             this.menuItemReportIssue.Text = "I want to report an issue";
             this.menuItemReportIssue.Click += new System.EventHandler(this.menuItemReportIssue_Click);
+            // 
+            // menuItemGiveFeedback
+            // 
+            this.menuItemGiveFeedback.Name = "menuItemGiveFeedback";
+            this.menuItemGiveFeedback.Size = new System.Drawing.Size(200, 22);
+            this.menuItemGiveFeedback.Text = "I want to give feedback";
+            this.menuItemGiveFeedback.Click += new System.EventHandler(this.menuItemGiveFeedback_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -2709,13 +2716,6 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // menuItemGiveFeedback
-            // 
-            this.menuItemGiveFeedback.Name = "menuItemGiveFeedback";
-            this.menuItemGiveFeedback.Size = new System.Drawing.Size(200, 22);
-            this.menuItemGiveFeedback.Text = "I want to give feedback";
-            this.menuItemGiveFeedback.Click += new System.EventHandler(this.menuItemGiveFeedback_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2736,6 +2736,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainForm_KeyDown);
+            this.Resize += new System.EventHandler(this.MainForm_Resize);
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.contextMenuStripListView.ResumeLayout(false);

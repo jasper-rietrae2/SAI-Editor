@@ -1323,5 +1323,11 @@ namespace SAI_Editor.Forms
         {
             SAI_Editor_Manager.Instance.StartProcess("http://jasper-rietrae.com/#contact/");
         }
+
+        private void MainForm_Resize(object sender, EventArgs e)
+        {
+            Invalidate();
+            Update();
+        }
     }
 }
