@@ -538,11 +538,8 @@ namespace SAI_Editor
 
             FillFieldsBasedOnSelectedScript();
 
-            if (Settings.Default.ChangeStaticInfo)
-            {
-                //TODO: Fix
-                //checkBoxListActionlistsOrEntries.Text = customObjectListView.SelectedObjects[0].SubItems[1].Text == "9" ? "List entries too" : "List actionlists too";
-            }
+            if (checkBoxAllowChangingEntryAndSourceType.Checked)
+                checkBoxListActionlistsOrEntries.Text = ((SmartScript)customObjectListView.SelectedObjects[0]).source_type == 9 ? "List entries too" : "List actionlists too";
         }
 
         public void FillFieldsBasedOnSelectedScript()
@@ -552,7 +549,7 @@ namespace SAI_Editor
                 updatingFieldsBasedOnSelectedScript = true;
                 SmartScript selectedScript = ((SmartScriptList)customObjectListView.List).SelectedScript;
 
-                if (Settings.Default.ChangeStaticInfo)
+                if (checkBoxAllowChangingEntryAndSourceType.Checked)
                 {
                     textBoxEntryOrGuid.Text = selectedScript.entryorguid.ToString();
                     comboBoxSourceType.SelectedIndex = GetIndexBySourceType((SourceTypes)selectedScript.source_type);
@@ -903,23 +900,20 @@ namespace SAI_Editor
             if (customObjectListView.SelectedObjects.Count == 0)
                 return;
 
-            //int prevSelectedIndex = customObjectListView.SelectedObjects[0].Index;
+            int prevSelectedIndex = customObjectListView.SelectedIndex;
 
-            //TODO: Fix
-            //if (customObjectListView.SelectedObjects[0].SubItems[0].Text == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
-            //    if (customObjectListView.SelectedObjects[0].SubItems[2].Text == lastSmartScriptIdOfScript.ToString())
-            //        lastSmartScriptIdOfScript--;
+            if (((SmartScript)customObjectListView.SelectedObjects[0]).entryorguid == originalEntryOrGuidAndSourceType.entryOrGuid)
+                if (((SmartScript)customObjectListView.SelectedObjects[0]).id == lastSmartScriptIdOfScript)
+                    lastSmartScriptIdOfScript--;
 
             lastDeletedSmartScripts.Add(((SmartScriptList)customObjectListView.List).SelectedScript.Clone());
             customObjectListView.List.RemoveScript(((SmartScriptList)customObjectListView.List).SelectedScript);
             SetGenerateCommentsEnabled(customObjectListView.Items.Count > 0 && Settings.Default.UseWorldDatabase);
 
             if (customObjectListView.Items.Count <= 0)
-                ResetFieldsToDefault(Settings.Default.ChangeStaticInfo);
+                ResetFieldsToDefault(checkBoxAllowChangingEntryAndSourceType.Checked);
             else
-            {
-                //ReSelectListViewItemWithPrevIndex(prevSelectedIndex);
-            }
+                ReSelectListViewItemWithPrevIndex(prevSelectedIndex);
 
             //! Need to do this if static info is changed
             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
@@ -2169,6 +2163,8 @@ namespace SAI_Editor
                 ListViewList.ReplaceScript(ListViewList.SelectedScript);
                 await GenerateCommentForSmartScript(ListViewList.SelectedScript);
             }
+
+            customObjectListView.List.Apply(); //! Refreshes colors and whatnot
         }
 
         private async void textBoxEventChance_ValueChanged(object sender, EventArgs e)

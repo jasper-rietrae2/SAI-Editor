@@ -33,7 +33,7 @@ namespace SAI_Editor.Classes
 
         public virtual void Apply(bool keepSelection = false)
         {
-            //int lastSelectedIndex = ListView.SelectedIndices.Count > 0 ? ListView.SelectedIndices[0] : -1;
+            int lastSelectedIndex = ListView.SelectedIndex;
             object lastSelected = ListView.SelectedObjects.Count > 0 ? ListView.SelectedObject : null;
 
             //ListView.Items.Clear();
@@ -49,14 +49,19 @@ namespace SAI_Editor.Classes
             if (Scripts != null)
                 AddScripts(Scripts, true);
 
-            //foreach (ColumnHeader header in ListView.Columns)
-            //    header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            ResizeColumns();
 
             if (keepSelection && lastSelected != null)
                 ListView.SelectObject(lastSelected);
 
-            //if (keepSelection && lastSelectedIndex != -1)
-            //    ListView.Items[lastSelectedIndex].Selected = true;
+            if (keepSelection && lastSelectedIndex != -1)
+                ListView.Items[lastSelectedIndex].Selected = true;
+        }
+
+        public void ResizeColumns()
+        {
+            foreach (ColumnHeader header in ListView.Columns)
+                header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         public virtual void AddScript(DatabaseClass script, bool listViewOnly = false, bool selectNewItem = false)

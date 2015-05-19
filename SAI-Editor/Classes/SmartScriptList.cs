@@ -56,15 +56,6 @@ namespace SAI_Editor.Classes
             int lastSelectedIndex = _oListView.SelectedIndices.Count > 0 ? _oListView.SelectedIndices[0] : -1;
             base.Apply(keepSelection);
 
-            //TODO: Fix me
-            //if (keepSelection && lastSelectedIndex != -1)
-            //{
-            //    oListView.Items[lastSelectedIndex].Selected = true;
-            //    ((CustomListViewItem)oListView.Items[lastSelectedIndex]).LastBackColor = oListView.SelectedItems[0].BackColor;
-            //    oListView.Items[lastSelectedIndex].BackColor = Color.FromArgb(51, 153, 254);
-            //    oListView.Items[lastSelectedIndex].ForeColor = Color.White;
-            //}
-
             _colors = new Stack<Color>(Constants.phaseColors);
             _phaseColors.Clear();
 
@@ -80,6 +71,9 @@ namespace SAI_Editor.Classes
 
                 foreach (int phasemask in phasemasks.Where(phasemask => phasemask != 0 && !_phaseColors.ContainsKey(phasemask)))
                     _phaseColors.Add(phasemask, _colors.Pop());
+
+                _oListView.Refresh();
+                ResizeColumns();
             }
         }
 
@@ -96,26 +90,32 @@ namespace SAI_Editor.Classes
         {
             base.AddScript(script, listViewOnly, selectNewItem);
 
-            //TODO: Fix me
-            //if (Settings.Default.PhaseHighlighting && script.event_phase_mask != 0)
-            //{
-            //    if (!_phaseColors.ContainsKey(script.event_phase_mask))
-            //    {
-            //        if (_colors.Count == 0)
-            //        {
-            //            MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //            return -1;
-            //        }
+            if (Settings.Default.PhaseHighlighting && script.event_phase_mask != 0)
+            {
+                if (!_phaseColors.ContainsKey(script.event_phase_mask))
+                {
+                    if (_colors.Count == 0)
+                    {
+                        MessageBox.Show("There are not enough colors in the application because you are using too many different phasemasks.", "Not enough colors!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+            
+                    _phaseColors.Add(script.event_phase_mask, _colors.Pop());
+                }
 
-            //        _phaseColors.Add(script.event_phase_mask, _colors.Pop());
-            //    }
-
-            //    newItem.BackColor = _phaseColors[script.event_phase_mask];
-            //}
+                _oListView.Refresh();
+                ResizeColumns();
+            }
 
             ListView.SelectObject(script);
             _oListView.Select();
             _oListView.EnsureModelVisible(script);
+        }
+
+        private void ResizeColumns()
+        {
+            foreach (ColumnHeader header in _oListView.Columns)
+                header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         private void oListView_FormatRow(object sender, FormatRowEventArgs e)
@@ -125,6 +125,5 @@ namespace SAI_Editor.Classes
             if (script != null && _phaseColors.ContainsKey(script.event_phase_mask))
                 e.Item.BackColor = _phaseColors[script.event_phase_mask];
         }
-
     }
 }
