@@ -3168,6 +3168,9 @@ namespace SAI_Editor
 
         public void checkBoxUseStaticTooltips_CheckedChanged(object sender, EventArgs e)
         {
+            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+                return;
+
             checkBoxUseStaticTooltips.Enabled = false;
             Settings.Default.ShowTooltipsStaticly = checkBoxUseStaticTooltips.Checked;
             Settings.Default.Save();
@@ -3204,7 +3207,12 @@ namespace SAI_Editor
 
             expandingListView = expand;
             contractingListView = !expand;
-            customObjectListViewHeightToChangeTo = expand ? customObjectListView.Height + (int)FormSizes.ListViewHeightContract : customObjectListView.Height - (int)FormSizes.ListViewHeightContract;
+
+            if (expand)
+                customObjectListViewHeightToChangeTo = customObjectListView.Height + (int)FormSizes.ListViewHeightContract;
+            else
+                customObjectListViewHeightToChangeTo = customObjectListView.Height - (int)FormSizes.ListViewHeightContract;
+
             timerShowStaticTooltips.Enabled = true;
             checkBoxUseStaticTooltips.Checked = !expand;
             ToolTipHelper.DisableOrEnableAllToolTips(false);
