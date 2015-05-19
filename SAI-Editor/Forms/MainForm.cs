@@ -162,12 +162,15 @@ namespace SAI_Editor.Forms
                 CreateTabControl(true);
                 tabControlWorkspaces.SelectedIndex = 0;
 
-                states = SAIUserControlState.StatesFromJson(Settings.Default.LastStaticInfoPerTab, userControl);
-
-                if (states != null && states.Count > 0)
+                if (!String.IsNullOrWhiteSpace(Settings.Default.LastStaticInfoPerTab))
                 {
-                    userControl.States.Add(states.First().Value);
-                    userControl.CurrentState = states.First().Value;
+                    states = SAIUserControlState.StatesFromJson(Settings.Default.LastStaticInfoPerTab, userControl);
+
+                    if (states != null && states.Count > 0)
+                    {
+                        userControl.States.Add(states.First().Value);
+                        userControl.CurrentState = states.First().Value;
+                    }
                 }
                 else
                 {
