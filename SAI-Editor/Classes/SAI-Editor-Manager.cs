@@ -491,6 +491,8 @@ namespace SAI_Editor.Classes
 
         public bool StartProcess(string filename, string argument = "", bool showException = false)
         {
+            bool isWebsiteUrl = filename.Contains("www.") || filename.Contains("http");
+
             try
             {
                 Process.Start(filename, argument);
@@ -500,7 +502,8 @@ namespace SAI_Editor.Classes
                 if (showException)
                     return false;
 
-                DialogResult dialogResult = MessageBox.Show(String.Format("The process '{0}' could not be opened! Do you wish to see the error thrown by the application?", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+                DialogResult dialogResult = MessageBox.Show(String.Format("The {0} '{1}' could not be opened! Do you wish to see the error thrown by the application?",
+                    isWebsiteUrl ? "website" : "process", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
 
                 if (dialogResult == DialogResult.Yes)
                     MessageBox.Show(ex.Message, "An exception was thrown!", MessageBoxButtons.OK, MessageBoxIcon.Error);
