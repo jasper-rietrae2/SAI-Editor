@@ -37,7 +37,7 @@ namespace SAI_Editor
         private System.Windows.Forms.Timer timerCheckForInternetConnection = new System.Windows.Forms.Timer();
         private MainForm MainForm;
 
-        private static readonly SAIUserControlState DefaultState = new SAIUserControlState();
+        public readonly SAIUserControlState DefaultState = new SAIUserControlState();
 
         public readonly List<SAIUserControlState> States = new List<SAIUserControlState>();
 

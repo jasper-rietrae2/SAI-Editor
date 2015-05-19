@@ -169,6 +169,11 @@ namespace SAI_Editor.Forms
                     userControl.States.Add(states.First().Value);
                     userControl.CurrentState = states.First().Value;
                 }
+                else
+                {
+                    userControl.States.Add(userControl.DefaultState);
+                    userControl.CurrentState = userControl.DefaultState;
+                }
             }
 
             userControl.tabControlParameters.AutoScrollOffset = new Point(5, 5);
