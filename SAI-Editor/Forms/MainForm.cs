@@ -716,6 +716,8 @@ namespace SAI_Editor.Forms
                 uc.FinishedExpandingOrContracting(expanding);
 
             SetSizable(expanding);
+
+            Update();
         }
 
         private void menuItemExit_Click(object sender, System.EventArgs e)
