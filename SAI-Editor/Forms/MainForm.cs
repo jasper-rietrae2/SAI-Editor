@@ -1345,5 +1345,15 @@ namespace SAI_Editor.Forms
             oldHeightTabControlWorkspaces = tabControlWorkspaces.Height;
             oldWidthTabControlWorkspaces = tabControlWorkspaces.Width;
         }
+
+        private void menuItemReportIssue_Click(object sender, EventArgs e)
+        {
+            SAI_Editor_Manager.Instance.StartProcess("https://github.com/Discover-/SAI-Editor/issues/new");
+        }
+
+        private void menuItemGiveFeedback_Click(object sender, EventArgs e)
+        {
+            SAI_Editor_Manager.Instance.StartProcess("http://jasper-rietrae.com/#contact/");
+        }
     }
 }
