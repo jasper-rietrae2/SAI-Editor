@@ -22,14 +22,9 @@ namespace SAI_Editor.Classes.Serialization
             foreach (var state in states)
             {
                 if (state.ControlValue is CList)
-                {
-                    var objs = ((CList)state.ControlValue).Scripts;
-                    state.Value = objs;
-                }
+                    state.Value = ((CList)state.ControlValue).Scripts;
                 else
-                {
                     state.Value = state.ControlValue;
-                }
 
                 JObject.FromObject(state).WriteTo(writer);
             }

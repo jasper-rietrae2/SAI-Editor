@@ -164,7 +164,7 @@ namespace SAI_Editor.Classes.CustomControls
             }
         }
 
-        protected void PaintTransparentBackground(Graphics graphics, Rectangle clipRect)
+        protected new void PaintTransparentBackground(Graphics graphics, Rectangle clipRect)
         {
             if ((this.Parent != null))
             {

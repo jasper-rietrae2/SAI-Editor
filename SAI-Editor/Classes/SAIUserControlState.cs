@@ -131,10 +131,9 @@ namespace SAI_Editor.Classes
 
                     foreach (var g in group)
                     {
+                        //! TODO
                         if (g.Control is CustomObjectListView)
-                        {
                             continue;
-                        }
 
                         state.Controls.Add(g.Control, g.State.Value);
                     }
@@ -143,7 +142,7 @@ namespace SAI_Editor.Classes
                     states.Add(group.Key, state);
                 }
             }
-            catch (JsonReaderException ex)
+            catch (JsonReaderException)
             {
 
             }
@@ -236,10 +235,9 @@ namespace SAI_Editor.Classes
 
             foreach (var kvp in Controls)
             {
+                //! TODO
                 if (kvp.Key is CustomObjectListView)
-                {
                     continue;
-                }
 
                 objs.Add(new StateObject { Key = kvp.Key.Name, ControlValue = kvp.Value });
             }

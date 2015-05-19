@@ -36,7 +36,7 @@ namespace SAI_Editor.Forms
         private string applicationVersion = String.Empty;
         private System.Windows.Forms.Timer timerCheckForInternetConnection = new System.Windows.Forms.Timer();
 
-        public List<UserControlSAI> userControls = new List<UserControlSAI>();
+        public UserControlSAI userControl = null;
 
         public MainForm()
         {
@@ -79,16 +79,6 @@ namespace SAI_Editor.Forms
             //! HAS to be called before try-catch block
             tabControlWorkspaces.TabPages.Clear(); //! We only have it in the designer to get an idea of how stuff looks
 
-            //! Create all tabs based on settings
-            //for (int i = 1; i < Settings.Default.LastStaticInfoPerTab.Split(',').Length; ++i)
-            //    CreateTabControl(tabControlWorkspaces.TabPages.Count == 0);
-
-            //if (tabControlWorkspaces.TabPages.Count == 0)
-            //    CreateTabControl(true);
-
-            //if (tabControlWorkspaces.TabPages.Count > 0)
-            //    tabControlWorkspaces.SelectedIndex = 0;
-
             tabControlWorkspaces.Visible = false;
             customPanelLogin.Visible = true;
 
@@ -122,20 +112,6 @@ namespace SAI_Editor.Forms
 
                     if (Settings.Default.InstantExpand)
                         StartExpandingToMainForm(true);
-                }
-            }
-
-            foreach (UserControlSAI uc in userControls)
-            {
-                uc.tabControlParameters.AutoScrollOffset = new Point(5, 5);
-
-                //! Static scrollbar to the parameters tabpage windows
-                foreach (TabPage page in uc.tabControlParameters.TabPages)
-                {
-                    page.HorizontalScroll.Enabled = false;
-                    page.HorizontalScroll.Visible = false;
-                    page.AutoScroll = true;
-                    page.AutoScrollMinSize = new Size(page.Width, page.Height);
                 }
             }
 
@@ -175,41 +151,52 @@ namespace SAI_Editor.Forms
 
             updateSurveyThread = new Thread(UpdateSurvey);
             updateSurveyThread.Start();
-            //Task.Run(async () => UpdateSurvey());
 
             checkIfUpdatesAvailableThread = new Thread(CheckIfUpdatesAvailable);
             checkIfUpdatesAvailableThread.Start();
 
-
             Dictionary<int, SAIUserControlState> states = null;
+
             if (tabControlWorkspaces.TabPages.Count == 0)
             {
                 CreateTabControl(true);
                 tabControlWorkspaces.SelectedIndex = 0;
 
-                states = SAIUserControlState.StatesFromJson(Settings.Default.LastStaticInfoPerTab, userControls.First());
+                states = SAIUserControlState.StatesFromJson(Settings.Default.LastStaticInfoPerTab, userControl);
 
                 if (states != null && states.Count > 0)
                 {
-                    userControls.Single().States.Add(states.First().Value);
-                    userControls.Single().CurrentState = states.First().Value;
+                    userControl.States.Add(states.First().Value);
+                    userControl.CurrentState = states.First().Value;
                 }
             }
 
-            if (!string.IsNullOrEmpty(Settings.Default.LastStaticInfoPerTab) && states != null)
+            userControl.tabControlParameters.AutoScrollOffset = new Point(5, 5);
+
+            //! Static scrollbar to the parameters tabpage windows
+            foreach (TabPage page in userControl.tabControlParameters.TabPages)
+            {
+                page.HorizontalScroll.Enabled = false;
+                page.HorizontalScroll.Visible = false;
+                page.AutoScroll = true;
+                page.AutoScrollMinSize = new Size(page.Width, page.Height);
+            }
+
+            if (!String.IsNullOrEmpty(Settings.Default.LastStaticInfoPerTab) && states != null)
             {
                 int ctr = 0;
+
                 foreach (var kvp in states.Skip(1))
                 {
-                    userControls.Single().States.Add(kvp.Value);
+                    userControl.States.Add(kvp.Value);
 
                     CreateTabControl();
                     ctr++;
                 }
 
                 tabControlWorkspaces.SelectedIndex = 0;
-                userControls.Single().States.First().Load();
-                userControls.Single().CurrentState = userControls.Single().States.First();
+                userControl.States.First().Load();
+                userControl.CurrentState = userControl.States.First();
             }
 
             try
@@ -224,15 +211,12 @@ namespace SAI_Editor.Forms
                 radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
                 SAI_Editor_Manager.Instance.Expansion = (WowExpansion)Settings.Default.WowExpansionIndex;
 
-                foreach (UserControlSAI uc in userControls)
-                {
-                    uc.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
-                    uc.buttonGenerateComments.Enabled = uc.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
-                    uc.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase;
-                }
+                userControl.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
+                userControl.buttonGenerateComments.Enabled = userControl.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+                userControl.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase;
 
                 menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
-                menuItemGenerateComment.Enabled = GetActiveUserControl().ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+                menuItemGenerateComment.Enabled = userControl.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
                 searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
                 searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
                 searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
@@ -270,15 +254,6 @@ namespace SAI_Editor.Forms
                 MinimumSize = new Size(0, 0);
                 tabControlWorkspaces.Anchor = AnchorStyles.Left | AnchorStyles.Top;
             }
-        }
-
-        public UserControlSAI GetActiveUserControl()
-        {
-            if (userControls.Count == 0)
-                return null;
-
-            return userControls.First();
-            //return userControls[tabControl.SelectedIndex];
         }
 
         protected override CreateParams CreateParams
@@ -603,17 +578,13 @@ namespace SAI_Editor.Forms
 
             customPanelLogin.Visible = false;
 
-            foreach (UserControlSAI uc in userControls)
-            {
-                uc.panelStaticTooltipTypes.Visible = false;
-                uc.panelStaticTooltipParameters.Visible = false;
-            }
+            userControl.panelStaticTooltipTypes.Visible = false;
+            userControl.panelStaticTooltipParameters.Visible = false;
         }
 
         private void ResetFieldsToDefault()
         {
-            foreach (UserControlSAI uc in userControls)
-                uc.ResetFieldsToDefault();
+            userControl.ResetFieldsToDefault();
         }
 
         private void StartContractingToLoginForm(bool instant = false)
@@ -623,8 +594,7 @@ namespace SAI_Editor.Forms
             SetFormTitle("SAI-Editor " + applicationVersion + ": Login");
 
             if (Settings.Default.ShowTooltipsStaticly)
-                foreach (UserControlSAI uc in userControls)
-                    uc.ListView.Height += (int)FormSizes.ListViewHeightContract;
+                userControl.ListView.Height += (int)FormSizes.ListViewHeightContract;
 
             if (instant)
             {
@@ -680,24 +650,20 @@ namespace SAI_Editor.Forms
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || GetActiveUserControl().contractingListView || GetActiveUserControl().expandingListView)
+            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || userControl.contractingListView || userControl.expandingListView)
                 return;
 
             for (int i = 0; i < Application.OpenForms.Count; ++i)
                 if (Application.OpenForms[i] != this)
                     Application.OpenForms[i].Close();
 
-            foreach (UserControlSAI uc in userControls)
-            {
-                uc.panelStaticTooltipTypes.Visible = false;
-                uc.panelStaticTooltipParameters.Visible = false;
-            }
+            userControl.panelStaticTooltipTypes.Visible = false;
+            userControl.panelStaticTooltipParameters.Visible = false;
 
             SaveLastUsedFields();
             ResetFieldsToDefault();
 
-            foreach (UserControlSAI uc in userControls)
-                uc.ListViewList.ClearScripts();
+            userControl.ListViewList.ClearScripts();
 
             StartContractingToLoginForm(Settings.Default.InstantExpand);
         }
@@ -714,42 +680,16 @@ namespace SAI_Editor.Forms
             if (!expanding)
                 HandleHeightLoginFormBasedOnuseDatabaseSetting();
 
-            foreach (UserControlSAI uc in userControls)
-            {
-                uc.panelStaticTooltipTypes.Visible = false;
-                uc.panelStaticTooltipParameters.Visible = false;
-                uc.checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
-                uc.checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
-                uc.checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
-                uc.checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
-                uc.checkBoxUsePhaseColors.Checked = Settings.Default.PhaseHighlighting;
-                uc.checkBoxUseStaticTooltips.Checked = Settings.Default.ShowTooltipsStaticly;
-            }
+            userControl.panelStaticTooltipTypes.Visible = false;
+            userControl.panelStaticTooltipParameters.Visible = false;
+            userControl.checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
+            userControl.checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
+            userControl.checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
+            userControl.checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
+            userControl.checkBoxUsePhaseColors.Checked = Settings.Default.PhaseHighlighting;
+            userControl.checkBoxUseStaticTooltips.Checked = Settings.Default.ShowTooltipsStaticly;
 
-            //1234-1,5555-3
-            //string[] lastStaticInfoPerTab = Settings.Default.LastStaticInfoPerTab.Split(',');
-
-            //if (userControls.Count > 0)
-            //{
-            //    for (int i = 0; i < userControls.Single().States.Count; ++i)
-            //    {
-            //        SAIUserControlState uc = userControls.Single().States[i];
-
-            //        string[] splitSections = lastStaticInfoPerTab[i].Split('-');
-
-            //        //! If entryorguid text saved is empty, don't bother setting anything
-            //        if (splitSections.Length == 1 && splitSections[0] == String.Empty)
-            //            continue;
-
-            //        uc.SetControlValueByName("textBoxEntryOrGuid", splitSections[0]);
-            //        uc.SetControlValueByName("comboBoxSourceType", Convert.ToInt32(splitSections[1]));
-            //        //uc.GetControlByName("textBoxEntryOrGuid").Text = splitSections[0];
-            //        //((ComboBox)uc.GetControlByName("comboBoxSourceType")).SelectedIndex = Convert.ToInt32(splitSections[1]);
-            //    }
-            //}
-
-            foreach (UserControlSAI uc in userControls)
-                uc.FinishedExpandingOrContracting(expanding);
+            userControl.FinishedExpandingOrContracting(expanding);
 
             SetSizable(expanding);
 
@@ -788,7 +728,7 @@ namespace SAI_Editor.Forms
 
         private void menuOptionDeleteSelectedRow_Click(object sender, EventArgs e)
         {
-            CustomObjectListView listViewSmartScripts = GetActiveUserControl().ListView;
+            CustomObjectListView listViewSmartScripts = userControl.ListView;
 
             if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
                 return;
@@ -799,12 +739,12 @@ namespace SAI_Editor.Forms
                 return;
             }
 
-            GetActiveUserControl().DeleteSelectedRow();
+            userControl.DeleteSelectedRow();
         }
 
         private void menuItemCopySelectedRowListView_Click(object sender, EventArgs e)
         {
-            CustomObjectListView listViewSmartScripts = GetActiveUserControl().ListView;
+            CustomObjectListView listViewSmartScripts = userControl.ListView;
 
             if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
                 return;
@@ -814,7 +754,7 @@ namespace SAI_Editor.Forms
 
         private void menuItemPasteLastCopiedRow_Click(object sender, EventArgs e)
         {
-            CustomObjectListView listViewSmartScripts = GetActiveUserControl().ListView;
+            CustomObjectListView listViewSmartScripts = userControl.ListView;
 
             if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
                 return;
@@ -845,7 +785,7 @@ namespace SAI_Editor.Forms
 
         private void testToolStripMenuItemDeleteRow_Click(object sender, EventArgs e)
         {
-            GetActiveUserControl().DeleteSelectedRow();
+            userControl.DeleteSelectedRow();
         }
 
         private void smartAIWikiToolStripMenuItem_Click(object sender, EventArgs e)
@@ -858,15 +798,14 @@ namespace SAI_Editor.Forms
             if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
                 return;
 
-            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await GetActiveUserControl().GenerateSmartAiSqlFromListView(), true, await GetActiveUserControl().GenerateSmartAiRevertQuery()))
+            using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await userControl.GenerateSmartAiSqlFromListView(), true, await userControl.GenerateSmartAiRevertQuery()))
                 sqlOutputForm.ShowDialog(this);
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach (UserControlSAI uc in userControls)
-                foreach (Control control in uc.Controls)
-                    control.Enabled = false;
+            foreach (Control control in userControl.Controls)
+                control.Enabled = false;
 
             foreach (Control control in Controls)
                 control.Enabled = false;
@@ -880,38 +819,22 @@ namespace SAI_Editor.Forms
 
         private void SaveLastUsedFields()
         {
-            Settings.Default.ShowBasicInfo = GetActiveUserControl().checkBoxShowBasicInfo.Checked;
-            Settings.Default.LockSmartScriptId = GetActiveUserControl().checkBoxLockEventId.Checked;
-            Settings.Default.ListActionLists = GetActiveUserControl().checkBoxListActionlistsOrEntries.Checked;
-            Settings.Default.AllowChangingEntryAndSourceType = GetActiveUserControl().checkBoxAllowChangingEntryAndSourceType.Checked;
-            Settings.Default.PhaseHighlighting = GetActiveUserControl().checkBoxUsePhaseColors.Checked;
-            Settings.Default.ShowTooltipsStaticly = GetActiveUserControl().checkBoxUseStaticTooltips.Checked;
+            Settings.Default.ShowBasicInfo = userControl.checkBoxShowBasicInfo.Checked;
+            Settings.Default.LockSmartScriptId = userControl.checkBoxLockEventId.Checked;
+            Settings.Default.ListActionLists = userControl.checkBoxListActionlistsOrEntries.Checked;
+            Settings.Default.AllowChangingEntryAndSourceType = userControl.checkBoxAllowChangingEntryAndSourceType.Checked;
+            Settings.Default.PhaseHighlighting = userControl.checkBoxUsePhaseColors.Checked;
+            Settings.Default.ShowTooltipsStaticly = userControl.checkBoxUseStaticTooltips.Checked;
 
             string lastStaticInfoPerTab = String.Empty;
 
-            //entryorguid,sourceTypeIndex,entryorguid,sourceTypeIndex,entryorguid,sourceTypeIndex,....
-            //if (userControls.Count > 0)
-            //{
-            //    foreach (SAIUserControlState uc in userControls.Single().States)
-            //    {
-            //        string entryOrGuidStr = uc.GetControlValueName("textBoxEntryOrGuid").ToString();
-
-            //        if (String.IsNullOrWhiteSpace(entryOrGuidStr))
-            //            entryOrGuidStr = uc.GetControlByName("textBoxEntryOrGuid").Text;
-
-            //        if (String.IsNullOrWhiteSpace(entryOrGuidStr))
-            //            entryOrGuidStr = "0";
-
-            //        lastStaticInfoPerTab += entryOrGuidStr + "-" + uc.GetControlValueName("comboBoxSourceType").ToString() + ",";
-            //    }
-            //}
-
             var objs = new List<object>();
 
-            userControls.Single().CurrentState.Save(userControls.Single());
+            userControl.CurrentState.Save(userControl);
 
             int ctr = 0;
-            foreach (SAIUserControlState state in userControls.Single().States)
+
+            foreach (SAIUserControlState state in userControl.States)
             {
                 objs.Add(new
                 {
@@ -957,7 +880,7 @@ namespace SAI_Editor.Forms
             if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || !Settings.Default.UseWorldDatabase)
                 return;
 
-            await GetActiveUserControl().GenerateCommentListView();
+            await userControl.GenerateCommentListView();
         }
 
         private void menuItemDuplicateSelectedRow_Click(object sender, EventArgs e)
@@ -965,12 +888,12 @@ namespace SAI_Editor.Forms
             if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
                 return;
 
-            GetActiveUserControl().DuplicateSelectedRow();
+            userControl.DuplicateSelectedRow();
         }
 
         private void menuItemLoadSelectedEntry_Click(object sender, EventArgs e)
         {
-            GetActiveUserControl().LoadSelectedEntry();
+            userControl.LoadSelectedEntry();
         }
 
         private void radioButtonConnectToMySql_CheckedChanged(object sender, EventArgs e)
@@ -1018,16 +941,13 @@ namespace SAI_Editor.Forms
             radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
             radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
 
-            foreach (UserControlSAI uc in userControls)
-            {
-                uc.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || uc.comboBoxSourceType.SelectedIndex == 2;
-                uc.pictureBoxLoadScript.Enabled = uc.textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
-                uc.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
-                uc.buttonGenerateComments.Enabled = uc.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
-            }
+            userControl.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase || userControl.comboBoxSourceType.SelectedIndex == 2;
+            userControl.pictureBoxLoadScript.Enabled = userControl.textBoxEntryOrGuid.Text.Length > 0 && Settings.Default.UseWorldDatabase;
+            userControl.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
+            userControl.buttonGenerateComments.Enabled = userControl.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
 
             menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
-            menuItemGenerateComment.Enabled = GetActiveUserControl().ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+            menuItemGenerateComment.Enabled = userControl.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
             searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
             searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
             searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
@@ -1060,13 +980,13 @@ namespace SAI_Editor.Forms
                 return;
             }
 
-            GetActiveUserControl().ListViewList.AddScript(lastDeletedSmartScripts.Last());
+            userControl.ListViewList.AddScript(lastDeletedSmartScripts.Last());
             lastDeletedSmartScripts.Remove(lastDeletedSmartScripts.Last());
         }
 
         private void ShowSearchFromDatabaseForm(TextBox textBoxToChange, DatabaseSearchFormType searchType)
         {
-            GetActiveUserControl().ShowSearchFromDatabaseForm(textBoxToChange, searchType);
+            userControl.ShowSearchFromDatabaseForm(textBoxToChange, searchType);
         }
 
         private void searchForASpellToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -1242,21 +1162,18 @@ namespace SAI_Editor.Forms
                     return;
                 }
 
-                userControls.Single().AddWorkSpace();
+                userControl.AddWorkSpace();
 
                 CreateTabControl();
             }
 
-            //! No new workspace created but different workspace selected
-            var uc = userControls.First();
-
             if (lastSelectedWorkspaceIndex < tabControlWorkspaces.TabPages.Count)
-                tabControlWorkspaces.TabPages[lastSelectedWorkspaceIndex].Controls.Remove(uc);
+                tabControlWorkspaces.TabPages[lastSelectedWorkspaceIndex].Controls.Remove(userControl);
 
-            tabControlWorkspaces.TabPages[tabControlWorkspaces.SelectedIndex].Controls.Add(uc);
+            tabControlWorkspaces.TabPages[tabControlWorkspaces.SelectedIndex].Controls.Add(userControl);
 
-            if (tabControlWorkspaces.SelectedIndex < uc.States.Count)
-                uc.CurrentState = uc.States[tabControlWorkspaces.SelectedIndex];
+            if (tabControlWorkspaces.SelectedIndex < userControl.States.Count)
+                userControl.CurrentState = userControl.States[tabControlWorkspaces.SelectedIndex];
 
             lastSelectedWorkspaceIndex = tabControlWorkspaces.SelectedIndex;
         }
@@ -1271,14 +1188,14 @@ namespace SAI_Editor.Forms
 
             UserControlSAI userControlSAI;
 
-            if (first && userControls.Count == 0)
+            if (first && userControl == null)
             {
                 userControlSAI = new UserControlSAI();
                 userControlSAI.Parent = this;
                 userControlSAI.LoadUserControl();
             }
             else
-                userControlSAI = userControls.Single();
+                userControlSAI = userControl;
 
             TabPage newPage = new TabPage();
             newPage.Text = "Workspace " + (tabControlWorkspaces.TabPages.Count + 1);
@@ -1299,12 +1216,11 @@ namespace SAI_Editor.Forms
             if (addWorkspace)
                 userControlSAI.AddWorkSpace();
 
-            if (first && userControls.Count == 0)
-                userControls.Add(userControlSAI);
+            if (first && userControl == null)
+                userControl = userControlSAI;
 
             if (!first)
                 tabControlWorkspaces.SelectedIndex = tabControlWorkspaces.TabPages.Count - 2;
-
         }
 
         private void pictureBoxDonate_Click(object sender, EventArgs e)
@@ -1360,7 +1276,7 @@ namespace SAI_Editor.Forms
 
         private void tabControlWorkspaces_TabClosing(object sender, TabControlCancelEventArgs e)
         {
-            userControls.First().States.RemoveAt(e.TabPageIndex);
+            userControl.States.RemoveAt(e.TabPageIndex);
         }
 
         int oldWidthTabControlWorkspaces = 0, oldHeightTabControlWorkspaces = 0;
@@ -1376,25 +1292,23 @@ namespace SAI_Editor.Forms
             if (oldWidthTabControlWorkspaces == tabControlWorkspaces.Width && oldHeightTabControlWorkspaces == tabControlWorkspaces.Height)
                 return;
 
-            UserControlSAI uc = userControls.First();
-
-            uc.Width = tabControlWorkspaces.Width;
-            uc.Height = tabControlWorkspaces.Height;
+            userControl.Width = tabControlWorkspaces.Width;
+            userControl.Height = tabControlWorkspaces.Height;
 
             int contractHeightFromTabControl = 252, contractWidthFromTabControl = 17; //! Not sure why but height is really off...
 
-            if (uc.checkBoxUseStaticTooltips.Checked)
+            if (userControl.checkBoxUseStaticTooltips.Checked)
                 contractHeightFromTabControl += 60 + 9; //! Height of two panels plus some extra marging
 
-            uc.ListView.Width = tabControlWorkspaces.Width - contractWidthFromTabControl;
-            uc.ListView.Height = tabControlWorkspaces.Height - contractHeightFromTabControl;
+            userControl.ListView.Width = tabControlWorkspaces.Width - contractWidthFromTabControl;
+            userControl.ListView.Height = tabControlWorkspaces.Height - contractHeightFromTabControl;
 
-            uc.panelStaticTooltipTypes.Width = tabControlWorkspaces.Width - 17;
-            uc.panelStaticTooltipParameters.Width = tabControlWorkspaces.Width - 17;
+            userControl.panelStaticTooltipTypes.Width = tabControlWorkspaces.Width - 17;
+            userControl.panelStaticTooltipParameters.Width = tabControlWorkspaces.Width - 17;
 
             int increaseY = tabControlWorkspaces.Height - oldHeightTabControlWorkspaces;
-            uc.panelStaticTooltipTypes.Location = new Point(uc.panelStaticTooltipTypes.Location.X, uc.panelStaticTooltipTypes.Location.Y + increaseY);
-            uc.panelStaticTooltipParameters.Location = new Point(uc.panelStaticTooltipParameters.Location.X, uc.panelStaticTooltipParameters.Location.Y + increaseY);
+            userControl.panelStaticTooltipTypes.Location = new Point(userControl.panelStaticTooltipTypes.Location.X, userControl.panelStaticTooltipTypes.Location.Y + increaseY);
+            userControl.panelStaticTooltipParameters.Location = new Point(userControl.panelStaticTooltipParameters.Location.X, userControl.panelStaticTooltipParameters.Location.Y + increaseY);
 
             oldHeightTabControlWorkspaces = tabControlWorkspaces.Height;
             oldWidthTabControlWorkspaces = tabControlWorkspaces.Width;

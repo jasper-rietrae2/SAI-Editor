@@ -36,7 +36,7 @@ namespace SAI_Editor.Forms
         private void SqlOutputForm_Load(object sender, EventArgs e)
         {
             if (sqlForSmartScripts)
-                originalEntryOrGuidAndSourceType = ((MainForm)Owner).GetActiveUserControl().originalEntryOrGuidAndSourceType;
+                originalEntryOrGuidAndSourceType = ((MainForm)Owner).userControl.originalEntryOrGuidAndSourceType;
 
             buttonSaveToFile.Enabled = saveToFile;
             richTextBoxSqlOutput.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;

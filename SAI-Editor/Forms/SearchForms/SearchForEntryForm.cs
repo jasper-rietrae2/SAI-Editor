@@ -593,31 +593,31 @@ namespace SAI_Editor.Forms.SearchForms
                 entryToPlace = "-";
 
             entryToPlace += listViewEntryResults.SelectedItems[0].Text;
-            ((MainForm)Owner).GetActiveUserControl().textBoxEntryOrGuid.Text = entryToPlace;
+            ((MainForm)Owner).userControl.textBoxEntryOrGuid.Text = entryToPlace;
 
             switch (comboBoxSearchType.SelectedIndex)
             {
                 case 0: //! Creature entry
                 case 1: //! Creature name
                 case 2: //! Creature guid
-                    ((MainForm)Owner).GetActiveUserControl().comboBoxSourceType.SelectedIndex = 0;
+                    ((MainForm)Owner).userControl.comboBoxSourceType.SelectedIndex = 0;
                     break;
                 case 3: //! Gameobject entry
                 case 4: //! Gameobject name
                 case 5: //! Gameobject guid
-                    ((MainForm)Owner).GetActiveUserControl().comboBoxSourceType.SelectedIndex = 1;
+                    ((MainForm)Owner).userControl.comboBoxSourceType.SelectedIndex = 1;
                     break;
                 case 6: //! Areatrigger id
                 case 7: //! Areatrigger map id
-                    ((MainForm)Owner).GetActiveUserControl().comboBoxSourceType.SelectedIndex = 2;
+                    ((MainForm)Owner).userControl.comboBoxSourceType.SelectedIndex = 2;
                     break;
                 case 8: //! Actionlist entry
-                    ((MainForm)Owner).GetActiveUserControl().comboBoxSourceType.SelectedIndex = 3;
+                    ((MainForm)Owner).userControl.comboBoxSourceType.SelectedIndex = 3;
                     break;
             }
 
-            if (((MainForm)Owner).GetActiveUserControl().pictureBoxLoadScript.Enabled)
-                ((MainForm)Owner).GetActiveUserControl().TryToLoadScript(-1, SourceTypes.SourceTypeNone, true, true);
+            if (((MainForm)Owner).userControl.pictureBoxLoadScript.Enabled)
+                ((MainForm)Owner).userControl.TryToLoadScript(-1, SourceTypes.SourceTypeNone, true, true);
 
             Close();
         }

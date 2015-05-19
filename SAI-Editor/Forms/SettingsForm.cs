@@ -61,9 +61,9 @@ namespace SAI_Editor.Forms
         {
             if (checkBoxChangeStaticInfo.Checked != Settings.Default.ChangeStaticInfo)
             {
-                EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = ((MainForm)Owner).GetActiveUserControl().originalEntryOrGuidAndSourceType;
-                ((MainForm)Owner).GetActiveUserControl().textBoxEntryOrGuid.Text = originalEntryOrGuidAndSourceType.entryOrGuid.ToString();
-                ((MainForm)Owner).GetActiveUserControl().comboBoxSourceType.SelectedIndex = ((MainForm)Owner).GetActiveUserControl().GetIndexBySourceType(originalEntryOrGuidAndSourceType.sourceType);
+                EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = ((MainForm)Owner).userControl.originalEntryOrGuidAndSourceType;
+                ((MainForm)Owner).userControl.textBoxEntryOrGuid.Text = originalEntryOrGuidAndSourceType.entryOrGuid.ToString();
+                ((MainForm)Owner).userControl.comboBoxSourceType.SelectedIndex = ((MainForm)Owner).userControl.GetIndexBySourceType(originalEntryOrGuidAndSourceType.sourceType);
             }
 
             bool showTooltipsStaticly = Settings.Default.ShowTooltipsStaticly;
@@ -142,15 +142,15 @@ namespace SAI_Editor.Forms
                 MessageBox.Show("The database settings were not saved because no connection could be established. All other changed settings were saved.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             if (checkBoxAutoGenerateComments.Checked != generateComments && checkBoxAutoGenerateComments.Checked)
-                ((MainForm)Owner).GetActiveUserControl().GenerateCommentsForAllItems();
+                ((MainForm)Owner).userControl.GenerateCommentsForAllItems();
             
             if (checkBoxShowTooltipsStaticly.Checked != showTooltipsStaticly)
-                ((MainForm)Owner).GetActiveUserControl().ExpandOrContractToShowStaticTooltips(!checkBoxShowTooltipsStaticly.Checked);
+                ((MainForm)Owner).userControl.ExpandOrContractToShowStaticTooltips(!checkBoxShowTooltipsStaticly.Checked);
 
             if (checkBoxPhaseHighlighting.Checked != phaseHighlighting)
             {
-                ((MainForm)Owner).GetActiveUserControl().ListViewList.Apply(true);
-                ((MainForm)Owner).GetActiveUserControl().checkBoxUsePhaseColors.Checked = checkBoxPhaseHighlighting.Checked;
+                ((MainForm)Owner).userControl.ListViewList.Apply(true);
+                ((MainForm)Owner).userControl.checkBoxUsePhaseColors.Checked = checkBoxPhaseHighlighting.Checked;
             }
 
             ((MainForm)Owner).HandleUseWorldDatabaseSettingChanged();
