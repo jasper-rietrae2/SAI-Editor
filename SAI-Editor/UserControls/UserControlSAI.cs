@@ -640,6 +640,7 @@ namespace SAI_Editor
             }
             catch
             {
+                updatingFieldsBasedOnSelectedScript = false;
                 MessageBox.Show("Something went wrong while attempting to edit the fields based on the new selection.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
