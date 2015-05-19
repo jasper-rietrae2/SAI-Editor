@@ -1649,7 +1649,7 @@
             // 
             // customObjectListView
             // 
-            this.customObjectListView.Dock = System.Windows.Forms.DockStyle.Bottom;
+            //this.customObjectListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customObjectListView.List = null;
             this.customObjectListView.Location = new System.Drawing.Point(0, 222);
             this.customObjectListView.Name = "customObjectListView";
@@ -1660,6 +1660,11 @@
             this.customObjectListView.View = System.Windows.Forms.View.Details;
             this.customObjectListView.VirtualMode = true;
             this.customObjectListView.FullRowSelect = true;
+            //this.customObjectListView.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Top;
+            //this.customObjectListView.Anchor = System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom;
+            //this.customObjectListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            //| System.Windows.Forms.AnchorStyles.Left) 
+            //| System.Windows.Forms.AnchorStyles.Right)));
             this.customObjectListView.ItemSelectionChanged += customObjectListView_ItemSelectionChanged;
             // 
             // UserControlSAI

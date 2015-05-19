@@ -115,9 +115,9 @@
             this.menuItemDeleteSelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemCopySelectedRowListView = new System.Windows.Forms.ToolStripMenuItem();
             this.LoadTooltip = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureBoxDonate = new System.Windows.Forms.PictureBox();
             this.pictureBoxCreateScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
             this.pictureBoxLoadScript = new SAI_Editor.Classes.CustomControls.PictureBoxDisableable();
-            this.pictureBoxDonate = new System.Windows.Forms.PictureBox();
             this.timerExpandOrContract = new System.Windows.Forms.Timer(this.components);
             this.timerShowStaticTooltips = new System.Windows.Forms.Timer(this.components);
             this.tabControlWorkspaces = new System.Windows.Forms.CustomTabControl();
@@ -252,9 +252,9 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).BeginInit();
             this.tabControlWorkspaces.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBoxStaticScriptInfo.SuspendLayout();
@@ -286,7 +286,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.menuStrip.Size = new System.Drawing.Size(1339, 24);
+            this.menuStrip.Size = new System.Drawing.Size(1600, 24);
             this.menuStrip.TabIndex = 0;
             this.menuStrip.Text = "menuStrip1";
             // 
@@ -352,6 +352,7 @@
             this.menuItemExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.menuItemExit.Size = new System.Drawing.Size(244, 22);
             this.menuItemExit.Text = "Exit";
+            this.menuItemExit.Click += new System.EventHandler(this.menuItemExit_Click_1);
             // 
             // optionsToolStripMenuItem
             // 
@@ -988,6 +989,20 @@
             this.menuItemCopySelectedRowListView.Text = "Copy selected row";
             this.menuItemCopySelectedRowListView.Click += new System.EventHandler(this.menuItemCopySelectedRowListView_Click);
             // 
+            // pictureBoxDonate
+            // 
+            this.pictureBoxDonate.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxDonate.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxDonate.Image")));
+            this.pictureBoxDonate.Location = new System.Drawing.Point(853, -1);
+            this.pictureBoxDonate.Name = "pictureBoxDonate";
+            this.pictureBoxDonate.Size = new System.Drawing.Size(88, 23);
+            this.pictureBoxDonate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBoxDonate.TabIndex = 85;
+            this.pictureBoxDonate.TabStop = false;
+            this.LoadTooltip.SetToolTip(this.pictureBoxDonate, "If you like the application, please consider donating. The project is opensource " +
+        "and free otherwise.");
+            this.pictureBoxDonate.Click += new System.EventHandler(this.pictureBoxDonate_Click);
+            // 
             // pictureBoxCreateScript
             // 
             this.pictureBoxCreateScript.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1014,20 +1029,6 @@
             this.pictureBoxLoadScript.TabIndex = 16;
             this.pictureBoxLoadScript.TabStop = false;
             this.LoadTooltip.SetToolTip(this.pictureBoxLoadScript, "Load the script(s) using the given source type and entry or guid");
-            // 
-            // pictureBoxDonate
-            // 
-            this.pictureBoxDonate.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxDonate.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxDonate.Image")));
-            this.pictureBoxDonate.Location = new System.Drawing.Point(853, -1);
-            this.pictureBoxDonate.Name = "pictureBoxDonate";
-            this.pictureBoxDonate.Size = new System.Drawing.Size(88, 23);
-            this.pictureBoxDonate.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxDonate.TabIndex = 85;
-            this.pictureBoxDonate.TabStop = false;
-            this.LoadTooltip.SetToolTip(this.pictureBoxDonate, "If you like the application, please consider donating. The project is opensource " +
-        "and free otherwise.");
-            this.pictureBoxDonate.Click += new System.EventHandler(this.pictureBoxDonate_Click);
             // 
             // timerExpandOrContract
             // 
@@ -2691,13 +2692,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1339, 503);
+            this.ClientSize = new System.Drawing.Size(1600, 647);
             this.Controls.Add(this.pictureBoxDonate);
             this.Controls.Add(this.tabControlWorkspaces);
             this.Controls.Add(this.customPanelLogin);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
@@ -2711,9 +2711,9 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.contextMenuStripListView.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCreateScript)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLoadScript)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).EndInit();
             this.tabControlWorkspaces.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.groupBoxStaticScriptInfo.ResumeLayout(false);

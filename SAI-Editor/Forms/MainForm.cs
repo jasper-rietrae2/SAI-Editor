@@ -223,6 +223,22 @@ namespace SAI_Editor.Forms
             runningConstructor = false;
         }
 
+        private void SetSizable(bool sizable)
+        {
+            if (sizable)
+            {
+                FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+                MinimumSize = new Size(966, 542);
+                tabControlWorkspaces.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom | AnchorStyles.Top;
+            }
+            else
+            {
+                FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+                MinimumSize = new Size(0, 0);
+                tabControlWorkspaces.Anchor = AnchorStyles.Left | AnchorStyles.Top;
+            }
+        }
+
         public UserControlSAI GetActiveUserControl()
         {
             if (userControls.Count == 0)
@@ -694,6 +710,8 @@ namespace SAI_Editor.Forms
 
             foreach (UserControlSAI uc in userControls)
                 uc.FinishedExpandingOrContracting(expanding);
+
+            SetSizable(expanding);
         }
 
         private void menuItemExit_Click(object sender, System.EventArgs e)
@@ -1281,6 +1299,11 @@ namespace SAI_Editor.Forms
         private void tabControlWorkspaces_TabClosing(object sender, TabControlCancelEventArgs e)
         {
             userControls.First().States.RemoveAt(e.TabPageIndex);
+        }
+
+        private void menuItemExit_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

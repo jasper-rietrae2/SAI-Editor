@@ -164,33 +164,54 @@ namespace SAI_Editor.Classes.CustomControls
             }
         }
 
-        protected void PaintTransparentBackground(Graphics g, Rectangle clipRect)
+        protected void PaintTransparentBackground(Graphics graphics, Rectangle clipRect)
         {
             if ((this.Parent != null))
             {
                 clipRect.Offset(this.Location);
-                PaintEventArgs e = new PaintEventArgs(g, clipRect);
-                GraphicsState state = g.Save();
-                g.SmoothingMode = SmoothingMode.HighSpeed;
+                PaintEventArgs e = new PaintEventArgs(graphics, clipRect);
+                GraphicsState state = graphics.Save();
+                graphics.SmoothingMode = SmoothingMode.HighSpeed;
                 try
                 {
-                    g.TranslateTransform((float)-this.Location.X, (float)-this.Location.Y);
+                    graphics.TranslateTransform((float)-this.Location.X, (float)-this.Location.Y);
                     this.InvokePaintBackground(this.Parent, e);
                     this.InvokePaint(this.Parent, e);
                 }
 
                 finally
                 {
-                    g.Restore(state);
+                    graphics.Restore(state);
                     clipRect.Offset(-this.Location.X, -this.Location.Y);
                 }
             }
             else
             {
                 System.Drawing.Drawing2D.LinearGradientBrush backBrush = new System.Drawing.Drawing2D.LinearGradientBrush(this.Bounds, SystemColors.ControlLightLight, SystemColors.ControlLight, System.Drawing.Drawing2D.LinearGradientMode.Vertical);
-                g.FillRectangle(backBrush, this.Bounds);
+                graphics.FillRectangle(backBrush, this.Bounds);
                 backBrush.Dispose();
             }
+
+            //! Background color attempt
+            //graphics.Clear(Color.White);
+            //if ((this.Parent != null))
+            //{
+            //    clipRect.Offset(this.Location);
+            //    PaintEventArgs e = new PaintEventArgs(graphics, clipRect);
+            //    GraphicsState state = graphics.Save();
+            //    graphics.SmoothingMode = SmoothingMode.HighSpeed;
+            //    try
+            //    {
+            //        graphics.TranslateTransform((float)-this.Location.X, (float)-this.Location.Y);
+            //        this.InvokePaintBackground(this.Parent, e);
+            //        this.InvokePaint(this.Parent, e);
+            //    }
+            //    finally
+            //    {
+            //        graphics.Restore(state);
+            //        clipRect.Offset(-this.Location.X, -this.Location.Y);
+            //    }
+            //}
         }
 
         protected override void OnPaint(PaintEventArgs e)
