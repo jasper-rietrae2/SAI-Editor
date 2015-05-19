@@ -1323,10 +1323,28 @@ namespace SAI_Editor.Forms
             if (oldWidthTabControlWorkspaces == tabControlWorkspaces.Width && oldHeightTabControlWorkspaces == tabControlWorkspaces.Height)
                 return;
 
-            userControls.First().Width = tabControlWorkspaces.Width;
-            userControls.First().Height = tabControlWorkspaces.Height;
-            userControls.First().ListView.Width = tabControlWorkspaces.Width - 15;
-            userControls.First().ListView.Height = tabControlWorkspaces.Height - 255; //! Not sure why but height is really off...
+            UserControlSAI uc = userControls.First();
+
+            uc.Width = tabControlWorkspaces.Width;
+            uc.Height = tabControlWorkspaces.Height;
+
+            int contractHeightFromTabControl = 252, contractWidthFromTabControl = 17; //! Not sure why but height is really off...
+
+            if (uc.checkBoxUseStaticTooltips.Checked)
+                contractHeightFromTabControl += 60 + 9; //! Height of two panels plus some extra marging
+
+            uc.ListView.Width = tabControlWorkspaces.Width - contractWidthFromTabControl;
+            uc.ListView.Height = tabControlWorkspaces.Height - contractHeightFromTabControl;
+
+            uc.panelStaticTooltipTypes.Width = tabControlWorkspaces.Width - 17;
+            uc.panelStaticTooltipParameters.Width = tabControlWorkspaces.Width - 17;
+
+            int increaseY = tabControlWorkspaces.Height - oldHeightTabControlWorkspaces;
+            uc.panelStaticTooltipTypes.Location = new Point(uc.panelStaticTooltipTypes.Location.X, uc.panelStaticTooltipTypes.Location.Y + increaseY);
+            uc.panelStaticTooltipParameters.Location = new Point(uc.panelStaticTooltipParameters.Location.X, uc.panelStaticTooltipParameters.Location.Y + increaseY);
+
+            oldHeightTabControlWorkspaces = tabControlWorkspaces.Height;
+            oldWidthTabControlWorkspaces = tabControlWorkspaces.Width;
         }
     }
 }

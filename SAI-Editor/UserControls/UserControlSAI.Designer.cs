@@ -1571,7 +1571,7 @@
             this.panelStaticTooltipTypes.Controls.Add(this.labelStaticTooltipTitleTypes);
             this.panelStaticTooltipTypes.Controls.Add(this.labelStaticTooltipTextTypes);
             this.panelStaticTooltipTypes.Controls.Add(this.pictureBoxStaticTooltip);
-            this.panelStaticTooltipTypes.Location = new System.Drawing.Point(3, 367);
+            this.panelStaticTooltipTypes.Location = new System.Drawing.Point(3, 370);
             this.panelStaticTooltipTypes.Name = "panelStaticTooltipTypes";
             this.panelStaticTooltipTypes.Size = new System.Drawing.Size(915, 30);
             this.panelStaticTooltipTypes.TabIndex = 89;
@@ -1610,7 +1610,7 @@
             this.panelStaticTooltipParameters.Controls.Add(this.labelStaticTooltipTextParameters);
             this.panelStaticTooltipParameters.Controls.Add(this.labelStaticTooltipParameterTitleTypes);
             this.panelStaticTooltipParameters.Controls.Add(this.pictureBox1);
-            this.panelStaticTooltipParameters.Location = new System.Drawing.Point(3, 400);
+            this.panelStaticTooltipParameters.Location = new System.Drawing.Point(3, 403);
             this.panelStaticTooltipParameters.Name = "panelStaticTooltipParameters";
             this.panelStaticTooltipParameters.Size = new System.Drawing.Size(915, 30);
             this.panelStaticTooltipParameters.TabIndex = 88;
