@@ -352,7 +352,7 @@
             this.menuItemExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.menuItemExit.Size = new System.Drawing.Size(244, 22);
             this.menuItemExit.Text = "Exit";
-            this.menuItemExit.Click += new System.EventHandler(this.menuItemExit_Click_1);
+            this.menuItemExit.Click += new System.EventHandler(this.menuItemExit_Click);
             // 
             // optionsToolStripMenuItem
             // 

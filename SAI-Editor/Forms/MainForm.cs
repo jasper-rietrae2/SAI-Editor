@@ -1300,10 +1300,5 @@ namespace SAI_Editor.Forms
         {
             userControls.First().States.RemoveAt(e.TabPageIndex);
         }
-
-        private void menuItemExit_Click_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }
