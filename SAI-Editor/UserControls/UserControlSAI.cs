@@ -955,8 +955,25 @@ namespace SAI_Editor
 
                 //! Only add the new smartscript if it doesn't yet exist
                 foreach (SmartScript newSmartScript in smartScripts)
-                    if (!customObjectListView.Items.Cast<CustomListViewItem>().Any(p => (p.Script as SmartScript).entryorguid == newSmartScript.entryorguid && (p.Script as SmartScript).id == newSmartScript.id))
-                        customObjectListView.List.AddScript(newSmartScript);
+                {
+                    bool _continue = false;
+
+                    for (int i = 0; i < customObjectListView.Items.Count; ++i)
+                    {
+                        SmartScript script = customObjectListView.List.Scripts[i] as SmartScript;
+
+                        if (script.entryorguid == newSmartScript.entryorguid && script.id == newSmartScript.id)
+                        {
+                            _continue = true;
+                            break;
+                        }
+                    }
+
+                    if (_continue)
+                        continue;
+
+                    customObjectListView.List.AddScript(newSmartScript);
+                }
 
                 pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             }
