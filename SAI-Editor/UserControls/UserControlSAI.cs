@@ -1386,9 +1386,8 @@ namespace SAI_Editor
                 return;
             }
 
-            //TODO: Fix
-            //using (SearchForLinkForm searchForLinkForm = new SearchForLinkForm(ListViewList.SmartScripts, customObjectListView.SelectedObjects[0].Index, textBoxToChange))
-            //    searchForLinkForm.ShowDialog(this);
+            using (SearchForLinkForm searchForLinkForm = new SearchForLinkForm(ListViewList.SmartScripts, customObjectListView.SelectedIndex, textBoxToChange))
+                searchForLinkForm.ShowDialog(this);
         }
 
         public void ResetFieldsToDefault(bool withStatic = false)
