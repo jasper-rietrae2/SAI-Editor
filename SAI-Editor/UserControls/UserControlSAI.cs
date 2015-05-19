@@ -1289,9 +1289,13 @@ namespace SAI_Editor
 
                 if (checkBoxListActionlistsOrEntries.Enabled && checkBoxListActionlistsOrEntries.Checked)
                 {
-                    foreach (ListViewItem item in customObjectListView.Items)
+                    for (int i = 0; i < customObjectListView.Items.Count; ++i)
+                    {
+                        ListViewItem item = customObjectListView.Items[i];
+
                         if (item.Text == originalEntryOrGuidAndSourceType.entryOrGuid.ToString())
                             lastSmartScriptIdOfScript = CustomConverter.ToInt32(item.SubItems[2].Text);
+                    }
                 }
                 else
                     lastSmartScriptIdOfScript = CustomConverter.ToInt32(customObjectListView.Items[customObjectListView.Items.Count - 1].SubItems[2].Text);
