@@ -1284,6 +1284,6 @@ namespace SAI_Editor.Enumerators
 
     enum MiscEnumerators : int
     {
-        MaxWorkSpaceCount = 6,
+        MaxWorkSpaceCount = 10,
     }
 }
