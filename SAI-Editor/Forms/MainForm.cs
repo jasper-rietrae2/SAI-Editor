@@ -87,34 +87,6 @@ namespace SAI_Editor.Forms
             //! We first load the information and then change the parameter fields
             await SAI_Editor_Manager.Instance.LoadSQLiteDatabaseInfo();
 
-            if (Settings.Default.AutoConnect)
-            {
-                checkBoxAutoConnect.Checked = true;
-
-                if (Settings.Default.UseWorldDatabase)
-                {
-                    SAI_Editor_Manager.Instance.connString = new MySqlConnectionStringBuilder();
-                    SAI_Editor_Manager.Instance.connString.Server = textBoxHost.Text;
-                    SAI_Editor_Manager.Instance.connString.UserID = textBoxUsername.Text;
-                    SAI_Editor_Manager.Instance.connString.Port = CustomConverter.ToUInt32(textBoxPort.Text);
-                    SAI_Editor_Manager.Instance.connString.Database = textBoxWorldDatabase.Text;
-
-                    if (textBoxPassword.Text.Length > 0)
-                        SAI_Editor_Manager.Instance.connString.Password = textBoxPassword.Text;
-
-                    SAI_Editor_Manager.Instance.ResetWorldDatabase(true);
-                }
-
-                if (!Settings.Default.UseWorldDatabase || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(SAI_Editor_Manager.Instance.connString, false))
-                {
-                    SAI_Editor_Manager.Instance.ResetWorldDatabase(Settings.Default.UseWorldDatabase);
-                    buttonConnect.PerformClick();
-
-                    if (Settings.Default.InstantExpand)
-                        StartExpandingToMainForm(true);
-                }
-            }
-
             if (Settings.Default.HidePass)
                 textBoxPassword.PasswordChar = '●';
 
@@ -124,8 +96,8 @@ namespace SAI_Editor.Forms
 
             if (!Settings.Default.InformedAboutSurvey)
             {
-                string termsArgeementString = "By clicking 'Yes' you agree to the application keeping a record of its usage in a remote database. Keep " +
-                                                "in mind that this data will not be disclosed to a third party. It is for internal use and bookkeeping only.";
+                string termsArgeementString = "By clicking 'Yes' you agree to the application keeping a record of the usage in a remote database. Keep " +
+                                                "in mind that this data will not be disclosed to a third party.";
 
                 DialogResult result = MessageBox.Show(termsArgeementString, "Agree to the terms", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
@@ -147,6 +119,7 @@ namespace SAI_Editor.Forms
 
                 Settings.Default.InformedAboutSurvey = true;
                 Settings.Default.AgreedToSurvey = result == DialogResult.Yes;
+                Settings.Default.Save();
             }
 
             updateSurveyThread = new Thread(UpdateSurvey);
@@ -243,6 +216,34 @@ namespace SAI_Editor.Forms
             catch
             {
                 MessageBox.Show("Something went wrong when loading the settings.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            if (Settings.Default.AutoConnect)
+            {
+                checkBoxAutoConnect.Checked = true;
+
+                if (Settings.Default.UseWorldDatabase)
+                {
+                    SAI_Editor_Manager.Instance.connString = new MySqlConnectionStringBuilder();
+                    SAI_Editor_Manager.Instance.connString.Server = textBoxHost.Text;
+                    SAI_Editor_Manager.Instance.connString.UserID = textBoxUsername.Text;
+                    SAI_Editor_Manager.Instance.connString.Port = CustomConverter.ToUInt32(textBoxPort.Text);
+                    SAI_Editor_Manager.Instance.connString.Database = textBoxWorldDatabase.Text;
+
+                    if (textBoxPassword.Text.Length > 0)
+                        SAI_Editor_Manager.Instance.connString.Password = textBoxPassword.Text;
+
+                    SAI_Editor_Manager.Instance.ResetWorldDatabase(true);
+                }
+
+                if (!Settings.Default.UseWorldDatabase || SAI_Editor_Manager.Instance.worldDatabase.CanConnectToDatabase(SAI_Editor_Manager.Instance.connString, false))
+                {
+                    SAI_Editor_Manager.Instance.ResetWorldDatabase(Settings.Default.UseWorldDatabase);
+                    buttonConnect.PerformClick();
+
+                    if (Settings.Default.InstantExpand)
+                        StartExpandingToMainForm(true);
+                }
             }
 
             runningConstructor = false;
