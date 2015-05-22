@@ -22,6 +22,10 @@ namespace SAI_Editor.Classes.CustomControls
         protected CustomListViewType _customListViewType;
         protected readonly PropertyInfo[] _pinfo;
 
+        public CustomListView()
+        {
+        }
+
         protected CustomListView(CustomListViewType customListViewType)
         {
             switch (customListViewType)
