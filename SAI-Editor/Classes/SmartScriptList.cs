@@ -112,12 +112,6 @@ namespace SAI_Editor.Classes
             _oListView.EnsureModelVisible(script);
         }
 
-        private void ResizeColumns()
-        {
-            foreach (ColumnHeader header in _oListView.Columns)
-                header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-        }
-
         private void oListView_FormatRow(object sender, FormatRowEventArgs e)
         {
             SmartScript script = (SmartScript)e.Model;
