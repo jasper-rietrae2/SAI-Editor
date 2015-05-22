@@ -34,7 +34,6 @@
             this.menuHeaderFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemGenerateSql = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemRevertQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemReconnect = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
@@ -253,6 +252,7 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.menuItemRevertQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).BeginInit();
@@ -299,7 +299,6 @@
             this.menuHeaderFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSettings,
             this.menuItemGenerateSql,
-            this.menuItemRevertQuery,
             this.toolStripSeparator2,
             this.menuItemReconnect,
             this.menuItemExit});
@@ -312,7 +311,7 @@
             this.menuItemSettings.Name = "menuItemSettings";
             this.menuItemSettings.ShortcutKeyDisplayString = "(F1)";
             this.menuItemSettings.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.menuItemSettings.Size = new System.Drawing.Size(244, 22);
+            this.menuItemSettings.Size = new System.Drawing.Size(204, 22);
             this.menuItemSettings.Text = "Settings";
             this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
             // 
@@ -322,30 +321,21 @@
             this.menuItemGenerateSql.Name = "menuItemGenerateSql";
             this.menuItemGenerateSql.ShortcutKeyDisplayString = "(Ctrl + M)";
             this.menuItemGenerateSql.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.menuItemGenerateSql.Size = new System.Drawing.Size(244, 22);
+            this.menuItemGenerateSql.Size = new System.Drawing.Size(204, 22);
             this.menuItemGenerateSql.Text = "Generate SQL";
             this.menuItemGenerateSql.Click += new System.EventHandler(this.generateSQLToolStripMenuItem_Click);
-            // 
-            // menuItemRevertQuery
-            // 
-            this.menuItemRevertQuery.Name = "menuItemRevertQuery";
-            this.menuItemRevertQuery.ShortcutKeyDisplayString = "(Ctrl + R)";
-            this.menuItemRevertQuery.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.menuItemRevertQuery.Size = new System.Drawing.Size(244, 22);
-            this.menuItemRevertQuery.Text = "Execute a revert query";
-            this.menuItemRevertQuery.Click += new System.EventHandler(this.menuItemRevertQuery_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(241, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(201, 6);
             // 
             // menuItemReconnect
             // 
             this.menuItemReconnect.Name = "menuItemReconnect";
             this.menuItemReconnect.ShortcutKeyDisplayString = "(Shift + F4)";
             this.menuItemReconnect.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F4)));
-            this.menuItemReconnect.Size = new System.Drawing.Size(244, 22);
+            this.menuItemReconnect.Size = new System.Drawing.Size(204, 22);
             this.menuItemReconnect.Text = "Re-connect";
             this.menuItemReconnect.Click += new System.EventHandler(this.menuItemReconnect_Click);
             // 
@@ -354,7 +344,7 @@
             this.menuItemExit.Name = "menuItemExit";
             this.menuItemExit.ShortcutKeyDisplayString = "(Alt + F4)";
             this.menuItemExit.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.menuItemExit.Size = new System.Drawing.Size(244, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(204, 22);
             this.menuItemExit.Text = "Exit";
             this.menuItemExit.Click += new System.EventHandler(this.menuItemExit_Click);
             // 
@@ -889,7 +879,8 @@
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.conditionEditorToolStripMenuItem});
+            this.conditionEditorToolStripMenuItem,
+            this.menuItemRevertQuery});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -2716,6 +2707,15 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // menuItemRevertQuery
+            // 
+            this.menuItemRevertQuery.Name = "menuItemRevertQuery";
+            this.menuItemRevertQuery.ShortcutKeyDisplayString = "(Ctrl + R)";
+            this.menuItemRevertQuery.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.menuItemRevertQuery.Size = new System.Drawing.Size(257, 22);
+            this.menuItemRevertQuery.Text = "Execute a revert query";
+            this.menuItemRevertQuery.Click += new System.EventHandler(this.menuItemRevertQuery_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2799,7 +2799,6 @@
         public System.Windows.Forms.ToolStripMenuItem otherToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem smartAIWikiToolStripMenuItem;
         public System.Windows.Forms.ToolStripMenuItem menuItemGenerateSql;
-        public System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
         public System.Windows.Forms.ToolStripMenuItem menuItemGenerateCommentListView;
         public System.Windows.Forms.ToolStripMenuItem menuItemLoadSelectedEntryListView;
         public System.Windows.Forms.Timer timerExpandOrContract;
@@ -3002,6 +3001,7 @@
         private System.Windows.Forms.ToolStripMenuItem feedbackbugsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuItemReportIssue;
         private System.Windows.Forms.ToolStripMenuItem menuItemGiveFeedback;
+        private System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
     }
 }
 
