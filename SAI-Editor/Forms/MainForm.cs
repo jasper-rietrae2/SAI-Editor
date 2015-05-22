@@ -1293,6 +1293,10 @@ namespace SAI_Editor.Forms
 
         private void tabControlWorkspaces_SizeChanged(object sender, EventArgs e)
         {
+            //! This happens on Windows 7 when minimizing for some reason
+            if (tabControlWorkspaces.Width == 0 && tabControlWorkspaces.Height == 0)
+                return;
+
             if (oldWidthTabControlWorkspaces == 0)
                 oldWidthTabControlWorkspaces = tabControlWorkspaces.Width;
 
