@@ -46,6 +46,8 @@ namespace SAI_Editor.Forms
 
                 listViewScripts.Items.Add(file.Replace(@"Reverts\", "").Replace(".sql", "").Replace(";", ":"));
             }
+
+            buttonExecuteSelectedScript.Enabled = listViewScripts.SelectedItems.Count > 0;
         }
 
         private void buttonExecuteSelectedScript_Click(object sender, EventArgs e)
