@@ -86,5 +86,8 @@
     <Setting Name="WowExpansionIndex" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="PastebinLinksStore" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

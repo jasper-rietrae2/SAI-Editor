@@ -358,5 +358,17 @@ namespace SAI_Editor.Properties {
                 this["WowExpansionIndex"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string PastebinLinksStore {
+            get {
+                return ((string)(this["PastebinLinksStore"]));
+            }
+            set {
+                this["PastebinLinksStore"] = value;
+            }
+        }
     }
 }

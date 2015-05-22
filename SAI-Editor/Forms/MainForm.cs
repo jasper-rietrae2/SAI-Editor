@@ -1339,5 +1339,14 @@ namespace SAI_Editor.Forms
             Invalidate();
             Update();
         }
+
+        private void menuItemViewAllPastebins_Click(object sender, EventArgs e)
+        {
+            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+                return;
+
+            using (ViewAllPastebinsForm viewAllPastebinsForm = new ViewAllPastebinsForm())
+                viewAllPastebinsForm.ShowDialog(this);
+        }
     }
 }

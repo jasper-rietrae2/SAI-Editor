@@ -103,6 +103,7 @@
             this.searchForTempSummonTypesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conditionEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemRevertQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smartAIWikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.feedbackbugsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -252,7 +253,7 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.menuItemRevertQuery = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemViewAllPastebins = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).BeginInit();
@@ -880,7 +881,8 @@
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.conditionEditorToolStripMenuItem,
-            this.menuItemRevertQuery});
+            this.menuItemRevertQuery,
+            this.menuItemViewAllPastebins});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
             this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.toolsToolStripMenuItem.Text = "Tools";
@@ -894,6 +896,15 @@
             this.conditionEditorToolStripMenuItem.Size = new System.Drawing.Size(257, 22);
             this.conditionEditorToolStripMenuItem.Text = "Condition-Editor";
             this.conditionEditorToolStripMenuItem.Click += new System.EventHandler(this.conditionEditorToolStripMenuItem_Click);
+            // 
+            // menuItemRevertQuery
+            // 
+            this.menuItemRevertQuery.Name = "menuItemRevertQuery";
+            this.menuItemRevertQuery.ShortcutKeyDisplayString = "(Ctrl + R)";
+            this.menuItemRevertQuery.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
+            this.menuItemRevertQuery.Size = new System.Drawing.Size(257, 22);
+            this.menuItemRevertQuery.Text = "Execute a revert query";
+            this.menuItemRevertQuery.Click += new System.EventHandler(this.menuItemRevertQuery_Click);
             // 
             // otherToolStripMenuItem
             // 
@@ -2707,14 +2718,12 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // menuItemRevertQuery
+            // menuItemViewAllPastebins
             // 
-            this.menuItemRevertQuery.Name = "menuItemRevertQuery";
-            this.menuItemRevertQuery.ShortcutKeyDisplayString = "(Ctrl + R)";
-            this.menuItemRevertQuery.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.menuItemRevertQuery.Size = new System.Drawing.Size(257, 22);
-            this.menuItemRevertQuery.Text = "Execute a revert query";
-            this.menuItemRevertQuery.Click += new System.EventHandler(this.menuItemRevertQuery_Click);
+            this.menuItemViewAllPastebins.Name = "menuItemViewAllPastebins";
+            this.menuItemViewAllPastebins.Size = new System.Drawing.Size(257, 22);
+            this.menuItemViewAllPastebins.Text = "View all pastebins";
+            this.menuItemViewAllPastebins.Click += new System.EventHandler(this.menuItemViewAllPastebins_Click);
             // 
             // MainForm
             // 
@@ -3002,6 +3011,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemReportIssue;
         private System.Windows.Forms.ToolStripMenuItem menuItemGiveFeedback;
         private System.Windows.Forms.ToolStripMenuItem menuItemRevertQuery;
+        private System.Windows.Forms.ToolStripMenuItem menuItemViewAllPastebins;
     }
 }
 

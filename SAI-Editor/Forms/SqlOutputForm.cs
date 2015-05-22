@@ -216,6 +216,11 @@ namespace SAI_Editor.Forms
                         SAI_Editor_Manager.Instance.StartProcess(responseFromServer);
                     else
                         Clipboard.SetText(responseFromServer);
+
+                    //! Save pastebin to the settings.
+                    //! Format: link-name;
+                    Settings.Default.PastebinLinksStore += responseFromServer + "|" + pasteName + ";";
+                    Settings.Default.Save();
                 }
                 else
                     MessageBox.Show("Something went wrong with uploading to pastebin.com.", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
