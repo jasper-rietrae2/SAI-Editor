@@ -142,7 +142,7 @@ namespace SAI_Editor.Classes
                     states.Add(group.Key, state);
                 }
             }
-            catch (JsonReaderException)
+            catch (Exception)
             {
 
             }
