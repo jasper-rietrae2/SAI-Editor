@@ -370,5 +370,29 @@ namespace SAI_Editor.Properties {
                 this["PastebinLinksStore"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastFormExtraWidth {
+            get {
+                return ((int)(this["LastFormExtraWidth"]));
+            }
+            set {
+                this["LastFormExtraWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int LastFormExtraHeight {
+            get {
+                return ((int)(this["LastFormExtraHeight"]));
+            }
+            set {
+                this["LastFormExtraHeight"] = value;
+            }
+        }
     }
 }

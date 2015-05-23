@@ -3210,9 +3210,9 @@ namespace SAI_Editor
             contractingListView = !expand;
 
             if (expand)
-                customObjectListViewHeightToChangeTo = customObjectListView.Height + (int)FormSizes.ListViewHeightContract;
+                customObjectListViewHeightToChangeTo = customObjectListView.Height + (int)SaiEditorSizes.ListViewHeightContract;
             else
-                customObjectListViewHeightToChangeTo = customObjectListView.Height - (int)FormSizes.ListViewHeightContract;
+                customObjectListViewHeightToChangeTo = customObjectListView.Height - (int)SaiEditorSizes.ListViewHeightContract;
 
             timerShowStaticTooltips.Enabled = true;
             checkBoxUseStaticTooltips.Checked = !expand;
@@ -3222,12 +3222,12 @@ namespace SAI_Editor
             {
                 panelStaticTooltipTypes.Visible = false;
                 panelStaticTooltipParameters.Visible = false;
-                customObjectListViewHeightToChangeTo = customObjectListView.Height + (int)FormSizes.ListViewHeightContract;
+                customObjectListViewHeightToChangeTo = customObjectListView.Height + (int)SaiEditorSizes.ListViewHeightContract;
                 ChangeParameterFieldsBasedOnType();
             }
             else
             {
-                customObjectListViewHeightToChangeTo = customObjectListView.Height - (int)FormSizes.ListViewHeightContract;
+                customObjectListViewHeightToChangeTo = customObjectListView.Height - (int)SaiEditorSizes.ListViewHeightContract;
                 //ChangeParameterFieldsBasedOnType();
             }
         }

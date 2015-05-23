@@ -17,7 +17,7 @@ namespace SAI_Editor.Enumerators
         ExpansionWod,
     }
 
-    internal enum FormSizes
+    internal enum SaiEditorSizes
     {
         LoginFormWidth = 403,
         LoginFormHeight = 236,
@@ -25,9 +25,14 @@ namespace SAI_Editor.Enumerators
         MainFormWidth = 969,
         MainFormHeight = 541,
 
+        TabControlWorkspaceWidth = 934,
+        TabControlWorkspaceHeight = 466,
+
         ListViewHeightContract = 65,
 
         LoginFormHeightShowWarning = 309,
+
+        StaticTooltipsPadding = 17,
     }
 
     public enum SourceTypes

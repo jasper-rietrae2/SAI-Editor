@@ -29,8 +29,8 @@ namespace SAI_Editor.Forms
         public int expandAndContractSpeed = 5, lastSelectedWorkspaceIndex = 0;
         public bool runningConstructor = false;
         private bool contractingToLoginForm = false, expandingToMainForm = false, adjustedLoginSettings = false;
-        private int originalHeight = 0, originalWidth = 0;
-        private int MainFormWidth = (int)FormSizes.MainFormWidth, MainFormHeight = (int)FormSizes.MainFormHeight;
+        private int originalHeight = 0, originalWidth = 0, oldWidthTabControlWorkspaces = 0, oldHeightTabControlWorkspaces = 0;
+        private int MainFormWidth = (int)SaiEditorSizes.MainFormWidth, MainFormHeight = (int)SaiEditorSizes.MainFormHeight;
         private List<SmartScript> lastDeletedSmartScripts = new List<SmartScript>(), smartScriptsOnClipBoard = new List<SmartScript>();
         private Thread updateSurveyThread = null, checkIfUpdatesAvailableThread = null;
         private string applicationVersion = String.Empty;
@@ -62,11 +62,17 @@ namespace SAI_Editor.Forms
             //imgList.TransparentColor = Color.White;
             //pictureBoxDonate.Image = imgList.Images[0];
 
-            Width = (int)FormSizes.LoginFormWidth;
-            Height = (int)FormSizes.LoginFormHeight;
+            Width = (int)SaiEditorSizes.LoginFormWidth;
+            Height = (int)SaiEditorSizes.LoginFormHeight;
 
             originalHeight = Height;
             originalWidth = Width;
+
+            if (Settings.Default.LastFormExtraWidth > 0)
+                MainFormWidth += Settings.Default.LastFormExtraWidth;
+
+            if (Settings.Default.LastFormExtraHeight > 0)
+                MainFormHeight += Settings.Default.LastFormExtraHeight;
 
             if (MainFormWidth > SystemInformation.VirtualScreen.Width)
                 MainFormWidth = SystemInformation.VirtualScreen.Width;
@@ -418,7 +424,6 @@ namespace SAI_Editor.Forms
                         Width = MainFormWidth;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
-                        SAI_Editor_Manager.Instance.FormState = FormState.FormStateMain;
                         FinishedExpandingOrContracting(true);
                     }
                 }
@@ -439,7 +444,6 @@ namespace SAI_Editor.Forms
                         Height = MainFormHeight;
                         timerExpandOrContract.Enabled = false;
                         expandingToMainForm = false;
-                        SAI_Editor_Manager.Instance.FormState = FormState.FormStateMain;
                         FinishedExpandingOrContracting(true);
                     }
                 }
@@ -457,7 +461,6 @@ namespace SAI_Editor.Forms
                         Width = originalWidth;
                         timerExpandOrContract.Enabled = false;
                         contractingToLoginForm = false;
-                        SAI_Editor_Manager.Instance.FormState = FormState.FormStateLogin;
                         FinishedExpandingOrContracting(false);
                     }
                 }
@@ -473,7 +476,6 @@ namespace SAI_Editor.Forms
                         Height = originalHeight;
                         timerExpandOrContract.Enabled = false;
                         contractingToLoginForm = false;
-                        SAI_Editor_Manager.Instance.FormState = FormState.FormStateLogin;
                         FinishedExpandingOrContracting(false);
                     }
                 }
@@ -575,7 +577,6 @@ namespace SAI_Editor.Forms
             {
                 Width = MainFormWidth;
                 Height = MainFormHeight;
-                SAI_Editor_Manager.Instance.FormState = FormState.FormStateMain;
                 FinishedExpandingOrContracting(true);
             }
             else
@@ -603,13 +604,12 @@ namespace SAI_Editor.Forms
             SetFormTitle("SAI-Editor " + applicationVersion + ": Login");
 
             if (Settings.Default.ShowTooltipsStaticly)
-                userControl.ListView.Height += (int)FormSizes.ListViewHeightContract;
+                userControl.ListView.Height += (int)SaiEditorSizes.ListViewHeightContract;
 
             if (instant)
             {
                 Width = originalWidth;
                 Height = originalHeight;
-                SAI_Editor_Manager.Instance.FormState = FormState.FormStateLogin;
                 FinishedExpandingOrContracting(false);
             }
             else
@@ -679,15 +679,20 @@ namespace SAI_Editor.Forms
 
         private void FinishedExpandingOrContracting(bool expanding)
         {
+            SAI_Editor_Manager.Instance.FormState = expanding ? FormState.FormStateMain : FormState.FormStateLogin;
             customPanelLogin.Visible = !expanding;
             tabControlWorkspaces.Visible = expanding;
             menuStrip.Visible = expanding;
             pictureBoxDonate.Visible = expanding;
-            pictureBoxDonate.Visible = expanding;
             Invalidate();
 
             if (!expanding)
-                HandleHeightLoginFormBasedOnuseDatabaseSetting();
+                SetHeightLoginFormBasedOnSetting();
+
+            int width = (int)SaiEditorSizes.TabControlWorkspaceWidth + MainFormWidth - (int)SaiEditorSizes.MainFormWidth;
+            int height = (int)SaiEditorSizes.TabControlWorkspaceHeight + MainFormHeight - (int)SaiEditorSizes.MainFormHeight;
+            tabControlWorkspaces.Size = new Size(width, height);
+            HandleTabControlWorkspacesResized();
 
             userControl.panelStaticTooltipTypes.Visible = false;
             userControl.panelStaticTooltipParameters.Visible = false;
@@ -823,6 +828,13 @@ namespace SAI_Editor.Forms
             if (adjustedLoginSettings)
                 SaveLastUsedFields();
 
+            if (SAI_Editor_Manager.Instance.FormState == FormState.FormStateMain)
+            {
+                Settings.Default.LastFormExtraWidth = Width - (int)SaiEditorSizes.MainFormWidth;
+                Settings.Default.LastFormExtraHeight = Height - (int)SaiEditorSizes.MainFormHeight;
+                Settings.Default.Save();
+            }
+
             if (updateSurveyThread != null)
                 updateSurveyThread.Abort();
         }
@@ -926,22 +938,22 @@ namespace SAI_Editor.Forms
             buttonSearchWorldDb.Enabled = radioButtonConnectToMySql.Checked;
             labelDontUseDatabaseWarning.Visible = !radioButtonConnectToMySql.Checked;
 
-            HandleHeightLoginFormBasedOnuseDatabaseSetting();
+            SetHeightLoginFormBasedOnSetting();
         }
 
-        private void HandleHeightLoginFormBasedOnuseDatabaseSetting()
+        private void SetHeightLoginFormBasedOnSetting()
         {
             if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
             {
                 if (radioButtonConnectToMySql.Checked)
                 {
-                    MaximumSize = new Size((int)FormSizes.MainFormWidth, (int)FormSizes.MainFormHeight);
-                    Height = (int)FormSizes.LoginFormHeight;
+                    MaximumSize = new Size((int)SaiEditorSizes.MainFormWidth, (int)SaiEditorSizes.MainFormHeight);
+                    Height = (int)SaiEditorSizes.LoginFormHeight;
                 }
                 else
                 {
-                    MaximumSize = new Size((int)FormSizes.MainFormWidth, (int)FormSizes.MainFormHeight);
-                    Height = (int)FormSizes.LoginFormHeightShowWarning;
+                    MaximumSize = new Size((int)SaiEditorSizes.MainFormWidth, (int)SaiEditorSizes.MainFormHeight);
+                    Height = (int)SaiEditorSizes.LoginFormHeightShowWarning;
                 }
             }
         }
@@ -1289,9 +1301,12 @@ namespace SAI_Editor.Forms
             userControl.States.RemoveAt(e.TabPageIndex);
         }
 
-        int oldWidthTabControlWorkspaces = 0, oldHeightTabControlWorkspaces = 0;
-
         private void tabControlWorkspaces_SizeChanged(object sender, EventArgs e)
+        {
+            HandleTabControlWorkspacesResized();
+        }
+
+        private void HandleTabControlWorkspacesResized()
         {
             //! This happens on Windows 7 when minimizing for some reason
             if (tabControlWorkspaces.Width == 0 && tabControlWorkspaces.Height == 0)
@@ -1303,22 +1318,25 @@ namespace SAI_Editor.Forms
             if (oldHeightTabControlWorkspaces == 0)
                 oldHeightTabControlWorkspaces = tabControlWorkspaces.Height;
 
-            if (oldWidthTabControlWorkspaces == tabControlWorkspaces.Width && oldHeightTabControlWorkspaces == tabControlWorkspaces.Height)
-                return;
+            SynchronizeSizeOfUserControlAndListView();
+        }
 
+        private void SynchronizeSizeOfUserControlAndListView()
+        {
             userControl.Width = tabControlWorkspaces.Width;
             userControl.Height = tabControlWorkspaces.Height;
 
-            int contractHeightFromTabControl = 252, contractWidthFromTabControl = 17; //! Not sure why but height is really off...
+            //! Not sure why but height is really off...
+            int contractHeightFromTabControl = 252, contractWidthFromTabControl = (int)SaiEditorSizes.StaticTooltipsPadding;
 
             if (userControl.checkBoxUseStaticTooltips.Checked)
-                contractHeightFromTabControl += 60 + 9; //! Height of two panels plus some extra marging
+                contractHeightFromTabControl += 60 + 9; //! Height of two panels plus some extra padding
 
             userControl.ListView.Width = tabControlWorkspaces.Width - contractWidthFromTabControl;
             userControl.ListView.Height = tabControlWorkspaces.Height - contractHeightFromTabControl;
 
-            userControl.panelStaticTooltipTypes.Width = tabControlWorkspaces.Width - 17;
-            userControl.panelStaticTooltipParameters.Width = tabControlWorkspaces.Width - 17;
+            userControl.panelStaticTooltipTypes.Width = tabControlWorkspaces.Width - (int)SaiEditorSizes.StaticTooltipsPadding;
+            userControl.panelStaticTooltipParameters.Width = tabControlWorkspaces.Width - (int)SaiEditorSizes.StaticTooltipsPadding;
 
             int increaseY = tabControlWorkspaces.Height - oldHeightTabControlWorkspaces;
             userControl.panelStaticTooltipTypes.Location = new Point(userControl.panelStaticTooltipTypes.Location.X, userControl.panelStaticTooltipTypes.Location.Y + increaseY);
