@@ -90,6 +90,12 @@ namespace SAI_Editor.Forms
 
             customPanelLogin.Location = new Point(9, 8);
 
+            if (oldWidthTabControlWorkspaces == 0)
+                oldWidthTabControlWorkspaces = (int)SaiEditorSizes.TabControlWorkspaceWidth;
+
+            if (oldHeightTabControlWorkspaces == 0)
+                oldHeightTabControlWorkspaces = (int)SaiEditorSizes.TabControlWorkspaceHeight;
+
             //! We first load the information and then change the parameter fields
             await SAI_Editor_Manager.Instance.LoadSQLiteDatabaseInfo();
 
@@ -693,15 +699,6 @@ namespace SAI_Editor.Forms
             int height = (int)SaiEditorSizes.TabControlWorkspaceHeight + MainFormHeight - (int)SaiEditorSizes.MainFormHeight;
             tabControlWorkspaces.Size = new Size(width, height);
             HandleTabControlWorkspacesResized();
-
-            userControl.panelStaticTooltipTypes.Visible = false;
-            userControl.panelStaticTooltipParameters.Visible = false;
-            userControl.checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
-            userControl.checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
-            userControl.checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
-            userControl.checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
-            userControl.checkBoxUsePhaseColors.Checked = Settings.Default.PhaseHighlighting;
-            userControl.checkBoxUseStaticTooltips.Checked = Settings.Default.ShowTooltipsStaticly;
 
             userControl.FinishedExpandingOrContracting(expanding);
 
@@ -1311,12 +1308,6 @@ namespace SAI_Editor.Forms
             //! This happens on Windows 7 when minimizing for some reason
             if (tabControlWorkspaces.Width == 0 && tabControlWorkspaces.Height == 0)
                 return;
-
-            if (oldWidthTabControlWorkspaces == 0)
-                oldWidthTabControlWorkspaces = tabControlWorkspaces.Width;
-
-            if (oldHeightTabControlWorkspaces == 0)
-                oldHeightTabControlWorkspaces = tabControlWorkspaces.Height;
 
             SynchronizeSizeOfUserControlAndListView();
         }

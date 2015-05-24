@@ -3182,6 +3182,15 @@ namespace SAI_Editor
 
         public void FinishedExpandingOrContracting(bool expanding)
         {
+            panelStaticTooltipTypes.Visible = expanding && Settings.Default.ShowTooltipsStaticly;
+            panelStaticTooltipParameters.Visible = expanding && Settings.Default.ShowTooltipsStaticly;
+            checkBoxShowBasicInfo.Checked = Settings.Default.ShowBasicInfo;
+            checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
+            checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
+            checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
+            checkBoxUsePhaseColors.Checked = Settings.Default.PhaseHighlighting;
+            checkBoxUseStaticTooltips.Checked = Settings.Default.ShowTooltipsStaticly;
+
             if (expanding)
             {
                 if (checkBoxUseStaticTooltips.Checked)
