@@ -23,7 +23,7 @@ namespace SAI_Editor.Enumerators
         LoginFormHeight = 236,
 
         MainFormWidth = 969,
-        MainFormHeight = 541,
+        MainFormHeight = 542,
 
         TabControlWorkspaceWidth = 934,
         TabControlWorkspaceHeight = 466,

@@ -414,11 +414,14 @@ namespace SAI_Editor.Forms
         {
             if (expandingToMainForm)
             {
+                MaximumSize = new Size(0, 0);
+                MinimumSize = new Size(0, 0);
+
                 if (Height < MainFormHeight)
                 {
                     Height += expandAndContractSpeed;
 
-                    if (Height >= MainFormHeight)
+                    if (Height > MainFormHeight)
                         timerExpandOrContract_Tick(sender, e);
                 }
                 else
@@ -438,7 +441,7 @@ namespace SAI_Editor.Forms
                 {
                     Width += expandAndContractSpeed;
 
-                    if (Width >= MainFormWidth)
+                    if (Width > MainFormWidth)
                         timerExpandOrContract_Tick(sender, e);
                 }
                 else
