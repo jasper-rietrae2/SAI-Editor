@@ -230,5 +230,13 @@ namespace SAI_Editor.Forms
                 MessageBox.Show(ex.Message, "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void buttonViewPastebins_Click(object sender, EventArgs e)
+        {
+            Close();
+
+            using (ViewAllPastebinsForm viewAllPastebinsForm = new ViewAllPastebinsForm())
+                viewAllPastebinsForm.ShowDialog(this);
+        }
     }
 }
