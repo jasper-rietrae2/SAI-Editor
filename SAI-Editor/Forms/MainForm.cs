@@ -705,6 +705,8 @@ namespace SAI_Editor.Forms
             SetSizable(expanding);
 
             Update();
+
+            HandleTabControlWorkspacesResized(true);
         }
 
         private void menuItemExit_Click(object sender, System.EventArgs e)
@@ -1300,19 +1302,19 @@ namespace SAI_Editor.Forms
 
         private void tabControlWorkspaces_SizeChanged(object sender, EventArgs e)
         {
-            HandleTabControlWorkspacesResized();
+            HandleTabControlWorkspacesResized(true);
         }
 
-        private void HandleTabControlWorkspacesResized()
+        private void HandleTabControlWorkspacesResized(bool fromResize = false)
         {
             //! This happens on Windows 7 when minimizing for some reason
             if (tabControlWorkspaces.Width == 0 && tabControlWorkspaces.Height == 0)
                 return;
 
-            SynchronizeSizeOfUserControlAndListView();
+            SynchronizeSizeOfUserControlAndListView(fromResize);
         }
 
-        private void SynchronizeSizeOfUserControlAndListView()
+        private void SynchronizeSizeOfUserControlAndListView(bool fromResize = false)
         {
             userControl.Width = tabControlWorkspaces.Width;
             userControl.Height = tabControlWorkspaces.Height;
@@ -1320,8 +1322,8 @@ namespace SAI_Editor.Forms
             //! Not sure why but height is really off...
             int contractHeightFromTabControl = 252, contractWidthFromTabControl = (int)SaiEditorSizes.StaticTooltipsPadding;
 
-            if (userControl.checkBoxUseStaticTooltips.Checked)
-                contractHeightFromTabControl += 60 + 9; //! Height of two panels plus some extra padding
+            if (fromResize && userControl.checkBoxUseStaticTooltips.Checked)
+                contractHeightFromTabControl += 60 + 12; //! Height of two panels plus some extra padding
 
             userControl.ListView.Width = tabControlWorkspaces.Width - contractWidthFromTabControl;
             userControl.ListView.Height = tabControlWorkspaces.Height - contractHeightFromTabControl;
