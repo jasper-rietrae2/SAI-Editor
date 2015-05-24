@@ -3,24 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Newtonsoft.Json;
+using SAI_Editor.Classes.Database.Classes;
 
 namespace SAI_Editor.Classes.Serialization
 {
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
-    public class StateObject
+    [JsonObject]
+    public class ScriptContainer
     {
-        public object ControlValue { get; set; }
-
         [JsonProperty]
-        public string Key { get; set; }
+        public string TypeName { get; set; }
 
         [JsonProperty]
         public object Value { get; set; }
-
-        [JsonProperty]
-        public bool IsList { get; set; }
 
     }
 }

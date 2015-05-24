@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SAI_Editor.Classes.CustomControls;
+using SAI_Editor.Classes.Database.Classes;
 using SAI_Editor.Classes.Serialization;
 using SAI_Editor.Classes.State;
 
@@ -57,14 +58,13 @@ namespace SAI_Editor.Classes
             states.Add(new ControlState<CheckBox>((d, c) => d[c] = ((CheckBox)c).Checked, (c, o) => ((CheckBox)c).Checked = (bool)Convert.ChangeType(o, typeof(bool))));
             states.Add(new ControlState<CustomObjectListView>((d, c) =>
             {
-                d[c] = ((CustomObjectListView)c).List;
+                d[c] = new List<DatabaseClass>(((CustomObjectListView)c).List.Scripts);
             }, (c, o) =>
             {
                 CustomObjectListView listView = (CustomObjectListView)c;
-                CList list = (CList)o;
+                var scripts = (List<DatabaseClass>)o;
 
-                listView.List = (CList)list.Clone();
-                list.Apply();
+                listView.List.ReplaceScripts(scripts);
             }));
 
             StatesByType = states.ToDictionary(p => p.ControlType);
@@ -131,20 +131,44 @@ namespace SAI_Editor.Classes
 
                     foreach (var g in group)
                     {
-                        //! TODO
                         if (g.Control is CustomObjectListView)
-                            continue;
+                        {
+                            var scripts = new List<DatabaseClass>();
 
-                        state.Controls.Add(g.Control, g.State.Value);
+                            var arr = JArray.FromObject(g.State.Value);
+
+                            var containers = arr.ToObject<List<ScriptContainer>>();
+
+                            foreach (var container in containers)
+                            {
+                                Type sType = Type.GetType(container.TypeName);
+
+                                try
+                                {
+                                    var dc = (DatabaseClass)JObject.FromObject(container.Value).ToObject(sType);
+                                    
+                                    scripts.Add(dc);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
+                            }
+
+                            state.Controls.Add(g.Control, scripts);
+                        }
+                        else
+                        {
+                            state.Controls.Add(g.Control, g.State.Value);
+                        }
                     }
-
-                    //state.Save(controls);
+                    
                     states.Add(group.Key, state);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex);
             }
 
             return states;
@@ -236,8 +260,8 @@ namespace SAI_Editor.Classes
             foreach (var kvp in Controls)
             {
                 //! TODO
-                if (kvp.Key is CustomObjectListView)
-                    continue;
+                //if (kvp.Key is CustomObjectListView)
+                //    continue;
 
                 objs.Add(new StateObject { Key = kvp.Key.Name, ControlValue = kvp.Value });
             }

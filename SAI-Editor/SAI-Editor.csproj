@@ -111,6 +111,7 @@
     <Compile Include="Classes\CustomConverter.cs" />
     <Compile Include="Classes\SAIUserControlState.cs" />
     <Compile Include="Classes\Serialization\CustomStateSerializer.cs" />
+    <Compile Include="Classes\Serialization\ScriptContainer.cs" />
     <Compile Include="Classes\Serialization\StateObject.cs" />
     <Compile Include="Classes\SmartScriptList.cs" />
     <Compile Include="Classes\State\ControlState.cs" />

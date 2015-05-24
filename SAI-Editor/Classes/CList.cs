@@ -11,7 +11,6 @@ using SAI_Editor.Classes.Database.Classes;
 
 namespace SAI_Editor.Classes
 {
-    [JsonObject(MemberSerialization = MemberSerialization.OptIn)]
     public abstract class CList : ICloneable
     {
         public List<DatabaseClass> Scripts { get; protected set; }
@@ -169,7 +168,7 @@ namespace SAI_Editor.Classes
 
         public virtual void ReplaceScripts(List<DatabaseClass> scripts)
         {
-            Scripts = scripts;
+            Scripts = scripts.ToList();
             Apply();
         }
 
