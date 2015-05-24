@@ -2194,6 +2194,9 @@ namespace SAI_Editor
 
         private async void textBoxLinkFrom_TextChanged(object sender, EventArgs e)
         {
+            if (ListViewList.SelectedScript == null)
+                return;
+
             int newLinkFrom = 0;// CustomConverter.ToInt32(textBoxLinkFrom.Text);
 
             try
