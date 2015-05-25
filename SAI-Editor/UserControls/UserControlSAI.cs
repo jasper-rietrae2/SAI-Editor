@@ -3176,11 +3176,10 @@ namespace SAI_Editor
             }
         }
 
-        public void customObjectListView_MouseClick(object sender, MouseEventArgs e)
+        private void customObjectListView_CellRightClick(object sender, BrightIdeasSoftware.CellRightClickEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-                if (customObjectListView.FocusedItem.Bounds.Contains(e.Location))
-                    MainForm.contextMenuStripListView.Show(Cursor.Position);
+            if (customObjectListView.FocusedItem.Bounds.Contains(e.Location))
+                MainForm.contextMenuStripListView.Show(Cursor.Position);
         }
 
         public void ExpandOrContractToShowStaticTooltips(bool expand)

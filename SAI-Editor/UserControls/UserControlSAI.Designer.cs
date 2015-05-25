@@ -1661,6 +1661,7 @@
             this.customObjectListView.VirtualMode = true;
             this.customObjectListView.ItemSelectionChanged += customObjectListView_ItemSelectionChanged;
             this.customObjectListView.MultiSelect = false;
+            this.customObjectListView.CellRightClick += customObjectListView_CellRightClick;
             // 
             // UserControlSAI
             // 
