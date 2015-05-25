@@ -590,7 +590,7 @@ namespace SAI_Editor.Forms
             }
             else
             {
-                SAI_Editor_Manager.Instance.FormState = FormState.FormStateExpandingOrContracting;
+                SAI_Editor_Manager.FormState = FormState.FormStateExpandingOrContracting;
                 timerExpandOrContract.Enabled = true;
                 expandingToMainForm = true;
             }
@@ -623,7 +623,7 @@ namespace SAI_Editor.Forms
             }
             else
             {
-                SAI_Editor_Manager.Instance.FormState = FormState.FormStateExpandingOrContracting;
+                SAI_Editor_Manager.FormState = FormState.FormStateExpandingOrContracting;
                 timerExpandOrContract.Enabled = true;
                 contractingToLoginForm = true;
             }
@@ -654,7 +654,7 @@ namespace SAI_Editor.Forms
             switch (e.KeyCode)
             {
                 case Keys.Enter:
-                    switch (SAI_Editor_Manager.Instance.FormState)
+                    switch (SAI_Editor_Manager.FormState)
                     {
                         case FormState.FormStateLogin:
                             buttonConnect.PerformClick();
@@ -668,7 +668,7 @@ namespace SAI_Editor.Forms
 
         private void menuItemReconnect_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || userControl.contractingListView || userControl.expandingListView)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain || userControl.contractingListView || userControl.expandingListView)
                 return;
 
             for (int i = 0; i < Application.OpenForms.Count; ++i)
@@ -688,7 +688,7 @@ namespace SAI_Editor.Forms
 
         private void FinishedExpandingOrContracting(bool expanding)
         {
-            SAI_Editor_Manager.Instance.FormState = expanding ? FormState.FormStateMain : FormState.FormStateLogin;
+            SAI_Editor_Manager.FormState = expanding ? FormState.FormStateMain : FormState.FormStateLogin;
             customPanelLogin.Visible = !expanding;
             tabControlWorkspaces.Visible = expanding;
             menuStrip.Visible = expanding;
@@ -714,7 +714,7 @@ namespace SAI_Editor.Forms
 
         private void menuItemExit_Click(object sender, System.EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState == FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState == FormState.FormStateMain)
                 TryCloseApplication();
         }
 
@@ -726,7 +726,7 @@ namespace SAI_Editor.Forms
 
         private void menuItemSettings_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain)
                 return;
 
             using (SettingsForm settingsForm = new SettingsForm())
@@ -735,7 +735,7 @@ namespace SAI_Editor.Forms
 
         private void menuItemAbout_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain)
                 return;
 
             using (AboutForm aboutForm = new AboutForm())
@@ -746,7 +746,7 @@ namespace SAI_Editor.Forms
         {
             CustomObjectListView listViewSmartScripts = userControl.ListView;
 
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
                 return;
 
             if (listViewSmartScripts.SelectedItems.Count <= 0)
@@ -762,7 +762,7 @@ namespace SAI_Editor.Forms
         {
             CustomObjectListView listViewSmartScripts = userControl.ListView;
 
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
                 return;
 
             smartScriptsOnClipBoard.Add(((SmartScriptList)listViewSmartScripts.List).SelectedScript.Clone());
@@ -772,7 +772,7 @@ namespace SAI_Editor.Forms
         {
             CustomObjectListView listViewSmartScripts = userControl.ListView;
 
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
                 return;
 
             if (smartScriptsOnClipBoard.Count <= 0)
@@ -811,7 +811,7 @@ namespace SAI_Editor.Forms
 
         private async void generateSQLToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain)
                 return;
 
             using (SqlOutputForm sqlOutputForm = new SqlOutputForm(await userControl.GenerateSmartAiSqlFromListView(), true, await userControl.GenerateSmartAiRevertQuery()))
@@ -830,7 +830,7 @@ namespace SAI_Editor.Forms
             if (adjustedLoginSettings)
                 SaveLastUsedFields();
 
-            if (SAI_Editor_Manager.Instance.FormState == FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState == FormState.FormStateMain)
             {
                 Settings.Default.LastFormExtraWidth = Width - (int)SaiEditorSizes.MainFormWidth;
                 Settings.Default.LastFormExtraHeight = Height - (int)SaiEditorSizes.MainFormHeight;
@@ -869,7 +869,7 @@ namespace SAI_Editor.Forms
 
             Settings.Default.LastStaticInfoPerTab = JsonConvert.SerializeObject(new { Workspaces = objs }, Formatting.Indented);
 
-            if (SAI_Editor_Manager.Instance.FormState == FormState.FormStateLogin)
+            if (SAI_Editor_Manager.FormState == FormState.FormStateLogin)
             {
                 RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
                 byte[] buffer = new byte[1024];
@@ -892,7 +892,7 @@ namespace SAI_Editor.Forms
 
         private void menuItemRevertQuery_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain)
                 return;
 
             using (RevertQueryForm revertQueryForm = new RevertQueryForm())
@@ -901,7 +901,7 @@ namespace SAI_Editor.Forms
 
         private async void menuItemGenerateCommentListView_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain || !Settings.Default.UseWorldDatabase)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain || !Settings.Default.UseWorldDatabase)
                 return;
 
             await userControl.GenerateCommentListView();
@@ -909,7 +909,7 @@ namespace SAI_Editor.Forms
 
         private void menuItemDuplicateSelectedRow_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain)
                 return;
 
             userControl.DuplicateSelectedRow();
@@ -945,7 +945,7 @@ namespace SAI_Editor.Forms
 
         private void SetHeightLoginFormBasedOnSetting()
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain)
             {
                 if (radioButtonConnectToMySql.Checked)
                 {
@@ -1120,7 +1120,7 @@ namespace SAI_Editor.Forms
 
         private void conditionEditorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain)
                 return;
 
             foreach (Form form in Application.OpenForms)
@@ -1291,7 +1291,7 @@ namespace SAI_Editor.Forms
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain)
                 return;
 
             using (SettingsForm settingsForm = new SettingsForm())
@@ -1360,7 +1360,7 @@ namespace SAI_Editor.Forms
 
         private void menuItemViewAllPastebins_Click(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain)
                 return;
 
             using (ViewAllPastebinsForm viewAllPastebinsForm = new ViewAllPastebinsForm())

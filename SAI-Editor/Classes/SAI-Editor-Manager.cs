@@ -100,7 +100,7 @@ namespace SAI_Editor.Classes
         public List<ActionTypeInformation> actionTypeInformations;
         public List<TargetTypeInformation> targetTypeInformations;
 
-        public FormState FormState = FormState.FormStateLogin;
+        public static FormState FormState = FormState.FormStateLogin;
 
         public MySqlConnectionStringBuilder connString;
 
