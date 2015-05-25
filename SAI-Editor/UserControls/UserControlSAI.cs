@@ -20,6 +20,7 @@ using System.Threading;
 using System.Runtime.InteropServices;
 using SAI_Editor.Classes.CustomControls;
 using SAI_Editor.Forms;
+using BrightIdeasSoftware;
 
 namespace SAI_Editor
 {
@@ -508,8 +509,7 @@ namespace SAI_Editor
                     }
                 }
 
-                foreach (ColumnHeader header in customObjectListView.Columns)
-                    header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                ResizeColumns();
             }
             catch
             {
@@ -2533,7 +2533,7 @@ namespace SAI_Editor
                     case SourceTypes.SourceTypeCreature:
                         if (!Settings.Default.UseWorldDatabase)
                         {
-                            generatedSql += "-- No changes to the AIName were made as there is no world database connection.\n";
+                            generatedSql += "-- No changes to the AIName were made because there is no world database connection.\n";
                             break;
                         }
 
@@ -2549,7 +2549,7 @@ namespace SAI_Editor
                     case SourceTypes.SourceTypeGameobject:
                         if (!Settings.Default.UseWorldDatabase)
                         {
-                            generatedSql += "-- No changes to the AIName were made as there is no world database connection.\n";
+                            generatedSql += "-- No changes to the AIName were made because there is no world database connection.\n";
                             break;
                         }
 
@@ -2599,7 +2599,7 @@ namespace SAI_Editor
                                 {
                                     if (!Settings.Default.UseWorldDatabase)
                                     {
-                                        generatedSql += "-- No changes to the AIName were made as there is no world database connection.";
+                                        generatedSql += "-- No changes to the AIName were made because there is no world database connection.";
                                         break;
                                     }
 
@@ -2882,7 +2882,7 @@ namespace SAI_Editor
 
         public void ResizeColumns()
         {
-            foreach (ColumnHeader header in customObjectListView.Columns)
+            foreach (OLVColumn header in customObjectListView.AllColumns)
                 header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 

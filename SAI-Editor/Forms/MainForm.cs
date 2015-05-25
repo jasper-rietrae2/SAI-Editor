@@ -944,6 +944,9 @@ namespace SAI_Editor.Forms
             buttonSearchWorldDb.Enabled = radioButtonConnectToMySql.Checked;
             labelDontUseDatabaseWarning.Visible = !radioButtonConnectToMySql.Checked;
 
+            Settings.Default.UseWorldDatabase = radioButtonConnectToMySql.Checked;
+            Settings.Default.Save();
+
             SetHeightLoginFormBasedOnSetting();
         }
 
