@@ -979,6 +979,8 @@ namespace SAI_Editor.Forms
 
             menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
             menuItemGenerateComment.Enabled = userControl.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+            menuItemGenerateCommentListView.Enabled = Settings.Default.UseWorldDatabase;
+            menuItemLoadSelectedEntryListView.Enabled = Settings.Default.UseWorldDatabase;
             searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
             searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
             searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
