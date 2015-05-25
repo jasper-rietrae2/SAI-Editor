@@ -27,7 +27,6 @@ namespace SAI_Editor
     {
         public int lastSmartScriptIdOfScript = 0, previousLinkFrom = -1;
         public EntryOrGuidAndSourceType originalEntryOrGuidAndSourceType = new EntryOrGuidAndSourceType();
-        private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private bool updatingFieldsBasedOnSelectedScript = false;
         public bool expandingListView = false, contractingListView = false;
         public const int expandAndContractSpeedListView = 2;
@@ -1284,7 +1283,9 @@ namespace SAI_Editor
 
             if (customObjectListView.Items.Count > 0)
             {
-                SortListView(SortOrder.Ascending, 1);
+                if (customObjectListView.AllColumns.Count > 0)
+                    customObjectListView.Sort(customObjectListView.AllColumns.ElementAt(1), SortOrder.Ascending);
+
                 customObjectListView.Items[0].Selected = true;
                 customObjectListView.Select(); //! Sets the focus on the listview
 
@@ -1317,37 +1318,6 @@ namespace SAI_Editor
         public void buttonSelectEventFlag_Click(object sender, EventArgs e)
         {
             ShowSelectForm("SmartEventFlags", textBoxEventFlags);
-        }
-
-        public void customObjectListView_ColumnClick(object sender, ColumnClickEventArgs e)
-        {
-            //! Don't use the SortListView method here
-            customObjectListView.ListViewItemSorter = lvwColumnSorter;
-
-            if (e.Column != lvwColumnSorter.SortColumn)
-            {
-                lvwColumnSorter.SortColumn = e.Column;
-                lvwColumnSorter.Order = SortOrder.Ascending;
-            }
-            else
-                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
-
-            customObjectListView.Sort();
-        }
-
-        public void SortListView(SortOrder order, int column)
-        {
-            customObjectListView.ListViewItemSorter = lvwColumnSorter;
-
-            if (column != lvwColumnSorter.SortColumn)
-            {
-                lvwColumnSorter.SortColumn = column;
-                lvwColumnSorter.Order = order != SortOrder.None ? order : SortOrder.Ascending;
-            }
-            else
-                lvwColumnSorter.Order = order != SortOrder.None ? order : SortOrder.Ascending;
-
-            customObjectListView.Sort();
         }
 
         private ListView.ListViewItemCollection GetItemsBasedOnSelection(ListView listView)
