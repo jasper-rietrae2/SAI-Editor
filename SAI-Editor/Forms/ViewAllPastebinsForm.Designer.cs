@@ -50,6 +50,7 @@
             this.listViewPastebins.UseCompatibleStateImageBehavior = false;
             this.listViewPastebins.View = System.Windows.Forms.View.Details;
             this.listViewPastebins.SelectedIndexChanged += new System.EventHandler(this.listViewPastebins_SelectedIndexChanged);
+            this.listViewPastebins.DoubleClick += new System.EventHandler(this.listViewPastebins_DoubleClick);
             // 
             // columnHeaderName
             // 

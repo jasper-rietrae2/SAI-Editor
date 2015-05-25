@@ -61,10 +61,20 @@ namespace SAI_Editor.Forms
 
         private void buttonVisitSelectedPastebin_Click(object sender, EventArgs e)
         {
+            VisitSelectedPastebin();
+        }
+
+        private void VisitSelectedPastebin()
+        {
             if (listViewPastebins.SelectedItems.Count == 0)
                 return;
 
             SAI_Editor_Manager.Instance.StartProcess(listViewPastebins.SelectedItems[0].SubItems[1].Text);
+        }
+
+        private void listViewPastebins_DoubleClick(object sender, EventArgs e)
+        {
+            VisitSelectedPastebin();
         }
     }
 }
