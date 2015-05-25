@@ -82,6 +82,7 @@ namespace SAI_Editor.Forms
 
             tabControlWorkspaces.DisplayStyle = TabStyle.VisualStudio;
             tabControlWorkspaces.DisplayStyleProvider.ShowTabCloser = true;
+
             //! HAS to be called before try-catch block
             tabControlWorkspaces.TabPages.Clear(); //! We only have it in the designer to get an idea of how stuff looks
 
@@ -827,14 +828,17 @@ namespace SAI_Editor.Forms
             foreach (Control control in Controls)
                 control.Enabled = false;
 
-            if (adjustedLoginSettings)
-                SaveLastUsedFields();
-
-            if (SAI_Editor_Manager.FormState == FormState.FormStateMain)
+            if (SAI_Editor_Manager.SaveSettingsOnExit)
             {
-                Settings.Default.LastFormExtraWidth = Width - (int)SaiEditorSizes.MainFormWidth;
-                Settings.Default.LastFormExtraHeight = Height - (int)SaiEditorSizes.MainFormHeight;
-                Settings.Default.Save();
+                if (adjustedLoginSettings)
+                    SaveLastUsedFields();
+
+                if (SAI_Editor_Manager.FormState == FormState.FormStateMain)
+                {
+                    Settings.Default.LastFormExtraWidth = Width - (int)SaiEditorSizes.MainFormWidth;
+                    Settings.Default.LastFormExtraHeight = Height - (int)SaiEditorSizes.MainFormHeight;
+                    Settings.Default.Save();
+                }
             }
 
             if (updateSurveyThread != null)

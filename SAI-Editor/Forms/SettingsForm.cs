@@ -368,5 +368,22 @@ namespace SAI_Editor.Forms
                     break;
             }
         }
+
+        private void buttonResetEverything_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("Warning: this will also get rid of all session-related settings. Are you sure you wish to continue?", "Sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+                Settings.Default.Reset();
+
+                MessageBox.Show("The settings have been reset and the application will be closed to prevent old settings from colliding.", "Closing", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                closedFormManually = true;
+                Close();
+                SAI_Editor_Manager.SaveSettingsOnExit = false;
+                Application.Exit();
+            }
+        }
     }
 }

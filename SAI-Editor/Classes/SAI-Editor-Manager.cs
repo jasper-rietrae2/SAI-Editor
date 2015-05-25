@@ -102,6 +102,8 @@ namespace SAI_Editor.Classes
 
         public static FormState FormState = FormState.FormStateLogin;
 
+        public static bool SaveSettingsOnExit = true;
+
         public MySqlConnectionStringBuilder connString;
 
         private static object _lock = new object();
