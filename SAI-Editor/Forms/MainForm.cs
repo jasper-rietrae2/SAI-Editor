@@ -1309,6 +1309,7 @@ namespace SAI_Editor.Forms
 
         private void tabControlWorkspaces_TabClosing(object sender, TabControlCancelEventArgs e)
         {
+            tabControlWorkspaces.SelectedIndex = e.TabPageIndex > 0 ? e.TabPageIndex - 1 : 0;
             userControl.States.RemoveAt(e.TabPageIndex);
         }
 
