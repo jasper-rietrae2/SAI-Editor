@@ -2971,7 +2971,20 @@ namespace SAI_Editor
             SmartScript smartScriptLink = null;
             int idToCheck = smartScript.id;
 
-        GetLinkForCurrentSmartScriptLink:
+            GetLinkForCurrentSmartScriptLink(idToCheck, ref smartScriptLink);
+
+            while (smartScriptLink != null && (SmartEvent)smartScriptLink.event_type == SmartEvent.SMART_EVENT_LINK)
+            {
+                idToCheck = smartScriptLink.id;
+                smartScriptLink = null;
+                GetLinkForCurrentSmartScriptLink(idToCheck, ref smartScriptLink);
+            }
+
+            return smartScriptLink;
+        }
+
+        private SmartScript GetLinkForCurrentSmartScriptLink(int idToCheck, ref SmartScript smartScriptLink)
+        {
             foreach (SmartScript smartScriptInListView in ListViewList.SmartScripts)
             {
                 if (smartScriptInListView.link == idToCheck)
@@ -2981,14 +2994,7 @@ namespace SAI_Editor
                 }
             }
 
-            if (smartScriptLink != null && (SmartEvent)smartScriptLink.event_type == SmartEvent.SMART_EVENT_LINK)
-            {
-                idToCheck = smartScriptLink.id;
-                smartScriptLink = null;
-                goto GetLinkForCurrentSmartScriptLink; //TODO: Don't use goto!
-            }
-
-            return smartScriptLink;
+            return null;
         }
 
         //! MUST take initial smartscript of linkings
