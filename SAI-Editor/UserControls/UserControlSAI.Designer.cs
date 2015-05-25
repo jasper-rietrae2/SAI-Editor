@@ -1660,7 +1660,6 @@
             this.customObjectListView.View = System.Windows.Forms.View.Details;
             this.customObjectListView.VirtualMode = true;
             this.customObjectListView.ItemSelectionChanged += customObjectListView_ItemSelectionChanged;
-            this.customObjectListView.Click += customObjectListView_Click;
             this.customObjectListView.MultiSelect = false;
             // 
             // UserControlSAI

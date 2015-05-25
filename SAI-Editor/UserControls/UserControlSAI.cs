@@ -523,7 +523,7 @@ namespace SAI_Editor
             return smartScriptsToReturn;
         }
 
-        public void customObjectListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void customObjectListView_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             MainForm.menuItemDeleteSelectedRow.Enabled = customObjectListView.SelectedObjects.Count > 0;
             MainForm.menuItemGenerateSql.Enabled = customObjectListView.SelectedObjects.Count > 0;
@@ -3173,7 +3173,7 @@ namespace SAI_Editor
 
         public void checkBoxUseStaticTooltips_CheckedChanged(object sender, EventArgs e)
         {
-            if (SAI_Editor_Manager.Instance.FormState != FormState.FormStateMain)
+            if (SAI_Editor_Manager.FormState != FormState.FormStateMain)
                 return;
 
             checkBoxUseStaticTooltips.Enabled = false;
