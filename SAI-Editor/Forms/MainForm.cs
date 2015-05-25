@@ -1311,6 +1311,19 @@ namespace SAI_Editor.Forms
         {
             tabControlWorkspaces.SelectedIndex = e.TabPageIndex > 0 ? e.TabPageIndex - 1 : 0;
             userControl.States.RemoveAt(e.TabPageIndex);
+
+            List<TabPage> tabPages = new List<TabPage>();
+
+            //! .Count - 1 because we don't need to rename the "+" tab.
+            for (int i = 0; i < tabControlWorkspaces.TabPages.Count - 1; ++i)
+                if (i != e.TabPageIndex)
+                    tabPages.Add(tabControlWorkspaces.TabPages[i]);
+
+            for (int i = 0; i < tabPages.Count; ++i)
+                tabPages[i].Text = "Workspace " + (i + 1).ToString();
+
+            tabControlWorkspaces.Invalidate();
+            tabControlWorkspaces.Update();
         }
 
         private void tabControlWorkspaces_SizeChanged(object sender, EventArgs e)
