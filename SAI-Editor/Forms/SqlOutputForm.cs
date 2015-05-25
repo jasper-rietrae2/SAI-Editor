@@ -39,10 +39,6 @@ namespace SAI_Editor.Forms
                 originalEntryOrGuidAndSourceType = ((MainForm)Owner).userControl.originalEntryOrGuidAndSourceType;
 
             buttonSaveToFile.Enabled = saveToFile;
-            richTextBoxSqlOutput.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            buttonExecuteScript.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
-            buttonSaveToFile.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
-            buttonUploadToPastebin.Anchor = AnchorStyles.Right | AnchorStyles.Bottom;
             buttonExecuteScript.Enabled = Settings.Default.UseWorldDatabase;
         }
 
@@ -237,6 +233,52 @@ namespace SAI_Editor.Forms
 
             using (ViewAllPastebinsForm viewAllPastebinsForm = new ViewAllPastebinsForm())
                 viewAllPastebinsForm.ShowDialog(this);
+        }
+
+        private async void buttonAppendToFile_Click(object sender, EventArgs e)
+        {
+            openFileDialog.Filter = "SQL files (*.sql)|*.sql|All files (*.*)|*.*";
+
+            switch (originalEntryOrGuidAndSourceType.sourceType)
+            {
+                case SourceTypes.SourceTypeCreature:
+                case SourceTypes.SourceTypeGameobject:
+                case SourceTypes.SourceTypeAreaTrigger:
+                case SourceTypes.SourceTypeScriptedActionlist:
+                    if (sqlForSmartScripts)
+                    {
+                        openFileDialog.FileName = "SAI for " + SAI_Editor_Manager.Instance.GetSourceTypeString(originalEntryOrGuidAndSourceType.sourceType).ToLower() + " ";
+
+                        if (Settings.Default.UseWorldDatabase)
+                            openFileDialog.FileName += await SAI_Editor_Manager.Instance.worldDatabase.GetObjectNameByIdOrGuidAndSourceType(originalEntryOrGuidAndSourceType);
+                        else
+                            openFileDialog.FileName += originalEntryOrGuidAndSourceType.entryOrGuid;
+                    }
+                    else
+                        openFileDialog.FileName = "Condition SQL";
+
+                    break;
+            }
+
+            openFileDialog.ShowDialog(this);
+        }
+
+        private void openFileDialog_FileOk(object sender, CancelEventArgs e)
+        {
+            try
+            {
+                File.AppendAllText(openFileDialog.FileName, "\n" + richTextBoxSqlOutput.Text);
+            }
+            catch
+            {
+                MessageBox.Show("The file could not be appended.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            //DialogResult dialogResult = MessageBox.Show("The SQL has been appended to the file succesfully! Do you want to open it?", "Success!", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            //if (dialogResult == DialogResult.Yes)
+                SAI_Editor_Manager.Instance.StartProcess(openFileDialog.FileName);
         }
     }
 }

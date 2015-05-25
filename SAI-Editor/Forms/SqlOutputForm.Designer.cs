@@ -36,11 +36,16 @@
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.buttonUploadToPastebin = new System.Windows.Forms.Button();
             this.buttonViewPastebins = new System.Windows.Forms.Button();
+            this.buttonAppendToFile = new System.Windows.Forms.Button();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.richTextBoxSqlOutput)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBoxSqlOutput
             // 
+            this.richTextBoxSqlOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBoxSqlOutput.AutoScrollMinSize = new System.Drawing.Size(27, 14);
             this.richTextBoxSqlOutput.BackBrush = null;
             this.richTextBoxSqlOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -49,7 +54,6 @@
             this.richTextBoxSqlOutput.CommentPrefix = "--";
             this.richTextBoxSqlOutput.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.richTextBoxSqlOutput.DisabledColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))), ((int)(((byte)(180)))));
-            this.richTextBoxSqlOutput.Font = new System.Drawing.Font("Courier New", 9.75F);
             this.richTextBoxSqlOutput.IsReplaceMode = false;
             this.richTextBoxSqlOutput.Language = FastColoredTextBoxNS.Language.SQL;
             this.richTextBoxSqlOutput.LeftBracket = '(';
@@ -64,6 +68,7 @@
             // 
             // buttonExecuteScript
             // 
+            this.buttonExecuteScript.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonExecuteScript.Location = new System.Drawing.Point(746, 340);
             this.buttonExecuteScript.Name = "buttonExecuteScript";
             this.buttonExecuteScript.Size = new System.Drawing.Size(85, 23);
@@ -74,6 +79,7 @@
             // 
             // buttonSaveToFile
             // 
+            this.buttonSaveToFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonSaveToFile.Location = new System.Drawing.Point(655, 340);
             this.buttonSaveToFile.Name = "buttonSaveToFile";
             this.buttonSaveToFile.Size = new System.Drawing.Size(85, 23);
@@ -88,6 +94,7 @@
             // 
             // buttonUploadToPastebin
             // 
+            this.buttonUploadToPastebin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonUploadToPastebin.Location = new System.Drawing.Point(12, 340);
             this.buttonUploadToPastebin.Name = "buttonUploadToPastebin";
             this.buttonUploadToPastebin.Size = new System.Drawing.Size(154, 23);
@@ -98,6 +105,7 @@
             // 
             // buttonViewPastebins
             // 
+            this.buttonViewPastebins.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonViewPastebins.Location = new System.Drawing.Point(172, 340);
             this.buttonViewPastebins.Name = "buttonViewPastebins";
             this.buttonViewPastebins.Size = new System.Drawing.Size(136, 23);
@@ -106,11 +114,28 @@
             this.buttonViewPastebins.UseVisualStyleBackColor = true;
             this.buttonViewPastebins.Click += new System.EventHandler(this.buttonViewPastebins_Click);
             // 
+            // buttonAppendToFile
+            // 
+            this.buttonAppendToFile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonAppendToFile.Location = new System.Drawing.Point(564, 340);
+            this.buttonAppendToFile.Name = "buttonAppendToFile";
+            this.buttonAppendToFile.Size = new System.Drawing.Size(85, 23);
+            this.buttonAppendToFile.TabIndex = 5;
+            this.buttonAppendToFile.Text = "Append to file";
+            this.buttonAppendToFile.UseVisualStyleBackColor = true;
+            this.buttonAppendToFile.Click += new System.EventHandler(this.buttonAppendToFile_Click);
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            this.openFileDialog.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog_FileOk);
+            // 
             // SqlOutputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(843, 368);
+            this.Controls.Add(this.buttonAppendToFile);
             this.Controls.Add(this.buttonViewPastebins);
             this.Controls.Add(this.buttonUploadToPastebin);
             this.Controls.Add(this.buttonSaveToFile);
@@ -138,5 +163,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.Button buttonUploadToPastebin;
         private System.Windows.Forms.Button buttonViewPastebins;
+        private System.Windows.Forms.Button buttonAppendToFile;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
     }
 }
