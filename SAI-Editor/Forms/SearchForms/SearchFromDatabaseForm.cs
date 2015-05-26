@@ -123,7 +123,7 @@ namespace SAI_Editor.Forms.SearchForms
                     listViewEntryResults.Columns.Add("Name", 284);
                     comboBoxSearchType.Items.Add("Emote id");
                     comboBoxSearchType.Items.Add("Emote name");
-                    baseQuery = "SELECT field0, field1 FROM " + SAI_Editor_Manager.GetEmotesTableName();
+                    baseQuery = "SELECT id, emote FROM " + SAI_Editor_Manager.GetEmotesTableName();
                     break;
                 case DatabaseSearchFormType.DatabaseSearchFormTypeQuest:
                     Text = "Search for a quest";

@@ -1651,7 +1651,8 @@
             // 
             this.customObjectListView.FullRowSelect = true;
             this.customObjectListView.List = null;
-            this.customObjectListView.Location = new System.Drawing.Point(3, 222);
+            this.customObjectListView.Location = new System.Drawing.Point(3, 217);
+            this.customObjectListView.MultiSelect = false;
             this.customObjectListView.Name = "customObjectListView";
             this.customObjectListView.ShowGroups = false;
             this.customObjectListView.Size = new System.Drawing.Size(915, 208);
@@ -1659,9 +1660,6 @@
             this.customObjectListView.UseCompatibleStateImageBehavior = false;
             this.customObjectListView.View = System.Windows.Forms.View.Details;
             this.customObjectListView.VirtualMode = true;
-            this.customObjectListView.ItemSelectionChanged += customObjectListView_ItemSelectionChanged;
-            this.customObjectListView.MultiSelect = false;
-            this.customObjectListView.CellRightClick += customObjectListView_CellRightClick;
             // 
             // UserControlSAI
             // 
