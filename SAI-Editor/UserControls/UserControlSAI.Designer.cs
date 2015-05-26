@@ -1451,6 +1451,8 @@
             this.customObjectListView.UseCompatibleStateImageBehavior = false;
             this.customObjectListView.View = System.Windows.Forms.View.Details;
             this.customObjectListView.VirtualMode = true;
+            this.customObjectListView.ItemSelectionChanged += customObjectListView_ItemSelectionChanged;
+            this.customObjectListView.CellRightClick += customObjectListView_CellRightClick;
             // 
             // pictureBoxCreateScript
             // 
