@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutForm));
             this.labelCompanyName = new System.Windows.Forms.Label();
-            this.textBoxDescription = new System.Windows.Forms.TextBox();
             this.buttonTrinitycore = new System.Windows.Forms.Button();
             this.buttonGithub = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBoxMitch = new System.Windows.Forms.PictureBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMitch)).BeginInit();
@@ -51,19 +51,6 @@
             this.labelCompanyName.TabIndex = 28;
             this.labelCompanyName.Text = "Written by Discover- and Mitch528";
             this.labelCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBoxDescription
-            // 
-            this.textBoxDescription.Location = new System.Drawing.Point(15, 53);
-            this.textBoxDescription.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
-            this.textBoxDescription.Multiline = true;
-            this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.ReadOnly = true;
-            this.textBoxDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxDescription.Size = new System.Drawing.Size(302, 319);
-            this.textBoxDescription.TabIndex = 29;
-            this.textBoxDescription.TabStop = false;
-            this.textBoxDescription.Text = resources.GetString("textBoxDescription.Text");
             // 
             // buttonTrinitycore
             // 
@@ -129,16 +116,25 @@
             this.pictureBoxMitch.TabStop = false;
             this.pictureBoxMitch.Click += new System.EventHandler(this.pictureBoxMitch_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Enabled = false;
+            this.richTextBox1.Location = new System.Drawing.Point(15, 53);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(302, 319);
+            this.richTextBox1.TabIndex = 32;
+            this.richTextBox1.Text = resources.GetString("richTextBox1.Text");
+            // 
             // AboutForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(466, 411);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBoxMitch);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.labelCompanyName);
-            this.Controls.Add(this.textBoxDescription);
             this.Controls.Add(this.buttonTrinitycore);
             this.Controls.Add(this.buttonGithub);
             this.Controls.Add(this.okButton);
@@ -157,19 +153,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMitch)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.Label labelCompanyName;
-        private System.Windows.Forms.TextBox textBoxDescription;
         private System.Windows.Forms.Button buttonTrinitycore;
         private System.Windows.Forms.Button buttonGithub;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBoxMitch;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

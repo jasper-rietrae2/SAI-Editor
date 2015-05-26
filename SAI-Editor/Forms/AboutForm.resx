@@ -117,20 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="textBoxDescription.Text" xml:space="preserve">
-    <value>SAI-Editor is an opensource application written in C# by Discover and Mitch528 for the World of Warcraft private server emulation community.
-
-This software may NOT be sold, shared, advertised and in any shape or form commercialized without explicit owners letter of approval.
-
-
-THANKS TO:
-Faq, Mitch528, Subv, GuyBrush, Rushor, Intra
-
-
-The application was designed to make it easier to understand and write SmartAI code (smart_scripts) for the TrinityCore project. TrinityCore is a World of Warcraft emulator.
-
-'SAI' stands for 'SmartAI', which is the main database scripting engine used in TrinityCore. Using the scripting system allows the developer to make certain entities (creatures, gameobjects and areatriggers) perform certain actions, like casting spells or talking, at a given time (event, like when the entity dies).</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="pictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -6769,6 +6755,21 @@ The application was designed to make it easier to understand and write SmartAI c
         fuZCVz/qnKN6hq1x4vHYsE3GcaHOapXXc52/13lt2RbXeqtTv8OPM2xaT3G47fVlF3/UWb7nWQzx7Il8
         jal0WF3qk7diyUs21rLvGboOTP0rWbnD5IFpb7zjc8o5MLHvODQHe5TW/Lz1wOR9lXWzaSDt5kHssc1e
         6PtY+Wes2bF/r2Iq17HycZ8jnn2PP9tf6ukV8sELU2AAAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="richTextBox1.Text" xml:space="preserve">
+    <value>SAI-Editor is an opensource application written in C# by Discover and Mitch528 for the World of Warcraft private server emulation community.
+
+This software may NOT be sold, shared, advertised and in any shape or form commercialized without explicit owners letter of approval.
+
+
+THANKS TO:
+Faq, Mitch528, Subv, GuyBrush, Rushor, Intra
+
+
+The application was designed to make it easier to understand and write SmartAI code (smart_scripts) for the TrinityCore project. TrinityCore is a World of Warcraft emulator.
+
+'SAI' stands for 'SmartAI', which is the main database scripting engine used in TrinityCore. Using the scripting system allows the developer to make certain entities (creatures, gameobjects and areatriggers) perform certain actions, like casting spells or talking, at a given time (event, like when the entity dies).
 </value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
