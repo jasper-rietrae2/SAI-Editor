@@ -98,11 +98,16 @@ namespace SAI_Editor.Classes.CustomControls
             if (_scripts != null)
                 AddScripts(_scripts, true);
 
-            foreach (ColumnHeader header in Columns)
-                header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            ResizeColumns();
 
             if (keepSelection && lastSelectedIndex != -1)
                 Items[lastSelectedIndex].Selected = true;
+        }
+
+        public void ResizeColumns()
+        {
+            foreach (ColumnHeader header in Columns)
+                header.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
 
         public virtual int AddScript(DatabaseClass script, bool listViewOnly = false, bool selectNewItem = false)

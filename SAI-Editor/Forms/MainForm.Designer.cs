@@ -104,6 +104,7 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conditionEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemRevertQuery = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemViewAllPastebins = new System.Windows.Forms.ToolStripMenuItem();
             this.otherToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smartAIWikiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.feedbackbugsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -253,7 +254,6 @@
             this.buttonConnect = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.menuItemViewAllPastebins = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxDonate)).BeginInit();
@@ -906,6 +906,13 @@
             this.menuItemRevertQuery.Text = "Execute a revert query";
             this.menuItemRevertQuery.Click += new System.EventHandler(this.menuItemRevertQuery_Click);
             // 
+            // menuItemViewAllPastebins
+            // 
+            this.menuItemViewAllPastebins.Name = "menuItemViewAllPastebins";
+            this.menuItemViewAllPastebins.Size = new System.Drawing.Size(257, 22);
+            this.menuItemViewAllPastebins.Text = "View all pastebins";
+            this.menuItemViewAllPastebins.Click += new System.EventHandler(this.menuItemViewAllPastebins_Click);
+            // 
             // otherToolStripMenuItem
             // 
             this.otherToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1021,6 +1028,7 @@
             // pictureBoxDonate
             // 
             this.pictureBoxDonate.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxDonate.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxDonate.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxDonate.Image")));
             this.pictureBoxDonate.Location = new System.Drawing.Point(853, -1);
             this.pictureBoxDonate.Name = "pictureBoxDonate";
@@ -2717,13 +2725,6 @@
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // menuItemViewAllPastebins
-            // 
-            this.menuItemViewAllPastebins.Name = "menuItemViewAllPastebins";
-            this.menuItemViewAllPastebins.Size = new System.Drawing.Size(257, 22);
-            this.menuItemViewAllPastebins.Text = "View all pastebins";
-            this.menuItemViewAllPastebins.Click += new System.EventHandler(this.menuItemViewAllPastebins_Click);
             // 
             // MainForm
             // 

@@ -32,10 +32,7 @@ namespace SAI_Editor.Classes
 
         public virtual void Apply(bool keepSelection = false)
         {
-            int lastSelectedIndex = ListView.SelectedIndex;
             object lastSelected = ListView.SelectedObjects.Count > 0 ? ListView.SelectedObject : null;
-
-            //ListView.Items.Clear();
 
             ListView.ClearObjects();
             ListView.Columns.Clear();
@@ -48,13 +45,8 @@ namespace SAI_Editor.Classes
             if (Scripts != null)
                 AddScripts(Scripts, true);
 
-            ResizeColumns();
-
             if (keepSelection && lastSelected != null)
                 ListView.SelectObject(lastSelected);
-
-            if (keepSelection && lastSelectedIndex != -1)
-                ListView.Items[lastSelectedIndex].Selected = true;
         }
 
         public void ResizeColumns()
