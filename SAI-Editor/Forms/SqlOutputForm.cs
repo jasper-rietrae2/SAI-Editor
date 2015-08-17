@@ -187,7 +187,7 @@ namespace SAI_Editor.Forms
                     pasteName += "ERROR";
 
                 byte[] bData = encoding.GetBytes(String.Concat("api_paste_code=", richTextBoxSqlOutput.Text, "&api_paste_private=0" +
-                    "&api_paste_expire_date=1M&api_dev_key=afac889230d290e94a94fb96d951773e&api_option=paste&api_paste_format=mysql" +
+                    "&api_paste_expire_date=N&api_dev_key=afac889230d290e94a94fb96d951773e&api_option=paste&api_paste_format=mysql" +
                     "&api_paste_name=" + pasteName));
 
                 wr.Method = "POST";
