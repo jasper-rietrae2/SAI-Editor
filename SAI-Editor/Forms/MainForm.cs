@@ -238,13 +238,13 @@ namespace SAI_Editor.Forms
                 if (Settings.Default.UseWorldDatabase)
                 {
                     SAI_Editor_Manager.Instance.connString = new MySqlConnectionStringBuilder();
-                    SAI_Editor_Manager.Instance.connString.Server = textBoxHost.Text;
-                    SAI_Editor_Manager.Instance.connString.UserID = textBoxUsername.Text;
-                    SAI_Editor_Manager.Instance.connString.Port = CustomConverter.ToUInt32(textBoxPort.Text);
-                    SAI_Editor_Manager.Instance.connString.Database = textBoxWorldDatabase.Text;
+                    SAI_Editor_Manager.Instance.connString.Server = Settings.Default.Host;
+                    SAI_Editor_Manager.Instance.connString.UserID = Settings.Default.User;
+                    SAI_Editor_Manager.Instance.connString.Port = Settings.Default.Port;
+                    SAI_Editor_Manager.Instance.connString.Database = Settings.Default.Database;
 
-                    if (textBoxPassword.Text.Length > 0)
-                        SAI_Editor_Manager.Instance.connString.Password = textBoxPassword.Text;
+                    if (Settings.Default.Password.Length > 0)
+                        SAI_Editor_Manager.Instance.connString.Password = SAI_Editor_Manager.Instance.GetPasswordSetting();// Settings.Default.Password.ToSecureString().EncryptString(Encoding.Unicode.GetBytes(Settings.Default.Entropy));
 
                     SAI_Editor_Manager.Instance.ResetWorldDatabase(true);
                 }
