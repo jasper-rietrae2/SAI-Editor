@@ -32,15 +32,13 @@ namespace SAI_Editor.Classes
 
         public virtual void Apply(bool keepSelection = false)
         {
-            object lastSelected = ListView.SelectedObjects.Count > 0 ? ListView.SelectedObject : null;
+            object lastSelected = ListView.SelectedObject;
 
             ListView.ClearObjects();
             ListView.Columns.Clear();
 
             foreach (PropertyInfo propInfo in PropInfo.Where(propInfo => !ExcludedProperties.Contains(propInfo.Name)))
-            {
                 ListView.Columns.Add(new OLVColumn(propInfo.Name, propInfo.Name));
-            }
 
             if (Scripts != null)
                 AddScripts(Scripts, true);
@@ -81,10 +79,10 @@ namespace SAI_Editor.Classes
 
             if (selectNewItem)
             {
+                ListView.HideSelection = false;
                 ListView.SelectObject(script);
-                //newItem.Selected = true;
-                //newItem.Focused = true;
                 ListView.Select();
+                ListView.Focus();
                 ListView.EnsureModelVisible(script);
             }
         }

@@ -502,14 +502,13 @@ namespace SAI_Editor
                         {
                             List<SmartScript> newSmartScripts = await GetSmartScriptsForEntryAndSourceType(entryOrGuidAndSourceType.entryOrGuid.ToString(), entryOrGuidAndSourceType.sourceType);
 
-                            foreach (SmartScript item in newSmartScripts.Where(item => !ListContainsSmartScript(smartScriptsToReturn, item))) smartScriptsToReturn.Add(item);
+                            foreach (SmartScript item in newSmartScripts.Where(item => !ListContainsSmartScript(smartScriptsToReturn, item)))
+                                smartScriptsToReturn.Add(item);
 
                             pictureBoxCreateScript.Enabled = textBoxEntryOrGuid.Text.Length > 0;
                         }
                     }
                 }
-
-                ResizeColumns();
             }
             catch
             {
@@ -892,7 +891,11 @@ namespace SAI_Editor
                 clonedSmartScript.id = ++lastSmartScriptIdOfScript;
 
             customObjectListView.List.AddScript(clonedSmartScript, selectNewItem: true);
+
+            customObjectListView.HideSelection = false;
+            customObjectListView.SelectObject(clonedSmartScript);
             customObjectListView.EnsureModelVisible(clonedSmartScript);
+            customObjectListView.Select();
         }
 
         public void DeleteSelectedRow()
@@ -945,7 +948,6 @@ namespace SAI_Editor
             if (checkBoxListActionlistsOrEntries.Checked)
             {
                 List<SmartScript> smartScripts = await GetSmartScriptsForEntryAndSourceType(originalEntryOrGuidAndSourceType.entryOrGuid.ToString(), originalEntryOrGuidAndSourceType.sourceType);
-                List<SmartScript> newSmartScripts = new List<SmartScript>();
 
                 //! Only add the new smartscript if it doesn't yet exist
                 foreach (SmartScript newSmartScript in smartScripts)
@@ -980,9 +982,7 @@ namespace SAI_Editor
             //    customObjectListView.Items[prevSelectedIndex].Selected = true;
 
             if (customObjectListView.Items.Count > 0)
-            {
                 customObjectListView.SelectObject(customObjectListView.SelectedObjects.Count > 0 ? customObjectListView.SelectedObjects[0] : customObjectListView.Objects.Cast<object>().ElementAt(0));
-            }
 
             buttonGenerateSql.Enabled = customObjectListView.Items.Count > 0;
             MainForm.menuItemGenerateSql.Enabled = customObjectListView.Items.Count > 0;
@@ -1208,7 +1208,13 @@ namespace SAI_Editor
 
             ListViewList.AddScript(newSmartScript, selectNewItem: true);
 
-            HandleShowBasicInfo();
+            HandleShowBasicInfo(true);
+
+            //! Call the select stuff after calling HandleShowBasicInfo. Reason is it tampers with the property fields
+            customObjectListView.HideSelection = false;
+            customObjectListView.SelectObject(newSmartScript);
+            customObjectListView.EnsureModelVisible(newSmartScript);
+            customObjectListView.Select();
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
             SetGenerateCommentsEnabled(customObjectListView.Items.Count > 0 && Settings.Default.UseWorldDatabase);
@@ -2083,8 +2089,17 @@ namespace SAI_Editor
             newSmartScript.target_y = "0";
             newSmartScript.target_z = "0";
             newSmartScript.target_o = "0";
+
             ListViewList.AddScript(newSmartScript, selectNewItem: true);
-            HandleShowBasicInfo();
+
+            HandleShowBasicInfo(true);
+
+            //! Call the select stuff after calling HandleShowBasicInfo. Reason is it tampers with the property fields
+            customObjectListView.HideSelection = false;
+            customObjectListView.SelectObject(newSmartScript);
+            customObjectListView.EnsureModelVisible(newSmartScript);
+            customObjectListView.Select();
+
             ResizeColumns();
 
             buttonNewLine.Enabled = textBoxEntryOrGuid.Text.Length > 0;
@@ -3028,7 +3043,7 @@ namespace SAI_Editor
             ResizeColumns();
         }
 
-        public void HandleShowBasicInfo()
+        public void HandleShowBasicInfo(bool calledAfterNewScriptAdded = false)
         {
             //int prevSelectedIndex = customObjectListView.SelectedObjects.Count > 0 ? customObjectListView.SelectedObjects[0].Index : 0;
 
@@ -3055,21 +3070,23 @@ namespace SAI_Editor
             properties.Add("target_z");
             properties.Add("target_o");
 
+            //TODO: Performance check
             if (checkBoxShowBasicInfo.Checked)
-            {
-                //TODO: Performance check
                 customObjectListView.List.ExcludeProperties(properties);
-            }
             else
                 ListViewList.IncludeProperties(properties);
 
-            if (customObjectListView.Items.Count > 0)
+            if (!calledAfterNewScriptAdded && customObjectListView.Items.Count > 0)
             {
                 object obj = customObjectListView.SelectedObjects.Count > 0 ? customObjectListView.SelectedObjects[0] : customObjectListView.Objects.Cast<object>().ElementAt(0);
 
-                customObjectListView.SelectObject(obj);
+                if (customObjectListView.SelectedObjects.Count == 0)
+                {
+                    customObjectListView.HideSelection = false;
+                    customObjectListView.SelectObject(obj);
+                }
+
                 customObjectListView.EnsureModelVisible(obj);
-                //customObjectListView.EnsureVisible(prevSelectedIndex);
             }
 
             customObjectListView.Select(); //! Sets the focus on the listview

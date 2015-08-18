@@ -107,8 +107,11 @@ namespace SAI_Editor.Classes
                 ResizeColumns();
             }
 
+            ListView.HideSelection = false;
+            ListView.Focus();
             ListView.SelectObject(script);
             _oListView.Select();
+            _oListView.SelectObject(script);
             _oListView.EnsureModelVisible(script);
         }
 
