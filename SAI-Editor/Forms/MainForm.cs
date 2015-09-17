@@ -858,7 +858,7 @@ namespace SAI_Editor.Forms
             Settings.Default.LockSmartScriptId = userControl.checkBoxLockEventId.Checked;
             Settings.Default.ListActionLists = userControl.checkBoxListActionlistsOrEntries.Checked;
             Settings.Default.AllowChangingEntryAndSourceType = userControl.checkBoxAllowChangingEntryAndSourceType.Checked;
-            Settings.Default.PhaseHighlighting = userControl.checkBoxUsePhaseColors.Checked;
+            Settings.Default.PhaseHighlighting = false;// userControl.checkBoxUsePhaseColors.Checked;
             Settings.Default.ShowTooltipsStaticly = userControl.checkBoxUseStaticTooltips.Checked;
 
             string lastStaticInfoPerTab = String.Empty;

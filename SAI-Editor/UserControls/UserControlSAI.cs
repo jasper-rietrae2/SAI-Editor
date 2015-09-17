@@ -129,7 +129,7 @@ namespace SAI_Editor
             checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
             checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
             checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
-            checkBoxUsePhaseColors.Checked = Settings.Default.PhaseHighlighting;
+            checkBoxUsePhaseColors.Checked = false;// Settings.Default.PhaseHighlighting;
             checkBoxUseStaticTooltips.Checked = Settings.Default.ShowTooltipsStaticly;
 
             DefaultState.Save(this);
@@ -3158,7 +3158,7 @@ namespace SAI_Editor
 
         public void checkBoxUsePhaseColors_CheckedChanged(object sender, EventArgs e)
         {
-            Settings.Default.PhaseHighlighting = checkBoxUsePhaseColors.Checked;
+            Settings.Default.PhaseHighlighting = false;// checkBoxUsePhaseColors.Checked;
             Settings.Default.Save();
 
             ListViewList.Apply(true);
@@ -3184,7 +3184,7 @@ namespace SAI_Editor
             checkBoxLockEventId.Checked = Settings.Default.LockSmartScriptId;
             checkBoxListActionlistsOrEntries.Checked = Settings.Default.ListActionLists;
             checkBoxAllowChangingEntryAndSourceType.Checked = Settings.Default.AllowChangingEntryAndSourceType;
-            checkBoxUsePhaseColors.Checked = Settings.Default.PhaseHighlighting;
+            checkBoxUsePhaseColors.Checked = false;// Settings.Default.PhaseHighlighting;
             checkBoxUseStaticTooltips.Checked = Settings.Default.ShowTooltipsStaticly;
 
             if (expanding)

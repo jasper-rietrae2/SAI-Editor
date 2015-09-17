@@ -36,7 +36,7 @@ namespace SAI_Editor.Forms
             checkBoxShowTooltipsStaticly.Checked = Settings.Default.ShowTooltipsStaticly;
             checkBoxAutoGenerateComments.Checked = Settings.Default.GenerateComments;
             checkBoxCreateRevertQuery.Checked = Settings.Default.CreateRevertQuery;
-            checkBoxPhaseHighlighting.Checked = Settings.Default.PhaseHighlighting;
+            checkBoxPhaseHighlighting.Checked = false;// Settings.Default.PhaseHighlighting;
             textBoxAnimationSpeed.Text = Settings.Default.AnimationSpeed.ToString();
             textBoxPassword.PasswordChar = Convert.ToChar(checkBoxHidePass.Checked ? '●' : '\0');
             radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
@@ -68,7 +68,7 @@ namespace SAI_Editor.Forms
 
             bool showTooltipsStaticly = Settings.Default.ShowTooltipsStaticly;
             bool generateComments = Settings.Default.GenerateComments;
-            bool phaseHighlighting = Settings.Default.PhaseHighlighting;
+            bool phaseHighlighting = false;// Settings.Default.PhaseHighlighting;
 
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             byte[] buffer = new byte[1024];
@@ -121,7 +121,7 @@ namespace SAI_Editor.Forms
             Settings.Default.ShowTooltipsStaticly = checkBoxShowTooltipsStaticly.Checked;
             Settings.Default.GenerateComments = checkBoxAutoGenerateComments.Checked;
             Settings.Default.CreateRevertQuery = checkBoxCreateRevertQuery.Checked;
-            Settings.Default.PhaseHighlighting = checkBoxPhaseHighlighting.Checked;
+            Settings.Default.PhaseHighlighting = false;// checkBoxPhaseHighlighting.Checked;
             Settings.Default.DuplicatePrimaryFields = checkBoxDuplicatePrimaryFields.Checked;
             Settings.Default.WowExpansionIndex = (uint)comboBoxWowExpansion.SelectedIndex;
             SAI_Editor_Manager.Instance.Expansion = (WowExpansion)Settings.Default.WowExpansionIndex;
@@ -194,7 +194,7 @@ namespace SAI_Editor.Forms
                 checkBoxShowTooltipsStaticly.Checked == Settings.Default.ShowTooltipsStaticly &&
                 checkBoxAutoGenerateComments.Checked == Settings.Default.GenerateComments &&
                 checkBoxCreateRevertQuery.Checked == Settings.Default.CreateRevertQuery &&
-                checkBoxPhaseHighlighting.Checked == Settings.Default.PhaseHighlighting &&
+                /*checkBoxPhaseHighlighting.Checked == Settings.Default.PhaseHighlighting && */
                 checkBoxDuplicatePrimaryFields.Checked == Settings.Default.DuplicatePrimaryFields &&
                 comboBoxWowExpansion.SelectedIndex == (int)Settings.Default.WowExpansionIndex &&
 

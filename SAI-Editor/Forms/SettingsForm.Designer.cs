@@ -155,6 +155,7 @@
             // checkBoxPhaseHighlighting
             // 
             this.checkBoxPhaseHighlighting.AutoSize = true;
+            this.checkBoxPhaseHighlighting.Enabled = false;
             this.checkBoxPhaseHighlighting.Location = new System.Drawing.Point(6, 144);
             this.checkBoxPhaseHighlighting.Name = "checkBoxPhaseHighlighting";
             this.checkBoxPhaseHighlighting.Size = new System.Drawing.Size(203, 17);

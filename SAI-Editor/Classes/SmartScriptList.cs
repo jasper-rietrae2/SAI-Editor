@@ -117,6 +117,9 @@ namespace SAI_Editor.Classes
 
         private void oListView_FormatRow(object sender, FormatRowEventArgs e)
         {
+            if (!Settings.Default.PhaseHighlighting)
+                return;
+
             SmartScript script = (SmartScript)e.Model;
 
             if (script != null && _phaseColors.ContainsKey(script.event_phase_mask))

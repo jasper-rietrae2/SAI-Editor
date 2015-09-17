@@ -2360,6 +2360,7 @@
             this.checkBoxUsePhaseColors.Name = "checkBoxUsePhaseColors";
             this.checkBoxUsePhaseColors.Size = new System.Drawing.Size(108, 17);
             this.checkBoxUsePhaseColors.TabIndex = 22;
+            this.checkBoxUsePhaseColors.Enabled = false;
             this.checkBoxUsePhaseColors.Text = "Use phase colors";
             this.checkBoxUsePhaseColors.UseVisualStyleBackColor = true;
             // 
