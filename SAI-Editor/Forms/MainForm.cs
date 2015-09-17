@@ -141,6 +141,39 @@ namespace SAI_Editor.Forms
             checkIfUpdatesAvailableThread = new Thread(CheckIfUpdatesAvailable);
             checkIfUpdatesAvailableThread.Start();
 
+            try
+            {
+                textBoxHost.Text = Settings.Default.Host;
+                textBoxUsername.Text = Settings.Default.User;
+                textBoxPassword.Text = SAI_Editor_Manager.Instance.GetPasswordSetting();
+                textBoxWorldDatabase.Text = Settings.Default.Database;
+                textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
+                expandAndContractSpeed = Settings.Default.AnimationSpeed;
+                radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
+                radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
+                SAI_Editor_Manager.Instance.Expansion = (WowExpansion)Settings.Default.WowExpansionIndex;
+
+                menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
+                searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGameobjectEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGameobjectGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGameEventToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAnItemEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForACreatureSummonsIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAnEquipmentTemplateToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAWaypointToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForANpcTextToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGossipMenuOptionToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                searchForAGossipOptionIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
+                adjustedLoginSettings = true;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Something went wrong when loading the settings.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             Dictionary<int, SAIUserControlState> states = null;
 
             if (tabControlWorkspaces.TabPages.Count == 0)
@@ -163,6 +196,18 @@ namespace SAI_Editor.Forms
                     userControl.States.Add(userControl.DefaultState);
                     userControl.CurrentState = userControl.DefaultState;
                 }
+            }
+
+            try
+            {
+                userControl.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
+                userControl.buttonGenerateComments.Enabled = userControl.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+                userControl.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase;
+                menuItemGenerateComment.Enabled = userControl.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Something went wrong when loading the settings.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             userControl.tabControlParameters.AutoScrollOffset = new Point(5, 5);
@@ -191,44 +236,6 @@ namespace SAI_Editor.Forms
                 tabControlWorkspaces.SelectedIndex = 0;
                 userControl.States.First().Load();
                 userControl.CurrentState = userControl.States.First();
-            }
-
-            try
-            {
-                textBoxHost.Text = Settings.Default.Host;
-                textBoxUsername.Text = Settings.Default.User;
-                textBoxPassword.Text = SAI_Editor_Manager.Instance.GetPasswordSetting();
-                textBoxWorldDatabase.Text = Settings.Default.Database;
-                textBoxPort.Text = Settings.Default.Port > 0 ? Settings.Default.Port.ToString() : String.Empty;
-                expandAndContractSpeed = Settings.Default.AnimationSpeed;
-                radioButtonConnectToMySql.Checked = Settings.Default.UseWorldDatabase;
-                radioButtonDontUseDatabase.Checked = !Settings.Default.UseWorldDatabase;
-                SAI_Editor_Manager.Instance.Expansion = (WowExpansion)Settings.Default.WowExpansionIndex;
-
-                userControl.checkBoxListActionlistsOrEntries.Enabled = Settings.Default.UseWorldDatabase;
-                userControl.buttonGenerateComments.Enabled = userControl.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
-                userControl.buttonSearchForEntryOrGuid.Enabled = Settings.Default.UseWorldDatabase;
-
-                menuItemRevertQuery.Enabled = Settings.Default.UseWorldDatabase;
-                menuItemGenerateComment.Enabled = userControl.ListView.Items.Count > 0 && Settings.Default.UseWorldDatabase;
-                searchForAQuestToolStripMenuItem1.Enabled = Settings.Default.UseWorldDatabase;
-                searchForACreatureEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForACreatureGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAGameobjectEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAGameobjectGuidToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAGameEventToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAnItemEntryToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForACreatureSummonsIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAnEquipmentTemplateToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAWaypointToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForANpcTextToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAGossipMenuOptionToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                searchForAGossipOptionIdToolStripMenuItem.Enabled = Settings.Default.UseWorldDatabase;
-                adjustedLoginSettings = true;
-            }
-            catch
-            {
-                MessageBox.Show("Something went wrong when loading the settings.", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             if (Settings.Default.AutoConnect)
@@ -1190,7 +1197,9 @@ namespace SAI_Editor.Forms
                 if (tabControlWorkspaces.TabPages.Count > (int)MiscEnumerators.MaxWorkSpaceCount)
                 {
                     MessageBox.Show("You can't have more than " + (int)MiscEnumerators.MaxWorkSpaceCount +
-                        " different workspaces open at the same time to avoid start-up delays.", "Workspace limit", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        " different workspaces open at the same time. This limit is created to avoid start-up delays.",
+                        "Workspace limit", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
                     tabControlWorkspaces.SelectedIndex = lastSelectedWorkspaceIndex;
                     return;
                 }
@@ -1209,6 +1218,12 @@ namespace SAI_Editor.Forms
                 userControl.CurrentState = userControl.States[tabControlWorkspaces.SelectedIndex];
 
             lastSelectedWorkspaceIndex = tabControlWorkspaces.SelectedIndex;
+
+            if (userControl.ListView.Objects.Cast<object>().Count<object>() > 0)
+                userControl.ListView.SelectObject(userControl.ListView.Objects.Cast<object>().ElementAt(0));
+
+            userControl.ListView.Select();
+            userControl.ListView.Focus();
         }
 
         private void CreateTabControl(bool first = false, bool addWorkspace = false)
