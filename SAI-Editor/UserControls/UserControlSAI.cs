@@ -994,7 +994,7 @@ namespace SAI_Editor
             List<DatabaseClass> smartScriptsToRemove = ListViewList.SmartScripts.Where(smartScript => smartScript.source_type != (int)originalEntryOrGuidAndSourceType.sourceType).Cast<DatabaseClass>().ToList();
 
             foreach (SmartScript smartScript in smartScriptsToRemove.Cast<SmartScript>())
-                ListViewList.SmartScripts.Remove(smartScript);
+                customObjectListView.List.RemoveScript(smartScript);
         }
 
         public int GetIndexBySourceType(SourceTypes sourceType)
