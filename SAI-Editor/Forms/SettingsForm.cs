@@ -362,9 +362,16 @@ namespace SAI_Editor.Forms
             switch ((WowExpansion)comboBoxWowExpansion.SelectedIndex)
             {
                 case WowExpansion.ExpansionMop:
-                case WowExpansion.ExpansionWod:
                     MessageBox.Show("This expansion is currently not supported.", "Not supported", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     comboBoxWowExpansion.SelectedIndex = 0;
+                    break;
+                case WowExpansion.ExpansionWod:
+                    DialogResult result = MessageBox.Show("This expansion is currently not FULLY supported.\nNot all DBC files have been ported over yet. " +
+                        "Visit the GitHub page of the project if you would like to help out.\n\nAre you sure you wish to continue with WoD?", "Not fully supported", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    
+                    if (result != DialogResult.Yes)
+                        comboBoxWowExpansion.SelectedIndex = 0;
+
                     break;
             }
         }
