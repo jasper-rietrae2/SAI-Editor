@@ -8,3 +8,9 @@
 - Add a tutorial to the application
 - Setting to control the comment generating (rules to follow and whatnot)
 - Take a look into reloading the smart_scripts table (thus executing the `.reload smart` GM command in-game or in the console) from the application.
+
+
+Missing WoD SQLite information (currently have Cata information copied):
+maps_wod
+sound_entries_wod
+spells_wod
