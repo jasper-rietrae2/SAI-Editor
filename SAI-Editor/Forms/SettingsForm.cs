@@ -359,6 +359,9 @@ namespace SAI_Editor.Forms
                 return;
             }
 
+            if (comboBoxWowExpansion.SelectedIndex == (int)Settings.Default.WowExpansionIndex)
+                return;
+
             switch ((WowExpansion)comboBoxWowExpansion.SelectedIndex)
             {
                 case WowExpansion.ExpansionMop:
