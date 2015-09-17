@@ -252,6 +252,7 @@
             this.textBoxEntryOrGuid.Size = new System.Drawing.Size(110, 20);
             this.textBoxEntryOrGuid.TabIndex = 12;
             this.textBoxEntryOrGuid.TextChanged += new System.EventHandler(this.textBoxEntryOrGuid_TextChanged);
+            this.textBoxEntryOrGuid.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxEntryOrGuid_KeyDown);
             // 
             // buttonGenerateComments
             // 
@@ -1662,7 +1663,6 @@
             this.customObjectListView.UseCompatibleStateImageBehavior = false;
             this.customObjectListView.View = System.Windows.Forms.View.Details;
             this.customObjectListView.VirtualMode = true;
-            this.customObjectListView.CellRightClick += customObjectListView_CellRightClick;
             // 
             // UserControlSAI
             // 

@@ -98,6 +98,7 @@ namespace SAI_Editor
             MainForm = Parent as MainForm;
 
             customObjectListView.List = new SmartScriptList(customObjectListView);
+            customObjectListView.CellRightClick += customObjectListView_CellRightClick;
 
             comboBoxSourceType.SelectedIndex = 0;
             comboBoxEventType.SelectedIndex = 0;
@@ -3314,6 +3315,12 @@ namespace SAI_Editor
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void textBoxEntryOrGuid_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                TryToLoadScript();
         }
     }
 }
