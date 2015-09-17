@@ -520,7 +520,8 @@ namespace SAI_Editor.Classes
                         fullLine = fullLine.Replace("_incrementOrDecrementActionParamOne_", "Increment");
                     else if (smartScript.action_param2.ToString() == "1")
                         fullLine = fullLine.Replace("_incrementOrDecrementActionParamOne_", "Decrement");
-                    //else //? What to do?
+                    else
+                        fullLine = fullLine.Replace("_incrementOrDecrementActionParamOne_", "Increment or Decrement");
                 }
 
                 if (fullLine.Contains("_sheathActionParamOne_"))
