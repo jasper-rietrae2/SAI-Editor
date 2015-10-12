@@ -99,6 +99,7 @@ namespace SAI_Editor
 
             customObjectListView.List = new SmartScriptList(customObjectListView);
             customObjectListView.CellRightClick += customObjectListView_CellRightClick;
+            customObjectListView.ItemSelectionChanged += customObjectListView_ItemSelectionChanged;
 
             comboBoxSourceType.SelectedIndex = 0;
             comboBoxEventType.SelectedIndex = 0;
