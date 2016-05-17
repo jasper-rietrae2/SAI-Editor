@@ -291,9 +291,9 @@ namespace SAI_Editor.Forms
         {
             Dictionary<string, Control> condValues = new Dictionary<string, Control>()
             {
-                { "1lbl", labelCondValue1 }, { "2lbl", labelCondValue2 }, { "3lbl", labelCondValue3 }, { "4lbl", labelCondValue4 },
-                { "1txt", textBoxCondValue1 }, { "2txt", textBoxCondValue2 }, { "3txt", textBoxCondValue3 }, { "4txt", textBoxCondValue4 },
-                { "1btn", buttonSearchConditionValue1 }, { "2btn", buttonSearchConditionValue2 }, { "3btn", buttonSearchConditionValue3 }, { "4btn", buttonSearchConditionValue4 },
+                { "1lbl", labelCondValue1 }, { "2lbl", labelCondValue2 }, { "3lbl", labelCondValue3 },
+                { "1txt", textBoxCondValue1 }, { "2txt", textBoxCondValue2 }, { "3txt", textBoxCondValue3 },
+                { "1btn", buttonSearchConditionValue1 }, { "2btn", buttonSearchConditionValue2 }, { "3btn", buttonSearchConditionValue3 },
             };
 
             for (int i = 0; i < 4; ++i)
@@ -711,7 +711,7 @@ namespace SAI_Editor.Forms
             condition.ConditionValue1 = CustomConverter.ToInt32(textBoxCondValue1.Text);
             condition.ConditionValue2 = CustomConverter.ToInt32(textBoxCondValue2.Text);
             condition.ConditionValue3 = CustomConverter.ToInt32(textBoxCondValue3.Text);
-            condition.NegativeCondition = CustomConverter.ToInt32(textBoxCondValue4.Text);
+            condition.NegativeCondition = checkBoxNegativeCondition.Checked ? 1 : 0;
             condition.ErrorType = CustomConverter.ToInt32(textBoxErrorType.Text);
             condition.ErrorTextId = CustomConverter.ToInt32(textBoxErrorTextId.Text);
             condition.ScriptName = textBoxScriptName.Text;
@@ -769,7 +769,7 @@ namespace SAI_Editor.Forms
             textBoxCondValue1.Text = selectedCond.ConditionValue1.ToString();
             textBoxCondValue2.Text = selectedCond.ConditionValue2.ToString();
             textBoxCondValue3.Text = selectedCond.ConditionValue3.ToString();
-            textBoxCondValue4.Text = selectedCond.NegativeCondition.ToString();
+            checkBoxNegativeCondition.Checked = selectedCond.NegativeCondition == 1;
             textBoxErrorType.Text = selectedCond.ErrorType.ToString();
             textBoxErrorTextId.Text = selectedCond.ErrorTextId.ToString();
             textBoxScriptName.Text = selectedCond.ScriptName;

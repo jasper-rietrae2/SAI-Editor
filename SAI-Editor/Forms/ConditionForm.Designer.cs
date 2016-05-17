@@ -61,10 +61,6 @@
             this.buttonSearchConditionValue1 = new System.Windows.Forms.Button();
             this.buttonSearchConditionValue2 = new System.Windows.Forms.Button();
             this.buttonSearchConditionValue3 = new System.Windows.Forms.Button();
-            this.labelCondValue4 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBoxCondValue4 = new System.Windows.Forms.TextBox();
-            this.buttonSearchConditionValue4 = new System.Windows.Forms.Button();
             this.buttonGenerateComment = new System.Windows.Forms.Button();
             this.buttonGenerateSql = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -87,14 +83,17 @@
             this.textBoxErrorType = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.buttonDuplicateCondition = new System.Windows.Forms.Button();
             this.buttonDeleteCondition = new System.Windows.Forms.Button();
             this.buttonLoadCondition = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.checkBoxNegativeCondition = new System.Windows.Forms.CheckBox();
+            this.lineSeparator1 = new SAI_Editor.Classes.CustomControls.LineSeparator();
+            this.listViewConditions = new SAI_Editor.Classes.CustomControls.ConditionListView();
             this.tabControl.SuspendLayout();
             this.tabPageEditing.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -470,49 +469,10 @@
             this.buttonSearchConditionValue3.UseVisualStyleBackColor = true;
             this.buttonSearchConditionValue3.Click += new System.EventHandler(this.buttonSearchConditionValue3_Click);
             // 
-            // labelCondValue4
-            // 
-            this.labelCondValue4.AutoSize = true;
-            this.labelCondValue4.Location = new System.Drawing.Point(12, 236);
-            this.labelCondValue4.Name = "labelCondValue4";
-            this.labelCondValue4.Size = new System.Drawing.Size(96, 13);
-            this.labelCondValue4.TabIndex = 6;
-            this.labelCondValue4.Text = "Negative condition";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(107, 236);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(10, 13);
-            this.label13.TabIndex = 16;
-            this.label13.Text = ":";
-            // 
-            // textBoxCondValue4
-            // 
-            this.textBoxCondValue4.Location = new System.Drawing.Point(119, 233);
-            this.textBoxCondValue4.Name = "textBoxCondValue4";
-            this.textBoxCondValue4.Size = new System.Drawing.Size(66, 20);
-            this.textBoxCondValue4.TabIndex = 18;
-            this.textBoxCondValue4.Text = "0";
-            this.textBoxCondValue4.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxesConditionEditor_KeyPress);
-            this.textBoxCondValue4.Leave += new System.EventHandler(this.textBoxesConditionEditor_Leave);
-            // 
-            // buttonSearchConditionValue4
-            // 
-            this.buttonSearchConditionValue4.Enabled = false;
-            this.buttonSearchConditionValue4.Location = new System.Drawing.Point(185, 232);
-            this.buttonSearchConditionValue4.Name = "buttonSearchConditionValue4";
-            this.buttonSearchConditionValue4.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchConditionValue4.TabIndex = 19;
-            this.buttonSearchConditionValue4.Text = "...";
-            this.buttonSearchConditionValue4.UseVisualStyleBackColor = true;
-            this.buttonSearchConditionValue4.Click += new System.EventHandler(this.buttonSearchConditionValue3_Click);
-            // 
             // buttonGenerateComment
             // 
             this.buttonGenerateComment.Enabled = false;
-            this.buttonGenerateComment.Location = new System.Drawing.Point(517, 201);
+            this.buttonGenerateComment.Location = new System.Drawing.Point(517, 181);
             this.buttonGenerateComment.Name = "buttonGenerateComment";
             this.buttonGenerateComment.Size = new System.Drawing.Size(125, 23);
             this.buttonGenerateComment.TabIndex = 24;
@@ -522,7 +482,7 @@
             // 
             // buttonGenerateSql
             // 
-            this.buttonGenerateSql.Location = new System.Drawing.Point(517, 230);
+            this.buttonGenerateSql.Location = new System.Drawing.Point(517, 207);
             this.buttonGenerateSql.Name = "buttonGenerateSql";
             this.buttonGenerateSql.Size = new System.Drawing.Size(125, 23);
             this.buttonGenerateSql.TabIndex = 26;
@@ -537,11 +497,14 @@
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(664, 290);
+            this.tabControl.Size = new System.Drawing.Size(664, 268);
             this.tabControl.TabIndex = 29;
             // 
             // tabPageEditing
             // 
+            this.tabPageEditing.Controls.Add(this.checkBoxNegativeCondition);
+            this.tabPageEditing.Controls.Add(this.label10);
+            this.tabPageEditing.Controls.Add(this.label11);
             this.tabPageEditing.Controls.Add(this.label14);
             this.tabPageEditing.Controls.Add(this.textBoxScriptName);
             this.tabPageEditing.Controls.Add(this.label12);
@@ -559,10 +522,8 @@
             this.tabPageEditing.Controls.Add(this.buttonSearchSourceId);
             this.tabPageEditing.Controls.Add(this.buttonSearchSourceEntry);
             this.tabPageEditing.Controls.Add(this.labelCondValue2);
-            this.tabPageEditing.Controls.Add(this.buttonSearchConditionValue4);
             this.tabPageEditing.Controls.Add(this.labelCondValue3);
             this.tabPageEditing.Controls.Add(this.buttonSearchConditionValue3);
-            this.tabPageEditing.Controls.Add(this.labelCondValue4);
             this.tabPageEditing.Controls.Add(this.buttonSearchConditionValue2);
             this.tabPageEditing.Controls.Add(this.buttonSearchErrorTextId);
             this.tabPageEditing.Controls.Add(this.labelSourceGroup);
@@ -573,7 +534,6 @@
             this.tabPageEditing.Controls.Add(this.labelSourceEntry);
             this.tabPageEditing.Controls.Add(this.buttonSearchSourceGroup);
             this.tabPageEditing.Controls.Add(this.labelConditionTarget);
-            this.tabPageEditing.Controls.Add(this.textBoxCondValue4);
             this.tabPageEditing.Controls.Add(this.comboBoxConditionTarget);
             this.tabPageEditing.Controls.Add(this.textBoxCondValue3);
             this.tabPageEditing.Controls.Add(this.textBoxSourceGroup);
@@ -589,7 +549,6 @@
             this.tabPageEditing.Controls.Add(this.lineSeparator1);
             this.tabPageEditing.Controls.Add(this.label2);
             this.tabPageEditing.Controls.Add(this.labelComment);
-            this.tabPageEditing.Controls.Add(this.label13);
             this.tabPageEditing.Controls.Add(this.textBoxComment);
             this.tabPageEditing.Controls.Add(this.label5);
             this.tabPageEditing.Controls.Add(this.label18);
@@ -604,7 +563,7 @@
             this.tabPageEditing.Location = new System.Drawing.Point(4, 22);
             this.tabPageEditing.Name = "tabPageEditing";
             this.tabPageEditing.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEditing.Size = new System.Drawing.Size(656, 264);
+            this.tabPageEditing.Size = new System.Drawing.Size(656, 242);
             this.tabPageEditing.TabIndex = 0;
             this.tabPageEditing.Text = "Condition editing";
             this.tabPageEditing.UseVisualStyleBackColor = true;
@@ -636,7 +595,7 @@
             // 
             // buttonResetSession
             // 
-            this.buttonResetSession.Location = new System.Drawing.Point(255, 230);
+            this.buttonResetSession.Location = new System.Drawing.Point(517, 155);
             this.buttonResetSession.Name = "buttonResetSession";
             this.buttonResetSession.Size = new System.Drawing.Size(125, 23);
             this.buttonResetSession.TabIndex = 25;
@@ -646,7 +605,7 @@
             // 
             // buttonSaveCondition
             // 
-            this.buttonSaveCondition.Location = new System.Drawing.Point(386, 230);
+            this.buttonSaveCondition.Location = new System.Drawing.Point(517, 129);
             this.buttonSaveCondition.Name = "buttonSaveCondition";
             this.buttonSaveCondition.Size = new System.Drawing.Size(125, 23);
             this.buttonSaveCondition.TabIndex = 25;
@@ -657,7 +616,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(215, 184);
+            this.label19.Location = new System.Drawing.Point(215, 211);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(60, 13);
             this.label19.TabIndex = 4;
@@ -666,7 +625,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(215, 158);
+            this.label17.Location = new System.Drawing.Point(215, 185);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(52, 13);
             this.label17.TabIndex = 4;
@@ -685,7 +644,7 @@
             // 
             // buttonSearchErrorTextId
             // 
-            this.buttonSearchErrorTextId.Location = new System.Drawing.Point(385, 180);
+            this.buttonSearchErrorTextId.Location = new System.Drawing.Point(385, 207);
             this.buttonSearchErrorTextId.Name = "buttonSearchErrorTextId";
             this.buttonSearchErrorTextId.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchErrorTextId.TabIndex = 23;
@@ -695,7 +654,7 @@
             // 
             // buttonSearchErrorType
             // 
-            this.buttonSearchErrorType.Location = new System.Drawing.Point(385, 154);
+            this.buttonSearchErrorType.Location = new System.Drawing.Point(385, 181);
             this.buttonSearchErrorType.Name = "buttonSearchErrorType";
             this.buttonSearchErrorType.Size = new System.Drawing.Size(24, 22);
             this.buttonSearchErrorType.TabIndex = 21;
@@ -743,7 +702,7 @@
             // 
             // textBoxErrorTextId
             // 
-            this.textBoxErrorTextId.Location = new System.Drawing.Point(320, 181);
+            this.textBoxErrorTextId.Location = new System.Drawing.Point(320, 208);
             this.textBoxErrorTextId.Name = "textBoxErrorTextId";
             this.textBoxErrorTextId.Size = new System.Drawing.Size(65, 20);
             this.textBoxErrorTextId.TabIndex = 22;
@@ -753,7 +712,7 @@
             // 
             // textBoxErrorType
             // 
-            this.textBoxErrorType.Location = new System.Drawing.Point(320, 155);
+            this.textBoxErrorType.Location = new System.Drawing.Point(320, 182);
             this.textBoxErrorType.Name = "textBoxErrorType";
             this.textBoxErrorType.Size = new System.Drawing.Size(65, 20);
             this.textBoxErrorType.TabIndex = 20;
@@ -779,19 +738,10 @@
             this.label15.TabIndex = 17;
             this.label15.Text = ":";
             // 
-            // lineSeparator1
-            // 
-            this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
-            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
-            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
-            this.lineSeparator1.Name = "lineSeparator1";
-            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
-            this.lineSeparator1.TabIndex = 13;
-            // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(308, 184);
+            this.label18.Location = new System.Drawing.Point(308, 211);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(10, 13);
             this.label18.TabIndex = 16;
@@ -800,7 +750,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(308, 158);
+            this.label16.Location = new System.Drawing.Point(308, 185);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(10, 13);
             this.label16.TabIndex = 16;
@@ -815,23 +765,10 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(656, 264);
+            this.tabPage1.Size = new System.Drawing.Size(656, 242);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "Conditions overview";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // listViewConditions
-            // 
-            this.listViewConditions.FullRowSelect = true;
-            this.listViewConditions.HideSelection = false;
-            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
-            this.listViewConditions.MultiSelect = false;
-            this.listViewConditions.Name = "listViewConditions";
-            this.listViewConditions.Size = new System.Drawing.Size(656, 228);
-            this.listViewConditions.TabIndex = 3;
-            this.listViewConditions.UseCompatibleStateImageBehavior = false;
-            this.listViewConditions.View = System.Windows.Forms.View.Details;
-            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
             // 
             // buttonDuplicateCondition
             // 
@@ -866,11 +803,60 @@
             this.buttonLoadCondition.UseVisualStyleBackColor = true;
             this.buttonLoadCondition.Click += new System.EventHandler(this.buttonLoadCondition_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(215, 158);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(96, 13);
+            this.label10.TabIndex = 32;
+            this.label10.Text = "Negative condition";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(308, 158);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(10, 13);
+            this.label11.TabIndex = 33;
+            this.label11.Text = ":";
+            // 
+            // checkBoxNegativeCondition
+            // 
+            this.checkBoxNegativeCondition.AutoSize = true;
+            this.checkBoxNegativeCondition.Location = new System.Drawing.Point(320, 158);
+            this.checkBoxNegativeCondition.Name = "checkBoxNegativeCondition";
+            this.checkBoxNegativeCondition.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxNegativeCondition.TabIndex = 35;
+            this.checkBoxNegativeCondition.UseVisualStyleBackColor = true;
+            // 
+            // lineSeparator1
+            // 
+            this.lineSeparator1.Location = new System.Drawing.Point(0, 117);
+            this.lineSeparator1.MaximumSize = new System.Drawing.Size(2000, 2);
+            this.lineSeparator1.MinimumSize = new System.Drawing.Size(0, 2);
+            this.lineSeparator1.Name = "lineSeparator1";
+            this.lineSeparator1.Size = new System.Drawing.Size(680, 2);
+            this.lineSeparator1.TabIndex = 13;
+            // 
+            // listViewConditions
+            // 
+            this.listViewConditions.FullRowSelect = true;
+            this.listViewConditions.HideSelection = false;
+            this.listViewConditions.Location = new System.Drawing.Point(0, 0);
+            this.listViewConditions.MultiSelect = false;
+            this.listViewConditions.Name = "listViewConditions";
+            this.listViewConditions.Size = new System.Drawing.Size(656, 228);
+            this.listViewConditions.TabIndex = 3;
+            this.listViewConditions.UseCompatibleStateImageBehavior = false;
+            this.listViewConditions.View = System.Windows.Forms.View.Details;
+            this.listViewConditions.SelectedIndexChanged += new System.EventHandler(this.listViewConditions_SelectedIndexChanged);
+            // 
             // ConditionForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(687, 311);
+            this.ClientSize = new System.Drawing.Size(687, 290);
             this.Controls.Add(this.tabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -926,10 +912,6 @@
         private System.Windows.Forms.Label labelCondValue1;
         private System.Windows.Forms.Label labelCondValue2;
         private System.Windows.Forms.Label labelCondValue3;
-        private System.Windows.Forms.Label labelCondValue4;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBoxCondValue4;
-        private System.Windows.Forms.Button buttonSearchConditionValue4;
         private System.Windows.Forms.Button buttonGenerateComment;
         private System.Windows.Forms.Button buttonGenerateSql;
         private System.Windows.Forms.TabControl tabControl;
@@ -959,5 +941,8 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button buttonSearchSourceId;
         private System.Windows.Forms.Button buttonResetSession;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox checkBoxNegativeCondition;
     }
 }
