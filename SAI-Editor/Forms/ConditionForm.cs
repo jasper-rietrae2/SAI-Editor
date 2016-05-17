@@ -660,8 +660,8 @@ namespace SAI_Editor.Forms
                     sql += "(" + conditions[0].SourceTypeOrReferenceId + "," + conditions[0].SourceGroup + "," + conditions[0].SourceEntry;
                     sql += "," + conditions[0].SourceId + "," + conditions[0].ElseGroup + "," + conditions[0].ConditionTypeOrReference;
                     sql += "," + conditions[0].ConditionTarget + "," + conditions[0].ConditionValue1;
-                    sql += "," + conditions[0].ConditionValue2 + "," + conditions[0].ConditionValue3 + "," + conditions[0].ErrorTextId;
-                    sql += "," + conditions[0].NegativeCondition + "," + conditions[0].ErrorType;
+                    sql += "," + conditions[0].ConditionValue2 + "," + conditions[0].ConditionValue3;
+                    sql += "," + conditions[0].NegativeCondition + "," + conditions[0].ErrorType + "," + conditions[0].ErrorTextId;
                     sql += "," + '"' + conditions[0].ScriptName + '"' + "," + '"' + conditions[0].Comment + '"' + ");";
                     break;
                 default:
@@ -679,8 +679,8 @@ namespace SAI_Editor.Forms
                         sql += "(" + condition.SourceTypeOrReferenceId + "," + condition.SourceGroup + "," + condition.SourceEntry;
                         sql += "," + condition.SourceId + "," + condition.ElseGroup + "," + condition.ConditionTypeOrReference;
                         sql += "," + condition.ConditionTarget + "," + condition.ConditionValue1;
-                        sql += "," + condition.ConditionValue2 + "," + condition.ConditionValue3 + "," + condition.ErrorTextId;
-                        sql += "," + conditions[0].NegativeCondition + "," + conditions[0].ErrorType;
+                        sql += "," + condition.ConditionValue2 + "," + condition.ConditionValue3;
+                        sql += "," + conditions[0].NegativeCondition + "," + conditions[0].ErrorType + "," + condition.ErrorTextId;
                         sql += "," + '"' + condition.ScriptName + '"' + "," + '"' + condition.Comment + '"' + ")";
                         sql += (i != conditions.Count - 1) ? ",\n" : ";\n";
                     }
