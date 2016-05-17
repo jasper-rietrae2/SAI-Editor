@@ -296,7 +296,7 @@ namespace SAI_Editor.Forms
                 { "1btn", buttonSearchConditionValue1 }, { "2btn", buttonSearchConditionValue2 }, { "3btn", buttonSearchConditionValue3 },
             };
 
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 3; ++i)
             {
                 condValues[(i + 1).ToString() + "lbl"].Text = String.IsNullOrWhiteSpace(values[i]) ? " - " : values[i]; //! Label
                 condValues[(i + 1).ToString() + "btn"].Enabled = searchables[i]; //! Button
