@@ -229,8 +229,6 @@ namespace SAI_Editor.Forms
 
         private void buttonViewPastebins_Click(object sender, EventArgs e)
         {
-            Close();
-
             using (ViewAllPastebinsForm viewAllPastebinsForm = new ViewAllPastebinsForm())
                 viewAllPastebinsForm.ShowDialog(this);
         }
