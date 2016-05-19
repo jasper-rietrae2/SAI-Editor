@@ -544,7 +544,7 @@
             this.buttonResetSession.Location = new System.Drawing.Point(645, 18);
             this.buttonResetSession.Name = "buttonResetSession";
             this.buttonResetSession.Size = new System.Drawing.Size(230, 107);
-            this.buttonResetSession.TabIndex = 25;
+            this.buttonResetSession.TabIndex = 10;
             this.buttonResetSession.Text = "Reset session";
             this.buttonResetSession.UseVisualStyleBackColor = true;
             this.buttonResetSession.Click += new System.EventHandler(this.buttonResetSession_Click);
@@ -583,7 +583,7 @@
             this.buttonSearchSourceId.Location = new System.Drawing.Point(615, 73);
             this.buttonSearchSourceId.Name = "buttonSearchSourceId";
             this.buttonSearchSourceId.Size = new System.Drawing.Size(24, 22);
-            this.buttonSearchSourceId.TabIndex = 10;
+            this.buttonSearchSourceId.TabIndex = 1099;
             this.buttonSearchSourceId.Text = "...";
             this.buttonSearchSourceId.UseVisualStyleBackColor = true;
             this.buttonSearchSourceId.Click += new System.EventHandler(this.buttonSearchSourceId_Click);
