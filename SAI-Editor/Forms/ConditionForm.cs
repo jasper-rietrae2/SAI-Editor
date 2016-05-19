@@ -37,7 +37,7 @@ namespace SAI_Editor.Forms
             //! Reset the values
             labelSourceGroup.Text = " - ";
             labelSourceEntry.Text = " - ";
-            labelElseGroup.Text = " - ";
+            //labelElseGroup.Text = " - ";
             SetConditionTargetValues(null);
 
             //! Source id is only available for SMART_EVENT cond type
