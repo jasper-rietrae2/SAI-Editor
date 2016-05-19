@@ -69,8 +69,8 @@ namespace SAI_Editor.Forms
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_GOSSIP_MENU_OPTION:
-                    SetSourceGroupValues("Gossip menu entry", true);
-                    SetSourceEntryValues("Gossip menu text entry", true);
+                    SetSourceGroupValues("Gossip option menu id", true);
+                    SetSourceEntryValues("Gossip option id", true);
                     SetConditionTargetValues(new string[] { "Player who can see the gossip text", "Object providing the gossip" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_TEMPLATE_VEHICLE:
