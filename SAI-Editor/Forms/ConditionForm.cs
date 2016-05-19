@@ -700,33 +700,33 @@ namespace SAI_Editor.Forms
 
         private void buttonSaveCondition_Click(object sender, EventArgs e)
         {
-            Condition condition = new Condition();
-            condition.SourceTypeOrReferenceId = comboBoxConditionSourceTypes.SelectedIndex;
-            condition.SourceGroup = CustomConverter.ToInt32(textBoxSourceGroup.Text);
-            condition.SourceEntry = CustomConverter.ToInt32(textBoxSourceEntry.Text);
-            condition.SourceId = CustomConverter.ToInt32(textBoxSourceId.Text);
-            condition.ElseGroup = CustomConverter.ToInt32(textBoxElseGroup.Text);
-            condition.ConditionTypeOrReference = comboBoxConditionTypes.SelectedIndex;
-            condition.ConditionTarget = comboBoxConditionTarget.SelectedIndex;
-            condition.ConditionValue1 = CustomConverter.ToInt32(textBoxCondValue1.Text);
-            condition.ConditionValue2 = CustomConverter.ToInt32(textBoxCondValue2.Text);
-            condition.ConditionValue3 = CustomConverter.ToInt32(textBoxCondValue3.Text);
-            condition.NegativeCondition = checkBoxNegativeCondition.Checked ? 1 : 0;
-            condition.ErrorType = CustomConverter.ToInt32(textBoxErrorType.Text);
-            condition.ErrorTextId = CustomConverter.ToInt32(textBoxErrorTextId.Text);
-            condition.ScriptName = textBoxScriptName.Text;
-            condition.Comment = textBoxComment.Text;
-            conditions.Add(condition);
+            Condition newCondition = new Condition();
+            newCondition.SourceTypeOrReferenceId = comboBoxConditionSourceTypes.SelectedIndex;
+            newCondition.SourceGroup = CustomConverter.ToInt32(textBoxSourceGroup.Text);
+            newCondition.SourceEntry = CustomConverter.ToInt32(textBoxSourceEntry.Text);
+            newCondition.SourceId = CustomConverter.ToInt32(textBoxSourceId.Text);
+            newCondition.ElseGroup = CustomConverter.ToInt32(textBoxElseGroup.Text);
+            newCondition.ConditionTypeOrReference = comboBoxConditionTypes.SelectedIndex;
+            newCondition.ConditionTarget = comboBoxConditionTarget.SelectedIndex;
+            newCondition.ConditionValue1 = CustomConverter.ToInt32(textBoxCondValue1.Text);
+            newCondition.ConditionValue2 = CustomConverter.ToInt32(textBoxCondValue2.Text);
+            newCondition.ConditionValue3 = CustomConverter.ToInt32(textBoxCondValue3.Text);
+            newCondition.NegativeCondition = checkBoxNegativeCondition.Checked ? 1 : 0;
+            newCondition.ErrorType = CustomConverter.ToInt32(textBoxErrorType.Text);
+            newCondition.ErrorTextId = CustomConverter.ToInt32(textBoxErrorTextId.Text);
+            newCondition.ScriptName = textBoxScriptName.Text;
+            newCondition.Comment = textBoxComment.Text;
 
-            tabControl.SelectedIndex = 1;
-            listViewConditions.AddScript(condition, selectNewItem: true);
+            conditions.Add(newCondition);
+            
+            listViewConditions.AddScript(newCondition, selectNewItem: true);
 
             ResetAllFields();
         }
 
         private void ResetAllFields()
         {
-            foreach (Control control in tabControl.TabPages[0].Controls)
+            foreach (Control control in groupBoxConditionInformation.Controls)
             {
                 if (control is TextBox && control.Name != "textBoxScriptName" && control.Name != "textBoxComment")
                     control.Text = "0";
@@ -755,6 +755,23 @@ namespace SAI_Editor.Forms
         {
             if (DialogResult.Yes != MessageBox.Show("Are you sure you want to load this condition and get rid of the local changes?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
                 return;
+        }
+
+        private void buttonDuplicateCondition_Click(object sender, EventArgs e)
+        {
+            if (DialogResult.Yes != MessageBox.Show("Are you sure you want to duplicate this condition?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+                return;
+
+            listViewConditions.AddScript(listViewConditions.SelectedScript, selectNewItem: true);
+        }
+
+        private void listViewConditions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            buttonDeleteCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
+            buttonDuplicateCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
+
+            if (listViewConditions.SelectedScript == null)
+                return;
 
             ResetAllFields();
 
@@ -774,23 +791,6 @@ namespace SAI_Editor.Forms
             textBoxErrorTextId.Text = selectedCond.ErrorTextId.ToString();
             textBoxScriptName.Text = selectedCond.ScriptName;
             textBoxComment.Text = selectedCond.Comment;
-
-            tabControl.SelectedIndex = 0;
-        }
-
-        private void buttonDuplicateCondition_Click(object sender, EventArgs e)
-        {
-            if (DialogResult.Yes != MessageBox.Show("Are you sure you want to duplicate this condition?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
-                return;
-
-            listViewConditions.AddScript(listViewConditions.SelectedScript, selectNewItem: true);
-        }
-
-        private void listViewConditions_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            buttonDeleteCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
-            buttonDuplicateCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
-            buttonLoadCondition.Enabled = listViewConditions.SelectedIndices.Count > 0;
         }
 
         private void buttonSearchErrorType_Click(object sender, EventArgs e)
