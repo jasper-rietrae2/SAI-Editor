@@ -35,9 +35,9 @@ namespace SAI_Editor.Forms
         private void comboBoxConditionSourceTypes_SelectedIndexChanged(object sender, EventArgs e)
         {
             //! Reset the values
-            labelSourceGroup.Text = " - ";
-            labelSourceEntry.Text = " - ";
-            //labelElseGroup.Text = " - ";
+            labelSourceGroup.Text = "Unused parameter";
+            labelSourceEntry.Text = "Unused parameter";
+            //labelElseGroup.Text = "Unused parameter";
             SetConditionTargetValues(null);
 
             //! Source id is only available for SMART_EVENT cond type
@@ -74,12 +74,12 @@ namespace SAI_Editor.Forms
                     SetConditionTargetValues(new string[] { "Player who can see the gossip text", "Object providing the gossip" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_CREATURE_TEMPLATE_VEHICLE:
-                    SetSourceGroupValues(" - ");
+                    SetSourceGroupValues("Unused parameter");
                     SetSourceEntryValues("Creature entry", true);
                     SetConditionTargetValues(new string[] { "Player riding the vehicle", "Vehicle itself" });
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL:
-                    SetSourceGroupValues(" - ");
+                    SetSourceGroupValues("Unused parameter");
                     SetSourceEntryValues("Spell entry", true);
                     SetConditionTargetValues(new string[] { "Caster of the spell", "Actual spell target" });
                     break;
@@ -90,7 +90,7 @@ namespace SAI_Editor.Forms
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_ACCEPT:
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_QUEST_SHOW_MARK:
-                    SetSourceGroupValues(" - ");
+                    SetSourceGroupValues("Unused parameter");
                     SetSourceEntryValues("Quest entry", true);
                     SetConditionTargetValues(null);
                     break;
@@ -111,7 +111,7 @@ namespace SAI_Editor.Forms
                     SetConditionTargetValues(null);
                     break;
                 case ConditionSourceTypes.CONDITION_SOURCE_TYPE_SPELL_PROC:
-                    SetSourceGroupValues(" - ");
+                    SetSourceGroupValues("Unused parameter");
                     SetSourceEntryValues("Spell id of the aura", true);
                     SetConditionTargetValues(new string[] { "Actor", "Action target" });
                     break;
@@ -298,7 +298,7 @@ namespace SAI_Editor.Forms
 
             for (int i = 0; i < 3; ++i)
             {
-                condValues[(i + 1).ToString() + "lbl"].Text = String.IsNullOrWhiteSpace(values[i]) ? " - " : values[i]; //! Label
+                condValues[(i + 1).ToString() + "lbl"].Text = String.IsNullOrWhiteSpace(values[i]) ? "Unused parameter" : values[i]; //! Label
                 condValues[(i + 1).ToString() + "btn"].Enabled = searchables[i]; //! Button
             }
         }
