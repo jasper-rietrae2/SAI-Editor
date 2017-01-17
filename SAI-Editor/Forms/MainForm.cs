@@ -757,12 +757,6 @@ namespace SAI_Editor.Forms
             if (SAI_Editor_Manager.FormState != FormState.FormStateMain || ((SmartScriptList)listViewSmartScripts.List).SelectedScript == null)
                 return;
 
-            if (listViewSmartScripts.SelectedItems.Count <= 0)
-            {
-                MessageBox.Show("No rows were selected to delete!", "Something went wrong!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
             userControl.DeleteSelectedRow();
         }
 
