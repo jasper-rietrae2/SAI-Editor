@@ -44,7 +44,6 @@ namespace SAI_Editor.Forms.SearchForms
                 listViewEntryResults.Columns.Add("Entry/guid", 70, HorizontalAlignment.Right);
                 listViewEntryResults.Columns.Add("Name", 260, HorizontalAlignment.Left);
             }
-
         }
 
         private void SearchForEntryForm_Load(object sender, EventArgs e)

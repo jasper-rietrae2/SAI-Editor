@@ -282,13 +282,7 @@ namespace SAI_Editor.Classes
                 }
 
                 if (fullLine.Contains("_previousLineComment_") && smartScriptLink != null)
-                {
                     fullLine = fullLine.Replace("_previousLineComment_", smartEventStrings[(SmartEvent)smartScriptLink.event_type]);
-                    smartScript.event_param1 = smartScriptLink.event_param1;
-                    smartScript.event_param2 = smartScriptLink.event_param2;
-                    smartScript.event_param3 = smartScriptLink.event_param3;
-                    smartScript.event_param4 = smartScriptLink.event_param4;
-                }
 
                 fullLine = fullLine.Replace("_previousLineComment_", "MISSING LINK");
 
