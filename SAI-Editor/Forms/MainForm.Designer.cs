@@ -1429,7 +1429,8 @@
             "ACTION_SUMMON_CREATURE_GROUP",
             "ACTION_SET_POWER",
             "ACTION_ADD_POWER",
-            "ACTION_REMOVE_POWER"});
+            "ACTION_REMOVE_POWER",
+            "ACTION_MOVE_OFFSET"});
             this.comboBoxActionType.Location = new System.Drawing.Point(59, 45);
             this.comboBoxActionType.Name = "comboBoxActionType";
             this.comboBoxActionType.Size = new System.Drawing.Size(235, 21);

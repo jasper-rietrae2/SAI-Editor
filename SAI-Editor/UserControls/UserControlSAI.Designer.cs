@@ -501,7 +501,8 @@
             "ACTION_REMOVE_POWER",
             "ACTION_GAME_EVENT_STOP",
             "ACTION_GAME_EVENT_START",
-            "ACTION_START_CLOSEST_WAYPOINT"});
+            "ACTION_START_CLOSEST_WAYPOINT",
+            "ACTION_MOVE_OFFSET"});
             this.comboBoxActionType.Location = new System.Drawing.Point(59, 45);
             this.comboBoxActionType.Name = "comboBoxActionType";
             this.comboBoxActionType.Size = new System.Drawing.Size(235, 21);
