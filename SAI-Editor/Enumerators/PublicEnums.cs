@@ -283,6 +283,7 @@ namespace SAI_Editor.Enumerators
         SMART_TARGET_THREAT_LIST = 24,
         SMART_TARGET_CLOSEST_ENEMY = 25,
         SMART_TARGET_CLOSEST_FRIENDLY = 26,
+        SMART_TARGET_LOOT_RECIPIENTS = 27,
         SMART_TARGET_MAX,
     }
 

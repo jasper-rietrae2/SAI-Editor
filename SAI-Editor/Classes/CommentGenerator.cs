@@ -1020,6 +1020,8 @@ namespace SAI_Editor.Classes
                     return "Closest Enemy";
                 case SmartTarget.SMART_TARGET_CLOSEST_FRIENDLY:
                     return "Closest Friendly Unit";
+                case SmartTarget.SMART_TARGET_LOOT_RECIPIENTS:
+                    return "Loot Recipients";
                 default:
                     return "<unsupported target type>";
             }
