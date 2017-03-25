@@ -1706,7 +1706,8 @@
             "EVENT_ON_SPELLCLICK",
             "EVENT_FRIENDLY_HEALTH_PCT",
             "EVENT_DISTANCE_CREATURE",
-            "EVENT_DISTANCE_GAMEOBJECT"});
+            "EVENT_DISTANCE_GAMEOBJECT",
+            "EVENT_COUNTER_SET"});
             this.comboBoxEventType.Location = new System.Drawing.Point(59, 18);
             this.comboBoxEventType.Name = "comboBoxEventType";
             this.comboBoxEventType.Size = new System.Drawing.Size(235, 21);
