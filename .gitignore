@@ -30,8 +30,6 @@ _ReSharper*/
 *.DotSettings
 
 #nuget
-packages/*
-!packages/repositories.config
 
 #Installer
 SAI-Editor Installer/SAI-Editor-SetupFiles
